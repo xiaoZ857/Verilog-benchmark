@@ -1,0 +1,39 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+reg A, B;
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        A <= 0;
+        B <= 1;
+    end else begin
+        case (B)
+            1'b1: begin
+                if (in) begin
+                    A <= 1;
+                end
+                else begin
+                    A <= A;
+                end
+            end
+            1'b0: begin
+                if (!in) begin
+                    B <= A;
+                end
+                else begin
+                    B <= B;
+                end
+            end
+        endcase
+    end
+end
+
+assign out = B;
+
+endmodule

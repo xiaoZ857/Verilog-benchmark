@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01 results\mistral_7b_0shot_temp0.0\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv dataset_code-complete-iccad2023/Prob096_review2015_fsmseq_test.sv dataset_code-complete-iccad2023/Prob096_review2015_fsmseq_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'start_shifting' has 308 mismatches. First mismatch occurred at time 50.
+Hint: Total mismatched samples is 308 out of 643 samples
+
+Simulation finished at 3216 ps
+Mismatches: 308 in 643 samples
+
+
+--- stderr ---

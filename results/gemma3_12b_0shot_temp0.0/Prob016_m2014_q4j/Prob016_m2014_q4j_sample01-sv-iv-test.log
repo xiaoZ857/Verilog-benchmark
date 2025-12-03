@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob016_m2014_q4j/Prob016_m2014_q4j_sample01 results\gemma3_12b_0shot_temp0.0\Prob016_m2014_q4j/Prob016_m2014_q4j_sample01.sv dataset_code-complete-iccad2023/Prob016_m2014_q4j_test.sv dataset_code-complete-iccad2023/Prob016_m2014_q4j_ref.sv
+Return code: 5
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob016_m2014_q4j/Prob016_m2014_q4j_sample01.sv:11: error: Unknown module type: full_adder
+results\gemma3_12b_0shot_temp0.0\Prob016_m2014_q4j/Prob016_m2014_q4j_sample01.sv:19: error: Unknown module type: full_adder
+results\gemma3_12b_0shot_temp0.0\Prob016_m2014_q4j/Prob016_m2014_q4j_sample01.sv:27: error: Unknown module type: full_adder
+results\gemma3_12b_0shot_temp0.0\Prob016_m2014_q4j/Prob016_m2014_q4j_sample01.sv:35: error: Unknown module type: full_adder
+5 error(s) during elaboration.
+*** These modules were missing:
+        full_adder referenced 4 times.
+***

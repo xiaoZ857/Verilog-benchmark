@@ -1,0 +1,19 @@
+reg [9:0] counter;
+reg tc_reg;
+
+always @(posedge clk) begin
+  if (load) begin
+    counter <= data;
+  end else if (counter > 0) begin
+    counter <= counter - 1;
+  end
+  
+  if (counter == 0) begin
+    tc_reg <= 1;
+  end else begin
+    tc_reg <= 0;
+  end
+end
+
+assign tc = tc_reg;
+endmodule

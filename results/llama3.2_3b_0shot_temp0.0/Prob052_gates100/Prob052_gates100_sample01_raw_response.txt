@@ -1,0 +1,6 @@
+```verilog
+assign out_and = ~in;
+assign out_or = in;
+assign out_xor = in[1:1] ^ in[2:2] ^ ... ^ in[99:99];
+endmodule
+```

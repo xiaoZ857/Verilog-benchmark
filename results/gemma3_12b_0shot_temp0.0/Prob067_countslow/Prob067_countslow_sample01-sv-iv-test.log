@@ -1,0 +1,22 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob067_countslow/Prob067_countslow_sample01 results\gemma3_12b_0shot_temp0.0\Prob067_countslow/Prob067_countslow_sample01.sv dataset_code-complete-iccad2023/Prob067_countslow_test.sv dataset_code-complete-iccad2023/Prob067_countslow_ref.sv
+Return code: 14
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob067_countslow/Prob067_countslow_sample01.sv:20: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:13: error: malformed statement
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:15: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:15: error: malformed statement
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:16: error: malformed statement
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:35: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:42: error: malformed statement
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:43: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:45: error: malformed statement
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:47: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:52: error: malformed statement
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:53: syntax error
+dataset_code-complete-iccad2023/Prob067_countslow_test.sv:54: Syntax in assignment statement l-value.

@@ -1,0 +1,45 @@
+```verilog
+reg [1:0] state, next_state;
+
+always @(*) begin
+    case (state)
+        2'b00: // State A
+            if (in == 1'b0) 
+                next_state = 2'b00; // Stay in A
+            else 
+                next_state = 2'b01; // Go to B
+
+        2'b01: // State B
+            if (in == 1'b0)
+                next_state = 2'b10; // Go to C
+            else
+                next_state = 2'b01; // Stay in B
+
+        2'b10: // State C
+            if (in == 1'b0) 
+                next_state = 2'b00; // Go to A
+            else 
+                next_state = 2'b11; // Go to D
+
+        2'b11: // State D
+            if (in == 1'b0)
+                next_state = 2'b10; // Go to C
+            else
+                next_state = 2'b01; // Go to B
+
+        default:
+            next_state = 2'b00; // Default to A
+    endcase
+end
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        state <= 2'b00; // Reset to State A
+    else
+        state <= next_state;
+end
+
+assign out = (state == 2'b11); // Output is 1 only in State D
+
+endmodule
+```

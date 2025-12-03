@@ -1,0 +1,10 @@
+generate
+  for (i = 0; i < 8; i++) begin : dff_i
+    DFF 
+      #(.clk(clk), .areset(areset)) 
+      dff (
+        .d(d[i]),
+        .q(q[i])
+      );
+  end
+endgenerate

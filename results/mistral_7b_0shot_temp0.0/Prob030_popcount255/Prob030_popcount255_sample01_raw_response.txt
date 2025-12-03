@@ -1,0 +1,28 @@
+ Here is the Verilog code for a 255-bit population count circuit:
+
+```verilog
+module PopCount (
+  input [254:0] data,
+  output reg [7:0] pop_count
+);
+
+reg [254:0] prev_data = 8'bz; // Initialize previous data to zero
+always @(posedge clk) begin
+  prev_data <= data;
+end
+
+always @(posedge clk) begin
+  pop_count <= 8'b0;
+  for (int i = 254; i >= 0; i--) begin
+    if (prev_data[i] ^ data[i]) begin
+      pop_count[7-i/32] += (1'b1 << (i%32)); // Add the contribution of the current bit to the appropriate position in pop_count
+    end
+  end
+end
+
+endmodule
+```
+
+In this code, I have created a separate module named `PopCount`. The input is a 255-bit vector `data`, and the output is an 8-bit register `pop_count` that represents the population count.
+
+The previous data is stored in a register `prev_data` to keep track of the state between clock cycles. In each clock cycle, we calculate the population count by iterating through all bits of the input vector and adding the contribution of each bit to the appropriate position in the `pop_count` register. The contribution of a bit is calculated as 2^n where n is the position of the bit within a 32-bit word (since we are using 8-bit registers for the population count).

@@ -1,0 +1,14 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4: error: `default_nettype directives must appear
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : outside module definitions. The containing
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : module TopModule starts on line results\gpt-oss_20b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:3.
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:79: syntax error
+I give up.

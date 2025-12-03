@@ -1,0 +1,15 @@
+module TopModule (
+  input [5:0] y,
+  input w,
+  output Y1,
+  output Y3
+);
+
+always @(*) begin
+  case (y)
+    6'b000001: // State A
+      if (w == 1) begin
+        Y1 = 1;
+      end else begin
+        Y1 = 0;
+        Y

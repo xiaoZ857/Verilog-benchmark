@@ -1,0 +1,33 @@
+
+module TopModule (
+  input [3:0] a,
+  input [3:0] b,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+  case({a, b})
+    4'b0000 : q <= b;
+    4'b0001 : q <= e;
+    4'b0010 : q <= a;
+    4'b0011 : q <= d;
+    4'b0100 : q <= c;
+    4'b0101 : q <= d;
+    4'b0110 : q <= e;
+    4'b0111 : q <= f;
+    4'b1000 : q <= f;
+    4'b1001 : q <= e;
+    4'b1010 : q <= d;
+    4'b1011 : q <= a;
+    4'b1100 : q <= b;
+    4'b1101 : q <= f;
+    4'b1110 : q <= f;
+    4'b1111 : q <= f;
+  endcase
+end
+
+// Assuming 'c', 'd', and 'e' are not used in the given waveform data, but if they are needed, add appropriate logic here.
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,16 @@
+ Here is the Verilog code for a D Latch implemented using an `always` block:
+
+```verilog
+reg q; // internal signal to store the data
+
+always @(posedge clk) begin
+  if (ena)
+    q <= d;
+end
+
+assign q_out = q; // output assignment for q
+
+endmodule
+```
+
+In this code, `q` is an internal register that stores the data. The `always` block triggers on the positive edge of the clock (clk), and if the enable signal (ena) is high, it assigns the current value of the input data (d) to the internal register `q`. The output `q_out` is simply assigned to the value of the internal register `q`.

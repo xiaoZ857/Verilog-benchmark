@@ -1,0 +1,12 @@
+
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+
+
+
+// VERILOG-EVAL: endmodule not found

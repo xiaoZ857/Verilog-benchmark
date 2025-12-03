@@ -1,0 +1,22 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01 results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv dataset_code-complete-iccad2023/Prob145_circuit8_test.sv dataset_code-complete-iccad2023/Prob145_circuit8_ref.sv
+Return code: 14
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:27: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:27: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:28: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:29: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:29: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:30: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:30: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:31: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:31: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:32: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:32: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:33: syntax error
+results\mistral_7b_0shot_temp0.0\Prob145_circuit8/Prob145_circuit8_sample01.sv:33: error: malformed statement

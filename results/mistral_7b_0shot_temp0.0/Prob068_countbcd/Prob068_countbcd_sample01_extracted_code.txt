@@ -1,0 +1,48 @@
+module TopModule (
+  input clk,
+  input reset,
+  output reg ena_ones,
+  output reg ena_tens,
+  output reg ena_hundreds,
+  output reg ena_thousands,
+  output reg [3:0] q_ones,
+  output reg [6:4] q_tens,
+  output reg [9:7] q_hundreds,
+  output reg [12:10] q_thousands
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q_ones <= 4'b0001; // Reset the ones digit to 1
+    q_tens <= 4'b0010; // Reset the tens digit to 2
+    q_hundreds <= 4'b0100; // Reset the hundreds digit to 4
+    q_thousands <= 4'b1000; // Reset the thousands digit to 8
+  end else begin
+    if (q_ones < 9) begin
+      q_ones <= q_ones + 1;
+    end else begin
+      q_ones <= 4'b0001; // Roll over to 1 when the ones digit reaches 10
+      ena_ones <= 1'b1; // Enable incrementing of the tens digit
+    end
+
+    if (ena_ones && q_tens < 9) begin
+      q_tens <= q_tens + 1;
+    end
+
+    if (q_tens < 6) begin
+      if (ena_ones) ena_tens <= 1'b1; // Enable incrementing of the hundreds digit when tens digit is less than 6
+    end
+
+    if (ena_tens && q_hundreds < 9) begin
+      q_hundreds <= q_hundreds + 1;
+    end
+
+    if (q_hundreds < 8) begin
+      if (ena_tens) ena_hundreds <= 1'b1; // Enable incrementing of the thousands digit when hundreds digit is less than 8
+    end
+  end
+end
+
+assign ena = {ena_ones, ena_tens, ena_hundreds}; // Combine enable signals for output
+
+endmodule

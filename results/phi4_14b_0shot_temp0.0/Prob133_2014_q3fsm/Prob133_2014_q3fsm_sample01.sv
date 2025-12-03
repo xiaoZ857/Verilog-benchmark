@@ -1,0 +1,50 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+
+reg [1:0] count;
+reg [2:0] w_history;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset state A
+        z <= 0;
+        count <= 0;
+        w_history <= 3'b000;
+    end else begin
+        casez ({s, count})
+            {1'b0, 2'bxx}: begin
+                // State A: s = 0
+                z <= 0;
+                if (s == 1) begin
+                    count <= 0; // Move to state B
+                end
+            end
+
+            {1'b1, 2'b00}: begin
+                // State B: Counting w
+                w_history <= {w_history[1:0], w};
+                count <= count + 1;
+            end
+
+            {1'b1, 2'b01}, {1'b1, 2'b10}, {1'b1, 2'b11}: begin
+                // State B: Check w history
+                if (count == 3) begin
+                    z <= (^w_history == 2); // Set z based on two '1's in w_history
+                    count <= 0; // Reset count for next cycle
+                end else begin
+                    count <= count + 1;
+                end
+            end
+
+        endcase
+    end
+end
+
+endmodule

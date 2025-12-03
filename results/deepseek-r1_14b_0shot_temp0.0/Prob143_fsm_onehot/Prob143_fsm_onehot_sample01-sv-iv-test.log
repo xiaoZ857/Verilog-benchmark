@@ -1,0 +1,52 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv dataset_code-complete-iccad2023/Prob143_fsm_onehot_ref.sv
+Return code: 44
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:11: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:11: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:19: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:20: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:20: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:21: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:24: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:25: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:26: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:27: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:27: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:28: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:31: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:32: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:33: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:34: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:34: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:35: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:38: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:39: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:40: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:41: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:41: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:42: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:45: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:46: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:47: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:48: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:48: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:49: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:52: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:53: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:54: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:55: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:55: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:56: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:59: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:60: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:61: error: invalid module item.
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:62: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:62: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:63: error: Invalid module instantiation
+dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:15: error: invalid module item.

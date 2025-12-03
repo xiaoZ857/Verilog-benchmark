@@ -1,0 +1,39 @@
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output [23:0] out_bytes,
+  output done
+);
+
+reg [3:0] in_byte;
+reg [2:0] byte_count;
+reg [24:0] message;
+
+always @(posedge clk) begin
+  if (reset) begin
+    in_byte <= 8'b00000000;
+    byte_count <= 3'b000;
+    message <= 25'b0000000000000000000000000000000000000000000000000000000000000;
+  end else begin
+    in_byte <= in[6:0];
+    if (in_byte[2] == 1) begin
+      byte_count <= byte_count + 1;
+      if (byte_count == 3'b111) begin
+        done <= 1;
+        message <= {in_byte, in[7:2], in[15:8]};
+      end else begin
+        done <= 0;
+      end
+    end else begin
+      byte_count <= 3'b000;
+      message <= 25'b0000000000000000000000000000000000000000000000000000000000000;
+    end
+  end
+end
+
+assign out_bytes = message[23:16];
+assign out_bytes[15:8] = message[15:8];
+assign out_bytes[7:0] = message[7:0];
+
+endmodule

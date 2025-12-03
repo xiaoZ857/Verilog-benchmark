@@ -1,0 +1,26 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob052_gates100/Prob052_gates100_sample01 results\mistral_7b_0shot_temp0.0\Prob052_gates100/Prob052_gates100_sample01.sv dataset_code-complete-iccad2023/Prob052_gates100_test.sv dataset_code-complete-iccad2023/Prob052_gates100_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob052_gates100/Prob052_gates100_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_and' has no mismatches.
+Hint: Output 'out_or' has no mismatches.
+Hint: Output 'out_xor' has no mismatches.
+Hint: Total mismatched samples is 0 out of 433 samples
+
+Simulation finished at 2166 ps
+Mismatches: 0 in 433 samples
+
+
+--- stderr ---

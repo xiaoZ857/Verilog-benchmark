@@ -1,0 +1,50 @@
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset state equivalent to water level being low for a long time
+        fr3 <= 1'b1;
+        fr2 <= 1'b1;
+        fr1 <= 1'b1;
+        dfr <= 1'b0; // No supplemental flow needed initially
+    end else begin
+        if (s[3]) begin
+            // Water level above s[3]
+            fr3 <= 1'b0;
+            fr2 <= 1'b0;
+            fr1 <= 1'b0;
+            dfr <= 1'b0;
+        end else if (s[2] && !s[3]) begin
+            // Water level between s[3] and s[2]
+            fr3 <= 1'b0;
+            fr2 <= 1'b0;
+            fr1 <= 1'b1;
+            dfr <= (prev_s[2] && !s[2]) ? 1'b1 : 1'b0; // Check if level increased
+        end else if (s[1] && !s[2]) begin
+            // Water level between s[2] and s[1]
+            fr3 <= 1'b0;
+            fr2 <= 1'b1;
+            fr1 <= 1'b1;
+            dfr <= (prev_s[1] && !s[1]) ? 1'b1 : 1'b0; // Check if level increased
+        end else begin
+            // Water level below s[1]
+            fr3 <= 1'b1;
+            fr2 <= 1'b1;
+            fr1 <= 1'b1;
+            dfr <= 1'b0;
+        end
+
+        // Update previous sensor state for next cycle comparison
+        prev_s[3] <= s[3];
+        prev_s[2] <= s[2];
+        prev_s[1] <= s[1];
+    end
+end
+
+// Register to hold the previous state of sensors
+reg [3:1] prev_s;
+always @(posedge clk) begin
+    if (!reset) begin
+        prev_s <= 3'b000; // Initialize with no sensors asserted
+    end
+end
+
+endmodule

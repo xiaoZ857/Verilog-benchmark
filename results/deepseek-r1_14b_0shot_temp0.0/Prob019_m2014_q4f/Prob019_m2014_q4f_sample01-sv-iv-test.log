@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob019_m2014_q4f/Prob019_m2014_q4f_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob019_m2014_q4f/Prob019_m2014_q4f_sample01.sv dataset_code-complete-iccad2023/Prob019_m2014_q4f_test.sv dataset_code-complete-iccad2023/Prob019_m2014_q4f_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\deepseek-r1_14b_0shot_temp0.0\Prob019_m2014_q4f/Prob019_m2014_q4f_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out' has no mismatches.
+Hint: Total mismatched samples is 0 out of 100 samples
+
+Simulation finished at 501 ps
+Mismatches: 0 in 100 samples
+
+
+--- stderr ---

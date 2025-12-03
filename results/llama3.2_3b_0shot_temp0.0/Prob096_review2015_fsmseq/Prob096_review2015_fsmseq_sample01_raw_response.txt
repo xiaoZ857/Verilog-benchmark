@@ -1,0 +1,37 @@
+```verilog
+reg [2:0] state = 0;
+reg [3:0] seq_found = 0;
+reg start_shifting = 0;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 0;
+    seq_found <= 0;
+    start_shifting <= 0;
+  end else begin
+    // Search for the sequence 1101 in the input data
+    if (data == 1 && state == 00) begin
+      state <= 01;
+    end else if (data == 1 && state == 10) begin
+      state <= 11;
+    end else if (data == 0 && state == 01) begin
+      state <= 00;
+    end else if (data == 0 && state == 11) begin
+      state <= 10;
+    end else if (data == 1 && seq_found != 4) begin
+      seq_found <= seq_found + 1;
+    end else if (data == 0 && seq_found != 3) begin
+      seq_found <= seq_found + 1;
+    end else if (seq_found == 4 || seq_found == 3) begin
+      start_shifting <= 1;
+    end else begin
+      state <= 00;
+      seq_found <= 0;
+    end
+  end
+end
+
+assign start_shifting = start_shifting;
+
+endmodule
+```

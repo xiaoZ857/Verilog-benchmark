@@ -1,0 +1,25 @@
+
+
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+always @(negedge clk) begin
+    if (reset) begin
+        q[7] <= 0;
+        q[6] <= 0;
+        q[5] <= 1;
+        q[4] <= 1;
+        q[3] <= 0;
+        q[2] <= 1;
+        q[1] <= 0;
+        q[0] <= 0;
+    end else begin
+        q <= d;
+    end
+end
+
+endmodule

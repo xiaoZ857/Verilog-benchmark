@@ -1,0 +1,36 @@
+Here's the Verilog module implementing 8 D flip-flops with active high synchronous reset:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+generate
+  genvar i;
+  for (i = 0; i < 8; i++) begin : dff_gen
+    DFlipFlop dflipflop (
+      .clk(clk),
+      .d(d[i]),
+      .reset(reset),
+      .q(q[i])
+    );
+  end
+endgenerate
+
+endmodule
+```
+
+Note: This code assumes you have a DFlipFlop module defined elsewhere with the following interface:
+```verilog
+module DFlipFlop (
+  input clk,
+  input d,
+  input reset,
+  output reg q
+);
+```
+
+The above code creates an array of 8 identical D flip-flops, each triggered by the positive edge of `clk` and synchronized to a common `reset` signal.

@@ -1,0 +1,20 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv dataset_code-complete-iccad2023/Prob041_dff8r_test.sv dataset_code-complete-iccad2023/Prob041_dff8r_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+results\deepseek-r1_14b_0shot_temp0.0\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFlipFlop
+8 error(s) during elaboration.
+*** These modules were missing:
+        DFlipFlop referenced 8 times.
+***

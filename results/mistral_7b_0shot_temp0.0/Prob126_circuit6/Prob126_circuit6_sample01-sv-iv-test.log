@@ -1,0 +1,12 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01 results\mistral_7b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv dataset_code-complete-iccad2023/Prob126_circuit6_test.sv dataset_code-complete-iccad2023/Prob126_circuit6_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:11: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:12: error: malformed statement

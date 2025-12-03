@@ -1,0 +1,11 @@
+```verilog
+assign next_state = (state[3:0] == 4'b0001) ? ({in, 3'b000}) : // A -> B if in=1 else A
+                    (state[3:0] == 4'b0010) ? ({1'b0, state[2:0]}) : // B -> C if in=1 else B
+                    (state[3:0] == 4'b0100) ? ({in, 2'b00, ~in}) : // C -> D if in=1 else A
+                    (state[3:0] == 4'b1000) ? ({1'b0, state[2], 2'b01}) : // D -> B if in=1 else C
+                    4'b0000; // Default case
+
+assign out = (state[3:0] == 4'b1000); // Output is 1 only when in state D
+
+endmodule
+```

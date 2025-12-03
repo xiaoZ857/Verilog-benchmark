@@ -1,0 +1,41 @@
+ Here is the Verilog code for the thermostat module as per your description:
+
+```verilog
+module TopModule (
+  input logic mode,
+  input logic too_cold,
+  input logic too_hot,
+  input logic fan_on,
+  output logic heater,
+  output logic aircon,
+  output logic fan
+);
+
+always @(posedge clk) begin
+  if (mode == 1) begin // Heating mode
+    if (too_cold) begin
+      heater <= 1'b1;
+      aircon <= 1'b0;
+    end else begin
+      heater <= 1'b0;
+    end
+  end else begin // Cooling mode
+    if (too_hot) begin
+      heater <= 1'b0;
+      aircon <= 1'b1;
+    end else begin
+      heater <= 1'b0;
+    end
+  end
+
+  if ((heater || aircon) || fan_on) begin // Turn on the fan when heater, aircon or user request is on
+    fan <= 1'b1;
+  end else begin
+    fan <= 1'b0;
+  end
+end
+
+endmodule
+```
+
+This code assumes that the clock signal is named `clk`. The module takes in inputs for mode, too_cold, too_hot, and fan_on, and outputs heater, aircon, and fan. In heating mode, if it's too cold, the heater turns on and the air conditioner remains off. In cooling mode, if it's too hot, the air conditioner turns on and the heater remains off. The fan is turned on when the heater or air conditioner are on, or when the user requests it directly.

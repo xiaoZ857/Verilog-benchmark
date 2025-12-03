@@ -1,0 +1,6 @@
+always @(*) 
+  out_alwaysblock = a & b;
+  
+assign out_assign = a & b;
+
+endmodule

@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob027_fadd/Prob027_fadd_sample01 results\gemma3_12b_0shot_temp0.0\Prob027_fadd/Prob027_fadd_sample01.sv dataset_code-complete-iccad2023/Prob027_fadd_test.sv dataset_code-complete-iccad2023/Prob027_fadd_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gemma3_12b_0shot_temp0.0\Prob027_fadd/Prob027_fadd_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'cout' has no mismatches.
+Hint: Output 'sum' has no mismatches.
+Hint: Total mismatched samples is 0 out of 214 samples
+
+Simulation finished at 1070 ps
+Mismatches: 0 in 214 samples
+
+
+--- stderr ---

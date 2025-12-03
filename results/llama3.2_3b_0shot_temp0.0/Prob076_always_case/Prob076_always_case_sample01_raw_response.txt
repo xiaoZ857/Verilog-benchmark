@@ -1,0 +1,11 @@
+```verilog
+// Select the corresponding data input based on the sel value
+reg [3:0] temp;
+
+assign temp = (sel <= 5) ? 0 : (sel[1:0]);
+assign out = (temp == 0) ? data0 : 
+               (temp == 1) ? data1 : 
+               (temp == 2) ? data2 : 
+               (temp == 3) ? data3 : 
+               (temp == 4) ? data4 : data5;
+```

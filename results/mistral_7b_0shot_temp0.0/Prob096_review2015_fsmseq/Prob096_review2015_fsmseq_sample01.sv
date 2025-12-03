@@ -1,0 +1,41 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+
+reg state = 0; // Current state of the FSM (0, 1, 2, or 3)
+reg start_shifting = 0; // Output signal indicating when to start shifting
+reg last_data = 0; // Last received data bit
+
+always @(posedge clk) begin
+    if (reset) begin
+        state <= 0; // Reset the FSM to initial state (0)
+        start_shifting <= 0; // Reset the output signal
+    end else if (state == 0) begin
+        start_shifting <= 0; // Ignore data in this state
+        state <= data; // Move to next state
+        last_data <= data; // Remember the current data bit
+    end else if (state == 1 && last_data == 1) begin
+        state <= 2; // Found first '1' of the sequence, move to next state
+        start_shifting <= 0; // Ignore data in this state
+    end else if (state == 2 && data == 0) begin
+        state <= 3; // Found second '0' of the sequence, move to final state
+        start_shifting <= 1; // Start shifting and set output signal
+    end else if (state == 3 && data == 1) begin
+        state <= 0; // Reset FSM as invalid sequence detected, move back to initial state
+        start_shifting <= 0; // Reset the output signal
+    end else begin
+        state <= last_data; // Move to next state with current data bit
+        start_shifting <= 0; // Ignore data in all other states
+    end
+end
+
+always @(posedge clk) begin
+    last_data <= data; // Update the last received data bit on every clock edge
+end
+
+endmodule

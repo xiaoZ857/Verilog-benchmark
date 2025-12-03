@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01 results\mistral_7b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01.sv dataset_code-complete-iccad2023/Prob023_vector100r_test.sv dataset_code-complete-iccad2023/Prob023_vector100r_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01.sv:7: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01.sv:7: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

@@ -1,0 +1,56 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+reg [2:0] state, next_state;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 3'b000;
+    else
+        state <= next_state;
+end
+
+assign disc = (state == 3'b011);
+assign flag = (state == 3'b111);
+assign err = (state == 3'b110);
+
+always @(*) begin
+    case (state)
+        3'b000: // Initial state, behaves as if previous input was 0
+            next_state = in ? 3'b001 : 3'b000;
+        
+        3'b001: // One '1' seen
+            next_state = in ? 3'b010 : 3'b000;
+        
+        3'b010: // Two consecutive '1's seen
+            next_state = in ? 3'b011 : 3'b000;
+        
+        3'b011: // Three consecutive '1's seen, potential discard or flag
+            next_state = in ? 3'b100 : 3'b001; // Discard if followed by '0'
+        
+        3'b100: // Four consecutive '1's seen
+            next_state = in ? 3'b101 : 3'b000;
+        
+        3'b101: // Five consecutive '1's seen, potential flag or error
+            next_state = in ? 3'b110 : 3'b010; // Error if followed by '1'
+        
+        3'b110: // Six consecutive '1's seen, error state
+            next_state = 3'b000;
+        
+        3'b111: // Flag detected (01111110)
+            next_state = in ? 3'b000 : 3'b100; // Return to potential discard
+        
+        default:
+            next_state = 3'b000;
+    endcase
+end
+
+endmodule

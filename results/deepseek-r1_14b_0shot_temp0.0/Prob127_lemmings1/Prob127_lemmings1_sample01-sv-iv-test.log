@@ -1,0 +1,13 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv dataset_code-complete-iccad2023/Prob127_lemmings1_test.sv dataset_code-complete-iccad2023/Prob127_lemmings1_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:23: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:24: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+2 error(s) during elaboration.

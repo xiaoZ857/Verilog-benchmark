@@ -1,0 +1,36 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01 results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv dataset_code-complete-iccad2023/Prob106_always_nolatches_ref.sv
+Return code: 27
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:11: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:17: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:18: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:22: syntax error
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:22: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:23: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:24: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:27: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:28: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:29: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:30: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:33: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:34: syntax error
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:34: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:35: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:36: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:39: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:40: syntax error
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:40: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:41: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:42: error: Invalid module instantiation
+dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv:11: error: invalid module item.

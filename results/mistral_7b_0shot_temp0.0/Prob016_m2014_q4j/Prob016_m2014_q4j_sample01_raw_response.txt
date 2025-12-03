@@ -1,0 +1,36 @@
+ Here is a simple implementation of a 4-bit adder with full adders in Verilog. The output `sum` includes the carry-out from the fourth full adder (which represents the overflow bit).
+
+```verilog
+module FullAdder (
+  input a,
+  input b,
+  input cin,
+  output sum,
+  output cout
+);
+
+assign sum = a ^ b ^ cin;
+assign cout = (a & b) | (cin & sum);
+
+endmodule
+
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output reg [4:0] sum,
+  output reg overflow
+);
+
+wire [3:0] cin;
+FullAdder fa0 (x[0], y[0], cin[0], sum[0], overflow);
+FullAdder fa1 (x[1], y[1], cin[0], sum[1], cin[1]);
+FullAdder fa2 (x[2], y[2], cin[1], sum[2], cin[2]);
+FullAdder fa3 (x[3], y[3], cin[2], sum[3], cin[3]);
+
+always @(posedge clk)
+  overflow <= cin[3];
+
+endmodule
+```
+
+In this code, the `TopModule` consists of four full adders (`fa0`, `fa1`, `fa2`, and `fa3`) that perform the addition. The carry-in signal for each full adder is connected to the carry-out of the previous one. The `always` block at the bottom updates the overflow flag on every clock edge.

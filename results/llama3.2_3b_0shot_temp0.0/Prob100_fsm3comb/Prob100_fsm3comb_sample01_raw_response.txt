@@ -1,0 +1,4 @@
+```verilog
+assign next_state = state == 2'b00 ? state : (state == 2'b01 ? 2'b10 : (state == 2'b10 ? 2'b11 : 2'b00));
+assign out = ~((in && state == 2'b00) || (in && state == 2'b10)) ? 1'b0 : 1'b1;
+```

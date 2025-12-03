@@ -1,0 +1,55 @@
+```verilog
+reg [1:0] state, next_state;
+reg carry;
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= 2'b00; // Initial state
+        carry <= 1'b0;
+    end else begin
+        state <= next_state;
+    end
+end
+
+always @(*) begin
+    case (state)
+        2'b00: begin
+            if (!x) begin
+                next_state = 2'b01;
+                carry = 1'b1; // Start of 2's complement, set carry to 1
+            end else begin
+                next_state = 2'b10;
+                carry = 1'b0;
+            end
+        end
+        2'b01: begin
+            if (!x) begin
+                next_state = 2'b01; // Keep inverting and passing the carry
+                carry = 1'b1;
+            end else begin
+                next_state = 2'b10;
+                carry = 1'b0;
+            end
+        end
+        2'b10: begin
+            if (carry) begin
+                next_state = 2'b01; // Invert and pass the carry
+                carry = 1'b1;
+            end else begin
+                next_state = 2'b11; // Stop state, output is ready
+            end
+        end
+        2'b11: begin
+            if (areset) begin
+                next_state = 2'b00; // Reset to initial state
+            end else begin
+                next_state = 2'b11;
+            end
+        end
+    endcase
+end
+
+assign z = (state == 2'b10 && !carry) ? x : ~x;
+
+endmodule
+```

@@ -1,0 +1,29 @@
+ Here is the Verilog code for the 2's complementer Mealy machine with one-hot encoding:
+
+```verilog
+reg state_A, state_B;
+assign z = (state_A ? ~x : state_B ? x : 1'bz); // Assigning output z based on the current state and input x
+
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state_A <= 1'b0;
+        state_B <= 1'b0;
+    end else if (state_A && !x) begin
+        state_A <= 1'b1;
+        state_B <= 1'b0;
+    end else if (state_A && x) begin
+        state_A <= 1'b1;
+        state_B <= 1'b1;
+    end else if (!state_A && !x) begin
+        state_A <= 1'b0;
+        state_B <= 1'b0;
+    end else if (!state_A && x) begin
+        state_A <= 1'b0;
+        state_B <= 1'b1;
+    end
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `areset`, `x`, and output `z`. The states are represented by `state_A` and `state_B`, which use one-hot encoding. The output `z` is assigned based on the current state and input `x`. The always block handles the transitions between states at the positive edge of the clock or active-high reset signal.

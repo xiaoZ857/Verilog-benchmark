@@ -1,0 +1,36 @@
+ Here is the Verilog code for the Moore machine described:
+
+```verilog
+reg A, B;
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        A <= 0;
+        B <= 1;
+    end else begin
+        case (B)
+            1'b1: begin
+                if (in) begin
+                    A <= 1;
+                end
+                else begin
+                    A <= A;
+                end
+            end
+            1'b0: begin
+                if (!in) begin
+                    B <= A;
+                end
+                else begin
+                    B <= B;
+                end
+            end
+        endcase
+    end
+end
+
+assign out = B;
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `in`, and `areset`, and an output `out`. The state machine is implemented using a case statement based on the current value of the `B` signal. When the asynchronous reset signal `areset` is high, the state machine resets to state B (1). Otherwise, it follows the Moore machine diagram described in your question. The final line assigns the output `out` to the current value of the `B` signal.

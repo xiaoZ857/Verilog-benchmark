@@ -1,0 +1,47 @@
+```verilog
+reg [6:0] global_history;
+reg [6:0] history_buffer;
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        global_history <= 7'b0;
+        history_buffer <= 7'b0;
+    end else begin
+        if (train_valid) begin
+            // Update the global history register only on misprediction
+            if (train_mispredicted)
+                global_history <= train_history;
+            else
+                history_buffer <= train_history; // Buffer for prediction update
+        end else if (predict_valid) begin
+            history_buffer <= global_history; // Use current global history for prediction
+        end
+    end
+end
+
+wire [6:0] index = predict_pc ^ global_history;
+
+reg [1:0] pht[127:0]; // Pattern History Table with 128 entries of 2-bit saturating counters
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        integer i;
+        for (i = 0; i < 128; i = i + 1)
+            pht[i] <= 2'b10; // Initialize PHT to weakly taken state
+    end else begin
+        if (train_valid) begin
+            if (pht[index] != train_taken) begin
+                if (train_taken && pht[index] < 2'b11)
+                    pht[index] <= pht[index] + 1;
+                else if (!train_taken && pht[index] > 2'b00)
+                    pht[index] <= pht[index] - 1;
+            end
+        end
+    end
+end
+
+assign predict_taken = (pht[index] >= 2'b10);
+assign predict_history = history_buffer;
+
+endmodule
+```

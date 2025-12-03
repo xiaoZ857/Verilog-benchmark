@@ -1,0 +1,52 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    present_state <= 2'b00;
+  end else begin
+    case (present_state)
+      2'b00: begin
+        if (in == 0) begin
+          next_state <= 2'b01;
+        end else begin
+          next_state <= 2'b00;
+        end
+      end
+      2'b01: begin
+        if (in == 0) begin
+          next_state <= 2'b10;
+        end else begin
+          next_state <= 2'b01;
+        end
+      end
+      default: begin
+        next_state <= 2'b00;
+      end
+    endcase
+  end
+end
+
+always @(present_state) begin
+  case (present_state)
+    2'b00: out = 1;
+    2'b01: out = 1;
+    2'b10: out = 0;
+    default: out = 1;
+  endcase
+end
+
+reg present_state;
+reg next_state;
+
+always @(posedge clk) begin
+  present_state <= next_state;
+end
+
+endmodule

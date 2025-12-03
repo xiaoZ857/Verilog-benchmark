@@ -1,0 +1,25 @@
+ Here's the Verilog code for a 4-bit priority encoder as per your description:
+
+```verilog
+module TopModule (
+  input [3:0] in,
+  output reg [1:0] pos
+);
+
+always @(posedge clk) begin
+  if (in[3])
+    pos <= 4'b0101; // Output 4 when bit 3 is high
+  else if (in[2])
+    pos <= 4'b0110; // Output 2 when bit 2 is high
+  else if (in[1])
+    pos <= 4'b0111; // Output 1 when bit 1 is high
+  else if (in[0])
+    pos <= 4'b1000; // Output 0 when bit 0 is high
+  else
+    pos <= 4'b0000; // Output zero when none of the input bits are high
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with a 4-bit input `in` and a 2-bit output `pos`. The priority encoder logic is implemented using an always block that checks each input bit in order of priority (from the most significant bit to the least significant bit). When a high input bit is detected, the corresponding output value is assigned. If none of the input bits are high, the output is zero.

@@ -1,0 +1,14 @@
+always @(posedge clk) begin
+    case (y)
+        000 : Y2 <= w; // A -> B transition
+        001 : Y2 <= y[0]; // A -> A transition
+        010 : Y2 <= 0; // B -> C transition
+        011 : Y2 <= 1; // B -> D transition
+        100 : Y2 <= 0; // C -> E transition
+        101 : Y2 <= 1; // C -> D transition
+        110 : Y2 <= 0; // D -> F transition
+        111 : Y2 <= y[0]; // D -> A transition
+        001b:Y2 <= y[1]; // E -> D transition (since E stays at 1, we can use the current state y[1] for next state)
+        101b:Y2 <= y[0]; // F -> C transition (since F stays at 1, we can use the current state y[0] for next state)
+    endcase
+end

@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01 results\mistral_7b_0shot_temp0.0\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv dataset_code-complete-iccad2023/Prob121_2014_q3bfsm_test.sv dataset_code-complete-iccad2023/Prob121_2014_q3bfsm_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'z' has 367 mismatches. First mismatch occurred at time 60.
+Hint: Total mismatched samples is 367 out of 1006 samples
+
+Simulation finished at 5031 ps
+Mismatches: 367 in 1006 samples
+
+
+--- stderr ---

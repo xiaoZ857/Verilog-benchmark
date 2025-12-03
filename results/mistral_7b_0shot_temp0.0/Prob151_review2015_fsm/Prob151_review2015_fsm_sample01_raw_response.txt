@@ -1,0 +1,42 @@
+ Here is the Verilog code for the finite-state machine (FSM) that controls the timer as described:
+
+```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= STATE_IDLE; // Reset to idle state
+    end else begin
+        case (state)
+            STATE_IDLE:
+                if (data == 1'b1 && prev_data == 1'b0 && next_data == 1'b1 && next_next_data == 1'b0) begin // Check for start sequence (1101)
+                    state <= STATE_START;
+                    shift_ena <= 1'b1; // Enable shifting for 4 clock cycles
+                end
+                prev_data <= data;
+            STATE_START:
+                if (shift_ena) begin
+                    state <= STATE_COUNTING;
+                    counting <= 1'b1; // Indicate waiting for counters
+                end else begin
+                    state <= STATE_IDLE;
+                    shift_ena <= 1'b0;
+                end
+            STATE_COUNTING:
+                if (done_counting) begin
+                    state <= STATE_DONE;
+                    done <= 1'b1; // Notify user the timer has timed out
+                end
+            STATE_DONE:
+                if (ack) begin
+                    state <= STATE_IDLE; // Reset to idle state after acknowledgement
+                end
+        endcase
+    end
+end
+
+assign next_next_data = data;
+assign next_data = prev_data;
+```
+
+In this code, the FSM has three states: STATE_IDLE, STATE_START, and STATE_COUNTING. The state machine starts in the idle state (STATE_IDLE) and waits for the start sequence (1101). When the sequence is detected, it transitions to the STATE_START state and asserts shift_ena for 4 clock cycles. After that, it transitions to the STATE_COUNTING state, where it waits until done_counting is high, indicating that the counters have finished counting. Once done_counting is high, it transitions to the STATE_DONE state and asserts done to notify the user the timer has timed out. When the user acknowledges the timer by setting ack to 1, the FSM resets back to the idle state (STATE_IDLE) and waits for the next occurrence of the start sequence (1101).
+
+The variables prev_data and next_next_data are used to store the previous and next data values, respectively, to check for the start sequence (1101).

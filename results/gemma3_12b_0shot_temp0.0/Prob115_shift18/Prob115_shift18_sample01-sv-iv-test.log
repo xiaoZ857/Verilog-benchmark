@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01 results\gemma3_12b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01.sv dataset_code-complete-iccad2023/Prob115_shift18_test.sv dataset_code-complete-iccad2023/Prob115_shift18_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01.sv:36: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:14: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:21: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:21: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:22: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:24: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:26: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:31: Syntax in assignment statement l-value.

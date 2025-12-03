@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01 results\phi4_14b_0shot_temp0.0\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv dataset_code-complete-iccad2023/Prob095_review2015_fsmshift_test.sv dataset_code-complete-iccad2023/Prob095_review2015_fsmshift_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'shift_ena' has 14 mismatches. First mismatch occurred at time 360.
+Hint: Total mismatched samples is 14 out of 200 samples
+
+Simulation finished at 1001 ps
+Mismatches: 14 in 200 samples
+
+
+--- stderr ---

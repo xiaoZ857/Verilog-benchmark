@@ -1,0 +1,33 @@
+```verilog
+reg [255:0] q[15:0];
+reg [7:0][15:0] temp_q[16:0];
+
+always @(posedge clk) begin
+  if (load) begin
+    for (int i = 0; i < 16; i++) 
+      temp_q[i] <= data[(i*16):(i*16+15)];
+  end else begin
+    for (int i = 0; i < 16; i++) 
+      temp_q[i] <= q[(i*16):(i*16+15)];
+  end
+
+  for (int i = 0; i < 16; i++) begin
+    int count = 0;
+    for (int j = max(0, i-1); min(15, i+2) >= 0; j = max(0, j-1)) 
+      if ((q[(j*16):(j*16+15)] & (i == j ? ~1 : 1)) != 0)
+        count++;
+    q[i] <= (count == 3 || count == 2) ? temp_q[i] : 0;
+  end
+end
+
+assign q[255:224] = q[15:0];
+assign q[223:192] = q[31:16];
+assign q[191:160] = q[47:32];
+assign q[159:128] = q[63:48];
+assign q[127:96] = q[79:64];
+assign q[95:64] = q[95:64];
+assign q[63:32] = q[111:96];
+assign q[31:0] = q[127:112];
+
+endmodule
+```

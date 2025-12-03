@@ -1,0 +1,47 @@
+always @(*) begin
+  // Calculate the next state of Y[2:0]
+  case (x)
+    0: 
+      if (y == 3'd0) Y0 = 3'd0;
+      else if (y == 3'd1) Y0 = 3'd1;
+      else if (y == 3'd2) Y0 = 3'd0;
+      else if (y == 3'd1) Y0 = 3'd1;
+      else if (y == 3'd2) Y0 = 3'd0;
+      else if (y == 3'd0) Y0 = 3'd0;
+      else if (y == 3'd1) Y0 = 3'd1;
+      else if (y == 3'd2) Y0 = 3'd0;
+
+    1: 
+      if (y == 3'd0) Y0 = 3'd0;
+      else if (y == 3'd1) Y0 = 3'd1;
+      else if (y == 3'd2) Y0 = 3'd0;
+      else if (y == 3'd1) Y0 = 3'd1;
+      else if (y == 3'd2) Y0 = 3'd0;
+      else if (y == 3'd0) Y0 = 3'd0;
+      else if (y == 3'd1) Y0 = 3'd1;
+      else if (y == 3'd2) Y0 = 3'd0;
+
+    default: 
+      Y0 = 3'd0;
+  endcase
+
+  // Calculate the output z
+  case (Y0)
+    3'd0: z = 1'b0;
+    3'd1: z = 1'b1;
+    default: z = 1'b0;
+  endcase
+end
+
+assign Y0 = Y0;
+
+always @(posedge clk) begin
+  // Update the values of Y0 and z on each clock edge
+  if (clk == 1'b1) 
+    Y0 <= Y0;
+  else 
+    Y0 <= 3'd0;
+  end
+end
+
+assign z = z;

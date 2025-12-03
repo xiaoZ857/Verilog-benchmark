@@ -1,0 +1,21 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01 results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv dataset_code-complete-iccad2023/Prob083_mt2015_q4b_test.sv dataset_code-complete-iccad2023/Prob083_mt2015_q4b_ref.sv
+Return code: 7
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:12: error: Unable to bind wire/reg/memory `reset' in `tb.top_module1'
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:12: error: Unable to elaborate condition expression.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:21: error: z is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:6:      : z is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:28: error: z is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:6:      : z is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:35: error: z is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:6:      : z is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:39: error: z is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:6:      : z is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:43: error: z is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:6:      : z is declared here as wire.
+7 error(s) during elaboration.

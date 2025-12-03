@@ -1,0 +1,22 @@
+module TopModule (
+  input wire a,
+  input wire b,
+  output wire q
+);
+
+always @(posedge clk) // Assuming positive edge-triggered clock
+begin
+  assign q = (!a & b) | (a & !b & prev_q); // Using previous value of q for feedback
+end
+
+reg q; // Internal register for the q signal
+assign prev_q = q; // Initialize previous_q with current q
+always @* // Assuming synchronous reset
+begin
+  if (clk == 1'b0 && reset == 1'b1)
+    assign prev_q = 1'b0;
+end
+
+// Add reset input and assignment here if needed
+
+endmodule

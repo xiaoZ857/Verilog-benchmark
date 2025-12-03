@@ -1,0 +1,5 @@
+```verilog
+assign shift_ena = !reset && clk;
+```
+
+Note: The `assign` keyword is used to create a non-blocking assignment, which is suitable for this scenario where we want the value of `shift_ena` to be determined by the current state of the inputs.

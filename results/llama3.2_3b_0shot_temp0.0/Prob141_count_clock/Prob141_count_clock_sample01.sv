@@ -1,0 +1,39 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+
+reg [1:0] hh_count;
+reg [3:0] mm_count;
+reg [3:0] ss_count;
+
+always @(posedge clk) begin
+  if (reset) begin
+    hh_count <= 12;
+    mm_count <= 0;
+    ss_count <= 0;
+  end else begin
+    hh_count <= hh_count + 1;
+    mm_count <= mm_count + 1;
+    ss_count <= ss_count + 1;
+
+    if (hh_count == 13) hh_count <= 1;
+    if (mm_count == 60) mm_count <= 0;
+    if (ss_count == 60) ss_count <= 0;
+  end
+end
+
+assign pm = (hh_count >= 12) ? 1 : 0;
+
+assign hh = hh_count;
+assign mm = mm_count;
+assign ss = ss_count;
+
+// VERILOG-EVAL: endmodule not found

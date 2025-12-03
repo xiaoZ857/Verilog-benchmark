@@ -1,0 +1,18 @@
+ Here is the Verilog code for the combinational circuit based on the provided truth table:
+
+```verilog
+module TopModule (
+  input wire x3,
+  input wire x2,
+  input wire x1,
+  output reg f
+);
+
+always @(posedge clk) begin
+  assign f = (x3 & ~x2 & x1) | (~x3 & x2 & ~x1) | (x3 & x2 & x1);
+end
+
+endmodule
+```
+
+In this code, the `always @(posedge clk)` block represents a positive edge-triggered combinational circuit. The `assign` statement is used to create the output `f` based on the provided truth table. The `|` operator represents OR gate, and the `&` operator represents AND gate.

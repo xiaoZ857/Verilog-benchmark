@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\qwen3_8b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01 results\qwen3_8b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv dataset_code-complete-iccad2023/Prob137_fsm_serial_ref.sv
+Return code: 3
+
+--- stdout ---
+
+
+--- stderr ---
+dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob137_fsm_serial_ref.sv:39: syntax error
+I give up.

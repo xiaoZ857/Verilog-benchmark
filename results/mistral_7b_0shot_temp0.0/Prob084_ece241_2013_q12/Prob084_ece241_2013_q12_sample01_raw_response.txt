@@ -1,0 +1,17 @@
+ ```verilog
+reg [7:0] shift_register;
+
+always @(posedge clk) begin
+  if (enable)
+    shift_register <= {shift_register[6], S, shift_register[1:0]};
+end
+
+assign Z = shift_register[(A & B & C) + 1];
+
+endmodule
+```
+This Verilog code defines a module named `TopModule` with inputs for clock (clk), enable signal, and the serial input S, as well as three additional inputs A, B, C. The output is Z.
+
+The shift register is implemented using an 8-bit reg named `shift_register`. An always block triggers on positive edge of clk and shifts the bits into the shift register when enable is high.
+
+A muxless assignment statement is used to generate the output Z based on the values of A, B, C, and the shift register. The output Z will be the value from the shift register corresponding to the position determined by the binary representation of ABC (i.e., Z=Q[0] when ABC is 000, Z=Q[1] when ABC is 001, and so on).

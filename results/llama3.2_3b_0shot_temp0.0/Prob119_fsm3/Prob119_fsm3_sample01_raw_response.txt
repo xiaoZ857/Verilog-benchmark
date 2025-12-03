@@ -1,0 +1,33 @@
+```verilog
+always @(*) begin
+    // Define the states and their corresponding next states
+    case (out)
+        0: 
+            if (in == 0) out = A;
+            else if (in == 1) out = B;
+        1:
+            if (in == 0) out = C;
+            else if (in == 1) out = D;
+    endcase
+end
+
+// Define the states
+localparam A = 0;
+localparam B = 1;
+localparam C = 2;
+localparam D = 3;
+
+// Asynchronous reset
+always @(*) begin
+    if (!areset && clk == 1) 
+        out <= A;
+    end
+end
+
+// Positive edge triggered clock
+always @(posedge clk) begin
+    // Reset the FSM on rising edge of clock
+    if (areset)
+        out <= A;
+end
+```

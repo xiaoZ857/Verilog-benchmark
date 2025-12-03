@@ -1,0 +1,45 @@
+ Here's the Verilog code for the next-state logic of `y[2]` in your state machine:
+
+```verilog
+always @(posedge clk) begin
+    case (y)
+        000 : Y2 <= w; // A -> B transition
+        001 : Y2 <= y[0]; // A -> A transition
+        010 : Y2 <= 0; // B -> C transition
+        011 : Y2 <= 1; // B -> D transition
+        100 : Y2 <= 0; // C -> E transition
+        101 : Y2 <= 1; // C -> D transition
+        110 : Y2 <= 0; // D -> F transition
+        111 : Y2 <= y[0]; // D -> A transition
+        001b:Y2 <= y[1]; // E -> D transition (since E stays at 1, we can use the current state y[1] for next state)
+        101b:Y2 <= y[0]; // F -> C transition (since F stays at 1, we can use the current state y[0] for next state)
+    endcase
+end
+```
+
+In this code, `clk` is assumed to be an input clock signal. The `w` input is used as the input for the A -> B transition. The output `Y2` represents the next-state value for `y[2]`. The state codes are represented in binary format (000, 001, ..., 111).
+
+Please note that this code only implements the next-state logic for `y[2]`, and you would need to create separate modules for `y[1]` and `y[0]` to complete the state machine. Also, don't forget to include the necessary module instantiation, input/output definitions, and clock assignment in your top-level Verilog file.
+
+```verilog
+module TopModule (
+  input clk,
+  input w,
+  output reg y_0,
+  output reg y_1,
+  output reg Y2
+);
+
+// Instantiate the next-state logic modules for each state variable
+YNext_2(y_1, w, Y2); // For y[2]
+YNext_1(y_0, Y2, y_1); // For y[1]
+YNext_0(y_0, Y2, y_1); // For y[0]
+
+// Assign clock to all flip-flops
+always @(posedge clk) begin
+    y_0 <= Y2;
+    y_1 <= y_0;
+end
+
+endmodule
+```

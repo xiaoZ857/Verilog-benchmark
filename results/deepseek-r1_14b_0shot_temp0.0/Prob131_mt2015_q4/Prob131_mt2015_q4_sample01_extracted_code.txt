@@ -1,0 +1,24 @@
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  
+  // Module A instances
+  wire a_out1 = (x ^ y) & x;
+  wire a_out2 = (x ^ y) & x;  // Since both A submodules share the same inputs
+  
+  // Module B instances
+  wire b_out1 = (~x) ^ (~y);  // XNOR operation for B
+  wire b_out2 = (~x) ^ (~y);  // Same as B1 since inputs are same
+  
+  // OR gate connection
+  wire or_out = a_out1 | b_out1;
+  
+  // AND gate connection
+  wire and_out = a_out2 & b_out2;
+  
+  // XOR gate for final output
+  z = or_out ^ and_out;
+
+endmodule

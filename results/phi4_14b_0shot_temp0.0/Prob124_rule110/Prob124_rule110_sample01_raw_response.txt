@@ -1,0 +1,40 @@
+```verilog
+always @(posedge clk) begin
+    if (load) begin
+        q <= data;
+    end else begin
+        integer i;
+        for (i = 0; i < 512; i = i + 1) begin
+            case ({q[i+1], q[i], q[i-1]})
+                3'b111: q[i] <= 1'b0;
+                3'b110, 3'b101, 3'b011: q[i] <= 1'b1;
+                default: q[i] <= 1'b0;
+            endcase
+        end
+    end
+end
+
+// Handle boundary conditions by using a temporary register
+reg [511:0] temp_q;
+
+always @(posedge clk) begin
+    if (load) begin
+        temp_q <= data;
+    end else begin
+        integer i;
+        for (i = 0; i < 512; i = i + 1) begin
+            case ({temp_q[i+1], q[i], (i == 0 ? 1'b0 : temp_q[i-1])})
+                3'b111: q[i] <= 1'b0;
+                3'b110, 3'b101, 3'b011: q[i] <= 1'b1;
+                default: q[i] <= 1'b0;
+            endcase
+        end
+    end
+end
+
+always @(posedge clk) begin
+    temp_q <= q; // Update the temporary register for next cycle
+end
+
+endmodule
+```

@@ -1,0 +1,44 @@
+
+
+module TopModule (
+  input in,
+  input [1:0] state,
+  output reg [1:0] next_state,
+  output out
+);
+
+ ```verilog
+always @(posedge clk) begin
+    case (state)
+        A: begin
+            if (in === 0)
+                next_state <= 2'b00; // A
+            else if (in === 1)
+                next_state <= 2'b01; // B
+            out <= 0;
+        end
+        B: begin
+            if (in === 0)
+                next_state <= 2'b10; // C
+            else if (in === 1)
+                next_state <= 2'b01; // B
+            out <= 0;
+        end
+        C: begin
+            if (in === 0)
+                next_state <= 2'b11; // D
+            else if (in === 1)
+                next_state <= 2'b00; // A
+            out <= 0;
+        end
+        D: begin
+            if (in === 0)
+                next_state <= 2'b10; // C
+            else if (in === 1)
+                next_state <= 2'b01; // B
+            out <= 1;
+        enddefault: next_state <= state; // Default case to keep current state
+    endcase
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

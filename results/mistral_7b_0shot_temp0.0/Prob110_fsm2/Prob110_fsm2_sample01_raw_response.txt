@@ -1,0 +1,25 @@
+ Here is the Verilog code for the Moore state machine as described:
+
+```verilog
+reg state_machine = 0; // Initial state is OFF (0)
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state_machine <= 0; // Reset to OFF state
+    end else begin
+        case (state_machine)
+            0: begin
+                if (j) state_machine <= 1; // Transition to ON state when j=1
+            end,
+            1: begin
+                if (!k) state_machine <= 1; // Stay in ON state when k=0
+                else state_machine <= 0; // Transition to OFF state when k=1
+            end
+        endcase
+    end
+end
+assign out = state_machine; // Output is the current state of the state machine
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `j`, `k`, and `areset`, and an output `out`. The state machine's behavior is defined using an always block that triggers on positive edge of clock or negative edge of the asynchronous reset. The current state of the state machine is stored in a register named `state_machine`. The case statement handles the transitions between OFF and ON states based on the input values `j` and `k`. Finally, the output `out` is assigned to the current value of `state_machine`.

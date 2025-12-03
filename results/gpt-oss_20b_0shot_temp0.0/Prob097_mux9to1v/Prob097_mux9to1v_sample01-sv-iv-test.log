@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob097_mux9to1v/Prob097_mux9to1v_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob097_mux9to1v/Prob097_mux9to1v_sample01.sv dataset_code-complete-iccad2023/Prob097_mux9to1v_test.sv dataset_code-complete-iccad2023/Prob097_mux9to1v_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob097_mux9to1v/Prob097_mux9to1v_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out' has no mismatches.
+Hint: Total mismatched samples is 0 out of 220 samples
+
+Simulation finished at 1100 ps
+Mismatches: 0 in 220 samples
+
+
+--- stderr ---

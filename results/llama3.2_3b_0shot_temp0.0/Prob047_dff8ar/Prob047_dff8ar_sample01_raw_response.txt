@@ -1,0 +1,18 @@
+```verilog
+always @(posedge clk) begin
+    if (areset) q <= 8'd0;
+    else q <= d;
+end
+```
+
+Note that in Verilog, the `reg` keyword is not necessary when using the `assign` statement. The `reg` keyword was used in older versions of Verilog to explicitly specify that a signal should be registered (i.e., updated on the rising edge of the clock). However, this is no longer required and can actually lead to warnings if used with newer tools.
+
+Also note that the `q <= d` statement will not work as expected because it's trying to assign a value to `q` based on the current value of `d`. Instead, we want to update `q` only when the clock edge is triggered. That's why we use the `posedge clk` clause in the `always` block.
+
+Here's an alternative way to write this using the `assign` statement:
+
+```verilog
+assign q = (areset ? 8'd0 : d);
+```
+
+This will achieve the same result, but is more concise and idiomatic Verilog.

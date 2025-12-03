@@ -1,0 +1,14 @@
+```verilog
+always @(posedge clk)
+begin
+    if (load == 1)
+        tc <= 1;
+    else
+        if (tc == 0)
+            tc <= 1;
+        else
+            tc <= tc - 1;
+end
+```
+
+Note: The above code uses the `always` block to create a combinational logic that updates the value of `tc` based on the current state and the clock edge. It also handles the case where `load` is 0, which causes the counter to decrement by 1 at each clock cycle.

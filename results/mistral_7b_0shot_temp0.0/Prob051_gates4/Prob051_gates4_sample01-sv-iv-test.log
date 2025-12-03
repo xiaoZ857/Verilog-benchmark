@@ -1,0 +1,14 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01 results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv dataset_code-complete-iccad2023/Prob051_gates4_test.sv dataset_code-complete-iccad2023/Prob051_gates4_ref.sv
+Return code: 6
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv:25: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0.0\Prob051_gates4/Prob051_gates4_sample01.sv:34: error: invalid module item.

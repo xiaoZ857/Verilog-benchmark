@@ -1,0 +1,30 @@
+ Here is the Verilog code for the given sequential circuit:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire a,
+  output reg [2:0] q
+);
+
+always @(posedge clk) begin
+  if (a) begin
+    case ({clk, a})
+      2'b01 : q <= 4'b0101;
+      2'b10 : q <= 4'b1010;
+      2'b11 : q <= 4'b0110;
+      default: q <= 4'b0001; // for unhandled cases, set q to 1 initially
+    endcase
+  end
+  else begin
+    case ({clk, a})
+      2'b00 : q <= 4'b0000;
+      default: q <= q + 1; // increment q when clk and a are both low
+    endcase
+  end
+end
+
+endmodule
+```
+
+This code implements the given sequential circuit using an always block that is triggered on the positive edge of the clock signal. The `case` statement checks the values of both the clock and input signals to determine the next state of the output register `q`.

@@ -1,0 +1,12 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01 results\mistral_7b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv dataset_code-complete-iccad2023/Prob137_fsm_serial_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:42: syntax error
+dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:10: error: malformed statement
+dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:12: syntax error
+dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:13: Syntax in assignment statement l-value.

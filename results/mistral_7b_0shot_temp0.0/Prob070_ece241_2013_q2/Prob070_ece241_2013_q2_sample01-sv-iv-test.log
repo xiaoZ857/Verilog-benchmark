@@ -1,0 +1,12 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01 results\mistral_7b_0shot_temp0.0\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv dataset_code-complete-iccad2023/Prob070_ece241_2013_q2_test.sv dataset_code-complete-iccad2023/Prob070_ece241_2013_q2_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0.0\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv:12: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv:18: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv:26: error: Invalid module instantiation

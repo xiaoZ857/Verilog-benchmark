@@ -1,0 +1,104 @@
+
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    current_state <= walk_left_state;
+    fall_count <= 0;
+  end else begin
+    case (current_state)
+      walk_left_state: begin
+        walk_left <= 1;
+        walk_right <= 0;
+        digging <= 0;
+        aaah <= 0;
+        if (bump_left) begin
+          current_state <= walk_right_state;
+        end else if (bump_right) begin
+          current_state <= walk_left_state;
+        end else if (!ground) begin
+          current_state <= falling_state;
+          fall_count <= 0;
+        end else if (dig && ground) begin
+          current_state <= digging_state;
+        end
+      end
+      walk_right_state: begin
+        walk_left <= 0;
+        walk_right <= 1;
+        digging <= 0;
+        aaah <= 0;
+        if (bump_left) begin
+          current_state <= walk_left_state;
+        end else if (bump_right) begin
+          current_state <= walk_right_state;
+        end else if (!ground) begin
+          current_state <= falling_state;
+          fall_count <= 0;
+        end else if (dig && ground) begin
+          current_state <= digging_state;
+        end
+      end
+      falling_state: begin
+        walk_left <= 0;
+        walk_right <= 0;
+        digging <= 0;
+        aaah <= 1;
+        if (fall_count >= 20) begin
+          walk_left <= 0;
+          walk_right <= 0;
+          digging <= 0;
+          aaah <= 0;
+          current_state <= walk_left_state;
+        end else if (ground) begin
+          if (current_state == falling_state) begin
+            current_state <= walk_left_state;
+          end
+          aaah <= 0;
+          fall_count <= 0;
+        end else begin
+          fall_count <= fall_count + 1;
+        end
+      end
+      digging_state: begin
+        walk_left <= 0;
+        walk_right <= 0;
+        digging <= 1;
+        aaah <= 0;
+        if (!ground) begin
+          current_state <= falling_state;
+          fall_count <= 0;
+        end else if (bump_left || bump_right) begin
+          current_state <= walk_left_state;
+        end else if (dig) begin
+          current_state <= digging_state;
+        end
+      end
+      default: begin
+        current_state <= walk_left_state;
+      end
+    endcase
+  end
+end
+
+parameter walk_left_state = 2'b00;
+parameter walk_right_state = 2'b01;
+parameter falling_state = 2'b10;
+parameter digging_state = 2'b11;
+
+reg [1:0] current_state;
+reg [4:0] fall_count;
+
+endmodule

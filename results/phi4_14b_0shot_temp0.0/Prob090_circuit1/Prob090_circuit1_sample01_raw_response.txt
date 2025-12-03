@@ -1,0 +1,6 @@
+```verilog
+assign q = (a & b) | (~a & ~b);
+endmodule
+```
+
+This Verilog code implements the logic described by the simulation waveforms. The output `q` is high only when both inputs `a` and `b` are either both high or both low, which corresponds to an XNOR gate behavior.

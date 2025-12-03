@@ -1,0 +1,44 @@
+ Here are the three implementations of an XOR gate as requested:
+
+1. Using assign statement:
+
+```verilog
+assign out_assign = a ^ b;
+```
+
+2. Using combinational always block (output `out_always_comb`):
+
+```verilog
+always @* begin
+  out_always_comb <= a ^ b;
+end
+```
+
+3. Using clocked always block (output `out_always_ff`):
+
+```verilog
+reg out_always_ff_temp;
+always @(posedge clk) begin
+  out_always_ff_temp <= a ^ b;
+  out_always_ff <= out_always_ff_temp;
+end
+```
+
+Remember to include the module, input and output definitions at the beginning of your Verilog file:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+```
+
+And end the module with:
+
+```verilog
+endmodule
+```

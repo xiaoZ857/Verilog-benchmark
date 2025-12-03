@@ -1,0 +1,22 @@
+To create a dual-edge triggered flip-flop without using an illegal sensitivity list, we can use two separate flip-flops: one triggered on the positive edge of the clock (posedge) and another on the negative edge (negedge). The outputs of these two flip-flops are combined with a logical OR to produce the final output.
+
+Here's how it works:
+
+1. **q1 Flip-Flop**: Captures the input `d` on the rising edge of `clk`.
+2. **q2 Flip-Flop**: Captures the input `d` on the falling edge of `clk`.
+3. **Output q**: Combines the outputs of `q1` and `q2` using a logical OR, ensuring that both edges trigger the output.
+
+This approach effectively mimics the behavior of a dual-edge triggered flip-flop while adhering to FPGA synthesis constraints.
+
+```verilog
+always @(posedge clk)
+    q1 <= d;
+
+always @(negedge clk)
+    q2 <= d;
+
+always @*
+    q = q1 | q2;
+```
+
+This code ensures that both edges of the clock trigger the output, achieving the desired dual-edge behavior without using an illegal sensitivity list.

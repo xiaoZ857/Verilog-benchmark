@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01 results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv dataset_code-complete-iccad2023/Prob084_ece241_2013_q12_test.sv dataset_code-complete-iccad2023/Prob084_ece241_2013_q12_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:18: error: Q['sd7] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd7] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:19: error: Q['sd6] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd6] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:20: error: Q['sd5] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd5] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:21: error: Q['sd4] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd4] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:22: error: Q['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:23: error: Q['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:24: error: Q['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:25: error: Q['sd0] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13:      : Q['sd0] is declared here as wire.
+8 error(s) during elaboration.

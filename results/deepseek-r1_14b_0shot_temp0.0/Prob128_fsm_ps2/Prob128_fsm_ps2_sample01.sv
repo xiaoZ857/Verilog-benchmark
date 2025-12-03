@@ -1,0 +1,48 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+  
+  reg [1:0] state_ff;
+  reg [7:0] data_byte1, data_byte2, data_byte3;
+  wire start_flag;
+  
+  // State transitions and next state logic
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      state_ff <= 2'b00;  // idle state
+      data_byte1 <= 8'h00;
+      data_byte2 <= 8'h00;
+      data_byte3 <= 8'h00;
+      done <= 1'b0;
+    end else begin
+      case (state_ff)
+        2'b00: begin  // idle state
+          if (in[3]) begin
+            state_ff <= 2'b01;  // expecting_second_byte
+            data_byte1 <= in;
+          end
+        end
+        
+        2'b01: begin  // expecting_second_byte
+          state_ff <= 2'b10;  // expecting_third_byte
+          data_byte2 <= in;
+        end
+        
+        2'b10: begin  // expecting_third_byte
+          state_ff <= 2'b00;  // back to idle
+          data_byte3 <= in;
+          done <= 1'b1;
+        end
+      endcase
+    end
+  end
+  
+  assign done = (state_ff == 2'b10) ? 1'b1 : 1'b0;
+  
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,27 @@
+ Here's the Verilog code for a 4-bit binary counter with a period of 16, synchronous active high reset, and positive edge-triggered clock:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 4'b0001; // Reset the counter to 0001 (decimal 1)
+  end else begin
+    q <= q + 1; // Increment the counter on each positive clock edge
+  end
+end
+
+always @(posedge clk negedge reset) begin
+  if (reset) begin
+    $finish; // Stop simulation when reset is active to allow observing the initial state
+  end
+end
+
+endmodule
+```
+
+This code includes two always blocks: one for handling the counter increment and another for stopping the simulation when the reset signal is active. The first always block checks if the reset signal is active, and if so, it resets the counter to 0001 (decimal 1). Otherwise, it increments the counter on each positive clock edge. The second always block stops the simulation when the reset signal is active, allowing you to observe the initial state of the counter during simulation.

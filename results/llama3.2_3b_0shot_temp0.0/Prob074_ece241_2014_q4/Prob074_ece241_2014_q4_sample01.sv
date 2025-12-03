@@ -1,0 +1,15 @@
+
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+
+assign z = ~(x ^ (DFF1 & ~DFF2)) | (~DFF3 & DFF1) | (~DFF2 & ~DFF3);
+ 
+ assign DFF1 = ~x & x;
+ assign DFF2 = ~x & ~x;
+ assign DFF3 = ~~x & ~x;
+
+endmodule

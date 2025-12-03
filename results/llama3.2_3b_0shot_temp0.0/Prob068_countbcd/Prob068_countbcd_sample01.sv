@@ -1,0 +1,29 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+
+assign ena = {ena[2], ena[1], ena[0]};
+reg [15:0] q;
+
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 16'd0;
+    end else begin
+        // Increment the ones digit
+        q[3] <= ~q[3] & q[2];
+        
+        // Increment the tens digit
+        q[7] <= ~q[7] & q[6];
+        
+        // Increment the hundreds digit
+        q[11] <= ~q[11] & q[10];
+        
+        // Increment the thousands digit
+        q[15] <= ~q[15] & q[14];
+    end
+endmodule

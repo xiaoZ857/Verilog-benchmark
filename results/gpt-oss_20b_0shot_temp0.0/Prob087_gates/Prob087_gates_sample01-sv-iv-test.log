@@ -1,0 +1,30 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv dataset_code-complete-iccad2023/Prob087_gates_test.sv dataset_code-complete-iccad2023/Prob087_gates_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_and' has no mismatches.
+Hint: Output 'out_or' has no mismatches.
+Hint: Output 'out_xor' has no mismatches.
+Hint: Output 'out_nand' has no mismatches.
+Hint: Output 'out_nor' has no mismatches.
+Hint: Output 'out_xnor' has no mismatches.
+Hint: Output 'out_anotb' has no mismatches.
+Hint: Total mismatched samples is 0 out of 210 samples
+
+Simulation finished at 1050 ps
+Mismatches: 0 in 210 samples
+
+
+--- stderr ---

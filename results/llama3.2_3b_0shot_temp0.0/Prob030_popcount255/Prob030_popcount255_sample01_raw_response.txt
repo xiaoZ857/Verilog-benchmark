@@ -1,0 +1,9 @@
+```verilog
+reg [7:0] out;
+
+always @(*) begin
+  out = $count_mod(in[0]);
+endmodule
+```
+
+Note: The `$count_mod` function is a built-in Verilog function that counts the number of '1's in an input vector. It returns the count as a value between 0 and 7 (inclusive).

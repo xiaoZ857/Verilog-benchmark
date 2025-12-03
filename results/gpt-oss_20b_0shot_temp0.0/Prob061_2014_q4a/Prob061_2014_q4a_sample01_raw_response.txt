@@ -1,0 +1,8 @@
+wire next_Q;
+assign next_Q = L ? R : (E ? w : Q);
+
+always @(posedge clk) begin
+  Q <= next_Q;
+end
+
+endmodule

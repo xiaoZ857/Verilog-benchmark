@@ -1,0 +1,19 @@
+  // 2's complement of a serial input (LSB first) using a single carry register.
+  // The carry register is initialized to 1 on reset to account for the "+1" in 2's complement.
+  // The output z is produced combinationally from the current input bit x and the current carry.
+  // The carry is updated on each clock edge to reflect the addition of 1 to the inverted input bits.
+
+  reg carry;
+
+  // Output logic: z = (~x) XOR carry
+  assign z = (~x) ^ carry;
+
+  // Carry update logic: carry_next = (~x) AND carry
+  always @(posedge clk or posedge areset) begin
+    if (areset)
+      carry <= 1'b1;          // Reset carry to 1 for 2's complement
+    else
+      carry <= (~x) & carry;  // Update carry for next bit
+  end
+
+endmodule

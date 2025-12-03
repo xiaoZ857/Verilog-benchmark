@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01 results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv dataset_code-complete-iccad2023/Prob064_vector3_test.sv dataset_code-complete-iccad2023/Prob064_vector3_ref.sv
+Return code: 9
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:18: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:19: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:20: syntax error
+results\mistral_7b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:20: error: malformed statement
+dataset_code-complete-iccad2023/Prob064_vector3_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob064_vector3_ref.sv:19: syntax error
+I give up.

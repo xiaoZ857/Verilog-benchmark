@@ -1,0 +1,15 @@
+ Here is the Verilog code for an AND gate:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+assign out = a & b;
+
+endmodule
+```
+
+This module takes two inputs `a` and `b`, and outputs the result of their logical AND operation on signal `out`. The `assign` keyword is used to assign the result of the logical AND operation to the output.

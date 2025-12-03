@@ -1,0 +1,56 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output reg disc,
+  output reg flag,
+  output reg err
+);
+
+reg [2:0] state;
+reg [1:0] count;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 3'b000;
+    count <= 2'b00;
+  end else begin
+    if (in == 1'b1 && count == 2'b00) begin
+      state <= 3'b001;
+      count <= 2'b01;
+    end else if (in == 1'b0 && count == 2'b01) begin
+      state <= 3'b000;
+      count <= 2'b00;
+    end else if (in == 1'b1 && count == 2'b01) begin
+      state <= 3'b010;
+      count <= 2'b10;
+    end else if (in == 1'b0 && count == 2'b10) begin
+      state <= 3'b000;
+      count <= 2'b00;
+    end else if (in == 1'b1 && count == 2'b10) begin
+      state <= 3'b100;
+      count <= 2'b11;
+    end else if (in == 1'b0 && count == 2'b11) begin
+      state <= 3'b000;
+      count <= 2'b00;
+    end else if (in == 1'b1 && count == 2'b11) begin
+      err <= 1'b1;
+      state <= 3'b111;
+      count <= 2'b00;
+    end else if (count == 2'b11) begin
+      flag <= 1'b1;
+      state <= 3'b000;
+      count <= 2'b00;
+    end
+  end
+
+  case(state)
+    3'b001: disc <= 1'b0;
+    3'b010: disc <= 1'b1;
+    3'b100: err <= 1'b0;
+    3'b111: err <= 1'b1;
+    default: disc <= 1'b0, flag <= 1'b0, err <= 1'b0;
+  endcase
+endmodule
+```

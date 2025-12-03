@@ -1,0 +1,8 @@
+```verilog
+always_ff @(posedge clk or posedge ena) begin
+    if (ena)
+        q <= d;
+end
+
+endmodule
+```

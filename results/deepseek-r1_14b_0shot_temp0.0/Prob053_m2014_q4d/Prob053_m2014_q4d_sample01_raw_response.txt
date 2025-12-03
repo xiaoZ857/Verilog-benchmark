@@ -1,0 +1,18 @@
+Here is the Verilog implementation of the described circuit:
+
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+  
+  always @ (posedge clk)
+    begin
+      out = in ^ out;
+    end
+  
+endmodule
+```
+
+This code defines a module with an always block that triggers on the positive edge of `clk`. The output `out` is updated to the result of the XOR operation between `in` and its current value.

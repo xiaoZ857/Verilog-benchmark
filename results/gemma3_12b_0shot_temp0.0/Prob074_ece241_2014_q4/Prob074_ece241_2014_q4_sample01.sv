@@ -1,0 +1,20 @@
+
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+
+  reg f1, f2, f3;
+  reg z_reg;
+
+  always @(posedge clk) begin
+    f1 <= x ^ f1;
+    f2 <= x & ~f2;
+    f3 <= x | ~f3;
+  end
+
+  assign z_reg = ~(f1 | f2 | f3);
+  assign z = z_reg;
+endmodule

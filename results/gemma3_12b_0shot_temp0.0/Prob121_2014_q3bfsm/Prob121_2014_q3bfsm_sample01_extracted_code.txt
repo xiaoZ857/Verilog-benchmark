@@ -1,0 +1,49 @@
+always @(posedge clk) begin
+  if (reset) begin
+    z <= 0;
+  end else begin
+    case (y[2:0])
+      3'000: begin
+        if (x == 0)
+          y <= 3'000;
+        else
+          y <= 3'001;
+        z <= 0;
+      end
+      3'001: begin
+        if (x == 0)
+          y <= 3'001;
+        else
+          y <= 3'100;
+        z <= 0;
+      end
+      3'010: begin
+        if (x == 0)
+          y <= 3'010;
+        else
+          y <= 3'001;
+        z <= 0;
+      end
+      3'011: begin
+        if (x == 0)
+          y <= 3'001;
+        else
+          y <= 3'010;
+        z <= 1;
+      end
+      3'100: begin
+        if (x == 0)
+          y <= 3'011;
+        else
+          y <= 3'100;
+        z <= 1;
+      end
+      default: begin
+        y <= 3'000;
+        z <= 0;
+      end
+    endcase
+  end
+end
+
+endmodule

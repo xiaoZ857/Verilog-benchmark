@@ -1,0 +1,19 @@
+Here's the Verilog implementation using assign statements:
+
+```verilog
+out_assign = (sel_b1 & sel_b2) ? b : a;
+```
+
+And here's the implementation using procedural if statements:
+
+```verilog
+always @*
+begin
+    if (sel_b1 & sel_b2)
+        out_always = b;
+    else
+        out_always = a;
+end
+```
+
+endmodule

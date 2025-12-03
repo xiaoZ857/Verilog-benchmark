@@ -1,0 +1,49 @@
+
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  input p1e,
+  input p1f,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+// AND gate for p1y
+wire and_p1y_a;
+wire and_p1y_b;
+wire and_p1y_c;
+
+assign and_p1y_a = p1a & p1b & p1c;
+assign and_p1y_b = p1d & p1e & p1f;
+assign and_p1y_c = and_p1y_a | and_p1y_b;
+
+// OR gate for p1y
+wire or_p1y;
+
+assign or_p1y = and_p1y_a | and_p1y_b;
+
+// AND gates for p2y
+wire and_p2a;
+wire and_p2b;
+
+assign and_p2a = p2a & p2b;
+assign and_p2b = p2c & p2d;
+
+// OR gate for p2y
+wire or_p2y;
+
+assign or_p2y = and_p2a | and_p2b;
+
+// Assign outputs to match the original description
+assign p1y = or_p1y;
+assign p2y = or_p2y;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

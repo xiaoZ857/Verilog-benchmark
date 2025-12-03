@@ -1,0 +1,21 @@
+
+module TopModule (
+  input [6:1] y,
+  input w,
+  output reg Y2,
+  output reg Y4
+);
+
+always @(posedge clk) begin
+  case (y)
+    2'b00 : Y2 <= 2'b0; Y4 <= 2'b0; // A
+    2'b01 : Y2 <= 2'b0; Y4 <= 2'b1; // B
+    2'b10 : Y2 <= 2'b1; Y4 <= 2'b0; // C
+    2'b11 : Y2 <= 2'b1; Y4 <= 2'b1; // D
+    default: Y2 <= 2'bx; Y4 <= 2'bx; // Unassigned states (X)
+  endcase
+
+  assign w_next = w ^ (y[2] == 1'b1); // Next clock input w is inverted if y[2] is set to 1
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

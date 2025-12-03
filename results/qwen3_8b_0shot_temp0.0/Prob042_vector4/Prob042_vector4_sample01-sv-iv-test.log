@@ -1,0 +1,10 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\qwen3_8b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01 results\qwen3_8b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv dataset_code-complete-iccad2023/Prob042_vector4_test.sv dataset_code-complete-iccad2023/Prob042_vector4_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\qwen3_8b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: syntax error
+results\qwen3_8b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Syntax error between internal '}' and closing '}' of repeat concatenation.

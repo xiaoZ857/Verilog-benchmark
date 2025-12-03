@@ -1,0 +1,25 @@
+```verilog
+reg [3:0] state;
+reg [3:0] next_state;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 4'b0000;
+    else
+        state <= next_state;
+end
+
+assign start_shifting = (state == 4'b1101);
+
+always @(*) begin
+    case (state)
+        4'b0000: next_state = data ? 4'b1000 : 4'b0000;
+        4'b1000: next_state = data ? 4'b1001 : 4'b0000;
+        4'b1001: next_state = data ? 4'b0011 : 4'b1000;
+        4'b0011: next_state = data ? 4'b1101 : 4'b0000;
+        default: next_state = 4'b0000;
+    endcase
+end
+
+endmodule
+```

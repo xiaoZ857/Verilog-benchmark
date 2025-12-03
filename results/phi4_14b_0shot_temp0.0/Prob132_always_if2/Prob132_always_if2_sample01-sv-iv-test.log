@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01 results\phi4_14b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01.sv dataset_code-complete-iccad2023/Prob132_always_if2_test.sv dataset_code-complete-iccad2023/Prob132_always_if2_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01.sv:11: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\phi4_14b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01.sv:11: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

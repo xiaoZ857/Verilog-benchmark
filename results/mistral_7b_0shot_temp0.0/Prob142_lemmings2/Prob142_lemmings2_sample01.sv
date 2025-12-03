@@ -1,0 +1,54 @@
+
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+
+ ```verilog
+reg walk_left, walk_right, state; // Internal signals for the finite state machine
+reg aaah;
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 0; // Reset to walking left when areset is asserted
+    end else begin
+        case (state)
+            0: begin
+                if (bump_right) state <= 1; // Switch to walking right if bumped on the right
+            end,
+            1: begin
+                if (bump_left) state <= 2; // Switch to walking left if bumped on the left
+                else if (ground == 0) begin
+                    aaah <= 1; // Lemming falls and says "aaah!" when ground disappears
+                    state <= 3; // Stay in this state until ground reappears or bump occurs
+                end
+            end,
+            2: begin
+                if (bump_right) state <= 0; // Switch to walking left if bumped on the right while falling
+                else if (ground == 1) begin
+                    aaah <= 0; // Lemming resumes walking when ground reappears
+                    state <= 1; // Stay in this state until bumped on the left or ground disappears again
+                end
+            end,
+            3: begin
+                if (ground == 1) begin
+                    aaah <= 0; // Lemming resumes walking when ground reappears
+                    state <= 1; // Stay in this state until bumped on the left or ground disappears again
+                end
+            end
+        endcase
+    end
+end
+assign walk_left = (state == 0 || state == 3);
+assign walk_right = (state == 1 || state == 2);
+
+This Verilog code implements a Moore finite state machine that models the behavior of a Lemming in the game Lemmings. The internal states are `walk_left`, `walk_right`, and `falling`. The Lemming switches directions when bumped on either side, falls and says "aaah!" when the ground disappears, and resumes walking in the same direction as before when the ground reappears. The state machine is reset to walking left when `areset` is asserted.
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

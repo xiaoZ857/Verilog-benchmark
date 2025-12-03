@@ -1,0 +1,12 @@
+Here's the Verilog implementation for a 2-to-1 multiplexer:
+
+```verilog
+always @(posedge clk) begin
+    if (sel == 0)
+        out <= a;
+    else
+        out <= b;
+end
+```
+
+This code uses an `always` block triggered by the positive edge of the clock (`clk`). When `sel` is 0, it assigns the value of `a` to `out`. When `sel` is 1, it assigns the value of `b` to `out`.

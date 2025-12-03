@@ -1,0 +1,15 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  output reg one
+);
+
+always_comb begin
+  one = 1'b1;
+end
+
+endmodule
+```
+
+This module has an output signal `one` that is always set to logic high (1). The `always_comb` block ensures that the output changes immediately when the input changes, as there are no inputs in this case.

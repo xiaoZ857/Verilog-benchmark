@@ -1,0 +1,82 @@
+reg [7:0] shift_reg;
+reg [3:0] delay;
+reg [19:0] counter; // 20 bits to count up to 60000 (for max delay=15)
+reg [3:0] remaining_time;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        shift_reg <= 8'b00000000;
+        delay <= 4'b0000;
+        counter <= 20'd0;
+        counting <= 1'b0;
+        done <= 1'b0;
+        remaining_time <= 4'b0000;
+    end else begin
+        case (state)
+            IDLE: begin
+                shift_reg <= {shift_reg[6:0], data};
+                if (shift_reg == 8'b11010000) begin
+                    state <= READ_DELAY;
+                end
+            end
+
+            READ_DELAY: begin
+                delay <= {delay[2:0], data};
+                if (counter == 20'd4) begin
+                    counter <= 20'd0;
+                    counting <= 1'b1;
+                    remaining_time <= delay;
+                    state <= COUNTING;
+                end else begin
+                    counter <= counter + 1;
+                end
+            end
+
+            COUNTING: begin
+                if (counter == ((delay + 1) * 20'd1000 - 1)) begin
+                    counting <= 1'b0;
+                    done <= 1'b1;
+                    state <= WAIT_ACK;
+                end else if (counter % 20'd1000 == 19'd999) begin
+                    remaining_time <= remaining_time - 4'b0001;
+                end
+                counter <= counter + 1;
+            end
+
+            WAIT_ACK: begin
+                if (ack) begin
+                    done <= 1'b0;
+                    state <= IDLE;
+                end
+            end
+
+        endcase
+    end
+end
+
+assign count = counting ? remaining_time : 4'bx;
+
+reg [2:0] state, next_state;
+localparam IDLE = 3'd0,
+           READ_DELAY = 3'd1,
+           COUNTING = 3'd2,
+           WAIT_ACK = 3'd3;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= IDLE;
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        IDLE: next_state = (shift_reg == 8'b11010000) ? READ_DELAY : IDLE;
+        READ_DELAY: next_state = (counter == 20'd4) ? COUNTING : READ_DELAY;
+        COUNTING: next_state = (counter == ((delay + 1) * 20'd1000 - 1)) ? WAIT_ACK : COUNTING;
+        WAIT_ACK: next_state = (ack) ? IDLE : WAIT_ACK;
+        default: next_state = IDLE;
+    endcase
+end
+
+endmodule

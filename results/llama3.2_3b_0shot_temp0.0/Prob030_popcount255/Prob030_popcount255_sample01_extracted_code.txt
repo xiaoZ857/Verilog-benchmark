@@ -1,0 +1,5 @@
+reg [7:0] out;
+
+always @(*) begin
+  out = $count_mod(in[0]);
+endmodule

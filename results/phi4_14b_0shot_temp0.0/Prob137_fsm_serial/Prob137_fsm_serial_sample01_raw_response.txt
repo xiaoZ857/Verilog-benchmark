@@ -1,0 +1,60 @@
+```verilog
+reg [2:0] state;
+localparam IDLE = 3'b000, START_BIT = 3'b001, DATA_BITS = 3'b010, STOP_BIT = 3'b011, ERROR_WAIT = 3'b100;
+
+reg [7:0] data_reg;
+reg done_reg;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= IDLE;
+        data_reg <= 8'b00000000;
+        done_reg <= 1'b0;
+    end else begin
+        case (state)
+            IDLE: begin
+                if (!in) begin // Start bit detected
+                    state <= START_BIT;
+                end
+            end
+
+            START_BIT: begin
+                if (in) begin // Check for stop bit after start bit
+                    state <= DATA_BITS;
+                    data_reg <= {data_reg[6:0], in}; // Shift in first data bit
+                end else begin
+                    state <= IDLE; // Invalid start, go back to idle
+                end
+            end
+
+            DATA_BITS: begin
+                if (|data_reg) begin // If not all bits received yet
+                    data_reg <= {data_reg[6:0], in}; // Shift in next bit
+                end else begin
+                    state <= STOP_BIT; // All 8 data bits received
+                end
+            end
+
+            STOP_BIT: begin
+                if (in) begin // Check for stop bit
+                    done_reg <= 1'b1;
+                    state <= IDLE;
+                end else begin
+                    state <= ERROR_WAIT; // Invalid stop, wait for next valid byte
+                end
+            end
+
+            ERROR_WAIT: begin
+                if (in) begin // Wait until a start bit is detected
+                    state <= START_BIT;
+                end
+            end
+
+        endcase
+    end
+end
+
+assign done = done_reg;
+
+endmodule
+```

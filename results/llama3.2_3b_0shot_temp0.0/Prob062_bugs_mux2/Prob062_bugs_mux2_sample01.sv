@@ -1,0 +1,16 @@
+
+module TopModule (
+  input sel,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out
+);
+
+reg [7:0] temp;
+
+assign temp = (~sel & a) | (sel & b);
+assign out = temp;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,27 @@
+
+
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+
+reg [99:0] q;
+
+always @(posedge clk) begin
+    if (load) begin
+        q <= data;
+    end else if ((ena[1:0]) == 2'b01) begin
+        q <= {data[99], data};
+    end else if ((ena[1:0]) == 2'b10) begin
+        q <= data[98:0] & data[1:0];
+    end else begin
+        q <= data;
+    end
+end
+
+assign q = q;
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,4 @@
+  always @(sel, a, b) begin
+    out = (~sel & a) | (sel & b);
+  end
+endmodule

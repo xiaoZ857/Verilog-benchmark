@@ -1,0 +1,22 @@
+```verilog
+reg [3:0] counter;
+wire enable_shift;
+
+assign enable_shift = (counter == 4'b1111);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        counter <= 4'b1111; // Assert shift_ena for 4 cycles on reset
+    end else begin
+        if (enable_shift) begin
+            counter <= 4'b0000; // Reset counter after 4 cycles of enable
+        end else begin
+            counter <= counter + 1;
+        end
+    end
+end
+
+assign shift_ena = enable_shift;
+
+endmodule
+```

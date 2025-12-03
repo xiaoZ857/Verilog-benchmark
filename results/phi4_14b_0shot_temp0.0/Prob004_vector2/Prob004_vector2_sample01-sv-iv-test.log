@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob004_vector2/Prob004_vector2_sample01 results\phi4_14b_0shot_temp0.0\Prob004_vector2/Prob004_vector2_sample01.sv dataset_code-complete-iccad2023/Prob004_vector2_test.sv dataset_code-complete-iccad2023/Prob004_vector2_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob004_vector2/Prob004_vector2_sample01.sv:9: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob004_vector2/Prob004_vector2_sample01.sv:5:      : out is declared here as wire.
+1 error(s) during elaboration.

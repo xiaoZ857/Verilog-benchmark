@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input ena,
+  input [1:0] amount,
+  input [63:0] data,
+  output reg [63:0] q
+);
+
+always @(posedge clk) begin
+    if (load)
+        q <= data;
+    else if (ena) begin
+        switch (amount)
+            // Shift left by 1 bit
+            case 2'b00 :
+                q <= {q[62], 0} << 1;
+            // Shift left by 8 bits
+            case 2'b01 :
+                q <= {q[55:63], q[47:55]} << 8;
+            // Shift right by 1 bit
+            case 2'b10 :
+                q <= {q[62], q[62] >> 1};
+            // Shift right by 8 bits
+            case 2'b11 :
+                q <= {q[55:63], q[47:55]} >> 8;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

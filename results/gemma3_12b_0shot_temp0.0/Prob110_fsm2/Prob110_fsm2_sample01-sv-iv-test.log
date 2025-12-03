@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01 results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv dataset_code-complete-iccad2023/Prob110_fsm2_test.sv dataset_code-complete-iccad2023/Prob110_fsm2_ref.sv
+Return code: 5
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:13: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:8:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:14: error: Could not find variable ``present_state'' in ``tb.top_module1''
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:16: error: Unable to bind wire/reg/memory `present_state' in `tb.top_module1'
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:16: error: Unable to elaborate this case expression.
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:35: error: Could not find variable ``present_state'' in ``tb.top_module1''
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:36: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob110_fsm2/Prob110_fsm2_sample01.sv:8:      : out is declared here as wire.
+5 error(s) during elaboration.

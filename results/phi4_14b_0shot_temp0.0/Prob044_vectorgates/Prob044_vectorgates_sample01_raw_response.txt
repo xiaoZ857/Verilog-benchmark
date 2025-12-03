@@ -1,0 +1,10 @@
+```verilog
+assign out_or_bitwise = a | b; // Bitwise OR of inputs a and b
+
+assign out_or_logical = (a != 3'b000) || (b != 3'b000); // Logical OR, true if either is non-zero
+
+assign out_not[5:3] = ~b; // Inverse of b in the upper half
+assign out_not[2:0] = ~a; // Inverse of a in the lower half
+
+endmodule
+```

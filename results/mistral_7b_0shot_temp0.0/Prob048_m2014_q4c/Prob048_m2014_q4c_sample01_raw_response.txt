@@ -1,0 +1,25 @@
+ Here is the Verilog code for a simple D Flip-Flop with an active high synchronous reset:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+reg q; // internal signal for the flip flop's Q output
+
+always @(posedge clk) begin
+  if (!r) // if reset is high (active high), set Q to 0
+    q <= 0;
+  else // otherwise, assign Q to D
+    q <= d;
+end
+
+assign q = q; // provide the output Q
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs for clock (clk), data (d), and reset (r). The internal signal `q` represents the flip-flop's Q output. An always block is used to capture the positive edge of the clock, and if the reset input is high, it sets the Q output to 0; otherwise, it assigns the value of D to Q. Finally, the output `q` is assigned the internal signal for direct access outside the module.

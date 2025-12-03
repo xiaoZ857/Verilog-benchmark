@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01 results\mistral_7b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01.sv dataset_code-complete-iccad2023/Prob105_rotate100_test.sv dataset_code-complete-iccad2023/Prob105_rotate100_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01.sv:21: warning: implicit definition of wire 'q_out'.
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has 3820 mismatches. First mismatch occurred at time 50.
+Hint: Total mismatched samples is 3820 out of 4005 samples
+
+Simulation finished at 20026 ps
+Mismatches: 3820 in 4005 samples
+
+
+--- stderr ---

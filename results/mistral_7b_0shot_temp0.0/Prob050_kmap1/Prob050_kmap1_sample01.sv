@@ -1,0 +1,20 @@
+
+module TopModule (
+  input wire a,
+  input wire b,
+  input wire c,
+  output reg out
+);
+
+always @(posedge clk) begin
+  case ({a, b, c})
+    2'b00 -> out <= 0;
+    2'b01 -> out <= 1;
+    2'b11 -> out <= 1;
+     default -> out <= 1; // since all other combinations result in '1' according to the Karnaugh map
+  endcase
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

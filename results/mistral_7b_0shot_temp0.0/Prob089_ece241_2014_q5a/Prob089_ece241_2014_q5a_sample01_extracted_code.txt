@@ -1,0 +1,40 @@
+module TopModule (
+  input clk,
+  input areset,
+  input [1:0] x,
+  output reg [1:0] z,
+  output reg state
+);
+
+reg signedData [1:0]; // Stores the current data being processed
+
+always @(posedge clk) begin
+  if (!areset) begin
+    state <= 0; // Reset state to initial state (0)
+    signedData <= 0; // Clear the stored data
+  end else begin
+    case (state)
+      0: begin
+        signedData[1] <= x[0]; // Store the least significant bit
+        state <= 1; // Move to the next state
+      end
+      1: begin
+        signedData[0] <= x[1]; // Store the next bit
+        if (signedData[1] == 1) // If the previous bit was set, make this one negative
+          signedData[0] <= ~signedData[0];
+        state <= 2; // Move to the next state
+      end
+      2: begin
+        z <= signedData; // Output the 2's complement of the stored data
+        state <= 3; // Move to the idle state
+      end
+      3: begin
+        // Idle state, wait for reset or new input
+      end
+    endcase
+  end
+end
+
+assign z = signedData[1]; // Ensure that the most significant bit (MSB) is always output
+
+endmodule

@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01 results\phi4_14b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv dataset_code-complete-iccad2023/Prob144_conwaylife_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has no mismatches.
+Hint: Total mismatched samples is 0 out of 5023 samples
+
+Simulation finished at 25116 ps
+Mismatches: 0 in 5023 samples
+
+
+--- stderr ---

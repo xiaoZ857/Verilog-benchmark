@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob013_m2014_q4e/Prob013_m2014_q4e_sample01 results\phi4_14b_0shot_temp0.0\Prob013_m2014_q4e/Prob013_m2014_q4e_sample01.sv dataset_code-complete-iccad2023/Prob013_m2014_q4e_test.sv dataset_code-complete-iccad2023/Prob013_m2014_q4e_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob013_m2014_q4e/Prob013_m2014_q4e_sample01.sv:9: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\phi4_14b_0shot_temp0.0\Prob013_m2014_q4e/Prob013_m2014_q4e_sample01.sv:9: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

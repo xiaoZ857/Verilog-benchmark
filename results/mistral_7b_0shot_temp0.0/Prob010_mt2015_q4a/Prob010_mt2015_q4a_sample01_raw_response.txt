@@ -1,0 +1,17 @@
+ Here is the Verilog code for the given description:
+
+```verilog
+module TopModule (
+  input wire x,
+  input wire y,
+  output reg z
+);
+
+always @(posedge clk) begin
+  assign z = (x ^ y) & x;
+end
+
+endmodule
+```
+
+In this code, the `z` signal is a registered output since it's assigned inside an always block triggered by the positive edge of the clock. The boolean function `(x^y) & x` is implemented as desired.

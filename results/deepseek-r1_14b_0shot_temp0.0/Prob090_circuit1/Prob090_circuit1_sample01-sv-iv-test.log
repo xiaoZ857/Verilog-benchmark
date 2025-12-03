@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob090_circuit1/Prob090_circuit1_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob090_circuit1/Prob090_circuit1_sample01.sv dataset_code-complete-iccad2023/Prob090_circuit1_test.sv dataset_code-complete-iccad2023/Prob090_circuit1_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob090_circuit1/Prob090_circuit1_sample01.sv:10: error: q is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob090_circuit1/Prob090_circuit1_sample01.sv:6:      : q is declared here as wire.
+1 error(s) during elaboration.

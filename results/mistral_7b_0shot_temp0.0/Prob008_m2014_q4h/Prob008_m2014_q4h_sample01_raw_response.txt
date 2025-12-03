@@ -1,0 +1,14 @@
+ Here is a simple Verilog implementation of your description:
+
+```verilog
+module TopModule (
+  input wire in,
+  output wire out
+);
+
+assign out = in;
+
+endmodule
+```
+
+This module takes an input `in` and assigns it to the output `out`. Since no combinational logic is specified, the output will simply mirror the input.

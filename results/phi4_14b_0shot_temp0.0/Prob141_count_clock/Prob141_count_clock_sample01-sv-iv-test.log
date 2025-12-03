@@ -1,0 +1,30 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob141_count_clock/Prob141_count_clock_sample01 results\phi4_14b_0shot_temp0.0\Prob141_count_clock/Prob141_count_clock_sample01.sv dataset_code-complete-iccad2023/Prob141_count_clock_test.sv dataset_code-complete-iccad2023/Prob141_count_clock_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob141_count_clock/Prob141_count_clock_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset doesn't seem to be working.
+Hint: Clock seems to reset to 12:00:11 AM (Should be 12:00:00 AM).
+TIMEOUT
+Hint: Output 'pm' has 86400 mismatches. First mismatch occurred at time 434270.
+Hint: Output 'hh' has 177951 mismatches. First mismatch occurred at time 10.
+Hint: Output 'mm' has 197871 mismatches. First mismatch occurred at time 10.
+Hint: Output 'ss' has 199991 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 199991 out of 200000 samples
+
+Simulation finished at 1000000 ps
+Mismatches: 199991 in 200000 samples
+
+
+--- stderr ---

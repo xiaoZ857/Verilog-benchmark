@@ -1,0 +1,15 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01 results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv dataset_code-complete-iccad2023/Prob111_fsm2s_ref.sv
+Return code: 3
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:23: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:8:      : out is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:30: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:8:      : out is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:37: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:8:      : out is declared here as wire.
+3 error(s) during elaboration.

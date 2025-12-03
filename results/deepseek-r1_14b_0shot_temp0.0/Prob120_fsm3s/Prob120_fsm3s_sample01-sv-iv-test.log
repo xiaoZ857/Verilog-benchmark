@@ -1,0 +1,12 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv dataset_code-complete-iccad2023/Prob120_fsm3s_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:2: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:2: error: Syntax error in typedef clause.
+results\deepseek-r1_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:10: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:10: error: Invalid module instantiation

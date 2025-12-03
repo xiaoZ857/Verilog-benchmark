@@ -1,0 +1,12 @@
+```verilog
+always @(posedge clk) begin
+    if (a == 1'b1)
+        q <= 3'd4;
+    else if (q != 3'd0 && q != 3'd1)
+        q <= q + 1'b1;
+end
+
+endmodule
+```
+
+This Verilog code implements the behavior described in the simulation waveforms. The circuit is a sequential logic that updates its output `q` based on the input `a` and the current state of `q`. When `a` is high (`1`), `q` is set to `4`. If `a` is low (`0`) and `q` is neither `0` nor `1`, `q` increments by 1. When `q` reaches `7`, it resets to `0` on the next clock cycle when `a` is low, as observed in the waveform at time `75ns`.

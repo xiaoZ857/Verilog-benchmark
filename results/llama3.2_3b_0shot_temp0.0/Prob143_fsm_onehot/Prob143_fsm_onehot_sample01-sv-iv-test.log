@@ -1,0 +1,13 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01 results\llama3.2_3b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv dataset_code-complete-iccad2023/Prob143_fsm_onehot_ref.sv
+Return code: 5
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:12: error: Sized numeric constant must have a size greater than zero.
+results\llama3.2_3b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:13: error: Sized numeric constant must have a size greater than zero.
+dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob143_fsm_onehot_ref.sv:26: syntax error
+I give up.

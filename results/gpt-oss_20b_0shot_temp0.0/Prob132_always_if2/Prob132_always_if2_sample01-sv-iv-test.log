@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01.sv dataset_code-complete-iccad2023/Prob132_always_if2_test.sv dataset_code-complete-iccad2023/Prob132_always_if2_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob132_always_if2/Prob132_always_if2_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'shut_off_computer' has no mismatches.
+Hint: Output 'keep_driving' has no mismatches.
+Hint: Total mismatched samples is 0 out of 121 samples
+
+Simulation finished at 605 ps
+Mismatches: 0 in 121 samples
+
+
+--- stderr ---

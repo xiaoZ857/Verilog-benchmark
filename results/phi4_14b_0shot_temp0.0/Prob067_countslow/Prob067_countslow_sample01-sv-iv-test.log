@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob067_countslow/Prob067_countslow_sample01 results\phi4_14b_0shot_temp0.0\Prob067_countslow/Prob067_countslow_sample01.sv dataset_code-complete-iccad2023/Prob067_countslow_test.sv dataset_code-complete-iccad2023/Prob067_countslow_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob067_countslow/Prob067_countslow_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'q' has 112 mismatches. First mismatch occurred at time 55.
+Hint: Total mismatched samples is 112 out of 499 samples
+
+Simulation finished at 2496 ps
+Mismatches: 112 in 499 samples
+
+
+--- stderr ---

@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob155_lemmings4/Prob155_lemmings4_sample01 results\mistral_7b_0shot_temp0.0\Prob155_lemmings4/Prob155_lemmings4_sample01.sv dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv dataset_code-complete-iccad2023/Prob155_lemmings4_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0.0\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:16: warning: macro Verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:17: error: invalid module item.

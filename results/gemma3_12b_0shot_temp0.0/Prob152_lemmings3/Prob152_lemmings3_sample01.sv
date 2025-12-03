@@ -1,0 +1,90 @@
+
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+  reg [1:0] current_state;
+  reg [1:0] next_state;
+
+  reg walk_left_out;
+  reg walk_right_out;
+  reg aaah_out;
+  reg digging_out;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= 0; // Walk left initially
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  always @(*) begin
+    walk_left_out = 0;
+    walk_right_out = 0;
+    aaah_out = 0;
+    digging_out = 0;
+
+    case (current_state)
+      2'b00: begin // Walk left
+        walk_left_out = 1;
+        if (bump_right) begin
+          next_state = 2'b01;
+        end else if (ground == 0) begin
+          next_state = 2'b10;
+        end else if (dig && ground) begin
+          next_state = 2'b11;
+        end else begin
+          next_state = 2'b00;
+        end
+      end
+      2'b01: begin // Walk right
+        walk_right_out = 1;
+        if (bump_left) begin
+          next_state = 2'b00;
+        end else if (ground == 0) begin
+          next_state = 2'b10;
+        end else if (dig && ground) begin
+          next_state = 2'b11;
+        end else begin
+          next_state = 2'b01;
+        end
+      end
+      2'b10: begin // Falling
+        aaah_out = 1;
+        if (ground) begin
+          next_state = current_state; // Resume walking in original direction
+        end else begin
+          next_state = 2'b10;
+        end
+      end
+      2'b11: begin // Digging
+        digging_out = 1;
+        if (!ground) begin
+          next_state = 2'b10; // Fall if no ground
+        end else begin
+          next_state = 2'b11;
+        end
+      end
+      default: begin
+        next_state = 2'b00;
+      end
+    endcase
+  end
+
+  assign walk_left = walk_left_out;
+  assign walk_right = walk_right_out;
+  assign aaah = aaah_out;
+  assign digging = digging_out;
+
+endmodule

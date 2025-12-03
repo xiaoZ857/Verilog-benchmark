@@ -1,0 +1,20 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01 results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv dataset_code-complete-iccad2023/Prob153_gshare_test.sv dataset_code-complete-iccad2023/Prob153_gshare_ref.sv
+Return code: 12
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:33: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:33: error: Incomprehensible for loop.
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:44: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:44: error: Incomprehensible for loop.
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:49: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:49: error: Incomprehensible for loop.
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:55: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:55: error: Incomprehensible for loop.
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:60: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:60: error: Incomprehensible for loop.
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:66: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:66: error: Incomprehensible for loop.

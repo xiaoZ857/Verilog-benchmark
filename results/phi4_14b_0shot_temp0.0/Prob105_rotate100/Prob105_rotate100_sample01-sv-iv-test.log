@@ -1,0 +1,14 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01 results\phi4_14b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01.sv dataset_code-complete-iccad2023/Prob105_rotate100_test.sv dataset_code-complete-iccad2023/Prob105_rotate100_ref.sv
+Return code: 6
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01.sv:27: syntax error
+dataset_code-complete-iccad2023/Prob105_rotate100_test.sv:11: error: malformed statement
+dataset_code-complete-iccad2023/Prob105_rotate100_test.sv:13: syntax error
+dataset_code-complete-iccad2023/Prob105_rotate100_test.sv:14: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob105_rotate100_test.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob105_rotate100_test.sv:17: Syntax in assignment statement l-value.

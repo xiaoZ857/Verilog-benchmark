@@ -1,0 +1,29 @@
+reg [1:0] state, next_state;
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        state <= 2'b00; // Reset to state A
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        2'b00: begin // State A
+            if (x == 1'b0)
+                next_state = 2'b00; // Stay in A
+            else
+                next_state = 2'b01; // Move to B
+        end
+        2'b01: begin // State B
+            if (x == 1'b0)
+                next_state = 2'b01; // Stay in B
+            else
+                next_state = 2'b01; // Stay in B
+        end
+    endcase
+end
+
+assign z = state[1]; // Output based on current state
+
+endmodule

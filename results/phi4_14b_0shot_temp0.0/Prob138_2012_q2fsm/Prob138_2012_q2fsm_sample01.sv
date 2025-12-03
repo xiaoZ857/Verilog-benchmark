@@ -1,0 +1,64 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+
+reg [2:0] current_state, next_state;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        current_state <= 3'b000; // Reset to state A
+    else
+        current_state <= next_state;
+end
+
+always @(*) begin
+    case (current_state)
+        3'b000: // State A
+            if (w)
+                next_state = 3'b001; // Transition to B
+            else
+                next_state = 3'b000; // Remain in A
+        
+        3'b001: // State B
+            if (w)
+                next_state = 3'b010; // Transition to C
+            else
+                next_state = 3'b011; // Transition to D
+        
+        3'b010: // State C
+            if (w)
+                next_state = 3'b100; // Transition to E
+            else
+                next_state = 3'b011; // Transition to D
+        
+        3'b011: // State D
+            if (w)
+                next_state = 3'b101; // Transition to F
+            else
+                next_state = 3'b000; // Transition to A
+        
+        3'b100: // State E
+            if (!w)
+                next_state = 3'b011; // Transition to D
+            else
+                next_state = 3'b100; // Remain in E
+        
+        3'b101: // State F
+            if (w)
+                next_state = 3'b010; // Transition to C
+            else
+                next_state = 3'b011; // Transition to D
+
+        default:
+            next_state = 3'b000; // Default to state A
+    endcase
+end
+
+assign z = (current_state == 3'b100) | (current_state == 3'b101); // Output is high in states E and F
+
+endmodule

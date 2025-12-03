@@ -1,0 +1,36 @@
+localparam A = 2'b00;
+localparam B = 2'b01;
+localparam C = 2'b10;
+localparam D = 2'b11;
+
+reg [1:0] CS, NS;
+wire in, areset, clk, out;
+
+always @(*) begin
+    case (CS)
+        A:
+            if (in == 0) NS = A;
+            else NS = B;
+        B:
+            if (in == 0) NS = C;
+            else NS = B;
+        C:
+            if (in == 0) NS = A;
+            else NS = D;
+        D:
+            if (in == 0) NS = C;
+            else NS = B;
+        default:
+            NS = A;
+    endcase
+end
+
+always @(posedge clk or areset) begin
+    if (areset) begin
+        CS <= A;
+    end else begin
+        CS <= NS;
+    end
+end
+
+assign out = (CS == D);

@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01 results\llama3.2_3b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv dataset_code-complete-iccad2023/Prob079_fsm3onehot_test.sv dataset_code-complete-iccad2023/Prob079_fsm3onehot_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\llama3.2_3b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'next_state' has 147 mismatches. First mismatch occurred at time 10.
+Hint: Output 'out' has no mismatches.
+Hint: Total mismatched samples is 147 out of 200 samples
+
+Simulation finished at 1001 ps
+Mismatches: 147 in 200 samples
+
+
+--- stderr ---

@@ -1,0 +1,44 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input x,
+  output reg z
+);
+
+Here's the Verilog implementation for the finite-state machine based on the provided description:
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        y2 <= 0;
+        y1 <= 0;
+        y0 <= 0;
+    end else begin
+        case ({y2, y1, y0})
+            3'b000: 
+                if (x == 0) begin
+                    y2n = 0; y1n = 0; y0n = 0; z = 0;
+                end else begin
+                    y2n = 0; y1n = 0; y0n = 1; z = 0;
+                end
+            3'b001: 
+                if (x == 0) begin
+                    y2n = 0; y1n = 0; y0n = 1; z = 0;
+                end else begin
+                    y2n = 1; y1n = 0; y0n = 0; z = 0;
+                end
+            3'b010: 
+                if (x == 0) begin
+                    y2n = 0; y1n = 1; y0n = 0; z = 0;
+                end else begin
+                    y2n = 0; y1n = 0; y0n = 1; z = 0;
+                end
+            3'b011: 
+                if (x == 0) begin
+                    y2n = 0; y1n = 0; y0n = 1; z = 1;
+                end else begin
+                    y2n = 0; y1n = 
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

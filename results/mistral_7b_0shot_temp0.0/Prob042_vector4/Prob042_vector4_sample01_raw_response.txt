@@ -1,0 +1,17 @@
+ Here is a Verilog implementation of the sign-extension circuit for an 8-bit number to 32 bits as per your description:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [31:0] out
+);
+
+reg [7:0] sign_replication;
+assign sign_replication = {in[7], in[7], in[7], in[7], in[7], in[7], in[7], in[7], 0, 0, 0, 0, 0, 0, 0, 0};
+
+assign out = sign_replication & in | ~sign_replication << 8;
+
+endmodule
+```
+
+In this code, the `sign_replication` register is initialized with the most significant bit (MSB) of the input repeated 24 times followed by zeros. The output is then calculated by performing a logical AND operation between the sign_replication and the input, and a left shift operation on the complement of the sign_replication by 8 bits. This ensures that only the MSB of the input (the sign bit) is replicated to the left for the sign-extension.

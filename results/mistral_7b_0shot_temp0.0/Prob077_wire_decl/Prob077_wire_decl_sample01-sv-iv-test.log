@@ -1,0 +1,14 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01 results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv dataset_code-complete-iccad2023/Prob077_wire_decl_test.sv dataset_code-complete-iccad2023/Prob077_wire_decl_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:12: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:15: warning: implicit definition of wire 'and1'.
+results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:16: warning: implicit definition of wire 'and2'.
+results\mistral_7b_0shot_temp0.0\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:18: warning: implicit definition of wire 'or_output'.

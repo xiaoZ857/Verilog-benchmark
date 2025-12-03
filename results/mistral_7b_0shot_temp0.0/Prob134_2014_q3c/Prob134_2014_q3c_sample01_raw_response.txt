@@ -1,0 +1,40 @@
+ Here is the Verilog code for the given state-assigned table:
+
+```verilog
+always @(posedge clk) begin
+    case (y)
+        3'b000 : begin
+            if (x === 0)
+                Y = 3'b000;
+            else
+                Y = 3'b001;
+            z <= 0;
+        end
+        3'b001 : begin
+            if (x === 0)
+                Y = 3'b001;
+            else
+                Y = 4'b100;
+            z <= 0;
+        end
+        3'b010 : begin
+            Y = 3'b010;
+            z <= 0;
+        end
+        3'b011 : begin
+            Y = 3'b001;
+            z <= 1;
+        end
+        3'b100 : begin
+            Y = 4'b011;
+            z <= 1;
+        end
+    endcase
+end
+
+assign Y0 = Y[0];
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `x`, and `y`, and outputs `Y0` and `z`. The logic functions for the next state of `Y` and output `z` are implemented using an always block and a case statement. The `assign` statement is used to assign the first bit of the `Y` register to the `Y0` output.

@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob078_dualedge/Prob078_dualedge_sample01 results\llama3.2_3b_0shot_temp0.0\Prob078_dualedge/Prob078_dualedge_sample01.sv dataset_code-complete-iccad2023/Prob078_dualedge_test.sv dataset_code-complete-iccad2023/Prob078_dualedge_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\llama3.2_3b_0shot_temp0.0\Prob078_dualedge/Prob078_dualedge_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has 93 mismatches. First mismatch occurred at time 20.
+Hint: Total mismatched samples is 93 out of 224 samples
+
+Simulation finished at 1121 ps
+Mismatches: 93 in 224 samples
+
+
+--- stderr ---

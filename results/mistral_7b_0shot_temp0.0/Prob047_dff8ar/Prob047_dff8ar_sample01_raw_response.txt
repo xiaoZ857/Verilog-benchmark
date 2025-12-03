@@ -1,0 +1,26 @@
+ Here is the Verilog code for your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+reg [7:0] q_temp; // Temporary register for storing the data before applying reset
+
+always @(posedge clk) begin
+  if (!areset) begin
+    q_temp <= 8'b0; // Reset all DFFs to 0 when areset is high
+  end else begin
+    q_temp <= d; // Otherwise, store the input data
+  end
+end
+
+assign q = q_temp; // Assign the temporary register as the final output
+
+endmodule
+```
+
+This code creates an 8-bit D flip-flop (DFF) module with active high asynchronous reset. The `q_temp` register is used to store the data before applying the reset, ensuring that all DFFs are reset to 0 when `areset` is high. The final output `q` is assigned the value of `q_temp`.

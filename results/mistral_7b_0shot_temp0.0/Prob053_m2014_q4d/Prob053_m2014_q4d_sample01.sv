@@ -1,0 +1,37 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+
+module DFlipFlopXOR (
+  input clk,
+  input in,
+  output reg q,
+  output logic out
+);
+
+assign out = q; // Assigning the output of the D flip-flop to the XOR's input
+
+always @(posedge clk)
+begin
+  if (in ^ q) // Toggle the D flip-flop on positive edge of clock when in is different from q
+    q <= ~q;
+end
+
+endmodule
+
+// TopModule implementation using DFlipFlopXOR module
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+
+DFlipFlopXOR dffxor (clk, in, q, out); // Instantiate the D flip-flop XOR module
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

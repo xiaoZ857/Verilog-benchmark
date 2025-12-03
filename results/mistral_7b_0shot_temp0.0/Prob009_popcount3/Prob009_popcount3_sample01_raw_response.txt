@@ -1,0 +1,26 @@
+ Here is the Verilog code for a 3-bit population count circuit:
+
+```verilog
+module TopModule (
+  input [2:0] in,
+  output [1:0] out
+);
+
+// Partial sums for each bit position
+reg [2:0] partial_sums = 3'b000;
+
+always @(posedge clk) begin
+    // Update the partial sums from left to right
+    partial_sums[0] <= in[0] + partial_sums[1];
+    partial_sums[1] <= in[1] + partial_sums[2];
+    partial_sums[2] <= in[2];
+end
+
+// Calculate the final population count
+assign out[0] = partial_sums[0] ^ partial_sums[1];
+assign out[1] = partial_sums[1] ^ partial_sums[2];
+
+endmodule
+```
+
+This code calculates the population count by updating a running sum of bits from left to right. The final population count is obtained by performing an XOR operation on the last two partial sums, as the XOR of a number and itself results in zero for all bits that are set to 1.

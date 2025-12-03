@@ -1,0 +1,49 @@
+Here's the Verilog implementation for the described state machine:
+
+```verilog
+localparam A = 2'b00;
+localparam B = 2'b01;
+localparam C = 2'b10;
+localparam D = 2'b11;
+
+reg [1:0] CS, NS;
+wire in, areset, clk, out;
+
+always @(*) begin
+    case (CS)
+        A:
+            if (in == 0) NS = A;
+            else NS = B;
+        B:
+            if (in == 0) NS = C;
+            else NS = B;
+        C:
+            if (in == 0) NS = A;
+            else NS = D;
+        D:
+            if (in == 0) NS = C;
+            else NS = B;
+        default:
+            NS = A;
+    endcase
+end
+
+always @(posedge clk or areset) begin
+    if (areset) begin
+        CS <= A;
+    end else begin
+        CS <= NS;
+    end
+end
+
+assign out = (CS == D);
+```
+
+This implementation includes:
+- Local parameters defining each state as 2-bit values
+- A register `CS` to store the current state
+- Logic to compute the next state based on the input and current state
+- Positive edge triggered clock with asynchronous reset functionality
+- Output that is high only when in state D
+
+The state transitions follow the provided table, and the output is determined by whether the FSM is in state D.

@@ -1,0 +1,14 @@
+
+
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+
+
+// VERILOG-EVAL: endmodule not found

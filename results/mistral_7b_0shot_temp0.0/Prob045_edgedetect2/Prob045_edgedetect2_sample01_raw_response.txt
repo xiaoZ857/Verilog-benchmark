@@ -1,0 +1,24 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+always @(posedge clk) begin
+  for (int i = 0; i < 8; i++) begin
+    if ((in[i] && !prev_in[i]) || (!in[i] && prev_in[i])) begin
+      anyedge[i] <= 1'b1;
+    end
+    prev_in[i] <= in[i];
+  end
+end
+
+reg [7:0] prev_in;
+
+endmodule
+```
+
+This code uses an always block to check for changes in the input vector `in` on each positive edge of the clock signal `clk`. The `prev_in` register is used to store the previous state of the input vector, allowing us to detect transitions from one state to another. The output vector `anyedge` is set to 1'b1 (true) for any bit that has experienced a transition since the last clock cycle.

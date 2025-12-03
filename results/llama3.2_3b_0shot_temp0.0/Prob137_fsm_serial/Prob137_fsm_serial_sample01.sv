@@ -1,0 +1,45 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+
+always @(posedge clk) begin
+    if (reset) begin
+        done <= 1;
+    end else begin
+        // Check for start bit
+        if (~in && done == 0) begin
+            done <= 1;
+        end else if (in && done == 0) begin
+            done <= 0;
+        end
+
+        // Wait for data bits
+        if (done == 1) begin
+            if (in) begin
+                done <= 0;
+            end else if (~in) begin
+                done <= 1;
+            end
+        end
+
+        // Check stop bit and verify byte received
+        if (done == 1 && in) begin
+            done <= 0;
+            if (~in) begin
+                done <= 1;
+            end
+        end else if (done == 1 && ~in) begin
+            done <= 0;
+        end
+
+        // If stop bit not received, wait for next start bit
+        if (done == 0 && in) begin
+            done <= 1;
+        end
+    end
+endmodule

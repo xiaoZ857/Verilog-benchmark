@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01 results\phi4_14b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv dataset_code-complete-iccad2023/Prob137_fsm_serial_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob137_fsm_serial/Prob137_fsm_serial_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'done' has 111 mismatches. First mismatch occurred at time 110.
+Hint: Total mismatched samples is 111 out of 905 samples
+
+Simulation finished at 4526 ps
+Mismatches: 111 in 905 samples
+
+
+--- stderr ---

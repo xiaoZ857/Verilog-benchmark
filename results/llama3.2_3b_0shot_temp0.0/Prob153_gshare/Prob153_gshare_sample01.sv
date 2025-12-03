@@ -1,0 +1,76 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+
+reg [7:0] global_branch_history;
+reg [7:0] pc_hash;
+reg [7:0] pht_entry[127:0];
+reg [1:0] pht_entry_state[127:0];
+
+reg [7:0] predict_taken_reg;
+reg [6:0] predict_history_reg;
+
+assign predict_taken = predict_taken_reg;
+assign predict_history = predict_history_reg;
+
+always @(posedge clk) begin
+  if (areset) begin
+    global_branch_history <= 0;
+    pc_hash <= 0;
+    for (int i = 127:0; i >= 0; i--) begin
+      pht_entry_state[i] <= 2'b00;
+      pht_entry[i] <= 2'b00;
+    end
+  end else begin
+    global_branch_history <= global_branch_history;
+    pc_hash <= predict_pc ^ global_branch_history;
+
+    if (predict_valid) begin
+      predict_taken_reg <= train_taken ? 1 : (train_mispredicted ? 0 : 1);
+      predict_history_reg <= train_history;
+      for (int i = 127:0; i >= 0; i--) begin
+        pht_entry_state[i] <= train_taken ? 2'b00 : (train_mispredicted ? 2'b01 : 2'b10);
+        pht_entry[i] <= train_pc ^ global_branch_history;
+      end
+    end else if (train_valid) begin
+      for (int i = 127:0; i >= 0; i--) begin
+        pht_entry_state[i] <= train_taken ? 2'b00 : (train_mispredicted ? 2'b01 : 2'b10);
+        pht_entry[i] <= train_pc ^ global_branch_history;
+      end
+
+      if (!train_taken) begin
+        for (int i = 127:0; i >= 0; i--) begin
+          pht_entry_state[i] <= 2'b00;
+          pht_entry[i] <= 2'b00;
+        end
+      end else if (train_mispredicted) begin
+        for (int i = 127:0; i >= 0; i++) begin
+          pht_entry_state[i] <= 2'b01;
+          pht_entry[i] <= train_pc ^ global_branch_history;
+        end
+      end
+    end else if (!predict_valid && !train_valid) begin
+      for (int i = 127:0; i >= 0; i++) begin
+        pht_entry_state[i] <= 2'b00;
+        pht_entry[i] <= 2'b00;
+      end
+    end
+  end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

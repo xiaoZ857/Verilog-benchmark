@@ -1,0 +1,17 @@
+always @(sel or data0 or data1 or data2 or data3 or data4 or data5) begin
+  if (sel == 0) begin
+    out = data0;
+  end else if (sel == 1) begin
+    out = data1;
+  end else if (sel == 2) begin
+    out = data2;
+  end else if (sel == 3) begin
+    out = data3;
+  end else if (sel == 4) begin
+    out = data4;
+  end else if (sel == 5) begin
+    out = data5;
+  end else begin
+    out = 0;
+  end
+endmodule

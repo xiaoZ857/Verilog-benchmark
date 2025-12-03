@@ -1,0 +1,104 @@
+
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+always @(*) begin
+    // Lemming's current state (0 = walking left, 1 = walking right)
+    reg [1:0] state;
+    
+    // Direction of the Lemming (0 = walking left, 1 = walking right)
+    reg walk_left_dir;
+    
+    // Flag to indicate if the Lemming is falling
+    reg fall;
+    
+    // Flag to indicate if the Lemming is digging
+    reg digging;
+    
+    // Assign initial state and direction based on areset
+    always @posedge(clk) begin
+        if (areset) begin
+            state <= 0;
+            walk_left_dir <= 1;
+            fall <= 0;
+            digging <= 0;
+        end else begin
+            state <= state;
+            walk_left_dir <= walk_left_dir;
+            fall <= fall;
+            digging <= digging;
+        end
+    end
+    
+    // Update the Lemming's direction based on bump inputs
+    always @(*) begin
+        if (bump_left && !walk_left) begin
+            walk_left_dir <= 1;
+        end else if (bump_right && !walk_right) begin
+            walk_left_dir <= 0;
+        end else if ((bump_left && bump_right) || (!bump_left && !bump_right)) begin
+            // If bumped on both sides or neither side, switch direction
+            walk_left_dir <= ~walk_left_dir;
+        end
+    end
+    
+    // Update the Lemming's state based on ground input
+    always @(*) begin
+        if (ground == 0) begin
+            fall <= 1;
+        end else if (fall && ground == 1) begin
+            fall <= 0;
+        end
+    end
+    
+    // Update the Lemming's digging state based on dig input
+    always @(*) begin
+        if (digging && walk_left_dir == 1 && ground == 1) begin
+            digging <= 0;
+        end else if (!digging && walk_left_dir == 1 && ground == 0) begin
+            digging <= 1;
+        end
+    end
+    
+    // Update the Lemming's walking direction based on its current state and digging status
+    always @(*) begin
+        if (digging) begin
+            walk_left_dir <= 1;
+        end else if (fall) begin
+            walk_left_dir <= 0;
+        end else if (state == 0 && dig == 1) begin
+            walk_left_dir <= 1;
+        end else if (state == 1 && dig == 1) begin
+            walk_left_dir <= 0;
+        end
+    end
+    
+    // Assign the Lemming's walking directions to the output ports
+    assign walk_left = (walk_left_dir == 1);
+    assign walk_right = (walk_left_dir == 0);
+    
+    // Generate an "aaah!" signal when the Lemming is falling
+    always @(*) begin
+        if (fall) begin
+            aaah <= 1;
+        end else begin
+            aaah <= 0;
+        end
+    end
+    
+    // Assign the digging status to the output port
+    assign digging = digging;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

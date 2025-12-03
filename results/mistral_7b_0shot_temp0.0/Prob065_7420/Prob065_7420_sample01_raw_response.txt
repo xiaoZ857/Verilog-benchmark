@@ -1,0 +1,27 @@
+ Here is the Verilog code for a module that emulates the functionality of the 7420 chip with two 4-input NAND gates:
+
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  output reg p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output reg p2y
+);
+
+assign p1y = ~(p1a & p1b & p1c & p1d);
+assign p2y = ~(p2a & p2b & p2c & p2d);
+
+always @(posedge clk) begin
+  // No clock is specified, so we assume positive edge-triggered signals
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with eight inputs (p1a, p1b, p1c, p1d, p2a, p2b, p2c, and p2d) and two outputs (p1y and p2y). The outputs are assigned the result of the NAND operation on their respective inputs. Since no clock is specified in the problem statement, we assume that the signals are positive edge-triggered.

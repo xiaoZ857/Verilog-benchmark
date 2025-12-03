@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\qwen3_8b_0shot_temp0.0\Prob038_count15/Prob038_count15_sample01 results\qwen3_8b_0shot_temp0.0\Prob038_count15/Prob038_count15_sample01.sv dataset_code-complete-iccad2023/Prob038_count15_test.sv dataset_code-complete-iccad2023/Prob038_count15_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\qwen3_8b_0shot_temp0.0\Prob038_count15/Prob038_count15_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has no mismatches.
+Hint: Total mismatched samples is 0 out of 421 samples
+
+Simulation finished at 2106 ps
+Mismatches: 0 in 421 samples
+
+
+--- stderr ---

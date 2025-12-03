@@ -1,0 +1,12 @@
+
+
+module TopModule (
+  input [6:1] y,
+  input w,
+  output Y2,
+  output Y4
+);
+
+
+
+// VERILOG-EVAL: endmodule not found

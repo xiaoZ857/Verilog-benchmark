@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01 results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv dataset_code-complete-iccad2023/Prob122_kmap4_test.sv dataset_code-complete-iccad2023/Prob122_kmap4_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:12: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:13: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:13: warning: Numeric constant truncated to 2 bits.
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:14: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:14: warning: Numeric constant truncated to 2 bits.
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

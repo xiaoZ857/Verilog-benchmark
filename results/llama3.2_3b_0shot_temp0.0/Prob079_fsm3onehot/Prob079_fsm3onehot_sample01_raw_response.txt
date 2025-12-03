@@ -1,0 +1,5 @@
+```verilog
+assign next_state = state;
+assign out = (state == 4'b1000) ? 1 : 0;
+endmodule
+```

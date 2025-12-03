@@ -1,0 +1,31 @@
+
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out
+);
+
+wire [3:0] minterms;
+
+assign minterms[0] = ~a & ~b & ~c & ~d; // abcd = 0000
+assign minterms[1] = ~a & ~b & c & ~d;  // abcd = 0010
+assign minterms[2] = ~a & b & ~c & ~d;  // abcd = 0100
+assign minterms[3] = ~a & b & c & d;    // abcd = 0111
+
+wire result;
+
+assign result = minterms[0] | 
+                minterms[1] |
+                minterms[2] |
+                minterms[3] |
+                (a & ~b & ~c & d) |   // abcd = 1001
+                (a & ~b & c & ~d) |    // abcd = 1010
+                (a & b & ~c & ~d) |    // abcd = 1100
+                (a & b & c & d);       // abcd = 1111
+
+assign out = result;
+
+endmodule

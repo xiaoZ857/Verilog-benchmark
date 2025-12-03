@@ -1,0 +1,101 @@
+```verilog
+  reg [1:0] current_state;
+  reg [1:0] next_state;
+  reg sensor_change;
+
+  // Define states
+  localparam STATE_LOW = 2'b00;
+  localparam STATE_MEDIUM1 = 2'b01;
+  localparam STATE_MEDIUM2 = 2'b10;
+  localparam STATE_HIGH = 2'b11;
+
+  // State register update
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= STATE_LOW;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    next_state = current_state; // Default: stay in current state
+    sensor_change = 0;
+
+    case (current_state)
+      STATE_LOW: begin
+        if (s[1] == 1) begin
+          next_state = STATE_MEDIUM2;
+          sensor_change = 1;
+        end else begin
+          next_state = STATE_LOW;
+        end
+      end
+      STATE_MEDIUM2: begin
+        if (s[2] == 1) begin
+          next_state = STATE_MEDIUM1;
+          sensor_change = 1;
+        end else begin
+          next_state = STATE_LOW;
+        end
+      end
+      STATE_MEDIUM1: begin
+        if (s[3] == 1) begin
+          next_state = STATE_HIGH;
+          sensor_change = 1;
+        end else begin
+          next_state = STATE_MEDIUM2;
+        end
+      end
+      STATE_HIGH: begin
+        next_state = STATE_HIGH;
+      end
+      default: begin
+        next_state = STATE_LOW;
+      end
+    endcase
+  end
+
+  // Output logic
+  always @(current_state, sensor_change) begin
+    fr3 = 0;
+    fr2 = 0;
+    fr1 = 0;
+    dfr = 0;
+
+    case (current_state)
+      STATE_LOW: begin
+        fr1 = 1;
+        fr2 = 1;
+        fr3 = 1;
+        dfr = 1;
+      end
+      STATE_MEDIUM1: begin
+        fr1 = 1;
+        fr2 = 0;
+        fr3 = 0;
+        dfr = sensor_change;
+      end
+      STATE_MEDIUM2: begin
+        fr1 = 1;
+        fr2 = 1;
+        fr3 = 0;
+        dfr = sensor_change;
+      end
+      STATE_HIGH: begin
+        fr1 = 0;
+        fr2 = 0;
+        fr3 = 0;
+        dfr = 0;
+      end
+      default: begin
+        fr1 = 0;
+        fr2 = 0;
+        fr3 = 0;
+        dfr = 0;
+      end
+    endcase
+  end
+endmodule
+```

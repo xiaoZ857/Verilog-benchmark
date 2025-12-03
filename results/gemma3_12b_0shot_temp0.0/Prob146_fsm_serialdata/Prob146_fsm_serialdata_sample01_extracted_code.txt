@@ -1,0 +1,79 @@
+  reg [7:0] data_reg;
+  reg [2:0] state;
+  reg [7:0] out_byte_reg;
+  reg done_reg;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= 0;
+      done_reg <= 0;
+      out_byte_reg <= 0;
+    end else begin
+      case (state)
+        0: begin // Idle - wait for start bit
+          if (!in) begin
+            state <= 1;
+          end
+        end
+        1: begin // Received start bit, waiting for 8 data bits
+          if ($random % 2) begin
+            data_reg[0] <= in;
+          end else begin
+            data_reg[0] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[1] <= in;
+          end else begin
+            data_reg[1] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[2] <= in;
+          end else begin
+            data_reg[2] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[3] <= in;
+          end else begin
+            data_reg[3] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[4] <= in;
+          end else begin
+            data_reg[4] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[5] <= in;
+          end else begin
+            data_reg[5] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[6] <= in;
+          end else begin
+            data_reg[6] <= ~in;
+          end
+          if ($random % 2) begin
+            data_reg[7] <= in;
+          end else begin
+            data_reg[7] <= ~in;
+          end
+          state <= 2;
+        end
+        2: begin // Received 8 data bits, waiting for stop bit
+          if (in) begin
+            state <= 0;
+          end else begin
+            state <= 3;
+          end
+        end
+        3: begin // Received stop bit
+          done_reg <= 1;
+          out_byte_reg <= data_reg;
+          state <= 0;
+        end
+      endcase
+    end
+  end
+
+  assign out_byte = out_byte_reg;
+  assign done = done_reg;
+endmodule

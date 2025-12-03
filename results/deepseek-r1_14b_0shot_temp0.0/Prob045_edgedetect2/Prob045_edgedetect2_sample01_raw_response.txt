@@ -1,0 +1,24 @@
+Here's the Verilog implementation for detecting any edge on each bit of an 8-bit vector:
+
+```verilog
+always_ff @ (posedge clk) begin
+    reg [7:0] prev_in;
+    reg [7:0] edge_reg;
+
+    // Store previous input state
+    prev_in <= in;
+
+    // Detect edges and register the result for output
+    edge_reg <= (in != prev_in);
+
+    anyedge <= edge_reg;
+end
+```
+
+This code:
+1. Stores the previous state of `in` in `prev_in`
+2. Detects transitions by comparing current `in` with `prev_in`
+3. Delays the transition detection by one clock cycle using a register
+4. Outputs the delayed result on `anyedge`
+
+The implementation ensures that each bit in `anyedge` is set the cycle after a transition occurs on the corresponding bit in `in`.

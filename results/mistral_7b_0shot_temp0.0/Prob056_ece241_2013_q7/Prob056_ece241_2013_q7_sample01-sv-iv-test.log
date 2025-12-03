@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob056_ece241_2013_q7/Prob056_ece241_2013_q7_sample01 results\mistral_7b_0shot_temp0.0\Prob056_ece241_2013_q7/Prob056_ece241_2013_q7_sample01.sv dataset_code-complete-iccad2023/Prob056_ece241_2013_q7_test.sv dataset_code-complete-iccad2023/Prob056_ece241_2013_q7_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob056_ece241_2013_q7/Prob056_ece241_2013_q7_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'Q' has 121 mismatches. First mismatch occurred at time 80.
+Hint: Total mismatched samples is 121 out of 422 samples
+
+Simulation finished at 2110 ps
+Mismatches: 121 in 422 samples
+
+
+--- stderr ---

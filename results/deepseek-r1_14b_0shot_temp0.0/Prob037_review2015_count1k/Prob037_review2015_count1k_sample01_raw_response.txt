@@ -1,0 +1,23 @@
+Here's the Verilog code for a counter that counts from 0 to 999 with synchronous reset:
+
+```verilog
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 0;
+    end else begin
+        if (q != 999) begin
+            q <= q + 1;
+        end else begin
+            q <= 0;
+        end
+    end
+end
+```
+
+This code:
+- Counts from 0 to 999
+- Resets to 0 when `reset` is high
+- Uses positive clock edge triggering
+- Automatically wraps around from 999 to 0
+
+The counter will cycle continuously between 0 and 999, incrementing on each clock cycle unless reset is asserted.

@@ -1,0 +1,25 @@
+ To create a Verilog module that functions as a dual-edge triggered flip-flop without using the always @(posedge clk or negedge clk) sensitivity list, we can use the posedge and negedge events separately. Here's an example of how you could implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+reg temp; // Temporary register to store the data value
+
+always @(posedge clk) begin
+  if (temp != d) begin // Check for a change in data
+    temp <= d; // Store the new data value
+  end
+end
+
+always @(negedge clk) begin
+  q <= temp; // Assign the stored data to the output on the falling edge of clock
+end
+
+endmodule
+```
+
+In this implementation, we use two always blocks: one for the posedge event and another for the negedge event. The `temp` register is used to store the new data value when it changes (posedge clk). Then, on the falling edge of the clock (negedge clk), the stored data is assigned to the output `q`. This way, the flip-flop behaves as if it were dual-edge triggered.

@@ -1,0 +1,44 @@
+```verilog
+reg [3:0] prev_s;
+reg [3:0] curr_s;
+reg [3:0] water_level;
+reg [3:0] flow_rate;
+
+always @(posedge clk) begin
+    if (reset) begin
+        prev_s <= 4'b0000;
+        curr_s <= 4'b0000;
+        water_level <= 4'b0000;
+        fr1 <= 1'b0;
+        fr2 <= 1'b0;
+        fr3 <= 1'b0;
+        dfr <= 1'b0;
+    end else begin
+        prev_s <= curr_s;
+        curr_s <= s;
+
+        // Determine water level based on sensors
+        if (curr_s[3] == 4'b1111) water_level <= 4'b1111;
+        else if (curr_s[2] == 4'b1111 && curr_s[3] != 4'b1111) water_level <= curr_s[2];
+        else if (curr_s[1] == 4'b1111 && curr_s[2] != 4'b1111) water_level <= curr_s[1];
+        else water_level <= 4'b0000;
+
+        // Determine flow rate based on water level and previous sensor change
+        if (water_level > prev_s) fr3 <= 1'b0;
+        else if (curr_s == 4'b0000 && prev_s != 4'b0000) fr3 <= 1'b1;
+        else if (water_level < prev_s) fr3 <= 1'b1;
+
+        if (water_level > curr_s[2]) fr2 <= 1'b0;
+        else if (curr_s == 4'b0000 && curr_s[2] != 4'b1111) fr2 <= 1'b1;
+        else if (water_level < curr_s[2]) fr2 <= 1'b1;
+
+        if (water_level > curr_s[1]) fr1 <= 1'b0;
+        else if (curr_s == 4'b0000 && curr_s[1] != 4'b1111) fr1 <= 1'b1;
+        else if (water_level < curr_s[1]) fr1 <= 1'b1;
+
+        // Determine dfr based on sensor change
+        if (curr_s != prev_s) dfr <= 1'b1;
+        else dfr <= 1'b0;
+    end
+endmodule
+```

@@ -1,0 +1,21 @@
+To solve this problem, we need to create a Verilog module that computes an even parity bit for an 8-bit byte. The even parity bit is determined by XORing all the data bits together. If the result is 1, it indicates an odd number of 1s in the data bits, and thus the parity bit will be set to 1 to make the total count even. Conversely, if the result is 0, the parity bit remains 0.
+
+### Approach
+The approach involves using combinational logic to compute the parity bit. The key steps are:
+1. **XOR Operation**: Compute the XOR of all 8 data bits. This will give us a single bit that indicates whether there's an odd or even number of 1s in the data.
+2. **Output Assignment**: Assign this computed XOR result to the output parity bit.
+
+This approach is efficient because it directly uses the properties of the XOR operation to determine the parity without needing any loops or additional state storage.
+
+### Solution Code
+```verilog
+always @(*) begin
+    parity = in[7] ^ in[6] ^ in[5] ^ in[4] ^ in[3] ^ in[2] ^ in[1] ^ in[0];
+end
+```
+
+### Explanation
+- **XOR Operation**: The XOR operation is applied to all 8 bits of the input (`in[7:0]`). This operation effectively counts the number of 1s in the data. If there's an odd number of 1s, the result will be 1; if even, it will be 0.
+- **Output Assignment**: The result of this XOR operation is directly assigned to the `parity` output. This means that whenever any of the input bits change, the parity bit updates accordingly.
+
+This solution efficiently computes the even parity bit using a single line of code, leveraging the properties of the XOR operation to ensure correctness and simplicity.

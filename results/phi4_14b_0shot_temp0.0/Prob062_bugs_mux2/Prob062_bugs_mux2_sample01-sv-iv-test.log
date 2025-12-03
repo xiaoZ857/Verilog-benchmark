@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01 results\phi4_14b_0shot_temp0.0\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv dataset_code-complete-iccad2023/Prob062_bugs_mux2_test.sv dataset_code-complete-iccad2023/Prob062_bugs_mux2_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out' has 111 mismatches. First mismatch occurred at time 20.
+Hint: Total mismatched samples is 111 out of 114 samples
+
+Simulation finished at 570 ps
+Mismatches: 111 in 114 samples
+
+
+--- stderr ---

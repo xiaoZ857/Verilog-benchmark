@@ -1,0 +1,25 @@
+ Here's a Verilog implementation of the described counter:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [9:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 0;
+  end else begin
+    if (q < 999) begin
+      q <= q + 1;
+    end else begin
+      q <= 0; // Reset the counter when it reaches 1000
+    end
+  end
+end
+
+endmodule
+```
+
+This module has a clock input `clk`, a reset input `reset`, and an output register `q` with 10 bits. The counter is implemented using an always block that triggers on the positive edge of either `clk` or `reset`. When `reset` is high, the counter is reset to zero; otherwise, it increments by one on each clock cycle until it reaches 999, at which point it resets back to zero.

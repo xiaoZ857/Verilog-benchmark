@@ -1,0 +1,26 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob142_lemmings2/Prob142_lemmings2_sample01 results\phi4_14b_0shot_temp0.0\Prob142_lemmings2/Prob142_lemmings2_sample01.sv dataset_code-complete-iccad2023/Prob142_lemmings2_test.sv dataset_code-complete-iccad2023/Prob142_lemmings2_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob142_lemmings2/Prob142_lemmings2_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'walk_left' has 114 mismatches. First mismatch occurred at time 150.
+Hint: Output 'walk_right' has 114 mismatches. First mismatch occurred at time 150.
+Hint: Output 'aaah' has no mismatches.
+Hint: Total mismatched samples is 114 out of 441 samples
+
+Simulation finished at 2206 ps
+Mismatches: 114 in 441 samples
+
+
+--- stderr ---

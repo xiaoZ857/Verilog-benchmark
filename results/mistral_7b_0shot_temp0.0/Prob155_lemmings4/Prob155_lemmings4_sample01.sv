@@ -1,0 +1,80 @@
+
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+ ```Verilog
+reg state; // Current state of the FSM (0: walking left, 1: walking right)
+reg falling_counter = 20'b0; // Counter for tracking falling duration
+
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 0; // Reset to walking left on positive edge of areset
+        falling_counter <= 20'b0; // Reset falling counter
+    end
+    else begin
+        case(state)
+            0: begin // Walking left
+                if (bump_right) begin
+                    state <= 1; // Switch to walking right on bump_right
+                end
+                if (ground && !dig && falling_counter == 20'hFF) begin // Splatter if grounded after long fall
+                    state <= 3; // Set state to splattered
+                end
+                if (ground && !falling_counter && dig) begin // Start digging on ground and dig command
+                    state <= 2; // Set state to digging
+                end
+            end
+            1: begin // Walking right
+                if (bump_left) begin
+                    state <= 0; // Switch to walking left on bump_left
+                end
+                if (ground && !dig && falling_counter == 20'hFF) begin // Splatter if grounded after long fall
+                    state <= 3; // Set state to splattered
+                end
+                if (ground && !falling_counter && dig) begin // Start digging on ground and dig command
+                    state <= 2; // Set state to digging
+                end
+            end
+            2: begin // Digging
+                if (!ground) begin // Stop digging when no longer on ground
+                    state <= (falling_counter == 20'hFF) ? 3 : 0; // If falling, set to splattered. Otherwise, reset to walking left
+                end
+                if (bump_left || bump_right) begin // Ignore direction change while digging
+                    state <= state;
+                end
+            end
+            3: begin // Splattered
+                walk_left <= 0;
+                walk_right <= 0;
+                aaah <= 1;
+                digging <= 0;
+            end
+        endcase
+
+        if (ground) begin // Reset falling counter when ground reappears
+            falling_counter <= 20'b0;
+        end else begin // Increment falling counter on each clock cycle while falling
+            falling_counter <= falling_counter + 1;
+        end
+    end
+end
+
+assign walk_left = (state == 0);
+assign walk_right = (state == 1);
+assign aaah = (state == 3);
+assign digging = (state == 2);
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

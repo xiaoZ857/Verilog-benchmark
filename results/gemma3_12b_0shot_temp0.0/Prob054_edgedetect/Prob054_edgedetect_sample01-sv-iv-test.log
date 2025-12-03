@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob054_edgedetect/Prob054_edgedetect_sample01 results\gemma3_12b_0shot_temp0.0\Prob054_edgedetect/Prob054_edgedetect_sample01.sv dataset_code-complete-iccad2023/Prob054_edgedetect_test.sv dataset_code-complete-iccad2023/Prob054_edgedetect_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gemma3_12b_0shot_temp0.0\Prob054_edgedetect/Prob054_edgedetect_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'pedge' has 186 mismatches. First mismatch occurred at time 50.
+Hint: Total mismatched samples is 186 out of 227 samples
+
+Simulation finished at 1135 ps
+Mismatches: 186 in 227 samples
+
+
+--- stderr ---

@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob063_review2015_shiftcount/Prob063_review2015_shiftcount_sample01 results\phi4_14b_0shot_temp0.0\Prob063_review2015_shiftcount/Prob063_review2015_shiftcount_sample01.sv dataset_code-complete-iccad2023/Prob063_review2015_shiftcount_test.sv dataset_code-complete-iccad2023/Prob063_review2015_shiftcount_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob063_review2015_shiftcount/Prob063_review2015_shiftcount_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has 1900 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 1900 out of 2071 samples
+
+Simulation finished at 10356 ps
+Mismatches: 1900 in 2071 samples
+
+
+--- stderr ---

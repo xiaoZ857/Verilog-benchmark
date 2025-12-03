@@ -1,0 +1,20 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 4'b0001; // Reset the counter to 1
+  end else begin
+    q <= q + 1; // Increment the counter
+    if (q > 4'b1001) // If the counter exceeds 10, reset it to 1
+      q <= 4'b0001;
+  end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

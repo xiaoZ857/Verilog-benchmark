@@ -1,0 +1,23 @@
+
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+reg [7:0] q_temp; // Temporary register for storing the data before applying reset
+
+always @(posedge clk) begin
+  if (!areset) begin
+    q_temp <= 8'b0; // Reset all DFFs to 0 when areset is high
+  end else begin
+    q_temp <= d; // Otherwise, store the input data
+  end
+end
+
+assign q = q_temp; // Assign the temporary register as the final output
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

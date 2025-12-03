@@ -1,0 +1,10 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv dataset_code-complete-iccad2023/Prob002_m2014_q4i_test.sv dataset_code-complete-iccad2023/Prob002_m2014_q4i_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv:2: syntax error
+I give up.

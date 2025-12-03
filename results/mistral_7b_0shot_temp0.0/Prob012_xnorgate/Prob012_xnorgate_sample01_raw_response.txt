@@ -1,0 +1,15 @@
+ Here is the Verilog code for an XNOR gate:
+
+```verilog
+module TopModule (
+  input wire a,
+  input wire b,
+  output wire out
+);
+
+assign out = ~(a ^ b);
+
+endmodule
+```
+
+This module takes two inputs `a` and `b`, and produces an output `out` which is the XNOR of `a` and `b`. The `~` operator represents the bitwise NOT operation, and the `^` operator represents the bitwise XOR operation.

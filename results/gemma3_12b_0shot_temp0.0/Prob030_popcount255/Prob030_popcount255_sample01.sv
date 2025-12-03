@@ -1,0 +1,22 @@
+
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+
+  reg [254:0] temp;
+  reg [7:0] sum;
+
+  always @(posedge clk) begin
+    temp <= in;
+    sum <= 0;
+    for (int i = 0; i < 255; i = i + 1) begin
+      if (temp[i]) begin
+        sum <= sum + 1;
+      end
+    end
+  end
+
+  assign out = sum;
+endmodule

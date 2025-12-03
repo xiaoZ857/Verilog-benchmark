@@ -1,0 +1,15 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01 results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv dataset_code-complete-iccad2023/Prob065_7420_test.sv dataset_code-complete-iccad2023/Prob065_7420_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv:17: error: p1y is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv:8:      : p1y is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv:18: error: p2y is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv:13:      : p2y is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv:16: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\phi4_14b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv:16: error: Failed to evaluate event expression 'posedge clk'.
+4 error(s) during elaboration.

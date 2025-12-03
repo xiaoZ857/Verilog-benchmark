@@ -1,0 +1,45 @@
+ Here is the Verilog code for the Mealy-type finite state machine that recognizes the sequence "101" on an input signal named `x` and has an output signal `z` asserted to logic-1 when the "101" sequence is detected. The FSM also has a negative edge triggered asynchronous reset:
+
+```verilog
+always @(posedge clk or negedge aresetn) begin
+  if (!aresetn) begin
+    z <= 0; // Reset the output to zero
+  end else begin
+    case (state) // State machine logic
+      0: begin
+        if (x == 1) begin
+          state <= 1;
+        end
+        z <= 0; // Output remains unchanged in this state
+      end
+      1: begin
+        if (x == 0) begin
+          state <= 2;
+        end else begin
+          state <= 0; // Reset the state machine if input does not match expected value
+          z <= 0; // Output remains unchanged in this state
+        end
+      end
+      2: begin
+        if (x == 1) begin
+          state <= 0; // Reset the state machine and prepare for next sequence detection
+          z <= 1; // Output is asserted when the "101" sequence is detected
+        end else begin
+          state <= 0; // Reset the state machine if input does not match expected value
+          z <= 0; // Output remains unchanged in this state
+        end
+      end
+    endcase
+  end
+end
+
+// Initialization and sensitivity list
+initial begin
+  state <= 0; // Initialize the state to 0
+end
+
+// Define the state variable
+reg [2:0] state;
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `aresetn`, `x`, and an output `z`. The FSM has three states (0, 1, and 2) and recognizes overlapping sequences. The `always` block contains the state machine logic that is triggered on both positive edges of `clk` and negative edge of `aresetn`. The `case` statement handles the transitions between states based on the current state and input value. The initial block sets the initial state to 0.

@@ -1,0 +1,49 @@
+  reg [1:0] state;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= 0;
+      z <= 0;
+    end else begin
+      case (state)
+        0: begin // State A
+          if (s) begin
+            state <= 1;
+          end else begin
+            state <= 0;
+          end
+        end
+        1: begin // State B - First w check
+          if (w) begin
+            state <= 2;
+          end else begin
+            state <= 1;
+          end
+        end
+        2: begin // State C - Second w check
+          if (w) begin
+            state <= 3;
+          end else begin
+            state <= 1;
+          end
+        end
+        3: begin // State D - Third w check
+          if (w) begin
+            state <= 3;
+          end else begin
+            state <= 1;
+          end
+        end
+        default: begin
+          state <= 0;
+        end
+      endcase
+      
+      if (state == 3) begin
+        z <= 1;
+      end else begin
+        z <= 0;
+      end
+    end
+  end
+endmodule

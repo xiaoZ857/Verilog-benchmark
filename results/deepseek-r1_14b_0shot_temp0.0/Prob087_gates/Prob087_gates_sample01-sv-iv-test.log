@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv dataset_code-complete-iccad2023/Prob087_gates_test.sv dataset_code-complete-iccad2023/Prob087_gates_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:15: syntax error
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:15: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:16: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:17: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:18: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:19: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:20: error: Invalid module instantiation
+results\deepseek-r1_14b_0shot_temp0.0\Prob087_gates/Prob087_gates_sample01.sv:21: error: Invalid module instantiation

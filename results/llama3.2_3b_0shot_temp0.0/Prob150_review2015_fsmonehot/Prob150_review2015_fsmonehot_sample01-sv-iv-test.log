@@ -1,0 +1,33 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01 results\llama3.2_3b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:21: warning: implicit definition of wire 'S11_next'.
+results\llama3.2_3b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:22: warning: implicit definition of wire 'S110_next'.
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\llama3.2_3b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'B3_next' has 51 mismatches. First mismatch occurred at time 45.
+Hint: Output 'S_next' has 97 mismatches. First mismatch occurred at time 30.
+Hint: Output 'S1_next' has 9 mismatches. First mismatch occurred at time 265.
+Hint: Output 'Count_next' has 79 mismatches. First mismatch occurred at time 10.
+Hint: Output 'Wait_next' has 300 mismatches. First mismatch occurred at time 5.
+Hint: Output 'done' has 24 mismatches. First mismatch occurred at time 45.
+Hint: Output 'counting' has 95 mismatches. First mismatch occurred at time 25.
+Hint: Output 'shift_ena' has 176 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 300 out of 300 samples
+
+Simulation finished at 1501 ps
+Mismatches: 300 in 300 samples
+
+
+--- stderr ---

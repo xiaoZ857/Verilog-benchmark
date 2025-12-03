@@ -1,0 +1,13 @@
+
+module TopModule (
+  output reg zero
+);
+
+always @(posedge clk)
+begin
+  zero <= 0;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

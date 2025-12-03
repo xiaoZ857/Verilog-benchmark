@@ -1,0 +1,26 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob072_thermostat/Prob072_thermostat_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob072_thermostat/Prob072_thermostat_sample01.sv dataset_code-complete-iccad2023/Prob072_thermostat_test.sv dataset_code-complete-iccad2023/Prob072_thermostat_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob072_thermostat/Prob072_thermostat_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'heater' has no mismatches.
+Hint: Output 'aircon' has no mismatches.
+Hint: Output 'fan' has no mismatches.
+Hint: Total mismatched samples is 0 out of 248 samples
+
+Simulation finished at 1241 ps
+Mismatches: 0 in 248 samples
+
+
+--- stderr ---

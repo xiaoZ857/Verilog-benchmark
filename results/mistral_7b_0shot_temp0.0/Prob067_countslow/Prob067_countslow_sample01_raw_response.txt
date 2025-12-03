@@ -1,0 +1,15 @@
+ Here is a possible implementation of the requested decade counter in Verilog:
+
+```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 4'b0001; // Reset the counter to 0
+    end else if (slowena) begin
+        q <= q + 1; // Increment the counter when slowena is high
+    end
+end
+```
+
+In this implementation, the `TopModule` has three outputs: `q[3]`, `q[2]`, `q[1]`, and `q[0]`. The counter is reset to 0 when the `reset` input is high. When both the clock and the `slowena` input are rising edges, the counter increments if `slowena` is high.
+
+The counter counts from 0 through 9, inclusive, with a period of 10 because it takes 10 clock cycles to count from 0 to 9 (including the reset cycle) and then it resets back to 0 again. The counter can be paused by setting `slowena` to 0, which will prevent it from incrementing even when the clock edge occurs.

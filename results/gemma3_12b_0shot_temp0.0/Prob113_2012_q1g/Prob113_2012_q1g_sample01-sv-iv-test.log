@@ -1,0 +1,14 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01 results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv dataset_code-complete-iccad2023/Prob113_2012_q1g_ref.sv
+Return code: 6
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:10: syntax error
+results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:10: error: Invalid module instantiation
+results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:11: error: Invalid module instantiation
+results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:12: error: Invalid module instantiation
+results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:13: error: Invalid module instantiation
+results\gemma3_12b_0shot_temp0.0\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:15: error: Invalid module instantiation

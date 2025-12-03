@@ -1,0 +1,21 @@
+ Here is the Verilog code for the given sequential circuit:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire a,
+  output reg q
+);
+
+always @(posedge clk) begin
+  if (a) begin
+    q <= q; // No change when a is high
+  end else begin
+    q <= ~q; // Toggle q when a is low
+  end
+end
+
+endmodule
+```
+
+This module implements the given sequential circuit. The `always @(posedge clk)` block represents the combinational logic that updates the output `q` based on the current values of inputs `clk` and `a`. When `a` is high, there is no change in the value of `q`, and when `a` is low, the value of `q` toggles.

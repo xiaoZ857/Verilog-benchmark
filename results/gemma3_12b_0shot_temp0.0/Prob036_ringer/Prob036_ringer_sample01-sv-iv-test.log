@@ -1,0 +1,19 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01 results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv dataset_code-complete-iccad2023/Prob036_ringer_test.sv dataset_code-complete-iccad2023/Prob036_ringer_ref.sv
+Return code: 6
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:12: error: motor is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:7:      : motor is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:13: error: ringer is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:6:      : ringer is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:15: error: ringer is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:6:      : ringer is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:16: error: motor is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:7:      : motor is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\gemma3_12b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+6 error(s) during elaboration.

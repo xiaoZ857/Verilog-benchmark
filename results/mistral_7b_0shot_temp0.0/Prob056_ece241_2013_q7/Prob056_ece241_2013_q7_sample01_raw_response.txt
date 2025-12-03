@@ -1,0 +1,27 @@
+ Here is the Verilog code for the JK flip-flop as per your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q,
+  output reg Qold // Adding Qold output
+);
+
+always @(posedge clk) begin
+  if (j & ~k) begin
+    Q <= ~Qold; // When J=1 and K=0, Q is the complement of Qold
+  end else if (~j & k) begin
+    Q <= 0; // When J=0 and K=1, Q is always 0
+  end else begin
+    Q <= Qold; // When neither J nor K is 1, Q remains unchanged
+  end
+
+  Qold <= Q; // Assign the current value of Q to Qold for the next clock cycle
+end
+
+endmodule
+```
+
+This code implements a JK flip-flop with an additional output `Qold`. The `always @(posedge clk)` block describes the behavior of the flip-flop on each positive edge of the clock signal. The `if` and `else if` statements cover all possible combinations of J and K, and set the value of Q accordingly. Finally, the current value of Q is assigned to Qold for the next clock cycle.

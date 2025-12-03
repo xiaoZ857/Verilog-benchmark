@@ -1,0 +1,9 @@
+always @(*) begin
+    case(in)
+        0: out = (reset == 1 ? B : A);
+        1: out = (reset == 1 ? B : B);
+    endcase
+endmodule
+
+assign B = ~A;
+assign A = in ^ B;

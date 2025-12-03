@@ -1,0 +1,20 @@
+ Here's a simple Verilog implementation for an 8-bit even parity generator:
+
+```verilog
+module TopModule (
+  input [7:0] data_in,
+  output reg parity_out
+);
+
+always @(posedge clk) begin
+  parity_out <= ~data_in;
+  parity_out <= parity_out ^ data_in;
+end
+
+endmodule
+```
+
+In this code:
+- `data_in` is the 8-bit input data.
+- `parity_out` is the output parity bit, which will be the XOR of all 8 data bits for even parity.
+- The always block triggers on the positive edge of the clock (clk), and calculates the parity by first setting it to the complement of the input data, then XORing it with the original data. This ensures that an even number of 1s will result in a 0 for the parity bit, which is the desired behavior for even parity.

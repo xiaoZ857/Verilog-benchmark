@@ -1,0 +1,52 @@
+
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+reg [2:0] state, next_state;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 3'b000;
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        3'b000: begin
+            z = 1'b1;
+            if (x)
+                next_state = 3'b001;
+            else
+                next_state = 3'b000;
+        end
+        3'b001: begin
+            z = 1'b0;
+            if (y)
+                next_state = 3'b010;
+            else
+                next_state = 3'b100;
+        end
+        3'b010: begin
+            z = 1'b0;
+            next_state = 3'b011;
+        end
+        3'b011: begin
+            z = 1'b1;
+            next_state = 3'b100;
+        end
+        3'b100: begin
+            z = 1'b0;
+            if (x)
+                next_state = 3'b001;
+            else
+                next_state = 3'b010;
+        end
+    endcase
+end
+
+endmodule

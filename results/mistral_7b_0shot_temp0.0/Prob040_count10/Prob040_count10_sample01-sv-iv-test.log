@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob040_count10/Prob040_count10_sample01 results\mistral_7b_0shot_temp0.0\Prob040_count10/Prob040_count10_sample01.sv dataset_code-complete-iccad2023/Prob040_count10_test.sv dataset_code-complete-iccad2023/Prob040_count10_ref.sv
+Return code: 3
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob040_count10/Prob040_count10_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0.0\Prob040_count10/Prob040_count10_sample01.sv:18: error: Malformed event control expression.
+results\mistral_7b_0shot_temp0.0\Prob040_count10/Prob040_count10_sample01.sv:18: error: Invalid event control.

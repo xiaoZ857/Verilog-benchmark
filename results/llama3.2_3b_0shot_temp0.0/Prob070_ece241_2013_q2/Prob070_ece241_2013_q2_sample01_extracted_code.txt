@@ -1,0 +1,4 @@
+assign out_sop = (a & ~b & ~c & ~d) | (~a & b & ~c & ~d) | (~a & ~b & c & ~d) | (~a & ~b & ~c & d) |
+                  (a & b & c & ~d) | (a & b & ~c & d) | (~a & b & c & d) | (~a & b & ~c & d);
+
+assign out_pos = ~(out_sop);

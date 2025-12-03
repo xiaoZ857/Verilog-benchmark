@@ -1,0 +1,18 @@
+ Here is the Verilog code for a D flip-flop:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire d,
+  output reg q
+);
+
+always @(posedge clk)
+begin
+  q <= d;
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with three signals: `clk`, `d`, and `q`. The `always` block triggers on the positive edge of the clock signal, assigning the value of the `d` input to the `q` output register.

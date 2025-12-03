@@ -1,0 +1,7 @@
+Here's the Verilog implementation of an XNOR gate:
+
+```verilog
+out = ~(a ^ b);
+```
+
+This implements an XNOR gate where `out` is 1 when both `a` and `b` are the same, and 0 otherwise.

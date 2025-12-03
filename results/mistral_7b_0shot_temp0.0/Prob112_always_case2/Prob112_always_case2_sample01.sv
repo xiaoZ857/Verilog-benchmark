@@ -1,0 +1,22 @@
+
+module TopModule (
+  input [3:0] in,
+  output reg [1:0] pos
+);
+
+always @(posedge clk) begin
+  if (in[3])
+    pos <= 4'b0101; // Output 4 when bit 3 is high
+  else if (in[2])
+    pos <= 4'b0110; // Output 2 when bit 2 is high
+  else if (in[1])
+    pos <= 4'b0111; // Output 1 when bit 1 is high
+  else if (in[0])
+    pos <= 4'b1000; // Output 0 when bit 0 is high
+  else
+    pos <= 4'b0000; // Output zero when none of the input bits are high
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

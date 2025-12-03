@@ -1,0 +1,16 @@
+ Here is the Verilog code for your requirement:
+
+```verilog
+always @(posedge clk) begin
+    for (int i = 0; i < 8; i++) begin
+        if (in[i] && !prev_in[i]) begin
+            pedge[i] <= 1'b1;
+        end
+        prev_in[i] <= in[i];
+    end
+end
+
+reg [7:0] prev_in; // Initialize previous input values
+```
+
+This code creates an always block that triggers on the positive edge of the `clk` signal. Inside the block, it uses a for loop to iterate through each bit in the 8-bit vector `in`. If the current value of `in[i]` is 1 and the previous value was 0 (indicating a transition from 0 to 1), it sets the corresponding output bit `pedge[i]` to 1. The previous input values are stored in the `prev_in` register for comparison.

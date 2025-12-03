@@ -1,0 +1,26 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01 results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv dataset_code-complete-iccad2023/Prob130_circuit5_test.sv dataset_code-complete-iccad2023/Prob130_circuit5_ref.sv
+Return code: 17
+
+--- stdout ---
+
+
+--- stderr ---
+dataset_code-complete-iccad2023/Prob130_circuit5_test.sv:102: error: port ``c'' is not a port of top_module1.
+dataset_code-complete-iccad2023/Prob130_circuit5_test.sv:102: error: port ``d'' is not a port of top_module1.
+dataset_code-complete-iccad2023/Prob130_circuit5_test.sv:102: error: port ``e'' is not a port of top_module1.
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:11: error: Unable to bind wire/reg/memory `e' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:13: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:14: error: Unable to bind wire/reg/memory `c' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:15: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:16: error: Unable to bind wire/reg/memory `e' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:17: error: Unable to bind wire/reg/memory `f' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:18: error: Unable to bind wire/reg/memory `f' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:19: error: Unable to bind wire/reg/memory `e' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:20: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:23: error: Unable to bind wire/reg/memory `f' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:24: error: Unable to bind wire/reg/memory `f' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:25: error: Unable to bind wire/reg/memory `f' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:8: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob130_circuit5/Prob130_circuit5_sample01.sv:8: error: Failed to evaluate event expression 'posedge clk'.
+17 error(s) during elaboration.

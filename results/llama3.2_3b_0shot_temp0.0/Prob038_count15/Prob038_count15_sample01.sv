@@ -1,0 +1,29 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+    if (reset) q <= 4'b0000;
+    else if (q == 4'b0000) q <= 4'b0001;
+    else if (q == 4'b0001) q <= 4'b0010;
+    else if (q == 4'b0010) q <= 4'b0011;
+    else if (q == 4'b0011) q <= 4'b0100;
+    else if (q == 4'b0100) q <= 4'b0101;
+    else if (q == 4'b0101) q <= 4'b0110;
+    else if (q == 4'b0110) q <= 4'b0111;
+    else if (q == 4'b0111) q <= 4'b1000;
+    else if (q == 4'b1000) q <= 4'b1001;
+    else if (q == 4'b1001) q <= 4'b1010;
+    else if (q == 4'b1010) q <= 4'b1011;
+    else if (q == 4'b1011) q <= 4'b1100;
+    else if (q == 4'b1100) q <= 4'b1101;
+    else if (q == 4'b1101) q <= 4'b1110;
+    else if (q == 4'b1110) q <= 4'b1111;
+end
+
+assign q = q;
+endmodule

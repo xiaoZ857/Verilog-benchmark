@@ -1,0 +1,22 @@
+Here's the Verilog implementation for the decade counter based on your description:
+
+```verilog
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 0;
+    end else begin
+        if (slowena) begin
+            if (q == 9) begin
+                q <= 0;
+            end else begin
+                q <= q + 1;
+            end
+        end
+    end
+end
+```
+
+This implementation:
+- Uses a synchronous reset that takes effect immediately when `reset` is high.
+- Only increments the counter when `slowena` is high.
+- Wraps around from 9 back to 0 when counting up.

@@ -1,0 +1,15 @@
+ Here is a simple Verilog implementation for your requirement:
+
+```verilog
+always @(posedge clk) begin
+    if (ring && !vibrate_mode)
+        ringer <= 1'b1;
+    else if (vibrate_mode)
+        motor <= 1'b1;
+    else
+        ringer <= 1'b0;
+    motor <= 1'b0;
+end
+```
+
+In this code, I assumed that the clock is named `clk`. The circuit checks if there is a ring signal and the phone is not in vibrate mode. If so, it sets the ringer output to 1 (high). If the phone is in vibrate mode, it sets the motor output to 1 (high). Otherwise, it sets the ringer output to 0 (low). The motor output is initially set to 0 (low) for both conditions.

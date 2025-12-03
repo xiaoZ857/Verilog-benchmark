@@ -1,0 +1,16 @@
+
+
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  logic term1, term2, term3, term4;
+
+  term1 = x[1] & x[2] & ~x[3] & ~x[4];
+  term2 = ~x[1] & x[2] & x[3] & ~x[4];
+  term3 = x[1] & x[2] & x[3] & x[4];
+  term4 = ~x[1] & x[2] & x[3] & x[4];
+
+  f = term1 | term2 | term3 | term4;
+endmodule

@@ -1,0 +1,57 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01 results\mistral_7b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01.sv dataset_code-complete-iccad2023/Prob115_shift18_test.sv dataset_code-complete-iccad2023/Prob115_shift18_ref.sv
+Return code: 47
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0.0\Prob115_shift18/Prob115_shift18_sample01.sv:15: error: Syntax error in task arguments.
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:21: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:22: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:24: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:26: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:31: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:78: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:80: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:82: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:83: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:84: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:84: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:85: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:85: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:86: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:86: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:88: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:88: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:89: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:89: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:91: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:91: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:94: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:94: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:95: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:95: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:96: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:96: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:98: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:98: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:99: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:100: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:102: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:102: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:103: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:103: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:104: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:104: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:105: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:105: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:106: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:106: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:107: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:107: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:109: syntax error
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:110: error: malformed statement
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:131: warning: implicit definition of wire 'q_ref'.
+dataset_code-complete-iccad2023/Prob115_shift18_test.sv:139: warning: implicit definition of wire 'q_dut'.

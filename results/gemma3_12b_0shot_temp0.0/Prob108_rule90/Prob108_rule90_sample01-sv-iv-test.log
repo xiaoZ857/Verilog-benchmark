@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob108_rule90/Prob108_rule90_sample01 results\gemma3_12b_0shot_temp0.0\Prob108_rule90/Prob108_rule90_sample01.sv dataset_code-complete-iccad2023/Prob108_rule90_test.sv dataset_code-complete-iccad2023/Prob108_rule90_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob108_rule90/Prob108_rule90_sample01.sv:24: syntax error
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:12: error: malformed statement
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:19: syntax error
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:19: error: malformed statement
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:20: syntax error
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:22: error: malformed statement
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:24: syntax error
+dataset_code-complete-iccad2023/Prob108_rule90_test.sv:29: Syntax in assignment statement l-value.

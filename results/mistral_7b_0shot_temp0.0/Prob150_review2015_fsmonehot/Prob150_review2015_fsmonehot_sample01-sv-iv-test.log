@@ -1,0 +1,90 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01 results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_ref.sv
+Return code: 55
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:18: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:22: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:22: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:23: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:24: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:25: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:28: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:29: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:30: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:37: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:37: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:38: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:38: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:39: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:41: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:41: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:42: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:42: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:43: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:44: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:45: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:45: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:46: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:46: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:46: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:47: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:48: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:49: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:49: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:50: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:50: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:50: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:51: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:52: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:53: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:53: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:54: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:54: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:54: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:55: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:56: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:57: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:57: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:58: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:58: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:58: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:59: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:60: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:61: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:61: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:62: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:62: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:62: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:63: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:64: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:65: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:65: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:66: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:66: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:66: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:67: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:68: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:69: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:69: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:70: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:70: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:70: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:71: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:72: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:73: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:74: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:74: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:74: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:75: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:76: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:77: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:78: syntax error
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:79: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:80: syntax error
+dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv:11: error: invalid module item.

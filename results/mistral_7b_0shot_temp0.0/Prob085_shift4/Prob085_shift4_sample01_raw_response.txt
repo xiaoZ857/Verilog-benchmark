@@ -1,0 +1,27 @@
+ Here is the Verilog code for the 4-bit shift register as per your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+  if (!areset)
+    q <= 4'b0; // Reset the shift register to zero
+  else if (load && ena)
+    q <= data; // Load data into the shift register
+  else if (ena)
+    q <= {q[1:0], 0}; // Shift right and discard q[3]
+end
+
+assign q[3] = load & !ena ? data[3] : ena ? q[2] : 0; // Assign the value of q[3] based on load and ena inputs
+
+endmodule
+```
+
+This code defines a module named `TopModule` with the specified inputs and output. The `always @(posedge clk)` block describes the behavior of the shift register, which resets to zero when `areset` is asserted, loads data when both `load` and `ena` are asserted (with priority given to load), shifts right when only `ena` is asserted, and assigns the value of `q[3]` based on the `load` and `ena` inputs.

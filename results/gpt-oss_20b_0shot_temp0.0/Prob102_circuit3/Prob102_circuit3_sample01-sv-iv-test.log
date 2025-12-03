@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob102_circuit3/Prob102_circuit3_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob102_circuit3/Prob102_circuit3_sample01.sv dataset_code-complete-iccad2023/Prob102_circuit3_test.sv dataset_code-complete-iccad2023/Prob102_circuit3_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob102_circuit3/Prob102_circuit3_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has 78 mismatches. First mismatch occurred at time 5.
+Hint: Total mismatched samples is 78 out of 121 samples
+
+Simulation finished at 605 ps
+Mismatches: 78 in 121 samples
+
+
+--- stderr ---

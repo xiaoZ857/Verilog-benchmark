@@ -1,0 +1,22 @@
+ Here is the Verilog code for your request:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+assign w = a;
+assign x = b;
+assign y = b;
+assign z = c;
+
+endmodule
+```
+
+This module creates connections as described in your request. The signals `w`, `x`, `y`, and `z` are assigned the values of their respective inputs (`a`, `b`, and `c`) when they are active.

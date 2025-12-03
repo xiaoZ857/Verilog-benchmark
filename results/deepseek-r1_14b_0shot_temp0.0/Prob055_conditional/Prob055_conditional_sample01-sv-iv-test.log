@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob055_conditional/Prob055_conditional_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob055_conditional/Prob055_conditional_sample01.sv dataset_code-complete-iccad2023/Prob055_conditional_test.sv dataset_code-complete-iccad2023/Prob055_conditional_ref.sv
+Return code: 2
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob055_conditional/Prob055_conditional_sample01.sv:11: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\deepseek-r1_14b_0shot_temp0.0\Prob055_conditional/Prob055_conditional_sample01.sv:11: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

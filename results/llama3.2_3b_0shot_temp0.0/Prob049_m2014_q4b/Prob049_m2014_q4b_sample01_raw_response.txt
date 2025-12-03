@@ -1,0 +1,12 @@
+```verilog
+always @(posedge clk) begin
+    if (ar) 
+        q <= 1'b0;
+    else
+        q <= d;
+end
+
+assign q = q; // to avoid latches
+```
+
+`endmodule`

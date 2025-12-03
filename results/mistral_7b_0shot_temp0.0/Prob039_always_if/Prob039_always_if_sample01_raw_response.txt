@@ -1,0 +1,33 @@
+ Here are the two implementations of the 2-to-1 multiplexer as requested:
+
+1. Using assign statements:
+
+```verilog
+always @(posedge clk) begin
+  if (sel_b1 && sel_b2)
+    out_assign <= b;
+  else
+    out_assign <= a;
+end
+
+assign out_always = out_assign;
+```
+
+2. Using procedural if statement:
+
+```verilog
+always @(posedge clk) begin
+  if (sel_b1 && sel_b2)
+    out_always <= b;
+  else
+    out_always <= a;
+end
+```
+
+Both implementations assume that the clock is positive-edge triggered. The `out_assign` signal is used for synthesizable code, while `out_always` is a registered output for simulation purposes. Replace `clk` with your actual clock input if needed.
+
+Remember to end the module definition:
+
+```verilog
+endmodule
+```

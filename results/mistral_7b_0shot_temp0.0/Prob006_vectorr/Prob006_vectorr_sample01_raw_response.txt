@@ -1,0 +1,16 @@
+ Here is the Verilog code for reversing the bit ordering of an 8-bit input vector:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [7:0] out
+);
+
+always @(posedge clk) begin
+  out <= {in[7], in[6], in[5], in[4], in[3], in[2], in[1], in[0]};
+end
+
+endmodule
+```
+
+In this code, the `always` block is triggered on the positive edge of the clock signal (clk). The output vector `out` is assigned the reversed order of the input vector `in`. The braces `{}` are used to concatenate the bits in the correct order.

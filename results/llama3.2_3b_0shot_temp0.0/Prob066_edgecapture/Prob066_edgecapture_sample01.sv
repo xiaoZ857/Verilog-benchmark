@@ -1,0 +1,33 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+reg [31:0] capture;
+reg [31:0] prev_in;
+
+always @(posedge clk) begin
+  if (reset) begin
+    capture <= 32'd0;
+    prev_in <= 32'd0;
+  end else begin
+    prev_in <= in;
+    capture <= capture & ~prev_in | (in ^ prev_in);
+  end
+end
+
+assign out = capture;
+
+always @(posedge clk or reset) begin
+  if (reset) begin
+    out <= 32'd0;
+  end else begin
+    out <= out;
+  end
+end
+
+// VERILOG-EVAL: endmodule not found

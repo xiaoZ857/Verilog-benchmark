@@ -1,0 +1,38 @@
+ Here is the Verilog code for the described timer module:
+
+```verilog
+reg [3:0] delay = 4'bz; // Initialize delay to all zeros (don't-care)
+reg start_sequence_detected = 0;
+reg counting = 0;
+reg done = 0;
+reg remaining_time = 4'bz;
+
+always @(posedge clk) begin
+    if (reset) begin
+        delay <= 4'bz;
+        start_sequence_detected <= 0;
+        counting <= 0;
+        done <= 0;
+    end else if (!counting && data == 4'b1101) begin
+        start_sequence_detected <= 1;
+        delay = shiftreg(data, 4); // Shift in the next 4 bits to determine the duration of the timer delay
+    end else if (start_sequence_detected && counting == 0) begin
+        counting <= 1;
+        remaining_time = delay;
+    end else if (counting) begin
+        if (remaining_time > 0) begin
+            remaining_time = remaining_time - 1;
+        end
+        counting <= (remaining_time == 0); // Count until (delay[3:0] + 1) * 1000 clock cycles
+    end else if (!counting && ack) begin
+        delay <= 4'bz;
+        start_sequence_detected <= 0;
+        counting <= 0;
+        done <= 1;
+    end
+end
+
+assign count = (counting ? remaining_time : 4'bz); // Assign the current remaining time when counting, otherwise don't-care values
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `reset`, `data`, and outputs `count`, `counting`, `done`, and `ack`. The module implements a timer that starts when the input pattern 1101 is detected, shifts in the next 4 bits to determine the duration of the delay, counts for the specified number of clock cycles, and notifies the user when it's done. The remaining time is output as well. When the circuit isn't counting, the count output is don't-care (whatever value is convenient for you to implement). At that point, the circuit asserts `done` to notify the user the timer has timed out, and waits until input `ack` is 1 before being reset to look for the next occurrence of the start sequence (1101). The module also includes a shift register function `shiftreg(data, 4)` that shifts in the next 4 bits most-significant-bit first.

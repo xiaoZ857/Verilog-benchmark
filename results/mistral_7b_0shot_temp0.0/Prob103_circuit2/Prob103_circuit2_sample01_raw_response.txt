@@ -1,0 +1,17 @@
+ Here is the Verilog code for the given combinational circuit:
+
+```verilog
+module TopModule (
+  input wire a,
+  input wire b,
+  input wire c,
+  input wire d,
+  output wire q
+);
+
+assign q = (!a && !b && !c && !d) || ((!a && !b && !c && d) && ((!a && b) || (a && c))) || ((!a && b && c && !d) && ((!b && c) || (b && d)));
+
+endmodule
+```
+
+This code implements the truth table given in the description. The `assign` statement is used to create an assignment for the output signal `q`. The expression inside the parentheses represents the logic that determines the value of `q` based on the input signals `a`, `b`, `c`, and `d`.

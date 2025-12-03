@@ -1,0 +1,4 @@
+always @(posedge clk) begin
+    if (areset) q <= 8'd0;
+    else q <= d;
+end

@@ -1,0 +1,29 @@
+Here's the Verilog code for the two-bit saturating counter:
+
+```verilog
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= 2'b01;
+    end else begin
+        if (train_valid && train_taken) begin
+            if (state == 2'b11) begin
+                state <= 2'b11;
+            end else begin
+                state <= state + 1;
+            end
+        end else if (train_valid && !train_taken) begin
+            if (state == 2'b00) begin
+                state <= 2'b00;
+            end else begin
+                state <= state - 1;
+            end
+        end
+    end
+end
+```
+
+This code implements the described counter behavior:
+- It resets to `2'b01` on positive edge of `areset`
+- Increments when `train_valid` and `train_taken` are both 1 (up to max of 3)
+- Decrements when `train_valid` is 1 and `train_taken` is 0 (down to min of 0)
+- Holds value when not training (`train_valid` is 0)

@@ -1,0 +1,15 @@
+To create a Verilog module with no inputs and an output that is always low, we can use a continuous assignment to drive the output directly.
+
+```verilog
+assign out = 0;
+```
+
+This statement ensures that `out` remains at logic low regardless of any other conditions since there are no input signals affecting it. The `assign` keyword is used for continuous assignments, making this solution efficient and straightforward.
+
+```verilog
+module TopModule (
+  output out
+);
+  assign out = 0;
+endmodule
+```

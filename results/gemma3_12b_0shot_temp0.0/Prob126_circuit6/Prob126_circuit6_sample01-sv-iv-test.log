@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01 results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv dataset_code-complete-iccad2023/Prob126_circuit6_test.sv dataset_code-complete-iccad2023/Prob126_circuit6_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:12: syntax error
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:12: error: malformed statement
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:13: syntax error
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:13: error: malformed statement
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:15: syntax error
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:15: error: malformed statement
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:17: syntax error
+results\gemma3_12b_0shot_temp0.0\Prob126_circuit6/Prob126_circuit6_sample01.sv:17: error: malformed statement

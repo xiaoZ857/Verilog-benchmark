@@ -1,0 +1,17 @@
+ Here is the Verilog code for the given truth table:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+assign q = (!a && !b && !c) || (!a && !b && d) || (!a && c && !d) || (!a && c && d) || (a && !b && !c) || (a && !b && d) || (a && c && !d) || (a && c && d) || (b && !c && !d) || (b && !c && d) || (b && c && !d) || (b && c && d) || (c && !d && !a) || (c && !d && a) || (c && d && !a) || (c && d && a);
+
+endmodule
+```
+
+This Verilog code implements the given truth table by using an assign statement to define the output `q`. The expression on the right-hand side of the assign statement is constructed from the OR operator (||) and NOT operator (!). The expression covers all possible combinations of inputs `a`, `b`, `c`, and `d` based on the provided truth table.

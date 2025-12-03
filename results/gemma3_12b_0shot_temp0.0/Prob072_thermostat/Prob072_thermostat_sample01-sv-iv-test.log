@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob072_thermostat/Prob072_thermostat_sample01 results\gemma3_12b_0shot_temp0.0\Prob072_thermostat/Prob072_thermostat_sample01.sv dataset_code-complete-iccad2023/Prob072_thermostat_test.sv dataset_code-complete-iccad2023/Prob072_thermostat_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob072_thermostat/Prob072_thermostat_sample01.sv:24: syntax error
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:11: error: malformed statement
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:18: syntax error
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:18: error: malformed statement
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:19: syntax error
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:21: error: malformed statement
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:23: syntax error
+dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:28: Syntax in assignment statement l-value.

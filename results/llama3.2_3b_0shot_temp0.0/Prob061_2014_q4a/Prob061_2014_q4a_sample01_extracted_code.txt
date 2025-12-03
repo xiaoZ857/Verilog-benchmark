@@ -1,0 +1,3 @@
+assign Q = (E & ~L) ? w : Q;
+assign Q[0] = (R & ~L) ? w[0] : Q[0];
+assign Q[1:0] = (R & ~L) ? w[1:0] : Q[1:0];

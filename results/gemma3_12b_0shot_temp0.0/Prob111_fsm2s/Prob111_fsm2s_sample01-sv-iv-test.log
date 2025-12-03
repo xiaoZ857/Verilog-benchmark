@@ -1,0 +1,22 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01 results\gemma3_12b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv dataset_code-complete-iccad2023/Prob111_fsm2s_ref.sv
+Return code: 14
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:35: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:13: error: malformed statement
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:15: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:15: error: malformed statement
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:16: error: malformed statement
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:35: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:42: error: malformed statement
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:43: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:45: error: malformed statement
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:47: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:51: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:53: syntax error
+dataset_code-complete-iccad2023/Prob111_fsm2s_test.sv:54: Syntax in assignment statement l-value.

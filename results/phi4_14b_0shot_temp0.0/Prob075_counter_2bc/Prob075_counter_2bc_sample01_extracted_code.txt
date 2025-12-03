@@ -1,0 +1,20 @@
+always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= 2'b01; // Reset to weakly not-taken
+    end else if (train_valid) begin
+        if (state == 2'b11 && train_taken) begin
+            // Saturate at maximum value
+            state <= 2'b11;
+        end else if (state == 2'b00 && !train_taken) begin
+            // Saturate at minimum value
+            state <= 2'b00;
+        end else begin
+            if (train_taken)
+                state <= state + 1; // Increment
+            else
+                state <= state - 1; // Decrement
+        end
+    end
+end
+
+endmodule

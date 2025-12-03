@@ -1,0 +1,13 @@
+```verilog
+assign f = (x2 & ~x1) | (~x2 & x1 & x3) | (x2 & x1);
+
+endmodule
+``` 
+
+This Verilog code implements the given truth table using a combinational logic expression. The output `f` is determined by the logical OR of three terms:
+
+- `(x2 & ~x1)` covers the cases where `x2 = 1`, `x1 = 0`.
+- `(~x2 & x1 & x3)` covers the case where `x2 = 0`, `x1 = 1`, and `x3 = 1`.
+- `(x2 & x1)` covers the cases where both `x2` and `x1` are `1`. 
+
+This expression correctly implements the specified truth table.

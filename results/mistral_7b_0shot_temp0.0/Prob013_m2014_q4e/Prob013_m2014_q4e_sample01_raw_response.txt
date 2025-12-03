@@ -1,0 +1,15 @@
+ Here is the Verilog code for a 2-input NOR gate:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+assign out = ~(in1 | in2);
+
+endmodule
+```
+
+This code defines a module named `TopModule` with two inputs `in1` and `in2`, and one output `out`. The output `out` is assigned the logical negation (~) of the OR operation (|) between `in1` and `in2`. This results in a 2-input NOR gate.

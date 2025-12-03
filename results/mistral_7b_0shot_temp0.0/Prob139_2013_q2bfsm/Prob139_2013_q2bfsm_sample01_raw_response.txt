@@ -1,0 +1,45 @@
+ ```Verilog
+reg f, g;
+reg next_f, next_g;
+reg x_prev, x_two_prev;
+reg y_prev, y_current;
+
+always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+        f <= 1'b0;
+        g <= 1'b0;
+    end else begin
+        if (~resetn && next_f) begin
+            f <= 1'b1;
+        end
+        if (next_g) begin
+            g <= 1'b1;
+        end
+        if (x == 1'b1) begin
+            x_prev <= x_two_prev;
+            x_two_prev <= x;
+            if (x_prev == 1'b0 && x == 1'b1 && x_two_prev == 1'b1) begin
+                next_g <= 1'b1;
+            end else next_g <= g;
+        end else next_g <= g;
+        if (y_prev || y_current) begin
+            y_current <= y;
+            if (y_current == 1'b1 && !next_g) begin
+                next_g <= 1'b1;
+            end else next_g <= g;
+        end else if (next_g) begin
+            next_g <= 1'b0;
+        end
+    end
+end
+
+assign f = f;
+assign g = g;
+
+endmodule
+```
+This Verilog code implements the described finite state machine. The FSM has two outputs `f` and `g`, and five internal registers: `next_f`, `next_g`, `x_prev`, `x_two_prev`, and `y_prev`. The `y_current` register is used to store the current value of input `y`.
+
+The FSM follows the given description. When reset is asserted, both outputs are set to 0. After deasserting the reset signal, if the next clock edge occurs, output `f` is set to 1 for one clock cycle. Then, the FSM monitors the `x` input. If `x` has produced the values 1, 0, 1 in three successive clock cycles, then `g` is set to 1 on the following clock cycle.
+
+While maintaining `g = 1`, the FSM monitors the `y` input. If `y` has the value 1 within at most two clock cycles, then `g` is maintained as 1 permanently (until reset). But if `y` does not become 1 within two clock cycles, then `g` is set to 0 permanently (until reset).

@@ -1,0 +1,24 @@
+ Here's a simple Verilog implementation of the described Finite State Machine (FSM) for controlling the shift register:
+
+```verilog
+reg [3:0] state; // FSM state variables
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    state <= 4'b0001; // Reset state, assert shift_ena for 4 cycles
+  end else begin
+    case (state)
+      4'b0001: state <= 4'b0010; // Move to next state
+      4'b0010: state <= 4'b0100; // Move to next state
+      4'b0100: state <= 4'b1000; // Move to next state
+      4'b1000: state <= 4'b0001; // Reset back to initial state, shift_ena is always asserted during this state
+    default: state <= 4'b0000; // Invalid state, reset FSM
+    endcase
+  end
+end
+
+assign shift_ena = (state == 4'b0001) || (state == 4'b0010) || (state == 4'b0100) || (state == 4'b0100); // shift_ena is asserted during the first 4 states
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `reset`, and output `shift_ena`. The FSM is implemented using an always block that changes state based on the current state and clock edge. The shift register will be enabled for exactly 4 clock cycles whenever the FSM is in one of the first four states (0001, 0010, 0100, or 1000). When the reset signal is high, the FSM will start in state 0001 and shift_ena will be asserted for 4 cycles. After that, shift_ena will only be asserted during the initial 4 states until the next reset occurs.

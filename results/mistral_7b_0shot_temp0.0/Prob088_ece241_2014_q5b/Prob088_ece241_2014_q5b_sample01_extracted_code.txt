@@ -1,0 +1,23 @@
+reg state_A, state_B;
+assign z = (state_A ? ~x : state_B ? x : 1'bz); // Assigning output z based on the current state and input x
+
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state_A <= 1'b0;
+        state_B <= 1'b0;
+    end else if (state_A && !x) begin
+        state_A <= 1'b1;
+        state_B <= 1'b0;
+    end else if (state_A && x) begin
+        state_A <= 1'b1;
+        state_B <= 1'b1;
+    end else if (!state_A && !x) begin
+        state_A <= 1'b0;
+        state_B <= 1'b0;
+    end else if (!state_A && x) begin
+        state_A <= 1'b0;
+        state_B <= 1'b1;
+    end
+end
+
+endmodule

@@ -1,0 +1,15 @@
+Here's the Verilog module implementing an AND gate using both an assign statement and a combinational always block:
+
+```verilog
+always @(*) 
+  out_alwaysblock = a & b;
+  
+assign out_assign = a & b;
+
+endmodule
+```
+
+This code:
+1. Uses an `always` block with `@(*)` (all inputs) sensitivity to create the output `out_alwaysblock`
+2. Uses an `assign` statement directly for `out_assign`
+3. Both implement the AND function using `&` operator

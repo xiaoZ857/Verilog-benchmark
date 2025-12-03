@@ -1,0 +1,20 @@
+Here's the Verilog code for a 4-bit binary counter with synchronous active-high reset:
+
+```verilog
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 0;
+    end else begin
+        if (q == 15) begin
+            q <= 0;
+        end else begin
+            q <= q + 1;
+        end
+    end
+end
+```
+
+This code:
+- Increments the counter on each rising edge of `clk`
+- Resets to 0 when `reset` is high
+- Wraps around from 15 back to 0 using an overflow condition

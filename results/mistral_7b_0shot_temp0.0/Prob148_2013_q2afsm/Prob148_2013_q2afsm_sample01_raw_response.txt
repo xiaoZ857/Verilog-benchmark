@@ -1,0 +1,51 @@
+ Here is a Verilog implementation of the described FSM:
+
+```verilog
+reg [2:0] state; // State variables
+always @(posedge clk or negedge resetn) begin
+    if (resetn)
+        state <= 2'b00; // Reset to state A
+    else if (state == 2'b00 && !r[1]) // If in state A and no requests, stay in state A
+        state <= state;
+    else if (state == 2'b00 && r[1]) // If in state A and device 1 requests, go to state B
+        state <= 2'b01;
+    else if (state == 2'b00 && r[2]) // If in state A and device 2 requests, go to state C
+        state <= 2'b02;
+    else if (state != 2'b00) { // If in any other state and no requests, return to state A
+        state <= 2'b00;
+    }
+end
+
+always @(posedge clk) begin
+    case (state)
+        2'b00: begin // State A
+            g[1] <= r[1]; // Device 1 gets grant if it requests and in state A
+            g[2] <= 0;
+            g[3] <= 0;
+        end
+        2'b01: begin // State B (device 1 has priority)
+            if (r[1])
+                g[1] <= 1'b1; // Device 1 continues to have grant if it still requests
+            else
+                g[1] <= 0;
+            if (r[2] && !g[2]) // If device 2 requests and device 2 doesn't have grant, give it grant
+                g[2] <= 1'b1;
+            g[3] <= 0;
+        end
+        2'b02: begin // State C (device 1 and 2 both requested, so device 2 has priority)
+            if (r[1])
+                g[1] <= 0;
+            if (r[2] && !g[2])
+                g[2] <= 1'b1; // Device 2 continues to have grant if it still requests
+            if (!g[1] && !g[2] && r[3]) // If device 1 and 2 don't have grant and device 3 requests, give it grant
+                g[3] <= 1'b1;
+        end
+    endcase
+end
+```
+
+In this code:
+- The state variables are `state`.
+- The FSM outputs are `g[i]`, which represent the grants for each device.
+- The state codes used are `2'b00` (A), `2'b01` (B), and `2'b02` (C).
+- The priority system is implemented as described in the problem statement.

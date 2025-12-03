@@ -1,0 +1,21 @@
+ Here's the Verilog code for the circuit you described:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// AND gate with a bubble on input in2
+always @(posedge clk) begin
+  if (!in2)
+    out <= in1;
+  else
+    out <= in1 & in2;
+end
+
+endmodule
+```
+
+In this code, the `always` block represents an always-active combinational logic. The `if` statement checks whether `in2` is low (0), and if so, assigns the value of `in1` directly to `out`. Otherwise, it performs the AND operation between `in1` and `in2`, as described in your question.

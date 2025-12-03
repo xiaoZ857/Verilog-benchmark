@@ -1,0 +1,39 @@
+  reg [1:0] state;
+  reg [7:0] byte_buffer;
+  reg done_reg;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= 0;
+      done_reg <= 0;
+    end else begin
+      case (state)
+        0: begin // Initial state - searching for start byte
+          if (in[3]) begin
+            state <= 1;
+            byte_buffer <= in;
+          end else begin
+            state <= 0;
+          end
+        end
+        1: begin // Received start byte, waiting for second byte
+          byte_buffer <= in;
+          state <= 2;
+        end
+        2: begin // Received second byte, waiting for third byte
+          byte_buffer <= in;
+          state <= 3;
+          done_reg <= 0;
+        end
+        3: begin // Received third byte, done
+          state <= 0;
+          done_reg <= 1;
+        end
+        default: begin
+          state <= 0;
+        end
+      endcase
+    end
+  end
+
+  assign done = done_reg;

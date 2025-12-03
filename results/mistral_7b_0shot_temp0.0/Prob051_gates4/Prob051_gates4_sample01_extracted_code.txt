@@ -1,0 +1,35 @@
+module TopModule (
+  input [3:0] in,
+  output reg out_and,
+  output reg out_or,
+  output reg out_xor
+);
+
+// Declare AND gate instance
+and4_instance: and4 (
+  .a(in[0]),
+  .b(in[1]),
+  .c(in[2]),
+  .d(in[3]),
+  .y(out_and)
+);
+
+// Declare OR gate instance
+or4_instance: or4 (
+  .a(in[0]),
+  .b(in[1]),
+  .c(in[2]),
+  .d(in[3]),
+  .y(out_or)
+);
+
+// Declare XOR gate instance
+xor4_instance: xor4 (
+  .a(in[0]),
+  .b(in[1]),
+  .c(in[2]),
+  .d(in[3]),
+  .y(out_xor)
+);
+
+endmodule

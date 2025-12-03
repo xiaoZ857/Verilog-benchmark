@@ -1,0 +1,27 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob152_lemmings3/Prob152_lemmings3_sample01 results\gemma3_12b_0shot_temp0.0\Prob152_lemmings3/Prob152_lemmings3_sample01.sv dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gemma3_12b_0shot_temp0.0\Prob152_lemmings3/Prob152_lemmings3_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'walk_left' has 80 mismatches. First mismatch occurred at time 190.
+Hint: Output 'walk_right' has 80 mismatches. First mismatch occurred at time 240.
+Hint: Output 'aaah' has 211 mismatches. First mismatch occurred at time 190.
+Hint: Output 'digging' has 135 mismatches. First mismatch occurred at time 310.
+Hint: Total mismatched samples is 253 out of 443 samples
+
+Simulation finished at 2216 ps
+Mismatches: 253 in 443 samples
+
+
+--- stderr ---

@@ -1,0 +1,38 @@
+module TopModule (
+  input clk,
+  input x,
+  output reg z
+);
+
+// Define the D flip-flops and their corresponding gates
+reg flop1_q, flop2_q, flop3_q;
+wire flop1_d, flop2_d, flop3_d;
+
+// XOR gate for flop1
+wire xor1_out;
+xor1_out = x ^ flop1_q;
+flop1_d = xor1_out;
+
+// AND gate for flop2
+wire and2_out;
+and2_out = x & ~flop2_q;
+flop2_d = and2_out;
+
+// OR gate for flop3
+wire or3_out;
+or3_out = x | flop3_q;
+flop3_d = ~or3_out;
+
+// D flip-flops
+always @(posedge clk) begin
+  flop1 <= flop1_d;
+  flop2 <= flop2_d;
+  flop3 <= flop3_d;
+end
+
+// Three-input NOR gate for output Z
+wire nor3_out;
+nor3_out = ~(xor1_out | and2_out | or3_out);
+assign z = nor3_out;
+
+endmodule

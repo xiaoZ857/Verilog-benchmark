@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01 results\gemma3_12b_0shot_temp0.0\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gemma3_12b_0shot_temp0.0\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'z' has 371 mismatches. First mismatch occurred at time 80.
+Hint: Total mismatched samples is 371 out of 1414 samples
+
+Simulation finished at 7071 ps
+Mismatches: 371 in 1414 samples
+
+
+--- stderr ---

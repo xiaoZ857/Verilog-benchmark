@@ -1,0 +1,11 @@
+```verilog
+assign out_assign = ~a ^ b;
+
+always @(posedge clk) begin
+    out_always_comb = ~(a & ~b);
+end
+
+always @(posedge clk) begin
+    out_always_ff <= (a & b);
+endmodule
+```

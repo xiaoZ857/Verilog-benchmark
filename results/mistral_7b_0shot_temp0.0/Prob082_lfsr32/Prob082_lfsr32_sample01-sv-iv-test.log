@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob082_lfsr32/Prob082_lfsr32_sample01 results\mistral_7b_0shot_temp0.0\Prob082_lfsr32/Prob082_lfsr32_sample01.sv dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv dataset_code-complete-iccad2023/Prob082_lfsr32_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob082_lfsr32/Prob082_lfsr32_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+TIMEOUT
+Hint: Output 'q' has 199953 mismatches. First mismatch occurred at time 190.
+Hint: Total mismatched samples is 199953 out of 200000 samples
+
+Simulation finished at 1000000 ps
+Mismatches: 199953 in 200000 samples
+
+
+--- stderr ---

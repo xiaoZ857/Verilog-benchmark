@@ -1,0 +1,21 @@
+reg [3:0] q[3:0];
+reg [7:0] shiftReg;
+
+always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+        shiftReg <= 8'd0;
+        for (int i = 3; i >= 0; i--) begin
+            q[i] <= 8'd0;
+        end
+    end else begin
+        shiftReg <= in;
+        for (int i = 3; i >= 1; i--) begin
+            q[i] <= q[i-1];
+        end
+        q[0] <= shiftReg(7:0);
+    end
+end
+
+assign out = q;
+
+endmodule

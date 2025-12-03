@@ -1,0 +1,18 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob034_dff8/Prob034_dff8_sample01 results\llama3.2_3b_0shot_temp0.0\Prob034_dff8/Prob034_dff8_sample01.sv dataset_code-complete-iccad2023/Prob034_dff8_test.sv dataset_code-complete-iccad2023/Prob034_dff8_ref.sv
+Return code: 10
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob034_dff8/Prob034_dff8_sample01.sv:13: syntax error
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:11: error: malformed statement
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:18: syntax error
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:18: error: malformed statement
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:19: syntax error
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:21: error: malformed statement
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:23: syntax error
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:28: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:30: syntax error
+dataset_code-complete-iccad2023/Prob034_dff8_test.sv:31: error: malformed statement

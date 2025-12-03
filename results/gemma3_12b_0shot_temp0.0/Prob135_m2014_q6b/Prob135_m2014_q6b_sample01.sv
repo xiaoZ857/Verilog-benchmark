@@ -1,0 +1,25 @@
+
+
+module TopModule (
+  input [3:1] y,
+  input w,
+  output reg Y2
+);
+
+always @(posedge clk) begin
+  case (y[3:1])
+    4'b0000: Y2 <= 0;
+    4'b0001: Y2 <= 1;
+    4'b0010: Y2 <= 0;
+    4'b0011: Y2 <= 1;
+    4'b0100: Y2 <= 0;
+    4'b0101: Y2 <= 1;
+    4'b0110: Y2 <= 1;
+    4'b0111: Y2 <= 0;
+    4'b1000: Y2 <= 1;
+    4'b1001: Y2 <= 1;
+    4'b1010: Y2 <= 0;
+    4'b1011: Y2 <= 1;
+    default: Y2 <= 0;
+  endcase
+endmodule

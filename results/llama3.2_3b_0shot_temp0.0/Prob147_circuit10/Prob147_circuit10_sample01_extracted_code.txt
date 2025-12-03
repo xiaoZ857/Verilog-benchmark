@@ -1,0 +1,19 @@
+assign state = $signed(a ^ b);
+
+always @(posedge clk) begin
+  if (state == 1'b0) begin
+    q <= 1'b0;
+  end else if (state == 1'b1) begin
+    q <= a & b;
+  end else if (state == 2'b00) begin
+    q <= ~a & ~b;
+  end else if (state == 2'b01) begin
+    q <= ~a | b;
+  end else if (state == 2'b10) begin
+    q <= a | ~b;
+  end else if (state == 2'b11) begin
+    q <= a & ~b;
+  end
+end
+
+assign #({1, 0}) state = {q, state};

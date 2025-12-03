@@ -1,0 +1,9 @@
+Here's a Verilog implementation of a single D flip-flop:
+
+```verilog
+always @(posedge clk) begin
+    q <= d;
+end
+```
+
+This code defines a simple D flip-flop where the output `q` is updated on each positive edge of the clock signal `clk` to match the input data `d`.

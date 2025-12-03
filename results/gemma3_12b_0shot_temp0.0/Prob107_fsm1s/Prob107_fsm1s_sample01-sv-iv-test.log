@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01 results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv dataset_code-complete-iccad2023/Prob107_fsm1s_test.sv dataset_code-complete-iccad2023/Prob107_fsm1s_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:38: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:39: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:40: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:41: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+4 error(s) during elaboration.

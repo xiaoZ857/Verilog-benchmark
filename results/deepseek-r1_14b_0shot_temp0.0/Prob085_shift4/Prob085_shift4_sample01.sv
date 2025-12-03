@@ -1,0 +1,33 @@
+
+
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+always @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        q <= 4'b0000;
+    end
+end
+
+always @(posedge clk, negedge areset) begin
+    if (!areset && load) begin
+        q <= data;
+    end
+end
+
+always @(posedge clk, negedge areset) begin
+    if (!areset && ena && !load) begin
+        q[0] <= 1'b0; // Shift right with zero fill
+        q[1] <= q[0];
+        q[2] <= q[1];
+        q[3] <= q[2];
+    end
+end
+
+// VERILOG-EVAL: endmodule not found

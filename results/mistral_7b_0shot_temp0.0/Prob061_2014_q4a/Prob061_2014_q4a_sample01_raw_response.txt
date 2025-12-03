@@ -1,0 +1,30 @@
+ Here is a simple implementation of one stage of the shift register circuit as requested:
+
+```verilog
+module TopModule (
+  input clk,
+  input w,
+  input R,
+  input E,
+  input L,
+  output reg Q
+);
+
+// D Flip-flop with enable (E) and load (L) control
+always @(posedge clk) begin
+  if (E) begin
+    if (L) Q <= R; // Load the value from R when L is asserted
+    else Q <= D; // Otherwise, keep the previous value in D
+  end
+  else begin
+    D <= w; // When E is deasserted, shift in the input w
+  end
+end
+
+// Multiplexer for selecting between the input w and the output Q as data for the next stage
+assign next_Q = (L ? R : Q);
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule`. It includes a D flip-flop with enable (E) and load (L) control, as well as a multiplexer for selecting between the input w and the output Q as data for the next stage. The `next_Q` signal is used to pass the data from this stage to the next one in a cascaded shift register.

@@ -1,0 +1,21 @@
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+  if (!areset)
+    q <= 4'b0; // Reset the shift register to zero
+  else if (load && ena)
+    q <= data; // Load data into the shift register
+  else if (ena)
+    q <= {q[1:0], 0}; // Shift right and discard q[3]
+end
+
+assign q[3] = load & !ena ? data[3] : ena ? q[2] : 0; // Assign the value of q[3] based on load and ena inputs
+
+endmodule

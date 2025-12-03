@@ -1,0 +1,23 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out
+);
+
+reg [3:0] f; // 4-bit internal signal 'f' to store the result
+
+always @(posedge clk) begin
+  case ({a, b, c, d}) // Karnaugh map case statement
+    4'b0001 : f <= 1'b1; // a=0, b=0, c=0, d=1
+    4'b0010 : f <= 1'b1; // a=0, b=1, c=0, d=0
+    4'b0111 : f <= 1'b0; // a=1, b=1, c=1, d=1
+    4'b1010 : f <= 1'b1; // a=1, b=0, c=1, d=0
+    default   : f <= 1'b0; // all other combinations
+  endcase
+end
+
+assign out = f[0]; // Output is the least significant bit of 'f'
+
+endmodule

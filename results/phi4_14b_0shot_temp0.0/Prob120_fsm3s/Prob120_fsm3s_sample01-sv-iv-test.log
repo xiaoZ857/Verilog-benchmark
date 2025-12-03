@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01 results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv dataset_code-complete-iccad2023/Prob120_fsm3s_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:22: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:7:      : out is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:29: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:7:      : out is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:36: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:7:      : out is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:43: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:7:      : out is declared here as wire.
+4 error(s) during elaboration.

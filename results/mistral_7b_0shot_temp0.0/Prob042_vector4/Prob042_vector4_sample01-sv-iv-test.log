@@ -1,0 +1,18 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01 results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv dataset_code-complete-iccad2023/Prob042_vector4_test.sv dataset_code-complete-iccad2023/Prob042_vector4_ref.sv
+Return code: 9
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Concatenation operand "'sd0" has indefinite width.
+results\mistral_7b_0shot_temp0.0\Prob042_vector4/Prob042_vector4_sample01.sv:8: error: Unable to elaborate r-value: {in['sd7], in['sd7], in['sd7], in['sd7], in['sd7], in['sd7], in['sd7], in['sd7], 'sd0, 'sd0, 'sd0, 'sd0, 'sd0, 'sd0, 'sd0, 'sd0}
+9 error(s) during elaboration.

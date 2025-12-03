@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob001_zero/Prob001_zero_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob001_zero/Prob001_zero_sample01.sv dataset_code-complete-iccad2023/Prob001_zero_test.sv dataset_code-complete-iccad2023/Prob001_zero_ref.sv
+Return code: 3
+
+--- stdout ---
+
+
+--- stderr ---
+dataset_code-complete-iccad2023/Prob001_zero_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob001_zero_ref.sv:10: syntax error
+I give up.

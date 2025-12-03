@@ -1,0 +1,22 @@
+
+
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output [4:0] sum
+);
+
+  wire [2:0] carry;
+
+  // First full adder for least significant bits
+  assign {carry[0], sum[0]} = x[0] + y[0];
+
+  // Second full adder
+  assign {carry[1], sum[1]} = x[1] + y[1] + carry[0];
+
+  // Third full adder
+  assign {carry[2], sum[2]} = x[2] + y[2] + carry[1];
+
+  // Fourth full adder for most significant bits
+  assign {sum[3], sum[4]} = x[3] + y[3] + carry[2];
+endmodule

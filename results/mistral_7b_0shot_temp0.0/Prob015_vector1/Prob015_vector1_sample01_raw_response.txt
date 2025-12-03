@@ -1,0 +1,18 @@
+ Here is the Verilog code for the requested combinational circuit:
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output reg [7:0] out_hi,
+  output reg [7:0] out_lo
+);
+
+always @(posedge clk) begin
+  out_hi <= in[15:8];
+  out_lo <= in[7:0];
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with an input half-word of 16 bits (`in`) and two outputs for the lower and upper bytes (`out_hi` and `out_lo`). The circuit is positive edge triggered on clock signal `clk`. Inside the always block, the values of `out_hi` and `out_lo` are assigned the corresponding bits from the input half-word.

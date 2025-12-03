@@ -1,0 +1,47 @@
+ Here is the Verilog code for the finite-state machine based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire x,
+  output reg [2:0] y,
+  output reg z
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    y <= 3'b000; // Reset the FSM to state 000
+    z <= 0;
+  end else begin
+    case (y)
+      3'b000: begin
+        if (x) y <= 3'b001;
+        else y <= 3'b000;
+        z <= 0;
+      end
+      3'b001: begin
+        if (x) y <= 3'b100;
+        else y <= 3'b001;
+        z <= 0;
+      end
+      3'b010: begin
+        y <= 3'b010;
+        z <= 0;
+      end
+      3'b011: begin
+        y <= 3'b001;
+        z <= 1;
+      end
+      3'b100: begin
+        y <= 3'b011;
+        z <= 1;
+      end
+    endcase
+  end
+end
+
+endmodule
+```
+
+This code defines a module with inputs `clk`, `reset`, and `x`, and outputs `z` and the state variables `y`. The FSM is implemented using an always block that triggers on both positive edges of `clk` and `reset`. When `reset` is high, the FSM is reset to state 000. Otherwise, the current state and input `x` are used to determine the next state and output `z` based on the provided state-transition table.

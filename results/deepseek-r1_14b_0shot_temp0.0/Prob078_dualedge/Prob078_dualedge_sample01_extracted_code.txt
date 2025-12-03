@@ -1,0 +1,8 @@
+always @(posedge clk)
+    q1 <= d;
+
+always @(negedge clk)
+    q2 <= d;
+
+always @*
+    q = q1 | q2;

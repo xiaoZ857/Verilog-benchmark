@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+reg temp; // Temporary register to store the data value
+
+always @(posedge clk) begin
+  if (temp != d) begin // Check for a change in data
+    temp <= d; // Store the new data value
+  end
+end
+
+always @(negedge clk) begin
+  q <= temp; // Assign the stored data to the output on the falling edge of clock
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

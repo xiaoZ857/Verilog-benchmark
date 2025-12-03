@@ -1,0 +1,27 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01 results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv dataset_code-complete-iccad2023/Prob046_dff8p_test.sv dataset_code-complete-iccad2023/Prob046_dff8p_ref.sv
+Return code: 10
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:10: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: warning: macro clk undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: warning: macro q undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: warning: macro d undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: warning: macro clk undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: warning: macro reset undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv:18:      : between the tic and preprocessor directive?
+dataset_code-complete-iccad2023/Prob046_dff8p_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob046_dff8p_test.sv:12: error: invalid module item.

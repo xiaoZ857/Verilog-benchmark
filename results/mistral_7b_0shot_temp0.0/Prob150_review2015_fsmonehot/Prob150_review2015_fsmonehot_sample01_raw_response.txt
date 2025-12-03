@@ -1,0 +1,69 @@
+ ```verilog
+always @(posedge clk) begin
+    // Next state logic
+    B3_next <= state[8];
+    S_next <= state[0];
+    S1_next <= state[1];
+    Count_next <= state[5];
+    Wait_next <= state[9];
+
+    // Output logic
+    counting <= (S_next || S1_next || Count_next || Wait_next);
+    shift_ena <= B3_next;
+    done <= (Wait_next && ack);
+end
+
+always @(posedge clk) begin
+    // State transition logic
+    case (state)
+      1'b0 : begin
+          if (d) state <= 1'b10;
+          else state <= 1'b0;
+        end
+      1'b1 : begin
+          if (d) state <= 1'b100;
+          else state <= 1'b1;
+        end
+      1'b10 : begin
+          if (d) state <= 1'b1000;
+          else state <= 1'b10;
+        end
+      1'b100 : begin
+          if (d) state <= 1'b10000;
+          else state <= 1'b100;
+        end
+      1'b1000 : begin
+          if (d) state <= 1'b100000;
+          else state <= 1'b1000;
+        end
+      1'b10000 : begin
+          if (d) state <= 1'b1000000;
+          else state <= 1'b10000;
+        end
+      1'b100000 : begin
+          if (d) state <= 1'b10000000;
+          else state <= 1'b100000;
+        end
+      1'b1000000 : begin
+          if (done_counting) state <= 1'b100000000; // Wait state
+          else state <= 1'b10000000; // Count state
+        end
+      1'b10000000 : begin
+          if (done_counting) state <= 1'b1000000000; // Wait state
+          else state <= 1'b100000000; // Count state
+        end
+      1'b100000000 : begin
+          if (ack) state <= 1'b0; // S state
+          else state <= 1'b1000000000; // Wait state
+        end
+      1'b1000000000 : begin
+          state <= 1'b0; // S state
+        end
+    default: state <= 1'b0; // S state
+    endcase
+end
+
+// Add reset logic here if needed
+
+endmodule
+```

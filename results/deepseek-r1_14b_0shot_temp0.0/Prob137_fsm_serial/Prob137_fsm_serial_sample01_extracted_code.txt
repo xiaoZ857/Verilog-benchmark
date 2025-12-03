@@ -1,0 +1,57 @@
+typedef enum {Idle, StartBitReceived, DataReception, StopBitExpected} State;
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+
+  reg [2:0] state;
+  reg [2:0] data_count;
+  reg done_reg;
+
+  initial begin
+    state = Idle;
+    data_count = 0;
+    done_reg = 0;
+  end
+
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= Idle;
+      data_count <= 0;
+      done_reg <= 0;
+    end else begin
+      case (state)
+        Idle: begin
+          if (in == 0) begin
+            state <= StartBitReceived;
+          end
+        end
+        
+        StartBitReceived: begin
+          state <= DataReception;
+          data_count <= 0;
+        end
+        
+        DataReception: begin
+          data_count <= data_count + 1;
+          if (data_count == 7) begin
+            state <= StopBitExpected;
+          end
+        end
+        
+        StopBitExpected: begin
+          if (in == 1) begin
+            done_reg <= 1;
+            state <= Idle;
+          end
+        end
+      endcase
+    end
+  end
+
+  assign done = done_reg;
+
+endmodule

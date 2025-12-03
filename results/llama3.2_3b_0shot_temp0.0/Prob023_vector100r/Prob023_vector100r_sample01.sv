@@ -1,0 +1,12 @@
+
+
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+reg [99:0] temp;
+assign out = {temp[98:0], temp[99]};
+always @(posedge clk) begin
+    temp <= {in[99], in[98:1]};
+endmodule

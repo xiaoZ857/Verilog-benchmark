@@ -1,0 +1,18 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output reg out
+);
+
+always @(posedge clk) begin
+    case({a, b, c, d})
+        2'b00_01 : out <= 1'b0;
+        2'b01_10 : out <= 1'b1;
+        2'b11_10 : out <= 1'b0;
+        default   : out <= 1'bx; // Assuming x represents an unknown input value
+    endcase
+end
+
+endmodule

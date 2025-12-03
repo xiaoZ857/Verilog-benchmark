@@ -1,0 +1,21 @@
+ Here is the Verilog code for a 2-1 multiplexer as per your description:
+
+```verilog
+module TopModule (
+  input wire sel,
+  input [99:0] a,
+  input [99:0] b,
+  output reg [99:0] out
+);
+
+always @(posedge clk) begin
+  if (sel)
+    out <= b;
+  else
+    out <= a;
+end
+
+endmodule
+```
+
+In this code, the `TopModule` is created with three inputs: `a`, `b`, and `sel`. The output is named `out`. The multiplexer logic is implemented using an always block that triggers on the positive edge of an implied clock signal (clk). If `sel` is 1, then `out` will be equal to `b`, otherwise it will be equal to `a`.

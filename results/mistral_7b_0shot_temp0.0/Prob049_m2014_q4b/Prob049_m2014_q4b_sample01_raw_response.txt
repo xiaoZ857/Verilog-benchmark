@@ -1,0 +1,16 @@
+ ```verilog
+always @(posedge clk or negedge ar)
+begin
+  if (!ar)
+    q <= d;
+  else
+    q <= ~q; // reset value is complement of current Q
+end
+
+assign q_bar = !q; // providing q_bar as an additional output
+
+endmodule
+```
+In this code, I have implemented a D flip-flop with positive edge triggering on the clock signal (clk) and an asynchronous reset (ar). The `always` block checks for either a positive edge on clk or a change in ar. If the reset is asserted (ar = 1), the output q will be set to the complement of its current value; otherwise, it will store the incoming data (d) on the next rising clock edge.
+
+Additionally, I have included an `assign` statement that creates an additional output `q_bar`, which is the complement of the primary output `q`.

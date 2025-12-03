@@ -1,0 +1,14 @@
+ Here is the Verilog code for a module that behaves like a wire:
+
+```verilog
+module TopModule (
+  input wire in,
+  output wire out
+);
+
+assign out = in;
+
+endmodule
+```
+
+In this code, `input wire in` and `output wire out` define the inputs and outputs of the module. The `assign` statement is used to create a direct connection between the input and output signals. This makes the output signal behave like a wire, simply passing the value of the input signal without any processing.

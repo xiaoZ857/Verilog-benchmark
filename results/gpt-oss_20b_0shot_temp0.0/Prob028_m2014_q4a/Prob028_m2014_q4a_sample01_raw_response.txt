@@ -1,0 +1,5 @@
+always @ (ena or d) begin
+  if (ena) q <= d;
+end
+
+endmodule

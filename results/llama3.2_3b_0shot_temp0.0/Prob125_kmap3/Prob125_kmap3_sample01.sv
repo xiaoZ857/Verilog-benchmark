@@ -1,0 +1,12 @@
+
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output reg out
+);
+
+assign out = (a & ~c) | ((b & c) | (d & ~c));
+endmodule

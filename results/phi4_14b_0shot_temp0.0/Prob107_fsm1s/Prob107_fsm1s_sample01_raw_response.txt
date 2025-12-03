@@ -1,0 +1,35 @@
+```verilog
+reg [1:0] state, next_state;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 2'b10; // Reset to B
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        2'b10: begin // State B
+            out = 1'b1;
+            if (in == 1'b0)
+                next_state = 2'b01; // Transition to A
+            else
+                next_state = 2'b10; // Remain in B
+        end
+        2'b01: begin // State A
+            out = 1'b0;
+            if (in == 1'b0)
+                next_state = 2'b10; // Transition to B
+            else
+                next_state = 2'b01; // Remain in A
+        end
+        default: begin
+            out = 1'b1; // Default output for undefined states
+            next_state = 2'b10; // Default transition to B
+        end
+    endcase
+end
+
+endmodule
+```

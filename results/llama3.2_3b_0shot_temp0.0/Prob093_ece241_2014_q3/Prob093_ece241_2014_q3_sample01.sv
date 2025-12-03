@@ -1,0 +1,33 @@
+
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+
+  // Selectors for the 4-to-1 multiplexer
+  wire [1:0] a_b;
+  assign a_b = (c & ~d) | (~c & d);
+
+  // Selectors for the first 2-to-1 multiplexer
+  wire [1:0] c_d_a;
+  assign c_d_a = (c & d) | (~c & ~d);
+
+  // Selectors for the second 2-to-1 multiplexer
+  wire [1:0] a_b_c;
+  assign a_b_c = (a_b & c) | (~a_b & ~c);
+
+  // Selectors for the third 2-to-1 multiplexer
+  wire [1:0] b_d_a;
+  assign b_d_a = (b_d & d) | (~b_d & ~d);
+
+  // Final output selection using the last 4-to-1 multiplexer
+  wire [3:0] mux_in_out;
+  assign mux_in_out[3] = a_b_c;
+  assign mux_in_out[2] = b_d_a;
+  assign mux_in_out[1] = c_d_a;
+  assign mux_in_out[0] = (c & d) | (~c & ~d);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

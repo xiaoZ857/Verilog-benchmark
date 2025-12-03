@@ -1,0 +1,58 @@
+
+
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg Z
+);
+
+  reg [7:0] Q;
+  
+  // Shift register with D-type flip-flops
+  always @(posedge clk) begin
+    if (enable) begin
+      Q[7] <= Q[6];
+      Q[6] <= Q[5];
+      Q[5] <= Q[4];
+      Q[4] <= Q[3];
+      Q[3] <= Q[2];
+      Q[2] <= Q[1];
+      Q[1] <= Q[0];
+      Q[0] <= S;
+    end
+  end
+  
+  // Decoder to select the correct Q based on ABC
+  reg [7:0] decoder_output;
+  always @(A, B, C) begin
+    decoder_output = 8'b00000000;
+    case ({A,B,C})
+      3'b000: decoder_output[0] = 1;
+      3'b001: decoder_output[1] = 1;
+      3'b010: decoder_output[2] = 1;
+      3'b011: decoder_output[3] = 1;
+      3'b100: decoder_output[4] = 1;
+      3'b101: decoder_output[5] = 1;
+      3'b110: decoder_output[6] = 1;
+      3'b111: decoder_output[7] = 1;
+    endcase
+  end
+  
+  // Multiplexers to select Z based on decoder output
+  always @(Q, decoder_output) begin
+    case (decoder_output)
+      8'h01: Z <= Q[0];
+      8'h02: Z <= Q[1];
+      8'h04: Z <= Q[2];
+      8'h08: Z <= Q[3];
+      8'h10: Z <= Q[4];
+      8'h20: Z <= Q[5];
+      8'h40: Z <= Q[6];
+      default: Z <= Q[7];
+    endcase
+  end
+endmodule

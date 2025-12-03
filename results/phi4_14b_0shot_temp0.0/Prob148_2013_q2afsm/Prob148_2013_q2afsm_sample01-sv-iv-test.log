@@ -1,0 +1,13 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01 results\phi4_14b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv dataset_code-complete-iccad2023/Prob148_2013_q2afsm_test.sv dataset_code-complete-iccad2023/Prob148_2013_q2afsm_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:33: error: Unable to bind wire/reg/memory `g1' in `tb.top_module1'
+results\phi4_14b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:33: error: Unable to elaborate condition expression.
+results\phi4_14b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:40: error: Unable to bind wire/reg/memory `g2' in `tb.top_module1'
+results\phi4_14b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:40: error: Unable to elaborate condition expression.
+4 error(s) during elaboration.

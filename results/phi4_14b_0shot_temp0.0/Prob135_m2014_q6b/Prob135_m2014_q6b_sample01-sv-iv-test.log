@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01 results\phi4_14b_0shot_temp0.0\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv dataset_code-complete-iccad2023/Prob135_m2014_q6b_test.sv dataset_code-complete-iccad2023/Prob135_m2014_q6b_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'Y2' has 48 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 48 out of 100 samples
+
+Simulation finished at 501 ps
+Mismatches: 48 in 100 samples
+
+
+--- stderr ---

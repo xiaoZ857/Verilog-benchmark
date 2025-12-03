@@ -1,0 +1,40 @@
+
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    out <= 0;
+    present_state <= 0;
+  end else begin
+    case (present_state)
+      2'b00: begin // OFF state
+        if (j == 0) begin
+          next_state <= 2'b00;
+        end else begin
+          next_state <= 2'b01;
+        end
+      end
+      2'b01: begin // ON state
+        if (k == 0) begin
+          next_state <= 2'b01;
+        end else begin
+          next_state <= 2'b00;
+        end
+      end
+      default: begin
+        next_state <= 2'b00;
+      end
+    endcase
+    present_state <= next_state;
+    out <= present_state;
+  end
+end
+
+endmodule

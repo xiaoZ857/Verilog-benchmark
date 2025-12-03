@@ -1,0 +1,54 @@
+  reg [6:0] global_history;
+  reg [7:0] pht [0:127];
+  reg [6:0] predict_history_out;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      global_history <= 0;
+      for (integer i = 0; i < 128; i = i + 1) begin
+        pht[i] <= 2;
+      end
+    end else begin
+      if (train_valid) begin
+        // Hash PC and history into index
+        reg [6:0] index = train_pc ^ global_history;
+
+        // Update PHT based on taken/not taken and mispredicted
+        if (train_taken) begin
+          if (train_mispredicted) begin
+            pht[index] <= (pht[index] == 0) ? 0 : (pht[index] == 1) ? 1 : 2;
+          end else begin
+            pht[index] <= (pht[index] == 0) ? 0 : (pht[index] == 1) ? 1 : 2;
+          end
+        end else begin
+          if (train_mispredicted) begin
+            pht[index] <= (pht[index] == 0) ? 0 : (pht[index] == 1) ? 1 : 2;
+          end else begin
+            pht[index] <= (pht[index] == 0) ? 0 : (pht[index] == 1) ? 1 : 2;
+          end
+        end
+
+        // Update global history (delayed)
+        global_history <= train_history;
+      end
+    end
+  end
+
+  always @(posedge clk) begin
+    if (predict_valid) begin
+      // Hash PC and history into index
+      reg [6:0] index = predict_pc ^ global_history;
+
+      // Predict based on PHT
+      case (pht[index])
+        0: predict_taken = 0;
+        1: predict_taken = 0;
+        2: predict_taken = 0;
+        default: predict_taken = 0;
+      endcase
+
+      predict_history_out <= global_history;
+    end
+  end
+
+endmodule

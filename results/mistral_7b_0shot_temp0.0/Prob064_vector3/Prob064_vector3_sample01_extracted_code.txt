@@ -1,0 +1,6 @@
+always @(posedge clk) begin
+    w <= {a, b, c, d, e, f, 1'b1, 1'b1}; // Concatenate input vectors and add two 1 bits at the end
+    x <= {b, c, d, e, f}[0]; // Extract first 5 bits from concatenated vector
+    y <= {c, d, e, f}[0]; // Extract second 5 bits from concatenated vector
+    z <= {d, e, f}[0]; // Extract third 5 bits from concatenated vector
+end

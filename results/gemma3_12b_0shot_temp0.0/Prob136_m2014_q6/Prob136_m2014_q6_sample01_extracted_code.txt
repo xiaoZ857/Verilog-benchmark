@@ -1,0 +1,47 @@
+  reg [1:0] current_state;
+  reg [1:0] next_state;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= 2'b00; // A
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  always @(*) begin
+    next_state = current_state; // Default: stay in the current state
+    case (current_state)
+      2'b00: begin // A
+        if (w) begin
+          next_state = 2'b00;
+        end else begin
+          next_state = 2'b01; // B
+        end
+      end
+      2'b01: begin // B
+        if (w) begin
+          next_state = 2'b10; // D
+        end else begin
+          next_state = 2'b11; // C
+        end
+      end
+      2'b11: begin // C
+        if (w) begin
+          next_state = 2'b10; // D
+        end else begin
+          next_state = 2'b11; // C
+        end
+      end
+      2'b10: begin // D
+        if (w) begin
+          next_state = 2'b00; // A
+        end else begin
+          next_state = 2'b10; // D
+        end
+      end
+    endcase
+  end
+
+  assign z = (current_state == 2'b11); // z is high when in state C
+endmodule

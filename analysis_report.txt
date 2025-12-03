@@ -1,0 +1,67 @@
+================================================================================
+VerilogEval - Model Performance Analysis
+================================================================================
+
+Model                     Pass@1     Compiled   Passed/Total   
+--------------------------------------------------------------------------------
+deepseek-r1:14b           0.0%       13.5%      0/156          
+gemma3:12b                0.0%       54.5%      0/156          
+gpt-oss:20b               0.0%       59.6%      0/156          
+llama3.2:3b               0.0%       32.1%      0/156          
+mistral:7b                0.0%       23.7%      0/156          
+phi4:14b                  0.0%       70.5%      0/156          
+qwen3:8b                  0.0%       17.9%      0/156          
+
+================================================================================
+Detailed Statistics
+================================================================================
+
+
+deepseek-r1:14b:
+  Total problems: 156
+  Successfully compiled: 21 (13.5%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 135
+  Compiled but failed tests: 21
+
+gemma3:12b:
+  Total problems: 156
+  Successfully compiled: 85 (54.5%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 71
+  Compiled but failed tests: 85
+
+gpt-oss:20b:
+  Total problems: 156
+  Successfully compiled: 93 (59.6%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 63
+  Compiled but failed tests: 93
+
+llama3.2:3b:
+  Total problems: 156
+  Successfully compiled: 50 (32.1%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 106
+  Compiled but failed tests: 50
+
+mistral:7b:
+  Total problems: 156
+  Successfully compiled: 37 (23.7%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 119
+  Compiled but failed tests: 37
+
+phi4:14b:
+  Total problems: 156
+  Successfully compiled: 110 (70.5%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 46
+  Compiled but failed tests: 110
+
+qwen3:8b:
+  Total problems: 156
+  Successfully compiled: 28 (17.9%)
+  Passed tests: 0 (0.0%)
+  Failed compilation: 128
+  Compiled but failed tests: 28

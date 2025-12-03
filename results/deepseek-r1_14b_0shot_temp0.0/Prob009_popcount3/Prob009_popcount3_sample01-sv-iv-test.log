@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv dataset_code-complete-iccad2023/Prob009_popcount3_test.sv dataset_code-complete-iccad2023/Prob009_popcount3_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:14: error: 'c0' has already been declared in this scope.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:11:      : It was declared here as a net.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:15: error: 'out' has already been declared in this scope.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:5:      : It was declared here as a net.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:18: warning: implicit definition of wire 'c'.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:19: error: 'c' has already been declared in this scope.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:18:      : It was declared here as an instance name.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:20: error: 'c1' has already been declared in this scope.
+results\deepseek-r1_14b_0shot_temp0.0\Prob009_popcount3/Prob009_popcount3_sample01.sv:11:      : It was declared here as a net.

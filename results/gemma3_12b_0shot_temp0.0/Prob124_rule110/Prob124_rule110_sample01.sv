@@ -1,0 +1,48 @@
+
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+always @(posedge clk) begin
+  if (load) begin
+    q <= data;
+  end else begin
+    for (int i = 0; i < 512; i++) begin
+      if (i == 0) begin
+        if (q[i] && q[i+1] && 0) q[i] <= 0;
+        else if (q[i] && q[i+1] && 1) q[i] <= 1;
+        else if (q[i] && 0 && 1) q[i] <= 1;
+        else if (q[i] && 0 && 0) q[i] <= 0;
+        else if (0 && 1 && 1) q[i] <= 1;
+        else if (0 && 1 && 0) q[i] <= 1;
+        else if (0 && 0 && 1) q[i] <= 1;
+        else if (0 && 0 && 0) q[i] <= 0;
+        else q[i] <= q[i];
+      end else if (i == 511) begin
+        if (q[i] && q[i-1] && 0) q[i] <= 0;
+        else if (q[i] && q[i-1] && 1) q[i] <= 1;
+        else if (q[i] && 0 && 1) q[i] <= 1;
+        else if (q[i] && 0 && 0) q[i] <= 0;
+        else if (0 && 1 && 1) q[i] <= 1;
+        else if (0 && 1 && 0) q[i] <= 1;
+        else if (0 && 0 && 1) q[i] <= 1;
+        else if (0 && 0 && 0) q[i] <= 0;
+        else q[i] <= q[i];
+      end else begin
+        if (q[i] && q[i+1] && q[i-1]) q[i] <= 0;
+        else if (q[i] && q[i+1] && 1) q[i] <= 1;
+        else if (q[i] && 0 && 1) q[i] <= 1;
+        else if (q[i] && 0 && 0) q[i] <= 0;
+        else if (0 && 1 && 1) q[i] <= 1;
+        else if (0 && 1 && 0) q[i] <= 1;
+        else if (0 && 0 && 1) q[i] <= 1;
+        else if (0 && 0 && 0) q[i] <= 0;
+        else q[i] <= q[i];
+      end
+    end
+  end
+endmodule

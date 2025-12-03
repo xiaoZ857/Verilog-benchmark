@@ -1,0 +1,89 @@
+
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+
+reg state, next_state;
+reg f_reg, g_reg;
+
+always @(posedge clk or negedge resetn) begin
+  if (!resetn) begin
+    state <= 0; // State A
+    f_reg <= 0;
+    g_reg <= 0;
+  end else begin
+    state <= next_state;
+    f_reg <= f_reg;
+    g_reg <= g_reg;
+  end
+end
+
+always @(*) begin
+  next_state = state;
+  f = f_reg;
+  g = g_reg;
+
+  case (state)
+    0: begin // State A - Reset
+      if (!resetn) begin
+        next_state = 0;
+      end else begin
+        next_state = 1;
+      end
+    end
+    1: begin // State B - Initial f=1
+      f_reg = 1;
+      next_state = 2;
+    end
+    2: begin // State C - Monitor x
+      if (x == 1) begin
+        next_state = 3;
+      end else begin
+        next_state = 2;
+      end
+    end
+    3: begin // State D - Monitor x
+      if (x == 1) begin
+        next_state = 4;
+      end else begin
+        next_state = 2;
+      end
+    end
+    4: begin // State E - Monitor x
+      if (x == 1) begin
+        next_state = 5;
+      end else begin
+        next_state = 2;
+      end
+    end
+    5: begin // State F - g = 1, monitor y
+      g_reg = 1;
+      next_state = 6;
+    end
+    6: begin // State G - Monitor y within 2 cycles
+      if (y == 1) begin
+        next_state = 7;
+      end else begin
+        next_state = 8;
+      end
+    end
+    7: begin // State H - g = 1 permanently
+      next_state = 7;
+    end
+    8: begin // State I - g = 0 permanently
+      g_reg = 0;
+      next_state = 8;
+    end
+    default: begin
+      next_state = 0;
+    end
+  endcase
+end
+
+endmodule

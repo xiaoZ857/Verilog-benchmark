@@ -1,0 +1,142 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    shift_ena <= 0;
+    counting <= 0;
+    done <= 0;
+    current_state <= IDLE;
+  end else begin
+    case (current_state)
+      IDLE: begin
+        shift_ena <= 0;
+        counting <= 0;
+        done <= 0;
+        if (data == 1) begin
+          next_state <= IDLE_1;
+        end else begin
+          next_state <= IDLE;
+        end
+      end
+      IDLE_1: begin
+        shift_ena <= 0;
+        counting <= 0;
+        done <= 0;
+        if (data == 1) begin
+          next_state <= IDLE_1_1;
+        end else begin
+          next_state <= IDLE;
+        end
+      end
+      IDLE_1_1: begin
+        shift_ena <= 0;
+        counting <= 0;
+        done <= 0;
+        if (data == 0) begin
+          next_state <= IDLE_1_1_0;
+        end else begin
+          next_state <= IDLE_1;
+        end
+      end
+      IDLE_1_1_0: begin
+        shift_ena <= 0;
+        counting <= 0;
+        done <= 0;
+        if (data == 1) begin
+          next_state <= SHIFT;
+        end else begin
+          next_state <= IDLE;
+        end
+      end
+      SHIFT: begin
+        shift_ena <= 1;
+        counting <= 0;
+        done <= 0;
+        if (shift_count == 0) begin
+          next_state <= COUNTING;
+        end else begin
+          next_state <= SHIFT;
+        end
+      end
+      COUNTING: begin
+        shift_ena <= 0;
+        counting <= 1;
+        done <= 0;
+        if (done_counting) begin
+          next_state <= DONE;
+        end else begin
+          next_state <= COUNTING;
+        end
+      end
+      DONE: begin
+        shift_ena <= 0;
+        counting <= 0;
+        done <= 1;
+        if (ack) begin
+          next_state <= IDLE;
+        end else begin
+          next_state <= DONE;
+        end
+      end
+      default: next_state <= IDLE;
+    endcase
+  end
+end
+
+reg [1:0] current_state;
+reg [1:0] next_state;
+reg [3:0] shift_count;
+reg shift_count_enable;
+
+always @(posedge clk) begin
+  if (reset) begin
+    current_state <= IDLE;
+  end else begin
+    current_state <= next_state;
+  end
+end
+
+parameter IDLE = 0;
+parameter IDLE_1 = 1;
+parameter IDLE_1_1 = 2;
+parameter IDLE_1_1_0 = 3;
+parameter SHIFT = 4;
+parameter COUNTING = 5;
+parameter DONE = 6;
+
+always @(posedge clk) begin
+  if (reset) begin
+    shift_count <= 0;
+  end else if (shift_count_enable) begin
+    if (shift_count < 4) begin
+      shift_count <= shift_count + 1;
+    end else begin
+      shift_count <= 0;
+    end
+  end
+end
+
+always @(posedge clk) begin
+  if (reset) begin
+    shift_count_enable <= 0;
+  end else begin
+    if (current_state == SHIFT) begin
+      shift_count_enable <= 1;
+    end else begin
+      shift_count_enable <= 0;
+    end
+  end
+end
+
+endmodule

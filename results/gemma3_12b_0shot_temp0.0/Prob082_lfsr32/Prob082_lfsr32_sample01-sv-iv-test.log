@@ -1,0 +1,23 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob082_lfsr32/Prob082_lfsr32_sample01 results\gemma3_12b_0shot_temp0.0\Prob082_lfsr32/Prob082_lfsr32_sample01.sv dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv dataset_code-complete-iccad2023/Prob082_lfsr32_ref.sv
+Return code: 15
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:15: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:9: error: malformed statement
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:12: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:14: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:16: error: invalid module item.
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:17: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:17: error: invalid module item.
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:18: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:18: error: Invalid module instantiation
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:19: error: invalid module item.
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:20: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:20: error: invalid module item.
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:21: syntax error
+dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:25: error: invalid module item.

@@ -1,0 +1,11 @@
+module TopModule (
+  input [7:0] data_in,
+  output reg parity_out
+);
+
+always @(posedge clk) begin
+  parity_out <= ~data_in;
+  parity_out <= parity_out ^ data_in;
+end
+
+endmodule

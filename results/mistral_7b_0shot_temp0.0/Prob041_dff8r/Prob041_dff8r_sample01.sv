@@ -1,0 +1,21 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+// Instantiate D Flip-Flops with active high synchronous reset
+DFF dff0 (.clk(clk), .reset(reset), .d(d[0]), .q(q[0]));
+DFF dff1 (.clk(clk), .reset(reset), .d(d[1]), .q(q[1]));
+DFF dff2 (.clk(clk), .reset(reset), .d(d[2]), .q(q[2]));
+DFF dff3 (.clk(clk), .reset(reset), .d(d[3]), .q(q[3]));
+DFF dff4 (.clk(clk), .reset(reset), .d(d[4]), .q(q[4]));
+DFF dff5 (.clk(clk), .reset(reset), .d(d[5]), .q(q[5]));
+DFF dff6 (.clk(clk), .reset(reset), .d(d[6]), .q(q[6]));
+DFF dff7 (.clk(clk), .reset(reset), .d(d[7]), .q(q[7]));
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,67 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01 results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv
+Return code: 59
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:11: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:12: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:12: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:13: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:13: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:14: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:14: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: error: malformed statement
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:13: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:9: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:21: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:79: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:79: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:80: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:87: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:87: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:88: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:88: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:88: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:89: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:89: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:89: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:90: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:6: error: malformed statement
+dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:3: error: Incomprehensible case expression.
+dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:12: syntax error
+dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:16: error: Incomprehensible case expression.

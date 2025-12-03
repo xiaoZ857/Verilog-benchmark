@@ -1,0 +1,11 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01 results\mistral_7b_0shot_temp0.0\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv dataset_code-complete-iccad2023/Prob028_m2014_q4a_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: 'q' has already been declared in this scope.
+results\mistral_7b_0shot_temp0.0\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:6:      : It was declared here as a variable.
+results\mistral_7b_0shot_temp0.0\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:16: warning: implicit definition of wire 'q_out'.

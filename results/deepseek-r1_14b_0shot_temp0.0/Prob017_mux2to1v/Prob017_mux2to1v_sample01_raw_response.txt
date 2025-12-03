@@ -1,0 +1,15 @@
+To implement a 2-1 multiplexer in Verilog where the output `out` selects between inputs `a` and `b` based on the selector signal `sel`, we can use a simple conditional assignment. Here's how it's done:
+
+```verilog
+module TopModule (
+  input [99:0] a,
+  input [99:0] b,
+  input sel,
+  output [99:0] out
+);
+  // When sel is 0, out equals a; when sel is 1, out equals b.
+  assign out = (sel == 0) ? a : b;
+endmodule
+```
+
+This code defines the module with the specified inputs and outputs. The `assign` statement uses Verilog's ternary operator to conditionally set `out` based on the value of `sel`. If `sel` is 0, `out` takes the value of `a`; if `sel` is 1, `out` takes the value of `b`. This implementation ensures that the multiplexer correctly selects between the two inputs as required.

@@ -1,0 +1,13 @@
+
+module TopModule (
+  input wire a,
+  input wire b,
+  input wire sel,
+  output wire out
+);
+
+assign out = sel ? b : a;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

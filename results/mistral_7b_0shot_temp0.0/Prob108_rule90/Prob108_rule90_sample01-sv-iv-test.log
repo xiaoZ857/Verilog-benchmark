@@ -1,0 +1,9 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob108_rule90/Prob108_rule90_sample01 results\mistral_7b_0shot_temp0.0\Prob108_rule90/Prob108_rule90_sample01.sv dataset_code-complete-iccad2023/Prob108_rule90_test.sv dataset_code-complete-iccad2023/Prob108_rule90_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob108_rule90/Prob108_rule90_sample01.sv:17: error: Sized numeric constant must have a size greater than zero.

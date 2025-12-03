@@ -1,0 +1,33 @@
+ Here is the Verilog code for the given description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+// Sum-of-Products (SOP) for the logic-1 conditions: 2, 7, and 15
+out_sop <= ~(a & b & ~c & ~d) | // 0010 (4)
+         ~(a & b & c & ~d) |    // 0110 (6)
+         ~(a & b & c & d) |    // 0111 (7)
+         a & ~b & c & d;       // 1001 (9)
+
+// Product-of-Sum (POS) for the logic-0 conditions: 0, 1, 4, 5, 6, 9, 10, 13, and 14
+out_pos <= a & b & c & d |    // 0001 (1)
+         ~a & b & c & d |     // 1001 (9)
+         a & ~b & c & d |     // 1011 (13)
+         a & b & ~c & d |     // 0101 (5)
+         a & b & c & ~d |     // 0111 (7)
+         a & b & ~c & ~d;     // 0011 (3)
+
+// Exclude the input conditions for numbers 3, 8, 11, and 12
+out_pos <= out_pos & ~(a^b^c^d);
+
+endmodule
+```
+
+This code implements both the Sum-of-Products (SOP) and Product-of-Sum (POS) forms for the given conditions. The SOP output `out_sop` is a logic-1 when 2, 7, or 15 appears on the inputs, and a logic-0 otherwise. The POS output `out_pos` is a logic-1 when 0, 1, 4, 5, 6, 9, 10, 13, or 14 appears on the inputs, and a logic-0 when 2, 7, or 15 appears. The excluded input conditions for numbers 3, 8, 11, and 12 are accounted for in the POS output calculation.

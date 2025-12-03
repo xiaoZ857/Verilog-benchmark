@@ -1,0 +1,6 @@
+```verilog
+  assign out_sop = (a & !b & !c & !d) | (!a & b & c & d) | (a & b & c & d);
+
+  assign out_pos = (!a | b | c | d) & (!b | a | c | d) & (!c | a | b | d) & (!d | a | b | c);
+endmodule
+```

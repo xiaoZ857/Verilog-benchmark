@@ -1,0 +1,100 @@
+  reg [1:0] state;
+  reg [7:0] sum;
+  reg carry;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      state <= 0;
+      sum <= 0;
+      carry <= 0;
+      z <= 0;
+    end else begin
+      case (state)
+        0: begin
+          // Initial state: Wait for reset to be released
+          z <= 0;
+        end
+        1: begin
+          // First bit: Add the least significant bit
+          if (x == 0) begin
+            sum <= sum;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= 1;
+          end
+          z <= ~sum;
+        end
+        2: begin
+          // Second bit: Add the second least significant bit
+          if (x == 0) begin
+            sum <= sum + 0;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= carry;
+          end
+          z <= ~sum;
+        end
+        3: begin
+          // Third bit: Add the third least significant bit
+          if (x == 0) begin
+            sum <= sum + 0;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= carry;
+          end
+          z <= ~sum;
+        end
+        4: begin
+          // Fifth bit: Add the fifth least significant bit
+          if (x == 0) begin
+            sum <= sum + 0;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= carry;
+          end
+          z <= ~sum;
+        end
+        5: begin
+          // Sixth bit: Add the sixth least significant bit
+          if (x == 0) begin
+            sum <= sum + 0;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= carry;
+          end
+          z <= ~sum;
+        end
+        6: begin
+          // Seventh bit: Add the seventh least significant bit
+          if (x == 0) begin
+            sum <= sum + 0;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= carry;
+          end
+          z <= ~sum;
+        end
+        7: begin
+          // Eighth bit: Add the eighth least significant bit
+          if (x == 0) begin
+            sum <= sum + 0;
+            carry <= carry;
+          end else begin
+            sum <= sum + 1;
+            carry <= carry;
+          end
+          z <= ~sum;
+        end
+        default: begin
+          state <= 0;
+        end
+      endcase
+      state <= state + 1;
+    end
+  endmodule

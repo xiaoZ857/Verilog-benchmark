@@ -1,0 +1,27 @@
+
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output q,
+  output state
+);
+
+reg state; // One bit of memory (flip-flop)
+always @(posedge clk) begin
+    if (a && !b) begin
+        state <= 0; // Assigning 0 to state when a is high and b is low
+    end
+    else if (!a && b) begin
+        state <= 1; // Assigning 1 to state when a is low and b is high
+    end
+    else begin
+        state <= state; // Maintaining the current state value when neither a nor b changes
+    end
+end
+
+assign q = state; // Output of flip-flop (q)
+assign state = !state; // Output for observing the state (observable through output state)
+
+// VERILOG-EVAL: endmodule not found

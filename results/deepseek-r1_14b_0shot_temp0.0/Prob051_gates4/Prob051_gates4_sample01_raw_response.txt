@@ -1,0 +1,8 @@
+Here's the Verilog implementation for the described combinational circuit:
+
+```verilog
+out_and = in[0] & in[1] & in[2] & in[3];
+out_or  = in[0] | in[1] | in[2] | in[3];
+out_xor = (in[0] ^ in[1]) ^ in[2] ^ in[3];
+endmodule
+```

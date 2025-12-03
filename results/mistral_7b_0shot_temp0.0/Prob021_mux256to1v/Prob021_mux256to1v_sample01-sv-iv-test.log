@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob021_mux256to1v/Prob021_mux256to1v_sample01 results\mistral_7b_0shot_temp0.0\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv dataset_code-complete-iccad2023/Prob021_mux256to1v_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:10: error: malformed statement
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:12: syntax error
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:13: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:13: syntax error
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:13: error: malformed statement
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:13: syntax error
+dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:14: Syntax in assignment statement l-value.

@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01 results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv dataset_code-complete-iccad2023/Prob064_vector3_test.sv dataset_code-complete-iccad2023/Prob064_vector3_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:17: error: w is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:10:      : w is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:17: error: x is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:11:      : x is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:17: error: y is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:12:      : y is declared here as wire.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:17: error: z is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv:13:      : z is declared here as wire.
+4 error(s) during elaboration.

@@ -1,0 +1,25 @@
+ Here's a Verilog module implementation based on your description. The `out` register will be set to 1 for each bit in the `in` vector whenever there is a transition from 1 to 0. The register will remain at 1 until it is reset.
+
+```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        out <= 32'b0; // Reset the output to zero
+    end else begin
+        for (int i = 0; i < 32; i++) begin
+            if ((in[i] == 1'b1) && (~in[i + 1] == 1'b0)) begin
+                out[i] <= 1'b1; // Set the output to 1 for the transition bit
+            end
+        end
+    end
+end
+
+always @(posedge clk) begin
+    out <= out; // Propagate the values in the output register
+end
+
+assign out_sync = reset | (~reset & out); // Provide a synchronous output for use elsewhere
+
+endmodule
+```
+
+In this code, I added an additional always block to provide a synchronous version of the `out` signal (`out_sync`) that can be used elsewhere in your design. The `out` register is updated on every clock edge, while the `out_sync` signal is only updated on the positive edge of the reset signal or the positive edge of the clock when the reset signal is 0.

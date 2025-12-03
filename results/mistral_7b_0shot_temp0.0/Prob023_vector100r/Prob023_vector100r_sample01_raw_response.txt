@@ -1,0 +1,18 @@
+ Here is the Verilog code for reversing the bit ordering of a 100-bit input vector:
+
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+always @(posedge clk) begin
+  for (int i = 0; i < 100; i++) begin
+    out[i] <= in[99 - i];
+  end
+end
+
+endmodule
+```
+
+In this code, the `always` block is triggered on the positive edge of an assumed clock signal (clk). The loop iterates through each bit position from 0 to 99 and assigns the corresponding input bit to the output bit at the reversed position.

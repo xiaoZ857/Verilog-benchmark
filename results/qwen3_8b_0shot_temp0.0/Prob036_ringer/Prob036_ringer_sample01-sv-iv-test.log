@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\qwen3_8b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01 results\qwen3_8b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01.sv dataset_code-complete-iccad2023/Prob036_ringer_test.sv dataset_code-complete-iccad2023/Prob036_ringer_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\qwen3_8b_0shot_temp0.0\Prob036_ringer/Prob036_ringer_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'ringer' has no mismatches.
+Hint: Output 'motor' has no mismatches.
+Hint: Total mismatched samples is 0 out of 19 samples
+
+Simulation finished at 97 ps
+Mismatches: 0 in 19 samples
+
+
+--- stderr ---

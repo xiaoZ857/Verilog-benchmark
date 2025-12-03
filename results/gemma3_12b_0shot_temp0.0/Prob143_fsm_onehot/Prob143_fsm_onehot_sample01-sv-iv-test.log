@@ -1,0 +1,53 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01 results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv dataset_code-complete-iccad2023/Prob143_fsm_onehot_ref.sv
+Return code: 23
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:15: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:17: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:22: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:24: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:29: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:31: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:36: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:38: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:43: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:45: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:50: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:52: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:57: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:59: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:64: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:66: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:71: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:73: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:78: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:80: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:84: error: next_state is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:6:      : next_state is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:11: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\gemma3_12b_0shot_temp0.0\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:11: error: Failed to evaluate event expression 'posedge clk'.
+23 error(s) during elaboration.

@@ -1,0 +1,26 @@
+```verilog
+always @(*) begin
+  case(q)
+    4'd10 : q = 4'd0;
+    default : q = q + 1;
+  endcase
+endmodule
+```
+
+Note that this implementation uses a combinational logic block to generate the next value of `q`. The `default` branch is used when the current value of `q` is not one of the values from 1 to 10. This will cause the counter to wrap around and start counting again.
+
+However, if you want to implement this using a sequential logic block (i.e., with a state machine), it would look like this:
+
+```verilog
+reg [3:0] q;
+reg [2:0] state;
+
+always @(*) begin
+  case(state)
+    3'd0 : state = 3'd1; // reset to state 1
+    default : state = state + 1;
+  endcase
+endmodule
+
+assign q = {state[2], state[1], state[0]};
+```

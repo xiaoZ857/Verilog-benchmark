@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01 results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv dataset_code-complete-iccad2023/Prob127_lemmings1_test.sv dataset_code-complete-iccad2023/Prob127_lemmings1_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:14: error: walk_left is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_left is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:15: error: walk_right is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:9:      : walk_right is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:18: error: walk_left is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_left is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:19: error: walk_right is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:9:      : walk_right is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:21: error: walk_left is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_left is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:22: error: walk_right is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:9:      : walk_right is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:24: error: walk_left is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_left is declared here as wire.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:25: error: walk_right is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0.0\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:9:      : walk_right is declared here as wire.
+8 error(s) during elaboration.

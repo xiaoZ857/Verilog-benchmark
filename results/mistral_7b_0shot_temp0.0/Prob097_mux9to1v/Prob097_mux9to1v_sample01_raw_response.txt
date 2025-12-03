@@ -1,0 +1,20 @@
+ Here is the Verilog code for a 16-bit wide, 9-to-1 multiplexer as per your description:
+
+```verilog
+always @(posedge clk) begin
+  case (sel)
+    4'b0001 : out <= a;
+    4'b0010 : out <= b;
+    4'b0100 : out <= c;
+    4'b0110 : out <= d;
+    4'b1000 : out <= e;
+    4'b1010 : out <= f;
+    4'b1100 : out <= g;
+    4'b1110 : out <= h;
+    4'b1001 : out <= i;
+    default : out <= 16'b1111111111111111; // for unused cases (sel=9 to 15)
+  endcase
+end
+```
+
+This code defines a combinational logic block that selects one of the inputs `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, or `i` based on the value of the `sel` input. The output `out` is set to all '1's for unused cases (when `sel` is between 9 and 15). The always block is triggered at the positive edge of the clock signal, which is not explicitly defined in your question but assumed to be present.

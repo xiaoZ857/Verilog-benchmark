@@ -1,0 +1,41 @@
+ Here's a possible implementation of the described finite state machine in Verilog:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire s,
+  input wire w,
+  output reg z
+);
+
+reg [1:0] state; // FSM state register
+reg counter; // Counter for counting the number of 'w' pulses in three consecutive clock cycles
+
+always @(posedge clk) begin
+    if (reset) begin
+        state <= 0; // Reset to state A
+        z <= 0; // Reset output z to 0
+    end else if (state == 1 && s == 1) begin
+        state <= 2; // Transition to state B
+        counter <= w; // Start counting the number of 'w' pulses
+    end else if (state == 2) begin
+        counter <= counter << 1 | w; // Shift and add the current value of w to the counter
+        if (counter == 4'b1010) begin // Check if exactly two 'w' pulses were detected
+            z <= ~z; // Toggle output z
+        end
+        state <= 2; // Stay in state B for the next three clock cycles
+    end
+end
+
+always @(posedge clk) begin
+    if (state == 3) begin
+        counter <= counter << 1; // Reset the counter and move to the next state
+        state <= state + 1;
+    end
+end
+
+endmodule
+```
+
+In this implementation, the FSM has three states: A, B, and C. The FSM starts in state A (represented by `state[0]`). When the `s` input is high, the FSM transitions to state B (represented by `state[1]`), where it checks the value of the `w` input for the next three clock cycles. If exactly two 'w' pulses are detected during this period, the output `z` is toggled in the following clock cycle. After checking the `w` input for three consecutive clock cycles, the FSM moves to state C (represented by `state[2]`) and resets its counter before moving back to state A for the next round of checks.

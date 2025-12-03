@@ -1,0 +1,10 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01 results\gemma3_12b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv dataset_code-complete-iccad2023/Prob148_2013_q2afsm_test.sv dataset_code-complete-iccad2023/Prob148_2013_q2afsm_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:62: sorry: part selects straddling the start of signal (g['sd0]) are not currently supported.
+1 error(s) during elaboration.

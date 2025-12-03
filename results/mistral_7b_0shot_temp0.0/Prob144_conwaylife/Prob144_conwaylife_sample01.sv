@@ -1,0 +1,48 @@
+
+module TopModule (
+  input wire clk,
+  input wire load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+
+// Macro to calculate the index of a neighbor cell in the toroidal grid
+#define NEIGHBOR_INDEX(i, j) (((i + 1) % 16) * 16 + ((j + 1) % 16))
+
+always @(posedge clk) begin
+    if (load) begin
+        q <= data;
+    end else begin
+        reg [255:0] new_q; // Temporary storage for the next state of the grid
+
+        // Iterate through all cells in the grid and calculate their new state
+        for (int i = 0; i < 16; i++) begin
+            for (int j = 0; j < 16; j++) begin
+                int num_neighbors = 0;
+
+                // Check all neighbors and count alive cells
+                for (int k = -1; k <= 1; k++) begin
+                    for (int l = -1; l <= 1; l++) begin
+                        if ((NEIGHBOR_INDEX(i + k, j + l) < 256) && (q[NEIGHBOR_INDEX(i + k, j + l)] == 1))
+                            num_neighbors += 1;
+                    end
+                end
+
+                // Update the cell state based on the number of neighbors
+                if ((num_neighbors == 2) || (num_neighbors == 3)) begin
+                    new_q[i * 16 + j] <= q[i * 16 + j]; // Do not change state for 2 neighbors
+                end else if (num_neighbors == 3) begin
+                    new_q[i * 16 + j] <= 1'b1; // Set cell to alive for 3 neighbors
+                end else begin
+                    new_q[i * 16 + j] <= 1'b0; // Set cell to dead for 4+ neighbors
+                end
+            end
+        end
+
+        q <= new_q; // Update the current state of the grid with the next state
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

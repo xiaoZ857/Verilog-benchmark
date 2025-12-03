@@ -1,0 +1,22 @@
+ Here is the Verilog code for your request:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Using assign statement
+assign out_assign = a & b;
+
+// Using combinational always block
+always @(posedge clk) begin
+  out_alwaysblock <= a & b;
+end
+
+endmodule
+```
+
+In this code, `out_assign` is implemented using an assign statement, and `out_alwaysblock` is implemented using a combinational always block that triggers on the positive edge of the clock. However, since no clock signal was provided in your description, I assumed there is no clock input for simplicity. If you need to add a clock, please replace `posedge clk` with the appropriate clock event.

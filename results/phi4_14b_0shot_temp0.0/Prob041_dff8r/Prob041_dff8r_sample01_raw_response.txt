@@ -1,0 +1,11 @@
+```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 8'b00000000;
+    end else begin
+        q <= d;
+    end
+end
+
+endmodule
+```

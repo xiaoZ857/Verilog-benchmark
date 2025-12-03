@@ -1,0 +1,64 @@
+ Here is the Verilog code for the 7458 chip equivalent module:
+
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  input p1e,
+  input p1f,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+// AND gates for p1y
+wire and_gate1_output1, and_gate1_output2, and_gate1_output3;
+and gate1 (
+  .a(p1a),
+  .b(p1b),
+  .c(p1c),
+  .o(and_gate1_output1)
+);
+
+and gate2 (
+  .a(p1d),
+  .b(p1e),
+  .c(p1f),
+  .o(and_gate1_output2)
+);
+
+or gate3 (
+  .a(and_gate1_output1),
+  .b(and_gate1_output2),
+  .o(p1y)
+);
+
+// AND gates for p2y
+wire and_gate4_output, and_gate5_output;
+and gate4 (
+  .a(p2a),
+  .b(p2b),
+  .o(and_gate4_output)
+);
+
+and gate5 (
+  .a(p2c),
+  .b(p2d),
+  .o(and_gate5_output)
+);
+
+or gate6 (
+  .a(and_gate4_output),
+  .b(and_gate5_output),
+  .o(p2y)
+);
+
+endmodule
+```
+
+This code creates a Verilog module named `TopModule` with the specified inputs and outputs. It uses AND gates (`and`) and OR gates (`or`) to implement the functionality of the 7458 chip as described. The intermediate signals are used for internal wires, driven by the output of one of the AND gates.

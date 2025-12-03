@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01 results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv dataset_code-complete-iccad2023/Prob153_gshare_test.sv dataset_code-complete-iccad2023/Prob153_gshare_ref.sv
+Return code: 16
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:30: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:31: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:32: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:32: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:33: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:37: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:38: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:38: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:39: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:47: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:48: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:48: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:49: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:49: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:50: syntax error
+results\mistral_7b_0shot_temp0.0\Prob153_gshare/Prob153_gshare_sample01.sv:52: Syntax in assignment statement l-value.

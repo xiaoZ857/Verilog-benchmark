@@ -1,0 +1,55 @@
+  localparam STATE_A = 4'b0000;
+  localparam STATE_B = 4'b0001;
+  localparam STATE_C = 4'b0010;
+  localparam STATE_D = 4'b0011;
+
+  reg [3:0] current_state;
+  reg [3:0] next_state;
+
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      current_state <= STATE_A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  always @(*) begin
+    next_state = current_state;
+    case (current_state)
+      STATE_A: begin
+        if (r[1]) begin
+          next_state = STATE_B;
+        end else if (r[2]) begin
+          next_state = STATE_C;
+        end else if (r[3]) begin
+          next_state = STATE_D;
+        end
+      end
+      STATE_B: begin
+        if (!r[1]) begin
+          next_state = STATE_A;
+        end
+      end
+      STATE_C: begin
+        if (!r[2]) begin
+          next_state = STATE_A;
+        end
+      end
+      STATE_D: begin
+        if (!r[3]) begin
+          next_state = STATE_A;
+        end
+      end
+      default: begin
+        next_state = STATE_A;
+      end
+    endcase
+  end
+
+  assign g[1] = (current_state == STATE_B);
+  assign g[2] = (current_state == STATE_C);
+  assign g[3] = (current_state == STATE_D);
+  assign g[0] = 0;
+
+endmodule

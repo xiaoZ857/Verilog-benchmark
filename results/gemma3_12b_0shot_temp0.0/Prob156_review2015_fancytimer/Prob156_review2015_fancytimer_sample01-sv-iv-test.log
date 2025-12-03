@@ -1,0 +1,23 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01 results\gemma3_12b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv
+Return code: 13
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:77: syntax error
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4: error: `default_nettype directives must appear
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : outside module definitions. The containing
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : module TopModule starts on line results\gemma3_12b_0shot_temp0.0\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:3.
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:14: error: malformed statement
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:15: syntax error
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:15: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:16: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:18: syntax error
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:20: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:22: syntax error
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:24: error: malformed statement
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:26: syntax error
+dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:28: error: malformed statement

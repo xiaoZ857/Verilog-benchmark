@@ -1,0 +1,31 @@
+
+
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  input p1e,
+  input p1f,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+wire and1_out, and2_out;
+wire and3_out, and4_out;
+
+assign and1_out = p1a & p1b & p1c; // First 3-input AND gate for p1y
+assign and2_out = p1d & p1e & p1f; // Second 3-input AND gate for p1y
+
+assign p1y = and1_out | and2_out;   // OR the outputs of the two 3-input AND gates
+
+assign and3_out = p2a & p2b;        // First 2-input AND gate for p2y
+assign and4_out = p2c & p2d;        // Second 2-input AND gate for p2y
+
+assign p2y = and3_out | and4_out;   // OR the outputs of the two 2-input AND gates
+
+endmodule

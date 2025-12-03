@@ -1,0 +1,17 @@
+
+
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+always_ff @(posedge clk) begin
+    case (x[2:1])
+        2'b00: f <= (x[4] == 1'b0 && x[3] == 1'b0) || (x[4] == 1'b1 && x[3] == 1'b1);
+        2'b01: f <= 1'b0;
+        2'b11: f <= !(x[4] && !x[3]);
+        2'b10: f <= !(x[4] ^ x[3]);
+    endcase
+end
+
+endmodule

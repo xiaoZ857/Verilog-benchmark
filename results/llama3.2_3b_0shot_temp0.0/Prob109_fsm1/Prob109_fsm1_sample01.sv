@@ -1,0 +1,22 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+always @(posedge clk or negedge areset)
+begin
+    if (areset) 
+        out <= 1'b0;
+    else
+        case(in)
+            0'b0: out <= 0'b0; // A -> B
+            0'b1: out <= 0'b1; // B -> B
+            default: out <= 0'b0; // A -> B
+        endcase
+end
+
+// VERILOG-EVAL: endmodule not found

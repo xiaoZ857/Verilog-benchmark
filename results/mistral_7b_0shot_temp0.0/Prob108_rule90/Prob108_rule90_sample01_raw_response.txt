@@ -1,0 +1,27 @@
+ Here is the Verilog code for the Rule 90 one-dimensional cellular automaton as per your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+always @(posedge clk) begin
+  if (load)
+    q <= data;
+  else begin
+    for (int i = 0; i < 512; i++) begin
+      if ((i > 0) && (i < 511))
+        q[i] <= q[i-1] ^ q[i+1];
+      else
+        q[i] <= 0'b0; // Assuming boundary conditions are zero
+    end
+  end
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with inputs `clk`, `load`, `data`, and output `q`. The `always @(posedge clk)` block describes the behavior that happens on each positive edge of the clock signal. If the load input is high, it loads the data into the q array. Otherwise, it applies Rule 90 to the cells in the array (excluding the boundaries).

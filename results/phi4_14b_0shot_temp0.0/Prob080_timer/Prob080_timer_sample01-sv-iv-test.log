@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob080_timer/Prob080_timer_sample01 results\phi4_14b_0shot_temp0.0\Prob080_timer/Prob080_timer_sample01.sv dataset_code-complete-iccad2023/Prob080_timer_test.sv dataset_code-complete-iccad2023/Prob080_timer_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob080_timer/Prob080_timer_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'tc' has no mismatches.
+Hint: Total mismatched samples is 0 out of 7127 samples
+
+Simulation finished at 35636 ps
+Mismatches: 0 in 7127 samples
+
+
+--- stderr ---

@@ -1,0 +1,5 @@
+```verilog
+reg [7:0] min = a;
+assign min = min < b ? min : (min < c ? (min < d ? min : d) : (min < c ? c : (min < d ? d : d)));
+endmodule
+```

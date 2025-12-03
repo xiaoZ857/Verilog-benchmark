@@ -1,0 +1,8 @@
+always @(posedge clk) begin
+  if (sel_b1 && sel_b2)
+    out_assign <= b;
+  else
+    out_assign <= a;
+end
+
+assign out_always = out_assign;

@@ -1,0 +1,18 @@
+always @ (posedge clk) begin
+    // Calculate out_both
+    for (int i = 97; i >= 0; i = i - 1) begin
+        out_both[i + 1] <= in[i + 1] & in[i + 2];
+    end
+
+    // Calculate out_any
+    for (int j = 1; j < 100; j = j + 1) begin
+        out_any[j] <= in[j] | in[j - 1];
+    end
+
+    // Calculate out_different with wrapping around
+    for (int k = 0; k < 99; k = k + 1) begin
+        out_different[k] <= in[k] ^ in[k + 1];
+    end
+    out_different[99] <= in[99] ^ in[0]; // Wrap-around case
+
+endmodule

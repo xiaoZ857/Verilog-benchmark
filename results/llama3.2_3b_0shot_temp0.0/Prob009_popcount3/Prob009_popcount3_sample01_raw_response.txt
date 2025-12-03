@@ -1,0 +1,15 @@
+```verilog
+assign out = $count_mod(in);
+endmodule
+```
+
+Note: The `$count_mod` function is not a standard Verilog function. It's assumed to be a custom function that counts the number of '1's in an input vector.
+
+However, if you want to implement it manually, here's how you can do it:
+
+```verilog
+assign out = $signed(in) & $unsigned(in[2:1]);
+endmodule
+```
+
+This code works by first converting the 3-bit input vector into a signed integer using `$signed`, and then performing a bitwise AND operation with the unsigned version of the same input vector (excluding the most significant bit). The result is the population count.

@@ -1,0 +1,16 @@
+ Here is the Verilog code for a module that always outputs a low value:
+
+```verilog
+module TopModule (
+  output reg zero
+);
+
+always @(posedge clk)
+begin
+  zero <= 0;
+end
+
+endmodule
+```
+
+In this example, the `TopModule` has one output signal named `zero`. The always block is sensitive to the positive edge of an assumed clock signal (clk). Inside the always block, we assign a value of 0 to the `zero` output on every positive edge of the clock. This ensures that the module will always output a low value.

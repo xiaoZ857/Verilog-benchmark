@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01 results\gemma3_12b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv dataset_code-complete-iccad2023/Prob076_always_case_test.sv dataset_code-complete-iccad2023/Prob076_always_case_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:30: syntax error
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:17: error: malformed statement
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:24: syntax error
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:24: error: malformed statement
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:25: syntax error
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:27: error: malformed statement
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:29: syntax error
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:34: Syntax in assignment statement l-value.

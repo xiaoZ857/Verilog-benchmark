@@ -1,0 +1,16 @@
+Here is the Verilog code for implementing 8 D flip-flops with active high asynchronous reset:
+
+```verilog
+generate
+  for (i = 0; i < 8; i++) begin : dff_i
+    DFF 
+      #(.clk(clk), .areset(areset)) 
+      dff (
+        .d(d[i]),
+        .q(q[i])
+      );
+  end
+endgenerate
+```
+
+This code creates an 8-bit D flip-flop array using a generate loop. Each DFF instance is configured with the same clock and asynchronous reset signals, but they operate independently on their respective data inputs (d[0] to d[7]) and produce independent outputs (q[0] to q[7]).

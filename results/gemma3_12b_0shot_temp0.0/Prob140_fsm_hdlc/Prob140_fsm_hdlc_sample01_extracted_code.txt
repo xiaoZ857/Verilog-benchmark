@@ -1,0 +1,91 @@
+  reg [2:0] state;
+  reg [2:0] next_state;
+  reg disc_q;
+  reg flag_q;
+  reg err_q;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= 0;
+      disc_q <= 0;
+      flag_q <= 0;
+      err_q <= 0;
+    end else begin
+      state <= next_state;
+      disc_q <= disc_q;
+      flag_q <= flag_q;
+      err_q <= err_q;
+    end
+  end
+
+  always @(*) begin
+    next_state = state;
+    disc_q = 0;
+    flag_q = 0;
+    err_q = 0;
+
+    case (state)
+      0: begin // Initial state, also acts as if previous input was 0
+        if (in) begin
+          next_state = 1;
+        end
+      end
+      1: begin
+        if (in) begin
+          next_state = 2;
+        end else begin
+          next_state = 0;
+        end
+      end
+      2: begin
+        if (in) begin
+          next_state = 3;
+        end else begin
+          next_state = 0;
+        end
+      end
+      3: begin
+        if (in) begin
+          next_state = 4;
+        end else begin
+          next_state = 0;
+        end
+      end
+      4: begin
+        if (in) begin
+          next_state = 5;
+        end else begin
+          next_state = 0;
+        end
+      end
+      5: begin
+        if (in) begin
+          next_state = 6;
+        end else begin
+          next_state = 0;
+        end
+      end
+      6: begin
+        if (in) begin
+          next_state = 7;
+        end else begin
+          next_state = 0;
+        end
+      end
+      7: begin
+        if (in) begin
+          flag_q = 1;
+          next_state = 0;
+        end else begin
+          err_q = 1;
+          next_state = 0;
+        end
+      end
+    endcase
+  end
+
+  assign disc = disc_q;
+  assign flag = flag_q;
+  assign err = err_q;
+
+endmodule

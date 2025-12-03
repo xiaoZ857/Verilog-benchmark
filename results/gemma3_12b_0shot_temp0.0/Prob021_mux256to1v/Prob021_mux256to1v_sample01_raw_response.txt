@@ -1,0 +1,4 @@
+always @(sel) begin
+  out = in[sel * 4 : sel * 4 + 3];
+end
+endmodule

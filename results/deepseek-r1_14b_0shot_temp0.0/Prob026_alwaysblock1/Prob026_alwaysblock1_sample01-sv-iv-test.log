@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv dataset_code-complete-iccad2023/Prob026_alwaysblock1_test.sv dataset_code-complete-iccad2023/Prob026_alwaysblock1_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\deepseek-r1_14b_0shot_temp0.0\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_assign' has no mismatches.
+Hint: Output 'out_alwaysblock' has no mismatches.
+Hint: Total mismatched samples is 0 out of 219 samples
+
+Simulation finished at 1096 ps
+Mismatches: 0 in 219 samples
+
+
+--- stderr ---

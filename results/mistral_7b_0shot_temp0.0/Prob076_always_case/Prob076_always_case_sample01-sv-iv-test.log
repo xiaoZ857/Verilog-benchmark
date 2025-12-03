@@ -1,0 +1,17 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01 results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv dataset_code-complete-iccad2023/Prob076_always_case_test.sv dataset_code-complete-iccad2023/Prob076_always_case_ref.sv
+Return code: 3
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:19: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:19: warning: Numeric constant truncated to 2 bits.
+results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:20: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:20: warning: Numeric constant truncated to 2 bits.
+results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:21: warning: extra digits given for sized binary constant.
+results\mistral_7b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv:21: warning: Numeric constant truncated to 2 bits.
+dataset_code-complete-iccad2023/Prob076_always_case_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob076_always_case_ref.sv:27: syntax error
+I give up.

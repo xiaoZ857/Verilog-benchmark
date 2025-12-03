@@ -1,0 +1,22 @@
+```verilog
+always @(*) begin
+    if (do_sub) 
+        out = a - b;
+    else 
+        out = a + b;
+
+    // Check for zero result using bitwise NOR to handle signed numbers correctly
+    result_is_zero = ~(|out);  // Set result_is_zero to 1 if all bits of 'out' are 0
+end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Conditional Logic**: The `if-else` statement is used instead of a `case` statement for clarity and simplicity when there are only two conditions.
+
+2. **Zero Flag Calculation**:
+   - The original code checks if `~out` is true to set the zero flag, which doesn't work correctly for signed numbers.
+   - Instead, use `|out`, which performs a bitwise OR across all bits of `out`. If `out` is zero, this operation results in 0.
+   - Using `~(|out)` will yield 1 if `out` is zero (since the NOR of all zeros is one), correctly setting the `result_is_zero` flag.

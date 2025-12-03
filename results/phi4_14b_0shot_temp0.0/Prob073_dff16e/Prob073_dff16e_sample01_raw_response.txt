@@ -1,0 +1,38 @@
+```verilog
+always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+        q <= 16'b0;
+    end else begin
+        if (byteena[1]) begin
+            q[15:8] <= d[15:8];
+        end
+        if (byteena[0]) begin
+            q[7:0] <= d[7:0];
+        end
+    end
+end
+
+// Internal registers for the 16 D flip-flops
+reg [15:0] internal_registers;
+
+always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+        internal_registers <= 16'b0;
+    end else begin
+        // Update each byte based on byteena signals
+        if (byteena[1]) begin
+            internal_registers[15:8] <= d[15:8];
+        end
+        if (byteena[0]) begin
+            internal_registers[7:0] <= d[7:0];
+        end
+    end
+end
+
+// Output assignment from the internal registers to q
+always @(posedge clk) begin
+    q <= internal_registers;
+end
+
+endmodule
+```

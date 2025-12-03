@@ -1,0 +1,16 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob048_m2014_q4c/Prob048_m2014_q4c_sample01 results\gemma3_12b_0shot_temp0.0\Prob048_m2014_q4c/Prob048_m2014_q4c_sample01.sv dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv dataset_code-complete-iccad2023/Prob048_m2014_q4c_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob048_m2014_q4c/Prob048_m2014_q4c_sample01.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:9: error: malformed statement
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:11: syntax error
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:13: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:16: syntax error
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:16: error: invalid module item.
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:17: syntax error
+dataset_code-complete-iccad2023/Prob048_m2014_q4c_test.sv:21: error: invalid module item.

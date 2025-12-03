@@ -1,0 +1,10 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob152_lemmings3/Prob152_lemmings3_sample01 results\phi4_14b_0shot_temp0.0\Prob152_lemmings3/Prob152_lemmings3_sample01.sv dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\phi4_14b_0shot_temp0.0\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:78: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+1 error(s) during elaboration.

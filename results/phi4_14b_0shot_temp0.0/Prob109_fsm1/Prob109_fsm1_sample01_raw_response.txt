@@ -1,0 +1,33 @@
+```verilog
+reg [1:0] current_state, next_state;
+
+always @(*) begin
+    case (current_state)
+        2'b01: // State B
+            if (in == 1'b0) 
+                next_state = 2'b00; // Transition to A
+            else 
+                next_state = 2'b01; // Remain in B
+
+        2'b00: // State A
+            if (in == 1'b0)
+                next_state = 2'b01; // Transition to B
+            else
+                next_state = 2'b00; // Remain in A
+
+        default:
+            next_state = 2'b01; // Default to state B
+    endcase
+end
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        current_state <= 2'b01; // Asynchronously reset to state B
+    else
+        current_state <= next_state;
+end
+
+assign out = (current_state == 2'b00); // Output is high when in state A
+
+endmodule
+```

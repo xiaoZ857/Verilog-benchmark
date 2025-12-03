@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob030_popcount255/Prob030_popcount255_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob030_popcount255/Prob030_popcount255_sample01.sv dataset_code-complete-iccad2023/Prob030_popcount255_test.sv dataset_code-complete-iccad2023/Prob030_popcount255_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\deepseek-r1_14b_0shot_temp0.0\Prob030_popcount255/Prob030_popcount255_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out' has 209 mismatches. First mismatch occurred at time 20.
+Hint: Total mismatched samples is 209 out of 215 samples
+
+Simulation finished at 1076 ps
+Mismatches: 209 in 215 samples
+
+
+--- stderr ---

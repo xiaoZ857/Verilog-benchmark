@@ -1,0 +1,20 @@
+Here's the implementation of the described multiplexer:
+
+```verilog
+always_comb begin
+    case (sel)
+        0: out = a;
+        1: out = b;
+        2: out = c;
+        3: out = d;
+        4: out = e;
+        5: out = f;
+        6: out = g;
+        7: out = h;
+        8: out = i;
+        default: out = 1;
+    endcase
+end
+```
+
+This code uses a case statement to select between the nine input signals based on the value of `sel`. When `sel` is outside the range 0-8 (i.e., 9-15), the output is set to all ones.

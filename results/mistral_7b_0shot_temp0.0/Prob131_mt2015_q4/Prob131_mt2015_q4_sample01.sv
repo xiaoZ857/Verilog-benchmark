@@ -1,0 +1,46 @@
+
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+module A (
+  input x,
+  input y,
+  output wire z
+);
+  assign z = (x ^ y) & x;
+endmodule
+
+module B (
+  input x,
+  input y,
+  output wire z
+);
+  reg z;
+  always @(posedge clk) begin
+    if ((x == 0 && y == 0) ||
+        (x == 1 && y == 0 && posedge clk) ||
+        (x == 0 && y == 1 && negedge clk) ||
+        (x == 1 && y == 1 && ({x,y} == 1'b11)) )
+      z <= 1'b1;
+    else
+      z <= 1'b0;
+  end
+endmodule
+
+// Assuming a global clock signal 'clk' is defined elsewhere in the design
+TopModule top (
+  .x(x),
+  .y(y),
+  .z(z)
+);
+
+wire [3:0] or_in, and_in;
+OR or_gate (.a(top.A0.z), .b(top.B0.z), .o(or_in[0]));
+OR or_gate2 (.a(top.A1.z), .b(top.B1.z), .o(or_in[1]));
+AND and_gate (.a(top.A0.z), .b(top.B0.z), .o(and_in[0]));
+AND and_gate2 (.a(top.A1.z), .b(top.B1.z), .o(and_in[1]));
+XOR xor_gate (.a(or_in[0]), .b(and_in[1]), .o(z) );

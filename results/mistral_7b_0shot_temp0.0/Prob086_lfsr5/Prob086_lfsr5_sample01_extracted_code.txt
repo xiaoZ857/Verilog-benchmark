@@ -1,0 +1,17 @@
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 5'b1; // Active-high synchronous reset sets all outputs to 1
+    else if (!reset) // If not reset, shift the register and apply XOR operation at tapped bits
+        q <= {q[3], ~q[4] ^ q[0], q[2], q[1]};
+end
+
+// Explanation:
+// The always block is triggered on positive edge of clk or posedge reset.
+// If reset is high (active-high), the outputs are set to 1.
+// Otherwise, if not reset, the register shifts right and XOR operation is applied at bit positions 5 and 3.
+// Bit position 5 has a tap, so it XORs with q[0] (LSB output).
+// Bit position 3 also has a tap, so it XORs with the inverted value of q[4].
+// The other bits shift right unchanged.
+
+endmodule

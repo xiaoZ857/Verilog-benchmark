@@ -1,0 +1,29 @@
+
+
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+reg [2:0] pos;
+
+always @(*) begin
+  if (in == 8'b00000000) 
+    pos = 3'd0;
+  else if (in[7] == 1)
+    pos = in[7];
+  else if (in[6] == 1 && in[7] == 0)
+    pos = in[6];
+  else if (in[5] == 1 && in[6] == 0 && in[7] == 0)
+    pos = in[5];
+  else if (in[4] == 1 && in[5] == 0 && in[6] == 0 && in[7] == 0)
+    pos = in[4];
+  else if (in[3] == 1 && in[4] == 0 && in[5] == 0 && in[6] == 0 && in[7] == 0)
+    pos = in[3];
+  else if (in[2] == 1 && in[3] == 0 && in[4] == 0 && in[5] == 0 && in[6] == 0 && in[7] == 0)
+    pos = in[2];
+  else if (in[1] == 1 && in[2] == 0 && in[3] == 0 && in[4] == 0 && in[5] == 0 && in[6] == 0 && in[7] == 0)
+    pos = in[1];
+  else if (in[0] == 1 && in[1] == 0 && in[2] == 0 && in[3] == 0 && in[4] == 0 && in[5] == 0 && in[6] == 0 && in[7] == 0)
+    pos = in[0];
+endmodule

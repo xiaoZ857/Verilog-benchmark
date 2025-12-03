@@ -1,0 +1,21 @@
+
+module TopModule (
+  input do_sub,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out,
+  output reg result_is_zero
+);
+
+always @(posedge clk) begin
+    if (do_sub)
+        out = (a - b); // Use parentheses for subtraction
+    else
+        out = (a + b); // Use parentheses for addition
+
+    result_is_zero <= (out === 0); // Compare with zero instead of negating out
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

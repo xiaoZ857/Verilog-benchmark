@@ -1,0 +1,12 @@
+```verilog
+always @(posedge clk) begin
+    if (L)
+        Q <= R;
+    else if (E)
+        Q <= {Q[n-2:0], w};
+end
+
+endmodule
+```
+
+This Verilog code snippet implements one stage of an n-bit shift register with the specified control signals. The `always` block is triggered on the positive edge of the clock (`posedge clk`). If the load signal `L` is asserted, the output `Q` loads the value from `R`. Otherwise, if the enable signal `E` is asserted, `Q` shifts left by one bit and takes the new input `w` as its least significant bit. The shift operation uses concatenation to achieve this behavior.

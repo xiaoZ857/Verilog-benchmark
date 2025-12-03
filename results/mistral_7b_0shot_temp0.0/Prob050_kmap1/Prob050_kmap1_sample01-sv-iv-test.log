@@ -1,0 +1,9 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob050_kmap1/Prob050_kmap1_sample01 results\mistral_7b_0shot_temp0.0\Prob050_kmap1/Prob050_kmap1_sample01.sv dataset_code-complete-iccad2023/Prob050_kmap1_test.sv dataset_code-complete-iccad2023/Prob050_kmap1_ref.sv
+Return code: 1
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob050_kmap1/Prob050_kmap1_sample01.sv:11: syntax error

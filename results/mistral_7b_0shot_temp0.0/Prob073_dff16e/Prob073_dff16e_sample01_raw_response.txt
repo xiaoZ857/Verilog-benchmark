@@ -1,0 +1,28 @@
+ Here is the Verilog code for the described module:
+
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [15:0] q
+);
+
+reg [15:0] flipflops [15:0]; // Declare an array of 16 D-Flip Flops
+
+always @(posedge clk) begin
+  if (!resetn) begin // If resetn is active low, set all flip flops to zero on reset
+    flipflops <= 0;
+  end else begin
+    if (byteena[1]) flipflops[15:8] <= d[15:8]; // Write upper byte to flip flops if byteena[1] is high
+    if (byteena[0]) flipflops[7:0] <= d[7:0];   // Write lower byte to flip flops if byteena[0] is high
+  end
+end
+
+assign q = flipflops; // Assign the output q to the value of the flip flop array
+
+endmodule
+```
+
+This code creates a module named `TopModule` with inputs for clock, resetn, byteena, and d, as well as an output for q. It uses an always block triggered by the positive edge of clk to update the values in the flipflops array based on the byteena input. The final assignment statement assigns the value of the flipflops array to the output q.

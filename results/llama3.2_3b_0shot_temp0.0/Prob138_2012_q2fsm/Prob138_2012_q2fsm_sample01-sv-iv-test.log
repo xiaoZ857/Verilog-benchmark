@@ -1,0 +1,36 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01 results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:16: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:16: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:17: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:17: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:31: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:32: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:32: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:33: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:40: warning: Numeric constant truncated to 2 bits.
+results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:42: warning: Numeric constant truncated to 2 bits.
+dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:70: warning: Port 4 (z) of TopModule expects 2 bits, got 1.
+dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:70:        : Padding 1 high bits of the port.
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\llama3.2_3b_0shot_temp0.0\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'z' has 132 mismatches. First mismatch occurred at time 190.
+Hint: Total mismatched samples is 132 out of 400 samples
+
+Simulation finished at 2001 ps
+Mismatches: 132 in 400 samples
+
+
+--- stderr ---

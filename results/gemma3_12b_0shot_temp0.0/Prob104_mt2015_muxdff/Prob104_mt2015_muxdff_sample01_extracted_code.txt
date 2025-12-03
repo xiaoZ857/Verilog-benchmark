@@ -1,0 +1,7 @@
+always @(posedge clk) begin
+  if (L) begin
+    Q <= r_in;
+  end else begin
+    Q <= q_in;
+  end
+endmodule

@@ -1,0 +1,26 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01 results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv dataset_code-complete-iccad2023/Prob006_vectorr_test.sv dataset_code-complete-iccad2023/Prob006_vectorr_ref.sv
+Return code: 8
+
+--- stdout ---
+
+
+--- stderr ---
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:10: error: out['sd0] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd0] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:11: error: out['sd1] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd1] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:12: error: out['sd2] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd2] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:13: error: out['sd3] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd3] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:14: error: out['sd4] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd4] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:15: error: out['sd5] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd5] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:16: error: out['sd6] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd6] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:17: error: out['sd7] is not a valid l-value in tb.top_module1.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:5:      : out['sd7] is declared here as wire.
+results\deepseek-r1_14b_0shot_temp0.0\Prob006_vectorr/Prob006_vectorr_sample01.sv:8: warning: @* found no sensitivities so it will never trigger.
+8 error(s) during elaboration.

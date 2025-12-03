@@ -1,0 +1,35 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01 results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv dataset_code-complete-iccad2023/Prob144_conwaylife_ref.sv
+Return code: 27
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:19: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:19: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:19: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:20: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:20: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:24: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:24: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:24: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:24: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:24: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:25: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:25: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:33: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:34: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:35: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:36: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:37: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:38: syntax error
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:42: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:43: syntax error
+dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:13: error: invalid module item.

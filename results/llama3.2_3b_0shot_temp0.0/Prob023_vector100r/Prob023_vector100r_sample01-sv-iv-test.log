@@ -1,0 +1,14 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01 results\llama3.2_3b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01.sv dataset_code-complete-iccad2023/Prob023_vector100r_test.sv dataset_code-complete-iccad2023/Prob023_vector100r_ref.sv
+Return code: 6
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob023_vector100r/Prob023_vector100r_sample01.sv:12: syntax error
+dataset_code-complete-iccad2023/Prob023_vector100r_test.sv:9: error: malformed statement
+dataset_code-complete-iccad2023/Prob023_vector100r_test.sv:11: syntax error
+dataset_code-complete-iccad2023/Prob023_vector100r_test.sv:12: Syntax in assignment statement l-value.
+dataset_code-complete-iccad2023/Prob023_vector100r_test.sv:14: syntax error
+dataset_code-complete-iccad2023/Prob023_vector100r_test.sv:15: error: malformed statement

@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob078_dualedge/Prob078_dualedge_sample01 results\phi4_14b_0shot_temp0.0\Prob078_dualedge/Prob078_dualedge_sample01.sv dataset_code-complete-iccad2023/Prob078_dualedge_test.sv dataset_code-complete-iccad2023/Prob078_dualedge_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob078_dualedge/Prob078_dualedge_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has 2 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 2 out of 224 samples
+
+Simulation finished at 1121 ps
+Mismatches: 2 in 224 samples
+
+
+--- stderr ---

@@ -1,0 +1,24 @@
+```verilog
+module TopModule (
+    input c,
+    input d,
+    output reg [3:0] mux_in
+);
+
+    // Intermediate signals for the 2-to-1 multiplexers
+    wire w0, w1;
+
+    // First level of 2-to-1 MUXes
+    assign w0 = (c) ? 1'b1 : 1'b0; // c -> w0
+    assign w1 = (d) ? 1'b1 : 1'b0; // d -> w1
+
+    // Second level of 2-to-1 MUXes
+    always @(*) begin
+        mux_in[0] = (!c & !d); // ab=00, cd=00
+        mux_in[1] = (w0 & !d);  // ab=01, cd=01 or 11 or 10
+        mux_in[2] = ((w0 & w1) | (c & d)); // ab=11, cd=11 or 10
+        mux_in[3] = ((!w1 & c) | (w0 & !d)); // ab=10, cd=00 or 01 or 10
+    end
+
+endmodule
+```

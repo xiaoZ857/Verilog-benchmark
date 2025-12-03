@@ -1,0 +1,4 @@
+```verilog
+assign out = (a & c) | ((~a & ~c) & (~b & d)) | ((~a & ~c) & (b & d));
+endmodule
+```

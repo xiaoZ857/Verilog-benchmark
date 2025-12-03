@@ -1,0 +1,35 @@
+
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input reset,
+  output out
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    out <= 0;
+  end else begin
+    case (out)
+      0: begin
+        if (j == 0) begin
+          out <= 0;
+        end else begin
+          out <= 1;
+        end
+      end
+      1: begin
+        if (k == 0) begin
+          out <= 1;
+        end else begin
+          out <= 0;
+        end
+      end
+      default: begin
+        out <= 0;
+      end
+    endcase
+  end
+endmodule

@@ -1,0 +1,11 @@
+Here's the Verilog code implementing 8 D flip-flops:
+
+```verilog
+always @(posedge clk) begin
+    for (i = 0; i < 8; i++) begin
+        q[i] <= d[i];
+    end
+end
+```
+
+This code creates 8 D flip-flops, each triggered by the positive edge of `clk`. The loop iterates through all 8 bits, assigning the value of `d` to `q` on each rising clock edge.

@@ -1,0 +1,29 @@
+```verilog
+always @(posedge clk) begin
+    if (cpu_overheated)
+        shut_off_computer <= 1'b1;
+    else
+        shut_off_computer <= 1'b0; // Ensure it is reset when not overheated
+
+    if (~arrived)
+        keep_driving <= ~gas_tank_empty;
+    else
+        keep_driving <= 1'b0; // Ensure it is reset when arrived
+end
+
+endmodule
+```
+
+### Explanation of Changes:
+
+1. **Clock Triggering**: The original code used `always @(*)`, which implies combinational logic. However, since the outputs are registered (`output reg`), they should be clocked. I've added a positive edge-triggered clock (`posedge clk`) to ensure proper sequential behavior.
+
+2. **Reset Conditions**: 
+   - For `shut_off_computer`, it is set to 1 when `cpu_overheated` is true, and reset to 0 otherwise.
+   - For `keep_driving`, it is set based on the condition `~arrived && ~gas_tank_empty`. If `arrived` is true, `keep_driving` should be reset to 0.
+
+3. **Assumptions**: 
+   - A clock signal (`clk`) is assumed to be available for triggering the sequential logic.
+   - The module name was changed from `top_module` to `TopModule` to match the case sensitivity in Verilog naming conventions. Adjust as necessary based on your project's naming standards.
+
+These changes ensure that the outputs are properly controlled and reset, adhering to typical synchronous design practices.

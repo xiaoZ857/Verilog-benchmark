@@ -1,0 +1,26 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01 results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv dataset_code-complete-iccad2023/Prob079_fsm3onehot_test.sv dataset_code-complete-iccad2023/Prob079_fsm3onehot_ref.sv
+Return code: 17
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:10: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:16: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:20: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:21: syntax error
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:21: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:25: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:26: syntax error
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:26: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:30: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:31: syntax error
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:31: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:33: error: invalid module item.
+results\mistral_7b_0shot_temp0.0\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:34: syntax error
+dataset_code-complete-iccad2023/Prob079_fsm3onehot_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob079_fsm3onehot_test.sv:11: error: invalid module item.

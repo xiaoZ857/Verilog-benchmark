@@ -1,0 +1,15 @@
+ Here is the Verilog code for the circuit you described:
+
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output z
+);
+
+assign z = (A[1] == B[1]) & (A[0] == B[0]);
+
+endmodule
+```
+
+This code defines a module named `TopModule` with two 2-bit inputs `A` and `B`, and an output `z`. The value of `z` is assigned based on the comparison between the corresponding bits of `A` and `B`. If both bits are equal, then `z` will be 1; otherwise, it will be 0.

@@ -1,0 +1,13 @@
+// Implement three different XOR gates
+assign out_assign = a ^ b;
+
+always @(*) begin
+    out_always_comb = a ^ b;
+end
+
+always @(posedge clk) begin
+    if (a ^ b)
+        out_always_ff = 1;
+    else 
+        out_always_ff = 0;
+end

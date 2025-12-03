@@ -1,0 +1,25 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob003_step_one/Prob003_step_one_sample01 results\mistral_7b_0shot_temp0.0\Prob003_step_one/Prob003_step_one_sample01.sv dataset_code-complete-iccad2023/Prob003_step_one_test.sv dataset_code-complete-iccad2023/Prob003_step_one_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob003_step_one/Prob003_step_one_sample01.sv:6: warning: always_comb process has no sensitivities.
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\mistral_7b_0shot_temp0.0\Prob003_step_one/Prob003_step_one_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'one' has no mismatches.
+Hint: Total mismatched samples is 0 out of 20 samples
+
+Simulation finished at 102 ps
+Mismatches: 0 in 20 samples
+
+
+--- stderr ---

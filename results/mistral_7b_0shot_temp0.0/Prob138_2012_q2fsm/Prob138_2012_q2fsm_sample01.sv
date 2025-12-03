@@ -1,0 +1,56 @@
+
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+
+reg [2:0] current_state;
+reg next_state;
+reg z;
+
+always @(posedge clk or posedge reset) begin
+  if (reset)
+    current_state <= 3'b000; // Reset to state A
+  else
+    current_state <= next_state;
+end
+
+always @(posedge clk) begin
+  case (current_state)
+    3'b000: // State A
+      if (w)
+        next_state = 3'b001; // Transition to state B
+      else
+        next_state = 3'b000; // Stay in state A
+
+    3'b001: // State B
+      if (w)
+        next_state = 3'b010; // Transition to state C
+      else
+        next_state = 3'b001; // Stay in state B
+
+    3'b010: // State C
+      if (w)
+        next_state = 3'b100; // Transition to state E
+      else
+        next_state = 3'b010; // Stay in state C
+
+    3'b100: // State E
+      z = w; // Output _z_ is the input w
+      if (!w)
+        next_state = 3'b010; // Transition to state D or stay in state E
+
+    3'b101: // State D
+      next_state = 3'b000; // Transition to state A
+
+    default:
+      next_state = 3'b000; // Reset to state A if invalid state
+  endcase
+end
+
+assign z = w; // Output _z_ is the input w when in state F
+
+endmodule

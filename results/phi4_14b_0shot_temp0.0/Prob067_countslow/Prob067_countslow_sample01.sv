@@ -1,0 +1,21 @@
+
+
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 4'b0000;
+    end else if (slowena) begin
+        case (q)
+            4'd9: q <= 4'b0000; // Reset to 0 after reaching 9
+            default: q <= q + 1'b1; // Increment otherwise
+        endcase
+    end
+end
+
+endmodule

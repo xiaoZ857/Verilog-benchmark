@@ -1,0 +1,7 @@
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+  assign out = ~(a | b); // Alternatively can write `assign out = ~(|a, |b)`
+endmodule

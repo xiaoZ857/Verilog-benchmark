@@ -1,0 +1,21 @@
+ Here is a possible implementation of the described rotator in Verilog:
+
+```verilog
+always @(posedge clk) begin
+    if (load) begin
+        q <= data;
+    end else if (ena[1]) begin
+        q <= {q[98], q[0]}; // right rotation
+    end else if (ena[0]) begin
+        q <= {q[1], q[99]}; // left rotation
+    end
+end
+
+assign q_out = q[99]; // output the most significant bit
+
+endmodule
+```
+
+In this code, I have added an `always @(posedge clk)` block to handle the clock-triggered behavior. Inside this block, we first check if the load signal is active, in which case we simply assign the input data to the output register `q`. If not, we check the enable signals and perform the corresponding rotation operation (right or left).
+
+Finally, I have added an `assign` statement to provide an output for the most significant bit of the rotator. This is optional but can be useful if you need to access this specific bit outside the module.

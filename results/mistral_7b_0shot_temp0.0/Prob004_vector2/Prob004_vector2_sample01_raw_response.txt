@@ -1,0 +1,47 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+always @(posedge clk) begin
+  out[0]  <= in[31];
+  out[1]  <= in[30];
+  out[2]  <= in[29];
+  out[3]  <= in[28];
+  out[4]  <= in[27];
+  out[5]  <= in[26];
+  out[6]  <= in[25];
+  out[7]  <= in[24];
+  out[8]  <= in[23];
+  out[9]  <= in[22];
+  out[10] <= in[21];
+  out[11] <= in[20];
+  out[12] <= in[19];
+  out[13] <= in[18];
+  out[14] <= in[17];
+  out[15] <= in[16];
+  out[16] <= in[15];
+  out[17] <= in[14];
+  out[18] <= in[13];
+  out[19] <= in[12];
+  out[20] <= in[11];
+  out[21] <= in[10];
+  out[22] <= in[9];
+  out[23] <= in[8];
+  out[24] <= in[7];
+  out[25] <= in[6];
+  out[26] <= in[5];
+  out[27] <= in[4];
+  out[28] <= in[3];
+  out[29] <= in[2];
+  out[30] <= in[1];
+  out[31] <= in[0];
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with an input 32-bit vector `in` and an output 32-bit register `out`. The always block is triggered on the positive edge of the clock, and it assigns each bit of the input vector to its corresponding position in the output vector, effectively reversing the byte order.

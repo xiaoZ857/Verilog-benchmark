@@ -1,0 +1,10 @@
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 32'd1;
+    end else begin
+        q <= q[31:2];
+        q[31] = q[30] ^ q[22];
+        q[22] = q[21] ^ q[1];
+        q[1] = q[0] ^ q[0]; // q[0] is always 1 due to reset
+    end
+endmodule

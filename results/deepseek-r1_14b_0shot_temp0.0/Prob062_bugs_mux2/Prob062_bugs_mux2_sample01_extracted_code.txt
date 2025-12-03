@@ -1,0 +1,3 @@
+always_comb begin
+    out = (~sel & a) | (sel & b);
+end

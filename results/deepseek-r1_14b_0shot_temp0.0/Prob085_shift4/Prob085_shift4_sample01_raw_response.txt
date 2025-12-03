@@ -1,0 +1,32 @@
+Here's the Verilog code for the described shift register:
+
+```verilog
+always @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        q <= 4'b0000;
+    end
+end
+
+always @(posedge clk, negedge areset) begin
+    if (!areset && load) begin
+        q <= data;
+    end
+end
+
+always @(posedge clk, negedge areset) begin
+    if (!areset && ena && !load) begin
+        q[0] <= 1'b0; // Shift right with zero fill
+        q[1] <= q[0];
+        q[2] <= q[1];
+        q[3] <= q[2];
+    end
+end
+```
+
+This implementation:
+- Uses an asynchronous reset that takes precedence over all other operations
+- Implements the load function with higher priority than shifting
+- Shifts right when ena is active and load is inactive
+- Maintains proper clock synchronization for all operations
+
+The module declaration you provided already includes the input/output definitions, so this code should be placed inside it.

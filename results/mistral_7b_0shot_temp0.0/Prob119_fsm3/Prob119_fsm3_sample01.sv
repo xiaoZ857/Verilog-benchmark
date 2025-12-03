@@ -1,0 +1,49 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+ ```verilog
+reg state_reg;
+enum { A, B, C, D } state;
+always_comb begin
+  if (areset)
+    state_reg <= A;
+  else if (clk) begin
+    case (state_reg)
+      A: begin
+        if (in)
+          state_reg <= B;
+        else
+          state_reg <= A;
+      end
+      B: begin
+        if (in)
+          state_reg <= B; // no transition for same state on input 1
+        else
+          state_reg <= C;
+      end
+      C: begin
+        if (in)
+          state_reg <= D;
+        else
+          state_reg <= A;
+      end
+      D: begin
+        if (in)
+          state_reg <= B; // no transition for same state on input 1
+        else
+          state_reg <= C;
+      enddefault: state_reg <= A; // default to state A if invalid state
+    endcase
+  end
+end
+assign out = (state_reg == B);
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

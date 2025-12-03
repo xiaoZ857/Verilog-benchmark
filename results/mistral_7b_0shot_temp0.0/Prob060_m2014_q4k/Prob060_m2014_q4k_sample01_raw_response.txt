@@ -1,0 +1,18 @@
+ ```verilog
+always @(posedge clk or negedge resetn) begin
+  if (!resetn) begin
+    Q[3] <= 4'b0; // Reset all flip-flops to zero
+  end else begin
+    Q[0] <= in; // Load new input into first flip-flop
+    for (i = 1; i < 4; i = i + 1) begin
+      Q[i] <= Q[i - 1]; // Shift data through the shift register
+    end
+  end
+end
+
+assign out = Q[3]; // Output is the fourth flip-flop's output
+
+reg [3:0] Q; // Declare a 4-bit register to store the shift register's state
+
+endmodule
+```

@@ -1,0 +1,6 @@
+assign out_assign = a & b;
+
+always @(a or b) begin
+  out_alwaysblock = a & b;
+end
+endmodule

@@ -1,0 +1,75 @@
+
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+
+reg [2:0] state;
+reg [3:0] bit_count;
+reg [7:0] shift_reg;
+reg valid;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 3'b000; // IDLE
+        bit_count <= 4'd0;
+        shift_reg <= 8'h00;
+        valid <= 1'b0;
+        done <= 1'b0;
+    end else begin
+        case (state)
+            3'b000: begin // IDLE
+                if (in == 1'b0) begin
+                    state <= 3'b001; // START_BIT
+                    bit_count <= 4'd0;
+                    shift_reg <= 8'h00;
+                end
+                done <= 1'b0;
+            end
+
+            3'b001: begin // START_BIT
+                if (in == 1'b1) begin
+                    state <= 3'b010; // DATA_BITS
+                end else begin
+                    state <= 3'b000; // IDLE, invalid start bit
+                end
+            end
+
+            3'b010: begin // DATA_BITS
+                shift_reg[0] <= in;
+                if (bit_count < 4'd8) begin
+                    bit_count <= bit_count + 1'b1;
+                    state <= 3'b010; // Continue receiving data bits
+                end else begin
+                    state <= 3'b011; // STOP_BIT
+                    bit_count <= 4'd0;
+                end
+            end
+
+            3'b011: begin // STOP_BIT
+                if (in == 1'b1) begin
+                    valid <= 1'b1;
+                    done <= 1'b1;
+                    state <= 3'b000; // IDLE, ready for next byte
+                end else begin
+                    state <= 3'b000; // IDLE, invalid stop bit
+                end
+            end
+
+        endcase
+    end
+end
+
+always @(posedge clk) begin
+    if (state == 3'b010 && bit_count > 0) begin
+        shift_reg <= {shift_reg[6:0], in}; // Shift left on each data bit received
+    end
+end
+
+assign out_byte = valid ? shift_reg : 8'hXX; // Output byte when valid, don't-care otherwise
+
+endmodule

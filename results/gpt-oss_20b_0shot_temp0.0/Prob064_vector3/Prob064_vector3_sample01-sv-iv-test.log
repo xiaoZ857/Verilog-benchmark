@@ -1,0 +1,27 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01.sv dataset_code-complete-iccad2023/Prob064_vector3_test.sv dataset_code-complete-iccad2023/Prob064_vector3_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob064_vector3/Prob064_vector3_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'w' has no mismatches.
+Hint: Output 'x' has no mismatches.
+Hint: Output 'y' has no mismatches.
+Hint: Output 'z' has no mismatches.
+Hint: Total mismatched samples is 0 out of 126 samples
+
+Simulation finished at 630 ps
+Mismatches: 0 in 126 samples
+
+
+--- stderr ---

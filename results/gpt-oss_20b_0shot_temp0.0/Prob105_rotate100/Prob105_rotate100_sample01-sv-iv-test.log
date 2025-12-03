@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gpt-oss_20b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01 results\gpt-oss_20b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01.sv dataset_code-complete-iccad2023/Prob105_rotate100_test.sv dataset_code-complete-iccad2023/Prob105_rotate100_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gpt-oss_20b_0shot_temp0.0\Prob105_rotate100/Prob105_rotate100_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has no mismatches.
+Hint: Total mismatched samples is 0 out of 4005 samples
+
+Simulation finished at 20026 ps
+Mismatches: 0 in 4005 samples
+
+
+--- stderr ---

@@ -1,0 +1,7 @@
+```verilog
+assign q = (a & ~b) | (~a & b & c) | (a & b & ~c & ~d) | (a & b & c & d);
+
+endmodule
+```
+
+This Verilog code implements a combinational logic circuit based on the given truth table. The output `q` is determined by specific combinations of inputs `a`, `b`, `c`, and `d`. The expression uses logical AND (`&`), OR (`|`), and NOT (`~`) operations to match the conditions observed in the simulation waveforms.

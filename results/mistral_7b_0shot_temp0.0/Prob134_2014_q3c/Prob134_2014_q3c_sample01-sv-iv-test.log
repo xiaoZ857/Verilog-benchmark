@@ -1,0 +1,18 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01 results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv dataset_code-complete-iccad2023/Prob134_2014_q3c_test.sv dataset_code-complete-iccad2023/Prob134_2014_q3c_ref.sv
+Return code: 9
+
+--- stdout ---
+
+
+--- stderr ---
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:42: error: Unable to bind wire/reg/memory `Y['sd0]' in `tb.top_module1'
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:42: error: Unable to elaborate r-value: Y['sd0]
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:15: error: Could not find variable ``Y'' in ``tb.top_module1''
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:17: error: Could not find variable ``Y'' in ``tb.top_module1''
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:22: error: Could not find variable ``Y'' in ``tb.top_module1''
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:24: error: Could not find variable ``Y'' in ``tb.top_module1''
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:28: error: Could not find variable ``Y'' in ``tb.top_module1''
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:32: error: Could not find variable ``Y'' in ``tb.top_module1''
+results\mistral_7b_0shot_temp0.0\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:36: error: Could not find variable ``Y'' in ``tb.top_module1''
+9 error(s) during elaboration.

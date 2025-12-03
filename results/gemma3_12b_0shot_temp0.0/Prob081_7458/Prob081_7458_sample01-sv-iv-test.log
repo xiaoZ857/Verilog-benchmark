@@ -1,0 +1,29 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01 results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01.sv dataset_code-complete-iccad2023/Prob081_7458_test.sv dataset_code-complete-iccad2023/Prob081_7458_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01.sv:18: warning: implicit definition of wire 'and1'.
+results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01.sv:19: warning: implicit definition of wire 'and2'.
+results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01.sv:21: warning: implicit definition of wire 'and3'.
+results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01.sv:22: warning: implicit definition of wire 'and4'.
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\gemma3_12b_0shot_temp0.0\Prob081_7458/Prob081_7458_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'p1y' has no mismatches.
+Hint: Output 'p2y' has no mismatches.
+Hint: Total mismatched samples is 0 out of 439 samples
+
+Simulation finished at 2196 ps
+Mismatches: 0 in 439 samples
+
+
+--- stderr ---

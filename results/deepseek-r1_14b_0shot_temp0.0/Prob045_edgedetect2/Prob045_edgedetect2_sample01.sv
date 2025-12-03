@@ -1,0 +1,22 @@
+
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+always_ff @ (posedge clk) begin
+    reg [7:0] prev_in;
+    reg [7:0] edge_reg;
+
+    // Store previous input state
+    prev_in <= in;
+
+    // Detect edges and register the result for output
+    edge_reg <= (in != prev_in);
+
+    anyedge <= edge_reg;
+end
+
+// VERILOG-EVAL: endmodule not found

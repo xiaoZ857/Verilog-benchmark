@@ -1,0 +1,24 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\phi4_14b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01 results\phi4_14b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01.sv dataset_code-complete-iccad2023/Prob124_rule110_test.sv dataset_code-complete-iccad2023/Prob124_rule110_ref.sv
+Return code: 0
+
+--- stdout ---
+
+
+--- stderr ---
+
+
+=== Test Execution (FIXED) ===
+Command: vvp results\phi4_14b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01
+Return code: 0
+
+--- stdout ---
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'q' has 6220 mismatches. First mismatch occurred at time 40.
+Hint: Total mismatched samples is 6220 out of 6283 samples
+
+Simulation finished at 31416 ps
+Mismatches: 6220 in 6283 samples
+
+
+--- stderr ---

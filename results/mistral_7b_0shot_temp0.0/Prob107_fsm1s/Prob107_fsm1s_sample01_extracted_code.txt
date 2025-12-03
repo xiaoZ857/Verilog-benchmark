@@ -1,0 +1,22 @@
+reg state; // The current state of the state machine
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 1'b0; // Reset to B state
+    end else begin
+        case (state)
+            0: begin // Current state is B
+                if (in == 1) begin
+                    state <= 1'b1; // Transition to A state
+                end
+                out <= 1'b1; // Output is 1 in state B
+            end
+            1: begin // Current state is A
+                if (in == 0) begin
+                    state <= 1'b0; // Transition back to B state
+                end
+                out <= 1'b0; // Output is 0 in state A
+            end
+        endcase
+    end
+end
+endmodule

@@ -1,0 +1,14 @@
+ ```verilog
+reg [9:0] counter;
+always @(posedge clk) begin
+    if (load)
+        counter <= data;
+    else if (counter > 0)
+        counter = counter - 1;
+end
+
+assign tc = (counter == 0);
+
+endmodule
+```
+This Verilog module named `TopModule` implements a timer that counts down for a given number of clock cycles and asserts the `tc` signal when the count reaches zero. The internal counter can be loaded with a 10-bit data at any time, including when it is still counting and has not yet reached 0. The counter stops counting once it reaches 0 until it is loaded again.

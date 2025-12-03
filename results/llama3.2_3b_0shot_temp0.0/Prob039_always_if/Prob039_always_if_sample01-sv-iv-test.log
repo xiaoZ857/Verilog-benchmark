@@ -1,0 +1,13 @@
+=== Compilation ===
+Command: iverilog -Wall -Winfloop -Wno-timescale -g2012 -s tb -o results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01 results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01.sv dataset_code-complete-iccad2023/Prob039_always_if_test.sv dataset_code-complete-iccad2023/Prob039_always_if_ref.sv
+Return code: 4
+
+--- stdout ---
+
+
+--- stderr ---
+results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01.sv:13: error: 'out_always' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01.sv:9:      : It was declared here as a variable.
+dataset_code-complete-iccad2023/Prob039_always_if_test.sv:1: error: `timescale directive can not be inside a module definition.
+dataset_code-complete-iccad2023/Prob039_always_if_ref.sv:16: syntax error
+I give up.

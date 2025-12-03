@@ -1,99 +1,200 @@
-# VerilogEval Overview
+# VerilogEval Benchmark 测试结果记录
 
-This is an evaluation harness for the VerilogEval problem solving dataset originally described in the paper "[VerilogEval: Evaluating Large Language Models for Verilog Code Generation](https://arxiv.org/abs/2309.07544)," published in 2023. In August 2024, this repository was revised to cover specification-to-RTL tasks in addition to the original code completion task, add in-context learning examples to prompts, and categorize common iverilog failures. Please see the related apaper "[Revisiting VerilogEval: Newer LLMs, In-Context Learning, and Specification-to-RTL Tasks](https://arxiv.org/abs/2408.11053)," published in 2024.
+## 原始数据集简介
 
-**If you would like to benchmark against the original VerilogEval 1.0 harness, please checkout Git branch "release/1.0.0" which has been kept to preserve this original benchmark. Otherwise, the main branch can be used for the improved harness.**
+基于 VerilogEval 官方数据集（ICCAD 2023），包含 156 个 Verilog 数字电路设计问题，用于评估大语言模型的 Verilog 代码生成能力。
 
-### VerilogEvalV2 with Reframed Prompts and New Scripts
+- **数据集**: `dataset_code-complete-iccad2023`
+- **问题数量**: 156 个
+- **任务类型**: 代码补全
+- **评估工具**: iverilog v12 + 仿真测试
 
-This repo contains the original VerilogEval dataset with reframed prompts
-and new scripts. The original VerilogEval prompts explicitly included the
-Verilog module interface, while in this version we specify the module
-interface more abstractly. The new scripts manage the dataset as plain
-text files (instead of a large JSONL file), include generation and
-analysis scripts, and include a Makefile to drive the workflow. The
-generation script includes support for easily changing the LLM model,
-including/excluding in-context learning rules and in-context learning
-examples. The analysis script includes support for categorizing common
-iverilog errors and outputing the results in both plain text and CSV
-files.
+每个问题包含：
+- `Prob*_prompt.txt`: 问题描述和模块接口
+- `Prob*_test.sv`: 功能验证测试
+- `Prob*_ref.sv`: 参考实现
 
-MachineEval is not supported in VerilogEvalV2, only the Human Eval problem statements. Pass@10 is no longer being reported either, instead Pass@1 with number of samples n=1 (temperature=0, top_p=0.01) and n=20 (temperature=0.85, top_p=0.95) for low and high and temperature results, respectively.
+## 测试结果记录
 
-### Setup Linux Environment
+### 代码补全任务 (Code Completion)
 
-In order to use PyHDL-Eval you will need to install iverilog, verilator,
-and python3 along with several Python packages. These are the versions
-which were used for this project:
+#### 2024年12月3日测试
 
- - iverilog (v12)
- - python3 (v3.11.0)
+**测试配置**:
+- 温度参数: 0.0（确定性输出）
+- 采样方式: 零样本（0-shot）
+- 最大Token数: 1024
+- 测试环境: Windows + iverilog v12
 
-**Please note that iverilog v13 (development release) is not supported.**
+**测试结果**:
 
-To install Python 3.11:
+| 模型名称 | 参数规模 | 编译成功率 | **测试通过率** | 通过/总数 |
+|---------|---------|-----------|--------------|----------|
+| gpt-oss:20b | 20B | 59.6% | **56.4%** | 88/156 |
+| phi4:14b | 14B | 68.6% | 30.8% | 48/156 |
+| gemma3:12b | 12B | 53.8% | 28.2% | 44/156 |
+| qwen3:8b | 8B | 17.9% | 17.3% | 27/156 |
+| deepseek-r1:14b | 14B | 12.8% | 9.6% | 15/156 |
+| llama3.2:3b | 3B | 30.8% | 9.6% | 15/156 |
+| mistral:7b | 7B | 21.8% | 9.0% | 14/156 |
+
+**关键发现**:
+- gpt-oss:20b 表现最佳，通过率 56.4%
+- 参数规模与性能不完全正相关
+- phi4:14b 编译成功率最高（68.6%），但通过率仅为 30.8%
+
+## 评估方法
+
+### 数据集结构
+
+每个问题包含：
+- `Prob*_prompt.txt`: 问题描述和模块接口定义
+- `Prob*_test.sv`: 功能验证测试文件
+- `Prob*_ref.sv`: 参考实现（标准答案）
+- `Prob*_ifc.txt`: 模块接口定义文件
+
+**问题示例：Prob001_zero（恒定低电平输出）**
+
+问题描述 (`Prob001_zero_prompt.txt`):
 ```
-$ conda create -n codex python=3.11
-$ conda activate codex
+Build a circuit that always outputs a LOW.
+
+module TopModule (
+  output zero
+);
 ```
 
-Install [ICARUS Verilog](https://github.com/steveicarus/iverilog):
-```
-$ git clone https://github.com/steveicarus/iverilog.git && cd iverilog \
-        && git checkout v12-branch \
-        && sh ./autoconf.sh && ./configure && make -j4\
-        && make install
-```
-
-You will also need the following Python packages:
-
-```
- % pip install langchain langchain-openai langchain-nvidia-ai-endpoints
+参考实现 (`Prob001_zero_ref.sv`):
+```verilog
+module RefModule (
+  output zero
+);
+  assign zero = 1'b0;
+endmodule
 ```
 
-We plan to provide a Dockerfile and backwards compatibility mode with a prebuilt jsonl soon.
+测试文件 (`Prob001_zero_test.sv`):
+```verilog
+module tb();
+  wire zero_ref;
+  wire zero_dut;
+  RefModule good1 (.zero(zero_ref));
+  TopModule top_module1 (.zero(zero_dut));
+  assign tb_match = ( { zero_ref } === ( { zero_ref } ^ { zero_dut } ^ { zero_ref } ) );
+  always @(posedge clk, negedge clk) begin
+    if (!tb_match) begin
+      stats1.errors++;
+    end
+  end
+endmodule
+```
 
-### Usage 
+### 提示词格式
 
-The evalution harness is run using make and various evaluation parameters can be set as below:
+**系统消息**:
+```
+You only complete chats with syntax correct Verilog code. End the Verilog module code completion with 'endmodule'. Do not include module, input and output definitions.
+```
+
+**用户提示**:
+```
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+[问题描述]
+
+module TopModule (
+  [端口定义]
+);
+```
+
+**完整 API 调用示例**:
+```json
+[
+  {"role": "system", "content": "You only complete chats with syntax correct Verilog code. End the Verilog module code completion with 'endmodule'. Do not include module, input and output definitions."},
+  {"role": "user", "content": "// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.\nBuild a circuit that always outputs a LOW.\n\nmodule TopModule (\n  output zero\n);\n"}
+]
+```
+
+### 评估流程
+
+1. **代码生成**: 发送提示词给模型生成 Verilog 代码
+2. **代码提取**: 从模型响应中提取纯净的 Verilog 代码
+3. **静态检查**: 检测可能导致仿真卡死的代码模式
+4. **代码组装**: 将生成的代码与模块接口组装成完整文件
+5. **编译测试**: 使用 iverilog 编译生成的代码
+6. **功能验证**: 运行仿真测试与参考实现对比
+7. **结果记录**: 记录编译状态、测试通过情况和详细日志
+
+### 静态过滤器
+
+**背景问题**: 某些模型生成的代码包含组合逻辑环路（如 `assign out = (clk && ~out) ^ in;`），导致仿真无限循环卡死。
+
+**解决方案**: 集成静态分析器检测和过滤危险代码模式：
+
+**检测模式**:
+- 组合逻辑环路：信号在 assign 语句中自我引用
+- 复杂反馈回路：多信号形成的循环依赖
+- 不安全的时钟使用：可能导致竞争条件的时钟模式
+
+**处理流程**:
+1. 在编译前对生成的代码进行静态分析
+2. 如果检测到危险模式，跳过仿真测试并标记为 "STATIC FAILED"
+3. 记录具体的失败原因到日志文件
+4. 确保评估框架能够稳定运行，避免因个别问题导致整体测试中断
+
+## 结果文件结构
+
+评估完成后，结果保存在以下位置：
 
 ```
-mkdir -p build/
-../configure  --with-task=$task --with-model=$model --with-examples=$shots --with-samples=$samples --with-temperature=$temperature --with-top-p=$top_p
-make
+results/
+├── corrected_test_results.txt     # 汇总报告
+├── corrected_test_results.csv      # CSV格式数据
+├── corrected_test_results.json     # JSON详细数据
+└── [model]_0shot_temp0.0/         # 各模型详细结果
+    ├── Prob*_raw_response.txt     # 模型原始响应
+    ├── Prob*_extracted_code.txt   # 提取的Verilog代码
+    ├── Prob*.sv                   # 完整测试代码文件
+    └── Prob*-sv-iv-test.log       # 编译和测试日志
 ```
 
-Evaluation can be sped up by providing the `-j` flag to make, such as `-j4` to run 4 worker processes.
+## 原始 VerilogEval 项目
 
-Available tasks are `code-complete-iccad2023` and `spec-to-rtl` with each referencing their corresponding `dataset_$task` directory containig the problems. Problem themselves are identical between the two datasets and only the task format changes.
+本项目基于 VerilogEval 官方数据集，相关工作包括：
 
-Valid models are listed at the top of `scripts/sv-generate`. The number of in-context learning examples can be between 0-4, and given with `--with-examples`. Samples to collect per problem are given by `--with-samples`. Finally, model temperature and top_p can be set to --with-temperature and --with-top-p, respectively.
+- **VerilogEval v1** (2023): "[VerilogEval: Evaluating Large Language Models for Verilog Code Generation](https://arxiv.org/abs/2309.07544)" - ICCAD 2023
+- **VerilogEval v2** (2024): "[Revisiting VerilogEval: Newer LLMs, In-Context Learning, and Specification-to-RTL Tasks](https://arxiv.org/abs/2408.11053)" - 增加了规范到RTL转换、上下文学习等功能
 
-These parameters can be easily swept with a shell script, to create separate build directories for each evaluation harness configuration target. 
+**分支说明**:
+- `main`: VerilogEval V2 改进版本
+- `release/1.0.0`: 原始 VerilogEval 1.0 基准
 
-## Citation
+## 引用
 
-For this VerilogEval v2, please cite the following paper:
+如果使用本评估基准，请引用：
 
-```
+**VerilogEval V2**:
+```bibtex
 @misc{pinckney2024revisitingverilogevalnewerllms,
-      title={Revisiting VerilogEval: Newer LLMs, In-Context Learning, and Specification-to-RTL Tasks}, 
+      title={Revisiting VerilogEval: Newer LLMs, In-Context Learning, and Specification-to-RTL Tasks},
       author={Nathaniel Pinckney and Christopher Batten and Mingjie Liu and Haoxing Ren and Brucek Khailany},
       year={2024},
       eprint={2408.11053},
       archivePrefix={arXiv},
       primaryClass={cs.SE},
-      url={https://arxiv.org/abs/2408.11053}, 
+      url={https://arxiv.org/abs/2408.11053},
 }
 ```
 
-For the original VerilogEval v1, please use:
-
-```
+**原始 VerilogEval**:
+```bibtex
 @inproceedings{liu2023verilogeval,
   title={{VerilogEval:} Evaluating Large Language Models for Verilog Code Generation},
   author={Liu, Mingjie and Pinckney, Nathaniel and Khailany, Brucek and Ren, Haoxing},
-  booktitle={2023 IEEE/ACM International Conference on Computer-Aided Design (ICCAD)}, 
+  booktitle={2023 IEEE/ACM International Conference on Computer-Aided Design (ICCAD)},
   year={2023}
 }
 ```
+
+---
+
+*此文档用于持续记录 VerilogEval Benchmark 的测试结果，后续测试结果请按日期和任务类型添加到对应章节中。*

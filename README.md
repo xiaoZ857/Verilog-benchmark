@@ -7,7 +7,7 @@
 - **数据集**: `dataset_code-complete-iccad2023`
 - **问题数量**: 156 个
 - **任务类型**: 代码补全
-- **评估工具**: iverilog v12 + 仿真测试
+- **评估工具**: iverilog v12
 
 每个问题包含：
 - `Prob*_prompt.txt`: 问题描述和模块接口

@@ -1,0 +1,13 @@
+Problem: Prob116_m2014_q3
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\llama3.2_3b_0shot_temp0.0\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:8: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\llama3.2_3b_0shot_temp0.0\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:9: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\llama3.2_3b_0shot_temp0.0\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:8: error: Unable to elaborate r-value: ((((x['sd3])&(x['sd2]))|(((~(x['sd3]))&(~(x['sd2])))^(d)))|((((x['sd3])&(~(x['sd2])))|((~(x['sd3]))&(x['sd2])))&(d)))|(((x['sd1])&(x['sd4]))|((x['sd1])&(~(x['sd4]))))
+3 error(s) during elaboration.

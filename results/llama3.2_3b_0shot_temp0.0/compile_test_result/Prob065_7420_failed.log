@@ -1,0 +1,16 @@
+Problem: Prob065_7420
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob065_7420/Prob065_7420_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'p1y' has 91 mismatches. First mismatch occurred at time 40.
+Hint: Output 'p2y' has 89 mismatches. First mismatch occurred at time 30.
+Hint: Total mismatched samples is 143 out of 239 samples
+
+Simulation finished at 1196 ps
+Mismatches: 143 in 239 samples

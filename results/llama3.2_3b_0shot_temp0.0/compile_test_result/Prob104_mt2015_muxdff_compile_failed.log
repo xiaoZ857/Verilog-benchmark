@@ -1,0 +1,11 @@
+Problem: Prob104_mt2015_muxdff
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob104_mt2015_muxdff/Prob104_mt2015_muxdff_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\llama3.2_3b_0shot_temp0.0\Prob104_mt2015_muxdff/Prob104_mt2015_muxdff_sample01.sv:10: error: 'Q' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob104_mt2015_muxdff/Prob104_mt2015_muxdff_sample01.sv:7:      : It was declared here as a variable.

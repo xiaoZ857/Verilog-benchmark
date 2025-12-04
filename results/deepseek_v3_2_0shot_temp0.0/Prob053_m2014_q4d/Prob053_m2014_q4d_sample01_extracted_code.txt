@@ -1,0 +1,3 @@
+  always_ff @(posedge clk) begin
+    out <= in ^ out;
+  end

@@ -1,0 +1,12 @@
+Problem: Prob144_conwaylife
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\llama3.2_3b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:10: error: 'q' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:7:      : It was declared here as a variable.
+results\llama3.2_3b_0shot_temp0.0\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:23: warning: Static variable initialization requires explicit lifetime in this context.

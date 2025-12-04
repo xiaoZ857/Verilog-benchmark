@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output out
+);
+
+  // Internal signals for the shift register stages
+  reg [3:0] shift_reg;
+  
+  // Four D flip-flops in series with synchronous active-low reset
+  always @(posedge clk) begin
+    if (!resetn) begin
+      // Reset all flip-flops to 0
+      shift_reg <= 4'b0000;
+    end else begin
+      // Shift operation: shift left, input goes to LSB
+      shift_reg <= {shift_reg[2:0], in};
+    end
+  end
+  
+  // Output is the last stage of the shift register
+  assign out = shift_reg[3];
+  
+endmodule

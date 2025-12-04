@@ -1,0 +1,19 @@
+Problem: Prob124_rule110
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\llama3.2_3b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01.sv:10: error: 'q' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01.sv:7:      : It was declared here as a variable.
+results\llama3.2_3b_0shot_temp0.0\Prob124_rule110/Prob124_rule110_sample01.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:12: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:19: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:22: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:24: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:29: Syntax in assignment statement l-value.

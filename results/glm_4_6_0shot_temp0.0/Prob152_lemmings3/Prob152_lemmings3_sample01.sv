@@ -1,0 +1,79 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+reg [1:0] state, next_state;
+reg direction; // 0 for left, 1 for right
+
+// State encoding
+parameter WALK_LEFT = 2'b00;
+parameter WALK_RIGHT = 2'b01;
+parameter FALL = 2'b10;
+parameter DIG = 2'b11;
+
+// State transition logic
+always @(*) begin
+    next_state = state;
+    
+    case (state)
+        WALK_LEFT: begin
+            if (!ground) begin
+                next_state = FALL;
+            end else if (dig) begin
+                next_state = DIG;
+            end else if (bump_left || bump_right) begin
+                if (bump_left) begin
+                    next_state = WALK_RIGHT;
+                end else begin
+                    next_state = WALK_LEFT;
+                end
+            end
+        end
+        
+        WALK_RIGHT: begin
+            if (!ground) begin
+                next_state = FALL;
+            end else if (dig) begin
+                next_state = DIG;
+            end else if (bump_left || bump_right) begin
+                if (bump_right) begin
+                    next_state = WALK_LEFT;
+                end else begin
+                    next_state = WALK_RIGHT;
+                end
+            end
+        end
+        
+        FALL: begin
+            if (ground) begin
+                next_state = direction ? WALK_RIGHT : WALK_LEFT;
+            end
+        end
+        
+        DIG: begin
+            if (!ground) begin
+                next_state = FALL;
+            end
+        end
+    endcase
+end
+
+// Direction register update logic
+always @(*) begin
+    if (state == WALK_LEFT) begin
+        direction = 0;
+    end else if (state == WALK_RIGHT) begin
+        direction = 1
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,29 @@
+Looking at the waveform data, it appears that for each input value `a` from 0 to 7, there is a corresponding 16-bit output `q`. The values are:
+
+- a=0 ¡ú q=1232 (hex)
+- a=1 ¡ú q=aee0 (hex)
+- a=2 ¡ú q=27d4 (hex)
+- a=3 ¡ú q=5a0e (hex)
+- a=4 ¡ú q=2066 (hex)
+- a=5 ¡ú q=64ce (hex)
+- a=6 ¡ú q=c526 (hex)
+- a=7 ¡ú q=2f19 (hex)
+
+Since this is a combinational circuit, we can implement it using a case statement or an assign statement with a lookup table.
+
+```verilog
+  always @(*) begin
+    case (a)
+      3'd0: q = 16'h1232;
+      3'd1: q = 16'haee0;
+      3'd2: q = 16'h27d4;
+      3'd3: q = 16'h5a0e;
+      3'd4: q = 16'h2066;
+      3'd5: q = 16'h64ce;
+      3'd6: q = 16'hc526;
+      3'd7: q = 16'h2f19;
+      default: q = 16'h0000;
+    endcase
+  end
+endmodule
+```

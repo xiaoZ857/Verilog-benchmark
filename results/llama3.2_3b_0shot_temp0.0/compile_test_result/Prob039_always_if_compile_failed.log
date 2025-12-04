@@ -1,0 +1,14 @@
+Problem: Prob039_always_if
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01.sv:13: error: 'out_always' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob039_always_if/Prob039_always_if_sample01.sv:9:      : It was declared here as a variable.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob039_always_if_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob039_always_if_ref.sv:16: syntax error
+I give up.

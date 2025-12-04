@@ -1,0 +1,34 @@
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+  // State transition logic
+  always @(*) begin
+    next_state = 4'b0000; // Default assignment
+    case (1'b1)
+      state[0]: begin // State A (4'b0001)
+        if (in == 1'b0) next_state = 4'b0001; // A
+        else next_state = 4'b0010; // B
+      end
+      state[1]: begin // State B (4'b0010)
+        if (in == 1'b0) next_state = 4'b0100; // C
+        else next_state = 4'b0010; // B
+      end
+      state[2]: begin // State C (4'b0100)
+        if (in == 1'b0) next_state = 4'b0001; // A
+        else next_state = 4'b1000; // D
+      end
+      state[3]: begin // State D (4'b1000)
+        if (in == 1'b0) next_state = 4'b0100; // C
+        else next_state = 4'b0010; // B
+      end
+      default: next_state = 4'b0001; // Default to state A
+    endcase
+  end
+
+  // Output logic (Moore: output depends only on state)
+  assign out = state[3]; // Output is 1 only in state D (one-hot bit 3)
+endmodule

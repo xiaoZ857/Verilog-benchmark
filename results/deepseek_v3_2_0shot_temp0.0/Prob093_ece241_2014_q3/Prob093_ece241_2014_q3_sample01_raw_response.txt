@@ -1,0 +1,84 @@
+We can determine each mux_in value from the K-map by looking at the column corresponding to that ab combination:
+
+- For ab = 00 (column 00):  
+  cd = 00 ¡ú 0  
+  cd = 01 ¡ú 1  
+  cd = 11 ¡ú 1  
+  cd = 10 ¡ú 1  
+  So mux_in[0] = c + d
+
+- For ab = 01 (column 01):  
+  cd = 00 ¡ú 0  
+  cd = 01 ¡ú 0  
+  cd = 11 ¡ú 0  
+  cd = 10 ¡ú 0  
+  So mux_in[1] = 0
+
+- For ab = 11 (column 11):  
+  cd = 00 ¡ú 0  
+  cd = 01 ¡ú 0  
+  cd = 11 ¡ú 1  
+  cd = 10 ¡ú 0  
+  So mux_in[3] = c d
+
+- For ab = 10 (column 10):  
+  cd = 00 ¡ú 1  
+  cd = 01 ¡ú 0  
+  cd = 11 ¡ú 1  
+  cd = 10 ¡ú 1  
+  So mux_in[2] = d' + c
+
+We can implement these using only 2-to-1 multiplexers:
+
+- mux_in[0] = c + d:  
+  Use a 2-to-1 mux with select = c, data0 = d, data1 = 1 ¡ú output = c ? 1 : d
+
+- mux_in[1] = 0:  
+  Connect directly to 0.
+
+- mux_in[3] = c d:  
+  Use a 2-to-1 mux with select = c, data0 = 0, data1 = d ¡ú output = c ? d : 0
+
+- mux_in[2] = d' + c:  
+  This is ~d + c = c + ~d.  
+  Use a 2-to-1 mux with select = c, data0 = ~d, data1 = 1 ¡ú output = c ? 1 : ~d
+
+We need ~d for mux_in[2], which we can get using another 2-to-1 mux:  
+mux with select = d, data0 = 1, data1 = 0 ¡ú output = ~d.
+
+So total:  
+1 mux for ~d,  
+then 3 more muxes for mux_in[0], mux_in[2], mux_in[3],  
+and mux_in[1] = 0.
+
+But we can share the ~d mux output for mux_in[2] and possibly elsewhere.
+
+Let's implement step-by-step in Verilog using only 2-to-1 muxes (ternary operators):
+
+```verilog
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+  
+  wire not_d;
+  wire mux0_out, mux2_out, mux3_out;
+  
+  // not_d = ~d using a 2-to-1 mux: select = d, data0 = 1, data1 = 0
+  assign not_d = d ? 1'b0 : 1'b1;
+  
+  // mux_in[0] = c + d: select = c, data0 = d, data1 = 1
+  assign mux_in[0] = c ? 1'b1 : d;
+  
+  // mux_in[1] = 0
+  assign mux_in[1] = 1'b0;
+  
+  // mux_in[2] = c + not_d: select = c, data0 = not_d, data1 = 1
+  assign mux_in[2] = c ? 1'b1 : not_d;
+  
+  // mux_in[3] = c & d: select = c, data0 = 0, data1 = d
+  assign mux_in[3] = c ? d : 1'b0;
+  
+endmodule
+```

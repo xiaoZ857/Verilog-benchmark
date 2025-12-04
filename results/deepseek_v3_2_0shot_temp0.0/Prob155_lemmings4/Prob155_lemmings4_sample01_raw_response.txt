@@ -1,0 +1,116 @@
+We need to track the state with the following considerations:  
+
+- **Walking left** and **walking right** are separate states.  
+- **Falling** is a state (with a counter for cycles).  
+- **Digging** is a state (only when on ground initially).  
+- **Splattered** is a terminal state.  
+
+Priority order:  
+1. Falling (if ground=0 while walking/digging)  
+2. Digging (if dig=1 while walking on ground)  
+3. Switching direction (if bumped while walking)  
+
+Also:  
+- Falling counter resets when not falling.  
+- If falling for >20 cycles when ground=1, go to splatter.  
+- If falling for ¡Ü20 cycles when ground=1, resume walking in previous direction.  
+- Digging continues until ground=0, then fall.  
+
+Let¡¯s define states:  
+
+```
+WALK_L, WALK_R, FALL_L, FALL_R, DIG_L, DIG_R, SPLATTER
+```
+
+But FALL_L and FALL_R are the same except for remembering direction, so we can store direction separately during fall.  
+Similarly for DIG_L and DIG_R.  
+
+Better approach:  
+State encoding:  
+- walking_left  
+- walking_right  
+- digging_left  
+- digging_right  
+- falling_left  
+- falling_right  
+- splatter  
+
+But we also need a counter for fall duration.  
+
+Let¡¯s implement with separate state register and direction register, but that might complicate.  
+Simpler: explicit states for each combination, plus a fall timer.  
+
+---
+
+Here¡¯s the Verilog implementation:
+
+```verilog
+    parameter WL = 0, WR = 1, DL = 2, DR = 3, FL = 4, FR = 5, SPL = 6;
+    reg [2:0] state, next_state;
+    reg [4:0] fall_counter;
+    
+    // State transition
+    always @(*) begin
+        case (state)
+            WL: begin
+                if (!ground) next_state = FL;
+                else if (dig) next_state = DL;
+                else if (bump_left) next_state = WR;
+                else next_state = WL;
+            end
+            WR: begin
+                if (!ground) next_state = FR;
+                else if (dig) next_state = DR;
+                else if (bump_right) next_state = WL;
+                else next_state = WR;
+            end
+            DL: begin
+                if (!ground) next_state = FL;
+                else next_state = DL;
+            end
+            DR: begin
+                if (!ground) next_state = FR;
+                else next_state = DR;
+            end
+            FL: begin
+                if (ground) begin
+                    if (fall_counter > 5'd20) next_state = SPL;
+                    else next_state = WL;
+                end else next_state = FL;
+            end
+            FR: begin
+                if (ground) begin
+                    if (fall_counter > 5'd20) next_state = SPL;
+                    else next_state = WR;
+                end else next_state = FR;
+            end
+            SPL: next_state = SPL;
+            default: next_state = WL;
+        endcase
+    end
+    
+    // Sequential logic
+    always @(posedge clk, posedge areset) begin
+        if (areset) begin
+            state <= WL;
+            fall_counter <= 0;
+        end else begin
+            state <= next_state;
+            // Fall counter logic
+            if (state == FL || state == FR) begin
+                if (!ground) fall_counter <= fall_counter + 1;
+                else fall_counter <= 0;
+            end else begin
+                fall_counter <= 0;
+            end
+        end
+    end
+    
+    // Output logic (Moore)
+    assign walk_left = (state == WL);
+    assign walk_right = (state == WR);
+    assign aaah = (state == FL || state == FR);
+    assign digging = (state == DL || state == DR);
+```
+
+endmodule

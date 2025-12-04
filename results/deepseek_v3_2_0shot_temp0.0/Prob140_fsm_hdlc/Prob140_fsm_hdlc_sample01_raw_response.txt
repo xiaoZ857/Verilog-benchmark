@@ -1,0 +1,76 @@
+We need to track consecutive 1s and the zero after them.  
+Let¡¯s define states based on the count of consecutive 1s and whether we¡¯ve seen a zero after 5 ones (for discarding).  
+
+**State encoding idea:**  
+- `S0`: previous bit was 0 (or reset state).  
+- `S1`: 1 consecutive 1.  
+- `S2`: 2 consecutive 1s.  
+- `S3`: 3 consecutive 1s.  
+- `S4`: 4 consecutive 1s.  
+- `S5`: 5 consecutive 1s (next 0 should be discarded).  
+- `S6`: 6 consecutive 1s (next 0 is a flag).  
+- `S7`: 7 or more consecutive 1s (error state).  
+
+**Moore outputs:**  
+- `disc` = 1 only in state `S5` when `in == 0`? Wait, Moore means output depends only on state, not input.  
+  But `disc` should be asserted for one cycle after detecting `0111110` (i.e., after 5 ones then a zero).  
+  That means: after being in `S5` and input `in=0`, we go to `S0` and assert `disc` for that cycle?  
+  Actually, careful: The sequence `0111110` means: start from `S0` (prev bit 0), see 1 ¡ú `S1`, 1 ¡ú `S2`, 1 ¡ú `S3`, 1 ¡ú `S4`, 1 ¡ú `S5`, then 0 ¡ú go to `S0` and assert `disc`.  
+  So `disc` is asserted in `S0` only if we came from `S5` via `in=0`. But Moore FSM can¡¯t remember transition.  
+  So we need an extra state `DISC` that we enter after `S5` and `in=0`, where `disc=1`, then next cycle go to `S0`.  
+
+Similarly, `flag` after `01111110`: from `S6` with `in=0`, go to `FLAG` state with `flag=1`, then to `S0`.  
+
+`err` after 7 or more 1s: from `S6` with `in=1` go to `ERR` state, stay in `ERR` as long as `in=1`, and `err=1` in `ERR` state.  
+
+Let¡¯s list states explicitly:  
+- `S0`: prev bit 0, output all 0.  
+- `S1`: 1 consecutive 1.  
+- `S2`: 2 consecutive 1s.  
+- `S3`: 3 consecutive 1s.  
+- `S4`: 4 consecutive 1s.  
+- `S5`: 5 consecutive 1s.  
+- `S6`: 6 consecutive 1s.  
+- `ERR`: 7+ consecutive 1s, `err=1`.  
+- `DISC`: after 5 ones then 0, `disc=1`.  
+- `FLAG`: after 6 ones then 0, `flag=1`.  
+
+From `ERR`: if `in=0`, go to `S0`; if `in=1`, stay in `ERR`.  
+
+From `DISC`: next state `S0`.  
+From `FLAG`: next state `S0`.  
+
+Also, from `S5`: if `in=0`, go to `DISC` (not `S0`).  
+From `S6`: if `in=0`, go to `FLAG`; if `in=1`, go to `ERR`.  
+
+Now, implement in Verilog with one-hot or binary encoding. Let¡¯s use binary for clarity.  
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+  // State encoding: 4 bits for 10 states
+  localparam S0 = 4'd0;
+  localparam S1 = 4'd1;
+  localparam S2 = 4'd2;
+  localparam S3 = 4'd3;
+  localparam S4 = 4'd4;
+  localparam S5 = 4'd5;
+  localparam S6 = 4'd6;
+  localparam ERR = 4'd7;
+  localparam DISC = 4'd8;
+  localparam FLAG = 4'd9;
+
+  reg [3:0] state, next_state;
+
+  // State register
+  always @(posedge clk) begin
+    if (reset)
+      state <= S0;
+   

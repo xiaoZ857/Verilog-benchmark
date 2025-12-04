@@ -1,0 +1,12 @@
+Problem: Prob076_always_case
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob076_always_case/Prob076_always_case_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob076_always_case_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob076_always_case_ref.sv:27: syntax error
+I give up.

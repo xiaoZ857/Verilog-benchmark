@@ -1,0 +1,39 @@
+We need a Moore FSM that outputs the 2's complement of a serial bit stream starting from the LSB.  
+The 2's complement algorithm:  
+- Starting from LSB, copy bits unchanged until the first 1 is seen (including that 1), then invert all subsequent bits.  
+
+We can implement this with two states:  
+1. **State A**: Haven't seen the first 1 yet ¡ú output z = x (copy).  
+2. **State B**: Have seen the first 1 ¡ú output z = ~x (invert).  
+
+Reset is asynchronous and active high (areset = 1 resets to State A).  
+When reset is released (areset = 0), conversion begins.  
+When reset is asserted again (areset = 1), conversion stops and state resets.  
+
+Here¡¯s the Verilog code:  
+
+```verilog
+    reg state, next_state;
+    localparam A = 1'b0, B = 1'b1;
+    
+    // State register with async reset
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= A;
+        else
+            state <= next_state;
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            A: next_state = x ? B : A;
+            B: next_state = B;
+            default: next_state = A;
+        endcase
+    end
+    
+    // Output logic (Moore: output depends only on state)
+    assign z = (state == A) ? x : ~x;
+endmodule
+```

@@ -1,0 +1,23 @@
+Problem: Prob154_fsm_ps2data
+Code file: results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 11):
+
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:50: error: Unable to bind wire/reg/memory `byte1' in `tb.top_module1'
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:50: error: Unable to bind wire/reg/memory `byte2' in `tb.top_module1'
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:50: error: Unable to bind wire/reg/memory `byte3' in `tb.top_module1'
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:50: error: Concatenation/replication may not have zero width in this context.
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:50: error: Unable to elaborate r-value: {byte1, byte2, byte3}
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:12: error: Could not find variable ``state'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:13: error: Could not find variable ``byte1'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:14: error: Could not find variable ``byte2'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:15: error: Could not find variable ``byte3'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:16: error: done is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:7:      : done is declared here as wire.
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:18: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\glm_4_6_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:18: error: Unable to elaborate this case expression.
+11 error(s) during elaboration.

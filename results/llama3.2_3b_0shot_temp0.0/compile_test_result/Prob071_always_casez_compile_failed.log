@@ -1,0 +1,19 @@
+Problem: Prob071_always_casez
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob071_always_casez/Prob071_always_casez_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\llama3.2_3b_0shot_temp0.0\Prob071_always_casez/Prob071_always_casez_sample01.sv:8: error: 'pos' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob071_always_casez/Prob071_always_casez_sample01.sv:5:      : It was declared here as a variable.
+results\llama3.2_3b_0shot_temp0.0\Prob071_always_casez/Prob071_always_casez_sample01.sv:29: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:18: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:23: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:28: error: malformed statement

@@ -1,0 +1,16 @@
+Problem: Prob073_dff16e
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:11: error: 'q' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:8:      : It was declared here as a variable.
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:25: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:25: error: invalid module item.
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:25: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:25: error: Invalid module instantiation
+results\llama3.2_3b_0shot_temp0.0\Prob073_dff16e/Prob073_dff16e_sample01.sv:25: error: Invalid module instantiation

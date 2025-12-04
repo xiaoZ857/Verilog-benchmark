@@ -1,0 +1,23 @@
+    reg state, next_state;
+    localparam A = 1'b0, B = 1'b1;
+    
+    // State register with async reset
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= A;
+        else
+            state <= next_state;
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            A: next_state = x ? B : A;
+            B: next_state = B;
+            default: next_state = A;
+        endcase
+    end
+    
+    // Output logic (Moore: output depends only on state)
+    assign z = (state == A) ? x : ~x;
+endmodule

@@ -1,0 +1,90 @@
+We need to track two things: whether the lemming is currently falling, and if not falling, which direction it is walking.  
+We also need to remember the last walking direction while falling, so that when ground reappears, we can resume in that direction.
+
+Let¡¯s define states with two state bits:  
+- `FALLING` status (1 if falling, 0 if walking)  
+- If not falling: `DIR` (0 = left, 1 = right)  
+
+But since `FALLING` overrides walking outputs, we can encode as:  
+State encoding:  
+`state[1:0]`:  
+- `00`: WALK_LEFT  
+- `01`: WALK_RIGHT  
+- `10`: FALL_LEFT (falling, last direction was left)  
+- `11`: FALL_RIGHT (falling, last direction was right)  
+
+Transitions:  
+- If `ground == 0` and currently in a walking state ¡ú go to corresponding falling state (FALL_LEFT or FALL_RIGHT).  
+- If `ground == 1` and currently in a falling state ¡ú go to corresponding walking state (WALK_LEFT or WALK_RIGHT).  
+- If `ground == 1` and in walking state:  
+  - If bumped on left ¡ú go to WALK_RIGHT (unless bumped on both sides? Problem says: if bumped on both sides at same time, still switch directions. So if left bump, go right; if right bump, go left; if both, still switch, so left bump dominates? Wait, both bumps means left=1 and right=1. If currently walking left, bump_right=1 ¡ú go right; bump_left=1 ¡ú go right? Actually, spec: "If it's bumped on both sides at the same time, it will still switch directions." Means: if walking left and bump_left=1 ¡ú go right; if walking right and bump_right=1 ¡ú go left. But if both bumps=1, then regardless of current direction, we switch direction. So logic:  
+    - If walking left and (bump_left == 1) ¡ú walk right.  
+    - If walking right and (bump_right == 1) ¡ú walk left.  
+    - If both bumps=1, then:  
+        If walking left ¡ú bump_left=1 ¡ú go right.  
+        If walking right ¡ú bump_right=1 ¡ú go left.  
+    So effectively:  
+        if (state == WALK_LEFT && bump_left) ¡ú WALK_RIGHT  
+        if (state == WALK_RIGHT && bump_right) ¡ú WALK_RIGHT? Wait no, that¡¯s wrong. Let's check:  
+        Walking right, bump_right=1 ¡ú go left.  
+    So:  
+        if (state == WALK_LEFT && bump_left) ¡ú WALK_RIGHT  
+        if (state == WALK_RIGHT && bump_right) ¡ú WALK_LEFT  
+    And if both bumps=1:  
+        If state == WALK_LEFT ¡ú bump_left=1 ¡ú WALK_RIGHT  
+        If state == WALK_RIGHT ¡ú bump_right=1 ¡ú WALK_LEFT  
+    So both cases cause a switch. Good.  
+
+- Falling states ignore bumps.  
+- Async reset ¡ú WALK_LEFT (state 00).  
+
+Outputs (Moore):  
+- `walk_left = (state == WALK_LEFT)`  
+- `walk_right = (state == WALK_RIGHT)`  
+- `aaah = (state == FALL_LEFT || state == FALL_RIGHT)`  
+
+Let¡¯s implement:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+  
+  // State encoding
+  parameter WALK_LEFT  = 2'b00;
+  parameter WALK_RIGHT = 2'b01;
+  parameter FALL_LEFT  = 2'b10;
+  parameter FALL_RIGHT = 2'b11;
+  
+  reg [1:0] state, next_state;
+  
+  // State register
+  always @(posedge clk, posedge areset) begin
+    if (areset)
+      state <= WALK_LEFT;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      WALK_LEFT: begin
+        if (~ground)
+          next_state = FALL_LEFT;
+        else if (bump_left)
+          next_state = WALK_RIGHT;
+        else
+          next_state = WALK_LEFT;
+      end
+      WALK_RIGHT: begin
+        if (~ground)
+          next_state = FALL_RIGHT;
+        else if (b

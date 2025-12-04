@@ -1,0 +1,17 @@
+Problem: Prob136_m2014_q6
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob136_m2014_q6/Prob136_m2014_q6_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:6: syntax error
+results\llama3.2_3b_0shot_temp0.0\Prob136_m2014_q6/Prob136_m2014_q6_sample01.sv:140: error: Malformed conditional expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:14: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:18: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob136_m2014_q6_test.sv:23: error: invalid module item.

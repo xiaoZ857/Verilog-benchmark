@@ -1,0 +1,28 @@
+
+Based on the waveform analysis, I can see that:
+
+1. Signal `p` is updated on the rising edge of the clock and follows the value of input `a`
+2. Signal `q` is updated on the falling edge of the clock and follows the value of `p`
+
+This creates a two-stage pipeline where `p` captures `a` on rising edges, and `q` captures `p` on falling edges.
+
+```verilog
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+
+  // p follows a on rising edge of clock
+  always @(posedge clock) begin
+    p <= a;
+  end
+
+  // q follows p on falling edge of clock
+  always @(negedge clock) begin
+    q <= p;
+  end
+
+endmodule
+```

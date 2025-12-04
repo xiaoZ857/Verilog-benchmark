@@ -1,0 +1,71 @@
+We'll design an FSM with states to wait for the start bit, collect 8 data bits, and check the stop bit. Since the least significant bit is sent first, we'll shift bits into a register as they arrive.
+
+```verilog
+    reg [2:0] state, next_state;
+    reg [7:0] data_reg;
+    reg [2:0] bit_count;
+    reg done_reg;
+    
+    // State definitions
+    localparam IDLE = 3'b000;
+    localparam START = 3'b001;
+    localparam DATA  = 3'b010;
+    localparam STOP  = 3'b011;
+    localparam ERROR = 3'b100;
+    
+    // Sequential state update
+    always @(posedge clk) begin
+        if (reset) begin
+            state <= IDLE;
+            data_reg <= 8'b0;
+            bit_count <= 3'b0;
+            done_reg <= 1'b0;
+        end else begin
+            state <= next_state;
+            // Data collection
+            if (state == DATA) begin
+                data_reg <= {in, data_reg[7:1]}; // Shift right, LSB first
+                bit_count <= bit_count + 1;
+            end else begin
+                bit_count <= 3'b0;
+            end
+            // Done signal generation
+            if (next_state == STOP && in == 1'b1) begin
+                done_reg <= 1'b1;
+            end else begin
+                done_reg <= 1'b0;
+            end
+        end
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            IDLE: begin
+                if (in == 1'b0) next_state = START;
+                else next_state = IDLE;
+            end
+            START: begin
+                next_state = DATA;
+            end
+            DATA: begin
+                if (bit_count == 3'b111) next_state = STOP;
+                else next_state = DATA;
+            end
+            STOP: begin
+                if (in == 1'b1) next_state = IDLE;
+                else next_state = ERROR;
+            end
+            ERROR: begin
+                if (in == 1'b1) next_state = IDLE;
+                else next_state = ERROR;
+            end
+            default: next_state = IDLE;
+        endcase
+    end
+    
+    // Output assignments
+    assign out_byte = data_reg;
+    assign done = done_reg;
+endmodule
+```

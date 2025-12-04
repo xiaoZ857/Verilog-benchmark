@@ -1,0 +1,15 @@
+Problem: Prob118_history_shift
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob118_history_shift/Prob118_history_shift_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'predict_history' has 2041 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 2041 out of 2055 samples
+
+Simulation finished at 10276 ps
+Mismatches: 2041 in 2055 samples

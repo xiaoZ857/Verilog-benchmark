@@ -1,0 +1,28 @@
+
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+  
+  wire not_d;
+  wire mux0_out, mux2_out, mux3_out;
+  
+  // not_d = ~d using a 2-to-1 mux: select = d, data0 = 1, data1 = 0
+  assign not_d = d ? 1'b0 : 1'b1;
+  
+  // mux_in[0] = c + d: select = c, data0 = d, data1 = 1
+  assign mux_in[0] = c ? 1'b1 : d;
+  
+  // mux_in[1] = 0
+  assign mux_in[1] = 1'b0;
+  
+  // mux_in[2] = c + not_d: select = c, data0 = not_d, data1 = 1
+  assign mux_in[2] = c ? 1'b1 : not_d;
+  
+  // mux_in[3] = c & d: select = c, data0 = 0, data1 = d
+  assign mux_in[3] = c ? d : 1'b0;
+  
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

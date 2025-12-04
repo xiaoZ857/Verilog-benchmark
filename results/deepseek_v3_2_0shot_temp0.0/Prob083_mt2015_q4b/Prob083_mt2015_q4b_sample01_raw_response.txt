@@ -1,0 +1,22 @@
+We need to analyze the waveform to determine the behavior of `z` based on `x` and `y`.  
+Looking at the given times and values:
+
+- At t=0每20ns: `x=0, y=0, z=1`  
+- At t=25每30ns: `x=1, y=0, z=0`  
+- At t=35每40ns: `x=0, y=1, z=0`  
+- At t=45每50ns: `x=1, y=1, z=1`  
+- At t=55ns: `x=0, y=0, z=1`  
+- At t=60每65ns: `x=0, y=1, z=0`  
+- At t=70ns: `x=1, y=1, z=1`  
+- At t=75每85ns: `x=0, y=1, z=0`  
+- At t=90ns: `x=1, y=0, z=0`
+
+This matches the truth table of an XNOR gate:  
+`z = ~(x ^ y)` or `z = (x ~^ y)` or `z = (x == y)`.
+
+So the module is simply:
+
+```verilog
+  assign z = ~(x ^ y);
+endmodule
+```

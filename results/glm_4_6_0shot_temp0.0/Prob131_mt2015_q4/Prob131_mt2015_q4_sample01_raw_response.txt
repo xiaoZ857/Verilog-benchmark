@@ -1,0 +1,41 @@
+
+  // Internal wires for module outputs
+  wire a1_out, a2_out;
+  wire b1_out, b2_out;
+  wire or_out, and_out;
+  
+  // Module A instances
+  A a1 (.x(x), .y(y), .z(a1_out));
+  A a2 (.x(x), .y(y), .z(a2_out));
+  
+  // Module B instances
+  B b1 (.x(x), .y(y), .z(b1_out));
+  B b2 (.x(x), .y(y), .z(b2_out));
+  
+  // OR gate for first pair
+  assign or_out = a1_out | b1_out;
+  
+  // AND gate for second pair
+  assign and_out = a2_out & b2_out;
+  
+  // Final XOR
+  assign z = or_out ^ and_out;
+  
+  // Module A definition
+  module A (
+    input x,
+    input y,
+    output z
+  );
+    assign z = (x ^ y) & x;
+  endmodule
+  
+  // Module B definition
+  module B (
+    input x,
+    input y,
+    output z
+  );
+    assign z = ~(x ^ y); // XNOR based on waveform analysis
+  endmodule
+endmodule

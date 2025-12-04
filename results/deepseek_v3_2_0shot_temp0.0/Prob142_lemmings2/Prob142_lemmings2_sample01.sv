@@ -1,0 +1,47 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+  
+  // State encoding
+  parameter WALK_LEFT  = 2'b00;
+  parameter WALK_RIGHT = 2'b01;
+  parameter FALL_LEFT  = 2'b10;
+  parameter FALL_RIGHT = 2'b11;
+  
+  reg [1:0] state, next_state;
+  
+  // State register
+  always @(posedge clk, posedge areset) begin
+    if (areset)
+      state <= WALK_LEFT;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      WALK_LEFT: begin
+        if (~ground)
+          next_state = FALL_LEFT;
+        else if (bump_left)
+          next_state = WALK_RIGHT;
+        else
+          next_state = WALK_LEFT;
+      end
+      WALK_RIGHT: begin
+        if (~ground)
+          next_state = FALL_RIGHT;
+        else if (b
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

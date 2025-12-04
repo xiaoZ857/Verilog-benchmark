@@ -1,0 +1,12 @@
+Problem: Prob002_m2014_q4i
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\llama3.2_3b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv:7: error: port out already has a port declaration.
+results\llama3.2_3b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv:4: error: Port ``out'' has already been declared a port.
+results\llama3.2_3b_0shot_temp0.0\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv:7: error: Incomplete port declarations cannot be initialized.

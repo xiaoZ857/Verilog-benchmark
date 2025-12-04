@@ -1,0 +1,54 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [3:1] s,
+  output reg fr3,
+  output reg fr2,
+  output reg fr1,
+  output reg dfr
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    // Reset to state equivalent to water level being low for a long time
+    // All outputs asserted
+    fr1 <= 1;
+    fr2 <= 1;
+    fr3 <= 1;
+    dfr <= 1;
+    prev_level <= 2'b00; // Below s[1]
+  end else begin
+    // Determine current water level based on sensors
+    // 00: Below s[1], 01: Between s[2] and s[1], 10: Between s[3] and s[2], 11: Above s[3]
+    current_level <= {s[3], s[2]};
+    
+    // Set nominal flow rate based on current water level
+    case (current_level)
+      2'b11: begin // Above s[3] (s[1]=1, s[2]=1, s[3]=1)
+        fr1 <= 0;
+        fr2 <= 0;
+        fr3 <= 0;
+      end
+      2'b10: begin // Between s[3] and s[2] (s[1]=1, s[2]=1, s[3]=0)
+        fr1 <= 1;
+        fr2 <= 0;
+        fr3 <= 0;
+      end
+      2'b01: begin // Between s[2] and s[1] (s[1]=1, s[2]=0, s[3]=0)
+        fr1 <= 1;
+        fr2 <= 1;
+        fr3 <= 0;
+      end
+      2'b00: begin // Below s[1] (s[1]=0, s[2]=0, s[3]=0)
+        fr1 <= 1;
+        fr2 <= 1;
+        fr3 <= 1;
+      end
+    endcase
+    
+    // Determine if water level is rising (previous level lower than current)
+    // Only enable dfr when level is between upper and lower sensors (not 11 or 00)
+    if
+
+// VERILOG-EVAL: endmodule not found

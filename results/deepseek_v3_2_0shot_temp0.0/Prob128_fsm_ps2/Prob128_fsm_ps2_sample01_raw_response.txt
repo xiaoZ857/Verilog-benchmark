@@ -1,0 +1,64 @@
+We need to track which byte of the message we are expecting.  
+We'll have states for:  
+- `SEARCH`: looking for a byte with `in[3] == 1` to start a message.  
+- `BYTE2`: received byte 1, now waiting for byte 2 (any value).  
+- `BYTE3`: received byte 2, now waiting for byte 3 (any value).  
+
+After receiving byte 3, assert `done` for one cycle and go to `BYTE2` of the next message if `in[3] == 1` in that same cycle, else go to `SEARCH`.  
+
+But careful: The problem says "done in the cycle immediately after the third byte of each message was successfully received." That means after we receive byte 3 in a cycle, in the *next* cycle we assert `done`. However, reading carefully: "signal the receipt of a message once all 3 bytes have been received (done). The FSM should signal done in the cycle immediately after the third byte of each message was successfully received."  
+
+So:  
+Cycle 1: receive byte1 (in[3]=1)  
+Cycle 2: receive byte2  
+Cycle 3: receive byte3  
+Cycle 4: done=1, and also in that cycle, we check in[3] to decide next state.  
+
+But that means we need to store the fact that we just finished a message. Alternatively, we can have a state `DONE` that asserts `done` and decides next state based on `in[3]`.  
+
+Actually simpler:  
+We can have 4 states:  
+- `SEARCH`  
+- `BYTE2` (after receiving byte1)  
+- `BYTE3` (after receiving byte2)  
+- `BYTE1` (after receiving byte3, but we need to output done in this state? No, done in cycle *after* third byte, so maybe we need a `DONE` state.)  
+
+Let's design:  
+State transitions:  
+1. `SEARCH`: if in[3]==1 ¡ú `BYTE2`, else stay in `SEARCH`.  
+2. `BYTE2`: go to `BYTE3` (always, because any byte is accepted as byte2).  
+3. `BYTE3`: go to `DONE` (always, any byte accepted as byte3).  
+4. `DONE`: assert done=1, then if in[3]==1 ¡ú `BYTE2`, else ¡ú `SEARCH`.  
+
+But in `DONE`, we are looking at the current `in[3]` to decide if this byte starts a new message. That means in the same cycle we assert `done`, we also check the new byte's in[3]. That matches the requirement: done is asserted in the cycle after third byte was received, and in that same cycle we process the next byte (if any).  
+
+We must handle reset: go to `SEARCH`.  
+
+Let's code:  
+
+```verilog
+  reg [1:0] state, next_state;
+  localparam SEARCH = 2'b00,
+             BYTE2  = 2'b01,
+             BYTE3  = 2'b10,
+             DONE   = 2'b11;
+  
+  always @(posedge clk) begin
+    if (reset)
+      state <= SEARCH;
+    else
+      state <= next_state;
+  end
+  
+  always @(*) begin
+    case (state)
+      SEARCH: next_state = in[3] ? BYTE2 : SEARCH;
+      BYTE2:  next_state = BYTE3;
+      BYTE3:  next_state = DONE;
+      DONE:   next_state = in[3] ? BYTE2 : SEARCH;
+      default: next_state = SEARCH;
+    endcase
+  end
+  
+  assign done = (state == DONE);
+```

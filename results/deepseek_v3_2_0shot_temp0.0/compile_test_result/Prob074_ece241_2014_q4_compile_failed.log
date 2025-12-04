@@ -1,0 +1,16 @@
+Problem: Prob074_ece241_2014_q4
+Code file: results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:20: error: q0 is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:8:      : q0 is declared here as wire.
+results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:21: error: q1 is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:8:      : q1 is declared here as wire.
+results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:22: error: q2 is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0.0\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:8:      : q2 is declared here as wire.
+3 error(s) during elaboration.

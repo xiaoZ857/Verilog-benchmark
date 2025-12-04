@@ -1,0 +1,11 @@
+Problem: Prob085_shift4
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob085_shift4/Prob085_shift4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\llama3.2_3b_0shot_temp0.0\Prob085_shift4/Prob085_shift4_sample01.sv:12: error: 'q' has already been declared in this scope.
+results\llama3.2_3b_0shot_temp0.0\Prob085_shift4/Prob085_shift4_sample01.sv:9:      : It was declared here as a variable.

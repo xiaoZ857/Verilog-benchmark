@@ -1,0 +1,97 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+  // Internal BCD counters for seconds, minutes, and hours
+  reg [3:0] ss_ones, ss_tens;      // seconds: 00-59
+  reg [3:0] mm_ones, mm_tens;      // minutes: 00-59
+  reg [3:0] hh_ones, hh_tens;      // hours: 01-12
+
+  // Seconds counter (00-59)
+  always @(posedge clk) begin
+    if (reset) begin
+      ss_ones <= 4'd0;
+      ss_tens <= 4'd0;
+    end
+    else if (ena) begin
+      if (ss_ones == 4'd9) begin
+        ss_ones <= 4'd0;
+        if (ss_tens == 4'd5)
+          ss_tens <= 4'd0;
+        else
+          ss_tens <= ss_tens + 4'd1;
+      end
+      else
+        ss_ones <= ss_ones + 4'd1;
+    end
+  end
+
+  // Minutes counter (00-59) - increments when seconds roll over from 59 to 00
+  wire min_ena = ena && (ss_tens == 4'd5) && (ss_ones == 4'd9);
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      mm_ones <= 4'd0;
+      mm_tens <= 4'd0;
+    end
+    else if (min_ena) begin
+      if (mm_ones == 4'd9) begin
+        mm_ones <= 4'd0;
+        if (mm_tens == 4'd5)
+          mm_tens <= 4'd0;
+        else
+          mm_tens <= mm_tens + 4'd1;
+      end
+      else
+        mm_ones <= mm_ones + 4'd1;
+    end
+  end
+
+  // Hours counter (01-12 with AM/PM) - increments when minutes roll over from 59 to 00
+  wire hour_ena = min_ena && (mm_tens == 4'd5) && (mm_ones == 4'd9);
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      hh_ones <= 4'd2;      // 12:00 AM on reset
+      hh_tens <= 4'd1;
+      pm <= 1'b0;           // AM
+    end
+    else if (hour_ena) begin
+      // Handle hour increment with BCD 01-12
+      if (hh_ones == 4'd2 && hh_tens == 4'd1) begin
+        // 12 -> 01
+        hh_ones <= 4'd1;
+        hh_tens <= 4'd0;
+      end
+      else if (hh_ones == 4'd9) begin
+        // 09 -> 10, 19 -> 20 (but 19 doesn't occur in 12-hour clock)
+        hh_ones <= 4'd0;
+        hh_tens <= hh_tens + 4'd1;
+      end
+      else begin
+        hh_ones <= hh_ones + 4'd1;
+      end
+      
+      // Toggle PM at 12:59:59 -> 01:00:00
+      if (hh_ones == 4'd1 && hh_tens == 4'd1) begin  // 11 -> 12
+        // No PM change
+      end
+      else if (hh_ones == 4'd2 && hh_tens == 4'd1) begin  // 12 -> 01
+        pm <= ~pm;  // Toggle AM/PM
+      end
+    end
+  end
+
+  // Combine BCD digits into output registers
+  always @(*) begin
+    ss = {ss_tens, ss_ones};
+    mm = {mm_tens, mm_ones};
+    hh = {hh_tens, hh_ones};
+  end
+endmodule

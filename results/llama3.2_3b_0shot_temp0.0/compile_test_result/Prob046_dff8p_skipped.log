@@ -1,0 +1,7 @@
+Problem: Prob046_dff8p
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob046_dff8p/Prob046_dff8p_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: q depends on itself in assign statement

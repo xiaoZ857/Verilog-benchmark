@@ -1,0 +1,13 @@
+Problem: Prob093_ece241_2014_q3
+Code file: results\llama3.2_3b_0shot_temp0.0\Prob093_ece241_2014_q3/Prob093_ece241_2014_q3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\llama3.2_3b_0shot_temp0.0\Prob093_ece241_2014_q3/Prob093_ece241_2014_q3_sample01.sv:22: error: Unable to bind wire/reg/memory `b_d' in `tb.top_module1'
+results\llama3.2_3b_0shot_temp0.0\Prob093_ece241_2014_q3/Prob093_ece241_2014_q3_sample01.sv:22: error: Unable to bind wire/reg/memory `b_d' in `tb.top_module1'
+results\llama3.2_3b_0shot_temp0.0\Prob093_ece241_2014_q3/Prob093_ece241_2014_q3_sample01.sv:22: error: Unable to elaborate r-value: ((b_d)&(d))|((~(b_d))&(~(d)))
+3 error(s) during elaboration.

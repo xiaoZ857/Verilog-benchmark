@@ -204,25 +204,40 @@ def read_generated_code(problem_dir: str, problem_name: str) -> Optional[str]:
     extracted_file = os.path.join(problem_dir, f"{problem_name}_sample01_extracted_code.txt")
     sv_file = os.path.join(problem_dir, f"{problem_name}_sample01.sv")
 
-    # 优先读取提取的代码，如果不存在则读取完整SV文件
+    # 优先读取提取的代码，如果不存在或为空则读取完整SV文件
     for file_path in [extracted_file, sv_file]:
         if os.path.exists(file_path):
             encodings = ['utf-8', 'gbk', 'gb2312', 'latin-1']
             for encoding in encodings:
                 try:
                     with open(file_path, 'r', encoding=encoding) as f:
-                        return f.read()
+                        content = f.read()
+                        # 如果内容非空则返回，否则继续尝试下一个文件
+                        if content and content.strip():
+                            return content
+                        break  # 文件成功读取但为空，跳出编码循环，尝试下一个文件
                 except UnicodeDecodeError:
                     continue
                 except Exception as e:
                     print(f"Warning: Could not read {file_path}: {e}")
-                    return None
+                    break  # 读取错误，尝试下一个文件
 
     return None
 
 # ============================================================================
 # Analysis Functions
 # ============================================================================
+
+def read_compile_test_results_json(model_dir: str) -> Optional[Dict]:
+    """读取compile_test_results.json文件"""
+    json_path = os.path.join(model_dir, "compile_test_result", "compile_test_results.json")
+    if os.path.exists(json_path):
+        try:
+            with open(json_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Warning: Could not read JSON file {json_path}: {e}")
+    return None
 
 def classify_compilation_error(log_content: str) -> Tuple[str, str, Optional[int], str]:
     """
@@ -391,28 +406,94 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
     test_failures = []
     static_analysis_failures = []
 
+    # 尝试读取预先计算的JSON结果
+    json_results = read_compile_test_results_json(model_dir)
+
+    # compile_test_result目录路径
+    compile_result_dir = model_path / "compile_test_result"
+
     # 遍历所有问题目录
     for problem_dir in model_path.iterdir():
         if not problem_dir.is_dir():
             continue
 
+        # 跳过compile_test_result目录
+        if problem_dir.name == "compile_test_result":
+            continue
+
         problem_name = problem_dir.name
 
-        # 检查是否生成了代码
-        generated_code = read_generated_code(str(problem_dir), problem_name)
-        if generated_code:
-            generated += 1
+        # 检查是否生成了代码（检查.sv文件是否存在且非空）
+        sv_file = problem_dir / f"{problem_name}_sample01.sv"
+        if sv_file.exists():
+            try:
+                content = sv_file.read_text(encoding='utf-8')
+                if content and content.strip():
+                    generated += 1
+            except:
+                try:
+                    content = sv_file.read_text(encoding='latin-1')
+                    if content and content.strip():
+                        generated += 1
+                except:
+                    pass
 
-            # 读取编译和测试日志
-            # 查找实际的日志文件（可能有不同的命名格式）
+    # 如果有JSON结果，使用JSON中的编译和通过数据
+    if json_results:
+        compiled = json_results.get('compiled', 0)
+        passed = json_results.get('passed', 0)
+        # JSON中的generated应该与我们计算的一致，但以实际文件为准
+        # 分析编译失败的详情
+        failed_compilation = json_results.get('failed_compilation', [])
+        failed_tests = json_results.get('failed_tests', [])
+
+        # 从compile_test_result目录读取失败日志
+        for problem_name in failed_compilation:
+            # 尝试读取编译失败日志
+            compile_log = compile_result_dir / f"{problem_name}_compile_failed.log"
+            if compile_log.exists():
+                log_content = read_log_file(str(compile_log))
+                if log_content:
+                    error_type, error_pattern, line_num, code_snippet = classify_compilation_error(log_content)
+                    compilation_failures.append(CompilationFailure(
+                        problem_name=problem_name,
+                        error_type=error_type,
+                        error_message=error_pattern,
+                        error_pattern=extract_error_pattern(error_pattern),
+                        line_number=line_num,
+                        code_snippet=code_snippet
+                    ))
+
+        for problem_name in failed_tests:
+            # 尝试读取测试失败日志
+            test_log = compile_result_dir / f"{problem_name}_failed.log"
+            if test_log.exists():
+                log_content = read_log_file(str(test_log))
+                if log_content:
+                    failure_type, description = classify_test_failure(log_content, problem_name)
+                    test_failures.append(TestFailure(
+                        problem_name=problem_name,
+                        failure_type=failure_type,
+                        test_pattern=extract_test_pattern(log_content),
+                        description=description
+                    ))
+    else:
+        # 没有JSON，从日志文件分析
+        for problem_dir in model_path.iterdir():
+            if not problem_dir.is_dir() or problem_dir.name == "compile_test_result":
+                continue
+
+            problem_name = problem_dir.name
+
+            # 查找日志文件（可能有不同的命名格式和位置）
             log_file = None
-            possible_names = [
-                f"{problem_name}-sv-iv-test.log",
-                f"{problem_name}_sample01-sv-iv-test.log"
+            possible_locations = [
+                (problem_dir, f"{problem_name}-sv-iv-test.log"),
+                (problem_dir, f"{problem_name}_sample01-sv-iv-test.log"),
             ]
 
-            for log_name in possible_names:
-                potential_log = problem_dir / log_name
+            for log_dir, log_name in possible_locations:
+                potential_log = log_dir / log_name
                 if potential_log.exists():
                     log_file = potential_log
                     break
@@ -421,13 +502,11 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
 
             if log_content:
                 # 分析编译结果
-                # 编译成功：Return code: 0
                 compile_match = re.search(r'=== Compilation ===.*?Return code: (\d+)', log_content, re.DOTALL)
                 if compile_match and int(compile_match.group(1)) == 0:
                     compiled += 1
 
                     # 分析测试结果
-                    # 测试成功：Mismatches: 0 in X samples
                     test_match = re.search(r'Mismatches: (\d+) in \d+ samples', log_content)
                     if test_match and int(test_match.group(1)) == 0:
                         passed += 1
@@ -1146,14 +1225,21 @@ def main():
                 generate_model_detail_html(model, model_report_path, unified_report_path)
                 print(f"  [完成] 生成模型详情报告: {model.model_name}_details.html")
 
-        # 打印统计摘要
-        print(f"\n[统计] 参数配置 {temp}/{top_p} 统计摘要:")
-        print(f"  模型数量: {len(models)}")
+        # 打印详细统计表格
+        print(f"\n[统计] 参数配置 {temp}/{top_p} 详细结果:")
+        print(f"{'模型名称':<20} {'生成成功率':>10} {'编译成功率':>10} {'测试通过率':>10} {'通过/总数':>10}")
+        print("-" * 70)
+
+        # 按通过率排序
+        sorted_models = sorted(models, key=lambda m: m.pass_rate, reverse=True)
+        for model in sorted_models:
+            print(f"{model.model_name:<20} {model.generation_rate:>9.1f}% {model.compile_rate:>9.1f}% {model.pass_rate:>9.1f}% {model.passed:>4}/{model.total_problems:<4}")
+
+        print("-" * 70)
         avg_pass_rate = sum(m.pass_rate for m in models) / len(models)
         avg_compile_rate = sum(m.compile_rate for m in models) / len(models)
-        print(f"  平均通过率: {avg_pass_rate:.1f}%")
-        print(f"  平均编译率: {avg_compile_rate:.1f}%")
-        print(f"  总编译错误模式: {len(unified_analysis.compilation_error_patterns)}")
+        print(f"{'平均':>20} {'-':>10} {avg_compile_rate:>9.1f}% {avg_pass_rate:>9.1f}%")
+        print(f"\n  总编译错误模式: {len(unified_analysis.compilation_error_patterns)}")
         print(f"  总测试失败模式: {len(unified_analysis.test_failure_patterns)}")
 
     print(f"\n{'='*60}")

@@ -175,23 +175,39 @@
         }
     </style>
     
+        <style>
+            .rate-bar {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .rate-bar-fill {
+                height: 20px;
+                background: linear-gradient(90deg, #a8d8ea, #6bb9f0);
+                border-radius: 3px;
+                min-width: 5px;
+            }
+            .rate-text {
+                white-space: nowrap;
+                font-size: 0.9em;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
             <h1>VerilogEval 失败分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.0, Top_p = 0.01</p>
-            <p><strong>生成时间:</strong> 2025-12-09 15:36:11</p>
+            <p><strong>生成时间:</strong> 2025-12-09 15:51:48</p>
 
-            <h2>[性能概览] 模型性能概览</h2>
+            <h2>模型性能概览</h2>
             <table>
                 <thead>
                     <tr>
                         <th>模型</th>
-                        <th>生成率</th>
-                        <th>编译率</th>
-                        <th>通过率</th>
-                        <th>编译失败</th>
-                        <th>测试失败</th>
+                        <th>生成成功</th>
+                        <th>编译成功</th>
+                        <th>测试通过</th>
+                        <th>总数</th>
                         <th>详细分析</th>
                     </tr>
                 </thead>
@@ -199,98 +215,224 @@
     
                     <tr>
                         <td><strong>deepseek_r1_14b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>12.8%</td>
-                        <td style='background-color: #e74c3c; color: white;'>9.6%</td>
-                        <td>136</td>
-                        <td>5</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 12.82051282051282px;"></div>
+                                <span class="rate-text">20(12.8%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 9.615384615384617px;"></div>
+                                <span class="rate-text">15(9.6%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/deepseek_r1_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>deepseek_v3_2</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>59.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>46.2%</td>
-                        <td>64</td>
-                        <td>20</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 58.97435897435898px;"></div>
+                                <span class="rate-text">92(59.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 46.15384615384615px;"></div>
+                                <span class="rate-text">72(46.2%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/deepseek_v3_2_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>gemma3_12b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>53.8%</td>
-                        <td style='background-color: #e74c3c; color: white;'>28.2%</td>
-                        <td>72</td>
-                        <td>40</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 53.84615384615385px;"></div>
+                                <span class="rate-text">84(53.8%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 28.205128205128204px;"></div>
+                                <span class="rate-text">44(28.2%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/gemma3_12b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>glm_4_6</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>26.3%</td>
-                        <td style='background-color: #e74c3c; color: white;'>25.0%</td>
-                        <td>115</td>
-                        <td>2</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 26.282051282051285px;"></div>
+                                <span class="rate-text">41(26.3%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 25.0px;"></div>
+                                <span class="rate-text">39(25.0%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/glm_4_6_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>gpt_oss_20b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #f39c12; color: white;'>62.2%</td>
-                        <td style='background-color: #e74c3c; color: white;'>58.3%</td>
-                        <td>59</td>
-                        <td>6</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 62.17948717948718px;"></div>
+                                <span class="rate-text">97(62.2%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 58.333333333333336px;"></div>
+                                <span class="rate-text">91(58.3%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/gpt_oss_20b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>llama3_2_3b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>30.8%</td>
-                        <td style='background-color: #e74c3c; color: white;'>9.6%</td>
-                        <td>84</td>
-                        <td>33</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 30.76923076923077px;"></div>
+                                <span class="rate-text">48(30.8%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 9.615384615384617px;"></div>
+                                <span class="rate-text">15(9.6%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/llama3_2_3b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>mistral_7b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>21.8%</td>
-                        <td style='background-color: #e74c3c; color: white;'>9.0%</td>
-                        <td>122</td>
-                        <td>20</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 21.794871794871796px;"></div>
+                                <span class="rate-text">34(21.8%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 8.974358974358974px;"></div>
+                                <span class="rate-text">14(9.0%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/mistral_7b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>phi4_14b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #f39c12; color: white;'>68.6%</td>
-                        <td style='background-color: #e74c3c; color: white;'>30.8%</td>
-                        <td>49</td>
-                        <td>59</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 68.58974358974359px;"></div>
+                                <span class="rate-text">107(68.6%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 30.76923076923077px;"></div>
+                                <span class="rate-text">48(30.8%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/phi4_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>qwen3_8b</strong></td>
-                        <td style='background-color: #2ecc71; color: white;'>100.0%</td>
-                        <td style='background-color: #e74c3c; color: white;'>17.9%</td>
-                        <td style='background-color: #e74c3c; color: white;'>17.3%</td>
-                        <td>128</td>
-                        <td>1</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 100px;"></div>
+                                <span class="rate-text">156(100.0%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 17.94871794871795px;"></div>
+                                <span class="rate-text">28(17.9%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: 17.307692307692307px;"></div>
+                                <span class="rate-text">27(17.3%)</span>
+                            </div>
+                        </td>
+                        <td>156</td>
                         <td><a href="model_details/qwen3_8b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                 </tbody>
             </table>
 
-            <h2>[编译分析] 编译错误模式分析</h2>
+            <h2>编译错误模式分析</h2>
             <div class="stats-grid">
     
                 <div class="stats-card">
@@ -527,14 +669,14 @@
         </div></div>
             <div class="stats-grid">
                 <div class="stats-card">
-                    <h3>[最难题] 最具挑战性的问题 (通过率最低)</h3>
+                    <h3>最具挑战性的问题 (通过率最低)</h3>
                     <ul class="problem-list">
     <li><strong>Prob053_m2014_q4d</strong> - 通过率: 0.0%</li><li><strong>Prob057_kmap2</strong> - 通过率: 0.0%</li><li><strong>Prob062_bugs_mux2</strong> - 通过率: 0.0%</li><li><strong>Prob063_review2015_shiftcount</strong> - 通过率: 0.0%</li><li><strong>Prob066_edgecapture</strong> - 通过率: 0.0%</li><li><strong>Prob068_countbcd</strong> - 通过率: 0.0%</li><li><strong>Prob070_ece241_2013_q2</strong> - 通过率: 0.0%</li><li><strong>Prob082_lfsr32</strong> - 通过率: 0.0%</li><li><strong>Prob086_lfsr5</strong> - 通过率: 0.0%</li><li><strong>Prob089_ece241_2014_q5a</strong> - 通过率: 0.0%</li>
                     </ul>
                 </div>
 
                 <div class="stats-card">
-                    <h3>[简单题] 最简单的问题 (通过率最高)</h3>
+                    <h3>最简单的问题 (通过率最高)</h3>
                     <ul class="problem-list">
     <li><strong>Prob008_m2014_q4h</strong> - 通过率: 77.8%</li><li><strong>Prob003_step_one</strong> - 通过率: 66.7%</li><li><strong>Prob005_notgate</strong> - 通过率: 66.7%</li><li><strong>Prob007_wire</strong> - 通过率: 66.7%</li><li><strong>Prob014_andgate</strong> - 通过率: 66.7%</li><li><strong>Prob020_mt2015_eq2</strong> - 通过率: 66.7%</li><li><strong>Prob022_mux2to1</strong> - 通过率: 66.7%</li><li><strong>Prob031_dff</strong> - 通过率: 66.7%</li><li><strong>Prob059_wire4</strong> - 通过率: 66.7%</li><li><strong>Prob012_xnorgate</strong> - 通过率: 55.6%</li>
                     </ul>

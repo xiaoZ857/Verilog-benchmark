@@ -182,27 +182,18 @@
 
             <h1>mistral_7b 详细分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 16:13:55</p>
+            <p><strong>生成时间:</strong> 2025-12-09 16:50:31</p>
 
             <div class="summary-grid">
-                <div class="summary-card">
-                    <h3>总问题数</h3>
-                    <div class="value">156</div>
+                <div class="summary-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                    <h3>编译失败</h3>
+                    <div class="value">129</div>
+                    <p>编译失败数量</p>
                 </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
-                    <h3>生成成功率</h3>
-                    <div class="value">100.0%</div>
-                    <p>156/156</p>
-                </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
-                    <h3>编译成功率</h3>
-                    <div class="value">17.3%</div>
-                    <p>27/156</p>
-                </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                    <h3>测试通过率</h3>
-                    <div class="value">5.1%</div>
-                    <p>8/156</p>
+                <div class="summary-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <h3>测试失败</h3>
+                    <div class="value">19</div>
+                    <p>测试失败数量</p>
                 </div>
             </div>
     
@@ -250,11 +241,6 @@ initial begin
   $finish; // To end simulation immediately after compilation.
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -315,11 +301,6 @@ initial begin
   $finish; // Finalizes simulation when the initial block completes, since there are no inputs
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -400,11 +381,6 @@ function [7:0] reverse_byte;
 endfunction</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob004_vector2
@@ -474,11 +450,6 @@ initial begin
   #10 $finish; // Optionally, you can specify a simulation time for the testbench to run for a specific number of clock cycles.
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -557,11 +528,6 @@ always @(posedge clock) begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -661,11 +627,6 @@ popcount_3bits pop3 (.in(in), .out(out) );
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob009_popcount3
@@ -749,11 +710,6 @@ end
 // end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob010_mt2015_q4a
@@ -817,11 +773,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob011_norgate
@@ -884,11 +835,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -960,11 +906,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob014_andgate
@@ -1027,11 +968,6 @@ always @(posedge clk) begin
   out_lo &lt;= in [7:0]; // Lower byte
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1112,11 +1048,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob016_m2014_q4j
@@ -1190,11 +1121,6 @@ assign out = temp;
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1281,11 +1207,6 @@ end
 // end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob020_mt2015_eq2
@@ -1370,11 +1291,6 @@ always @* begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob021_mux256to1v
@@ -1451,11 +1367,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob022_mux2to1
@@ -1522,11 +1433,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1621,11 +1527,6 @@ assign q = (reset) ? 0 : sum; // assign the final output
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob024_hadd
@@ -1700,11 +1601,6 @@ assign io_parity = parity;
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob025_reduction
@@ -1770,11 +1666,6 @@ always @(posedge clk) begin
   out_alwaysblock &lt;= a &amp; b; // Combinational always block for an AND gate
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1880,11 +1771,6 @@ XOR XOR3 (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob027_fadd
@@ -1962,11 +1848,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2046,11 +1927,6 @@ assign out = xor_output[0];
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob029_m2014_q4g
@@ -2127,11 +2003,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob030_popcount255
@@ -2199,11 +2070,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2279,11 +2145,6 @@ always @(posedge clk) begin
   o0 &lt;= vec[0]; // Connect output o0 to input vector&#x27;s position 0
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2363,11 +2224,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob033_ece241_2014_q1c
@@ -2445,11 +2301,6 @@ begin
 end
 assign count_from_zero = temp_q + 1; // Add 1 to get the actual value counting from 0</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2537,11 +2388,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob036_ringer
@@ -2621,11 +2467,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2717,11 +2558,6 @@ end
 // end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob038_count15
@@ -2799,11 +2635,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2889,11 +2720,6 @@ initial begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob040_count10
@@ -2970,11 +2796,6 @@ function bit [31:0] signExtend;
   end
 endfunction</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3063,11 +2884,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob044_vectorgates
@@ -3143,11 +2959,6 @@ xor4 #(.A(in[0]), .B(in[1]), .C(in[2]), .D(in[3]), .Y(out_xor)) xor_gate (U3);
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3251,11 +3062,6 @@ begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob052_gates100
@@ -3349,11 +3155,6 @@ DFlipFlopXOR dffxor (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob053_m2014_q4d
@@ -3428,11 +3229,6 @@ initial begin
   pedge &lt;= 0;                   // initialize all output bits to 0
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3521,11 +3317,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob057_kmap2
@@ -3597,11 +3388,6 @@ assign out_assign = a ^ b;
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3680,11 +3466,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3785,11 +3566,6 @@ multiplexer MUX (sel, {w, R}, Q); // Connect the multiplexer to the output reg Q
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob061_2014_q4a
@@ -3866,11 +3642,6 @@ module TopModule (
 
 assign out = (~sel &amp; a) | (sel &amp; b);</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3955,11 +3726,6 @@ initial begin
     finish;                       // End the initial block
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4060,11 +3826,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob064_vector3
@@ -4158,11 +3919,6 @@ nand2 #(.N(2)) nand2 (p2a, p2b, p2c, p2d, p2y);
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4271,11 +4027,6 @@ initial begin
   #10 forever clk = ~clk; // Set the clock frequency to 10
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4412,11 +4163,6 @@ parameter d3_decade_comm = 12; // X
 always @</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob068_countbcd
@@ -4500,11 +4246,6 @@ always @(posedge clk) begin
                      );
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4592,11 +4333,6 @@ assign out_pos = ~(a &amp; b &amp; c &amp; d) &amp; // POS expression for undesi
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob070_ece241_2013_q2
@@ -4666,11 +4402,6 @@ always @(posedge clk) begin
     end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4787,11 +4518,6 @@ always @(posedge clk or negedge fan_on) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob072_thermostat
@@ -4880,11 +4606,6 @@ assign q = d_upper | d_lower; // concatenate upper and lower bytes to output
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4995,11 +4716,6 @@ reg [1:0] resetn = 2&#x27;b01; // Assuming resetn[0] and resetn[1] as two separa
 // );</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob074_ece241_2014_q4
@@ -5092,11 +4808,6 @@ end
 assign state[1:0] = state;</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob075_counter_2bc
@@ -5185,11 +4896,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob076_always_case
@@ -5270,11 +4976,6 @@ end
 
 reg clk_last;</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -5370,11 +5071,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob079_fsm3onehot
@@ -5454,11 +5150,6 @@ always @(posedge clk or posedge reset) begin
     end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -5577,11 +5268,6 @@ always @(posedge clk or posedge rising_edge) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob083_mt2015_q4b
@@ -5667,11 +5353,6 @@ end
 
 // End of TopModule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -5762,11 +5443,6 @@ always @(posedge clk or negedge areset) begin
     end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -5873,11 +5549,6 @@ always @(posedge clk) begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -6016,11 +5687,6 @@ assign b = sel_4to1[3];
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob093_ece241_2014_q3
@@ -6105,11 +5771,6 @@ assign shift_ena = shift_ena_ff; // Assign output as the flip flop&#x27;s output
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -6205,11 +5866,6 @@ assign out = (sel == 0) ? a :
              &#x27;b1111_1111_1111_1111;</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob097_mux9to1v
@@ -6295,11 +5951,6 @@ always @(posedge clk) begin
     q &lt;= ~q; // Assigning the complement of current state to next state
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -6409,11 +6060,6 @@ always @(posedge clk) begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -6527,11 +6173,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob100_fsm3comb
@@ -6620,11 +6261,6 @@ always @(posedge clk) begin
   q &lt;= a ^ b ^ c ^ d; // XOR operation
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -6745,11 +6381,6 @@ initial begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob103_circuit2
@@ -6848,11 +6479,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob105_rotate100
@@ -6938,11 +6564,6 @@ always @(posedge clk) begin
     endcase
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -7062,11 +6683,6 @@ assign q[512] = 0;
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob108_rule90
@@ -7141,11 +6757,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob112_always_case2
@@ -7210,11 +6821,6 @@ module TopModule (
     1       1           1      0
     1       1           0      1</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -7299,11 +6905,6 @@ always @(posedge clk) begin
     end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -7430,11 +7031,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob115_shift18
@@ -7549,11 +7145,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob116_m2014_q3
@@ -7646,11 +7237,6 @@ always @(posedge clk) begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -7778,11 +7364,6 @@ always @(posedge clk) begin
     history_counter &lt;= history_counter + 1&#x27;b1;
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -7912,11 +7493,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob119_fsm3
@@ -8030,11 +7606,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob121_2014_q3bfsm
@@ -8107,11 +7678,6 @@ module TopModule (
   out &lt;= (!a &amp;&amp; !b) || (a &amp;&amp; b &amp;&amp; !c) || (a &amp;&amp; c &amp;&amp; !d) || (!a &amp;&amp; !c &amp;&amp; d);
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -8213,11 +7779,6 @@ always @(posedge clk) begin
     end
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -8333,11 +7894,6 @@ always @* begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob124_rule110
@@ -8429,11 +7985,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob125_kmap3
@@ -8522,11 +8073,6 @@ always @(posedge clk) begin
     endcase
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -8663,11 +8209,6 @@ parameter DONE = 3;
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob128_fsm_ps2
@@ -8758,11 +8299,6 @@ always @(posedge clk) begin
   assign q = a + b + d; // Assuming the carry-in from the previous stage (c) is not used.
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -8878,11 +8414,6 @@ AND sub_AND (sub_A1.z, sub_B2.z, w4);
 XOR final_XOR (w3, w4, z);</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob131_mt2015_q4
@@ -8980,11 +8511,6 @@ end
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -9086,11 +8612,6 @@ initial begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob133_2014_q3fsm
@@ -9178,11 +8699,6 @@ always @(posedge clk) Y0 &lt;= next_state[2]; // Assigning Y0 to the MSB (most s
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -9276,11 +8792,6 @@ always @(posedge clk) begin
     endcase
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -9400,11 +8911,6 @@ assign z = current_state == 4&#x27;b1000; // Output is true when in state F
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -9542,11 +9048,6 @@ assign z = state;
 reg [2:0] oldstate = 3&#x27;bxx1; // &#x27;x&#x27; represents high-impedance (uninitialized) values in Verilog</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob138_2012_q2fsm
@@ -9667,11 +9168,6 @@ assign curr_y = y;
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -9816,11 +9312,6 @@ end
 // ...</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob140_fsm_hdlc
@@ -9952,11 +9443,6 @@ always @(posedge clk) begin
   pm &lt;= (hh[3]) ? 1&#x27;b1 : 1&#x27;b0; // Set PM if hours are greater than or equal to 13
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -10104,11 +9590,6 @@ always @* begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -10287,11 +9768,6 @@ always @(posedge clk) begin
     out_en2</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob143_fsm_onehot
@@ -10467,11 +9943,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob144_conwaylife
@@ -10615,11 +10086,6 @@ initial begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob145_circuit8
@@ -10747,11 +10213,6 @@ always @(posedge clk) begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob146_fsm_serialdata
@@ -10874,11 +10335,6 @@ always @(posedge clk) begin
   state &lt;= a ^ b ^ q; // calculate the state as XOR of current inputs and Q
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -11020,11 +10476,6 @@ always @(posedge clk) begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -11206,11 +10657,6 @@ assign shift_ena = B3_next;
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob150_review2015_fsmonehot
@@ -11355,11 +10801,6 @@ end
 
 assign shift_ena = (state == 4&#x27;b0010); // Assign shift enable output based on state</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -11511,11 +10952,6 @@ always @(posedge clk or negedge areset) begin
   end
 end</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -11669,11 +11105,6 @@ end
 
 assign train_enable = (predict_valid &amp;&amp; !train_valid); // Training only when prediction is requested but not training</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -11829,11 +11260,6 @@ MessageFinder message_finder(clk, in, reset, state, .data_valid(done), out_bytes
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -12004,11 +11430,6 @@ begin
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob155_lemmings4
@@ -12149,11 +11570,6 @@ end
 assign count = delay;</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob156_review2015_fancytimer
@@ -12224,16 +11640,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob001_zero/Prob001_zero_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;zero&#x27; has 20 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;zero&#x27; has 20 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 20 out of 20 samples
-Simulation finished at 102 ps
 Mismatches: 20 in 20 samples</div>
                 
                 <details>
@@ -12333,16 +11741,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob034_dff8/Prob034_dff8_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 17 mismatches. First mismatch occurred at time 45.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 17 mismatches. First mismatch occurred at time 45.
 Hint: Total mismatched samples is 17 out of 41 samples
-Simulation finished at 206 ps
 Mismatches: 17 in 41 samples</div>
                 
                 <details>
@@ -12420,16 +11820,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob045_edgedetect2/Prob045_edgedetect2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;anyedge&#x27; has 225 mismatches. First mismatch occurred at time 20.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;anyedge&#x27; has 225 mismatches. First mismatch occurred at time 20.
 Hint: Total mismatched samples is 225 out of 228 samples
-Simulation finished at 1140 ps
 Mismatches: 225 in 228 samples</div>
                 
                 <details>
@@ -12518,16 +11910,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob046_dff8p/Prob046_dff8p_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset doesn&#x27;t seem to be working.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset doesn&#x27;t seem to be working.
 Hint: Output &#x27;q&#x27; has 249 mismatches. First mismatch occurred at time 15.
 Hint: Total mismatched samples is 249 out of 436 samples
-Simulation finished at 2181 ps
 Mismatches: 249 in 436 samples</div>
                 
                 <details>
@@ -12613,16 +11998,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob047_dff8ar/Prob047_dff8ar_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 343 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 343 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 343 out of 436 samples
-Simulation finished at 2181 ps
 Mismatches: 343 in 436 samples</div>
                 
                 <details>
@@ -12700,16 +12077,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob050_kmap1/Prob050_kmap1_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 127 mismatches. First mismatch occurred at time 20.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 127 mismatches. First mismatch occurred at time 20.
 Hint: Total mismatched samples is 127 out of 219 samples
-Simulation finished at 1096 ps
 Mismatches: 127 in 219 samples</div>
                 
                 <details>
@@ -12803,16 +12172,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob066_edgecapture/Prob066_edgecapture_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 151 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 151 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 151 out of 266 samples
-Simulation finished at 1330 ps
 Mismatches: 151 in 266 samples</div>
                 
                 <details>
@@ -12913,16 +12274,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;Z&#x27; has 195 mismatches. First mismatch occurred at time 130.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;Z&#x27; has 195 mismatches. First mismatch occurred at time 130.
 Hint: Total mismatched samples is 195 out of 530 samples
-Simulation finished at 2650 ps
 Mismatches: 195 in 530 samples</div>
                 
                 <details>
@@ -13023,16 +12376,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob085_shift4/Prob085_shift4_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 88 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 88 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 88 out of 427 samples
-Simulation finished at 2136 ps
 Mismatches: 88 in 427 samples</div>
                 
                 <details>
@@ -13122,16 +12467,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob090_circuit1/Prob090_circuit1_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 95 mismatches. First mismatch occurred at time 30.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 95 mismatches. First mismatch occurred at time 30.
 Hint: Total mismatched samples is 95 out of 120 samples
-Simulation finished at 600 ps
 Mismatches: 95 in 120 samples</div>
                 
                 <details>
@@ -13232,18 +12569,10 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob094_gatesv/Prob094_gatesv_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out_both&#x27; has no mismatches.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out_both&#x27; has no mismatches.
 Hint: Output &#x27;out_any&#x27; has 55 mismatches. First mismatch occurred at time 5.
 Hint: Output &#x27;out_different&#x27; has 213 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 213 out of 213 samples
-Simulation finished at 1066 ps
 Mismatches: 213 in 213 samples</div>
                 
                 <details>
@@ -13343,16 +12672,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob102_circuit3/Prob102_circuit3_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 26 mismatches. First mismatch occurred at time 45.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 26 mismatches. First mismatch occurred at time 45.
 Hint: Total mismatched samples is 26 out of 121 samples
-Simulation finished at 605 ps
 Mismatches: 26 in 121 samples</div>
                 
                 <details>
@@ -13456,16 +12777,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob107_fsm1s/Prob107_fsm1s_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset doesn&#x27;t seem to be working.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset doesn&#x27;t seem to be working.
 Hint: Output &#x27;out&#x27; has 229 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 229 out of 230 samples
-Simulation finished at 1151 ps
 Mismatches: 229 in 230 samples</div>
                 
                 <details>
@@ -13564,16 +12878,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob109_fsm1/Prob109_fsm1_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset doesn&#x27;t seem to be working.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset doesn&#x27;t seem to be working.
 Hint: Output &#x27;out&#x27; has 107 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 107 out of 228 samples
-Simulation finished at 1141 ps
 Mismatches: 107 in 228 samples</div>
                 
                 <details>
@@ -13673,16 +12980,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be asynchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be asynchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;out&#x27; has 119 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 119 out of 241 samples
-Simulation finished at 1206 ps
 Mismatches: 119 in 241 samples</div>
                 
                 <details>
@@ -13782,16 +13082,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob111_fsm2s/Prob111_fsm2s_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;out&#x27; has 21 mismatches. First mismatch occurred at time 75.
 Hint: Total mismatched samples is 21 out of 241 samples
-Simulation finished at 1206 ps
 Mismatches: 21 in 241 samples</div>
                 
                 <details>
@@ -13889,16 +13182,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob120_fsm3s/Prob120_fsm3s_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 197 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 197 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 197 out of 230 samples
-Simulation finished at 1151 ps
 Mismatches: 197 in 230 samples</div>
                 
                 <details>
@@ -14001,16 +13286,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob129_ece241_2013_q8/Prob129_ece241_2013_q8_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;z&#x27; has 109 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;z&#x27; has 109 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 109 out of 440 samples
-Simulation finished at 2200 ps
 Mismatches: 109 in 440 samples</div>
                 
                 <details>
@@ -14167,16 +13444,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset doesn&#x27;t seem to be working.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset doesn&#x27;t seem to be working.
 Hint: Output &#x27;g&#x27; has 1053 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 1053 out of 1054 samples
-Simulation finished at 5271 ps
 Mismatches: 1053 in 1054 samples</div>
                 
                 <details>

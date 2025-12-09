@@ -182,27 +182,18 @@
 
             <h1>phi4_14b 详细分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 16:13:55</p>
+            <p><strong>生成时间:</strong> 2025-12-09 16:50:31</p>
 
             <div class="summary-grid">
-                <div class="summary-card">
-                    <h3>总问题数</h3>
-                    <div class="value">156</div>
+                <div class="summary-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                    <h3>编译失败</h3>
+                    <div class="value">36</div>
+                    <p>编译失败数量</p>
                 </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
-                    <h3>生成成功率</h3>
-                    <div class="value">100.0%</div>
-                    <p>156/156</p>
-                </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
-                    <h3>编译成功率</h3>
-                    <div class="value">76.9%</div>
-                    <p>120/156</p>
-                </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                    <h3>测试通过率</h3>
-                    <div class="value">39.7%</div>
-                    <p>62/156</p>
+                <div class="summary-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <h3>测试失败</h3>
+                    <div class="value">58</div>
+                    <p>测试失败数量</p>
                 </div>
             </div>
     
@@ -315,11 +306,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob016_m2014_q4j
@@ -406,11 +392,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob024_hadd
@@ -475,11 +456,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -596,11 +572,6 @@ module PopulationCount255 (
             end else if (i</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob030_popcount255
@@ -677,11 +648,6 @@ module TopModule (
    10  | 1 | 1 |</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob050_kmap1
@@ -750,11 +716,6 @@ module TopModule (
     10 | 1 | 1 | 0 | 0 |</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob057_kmap2
@@ -818,11 +779,6 @@ module TopModule (
                     <summary><strong>完整生成代码</strong></summary>
                     <div class="code-snippet">assign out = (~sel &amp; a) | (sel &amp; b);</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -945,11 +901,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob068_countbcd
@@ -1034,11 +985,6 @@ module TopModule (
   1 | 1 | 1 | 1</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob069_truthtable1
@@ -1112,11 +1058,6 @@ module TopModule (
   // Sum-of-Products form
   assign out_s</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1211,11 +1152,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob074_ece241_2014_q4
@@ -1305,11 +1241,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob078_dualedge
@@ -1397,11 +1328,6 @@ module TopModule (
 end</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob079_fsm3onehot
@@ -1485,11 +1411,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1576,11 +1497,6 @@ end
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob084_ece241_2013_q12
@@ -1644,11 +1560,6 @@ module TopModule (
         11 | 1 | 1 | d | d |
         10 | 1 | 1 | 0 | d |</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -1770,11 +1681,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob119_fsm3
@@ -1887,11 +1793,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob120_fsm3s
@@ -1962,11 +1863,6 @@ cd   00  01  11  10
 11 | 0 | 1 | 0 | 1 |
 10 | 1 | 0 | 1 | 0 |</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2064,11 +1960,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2180,11 +2071,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查信号声明和使用是否一致
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2318,11 +2204,6 @@ module TopModule (
    10 | 0 | 1 | 1 | 1 |</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob125_kmap3
@@ -2413,11 +2294,6 @@ module TopModule (
     assign z = (x ^ y) &amp; x;
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2519,11 +2395,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2657,11 +2528,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -2815,11 +2681,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob139_2013_q2bfsm
@@ -2952,11 +2813,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3104,11 +2960,6 @@ begin
     end
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3311,11 +3162,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob151_review2015_fsm
@@ -3510,11 +3356,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob152_lemmings3
@@ -3692,11 +3533,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 检查Verilog语法，确保关键字、括号、分号使用正确
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -3886,11 +3722,6 @@ module TopModule (
 
 endmodule</div>
                 </details>
-                
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
                 
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
@@ -4103,11 +3934,6 @@ module TopModule (
 endmodule</div>
                 </details>
                 
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    • 仔细检查错误信息，参考Verilog语法规范
-                </div>
-                
                 <details>
                     <summary><strong>完整编译器输出</strong></summary>
                     <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">Problem: Prob156_review2015_fancytimer
@@ -4181,16 +4007,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob003_step_one/Prob003_step_one_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;one&#x27; has 20 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;one&#x27; has 20 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 20 out of 20 samples
-Simulation finished at 102 ps
 Mismatches: 20 in 20 samples</div>
                 
                 <details>
@@ -4261,16 +4079,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob004_vector2/Prob004_vector2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 109 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 109 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 109 out of 110 samples
-Simulation finished at 550 ps
 Mismatches: 109 in 110 samples</div>
                 
                 <details>
@@ -4346,16 +4156,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob034_dff8/Prob034_dff8_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 38 mismatches. First mismatch occurred at time 20.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 38 mismatches. First mismatch occurred at time 20.
 Hint: Total mismatched samples is 38 out of 41 samples
-Simulation finished at 206 ps
 Mismatches: 38 in 41 samples</div>
                 
                 <details>
@@ -4439,16 +4241,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob035_count1to10/Prob035_count1to10_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 185 mismatches. First mismatch occurred at time 55.
 Hint: Total mismatched samples is 185 out of 439 samples
-Simulation finished at 2196 ps
 Mismatches: 185 in 439 samples</div>
                 
                 <details>
@@ -4539,17 +4334,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;ringer&#x27; has no mismatches.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;ringer&#x27; has no mismatches.
 Hint: Output &#x27;motor&#x27; has 4 mismatches. First mismatch occurred at time 30.
 Hint: Total mismatched samples is 4 out of 19 samples
-Simulation finished at 97 ps
 Mismatches: 4 in 19 samples</div>
                 
                 <details>
@@ -4632,16 +4419,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 834 mismatches. First mismatch occurred at time 55.
 Hint: Total mismatched samples is 834 out of 8027 samples
-Simulation finished at 40136 ps
 Mismatches: 834 in 8027 samples</div>
                 
                 <details>
@@ -4721,16 +4501,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob038_count15/Prob038_count15_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 185 mismatches. First mismatch occurred at time 65.
 Hint: Total mismatched samples is 185 out of 421 samples
-Simulation finished at 2106 ps
 Mismatches: 185 in 421 samples</div>
                 
                 <details>
@@ -4815,16 +4588,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob040_count10/Prob040_count10_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 185 mismatches. First mismatch occurred at time 55.
 Hint: Total mismatched samples is 185 out of 439 samples
-Simulation finished at 2196 ps
 Mismatches: 185 in 439 samples</div>
                 
                 <details>
@@ -4905,16 +4671,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob041_dff8r/Prob041_dff8r_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 41 mismatches. First mismatch occurred at time 55.
 Hint: Total mismatched samples is 41 out of 432 samples
-Simulation finished at 2161 ps
 Mismatches: 41 in 432 samples</div>
                 
                 <details>
@@ -5002,16 +4761,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob046_dff8p/Prob046_dff8p_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 46 mismatches. First mismatch occurred at time 75.
 Hint: Total mismatched samples is 46 out of 436 samples
-Simulation finished at 2181 ps
 Mismatches: 46 in 436 samples</div>
                 
                 <details>
@@ -5105,16 +4857,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob047_dff8ar/Prob047_dff8ar_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 335 mismatches. First mismatch occurred at time 50.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 335 mismatches. First mismatch occurred at time 50.
 Hint: Total mismatched samples is 335 out of 436 samples
-Simulation finished at 2181 ps
 Mismatches: 335 in 436 samples</div>
                 
                 <details>
@@ -5194,16 +4938,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 1 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 1 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 1 out of 100 samples
-Simulation finished at 501 ps
 Mismatches: 1 in 100 samples</div>
                 
                 <details>
@@ -5287,16 +5023,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob054_edgedetect/Prob054_edgedetect_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;pedge&#x27; has 208 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;pedge&#x27; has 208 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 208 out of 227 samples
-Simulation finished at 1135 ps
 Mismatches: 208 in 227 samples</div>
                 
                 <details>
@@ -5380,16 +5108,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 14 mismatches. First mismatch occurred at time 270.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 14 mismatches. First mismatch occurred at time 270.
 Hint: Total mismatched samples is 14 out of 299 samples
-Simulation finished at 1496 ps
 Mismatches: 14 in 299 samples</div>
                 
                 <details>
@@ -5481,16 +5201,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob063_review2015_shiftcount/Prob063_review2015_shiftcount_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 1886 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 1886 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 1886 out of 2071 samples
-Simulation finished at 10356 ps
 Mismatches: 1886 in 2071 samples</div>
                 
                 <details>
@@ -5594,19 +5306,11 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob064_vector3/Prob064_vector3_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;w&#x27; has 116 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;w&#x27; has 116 mismatches. First mismatch occurred at time 10.
 Hint: Output &#x27;x&#x27; has 109 mismatches. First mismatch occurred at time 70.
 Hint: Output &#x27;y&#x27; has 111 mismatches. First mismatch occurred at time 80.
 Hint: Output &#x27;z&#x27; has 126 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 126 out of 126 samples
-Simulation finished at 630 ps
 Mismatches: 126 in 126 samples</div>
                 
                 <details>
@@ -5705,16 +5409,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob066_edgecapture/Prob066_edgecapture_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 150 mismatches. First mismatch occurred at time 100.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 150 mismatches. First mismatch occurred at time 100.
 Hint: Total mismatched samples is 150 out of 266 samples
-Simulation finished at 1330 ps
 Mismatches: 150 in 266 samples</div>
                 
                 <details>
@@ -5807,16 +5503,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;q&#x27; has 1 mismatches. First mismatch occurred at time 65.
 Hint: Total mismatched samples is 1 out of 443 samples
-Simulation finished at 2216 ps
 Mismatches: 1 in 443 samples</div>
                 
                 <details>
@@ -5918,16 +5607,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob080_timer/Prob080_timer_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;tc&#x27; has 3232 mismatches. First mismatch occurred at time 50.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;tc&#x27; has 3232 mismatches. First mismatch occurred at time 50.
 Hint: Total mismatched samples is 3232 out of 7127 samples
-Simulation finished at 35636 ps
 Mismatches: 3232 in 7127 samples</div>
                 
                 <details>
@@ -6016,16 +5697,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob086_lfsr5/Prob086_lfsr5_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 4412 mismatches. First mismatch occurred at time 40.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 4412 mismatches. First mismatch occurred at time 40.
 Hint: Total mismatched samples is 4412 out of 4443 samples
-Simulation finished at 22216 ps
 Mismatches: 4412 in 4443 samples</div>
                 
                 <details>
@@ -6133,16 +5806,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob088_ece241_2014_q5b/Prob088_ece241_2014_q5b_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;z&#x27; has 16 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;z&#x27; has 16 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 16 out of 436 samples
-Simulation finished at 2180 ps
 Mismatches: 16 in 436 samples</div>
                 
                 <details>
@@ -6261,16 +5926,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob089_ece241_2014_q5a/Prob089_ece241_2014_q5a_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;z&#x27; has 205 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;z&#x27; has 205 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 205 out of 436 samples
-Simulation finished at 2180 ps
 Mismatches: 205 in 436 samples</div>
                 
                 <details>
@@ -6365,17 +6022,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob091_2012_q2b/Prob091_2012_q2b_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;Y1&#x27; has 137 mismatches. First mismatch occurred at time 35.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;Y1&#x27; has 137 mismatches. First mismatch occurred at time 35.
 Hint: Output &#x27;Y3&#x27; has 133 mismatches. First mismatch occurred at time 25.
 Hint: Total mismatched samples is 270 out of 600 samples
-Simulation finished at 3001 ps
 Mismatches: 270 in 600 samples</div>
                 
                 <details>
@@ -6486,18 +6135,10 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob092_gatesv100/Prob092_gatesv100_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out_both&#x27; has 201 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out_both&#x27; has 201 mismatches. First mismatch occurred at time 5.
 Hint: Output &#x27;out_any&#x27; has no mismatches.
 Hint: Output &#x27;out_different&#x27; has no mismatches.
 Hint: Total mismatched samples is 201 out of 201 samples
-Simulation finished at 1006 ps
 Mismatches: 201 in 201 samples</div>
                 
                 <details>
@@ -6601,16 +6242,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob093_ece241_2014_q3/Prob093_ece241_2014_q3_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;mux_in&#x27; has 60 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;mux_in&#x27; has 60 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 60 out of 60 samples
-Simulation finished at 300 ps
 Mismatches: 60 in 60 samples</div>
                 
                 <details>
@@ -6739,16 +6372,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;shift_ena&#x27; has 10 mismatches. First mismatch occurred at time 340.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;shift_ena&#x27; has 10 mismatches. First mismatch occurred at time 340.
 Hint: Total mismatched samples is 10 out of 200 samples
-Simulation finished at 1001 ps
 Mismatches: 10 in 200 samples</div>
                 
                 <details>
@@ -6881,16 +6506,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;start_shifting&#x27; has 81 mismatches. First mismatch occurred at time 50.
 Hint: Total mismatched samples is 81 out of 643 samples
-Simulation finished at 3216 ps
 Mismatches: 81 in 643 samples</div>
                 
                 <details>
@@ -6987,16 +6605,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob098_circuit7/Prob098_circuit7_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 26 mismatches. First mismatch occurred at time 60.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 26 mismatches. First mismatch occurred at time 60.
 Hint: Total mismatched samples is 26 out of 123 samples
-Simulation finished at 615 ps
 Mismatches: 26 in 123 samples</div>
                 
                 <details>
@@ -7094,17 +6704,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;Y2&#x27; has 78 mismatches. First mismatch occurred at time 20.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;Y2&#x27; has 78 mismatches. First mismatch occurred at time 20.
 Hint: Output &#x27;Y4&#x27; has 63 mismatches. First mismatch occurred at time 15.
 Hint: Total mismatched samples is 126 out of 200 samples
-Simulation finished at 1001 ps
 Mismatches: 126 in 200 samples</div>
                 
                 <details>
@@ -7201,16 +6803,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob101_circuit4/Prob101_circuit4_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 30 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 30 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 30 out of 121 samples
-Simulation finished at 605 ps
 Mismatches: 30 in 121 samples</div>
                 
                 <details>
@@ -7306,16 +6900,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob102_circuit3/Prob102_circuit3_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 24 mismatches. First mismatch occurred at time 35.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 24 mismatches. First mismatch occurred at time 35.
 Hint: Total mismatched samples is 24 out of 121 samples
-Simulation finished at 605 ps
 Mismatches: 24 in 121 samples</div>
                 
                 <details>
@@ -7412,16 +6998,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 121 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 121 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 121 out of 121 samples
-Simulation finished at 605 ps
 Mismatches: 121 in 121 samples</div>
                 
                 <details>
@@ -7528,16 +7106,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob104_mt2015_muxdff/Prob104_mt2015_muxdff_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;Q&#x27; has 49 mismatches. First mismatch occurred at time 5.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;Q&#x27; has 49 mismatches. First mismatch occurred at time 5.
 Hint: Total mismatched samples is 49 out of 199 samples
-Simulation finished at 996 ps
 Mismatches: 49 in 199 samples</div>
                 
                 <details>
@@ -7659,16 +7229,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob107_fsm1s/Prob107_fsm1s_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;out&#x27; has 57 mismatches. First mismatch occurred at time 85.
 Hint: Total mismatched samples is 57 out of 230 samples
-Simulation finished at 1151 ps
 Mismatches: 57 in 230 samples</div>
                 
                 <details>
@@ -7775,16 +7338,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob108_rule90/Prob108_rule90_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 7058 mismatches. First mismatch occurred at time 40.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 7058 mismatches. First mismatch occurred at time 40.
 Hint: Total mismatched samples is 7058 out of 7121 samples
-Simulation finished at 35606 ps
 Mismatches: 7058 in 7121 samples</div>
                 
                 <details>
@@ -7913,16 +7468,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob109_fsm1/Prob109_fsm1_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out&#x27; has 65 mismatches. First mismatch occurred at time 20.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out&#x27; has 65 mismatches. First mismatch occurred at time 20.
 Hint: Total mismatched samples is 65 out of 228 samples
-Simulation finished at 1141 ps
 Mismatches: 65 in 228 samples</div>
                 
                 <details>
@@ -8051,16 +7598,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob111_fsm2s/Prob111_fsm2s_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;out&#x27; has 21 mismatches. First mismatch occurred at time 75.
 Hint: Total mismatched samples is 21 out of 241 samples
-Simulation finished at 1206 ps
 Mismatches: 21 in 241 samples</div>
                 
                 <details>
@@ -8145,16 +7685,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob112_always_case2/Prob112_always_case2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;pos&#x27; has 61 mismatches. First mismatch occurred at time 90.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;pos&#x27; has 61 mismatches. First mismatch occurred at time 90.
 Hint: Total mismatched samples is 61 out of 94 samples
-Simulation finished at 470 ps
 Mismatches: 61 in 94 samples</div>
                 
                 <details>
@@ -8230,16 +7762,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;f&#x27; has 49 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;f&#x27; has 49 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 49 out of 100 samples
-Simulation finished at 501 ps
 Mismatches: 49 in 100 samples</div>
                 
                 <details>
@@ -8354,16 +7878,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob115_shift18/Prob115_shift18_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 3132 mismatches. First mismatch occurred at time 30.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 3132 mismatches. First mismatch occurred at time 30.
 Hint: Total mismatched samples is 3132 out of 4041 samples
-Simulation finished at 20206 ps
 Mismatches: 3132 in 4041 samples</div>
                 
                 <details>
@@ -8457,16 +7973,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob117_circuit9/Prob117_circuit9_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;q&#x27; has 244 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;q&#x27; has 244 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 244 out of 245 samples
-Simulation finished at 1225 ps
 Mismatches: 244 in 245 samples</div>
                 
                 <details>
@@ -8593,16 +8101,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;z&#x27; has 415 mismatches. First mismatch occurred at time 60.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;z&#x27; has 415 mismatches. First mismatch occurred at time 60.
 Hint: Total mismatched samples is 415 out of 1006 samples
-Simulation finished at 5031 ps
 Mismatches: 415 in 1006 samples</div>
                 
                 <details>
@@ -8751,17 +8251,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob127_lemmings1/Prob127_lemmings1_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;walk_left&#x27; has 83 mismatches. First mismatch occurred at time 120.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;walk_left&#x27; has 83 mismatches. First mismatch occurred at time 120.
 Hint: Output &#x27;walk_right&#x27; has 83 mismatches. First mismatch occurred at time 120.
 Hint: Total mismatched samples is 83 out of 229 samples
-Simulation finished at 1146 ps
 Mismatches: 83 in 229 samples</div>
                 
                 <details>
@@ -8887,16 +8379,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;done&#x27; has 69 mismatches. First mismatch occurred at time 240.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;done&#x27; has 69 mismatches. First mismatch occurred at time 240.
 Hint: Total mismatched samples is 69 out of 400 samples
-Simulation finished at 2001 ps
 Mismatches: 69 in 400 samples</div>
                 
                 <details>
@@ -9031,16 +8515,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;z&#x27; has 174 mismatches. First mismatch occurred at time 110.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;z&#x27; has 174 mismatches. First mismatch occurred at time 110.
 Hint: Total mismatched samples is 174 out of 1414 samples
-Simulation finished at 7071 ps
 Mismatches: 174 in 1414 samples</div>
                 
                 <details>
@@ -9143,17 +8619,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;Y0&#x27; has 69 mismatches. First mismatch occurred at time 10.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;Y0&#x27; has 69 mismatches. First mismatch occurred at time 10.
 Hint: Output &#x27;z&#x27; has 47 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 90 out of 200 samples
-Simulation finished at 1001 ps
 Mismatches: 90 in 200 samples</div>
                 
                 <details>
@@ -9252,16 +8720,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;Y2&#x27; has 13 mismatches. First mismatch occurred at time 20.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;Y2&#x27; has 13 mismatches. First mismatch occurred at time 20.
 Hint: Total mismatched samples is 13 out of 100 samples
-Simulation finished at 501 ps
 Mismatches: 13 in 100 samples</div>
                 
                 <details>
@@ -9443,16 +8903,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;done&#x27; has 48 mismatches. First mismatch occurred at time 110.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;done&#x27; has 48 mismatches. First mismatch occurred at time 110.
 Hint: Total mismatched samples is 48 out of 905 samples
-Simulation finished at 4526 ps
 Mismatches: 48 in 905 samples</div>
                 
                 <details>
@@ -9571,16 +9023,8 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;z&#x27; has 1 mismatches. First mismatch occurred at time 1885.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;z&#x27; has 1 mismatches. First mismatch occurred at time 1885.
 Hint: Total mismatched samples is 1 out of 400 samples
-Simulation finished at 2001 ps
 Mismatches: 1 in 400 samples</div>
                 
                 <details>
@@ -9762,18 +9206,10 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob140_fsm_hdlc/Prob140_fsm_hdlc_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;disc&#x27; has 12 mismatches. First mismatch occurred at time 480.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;disc&#x27; has 12 mismatches. First mismatch occurred at time 480.
 Hint: Output &#x27;flag&#x27; has 12 mismatches. First mismatch occurred at time 1545.
 Hint: Output &#x27;err&#x27; has 279 mismatches. First mismatch occurred at time 95.
 Hint: Total mismatched samples is 296 out of 801 samples
-Simulation finished at 4006 ps
 Mismatches: 296 in 801 samples</div>
                 
                 <details>
@@ -9928,19 +9364,11 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob141_count_clock/Prob141_count_clock_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-TIMEOUT
-Hint: Output &#x27;pm&#x27; has 105947 mismatches. First mismatch occurred at time 38270.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;pm&#x27; has 105947 mismatches. First mismatch occurred at time 38270.
 Hint: Output &#x27;hh&#x27; has 127547 mismatches. First mismatch occurred at time 362270.
 Hint: Output &#x27;mm&#x27; has no mismatches.
 Hint: Output &#x27;ss&#x27; has no mismatches.
 Hint: Total mismatched samples is 192347 out of 200000 samples
-Simulation finished at 1000000 ps
 Mismatches: 192347 in 200000 samples</div>
                 
                 <details>
@@ -10104,18 +9532,10 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob142_lemmings2/Prob142_lemmings2_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;walk_left&#x27; has 309 mismatches. First mismatch occurred at time 140.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;walk_left&#x27; has 309 mismatches. First mismatch occurred at time 140.
 Hint: Output &#x27;walk_right&#x27; has 309 mismatches. First mismatch occurred at time 140.
 Hint: Output &#x27;aaah&#x27; has no mismatches.
 Hint: Total mismatched samples is 309 out of 441 samples
-Simulation finished at 2206 ps
 Mismatches: 309 in 441 samples</div>
                 
                 <details>
@@ -10308,18 +9728,20 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: next_state[0] is incorrect.
+Hint: next_state[1] is incorrect.
+Hint: next_state[2] is   correct.
+Hint: next_state[3] is   correct.
+Hint: next_state[4] is incorrect.
+Hint: next_state[5] is   correct.
+Hint: next_state[6] is incorrect.
+Hint: next_state[7] is incorrect.
 Hint: next_state[8] is incorrect.
 Hint: next_state[9] is incorrect.
 Hint: Output &#x27;next_state&#x27; has 101 mismatches. First mismatch occurred at time 45.
 Hint: Output &#x27;out1&#x27; has 91 mismatches. First mismatch occurred at time 50.
 Hint: Output &#x27;out2&#x27; has 27 mismatches. First mismatch occurred at time 65.
 Hint: Total mismatched samples is 112 out of 224 samples
-Simulation finished at 1121 ps
 Mismatches: 112 in 224 samples</div>
                 
                 <details>
@@ -10456,17 +9878,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob145_circuit8/Prob145_circuit8_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;p&#x27; has 124 mismatches. First mismatch occurred at time 90.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;p&#x27; has 124 mismatches. First mismatch occurred at time 90.
 Hint: Output &#x27;q&#x27; has 133 mismatches. First mismatch occurred at time 120.
 Hint: Total mismatched samples is 161 out of 240 samples
-Simulation finished at 1200 ps
 Mismatches: 161 in 240 samples</div>
                 
                 <details>
@@ -10641,16 +10055,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset should be synchronous, but doesn&#x27;t appear to be.
 Hint: Output &#x27;g&#x27; has 184 mismatches. First mismatch occurred at time 65.
 Hint: Total mismatched samples is 184 out of 1054 samples
-Simulation finished at 5271 ps
 Mismatches: 184 in 1054 samples</div>
                 
                 <details>
@@ -10814,19 +10221,12 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Your reset doesn&#x27;t seem to be working.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Your reset doesn&#x27;t seem to be working.
 Hint: Output &#x27;fr3&#x27; has 1 mismatches. First mismatch occurred at time 55.
 Hint: Output &#x27;fr2&#x27; has 569 mismatches. First mismatch occurred at time 130.
 Hint: Output &#x27;fr1&#x27; has no mismatches.
 Hint: Output &#x27;dfr&#x27; has 1240 mismatches. First mismatch occurred at time 10.
 Hint: Total mismatched samples is 1524 out of 2040 samples
-Simulation finished at 10200 ps
 Mismatches: 1524 in 2040 samples</div>
                 
                 <details>
@@ -10988,14 +10388,7 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;B3_next&#x27; has 66 mismatches. First mismatch occurred at time 25.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;B3_next&#x27; has 66 mismatches. First mismatch occurred at time 25.
 Hint: Output &#x27;S_next&#x27; has 26 mismatches. First mismatch occurred at time 115.
 Hint: Output &#x27;S1_next&#x27; has no mismatches.
 Hint: Output &#x27;Count_next&#x27; has 38 mismatches. First mismatch occurred at time 10.
@@ -11004,7 +10397,6 @@ Hint: Output &#x27;done&#x27; has no mismatches.
 Hint: Output &#x27;counting&#x27; has no mismatches.
 Hint: Output &#x27;shift_ena&#x27; has no mismatches.
 Hint: Total mismatched samples is 140 out of 300 samples
-Simulation finished at 1501 ps
 Mismatches: 140 in 300 samples</div>
                 
                 <details>
@@ -11197,17 +10589,9 @@ endmodule</div>
                 </details>
                 
                 <p><strong>不匹配详情:</strong></p>
-                <div class="code-snippet" style="background-color: #e74c3c;">Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv
-Compilation: SUCCESS
-Test: FAILED
-==================================================
-=== Static Analysis ===
-Test exit code: 0
-VCD info: dumpfile wave.vcd opened for output.
-Hint: Output &#x27;out_bytes&#x27; has 410 mismatches. First mismatch occurred at time 210.
+                <div class="code-snippet" style="background-color: #e74c3c;">Hint: Output &#x27;out_bytes&#x27; has 410 mismatches. First mismatch occurred at time 210.
 Hint: Output &#x27;done&#x27; has 490 mismatches. First mismatch occurred at time 210.
 Hint: Total mismatched samples is 490 out of 1619 samples
-Simulation finished at 8096 ps
 Mismatches: 490 in 1619 samples</div>
                 
                 <details>

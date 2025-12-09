@@ -197,7 +197,7 @@
         <div class="container">
             <h1>VerilogEval 失败分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.0, Top_p = 0.01</p>
-            <p><strong>生成时间:</strong> 2025-12-09 16:13:54</p>
+            <p><strong>生成时间:</strong> 2025-12-09 16:50:31</p>
 
             <h2>模型性能概览</h2>
             <table>
@@ -238,8 +238,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">136(87.2%)</td>
-                        <td style="color: #f39c12;">5(90.4%)</td>
+                        <td style="color: #e74c3c;">136</td>
+                        <td style="color: #f39c12;">5</td>
                         <td><a href="model_details/deepseek_r1_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -265,8 +265,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">64(41.0%)</td>
-                        <td style="color: #f39c12;">20(53.8%)</td>
+                        <td style="color: #e74c3c;">64</td>
+                        <td style="color: #f39c12;">20</td>
                         <td><a href="model_details/deepseek_v3_2_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -292,8 +292,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">72(46.2%)</td>
-                        <td style="color: #f39c12;">40(71.8%)</td>
+                        <td style="color: #e74c3c;">72</td>
+                        <td style="color: #f39c12;">40</td>
                         <td><a href="model_details/gemma3_12b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -319,8 +319,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">115(73.7%)</td>
-                        <td style="color: #f39c12;">2(75.0%)</td>
+                        <td style="color: #e74c3c;">115</td>
+                        <td style="color: #f39c12;">2</td>
                         <td><a href="model_details/glm_4_6_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -346,8 +346,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">59(37.8%)</td>
-                        <td style="color: #f39c12;">6(41.7%)</td>
+                        <td style="color: #e74c3c;">59</td>
+                        <td style="color: #f39c12;">6</td>
                         <td><a href="model_details/gpt_oss_20b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -373,8 +373,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">108(69.2%)</td>
-                        <td style="color: #f39c12;">33(90.4%)</td>
+                        <td style="color: #e74c3c;">108</td>
+                        <td style="color: #f39c12;">33</td>
                         <td><a href="model_details/llama3_2_3b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -400,8 +400,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">122(78.2%)</td>
-                        <td style="color: #f39c12;">20(91.0%)</td>
+                        <td style="color: #e74c3c;">122</td>
+                        <td style="color: #f39c12;">20</td>
                         <td><a href="model_details/mistral_7b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -427,8 +427,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">49(31.4%)</td>
-                        <td style="color: #f39c12;">60(69.9%)</td>
+                        <td style="color: #e74c3c;">49</td>
+                        <td style="color: #f39c12;">60</td>
                         <td><a href="model_details/phi4_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -454,8 +454,8 @@
                             </div>
                         </td>
                         <td>156</td>
-                        <td style="color: #e74c3c;">128(82.1%)</td>
-                        <td style="color: #f39c12;">1(82.7%)</td>
+                        <td style="color: #e74c3c;">128</td>
+                        <td style="color: #f39c12;">1</td>
                         <td><a href="model_details/qwen3_8b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -697,21 +697,683 @@
                         </tbody>
                     </table>
         </div></div>
+            <h2>问题难度分析</h2>
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h3>问题通过率统计</h3>
+                    <p><strong style="color: #e74c3c;">通过率为 0% 的问题: 10 个</strong></p>
+                    <p><strong style="color: #f39c12;">通过率低于 10% 的问题: 10 个</strong></p>
+                </div>
+            </div>
+
             <div class="stats-grid">
                 <div class="stats-card">
                     <h3>最具挑战性的问题 (通过率最低)</h3>
                     <ul class="problem-list">
-    <li><strong>compile_test_result</strong> - 通过率: 0.0%</li><li><strong>Prob053_m2014_q4d</strong> - 通过率: 0.0%</li><li><strong>Prob057_kmap2</strong> - 通过率: 0.0%</li><li><strong>Prob062_bugs_mux2</strong> - 通过率: 0.0%</li><li><strong>Prob063_review2015_shiftcount</strong> - 通过率: 0.0%</li><li><strong>Prob066_edgecapture</strong> - 通过率: 0.0%</li><li><strong>Prob068_countbcd</strong> - 通过率: 0.0%</li><li><strong>Prob070_ece241_2013_q2</strong> - 通过率: 0.0%</li><li><strong>Prob082_lfsr32</strong> - 通过率: 0.0%</li><li><strong>Prob086_lfsr5</strong> - 通过率: 0.0%</li>
+    
+                    <li>
+                        <strong>Prob053_m2014_q4d</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 3 | 测试失败: 5</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob057_kmap2</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 6 | 测试失败: 3</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob062_bugs_mux2</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 3 | 测试失败: 6</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob063_review2015_shiftcount</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 5 | 测试失败: 1</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob066_edgecapture</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 5 | 测试失败: 4</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob068_countbcd</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 8</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob070_ece241_2013_q2</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 7 | 测试失败: 2</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob082_lfsr32</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 6 | 测试失败: 3</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob086_lfsr5</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 8 | 测试失败: 1</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob089_ece241_2014_q5a</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 6 | 测试失败: 3</small>
+                    </li>
+        
                     </ul>
                 </div>
 
                 <div class="stats-card">
                     <h3>最简单的问题 (通过率最高)</h3>
                     <ul class="problem-list">
-    <li><strong>Prob008_m2014_q4h</strong> - 通过率: 77.8%</li><li><strong>Prob003_step_one</strong> - 通过率: 66.7%</li><li><strong>Prob005_notgate</strong> - 通过率: 66.7%</li><li><strong>Prob007_wire</strong> - 通过率: 66.7%</li><li><strong>Prob014_andgate</strong> - 通过率: 66.7%</li><li><strong>Prob020_mt2015_eq2</strong> - 通过率: 66.7%</li><li><strong>Prob022_mux2to1</strong> - 通过率: 66.7%</li><li><strong>Prob031_dff</strong> - 通过率: 66.7%</li><li><strong>Prob059_wire4</strong> - 通过率: 66.7%</li><li><strong>Prob012_xnorgate</strong> - 通过率: 55.6%</li>
+    
+                    <li>
+                        <strong>Prob008_m2014_q4h</strong> - 通过率: 77.8%<br>
+                        <small style="color: #27ae60;">编译失败: 2</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob003_step_one</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 1</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob005_notgate</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 3</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob007_wire</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 2</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob014_andgate</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 2</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob020_mt2015_eq2</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 3</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob022_mux2to1</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 3</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob031_dff</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 2</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob059_wire4</strong> - 通过率: 66.7%<br>
+                        <small style="color: #27ae60;">编译失败: 1</small>
+                    </li>
+        
+                    <li>
+                        <strong>Prob012_xnorgate</strong> - 通过率: 55.6%<br>
+                        <small style="color: #27ae60;">编译失败: 2 | 测试失败: 1</small>
+                    </li>
+        
                     </ul>
                 </div>
             </div>
+    
+            <div class="stats-card" style="margin-top: 20px;">
+                <h3>所有通过率低于 10% 的问题</h3>
+                <ul class="problem-list">
+        
+                    <li>
+                        <strong>Prob053_m2014_q4d</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 3 | 测试失败: 5</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+Implement in Verilog the following circuit: A D flip-flop takes as input
+the output of a two-input XOR. The flip-flop is positive edge triggered
+by clk, but there is no reset. The XOR takes as input &#x27;in&#x27; along with the
+output &#x27;out&#x27; of the flip-flop.
+
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_v3_2</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>mistral_7b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob057_kmap2</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 6 | 测试失败: 3</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+Implement the circuit described by the Karnaugh map below.
+
+              ab
+   cd   00  01  11  10
+   00 | 1 | 1 | 0 | 1 |
+   01 | 1 | 0 | 0 | 1 |
+   11 | 0 | 1 | 1 | 1 |
+   10 | 1 | 1 | 0 | 0 |
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_v3_2</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gpt_oss_20b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>mistral_7b</strong> - 未知错误<br>
+                            <small style='color: #666;'>Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob062_bugs_mux2</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 3 | 测试失败: 6</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+Find the bug and fix this 8-bit wide 2-to-1 mux.
+
+  module top_module (
+      input sel,
+      input [7:0] a,
+      input [7:0] b,
+      output out  );
+
+      assign out = (~sel &amp; a) | (sel &amp; b);
+
+  endmodule
+
+module TopModule (
+  input sel,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob063_review2015_shiftcount</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 5 | 测试失败: 1</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+Build a four-bit shift register that also acts as a down counter. Data is
+shifted in most-significant-bit first when shift_ena is 1. The number
+currently in the shift register is decremented when count_ena is 1. Since
+the full system doesn&#x27;t ever use shift_ena and count_ena together, it
+does not matter what your circuit does if both control inputs are 1 (This
+mainly means that it doesn&#x27;t matter which case gets higher priority).
+
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gemma3_12b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gpt_oss_20b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob066_edgecapture</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 5 | 测试失败: 4</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+For each bit in a 32-bit vector, capture when the input signal changes
+from 1 in one clock cycle to 0 the next. &quot;Capture&quot; means that the output
+will remain 1 until the register is reset (active high synchronous
+reset).
+
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gemma3_12b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>llama3_2_3b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob068_countbcd</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 8</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+Build a 4-digit BCD (binary-coded decimal) counter. Each decimal digit is
+encoded using 4 bits: q[3:0] is the ones digit, q[7:4] is the tens digit,
+etc. For digits [3:1], also output an enable signal indicating when each
+of the upper three digits should be incremented. Include a synchronous
+active-high reset.
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_v3_2</strong> - 未知错误<br>
+                            <small style='color: #666;'>ena[&#x27;sd1] is not a valid l-value in tb.top_module1.</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gemma3_12b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gpt_oss_20b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>mistral_7b</strong> - 未知错误<br>
+                            <small style='color: #666;'>implicit definition of wire &#x27;ena&#x27;.</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>phi4_14b</strong> - 未知错误<br>
+                            <small style='color: #666;'>ena is not a valid l-value in tb.top_module1.</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob070_ece241_2013_q2</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 7 | 测试失败: 2</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+A single-output digital system with four inputs (a,b,c,d) generates a
+logic-1 when 2, 7, or 15 appears on the inputs, and a logic-0 when 0, 1,
+4, 5, 6, 9, 10, 13, or 14 appears. The input conditions for the numbers
+3, 8, 11, and 12 never occur in this system. For example, 7 corresponds
+to a,b,c,d being set to 0,1,1,1, respectively. Determine the output
+out_sop in minimum sum-of-products form, and the output out_pos in
+minimum product-of-sums form.
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_v3_2</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gpt_oss_20b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>llama3_2_3b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>mistral_7b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob082_lfsr32</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 6 | 测试失败: 3</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+A linear feedback shift register is a shift register usually with a few
+XOR gates to produce the next state of the shift register. A Galois LFSR
+is one particular arrangement that shifts right, where a bit position with
+a &quot;tap&quot; is XORed with the LSB output bit (q[0]) to produce its next value,
+while bit positions without a tap shift right unchanged.  Build a 32-bit Galois
+LFSR with taps at bit positions 32, 22, 2, and 1. Reset should be active high
+synchronous, and should reset the output q to 32&#x27;h1.
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gemma3_12b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gpt_oss_20b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>llama3_2_3b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob086_lfsr5</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 8 | 测试失败: 1</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+A linear feedback shift register is a shift register usually with a few
+XOR gates to produce the next state of the shift register. A Galois LFSR
+is one particular arrangement that shifts right, where a bit position with
+a &quot;tap&quot; is XORed with the LSB output bit (q[0]) to produce its next value,
+while bit positions without a tap shift right unchanged. If the taps positions
+are carefully chosen, the LFSR can be made to be &quot;maximum-length&quot;. A maximum-length
+LFSR of n bits cycles through 2**n-1 states before repeating (the all-zero state is
+never reached). Build a 5-bit maximal-length Galois LFSR with taps at bit
+positions 5 and 3. The active-high synchronous reset should reset the
+LFSR output to 1.
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gemma3_12b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gpt_oss_20b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>llama3_2_3b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>mistral_7b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>phi4_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                    <li>
+                        <strong>Prob089_ece241_2014_q5a</strong> - 通过率: 0.0%<br>
+                        <small style="color: #e74c3c;">编译失败: 6 | 测试失败: 3</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">
+You are to design a one-input one-output serial 2&#x27;s complementer Moore
+state machine. The input (x) is a series of bits (one per clock cycle)
+beginning with the least-significant bit of the number, and the output
+(Z) is the 2&#x27;s complement of the input. The machine will accept input
+numbers of arbitrary length. The circuit requires a positive edge
+triggered asynchronous reset. The conversion begins when Reset is
+released and stops when Reset is asserted.
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+
+</div>
+                        </details>
+                        <details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>deepseek_r1_14b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>gemma3_12b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>glm_4_6</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>llama3_2_3b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>mistral_7b</strong> - 未知错误<br>
+                            <small style='color: #666;'>Cannot assign to array signedData. Did you forget a word index?</small>
+                        </div>
+                    
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>qwen3_8b</strong> - 语法错误<br>
+                            <small style='color: #666;'>syntax error</small>
+                        </div>
+                    </div></details>
+                    </li>
+            
+                </ul>
+            </div>
+        
         </div>
     </body>
     </html>

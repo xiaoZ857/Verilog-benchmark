@@ -60,7 +60,6 @@ class CompilationFailure:
     problem_prompt: Optional[str] = None  # 原始问题描述
     interface_definition: Optional[str] = None  # 接口定义
     compiler_full_output: Optional[str] = None  # 完整编译器输出
-    suggested_fix: Optional[str] = None  # 建议的修复方向
 
 @dataclass
 class TestFailure:
@@ -114,6 +113,7 @@ class UnifiedAnalysis:
     test_failure_patterns: Dict[str, int]  # 失败模式 -> 出现次数
     hardest_problems: List[Tuple[str, float]]  # (problem_name, pass_rate)
     easiest_problems: List[Tuple[str, float]]  # (problem_name, pass_rate)
+    problem_error_stats: Dict[str, Dict[str, int]]  # problem_name -> {error_type: count}
 
 # ============================================================================
 # Utility Functions
@@ -319,51 +319,6 @@ def extract_error_context(code: str, line_number: int, context_lines: int = 5) -
     return '\n'.join(context_lines_list)
 
 
-def suggest_fix_for_error(error_type: str, error_message: str, code_snippet: str) -> str:
-    """根据错误类型和信息建议修复方向"""
-    suggestions = []
-
-    error_lower = error_message.lower() if error_message else ""
-    snippet_lower = code_snippet.lower() if code_snippet else ""
-
-    # 语法错误建议
-    if error_type == "syntax":
-        if "missing" in error_lower and ";" in error_lower:
-            suggestions.append("检查语句末尾是否缺少分号")
-        if "unexpected" in error_lower:
-            suggestions.append("检查括号是否匹配，关键字是否正确")
-        if "endmodule" in error_lower or "module" in error_lower:
-            suggestions.append("检查module和endmodule是否配对")
-        if not suggestions:
-            suggestions.append("检查Verilog语法，确保关键字、括号、分号使用正确")
-
-    # 语义错误建议
-    elif error_type == "semantic":
-        if "undeclared" in error_lower:
-            suggestions.append("声明所有使用的信号和变量")
-        if "redeclaration" in error_lower or "multiple" in error_lower:
-            suggestions.append("检查是否有重复声明的信号")
-        if "width" in error_lower or "mismatch" in error_lower:
-            suggestions.append("检查信号位宽是否匹配")
-        if "driver" in error_lower:
-            suggestions.append("确保每个信号只有一个驱动源")
-        if not suggestions:
-            suggestions.append("检查信号声明和使用是否一致")
-
-    # 静态分析错误建议
-    elif error_type == "static_analysis":
-        if "infinite" in error_lower or "loop" in error_lower:
-            suggestions.append("避免组合逻辑环路，检查assign语句中的自引用")
-        if "feedback" in error_lower:
-            suggestions.append("检查是否存在反馈回路")
-        if not suggestions:
-            suggestions.append("检查代码是否存在可能导致仿真卡死的模式")
-
-    # 默认建议
-    if not suggestions:
-        suggestions.append("仔细检查错误信息，参考Verilog语法规范")
-
-    return "\n".join(f"• {s}" for s in suggestions)
 
 
 def extract_mismatch_details(log_content: str) -> str:
@@ -373,17 +328,39 @@ def extract_mismatch_details(log_content: str) -> str:
 
     details = []
     lines = log_content.split('\n')
+    important_lines = []
 
-    # 查找mismatch相关的行
+    # 查找关键的mismatch信息
     for i, line in enumerate(lines):
-        line_lower = line.lower()
-        if any(keyword in line_lower for keyword in ['mismatch', 'error', 'fail', 'tb_match']):
-            # 获取这一行及其上下文
-            start = max(0, i - 2)
-            end = min(len(lines), i + 3)
-            for j in range(start, end):
-                if lines[j].strip() and lines[j] not in details:
-                    details.append(lines[j])
+        # 查找包含不匹配信息的行
+        if "mismatch" in line.lower() or any(keyword in line for keyword in [
+            "has.*mismatches", "Total mismatched samples", "First mismatch occurred",
+            "Mismatches:", "samples", "Hint:"
+        ]):
+            # 优先添加这些关键信息行
+            important_lines.append(line.strip())
+
+    # 如果找到重要信息，使用它们
+    if important_lines:
+        # 去重并保持顺序
+        seen = set()
+        unique_lines = []
+        for line in important_lines:
+            if line and line not in seen:
+                seen.add(line)
+                unique_lines.append(line)
+        details = unique_lines
+    else:
+        # 如果没找到重要信息，使用原来的方法
+        for i, line in enumerate(lines):
+            line_lower = line.lower()
+            if any(keyword in line_lower for keyword in ['mismatch', 'error', 'fail', 'tb_match']):
+                # 获取这一行及其上下文
+                start = max(0, i - 2)
+                end = min(len(lines), i + 3)
+                for j in range(start, end):
+                    if lines[j].strip() and lines[j] not in details:
+                        details.append(lines[j])
 
     return '\n'.join(details[:20])  # 限制长度
 
@@ -631,9 +608,6 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                     problem_prompt = read_problem_prompt(problem_name)
                     interface_def = read_interface_definition(problem_name)
 
-                    # 生成修复建议
-                    suggested_fix = suggest_fix_for_error(error_type, error_pattern, code_snippet)
-
                     compilation_failures.append(CompilationFailure(
                         problem_name=problem_name,
                         error_type=error_type,
@@ -645,8 +619,7 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                         error_context=error_context,
                         problem_prompt=problem_prompt,
                         interface_definition=interface_def,
-                        compiler_full_output=log_content,
-                        suggested_fix=suggested_fix
+                        compiler_full_output=log_content
                     ))
 
         for problem_name in failed_tests:
@@ -751,9 +724,6 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                     problem_prompt = read_problem_prompt(problem_name)
                     interface_def = read_interface_definition(problem_name)
 
-                    # 生成修复建议
-                    suggested_fix = suggest_fix_for_error(error_type, error_pattern, code_snippet)
-
                     compilation_failures.append(CompilationFailure(
                         problem_name=problem_name,
                         error_type=error_type,
@@ -765,8 +735,7 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                         error_context=error_context,
                         problem_prompt=problem_prompt,
                         interface_definition=interface_def,
-                        compiler_full_output=log_content,
-                        suggested_fix=suggested_fix
+                        compiler_full_output=log_content
                     ))
 
                 # 检查静态分析失败
@@ -829,10 +798,15 @@ def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top
         for failure in model.test_failures:
             test_failure_patterns[failure.test_pattern] += 1
 
-    # 分析最难和最简单的问题
+    # 分析最难和最简单的问题（基于模型的 passed 数据）
     problem_stats = defaultdict(lambda: {'total': 0, 'passed': 0})
+    problem_error_stats = defaultdict(lambda: defaultdict(int))  # problem_name -> error_type -> count
 
     for model in models:
+        # 遍历所有问题，基于已知的模型通过数据统计
+        # 注意：ModelAnalysis 中的 passed 数量是已经正确编译和测试通过的数量
+        # 我们需要从 JSON 结果中获取每个具体问题的通过情况
+
         # 转换模型名称格式以匹配目录名
         model_name_safe = model.model_name.replace('.', '_').replace('-', '_')
         # 格式化温度和top_p参数
@@ -840,35 +814,60 @@ def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top
         top_p_str = str(top_p).replace('.', '_')
         model_dir = Path(f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}")
 
-        if model_dir.exists():
+        # 读取 compile_test_results.json 获取每个问题的详细结果
+        json_results = read_compile_test_results_json(str(model_dir))
+
+        if json_results:
+            # 从 JSON 中获取失败的问题列表
+            failed_compilation = json_results.get('failed_compilation', [])
+            failed_tests = json_results.get('failed_test', [])  # 注意：字段名是 'failed_test' 不是 'failed_tests'
+
+            # 获取统计信息
+            passed_count = json_results.get('passed', 0)
+            compiled_count = json_results.get('compiled', 0)
+            total_count = json_results.get('total_problems', len(get_problem_list()))
+
+            # 收集错误类型统计
+            for problem_name in failed_compilation:
+                problem_error_stats[problem_name]['compilation_failure'] += 1
+
+            for problem_name in failed_tests:
+                problem_error_stats[problem_name]['test_failure'] += 1
+
+            # 由于JSON没有明确列出通过的问题，我们需要重新检查日志文件
+            # 遍历所有问题目录，检查实际的测试结果
+
+            model_dir = Path(str(model_dir))
             for problem_dir in model_dir.iterdir():
-                if problem_dir.is_dir():
-                    problem_name = problem_dir.name
-                    problem_stats[problem_name]['total'] += 1
+                if not problem_dir.is_dir() or problem_dir.name == "compile_test_result":
+                    continue
 
-                    # 检查是否通过
-                    log_file = None
-                    possible_names = [
-                        f"{problem_name}-sv-iv-test.log",
-                        f"{problem_name}_sample01-sv-iv-test.log"
-                    ]
+                problem_name = problem_dir.name
+                problem_stats[problem_name]['total'] += 1
 
-                    for log_name in possible_names:
-                        potential_log = problem_dir / log_name
-                        if potential_log.exists():
-                            log_file = potential_log
-                            break
+                # 检查日志文件看是否通过
+                log_file = None
+                possible_names = [
+                    f"{problem_name}-sv-iv-test.log",
+                    f"{problem_name}_sample01-sv-iv-test.log"
+                ]
 
-                    if log_file:
-                        log_content = read_log_file(str(log_file))
-                        if log_content:
+                for log_name in possible_names:
+                    potential_log = problem_dir / log_name
+                    if potential_log.exists():
+                        log_file = potential_log
+                        break
+
+                if log_file:
+                    log_content = read_log_file(str(log_file))
+                    if log_content:
+                        # 检查测试是否通过
+                        # 查找 Mismatches: 0 in N samples 或类似的通过信息
+                        if "Mismatches: 0" in log_content or "has no mismatches" in log_content:
                             # 检查编译是否成功
                             compile_match = re.search(r'=== Compilation ===.*?Return code: (\d+)', log_content, re.DOTALL)
                             if compile_match and int(compile_match.group(1)) == 0:
-                                # 检查测试是否通过
-                                test_match = re.search(r'Mismatches: (\d+) in \d+ samples', log_content)
-                                if test_match and int(test_match.group(1)) == 0:
-                                    problem_stats[problem_name]['passed'] += 1
+                                problem_stats[problem_name]['passed'] += 1
 
     # 计算通过率并排序
     problem_rates = []
@@ -881,6 +880,12 @@ def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top
     hardest = sorted(problem_rates, key=lambda x: x[1])[:10]  # 最难的10个
     easiest = sorted(problem_rates, key=lambda x: x[1], reverse=True)[:10]  # 最简单的10个
 
+    # 转换 problem_error_stats 为普通字典
+    problem_error_stats_dict = {
+        problem_name: dict(error_counts)
+        for problem_name, error_counts in problem_error_stats.items()
+    }
+
     return UnifiedAnalysis(
         temperature=temperature,
         top_p=top_p,
@@ -888,7 +893,8 @@ def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top
         compilation_error_patterns=dict(compilation_error_patterns),
         test_failure_patterns=dict(test_failure_patterns),
         hardest_problems=hardest,
-        easiest_problems=easiest
+        easiest_problems=easiest,
+        problem_error_stats=problem_error_stats_dict
     )
 
 # ============================================================================
@@ -1157,8 +1163,8 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
                             </div>
                         </td>
                         <td>{model.total_problems}</td>
-                        <td style="color: #e74c3c;">{compile_failures}({compile_failure_rate:.1f}%)</td>
-                        <td style="color: #f39c12;">{test_failures}({test_failure_rate:.1f}%)</td>
+                        <td style="color: #e74c3c;">{compile_failures}</td>
+                        <td style="color: #f39c12;">{test_failures}</td>
                         <td><a href="model_details/{model.model_name}_details.html" class="model-link">查看详情</a></td>
                     </tr>
         """
@@ -1257,8 +1263,22 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
 
     html_content += "</div></div>"
 
+    # 统计通过率为0%和低于10%的问题数量（从所有问题中统计）
+    zero_pass_problems = [p for p, r in analysis.hardest_problems if r == 0.0]
+    # 获取所有通过率低于10%的问题
+    all_low_pass_problems = [p for p, r in analysis.hardest_problems if r < 10.0]
+
     # 最难和最简单的问题
-    html_content += """
+    html_content += f"""
+            <h2>问题难度分析</h2>
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h3>问题通过率统计</h3>
+                    <p><strong style="color: #e74c3c;">通过率为 0% 的问题: {len(zero_pass_problems)} 个</strong></p>
+                    <p><strong style="color: #f39c12;">通过率低于 10% 的问题: {len(all_low_pass_problems)} 个</strong></p>
+                </div>
+            </div>
+
             <div class="stats-grid">
                 <div class="stats-card">
                     <h3>最具挑战性的问题 (通过率最低)</h3>
@@ -1266,7 +1286,25 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
     """
 
     for problem_name, pass_rate in analysis.hardest_problems[:10]:
-        html_content += f"<li><strong>{problem_name}</strong> - 通过率: {pass_rate:.1f}%</li>"
+        # 读取问题描述
+        problem_prompt = read_problem_prompt(problem_name)
+
+        # 获取错误统计
+        error_stats = analysis.problem_error_stats.get(problem_name, {})
+        error_info = []
+        if error_stats:
+            if error_stats.get('compilation_failure', 0) > 0:
+                error_info.append(f"编译失败: {error_stats['compilation_failure']}")
+            if error_stats.get('test_failure', 0) > 0:
+                error_info.append(f"测试失败: {error_stats['test_failure']}")
+        error_str = " | ".join(error_info) if error_info else "无错误记录"
+
+        html_content += f"""
+                    <li>
+                        <strong>{problem_name}</strong> - 通过率: {pass_rate:.1f}%<br>
+                        <small style="color: #e74c3c;">{error_str}</small>
+                    </li>
+        """
 
     html_content += """
                     </ul>
@@ -1278,12 +1316,107 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
     """
 
     for problem_name, pass_rate in analysis.easiest_problems[:10]:
-        html_content += f"<li><strong>{problem_name}</strong> - 通过率: {pass_rate:.1f}%</li>"
+        # 读取问题描述
+        problem_prompt = read_problem_prompt(problem_name)
+
+        # 获取错误统计
+        error_stats = analysis.problem_error_stats.get(problem_name, {})
+        error_info = []
+        if error_stats:
+            if error_stats.get('compilation_failure', 0) > 0:
+                error_info.append(f"编译失败: {error_stats['compilation_failure']}")
+            if error_stats.get('test_failure', 0) > 0:
+                error_info.append(f"测试失败: {error_stats['test_failure']}")
+        error_str = " | ".join(error_info) if error_info else "无错误记录"
+
+        html_content += f"""
+                    <li>
+                        <strong>{problem_name}</strong> - 通过率: {pass_rate:.1f}%<br>
+                        <small style="color: #27ae60;">{error_str}</small>
+                    </li>
+        """
 
     html_content += """
                     </ul>
                 </div>
             </div>
+    """
+
+    # 添加通过率低于10%的所有问题
+    if all_low_pass_problems:
+        html_content += """
+            <div class="stats-card" style="margin-top: 20px;">
+                <h3>所有通过率低于 10% 的问题</h3>
+                <ul class="problem-list">
+        """
+
+        # 收集每个问题的详细失败原因
+        problem_failure_details = {}
+        for model in analysis.models:
+            for failure in model.compilation_failures:
+                if failure.problem_name not in problem_failure_details:
+                    problem_failure_details[failure.problem_name] = []
+                problem_failure_details[failure.problem_name].append({
+                    'model': model.model_name,
+                    'error_type': failure.error_type,
+                    'error_message': failure.error_message,
+                    'error_pattern': failure.error_pattern
+                })
+
+        for problem_name, pass_rate in [(p, r) for p, r in analysis.hardest_problems if r < 10.0]:
+            # 读取问题描述
+            problem_prompt = read_problem_prompt(problem_name)
+
+            # 获取错误统计
+            error_stats = analysis.problem_error_stats.get(problem_name, {})
+            error_info = []
+            if error_stats:
+                if error_stats.get('compilation_failure', 0) > 0:
+                    error_info.append(f"编译失败: {error_stats['compilation_failure']}")
+                if error_stats.get('test_failure', 0) > 0:
+                    error_info.append(f"测试失败: {error_stats['test_failure']}")
+            error_str = " | ".join(error_info) if error_info else "无错误记录"
+
+            # 获取详细的编译失败原因
+            failure_reasons = problem_failure_details.get(problem_name, [])
+            failure_details_html = ""
+            if failure_reasons:
+                failure_details_html = "<details style='margin-top: 5px;'><summary style='cursor: pointer; color: #e67e22; font-weight: bold;'>点击查看编译失败原因</summary><div style='background-color: #fef5e7; padding: 10px; border-radius: 5px; margin-top: 5px;'>"
+                for reason in failure_reasons:
+                    # 统计每种错误类型的出现次数
+                    error_type_display = {
+                        'syntax': '语法错误',
+                        'semantic': '语义错误',
+                        'static_analysis': '静态分析错误',
+                        'unknown': '未知错误'
+                    }.get(reason['error_type'], reason['error_type'])
+
+                    failure_details_html += f"""
+                        <div style='margin-bottom: 8px; padding: 8px; background-color: #fff; border-left: 3px solid #e74c3c; border-radius: 3px;'>
+                            <strong>{reason['model']}</strong> - {error_type_display}<br>
+                            <small style='color: #666;'>{html.escape(reason['error_pattern'][:150])}{'...' if len(reason['error_pattern']) > 150 else ''}</small>
+                        </div>
+                    """
+                failure_details_html += "</div></details>"
+
+            html_content += f"""
+                    <li>
+                        <strong>{problem_name}</strong> - 通过率: {pass_rate:.1f}%<br>
+                        <small style="color: #e74c3c;">{error_str}</small>
+                        <details style="margin-top: 5px;">
+                            <summary style="cursor: pointer; color: #3498db; font-weight: bold;">点击查看问题描述</summary>
+                            <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-top: 5px; white-space: pre-wrap;">{html.escape(problem_prompt) if problem_prompt else '无问题描述'}</div>
+                        </details>
+                        {failure_details_html}
+                    </li>
+            """
+
+        html_content += """
+                </ul>
+            </div>
+        """
+
+    html_content += """
         </div>
     </body>
     </html>
@@ -1318,24 +1451,15 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
             <p><strong>生成时间:</strong> {time.strftime('%Y-%m-%d %H:%M:%S')}</p>
 
             <div class="summary-grid">
-                <div class="summary-card">
-                    <h3>总问题数</h3>
-                    <div class="value">{model.total_problems}</div>
+                <div class="summary-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                    <h3>编译失败</h3>
+                    <div class="value">{model.generated - model.compiled}</div>
+                    <p>编译失败数量</p>
                 </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
-                    <h3>生成成功率</h3>
-                    <div class="value">{model.generation_rate:.1f}%</div>
-                    <p>{model.generated}/{model.total_problems}</p>
-                </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
-                    <h3>编译成功率</h3>
-                    <div class="value">{model.compile_rate:.1f}%</div>
-                    <p>{model.compiled}/{model.total_problems}</p>
-                </div>
-                <div class="summary-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
-                    <h3>测试通过率</h3>
-                    <div class="value">{model.pass_rate:.1f}%</div>
-                    <p>{model.passed}/{model.total_problems}</p>
+                <div class="summary-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <h3>测试失败</h3>
+                    <div class="value">{model.compiled - model.passed}</div>
+                    <p>测试失败数量</p>
                 </div>
             </div>
     """
@@ -1392,15 +1516,7 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
                 </details>
                 """
 
-            # 新增：显示修复建议
-            if failure.suggested_fix:
-                html_content += f"""
-                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
-                    <strong>修复建议:</strong><br>
-                    {html.escape(failure.suggested_fix).replace(chr(10), '<br>')}
-                </div>
-                """
-
+            
             # 新增：显示完整编译器输出
             if failure.compiler_full_output:
                 html_content += f"""
@@ -1595,7 +1711,7 @@ def main():
 
         # 打印详细统计表格
         print(f"\n[统计] 参数配置 {temp}/{top_p} 详细结果:")
-        print(f"{'模型名称':<20} {'参数规模':>10} {'生成成功率':>12} {'编译成功率':>12} {'测试通过率':>12} {'总数':>6} {'编译失败率':>12} {'测试失败率':>12}")
+        print(f"{'模型名称':<20} {'参数规模':>10} {'生成成功':>12} {'编译成功':>12} {'测试通过':>12} {'总数':>6} {'编译失败':>12} {'测试失败':>12}")
         print("-" * 110)
 
         # 按通过率排序
@@ -1604,11 +1720,11 @@ def main():
             # 计算参数规模
             param_size = get_model_parameter_size(model.model_name)
 
-            # 计算编译失败率和测试失败率
-            compile_failure_rate = 100.0 - model.compile_rate
-            test_failure_rate = 100.0 - model.pass_rate
+            # 计算编译失败和测试失败个数
+            compile_failures = model.generated - model.compiled
+            test_failures = model.compiled - model.passed
 
-            print(f"{model.model_name:<20} {param_size:>10} {model.generated:>4}({model.generation_rate:>5.1f}%) {model.compiled:>4}({model.compile_rate:>5.1f}%) {model.passed:>4}({model.pass_rate:>5.1f}%) {model.total_problems:>6} {model.generated - model.compiled:>4}({compile_failure_rate:>5.1f}%) {model.compiled - model.passed:>4}({test_failure_rate:>5.1f}%)")
+            print(f"{model.model_name:<20} {param_size:>10} {model.generated:>4}({model.generation_rate:>5.1f}%) {model.compiled:>4}({model.compile_rate:>5.1f}%) {model.passed:>4}({model.pass_rate:>5.1f}%) {model.total_problems:>6} {compile_failures:>12} {test_failures:>12}")
 
         print("-" * 110)
         avg_pass_rate = sum(m.pass_rate for m in models) / len(models)

@@ -1,0 +1,21 @@
+Problem: Prob041_dff8r
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:10: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:11: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:12: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:13: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:14: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:15: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:16: error: Unknown module type: DFF
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob041_dff8r/Prob041_dff8r_sample01.sv:17: error: Unknown module type: DFF
+9 error(s) during elaboration.
+*** These modules were missing:
+        DFF referenced 8 times.
+***

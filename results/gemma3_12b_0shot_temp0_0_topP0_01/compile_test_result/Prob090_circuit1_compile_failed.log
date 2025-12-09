@@ -1,0 +1,18 @@
+Problem: Prob090_circuit1
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:11: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:6:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:13: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:6:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:15: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:6:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:17: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:6:      : q is declared here as wire.
+4 error(s) during elaboration.

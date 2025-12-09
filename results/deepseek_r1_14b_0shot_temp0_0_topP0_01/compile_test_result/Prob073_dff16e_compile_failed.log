@@ -1,0 +1,14 @@
+Problem: Prob073_dff16e
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob073_dff16e/Prob073_dff16e_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob073_dff16e/Prob073_dff16e_sample01.sv:25: warning: implicit definition of wire 'en_lower'.
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob073_dff16e/Prob073_dff16e_sample01.sv:26: warning: implicit definition of wire 'en_upper'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob073_dff16e_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob073_dff16e_ref.sv:23: syntax error
+I give up.

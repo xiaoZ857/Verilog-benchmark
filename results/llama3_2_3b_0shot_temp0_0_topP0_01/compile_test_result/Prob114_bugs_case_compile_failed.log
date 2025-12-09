@@ -1,5 +1,5 @@
 Problem: Prob114_bugs_case
-Code file: results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv
 Compilation: FAILED
 ==================================================
 === Static Analysis ===
@@ -7,33 +7,33 @@ PASS: No simulation-hanging patterns detected
 ==================================================
 Compilation failed (exit code 32):
 
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:9: error: 'out' has already been declared in this scope.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:5:      : It was declared here as a variable.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:10: error: 'valid' has already been declared in this scope.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:6:      : It was declared here as a variable.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:21: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:21: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:22: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:22: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:23: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:23: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:24: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:24: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:25: syntax error
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:25: Syntax in assignment statement l-value.
-results\llama3.2_3b_0shot_temp0.0\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:27: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:9: error: 'out' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:5:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:10: error: 'valid' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:6:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:15: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:16: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:21: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:21: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:22: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:22: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:23: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:23: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:24: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:24: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:25: syntax error
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:25: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:27: syntax error
 D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:13: error: malformed statement
 D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: syntax error
 D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: error: malformed statement

@@ -1,0 +1,12 @@
+Problem: Prob090_circuit1
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:10: error: q is not a valid l-value in tb.top_module1.
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob090_circuit1/Prob090_circuit1_sample01.sv:6:      : q is declared here as wire.
+1 error(s) during elaboration.

@@ -1,0 +1,16 @@
+Problem: Prob067_countslow
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01\Prob067_countslow/Prob067_countslow_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'q' has 112 mismatches. First mismatch occurred at time 55.
+Hint: Total mismatched samples is 112 out of 499 samples
+
+Simulation finished at 2496 ps
+Mismatches: 112 in 499 samples

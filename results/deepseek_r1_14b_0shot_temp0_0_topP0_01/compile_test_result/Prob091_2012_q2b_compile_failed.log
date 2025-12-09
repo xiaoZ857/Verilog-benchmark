@@ -1,0 +1,34 @@
+Problem: Prob091_2012_q2b
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob091_2012_q2b/Prob091_2012_q2b_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 25):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:6: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:13: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:13: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:14: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:14: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:15: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:15: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:17: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:20: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:27: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:31: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:31: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:34: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:66: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:66: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:67: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:74: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:74: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_test.sv:75: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_ref.sv:7: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_ref.sv:3: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob091_2012_q2b_ref.sv:9: syntax error
+I give up.

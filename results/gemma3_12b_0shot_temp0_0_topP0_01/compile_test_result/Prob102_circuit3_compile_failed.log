@@ -1,0 +1,28 @@
+Problem: Prob102_circuit3
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:16: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:18: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:22: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:24: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:30: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:32: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:36: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:38: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:43: error: q is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob102_circuit3/Prob102_circuit3_sample01.sv:8:      : q is declared here as wire.
+9 error(s) during elaboration.

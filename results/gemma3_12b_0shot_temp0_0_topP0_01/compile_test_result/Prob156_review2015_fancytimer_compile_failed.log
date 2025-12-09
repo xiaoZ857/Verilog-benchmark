@@ -1,0 +1,24 @@
+Problem: Prob156_review2015_fancytimer
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 13):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:77: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4: error: `default_nettype directives must appear
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : outside module definitions. The containing
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : module TopModule starts on line results\gemma3_12b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:3.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:14: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:15: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:15: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:16: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:16: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:20: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:22: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:24: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:26: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:28: error: malformed statement

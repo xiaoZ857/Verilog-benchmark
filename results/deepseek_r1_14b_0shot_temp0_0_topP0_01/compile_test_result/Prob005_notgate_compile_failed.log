@@ -1,0 +1,12 @@
+Problem: Prob005_notgate
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob005_notgate/Prob005_notgate_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob005_notgate_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob005_notgate_ref.sv:11: syntax error
+I give up.

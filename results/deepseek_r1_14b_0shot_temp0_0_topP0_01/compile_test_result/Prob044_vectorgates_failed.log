@@ -1,0 +1,17 @@
+Problem: Prob044_vectorgates
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob044_vectorgates/Prob044_vectorgates_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_or_bitwise' has no mismatches.
+Hint: Output 'out_or_logical' has no mismatches.
+Hint: Output 'out_not' has 219 mismatches. First mismatch occurred at time 20.
+Hint: Total mismatched samples is 219 out of 261 samples
+
+Simulation finished at 1306 ps
+Mismatches: 219 in 261 samples

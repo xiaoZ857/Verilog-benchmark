@@ -1,0 +1,21 @@
+Problem: Prob141_count_clock
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob141_count_clock/Prob141_count_clock_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset doesn't seem to be working.
+Hint: Clock seems to reset to 00:00:00 AM (Should be 12:00:00 AM).
+TIMEOUT
+Hint: Output 'pm' has 86400 mismatches. First mismatch occurred at time 434270.
+Hint: Output 'hh' has 199999 mismatches. First mismatch occurred at time 10.
+Hint: Output 'mm' has 197027 mismatches. First mismatch occurred at time 2870.
+Hint: Output 'ss' has 197793 mismatches. First mismatch occurred at time 30.
+Hint: Total mismatched samples is 199999 out of 200000 samples
+
+Simulation finished at 1000000 ps
+Mismatches: 199999 in 200000 samples

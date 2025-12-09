@@ -1,0 +1,12 @@
+Problem: Prob002_m2014_q4i
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv:8: error: out is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob002_m2014_q4i/Prob002_m2014_q4i_sample01.sv:3:      : out is declared here as wire.
+1 error(s) during elaboration.

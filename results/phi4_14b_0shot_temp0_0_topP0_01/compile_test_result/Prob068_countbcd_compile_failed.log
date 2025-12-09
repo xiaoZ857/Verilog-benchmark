@@ -1,0 +1,36 @@
+Problem: Prob068_countbcd
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 13):
+
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:13: error: ena is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:18: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:21: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:27: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:30: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:36: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:39: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:55: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:56: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:58: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:59: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:61: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:62: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob068_countbcd/Prob068_countbcd_sample01.sv:6:      : ena['sd3] is declared here as wire.
+13 error(s) during elaboration.

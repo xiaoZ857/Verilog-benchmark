@@ -1,0 +1,27 @@
+Problem: Prob142_lemmings2
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 12):
+
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:14: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: warning: macro walk_left undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: warning: macro walk_right undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: warning: macro falling undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: warning: macro areset undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:24: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:25: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:31: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:32: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:38: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:39: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob142_lemmings2_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:51: error: Invalid module instantiation

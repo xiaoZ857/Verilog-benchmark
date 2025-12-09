@@ -1,0 +1,14 @@
+Problem: Prob127_lemmings1
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob127_lemmings1/Prob127_lemmings1_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:23: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:24: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+2 error(s) during elaboration.

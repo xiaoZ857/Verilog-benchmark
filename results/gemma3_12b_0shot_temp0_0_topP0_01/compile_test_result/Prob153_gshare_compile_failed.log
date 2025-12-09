@@ -1,0 +1,20 @@
+Problem: Prob153_gshare
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:32: warning: Static variable initialization requires explicit lifetime in this context.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:58: warning: Static variable initialization requires explicit lifetime in this context.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:62: error: predict_taken is not a valid l-value in tb.top_module1.$unm_blk_13.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_taken is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:63: error: predict_taken is not a valid l-value in tb.top_module1.$unm_blk_13.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_taken is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:64: error: predict_taken is not a valid l-value in tb.top_module1.$unm_blk_13.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_taken is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:65: error: predict_taken is not a valid l-value in tb.top_module1.$unm_blk_13.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_taken is declared here as wire.
+4 error(s) during elaboration.

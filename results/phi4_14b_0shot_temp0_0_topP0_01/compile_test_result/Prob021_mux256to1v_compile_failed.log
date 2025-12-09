@@ -1,0 +1,32 @@
+Problem: Prob021_mux256to1v
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 23):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:6: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:10: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:39: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:39: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:40: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:47: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:47: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:48: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:48: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:48: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:49: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:49: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:49: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:50: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:50: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:50: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:52: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_ref.sv:6: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_ref.sv:3: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_ref.sv:8: syntax error
+I give up.

@@ -1,0 +1,7 @@
+Problem: Prob063_review2015_shiftcount
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob063_review2015_shiftcount/Prob063_review2015_shiftcount_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: rise_clk_shift_ena depends on itself in assign statement

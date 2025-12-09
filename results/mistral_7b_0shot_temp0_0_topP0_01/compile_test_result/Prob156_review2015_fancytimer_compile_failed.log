@@ -1,0 +1,19 @@
+Problem: Prob156_review2015_fancytimer
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:15: error: 'counting' has already been declared in this scope.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:8:      : It was declared here as a variable.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:16: error: 'done' has already been declared in this scope.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:9:      : It was declared here as a variable.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4: error: `default_nettype directives must appear
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : outside module definitions. The containing
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : module TopModule starts on line results\mistral_7b_0shot_temp0_0_topP0_01\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:3.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:79: syntax error
+I give up.

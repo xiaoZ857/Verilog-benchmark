@@ -197,17 +197,20 @@
         <div class="container">
             <h1>VerilogEval 失败分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 15:51:49</p>
+            <p><strong>生成时间:</strong> 2025-12-09 16:13:55</p>
 
             <h2>模型性能概览</h2>
             <table>
                 <thead>
                     <tr>
                         <th>模型</th>
+                        <th>参数规模</th>
                         <th>生成成功</th>
                         <th>编译成功</th>
                         <th>测试通过</th>
                         <th>总数</th>
+                        <th>编译失败</th>
+                        <th>测试失败</th>
                         <th>详细分析</th>
                     </tr>
                 </thead>
@@ -215,6 +218,7 @@
     
                     <tr>
                         <td><strong>deepseek_r1_14b</strong></td>
+                        <td>14B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -234,11 +238,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">131(84.0%)</td>
+                        <td style="color: #f39c12;">1(84.6%)</td>
                         <td><a href="model_details/deepseek_r1_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>deepseek_v3_2</strong></td>
+                        <td>API</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -258,11 +265,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">64(41.0%)</td>
+                        <td style="color: #f39c12;">16(51.3%)</td>
                         <td><a href="model_details/deepseek_v3_2_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>gemma3_12b</strong></td>
+                        <td>12B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -282,11 +292,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">51(32.7%)</td>
+                        <td style="color: #f39c12;">47(62.8%)</td>
                         <td><a href="model_details/gemma3_12b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>glm_4_6</strong></td>
+                        <td>API</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -306,11 +319,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">111(71.2%)</td>
+                        <td style="color: #f39c12;">6(75.0%)</td>
                         <td><a href="model_details/glm_4_6_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>gpt_oss_20b</strong></td>
+                        <td>20B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -330,11 +346,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">89(57.1%)</td>
+                        <td style="color: #f39c12;">2(58.3%)</td>
                         <td><a href="model_details/gpt_oss_20b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>llama3_2_3b</strong></td>
+                        <td>3B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -354,11 +373,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">128(82.1%)</td>
+                        <td style="color: #f39c12;">21(95.5%)</td>
                         <td><a href="model_details/llama3_2_3b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>mistral_7b</strong></td>
+                        <td>7B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -378,11 +400,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">129(82.7%)</td>
+                        <td style="color: #f39c12;">19(94.9%)</td>
                         <td><a href="model_details/mistral_7b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>phi4_14b</strong></td>
+                        <td>14B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -402,11 +427,14 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">36(23.1%)</td>
+                        <td style="color: #f39c12;">58(60.3%)</td>
                         <td><a href="model_details/phi4_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
                     <tr>
                         <td><strong>qwen3_8b</strong></td>
+                        <td>8B</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: 100px;"></div>
@@ -426,6 +454,8 @@
                             </div>
                         </td>
                         <td>156</td>
+                        <td style="color: #e74c3c;">140(89.7%)</td>
+                        <td style="color: #f39c12;">0(89.7%)</td>
                         <td><a href="model_details/qwen3_8b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         

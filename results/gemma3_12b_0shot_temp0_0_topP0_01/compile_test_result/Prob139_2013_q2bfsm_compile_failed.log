@@ -1,0 +1,14 @@
+Problem: Prob139_2013_q2bfsm
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:29: error: f is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:8:      : f is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:30: error: g is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:9:      : g is declared here as wire.
+2 error(s) during elaboration.

@@ -1,0 +1,14 @@
+Problem: Prob061_2014_q4a
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:16: error: Unable to bind parameter `n' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:16: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:16:      : This msb expression violates the rule: (n)-('sd2)
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:16: error: can not select part of scalar: Q
+3 error(s) during elaboration.

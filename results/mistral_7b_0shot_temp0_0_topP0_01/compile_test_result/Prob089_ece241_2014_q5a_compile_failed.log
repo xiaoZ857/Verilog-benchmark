@@ -1,0 +1,16 @@
+Problem: Prob089_ece241_2014_q5a
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob089_ece241_2014_q5a/Prob089_ece241_2014_q5a_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob089_ece241_2014_q5a/Prob089_ece241_2014_q5a_sample01.sv:15: error: Cannot assign to array signedData. Did you forget a word index?
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob089_ece241_2014_q5a/Prob089_ece241_2014_q5a_sample01.sv:29: error: z Unable to assign to unresolved wires.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob089_ece241_2014_q5a_test.sv:125: warning: Port 3 (x) of TopModule expects 2 bits, got 1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob089_ece241_2014_q5a_test.sv:125:        : Padding 1 high bits of the port.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob089_ece241_2014_q5a_test.sv:125: warning: Port 4 (z) of TopModule expects 2 bits, got 1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob089_ece241_2014_q5a_test.sv:125:        : Padding 1 high bits of the port.
+2 error(s) during elaboration.

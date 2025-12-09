@@ -1,0 +1,12 @@
+Problem: Prob004_vector2
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01\Prob004_vector2/Prob004_vector2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob004_vector2/Prob004_vector2_sample01.sv:9: error: out is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01\Prob004_vector2/Prob004_vector2_sample01.sv:5:      : out is declared here as wire.
+1 error(s) during elaboration.

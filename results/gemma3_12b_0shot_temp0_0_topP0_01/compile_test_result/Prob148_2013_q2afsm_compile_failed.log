@@ -1,0 +1,11 @@
+Problem: Prob148_2013_q2afsm
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:62: sorry: part selects straddling the start of signal (g['sd0]) are not currently supported.
+1 error(s) during elaboration.

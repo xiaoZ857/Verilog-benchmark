@@ -1,0 +1,12 @@
+Problem: Prob092_gatesv100
+Code file: results\qwen3_8b_0shot_temp0_0_topP0_01\Prob092_gatesv100/Prob092_gatesv100_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob092_gatesv100_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob092_gatesv100_ref.sv:15: syntax error
+I give up.

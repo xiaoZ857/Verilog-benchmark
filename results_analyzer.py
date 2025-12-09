@@ -164,6 +164,52 @@ def extract_model_name(directory: str) -> str:
         return match.group(1)
     return dir_name
 
+def get_model_parameter_size(model_name: str) -> str:
+    """根据模型名称返回参数规模"""
+    # 模型名称到参数规模的映射
+    param_map = {
+        'gpt-oss_20b': '20B',
+        'gpt_oss_20b': '20B',
+        'deepseek_v3_2': 'API',
+        'deepseek_v3': 'API',
+        'phi4_14b': '14B',
+        'gemma3_12b': '12B',
+        'glm_4_6': 'API',
+        'qwen3_8b': '8B',
+        'deepseek-r1_14b': '14B',
+        'deepseek_r1_14b': '14B',
+        'llama3.2_3b': '3B',
+        'llama3_2_3b': '3B',
+        'mistral_7b': '7B'
+    }
+
+    # 处理可能的名称变体
+    normalized_name = model_name.replace('-', '_').replace('.', '_').lower()
+
+    # 尝试精确匹配
+    if model_name in param_map:
+        return param_map[model_name]
+    elif normalized_name in param_map:
+        return param_map[normalized_name]
+    else:
+        # 尝试从名称中提取参数规模
+        if '20b' in model_name.lower():
+            return '20B'
+        elif '14b' in model_name.lower() or 'r1' in model_name.lower():
+            return '14B'
+        elif '12b' in model_name.lower():
+            return '12B'
+        elif '8b' in model_name.lower():
+            return '8B'
+        elif '7b' in model_name.lower():
+            return '7B'
+        elif '3b' in model_name.lower():
+            return '3B'
+        elif 'api' in model_name.lower() or 'v3' in model_name.lower():
+            return 'API'
+        else:
+            return 'Unknown'
+
 def get_problem_list() -> List[str]:
     """从数据集目录获取所有问题列表"""
     if not os.path.exists("dataset_code-complete-iccad2023"):
@@ -1066,10 +1112,13 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
                 <thead>
                     <tr>
                         <th>模型</th>
+                        <th>参数规模</th>
                         <th>生成成功</th>
                         <th>编译成功</th>
                         <th>测试通过</th>
                         <th>总数</th>
+                        <th>编译失败</th>
+                        <th>测试失败</th>
                         <th>详细分析</th>
                     </tr>
                 </thead>
@@ -1077,9 +1126,18 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
     """
 
     for model in analysis.models:
+        # 计算参数规模
+        param_size = get_model_parameter_size(model.model_name)
+        # 计算失败数量和失败率
+        compile_failures = model.generated - model.compiled
+        test_failures = model.compiled - model.passed
+        compile_failure_rate = 100.0 - model.compile_rate
+        test_failure_rate = 100.0 - model.pass_rate
+
         html_content += f"""
                     <tr>
                         <td><strong>{model.model_name}</strong></td>
+                        <td>{param_size}</td>
                         <td>
                             <div class="rate-bar">
                                 <div class="rate-bar-fill" style="width: {get_bar_width(model.generation_rate)}px;"></div>
@@ -1099,6 +1157,8 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
                             </div>
                         </td>
                         <td>{model.total_problems}</td>
+                        <td style="color: #e74c3c;">{compile_failures}({compile_failure_rate:.1f}%)</td>
+                        <td style="color: #f39c12;">{test_failures}({test_failure_rate:.1f}%)</td>
                         <td><a href="model_details/{model.model_name}_details.html" class="model-link">查看详情</a></td>
                     </tr>
         """
@@ -1535,18 +1595,26 @@ def main():
 
         # 打印详细统计表格
         print(f"\n[统计] 参数配置 {temp}/{top_p} 详细结果:")
-        print(f"{'模型名称':<20} {'生成成功率':>10} {'编译成功率':>10} {'测试通过率':>10} {'通过/总数':>10}")
-        print("-" * 70)
+        print(f"{'模型名称':<20} {'参数规模':>10} {'生成成功率':>12} {'编译成功率':>12} {'测试通过率':>12} {'总数':>6} {'编译失败率':>12} {'测试失败率':>12}")
+        print("-" * 110)
 
         # 按通过率排序
         sorted_models = sorted(models, key=lambda m: m.pass_rate, reverse=True)
         for model in sorted_models:
-            print(f"{model.model_name:<20} {model.generation_rate:>9.1f}% {model.compile_rate:>9.1f}% {model.pass_rate:>9.1f}% {model.passed:>4}/{model.total_problems:<4}")
+            # 计算参数规模
+            param_size = get_model_parameter_size(model.model_name)
 
-        print("-" * 70)
+            # 计算编译失败率和测试失败率
+            compile_failure_rate = 100.0 - model.compile_rate
+            test_failure_rate = 100.0 - model.pass_rate
+
+            print(f"{model.model_name:<20} {param_size:>10} {model.generated:>4}({model.generation_rate:>5.1f}%) {model.compiled:>4}({model.compile_rate:>5.1f}%) {model.passed:>4}({model.pass_rate:>5.1f}%) {model.total_problems:>6} {model.generated - model.compiled:>4}({compile_failure_rate:>5.1f}%) {model.compiled - model.passed:>4}({test_failure_rate:>5.1f}%)")
+
+        print("-" * 110)
         avg_pass_rate = sum(m.pass_rate for m in models) / len(models)
         avg_compile_rate = sum(m.compile_rate for m in models) / len(models)
-        print(f"{'平均':>20} {'-':>10} {avg_compile_rate:>9.1f}% {avg_pass_rate:>9.1f}%")
+        avg_generation_rate = sum(m.generation_rate for m in models) / len(models)
+        print(f"{'平均':>20} {'-':>10} {avg_generation_rate:>9.1f}% {avg_compile_rate:>9.1f}% {avg_pass_rate:>9.1f}% {'-':>6} {'-':>12} {'-':>12}")
         print(f"\n  总编译错误模式: {len(unified_analysis.compilation_error_patterns)}")
         print(f"  总测试失败模式: {len(unified_analysis.test_failure_patterns)}")
 

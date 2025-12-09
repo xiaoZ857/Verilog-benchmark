@@ -1,0 +1,15 @@
+Problem: Prob025_reduction
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01\Prob025_reduction/Prob025_reduction_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob025_reduction_test.sv:62: error: port ``in'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob025_reduction_test.sv:62: error: port ``parity'' is not a port of top_module1.
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob025_reduction/Prob025_reduction_sample01.sv:7: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\mistral_7b_0shot_temp0_0_topP0_01\Prob025_reduction/Prob025_reduction_sample01.sv:7: error: Failed to evaluate event expression 'posedge clk'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob025_reduction_test.sv:62: warning: Instantiating module TopModule with dangling input port 1 (data_in) floating.
+4 error(s) during elaboration.

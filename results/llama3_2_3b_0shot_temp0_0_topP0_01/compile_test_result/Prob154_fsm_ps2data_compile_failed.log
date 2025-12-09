@@ -1,5 +1,5 @@
 Problem: Prob154_fsm_ps2data
-Code file: results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv
 Compilation: FAILED
 ==================================================
 === Static Analysis ===
@@ -7,12 +7,12 @@ PASS: No simulation-hanging patterns detected
 ==================================================
 Compilation failed (exit code 2):
 
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:18: warning: extra digits given for sized binary constant.
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:31: warning: extra digits given for sized binary constant.
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:24: error: done is not a valid l-value in tb.top_module1.
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:7:      : done is declared here as wire.
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:25: warning: Part select [15:8] is selecting after the vector in[7:0].
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:25:        : Replacing the out of bound bits with 'bx.
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:27: error: done is not a valid l-value in tb.top_module1.
-results\llama3.2_3b_0shot_temp0.0\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:7:      : done is declared here as wire.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:18: warning: extra digits given for sized binary constant.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:31: warning: extra digits given for sized binary constant.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:24: error: done is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:7:      : done is declared here as wire.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:25: warning: Part select [15:8] is selecting after the vector in[7:0].
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:25:        : Replacing the out of bound bits with 'bx.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:27: error: done is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_0_topP0_01\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:7:      : done is declared here as wire.
 2 error(s) during elaboration.

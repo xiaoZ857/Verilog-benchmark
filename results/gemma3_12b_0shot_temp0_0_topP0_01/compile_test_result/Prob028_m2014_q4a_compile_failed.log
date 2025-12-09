@@ -1,0 +1,12 @@
+Problem: Prob028_m2014_q4a
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

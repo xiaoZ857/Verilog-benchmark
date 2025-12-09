@@ -1,0 +1,18 @@
+Problem: Prob123_bugs_addsubz
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:7: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:14: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:22: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:24: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:26: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:31: Syntax in assignment statement l-value.

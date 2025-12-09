@@ -1,0 +1,18 @@
+Problem: Prob107_fsm1s
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:38: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:39: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:40: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:41: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_0_topP0_01\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:7:      : out is declared here as wire.
+4 error(s) during elaboration.

@@ -178,11 +178,11 @@
     </head>
     <body>
         <div class="container">
-            <a href="..\unified_analysis.html" class="back-link">← 返回统一分析</a>
+            <a href="../unified_analysis.html" class="back-link">← 返回统一分析</a>
 
             <h1>phi4_14b 详细分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 14:33:44</p>
+            <p><strong>生成时间:</strong> 2025-12-09 06:58:22</p>
 
             <div class="summary-grid">
                 <div class="summary-card">
@@ -196,16 +196,216 @@
                 </div>
                 <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
                     <h3>编译成功率</h3>
-                    <div class="value">0.0%</div>
-                    <p>0/156</p>
+                    <div class="value">76.9%</div>
+                    <p>120/156</p>
                 </div>
                 <div class="summary-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
                     <h3>测试通过率</h3>
-                    <div class="value">0.0%</div>
-                    <p>0/156</p>
+                    <div class="value">39.7%</div>
+                    <p>62/156</p>
                 </div>
             </div>
-    <h2>[编译成功] 编译失败</h2><p>没有编译失败的情况</p><h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p><h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>
+    
+            <h2>[编译失败] 编译失败详情</h2>
+        
+            <div class="error-details">
+                <h3>Prob016_m2014_q4j</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob016_m2014_q4j_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob024_hadd</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob024_hadd_ref.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob028_m2014_q4a</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: Unable to bind wire/reg/memory `reset_n&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `reset_n&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob030_popcount255</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob050_kmap1</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob050_kmap1/Prob050_kmap1_sample01.sv:3: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob057_kmap2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:3: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob062_bugs_mux2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob062_bugs_mux2_ref.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob068_countbcd</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:20: error: carry1 is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> carry1 is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob069_truthtable1</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:2: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob070_ece241_2013_q2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob070_ece241_2013_q2_test.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob074_ece241_2014_q4</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:23: error: xor_out is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> xor_out is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob078_dualedge</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob078_dualedge/Prob078_dualedge_sample01.sv:24: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob079_fsm3onehot</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:2: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob082_lfsr32</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:21: error: feedback is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> feedback is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob084_ece241_2013_q12</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob084_ece241_2013_q12_ref.sv:22: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob116_m2014_q3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:2: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob119_fsm3</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob119_fsm3/Prob119_fsm3_sample01.sv:37: error: This assignment requires an explicit cast.</p>
+                <p><strong>错误模式:</strong> This assignment requires an explicit cast.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob120_fsm3s</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:34: error: This assignment requires an explicit cast.</p>
+                <p><strong>错误模式:</strong> This assignment requires an explicit cast.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob122_kmap4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:3: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob123_bugs_addsubz</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_ref.sv:20: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob124_rule110</h3>
+                <p><span class="error-type error-semantic">semantic</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: A reference to a wire or reg (`i&#x27;) is not allowed in a constant expression.</p>
+                <p><strong>错误模式:</strong> A reference to a wire or reg (`i&#x27;) is not allowed in a constant expression.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob125_kmap3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob125_kmap3/Prob125_kmap3_sample01.sv:3: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob131_mt2015_q4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob131_mt2015_q4_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob132_always_if2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob132_always_if2_ref.sv:26: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob136_m2014_q6</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob136_m2014_q6/Prob136_m2014_q6_sample01.sv:34: error: This assignment requires an explicit cast.</p>
+                <p><strong>错误模式:</strong> This assignment requires an explicit cast.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob139_2013_q2bfsm</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:22: error: Enumeration name STATE_E has an inferred value that overflowed.</p>
+                <p><strong>错误模式:</strong> Enumeration name STATE_E has an inferred value that overflowed.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob144_conwaylife</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:27: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob146_fsm_serialdata</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob146_fsm_serialdata/Prob146_fsm_serialdata_sample01.sv:23: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob151_review2015_fsm</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> </p>
+                <p><strong>错误模式:</strong> </p>
+            </div>
+            <div class="error-details">
+                <h3>Prob152_lemmings3</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:45: error: This assignment requires an explicit cast.</p>
+                <p><strong>错误模式:</strong> This assignment requires an explicit cast.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob153_gshare</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob153_gshare/Prob153_gshare_sample01.sv:38: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob155_lemmings4</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:65: error: This assignment requires an explicit cast.</p>
+                <p><strong>错误模式:</strong> This assignment requires an explicit cast.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob156_review2015_fancytimer</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\phi4_14b_0shot_temp0_8_topP0_95\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:45: warning: A non-blocking assignment should not be used in an always_comb process.</p>
+                <p><strong>错误模式:</strong> A non-blocking assignment should not be used in an always_comb process.</p>
+            </div><h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p><h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>
         </div>
     </body>
     </html>

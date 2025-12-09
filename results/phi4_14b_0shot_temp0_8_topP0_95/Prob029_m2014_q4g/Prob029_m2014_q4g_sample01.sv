@@ -1,0 +1,20 @@
+
+module TopModule (
+  input in1,
+  input in2,
+  input in3,
+  output logic out
+);
+
+  // Intermediate signal to hold XNOR result
+  logic xnor_result;
+
+  // Implement the XNOR gate with inputs 'in1' and 'in2'
+  assign xnor_result = ~(in1 ^ in2); // Equivalent to (in1 === in2)
+
+  // Implement the XOR gate with inputs 'xnor_result' and 'in3'
+  assign out = xnor_result ^ in3;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

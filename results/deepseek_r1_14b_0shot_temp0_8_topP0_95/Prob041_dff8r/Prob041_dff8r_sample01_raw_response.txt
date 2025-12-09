@@ -1,0 +1,22 @@
+Here's the Verilog implementation of the module with 8 D flip-flops:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+always @ (posedge clk) begin
+  if (reset) begin
+    q <= 8'b0;
+  end else begin
+    q <= d;
+  end
+end
+
+endmodule
+```
+
+This code creates a module with 8 D flip-flops. Each flip-flop is controlled by the clock `clk`, has an active-high reset input, and captures data from the corresponding bit in `d` on each rising edge of the clock, provided the reset signal is not active. When the reset signal is active (high), all outputs are set to 0.

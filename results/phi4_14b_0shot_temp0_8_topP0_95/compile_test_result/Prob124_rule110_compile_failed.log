@@ -1,0 +1,73 @@
+Problem: Prob124_rule110
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 43):
+
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27:      : This lsb expression violates the rule: i
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27:      : This msb expression violates the rule: (i)+('sd2)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26:      : This lsb expression violates the rule: i
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26:      : This msb expression violates the rule: (i)+('sd2)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25:      : This lsb expression violates the rule: (i)-('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25:      : This msb expression violates the rule: (i)+('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24:      : This lsb expression violates the rule: (i)-('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24:      : This msb expression violates the rule: (i)+('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23:      : This lsb expression violates the rule: (i)-('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23:      : This msb expression violates the rule: (i)+('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23:      : This lsb expression violates the rule: (i)-('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:23:      : This msb expression violates the rule: (i)+('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24:      : This lsb expression violates the rule: (i)-('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:24:      : This msb expression violates the rule: (i)+('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25:      : This lsb expression violates the rule: (i)-('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:25:      : This msb expression violates the rule: (i)+('sd1)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26:      : This lsb expression violates the rule: i
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:26:      : This msb expression violates the rule: (i)+('sd2)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27:      : This lsb expression violates the rule: i
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: A reference to a wire or reg (`i') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:27:      : This msb expression violates the rule: (i)+('sd2)
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:30: error: All but the final index in a chain of indices must be a single value, not a range.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:31: error: All but the final index in a chain of indices must be a single value, not a range.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:32: error: All but the final index in a chain of indices must be a single value, not a range.
+43 error(s) during elaboration.

@@ -1,0 +1,28 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = a & b;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input a, input b, output out);`**: This line declares the module named `TopModule` and defines its input ports `a` and `b`, and the output port `out`.  `input` indicates these are input signals, and `output` indicates this is an output signal.
+* **`assign out = a & b;`**: This is the core logic of the AND gate.  The `assign` statement continuously assigns the result of the logical AND operation (`&`) between inputs `a` and `b` to the output signal `out`.  The output `out` will be `1` only when both `a` and `b` are `1`; otherwise, it will be `0`.
+* **`endmodule`**: This line marks the end of the module definition.
+
+**How it works as an AND gate:**
+
+An AND gate produces a high output (logic 1) only if all of its inputs are high (logic 1).  In this Verilog implementation, `a & b` performs the logical AND operation.
+
+* If `a` is 1 and `b` is 1, then `a & b` evaluates to 1, so `out` becomes 1.
+* If `a` is 1 and `b` is 0, then `a & b` evaluates to 0, so `out` becomes 0.
+* If `a` is 0 and `b` is 1, then `a & b` evaluates to 0, so `out` becomes 0.
+* If `a` is 0 and `b` is 0, then `a & b` evaluates to 0, so `out` becomes 0.
+
+Therefore, the output `out` acts exactly like the output of an AND gate.

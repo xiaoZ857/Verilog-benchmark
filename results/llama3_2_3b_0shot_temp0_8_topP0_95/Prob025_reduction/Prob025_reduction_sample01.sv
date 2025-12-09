@@ -1,0 +1,29 @@
+
+// Module to generate parity for an 8-bit byte (with a 9th bit)
+module TopModule(
+  // Input is the 8-bit byte being checked for errors
+  input [7:0] in,
+  // Output will contain the computed parity
+  output reg [1:0] parity
+);
+
+// Initialize the parity variable to zero
+reg [1:0] parity = 0;
+
+// Always block (i.e., at the end of each clock cycle)
+always @(posedge clk) begin
+  // Compute the parity by XORing all data bits
+  parity[1] = ~in[0];
+  parity[0] = in[7]^in[6]^in[5]^in[4]^in[3]^in[2]^in[1];
+end
+
+// Assign the computed parity to the output of the module
+assign out = parity;
+
+// Instantiate an instance of this module for use on your board
+// clk should be a signal driving this module (i.e., it should be 
+// assigned in your top-level design)
+TopModule UUT (clk, in, out);
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

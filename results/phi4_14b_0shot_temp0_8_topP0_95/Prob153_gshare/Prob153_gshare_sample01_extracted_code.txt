@@ -1,0 +1,67 @@
+module TopModule (
+  input clk,
+  input areset,
+
+  // Prediction interface
+  input predict_valid,
+  input [6:0] predict_pc,
+  output reg predict_taken,
+  output reg [6:0] predict_history,
+
+  // Training interface
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+
+  reg [6:0] global_history;
+  reg [7:0][1:0] pattern_table[127:0]; // 128 entries, each with a 2-bit saturating counter
+
+  integer i;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      for (i = 0; i < 128; i = i + 1)
+        pattern_table[i] <= 2'b10; // Initialize with weakly taken state
+
+      global_history <= 7'b0000000;
+    end else begin
+      if (train_valid) begin
+        // Update the branch history register only if it was a misprediction
+        if (train_mispredicted)
+          global_history <= train_history;
+
+        // Compute index for PHT using gshare technique
+        reg [6:0] index;
+        index = {predict_pc ^ global_history};
+
+        // Saturating counter update logic
+        case (pattern_table[index])
+          2'b00: pattern_table[index] <= train_taken ? 2'b01 : 2'b00; // Weakly not taken to weakly taken or remain weakly not taken
+          2'b01: pattern_table[index] <= train_taken ? 2'b11 : 2'b00; // Strongly not taken to weakly taken or strongly not taken
+          2'b10: pattern_table[index] <= train_taken ? 2'b11 : 2'b01; // Weakly taken to strongly taken or weakly not taken
+          2'b11: pattern_table[index] <= 2'b11;                      // Strongly taken remains strongly taken
+        endcase
+
+      end else if (predict_valid) begin
+        reg [6:0] index;
+        index = {predict_pc ^ global_history};
+
+        // Prediction logic based on PHT state
+        predict_taken <= pattern_table[index][1];
+        predict_history <= global_history;
+
+        // Update the history register with predicted outcome
+        if (pattern_table[index] > 2'b01) begin // Predict taken
+          global_history <= {global_history[5:0], 1'b1};
+        end else begin
+          global_history <= {global_history[5:0], 1'b0};
+        end
+
+      end
+    end
+  end
+
+endmodule

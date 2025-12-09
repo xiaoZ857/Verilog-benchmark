@@ -1,0 +1,21 @@
+
+module TopModule (
+  input [2:0] a,
+  output reg [15:0] q
+);
+
+always @(posedge clk) begin
+    case(a)
+        3'b000 : q <= 48h; // Hex for '0'
+        3'b001 : q <= 49h; // Hex for '1'
+        3'b010 : q <= 4ah; // Hex for '2'
+        3'b011 : q <= 4bh; // Hex for '3'
+        3'b100 : q <= 4ch; // Hex for '4'
+        3'b101 : q <= 4dh; // Hex for '5'
+        3'b110 : q <= 4eh; // Hex for '6'
+        3'b111 : q <= 4fh; // Hex for '7'
+    endcase
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

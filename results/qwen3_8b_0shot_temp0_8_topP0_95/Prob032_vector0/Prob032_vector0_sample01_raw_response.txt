@@ -1,0 +1,38 @@
+Here is the implementation of the `TopModule` in Verilog based on the provided description:
+
+```verilog
+module TopModule (
+  input [2:0] vec,
+  output [2:0] outv,
+  output o2,
+  output o1,
+  output o0
+);
+
+  // Assign the 3-bit input vector to the output vector
+  assign outv = vec;
+
+  // Assign individual bits of the input vector to the respective output signals
+  assign o2 = vec[2];
+  assign o1 = vec[1];
+  assign o0 = vec[0];
+
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Input:** The module receives a 3-bit input signal `vec`, which is a vector indexed from `vec[2]` (most significant bit) to `vec[0]` (least significant bit).
+  
+- **Output `outv`:** This is a 3-bit output signal that is directly assigned to the input vector `vec`, meaning it mirrors the input without any change.
+
+- **Individual Output Bits (`o2`, `o1`, `o0`):** These are 1-bit outputs that correspond to the individual bits of `vec`:
+  - `o2` is assigned `vec[2]`
+  - `o1` is assigned `vec[1]`
+  - `o0` is assigned `vec[0]`
+
+- **Implementation Style:** Since the problem specifies that signals are positive-edge clock-triggered unless stated otherwise, and since there is no clock signal mentioned in the interface, this module is implemented using **combinational logic**, with continuous assignments using the `assign` statement.
+
+This module satisfies the requirement to output the same 3-bit vector and to split it into individual bits as described.

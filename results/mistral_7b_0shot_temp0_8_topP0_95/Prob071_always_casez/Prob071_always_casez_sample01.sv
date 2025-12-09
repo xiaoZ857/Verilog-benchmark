@@ -1,0 +1,21 @@
+
+module TopModule (
+    input [7:0] in,
+    output reg [2:0] pos
+);
+
+always @(posedge clk) begin
+    pos[0] <= 0; // Reset all outputs to 0 initially
+
+    for(int i = 0; i < 8; i++) begin
+        if(in[i]) begin
+            if(pos[0]) begin
+                pos[0] <= 0; // Reset lower priority outputs if higher priority bit found
+            end
+            pos[i+1] <= 1; // Set output corresponding to the first encountered high-bit
+        end
+    end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,11 @@
+Problem: Prob094_gatesv
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob094_gatesv/Prob094_gatesv_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob094_gatesv/Prob094_gatesv_sample01.sv:16: sorry: part selects straddling the start of signal (out_any['sd0]) are not currently supported.
+1 error(s) during elaboration.

@@ -1,0 +1,39 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input cin,
+  output cout,
+  output sum
+);
+
+  assign sum = a ^ b ^ cin;
+  assign cout = (a & b) | (a & cin) | (b & cin);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  Defines the module named `TopModule` and lists its input and output signals.
+* **`input a, input b, input cin;`**: Declares `a`, `b`, and `cin` as input signals. These are the two bits to be added and the carry-in from a lower stage.
+* **`output cout, output sum;`**: Declares `cout` (carry-out) and `sum` as output signals.
+* **`assign sum = a ^ b ^ cin;`**:  This line calculates the sum bit. The `^` operator is the XOR operator.  The sum is the XOR of the three input bits.
+* **`assign cout = (a & b) | (a & cin) | (b & cin);`**: This line calculates the carry-out bit. The `&` operator is the AND operator and the `|` operator is the OR operator.  The carry-out is 1 if any two or all three inputs are 1.
+
+**How it Works (Truth Table Equivalent):**
+
+The full adder's behavior can be summarized by this truth table:
+
+| a | b | cin | sum | cout |
+|---|---|-----|-----|------|
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 | 0 |
+| 1 | 0 | 1 | 0 | 1 |
+| 1 | 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 1 | 1 |
+
+The Verilog code directly implements these logical expressions for `sum` and `cout`.

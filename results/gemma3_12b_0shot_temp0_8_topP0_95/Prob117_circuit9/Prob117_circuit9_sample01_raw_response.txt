@@ -1,0 +1,97 @@
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+  reg [2:0] next_q;
+
+  always @(posedge clk) begin
+    q <= next_q;
+  end
+
+  always @(*) begin
+    next_q = q; // Default: maintain current value
+
+    case (a)
+      1'b1: begin
+        if (q == 4'b000) begin
+          next_q = 4'b001;
+        end else if (q == 4'b001) begin
+          next_q = 4'b010;
+        end else if (q == 4'b010) begin
+          next_q = 4'b011;
+        end else if (q == 4'b011) begin
+          next_q = 4'b100;
+        end else if (q == 4'b100) begin
+          next_q = 4'b000;
+        end
+      end
+
+      1'b0: begin
+        next_q = 4'b000; // Reset when a is 0
+      end
+    endcase
+  end
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input clk, input a, output reg [2:0] q);`**: This line defines the module named `TopModule` with inputs `clk` and `a`, and an output `q` which is a 3-bit register.
+
+2. **`reg [2:0] next_q;`**: This declares a register named `next_q` that will hold the next state of the circuit.
+
+3. **`always @(posedge clk) begin ... end`**: This is a sequential `always` block that executes on the positive edge of the clock signal.  Inside this block, the current value of `q` is updated with the value of `next_q`. This is how the output `q` is synchronized to the clock.
+
+4. **`always @(*) begin ... end`**: This is a combinational `always` block.  The `@(*)` sensitivity list means it will execute whenever any of the inputs it uses changes.  Inside this block, the `next_q` is determined based on the current value of `q` and the input `a`.
+
+5. **`next_q = q;`**: This line initializes `next_q` with the current value of `q`. This is crucial to ensure that the circuit retains its state if `a` is 0.
+
+6. **`case (a)`**: This `case` statement is the heart of the logic. It checks the value of the input `a` and determines the next state of the circuit accordingly.
+
+7. **Logic for `a = 1`**:
+   - The code implements a state machine.  When `a` is 1, the circuit transitions between states based on the current value of `q`. The transitions are:
+     - 000 -> 001
+     - 001 -> 010
+     - 010 -> 011
+     - 011 -> 100
+     - 100 -> 000
+   - This logic directly reflects the state transitions observed in the simulation waveforms.
+
+8. **Logic for `a = 0`**:
+   - When `a` is 0, the circuit is reset to the state 000.  This ensures that the circuit returns to a known state when `a` is inactive.
+
+**How to Simulate:**
+
+To verify this code, you're going to need a testbench.  Here's a basic testbench that would work well:
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg a;
+  wire [2:0] q;
+
+  TopModule DUT (
+    .clk(clk),
+    .a(a),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    a = 0;
+    #50 $finish; // Simulate for 50ns
+  end
+
+  always #5 clk = ~clk; // Clock toggle
+
+  initial begin
+    // Apply input sequence
+    a = 1; #5;
+    a = 1; #5;
+    a = 1; #5;
+    a = 1; #5;
+    a = 1;

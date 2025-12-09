@@ -1,0 +1,56 @@
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  input p1e,
+  input p1f,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+  wire and1_out;
+  wire and2_out;
+
+  // Implement the logic for p1y as the OR of two 3-input AND gates
+  assign and1_out = p1a & p1b & p1c;
+  assign and2_out = p1d & p1e & p1f;
+  assign p1y = and1_out | and2_out;
+
+  // Implement the logic for p2y as the OR of two 2-input AND gates
+  assign p2y = (p2a & p2b) | (p2c & p2d);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`:  Defines the module named `TopModule` with the specified input and output ports.
+
+2. **Internal Wires (Optional but Recommended):**
+   - `wire and1_out;`
+   - `wire and2_out;`
+     These lines declare two wires (`and1_out`, `and2_out`) to be used as intermediate signals.  Using wires for intermediate signals makes the code more readable and easier to debug.
+
+3. **`assign` Statements for `p1y`:**
+   - `assign and1_out = p1a & p1b & p1c;`:  Assigns the result of `p1a & p1b & p1c` (the AND of p1a, p1b, and p1c) to the wire `and1_out`.
+   - `assign and2_out = p1d & p1e & p1f;`:  Assigns the result of `p1d & p1e & p1f` (the AND of p1d, p1e, and p1f) to the wire `and2_out`.
+   - `assign p1y = and1_out | and2_out;`:  Assigns the result of `and1_out | and2_out` (the OR of `and1_out` and `and2_out`) to the output `p1y`.
+
+4. **`assign` Statement for `p2y`:**
+   - `assign p2y = (p2a & p2b) | (p2c & p2d);`:  Assigns the result of `(p2a & p2b) | (p2c & p2d)` (the OR of two 2-input AND gates) to the output `p2y`.  Parentheses are used for clarity and to ensure the intended order of operations.
+
+5. **`endmodule`:**  Marks the end of the module definition.
+
+**How it Matches the Description:**
+
+- **p1y:**  The code implements `p1y` as the OR of two 3-input AND gates as required.  The 3-input AND gates are implemented using the `&` operator.
+- **p2y:** The code implements `p2y` as the OR of two 2-input AND gates, as described.
+- **10 Inputs, 2 Outputs:** The module has the specified number of inputs and outputs.
+- **Positive Clock Triggered:**  The `assign` statements are combinational logic and do not require a clock signal.  They will update immediately whenever any of their inputs change.

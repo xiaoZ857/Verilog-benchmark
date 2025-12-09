@@ -1,0 +1,29 @@
+// Use two flip-flops: one triggered on positive edge, one on negative edge.
+// Then combine their outputs with a multiplexer that toggles on each edge.
+
+reg q_pos, q_neg;
+wire clk_inv;
+
+// Invert the clock to create the negative-edge trigger signal
+assign clk_inv = ~clk;
+
+// Positive-edge triggered flip-flop
+always @(posedge clk) begin
+    q_pos <= d;
+end
+
+// Negative-edge triggered flip-flop (using inverted clock as positive edge)
+always @(posedge clk_inv) begin
+    q_neg <= d;
+end
+
+// Multiplexer to select the correct output based on the current clock level
+always @(*) begin
+    if (clk) begin
+        q = q_pos;
+    end else begin
+        q = q_neg;
+    end
+end
+
+endmodule

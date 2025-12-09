@@ -1,0 +1,23 @@
+Here's the implementation of the Verilog module for the combinational circuit you described:
+
+```verilog
+module TopModule (
+    input a,      // Clock signal (positive edge triggered)
+    input b,      // Data input signal
+    output q       // Output signal
+);
+
+    always @(*)  // Always block, sensitivity list empty, so it's true on every clock cycle
+        if (a == 0 && b == 0)   // If a is 0 and b is 0
+            q = 0;             // Then q should be 0
+        else if (a == 1 && b == 0) // If a is 1 and b is 0
+            q = 0;              // Then q should be 0
+        else if (a == 1 && b == 1) // If a is 1 and b is 1
+            q = 1;               // Then q should be 1
+        else                      // Anything else, which means a is 0 or b is 1 but a is 1
+            q = 0;                // So q should be 0
+
+endmodule
+```
+
+In this module, `q` is assigned the appropriate value based on the values of `a` and `b`. The `always @(*)` block is used to ensure that the logic inside it runs every time either `a` or `b` changes, regardless of their current value.

@@ -1,0 +1,21 @@
+ Here is the Verilog code for a simple D flip-flop based on your description:
+
+```verilog
+module TopModule (
+  input clock, // renamed clk to match your naming convention
+  input data_in,
+  output reg output_out
+);
+
+always @(posedge clock) // clock edge-triggered assignment for D flip-flop
+begin
+  if(data_in)
+    output_out <= 1'b1; // when data_in is high, set the output to 1
+  else
+    output_out <= 1'b0; // otherwise, set the output to 0
+end
+
+endmodule
+```
+
+This Verilog module creates a D flip-flop with a single input (data_in) and an output (output_out). The D flip-flop is positive edge-triggered at the clock signal. When data_in is high, the output will be set to 1; otherwise, it will be set to 0.

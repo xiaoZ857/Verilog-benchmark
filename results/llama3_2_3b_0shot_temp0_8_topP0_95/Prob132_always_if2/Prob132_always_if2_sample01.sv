@@ -1,0 +1,31 @@
+
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+module top_module (
+    // No input, no output declaration is required in this case.
+    // Add them if they exist.
+
+    input      cpu_overheated,
+    output reg shut_off_computer,
+    input      arrived,
+    input      gas_tank_empty,
+    output reg keep_driving  );
+
+    always @(*) begin
+        if (cpu_overheated)
+            shut_off_computer = 1'b1; // Ensure shut_off_computer is a reg.
+
+        // Removed the always @(*) block for arrived and added a condition to update keep_driving.
+        if (!arrived) begin
+            keep_driving = !gas_tank_empty;
+        end else begin
+            keep_driving = 1'b0; // Clear the register when arrived becomes 1.
+        end
+    end
+
+endmodule

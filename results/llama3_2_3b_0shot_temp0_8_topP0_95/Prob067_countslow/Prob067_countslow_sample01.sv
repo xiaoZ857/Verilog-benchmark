@@ -1,0 +1,36 @@
+
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+// Define the module parameters
+parameters 
+    // Count period (in clock cycles)
+    count_period = 10;
+
+// Define the module variables
+reg [3:0] q;        // Output counter value
+wire enable;        // Enable signal for increment operation
+
+// Define the module instances
+assign enable = ~slowena & clk;
+
+// Define the module behavior
+always @(posedge clk) begin
+    if (reset)
+        q <= 4' d$display("Reset, Q=0");
+    else if (~slowena && ~enable)
+        // do nothing when slowena is high and enable is low
+        q <= q;
+    else if (~slowena & enable)
+        q <= q + 1'(d$display("Q incremented by 1"));
+end
+
+// Initialize the counter to 0 on reset
+always @(reset) begin
+    q <= 4' d$display("Reset, Q=0");
+end
+
+// VERILOG-EVAL: endmodule not found

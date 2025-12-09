@@ -1,0 +1,68 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output [23:0] out_bytes,
+  output done
+);
+  // State encoding
+  reg [1:0] state, next_state;
+  localparam IDLE = 2'b00;
+  localparam BYTE2 = 2'b01;
+  localparam BYTE3 = 2'b10;
+  localparam DONE = 2'b11;
+  
+  // Registers to store the bytes
+  reg [7:0] byte1_reg, byte2_reg, byte3_reg;
+  
+  // State register update
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      byte1_reg <= 8'b0;
+      byte2_reg <= 8'b0;
+      byte3_reg <= 8'b0;
+    end else begin
+      state <= next_state;
+      if (state == IDLE && in[3]) begin
+        byte1_reg <= in;
+      end else if (state == BYTE2) begin
+        byte2_reg <= in;
+      end else if (state == BYTE3) begin
+        byte3_reg <= in;
+      end
+    end
+  end
+  
+  // Next state logic
+  always @(*) begin
+    next_state = state;
+    case (state)
+      IDLE: begin
+        if (in[3]) begin
+          next_state = BYTE2;
+        end
+      end
+      BYTE2: begin
+        next_state = BYTE3;
+      end
+      BYTE3: begin
+        next_state = DONE;
+      end
+      DONE: begin
+        if (in[3]) begin
+          next_state = BYTE2;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+    endcase
+  end
+  
+  // Output logic
+  assign done = (state == DONE);
+  assign out_bytes = {byte1_reg, byte2_reg, byte3_reg};
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

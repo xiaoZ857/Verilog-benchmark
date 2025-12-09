@@ -1,0 +1,14 @@
+
+// TopModule implements a simple AND gate
+module TopModule (
+  input  wire a,      // First input
+  input  wire b,      // Second input
+  output wire out     // AND result
+);
+
+  // Combinational assignment: out = a AND b
+  assign out = a & b;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

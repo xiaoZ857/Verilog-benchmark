@@ -1,0 +1,33 @@
+**Verilog implementation**
+
+The truth table shows that the output `q` is **0 only when both `b` and `c` are 0**.  
+For every other combination of the inputs the output is 1.  
+Therefore the logic reduces to a simple OR of `b` and `c` ¨C the signals `a` and `d` are not needed for the output.
+
+```verilog
+`timescale 1ns/1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: <your company>
+// Engineer: <your name>
+//
+// Create Date: <date>
+// Design Name: TopModule
+// Module Name: TopModule
+// Project Name: <project>
+// Target Devices: <devices>
+// Tool Versions: <tool versions>
+// Description:
+//   Combinational logic that outputs q = b OR c.  The inputs a and d are
+//   unused for the output.
+//
+// Dependencies: none
+//
+// Revision: 1.0
+// Additional Comments: The circuit is purely combinational; no clocks
+//                       or sequential elements are involved.
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+module TopModule (
+    input  wire a,   // unused
+    input  wire

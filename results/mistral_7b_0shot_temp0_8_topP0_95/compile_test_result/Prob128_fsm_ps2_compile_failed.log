@@ -1,0 +1,11 @@
+Problem: Prob128_fsm_ps2
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:11: error: 'done' has already been declared in this scope.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:6:      : It was declared here as a net.

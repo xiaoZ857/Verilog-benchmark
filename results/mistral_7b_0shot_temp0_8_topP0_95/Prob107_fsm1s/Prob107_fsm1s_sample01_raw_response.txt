@@ -1,0 +1,42 @@
+ Here's the Verilog code for the Moore state machine as per your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire in,
+  output reg out
+);
+
+reg state_B, state_A; // Declaring the states
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin // Reset condition
+        state_B <= 1'b0;
+        state_A <= 1'b0;
+    end else if (state_B && in == 0) begin // Transition from B to A on input = 0
+        state_B <= 1'b0;
+        state_A <= 1'b1;
+        out <= 1'b1;
+    end else if (state_B && in == 1) begin // Transition from B to B on input = 1
+        state_B <= 1'b1;
+        state_A <= 1'b0;
+        out <= 1'b1;
+    end else if (state_A && in == 0) begin // Transition from A to B on input = 0
+        state_A <= 1'b0;
+        out <= 1'b0;
+    end else if (state_A && in == 1) begin // Transition from A to A on input = 1
+        state_A <= 1'b1;
+        out <= 1'b0;
+    end
+end
+
+initial begin
+    state_B <= 1'b0; // Initial value for B state
+    state_A <= 1'b0; // Initial value for A state
+end
+
+endmodule
+```
+
+This code creates a Moore state machine with two states, `state_B` and `state_A`. The `out` signal represents the output of the state machine. The state transition diagram is captured in the `always` block, which checks the current state and input to determine the next state and output. The `initial` block sets the initial values for both states when the module is reset.

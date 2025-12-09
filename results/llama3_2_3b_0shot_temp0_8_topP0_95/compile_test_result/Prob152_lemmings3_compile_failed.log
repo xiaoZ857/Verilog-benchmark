@@ -1,0 +1,23 @@
+Problem: Prob152_lemmings3
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 11):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:30: warning: Numeric constant truncated to 2 bits.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:31: warning: Numeric constant truncated to 2 bits.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:39: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:41: warning: Numeric constant truncated to 2 bits.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:41: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:42: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:43: error: invalid module item.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:45: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:47: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:53: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:52: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:54: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:49: syntax error
+I give up.

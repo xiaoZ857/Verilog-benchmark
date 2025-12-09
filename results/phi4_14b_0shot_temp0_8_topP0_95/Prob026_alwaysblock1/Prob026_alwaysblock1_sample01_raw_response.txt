@@ -1,0 +1,32 @@
+To implement the described Verilog module, you can use an `assign` statement for one implementation of the AND gate and a combinational `always` block for the other. Below is how you can structure the module:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+  // Implementing AND using assign statement
+  assign out_assign = a & b;
+
+  // Implementing AND using combinational always block
+  always @(*) begin
+    out_alwaysblock = a & b;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Assign Statement:**
+   - The `assign` statement is used for continuous assignments and is typically utilized for simple combinational logic.
+   - Here, `out_assign` is directly assigned the result of `a & b`.
+
+2. **Combinational Always Block:**
+   - A combinational always block uses the sensitivity list `@(*)`, which means it will be triggered whenever any of its inputs change.
+   - Inside this block, `out_alwaysblock` is assigned the same logic as in the assign statement (`a & b`).
+
+Both methods achieve the same functionality for an AND gate but use different constructs to do so.

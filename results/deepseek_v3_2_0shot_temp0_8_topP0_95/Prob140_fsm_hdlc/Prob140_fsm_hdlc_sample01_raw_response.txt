@@ -1,0 +1,82 @@
+We need to track consecutive 1s after a 0, and detect patterns for disc, flag, and err.  
+We can design a Moore FSM where states represent the count of consecutive 1s after a 0, up to 7 or more.  
+
+Let¡¯s define states:  
+- S0: previous bit was 0 (or reset state).  
+- S1: seen 1 consecutive 1 after a 0.  
+- S2: seen 2 consecutive 1s.  
+- S3: seen 3 consecutive 1s.  
+- S4: seen 4 consecutive 1s.  
+- S5: seen 5 consecutive 1s.  
+- S6: seen 6 consecutive 1s.  
+- S7: seen 7 or more consecutive 1s (error state).  
+
+Transitions:  
+- From S0: if in=0 ¡ú stay S0; if in=1 ¡ú go to S1.  
+- From S1: if in=0 ¡ú go to S0; if in=1 ¡ú go to S2.  
+- From S2: if in=0 ¡ú go to S0; if in=1 ¡ú go to S3.  
+- From S3: if in=0 ¡ú go to S0; if in=1 ¡ú go to S4.  
+- From S4: if in=0 ¡ú go to S0; if in=1 ¡ú go to S5.  
+- From S5: if in=0 ¡ú go to S0 (and output disc=1); if in=1 ¡ú go to S6.  
+- From S6: if in=0 ¡ú go to S0 (and output flag=1); if in=1 ¡ú go to S7 (and output err=1 next cycle).  
+- From S7: if in=0 ¡ú go to S0; if in=1 ¡ú stay in S7 (err remains 1).  
+
+Outputs (Moore style, based only on current state):  
+- disc: asserted in state S5 when next input is 0 (but that¡¯s Mealy). Wait ¡ª the problem says: "output signals should be asserted for a complete cycle beginning on the clock cycle after the condition occurs."  
+That means we need to store detection of an event in the current cycle and output it in the next cycle.  
+
+We can handle this by having separate registers for disc, flag, err that are set based on state transitions and then output in the next cycle.  
+
+Alternatively, we can make the outputs purely combinatorial from state, but delayed by 1 cycle ¡ª but that¡¯s not Moore then. Actually, they want Moore FSM but outputs asserted *after* condition occurs, so we must buffer the detection.  
+
+Simpler: Make the FSM Moore with next-state logic, and have output registers that are set when entering a certain state from a certain condition.  
+
+Let¡¯s implement by adding detection flags in the FSM and registering them.  
+
+We¡¯ll detect:  
+- disc: when in S5 and in=0 (next state S0).  
+- flag: when in S6 and in=0 (next state S0).  
+- err: when in S6 and in=1 (next state S7) OR when in S7 and in=1 (stay S7).  
+
+But since outputs are delayed by 1 cycle, we store these detected events in flip-flops.  
+
+We can do it like this:  
+
+```verilog
+  reg [2:0] state, next_state;
+  reg disc_reg, flag_reg, err_reg;
+  
+  localparam S0 = 0,
+             S1 = 1,
+             S2 = 2,
+             S3 = 3,
+             S4 = 4,
+             S5 = 5,
+             S6 = 6,
+             S7 = 7;
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= S0;
+      disc_reg <= 0;
+      flag_reg <= 0;
+      err_reg <= 0;
+    end else begin
+      state <= next_state;
+      // Clear outputs after one cycle
+      disc_reg <= 0;
+      flag_reg <= 0;
+      err_reg <= 0;
+      // Set outputs if condition occurred in previous cycle's next_state transition
+      // Actually, we detect based on current state and input during transition
+      // But since we compute next_state combo, we can set outputs here based on next_state
+      // Better: set outputs based on what will happen in next cycle
+      // Let's compute outputs in separate always block from state transition
+    end
+  end
+  
+  // Next state logic
+  always @(*) begin
+    next_state = state;
+    case (state)
+      S0: next_state = in ? S1 : S0;

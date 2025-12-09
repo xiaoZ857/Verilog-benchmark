@@ -1,0 +1,63 @@
+We need to track the number of times w=1 over the last three clock cycles in state B, and output z=1 in the cycle after the third sample if exactly two of them were 1.  
+We can use a 3-bit shift register to store the last three w values, and a counter to know when three cycles have passed.  
+But since the problem says "use as few states as possible", we can encode the counting and the shift in a small state machine.
+
+Let¡¯s define states:  
+- A: reset state, wait for s=1  
+- B0: first cycle in B (just entered B, sampled w once)  
+- B1: second cycle in B (sampled w twice)  
+- B2: third cycle in B (sampled w three times) ¡ª here we decide z for next cycle.
+
+Actually, after B2 we go back to B0 (new group of three), but we must output z in the cycle after B2 based on the three w's collected in B0, B1, B2.
+
+So we need to store w values from B0, B1, B2. Let¡¯s store them in registers w1, w2, w3 (w1 oldest, w3 most recent).  
+At the end of B2 (third sample), we compute if (w1+w2+w3 == 2) and set z_next=1 in the next cycle.
+
+But careful: The FSM stays in state B after first entering it, so B0, B1, B2 are substates of B.  
+We can implement with states:  
+A, B (with a 2-bit counter cnt = 0,1,2 to track which of the three cycles we are in).  
+When cnt=2, next cycle we output z=1 if sum==2, then reset cnt=0 for next group.
+
+Wait ¡ª reading again: "If w = 1 in exactly two of these clock cycles, then the FSM has to set an output z to 1 in the following clock cycle."  
+That means:  
+Cycle 1 in B: sample w ¡ú store as w1  
+Cycle 2 in B: sample w ¡ú store as w2  
+Cycle 3 in B: sample w ¡ú store as w3  
+Cycle 4 in B: output z based on w1,w2,w3, and also sample new w for next group¡¯s w1.
+
+So we need a 4-cycle pattern in B:  
+B_first, B_second, B_third, B_output (then repeat B_first...).
+
+But we can merge B_first with B_output if we shift registers appropriately.
+
+Better:  
+We always store last three w's in shift register:  
+reg [2:0] w_history; // w_history[2] oldest, w_history[0] newest? Let's define clearly.
+
+Let¡¯s define:  
+At each clock in state B, shift new w into w_history[2:0] with w_history[2] = w_history[1], w_history[1] = w_history[0], w_history[0] = w.  
+Then after three clocks in B, w_history contains three most recent w's.  
+We need to output z=1 in the 4th clock if sum of w_history == 2.
+
+But careful: When we first enter B, w_history is empty (or unknown). We should start counting three cycles from entry.
+
+Thus, we can have a 2-bit counter "cycle_count" (0,1,2,3) but 3 means "output phase".  
+Actually, we can just count 0,1,2 for positions within group, and at count=2, in next cycle output z based on previous three.
+
+Wait, that¡¯s messy with timing. Let¡¯s design clearly:
+
+We want:  
+State B, with substate counter c = 0,1,2:  
+c=0: sample w into r0 (first of group)  
+c=1: sample w into r1 (second of group)  
+c=2: sample w into r2 (third of group)  
+Next cycle: c=0 again, but output z = (r0+r1+r2 == 2) and sample new w into r0 for next group.
+
+So at c=2, we store w into r2, and next cycle we output z based on (r0,r1,r2), and also store new w into r0.
+
+Thus we need registers r0,r1,r2 to hold the group¡¯s three samples, and a 2-bit counter to track c.
+
+Implementation plan:  
+- State A: wait for s=1, then go to state B with c=0, clear r0,r1,r2.  
+- In state B:  
+  if c==0: r0 <= w; c<=1; z<=0  

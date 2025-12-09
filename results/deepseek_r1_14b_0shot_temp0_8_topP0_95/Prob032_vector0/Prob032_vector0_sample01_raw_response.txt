@@ -1,0 +1,18 @@
+To solve this problem, we need to create a Verilog module that takes a 3-bit input vector and splits it into three separate 1-bit outputs while also mirroring the input vector as a 3-bit output.
+
+### Approach
+The approach involves creating a module with an input of a 3-bit vector. The module will have two types of outputs: one 3-bit vector that mirrors the input and three individual bits corresponding to each position in the input vector.
+
+1. **Input and Output Definition**: Define the input as a 3-bit vector `vec`. The output includes another 3-bit vector `outv` and three separate 1-bit outputs `o0`, `o1`, and `o2`.
+2. **Direct Assignment**: Assign the input vector directly to the 3-bit output vector `outv`.
+3. **Individual Bit Assignment**: Extract each bit from the input vector and assign them to the respective individual outputs:
+   - The least significant bit (LSB) of `vec` is assigned to `o0`.
+   - The middle bit of `vec` is assigned to `o1`.
+   - The most significant bit (MSB) of `vec` is assigned to `o2`.
+
+This approach ensures that each bit from the input vector is correctly mirrored in both the 3-bit output and the individual outputs.
+
+### Solution Code
+
+```verilog
+module Top

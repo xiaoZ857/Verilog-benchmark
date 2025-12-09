@@ -1,0 +1,31 @@
+Here’s a minimal, synthesizable Verilog implementation of a 2‑to‑1 multiplexer that selects between two 100‑bit inputs `a` and `b` based on the single‑bit selector `sel`.  
+The design is purely combinational (no clock is required), so the output `out` updates immediately when `sel`, `a`, or `b` change.
+
+```verilog
+// ------------------------------------------------------------
+// 2‑to‑1 Multiplexer – TopModule
+// ------------------------------------------------------------
+//  a, b : 100‑bit input operands
+//  sel  : 1‑bit selector (0 → a, 1 → b)
+//  out  : 100‑bit output
+// ------------------------------------------------------------
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [99:0] a,   // First operand
+    input  wire [99:0] b,   // Second operand
+    input  wire        sel, // Selector: 0 selects a, 1 selects b
+    output wire [99:0] out  // Result
+);
+
+    // Combinational assignment – no clock needed
+    assign out = sel ? b : a;
+
+endmodule
+```
+
+### Notes
+* The module is completely combinational; it reacts instantly to changes on `a`, `b`, or `sel`.
+* If you need a registered output (i.e., clock‑synchronized), you could wrap the assignment inside an `always @(posedge clk)` block and add a clock input.
+* The `timescale` directive is optional but helps simulation tools interpret time units correctly.

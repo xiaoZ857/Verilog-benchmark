@@ -1,0 +1,36 @@
+ Here's a simple Verilog implementation for the given description:
+
+```verilog
+module TopModule (
+  input wire ring,
+  input wire vibrate_mode,
+  output reg ringer,
+  output reg motor
+);
+
+always @(posedge clk) // Positive edge-triggered by default
+begin
+  if(vibrate_mode) begin
+    motor <= 1'b1;
+    ringer <= 1'b0;
+  end
+  else if(ring) begin
+    ringer <= 1'b1;
+    motor <= 1'b0;
+  end
+  else begin
+    ringer <= 1'b0;
+    motor <= 1'b0;
+  end
+end
+
+// You should add clk input and reset (if needed) here.
+
+endmodule
+```
+
+In this implementation, I assumed that there is an implicit `clk` input since it wasn't explicitly mentioned in the description. The circuit operates as follows:
+
+1. If `vibrate_mode` is high, it will always turn on the motor and keep the ringer off.
+2. If there is an incoming call (`ring` is high), it will turn on the ringer and keep the motor off.
+3. In all other cases, both the ringer and the motor will be turned off.

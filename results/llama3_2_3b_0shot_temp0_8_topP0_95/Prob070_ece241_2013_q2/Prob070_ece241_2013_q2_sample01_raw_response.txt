@@ -1,0 +1,47 @@
+Here is the Verilog module implementation for the given description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+  // Define constants for numbers corresponding to desired output conditions
+  parameter [2:0] zero_condition = 3'b000;
+  parameter [2:0] one_condition   = 3'b001;
+  parameter [2:0] four_condition   = 3'b004;
+  parameter [2:0] five_condition   = 3'b005;
+  parameter [2:0] six_condition    = 3'b006;
+  parameter [2:0] nine_condition   = 3'b009;
+  parameter [2:0] ten_condition   = 3'b010;
+  parameter [2:0] thirteen_condition= 3'b013;
+  parameter [2:0] fourteen_condition= 3'b014;
+
+  // Define constants for numbers corresponding to excluded conditions
+  parameter [2:0] three_condition  = 3'b101;
+  parameter [2:0] eight_condition  = 3'b110;
+  parameter [2:0] eleven_condition = 3'b111;
+  parameter [2:0] twelve_condition = 3'b112;
+
+  // Logic to calculate output in sum-of-products form
+  assign out_sop = ~(a & b & c & d) | (zero_condition == a | zero_condition == b | zero_condition == c | zero_condition == d) |
+                  | ((one_condition != a) & (one_condition != b)) | (four_condition != a | four_condition != b) |
+                  | ((five_condition != a) & (five_condition != b)) | (six_condition != a | six_condition != b) |
+                  | (nine_condition != c | nine_condition != d) | (ten_condition != c | ten_condition != d) |
+                  | (thirteen_condition != c | thirteen_condition != d) | (fourteen_condition != c | fourteen_condition != d);
+
+  // Logic to calculate output in product-of-sums form
+  assign out_pos = ~(a & b & c & d) & ((zero_condition == a | zero_condition == b | zero_condition == c | zero_condition == d)) |
+                  | (one_condition == a & one_condition == b) & (four_condition != a | four_condition != b) |
+                  | (five_condition == a & five_condition == b) & (six_condition != a | six_condition != b) |
+                  | (nine_condition != c & nine_condition != d) & (ten_condition != c | ten_condition != d) |
+                  | (thirteen_condition != c & thirteen_condition != d) & (fourteen_condition != c | fourteen_condition != d);
+
+endmodule
+```
+
+This module implements the logic described in the problem statement, generating a sum-of-products form `out_sop` and a product-of-sums form `out_pos`.

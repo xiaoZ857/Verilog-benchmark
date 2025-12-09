@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+always @(*) begin
+  // Reverse the byte order of the 32-bit vector
+  out[7:0]   = in[23:16];  // Byte 3 becomes Byte 1
+  out[15:8]  = in[15:8];   // Byte 2 remains Byte 2
+  out[23:16] = in[7:0];    // Byte 1 becomes Byte 3
+  out[31:24] = in[31:24];  // Byte 4 remains Byte 4
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

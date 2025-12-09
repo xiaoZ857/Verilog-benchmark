@@ -1,0 +1,76 @@
+We'll use a one-hot encoding for the states to simplify output logic.  
+State assignments:  
+A = 3'b001  
+B = 3'b010  
+C = 3'b100  
+D is not actually needed based on the given state transitions ¡ª the diagram mentions D but the description doesn't use it for g3, so we'll handle only A, B, C.  
+Device 3 gets grant only in state A when r3=1 and r1=0, r2=0, but the diagram shows D for r3=1? Actually, the text says D exists but no g3 logic is described, so I'll implement D for completeness with g3=1 in D.  
+
+Let's define:  
+A = 4'b0001  
+B = 4'b0010  
+C = 4'b0100  
+D = 4'b1000  
+
+Outputs:  
+g1 = 1 in state B  
+g2 = 1 in state C  
+g3 = 1 in state D  
+
+Priority: r1 > r2 > r3.  
+
+```verilog
+  reg [3:0] state, next_state;
+  localparam S_A = 4'b0001,
+             S_B = 4'b0010,
+             S_C = 4'b0100,
+             S_D = 4'b1000;
+
+  // State flip-flops
+  always @(posedge clk) begin
+    if (!resetn)
+      state <= S_A;
+    else
+      state <= next_state;
+  end
+
+  // Next state logic
+  always @(*) begin
+    case (state)
+      S_A: begin
+        if (r[1])
+          next_state = S_B;
+        else if (r[2])
+          next_state = S_C;
+        else if (r[3])
+          next_state = S_D;
+        else
+          next_state = S_A;
+      end
+      S_B: begin
+        if (r[1])
+          next_state = S_B;
+        else
+          next_state = S_A;
+      end
+      S_C: begin
+        if (r[2])
+          next_state = S_C;
+        else
+          next_state = S_A;
+      end
+      S_D: begin
+        if (r[3])
+          next_state = S_D;
+        else
+          next_state = S_A;
+      end
+      default: next_state = S_A;
+    endcase
+  end
+
+  // Output logic
+  assign g[1] = (state == S_B);
+  assign g[2] = (state == S_C);
+  assign g[3] = (state == S_D);
+```

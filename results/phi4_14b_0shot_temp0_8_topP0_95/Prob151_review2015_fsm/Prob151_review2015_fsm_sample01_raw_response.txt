@@ -1,0 +1,113 @@
+To implement the finite-state machine (FSM) for the described timer functionality, we need to define several states and transitions that handle the detection of the start pattern, shifting in additional bits, waiting for counters, notifying the user, and resetting upon acknowledgment. Below is a Verilog module implementing this FSM:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+  // State encoding
+  typedef enum logic [2:0] {
+    IDLE       = 3'b000,  // Waiting for start sequence
+    DETECT_1   = 3'b001,  // Detected '1' in sequence
+    DETECT_11  = 3'b010,  // Detected '11' in sequence
+    DETECT_110 = 3'b011,  // Detected '110' in sequence
+    START      = 3'b100,  // Detected start pattern '1101'
+    SHIFT      = 3'b101,  // Shifting the next 4 bits for delay
+    COUNT      = 3'b110,  // Waiting for counters to finish
+    NOTIFY     = 3'b111   // Notifying user and waiting for acknowledgment
+  } state_t;
+
+  state_t current_state, next_state;
+
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+      current_state <= IDLE;
+    else
+      current_state <= next_state;
+  end
+
+  always_comb begin
+    // Default outputs and next state
+    shift_ena = 1'b0;
+    counting = 1'b0;
+    done = 1'b0;
+    next_state = current_state;
+
+    case (current_state)
+      IDLE: begin
+        if (data == 1'b1) 
+          next_state = DETECT_1;
+      end
+
+      DETECT_1: begin
+        if (data == 1'b1)
+          next_state = DETECT_11;
+        else
+          next_state = IDLE;
+      end
+
+      DETECT_11: begin
+        if (data == 1'b0)
+          next_state = DETECT_110;
+        else
+          next_state = DETECT_1;
+      end
+
+      DETECT_110: begin
+        if (data == 1'b1)
+          next_state = START;
+        else
+          next_state = IDLE;
+      end
+
+      START: begin
+        shift_ena = 1'b1; // Enable shifting of the next 4 bits
+        next_state = SHIFT;
+      end
+
+      SHIFT: begin
+        shift_ena = 1'b0; // Disable shifting after 4 cycles
+        if (data) 
+          next_state = COUNT; // Shifted all 4 bits, proceed to counting
+      end
+
+      COUNT: begin
+        counting = 1'b1; // Start counting
+        if (done_counting)
+          next_state = NOTIFY;
+      end
+
+      NOTIFY: begin
+        done = 1'b1; // Notify the user
+        if (ack)
+          next_state = IDLE; // Wait for acknowledgment and reset
+      end
+      
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **States**: The FSM has several states representing different stages in detecting the start pattern, processing additional bits, counting, notifying the user, and resetting.
+  
+- **Transitions**:
+  - From `IDLE` to `DETECT_1` when a '1' is detected.
+  - From `DETECT_1` to `DETECT_11` if another '1' follows; otherwise, go back to `IDLE`.
+  - From `DETECT_11` to `DETECT_110` on detecting '0'; otherwise, revert to `DETECT_1`.
+  - From `DETECT_110` to `START` when the complete pattern '1101' is detected.
+  - In `START`, shift_ena is asserted for 4 cycles (simulated by moving directly to `COUNT` in this simple FSM).
+  - `SHIFT` assumes shifting occurs over a single cycle here; after shifting, transition to `COUNT`.
+  - `COUNT` asserts counting and waits for `done_counting` to go high.
+  - In `NOTIFY`, the done signal is asserted. The FSM waits for user acknowledgment (`ack`) before resetting back to `IDLE`.
+
+This module provides a structured approach to manage the sequential logic required by the timer's operation as described in your specifications. Adjustments might be needed based on specific hardware or additional requirements not covered here (e.g., handling shift cycles explicitly if they require more than one state).

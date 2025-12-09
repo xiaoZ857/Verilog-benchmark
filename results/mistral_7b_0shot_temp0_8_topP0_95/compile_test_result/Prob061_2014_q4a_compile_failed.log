@@ -1,0 +1,17 @@
+Problem: Prob061_2014_q4a
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:20: warning: implicit definition of wire 'D'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:22: warning: implicit definition of wire 'w_sel'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:23: warning: implicit definition of wire 'R_sel'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:31: error: Unknown module type: multiplexer
+2 error(s) during elaboration.
+*** These modules were missing:
+        multiplexer referenced 1 times.
+***

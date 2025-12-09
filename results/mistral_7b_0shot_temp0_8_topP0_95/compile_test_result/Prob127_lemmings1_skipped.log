@@ -1,0 +1,7 @@
+Problem: Prob127_lemmings1
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob127_lemmings1/Prob127_lemmings1_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: walk_left depends on itself in assign statement

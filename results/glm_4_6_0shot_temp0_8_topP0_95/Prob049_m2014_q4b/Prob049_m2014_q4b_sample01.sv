@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+  always @(posedge clk or posedge ar) begin
+    if (ar) begin
+      // Asynchronous reset
+      q <= 1'b0;
+    end else begin
+      // On positive clock edge, load D input
+      q <= d;
+    end
+  end
+endmodule

@@ -1,0 +1,18 @@
+Problem: Prob131_mt2015_q4
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:10: error: Unknown module type: A
+results\deepseek_v3_2_0shot_temp0_0_topP0_01\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:16: error: Unknown module type: B
+results\deepseek_v3_2_0shot_temp0_0_topP0_01\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:22: error: Unknown module type: A
+results\deepseek_v3_2_0shot_temp0_0_topP0_01\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:28: error: Unknown module type: B
+5 error(s) during elaboration.
+*** These modules were missing:
+        A referenced 2 times.
+        B referenced 2 times.
+***

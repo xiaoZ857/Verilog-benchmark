@@ -1,0 +1,11 @@
+Problem: Prob105_rotate100
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob105_rotate100/Prob105_rotate100_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob105_rotate100/Prob105_rotate100_sample01.sv:18: error: part select shift_register[0:98] is out of order.
+1 error(s) during elaboration.

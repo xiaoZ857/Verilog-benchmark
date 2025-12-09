@@ -1,0 +1,45 @@
+To implement the Verilog module described, you need to detect transitions from `0` to `1` for each bit of an 8-bit vector on the positive edge of the clock. The output should reflect these changes one cycle later.
+
+Here's how you can achieve this:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] in,
+    output reg [7:0] pedge
+);
+
+    // Internal registers to hold previous state and detected edges
+    reg [7:0] prev_in;
+    reg [7:0] edge_detected;
+
+    always @(posedge clk) begin
+        // Detect 0 -> 1 transitions for each bit of the input vector
+        edge_detected <= in & ~prev_in;
+
+        // Set pedge to the value of detected edges from the previous cycle
+        pedge <= edge_detected;
+
+        // Update the previous state register with the current input state
+        prev_in <= in;
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers:**
+   - `prev_in`: Holds the state of `in` from the previous clock cycle to detect transitions.
+   - `edge_detected`: Captures where a transition from `0` to `1` has occurred for each bit.
+
+2. **Edge Detection Logic:**
+   - The expression `in & ~prev_in` identifies bits that were `0` in the previous cycle and have become `1` in the current cycle, detecting positive edges (0 -> 1 transitions).
+
+3. **Output Logic:**
+   - `pedge` is updated with the value of `edge_detected` from the previous cycle to ensure the output reflects the detected transition one clock cycle later.
+
+4. **Clock Sensitivity:**
+   - The process block is triggered on the positive edge of the clock, ensuring synchronous operation.
+
+This design ensures that each bit in the 8-bit vector correctly detects and outputs a `1` one cycle after a transition from `0` to `1`.

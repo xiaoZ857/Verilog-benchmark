@@ -1,0 +1,61 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input predict_valid,
+  input predict_taken,
+  output logic [31:0] predict_history,
+
+  input train_mispredicted,
+  input train_taken,
+  input [31:0] train_history
+);
+
+  logic [31:0] history_reg;
+
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      history_reg <= 0;
+    end else begin
+      if (predict_valid) begin
+        // Shift in the prediction
+        history_reg <= {predict_taken, history_reg[31:1]};
+      end else if (train_mispredicted) begin
+        // Load history from misprediction
+        history_reg <= {train_history, train_taken};
+      end
+    end
+  end
+
+  assign predict_history = history_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`logic [31:0] history_reg;`**:  Declares a 32-bit register `history_reg` to hold the branch history.
+
+2. **`always_ff @(posedge clk or posedge areset)`**: This block describes a sequential circuit that updates `history_reg` on the positive edge of the clock or the positive edge of the asynchronous reset. `always_ff` is a good practice for describing sequential logic in SystemVerilog as it explicitly indicates that the block describes a flip-flop.
+
+3. **`if (areset) begin ... end`**:  Handles the asynchronous reset. When `areset` is asserted, `history_reg` is cleared to 0.
+
+4. **`else begin ... end`**:  Handles the clock-triggered updates.
+
+5. **`if (predict_valid) begin ... end`**:  Handles the prediction update.  If `predict_valid` is asserted, `predict_taken` is shifted into the least significant bit (LSB) of `history_reg`, effectively updating the history register with the prediction. `history_reg <= {predict_taken, history_reg[31:1]};` performs this shift.
+
+6. **`else if (train_mispredicted) begin ... end`**: Handles the misprediction update. If `train_mispredicted` is asserted, the `history_reg` is loaded with the concatenated value of `train_history` (the history before the mispredicted branch) and `train_taken` (the actual result of the branch).  This is done using the concatenation operator `{}`.
+
+7. **`assign predict_history = history_reg;`**:  Assigns the current value of `history_reg` to the output `predict_history`.
+
+**Key Considerations and Improvements:**
+
+* **Asynchronous Reset:** The asynchronous reset (`areset`) is crucial for bringing the history register to a known state at power-up or during error recovery.
+* **Shift Direction:** The shift happens from the LSB side, as specified in the problem description.
+* **Precedence of Misprediction:**  The `else if` structure ensures that a misprediction always overwrites a prediction if they occur simultaneously. This is important for correct pipeline flushing behavior.
+* **SystemVerilog `logic`:**  Using `logic` is generally preferred over `reg` and `wire` in SystemVerilog.  `logic` can be assigned to within `always` blocks and driven by continuous assignments.
+* **`always_ff`**: The use of `always_ff` is a SystemVerilog best practice for clearly indicating that the block is describing a flip-flop.
+* **Concatenation:**  The `{}` operator is used to concatenate the `train_history` and `train_taken` signals when a misprediction occurs.
+* **Modularity:**  For larger designs, you might consider breaking this into smaller modules for better organization and reusability.
+
+This implementation provides a functional 32-bit global history shift register that adheres to the specified requirements.  It's a good starting point and can be further optimized or adapted based on specific design constraints.

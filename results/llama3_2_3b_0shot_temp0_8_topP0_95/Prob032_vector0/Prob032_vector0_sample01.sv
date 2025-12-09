@@ -1,0 +1,22 @@
+
+// Define the module parameters
+module TopModule (
+  input [2:0] vec, // 3-bit vector input
+  output [2:0] outv, // same vector as input
+  output o2,
+  output o1,
+  output o0 // split into 1-bit outputs
+);
+
+// Create a copy of the input vector for the output
+assign outv = vec;
+
+// Extract each bit of the input vector and assign to separate outputs
+assign o0 = vec[0];
+assign o1 = vec[1];
+assign o2 = vec[2];
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

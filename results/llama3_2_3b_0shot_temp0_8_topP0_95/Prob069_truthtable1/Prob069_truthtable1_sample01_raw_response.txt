@@ -1,0 +1,32 @@
+```verilog
+module TopModule (
+  input x3,  // Positive clock/clk triggered signal
+  input x2,  // Positive clock/clk triggered signal
+  input x1,  // Positive clock/clk triggered signal
+  output f   // Output of the combinational circuit
+);
+
+// Assignments for each input to make it easier to read the truth table
+assign f = ~(x3 & (x2 | x1));
+
+endmodule
+```
+
+However, this is not optimal. The expression `~(x3 & (x2 | x1))` can be simplified using De Morgan's laws and the properties of bitwise operations.
+
+```verilog
+module TopModule (
+  input x3,  // Positive clock/clk triggered signal
+  input x2,  // Positive clock/clk triggered signal
+  input x1,  // Positive clock/clk triggered signal
+  output f   // Output of the combinational circuit
+);
+
+// Simplified expression using De Morgan's laws and bitwise operations
+assign f = ~(x3 & (x2 | x1)) =
+           ((~x3) | (~x2) | (~x1));  // Applying De Morgan's law
+
+endmodule
+```
+
+This simplification results in a more efficient and easier-to-understand expression for the output of the combinational circuit.

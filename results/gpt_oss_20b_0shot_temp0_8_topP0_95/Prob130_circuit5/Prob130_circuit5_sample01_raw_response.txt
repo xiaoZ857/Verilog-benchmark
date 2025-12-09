@@ -1,0 +1,51 @@
+**Verilog – TopModule**
+
+The wave‑forms show that the output `q` is a combinational function of the 4‑bit input `c` and the other four 4‑bit inputs (`a`, `b`, `d`, `e`, `f`).  
+For each value of `c` the output is:
+
+| `c` | `q` |
+|-----|-----|
+| 0   | `b` |
+| 1   | `e` |
+| 2   | `a` |
+| 3   | `d` |
+| 4‑f | `f` |
+
+Thus `q` is a 5‑to‑1 multiplexer where the 4‑bit code `c` selects among the five 4‑bit data words.  
+Because the specification says *“This is a combinational circuit”* we simply implement a combinational `always @*` block (or a continuous assignment) – no clock edge is involved.
+
+```verilog
+// TopModule.v
+// 5‑to‑1 4‑bit combinational multiplexer
+// Inputs: a,b,c,d,e   – 4‑bit data words
+// Output: q           – 4‑bit result selected by c
+
+module TopModule (
+    input  [3:0] a,
+    input  [3:0] b,
+    input  [3:0] c,
+    input  [3:0] d,
+    input  [3:0] e,
+    output reg [3:0] q
+);
+
+    always @* begin
+        case (c)
+            4'h0: q = b;   // when c == 0  -> output b
+            4'h1: q = e;   // when c == 1  -> output e
+            4'h2: q = a;   // when c == 2  -> output a
+            4'h3: q = d;   // when c == 3  -> output d
+            default: q = 4'hF;  // when c == 4..F -> output f
+        endcase
+    end
+
+endmodule
+```
+
+**Explanation**
+
+* The `always @*` block describes a purely combinational logic block.  
+* `case` selects the output based on the 4‑bit value of `c`.  
+* The `default` clause covers all values of `c` from `4'h4` to `4'hF`, yielding `q = 4'hF`.  
+
+This implementation matches exactly the behaviour shown in the waveform.

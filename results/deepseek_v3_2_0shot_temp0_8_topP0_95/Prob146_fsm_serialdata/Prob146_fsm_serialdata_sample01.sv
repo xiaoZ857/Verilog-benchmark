@@ -1,0 +1,138 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+    // States
+    localparam IDLE = 0;
+    localparam START = 1;
+    localparam D0 = 2;
+    localparam D1 = 3;
+    localparam D2 = 4;
+    localparam D3 = 5;
+    localparam D4 = 6;
+    localparam D5 = 7;
+    localparam D6 = 8;
+    localparam D7 = 9;
+    localparam STOP = 10;
+    localparam ERROR = 11;
+
+    reg [3:0] state, next_state;
+    reg [7:0] data_reg;
+    reg done_reg;
+
+    // State register
+    always @(posedge clk) begin
+        if (reset) begin
+            state <= IDLE;
+        end else begin
+            state <= next_state;
+        end
+    end
+
+    // Next state logic and data collection
+    always @(*) begin
+        next_state = state;
+        case (state)
+            IDLE: begin
+                if (in == 0) begin
+                    next_state = START;
+                end
+            end
+            START: begin
+                next_state = D0;
+            end
+            D0: begin
+                next_state = D1;
+            end
+            D1: begin
+                next_state = D2;
+            end
+            D2: begin
+                next_state = D3;
+            end
+            D3: begin
+                next_state = D4;
+            end
+            D4: begin
+                next_state = D5;
+            end
+            D5: begin
+                next_state = D6;
+            end
+            D6: begin
+                next_state = D7;
+            end
+            D7: begin
+                next_state = STOP;
+            end
+            STOP: begin
+                if (in == 1) begin
+                    next_state = IDLE;
+                end else begin
+                    next_state = ERROR;
+                end
+            end
+            ERROR: begin
+                if (in == 1) begin
+                    next_state = IDLE;
+                end
+            end
+            default: next_state = IDLE;
+        endcase
+    end
+
+    // Data shift register and done output
+    always @(posedge clk) begin
+        if (reset) begin
+            data_reg <= 8'b0;
+            done_reg <= 1'b0;
+        end else begin
+            done_reg <= 1'b0;
+            case (next_state)
+                START: begin
+                    // Clear data_reg when starting a new byte
+                    data_reg <= 8'b0;
+                end
+                D0: begin
+                    data_reg[0] <= in;
+                end
+                D1: begin
+                    data_reg[1] <= in;
+                end
+                D2: begin
+                    data_reg[2] <= in;
+                end
+                D3: begin
+                    data_reg[3] <= in;
+                end
+                D4: begin
+                    data_reg[4] <= in;
+                end
+                D5: begin
+                    data_reg[5] <= in;
+                end
+                D6: begin
+                    data_reg[6] <= in;
+                end
+                D7: begin
+                    data_reg[7] <= in;
+                end
+                STOP: begin
+                    if (in == 1) begin
+                        done_reg <= 1'b1;
+                    end
+                end
+                default: begin
+                    // Hold data_reg and done_reg
+                end
+            endcase
+        end
+    end
+
+    assign out_byte = data_reg;
+    assign done = done_reg;
+endmodule

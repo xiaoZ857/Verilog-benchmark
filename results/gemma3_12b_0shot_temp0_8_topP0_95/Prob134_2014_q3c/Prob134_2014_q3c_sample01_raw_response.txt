@@ -1,0 +1,69 @@
+```verilog
+module TopModule (
+  input clk,
+  input x,
+  input [2:0] y,
+  output reg Y0,
+  output reg z
+);
+
+  reg [2:0] next_y;
+
+  always @(posedge clk) begin
+    // Define next state logic based on the state table
+    case (y)
+      3'000: next_y = (x == 0) ? 3'000 : 3'001;
+      3'001: next_y = (x == 0) ? 3'001 : 3'100;
+      3'010: next_y = (x == 0) ? 3'010 : 3'001;
+      3'011: next_y = (x == 0) ? 3'001 : 3'010;
+      3'100: next_y = (x == 0) ? 3'011 : 3'100;
+      default: next_y = 3'000; // Default state for safety
+    endcase
+
+    // Update the present state
+    y <= next_y;
+
+    // Define output z based on the state table
+    case (y)
+      3'000: z = 0;
+      3'001: z = 0;
+      3'010: z = 0;
+      3'011: z = 1;
+      3'100: z = 1;
+      default: z = 0; // Default output for safety
+    endcase
+
+    Y0 = next_y[0];
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`:** Declares the Verilog module named `TopModule` with the specified input and output signals.
+
+2. **`reg [2:0] next_y;`:** Declares a register `next_y` to hold the next state value.  Registers hold their values until explicitly changed.
+
+3. **`always @(posedge clk) begin ... end`:**  This is a sequential block that executes on the positive edge of the clock signal (`clk`).  This ensures that the state transitions happen synchronously.
+
+4. **`case (y) ... endcase` (Next State Logic):** This `case` statement implements the logic for determining the `next_y` value based on the current state `y` and the input `x`.  It directly translates the state table into Verilog code.  The `(x == 0) ? 3'000 : 3'001` is a ternary operator, which is a shorthand for `if (x == 0) next_y = 3'000; else next_y = 3'001;`.
+
+5. **`y <= next_y;`:**  This line updates the present state `y` with the calculated `next_y`. The non-blocking assignment `<=` is used to ensure the next state is calculated before the present state is updated.
+
+6. **`case (y) ... endcase` (Output Logic):** This `case` statement defines the logic for the output `z` based on the present state `y`.  It directly translates the output column of the state table.
+
+7. **`default: ...`:** The `default` cases in both `case` statements are crucial for safety. They provide a defined behavior if the input `y` somehow enters an unexpected state. This prevents the design from behaving unpredictably.
+
+8. **`Y0 = next_y[0];`**: Assigns the least significant bit of `next_y` to the output `Y0`.
+
+**How to Use:**
+
+1.  **Save the code:** Save the code as a `.v` file (e.g., `top_module.v`).
+2.  **Simulate:** Use a Verilog simulator (like ModelSim, Xilinx Vivado Simulator, or Icarus Verilog) to simulate the module.  Provide appropriate testbench stimuli (input sequences of `clk`, `x`, and `y`) to verify its functionality.
+3.  **Synthesize and Implement:** If you're targeting an FPGA or ASIC, use synthesis and implementation tools to convert the Verilog code into a hardware implementation.
+
+**Important Considerations:**
+
+*   **Testbench:** Create a thorough testbench to verify the functionality of the module under various input conditions.
+*   **Default States:** Always include `

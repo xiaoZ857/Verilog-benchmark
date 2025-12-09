@@ -1,0 +1,16 @@
+Problem: Prob086_lfsr5
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob086_lfsr5/Prob086_lfsr5_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset doesn't seem to be working.
+Hint: Output 'q' has 4442 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 4442 out of 4443 samples
+
+Simulation finished at 22216 ps
+Mismatches: 4442 in 4443 samples

@@ -1,0 +1,42 @@
+To implement the Verilog module `TopModule` based on the given description, we need to handle each of the specified outputs (`out_both`, `out_any`, and `out_different`) according to their respective definitions. Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input [3:0] in,
+  output reg [2:0] out_both,
+  output reg [3:1] out_any,
+  output reg [3:0] out_different
+);
+
+  // Combinational logic for all outputs
+  always @(*) begin
+    // Calculate out_both[2:0]
+    out_both[2] = in[2] & in[3];
+    out_both[1] = in[1] & in[2];
+    out_both[0] = in[0] & in[1];
+
+    // Calculate out_any[3:1]
+    out_any[3] = in[3] | in[2];
+    out_any[2] = in[2] | in[1];
+    out_any[1] = in[1] | in[0];
+    out_any[0] = 1'b0; // As specified, out_any[0] is not needed
+
+    // Calculate out_different[3:0]
+    out_different[3] = in[3] ^ in[0]; // in[3]'s left neighbor is in[0]
+    out_different[2] = in[2] ^ in[3];
+    out_different[1] = in[1] ^ in[2];
+    out_different[0] = in[0] ^ in[1];
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **`out_both`**: For each bit `i` from 0 to 2, it checks if both the current bit `in[i]` and its left neighbor `in[i+1]` are '1'. This is done using the bitwise AND operation (`&`).
+
+- **`out_any`**: For each bit `i` from 1 to 3, it checks if either the current bit `in[i]` or its right neighbor `in[i-1]` is '1'. This is done using the bitwise OR operation (`|`). The first element `out_any[0]` is not used, so it can be left as a constant zero.
+
+- **`out_different`**: For each bit `i`, it checks if the current bit `in[i]` is different from its left neighbor. This is done using the bitwise XOR operation (`^`). The vector is treated as wrapping around, meaning `in[3]`'s left neighbor is `in[0]`.
+
+This module uses combinational logic (inside an `always @(*)` block) to ensure that outputs are updated immediately when any of the inputs change.

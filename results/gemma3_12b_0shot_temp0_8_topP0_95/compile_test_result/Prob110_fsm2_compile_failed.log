@@ -1,0 +1,16 @@
+Problem: Prob110_fsm2
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:20: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:21: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:7:      : out is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:22: error: out is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:7:      : out is declared here as wire.
+3 error(s) during elaboration.

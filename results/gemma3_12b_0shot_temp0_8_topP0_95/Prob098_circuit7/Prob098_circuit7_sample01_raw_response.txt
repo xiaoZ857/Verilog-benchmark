@@ -1,0 +1,33 @@
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg q
+);
+
+  always @(posedge clk) begin
+    if (a == 0) begin
+      q <= 1;
+    end else begin
+      q <= ~q;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Sequential Circuit:**  The `always @(posedge clk)` block indicates that this is a sequential circuit, meaning its output `q` depends on the current input `a` and the previous state.  The `posedge clk` means the logic is triggered on the rising edge of the clock signal.
+
+2. **Initial State:**  At time 0ns, `q` is undefined (`x`).
+
+3. **`a == 0` Case:** When `a` is 0, `q` is always set to 1.  This is evident from the waveforms at 5ns, 10ns, 15ns, 20ns, 25ns, 30ns, 35ns, 40ns, 50ns, 55ns, 60ns, 65ns, 70ns, 75ns, 80ns, 85ns and 90ns.
+
+4. **`a == 1` Case:** When `a` is 1, `q` toggles its value (flips from 0 to 1 or from 1 to 0).  This is apparent at 45ns.
+
+5. **Implementation:**  The `always` block implements the logic described above:
+   - `if (a == 0)`: If `a` is 0, `q` is set to 1.
+   - `else`: If `a` is 1, `q` is inverted using `~q`.
+
+This implementation accurately reflects the behavior observed in the provided simulation waveforms.

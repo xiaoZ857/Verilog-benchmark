@@ -1,0 +1,35 @@
+Below is a clean, synthesizable implementation that simply passes the 3‑bit input straight through to a 3‑bit output and also routes each individual bit to a separate 1‑bit output.  
+No clock is required because all signals are purely combinational.
+
+```verilog
+//  TopModule.v
+//  Simple combinational splitter – forwards the 3‑bit vector unchanged
+//  and also exposes each bit individually (o0 → vec[0], o1 → vec[1], o2 → vec[2]).
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [2:0] vec,   // 3‑bit input vector
+    output wire [2:0] outv,  // 3‑bit output (identical to vec)
+    output wire       o2,    // vec[2]
+    output wire       o1,    // vec[1]
+    output wire       o0     // vec[0]
+);
+
+// Continuous assignments – purely combinational logic
+assign outv = vec;      // forward the whole vector
+
+assign o0 = vec[0];     // bit 0
+assign o1 = vec[1];     // bit 1
+assign o2 = vec[2];     // bit 2
+
+endmodule
+```
+
+**Explanation**
+
+* `assign outv = vec;` – copies the entire 3‑bit input to the 3‑bit output.
+* `assign o0 = vec[0];`, `assign o1 = vec[1];`, `assign o2 = vec[2];` – expose each individual bit.
+* All ports are declared as `wire` by default (no `reg` needed), making this a purely combinational module.
+
+This module will compile under any standard Verilog toolchain and can be used directly in a larger design.

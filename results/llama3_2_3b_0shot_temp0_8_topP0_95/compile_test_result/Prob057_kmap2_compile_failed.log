@@ -1,0 +1,14 @@
+Problem: Prob057_kmap2
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:7: warning: Port declaration of out inherits dimensions from var/net.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:7: error: Scalar port ``out'' has a vectored net declaration [3:0].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:22: error: Net out is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:7: error: no wire/reg out in module tb.top_module1.
+3 error(s) during elaboration.

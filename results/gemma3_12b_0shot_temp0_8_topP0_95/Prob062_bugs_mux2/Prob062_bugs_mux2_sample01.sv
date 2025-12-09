@@ -1,0 +1,15 @@
+
+module TopModule (
+  input sel,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out
+);
+
+  always @(posedge clk) begin
+    out = (~sel & a) | (sel & b);
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

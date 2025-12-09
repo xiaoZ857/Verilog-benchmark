@@ -1,0 +1,112 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+
+reg [7:0] delay;
+reg [9:0] current_time;
+
+reg [7:0] count_data[4];
+reg state = '0;
+
+reg [7:0] state_count[2];
+
+int index;
+
+wire start_sequence = {1, 1, 0, 1};
+wire shift_data;
+
+initial begin
+    // Initialize the delay register to 0
+    delay <= 0;
+    
+    // Initialize current time to a high value to ensure counting starts immediately
+    current_time <= 20000;
+end
+
+always @(posedge clk) begin
+    if (state == '0') begin
+        if (data[2] && data[1] && data[0] && !data[3]) begin
+            state <= start_sequence[0];
+            count_data[0] <= data[6];
+            shift_data <= 1;
+        end else if (state == start_sequence[0]) begin
+            state <= start_sequence[1];
+            shift_data <= 1;
+        end else if (state == start_sequence[1]) begin
+            state <= start_sequence[2];
+            count_data[1] <= data[6];
+            shift_data <= 1;
+        end else if (state == start_sequence[2]) begin
+            state <= start_sequence[3];
+            count_data[2] <= data[6];
+            shift_data <= 1;
+        end else if (state == start_sequence[3]) begin
+            state <= '0;
+            delay <= {count_data[3], count_data[2], count_data[1], count_data[0]};
+            current_time <= {current_time, 1000};
+            counting <= 0;
+            done <= 1;
+        end
+    end else if (state == start_sequence[4]) begin
+        state <= '0';
+        delay <= shift_data & {count_data[3], count_data[2], count_data[1], count_data[0]};
+        current_time <= {current_time, 1000};
+        counting <= 0;
+        done <= 1;
+    end else if (state == start_sequence[5]) begin
+        state <= '0';
+        delay <= shift_data & {count_data[3], count_data[2], count_data[1], count_data[0]};
+        current_time <= {current_time, 1000};
+        counting <= 0;
+        done <= 1;
+    end else if (state == start_sequence[6]) begin
+        state <= '0';
+        delay <= shift_data & {count_data[3], count_data[2], count_data[1], count_data[0]};
+        current_time <= {current_time, 1000};
+        counting <= 0;
+        done <= 1;
+    end else if (state == '0') begin
+        // Counting logic here
+        for (index = 0; index < delay + 2; index++) begin
+            if (index == delay) begin
+                current_time <= {current_time, 1000};
+            end else if (index == (delay - 1)) begin
+                current_time <= {(current_time >> 10), 1000};
+            end else begin
+                current_time <= (current_time >> 10);
+            end
+        end
+        
+        for (index = delay + 2; index >= 0; index--) begin
+            if (index == 0) begin
+                counting <= 1;
+            end else begin
+                counting <= 0;
+            end
+            
+            // Check for ack and reset when done
+            if (~ack) begin
+                done <= 0;
+                state <= '0';
+                current_time <= 20000;
+            end
+        end
+        
+        counting <= 0;
+    end
+end
+
+assign counting = state_count[state];
+assign count = {current_time[9:5], (state_count[state] << 4), (counting << 2), (ack << 1)};
+assign done = !cking && (~ack);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

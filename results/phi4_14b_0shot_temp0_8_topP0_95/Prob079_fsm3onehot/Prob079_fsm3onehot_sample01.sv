@@ -1,0 +1,26 @@
+
+always @(*) begin
+    // Default to keeping current state (no change)
+    next_state = 4'b0000;
+    
+    case (state)
+        4'b0001: // Current state is A
+            if (in == 0) next_state = 4'b0001; // Stay in A
+            else         next_state = 4'b0010; // Move to B
+            
+        4'b0010: // Current state is B
+            if (in == 0) next_state = 4'b0100; // Move to C
+            else         next_state = 4'b0010; // Stay in B
+            
+        4'b0100: // Current state is C
+            if (in == 0) next_state = 4'b0001; // Move to A
+            else         next_state = 4'b1000; // Move to D
+            
+        4'b1000: // Current state is D
+            if (in == 0) next_state = 4'b0100; // Move to C
+            else         next_state = 4'b0010; // Move to B
+    endcase
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

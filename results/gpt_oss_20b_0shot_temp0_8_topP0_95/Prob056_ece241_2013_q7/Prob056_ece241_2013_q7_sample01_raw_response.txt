@@ -1,0 +1,30 @@
+Here is a minimal, synthesizable implementation of a JK‑flip‑flop that follows exactly the truth‑table you gave.  
+The module updates **Q** on the **positive edge** of `clk` and uses non‑blocking assignments (`<=`) so that the behaviour matches a real flip‑flop.
+
+```verilog
+// ---------------------------------------------------------------------
+//  JK Flip‑Flop (positive‑edge triggered)
+//  ----------------------------------------
+//  J | K | Q      (Qold = value of Q before the clock edge)
+//  0 | 0 | Qold   // no change
+//  0 | 1 | 0      // reset
+//  1 | 0 | 1      // set
+//  1 | 1 | ~Qold  // toggle
+// ---------------------------------------------------------------------
+
+module TopModule (
+    input  wire clk,   // positive‑edge clock
+    input  wire j,     // J input
+    input  wire k,     // K input
+    output reg  Q      // flip‑flop output
+);
+
+    // Positive‑edge triggered always block
+    always @(posedge clk) begin
+        // 2‑bit vector {j,k} gives the four possible input combinations
+        case ({j, k})
+            2'b00 : Q <= Q;      // No change (J=0, K=0)
+            2'b01 : Q <= 1'b0;   // Reset (J=0, K=1)
+            2'b10 : Q <= 1'b1;   // Set   (J=1, K=0)
+            2'b11 : Q <= ~Q;     // Toggle (J=1, K=1)
+            default:

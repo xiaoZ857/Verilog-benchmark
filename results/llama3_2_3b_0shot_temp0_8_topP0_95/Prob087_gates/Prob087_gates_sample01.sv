@@ -1,0 +1,26 @@
+
+module TopModule (
+    input a,        // Positive clock/clk triggered
+    input b,        // Positive clock/clk triggered
+    output out_and, // Positive clock/clk triggered
+    output out_or,  // Positive clock/clk triggered
+    output out_xor, // Positive clock/clk triggered
+    output out_nand, // Positive clock/clk triggered
+    output out_nor, // Positive clock/clk triggered
+    output out_xnor, // Positive clock/clk triggered
+    output out_anotb  // Negative clock/clk triggered
+);
+
+    // Combinational logic for all outputs
+    assign out_and = a & b;
+    assign out_or  = a | b;
+    assign out_xor = !a ^ b; // XOR gate is equivalent to NOT-AND-NOT
+    assign out_nand = !(a & b);
+    assign out_nor  = !a | !b;
+    assign out_xnor = !(a ^ b); // XNOR gate is equivalent to AND-OR-NOT
+
+    assign out_anotb = a & !(b);
+
+endmodule // TopModule
+
+// VERILOG-EVAL: errant inclusion of module definition

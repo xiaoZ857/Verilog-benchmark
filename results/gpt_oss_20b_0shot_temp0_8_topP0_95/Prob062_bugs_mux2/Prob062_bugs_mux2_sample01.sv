@@ -1,0 +1,29 @@
+
+module TopModule (
+  input sel,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out
+);
+**Bug**
+
+1. **Wrong output width** – The first module declares `output out` (implicitly 1‑bit).  
+   The expression `(~sel & a)` therefore zero‑extends the single‑bit `sel` to 8‑bits, so only the LSB of `a` (or `b`) can ever propagate.  
+
+2. **Missing logic in the second module** – `output reg [7:0] out` is declared but never driven (no `assign` or `always` block).
+
+**Fix**
+
+- Declare the output as an 8‑bit vector.  
+- Use the *conditional operator* (or an `always @*` block) so that the whole 8‑bit word is selected.  
+- If you keep the bitwise style, replicate `sel` to 8 bits (`{8{sel}}`), but the conditional form is simpler and more readable.
+
+// 8‑bit 2‑to‑1 multiplexer – clean, synthesizable
+module top_module (
+    input        sel,          // 1‑bit select
+    input  [7:0] a,            // 8‑bit input A
+    input  [7:0] b,            // 8‑bit input B
+    output [7:0]
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

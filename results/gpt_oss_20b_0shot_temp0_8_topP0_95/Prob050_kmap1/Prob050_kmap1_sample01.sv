@@ -1,0 +1,17 @@
+
+// TopModule.v
+// -------------
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire c,
+    output wire out
+);
+
+    // Direct Boolean implementation: F = a OR b OR c
+    assign out = a | b | c;
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

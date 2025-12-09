@@ -1,0 +1,43 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+// Define the module parameters
+parameters 
+    // Count period (in clock cycles)
+    count_period = 10;
+
+// Define the module variables
+reg [3:0] q;        // Output counter value
+wire enable;        // Enable signal for increment operation
+
+// Define the module instances
+assign enable = ~slowena & clk;
+
+// Define the module behavior
+always @(posedge clk) begin
+    if (reset)
+        q <= 4' d$display("Reset, Q=0");
+    else if (~slowena && ~enable)
+        // do nothing when slowena is high and enable is low
+        q <= q;
+    else if (~slowena & enable)
+        q <= q + 1'(d$display("Q incremented by 1"));
+end
+
+// Initialize the counter to 0 on reset
+always @(reset) begin
+    q <= 4' d$display("Reset, Q=0");
+end
+```
+
+In this code:
+
+*   We define a parameter `count_period` to specify the period of the count.
+*   We create two registers: `q` for storing the counter value and an auxiliary signal `enable` that controls when the counter increments.
+*   The `assign` statement defines `enable`, which is high only during clock cycles when both `slowena` is low and `clk` is high. This means the counter will increment on every clock cycle unless `slowena` is high, at which point no increment occurs.
+*   The `always` block with the `posedge clk` clause implements the module's behavior. It checks whether the reset signal is active or not:
+    *   When the reset signal is active (`reset`), it sets the counter to 0 and displays the message "Reset, Q=0".
+    *   If neither `slowena` nor `clk` is asserted and both `slowena & clk`, no increment occurs. The value of `q` remains unchanged.
+    *   When `~slowena & enable`, it increments the counter by 1 (wrapping around if necessary) while displaying the message "Q incremented by 1".
+
+You can run this code in a Verilog environment, like Vivado or ModelSim, to see its output.

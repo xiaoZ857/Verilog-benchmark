@@ -1,0 +1,66 @@
+```verilog
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  output [7:0] s,
+  output overflow
+);
+
+  assign s = a + b;
+  assign overflow = (a[7] == b[7]) && (a[7] != s[7]);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign s = a + b;`**: This line performs the addition of the two 8-bit numbers `a` and `b` and assigns the result to the 8-bit signal `s`. Verilog's `+` operator automatically handles the arithmetic operation.
+* **`assign overflow = (a[7] == b[7]) && (a[7] != s[7]);`**: This line calculates the overflow flag.  Let's break it down:
+    * **`a[7] == b[7]`**:  This checks if the most significant bits (MSBs) of `a` and `b` are the same. This is the first condition for overflow in signed addition. If they're the same, then if the result's MSB is different, we have an overflow.
+    * **`a[7] != s[7]`**: This checks if the MSB of the sum `s` is different from the MSBs of `a` and `b`. This is the second condition for overflow.
+    * **`&&`**: The logical AND operator ensures that *both* conditions must be true for the overflow flag to be asserted.
+
+**How Overflow Detection Works (Signed 2's Complement):**
+
+In 2's complement arithmetic, overflow occurs when adding two positive numbers and getting a negative result, or when adding two negative numbers and getting a positive result.  This indicates that the result cannot be represented within the available number of bits.
+
+The overflow condition can be detected by checking the signs of the operands and the result:
+
+* **If a and b have the same sign, and their sum has the opposite sign, then overflow occurred.**
+
+The code above effectively implements this rule by examining the MSBs (sign bits) of the operands and the result.
+
+**Example:**
+
+Let's say:
+
+* `a = 1000 0000`  ( -128)
+* `b = 0000 0001`  ( 1)
+
+`a + b = 1000 0001` (-127)
+
+* `a[7] == b[7]` is `1 == 0`, which is `false`.
+* `a[7] != s[7]` is `1 != 1`, which is `false`.
+* `overflow` will be `false` because both conditions are false.
+
+Now let's say:
+
+* `a = 0111 1111` (127)
+* `b = 0000 0001` (1)
+
+`a + b = 0000 0000` (0)
+
+* `a[7] == b[7]` is `0 == 0`, which is `true`.
+* `a[7] != s[7]` is `0 != 0`, which is `false`.
+* `overflow` will be `false` because one condition is false.
+
+Now let's say:
+
+* `a = 0111 1111` (127)
+* `b = 0111 1111` (127)
+
+`a + b = 1000 0000` (-128)
+
+* `a[7] == b[7]` is `0 == 0`, which is `true`.
+* `a[7] != s[7]` is `0 != 1`, which is `true`.
+* `overflow` will be `true` because both conditions are true.

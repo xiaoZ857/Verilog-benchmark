@@ -1,0 +1,23 @@
+
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// Create a temporary variable 'temp' to store the result of ANDing in1 and in2 without the bubble on in2.
+wire temp;
+
+// Create an AND gate with in1 as one input and in2 as another input (with the bubble).
+and gate1 (
+  input in1,
+  input in2,
+  output temp
+);
+
+// Connect the 'temp' wire to the AND gate output.
+assign out = temp;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

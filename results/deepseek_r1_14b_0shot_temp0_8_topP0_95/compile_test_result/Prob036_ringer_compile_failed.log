@@ -1,0 +1,15 @@
+Problem: Prob036_ringer
+Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:10: error: motor is not a valid l-value in tb.top_module1.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:6:      : motor is declared here as wire.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:11: error: ringer is not a valid l-value in tb.top_module1.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:5:      : ringer is declared here as wire.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:9: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

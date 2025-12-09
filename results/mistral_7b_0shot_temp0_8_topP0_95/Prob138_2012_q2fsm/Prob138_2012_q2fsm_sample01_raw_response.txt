@@ -1,0 +1,58 @@
+ Here is a Verilog code implementation for the provided finite state machine (FSM). I've assigned state codes for each state and defined the _z_ output as the final state.
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire w,
+  output reg z
+);
+
+// State codes
+reg [2:0] state;
+const int A = 3'b011, B = 3'b010, C = 3'b001, D = 3'b000, E = 4'b0001, F = 4'b0010;
+
+// Always block for state transition table
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= A;
+    end else if (state == A && w == 0) begin
+        state <= B;
+    end else if (state == A && w == 1) begin
+        state <= A;
+    end else if (state == B && w == 0) begin
+        state <= C;
+    end else if (state == B && w == 1) begin
+        state <= D;
+    end else if (state == C && w == 0) begin
+        state <= E;
+    end else if (state == C && w == 1) begin
+        state <= D;
+    end else if (state == D && w == 0) begin
+        state <= F;
+    end else if (state == D && w == 1) begin
+        state <= A;
+    end else if (state == E && w == 0) begin
+        state <= D;
+    end else if (state == E && w == 1) begin
+        state <= E;
+    end else if (state == F && w == 0) begin
+        state <= C;
+    end else if (state == F && w == 1) begin
+        state <= D;
+    end
+end
+
+// Always block for state flip-flops
+always @(posedge clk) begin
+    if (state != oldstate) begin
+        q = state;
+    end
+end
+
+// Assigning _z_ output as the final state
+assign z = state;
+
+// Initial value for the old state variable
+reg [2:0] oldstate = 3'bxx1; // 'x' represents high-impedance (uninitialized) values in Verilog
+```

@@ -1,0 +1,37 @@
+Here's the implementation of the `TopModule` in Verilog, which correctly reflects the specified connections between the inputs and outputs:
+
+---
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+  // Assign each output to the corresponding input
+  assign w = a;
+  assign x = b;
+  assign y = b;
+  assign z = c;
+
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Inputs and Outputs**: The module has three inputs (`a`, `b`, `c`) and four outputs (`w`, `x`, `y`, `z`).
+- **Behavior**: The module behaves like a set of **combinational wires**, meaning each output is directly assigned the value of the corresponding input.
+- **Assignments**:
+  - `w` is connected to `a`
+  - `x` is connected to `b`
+  - `y` is also connected to `b`
+  - `z` is connected to `c`
+
+This implementation ensures that the outputs are always driven by the inputs without any clock or sequential logic, which is consistent with the default assumption of **positive-edge-triggered** signals unless otherwise stated.

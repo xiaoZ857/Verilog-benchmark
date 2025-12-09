@@ -1,0 +1,26 @@
+
+module TopModule(
+    input clk,  // positive edge-triggered clock signal
+    input j,     // asynchronous input
+    input k,     // asynchronous input
+    input reset, // active-high synchronous reset signal
+    output out   // output signal (state)
+);
+
+reg [1:0] state; // two-state state machine
+
+always @(posedge clk or not reset) // always block to handle clock and reset conditions
+begin
+    if (reset) // if reset is asserted, go to OFF state
+        state <= 0;
+    else if (!j && !k) // if both inputs are low, stay in current state
+        state <= state;
+    else if (!j || !k) // if either input is high, transition to the other state
+        state <= state == 0 ? 1 : 0;
+end
+
+assign out = (state == 0) ? 0 : 1; // assign output signal based on current state
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

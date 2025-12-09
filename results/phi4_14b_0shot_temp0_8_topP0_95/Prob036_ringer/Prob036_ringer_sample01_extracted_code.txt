@@ -1,0 +1,24 @@
+module TopModule (
+    input wire ring,
+    input wire vibrate_mode,
+    output reg ringer,
+    output reg motor
+);
+
+always @(*) begin
+    if (vibrate_mode) begin
+        // If in vibrate mode, activate the motor and deactivate the ringer.
+        ringer = 0;
+        motor = 1;
+    end else if (ring) begin
+        // If not in vibrate mode but there's a ring signal, activate the ringer.
+        ringer = 1;
+        motor = 0;
+    end else begin
+        // Otherwise, both outputs are off.
+        ringer = 0;
+        motor = 0;
+    end
+end
+
+endmodule

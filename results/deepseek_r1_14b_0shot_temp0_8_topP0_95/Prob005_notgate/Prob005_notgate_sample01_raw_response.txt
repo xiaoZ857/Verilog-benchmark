@@ -1,0 +1,15 @@
+Here's the implementation of the NOT gate in Verilog:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  
+  // Implement NOT gate using the NOT keyword
+  assign out = !in;
+
+endmodule
+```
+
+This code defines a module called `TopModule` with an input `in` and an output `out`. The output is assigned the logical negation of the input, effectively creating a NOT gate.

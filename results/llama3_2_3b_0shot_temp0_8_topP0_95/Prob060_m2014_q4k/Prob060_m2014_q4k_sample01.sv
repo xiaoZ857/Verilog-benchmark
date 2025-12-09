@@ -1,0 +1,38 @@
+
+module TopModule(
+    input clk, // clock signal
+    input resetn, // active-low synchronous reset
+    input in,      // input to the shift register
+    output out     // output of the shift register
+);
+
+// Define the internal signals for the D flip-flops
+reg[3:0] shiftReg;
+
+// Initialize the registers with 0 (assuming the initial value is 0)
+initial begin
+    $display("Initializing the shift register...");
+    for (int i = 0; i < 4; i++) {
+        shiftReg[i] = 0;
+    }
+end
+
+always @(posedge clk) begin
+    // Update the shift register on every clock edge
+    if (!resetn) begin
+        // Clear the register when reset is asserted
+        shiftReg[0:3] <= 4'd0;
+    end else if (in != shiftReg[0]) begin
+        // Shift out the next bit and clear the oldest one
+        for (int i = 3; i > 0; i--) {
+            shiftReg[i] <= shiftReg[i - 1];
+        }
+        shiftReg[0] <= in;
+    end
+end
+
+assign out = shiftReg;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

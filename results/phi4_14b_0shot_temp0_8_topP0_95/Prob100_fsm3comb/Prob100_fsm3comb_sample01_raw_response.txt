@@ -1,0 +1,61 @@
+To implement the Verilog module for the given Moore machine with a single input and one output, we need to create combinational logic that computes both the `next_state` and the `out` based on the current state and input. Here's how you can write this in Verilog:
+
+```verilog
+module TopModule (
+  input wire in,
+  input wire [1:0] state,
+  output reg [1:0] next_state,
+  output wire out
+);
+
+  // Output logic (Moore machine)
+  assign out = (state == 2'b11) ? 1 : 0;
+
+  // Combinational logic for next state transition based on the given table
+  always @(*) begin
+    case (state)
+      2'b00: begin  // State A
+        if (in == 0) 
+          next_state = 2'b00;  // Stay in A
+        else 
+          next_state = 2'b01;  // Go to B
+      end
+
+      2'b01: begin  // State B
+        if (in == 0)
+          next_state = 2'b10;  // Go to C
+        else
+          next_state = 2'b01;  // Stay in B
+      end
+      
+      2'b10: begin  // State C
+        if (in == 0) 
+          next_state = 2'b00;  // Go to A
+        else 
+          next_state = 2'b11;  // Go to D
+      end
+
+      2'b11: begin  // State D
+        if (in == 0)
+          next_state = 2'b10;  // Go to C
+        else
+          next_state = 2'b01;  // Go to B
+      end
+
+      default:
+        next_state = 2'b00;  // Default case, can be adjusted based on design needs
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+- **Output Logic**: The output `out` is determined by the current state only (Moore machine characteristic), and it's set to '1' when the state is D (`2'b11`). Otherwise, it remains '0'.
+  
+- **Next State Logic**:
+  - A case statement is used for decision-making based on the current state.
+  - Inside each case block (representing a state), another conditional check determines `next_state` based on the input `in`.
+  - For each possible value of `state`, the appropriate transitions are implemented according to the provided state transition table.
+
+This design ensures that both the next state and output for any combination of current state and input are correctly determined.

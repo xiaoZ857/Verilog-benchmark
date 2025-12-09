@@ -1,0 +1,41 @@
+```verilog
+module TopModule (
+  input [2:0] in,
+  output [1:0] out
+);
+
+  wire c0, c1, c2;
+
+  assign c0 = in[0];
+  assign c1 = c0 + in[1];
+  assign c2 = c1 + in[2];
+
+  assign out[0] = c2;
+  assign out[1] = c1;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [2:0] in, output [1:0] out);`**:  This line defines the module named `TopModule` with an input `in` (a 3-bit vector) and an output `out` (a 2-bit vector).
+* **`wire c0, c1, c2;`**: This declares three wires `c0`, `c1`, and `c2`. These wires will be used to carry the carry bits from each addition.
+* **`assign c0 = in[0];`**:  `c0` is assigned the value of the least significant bit of the input `in`.  This is the initial count.
+* **`assign c1 = c0 + in[1];`**:  `c1` is the sum of `c0` (the previous count) and the second bit of the input `in`. This effectively adds the second bit to the previous count.
+* **`assign c2 = c1 + in[2];`**:  `c2` is the sum of `c1` (the previous count) and the most significant bit of the input `in`.  This adds the third bit to the previous count.
+* **`assign out[0] = c2;`**:  The least significant bit of the output `out` is assigned the value of `c2`. Since the output is 2 bits, this represents the units digit of the population count.
+* **`assign out[1] = c1;`**:  The most significant bit of the output `out` is assigned the value of `c1`.  This represents the tens digit of the population count.
+
+**How it works:**
+
+The circuit performs a ripple-carry addition.  Each bit of the input is added to the carry-out from the previous bit. The carry bits represent the number of '1's encountered so far. The final carry bits (`c2` and `c1`) are assigned to the output bits.
+
+**Example:**
+
+If `in = 3'b101`:
+
+1. `c0 = in[0] = 1`
+2. `c1 = c0 + in[1] = 1 + 0 = 1`
+3. `c2 = c1 + in[2] = 1 + 1 = 2`
+
+Therefore, `out = 2'b10`, which correctly indicates that there are two '1's in the input vector.

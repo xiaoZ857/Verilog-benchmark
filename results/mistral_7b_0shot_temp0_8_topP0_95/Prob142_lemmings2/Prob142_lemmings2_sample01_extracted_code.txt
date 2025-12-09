@@ -1,0 +1,65 @@
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah
+);
+
+reg state; // finite state machine state (0 for walking left and 1 for walking right)
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state <= 0;
+  end else if (ground == 0) begin
+    aaah <= 1'b1; // Lemming says "aaah!" when ground disappears
+    if (state == 0) begin // If Lemming was walking left, it will fall
+      walk_left <= 0;
+      walk_right <= 0;
+    end else begin // If Lemming was walking right, it will still walk right but say "aaah!"
+      walk_left <= 0;
+      walk_right <= 1;
+    end
+  end else begin
+    if (state == bump_left) begin // If Lemming is bumped on the left
+      walk_left <= 0;
+      walk_right <= 1;
+    end else if (state == bump_right) begin // If Lemming is bumped on the right
+      walk_left <= 1;
+      walk_right <= 0;
+    end else begin // If Lemming is not yet bumping or falling, it will keep walking in the same direction
+      if (bump_left && state != bump_left) begin
+        walk_left <= 0;
+        walk_right <= 1;
+        state = bump_left;
+      end else if (bump_right && state != bump_right) begin
+        walk_left <= 1;
+        walk_right <= 0;
+        state = bump_right;
+      end else begin
+        walk_left <= state; // walk left or right depending on the current state of the FSM
+        walk_right <= !state;
+      end
+    end
+  end
+end
+
+always @(posedge clk) begin
+  if (ground == 1 && aaah == 1'b0) begin // If ground reappears and Lemming is not saying "aaah!", it will resume walking in the same direction
+    walk_left <= state;
+    walk_right <= !state;
+  end
+end
+
+// Default initial conditions
+always @* begin
+  if (areset) begin
+    state <= 0;
+  end else begin
+    walk_left <= 0;
+    walk_right <= 1; // By default, the Lemming is walking right
+    aaah <= 1'b0;
+  end
+end

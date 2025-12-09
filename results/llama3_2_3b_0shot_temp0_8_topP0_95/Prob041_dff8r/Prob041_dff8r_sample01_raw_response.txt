@@ -1,0 +1,60 @@
+Here's how you can implement the Verilog module for the TopModule:
+
+```verilog
+// Define the clock period for the simulation
+parameter CLK_PERIOD = 1.0;
+
+module TopModule (
+  input clk, // Clock signal.
+  input [7:0] d, // Data to be fed into DFFs.
+  input reset, // Synchronous active high reset.
+  output reg [7:0] q // Output of the DFFs.
+);
+
+// Create 8 D flip-flops with an active-high synchronous reset
+for (int i = 0; i < 8; i++) begin
+    DFlipFlop dut(
+        .clk(clk),
+        .d(d[i]),
+        .reset(reset),
+        .q(q[i])
+    );
+end
+
+// Define the DFlipFlop module
+module DFlipFlop (
+    input clk, // Clock signal.
+    input d, // Data to be fed into the flip-flop.
+    input reset, // Synchronous active high reset.
+    output reg q // Output of the flip-flop.
+);
+
+    // Register and feedback loop for the DFF
+    reg [7:0] q;
+    always @(posedge clk) begin
+        if (!reset && d == 1'b1) begin
+            q <= d;
+        end else if (reset || !d) begin
+            q <= 8'h000; // Zero state
+        end
+    end
+
+endmodule
+
+// Instantiate the DFlipFlop module for each of the 8 DFFs
+TopModule dut (
+    .clk(clk),
+    .d(d),
+    .reset(reset),
+    .q(q)
+);
+```
+
+In this code:
+
+1. We first define the `TopModule` that includes a clock signal, data input (`d`), and an active-high reset.
+2. Inside the `TopModule`, we create 8 instances of the DFlipFlop module.
+3. Each instance is connected to its corresponding position in the output array `q`.
+4. The `DFlipFlop` module contains a register and feedback loop that implements the standard D flip-flop behavior with an active-high synchronous reset.
+
+This implementation should meet your requirements for creating 8 D flip-flops with an active-high synchronous reset, triggered by the positive edge of the clock signal.

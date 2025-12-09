@@ -1,0 +1,11 @@
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+always @(posedge clk) begin
+    q <= d; // D flip-flop behavior: capture `d` on rising edge of `clk`
+end
+
+endmodule

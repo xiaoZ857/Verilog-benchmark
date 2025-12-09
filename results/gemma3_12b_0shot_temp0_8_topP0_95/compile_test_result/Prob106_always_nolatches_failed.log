@@ -1,0 +1,18 @@
+Problem: Prob106_always_nolatches
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'left' has 4 mismatches. First mismatch occurred at time 50.
+Hint: Output 'down' has 2 mismatches. First mismatch occurred at time 70.
+Hint: Output 'right' has 3 mismatches. First mismatch occurred at time 80.
+Hint: Output 'up' has 2 mismatches. First mismatch occurred at time 40.
+Hint: Total mismatched samples is 11 out of 30020 samples
+
+Simulation finished at 150100 ps
+Mismatches: 11 in 30020 samples

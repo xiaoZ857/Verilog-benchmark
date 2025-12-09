@@ -1,0 +1,108 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+
+  // Define states
+  parameter A = 2'b00,
+            B = 2'b01,
+            C = 2'b10,
+            D = 2'b11,
+            E = 2'b00, //Overlap with A, but using for clarity
+            F = 2'b01;  //Overlap with B, but using for clarity
+
+  reg [1:0] current_state;
+
+  // Assign output based on current state
+  always @(current_state) begin
+    case (current_state)
+      A: z = 0;
+      B: z = 0;
+      C: z = 0;
+      D: z = 0;
+      E: z = 0;
+      F: z = 0;
+      default: z = 0; // Should not happen, but good practice
+    endcase
+  end
+
+  // State transition logic
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A;
+    end else begin
+      case (current_state)
+        A: begin
+          if (w) begin
+            current_state <= A;
+          end else begin
+            current_state <= B;
+          end
+        end
+        B: begin
+          if (w) begin
+            current_state <= D;
+          end else begin
+            current_state <= C;
+          end
+        end
+        C: begin
+          if (w) begin
+            current_state <= D;
+          end else begin
+            current_state <= E;
+          end
+        end
+        D: begin
+          if (w) begin
+            current_state <= A;
+          end else begin
+            current_state <= F;
+          end
+        end
+        E: begin
+          if (w) begin
+            current_state <= D;
+          end else begin
+            current_state <= E;
+          end
+        end
+        F: begin
+          if (w) begin
+            current_state <= C;
+          end else begin
+            current_state <= D;
+          end
+        end
+        default: current_state <= A; // Should not happen, but good practice
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Definition:**
+   - `parameter A = 2'b00, B = 2'b01, C = 2'b10, D = 2'b11, E = 2'b00, F = 2'b01;`
+   - Defines the states using named constants. This makes the code more readable and maintainable.  Note that states E and F overlap with states A and B respectively, but are assigned different values for clarity.
+
+2. **Output Assignment:**
+   - `always @(current_state) begin ... end`
+   - This block continuously monitors the `current_state` and assigns the output `z` based on the current state.  Since the problem doesn't specify any state-dependent output values, `z` is assigned 0 in all states.  You can easily modify this to reflect the desired output logic.
+
+3. **State Transition Logic:**
+   - `always @(posedge clk or posedge reset) begin ... end`
+   - This block describes the state transitions.  It's triggered on the positive edge of the clock (`posedge clk`) or the positive edge of the reset signal (`posedge reset`).
+   - **Reset:** If `reset` is high, the state machine is initialized to state `A`.
+   - **State Transitions:**  The `case` statement within the `always` block implements the state transition logic based on the current state and the input `w`. The `if (w)` conditions determine the next state based on the problem description.
+
+**How to use it:**
+
+1.  **Save:** Save the code as a `.v` file (e.g., `top_module.v`).
+2.  **Simulation:** Use a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado) to simulate the module. You're going to need to create a testbench to apply inputs (`clk`, `reset`, `w`) and observe the output `z` and the `current_state`.
+3.  **Synthesis:**  You can synthesize the Verilog code into a hardware implementation using

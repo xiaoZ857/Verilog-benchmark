@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  always @(posedge clk) begin
+    q <= d;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (clk, d, q);`**:  This declares a module named `TopModule` with three ports:
+    * `clk`: The clock input.
+    * `d`: The data input.
+    * `q`: The output, declared as a `reg` because it will be assigned a value within an `always` block.
+
+* **`always @(posedge clk) begin ... end`**: This defines an `always` block that is triggered on the positive edge (rising edge) of the `clk` signal.  This is the crucial part of a synchronous flip-flop.
+    * **`posedge clk`**:  Specifies that the block executes only on the rising edge of the clock signal.
+    * **`begin ... end`**:  Encloses the statements that will be executed on each positive clock edge.
+
+* **`q <= d;`**: This is the core of the D flip-flop.  On each positive clock edge, the value of the `d` (data) input is assigned to the `q` (output) register.  The non-blocking assignment (`<=`) is essential in `always` blocks for sequential logic.  It ensures that the value of `q` is updated at the *end* of the current simulation time step, preventing race conditions.
+
+**How it works as a D flip-flop:**
+
+A D flip-flop essentially copies its input to its output on the rising edge of the clock.  When the clock is low, the output `q` holds its previous value.  When the clock transitions from low to high, the value of `d` is latched into `q`.
+
+**To test this module, you would need to write a testbench:**
+
+Here's a basic testbench example:
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg d;
+  wire q;
+
+  TopModule uut (
+    .clk(clk),
+    .d(d),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    d = 0;
+    #10 clk = 1;
+    #10 d = 1;
+    #10 clk = 1;
+    #10 d = 0;
+    #10 clk = 1;
+    #10 $finish;
+  end
+
+  always #5 clk = ~clk;
+
+endmodule
+```
+
+This testbench provides clock and data signals and observes the output `q` to verify the functionality of the D flip-flop.  You would simulate this testbench using a Verilog simulator to check the behavior.

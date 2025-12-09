@@ -1,0 +1,16 @@
+Here is the Verilog implementation for the single D flip-flop module:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+always @ (posedge clk)
+    q <= d;
+
+endmodule
+```
+
+This code defines a simple D flip-flop that captures the input `d` on each rising edge of the clock signal `clk` and stores it in the output `q`.

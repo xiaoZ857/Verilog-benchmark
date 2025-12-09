@@ -1,0 +1,87 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output reg done
+);
+
+  // State definition
+  typedef enum logic [2:0] {
+    IDLE,
+    START_DETECTED,
+    RECEIVING_DATA,
+    STOP_DETECTED,
+    ERROR_STATE
+  } state_t;
+
+  reg state, next_state;
+
+  // Internal signals
+  reg [7:0] data_reg;
+  reg data_bit_count;
+  reg stop_bit_expected;
+  reg error_flag;
+
+  // State register update
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      done <= 0;
+      error_flag <= 0;
+    end else begin
+      state <= next_state;
+      done <= 0;
+      error_flag <= 0;
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    next_state = state;
+    case (state)
+      IDLE: begin
+        if (in == 0) begin
+          next_state = START_DETECTED;
+        end
+      end
+      START_DETECTED: begin
+        next_state = RECEIVING_DATA;
+        data_bit_count = 0;
+        stop_bit_expected = 1;
+      end
+      RECEIVING_DATA: begin
+        if (data_bit_count == 8) begin
+          if (stop_bit_expected) begin
+            next_state = STOP_DETECTED;
+          end else begin
+            next_state = ERROR_STATE;
+            error_flag = 1;
+          end
+        end else begin
+          next_state = RECEIVING_DATA;
+        end
+      end
+      STOP_DETECTED: begin
+        next_state = IDLE;
+        done = 1;
+      end
+      ERROR_STATE: begin
+        if (in == 1) begin
+          next_state = IDLE;
+        end
+      end
+    endcase
+  end
+
+  // Data register update and bit count
+  always @(posedge clk) begin
+    if (state == RECEIVING_DATA) begin
+      data_reg[data_bit_count] <= in;
+      if(data_bit_count < 9)
+        data_bit_count <= data_bit_count + 1;
+    end
+  end
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

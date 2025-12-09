@@ -1,0 +1,15 @@
+ Here is the implementation of the Verilog module for a 2-input NOR gate:
+
+```verilog
+module TopModule (
+    input wire in1,
+    input wire in2,
+    output logic out
+);
+
+assign out = ~(in1 | in2);
+
+endmodule
+```
+
+In this code, we define the `TopModule` with two inputs (`in1`, `in2`) and one output (`out`). The `~` operator is used for bitwise NOT operation, and the vertical bar `|` represents the OR gate. To implement a NOR gate, we place the NOT operation before the OR gate.

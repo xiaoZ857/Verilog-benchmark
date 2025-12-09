@@ -1,0 +1,27 @@
+To create a Verilog module that implements an XOR (Exclusive OR) gate, we can utilize the following logic:
+
+XOR(a, b) = (a && !b) || (!a && b)
+
+Here is the complete code for the XNOR gate implementation in Verilog:
+
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+// Implement XOR using NOT and AND
+assign out = (~a & ~b) | 
+             ( ~a & b ) |
+             ( a & ~b );
+
+endmodule
+```
+
+In this code, the `~` operator is used to represent the negation of a signal. The bitwise AND (`&`) operator is used for logical AND operation between two signals, while the bitwise OR (`|`) operator is used for logical OR operation.
+
+The expression `(~a & ~b)` will be true when both 'a' and 'b' are low (0). The expression `( ~a & b )` will be true when 'a' is high (1) but 'b' is low. Similarly, the expression `( a & ~b )` will be true when 'a' is low and 'b' is high.
+
+The final result of the XOR operation between two signals 'a' and 'b' can then be obtained using the bitwise OR operator (`|`).

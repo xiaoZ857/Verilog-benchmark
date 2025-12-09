@@ -1,0 +1,40 @@
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire x,
+    output reg z
+);
+
+    // State encoding using one-hot representation
+    parameter A = 1'b0;
+    parameter B = 1'b1;
+
+    reg [1:0] state, next_state;
+
+    // Asynchronous reset and synchronous state update
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= A; // Reset to state A
+        else
+            state <= next_state;
+    end
+
+    // Next state logic using one-hot encoding
+    always @(*) begin
+        case (state)
+            A: begin
+                next_state = (x == 1'b0) ? A : B;
+                z = 1'b0; // Output when in state A or transitioning from A to B
+            end
+            B: begin
+                next_state = B; // Always transition to state B
+                z = (x == 1'b0) ? 1'b1 : 1'b0; // Output depends on x value in state B
+            end
+            default: begin
+                next_state = A;
+                z = 1'b0;
+            end
+        endcase
+    end
+
+endmodule

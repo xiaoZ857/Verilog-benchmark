@@ -1,0 +1,48 @@
+Below is a straightforward Verilog implementation of a 4‑bit decade counter that
+
+* counts from **0 to 9** (inclusive) on each rising clock edge,
+* wraps back to 0 after 9,
+* has an **active‑high synchronous reset** that forces the counter to 0.
+
+```verilog
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire        clk,   // clock input
+    input  wire        reset, // active‑high synchronous reset
+    output reg  [3:0]  q     // 4‑bit counter output
+);
+
+    // Synchronous logic: triggered on the rising edge of clk
+    always @(posedge clk) begin
+        if (reset) begin
+            // Reset is synchronous – performed on the clock edge
+            q <= 4'd0;
+        end
+        else begin
+            // Count from 0 to 9, then wrap to 0
+            if (q == 4'd9) begin
+                q <= 4'd0;
+            end
+            else begin
+                q <= q + 1'b1;
+            end
+        end
+    end
+
+endmodule
+```
+
+### Notes
+
+* **Non‑blocking assignments (`<=`)** are used because the logic is synchronous.  
+* The counter uses a simple conditional check for `q == 9` to wrap around.  
+* If you prefer a more compact form, you could write:
+
+  ```verilog
+  q <= (q == 9) ? 0 : q + 1;
+  ```
+
+  but the expanded form shown above makes the wrap‑around logic crystal‑clear.  
+
+Feel free to integrate this module into your larger design or use it as a starting point for more complex counter‑based circuits.

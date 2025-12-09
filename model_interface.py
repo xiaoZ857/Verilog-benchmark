@@ -134,15 +134,15 @@ def get_ollama_models() -> List[str]:
                 if line.strip():
                     parts = line.split()
                     if parts:
-                        # Replace colon with underscore for consistent naming
-                        model_name = parts[0].replace(':', '_')
+                        # Keep original model name with colon for Ollama API
+                        model_name = parts[0]
                         models.append(model_name)
             return models
     except (FileNotFoundError, subprocess.TimeoutExpired, Exception):
         pass
     return []
 
-def call_ollama_api(model_name: str, prompt: str) -> GenerationResult:
+def call_ollama_api(model_name: str, prompt: str, temperature: float = 0.0, top_p: float = 0.01) -> GenerationResult:
     """Call Ollama HTTP API for code generation"""
     start_time = time.time()
 
@@ -155,8 +155,8 @@ def call_ollama_api(model_name: str, prompt: str) -> GenerationResult:
                 "prompt": prompt,
                 "stream": False,
                 "options": {
-                    "temperature": 0.0,
-                    "top_p": 0.01,
+                    "temperature": temperature,
+                    "top_p": top_p,
                     "num_predict": 1024
                 }
             },
@@ -199,7 +199,7 @@ def call_ollama_api(model_name: str, prompt: str) -> GenerationResult:
 # API Model Interface
 # ============================================================================
 
-def call_deepseek_api(api_key: str, prompt: str, model_config: Dict) -> GenerationResult:
+def call_deepseek_api(api_key: str, prompt: str, model_config: Dict, temperature: float = 0.0, top_p: float = 0.01) -> GenerationResult:
     """Call DeepSeek API for code generation using OpenAI SDK"""
     if not OPENAI_AVAILABLE:
         return GenerationResult(
@@ -223,8 +223,8 @@ def call_deepseek_api(api_key: str, prompt: str, model_config: Dict) -> Generati
                 {"role": "user", "content": prompt}
             ],
             max_tokens=model_config["max_tokens"],
-            temperature=model_config["temperature"],
-            top_p=model_config["top_p"],
+            temperature=temperature,
+            top_p=top_p,
             stream=False
         )
 
@@ -252,7 +252,7 @@ def call_deepseek_api(api_key: str, prompt: str, model_config: Dict) -> Generati
             error_message=f"DeepSeek API call failed: {str(e)}"
         )
 
-def call_glm_api(api_key: str, prompt: str, model_config: Dict) -> GenerationResult:
+def call_glm_api(api_key: str, prompt: str, model_config: Dict, temperature: float = 0.0, top_p: float = 0.01) -> GenerationResult:
     """Call GLM API for code generation"""
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -265,8 +265,8 @@ def call_glm_api(api_key: str, prompt: str, model_config: Dict) -> GenerationRes
             {"role": "system", "content": SYSTEM_MSG},
             {"role": "user", "content": prompt}
         ],
-        "temperature": model_config["temperature"],
-        "top_p": model_config["top_p"],
+        "temperature": temperature,
+        "top_p": top_p,
         "max_tokens": model_config["max_tokens"],
         "stream": False
     }
@@ -406,7 +406,7 @@ def extract_verilog_code(response: str, module_interface: str) -> Tuple[str, str
 
     return complete_code, extracted_code
 
-def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, interface: str) -> bool:
+def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, interface: str, temperature: float = 0.0, top_p: float = 0.01) -> bool:
     """
     Generate code for a specific problem using specified model
 
@@ -415,6 +415,8 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
         problem_name: Name of the problem
         prompt: Full prompt for the model
         interface: Module interface code
+        temperature: Generation temperature
+        top_p: Generation top_p
 
     Returns:
         True if successful, False otherwise
@@ -434,9 +436,9 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
 
             # Call API
             if api_type == "deepseek":
-                result = call_deepseek_api(keys[api_type], prompt, model_config)
+                result = call_deepseek_api(keys[api_type], prompt, model_config, temperature, top_p)
             elif api_type == "zhipuai":
-                result = call_glm_api(keys[api_type], prompt, model_config)
+                result = call_glm_api(keys[api_type], prompt, model_config, temperature, top_p)
             else:
                 print(f"Error: Unsupported API type: {api_type}")
                 return False
@@ -447,7 +449,7 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
                 print(f"Error: Ollama service not available")
                 return False
 
-            result = call_ollama_api(model_name, prompt)
+            result = call_ollama_api(model_name, prompt, temperature, top_p)
 
         if not result.success:
             print(f"Error generating code for {problem_name}: {result.error_message}")
@@ -456,26 +458,29 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
         # Extract code
         complete_code, extracted_code = extract_verilog_code(result.response_text, interface)
 
-        # Save files in Ollama-compatible format
-        model_name_safe = model_name.replace('-', '_').replace('.', '_')
-        output_dir = f"results/{model_name_safe}_0shot_temp0.0"
+        # Save files with temperature and top_p in directory name
+        model_name_safe = model_name.replace(':', '_').replace('-', '_').replace('.', '_')
+        # Format temperature and top_p for folder name
+        temp_str = str(temperature).replace('.', '_')
+        top_p_str = str(top_p).replace('.', '_')
+        output_dir = f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}"
         problem_dir = os.path.join(output_dir, problem_name)
 
         os.makedirs(problem_dir, exist_ok=True)
 
         # Save raw response
         raw_file = f"{problem_dir}/{problem_name}_sample01_raw_response.txt"
-        with open(raw_file, 'w') as f:
+        with open(raw_file, 'w', encoding='utf-8') as f:
             f.write(result.response_text)
 
         # Save extracted code
         extracted_file = f"{problem_dir}/{problem_name}_sample01_extracted_code.txt"
-        with open(extracted_file, 'w') as f:
+        with open(extracted_file, 'w', encoding='utf-8') as f:
             f.write(extracted_code)
 
         # Save complete code
         complete_file = f"{problem_dir}/{problem_name}_sample01.sv"
-        with open(complete_file, 'w') as f:
+        with open(complete_file, 'w', encoding='utf-8') as f:
             f.write(complete_code)
 
         return True

@@ -1,0 +1,88 @@
+
+// TopModule.v
+module TopModule (
+  input [99:0] in,
+  output logic [99:0] out_and,
+  output logic [99:0] out_or,
+  output logic [99:0] out_xor
+);
+
+  // Create an instance of the AND gate for the 'out_and' output
+  and_gate #(
+    .N(100)
+  ) and_gate_in (
+    .in(in),
+    .out(out_and)
+  );
+
+  // Create an instance of the OR gate for the 'out_or' output
+  or_gate #(
+    .N(100)
+  ) or_gate_in (
+    .in(in),
+    .out(out_or)
+  );
+
+  // Create an instance of the XOR gate for the 'out_xor' output
+  xor_gate #(
+    .N(100)
+  ) xor_gate_in (
+    .in(in),
+    .out(out_xor)
+  );
+
+endmodule
+
+// or_gate.sv (a simple OR gate implementation)
+module or_gate #(
+  parameter N : integer
+) (
+  input [N-1:0] in,
+  output logic [N-1:0] out
+);
+
+  assign out = in;
+
+endmodule
+
+// and_gate.sv (a simple AND gate implementation)
+module and_gate #(
+  parameter N : int
+) (
+  input [N-1:0] in,
+  output logic [N-1:0] out
+);
+
+  logic [N-1:0] temp;
+  
+  generate
+    for(int i = 0; i < N; i++)
+      temp[i] = '1';
+  endgenerate
+
+  assign out = temp & in;
+
+endmodule
+
+// xor_gate.sv (a simple XOR gate implementation)
+module xor_gate #(
+  parameter N : int
+) (
+  input [N-1:0] in,
+  output logic [N-1:0] out
+);
+
+  logic [N-1:0] temp, result;
+
+  generate
+    for(int i = 0; i < N; i++)
+      temp[i] = '0';
+    for (int j = 0; j < N; j++) 
+        if(in[j] != in[N-1-j])
+            temp[j] = '1';
+
+  assign result = temp;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

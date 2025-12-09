@@ -1,0 +1,80 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+
+  reg [255:0] next_q;
+
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+  always @(*) begin
+    next_q = q;
+    for (int i = 0; i < 256; i++) begin
+      int row = i / 16;
+      int col = i % 16;
+
+      int neighbors = 0;
+
+      // Calculate neighbors, wrapping around the grid
+      for (int dr = -1; dr <= 1; dr++) {
+        for (int dc = -1; dc <= 1; dc++) {
+          if (dr == 0 && dc == 0) continue;  // Don't count the cell itself
+
+          int neighbor_row = (row + dr + 16) % 16;
+          int neighbor_col = (col + dc + 16) % 16;
+          int neighbor_index = neighbor_row * 16 + neighbor_col;
+
+          neighbors += q[neighbor_index];
+        }
+      }
+
+      // Update cell based on number of neighbors
+      if (neighbors >= 4) begin
+        next_q[i] = 0;
+      end else if (neighbors == 3) begin
+        next_q[i] = 1;
+      end else if (neighbors == 2) begin
+        next_q[i] = q[i];
+      end else if (neighbors == 1) begin
+        next_q[i] = 0;
+      end else begin
+        next_q[i] = q[i];
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`: Defines the module with input `clk`, `load`, `data`, and output `q`.
+
+2. **`next_q` Register:**
+   - `reg [255:0] next_q;`:  A register to hold the next state of the grid.  This is necessary because the update logic depends on the current state (`q`) and needs to be evaluated before the output `q` is updated.
+
+3. **Load Logic (Synchronous):**
+   - `always @(posedge clk) begin ... end`: This block is triggered on the positive edge of the clock.
+   - `if (load) begin q <= data; end`:  When `load` is high, the grid is initialized with the data from the `data` input.  The `<=` operator is used for non-blocking assignment, ensuring that the state is updated at the end of the clock cycle.
+
+4. **Game Logic (Combinational):**
+   - `always @(*) begin ... end`: This block is combinational, meaning it is evaluated whenever any of its inputs change.  The `*` means "all inputs."
+   - `next_q = q;`: Initializes `next_q` with the current state of `q`. This is crucial for the combinational logic to work correctly.
+   - **Neighbor Calculation Loop:**
+     - `for (int i = 0; i < 256; i++)`: Iterates through each cell in the grid.
+     - `int row = i / 16; int col = i % 16;`: Calculates the row and column of the current cell.
+     - **Inner Loops for Neighbor Calculation:**
+       - `for (int dr = -1; dr <= 1; dr++) { for (int dc = -1; dc <= 1; dc++)`:  Iterates through the 3x3 neighborhood around the current cell.
+       - `if (dr == 0 && dc == 0) continue;`:  Skips the cell itself (doesn't count itself as a neighbor).
+       - `int neighbor_row = (row + dr + 16) % 16; int neighbor_col = (col + dc + 16) % 16;`: Calculates the row and column of the neighbor, using the modulo operator (`%`) to handle wraparound.  Adding 16 ensures that negative offsets are handled correctly when using the modulo operator.
+       - `int neighbor_index = neighbor_row * 16 + neighbor_col;`: Calculates the linear

@@ -1,0 +1,20 @@
+
+// Half‑Adder – combinational logic (no clock needed)
+//  a,b  : 1‑bit inputs
+//  sum  : XOR of the inputs
+//  cout : AND of the inputs (carry out)
+
+module TopModule (
+  input  wire a,   // first operand
+  input  wire b,   // second operand
+  output wire sum, // sum output
+  output wire cout // carry‑out output
+);
+
+// Combinational assignments
+assign sum  = a ^ b; // XOR gives the sum bit
+assign cout = a & b; // AND gives the carry out
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

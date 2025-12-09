@@ -1,0 +1,13 @@
+Problem: Prob030_popcount255
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv:17: error: 'ps' bit select must be a constant in this context.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv:13: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv:13: error: Failed to evaluate event expression 'posedge clk'.
+3 error(s) during elaboration.

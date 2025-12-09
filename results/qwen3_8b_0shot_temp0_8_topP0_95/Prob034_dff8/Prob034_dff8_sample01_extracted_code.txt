@@ -1,0 +1,12 @@
+Here's a well-structured and correct implementation of the `TopModule` in Verilog that contains 8 D flip-flops, all triggered by the positive edge of the `clk` signal. The module is designed to synchronously capture the 8-bit input `d` into the 8-bit output register `q` on each rising edge of `clk`.
+
+---
+
+### ✅ **Implementation Explanation**
+
+- **Inputs**:
+  - `clk`: A single clock signal, which triggers the flip-flops on the positive edge.
+  - `d`: An 8-bit input that drives the D inputs of the flip-flops.
+
+- **Output**:
+  - `q`: An 8-bit output register that reflects the value of `

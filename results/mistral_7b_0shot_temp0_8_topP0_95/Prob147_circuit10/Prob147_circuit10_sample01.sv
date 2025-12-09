@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output reg q,
+  output reg state
+);
+
+always @(posedge clk) begin
+  if (a && b == q) begin // if both 'a' and 'q' are high, then set Q to 1
+    q <= 1;
+  end else if (a != q) begin // if 'a' is different from Q, then toggle Q
+    q <= ~q;
+  end
+  state <= a ^ b ^ q; // calculate the state as XOR of current inputs and Q
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

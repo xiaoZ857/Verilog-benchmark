@@ -1,0 +1,48 @@
+```verilog
+// Detects changes (edges) in an 8-bit vector on each clock cycle.
+//
+// The output bit is set the next cycle after a transition from 0 to 1 or 1 to 0.
+
+module TopModule (
+    input clk,
+    input [7:0] in,
+    output reg [7:0] anyedge
+);
+
+    // Internal registers and signals
+    reg [7:0] prev_in;
+    wire [7:0] any_edge;
+
+    // Register the previous input value.
+    assign prev_in = in;
+
+    // The next edge will be detected on the rising or falling edge of this clock signal.
+    always @(posedge clk) begin
+        // Check for a transition from 0 to 1 or 1 to 0 between two consecutive values.
+        any_edge[0] <= !prev_in[0];
+        any_edge[1] <= !prev_in[1];
+        any_edge[2] <= !prev_in[2];
+        any_edge[3] <= !prev_in[3];
+        any_edge[4] <= !prev_in[4];
+        any_edge[5] <= !prev_in[5];
+        any_edge[6] <= !prev_in[6];
+        any_edge[7] <= !prev_in[7];
+
+        // Set the output value on the next clock cycle.
+        assign any_edge = {any_edge, prev_in};
+    end
+
+endmodule
+```
+
+This Verilog module implements a state machine with internal registers to track previous input values. It generates an active-low edge detection signal for each bit of the 8-bit input vector and latches the output bit on the next clock cycle. The `always` block is triggered at the rising (or falling) edges of the clock signal, capturing changes from one clock cycle to another.
+
+**Key Points:**
+
+- An internal register (`prev_in`) stores the previous value of the input signal.
+- The module uses a "wire" for each output bit, ensuring that all outputs are updated on the next clock cycle.
+- The `always` block is designed with proper synchronization at clock edges, capturing changes from one clock cycle to another.
+
+**Example Use Case:**
+
+You can use this module in a larger design where you need to detect changes in an 8-bit vector, such as in a digital signal processing or sensor interface application.

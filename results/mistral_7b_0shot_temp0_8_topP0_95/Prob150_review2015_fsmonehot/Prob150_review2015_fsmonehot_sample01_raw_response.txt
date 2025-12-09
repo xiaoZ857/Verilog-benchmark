@@ -1,0 +1,75 @@
+ Here is the Verilog code for the given Moore state machine:
+
+```verilog
+module TopModule (
+  input d,
+  input done_counting,
+  input ack,
+  input [9:0] state,
+  output B3_next,
+  output S_next,
+  output S1_next,
+  output Count_next,
+  output Wait_next,
+  output done,
+  output counting,
+  output shift_ena
+);
+
+// One-hot encoding for states
+reg [9:0] next_state = 10'b0000000001; // S
+reg [9:0] state_copy = state;
+
+assign B3_next = state_copy[2]; // B3 is the third bit from right in one-hot encoding
+assign S_next = state_copy[0]; // S is the first bit from right in one-hot encoding
+assign S1_next = state_copy[1]; // S1 is the second bit from right in one-hot encoding
+assign Count_next = state_copy[8]; // Count is the last bit from right in one-hot encoding
+assign Wait_next = state_copy[9]; // Wait is the second to last bit from right in one-hot encoding
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    state_copy <= next_state;
+  end else if (state == next_state) begin
+    case ({d, done_counting, ack})
+      2'b00: begin
+          state_copy <= S;
+        end
+      2'b01: begin
+          state_copy <= S1;
+        end
+      2'b10: begin
+          case (state)
+            1'b0: begin
+               state_copy <= S11;
+           end
+            1'b1: begin
+               state_copy <= S110;
+           end
+            3'b110: begin
+               state_copy <= B0;
+           end
+          endcase
+        end
+      2'b11: begin
+          case (state)
+            1'b0: begin
+               state_copy <= S;
+           end
+            3'b110: begin
+               state_copy <= B1;
+           end
+          endcase
+        end
+    end
+  end
+end
+
+// Output logic
+assign done = Wait_next & ack;
+assign counting = Count_next;
+assign shift_ena = B3_next;
+
+endmodule
+```
+
+This code generates the requested signals for the given Moore state machine. The next-state logic and output logic are implemented as described in the problem statement.

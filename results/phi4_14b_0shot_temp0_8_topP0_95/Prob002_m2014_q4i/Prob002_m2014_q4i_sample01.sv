@@ -1,0 +1,13 @@
+
+module TopModule (
+  output reg out
+);
+
+  // Always block to set the output to logic low
+  initial begin
+    out = 1'b0; // Initialize and drive the output to 0
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

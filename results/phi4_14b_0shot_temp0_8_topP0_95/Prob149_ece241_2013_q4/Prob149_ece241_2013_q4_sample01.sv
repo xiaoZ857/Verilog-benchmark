@@ -1,0 +1,78 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [3:1] s, // Sensors s[3], s[2], and s[1]
+  output reg fr3,
+  output reg fr2,
+  output reg fr1,
+  output reg dfr
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        STATE_LOW = 2'b00,   // Below s[1]
+        STATE_MID_LOW = 2'b01, // Between s[2] and s[1]
+        STATE_HIGH = 2'b10, // Between s[3] and s[2]
+        STATE_VERY_HIGH = 2'b11 // Above s[3]
+    } state_t;
+
+    state_t current_state, next_state;
+    logic [3:1] previous_s; // To store the last sensor values
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Reset to STATE_LOW with all flow rates enabled and dfr cleared
+            current_state <= STATE_LOW;
+            fr3 <= 1'b1;
+            fr2 <= 1'b1;
+            fr1 <= 1'b1;
+            dfr <= 1'b0;
+        end else begin
+            current_state <= next_state;
+            
+            // Set outputs based on the next state
+            case (next_state)
+                STATE_LOW: begin
+                    fr3 <= 1'b1;
+                    fr2 <= 1'b1;
+                    fr1 <= 1'b1;
+                    dfr <= 1'b0;
+                end
+                STATE_MID_LOW: begin
+                    fr3 <= 1'b0;
+                    fr2 <= 1'b1;
+                    fr1 <= 1'b1;
+                    dfr <= (previous_s < s) ? 1'b1 : 1'b0;
+                end
+                STATE_HIGH: begin
+                    fr3 <= 1'b0;
+                    fr2 <= 1'b0;
+                    fr1 <= 1'b1;
+                    dfr <= (previous_s < s) ? 1'b1 : 1'b0;
+                end
+                STATE_VERY_HIGH: begin
+                    fr3 <= 1'b0;
+                    fr2 <= 1'b0;
+                    fr1 <= 1'b0;
+                    dfr <= 1'b0;
+                end
+            endcase
+        end
+    end
+
+    always_comb begin
+        // Determine next state and update previous_s
+        case (s)
+            3'b111: next_state = STATE_VERY_HIGH; // Above s[3]
+            3'b110, 3'b101: next_state = STATE_HIGH; // Between s[3] and s[2]
+            3'b011, 3'b010, 3'b001: next_state = STATE_MID_LOW; // Between s[2] and s[1]
+            default: next_state = STATE_LOW; // Below s[1]
+        endcase
+
+        previous_s = s;
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,35 @@
+
+module TopModule (
+    input clk,
+    input reset,
+    input [31:0] in,
+    output reg [31:0] out
+);
+
+    // Temporary registers to hold current and previous states of the input
+    reg [31:0] prev_in;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Synchronous reset: clear all outputs on reset
+            out <= 32'b0;
+            prev_in <= 32'b0; // Also, reset the previous state register
+        end else begin
+            // Shift previous input to current for next cycle comparison
+            prev_in <= in;
+
+            // Check each bit for a transition from 1 to 0
+            for (int i = 0; i < 32; i = i + 1) begin
+                if ((prev_in[i] == 1'b1) && (in[i] == 1'b0)) begin
+                    out[i] <= 1'b1;
+                end else if (reset) begin
+                    // Ensure the output is cleared on reset, even if not set by transition
+                    out[i] <= 1'b0;
+                end
+            end
+        end
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

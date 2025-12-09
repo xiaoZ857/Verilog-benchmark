@@ -1,0 +1,24 @@
+module TopModule (
+  input wire a,
+  input wire b,
+  input wire c,
+  input wire d,
+  output reg out
+);
+
+always @(posedge clk) begin
+    case({a, b, c, d})
+        4'b0001: out <= 1'b1; // abcd = 0001
+        4'b0010: out <= 1'b1; // abcd = 0010
+        4'b1111: out <= 1'b0; // abcd = 1111
+        4'b1011: out <= 1'b0; // abcd = 1011
+        default: out <= 1'b0; // other combinations are set to 0
+    endcase
+end
+
+// Assuming the module is clocked by clk signal
+// If not specified, assume positive edge triggered
+
+// You can add clock synchronization or reset logic as needed
+
+endmodule

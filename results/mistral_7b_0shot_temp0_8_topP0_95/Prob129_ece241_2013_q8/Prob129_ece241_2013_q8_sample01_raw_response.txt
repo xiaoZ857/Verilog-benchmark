@@ -1,0 +1,47 @@
+ Here is the Verilog code for the Mealy-type finite state machine that recognizes the sequence "101" on an input signal named `x` and has an output signal `z` which is asserted to logic-1 when the "101" sequence is detected:
+
+```verilog
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+reg [2:0] state; // 3 states for the FSM
+ always @(posedge clk) begin
+   if (!aresetn) begin
+     state <= 0;
+     z <= 0;
+   end
+   else begin
+     case (state)
+       0: begin
+         if (x == 1) state <= 1;
+         else state <= 0;
+         z <= 0;
+       end
+       1: begin
+         if (x == 0) state <= 2;
+         else state <= 1;
+         z <= 0;
+       end
+       2: begin
+         if (x == 1) state <= 3;
+         else if (x == 0) state <= 0; // Reset the state if an incorrect bit is received
+         if (x == 1 && state == 2) z <= 1; // Assert z when "101" sequence is detected
+       end
+       3: begin
+         if (x == 0) state <= 0; // Reset the state if an incorrect bit is received
+       end
+     endcase
+   end
+ end
+endmodule
+```
+
+This FSM has three states, `state[2:0]`. The initial state is `0`, and the FSM transitions through states as follows:
+
+- From state 0 to state 1 when input `x` is 1.
+- From state 1 to state 2 when input `x` is 0.
+- From state 2 to state 3 when input `x` is 1, and the output `z` is asserted (set to 1) if we are in state 3. If an incorrect bit is received at any state, it resets back to state 0. This ensures that the FSM can recognize overlapping sequences.

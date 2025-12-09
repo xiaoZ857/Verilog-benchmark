@@ -1,0 +1,48 @@
+To refactor the `full_module` into a hierarchical design using a submodule named `TopModule`, we need to break down the functionality of each bit in `q[2:0]`. Each bit can be controlled by loading from `r` or performing the XOR operation based on its own and other bits' values. This is where the `TopModule` will come into play for each flip-flop.
+
+The `TopModule` should handle the logic of determining whether to load a new value from `r` or update its state using the specified logic. Here's how you can design the `TopModule`:
+
+```verilog
+module TopModule (
+    input clk,
+    input L,
+    input q_in,     // Input bit from q array
+    input r_in,     // Corresponding bit from r
+    output reg Q    // Output bit to q
+);
+
+always @(posedge clk) begin
+    if (L) begin
+        Q <= r_in;  // Load the value from r when L is asserted
+    end else begin
+        case ({Q, q_in})
+            2'b00: Q <= q_in;
+            2'b01: Q <= Q;
+            2'b10: Q <= ~q_in;
+            2'b11: Q <= Q;
+        endcase
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `clk`: The clock signal.
+  - `L`: Load enable signal to decide between loading a new value or updating the state.
+  - `q_in`: The current state of the bit from the `q` array that might be used in determining the next state.
+  - `r_in`: The corresponding bit from the input register `r`.
+  - `Q`: The output, which will be stored back into the `q` array.
+
+- **Logic**:
+  - On each positive clock edge (`posedge clk`), check if `L` is asserted.
+    - If `L` is high, load the value from `r_in` directly to `Q`.
+    - If `L` is low, determine the next state of `Q` based on its current value and the input bit `q_in`. The logic for updating `Q` is derived from the expression `{q[1] ^ q[2], q[0], q[2]}` in the original module:
+      - For `Q`, when `(Q, q_in) = (0, 0)`, set `Q` to `q_in`.
+      - When `(Q, q_in) = (0, 1)`, keep `Q` unchanged.
+      - When `(Q, q_in) = (1, 0)`, invert `q_in` for the next state of `Q`.
+      - When `(Q, q_in) = (1, 1)`, keep `Q` unchanged.
+
+This design allows each bit in `q[2:0]` to be controlled by an instance of `TopModule`, which will handle both loading and state update logic. The full module would instantiate three such submodules, one for each bit.

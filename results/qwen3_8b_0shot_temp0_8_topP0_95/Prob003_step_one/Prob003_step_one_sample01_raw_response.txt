@@ -1,0 +1,40 @@
+To implement the Verilog module as described, we need to create a module named `TopModule` with a single output signal named `one`. The requirement is that this output should **always** be driven to the logic high value (`1`), without any inputs.
+
+---
+
+### ✅ Design Overview
+
+- **No inputs**: The module does not require any input ports.
+- **Single output**: The output port `one` is declared as an `output`.
+- **Always high**: The output signal should be continuously driven to `1`, regardless of any clock or other signals.
+
+---
+
+### ✅ Implementation
+
+In Verilog, to continuously drive a signal to a fixed value, we use a **continuous assignment** (`assign` statement). Since the output is a `wire` by default, we can directly assign it to `1`. There is no need for a clock or any behavioral blocks because the signal must be high at all times.
+
+Here's the correct and minimal implementation:
+
+```verilog
+module TopModule (
+  output one
+);
+
+  assign one = 1;
+
+endmodule
+```
+
+---
+
+### ✅ Explanation
+
+- `module TopModule (output one);`: Declares the module with a single output port named `one`.
+- `assign one = 1;`: This is a continuous assignment that ensures the output signal `one` is always driven to the logic high value `1`.
+
+---
+
+### ✅ Conclusion
+
+This implementation satisfies the requirement of a module with no inputs and a single output that is always high. The code is concise, correct, and adheres to Verilog syntax and best practices for continuous signal assignment.

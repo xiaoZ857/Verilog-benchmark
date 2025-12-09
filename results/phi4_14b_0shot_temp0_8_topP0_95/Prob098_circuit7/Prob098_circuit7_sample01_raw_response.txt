@@ -1,0 +1,40 @@
+To implement the Verilog module based on the provided simulation waveforms, we need to determine the behavior of the circuit. Let's analyze the waveform:
+
+- At `t = 5ns`, when `clk` goes high and `a = 0`, `q` remains unchanged.
+- At `t = 15ns`, when `clk` goes high and `a = 0`, `q` is set to 1.
+- At `t = 35ns`, when `clk` goes high and `a = 1`, `q` remains 1.
+- At `t = 45ns`, when `clk` goes high and `a = 1`, `q` toggles to 0.
+- The pattern repeats every time `clk` is high with `a = 1`.
+
+From this, we can infer the following behavior:
+
+1. When `a = 0` and `clk` is positive edge, `q` is set to 1 if it was previously 0.
+2. When `a = 1` and `clk` is positive edge, `q` toggles its value.
+
+This behavior can be implemented using a D-type flip-flop with additional logic for toggling. Here's the Verilog code:
+
+```verilog
+module TopModule (
+    input clk,
+    input a,
+    output reg q
+);
+
+always @(posedge clk) begin
+    if (a == 1'b0) begin
+        q <= 1'b1;
+    end else if (a == 1'b1) begin
+        q <= ~q; // Toggle q when a is 1
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- The `always` block triggers on the positive edge of `clk`.
+- If `a` is `0`, `q` is set to `1`.
+- If `a` is `1`, `q` toggles its current state using `q <= ~q`.
+
+This implementation matches the behavior observed in the waveform.

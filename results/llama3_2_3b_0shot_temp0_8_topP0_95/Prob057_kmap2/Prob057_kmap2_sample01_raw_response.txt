@@ -1,0 +1,31 @@
+Based on the Karnaugh map, we can implement a simple 2-to-4 multiplexer with an additional logic gate to handle all possible combinations.
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out
+);
+
+wire [1:0] sel;
+assign sel = {d, c};
+
+wire [3:2] in0, in1, in2, in3;
+
+assign in0 = (a & ~b) | (~a);
+assign in1 = (a & b) | (~a & ~b);
+assign in2 = (c & ~d) | (~c);
+assign in3 = (c & b) | (~c & ~b);
+
+wire [3:0] out;
+
+assign out = {sel[1], sel[0], in0, in2};
+
+endmodule
+```
+
+This module creates a 4-to-1 multiplexer with three inputs and three outputs. The selection of the input for each output is determined by two signals (c and d) that are used to select one of four possible combinations.
+
+Please note that this circuit will only work correctly when the inputs are clocked and the first input is 'a' or 'b', then the logic works like a 2-to-4 multiplexer.

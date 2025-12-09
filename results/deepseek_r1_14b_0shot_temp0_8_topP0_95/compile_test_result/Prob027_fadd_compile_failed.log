@@ -1,0 +1,12 @@
+Problem: Prob027_fadd
+Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob027_fadd_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob027_fadd_ref.sv:14: syntax error
+I give up.

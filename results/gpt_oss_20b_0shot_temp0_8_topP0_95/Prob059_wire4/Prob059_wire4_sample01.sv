@@ -1,0 +1,24 @@
+
+// TopModule.v
+// 3‑input, 4‑output module that simply connects
+// a -> w,  b -> x,  b -> y,  c -> z
+
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire c,
+    output wire w,
+    output wire x,
+    output wire y,
+    output wire z
+);
+
+    // Continuous assignments create direct wire connections
+    assign w = a;
+    assign x = b;
+    assign y = b;
+    assign z = c;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

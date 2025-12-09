@@ -1,0 +1,88 @@
+Here's a Python code to generate the required signals and module for the given Moore state machine.
+
+```python
+class StateMachine:
+    def __init__(self, d, done_counting, ack):
+        self.d = d
+        self.done_counting = done_counting
+        self.ack = ack
+
+    def next_state(self, current_state):
+        if not self.ack:  # Wait state
+            return current_state
+        elif self.done_counting and (self.d or not current_state[6]):
+            return 0b10  # Count state
+        else:
+            return 0b01  # S1 state
+
+    def output_logic(self, next_state):
+        B3_next = int(next_state == 0b100000000)
+        S_next = int(next_state == 0b001000000)
+        S1_next = int(next_state == 0b010000000)
+        Count_next = int(next_state == 0b110000000)
+        Wait_next = int(next_state == 0b000100000)
+
+        done = self.d or (next_state == 0b000000000) or \
+                ((self.done_counting and not self.ack) and next_state != 0b000000000)
+
+        counting = self.done_counting and not self.ack
+
+        if next_state >= 0x10:
+            # All outputs are low in B state
+            shift_ena = 0
+
+        elif next_state == 0x20:  # Count state
+            # Shift enable is asserted for all states except S110
+            shift_ena = self.d or not (next_state & 0x010)
+
+        elif next_state > 0x40:
+            # All outputs are high in B state
+            shift_ena = 1
+
+        else:  # S, S1, S11, S110 states
+            if self.d == 1 and next_state >= 0x11:
+                # Shift enable is asserted when d=1
+                shift_ena = 1
+            elif self.done_counting and not self.ack:
+                # Shift enable is asserted for all states in Count state
+                shift_ena = 1
+
+        return done, counting, shift_ena
+
+
+def top_module(d, done_counting, ack, state):
+    sm = StateMachine(d, done_counting, ack)
+    B3_next, S_next, S1_next, Count_next, Wait_next, done, counting, shift_ena = \
+        sm.next_state(state), sm.output_logic(sm.next_state(state)), \
+        sm.output_logic(sm.next_state(state)), sm.output_logic(sm.next_state(state)), \
+        sm.output_logic(sm.next_state(state)), sm.output_logic(sm.next_state(state)), \
+        sm.output_logic(sm.next_state(state))
+
+    return B3_next, S_next, S1_next, Count_next, Wait_next, done, counting, shift_ena
+
+
+# Test driving the module
+if __name__ == "__main__":
+    import itertools
+
+    states = [0b000000000, 0b000000001, 0b000000010, 0b000000100,
+              0b000001000, 0b000010000, 0b000100000, 0b010000000,
+              0b110000000, 0b000011000, 0b000101000, 0b000111000]
+
+    d = [0, 1]
+    done_counting = [0, 1]
+    ack = [0, 1]
+    for st in states:
+        for di in d:
+            for dc in done_counting:
+                for ai in ack:
+                    B3_next, S_next, S1_next, Count_next, Wait_next, done, counting, shift_ena = \
+                        top_module(di, dc, ai, st)
+                    print(f"B3_{format(B3_next, 'b')} S_{format(S_next, 'b')}"
+                          f" S1_{format(S1_next, 'b')}")
+```
+
+In this code we create a `StateMachine` class that takes inputs for clock and reset as arguments. The class has methods to determine the next state of the machine based on its current state and input data.
+
+The `output_logic()` method is used to compute outputs given the next state. It first determines which output should be asserted based on the next state, then it performs any necessary logic to calculate this value. This includes conditions for shift enable, counting and done signals depending on the state of the machine.
+Finally, we test drive this module with an example usage in the `if __name__ == "__main__":` block. It generates a 10-bit current state (one-hot encoding), then iterates through all possible input combinations, calculating next states and output values using the `top_module()` function.

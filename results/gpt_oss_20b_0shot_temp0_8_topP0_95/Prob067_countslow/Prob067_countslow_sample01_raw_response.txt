@@ -1,0 +1,48 @@
+Here is a minimal, fully‑synchronous implementation of the decade counter.  
+The counter only advances on a rising clock edge **and** when `slowena` is high.  
+A synchronous active‑high reset clears the counter to zero.  When the
+counter reaches 9 it wraps back to 0 on the next enabled clock edge.
+
+```verilog
+// 10‑state decade counter (0 … 9)
+//  - synchronous active‑high reset
+//  - "slowena" enables increment on each clock edge
+module TopModule (
+    input  wire        clk,      // clock
+    input  wire        slowena,  // enable increment
+    input  wire        reset,    // active‑high synchronous reset
+    output reg  [3:0]  q         // 4‑bit counter output
+);
+
+    // synchronous logic
+    always @(posedge clk) begin
+        if (reset) begin
+            // synchronous reset – takes priority over slowena
+            q <= 4'd0;
+        end
+        else if (slowena) begin
+            // increment only when enabled
+            if (q == 4'd9) begin
+                q <= 4'd0;        // wrap‑around
+            end else begin
+                q <= q + 1'b1;    // normal increment
+            end
+        end
+        // else: retain current value (paused)
+    end
+
+endmodule
+```
+
+### Key points
+
+* **Synchronous reset** – `if (reset)` is evaluated after the clock edge, so
+  the reset behaves synchronously.
+* **Enable (`slowena`)** – When low, the counter holds its value.
+* **Decade behavior** – When `q` reaches 9, the next enabled clock pulse
+  resets it to 0, giving a period of 10.
+* **Non‑blocking assignments (`<=`)** – Standard practice for sequential
+  logic to avoid race conditions.
+
+This module satisfies the specification: it counts 0–9, pauses when
+`slowena` is low, and resets synchronously when `reset` is asserted.

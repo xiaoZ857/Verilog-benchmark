@@ -1,0 +1,38 @@
+To implement the functionality of a 7420 chip in Verilog, which contains two 4-input NAND gates, you'll need to create a module that takes 8 inputs and provides 2 outputs. Each 4-input NAND gate can be implemented using four input signals.
+
+Here's how you can write the `TopModule`:
+
+```verilog
+module TopModule (
+    input p1a,
+    input p1b,
+    input p1c,
+    input p1d,
+    output p1y,
+    input p2a,
+    input p2b,
+    input p2c,
+    input p2d,
+    output p2y
+);
+
+    // Implementing the first 4-input NAND gate
+    assign p1y = ~(p1a & p1b & p1c & p1d);
+
+    // Implementing the second 4-input NAND gate
+    assign p2y = ~(p2a & p2b & p2c & p2d);
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module has eight inputs (`p1a`, `p1b`, `p1c`, `p1d` for the first gate, and `p2a`, `p2b`, `p2c`, `p2d` for the second gate) and two outputs (`p1y` and `p2y`). These correspond to the inputs and outputs of the 7420 chip.
+
+- **NAND Gate Logic**: A NAND gate can be thought of as an AND gate followed by a NOT gate. In Verilog, this is achieved using the bitwise AND operator (`&`) combined with the logical negation operator (`~`).
+
+- **Assign Statements**:
+  - `p1y = ~(p1a & p1b & p1c & p1d);`: This line computes the NAND of the four inputs to produce the output `p1y`.
+  - `p2y = ~(p2a & p2b & p2c & p2d);`: Similarly, this line computes the NAND for the second set of inputs to produce `p2y`.
+
+This module replicates the behavior of a 7420 IC using Verilog's continuous assignment mechanism.

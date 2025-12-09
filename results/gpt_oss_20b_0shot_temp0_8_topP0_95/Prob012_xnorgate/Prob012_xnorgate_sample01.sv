@@ -1,0 +1,27 @@
+
+`timescale 1ns / 1ps
+
+/// @brief  Two‑input XNOR gate
+/// @details
+///   Implements the logical function
+///   out = a XNOR b  (i.e. out = ~(a ^ b))
+///
+///   All signals are assumed to be synchronous to the positive clock edge
+///   when used in a larger design – but this module itself is purely
+///   combinational.
+///
+///   @param a  First input
+///   @param b  Second input
+///   @param out  XOR‑NOT of the inputs
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // XNOR output
+);
+
+    // Combinational assignment
+    assign out = ~(a ^ b);   // Equivalent to: assign out = a XNOR b;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,103 @@
+To implement this behavior using a Moore state machine, we need to define states and transitions based on the given conditions. Here's how you can design the Verilog module:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        WALK_LEFT = 2'b01,   // Walking left
+        WALK_RIGHT = 2'b10,  // Walking right
+        FALLING = 2'b11      // Falling
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset)
+            current_state <= WALK_LEFT; // Asynchronous reset to walk left
+        else
+            current_state <= next_state;
+    end
+
+    always_comb begin
+        // Default outputs
+        walk_left = 0;
+        walk_right = 0;
+        aaah = 0;
+
+        case (current_state)
+            WALK_LEFT: begin
+                if (!ground) 
+                    next_state = FALLING;  // Transition to falling when ground is lost
+                else if (bump_right || (bump_left && bump_right))
+                    next_state = WALK_RIGHT;  // Switch direction on bump
+                else
+                    next_state = WALK_LEFT;
+
+                walk_left = 1;
+            end
+
+            WALK_RIGHT: begin
+                if (!ground)
+                    next_state = FALLING;  // Transition to falling when ground is lost
+                else if (bump_left || (bump_right && bump_left))
+                    next_state = WALK_LEFT;  // Switch direction on bump
+                else
+                    next_state = WALK_RIGHT;
+
+                walk_right = 1;
+            end
+
+            FALLING: begin
+                aaah = 1;  // Lemming says "aaah!" while falling
+                
+                if (ground) 
+                    if (current_state == WALK_LEFT)
+                        next_state = WALK_LEFT;  // Resume walking left after fall
+                    else
+                        next_state = WALK_RIGHT;  // Resume walking right after fall
+                else
+                    next_state = FALLING;
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding:** 
+   - We have three states: `WALK_LEFT`, `WALK_RIGHT`, and `FALLING`.
+   
+2. **State Transitions:**
+   - In the `WALK_LEFT` state:
+     - The Lemming continues to walk left unless it encounters an obstacle or loses ground.
+     - If bumped on the right (or both sides), it transitions to `WALK_RIGHT`.
+     - It falls if the ground disappears (`ground = 0`).
+   
+   - In the `WALK_RIGHT` state:
+     - The Lemming continues to walk right unless it encounters an obstacle or loses ground.
+     - If bumped on the left (or both sides), it transitions to `WALK_LEFT`.
+     - It falls if the ground disappears (`ground = 0`).
+   
+   - In the `FALLING` state:
+     - The Lemming says "aaah!" and stays falling until the ground reappears.
+     - When the ground reappears, it resumes walking in the direction it was going before the fall.
+
+3. **Outputs:**
+   - `walk_left` is asserted when the current state is `WALK_LEFT`.
+   - `walk_right` is asserted when the current state is `WALK_RIGHT`.
+   - `aaah` is asserted during the `FALLING` state.
+   
+4. **Synchronous and Asynchronous Behavior:**
+   - The state updates are synchronous with respect to `clk`, except for the asynchronous reset triggered by `areset`.

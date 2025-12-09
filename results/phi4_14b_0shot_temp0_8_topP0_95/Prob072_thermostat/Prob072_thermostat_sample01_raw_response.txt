@@ -1,0 +1,56 @@
+To implement the Verilog module based on your description, we need to design a control logic that manages the heater, air conditioner, and blower fan. The behavior of these components depends on the mode (heating or cooling), temperature conditions (`too_cold` and `too_hot`), and user input for the fan (`fan_on`). Below is the Verilog implementation:
+
+```verilog
+module TopModule (
+  input mode,
+  input too_cold,
+  input too_hot,
+  input fan_on,
+  output reg heater,
+  output reg aircon,
+  output reg fan
+);
+
+  always @(*) begin
+    // Default to off state
+    heater = 0;
+    aircon = 0;
+    fan = 0;
+
+    // Determine the operation based on mode and temperature
+    if (mode == 1) begin // Heating Mode
+      if (too_cold) begin
+        heater = 1;      // Turn on the heater
+        fan = 1;         // Turn on the fan to circulate air
+      end
+    end else begin // Cooling Mode
+      if (too_hot) begin
+        aircon = 1;      // Turn on the air conditioner
+        fan = 1;         // Turn on the fan to circulate air
+      end
+    end
+
+    // Allow user to turn on the fan independently
+    if (fan_on) begin
+      fan = 1;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs**: 
+  - `mode`: Determines whether the system is in heating (1) or cooling (0) mode.
+  - `too_cold` and `too_hot`: Indicate when it's too cold or hot to trigger heating or cooling respectively.
+  - `fan_on`: User input for turning on the fan independently of heating/cooling states.
+  - Outputs are `heater`, `aircon`, and `fan`, which control their respective devices.
+
+- **Logic**:
+  - Use an always block triggered by any change in inputs (`always @(*)`).
+  - Set default outputs to off (`0`) at the start of each evaluation cycle.
+  - In heating mode (`mode == 1`), if it's `too_cold`, turn on both the heater and fan. The air conditioner remains off.
+  - In cooling mode, if it's `too_hot`, activate the air conditioner and fan. The heater stays off.
+  - Independently of the mode, if `fan_on` is asserted by the user, ensure that the fan is turned on (`fan = 1`).
+
+This logic effectively controls the heating system based on the specified conditions, ensuring that both temperature control and user preferences are met.

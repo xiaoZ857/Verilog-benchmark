@@ -1,0 +1,71 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+
+reg [2:0] current_state, next_state;
+reg f_reg, g_reg;
+reg [1:0] y_counter;
+
+// State encoding
+parameter A = 3'd0;  // Reset state
+parameter B = 3'd1;  // f=1 state
+parameter C = 3'd2;  // Wait for first x=1
+parameter D = 3'd3;  // Got x=1, wait for x=0
+parameter E = 3'd4;  // Got x=1,0, wait for x=1
+parameter F = 3'd5;  // g=1, monitor y
+parameter G = 3'd6;  // g=1 permanent
+parameter H = 3'd7;  // g=0 permanent
+
+always @(posedge clk) begin
+  if (!resetn) begin
+    current_state <= A;
+    f_reg <= 1'b0;
+    g_reg <= 1'b0;
+    y_counter <= 2'b0;
+  end else begin
+    current_state <= next_state;
+    f_reg <= 1'b0;  // Default f=0
+    case (current_state)
+      A: begin
+        if (resetn) begin
+          next_state <= B;
+          f_reg <= 1'b1;
+        end
+      end
+      B: begin
+        next_state <= C;
+      end
+      C: begin
+        if (x) begin
+          next_state <= D;
+        end
+      end
+      D: begin
+        if (!x) begin
+          next_state <= E;
+        end else if (x) begin
+          next_state <= C;  // Restart sequence if x=1 again
+        end
+      end
+      E: begin
+        if (x) begin
+          next_state <= F;
+          g_reg <= 1'b1;
+        end else if (!x) begin
+          next_state <= D;
+        end
+      end
+      F: begin
+        if (y) begin
+          next_state <= G;  // y=1 within 2 cycles, go to permanent g=1
+        end else begin
+          if (y_counter == 2'd1)
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

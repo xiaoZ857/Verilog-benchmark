@@ -1,0 +1,25 @@
+Problem: Prob106_always_nolatches
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 16):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:12: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:12: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:13: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:13: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:14: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:15: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:18: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:19: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:20: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:21: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:24: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:25: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:26: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:27: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv:11: error: invalid module item.

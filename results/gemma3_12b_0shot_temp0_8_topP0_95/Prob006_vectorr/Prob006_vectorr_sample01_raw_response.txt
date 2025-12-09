@@ -1,0 +1,43 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+
+  assign out[0] = in[7];
+  assign out[1] = in[6];
+  assign out[2] = in[5];
+  assign out[3] = in[4];
+  assign out[4] = in[3];
+  assign out[5] = in[2];
+  assign out[6] = in[1];
+  assign out[7] = in[0];
+
+endmodule
+```
+
+**Explanation:**
+
+The code directly assigns the bits of the input `in` to the output `out` in reverse order.  `out[0]` gets the value of `in[7]`, `out[1]` gets `in[6]`, and so on. This effectively reverses the bit ordering.
+
+**Alternative Solution (using a conditional assignment, less efficient):**
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+
+  integer i;
+  always @(in) begin
+    for (i = 0; i < 8; i++) begin
+      out[i] = in[7-i];
+    end
+  end
+
+endmodule
+```
+
+**Explanation of the Alternative:**
+
+This alternative uses a `for` loop within an `always` block to iterate through the bits of the input and assign them to the output in reverse order.  `in[7-i]` accesses the input bits in reverse order. While this is functionally equivalent, it's generally less efficient than the direct assignment approach because it involves a loop, which can impact performance.  The direct assignment solution is preferred for its simplicity and efficiency.

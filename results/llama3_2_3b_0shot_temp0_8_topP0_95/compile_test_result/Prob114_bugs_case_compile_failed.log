@@ -1,0 +1,54 @@
+Problem: Prob114_bugs_case
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 44):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:12: error: 'valid' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:8:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:18: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:19: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:20: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:21: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:21: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:22: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:22: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:23: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:23: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:24: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:24: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:25: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:25: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:26: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:26: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:27: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:27: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:32: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:13: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:9: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:20: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:79: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:79: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:80: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:87: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:87: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:88: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:88: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:88: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:89: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:89: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:89: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_test.sv:90: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:6: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:3: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob114_bugs_case_ref.sv:16: error: Incomprehensible case expression.

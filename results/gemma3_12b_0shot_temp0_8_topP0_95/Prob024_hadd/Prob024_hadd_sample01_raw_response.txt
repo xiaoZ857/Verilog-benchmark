@@ -1,0 +1,37 @@
+```verilog
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+Create a half adder. A half adder adds two bits (with no carry-in) and
+produces a sum and carry-out.
+
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+
+  assign sum = a ^ b;  // XOR gate for sum
+  assign cout = a & b; // AND gate for carry-out
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` with the specified input and output ports.
+* **`input a, input b;`**: Declares `a` and `b` as input signals (the two bits to be added).
+* **`output sum, output cout;`**: Declares `sum` and `cout` as output signals (sum and carry-out, respectively).
+* **`assign sum = a ^ b;`**:  The sum is calculated using the XOR (exclusive OR) operation.  `a ^ b` means "a OR b, but not both".  This is the correct logic for the sum of two bits.
+* **`assign cout = a & b;`**: The carry-out is calculated using the AND operation. `a & b` means "a AND b".  A carry-out occurs only when both input bits are 1.
+* **`endmodule`**:  Marks the end of the module definition.
+
+**How it works (Truth Table):**
+
+| a | b | sum (a ^ b) | cout (a & b) |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 1 |
+
+This module accurately implements a half adder as described.  The `assign` statements are continuous assignments, meaning that the `sum` and `cout` signals will update immediately whenever `a` or `b` changes.  No clock signal is needed for this simple combinational circuit.

@@ -1,0 +1,95 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+
+  // States
+  parameter IDLE      = 2'b00
+  parameter SEQUENCE  = 2'b01
+  parameter COUNTING = 2'b10
+  parameter DONE     = 2'b11
+
+  // Internal signals
+  reg [1:0] state;
+  reg [3:0] shift_reg;
+  reg [3:0] delay;
+  reg [11:0] timer_count; // Enough bits to represent (delay + 1) * 1000
+  reg timer_active;
+
+  // Synchronous reset
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      shift_reg <= 0;
+      delay <= 0;
+      timer_count <= 0;
+      timer_active <= 0;
+      counting <= 0;
+      done <= 0;
+    end else begin
+      always @(posedge clk) begin
+        case (state)
+          IDLE: begin
+            if (data == 1) begin
+              if (shift_reg == 4'b1101) begin
+                state <= SEQUENCE;
+                shift_reg <= 0;
+              end else begin
+                shift_reg <= (shift_reg << 2) | data;
+              end
+            end else begin
+              shift_reg <= (shift_reg << 1) | data;
+            end
+          end
+          SEQUENCE: begin
+            shift_reg <= (shift_reg << 1) | data;
+            if (shift_reg >= 4'b1000) begin
+              state <= COUNTING;
+              delay <= shift_reg[3:0];
+              timer_count <= delay * 1000;
+              timer_active <= 1;
+              counting <= 1;
+              shift_reg <= 0;
+            end
+          end
+          COUNTING: begin
+            if (timer_active) begin
+              if (timer_count > 0) begin
+                timer_count <= timer_count - 1;
+              end else begin
+                timer_active <= 0;
+                counting <= 0;
+                state <= DONE;
+                done <= 1;
+              end
+            end
+          end
+          DONE: begin
+            if (ack) begin
+              state <= IDLE;
+              done <= 0;
+            end
+          end
+        endcase
+      end
+    end
+  end
+
+  // Count output
+  always @(posedge clk) begin
+    if (counting) begin
+      count <= (timer_active) ? ((timer_count / 1000) % 1000) : 4'b0;
+    end else begin
+      count <= 4'b0;
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,56 @@
+ Here's a basic Verilog implementation of the GSHARE branch predictor as described. Please note that this is a simplified version and may require further refinements based on specific hardware constraints and timing considerations.
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output reg predict_taken,
+  output reg [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc,
+
+  output reg train_enable
+);
+
+reg [127:0] PHT; // Pattern History Table (128-entry)
+reg history_reg [6:0]; // Global branch history register
+
+always @(posedge clk or negedge areset) begin
+  if (!areset) begin
+    PHT <= 32'b0;
+    history_reg <= 7'b0;
+  end
+end
+
+always @(posedge clk) begin
+  if (train_valid && train_enable) begin // Train the branch predictor
+    PHT[train_pc] <= {train_taken, train_history} + (train_mispredicted ? 1'b1 : 1'b0);
+    history_reg <= train_history;
+  end
+end
+
+always @(posedge clk) begin // Predict branch direction and update history register
+  if (predict_valid) begin
+    predict_taken <= PHT[predict_pc][0];
+    predict_history <= history_reg + {predict_taken, 1'b0};
+    history_reg <= predict_taken ? history_reg + 1 : history_reg - 1;
+  end
+end
+
+assign train_enable = (predict_valid && !train_valid); // Training only when prediction is requested but not training
+```
+
+This Verilog code creates the `TopModule`, which has a Pattern History Table (PHT) and a Global branch history register. The PHT is used to store the saturating counters of the 128-entry table, while the global branch history register holds the most recent 7 bits of the PC's global history.
+
+The `predict_valid` input signal triggers the prediction of the branch direction and updates the history register. The `train_valid` input signal is used to train the branch predictor with the actual outcomes of the branches. The training only happens when a prediction is requested but not currently being trained (`train_enable`).
+
+When both prediction and training occur in the same cycle, training takes precedence over prediction. If training and prediction happen at the same time, the prediction sees the PHT state before training because training modifies the PHT only at the next positive clock edge.
+
+The Verilog code assumes that a reset is asynchronous active-high, and it initializes all registers to zero during reset.

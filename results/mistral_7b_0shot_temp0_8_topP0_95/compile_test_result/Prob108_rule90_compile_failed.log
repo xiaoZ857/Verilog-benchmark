@@ -1,0 +1,13 @@
+Problem: Prob108_rule90
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob108_rule90/Prob108_rule90_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob108_rule90/Prob108_rule90_sample01.sv:21: sorry: part selects straddling the start of signal (q[-('sd1)]) are not currently supported.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob108_rule90/Prob108_rule90_sample01.sv:22: error: Index q[512] is out of range.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob108_rule90/Prob108_rule90_sample01.sv:18: error: q Unable to assign to unresolved wires.
+3 error(s) during elaboration.

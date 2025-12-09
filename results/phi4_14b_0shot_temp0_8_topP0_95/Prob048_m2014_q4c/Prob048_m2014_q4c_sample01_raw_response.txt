@@ -1,0 +1,30 @@
+To implement a simple D flip-flop with an active-high synchronous reset, you can use the following Verilog code. In this module, when the reset `r` is high during the clock's rising edge, the output `q` will be set to 0. Otherwise, it follows the input `d`.
+
+```verilog
+module TopModule (
+    input clk,
+    input d,
+    input r,
+    output logic q
+);
+
+    always_ff @(posedge clk) begin
+        if (r) begin
+            q <= 1'b0; // Synchronous reset to 0
+        end else begin
+            q <= d;     // Capture the input on rising edge of clock
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **always_ff @(posedge clk)**: This block triggers at every positive edge of `clk`. The `always_ff` construct is used for sequential logic in Verilog.
+
+- **if (r) begin ... end**: Checks if the reset signal `r` is active high. If true, it forces the output `q` to 0 synchronously with the clock edge.
+
+- **else q <= d;**: When `r` is not asserted, `q` takes on the value of `d` at every rising edge of `clk`. The non-blocking assignment (`<=`) is used here as it's more suitable for sequential logic in Verilog to prevent race conditions and ensure correct simulation.
+
+- **1'b0**: This specifies a single-bit binary 0. It ensures clarity that only one bit is being set/reset, which is crucial when dealing with logic signals.

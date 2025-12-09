@@ -1,0 +1,78 @@
+To implement a Verilog module for detecting and capturing 3-byte messages from a PS/2 mouse protocol stream, we can use a finite state machine (FSM). The FSM will identify the start of each message by looking for bytes where `in[3]` is set to 1. Once such a byte is detected, it assumes this is the first byte of a new message and continues to capture the next two bytes to complete the message.
+
+Here's how you can implement the described functionality in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] in,
+    input reset,
+    output reg done
+);
+
+    // Define states for FSM
+    typedef enum logic [1:0] {
+        IDLE,      // Waiting for a byte with in[3] = 1
+        RECV_BYTE1,// Received first byte of the message
+        RECV_BYTE2,// Received second byte of the message
+        RECV_BYTE3 // Received third byte of the message
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset)
+            current_state <= IDLE;
+        else
+            current_state <= next_state;
+    end
+
+    always_comb begin
+        // Default assignments
+        done = 1'b0;
+        case (current_state)
+            IDLE: begin
+                if (in[3] == 1) 
+                    next_state = RECV_BYTE1;
+                else
+                    next_state = IDLE;
+            end
+            
+            RECV_BYTE1: begin
+                next_state = RECV_BYTE2;
+            end
+
+            RECV_BYTE2: begin
+                next_state = RECV_BYTE3;
+            end
+
+            RECV_BYTE3: begin
+                done = 1'b1; // Indicate the message is complete
+                next_state = IDLE;
+            end
+
+            default: 
+                next_state = IDLE;
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Definitions**: We define four states:
+  - `IDLE`: Waiting for a start byte with `in[3]` set to 1.
+  - `RECV_BYTE1`: The first byte of the message has been received.
+  - `RECV_BYTE2`: The second byte is being captured.
+  - `RECV_BYTE3`: The third byte is being captured. Upon transition from this state, we assert `done`.
+
+- **State Transitions**:
+  - In the `IDLE` state, the FSM checks if `in[3]` of the current input byte is set to 1. If so, it transitions to `RECV_BYTE1`, indicating that a potential message start has been detected.
+  - From `RECV_BYTE1`, it automatically moves to `RECV_BYTE2`.
+  - From `RECV_BYTE2`, it moves to `RECV_BYTE3`.
+  - On receiving the third byte in `RECV_BYTE3`, it sets `done` high and transitions back to `IDLE`.
+
+- **Reset Handling**: The FSM handles a synchronous reset by transitioning back to the `IDLE` state when the reset signal is asserted.
+
+This design ensures that once three consecutive bytes have been received starting with `in[3] = 1`, the `done` signal will be asserted in the cycle immediately following the third byte, indicating successful message capture.

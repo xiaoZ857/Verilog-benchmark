@@ -1,0 +1,75 @@
+Below is the Verilog implementation of the described Moore state machine. The module `TopModule` uses a synchronous active-high reset to transition to the `OFF` state, and it transitions between states based on the inputs `j` and `k`.
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire j,
+  input wire k,
+  input wire reset,
+  output reg out
+);
+
+  // State encoding
+  parameter OFF = 1'b0;
+  parameter ON  = 1'b1;
+
+  // Internal state register
+  reg current_state, next_state;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      // Synchronous reset to OFF state
+      current_state <= OFF;
+    end else begin
+      // Update state on clock edge
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    case (current_state)
+      OFF: begin
+        if (j) begin
+          next_state = ON;   // Transition to ON if j is high
+        end else begin
+          next_state = OFF;  // Remain in OFF if j is low
+        end
+      end
+
+      ON: begin
+        if (k) begin
+          next_state = OFF;  // Transition to OFF if k is high
+        end else begin
+          next_state = ON;   // Remain in ON if k is low
+        end
+      end
+      
+      default:
+        next_state = OFF;    // Default case for safety
+    endcase
+  end
+
+  // Output logic (Moore)
+  always @(*) begin
+    case (current_state)
+      OFF: out = 1'b0;
+      ON:  out = 1'b1;
+      default: out = 1'b0; // Default case for safety
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+- **State Encoding:** Two states are defined, `OFF` and `ON`, using binary encoding (`1'b0` for OFF and `1'b1` for ON).
+- **Synchronous Reset:** The state machine resets to the `OFF` state when `reset` is high at a positive clock edge.
+- **Next State Logic:** This block determines the next state based on current inputs `j` and `k`:
+  - From `OFF`, if `j` is high, transition to `ON`; otherwise remain in `OFF`.
+  - From `ON`, if `k` is high, transition to `OFF`; otherwise remain in `ON`.
+- **Output Logic (Moore):** The output depends only on the current state:
+  - Outputs `0` when in `OFF`.
+  - Outputs `1` when in `ON`.
+
+This implementation correctly follows the Moore machine requirements with a synchronous reset.

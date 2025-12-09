@@ -1,0 +1,22 @@
+ Here is a Verilog implementation for the module as per your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+always @(posedge clk) // The DFFs are clocked on the positive edge of clk
+begin
+  if (reset) // If reset is high, set all DFF outputs to zero
+    q <= 8'b0000_0000;
+  else // Else, latch the current input values to the output
+    q <= d;
+end
+
+endmodule
+```
+
+In this Verilog code, we create a module named `TopModule`. It contains three inputs: `clk`, `d`, and `reset`, as well as one output: `q`. The DFFs are clocked on the positive edge of `clk`. If `reset` is high (active high), all DFF outputs will be set to zero. Otherwise, the DFFs latch the current input values to their respective outputs.

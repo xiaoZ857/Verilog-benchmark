@@ -1,0 +1,12 @@
+Problem: Prob133_2014_q3fsm
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+:0: error: Enumeration name E has an inferred value that overflowed.
+:0: error: Enumeration name E and A have the same value: 2'd0
+3 error(s) during elaboration.

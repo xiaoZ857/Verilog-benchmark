@@ -1,0 +1,23 @@
+To implement a Verilog module according to your description, you need to ensure that the output `out` is always assigned the same value as the input `in`. This should be done combinatorially, meaning there should not be any clock or other sequential logic involved. Below is how you can define this in a Verilog module:
+
+```verilog
+module TopModule (
+  input wire in,
+  output wire out
+);
+
+  // Combinational assignment of the output to the input
+  assign out = in;
+
+endmodule
+```
+
+### Explanation
+
+- **Module Declaration**: The `TopModule` is declared with one input (`in`) and one output (`out`). These are defined using the `input` and `output` keywords, respectively. 
+
+- **Combinational Assignment**: Inside the module body, we use an `assign` statement to assign the value of `in` directly to `out`. This means that whenever the value of `in` changes, `out` will immediately reflect this change without any delay or dependency on a clock signal.
+
+- **Input and Output Declaration as Wires**: The parameters `in` and `out` are declared with the `wire` data type. This is typical for signals that connect different parts of a design in Verilog, especially when using combinational logic like this.
+
+This setup ensures that the module behaves as specified: it has a purely combinatorial relationship between its input and output ports.

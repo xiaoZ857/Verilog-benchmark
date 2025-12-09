@@ -1,0 +1,25 @@
+// State encoding: A=0, B=1
+reg state, next_state;
+
+// State transition logic
+always @(*) begin
+    case (state)
+        1'b0: next_state = in ? 1'b0 : 1'b1; // A -> (in=1: A, in=0: B)
+        1'b1: next_state = in ? 1'b1 : 1'b0; // B -> (in=1: B, in=0: A)
+        default: next_state = 1'b1; // Default to B
+    endcase
+end
+
+// State register with asynchronous reset
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= 1'b1; // Reset to state B
+    end else begin
+        state <= next_state;
+    end
+end
+
+// Output logic (Moore: output depends only on state)
+assign out = state; // B=1, A=0
+
+endmodule

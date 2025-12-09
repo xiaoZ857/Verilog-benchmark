@@ -1,0 +1,51 @@
+Here's an implementation of a 5-bit maximal-length Galois LFSR in Verilog:
+
+```verilog
+module TopModule(
+  input clk, 
+  input reset, 
+  output reg [4:0] q
+);
+
+// Define the tap positions (bits 3 and 5)
+wire [1:0] taps = {1, 2}; // Tap position is bit 5
+
+// Counters for each bit to store previous state
+reg [7:0][4:0] p[4];
+
+// Initial state of the LFSR
+initial begin
+  p[4][4] = $random();
+  for (int i = 3; i >= 1; i--) 
+    p[i][i-1] = $random();
+end
+
+// Shift operation for each bit
+assign p[0][4] = q;
+for (int i = 1; i <= 5; i++) begin: shift_op
+  // Calculate the new state of the ith bit
+  assign p[i][i] = ~(~p[i-1][i]+&q);
+  
+  // Shift the state to the right and prepare for output
+  assign p[0][4+i-1] = p[i-1][4];
+end
+
+// Output the final value of the q[3] bit (LSB)
+assign q = p[5][0];
+
+// Active-high synchronous reset
+always @(posedge clk) begin: reset_logic
+  if (reset == 1) 
+    q <= 1;
+  else 
+    q <= $signed(p[5][0]);
+end
+
+endmodule
+```
+
+In this Verilog code, we use counters `p` to store the current state of the LFSR. We iterate over each bit position and use the XOR operation with `q` (the LSB) at the tap positions to update the current state. The new values of each bit are calculated by performing an XOR operation between the previous value of that bit and the result of another XOR operation on `q`. This produces a maximal-length Galois LFSR.
+
+The initial state of the LFSR is set randomly, but can be initialized with any values instead.
+
+Note that we only consider the active-high reset.

@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+Here is the implementation of the Verilog module that splits a 16-bit input into two 8-bit output signals representing the upper and lower bytes of the input half-word.
+
+---
+
+### **Module Description**
+
+- **Input:** A 16-bit signal `in`.
+- **Outputs:** Two 8-bit signals:
+  - `out_hi`: Upper
+
+// VERILOG-EVAL: endmodule not found

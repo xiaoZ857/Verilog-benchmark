@@ -1,0 +1,12 @@
+Problem: Prob057_kmap2
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

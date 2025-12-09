@@ -1,0 +1,39 @@
+
+// ---------------------------------------------------------------
+// TopModule.v
+// ---------------------------------------------------------------
+//  Two independent implementations of a 2‑input AND gate
+//
+//  • out_assign : produced with a continuous assign statement
+//  • out_alwaysblock : produced with a combinational always @(*) block
+//
+//  The module is fully synthesizable and uses only positive‑edge
+//  triggered logic (no clock is needed for combinational logic).
+// ---------------------------------------------------------------
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire a,               // First AND input
+    input  wire b,               // Second AND input
+    output wire out_assign,      // AND result via continuous assignment
+    output reg  out_alwaysblock  // AND result via always block
+);
+
+    // -----------------------------------------------------------
+    // 1. Continuous assignment
+    // -----------------------------------------------------------
+    assign out_assign = a & b;
+
+    // -----------------------------------------------------------
+    // 2. Combinational always block
+    // -----------------------------------------------------------
+    // The sensitivity list is *auto‑generated* with @(*),
+    // so any change to a or b will re‑evaluate the block.
+    always @(*) begin
+        out_alwaysblock = a & b;
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

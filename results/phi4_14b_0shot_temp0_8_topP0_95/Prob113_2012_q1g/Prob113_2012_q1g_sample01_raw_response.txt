@@ -1,0 +1,47 @@
+To implement the function \( f \) based on the given Karnaugh map, we need to identify the minterms where the output is '1'. From the Karnaugh map:
+
+- \( f = 1 \) for minterms: (0000), (0010), (1010), (0111), (1110), (1111).
+
+Let's express these minterms in terms of the variables \( x[4], x[3], x[2], x[1] \):
+
+1. Minterm (0000): \( \overline{x_4} \, \overline{x_3} \, \overline{x_2} \, \overline{x_1} \)
+2. Minterm (0010): \( \overline{x_4} \, \overline{x_3} \, x_2 \, \overline{x_1} \)
+3. Minterm (1010): \( x_4 \, \overline{x_3} \, x_2 \, \overline{x_1} \)
+4. Minterm (0111): \( \overline{x_4} \, x_3 \, x_2 \, x_1 \)
+5. Minterm (1110): \( x_4 \, x_3 \, x_2 \, \overline{x_1} \)
+6. Minterm (1111): \( x_4 \, x_3 \, x_2 \, x_1 \)
+
+Now, we can write the Boolean expression for \( f \) by summing these minterms:
+
+\[
+f = \overline{x_4} \, \overline{x_3} \, \overline{x_2} \, \overline{x_1} + \overline{x_4} \, \overline{x_3} \, x_2 \, \overline{x_1} + x_4 \, \overline{x_3} \, x_2 \, \overline{x_1} + \overline{x_4} \, x_3 \, x_2 \, x_1 + x_4 \, x_3 \, x_2 \, \overline{x_1} + x_4 \, x_3 \, x_2 \, x_1
+\]
+
+We can simplify this expression by combining terms:
+
+- Combine minterms (0010) and (1010): \( \overline{x_3} \, x_2 \, \overline{x_1} \)
+- Combine minterms (1110) and (1111): \( x_4 \, x_3 \, x_2 \)
+
+The simplified expression is:
+
+\[
+f = \overline{x_4} \, \overline{x_3} \, \overline{x_2} \, \overline{x_1} + \overline{x_3} \, x_2 \, \overline{x_1} + \overline{x_4} \, x_3 \, x_2 \, x_1 + x_4 \, x_3 \, x_2
+\]
+
+Now, let's implement this in a Verilog module:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  assign f = (~x[4] & ~x[3] & ~x[2] & ~x[1]) |
+             (~x[3] & x[2] & ~x[1])         |
+             (~x[4] & x[3] & x[2] & x[1])  |
+             (x[4] & x[3] & x[2]);
+
+endmodule
+```
+
+This Verilog module correctly implements the function \( f \) as described by the Karnaugh map.

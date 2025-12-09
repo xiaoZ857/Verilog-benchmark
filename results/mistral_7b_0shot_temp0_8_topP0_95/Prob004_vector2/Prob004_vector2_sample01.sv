@@ -1,0 +1,33 @@
+
+module TopModule (
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+always @(posedge clk) begin
+  out <= reverse_byte(in);
+end
+
+function [7:0] reverse_byte;
+  // This function reverses the order of a 8-bit byte
+  function [7:0] rev(input [7:0] data);
+    return {data[7], data[6], data[5], data[4], data[3], data[2], data[1], data[0]};
+  endfunction
+
+  // Reverse the byte order of a 32-bit vector by splitting it into four bytes and reversing each one.
+  always_comb begin
+    if ({in[7:0], in[15:8], in[23:16], in[31:24]}) == "00000000" then
+      // If the input is all zeros, set output to all zeros.
+      out <= 8'b0;
+    else if ({in[7:0], in[15:8], in[23:16], in[31:24]}) == "11111111" then
+      // If the input is all ones, set output to all ones.
+      out <= 8'bff;
+    else begin
+      assign reverse_byte = {rev(in[31:24]), rev(in[23:16]), rev(in[15:8]), rev(in[7:0])};
+      // Split the input into four bytes and reverse their order.
+    end
+  end
+endfunction
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

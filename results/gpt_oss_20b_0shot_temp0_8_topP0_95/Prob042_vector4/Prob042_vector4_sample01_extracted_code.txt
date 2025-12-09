@@ -1,0 +1,11 @@
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [7:0]  in,   // 8‑bit signed input
+    output wire [31:0] out   // 32‑bit sign‑extended output
+);
+
+    // Sign‑extend: replicate the MSB 24 times and append the 8‑bit value.
+    assign out = {24{in[7]}, in};
+
+endmodule

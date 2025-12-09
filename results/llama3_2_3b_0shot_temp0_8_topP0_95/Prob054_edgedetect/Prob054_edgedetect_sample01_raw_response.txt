@@ -1,0 +1,37 @@
+```verilog
+// Detects positive edge transitions on an 8-bit vector and sets the corresponding output bit.
+// The output bit is set one clock cycle after a transition from 0 to 1.
+
+module TopModule (
+    input clk,
+    input [7:0] in,
+    output reg [7:0] pedge
+);
+
+    // Incremental counter for each bit, reset on non-transitioning clock edges.
+    reg [2:0] bits[$];
+
+    // Flag indicating a transition has occurred for this bit.
+    wire [1:0] edge_flag[$];
+
+    // Shifted and masked input signal to detect transitions.
+    wire [7:0] shifted_in;
+
+    // Instantiate a counter for each bit, connecting the previous value
+    // to the current value on falling clock edges. The output is set on rising 
+    // clock edges if a transition has occurred.
+    always @(posedge clk) begin
+        bits[$] <= { bits[$][$:1], 0 };
+        edge_flag[$] <= {(in[$:$] != shifted_in[$:$])};
+    end
+
+    // Calculate the next output value by combining the current counter values 
+    // with the input and the edge flags.
+    assign pedge = { pedge[$:1], bits[2][$:1] | edge_flag[1][0] };
+
+endmodule
+```
+
+The solution takes advantage of Verilog's features to define a module with an 8-bit input, output bit register for each bit detection and flag indicating whether a transition has occurred in the current cycle. The module uses this setup to implement positive-edge detection.
+
+The core idea is to track which bits are active within one clock cycle (`bits[$]`) and check if any of those have seen their values change during that time (`edge_flag[$]$`). Only then do you set the output bit based on these detected transitions and the shifted input signal from the previous cycle.

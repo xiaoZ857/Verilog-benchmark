@@ -1,0 +1,52 @@
+
+module TopModule (
+    // Input signals
+    input clk,          // Clock signal
+    input load,         // Load the shift register with new data
+    input ena,          // Enable or disable shifting operation
+    input [1:0] amount,  // Amount of shift (see description)
+    input [63:0] data,   // Data to be loaded into the shift register
+
+    // Output signal
+    output reg [63:0] q  // Contents of the shift register
+);
+
+// Initialize the shift register content with 'zero'
+reg [63:0] q = 1;
+// Shift direction constants
+const int SHIFT_LEFT = 0;
+const int SHIFT_RIGHT = 1;
+
+// Shift left by amount of bits if enabled
+assign q[63:amount+1] = q[(amount-1):0];
+
+// Shift right by amount of bits if enabled
+assign q[amount:0] = q[(amount+1)+:64];
+
+// Synchronous load operation
+always @(posedge clk) begin
+    if (load)
+        q <= data;
+end
+
+// Enforce synchronous shifting
+always @(posedge clk, ena) begin
+    // Left shift
+    if ((ena && amount == SHIFT_LEFT) || (!ena && amount == 63:0))
+        q[64:amount+1] = q[(amount-1):0];
+
+    // Right shift
+    else if ((ena && amount == SHIFT_RIGHT) || (!ena && amount == 1:0))
+        q[amount:0] = q[(amount+1)+:64];
+end
+
+// Reset the contents of the shift register when load is low and ena is high
+always @(negedge clk, load)
+begin
+    if (load && !ena)
+        q <= 1;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

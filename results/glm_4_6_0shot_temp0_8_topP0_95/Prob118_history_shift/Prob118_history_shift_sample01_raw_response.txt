@@ -1,0 +1,21 @@
+
+```verilog
+// 32-bit global history shift register with rollback support
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    predict_history <= 32'd0;
+  end else begin
+    if (train_mispredicted) begin
+      // Load with history after mispredicted branch completion
+      // train_history (before mispredicted branch) + train_taken (actual result)
+      predict_history <= {train_history[30:0], train_taken};
+    end else if (predict_valid) begin
+      // Shift in new prediction from LSB side
+      predict_history <= {predict_history[31:1], predict_taken};
+    end
+    // Otherwise maintain current value
+  end
+end
+
+endmodule
+```

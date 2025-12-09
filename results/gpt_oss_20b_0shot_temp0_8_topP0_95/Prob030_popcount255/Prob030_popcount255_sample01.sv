@@ -1,0 +1,13 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+Below is a **ready‑to‑synthesize** Verilog implementation of a 255‑bit population‑count (pop‑count) circuit.  
+The design is written for Verilog‑2001/Verilog‑2005 (IEEE 1364‑2001) but it will also compile fine in a SystemVerilog environment.  
+The module is completely combinational – the output is produced immediately from the input – but the output is declared as a `reg` so that the synthesis tool can drive it with a simple continuous assignment.
+
+---
+
+
+// VERILOG-EVAL: endmodule not found

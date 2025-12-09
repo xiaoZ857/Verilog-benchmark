@@ -1,0 +1,16 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+// Based on the waveform analysis, this circuit implements the logic:
+// q = (a OR b) AND (c OR d)
+// This means q is 1 when either a or b is 1, AND either c or d is 1.
+
+assign q = (a | b) & (c | d);
+
+endmodule

@@ -1,0 +1,46 @@
+To implement a 4-bit priority encoder as described, we need to create a module `TopModule` that takes a 4-bit input vector and outputs the position of the first '1' bit found from the least significant bit (LSB) to the most significant bit (MSB). The output should be in the form of a 2-bit number representing this position. If no '1's are present in the input, the encoder should output `00`.
+
+Here is a Verilog implementation for the specified priority encoder:
+
+```verilog
+module TopModule (
+    input [3:0] in,
+    output reg [1:0] pos
+);
+
+    // Combinational logic to determine the position of the first '1'
+    always @(*) begin
+        if (in[3]) begin
+            pos = 2'b11;   // Position 4, since it's indexed from 0
+        end else if (in[2]) begin
+            pos = 2'b10;   // Position 3
+        end else if (in[1]) begin
+            pos = 2'b01;   // Position 2
+        end else if (in[0]) begin
+            pos = 2'b00;   // Position 1
+        end else begin
+            pos = 2'b00;   // If none of the bits are '1', output zero
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Input and Output:**
+  - `in[3:0]`: A 4-bit input vector.
+  - `pos[1:0]`: A 2-bit output representing the position of the first '1' bit, indexed from 0.
+
+- **Combinational Logic:**
+  - The `always @(*)` block ensures that the logic is combinatorial and reacts to changes in the input. 
+  - It checks each bit of the input vector starting from the MSB (`in[3]`) down to the LSB (`in[0]`).
+  - If a '1' is found, it assigns the corresponding position value to `pos`.
+  - The positions are encoded as follows: 
+    - `11` for index `3`,
+    - `10` for index `2`,
+    - `01` for index `1`,
+    - `00` for index `0`.
+  - If no '1's are present, `pos` is set to `00`.
+
+This module accurately implements a priority encoder as specified in the problem description.

@@ -1,0 +1,15 @@
+
+module TopModule (
+  input x3,  // Positive clock/clk triggered signal
+  input x2,  // Positive clock/clk triggered signal
+  input x1,  // Positive clock/clk triggered signal
+  output f   // Output of the combinational circuit
+);
+
+// Assignments for each input to make it easier to read the truth table
+assign f = ~(x3 & (x2 | x1));
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

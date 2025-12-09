@@ -1,0 +1,24 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out,
+  output out_n
+);
+
+// First layer AND gates
+wire and1 = a & b;
+wire and2 = c & d;
+
+// Intermediate OR gate
+wire or_out;
+or (or_out, and1, and2); // This assumes that the OR gate is named 'or'
+
+// Not gate for inverted output
+assign out_n = ~or_out;
+
+// Final output is connected to OR gate
+assign out = or_out;
+
+endmodule

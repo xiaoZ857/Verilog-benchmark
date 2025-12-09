@@ -1,0 +1,60 @@
+To implement the Moore state machine using a one-hot encoding scheme, we need to derive the next-state logic and output logic based on the given state transition table. Here is how you can construct the Verilog module:
+
+```verilog
+module TopModule (
+    input d,
+    input done_counting,
+    input ack,
+    input [9:0] state, // 10-bit one-hot current state
+    output B3_next,
+    output S_next,
+    output S1_next,
+    output Count_next,
+    output Wait_next,
+    output done,
+    output counting,
+    output shift_ena
+);
+
+// State encoding (one-hot)
+wire S = state[0];
+wire S1 = state[1];
+wire S11 = state[2];
+wire S110 = state[3];
+wire B0 = state[4];
+wire B1 = state[5];
+wire B2 = state[6];
+wire B3 = state[7];
+wire Count = state[8];
+wire Wait = state[9];
+
+// Next-state logic
+assign B3_next = (S11 | S110) & d;
+assign S_next = ((S & ~d) | (S1 & ~d) | (S11 & ~d) | (S110 & ~d) | Count & done_counting | Wait & ack);
+assign S1_next = S & d;
+assign Count_next = B3 & ~(done_counting | d); // B3 always leads to Count
+assign Wait_next = Count & done_counting;
+
+// Output logic
+assign done = Wait;
+assign counting = Count;
+assign shift_ena = (B0 | B1 | B2 | B3);
+
+endmodule
+```
+
+### Explanation:
+
+- **Next-State Logic:**
+  - `B3_next` is asserted when the current state is S11 or S110 and input `d` is 1.
+  - `S_next` transitions back to S from all states except Count (when `done_counting` is high) and Wait (when `ack` is high).
+  - `S1_next` is asserted when transitioning from S with `d = 1`.
+  - `Count_next` is asserted when transitioning from B3, provided `done_counting` is not active and `d` remains 1.
+  - `Wait_next` is asserted when transitioning from Count with `done_counting` high.
+
+- **Output Logic:**
+  - `done` is asserted in the Wait state.
+  - `counting` is asserted in the Count state.
+  - `shift_ena` is asserted in states B0, B1, B2, and B3. 
+
+This Verilog module represents a Moore machine with one-hot encoding for its states, calculating both next-state conditions and output logic based on current inputs and states.

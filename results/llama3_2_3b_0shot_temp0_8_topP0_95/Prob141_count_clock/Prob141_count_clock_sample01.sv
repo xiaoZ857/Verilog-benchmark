@@ -1,0 +1,64 @@
+
+module TopModule(
+    input clk,
+    input reset,
+    input ena,
+    output reg pm,
+    output reg [7:0] hh,
+    output reg [7:0] mm,
+    output reg [7:0] ss
+);
+
+reg [4:0] hours;
+reg [3:0] minutes;
+reg [3:0] seconds;
+reg [1:0] period;
+
+always_ff @(posedge clk or reset) begin
+    if (reset == 1) begin
+        pm <= 1'b0; // AM indicator
+        hh <= 12'b00000; // hours in BCD format
+        mm <= 15'b00000; // minutes in BCD format
+        ss <= 6'b00000; // seconds in BCD format
+        period <= 1'b0;
+    end else begin
+        if (ena == 1) begin
+            period <= period + 1;
+            if (period >= 12) begin
+                period <= 1'b0;
+                hours <= hours + 1;
+                minutes <= minutes + 1;
+                seconds <= seconds + 1;
+            end else begin
+                hours <= hours + period;
+                period <= 0;
+            end
+        end else if (period > 0) begin
+            period <= period - 1;
+        end else if (ena == 0 && period < 11) begin
+            period <= period + 1;
+        end
+    end
+    
+    // update PM indicator based on hours
+    pm <= hours[4:1] != 1'b1 ? 1'b0 : 1'b1; // AM/PM indicator
+    
+    hh[3] <= (hours % 12) >= 10 ? 'b0 : 'b1;
+    hh[2] <= (hours / 10);
+    hh[1] <= (minutes < 10) ? 'b0 : 'b1;
+    hh[0] <= minutes / 10;
+
+    mm[3] <= (minutes % 10) >= 10 ? 'b0 : 'b1;
+    mm[2] <= minutes % 10;
+    mm[1] <= (mm[2] < 5) ? 'b0 : 'b1;
+    mm[0] <= mm[2] / 10;
+
+    ss[3] <= (seconds % 10) >= 10 ? 'b0 : 'b1;
+    ss[2] <= seconds % 10;
+    ss[1] <= (ss[2] < 5) ? 'b0 : 'b1;
+    ss[0] <= ss[2] / 10;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

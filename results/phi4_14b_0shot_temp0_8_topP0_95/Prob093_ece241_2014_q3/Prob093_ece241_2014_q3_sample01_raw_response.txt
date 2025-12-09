@@ -1,0 +1,73 @@
+To implement the given Karnaugh map using multiplexers, we need to determine which inputs (`c`, `d`) should be fed into the select lines of smaller multiplexers to produce the correct outputs for each combination of `ab`. The goal is to minimize the number of 2-to-1 multiplexers used.
+
+### Step-by-step Implementation
+
+1. **Analyze the Karnaugh Map:**
+
+   ```
+       ab
+     cd  00  01  11  10
+     00 | 0 | 0 | 0 | 1 |
+     01 | 1 | 0 | 0 | 0 |
+     11 | 1 | 0 | 1 | 1 |
+     10 | 1 | 0 | 0 | 1 |
+   ```
+
+2. **Determine Outputs for Each `ab` Combination:**
+
+   - For `ab = 00`: The output depends on `cd`. It is `c' d'`.
+   - For `ab = 01`: Always 0.
+   - For `ab = 11`: Output is `1`.
+   - For `ab = 10`: The output depends on `d`, it is `d'.
+
+3. **Implement Using Multiplexers:**
+
+   We will use one 4-to-1 multiplexer and several 2-to-1 multiplexers to implement this logic.
+
+   - **`mux_in[0]` (ab = 00):** Needs to be `c' d'`. Use a 2-to-1 MUX with `c'` as the select line:
+     - Input 0: 1
+     - Input 1: 0
+
+   - **`mux_in[1]` (ab = 01):** Always 0.
+
+   - **`mux_in[2]` (ab = 11):** Always 1.
+
+   - **`mux_in[3]` (ab = 10):** Needs to be `d'`. Use a single input (just `d'`) as it doesn't depend on `c`.
+
+4. **Verilog Implementation:**
+
+```verilog
+module TopModule (
+    input c,
+    input d,
+    output [3:0] mux_in
+);
+
+    wire c_not, d_not;
+    assign c_not = ~c;
+    assign d_not = ~d;
+
+    // mux_in[0] for ab = 00: c' d'
+    wire [1:0] m0_inputs = {1'b1, 1'b0};
+    assign mux_in[0] = (m0_inputs[c]);
+
+    // mux_in[1] for ab = 01: Always 0
+    assign mux_in[1] = 1'b0;
+
+    // mux_in[2] for ab = 11: Always 1
+    assign mux_in[2] = 1'b1;
+
+    // mux_in[3] for ab = 10: d'
+    assign mux_in[3] = d_not;
+
+endmodule
+```
+
+### Explanation:
+
+- **`mux_in[0]`:** Uses a 2-to-1 MUX with `c` as the select line. The inputs are `{1'b1, 1'b0}` which corresponds to `c' d'`.
+- **`mux_in[1]`:** Directly assigned to 0.
+- **`mux_in[2]`:** Directly assigned to 1.
+- **`mux_in[3]`:** Directly assigned to `d'`.
+
+This setup ensures that the entire circuit, including the 4-to-1 MUX, correctly implements the logic described by the Karnaugh map.

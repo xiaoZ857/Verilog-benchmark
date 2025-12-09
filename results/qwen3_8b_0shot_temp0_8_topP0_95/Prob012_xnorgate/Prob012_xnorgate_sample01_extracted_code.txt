@@ -1,0 +1,12 @@
+To implement an XNOR gate in Verilog, we can use the built-in bitwise operators to express the logical behavior of the XNOR function.
+
+---
+
+### **Conceptual Background**
+
+An **XNOR gate** outputs a high (1) when both inputs are the same, and a low (0) when they are different. This is the logical negation of an **XOR gate**.
+
+- **XOR**: `a ^ b`
+- **XNOR**: `~(a ^ b)`
+
+This expression is concise, efficient, and widely used in digital logic design. It is also compatible with synthesis tools, making it a preferred choice for implementing XNOR gates

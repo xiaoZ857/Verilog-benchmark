@@ -1,0 +1,17 @@
+Problem: Prob060_m2014_q4k
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:14: error: part select out[0:2] is reversed.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:14: error: part select out[1:3] is out of order.
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob060_m2014_q4k_test.sv:73: warning: Port 4 (out) of TopModule expects 4 bits, got 1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob060_m2014_q4k_test.sv:73:        : Padding 3 high bits of the port.
+2 error(s) during elaboration.

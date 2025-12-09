@@ -1,0 +1,30 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire in,
+  output reg out
+);
+
+reg state; // Current state of the FSM
+always @(posedge clk or posedge reset) // Synchronous reset and clock edge triggering
+begin
+    if (reset)
+        state <= 0; // Reset the state to A when reset is high
+    else if (state == 1'b0 && in == 1'b0)
+        state <= state + 1'b0; // Move to next state B from state A
+    else if (state == 1'b1 && in == 1'b0)
+        state <= 2'b00; // Move to state C from state B
+    else if (state == 2'b01 && in == 1'b0)
+        state <= 3'b000; // Move to state D from state C
+    else if (state == 3'b001 && in == 1'b0)
+        state <= 2'b00; // Move back to state B from state D
+    else
+        state <= state; // If no transition, stay in the current state
+end
+
+assign out = (state == 2'b00); // Output is 1 if state is C and 0 otherwise
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

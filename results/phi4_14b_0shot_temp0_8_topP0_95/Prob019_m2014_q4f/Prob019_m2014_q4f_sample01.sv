@@ -1,0 +1,19 @@
+
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // Intermediate wire to hold the inverted value of in2
+  wire not_in2;
+
+  // Invert in2 to create a "bubble" effect
+  assign not_in2 = ~in2;
+
+  // Perform AND operation on in1 and the inverted in2
+  assign out = in1 & not_in2;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

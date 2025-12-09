@@ -1,0 +1,48 @@
+Here's the Verilog module implementation based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+reg [1:0] state;
+
+always @(posedge clk) begin
+    if (areset)
+        state <= 2'd0; // A
+
+    case(state)
+        2'd0:
+            if (in == 0)
+                state <= 2'd0;
+            else
+                state <= 2'd1;
+        2'd1:
+            if (in == 0)
+                state <= 2'd1;
+            else
+                state <= 2'd2;
+        2'd2:
+            if (in == 1 || in == 0)
+                state <= 2'd0;
+            else
+                state <= 2'd3;
+        2'd3:
+            if (in == 0)
+                state <= 2'd3;
+            else
+                state <= 2'd2;
+    endcase
+
+    out = state[1];
+endmodule
+```
+
+This module includes a Moore state machine with four states. The `state` variable stores the current state of the FSM, and the `out` signal represents the output value for the current state.
+
+The `always @(posedge clk)` block is used to update the state based on the clock input and any changes in the input signals or the reset signal.
+
+Note that this implementation uses a case statement to handle all possible state transitions.

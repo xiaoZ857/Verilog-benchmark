@@ -1,0 +1,33 @@
+To solve this problem, we need to implement a Verilog module that reverses the bit ordering of an 8-bit input vector. The goal is to take an 8-bit input and produce an 8-bit output where each bit is reversed from its original position.
+
+### Approach
+The approach involves explicitly mapping each bit of the input vector to the corresponding position in the output vector but in reverse order. Specifically, the least significant bit (LSB) of the input becomes the most significant bit (MSB) of the output, and vice versa. This can be achieved by assigning each bit of the input to the mirrored position in the output.
+
+### Solution Code
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+always_comb begin
+  out[7] = in[0];
+  out[6] = in[1];
+  out[5] = in[2];
+  out[4] = in[3];
+  out[3] = in[4];
+  out[2] = in[5];
+  out[1] = in[6];
+  out[0] = in[7];
+end
+endmodule
+```
+
+### Explanation
+The module `TopModule` is defined with an 8-bit input `in` and an 8-bit output `out`. The `always_comb` block ensures that the output is updated whenever any of the input bits change. Inside this block, each bit of the output vector is assigned a value from the corresponding reversed position in the input vector:
+
+- `out[7]` is assigned the value of `in[0]`, making it the MSB of the output.
+- `out[6]` is assigned the value of `in[1]`.
+- This pattern continues until `out[0]` is assigned the value of `in[7]`, which becomes the LSB of the output.
+
+By explicitly mapping each bit in this manner, we ensure that the input vector's bits are reversed and correctly assigned to the output vector. This approach is straightforward and efficient for an 8-bit reversal task.

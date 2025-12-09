@@ -1,0 +1,90 @@
+```verilog
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else if (slowena) begin
+      if (q == 9) begin
+        q <= 0;
+      end else begin
+        q <= q + 1;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule(...)`**: Defines the module named `TopModule` with the specified inputs and outputs.
+* **`input clk, slowena, reset;`**: Declares the input signals:
+    * `clk`: The clock signal.
+    * `slowena`: The enable signal for slow counting.
+    * `reset`: The synchronous reset signal (active high).
+* **`output reg [3:0] q;`**: Declares the output signal `q` as a 4-bit register.  We need to use `reg` because the value is assigned within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This is a sequential block that executes on the positive edge of the clock signal.
+* **`if (reset) begin q <= 0; end`**:  This is the synchronous reset condition. When `reset` is high, the counter is reset to 0.  The non-blocking assignment `<=` is used to prevent race conditions.
+* **`else if (slowena) begin ... end`**: This block executes only when `slowena` is high.  This enables slow counting, where the counter increments only when `slowena` is asserted.
+* **`if (q == 9) begin q <= 0; end else begin q <= q + 1; end`**: This is the counting logic.
+    * If `q` is 9, it wraps around to 0.
+    * Otherwise, `q` increments by 1.  Again, the non-blocking assignment `<=` is used.
+
+**How it works:**
+
+1. **Reset:** When `reset` is high, the counter immediately resets to 0.
+2. **Normal Counting:** When `reset` is low, the counter normally increments on the positive edge of `clk` *only* if `slowena` is also high.
+3. **Slow Counting:** When `slowena` is low, the counter does not increment, effectively pausing it.
+4. **Wrap-around:** The counter counts from 0 to 9 and then wraps around to 0, ensuring a period of 10.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg slowena;
+  reg reset;
+  wire [3:0] q;
+
+  TopModule dut (
+    .clk(clk),
+    .slowena(slowena),
+    .reset(reset),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    slowena = 1;
+    reset = 0;
+
+    #10;
+    reset = 1;
+    #10;
+    reset = 0;
+
+    #100;
+    slowena = 0;
+    #50;
+    slowena = 1;
+
+    $finish;
+  end
+
+  always #5 clk = ~clk;
+
+  initial begin
+    $monitor("Time=%0d, clk=%b, slowena=%b, reset=%b, q=%b", $time, clk, slowena, reset, q);
+  end
+
+endmodule
+```
+
+This testbench will simulate the decade counter and print the values of the signals at each time step.  The initial block sets up the initial values, applies a reset, enables slow counting, and then pauses and resumes the counting. The `$monitor` statement displays the signal values.

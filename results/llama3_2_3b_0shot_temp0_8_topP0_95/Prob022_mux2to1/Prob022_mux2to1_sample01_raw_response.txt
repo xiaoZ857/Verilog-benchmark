@@ -1,0 +1,16 @@
+Here is the Verilog module for the 2-to-1 multiplexer:
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+  
+  always @(*)
+    assign out = (sel == 0) ? a : b;
+endmodule
+```
+In this implementation, we use the `always` block to create a combinatorial assignment. The expression `(sel == 0) ? a : b` is evaluated based on the value of `sel`. If `sel` is 0, it returns the value of `a`; otherwise, it returns the value of `b`.
+
+Note that Verilog's "positive clock" convention implies that signals are assumed to be high (1) by default, unless explicitly stated otherwise. Since we don't have a clock signal in this example, the module is always triggered, and the expression is evaluated based on the current values of `a`, `b`, and `sel`.

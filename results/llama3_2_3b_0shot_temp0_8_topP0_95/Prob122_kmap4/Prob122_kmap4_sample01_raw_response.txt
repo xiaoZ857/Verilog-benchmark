@@ -1,0 +1,25 @@
+Here is the Verilog module that implements the circuit described by the Karnaugh map:
+
+```verilog
+module TopModule (
+  input a,    // A and B inputs
+  input b,    // C and D inputs 
+  output reg out// Output signal
+);
+
+reg [1:0] q; // Two-bit state variable
+
+always @(posedge clk) begin
+  // Apply the Karnaugh map rules to compute the next state
+  if(a && b && !c && d)   q <= 10;
+  else if(!a && b && !c && d) q <= 01;
+  else if(a && !b && c && d)  q <= 11;
+  else if(!a && !b && !c && d) q <= 00;
+
+  out = q; // Output the current state
+end
+
+endmodule
+```
+
+This module has four inputs `a`, `b`, `c`, and `d` which are assigned to the variables used in the Karnaugh map. The two-bit output is saved into a register called `q`. It's then updated according to the rules of the Karnaugh map on every rising edge of the clock signal, so it always holds the last state.

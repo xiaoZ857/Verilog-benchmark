@@ -1,0 +1,25 @@
+
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output [4:0] sum
+);
+  wire [3:0] c;
+  wire [3:0] s;
+  
+  // First full adder (LSB)
+  assign {c[0], s[0]} = x[0] + y[0];
+  
+  // Second full adder
+  assign {c[1], s[1]} = x[1] + y[1] + c[0];
+  
+  // Third full adder
+  assign {c[2], s[2]} = x[2] + y[2] + c[1];
+  
+  // Fourth full adder (MSB)
+  assign {c[3], s[3]} = x[3] + y[3] + c[2];
+  
+  // Output assignment
+  assign sum = {c[3], s[3:0]};
+
+endmodule

@@ -1,0 +1,22 @@
+Below is a minimal Verilog implementation of a NOT gate.  
+Because a NOT gate is purely combinational, no clock is required; the output follows the input immediately.
+
+```verilog
+`timescale 1ns/1ps          // (optional) set simulation time unit and precision
+
+module TopModule (
+    input  wire in,          // input signal
+    output wire out          // output signal (inverted input)
+);
+
+    // Combinational logic: output is the logical NOT of the input
+    assign out = ~in;
+
+endmodule
+```
+
+**Explanation**
+
+* `input wire in` and `output wire out` declare the module ports.  
+* The `assign` statement creates a continuous assignment that drives `out` with the logical complement of `in`.  
+* No clock or sequential logic is involved, making this a purely combinational NOT gate.

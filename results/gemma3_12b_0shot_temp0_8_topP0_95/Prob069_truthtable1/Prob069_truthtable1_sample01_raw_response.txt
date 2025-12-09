@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input x3,
+  input x2,
+  input x1,
+  output f
+);
+
+  assign f = (!x3) ? ((!x2) ? (!x1) : (x1)) : ((!x2) ? (!x1) : (x1));
+
+endmodule
+```
+
+**Explanation:**
+
+The code implements the truth table directly using a nested conditional assignment. Let's break it down:
+
+* **`assign f = ...;`**: This line assigns the value of the expression on the right-hand side to the output signal `f`.  `assign` is used because the logic is combinational.
+* **`(!x3) ? ... : ...`**: This is the outer conditional. If `x3` is 0 (false), then the expression after the `?` is evaluated. Otherwise (if `x3` is 1), the expression after the `:` is evaluated.
+* **`(!x2) ? (!x1) : (x1)`**: This is the inner conditional, executed when `x3` is 0. It checks if `x2` is 0. If `x2` is 0, then `f` is assigned the value of `!x1`.  Otherwise (if `x2` is 1), `f` is assigned the value of `x1`.
+* **`(!x2) ? (!x1) : (x1)`**: This is the inner conditional, executed when `x3` is 1. It checks if `x2` is 0. If `x2` is 0, then `f` is assigned the value of `!x1`.  Otherwise (if `x2` is 1), `f` is assigned the value of `x1`.
+
+**Alternative implementation using boolean algebra simplification:**
+
+The truth table can be simplified using boolean algebra.
+
+f = (!x3) ? ((!x2) ? (!x1) : (x1)) : ((!x2) ? (!x1) : (x1))
+f = (!x3) ? (!x2) ? (!x1) : x1 : (!x2) ? (!x1) : x1
+f = !x3 * !x2 * !x1 + !x3 * !x2 * x1 + !x3 * x2 * x1 + x3 * x2 * x1
+
+This can be expressed in Verilog as follows:
+
+```verilog
+module TopModule (
+  input x3,
+  input x2,
+  input x1,
+  output f
+);
+
+  assign f = (!x3 & !x2 & !x1) | (!x3 & !x2 & x1) | (!x3 & x2 & x1) | (x3 & x2 & x1);
+
+endmodule
+```
+
+This is functionally equivalent to the first solution but potentially more efficient for synthesis, depending on the target technology.
+
+**Summary:**
+
+Both implementations correctly implement the provided truth table.  The first one uses nested conditional assignments, which might be more readable for some, while the second one uses boolean expressions, which are potentially more efficient for synthesis. Choose whichever you find more understandable and maintainable.

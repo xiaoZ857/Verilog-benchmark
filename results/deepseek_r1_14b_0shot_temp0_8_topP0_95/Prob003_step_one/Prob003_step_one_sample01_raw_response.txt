@@ -1,0 +1,13 @@
+To create a Verilog module where the output is always high (1), you can use an assign statement inside the module. Here's how it's done:
+
+```verilog
+module TopModule (
+  output one
+);
+  
+  assign one = 1;
+
+endmodule
+```
+
+This code defines a module with no inputs and one output. The `assign` statement ensures that the output `one` is always set to logic high (1).

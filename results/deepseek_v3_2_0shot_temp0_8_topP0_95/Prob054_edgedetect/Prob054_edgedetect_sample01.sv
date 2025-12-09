@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+  // Store previous value of input
+  reg [7:0] prev_in;
+  
+  always @(posedge clk) begin
+    prev_in <= in;
+    // Each bit of pedge is high when current bit is 1 and previous bit was 0
+    pedge <= in & ~prev_in;
+  end
+
+endmodule

@@ -1,0 +1,38 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+module TimerTopModule(
+    input clk,        // Clock input
+    input load,        // Load signal to update counter value
+    input [9:0] data,   // Initial value for the counter
+    output tc         // Terminal count ( asserted when counter reaches 0 )
+);
+
+// Internal counter
+reg [10:0] counter;
+
+// Initialize counter with initial data
+initial begin
+    counter = data;
+end
+
+always @(posedge clk) begin
+    if(load == 1) begin
+        // Load the internal counter with the given value
+        counter = data;
+    else begin
+        // Decrement the internal counter by 1 (wrapping around to 0 when it reaches 0)
+        counter = counter - 1;
+    end
+end
+
+always @(*) begin
+    tc = (counter == 0);
+end
+```
+
+This code defines a Verilog module called `TimerTopModule` that takes in three inputs: `clk`, `load`, and `data`. The `tc` output signal is used to indicate whether the internal counter has reached 0.
+
+The module uses an internal registor (`counter`) to keep track of the current count. When the `load` input is high, it loads the initial value into the `counter`. If the `load` input is low, it decrements the `counter` by 1 at each clock cycle. This ensures that the `counter` wraps around to 0 when it reaches 0.
+
+The module uses a combinational block (`always @(*)`) to check whether the internal counter has reached 0 and set the `tc` output accordingly.

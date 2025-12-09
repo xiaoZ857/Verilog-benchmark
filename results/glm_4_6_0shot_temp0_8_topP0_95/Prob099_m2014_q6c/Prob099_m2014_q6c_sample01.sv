@@ -1,0 +1,23 @@
+
+module TopModule (
+  input [6:1] y,
+  input w,
+  output Y2,
+  output Y4
+);
+
+always @(*) begin
+  // Y2 corresponds to next state B (000010)
+  // We transition to state B when: current state is A (y[1]) and input w=0
+  Y2 = y[1] & ~w;
+  
+  // Y4 corresponds to next state D (001000)
+  // We transition to state D when:
+  // - current state is B (y[2]) and input w=1
+  // - current state is C (y[3]) and input w=1
+  // - current state is E (y[5]) and input w=1
+  // - current state is F (y[6]) and input w=1
+  Y4 = (y[2] & w) | (y[3] & w) | (y[5] & w) | (y[6] & w);
+end
+
+endmodule

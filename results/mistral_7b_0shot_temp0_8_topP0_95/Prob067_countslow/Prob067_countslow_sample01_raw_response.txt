@@ -1,0 +1,53 @@
+ Here's the Verilog code for a decade counter based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire slowena,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    q <= 4'b0001; // Reset the counter to 0001 (decimal 1)
+  end else if (slowena) begin
+    q <= q + 1; // Increment the counter when slowena is high
+  end
+end
+
+always @(posedge clk) begin
+  if (!slowena && q[3]) begin // Check for overflow and reset the decade counter
+    q <= 4'b0001;
+  end
+end
+
+// Enabling carry-out from the fourth bit to the fifth bit (decade unit)
+always @(posedge clk) begin
+  if (slowena) q[4] <= q[3] + q[2]; // Increment the decade counter when slowena is high
+end
+
+// Enabling carry-out from the third bit to the fourth bit (unit tens)
+always @(posedge clk) begin
+  if (slowena && !q[3]) q[4] <= 1'b0; // Reset the decade counter carry-out
+  else if (slowena) q[3] <= q[2] + q[1]; // Increment the tens counter when slowena is high
+end
+
+// Enabling carry-out from the second bit to the third bit (unit hundreds)
+always @(posedge clk) begin
+  if (slowena && !q[2]) q[3] <= 1'b0; // Reset the tens counter carry-out
+  else if (slowena) q[2] <= q[1] + q[0]; // Increment the hundreds counter when slowena is high
+end
+
+// Enabling carry-out from the first bit to the second bit (unit thousands)
+always @(posedge clk) begin
+  if (slowena && !q[1]) q[2] <= 1'b0; // Reset the hundreds counter carry-out
+end
+
+initial begin
+  clk = 0;
+  #10 forever clk = ~clk; // Set the clock frequency to 10
+end
+```
+
+This code provides a decade counter with separate registers for units, tens, hundreds, and thousands. The `slowena` input controls the incrementation of the counters, and an overflow check is implemented in the decade unit to reset the counter when it reaches 9.

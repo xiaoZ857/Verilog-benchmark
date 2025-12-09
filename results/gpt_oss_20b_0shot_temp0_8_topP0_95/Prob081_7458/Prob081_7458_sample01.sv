@@ -1,0 +1,43 @@
+
+//=====================================================================
+//  TopModule – 7458 equivalent
+//=====================================================================
+//  Four AND gates (two 3‑input, two 2‑input) feed two OR gates.
+//  p1y = (p1a & p1b & p1c) | (p1d & p1e & p1f)
+//  p2y = (p2a & p2b)       | (p2c & p2d)
+//=====================================================================
+module TopModule (
+    // 3‑input AND group 1
+    input  p1a,
+    input  p1b,
+    input  p1c,
+
+    // 3‑input AND group 2
+    input  p1d,
+    input  p1e,
+    input  p1f,
+    output p1y,            // OR of the two 3‑input AND outputs
+
+    // 2‑input AND group 1
+    input  p2a,
+    input  p2b,
+
+    // 2‑input AND group 2
+    input  p2c,
+    input  p2d,
+    output p2y             // OR of the two 2‑input AND outputs
+);
+
+//----------------------------------------
+//  Combinational logic
+//----------------------------------------
+
+// OR of the two 3‑input AND gates
+assign p1y = (p1a & p1b & p1c) | (p1d & p1e & p1f);
+
+// OR of the two 2‑input AND gates
+assign p2y = (p2a & p2b) | (p2c & p2d);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

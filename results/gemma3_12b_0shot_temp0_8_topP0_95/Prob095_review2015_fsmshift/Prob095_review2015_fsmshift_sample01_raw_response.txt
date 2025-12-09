@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output shift_ena
+);
+
+  reg [2:0] count; // Counter to track the number of shift enable cycles
+
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 0;
+      shift_ena <= 1;
+    end else begin
+      if (count < 4) begin
+        count <= count + 1;
+        shift_ena <= 1;
+      end else begin
+        count <= 0;
+        shift_ena <= 0;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [2:0] count;`**:  This declares a 3-bit register `count`.  We need 3 bits because we need to count up to 4 (0, 1, 2, 2).
+2. **`always @(posedge clk)`**:  This block executes on the positive edge of the clock signal.
+3. **`if (reset)`**: This checks if the reset signal is asserted (high).
+   - **`count <= 0;`**: If reset is high, the counter is reset to 0.
+   - **`shift_ena <= 1;`**:  And `shift_ena` is asserted (set to 1) for the initial 4 cycles after reset.
+4. **`else`**: If reset is not asserted, the following logic is executed.
+5. **`if (count < 4)`**: This checks if the counter is less than 4.
+   - **`count <= count + 1;`**: If the counter is less than 4, it's incremented by 1.
+   - **`shift_ena <= 1;`**:  `shift_ena` is asserted (set to 1) to enable the shift register.
+6. **`else`**:  If the counter reaches 4.
+   - **`count <= 0;`**: The counter is reset to 0.
+   - **`shift_ena <= 0;`**:  `shift_ena` is deasserted (set to 0) to disable the shift register.
+
+**How it works:**
+
+* **Reset:** When `reset` is high, `count` is initialized to 0, and `shift_ena` is set to 1. This starts the 4-cycle assertion.
+* **First 4 Clock Cycles:** The counter `count` increments from 0 to 1 to 2 to 3. `shift_ena` remains high (1) during this period.
+* **After 4 Clock Cycles:**  The `else` condition is met. The counter `count` is reset to 0, and `shift_ena` is set to 0, disabling the shift register.
+* **Subsequent Clock Cycles:** The counter remains at 0, and `shift_ena` remains low (0) until the reset signal is asserted again.
+
+This implementation ensures that `shift_ena` is high for exactly 4 clock cycles after a reset is asserted.

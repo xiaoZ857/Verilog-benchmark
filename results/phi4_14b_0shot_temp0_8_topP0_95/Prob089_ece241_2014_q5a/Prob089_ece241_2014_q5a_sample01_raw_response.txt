@@ -1,0 +1,74 @@
+To implement the Verilog module for a one-input one-output serial 2's complementer Moore state machine, we need to consider how to handle the conversion process. The key steps involve flipping each bit of the input sequence until a '1' is encountered (which acts as a carry in the binary addition), then continuing to pass through the remaining bits.
+
+Here is a Verilog implementation for the described module:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire areset, // asynchronous reset
+  input wire x,      // serial input bit
+  output reg z       // serial output bit (2's complement)
+);
+
+  // Define states for the state machine
+  typedef enum logic [1:0] {
+    IDLE,     // Waiting or resetting
+    COMPLEMENT // Flipping bits until a '1' is found
+  } state_t;
+
+  state_t current_state, next_state;
+  
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Asynchronous reset logic
+      current_state <= IDLE;
+    end else begin
+      // Synchronous state transition
+      current_state <= next_state;
+    end
+  end
+
+  always_comb begin
+    z = x; // Default output is the same as input
+    case (current_state)
+      IDLE: begin
+        if (!areset) begin
+          next_state = COMPLEMENT;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+      
+      COMPLEMENT: begin
+        z = ~x; // Invert the input bit for 2's complement
+        if (x == 1'b1) begin
+          next_state = IDLE; // Stop flipping after encountering '1'
+        end else begin
+          next_state = COMPLEMENT;
+        end
+      end
+      
+      default: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Definitions**: The state machine has two states:
+   - `IDLE`: Waiting for the reset to be deasserted or processing is complete.
+   - `COMPLEMENT`: Inverting each bit until a '1' is encountered.
+
+2. **Asynchronous Reset**: When `areset` is asserted, the state machine resets to `IDLE`. This occurs asynchronously with respect to the clock.
+
+3. **State Transition Logic**:
+   - In the `IDLE` state, if the reset is not active (`!areset`), transition to `COMPLEMENT`.
+   - In the `COMPLEMENT` state, invert each input bit using `z = ~x`. If a '1' is encountered (`if (x == 1'b1)`), stop flipping and return to `IDLE`.
+
+4. **Output Logic**: The output `z` initially mirrors the input `x`. During the `COMPLEMENT` state, it provides the inverted bits until the first '1' is found.
+
+This implementation ensures that the conversion begins upon reset deassertion and stops when a '1' is encountered in the input sequence, effectively producing the 2's complement of the binary number fed serially.

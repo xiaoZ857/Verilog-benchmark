@@ -1,0 +1,36 @@
+Here’s a minimal Verilog implementation of the combinational logic
+
+```verilog
+// TopModule.v
+// Implements the Boolean function:
+//     z = (x ^ y) & x
+//  ^  : XOR
+//  &  : AND
+//
+// Since there is no clock in the specification, the logic is purely combinational.
+
+module TopModule (
+    input  wire x,   // first operand (single‑bit)
+    input  wire y,   // second operand (single‑bit)
+    output wire z    // result of (x ^ y) & x
+);
+
+    // Continuous assignment – z is driven whenever x or y changes
+    assign z = (x ^ y) & x;
+
+endmodule
+```
+
+**Explanation**
+
+- `x ^ y` computes the XOR of the two inputs.
+- The result is then ANDed with `x` to obtain `z`.
+- Because the logic is combinational, a simple `assign` statement is sufficient. If you prefer an `always_comb` block, you could write:
+
+```verilog
+always_comb begin
+    z = (x ^ y) & x;
+end
+```
+
+Both versions produce the same functional behavior.

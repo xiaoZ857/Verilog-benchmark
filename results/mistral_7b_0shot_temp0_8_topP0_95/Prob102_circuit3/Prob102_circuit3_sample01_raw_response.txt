@@ -1,0 +1,21 @@
+ Based on the provided simulation waveforms, it appears that the circuit is a majority voter logic. A majority voter circuit outputs a '1' when at least a majority (more than half) of its inputs are '1'. In this case, the circuit has four inputs (a, b, c, d).
+
+Here is the Verilog code for the majority voter circuit:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+assign abc_majority = (a & b & c) || ((~a) & b & c) || (a & ~b & c) || (a & b & ~c);
+assign abcd_majority = (abc_majority & d) || (abc_majority & ~d);
+assign q = abcd_majority;
+
+endmodule
+```
+
+In this code, the `abc_majority` assignment checks for majority among inputs a, b, and c using the logical OR operator and some de Morgan's laws. The `abcd_majority` assignment then checks if the majority among a, b, c also matches with the input d. Finally, the output `q` is set to the result of `abcd_majority`.

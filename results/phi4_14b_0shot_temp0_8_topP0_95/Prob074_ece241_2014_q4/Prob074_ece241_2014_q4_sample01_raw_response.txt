@@ -1,0 +1,48 @@
+To implement the described finite state machine in Verilog, we need to create a module `TopModule` that includes three D flip-flops and logic gates (XOR, AND, OR) as specified. Below is the Verilog code for this design:
+
+```verilog
+module TopModule (
+  input clk,
+  input x,
+  output reg z
+);
+
+  // Declare registers to hold the state of each D flip-flop
+  reg dff1;
+  reg dff2;
+  reg dff3;
+
+  // Intermediate signals for the gates
+  wire xor_out, and_out, or_out;
+
+  always @(posedge clk) begin
+    // Update the states of the D flip-flops on positive edge of clock
+    dff1 <= x ^ dff1;       // XOR gate: x XOR current state
+    dff2 <= x & ~dff2;      // AND gate: x AND NOT current state
+    dff3 <= x | ~dff3;      // OR gate: x OR NOT current state
+
+    // Compute the output of each gate based on updated states
+    xor_out = x ^ dff1;
+    and_out = x & ~dff2;
+    or_out  = x | ~dff3;
+
+    // NOR operation for final output z
+    z <= ~(xor_out | and_out | or_out);
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **D Flip-Flops**: We use three D flip-flops (`dff1`, `dff2`, and `dff3`) to store the states. They are updated on every positive clock edge based on their respective logic gates.
+  
+- **XOR Gate**: The second input is the current state of the corresponding flip-flop. Thus, for `dff1`, it computes `x XOR dff1`.
+
+- **AND Gate**: This gate uses the complemented output of its corresponding flip-flop as the second input. Therefore, for `dff2`, it computes `x AND NOT(dff2)`.
+
+- **OR Gate**: Similarly, this gate uses the complemented output of its corresponding flip-flop as the second input. Hence, for `dff3`, it computes `x OR NOT(dff3)`.
+
+- **NOR Gate**: The outputs from the XOR, AND, and OR gates are fed into a three-input NOR gate to produce the final output `z`.
+
+The `always` block ensures that all operations occur on the positive edge of the clock signal (`clk`). The use of `<=` indicates non-blocking assignments for updating flip-flop states in synchronous logic.

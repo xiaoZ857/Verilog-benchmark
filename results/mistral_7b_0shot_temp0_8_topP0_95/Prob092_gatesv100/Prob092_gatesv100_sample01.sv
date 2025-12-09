@@ -1,0 +1,37 @@
+
+module TopModule (
+  input [99:0] in,
+  output reg [98:0] out_both,
+  output reg [99:1] out_any,
+  output reg [99:0] out_different
+);
+
+always @(posedge clk) begin
+  // Initialize outputs for the first and last bits (no left or right neighbors)
+  if (in[0]) begin
+    out_both[0] = out_any[0] = out_different[0] = 1'b0;
+  end else begin
+    out_both[0] = out_any[0] = 1'b1;
+  end
+
+  for (int i = 1; i < 100; i++) begin
+    // out_both: both bits are 1
+    out_both[i] = in[i] & in[modp(i - 1, 100)];
+
+    // out_any: any bit is 1 (including the current and right neighbor)
+    out_any[i + 1] = in[i] | in[modp(i + 1, 100)];
+
+    // out_different: different from left neighbor (wrapping around)
+    out_different[i] = in[i] ^ in[modp(i - 1, 100)];
+  end
+
+  // Initialize outputs for the last bit (no right neighbor)
+  if (in[99]) begin
+    out_both[99] = out_any[99] = 1'b0;
+  end else begin
+    out_both[99] = out_any[99] = 1'b1;
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

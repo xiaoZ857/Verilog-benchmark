@@ -1,0 +1,112 @@
+  reg [2:0] state, next_state;
+  reg f_reg, g_reg;
+  
+  localparam A = 3'd0,
+             B = 3'd1,
+             C = 3'd2,
+             D = 3'd3,
+             E = 3'd4,
+             F = 3'd5,
+             G = 3'd6;
+  
+  // State register
+  always @(posedge clk) begin
+    if (!resetn)
+      state <= A;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      A: next_state = resetn ? B : A;
+      B: next_state = C;
+      C: begin
+        // We need to detect x sequence 1,0,1 over 3 cycles.
+        // We'll handle this with a shift register in a separate always block.
+        // For now, assume we have a signal 'pattern_detected'.
+        if (pattern_detected)
+          next_state = D;
+        else
+          next_state = C;
+      end
+      D: begin
+        if (y)
+          next_state = F;
+        else
+          next_state = E;
+      end
+      E: begin
+        if (y)
+          next_state = F;
+        else
+          next_state = G;
+      end
+      F: next_state = F;
+      G: next_state = G;
+      default: next_state = A;
+    endcase
+  end
+  
+  // Shift register to detect x sequence 1,0,1
+  reg [2:0] x_shift;
+  wire pattern_detected;
+  
+  always @(posedge clk) begin
+    if (!resetn)
+      x_shift <= 3'b0;
+    else if (state == C || state == D || state == E || state == F || state == G)
+      x_shift <= {x_shift[1:0], x};
+    else
+      x_shift <= 3'b0;
+  end
+  
+  assign pattern_detected = (x_shift == 3'b101);
+  
+  // Output logic
+  always @(posedge clk) begin
+    if (!resetn) begin
+      f_reg <= 1'b0;
+      g_reg <= 1'b0;
+    end else begin
+      case (state)
+        A: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        B: begin
+          f_reg <= 1'b1;
+          g_reg <= 1'b0;
+        end
+        C: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        D: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b1;
+        end
+        E: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b1;
+        end
+        F: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b1;
+        end
+        G: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        default: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+      endcase
+    end
+  end
+  
+  assign f = f_reg;
+  assign g = g_reg;
+endmodule

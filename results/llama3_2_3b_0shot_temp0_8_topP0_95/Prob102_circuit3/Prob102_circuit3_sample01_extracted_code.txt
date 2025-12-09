@@ -1,0 +1,19 @@
+// Define the inputs and outputs
+input a, b, c, d;
+output q;
+
+module TopModule (
+  // Define the signals for the module
+  input clk, 
+  input [1:0] a, b, c, d,
+  output reg q
+);
+
+// Initialize all outputs as 0
+initial begin
+  q = 0;
+end
+
+assign q = (d & (~a | ~b)) ^ ((c << 1) | (d << 2));
+
+endmodule

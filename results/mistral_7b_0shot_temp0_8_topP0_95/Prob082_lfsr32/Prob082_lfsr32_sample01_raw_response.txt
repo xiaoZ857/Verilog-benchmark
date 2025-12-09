@@ -1,0 +1,20 @@
+ Here is a Verilog implementation for the Galois LFSR as per your description. The linear feedback shift register has taps at bit positions 32, 22, 2, and 1.
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    output reg [31:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 32'h1; // Reset the register to 32'h1
+    end else begin
+        // Shift the register right and XOR the tapped bits with q[0]
+        q <= {q[1:31], (q[32] ^ q[22]) ^ (q[2] ^ q[1])};
+    end
+end
+```
+
+In this code, the `posedge clk or posedge reset` sensitive clause triggers the combinational logic when there is a clock edge (rising or falling) or a positive edge on the reset signal. The `if(reset)` block checks if the reset signal is active high to reset the output register to 32'h1. In the else block, the LFSR shifts right and XORs the tapped bits with the least significant bit (q[0]).

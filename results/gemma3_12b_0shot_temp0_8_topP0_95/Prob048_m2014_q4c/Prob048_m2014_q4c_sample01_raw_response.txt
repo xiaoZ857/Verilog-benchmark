@@ -1,0 +1,38 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+  logic q_reg;
+
+  always_ff @(posedge clk, posedge r) begin
+    if (r) begin
+      q_reg <= 1'b0;
+    end else begin
+      q_reg <= d;
+    end
+  end
+
+  assign q = q_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`logic q_reg;`**:  Declares a register `q_reg` to hold the flip-flop's state.  Using `logic` is preferred in SystemVerilog for clarity and to avoid potential issues with `reg` declarations.
+* **`always_ff @(posedge clk, posedge r)`**: This is a synchronous flip-flop.  The `always_ff` block indicates that this is a sequential block containing a flip-flop. The sensitivity list specifies that the flip-flop updates on the positive edge of the clock (`posedge clk`) *and* the positive edge of the reset signal (`posedge r`).  This ensures the reset is synchronous, meaning it takes effect on the clock edge.
+* **`if (r) begin q_reg <= 1'b0; end`**:  This is the reset condition. If the `r` (reset) input is high, the flip-flop's state (`q_reg`) is set to 0.
+* **`else begin q_reg <= d; end`**:  If the reset is not active, the flip-flop's state (`q_reg`) is updated with the value of the data input `d` on the positive clock edge.
+* **`assign q = q_reg;`**: This assigns the value of the internal register `q_reg` to the output signal `q`.  This is necessary because the `always_ff` block updates `q_reg`, while `q` is the signal observed by the outside world.
+
+**Key Features and Why this implementation is good:**
+
+* **Synchronous Reset:** The reset is synchronous, meaning the reset signal takes effect on a clock edge. This is generally preferred for predictable and reliable behavior.
+* **`always_ff`:** Using `always_ff` is the correct and preferred way to declare flip-flops in SystemVerilog. It explicitly marks this as a sequential block.
+* **`logic` type:** Using `logic` is preferred over `reg` in SystemVerilog for clarity and to avoid potential declaration issues.
+* **Clear and Readable:** The code is well-structured and easy to understand.
+* **Correctness:** The implementation accurately reflects the requested D flip-flop with synchronous reset functionality.

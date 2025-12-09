@@ -1,0 +1,51 @@
+Here's the Verilog code to implement the described combinational circuit:
+
+```verilog
+module TopModule (
+    input a, // clock/clk 
+    input b, // not a clock signal
+    input c, // not a clock signal
+    input d, // clock signal (input)
+    output q  // output of the logic circuit
+);
+
+// First stage: AND gate between A and D
+wire q1;
+AND #(.CE = 0) and_gates (
+    .A(a),
+    .B(d),
+    .CE(0),
+    .Z(q1)
+);
+
+// Second stage: OR gate to combine B, C, and not-D (not a clock signal)
+wire q2;
+OR #(.CE = 1) or_gates (
+    .A(b), 
+    .B(c),    
+    .C(~d),  // NOT d
+    .CE(1),
+    .Z(q2)
+);
+
+// Third stage: AND gate between Q2 and Q1, then inverted
+wire q;
+AND #(.CE = 0) not_and_gates (
+    .A(q2),
+    .B(q1),
+    .CE(0),
+    .Z(~q)
+);
+
+endmodule
+```
+
+In this code:
+
+*   `a` is the clock/clk signal. It's used directly in the first stage.
+*   `b`, `c`, and `d` are signals that aren't connected to the clock. The second stage processes these.
+*   `q1` represents the output of the first stage, which is an AND operation between `a` and `d`.
+*   In the second stage, a NOT gate inverts `d` (since it's not a clock signal) before feeding it into the OR gate along with `b` and `c`. The result from this is then passed to the third stage.
+*   The output of this OR operation is combined with the first stage via an AND gate. This ensures that the output depends on both signals. However, because in this case we have a NOT gate before the AND operation (i.e., ~q), it effectively performs a NOT operation between q2 and q1, which gives us the desired logic.
+
+You can simulate this module using Verilog simulators to see what outputs result when different inputs are applied to it.

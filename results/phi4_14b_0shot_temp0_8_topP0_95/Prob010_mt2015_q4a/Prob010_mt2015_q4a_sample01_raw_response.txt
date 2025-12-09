@@ -1,0 +1,27 @@
+To implement the given Boolean function \( z = (x \oplus y) \land x \) in Verilog, we need to create a module that takes two inputs, \( x \) and \( y \), and produces one output, \( z \). The expression involves an XOR operation followed by an AND operation.
+
+Here's the implementation:
+
+```verilog
+module TopModule (
+  input x,
+  input y,
+  output reg z // Using 'reg' since this is a sequential logic output
+);
+
+always @(*) begin
+    z = (x ^ y) & x;
+end
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs**: The module `TopModule` has two inputs, `x` and `y`, and one output, `z`.
+- **Operation**:
+  - \( x \oplus y \): This is the XOR operation between `x` and `y`. It results in `1` if `x` and `y` are different.
+  - The result of the XOR operation is then ANDed with `x`, as specified by the Boolean expression \( (x \oplus y) \land x \).
+- **Output**: We use a procedural block (`always @(*)`) to ensure that `z` is updated whenever any of its dependencies (`x` or `y`) change. The sensitivity list `@(*)` indicates combinational logic, meaning the output will be recalculated whenever an input changes.
+- **Use of `reg` for Output**: In Verilog, outputs driven by procedural blocks need to be declared as `reg`. This is because the procedural block can assign values at any time based on its sensitivity list.
+
+This module provides a combinational logic implementation of the specified Boolean function.

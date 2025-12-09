@@ -1,0 +1,12 @@
+Problem: Prob120_fsm3s
+Code file: results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob120_fsm3s/Prob120_fsm3s_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob120_fsm3s_ref.sv:31: syntax error
+I give up.

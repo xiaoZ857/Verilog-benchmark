@@ -1,0 +1,90 @@
+```verilog
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output [4:0] sum
+);
+
+  wire c0, c1, c2, c3;
+
+  // Instantiate full adders
+  full_adder fa0 (
+    .a(x[0]),
+    .b(y[0]),
+    .cin(0),
+    .sum(sum[0]),
+    .cout(c0)
+  );
+
+  full_adder fa1 (
+    .a(x[1]),
+    .b(y[1]),
+    .cin(c0),
+    .sum(sum[1]),
+    .cout(c1)
+  );
+
+  full_adder fa2 (
+    .a(x[2]),
+    .b(y[2]),
+    .cin(c1),
+    .sum(sum[2]),
+    .cout(c2)
+  );
+
+  full_adder fa3 (
+    .a(x[3]),
+    .b(y[3]),
+    .cin(c2),
+    .sum(sum[3]),
+    .cout(c3)
+  );
+
+  // Overflow bit is the carry out from the last full adder
+  assign sum[4] = c3;
+
+endmodule
+
+// Full adder module
+module full_adder (
+  input a,
+  input b,
+  input cin,
+  output sum,
+  output cout
+);
+
+  assign sum = a ^ b ^ cin;
+  assign cout = (a & b) | (a & cin) | (b & cin);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`TopModule`:**
+   - Takes two 4-bit inputs `x` and `y`.
+   - Outputs a 5-bit value `sum`, where `sum[0..3]` is the sum and `sum[4]` is the overflow bit.
+   - Declares wires `c0`, `c1`, `c2`, and `c3` to represent the carry signals between the full adders.
+   - Instantiates four `full_adder` modules (`fa0`, `fa1`, `fa2`, `fa3`).  Each full adder adds one bit from `x`, one bit from `y`, and the carry-in from the previous stage.
+   - The `assign sum[4] = c3;` line assigns the carry-out from the last full adder (`c3`) to the overflow bit `sum[4]`.  This is because an overflow occurs when the sum of two numbers exceeds the maximum representable value for the number of bits.
+
+2. **`full_adder`:**
+   - This module implements a single full adder.
+   - `assign sum = a ^ b ^ cin;` calculates the sum bit using XOR operations.
+   - `assign cout = (a & b) | (a & cin) | (b & cin);` calculates the carry-out bit.
+
+**How it works:**
+
+The `TopModule` chains together four `full_adder` modules.  Each full adder adds one bit from `x` and `y` along with the carry-in from the previous stage.  The carry-out from each full adder becomes the carry-in for the next full adder.  The overflow bit `sum[4]` is the carry-out from the most significant bit's full adder.
+
+**Example:**
+
+If `x = 4'b0101` and `y = 4'b1010`:
+
+1. **fa0:** `x[0] = 1`, `y[0] = 0`, `cin = 0`. `sum[0] = 1`, `c0 = 0`.
+2. **fa1:** `x[1] = 1`, `y[1] = 0`, `cin = c0 = 0`. `sum[1] = 1`, `c1 = 0`.
+3. **fa2:** `x[2] = 0`, `y[2] = 1`, `cin = c1 = 0`. `sum[2] = 1`, `c2 = 0`.
+4. **fa3:** `x[3] = 0`, `y[3] = 1`, `cin = c2 = 0`. `sum[3] = 1`, `c3 = 1`.
+
+Therefore, `sum = 5'b11111`.  The sum is 1111 (decimal 15

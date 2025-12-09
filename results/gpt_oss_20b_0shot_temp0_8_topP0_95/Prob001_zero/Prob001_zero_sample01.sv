@@ -1,0 +1,17 @@
+
+// TopModule.v
+// Simple circuit that drives the output `zero` permanently LOW.
+// No clock or state needed.
+
+`timescale 1ns/1ps
+
+module TopModule (
+    output zero                // output port
+);
+
+    // Continuous assignment: zero is always 0
+    assign zero = 1'b0;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

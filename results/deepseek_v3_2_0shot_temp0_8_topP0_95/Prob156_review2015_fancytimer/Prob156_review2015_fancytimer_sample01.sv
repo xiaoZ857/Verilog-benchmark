@@ -1,0 +1,141 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+We'll implement a finite state machine (FSM) with states for:  
+1. **IDLE** 每 waiting for the start sequence 1101.  
+2. **SHIFT_DELAY** 每 shifting in the 4-bit delay value.  
+3. **COUNTING** 每 counting down the delay cycles.  
+4. **DONE** 每 signaling completion and waiting for acknowledgment.  
+
+We'll also need:  
+- A shift register to detect the sequence 1101.  
+- A shift register to capture the 4-bit delay.  
+- A counter for tracking the 1000-cycle intervals.  
+- A down-counter for the remaining delay value.  
+
+Here＊s the implementation:  
+
+  // FSM states
+  localparam IDLE         = 2'b00;
+  localparam SHIFT_DELAY  = 2'b01;
+  localparam COUNTING     = 2'b10;
+  localparam DONE         = 2'b11;
+
+  reg [1:0] state, next_state;
+  reg [3:0] seq_reg;          // shift register for detecting 1101
+  reg [3:0] delay_reg;        // shift register for delay value
+  reg [2:0] shift_count;      // counts 0-3 for shifting delay bits
+  reg [9:0] cycle_counter;    // counts 0-999 for each 1000-cycle block
+  reg [3:0] delay_value;      // stored delay value for countdown
+  reg [3:0] count_reg;        // output count value
+
+  // State register
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Sequence detection shift register
+  always @(posedge clk) begin
+    if (reset) begin
+      seq_reg <= 4'b0;
+    end else if (state == IDLE) begin
+      seq_reg <= {seq_reg[2:0], data};
+    end
+  end
+
+  // Shift delay register and shift counter
+  always @(posedge clk) begin
+    if (reset) begin
+      delay_reg     <= 4'b0;
+      shift_count   <= 3'b0;
+      delay_value   <= 4'b0;
+    end else begin
+      case (state)
+        IDLE: begin
+          shift_count <= 3'b0;
+          if (seq_reg == 4'b1101) begin
+            delay_reg <= 4'b0; // optional clear
+          end
+        end
+        SHIFT_DELAY: begin
+          if (shift_count < 4) begin
+            delay_reg <= {delay_reg[2:0], data};
+            shift_count <= shift_count + 1;
+          end
+          if (shift_count == 3) begin
+            delay_value <= {delay_reg[2:0], data}; // capture final delay
+          end
+        end
+        COUNTING: begin
+          // delay_value updated when count_reg decrements
+        end
+        DONE: begin
+          // hold values
+        end
+      endcase
+    end
+  end
+
+  // Cycle counter for 1000 cycles
+  always @(posedge clk) begin
+    if (reset) begin
+      cycle_counter <= 10'b0;
+    end else if (state == COUNTING) begin
+      if (cycle_counter == 10'd999) begin
+        cycle_counter <= 10'b0;
+      end else begin
+        cycle_counter <= cycle_counter + 1;
+      end
+    end else begin
+      cycle_counter <= 10'b0;
+    end
+  end
+
+  // Count register (remaining time)
+  always @(posedge clk) begin
+    if (reset) begin
+      count_reg <= 4'b0;
+    end else begin
+      case (state)
+        IDLE, SHIFT_DELAY: begin
+          count_reg <= 4'b0;
+        end
+        COUNTING: begin
+          if (cycle_counter == 10'd999) begin
+            if (count_reg != 4'b0) begin
+              count_reg <= count_reg - 1;
+            end
+          end
+        end
+        DONE: begin
+          count_reg <= 4'b0;
+        end
+      endcase
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    next_state = state;
+    case (state)
+      IDLE: begin
+        if (seq_reg == 4'b1101) begin
+          next_state = SHIFT_DELAY;
+        end
+      end
+      SHIFT_DELAY: begin
+        if (shift_count == 
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

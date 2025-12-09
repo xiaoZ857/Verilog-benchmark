@@ -1,0 +1,45 @@
+module TopModule(
+    input clk,        // System clock signal (active-high)
+    input reset,       // System reset signal (active-low)
+    output [3:1] ena,   // Enable signals for upper digits
+    output reg [15:0] q // BCD counter value
+);
+
+    parameter NUM_DIGITS = 4;
+
+    wire [NUM_DIGITS*4-1:NUM_DIGITS-1][NUM_DIGITS-1:0] bcd_inputs;
+    reg [NUM_DIGITS*4-1:NUM_DIGITS-1] count;
+
+    assign {
+        // Reset the counter
+        : ena = 1'b0; 
+        : q = 16'd0; 
+    } when (reset);
+
+    always @(posedge clk) begin
+        if (ena == 1'b0) begin
+            ena <= 1'b1;
+            count[2:0] <= count[3:1];
+            count[NUM_DIGITS-1:NUM_DIGITS*4-1] <= {count[NUM_DIGITS*4-2:NUM_DIGITS], count[NUM_DIGITS*4-2:NUM_DIGITS]};
+        end else begin
+            if (count[NUM_DIGITS-1] == 16'd9) begin
+                // All digits are counted, reset and wrap around
+                ena <= 1'b0;
+                count[0:NUM_DIGITS-1] <= {15'd0, count[0:NUM_DIGITS-2]};
+            end else if (count[NUM_DIGITS-1] > 16'd9) begin 
+                // Count wraps around
+                ena <= 1'b0;
+                count[NUM_DIGITS-1] <=  count[NUM_DIGITS*4-1];
+                count[0:NUM_DIGITS-1] <= {15'd0, count[0:NUM_DIGITS-2]};
+            end else begin 
+                // Increment the current digit
+                if (count[NUM_DIGITS*4-count[NUM_DIGITS-1]:NUM_DIGITS*3-count[NUM_DIGITS-2]] == 16'd9) 
+                    ena <= 1'b0;
+                count[NUM_DIGITS*4-count[NUM_DIGITS-1]:NUM_DIGITS*3-count[NUM_DIGITS-2]] <= {count[NUM_DIGITS*4-count[NUM_DIGITS-1]-1:NUM_DIGITS*3-count[NUM_DIGITS-2]-1], 16'd0}; 
+                count[NUM_DIGITS*4-count[NUM_DIGITS-1]:NUM_DIGITS*3-count[NUM_DIGITS-2]] <= {count[NUM_DIGITS*4-count[NUM_DIGITS-1]-1:NUM_DIGITS*3-count[NUM_DIGITS-2]-1], 16'd0}; 
+                count[0:NUM_DIGITS] <= (count[1:NUM_DIGITS] + 1);
+            end
+        end
+    end
+
+endmodule

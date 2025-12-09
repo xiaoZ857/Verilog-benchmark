@@ -1,0 +1,54 @@
+To implement the Verilog module based on your description, we need to create a 32-bit global history shift register that updates according to branch predictions and handles mispredictions by rolling back to a previous state. Here is how you can design this module:
+
+```verilog
+module TopModule (
+    input logic clk,
+    input logic areset,
+    input logic predict_valid,
+    input logic predict_taken,
+    
+    output logic [31:0] predict_history,
+
+    input logic train_mispredicted,
+    input logic train_taken,
+    input logic [31:0] train_history
+);
+
+    // Register to hold the current branch history
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset sets the history register to zero
+            predict_history <= 32'b0;
+        end else begin
+            if (train_mispredicted) begin
+                // On misprediction, load the corrected branch history
+                predict_history <= {train_history[30:0], train_taken};
+            end else if (predict_valid) begin
+                // Shift in predict_taken to update history for prediction
+                predict_history <= {predict_history[30:0], predict_taken};
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `clk`: Clock signal.
+  - `areset`: Asynchronous reset signal which resets the register to zero on a positive edge.
+  - `predict_valid`: Indicates whether a branch prediction is made (1 if valid).
+  - `predict_taken`: Specifies if the predicted branch was taken.
+  - `predict_history`: Output that shows the current state of the history shift register.
+  - `train_mispredicted`: Indicates if there was a misprediction (1 if true).
+  - `train_taken`: The actual outcome of the branch that was mispredicted.
+  - `train_history`: History up to but not including the mispredicted branch.
+
+- **Register Logic**:
+  - A synchronous process with sensitivity on both positive edge of `clk` and positive edge of `areset`.
+  - On an asynchronous reset (`areset`), `predict_history` is set to zero.
+  - When a misprediction occurs (`train_mispredicted = 1`), the history register (`predict_history`) is updated with the provided `train_history`, excluding its LSB, concatenated with `train_taken` (representing the actual result of the branch).
+  - If no misprediction occurs and there's a valid prediction (`predict_valid = 1`), the shift register updates by shifting in the value of `predict_taken`.
+
+This module ensures that the history is accurately maintained according to predictions and corrections due to mispredictions, prioritizing mispredictions as specified.

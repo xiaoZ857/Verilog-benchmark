@@ -1,0 +1,35 @@
+ Here is the Verilog implementation for the Moore state machine based on your description. Note that this code only implements the combinational logic portion of the state machine, as you requested.
+
+```verilog
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+
+assign A = state[0];
+assign B = state[1];
+assign C = state[2];
+assign D = state[3];
+
+always_comb begin
+    // State transition logic
+    if(A) begin
+        next_state <= {B, A};
+    end else if(B) begin
+        next_state <= {C, B};
+    end else if(C) begin
+        next_state <= {A, D};
+    end else begin // Default state is D
+        next_state <= {C, B};
+    end
+
+    // Output logic
+    out = C | (D & in);
+end
+
+endmodule
+```
+
+This implementation uses one-hot encoding as requested and implements the state transition and output logic based on the provided state transition table. The output is calculated as `C | (D & in)`.

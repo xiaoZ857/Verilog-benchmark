@@ -1,0 +1,17 @@
+Problem: Prob122_kmap4
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob122_kmap4_test.sv:95: error: port ``c'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob122_kmap4_test.sv:95: error: port ``d'' is not a port of top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:12: error: Unable to bind wire/reg/memory `c' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:12: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:12: error: Unable to elaborate condition expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+7 error(s) during elaboration.

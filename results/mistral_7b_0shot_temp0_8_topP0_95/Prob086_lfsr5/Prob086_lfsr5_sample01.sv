@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+
+// Maximal length LFSR polynomial for a 5-bit register: x^5 + x^3 + 1
+const int MAX_LENGTH_POLYNOMIAL = 5'b10111;
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 5'b1; // Reset the LFSR output to 1 when reset is high
+  end else begin
+    int lfsr = 5'b0; // Initialize the LFSR register
+
+    // Shift the LFSR left by one position and XOR with the polynomial taps
+    for (int i = 4; i >= 0; i--) begin
+      lfsr <= {lfsr[3:0], (MAX_LENGTH_POLYNOMIAL & (1'b1 << i)) ^ (lfsr[i] && (1'b1 << 5))};
+    end
+
+    q <= lfsr; // Assign the updated LFSR value to the output register
+  end
+end
+
+// End of TopModule
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

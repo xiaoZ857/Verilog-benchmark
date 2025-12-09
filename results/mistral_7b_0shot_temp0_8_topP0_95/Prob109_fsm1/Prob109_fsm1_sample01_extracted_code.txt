@@ -1,0 +1,29 @@
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output reg out
+);
+
+reg internal_state;
+parameter state_B = 1'b0;
+parameter state_A = 1'b1;
+
+always @(posedge clk or negedge areset) begin
+  if (areset)
+    internal_state <= state_B; // Reset to state B when reset is high
+  else if (internal_state == state_B) begin
+    if (in === 1'b0)
+      internal_state <= state_A;
+  end
+  else if (internal_state == state_A) begin
+    if (in === 1'b1)
+      internal_state <= state_A;
+    else
+      internal_state <= state_B;
+  end
+end
+
+assign out = internal_state;
+
+endmodule

@@ -1,0 +1,53 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+reg [3:0] state = 4'b0001; // Initial state is 0001 (waiting for start sequence)
+reg data_buffer [3:0]; // Buffer to store the received data
+reg counter_en = 0; // Counter enable flag
+reg done_flag = 0; // Done flag
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 4'b0001; // Reset to waiting for start sequence
+        data_buffer <= 4'b0000;
+        counter_en <= 0;
+        done_flag <= 0;
+    end else if (state == 4'b0001) begin // Checking for the start sequence
+        if (data == 5'b1101) begin
+            state <= 4'b0010; // Shift enabled state
+            data_buffer <= {data, data}; // Store the received data and shift it to the buffer
+        end
+    end else if (state == 4'b0010) begin // Shifting enabled state
+        data_buffer <= {data_buffer[3:0], data};
+        if ((data_buffer == 5'b11010) || (counter_en == 4)) begin // Check if 4 bits received or counter enable already set
+            counter_en <= 1; // Enable counter
+            state <= 4'b0100; // Waiting for counters state
+        end
+    end else if (state == 4'b0100) begin // Waiting for counters state
+        counting <= 1'b1; // Assert counting output
+        if (counter_en && done_counting) begin // Check if counter done and user is ready
+            state <= 4'b1000; // Done state
+            done_flag <= 1; // Set done flag
+        end
+    end else if (state == 4'b1000) begin // Done state
+        done <= done_flag; // Notify user and wait for acknowledgement
+        if (ack) begin
+            state <= 4'b0001; // Reset to waiting for start sequence after acknowledgement
+            done_flag <= 0; // Reset done flag
+        end
+    end
+end
+
+assign shift_ena = (state == 4'b0010); // Assign shift enable output based on state
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

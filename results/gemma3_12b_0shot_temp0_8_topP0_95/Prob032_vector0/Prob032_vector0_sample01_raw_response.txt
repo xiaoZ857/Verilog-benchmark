@@ -1,0 +1,29 @@
+```verilog
+module TopModule (
+  input [2:0] vec,
+  output [2:0] outv,
+  output o2,
+  output o1,
+  output o0
+);
+
+  assign outv = vec;
+  assign o2 = vec[2];
+  assign o1 = vec[1];
+  assign o0 = vec[0];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  Defines the Verilog module named `TopModule` and lists the input and output ports.
+* **`input [2:0] vec;`**: Declares a 3-bit input vector named `vec`. The `[2:0]` specifies that it's a 3-bit vector, with the most significant bit (MSB) being index 2 and the least significant bit (LSB) being index 0.
+* **`output [2:0] outv;`**: Declares a 3-bit output vector named `outv`.
+* **`output o2, o1, o0;`**: Declares three individual 1-bit outputs named `o2`, `o1`, and `o0`.
+* **`assign outv = vec;`**:  This is a continuous assignment.  It directly copies the value of the input vector `vec` to the output vector `outv`.  Whenever `vec` changes, `outv` will immediately reflect that change.
+* **`assign o2 = vec[2];`**:  Assigns the value of the 3rd bit (index 2) of the input vector `vec` to the output `o2`.
+* **`assign o1 = vec[1];`**:  Assigns the value of the 2nd bit (index 1) of the input vector `vec` to the output `o1`.
+* **`assign o0 = vec[0];`**:  Assigns the value of the 0th bit (index 0) of the input vector `vec` to the output `o0`.
+
+This module takes a 3-bit input, passes it through to an output vector and splits it into three separate 1-bit outputs as requested.  The `assign` statements are continuous, meaning they are always evaluating and updating the outputs whenever the inputs change.

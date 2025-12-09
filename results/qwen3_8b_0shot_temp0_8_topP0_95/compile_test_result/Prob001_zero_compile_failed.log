@@ -1,0 +1,13 @@
+Problem: Prob001_zero
+Code file: results\qwen3_8b_0shot_temp0_8_topP0_95\Prob001_zero/Prob001_zero_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\qwen3_8b_0shot_temp0_8_topP0_95\Prob001_zero/Prob001_zero_sample01.sv:5: warning: macro zero undefined (and assumed null) at this point.
+results\qwen3_8b_0shot_temp0_8_topP0_95\Prob001_zero/Prob001_zero_sample01.sv:5: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob001_zero_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\qwen3_8b_0shot_temp0_8_topP0_95\Prob001_zero/Prob001_zero_sample01.sv:5: error: Invalid module instantiation

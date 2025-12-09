@@ -1,0 +1,21 @@
+Here's the Verilog implementation for a 2-to-1 multiplexer:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+
+  // When sel=0, choose a; when sel=1, choose b
+  assign out = (sel == 0) ? a : b;
+
+endmodule
+```
+
+### Explanation:
+- The module `TopModule` has three inputs (`a`, `b`, and `sel`) and one output (`out`).
+- The ternary operator is used in the `assign` statement to select between inputs `a` and `b` based on the value of `sel`.
+  - When `sel` is `0`, the value of `a` is assigned to `out`.
+  - When `sel` is `1`, the value of `b` is assigned to `out`.

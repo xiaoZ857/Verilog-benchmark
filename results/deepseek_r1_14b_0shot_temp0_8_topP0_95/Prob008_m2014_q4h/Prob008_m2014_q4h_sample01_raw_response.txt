@@ -1,0 +1,14 @@
+Here's the Verilog implementation of the TopModule:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  
+  assign out = in;
+  
+endmodule
+```
+
+This code creates a module where the output `out` is assigned the value of the input `in` directly, making it immediately reflect any changes to `in`.

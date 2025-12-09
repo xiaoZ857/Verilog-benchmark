@@ -1,0 +1,59 @@
+**Verilog (SystemVerilog) – Two‑bit saturating counter**
+
+```verilog
+//  Two‑bit saturating counter
+//  state  : 2‑bit value (00 … 11)
+//  areset : asynchronous reset (active‑high)
+//  clk    : synchronous clock
+//  train_valid : enable for training
+//  train_taken : direction of the update
+//
+//  Behaviour
+//    • If areset is asserted – state is reset to 2'b01 (weakly “not‑taken”).
+//    • When train_valid = 1
+//          – if train_taken = 1 : increment (saturate at 3)
+//          – if train_taken = 0 : decrement (saturate at 0)
+//    • When train_valid = 0 : keep the current state.
+
+module TopModule (
+    input  logic        clk,
+    input  logic        areset,
+    input  logic        train_valid,
+    input  logic        train_taken,
+    output logic [1:0]  state
+);
+
+    // The counter is updated on the rising edge of clk.
+    // The asynchronous reset is also taken into account.
+    always_ff @(posedge clk or posedge areset)
+    begin
+        if (areset) begin
+            // Asynchronous reset – initialise to weakly not‑taken
+            state <= 2'b01;
+        end
+        else if (train_valid) begin
+            // Only update when training is active
+            if (train_taken) begin
+                // Increment but saturate at 3 (binary 11)
+                if (state != 2'b11)
+                    state <= state + 1'b1;
+            end
+            else begin
+                // Decrement but saturate at 0 (binary 00)
+                if (state != 2'b00)
+                    state <= state - 1'b1;
+            end
+        end
+        // If train_valid == 0 → state stays unchanged
+    end
+
+endmodule
+```
+
+### Key points
+
+1. **Synchronous logic with asynchronous reset** – `always_ff @(posedge clk or posedge areset)` guarantees that `state` is reset immediately when `areset` goes high, independent of the clock.
+2. **Saturating behaviour** – before incrementing or decrementing we check the boundary values (`2'b11` for the maximum and `2'b00` for the minimum). This prevents the counter from wrapping around.
+3. **Minimal combinational logic** – the only logic besides the reset is the simple enable/branching based on `train_valid` and `train_taken`, keeping the design clean and synthesizable.
+
+This module meets the specification: it maintains a two‑bit counter that only changes during training, increments/decrements with saturation, and resets asynchronously to `2'b01`.

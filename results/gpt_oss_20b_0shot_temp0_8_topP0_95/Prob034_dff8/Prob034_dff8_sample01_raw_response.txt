@@ -1,0 +1,27 @@
+Here’s a minimal, synthesizable Verilog implementation that instantiates eight D‑flip‑flops (one for each bit of the 8‑bit vector).  
+All flip‑flops are triggered on the positive edge of `clk`.
+
+```verilog
+// TopModule.v
+// 8‑bit D flip‑flop array – all triggered on the rising edge of clk
+module TopModule (
+    input  wire        clk,   // clock
+    input  wire [7:0]  d,     // data input
+    output reg  [7:0]  q      // data output (registered)
+);
+
+    // On every rising edge of clk, latch the input vector d into q.
+    always @(posedge clk) begin
+        q <= d;          // non‑blocking assignment for synchronous logic
+    end
+
+endmodule
+```
+
+**Explanation**
+
+* `output reg [7:0] q` – Declares an 8‑bit register that holds the output state.
+* `always @(posedge clk)` – Makes the block execute only on the positive edge of `clk`.
+* `q <= d;` – A non‑blocking assignment that updates all 8 bits of `q` simultaneously, effectively creating 8 independent D‑flip‑flops.
+
+This code is ready for synthesis on any standard FPGA or ASIC target.

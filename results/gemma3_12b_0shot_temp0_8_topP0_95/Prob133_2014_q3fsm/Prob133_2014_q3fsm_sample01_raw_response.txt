@@ -1,0 +1,118 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+
+  // Define the states
+  typedef enum logic [1:0] {
+    A,
+    B,
+    C,
+    D,
+    E
+  } state_t;
+
+  reg state, next_state;
+
+  // State register update
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      state <= A;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = state; // Default: stay in the current state
+
+    case (state)
+      A: begin
+        if (s == 1) begin
+          next_state = B;
+        end
+      end
+      B: begin
+        // Check the first w input
+        if (w == 1) begin
+          next_state = C;
+        end else begin
+          next_state = B;
+        end
+      end
+      C: begin
+        // Check the second w input
+        if (w == 1) begin
+          next_state = D;
+        end else begin
+          next_state = B;
+        end
+      end
+      D: begin
+        // Check the third w input
+        if (w == 1) begin
+          next_state = E;
+        end else begin
+          next_state = B;
+        end
+      end
+      E: begin
+        // Return to B after three cycles
+        next_state = B;
+      end
+      default: begin
+        next_state = A;
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    z = 0; // Default: z = 0
+
+    case (state)
+      E: begin
+        z = 1;
+      end
+      default: begin
+        // z remains 0 in all other states
+      end
+    endcase
+  end
+endmodule
+```
+
+**Explanation:**
+
+1. **States:** The FSM uses five states:
+   - `A`: Reset state.  `s = 0` keeps the FSM here.
+   - `B`: Initial check cycle for `w`.
+   - `C`: Second check cycle for `w`.
+   - `D`: Third check cycle for `w`.
+   - `E`:  The state where the output `z` is set to 1, if exactly two `w`s were 1 in the previous three cycles.
+
+2. **State Register:** The `state` register holds the current state of the FSM. It's updated on the positive edge of the clock and reset to `A` when `reset` is high.
+
+3. **Next State Logic:**  The `always_comb` block determines the next state based on the current state and inputs.
+   - **State A:** Transitions to state B if `s == 1`.
+   - **State B:** Transitions to state C if `w == 1`, otherwise stays in state B.  This checks the first `w`.
+   - **State C:** Transitions to state D if `w == 1`, otherwise back to B.  This checks the second `w`.
+   - **State D:** Transitions to state E if `w == 1`, otherwise back to B. This checks the third `w`.
+   - **State E:** Returns to state B after the third `w` has been checked.
+
+4. **Output Logic:** The `always_comb` block determines the output `z`.
+   - `z` is 1 *only* when the FSM is in state `E`. This signifies that exactly two `w` inputs were 1 in the preceding three clock cycles.  In all other states, `z` remains 0.
+
+**How it fulfills the requirements:**
+
+* **Positive Clock Triggered:** Signals are updated on the positive edge of the clock.
+* **Synchronous Reset:** `reset` is active high and synchronous.
+* **State A:** The FSM remains in state A as long as `s = 0`.
+* **Transition to B:** Moves to state B when `s = 1`.
+* **Three `w` Cycles:**  The FSM checks `w` for three consecutive cycles in states B, C, and D.
+* **Two `w` = 1:**  Only when the FSM reaches state E (after three cycles) does the output `z` become 1. This signifies that exactly

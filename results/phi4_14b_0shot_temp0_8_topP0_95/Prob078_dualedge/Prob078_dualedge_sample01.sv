@@ -1,0 +1,32 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  // Temporary registers to hold intermediate values
+  reg pos_edge_data;
+  reg neg_edge_data;
+
+  // Capture data on the positive edge of the clock
+  always @(posedge clk) begin
+    pos_edge_data <= d;
+  end
+
+  // Capture data on the negative edge of the clock
+  always @(negedge clk) begin
+    neg_edge_data <= d;
+  end
+
+  // Combine both edges to update the output q
+  always @(*) begin
+    if ($time % (2 * $period(clk)) < $period(clk))
+      q = pos_edge_data; // Use data captured on the positive edge
+    else
+      q = neg_edge_data; // Use data captured on the negative edge
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

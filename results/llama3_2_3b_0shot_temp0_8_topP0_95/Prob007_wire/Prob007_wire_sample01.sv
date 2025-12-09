@@ -1,0 +1,14 @@
+
+// Define the top-level module
+module TopModule (
+  input in, // Input signal
+  output reg out  // Output signal (reg is used to ensure it's always initialized)
+);
+
+// Wire behavior
+assign out = in; // Assign the input signal to the output
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

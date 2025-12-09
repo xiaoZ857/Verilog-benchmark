@@ -1,0 +1,132 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+  // State definition
+  typedef enum logic [2:0] {
+    S0, // Initial state, behaves as though previous input was 0
+    S1,
+    S2,
+    S3,
+    S4,
+    S5,
+    S6,
+    S7 // Error state
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // Output registers
+  reg disc_reg, flag_reg, err_reg;
+
+  // State register
+  reg state_reg;
+
+  // Output assignments
+  assign disc = disc_reg;
+  assign flag = flag_reg;
+  assign err = err_reg;
+
+  // State register update (synchronous)
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      state_reg <= S0;
+    end else begin
+      state_reg <= next_state;
+    end
+  end
+
+  // Output register update (synchronous)
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      disc_reg <= 0;
+      flag_reg <= 0;
+      err_reg <= 0;
+    end else begin
+      case (next_state)
+        S1: disc_reg <= 1;  // Discard
+        S6: flag_reg <= 1; // Flag
+        S7: err_reg <= 1; // Error
+        default: disc_reg <= 0;
+               flag_reg <= 0;
+               err_reg <= 0;
+      endcase
+    end
+  end
+
+
+  // Next state logic
+  always_comb begin
+    next_state = current_state;
+
+    case (current_state)
+      S0: begin
+        if (in) begin
+          next_state = S1;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S1: begin
+        if (in) begin
+          next_state = S2;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S2: begin
+        if (in) begin
+          next_state = S3;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S3: begin
+        if (in) begin
+          next_state = S4;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S4: begin
+        if (in) begin
+          next_state = S5;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S5: begin
+        if (in) begin
+          next_state = S6;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S6: begin
+        if (in) begin
+          next_state = S7;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S7: begin
+        next_state = S7;
+      end
+      default: next_state = S0;
+    endcase
+  end
+
+  // Initial state assignment
+  initial begin
+    current_state = S0;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

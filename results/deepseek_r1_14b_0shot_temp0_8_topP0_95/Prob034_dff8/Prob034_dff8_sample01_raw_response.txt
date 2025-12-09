@@ -1,0 +1,27 @@
+To implement the TopModule with 8 D flip-flops triggered by the positive edge of `clk`, we'll create an always block for each bit in the data bus. Each D flip-flop will capture the corresponding input on the rising clock edge and store it in the output.
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] d,
+    output reg [7:0] q
+);
+
+always @(posedge clk) begin
+    for (int i = 0; i < 8; i++) begin
+        q[i] <= d[i];
+    end
+end
+
+endmodule
+```
+
+**Explanation:**
+
+- **Module Declaration:** The module `TopModule` is defined with input ports `clk`, `d` (an 8-bit bus), and output port `q` (also an 8-bit bus).
+  
+- **Always Block:** Inside the module, an always block is triggered on the positive edge (`posedge`) of the clock signal `clk`.
+
+- **Loop Through Bits:** Using a for loop from `i = 0` to `7`, each bit of the output register `q[i]` is assigned the corresponding bit of input `d[i]`. This ensures that all 8 D flip-flops are updated simultaneously on each rising clock edge.
+
+This implementation effectively creates an 8-bit D flip-flop register, capturing the input data on each rising clock edge and storing it in the output.

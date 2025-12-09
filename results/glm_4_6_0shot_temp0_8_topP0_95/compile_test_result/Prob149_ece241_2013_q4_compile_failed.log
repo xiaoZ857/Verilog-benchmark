@@ -1,0 +1,19 @@
+Problem: Prob149_ece241_2013_q4
+Code file: results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:20: error: Could not find variable ``prev_level'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:23: error: Could not find variable ``prev_level'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:26: error: Unable to bind wire/reg/memory `curr_level' in `tb.top_module1'
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:26: error: Unable to elaborate this case expression.
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:52: error: Unable to bind wire/reg/memory `curr_level' in `tb.top_module1'
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:52: error: Unable to bind wire/reg/memory `curr_level' in `tb.top_module1'
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:52: error: Unable to bind wire/reg/memory `prev_level' in `tb.top_module1'
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:52: error: Unable to bind wire/reg/memory `curr_level' in `tb.top_module1'
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:52: error: Unable to elaborate condition expression.
+8 error(s) during elaboration.

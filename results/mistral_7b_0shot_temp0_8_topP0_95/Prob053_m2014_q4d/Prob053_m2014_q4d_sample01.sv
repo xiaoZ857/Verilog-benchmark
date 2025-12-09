@@ -1,0 +1,38 @@
+
+module DFlipFlopXOR (
+  input clk,
+  input in,
+  output reg q,
+  output logica out // Note that 'out' is both input and output, but it should be treated as an internal wire.
+);
+
+// Create a XOR gate for the feedback loop
+assign out = q ^ in;
+
+always @(posedge clk)
+begin
+  if (out)
+    q <= ~q; // Flip the state of the D flip-flop on positive edge of clk
+  else
+    q <= 0; // Reset the flip-flop to low on positive edge of clk if not inverted
+end
+
+// In the TopModule, we should just instantiate the DFlipFlopXOR module
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+
+wire out_internal; // Internal wire to connect 'out' and 'in' of DFlipFlopXOR
+
+DFlipFlopXOR dffxor (
+  .clk(clk),
+  .in(out_internal),
+  .q(out),
+  .out(out_internal) // Feedback connection through the internal wire
+);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

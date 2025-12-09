@@ -1,0 +1,83 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+  always @(in) begin
+    if (in[0] == 1) begin
+      pos = 0;
+    end else if (in[1] == 1) begin
+      pos = 1;
+    end else if (in[2] == 1) begin
+      pos = 2;
+    end else if (in[3] == 1) begin
+      pos = 3;
+    end else if (in[4] == 1) begin
+      pos = 4;
+    end else if (in[5] == 1) begin
+      pos = 5;
+    end else if (in[6] == 1) begin
+      pos = 6;
+    end else if (in[7] == 1) begin
+      pos = 7;
+    end else begin
+      pos = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input [7:0] in, output reg [2:0] pos);` declares the module named `TopModule` with an 8-bit input `in` and a 3-bit output `pos`.  `pos` is declared as `reg` because it's assigned within an `always` block.
+
+2. **`always @(in)` Block:**
+   - `always @(in)` creates a sequential block that is triggered whenever any of the input bits of `in` changes.  This ensures that the output `pos` is updated whenever the input changes.
+
+3. **Conditional Statements:**
+   - The `if-else if-else` chain checks each bit of the input `in` from the least significant bit (LSB) to the most significant bit (MSB).
+   - If a bit is found to be 1, the corresponding value is assigned to the output `pos`.  For example, if `in[0]` is 1, then `pos` is set to 0.
+   - If none of the input bits are 1, the final `else` block is executed, and `pos` is set to 0.
+
+**How it works with the example:**
+
+If `in = 8'b10010000`:
+
+1. `in[0]` is 0.
+2. `in[1]` is 0.
+3. `in[2]` is 0.
+4. `in[3]` is 0.
+5. `in[4]` is 1.  The code enters the `in[4] == 1` block, and `pos` is assigned the value 4.
+6. The `always` block completes, and `pos` remains 4.
+
+Therefore, the output `pos` will be 4.
+
+**Alternative Implementation using a `case` statement:**
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+  always @(in) begin
+    case (in)
+      8'b00000000: pos = 0;
+      8'b00000001: pos = 0;
+      8'b00000010: pos = 1;
+      8'b00000100: pos = 2;
+      8'b00001000: pos = 3;
+      8'b00010000: pos = 5;
+      8'b00100000: pos = 6;
+      8'b01000000: pos = 7;
+      default: pos = 0;  // Handle unexpected input
+    endcase
+  end
+
+endmodule
+```
+
+While this `case` statement works, it's less efficient because it lists every possible input combination.  The first `if-else if-else` chain is preferable because it only evaluates until it finds the first '1'.  The `case` statement always evaluates all the possible conditions.

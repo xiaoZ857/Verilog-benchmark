@@ -1,0 +1,24 @@
+Here's how you can implement a 2-input NOR gate using Verilog:
+
+```verilog
+// Implement a 2-input NOR gate module
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// Define the outputs as logic type to ensure proper behavior on clock edges
+assign out = ~(in1 & in2);
+
+endmodule // End of the TopModule definition
+```
+
+Explanation:
+
+- The `~` symbol denotes the NOT operator, which inverts all bits.
+- The `&` symbol represents an AND operation between two signals. By placing it after the NOT operator (`~`), we're performing a NOR operation (NOT OR).
+ 
+Example Use Case:
+
+To use this module in your design, you would first instantiate it and then connect its inputs to the inputs of another module or directly to other inputs in the same module.

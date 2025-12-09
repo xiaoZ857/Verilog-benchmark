@@ -1,0 +1,44 @@
+  wire [7:0] pop_count;
+  
+  // First stage: sum each bit-pair? Actually, we can sum in groups of 1 bit (just the bit itself),
+  // but better: sum in small groups (e.g., 3 bits) and then add results.
+  // However, 255 bits is not a power of two, so we pad intermediate results carefully.
+  
+  // Let's do it in stages: first, sum each adjacent bits into 2-bit sums.
+  // But simpler: use a tree of adders: break into 85 groups of 3 bits each.
+  // Sum of 3 bits needs 2 bits to represent (0..3).
+  
+  // Stage 1: 85 groups of 3 bits -> 85 2-bit sums
+  wire [1:0] stage1 [0:84];
+  genvar i;
+  generate
+    for (i = 0; i < 85; i = i + 1) begin : stage1_loop
+      if (i*3+2 < 255) begin
+        assign stage1[i] = in[i*3] + in[i*3+1] + in[i*3+2];
+      end else begin
+        // Handle leftover bits (255 not divisible by 3: 255/3=85 remainder 0, actually 85*3=255 exactly)
+        // So no leftover bits.
+        assign stage1[i] = in[i*3] + in[i*3+1] + in[i*3+2];
+      end
+    end
+  endgenerate
+  
+  // Stage 2: add up these 85 2-bit numbers.
+  // We can add them in pairs, but 85 is odd, so better to use a binary tree.
+  // Let's do it in a simple but verbose way: use multiple adder levels.
+  
+  // Instead of manually writing many levels, we can use a recursive thinking in generate,
+  // but for clarity, let's do it in a few stages with power-of-two grouping approximations.
+  
+  // Alternative simpler method: use a for loop inside an always block to sum.
+  
+  integer j;
+  reg [7:0] temp_sum;
+  always @(*) begin
+    temp_sum = 0;
+    for (j = 0; j < 255; j = j + 1) begin
+      temp_sum = temp_sum + in[j];
+    end
+    out = temp_sum;
+  end
+endmodule

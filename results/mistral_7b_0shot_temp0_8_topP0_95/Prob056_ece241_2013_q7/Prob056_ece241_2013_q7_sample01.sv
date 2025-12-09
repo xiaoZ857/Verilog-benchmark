@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q
+);
+
+always @(posedge clk) begin
+  if (j & ~k) begin
+    Q <= !Q; // Toggle Q when J=1 and K=0
+  end else if (~j & k) begin
+    Q <= 0; // Set Q to 0 when J=0 and K=1
+  end else begin
+    Q <= Q_prev; // Maintain the previous state of Q when neither J nor K is asserted
+  end
+end
+
+assign Q_next = Q; // Assign next state Q_next to current state Q for synthesis tools
+always @(posedge clk) begin
+  Q <= Q_next; // Assign next state to current state (positive edge-triggered flip-flop)
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,43 @@
+module TopModule (
+  input [15:0] a,
+  input [15:0] b,
+  input [15:0] c,
+  input [15:0] d,
+  input [15:0] e,
+  input [15:0] f,
+  input [15:0] g,
+  input [15:0] h,
+  input [15:0] i,
+  input [3:0] sel,
+  output logic [15:0] out
+);
+
+  // Define the number of inputs and outputs for the multiplexer
+  parameter N = 16;
+  parameter M = 9;
+
+  // Create a reg to hold the current output value
+  reg [15:0] cur_out;
+
+  // Initialize cur_out to '1's, which will be assigned to unused cases
+  assign cur_out = N'1;
+
+  // Use case-registered logic to calculate out based on sel
+  always @(*sel)
+    case ((sel[3:0]))
+      4'b0000: cur_out = a;
+      4'b0001: cur_out = b;
+      4'b0010: cur_out = c;
+      4'b0011: cur_out = d;
+      4'b0100: cur_out = e;
+      4'b0101: cur_out = f;
+      4'b0110: cur_out = g;
+      4'b0111: cur_out = h;
+      4'b1000: cur_out = i;
+      default:    cur_out = N'1;
+    endcase
+
+  // Assign out to cur_out
+  assign out = cur_out;
+
+endmodule

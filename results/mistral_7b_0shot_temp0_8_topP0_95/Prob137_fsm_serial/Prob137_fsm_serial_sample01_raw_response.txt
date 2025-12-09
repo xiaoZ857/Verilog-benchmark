@@ -1,0 +1,44 @@
+ Here is an example Verilog implementation of the described finite state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire in,
+  output reg done
+);
+
+reg [7:0] data; // 8-bit register to store received data
+reg start_bit, data_bits, stop_bit; // flags for current state
+
+always @(posedge clk) begin
+    if (reset) begin
+        start_bit <= 0;
+        data_bits <= 0;
+        stop_bit <= 0;
+    end else if (!start_bit && in) begin
+        start_bit <= 1; // start bit received, enter data receiving state
+    end else if (data_bits < 8) begin
+        data[data_bits] <= in; // store incoming data bit
+        data_bits <= data_bits + 1;
+    end else if (!stop_bit && !in) begin
+        stop_bit <= 1; // no data bit received, expect stop bit
+    end else if (stop_bit && in) begin
+        done <= 1; // byte correctly received, assert done
+        start_bit <= 0;
+        data_bits <= 0;
+        stop_bit <= 0;
+    end
+end
+
+assign done = !reset && done; // ensure done is only asserted after reset deassertion
+
+endmodule
+```
+
+This module implements a finite state machine that receives serial data according to the specified protocol. The four states are:
+
+1. Idle (start_bit = 0, data_bits = 0, stop_bit = 0): waits for the start bit (0) to be received.
+2. Data Receiving (data_bits < 8): stores each incoming data bit in the `data` register, starting from the least significant bit (LSB).
+3. Wait for Stop Bit (stop_bit = 0, !in): waits for the stop bit (1) to be received or detects a missing stop bit if no more bits are coming in.
+4. Done: asserts `done` when the correct byte has been received and resets the state machine to idle.

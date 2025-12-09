@@ -1,0 +1,37 @@
+ Here's a simple Verilog implementation of a module that behaves as a wire, passing the input signal to the output without any internal logic:
+
+```verilog
+module TopModule (
+  input wire in,
+  output reg out
+);
+
+always @(posedge clk)
+begin
+  out <= in;
+end
+
+initial begin
+  #10 $finish; // Optionally, you can specify a simulation time for the testbench to run for a specific number of clock cycles.
+end
+```
+
+In this example, the module has an input `in` and an output `out`. The signal is assigned from the input to the output on every positive edge of the implicit clock signal `clk`. The optional `initial` block at the end sets a delay for the simulation to run for 10 clock cycles before terminating.
+
+If you want to use a real clock signal instead of the implicit one, you can add a clock input and modify the always block accordingly:
+
+```verilog
+module TopModule (
+  input wire in,
+  input clk,
+  output reg out
+);
+
+always @(posedge clk)
+begin
+  if (clk)
+    out <= in;
+end
+```
+
+In this version of the module, the `out` signal is assigned the value of `in` on every positive edge of the `clk` input.

@@ -1,0 +1,36 @@
+We need a counter to count 4 cycles after reset.  
+The FSM can be simple: after reset, go to a state that asserts `shift_ena` for exactly 4 clock cycles, then stay in a state where `shift_ena = 0` until next reset.
+
+Let¡¯s use a 2-bit counter and a state bit to know if we are in the ¡°shifting¡± phase or the ¡°done¡± phase.
+
+One approach:  
+- State `SHIFTING`: `shift_ena = 1`, increment counter each cycle.  
+- State `DONE`: `shift_ena = 0`.  
+- Reset goes to `SHIFTING` with counter = 0.  
+- When counter reaches 3 (i.e., 4 cycles counted), go to `DONE`.
+
+---
+
+```verilog
+  reg [1:0] count;
+  reg state; // 0 = SHIFTING, 1 = DONE
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= 1'b0; // SHIFTING
+      count <= 2'b00;
+    end else begin
+      if (state == 1'b0) begin // SHIFTING
+        if (count == 2'b11) begin
+          state <= 1'b1; // DONE
+        end else begin
+          count <= count + 1;
+        end
+      end
+      // if state == DONE, do nothing
+    end
+  end
+  
+  assign shift_ena = (state == 1'b0);
+endmodule
+```

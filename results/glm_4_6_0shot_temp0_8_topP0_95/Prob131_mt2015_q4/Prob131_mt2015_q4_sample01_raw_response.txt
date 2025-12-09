@@ -1,0 +1,27 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  // Module A instances: z = (x^y) & x
+  wire a1_out, a2_out;
+  assign a1_out = (x ^ y) & x;
+  assign a2_out = (x ^ y) & x;
+
+  // Module B instances: z = x & y (from waveform analysis)
+  wire b1_out, b2_out;
+  assign b1_out = x & y;
+  assign b2_out = x & y;
+
+  // First pair: A1 OR B1
+  wire or_out;
+  assign or_out = a1_out | b1_out;
+
+  // Second pair: A2 AND B2
+  wire and_out;
+  assign and_out = a2_out & b2_out;
+
+  // Final output: XOR of OR and AND
+  assign z = or_out ^ and_out;
+endmodule

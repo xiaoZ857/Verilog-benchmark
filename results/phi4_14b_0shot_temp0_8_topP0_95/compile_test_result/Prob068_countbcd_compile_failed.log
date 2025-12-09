@@ -1,0 +1,22 @@
+Problem: Prob068_countbcd
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:20: error: carry1 is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:9:      : carry1 is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:23: error: carry1 is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:9:      : carry1 is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:30: error: carry2 is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:9:      : carry2 is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:33: error: carry2 is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:9:      : carry2 is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:41: error: carry3 is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:9:      : carry3 is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:44: error: carry3 is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:9:      : carry3 is declared here as wire.
+6 error(s) during elaboration.

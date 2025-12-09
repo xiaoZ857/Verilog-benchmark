@@ -1,0 +1,18 @@
+Problem: Prob068_countbcd
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:70: error: ena['sd0] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd0] is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:71: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd1] is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:72: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd2] is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:73: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd3] is declared here as wire.
+4 error(s) during elaboration.

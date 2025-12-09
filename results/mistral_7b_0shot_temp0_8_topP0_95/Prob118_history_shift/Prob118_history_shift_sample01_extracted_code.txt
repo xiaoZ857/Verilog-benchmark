@@ -1,0 +1,49 @@
+module TopModule (
+    input clk,
+    input areset,
+    input predict_valid,
+    input predict_taken,
+    output logic [31:0] predict_history,
+
+    input train_mispredicted,
+    input train_taken,
+    input [31:0] train_history
+);
+
+reg [31:0] predict_history_reg;
+reg [31:0] history_counter;
+reg rollback_flag;
+
+always @(posedge clk) begin
+    if (areset) begin
+        history_counter <= 0;
+        predict_history_reg <= 0;
+        rollback_flag <= 0;
+    end
+    else if (predict_valid && !rollback_flag) begin
+        // Shift in predict_taken from the LSB side
+        for (int i = 31; i > 0; i--) begin
+            predict_history_reg[i] <= predict_history_reg[i - 1];
+        end
+        predict_history_reg[0] <= predict_taken;
+    end
+    else if (train_mispredicted) begin
+        // Load the branch history register with the history after the mispredicted branch
+        predict_history_reg <= {train_history, train_taken};
+        rollback_flag <= 1'b1;
+    end
+end
+
+assign predict_history = predict_history_reg;
+
+// Handle edge triggered asynchronous reset
+always @(posedge areset) begin
+    if (areset) begin
+        history_counter <= 0;
+    end
+end
+
+// Increment the history counter on every clock cycle
+always @(posedge clk) begin
+    history_counter <= history_counter + 1'b1;
+end

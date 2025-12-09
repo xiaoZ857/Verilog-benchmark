@@ -1,0 +1,22 @@
+```verilog
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+  assign z = (x ^ y) & x;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input x, input y, output z);`**:  This line declares the module named `TopModule` and specifies the input signals `x` and `y` and the output signal `z`.  The `input` and `output` keywords define their direction.
+* **`assign z = (x ^ y) & x;`**:  This is the core of the module.  The `assign` statement performs a continuous assignment.  It evaluates the expression on the right-hand side (`(x ^ y) & x`) whenever any of the input signals `x` or `y` change.
+    * `x ^ y`:  This is the XOR (exclusive OR) operation.  It produces a 1 if `x` and `y` have different values, and a 0 if they have the same value.
+    * `&`: This is the AND operation.  It produces a 1 only if both operands are 1; otherwise, it produces a 0.
+    * The entire expression `(x ^ y) & x` calculates the boolean function z = (x^y) & x as described in the prompt.
+* **`endmodule`**:  This marks the end of the module definition.
+
+This implementation directly translates the given boolean equation into Verilog code, ensuring that the output `z` always reflects the correct result based on the values of inputs `x` and `y`.

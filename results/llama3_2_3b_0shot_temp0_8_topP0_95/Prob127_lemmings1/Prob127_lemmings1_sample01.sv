@@ -1,0 +1,95 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+// Moore State Machine for Lemmings Finite State Machine
+module lemming_fsm (
+    input clk,      // Positive edge triggered clock signal
+    input areset,    // Asynchronous reset signal
+    input bump_left, // Left side bump input
+    input bump_right, // Right side bump input
+    output walk_left, // Output for walking left state
+    output walk_right // Output for walking right state
+);
+
+// Define the states
+wire [1:0] currentState;  // Current state of the Lemming
+wire [1:0] nextState;      // Next state of the Lemming
+
+// State constants
+parameter IDLE_LEFT = 2'b00;
+parameter IDLE_RIGHT = 2'b01;
+parameter WALK_LEFT = 2'b10;
+parameter WALK_RIGHT = 2'b11;
+
+// Initialize the current state
+assign currentState = IDLE_LEFT;
+
+// Moore machine logic
+always @(posedge clk or negedge areset) begin
+    // Reset to idle when reset is active
+    if (areset) begin
+        currentState <= IDLE_LEFT;
+    end else begin
+        // Update next state based on current state and inputs
+        case (currentState)
+            IDLE_LEFT:
+                if (~bump_left && ~bump_right) begin // No bumps, stay in left walk state
+                    nextState <= WALK_LEFT;
+                elsif (bump_right) begin   // Right bump detected, switch to right walk state
+                    nextState <= WALK_RIGHT;
+                end else if (bump_left) begin // Left bump detected, switch to left walk state
+                    nextState <= WALK_LEFT;
+                end else                  // Both bumps detected, stay in left walk state
+                    nextState <= WALK_LEFT;
+
+            IDLE_RIGHT:
+                if (~bump_right && ~bump_left) begin // No bumps, stay in right walk state
+                    nextState <= WALK_RIGHT;
+                elsif (bump_left) begin   // Left bump detected, switch to left walk state
+                    nextState <= WALK_LEFT;
+                end else if (bump_right) begin // Right bump detected, switch to right walk state
+                    nextState <= WALK_RIGHT;
+                end else                  // Both bumps detected, stay in right walk state
+                    nextState <= WALK_RIGHT;
+
+            WALK_LEFT:
+                if (~bump_left && ~bump_right) begin
+                    nextState <= IDLE_LEFT;
+                elsif (bump_right) begin
+                    nextState <= WALK_RIGHT;
+                end else if (bump_left) begin
+                    nextState <= WALK_RIGHT;
+                end else
+                    nextState <= WALK_LEFT;
+
+            WALK_RIGHT:
+                if (~bump_right && ~bump_left) begin
+                    nextState <= IDLE_RIGHT;
+                elsif (bump_left) begin
+                    nextState <= WALK_LEFT;
+                end else if (bump_right) begin
+                    nextState <= WALK_LEFT;
+                end else
+                    nextState <= WALK_RIGHT;
+
+            default:
+                // Should never be reached, just in case
+                $assert_error("Invalid state");
+
+        endcase
+
+        currentState <= nextState;
+    end
+end
+
+// Output assignment
+assign walk_left = ~currentState & currentState == WALK_LEFT;
+assign walk_right = currentState == WALK_RIGHT;
+
+endmodule

@@ -1,0 +1,12 @@
+module TopModule (
+  input clk,
+  input a,
+  output reg q
+);
+
+always @(posedge clk) begin
+  if(a)
+    q <= q | !q; // Using XOR gate as the combinational logic circuit
+  else
+    q <= ~q; // Assigning the complement of current state to next state
+end

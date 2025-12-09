@@ -1,0 +1,77 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+
+  // Internal registers for hour, minute, and second
+  reg [3:0] hour_reg;
+  reg [3:0] minute_reg;
+  reg [3:0] second_reg;
+
+  // Always block for reset
+  always @(posedge clk) begin
+    if (reset) begin
+      hour_reg <= 4'b0011; // 0x3 = 3 (representing 12 in BCD)
+      minute_reg <= 4'b0000; // 0x0 = 0
+      second_reg <= 4'b0000; // 0x0 = 0
+      pm <= 0;
+    end else begin
+      // Increment second
+      if (ena) begin
+        if (second_reg == 4'b1111) begin // 59
+          second_reg <= 4'b0000;
+          // Increment minute
+          if (minute_reg == 4'b1111) begin // 59
+            minute_reg <= 4'b0000;
+            // Increment hour
+            if (hour_reg == 4'b1011) begin // 11
+              hour_reg <= 4'b0100; // 4 (representing 12 in BCD)
+              pm <= ~pm; // Toggle PM indicator
+            end else begin
+              hour_reg <= hour_reg + 1;
+            end
+          end
+        end else begin
+          second_reg <= second_reg + 1;
+        end
+      end
+    end
+  end
+
+  // Assign BCD outputs
+  assign hh = hour_reg;
+  assign mm = minute_reg;
+  assign ss = second_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Internal Registers:**
+   - `hour_reg`, `minute_reg`, `second_reg`: These are the internal registers that store the BCD values for hours, minutes, and seconds. Using 4 bits allows for representing values from 0 to 15 (0x0-0xF), which covers the necessary range for BCD representation.
+
+2. **Reset Logic (always @(posedge clk)):**
+   - `if (reset)`:  This block is executed when the `reset` signal is high. It resets all registers (`hour_reg`, `minute_reg`, `second_reg`) and the `pm` indicator to their initial values.  The hour register is initialized to 0x3 which represents 3 in BCD, which corresponds to 12 in a 12-hour clock.  The PM indicator is set to 0, indicating AM.
+   - `else`:  This block is executed when `reset` is low.  It handles the normal clocking and incrementing logic.
+
+3. **Increment Logic (inside `else` block):**
+   - `if (ena)`: This ensures that the clock increments only when the `ena` signal is high.
+   - **Second Increment:**  If `second_reg` reaches 59 (4'b1111), it's reset to 0 and the minute register is checked.
+   - **Minute Increment:** If `minute_reg` reaches 59 (4'b1111), it's reset to 0 and the hour register is checked.
+   - **Hour Increment:** If `hour_reg` reaches 12 (4'b1011), it's reset to 1 (4'b0100), and the `pm` indicator is toggled.  This handles the transition from 11:59:59 AM to 12:00:00 PM.
+   - The registers are incremented using `+ 1`.
+
+4. **Output Assignments:**
+   - `assign hh = hour_reg;`, `assign mm = minute_reg;`, `assign ss = second_reg;`:  These assignments connect the internal registers to the output signals.
+
+**Key Improvements and Considerations:**
+
+* **BCD Representation:** The code now correctly uses BCD (Binary-Coded Decimal) representation for hours, minutes, and seconds.  This is essential for accurate timekeeping.
+* **PM Indicator:**  The `pm` indicator

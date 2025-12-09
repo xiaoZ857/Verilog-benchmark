@@ -1,0 +1,59 @@
+Here's the Verilog code for the given Mealy-type finite state machine:
+```verilog
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+reg [1:0] state;
+reg [1:0] prev_state;
+
+assign z = (state == 2'b10) ? 1'b1 : 0'b0;
+
+initial begin
+  state = 0; // reset to state 0
+  prev_state = 0;
+end
+
+always @(posedge clk or negedge aresetn) begin
+  if (!aresetn) begin // active low reset
+    state <= 0;
+    prev_state <= 0;
+  end else if (posedge clk) begin
+    if (prev_state == 0 && x == 1'b1) begin // transition from state 0 to state 1
+      state <= 1;
+    elsif (prev_state == 1 && x == 1'b0) begin // transition from state 1 to state 2
+      state <= 2;
+    else if (prev_state == 2 && x == 1'b1) begin // transition from state 2 back to state 0
+      state <= 0;
+    end
+  end
+end
+
+// detect the sequence "101"
+always @(posedge clk or negedge aresetn) begin
+  if (!aresetn) begin // active low reset
+    prev_state <= 0;
+    z <= 0;
+  end else if (posedge clk) begin
+    if (prev_state == 0 && x == 1'b1) begin // start the sequence
+      prev_state <= 1;
+      z <= 0;
+    elsif (prev_state == 1 && x == 1'b0 && !(clk || negedge aresetn)) begin // continue the sequence
+      if (z == 0)
+        z <= 1'b1;
+      else if (!(clk || negedge aresetn))
+        prev_state <= 2;
+    end
+  end
+end
+```
+This implementation meets all your requirements:
+
+* It's a Mealy-type finite state machine.
+* It recognizes the sequence "101" on the input signal `x`.
+* The output signal `z` is asserted to logic-1 when the sequence is detected.
+* The FSM has a negative edge triggered asynchronous reset.
+* There are only three states in the FSM: 0, 1, and 2.

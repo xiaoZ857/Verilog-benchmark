@@ -1,0 +1,58 @@
+// Implement the Verilog module based on the following description.
+module TopModule (
+    input [3:0] in, // four-bit input vector
+    output [2:0] out_both, // out_both[2] means (in[2], in[3]) are '1', out_both[1] means (in[1], in[2]) are '1'
+    output [3:1] out_any, // out_any[2] means either in[2] or in[1] is '1'.
+    output [3:0] out_different // out_different[2] means if we "wrap" around the last element of in to left, then (in[2], in[0]) are different
+);
+
+// Variable declaration
+reg [2:0] out_both;
+reg [3:1] out_any;
+reg [3:0] out_different;
+
+// Positive edge triggered clock
+always @(posedge clk) begin
+
+    // Initialize the variables to 0
+    out_both <= 0;
+    out_any <= 0;
+    out_different <= 0;
+
+    // out_both[2]
+    if(in[2] == 1 && in[3] == 1) 
+        out_both[2] = 1;
+    
+    else if(in[2] == 1)
+        out_both[2] = 1; 
+
+    else if(in[3] == 1)
+        out_both[2] = 1;
+
+    // out_any[2]
+    else if(in[2] == 1 || in[1] == 1) 
+        out_any[2] = 1;
+
+    // out_different[2]
+    else if(in[2] != in[0]) 
+        out_different[2] = 1;
+    
+    // out_any[1]
+    if(in[1] == 1 || in[2] == 1) 
+        out_any[1] = 1;
+
+    // out_different[1]
+    else if(in[1] != in[2]) 
+        out_different[1] = 1;
+    
+    // out_any[0]
+    if(in[0] == 1 || in[1] == 1) 
+        out_any[0] = 1;
+
+    // out_different[0]
+    else if(in[0] != in[3]) 
+        out_different[0] = 1;
+    
+end
+
+endmodule

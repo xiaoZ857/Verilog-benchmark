@@ -1,0 +1,75 @@
+module top_module(
+    input clk,
+    input reset,
+    input [7:0] data,
+    output reg [31:0] start_shifting
+);
+
+// Define the states of the finite state machine
+typedef enum reg([31:0]) {
+    INITIAL_STATE,  // Waiting for first bit
+    BIT_1,           // First bit found, waiting for second bit
+    BIT_2,           // Second bit found, waiting for third bit
+    BIT_3            // Third bit found, waiting for fourth bit
+} state_t;
+
+// Define the current state of the finite state machine
+reg state_t state;
+reg [1:0] bits_found; // Count of 1101 bits found
+
+always @(*)
+begin
+    // Reset the states on reset
+    if (reset) begin
+        state = INITIAL_STATE;
+        bits_found = 0;
+        start_shifting <= 1'b0;
+    end else begin
+        // Update the current state based on the new data bit
+        if (data[6] == 1 && bits_found == 2) begin // Found second '1'
+            state = BIT_3;
+        end else if (data[5] == 1 && bits_found == 1) begin // Found first '1'
+            state = BIT_1;
+        end else if (data[4] == 0 && bits_found < 2) begin // Found second '0'
+            state = INITIAL_STATE; // Go back to the start
+            bits_found <= 1'b0;
+        end else if (data[3] == 1 && bits_found < 2) begin // Found first '0'
+            state = BIT_2;
+        end else if (data[2] == 1 && bits_found == 0) begin // Found first '1'
+            state = BIT_1;
+        end else if (data[1] == 0 && bits_found < 1) begin // Found second '0' and reset
+            state <= INITIAL_STATE;
+            bits_found <= 1'b0;
+            start_shifting <= 1'b0;
+        end else if (data[0] == 0 && bits_found == 0) begin // Found first '0'
+            state = INITIAL_STATE; // Go back to the start
+            bits_found <= 1'b0;
+        end
+    end
+
+    // Update the output based on the current state
+    case(state)
+        INITIAL_STATE: 
+            if (data[6] == 1 && data[5] == 1) begin // First two '1's found, start shifting
+                start_shifting <= 1'b1;
+            end else
+                start_shifting <= 1'b0;
+        BIT_1: 
+            if (data[4] == 1) begin // Second '1' found, continue to shift bits
+                start_shifting <= 1'b1;
+            end else
+                start_shifting <= 1'b0; 
+        BIT_2:
+            if (data[3] == 1) begin // Third '1' found, continue to shift bits
+                start_shifting <= 1'b1;
+            end else
+                start_shifting <= 1'b0;  
+        BIT_3: 
+            if (data[2] == 1) begin // Fourth '1' found and the sequence is complete
+                start_shifting <= 1'b1;
+            end else
+                start_shifting <= 1'b0;       
+    endcase
+end
+
+endmodule

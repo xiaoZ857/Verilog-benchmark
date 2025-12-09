@@ -1,0 +1,39 @@
+// 64‑bit arithmetic shift register with synchronous load
+//   load  : active high – loads q with data[63:0] on the rising edge of clk
+//   ena   : active high – enables shifting (only applied if load == 0)
+//   amount: 2‑bit control for shift operation
+//           00 → shift left  by 1  bit
+//           01 → shift left  by 8  bits
+//           10 → shift right by 1  bit (arithmetic)
+//           11 → shift right by 8  bits (arithmetic)
+//   q     : 64‑bit output (register)
+
+module TopModule (
+    input           clk,     // clock
+    input           load,    // synchronous load
+    input           ena,     // enable shift
+    input   [1:0]   amount,  // shift control
+    input   [63:0]  data,    // data to load
+    output reg [63:0] q      // shift register contents
+);
+
+    // synchronous process – executed on the rising edge of clk
+    always_ff @(posedge clk) begin
+        if (load) begin
+            // Load new data – overrides any shift operation
+            q <= data;
+        end
+        else if (ena) begin
+            // Perform shift based on the amount code
+            case (amount)
+                2'b00:  q <= {q[62:0], 1'b0};                         // left by 1
+                2'b01:  q <= {q[55:0], 8'b0};                         // left by 8
+                2'b10:  q <= {q[63],   q[63:1]};                     // right 1 (arith)
+                2'b11:  q <= {8{q[63]}, q[63:8]};                     // right 8 (arith)
+                default: q <= q;                                     // should never happen
+            endcase
+        end
+        // else ena == 0 → retain current value (no shift, no load)
+    end
+
+endmodule

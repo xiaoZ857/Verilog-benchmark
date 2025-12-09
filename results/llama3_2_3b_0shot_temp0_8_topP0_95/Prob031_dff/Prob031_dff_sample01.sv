@@ -1,0 +1,40 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+// Define the D Flip-Flop module
+module DFlipFlop(
+  // Input signal: Data to be stored in the flip-flop
+  input clk,
+  
+  // Input signal: Clock enabling signal (active high)
+  input enable,
+  
+  // Output signal: Q (previous output of the flip-flop)
+  output reg q
+  
+);
+
+// Internal signals for storing the state of the D flip-flop
+reg internal_next_q;
+
+// Assign the output 'q' from the internal next state
+assign q = internal_next_q;
+
+// Define the flip-flop logic to update the internal state
+always @(posedge clk) begin
+  // Check if the enabling signal is active high
+  if (enable == 1'b1) begin
+  
+    // Update the internal next state based on the current input data 'd'
+    internal_next_q = d;
+  
+  end else begin
+    // Reset the internal state when the enabling signal is inactive
+    internal_next_q <= 0;
+  end
+end
+
+// VERILOG-EVAL: endmodule not found

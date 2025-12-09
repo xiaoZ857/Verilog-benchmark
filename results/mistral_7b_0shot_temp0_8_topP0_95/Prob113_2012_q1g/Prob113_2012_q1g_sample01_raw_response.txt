@@ -1,0 +1,29 @@
+ Based on the provided Karnaugh map, the truth table for the function `f` can be derived as follows:
+
+```
+    x[4] x[3] x[2] x[1] | f
+    ---------------------|------
+    0       0           0      1
+    0       1           0      0
+    1       0           1      0
+    1       1           1      0
+    1       1           0      1
+```
+
+Now, we can implement this truth table in Verilog:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+always @(posedge clk) begin
+  if((x[4] & ~x[3]) | (~x[4] & x[2]))
+    f <= 1'b1;
+  else
+    f <= 1'b0;
+end
+```
+
+This Verilog module uses the provided Karnaugh map to implement the function `f`. The conditional expression inside the always block checks for the given conditions and assigns a high or low value to the output signal `f`, based on the truth table.

@@ -1,0 +1,36 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+
+  // State encoding
+  reg [3:0] state, next_state;
+  localparam IDLE  = 4'd0,
+             START = 4'd1,
+             DATA0 = 4'd2,
+             DATA1 = 4'd3,
+             DATA2 = 4'd4,
+             DATA3 = 4'd5,
+             DATA4 = 4'd6,
+             DATA5 = 4'd7,
+             DATA6 = 4'd8,
+             DATA7 = 4'd9,
+             STOP  = 4'd10,
+             ERROR = 4'd11;
+  
+  // Register to store received data
+  reg [7:0] data_reg;
+  reg done_reg;
+  
+  // State transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      data_reg <= 8'b0
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

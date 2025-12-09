@@ -1,0 +1,16 @@
+Problem: Prob148_2013_q2afsm
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'g' has 184 mismatches. First mismatch occurred at time 65.
+Hint: Total mismatched samples is 184 out of 1054 samples
+
+Simulation finished at 5271 ps
+Mismatches: 184 in 1054 samples

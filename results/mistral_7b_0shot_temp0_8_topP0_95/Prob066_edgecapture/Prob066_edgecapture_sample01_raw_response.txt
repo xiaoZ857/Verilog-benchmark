@@ -1,0 +1,42 @@
+ Here's a simple Verilog implementation of the described module:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+reg [31:0] previous_values; // Stores the values of 'in' from the previous clock cycle
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    previous_values <= 0; // Reset all previous values to zero when reset is active
+  end else begin
+    previous_values <= in; // Store current 'in' values for the next clock cycle
+  end
+end
+
+always @(posedge clk) begin
+  for (int i = 0; i < 32; i = i + 1) begin
+    if (previous_values[i] == 1'b1 && in[i] == 1'b0) begin
+      out[i] <= 1'b1; // Set the corresponding output bit to 1 when the condition is met
+    end
+  end
+end
+
+initial begin
+  previous_values <= 0; // Initialize all previous values to zero at the start
+end
+
+endmodule
+```
+
+This Verilog code creates a module called `TopModule` with `clk`, `reset`, `in`, and `out` as its inputs and outputs respectively. The module uses two registers: one for `previous_values` of `in` from the previous clock cycle, and another for the output `out`.
+
+The first always block resets the `previous_values` register when the `reset` signal is active (high), and stores the current values of `in` in `previous_values` on each positive edge of the clock.
+
+The second always block checks if any bit in the `previous_values` has changed from 1 to 0, and sets the corresponding bit in the `out` register to 1 when such a change is detected. The output bits will remain 1 until the module is reset again.
+
+Finally, the initial block initializes all previous values to zero at the start.

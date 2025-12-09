@@ -1,0 +1,52 @@
+To implement the described timer module in Verilog, you'll need to create a down-counter that can be reloaded at any time. The counter will decrement on each clock cycle if `load` is not asserted (i.e., `load = 0`). When it reaches zero, it will assert the terminal count (`tc`) signal and stop counting until reset or reloaded.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input load,
+    input [9:0] data,
+    output reg tc
+);
+
+    // Internal 10-bit counter register
+    reg [9:0] counter;
+
+    always @(posedge clk) begin
+        if (load) begin
+            // Load the counter with new data and reset terminal count
+            counter <= data;
+            tc <= 0;  // Reset terminal count when loading a new value
+        end else if (counter > 0) begin
+            // Decrement the counter only if it's greater than zero
+            counter <= counter - 1;
+        end
+
+        // Set terminal count to 1 when counter reaches zero
+        if (counter == 0) begin
+            tc <= 1;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Counter Register**: We use a 10-bit register `counter` to hold the countdown value.
+
+- **Always Block**: The logic inside the `always @(posedge clk)` block triggers on every positive edge of the clock signal (`clk`).
+
+- **Load Condition**:
+  - When `load = 1`, we load the counter with the new value from `data`.
+  - We also reset `tc` to 0, as a new timing period has started.
+
+- **Counting Down**:
+  - If `load = 0` and the counter is greater than zero, decrement the counter by 1.
+  
+- **Terminal Count Logic**:
+  - When the counter reaches zero, set `tc` to 1. This signals that the countdown is complete.
+  - The counter stops at zero until it's loaded again.
+
+This implementation ensures the timer can be reloaded anytime and counts down correctly while asserting a signal when the count reaches zero.

@@ -1,0 +1,41 @@
+```verilog
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+
+  always @(cpu_overheated) begin
+    shut_off_computer = cpu_overheated;
+  end
+
+  always @(arrived, gas_tank_empty) begin
+    if (~arrived) begin
+      keep_driving = ~gas_tank_empty;
+    end else begin
+      keep_driving = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation of Changes and Bug Fixes:**
+
+1. **`always @(cpu_overheated)`:** The original `always @(*)` for `shut_off_computer` was problematic.  `always @(*)` means the block will re-evaluate whenever *any* input to the block changes.  This is often unnecessary and can lead to unintended consequences.  Since `shut_off_computer` *only* depends on `cpu_overheated`, we should specify that dependency directly. This makes the code more readable and efficient.  The assignment is now synchronous to the clock.
+
+2. **`always @(arrived, gas_tank_empty)`:** Similar to the first change, the original `always @(*)` is replaced with a more targeted sensitivity list. This ensures that the `keep_driving` logic updates only when `arrived` or `gas_tank_empty` changes.  This also makes the code more efficient and readable.
+
+3. **Added `else` for `keep_driving`:** The original code for `keep_driving` only handled the case where `~arrived` is true.  If `arrived` is true, `keep_driving` would remain at its previous value, which might be unpredictable.  The added `else` statement explicitly sets `keep_driving` to `0` when `arrived` is true.  This guarantees predictable behavior.
+
+**Why the original code was problematic:**
+
+* **`always @(*)`:** Using `always @(*)` is generally discouraged. It creates a combinational loop if the logic inside the `always` block contains assignments that depend on the left-hand side of the assignment. This can lead to unexpected behavior, simulation errors, or even hardware synthesis problems.  It also adds unnecessary overhead.
+* **Missing `else` for `keep_driving`:** The original logic was incomplete.  It didn't define what should happen when `arrived` is true, leading to undefined behavior.
+
+**How the corrected code works:**
+
+* **`shut_off_computer`:**  This signal is set to `1` (true) whenever `cpu_overheated` is true.
+* **`keep_driving`:**  This signal is true only if the car has *not* arrived *and* the gas tank is not empty.  If the car has arrived, `keep_driving` is false, regardless of the gas tank status. This is a more realistic scenario.

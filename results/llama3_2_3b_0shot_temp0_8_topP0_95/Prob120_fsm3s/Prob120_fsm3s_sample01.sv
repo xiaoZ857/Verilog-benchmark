@@ -1,0 +1,49 @@
+
+module TopModule(
+    // Input signals
+    input clk,                  // Positive edge clock signal
+    input in,                    // Active low input signal
+    input reset,                 // Active high reset signal
+    
+    // Output signal
+    output out                   // Output of the state machine
+);
+
+// Define states
+typedef enum reg [1:0] {
+    A,
+    B,
+    C,
+    D
+} state_t;
+
+// State variable
+state_t state;
+
+// Initial state (A)
+initial begin
+    state = A;
+end
+
+// Moore state machine implementation
+always @(posedge clk or posedge reset) begin
+    // Reset the FSM to state A on active high reset
+    if (reset && !state) {
+        state <= A;
+    } else begin
+        // Check input and state to determine next state
+        case (state)
+            A:        state <= B;                    // No change when in=0, in=1 sets next_state to C
+            B:        state <= C;                    // No change when in=0, in=1 sets next_state to B
+            C:        state <= D;                    // No change when in=0, in=1 sets next_state to B
+            D:        state <= A;                    // Set output to 1 when in=1 (active low input)
+        endcase
+    end
+end
+
+// Output logic
+assign out = state == D? 1 : 0;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

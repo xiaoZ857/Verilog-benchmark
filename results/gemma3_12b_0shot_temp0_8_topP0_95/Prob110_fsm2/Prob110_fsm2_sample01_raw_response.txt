@@ -1,0 +1,105 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+
+  // Define the states
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  // Declare the state register
+  reg current_state;
+
+  // Assign the output based on the current state
+  always @(current_state) begin
+    case (current_state)
+      OFF:  out = 0;
+      ON:   out = 1;
+      default: out = 0; // Should never happen, but good to have a default
+    endcase
+  end
+
+  // Synchronous state transition logic
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= OFF;
+    end else begin
+      case (current_state)
+        OFF: begin
+          if (j) begin
+            current_state <= ON;
+          end else begin
+            current_state <= OFF;
+          end
+        end
+        ON: begin
+          if (k) begin
+            current_state <= OFF;
+          end else begin
+            current_state <= ON;
+          end
+        end
+        default: current_state <= OFF; // Default state in case of unexpected state
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**  The `module TopModule(...)` defines the module and its input/output ports.
+2. **State Definition:** `parameter OFF = 2'b00;` and `parameter ON = 2'b01;` assign symbolic names to the state values. This makes the code more readable and maintainable.  Using 2-bit parameters also defines the number of states.
+3. **State Register:** `reg current_state;` declares a register to hold the current state of the state machine.
+4. **Output Assignment (Combinational Logic):** `always @(current_state) begin ... end`  This block defines the output `out` based on the current state. It uses a `case` statement to assign `out = 0` when in the `OFF` state and `out = 1` when in the `ON` state. This is combinational logic and updates immediately when `current_state` changes.
+5. **Synchronous State Transition Logic (Sequential Logic):** `always @(posedge clk or posedge areset) begin ... end` This block defines the state transitions based on the clock and asynchronous reset.
+    * **Asynchronous Reset:** `if (areset) begin current_state <= OFF; end`  When `areset` is high, the state machine is reset to the `OFF` state.
+    * **State Transitions:** The `case (current_state)` statement handles the state transitions. It checks the current state and the input signals `j` and `k` to determine the next state.
+    * **Next State Assignment:** The `current_state <= ...` statements assign the next state based on the state transition rules defined in the problem description.  The `<=` is the non-blocking assignment operator, ensuring that the state is updated at the end of the clock cycle.
+6. **Default Case:**  The `default` case in both the output assignment and state transition blocks is included as a safety measure. If the state machine somehow enters an undefined state, it will default to a known state (`OFF` in this case), preventing unpredictable behavior.
+
+**How to Simulate:**
+
+You can simulate this Verilog code using a Verilog simulator like:
+
+* **Icarus Verilog (iverilog):** Free and open-source.
+* **ModelSim:** Commercial simulator.
+* **Vivado Simulator (Xilinx):** Included with Xilinx Vivado design suite.
+
+Here's a simple testbench for `TopModule`:
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg j;
+  reg k;
+  reg areset;
+  wire out;
+
+  TopModule uut (
+    .clk(clk),
+    .j(j),
+    .k(k),
+    .areset(areset),
+    .out(out)
+  );
+
+  initial begin
+    clk = 0;
+    j = 0;
+    k = 0;
+    areset = 0;
+
+    // Apply reset
+    areset = 1;
+    #10;
+    areset = 0;
+
+    // Test sequence
+    #10; j =

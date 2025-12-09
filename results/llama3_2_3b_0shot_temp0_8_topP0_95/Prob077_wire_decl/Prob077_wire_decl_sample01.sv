@@ -1,0 +1,28 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output [1:0] out, // Output is a 2-bit signal.
+                  output out_n // Output is also a 2-bit signal.
+);
+
+wire ena;
+wire and_out;
+
+// First layer
+and_out = (a & b) | (c & d); // AND gate for a, b and c, d
+
+ena = ~(a & b); // NOT gate for first AND output.
+
+// Connect the first AND to this new wire
+ena = ~(ena);
+
+// Second layer
+out_n = ena & out; // Inverted OR of ena and output 'out' in second layer.
+out = ~(ena) | (c & d); // OR of inverted ena and second AND output.
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

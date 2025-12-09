@@ -1,0 +1,20 @@
+Problem: Prob062_bugs_mux2
+Code file: results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:10: warning: macro output undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:11: warning: macro sel undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:11: warning: macro a undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:11: warning: macro b undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:13: warning: macro output undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:13: warning: macro assign undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:13: warning: macro always undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:18: warning: macro always undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:19: warning: macro sel undefined (and assumed null) at this point.
+results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:8: syntax error
+I give up.

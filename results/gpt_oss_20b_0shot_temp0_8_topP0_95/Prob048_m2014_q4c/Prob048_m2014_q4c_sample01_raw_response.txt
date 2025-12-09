@@ -1,0 +1,34 @@
+Here’s a minimal, synthesizable Verilog‑2001/Verilog‑2005‑style implementation of the requested D‑FF with an **active‑high synchronous reset** that forces the output `q` to zero when `r` is asserted.  
+
+```verilog
+`timescale 1ns / 1ps          // (optional – useful for simulation)
+
+module TopModule (
+    input  logic clk,          // clock – positive edge triggered
+    input  logic d,            // data input
+    input  logic r,            // active‑high synchronous reset
+    output logic q             // registered output
+);
+
+    // Positive‑edge triggered always block – synchronous logic
+    always_ff @(posedge clk) begin
+        if (r)          // synchronous reset
+            q <= 1'b0;  // reset output to zero
+        else
+            q <= d;     // normal D‑FF behaviour
+    end
+
+endmodule
+```
+
+### Key points
+
+| Feature | Implementation |
+|---------|----------------|
+| **Positive‑edge clock** | `always_ff @(posedge clk)` |
+| **Synchronous reset** | `if (r) q <= 1'b0;` – reset only on the rising edge of `clk` |
+| **Active‑high reset** | Condition `if (r)` checks for a logic `1` on `r` |
+| **Output type** | `logic q` – synthesizable and supports `x`/`z` during simulation |
+| **No asynchronous reset** | `r` is *not* in the sensitivity list, so it is truly synchronous |
+
+You can now instantiate `TopModule` in a larger design or use it in a testbench to verify its behaviour. If you’d like a quick testbench, let me know and I can add one!

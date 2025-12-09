@@ -1,0 +1,45 @@
+
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+module HalfAdder(
+  input a,
+  input b,
+  output reg sum,
+  output reg cout
+);
+
+always @(posedge clk) begin
+  if (a && b) begin
+    sum <= 1'bx; // X for unknown value in case of overlapping pulse inputs
+    cout <= 1'b1;
+  end else if (a) begin
+    sum <= b;
+    cout <= 0;
+  end else if (b) begin
+    sum <= a;
+    cout <= 0;
+  end else begin
+    sum <= 0;
+    cout <= 0;
+  end
+end
+
+// For synchronous reset
+always @* begin
+  if (reset) begin
+    sum <= 0;
+    cout <= 0;
+  end
+end
+
+// Add clock and reset inputs
+input clk, reset;
+output reg q; // for synthesizability purpose, replace 'reg' with 'wire' if necessary
+
+assign q = (reset) ? 0 : sum; // assign the final output
+
+endmodule

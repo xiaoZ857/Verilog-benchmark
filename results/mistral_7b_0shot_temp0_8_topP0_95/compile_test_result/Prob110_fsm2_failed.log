@@ -1,0 +1,16 @@
+Problem: Prob110_fsm2
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be asynchronous, but doesn't appear to be.
+Hint: Output 'out' has 119 mismatches. First mismatch occurred at time 5.
+Hint: Total mismatched samples is 119 out of 241 samples
+
+Simulation finished at 1206 ps
+Mismatches: 119 in 241 samples

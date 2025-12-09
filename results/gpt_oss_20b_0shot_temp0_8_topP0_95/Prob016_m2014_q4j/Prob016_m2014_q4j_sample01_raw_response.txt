@@ -1,0 +1,56 @@
+**Verilog – 4‑bit adder that returns a 5‑bit result (sum + overflow)**  
+
+```verilog
+// ---------------------------------------------------------------------
+//  Full‑adder – single‑bit
+// ---------------------------------------------------------------------
+module full_adder
+(
+    input  wire a,      // first operand bit
+    input  wire b,      // second operand bit
+    input  wire cin,    // carry‑in
+    output wire sum,    // sum bit
+    output wire cout    // carry‑out (overflow of this bit)
+);
+    // XOR for sum, majority‑gate for carry‑out
+    assign sum  = a ^ b ^ cin;
+    assign cout = (a & b) | (b & cin) | (a & cin);
+endmodule
+
+
+
+// ---------------------------------------------------------------------
+//  TopModule – 4‑bit ripple‑carry adder
+// ---------------------------------------------------------------------
+module TopModule
+(
+    input  wire [3:0] x,      // 4‑bit operand A
+    input  wire [3:0] y,      // 4‑bit operand B
+    output wire [4:0] sum     // 5‑bit result: [4] is overflow
+);
+    // Internal carry wires
+    wire c0, c1, c2, c3;
+
+    // Least‑significant bit (carry‑in = 0)
+    full_adder fa0 ( .a(x[0]), .b(y[0]), .cin(1'b0), .sum(sum[0]), .cout(c0) );
+
+    // Bit 1
+    full_adder fa1 ( .a(x[1]), .b(y[1]), .cin(c0), .sum(sum[1]), .cout(c1) );
+
+    // Bit 2
+    full_adder fa2 ( .a(x[2]), .b(y[2]), .cin(c1), .sum(sum[2]), .cout(c2) );
+
+    // Bit 3 (most‑significant bit of the operands)
+    full_adder fa3 ( .a(x[3]), .b(y[3]), .cin(c2), .sum(sum[3]), .cout(c3) );
+
+    // The final carry‑out is the overflow bit of the 4‑bit addition
+    assign sum[4] = c3;
+endmodule
+```
+
+### Explanation
+* The `full_adder` module implements a single‑bit full adder using combinational logic (`^` for sum, and the majority function for carry‑out).
+* `TopModule` wires together four instances of `full_adder` to build a 4‑bit ripple‑carry adder.
+* The carry produced by the most significant full adder (`c3`) is assigned to `sum[4]`, giving the 5‑bit result that includes the overflow (carry‑out) bit.
+
+The design is purely combinational; no clock is required. It will synthesize to a simple ripple‑carry adder in hardware.

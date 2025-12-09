@@ -1,0 +1,13 @@
+
+module TopModule (
+    input [1:0] A,
+    input [1:0] B,
+    output z
+);
+
+  // Comparing each bit of A and B to determine if they are equal
+  assign z = (A == B) ? 1'b1 : 1'b0;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,45 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+  reg [3:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (areset) begin
+      shift_reg <= 4'b0000;
+    end else if (load) begin
+      shift_reg <= data;
+    end else if (ena) begin
+      shift_reg <= {shift_reg[2:0], 1'b0};
+    end
+  end
+
+  assign q = shift_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`reg [3:0] shift_reg;`**: Declares a 4-bit register `shift_reg` to hold the shift register's contents.  We need to declare it as a `reg` because its value is updated within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This block describes the sequential logic triggered by the positive edge of the clock signal (`clk`).
+* **`if (areset) begin ... end`**:  When `areset` is high, the shift register is reset to all zeros.  This is asynchronous, meaning it happens immediately regardless of the clock.
+* **`else if (load) begin ... end`**: If `load` is high, the shift register is loaded with the value of the input `data`.  This takes precedence over the shift operation.
+* **`else if (ena) begin ... end`**: If `ena` is high (and neither `areset` nor `load` is high), the shift register performs a right shift.  `{shift_reg[2:0], 1'b0}` creates a new 4-bit value where the bits `shift_reg[2:0]` are shifted one position to the right, and the least significant bit (LSB) is set to 0.  This implements the right shift operation.
+* **`assign q = shift_reg;`**: This continuous assignment connects the `shift_reg` to the output `q`.  The output `q` always reflects the current value of the shift register.
+
+**Key Points:**
+
+* **Priority:** The code explicitly prioritizes `load` over `ena`.  If both are asserted, the shift register will be loaded with the value of `data`.
+* **Asynchronous Reset:** The `areset` signal is asynchronous, meaning it immediately resets the register regardless of the clock.
+* **Right Shift:** The right shift operation effectively discards the least significant bit (LSB) as it shifts.
+* **Positive Edge Triggered:** The `always @(posedge clk)` block ensures that the shift register's contents are updated only on the positive edge of the clock signal.
+* **Clear and Concise:** The code is structured to be easy to understand and maintain.
+
+This implementation accurately reflects the requirements specified in the problem description.  It's a functional and well-structured Verilog module for a 4-bit right shift register with the given control signals.

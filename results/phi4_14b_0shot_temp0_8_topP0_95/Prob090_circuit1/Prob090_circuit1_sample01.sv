@@ -1,0 +1,13 @@
+
+module TopModule (
+  input a,
+  input b,
+  output q
+);
+
+  // Implementing the AND operation between inputs 'a' and 'b'
+  assign q = a & b;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,33 @@
+ Here is the Verilog code for the described circuit:
+
+```verilog
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg [7:0] Q,
+  output reg Z
+);
+
+// Define 8-bit shift register with D-type flip-flops
+always @(posedge clk) begin
+  if (enable)
+    Q[0] <= S;
+  for (int i = 1; i < 8; i++)
+    Q[i] <= Q[i - 1];
+end
+
+// Multiplexer to select the output Z based on ABC inputs
+assign Z = Q[(A & B & C)];
+
+endmodule
+```
+
+In this implementation, we first create an 8-bit shift register using D-type flip-flops. The MSB (Q[0]) takes the input S, and the remaining bits are shifted on each clock edge when the enable signal is high.
+
+Then we added a multiplexer to select the output Z based on the ABC inputs. If A, B, and C are all 1s, then Z will correspond to Q[7]. If only one of the inputs (A, B, or C) is set to 1, then Z will correspond to the appropriate indexed bit in the shift register (Q[1] for ABC=001, Q[2] for ABC=010, and so on).
+
+Finally, we made Z an output reg to allow for proper simulation and synthesis of the Verilog code.

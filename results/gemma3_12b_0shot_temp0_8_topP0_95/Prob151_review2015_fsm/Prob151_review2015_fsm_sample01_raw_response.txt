@@ -1,0 +1,92 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+  // Define states
+  parameter IDLE = 2'b00
+  parameter SHIFT = 2'b01
+  parameter COUNTING = 2'b10
+  parameter DONE = 2'b11
+
+  reg [1:0] current_state;
+  reg [3:0] shift_reg;
+  reg shift_ena_count;
+  reg counting_count;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= IDLE;
+      shift_reg <= 0;
+      shift_ena_count <= 0;
+      counting_count <= 0;
+      shift_ena <= 0;
+      counting <= 0;
+      done <= 0;
+    end else begin
+      case (current_state)
+        IDLE: begin
+          shift_ena <= 0;
+          counting <= 0;
+          done <= 0;
+          if (data) begin
+            shift_reg <= (shift_reg << 1) | 1;
+            if (shift_reg == 4'b1101) begin
+              current_state <= SHIFT;
+              shift_ena_count <= 4;
+            end
+          end else begin
+            shift_reg <= (shift_reg << 1) | 0;
+          end
+        end
+
+        SHIFT: begin
+          shift_ena <= 1;
+          counting <= 0;
+          done <= 0;
+          if (shift_ena_count > 0) begin
+            shift_ena_count <= shift_ena_count - 1;
+          end else begin
+            current_state <= COUNTING;
+            counting <= 1;
+            counting_count <= 0;
+          end
+        end
+
+        COUNTING: begin
+          shift_ena <= 0;
+          counting <= 1;
+          done <= 0;
+          if (done_counting) begin
+            current_state <= DONE;
+            counting <= 0;
+            counting_count <= 0;
+          end
+        end
+
+        DONE: begin
+          shift_ena <= 0;
+          counting <= 0;
+          done <= 1;
+          if (ack) begin
+            current_state <= IDLE;
+            done <= 0;
+          end
+        end
+
+        default: begin
+          current_state <= IDLE;
+        end
+      endcase
+    end
+  end
+
+endmodule
+```

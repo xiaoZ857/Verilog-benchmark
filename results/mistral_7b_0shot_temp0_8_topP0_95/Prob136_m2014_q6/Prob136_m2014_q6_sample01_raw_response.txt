@@ -1,0 +1,60 @@
+ Here is a possible implementation of the described state machine in Verilog:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire w,
+  output wire z
+);
+
+reg [3:0] current_state; // Current state of the FSM
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    current_state <= 4'b0001; // Reset to initial state A
+  end else begin
+    case (current_state)
+      4'b0001: begin // State A
+        if (w) begin
+          current_state <= 4'b0010; // Transition to state B
+        end
+      end,
+      4'b0010: begin // State B
+        if (!w) begin
+          current_state <= 4'b0001; // Transition back to state A
+        end else begin
+          current_state <= 4'b0100; // Transition to state C
+        end
+      end,
+      4'b0100: begin // State C
+        current_state <= 4'b1000; // Transition to state D
+      end,
+      4'b0101: begin // State D (already visited earlier in the state machine)
+        if (!w) begin
+          current_state <= 4'b0001; // Transition back to state A
+        end else begin
+          current_state <= 4'b0010; // Transition back to state B
+        end
+      end,
+      4'b1000: begin // State E
+        if (!w) begin
+          current_state <= 4'b0101; // Transition to state D
+        end
+      end,
+      4'b1001: begin // State F
+        current_state <= 4'b0100; // Transition to state C
+      end
+    endcase
+  end
+end
+
+assign z = current_state == 4'b1000; // Output is true when in state F
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with three inputs (clk, reset, w) and one output (z). The current state of the state machine is stored in a 4-bit register `current_state`.
+
+The always block containing the sensitive clauses (posedge clk or posedge reset) updates the current state based on the previous state and input values. If the reset signal is asserted, the state is set to the initial value 'A'. Otherwise, it transitions between states according to the state machine diagram.
+
+The output `z` is defined as true when the current state is 'F' (4'b1000).

@@ -1,0 +1,78 @@
+```verilog
+module TopModule (
+  input [2:0] a,
+  output reg [15:0] q
+);
+
+  always @(a) begin
+    case (a)
+      3'b000: q = 16'h1232;
+      3'b001: q = 16'haee0;
+      3'b010: q = 16'h27d4;
+      3'b011: q = 16'h5a0e;
+      3'b100: q = 16'h2066;
+      3'b101: q = 16'h64ce;
+      3'b110: q = 16'hc526;
+      3'b111: q = 16'h2f19;
+      default: q = 16'h0000; // Default value for unknown inputs
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:** The code defines a Verilog module named `TopModule` with an input `a` (a 3-bit signal) and an output `q` (a 16-bit signal).
+
+2. **`always @(a)` Block:** This block specifies that the assignment of `q` should happen whenever the input `a` changes. This ensures that the output is updated as soon as the input changes, which is characteristic of a combinational circuit.
+
+3. **`case` Statement:**  The `case` statement examines the value of the input `a`. Based on the given waveforms, we can create a mapping of input `a` to the corresponding value of `q`.  The `case` statement efficiently implements this mapping.
+
+4. **Output Assignment:**  Within each `case` clause, the output `q` is assigned the corresponding hexadecimal value based on the input `a`.
+
+5. **Default Case:**  The `default` case is included to handle scenarios where the input `a` takes on a value that is not explicitly defined in the `case` statement. In this example, it assigns `q` to `16'h0000`.  This provides a predictable output for unknown inputs, which is a good practice in digital design.
+
+**How it matches the description:**
+
+The problem states that the circuit is combinational and that the provided waveforms show the relationship between inputs and outputs. This implementation directly translates these waveforms into a `case` statement.  For each input value in the waveform, the corresponding output value is assigned to `q`.  Because the description specifies a combinational circuit, the `always @(a)` block ensures that the output is updated whenever the input changes.
+
+**To use this code:**
+
+1.  **Save the code:** Save the code as a `.v` file (e.g., `top_module.v`).
+
+2.  **Simulate:** Use a Verilog simulator (like Icarus Verilog, ModelSim, or Xilinx Vivado) to simulate the module. You're going to need a testbench to provide input stimulus and check the output.
+
+**Example Testbench (for Icarus Verilog):**
+
+```verilog
+module testbench;
+
+  reg [2:0] a;
+  wire [15:0] q;
+
+  TopModule dut (
+    .a(a),
+    .q(q)
+  );
+
+  initial begin
+    $dumpfile("waveform.vcd");
+    $dumpvars(0, dut);
+
+    a = 3'b000; #5;
+    a = 3'b001; #5;
+    a = 3'b010; #5;
+    a = 3'b011; #5;
+    a = 3'b100; #5;
+    a = 3'b101; #5;
+    a = 3'b110; #5;
+    a = 3'b111; #5;
+    a = 3'b000; #5;
+    a = 3'b001; #5;
+    a = 3'b010; #5;
+    a = 3'b100; #5;
+    a = 3'b101; #5;
+    a = 3'b110; #5;
+    a = 3'b111; #5;
+    

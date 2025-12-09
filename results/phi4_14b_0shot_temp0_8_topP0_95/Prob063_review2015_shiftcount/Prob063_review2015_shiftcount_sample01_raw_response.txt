@@ -1,0 +1,44 @@
+To implement a Verilog module for a four-bit shift register that also acts as a down counter, we need to handle two primary operations based on control signals `shift_ena` and `count_ena`. The module should:
+
+1. Shift data into the most significant bit (MSB) when `shift_ena` is asserted.
+2. Decrement the current value stored in the register when `count_ena` is asserted.
+
+Since it doesn't matter what happens if both signals are asserted simultaneously, we can prioritize one operation over the other without concern for undefined behavior in that scenario.
+
+Here's a possible implementation of the module:
+
+```verilog
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (shift_ena) begin
+      // Shift operation: insert new data at MSB, right-shift other bits
+      q <= {data, q[3:1]};
+    end else if (count_ena) begin
+      // Down counter operation: decrement the current value
+      q <= q - 4'b0001;
+      
+      // Handle wrap-around if the result is negative
+      if (q == 4'b1111) begin
+        q <= 4'b1110; // Wrap around to 14 when going below 0
+      end
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+- **Shift Operation (`shift_ena`):** When `shift_ena` is high, the new data is inserted into the MSB position of register `q`, and all existing bits are right-shifted. This is achieved by concatenating `data` with the bits from `q[3:1]`.
+
+- **Down Counter Operation (`count_ena`):** When `count_ena` is high, the value in `q` is decremented by 1. Since we're working in a four-bit register, there's potential for underflow when decrementing zero (i.e., going from binary `0000` to an invalid negative number). Therefore, if after decrementing, `q` becomes `1111`, it wraps around to `1110` instead of wrapping to `10000` which would exceed the four-bit limit.
+
+- **Priority Handling:** The implementation prioritizes shifting over counting by checking `shift_ena` first. If both signals are asserted simultaneously, only the shift operation will occur due to the order of conditions in the `always` block.
+
+This module design fulfills the requirements, providing basic functionality for a shift register and down counter with simple control logic.

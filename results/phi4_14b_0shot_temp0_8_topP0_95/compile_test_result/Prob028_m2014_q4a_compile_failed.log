@@ -1,0 +1,12 @@
+Problem: Prob028_m2014_q4a
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: Unable to bind wire/reg/memory `reset_n' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_8_topP0_95\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: Unable to elaborate condition expression.
+2 error(s) during elaboration.

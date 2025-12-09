@@ -1,0 +1,45 @@
+ Here is the implementation of your requested Verilog module in two ways: using assign statements and a procedural if statement.
+
+1. Using Assign Statements:
+```Verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+always @(posedge clk) begin
+  out_always <= (sel_b1 && sel_b2) ? b : a;
+end
+
+endmodule
+```
+
+2. Using Procedural If Statement:
+```Verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+always @(posedge clk) begin
+  if(sel_b1 && sel_b2)
+    out_always <= b;
+  else
+    out_always <= a;
+end
+
+assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+endmodule
+```
+In both examples, the module's clock is not explicitly defined. You should add it if your design requires synchronization. Also, clk should be specified as an input and declared at the top of the module.

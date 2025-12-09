@@ -1,0 +1,42 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    for (int i = 0; i < 8; i++) begin
+      if (prev_in[i] == 0 && in[i] == 1) begin
+        pedge[i] = 1;
+      else begin
+        pedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [7:0] prev_in;`**:  This register stores the value of the input signal `in` from the previous clock cycle.  This is crucial for detecting the change from 0 to 1.
+
+2. **`always @(posedge clk)`**:  This block executes on the positive edge of the clock signal.
+
+3. **`for (int i = 0; i < 8; i++) begin ... end`**: This loop iterates through each bit of the 8-bit input vector.
+
+4. **`if (prev_in[i] == 0 && in[i] == 1) begin ... end`**: This is the core logic for positive edge detection.  It checks if the previous value of the `i`-th bit (`prev_in[i]`) was 0 and the current value (`in[i]`) is 1.  If this condition is true, it means a positive edge has occurred.
+
+5. **`pedge[i] = 1;`**: If a positive edge is detected, the corresponding bit in the `pedge` output register is set to 1.
+
+6. **`else begin pedge[i] = 0; end`**: If the condition for a positive edge is not met, the corresponding bit in the `pedge` output is set to 0.
+
+7. **`prev_in = in;`**:  This line updates the `prev_in` register with the current value of `in`.  This ensures that `prev_in` holds the value from the *previous* clock cycle for the next evaluation.
+
+**How it works:**
+
+The module uses a register `prev_in` to remember the input's value from the previous clock cycle.  On each rising clock edge, the module compares the current input value (`in`) with the stored previous value (`prev_in`).  If the input transitioned from 0 to 1, the corresponding bit in the `pedge` output is set to 1.  The `prev_in` register is then updated with the current input value. The output bit is set one cycle after the edge is detected.  Therefore, the `pedge` signal will be high for only one clock cycle.

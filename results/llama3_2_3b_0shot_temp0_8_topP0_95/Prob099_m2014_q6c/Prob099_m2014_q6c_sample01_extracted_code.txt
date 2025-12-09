@@ -1,0 +1,15 @@
+module TopModule(
+    input [7:0] y, // Assuming a one-hot code for state assignment
+    input w,
+    output [1:0] Y2,
+    output [1:0] Y4
+);
+
+// Define the next-state signals for each state transition
+assign Y2 = (y == 6'b000001) || (y == 6'b010000); // State A to B, or F to D
+assign Y4 = (y == 6'b000100) || (y == 6'b011000); // State C to E, or F to B
+
+// Always true assignments for resetting the states
+assign w' == ~w; // Ensure that we only get the correct state on clock edge
+
+endmodule

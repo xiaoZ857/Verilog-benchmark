@@ -1,0 +1,20 @@
+To implement a Verilog module that always outputs a low signal, you can design a simple combinational logic circuit. The task is straightforward: to always produce the logical `0` as its output. In Verilog, this can be accomplished by directly assigning a constant value of `0` to the output port.
+
+Here's how you can implement the `TopModule`:
+
+```verilog
+module TopModule (
+  output wire zero // Declare 'zero' as an output wire
+);
+
+  assign zero = 1'b0; // Always assign logic low (0) to the output
+
+endmodule
+```
+
+### Explanation:
+- **Port Declaration**: The module `TopModule` has a single output port named `zero`. This is declared with `output wire zero`.
+  
+- **Constant Assignment**: Inside the module, we use an `assign` statement to assign a constant value of `1'b0` to `zero`. The `1'b` specifies that it's a 1-bit binary constant.
+
+This design ensures that no matter what happens inside or outside this module, `zero` will always be at logic level low (`0`). Since there is no internal logic or clock signal involved in this operation, the output remains consistently low regardless of other conditions.

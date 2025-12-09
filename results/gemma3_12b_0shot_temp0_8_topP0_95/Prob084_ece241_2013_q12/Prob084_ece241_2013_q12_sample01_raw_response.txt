@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg Z
+);
+
+  reg [7:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (enable) begin
+      shift_reg[0] <= S;
+      for (integer i = 7; i > 0; i--) begin
+        shift_reg[i] <= shift_reg[i-1];
+      end
+    end
+  end
+
+  always @(*) begin
+    case (A * 8 + B * 2 + C)
+      2: Z = shift_reg[0];
+      3: Z = shift_reg[1];
+      4: Z = shift_reg[2];
+      5: Z = shift_reg[3];
+      6: Z = shift_reg[4];
+      7: Z = shift_reg[5];
+      8: Z = shift_reg[6];
+      9: Z = shift_reg[7];
+      default: Z = 1'b0; // Default case if ABC is not 000-011
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Shift Register:**
+   - `reg [7:0] shift_reg;`: Declares an 8-bit register `shift_reg` to hold the shift register's values.
+   - `always @(posedge clk) begin ... end`:  This block describes sequential logic triggered by the positive edge of the clock signal.
+   - `if (enable) begin ... end`: The shift register operation is enabled only when the `enable` input is high.
+   - `shift_reg[0] <= S;`: The input `S` is shifted into the least significant bit (LSB) of the shift register (`Q[0]` in the problem description).
+   - `for (integer i = 7; i > 0; i--) begin shift_reg[i] <= shift_reg[i-1]; end`: This loop shifts the contents of the register one position to the left.
+
+2. **Multiplexer (Implemented with `case` statement):**
+   - `always @(*) begin ... end`: This is a combinational logic block that determines the output `Z` based on the input signals `A`, `B`, and `C`. The `@(*)` sensitivity list ensures that the block re-evaluates whenever any of the inputs change.
+   - `case (A * 8 + B * 2 + C)`:  This `case` statement acts as a multiplexer.  The expression `A * 8 + B * 2 + C` converts the 3-input binary combination ABC into an integer from 0 to 7.  Each integer value represents a different selector for the multiplexer.
+   - `2: Z = shift_reg[0]; ... 9: Z = shift_reg[7];`:  Based on the value of `A * 8 + B * 2 + C`, the corresponding bit from the `shift_reg` is assigned to the output `Z`.  For example, when ABC is 000, A*8 + B*2 + C = 0, and Z = shift_reg[0]. When ABC is 001, A*8 + B*2 + C = 1, and Z = shift_reg[1], and so on.
+   - `default: Z = 1'b0;`:  This is a default case to handle any combination of `A`, `B`, and `C` that is not explicitly covered in the `case` statement.  It sets `Z` to 0 in such cases.  This is good practice to avoid unpredictable behavior.
+
+**How it fulfills the requirements:**
+
+* **8-bit Shift Register:** The code implements a standard 8-bit shift register with synchronous enable and serial input.
+* **Multiplexing:** The `case` statement acts as a multiplexer, selecting one of the 8 bits from the shift register based on the inputs A, B, and C.
+* **Function Realization:** The circuit realizes the desired logic function, where Z is equal to a specific bit from the shift register based on the value of ABC.
+* **Positive Clock Triggered:** The shift register is clocked on the positive edge of `clk`.
+* **No Extra Logic:** The solution uses only the shift register and the `case` statement (effectively a multiplexer), as requested.
+
+**To test this code:**
+
+1.  Create a testbench

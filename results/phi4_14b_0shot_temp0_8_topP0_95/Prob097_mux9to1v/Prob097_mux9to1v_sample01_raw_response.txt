@@ -1,0 +1,48 @@
+To implement the described Verilog module, we need to create a 9-to-1 multiplexer that selects one of nine 16-bit inputs based on a 4-bit selection signal `sel`. If `sel` is between 9 and 15, the output should be set to all '1's. Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [15:0] a,
+    input [15:0] b,
+    input [15:0] c,
+    input [15:0] d,
+    input [15:0] e,
+    input [15:0] f,
+    input [15:0] g,
+    input [15:0] h,
+    input [15:0] i,
+    input [3:0] sel,
+    output logic [15:0] out
+);
+
+always_comb begin
+    case (sel)
+        4'b0000: out = a;
+        4'b0001: out = b;
+        4'b0010: out = c;
+        4'b0011: out = d;
+        4'b0100: out = e;
+        4'b0101: out = f;
+        4'b0110: out = g;
+        4'b0111: out = h;
+        4'b1000: out = i;
+        default: out = 16'hFFFF; // Set output to all '1's for sel=9 to sel=15
+    endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs**: The module takes nine 16-bit inputs (`a` through `i`) and a 4-bit selection signal `sel`.
+  
+- **Outputs**: A single 16-bit output `out`.
+
+- **Logic**:
+  - We use an `always_comb` block to ensure combinational logic. This block is sensitive to changes in the inputs, specifically `sel`.
+  - Inside the `always_comb` block, a `case` statement selects one of the input signals based on the value of `sel`.
+  - For `sel` values from 0 to 8 (binary `0000` to `1000`), it selects one of the inputs `a` through `i`.
+  - For `sel` values from 9 to 15, which are not explicitly handled in the case statement, the default case sets the output to all '1's (`16'hFFFF`).
+
+This implementation meets the requirements by handling both valid selections and setting a default behavior for invalid selections.

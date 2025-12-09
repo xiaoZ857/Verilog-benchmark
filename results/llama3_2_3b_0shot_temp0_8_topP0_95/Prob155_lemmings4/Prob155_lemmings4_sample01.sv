@@ -1,0 +1,58 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+// Define states
+localparam [2:0] IDLE = 3'b100;
+localparam [2:0] FALLING = 3'b010;
+localparam [2:0] DIGGING = 3'b001;
+
+// Assign initial state to IDLE state
+assign walk_left = (areset || IDLE == IDLE) ? 1'b0 : (IDLE == IDLE) && dig == 1'b0 ? 1'b0 : (bump_left == 1'b0 && bump_right == 1'b0) ? 1'b1 : walk_left;
+assign walk_right = walk_left;
+
+assign aaah = (ground == 1'b0 && walk_left == 1'b1 && dig == 1'b0) || 
+               ((IDLE == FALLING || IDLE == DIGGING) && walk_left == 1'b1);
+
+assign digging = (dig == 1'b1 && ground == 1'b1 && walk_left == 1'b1) ? 1'b1 : 1'b0;
+
+// State logic
+localreg [2:0] state = IDLE;
+localreg [1:0] walk_dir = IDLE == IDLE ? 2'b00 : (IDLE == FALLING || IDLE == DIGGING) ? 2'b01 : 2'b11;
+
+always @(posedge clk or negedge areset)
+begin
+    if(areset) state <= IDLE;
+    else if((bump_left && bump_right) || bump_left || bump_right) state <= walk_dir[0] ^ walk_dir[1];
+    else if(ground == 1'b0 && !dig && walk_left) state <= FALLING;
+    else if(ground == 1'b1 && dig) state <= DIGGING;
+
+    // Update walking direction
+    if(state != IDLE)
+        $force walk_right = walk_dir[1];
+
+    // Reset falling and digging on state change
+    if((state == FALLING) && (walk_left || walk_right))
+        digging = 0;
+    else if((state == DIGGING) && (dig && ground == 1'b1))
+        digging = 0;
+
+end
+
+// Outputs are now in state-dependent form 
+assign walk_left = walk_dir[0];
+assign walk_right = walk_dir[1];
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

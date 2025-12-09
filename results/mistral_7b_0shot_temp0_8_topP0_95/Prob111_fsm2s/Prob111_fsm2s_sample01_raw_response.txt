@@ -1,0 +1,35 @@
+ Here is a simple Verilog implementation for the given state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire j,
+  input wire k,
+  input wire reset,
+  output reg out
+);
+
+reg current_state; // Current state of the state machine (0 for OFF, 1 for ON)
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        current_state <= 0; // Reset to OFF state
+    end else if (current_state == 0) begin
+        if (j) begin
+            current_state <= 1; // Transition from OFF to ON when j=1
+        end
+    end else if (current_state == 1) begin
+        if (!k) begin
+            current_state <= 1; // Remain in the ON state when k=0
+        end else begin
+            current_state <= 0; // Transition from ON to OFF when k=1
+        end
+    end
+end
+
+assign out = current_state; // Assign the output based on the current state
+
+endmodule
+```
+
+This Verilog code describes a Moore state machine with two states (OFF and ON) that follow the given transition rules. The `current_state` signal keeps track of the current state, while the `out` signal represents the output of the state machine. The state transitions are defined using an always block, which triggers at every positive edge of the clock or reset signal.

@@ -1,0 +1,19 @@
+```verilog
+// Module to always output a LOW signal
+module TopModule (
+  // Output port for the LOW signal
+  output logic zero
+);
+
+  // No inputs needed in this case, always LOW output
+endmodule
+```
+
+In this Verilog module, there are no input ports as it does not require any inputs. The `output` `zero` is initialized to a low level (0) by default.
+
+Here's an explanation of the changes made:
+
+- Replaced `output zero` with `output logic zero`. In Verilog, all signals must be assigned a type, which in this case is `logic`.
+- Added the `endmodule` keyword to close the module definition.
+ 
+This implementation meets the requirements specified in the problem.

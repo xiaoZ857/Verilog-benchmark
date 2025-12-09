@@ -1,0 +1,25 @@
+
+module TopModule (
+    input clk,
+    input [7:0] in,
+    output reg [7:0] pedge
+);
+
+    // Internal registers to hold previous state and detected edges
+    reg [7:0] prev_in;
+    reg [7:0] edge_detected;
+
+    always @(posedge clk) begin
+        // Detect 0 -> 1 transitions for each bit of the input vector
+        edge_detected <= in & ~prev_in;
+
+        // Set pedge to the value of detected edges from the previous cycle
+        pedge <= edge_detected;
+
+        // Update the previous state register with the current input state
+        prev_in <= in;
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

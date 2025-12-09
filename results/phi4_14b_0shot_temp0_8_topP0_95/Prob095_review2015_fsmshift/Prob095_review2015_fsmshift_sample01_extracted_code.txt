@@ -1,0 +1,66 @@
+module TopModule (
+    input wire clk,
+    input wire reset,
+    output reg shift_ena
+);
+
+    // State declaration
+    typedef enum logic [1:0] {
+        IDLE,  // Initial state
+        SHIFT, // Active shifting state
+        DONE   // Completed shifting state
+    } state_t;
+
+    state_t current_state, next_state;
+    integer counter; // Counter to track the number of shift cycles
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= IDLE;
+            counter <= 0;
+        end else begin
+            current_state <= next_state;
+            
+            if (current_state == SHIFT) begin
+                // Only increment the counter when in the shifting state
+                if (counter < 3)
+                    counter <= counter + 1;
+                else
+                    counter <= 0; // Reset counter after reaching 4 cycles
+            end
+        end
+    end
+
+    always_comb begin
+        // Default assignments
+        next_state = current_state;
+        shift_ena = 0;
+
+        case (current_state)
+            IDLE: begin
+                if (reset) begin
+                    // If reset, move to SHIFT state and start counting from 1
+                    next_state = SHIFT;
+                end else begin
+                    // Check your condition here for entering the SHIFT state normally
+                    // For demonstration purposes, let's assume a specific pattern is detected
+                    // Example: if (some_condition) then next_state = SHIFT;
+
+                    // If no condition met and not in reset, stay IDLE.
+                end
+            end
+
+            SHIFT: begin
+                shift_ena = 1; // Enable shifting while in the SHIFT state
+                if (counter == 3)
+                    next_state = DONE;
+            end
+
+            DONE: begin
+                next_state = IDLE; // Return to idle after completing 4 cycles of shift
+            end
+
+        endcase
+    end
+    
+endmodule

@@ -1,0 +1,57 @@
+To address the issues in the provided Verilog code, let's go through the requirements and ensure that the logic is correctly implemented.
+
+### Key Observations:
+
+1. **Sensitivity List**: The `always @(*)` construct indicates a combinational logic block. This means the outputs will be recalculated whenever any input changes. However, this can lead to unintended latches if not all possible conditions are covered.
+
+2. **Latch Creation**: In Verilog, an incomplete case or if-else structure in a combinational logic block can inadvertently create a latch. Every output must have a defined value for every possible condition of the inputs.
+
+3. **Logic Correction**:
+   - `shut_off_computer` should be set to 1 when `cpu_overheated` is true, and otherwise remain at its previous state.
+   - `keep_driving` should be determined by whether you have not arrived (`~arrived`) and the gas tank is not empty (`~gas_tank_empty`). If `arrived` is true, `keep_driving` should explicitly be set to 0.
+
+### Corrected Code:
+
+```verilog
+module top_module (
+    input      cpu_overheated,
+    output reg shut_off_computer,
+    input      arrived,
+    input      gas_tank_empty,
+    output reg keep_driving  
+);
+
+    always @(*) begin
+        // Default assignments to prevent latches
+        shut_off_computer = 0;
+        
+        if (cpu_overheated) begin
+            shut_off_computer = 1;
+        end
+    end
+
+    always @(*) begin
+        // Default assignment to prevent latches
+        keep_driving = 0;  // default value when arrived or gas_tank_empty
+        
+        if (~arrived && ~gas_tank_empty) begin
+            keep_driving = 1;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Initialization**: Both `shut_off_computer` and `keep_driving` are initialized to a default value (0) at the beginning of each always block. This ensures that every possible input combination results in a defined output, preventing latch creation.
+
+- **Logic for `shut_off_computer`**:
+  - It is set to 1 if `cpu_overheated` is true.
+  - Otherwise, it remains 0 (as initialized).
+
+- **Logic for `keep_driving`**:
+  - It is set to 1 only when both `~arrived` and `~gas_tank_empty` are true.
+  - If either condition fails, `keep_driving` defaults to 0.
+
+This approach ensures that the module behaves as expected without unintended latches.

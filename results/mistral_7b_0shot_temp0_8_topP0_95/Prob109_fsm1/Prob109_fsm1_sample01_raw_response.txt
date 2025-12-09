@@ -1,0 +1,35 @@
+ Here is the Verilog implementation of the Moore finite state machine based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output reg out
+);
+
+reg internal_state;
+parameter state_B = 1'b0;
+parameter state_A = 1'b1;
+
+always @(posedge clk or negedge areset) begin
+  if (areset)
+    internal_state <= state_B; // Reset to state B when reset is high
+  else if (internal_state == state_B) begin
+    if (in === 1'b0)
+      internal_state <= state_A;
+  end
+  else if (internal_state == state_A) begin
+    if (in === 1'b1)
+      internal_state <= state_A;
+    else
+      internal_state <= state_B;
+  end
+end
+
+assign out = internal_state;
+
+endmodule
+```
+
+In this implementation, the `internal_state` register holds the current state of the machine. The Moore machine has two states: A and B. When the reset signal is high (1), the machine asynchronously resets to state B. In state B, when the input signal is 0, it transitions to state A; otherwise, it stays in state B. In state A, when the input signal is either 0 or 1, it transitions to state B. The output `out` is directly connected to the current state of the machine.

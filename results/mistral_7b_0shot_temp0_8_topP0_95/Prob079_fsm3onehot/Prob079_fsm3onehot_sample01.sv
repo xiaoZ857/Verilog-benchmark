@@ -1,0 +1,32 @@
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+
+assign A = state[0];
+assign B = state[1];
+assign C = state[2];
+assign D = state[3];
+
+always_comb begin
+    // State transition logic
+    if(A) begin
+        next_state <= {B, A};
+    end else if(B) begin
+        next_state <= {C, B};
+    end else if(C) begin
+        next_state <= {A, D};
+    end else begin // Default state is D
+        next_state <= {C, B};
+    end
+
+    // Output logic
+    out = C | (D & in);
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

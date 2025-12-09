@@ -1,0 +1,52 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+  // Define states
+  parameter A = 2'b00
+  parameter B = 2'b01
+
+  // Declare state register
+  reg current_state;
+
+  // Output logic
+  always @(current_state) begin
+    case (current_state)
+      A: out = 0;
+      B: out = 1;
+      default: out = 0; // Default case for safety
+    endcase
+  end
+
+  // State register update logic (synchronous)
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= B;
+    end else begin
+      case (current_state)
+        A: begin
+          if (in == 0) begin
+            current_state <= B;
+          end else begin
+            current_state <= A;
+          end
+        end
+        B: begin
+          if (in == 0) begin
+            current_state <= B;
+          end else begin
+            current_state <= A;
+          end
+        end
+        default: current_state <= B; // Default case for safety
+      endcase
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

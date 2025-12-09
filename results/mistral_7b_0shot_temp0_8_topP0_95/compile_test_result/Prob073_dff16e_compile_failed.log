@@ -1,0 +1,17 @@
+Problem: Prob073_dff16e
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:27: error: Array d_upper needs an array index here.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:27: error: Array d_lower needs an array index here.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:27: error: Unable to elaborate r-value: (d_upper)|(d_lower)
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:16: error: Cannot assign to array d_upper. Did you forget a word index?
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:17: error: Cannot assign to array d_lower. Did you forget a word index?
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:20: error: Cannot assign to array d_upper. Did you forget a word index?
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:23: error: Cannot assign to array d_lower. Did you forget a word index?
+7 error(s) during elaboration.

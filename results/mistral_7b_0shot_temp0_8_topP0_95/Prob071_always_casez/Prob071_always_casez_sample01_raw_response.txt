@@ -1,0 +1,23 @@
+ Here's a Verilog implementation for the priority encoder as described:
+
+```verilog
+module TopModule (
+    input [7:0] in,
+    output reg [2:0] pos
+);
+
+always @(posedge clk) begin
+    pos[0] <= 0; // Reset all outputs to 0 initially
+
+    for(int i = 0; i < 8; i++) begin
+        if(in[i]) begin
+            if(pos[0]) begin
+                pos[0] <= 0; // Reset lower priority outputs if higher priority bit found
+            end
+            pos[i+1] <= 1; // Set output corresponding to the first encountered high-bit
+        end
+    end
+end
+```
+
+This Verilog code creates a module named `TopModule`. The input is an 8-bit vector `in`, and the output is a 3-bit register `pos`. The priority encoder checks for each bit in the input vector, starting from least significant bit (LSB) to most significant bit (MSB). When it finds a high bit, it sets the corresponding output that represents the position of the first encountered high-bit. If a higher priority bit is found, it resets the lower priority outputs to 0. The code assumes that the signals are positive clock/clk triggered unless otherwise stated.

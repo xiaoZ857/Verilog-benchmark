@@ -1,0 +1,86 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+
+  reg [9:0] counter;
+  reg tc_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      counter <= data;
+      tc_reg <= 0; // Reset tc when loading
+    end else begin
+      if (counter > 0) begin
+        counter <= counter - 1;
+      end else begin
+        counter <= 0;
+        tc_reg <= 1;
+      end
+    end
+  end
+
+  assign tc = tc_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [9:0] counter;`**: Declares a 10-bit register named `counter` to store the countdown value.  This is where the timer's internal count is kept.
+2. **`reg tc_reg;`**: Declares a register `tc_reg` to hold the value of the `tc` output.  Using a register ensures that the `tc` signal only changes on the clock edge.
+3. **`always @(posedge clk) begin ... end`**: This block describes the sequential logic that executes on the positive edge of the clock signal.
+4. **`if (load) begin ... end`**:  If the `load` signal is high (1), the internal counter is loaded with the value of the `data` input.  The `tc_reg` is reset to 0, because loading new data means a new timing duration is starting.
+5. **`else begin ... end`**: If `load` is low (0), the counter decrements.
+6. **`if (counter > 0) begin ... end`**: Checks if the counter is greater than 0. If it is, the counter is decremented by 1 (`counter <= counter - 1;`).
+7. **`else begin ... end`**: If the counter reaches 0:
+   - `counter <= 0;`: The counter remains at 0.
+   - `tc_reg <= 1;`:  The `tc` signal is asserted (set to 1) to indicate a terminal count.
+8. **`assign tc = tc_reg;`**:  Assigns the value of the `tc_reg` register to the output signal `tc`. This creates a continuous assignment, ensuring the output reflects the current state of the timer.
+
+**How it works:**
+
+* **Loading:**  When `load` is asserted, the timer is initialized with the specified duration (the value from `data`).
+* **Counting Down:** While `load` is not asserted, the counter decrements on each clock cycle.
+* **Terminal Count:** When the counter reaches 0, the `tc` signal is asserted, signaling that the timer has completed its countdown.
+* **Holding Zero:**  The counter stays at 0 until the timer is loaded again with a new duration.
+
+**Example Usage:**
+
+To set the timer to count for 1024 clock cycles:
+
+```verilog
+module TestModule (
+  output clk,
+  output load,
+  output [9:0] data,
+  output tc
+);
+
+  reg clk_reg;
+  reg load_reg;
+  reg [9:0] data_reg;
+
+  always #5 clk_reg = ~clk_reg; // Clock period of 5 time units
+
+  initial begin
+    clk_reg = 0;
+    load_reg = 0;
+    data_reg = 1024;
+    load_reg = 1;
+    #10 load_reg = 0; // Load the data and then stop loading
+    #500 $finish;
+  end
+
+  assign clk = clk_reg;
+  assign load = load_reg;
+  assign data = data_reg;
+  assign tc = TopModule_tc; // Assuming TopModule is instantiated as TopModule_
+
+endmodule
+```
+
+In this test module, `data_reg` is set to 1024, and `load` is asserted for one clock cycle to load the timer. Then, `load` is deasserted, and the timer counts down. The `tc` signal will be asserted approximately 1024 clock cycles later.  The `$finish` statement terminates the simulation after 500 time units.  (Adjust the time units according to your simulation setup).

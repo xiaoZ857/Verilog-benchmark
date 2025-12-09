@@ -1,0 +1,20 @@
+wire d_xor, d_and, d_or;
+wire q_xor, q_and, q_or;
+wire q_and_n, q_or_n;
+
+assign d_xor = x ^ q_xor;
+assign d_and = x & q_and_n;
+assign d_or  = x | q_or_n;
+
+assign q_and_n = ~q_and;
+assign q_or_n  = ~q_or;
+
+always @(posedge clk) begin
+    q_xor <= d_xor;
+    q_and <= d_and;
+    q_or  <= d_or;
+end
+
+assign z = ~(q_xor | q_and | q_or);
+
+endmodule

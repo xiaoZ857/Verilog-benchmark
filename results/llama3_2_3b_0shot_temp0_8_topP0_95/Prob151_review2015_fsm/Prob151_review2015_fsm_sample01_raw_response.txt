@@ -1,0 +1,74 @@
+Here is a Verilog module that implements the finite-state machine controlling the timer:
+
+```verilog
+module TopModule(
+    input clk,
+    input reset,
+    input data,
+    output reg shift_ena,
+    output reg counting,
+    input done_counting,
+    output reg done,
+    input ack
+);
+
+reg[3:0] state; // State (4-bit)
+reg [7:0] timer_counter;
+
+// Synchronous Reset
+always @(posedge clk or reset)
+if(reset) begin
+    state <= 0;
+    timer_counter <= 0;
+end else
+state <= state;
+
+assign counting = ~done && (state == 3);
+
+// Pattern recognition and shift enable
+reg [1:0] pattern_detected;
+reg[7:4] sequence_shifted;
+
+always @(posedge clk) begin
+    if(data == 1'd1 && data == 1'd0 && data == 1'd1 && data == 1'd0) begin // Pattern detected
+        state <= 2; // Start waiting for pattern length
+    end else if (state == 2) begin // Pattern length detection
+        sequence_shifted[3] = (data & (1 << 4));
+        sequence_shifted[2] = (data & (1 << 3));
+        sequence_shifted[1] = (data & (1 << 2));
+        if(sequence_shifted == 1'd1100) begin // Pattern length detected
+            state <= 5; // Enable shift enable and waiting for done_counting
+        end 
+    end else 
+    sequence_shifted[0:3] = data;
+end
+
+assign shift_ena = (state == 4);
+
+// Counting
+if(state == 3) begin // Waiting for count to complete
+    timer_counter <= timer_counter + 1;
+else if (state == 5) begin // Waiting for done_counting
+    timer_counter <= timer_counter;
+end
+
+// Timeout detection and resetting
+assign done = ~done_counting && (timer_counter >= 4);
+
+if(ack == 1) state <= 0;
+
+endmodule
+```
+
+This module implements a finite-state machine that controls the behavior of the timer. It uses a synchronous reset to ensure that it returns to its initial state when the clock is rising edge or when the reset signal is asserted.
+
+The states of the machine are as follows:
+
+- State `0`: Initial state, looking for pattern recognition.
+- State `1`: Detecting start sequence (1101).
+- State `2`: Detecting length of pattern (4 bits to shift).
+- State `3`: Waiting for counting to complete after shifting in 4-bit length data. The counting is done on the timer_counter, which goes from 0 to 7 and remains stuck at 7 when it reaches 8.
+- State `4`: Active high synchronous reset, setting state back to look for start sequence recognition again. 
+- State `5`: Enabled shift enable and waiting for done_counting signal to be high.
+
+This design should meet all the requirements specified in the problem description.

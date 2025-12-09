@@ -1,0 +1,31 @@
+
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+
+  // Declare a wire for the XOR output
+  wire d_in;
+
+  // Implement the XOR gate with 'in' and 'out'
+  xor_gate (d_in, in, out);
+
+  // D Flip-Flop implementation using posedge trigger
+  always @ (posedge clk) 
+    out <= d_in;
+
+endmodule
+
+// Define a simple XOR two-input gate (can be instantiated or replaced)
+// This is just an example; actual design may use built-in primitives.
+primitive xor_gate (
+  input in1,
+  input in2,
+  output out
+);
+  logic out;
+  assign out = in1 ^ in2;
+endprimitive
+
+// VERILOG-EVAL: errant inclusion of module definition

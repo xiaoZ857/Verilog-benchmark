@@ -1,0 +1,40 @@
+
+module TopModule(
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+
+logic [2:0] count;
+logic enable;
+
+// Asynchronous reset
+always_ff @(posedge areset) begin
+    count <= 'b0; // weakly not-taken (2'b01)
+end
+
+// Enable signal based on train_valid and train_taken
+always_comb begin
+    enable = train_valid && train_taken;
+end
+
+// Increment or decrement the counter
+always_ff @(posedge clk) begin
+    if (enable) begin
+        if (count[1] == 0) count <= 'b11; // saturate at maximum value
+        else if (count[2] == 1 && !train_taken) count[0] <= '0;
+        else if (!train_taken) count[0] <= '0;
+        else count <= count + 1;
+    end else begin
+        count <= count; // keep the same value when not training
+    end
+end
+
+// Assign output state
+assign state = count;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

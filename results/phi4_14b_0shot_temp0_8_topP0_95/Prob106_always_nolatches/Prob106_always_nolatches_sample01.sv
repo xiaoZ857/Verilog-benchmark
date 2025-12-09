@@ -1,0 +1,43 @@
+
+module TopModule (
+    input [15:0] scancode,
+    output reg left,
+    output reg down,
+    output reg right,
+    output reg up
+);
+
+always @(*) begin
+    // Default case: Deassert all outputs when no key is detected
+    left = 1'b0;
+    down = 1'b0;
+    right = 1'b0;
+    up = 1'b0;
+
+    // Use a case statement to check for specific scancodes
+    case (scancode)
+        16'hE06B: begin
+            left = 1'b1; // Left arrow key detected
+        end
+
+        16'hE072: begin
+            down = 1'b1; // Down arrow key detected
+        end
+
+        16'hE074: begin
+            right = 1'b1; // Right arrow key detected
+        end
+
+        16'hE075: begin
+            up = 1'b1;   // Up arrow key detected
+        end
+
+        default: begin
+            // No action needed as outputs are already deasserted by default
+        end
+    endcase
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

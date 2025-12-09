@@ -1,0 +1,17 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+module xnor_gate (
+  input wire a,
+  input wire b,
+  output reg out
+);
+
+always @(posedge clk) begin
+  out <= ~(a ^ b);
+end
+
+endmodule

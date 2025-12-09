@@ -1,0 +1,35 @@
+ Here's the Verilog implementation of the described Moore state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire j,
+  input wire k,
+  input wire areset,
+  output reg out
+);
+
+reg curr_state; // Current state of the state machine
+
+// State definitions
+parameter OFF = 0;
+parameter ON = 1;
+
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        curr_state <= OFF;
+    end else if (!areset && !curr_state) begin
+        // Transition from OFF to ON when j is high
+        curr_state <= ON;
+    end else if (curr_state == ON && k) begin
+        // Transition from ON to OFF when k is high
+        curr_state <= OFF;
+    end
+end
+
+assign out = curr_state; // Output assignment
+
+endmodule
+```
+
+This Verilog module implements a Moore state machine with two states (OFF and ON) and two inputs (j, k). The reset signal is asynchronous and active-high. When the reset signal is high, the state machine resets to the OFF state. The state machine stays in the OFF state when j is low, but transitions to the ON state when j is high. While in the ON state, the output remains high regardless of the k input value. However, when the k input is high while in the ON state, the state machine transitions back to the OFF state. The output of the state machine corresponds to its current state.

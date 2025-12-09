@@ -1,0 +1,33 @@
+To implement a Verilog module that sign-extends an 8-bit number to a 32-bit number, you can follow these steps:
+
+1. Identify the most significant bit (MSB) of the 8-bit input, which is `in[7]`.
+2. Replicate this MSB 24 times to create the upper 24 bits of the 32-bit output.
+3. Concatenate these replicated bits with the original 8-bit input.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [7:0] in,
+    output reg [31:0] out
+);
+
+    always @(*) begin
+        // Replicate the sign bit (in[7]) 24 times and concatenate with the original 8-bit number
+        out = {{24{in[7]}}, in};
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **`input [7:0] in;`**: This is an 8-bit input to the module.
+- **`output reg [31:0] out;`**: The output is a 32-bit register, which allows us to use procedural assignments inside always blocks.
+- **`always @(*) begin ... end`**: This block executes whenever any of its sensitivity list items (in this case, `*`, meaning all signals) change. It ensures that the assignment to `out` happens in response to changes in `in`.
+- **`{{24{in[7]}}, in}`**: 
+  - `{...}` is the concatenation operator.
+  - `24{in[7]}` replicates the sign bit (`in[7]`) 24 times. If `in[7]` is `1`, it creates a 24-bit value of all `1`s; if `in[7]` is `0`, it creates a 24-bit value of all `0`s.
+  - The original 8-bit input `in` is then concatenated to these replicated bits.
+
+This module effectively sign-extends the 8-bit input to a 32-bit output while preserving its signed value.

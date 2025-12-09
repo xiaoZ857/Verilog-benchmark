@@ -1,0 +1,12 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  // XNOR gate implementation
+  // Output is 1 when inputs are the same, 0 when different
+  assign out = a ~^ b;
+  
+endmodule

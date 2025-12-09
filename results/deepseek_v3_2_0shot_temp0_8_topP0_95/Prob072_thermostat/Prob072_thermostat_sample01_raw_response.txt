@@ -1,0 +1,8 @@
+  // Determine heater and aircon based on mode and temperature conditions
+  assign heater = mode & too_cold;  // Heating mode and too cold
+  assign aircon = ~mode & too_hot;  // Cooling mode and too hot
+  
+  // Fan is on when either heater, aircon, or manual fan request is active
+  assign fan = heater | aircon | fan_on;
+
+endmodule

@@ -1,0 +1,16 @@
+
+module TopModule (
+    input ring,
+    input vibrate_mode,
+    output ringer,
+    output motor
+);
+    
+    always @(*) begin
+        motor = ring & vibrate_mode;
+        ringer = ring & (~vibrate_mode);
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

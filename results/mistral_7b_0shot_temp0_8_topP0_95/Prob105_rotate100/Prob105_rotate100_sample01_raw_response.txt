@@ -1,0 +1,29 @@
+ Here is a Verilog implementation for the 100-bit left/right rotator based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+
+reg [99:0] shift_register;
+
+always @(posedge clk) begin
+    if (load)
+        shift_register <= data;
+    else if (ena == 2'b01) // Right rotation
+        shift_register <= {shift_register[98:0], shift_register[99]};
+    else if (ena == 2'b10) // Left rotation
+        shift_register <= {shift_register[99], shift_register[0:98]};
+    assign q = shift_register;
+end
+
+endmodule
+```
+
+This Verilog module describes a synchronous, clock-triggered 100-bit left/right rotator. The module takes an input clock signal (clk), load control signal (load), enable signals for left and right rotation (ena[1:0]), data to be loaded into the shift register (data), and outputs the contents of the rotator (q).
+
+The rotator uses a 100-bit shift register to store the data. When the `load` signal is high, it overwrites the current state of the shift register with the input data. If neither left nor right rotation is enabled, the rotator holds its state. However, when either right or left rotation is enabled (ena[1:0] = 2'b01 or 2'b10), the bits are shifted accordingly, with the shifted-out bit being stored in the shift register from the opposite end as described in the problem statement. The output `q` is assigned the current state of the shift register.

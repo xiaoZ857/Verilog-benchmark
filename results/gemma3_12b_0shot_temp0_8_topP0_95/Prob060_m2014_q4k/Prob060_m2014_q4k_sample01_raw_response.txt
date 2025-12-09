@@ -1,0 +1,87 @@
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output out
+);
+
+  // Internal signals for the four D flops
+  reg [3:0] shift_reg;
+
+  // Assign the output to the last flop in the shift register
+  assign out = shift_reg[3];
+
+  // Sequential logic for the shift register
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      // Reset condition: clear all flops
+      shift_reg <= 0;
+    end else begin
+      // Shift the register:
+      // The first flop gets the input signal
+      shift_reg[0] <= in;
+      // The remaining flops shift the value from the previous flop
+      shift_reg[1] <= shift_reg[0];
+      shift_reg[2] <= shift_reg[1];
+      shift_reg[3] <= shift_reg[2];
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (...)`:** Defines the module named `TopModule` with the specified input and output ports.
+
+2. **`reg [3:0] shift_reg;`:**  Declares a 4-bit register named `shift_reg`. This register will hold the four D flops. The `[3:0]` notation indicates that it's a 4-bit register, with `shift_reg[0]` being the least significant bit and `shift_reg[3]` being the most significant bit.
+
+3. **`assign out = shift_reg[3];`:**  Assigns the value of the most significant bit of the `shift_reg` (i.e., `shift_reg[3]`) to the output `out`.  This is because the last flop in the shift register's output is what we want to observe.
+
+4. **`always @(posedge clk or negedge resetn) begin ... end`:** This is a sequential block that executes on the positive edge of the clock signal (`posedge clk`) or the negative edge of the reset signal (`negedge resetn`).  This makes the reset synchronous.
+
+5. **`if (!resetn) begin ... end`:** This is the reset condition. `!resetn` evaluates to `true` when `resetn` is low (active-low reset). Inside this block, `shift_reg <= 0;` resets all four flops to 0.
+
+6. **`else begin ... end`:** This block executes when the reset condition is not met (i.e., `resetn` is high).  It contains the shift register logic.
+
+7. **`shift_reg[0] <= in;`:**  The first flop (`shift_reg[0]`) gets the value of the input signal `in`.
+
+8. **`shift_reg[1] <= shift_reg[0];`**, **`shift_reg[2] <= shift_reg[1];`**, **`shift_reg[3] <= shift_reg[2];`:** These three lines implement the shifting operation.  Each flop gets the value of the previous flop on the clock edge.
+
+**How it Works:**
+
+* **Reset:** When `resetn` is low, all four flops in the shift register are cleared to 0.
+* **Shifting:**  On each positive clock edge (when `resetn` is high), the input `in` is loaded into the first flop (`shift_reg[0]`), and the contents of each subsequent flop are shifted to the next higher-order flop.  This effectively moves the data one position to the left in the register.
+* **Output:** The output `out` is the value stored in the most significant bit (`shift_reg[3]`) of the shift register.
+
+**Testbench (for Simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg resetn;
+  reg in;
+  wire out;
+
+  TopModule uut (
+    .clk(clk),
+    .resetn(resetn),
+    .in(in),
+    .out(out)
+  );
+
+  // Clock generation
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk; // 10 time unit period
+  end
+
+  // Stimulus
+  initial begin
+    resetn = 0;
+    in = 0;
+    #10 resetn = 1; // Release reset
+    #10 in = 1;
+    #10 in = 0;

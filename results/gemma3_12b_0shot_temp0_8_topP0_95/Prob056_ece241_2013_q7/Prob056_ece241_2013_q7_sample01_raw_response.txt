@@ -1,0 +1,35 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q
+);
+
+  always @(posedge clk) begin
+    if (j == 0 && k == 0) begin
+      Q <= Q; // No change
+    end else if (j == 0 && k == 1) begin
+      Q <= 0;
+    end else if (j == 1 && k == 0) begin
+      Q <= 1;
+    end else begin // j == 1 && k == 1
+      Q <= ~Q;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**: Defines the module named `TopModule` with the specified input and output ports.
+* **`input clk, j, k;`**: Declares `clk`, `j`, and `k` as input signals. `clk` is the clock signal, `j` and `k` are the inputs to the JK flip-flop.
+* **`output reg Q;`**: Declares `Q` as an output signal and also declares it as a `reg` because its value is assigned within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This `always` block is triggered on the positive edge of the `clk` signal.  This ensures that the flip-flop's output changes only on the rising edge of the clock.
+* **`if (j == 0 && k == 0) begin Q <= Q; end`**:  If both `j` and `k` are 0, the output `Q` remains the same as its previous value (`Qold`).  The `<=` assignment operator is used for sequential assignments within `always` blocks.
+* **`else if (j == 0 && k == 1) begin Q <= 0; end`**: If `j` is 0 and `k` is 1, the output `Q` is set to 0.
+* **`else if (j == 1 && k == 0) begin Q <= 1; end`**: If `j` is 1 and `k` is 0, the output `Q` is set to 1.
+* **`else begin Q <= ~Q; end`**: If both `j` and `k` are 1, the output `Q` is toggled (inverted). The `~` operator performs a bitwise NOT operation.
+
+This Verilog code accurately implements the behavior of a JK flip-flop as described in the truth table.  It's concise, readable, and synthesizable.  The use of `posedge clk` ensures proper synchronization with the clock signal.

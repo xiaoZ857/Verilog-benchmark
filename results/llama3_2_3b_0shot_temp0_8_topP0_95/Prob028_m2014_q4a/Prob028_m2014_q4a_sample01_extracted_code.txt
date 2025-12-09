@@ -1,0 +1,18 @@
+// Implement a D latch using an always block.
+
+module TopModule (
+  input d,           // Data input
+  input ena,         // Enable input
+  output logic q     // Q output
+);
+
+always @(posedge clk) begin
+    if (ena == 1'b1) begin
+        q <= d;
+    end else begin
+        q <= q;  // Hold previous value
+    end
+end
+
+// Add a clock signal to trigger the always block
+assign clk = 1'b1; // Assuming it's a positive edge-triggered clock

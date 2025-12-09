@@ -1,0 +1,11 @@
+
+always @(posedge clk) begin
+    if (reset) begin
+      // Reset to 12:00:00 AM
+      pm <= 1'b0;
+      hh <= 8'h12;  // BCD: 0001_0010
+      mm <= 8'h00;  // BCD: 0000_0000
+      ss <= 8'h00;  // BCD: 0000_0000
+    end else if (ena) begin
+      // Increment seconds (BCD addition)
+      if (ss[3:0] == 4'd9) begin

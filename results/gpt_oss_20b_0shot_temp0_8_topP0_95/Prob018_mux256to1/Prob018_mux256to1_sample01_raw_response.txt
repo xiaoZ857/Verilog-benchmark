@@ -1,0 +1,32 @@
+Here is a minimal, synthesizable implementation of the 256‑to‑1 multiplexer described.  
+The design is purely combinational – the output follows the selected input bit immediately, with no clock required.
+
+```verilog
+// ------------------------------------------------------------
+// 256‑to‑1 Multiplexer (combinational)
+// ------------------------------------------------------------
+//  • 256 1‑bit inputs packed into a 256‑bit vector `in`
+//  • 8‑bit select input `sel`
+//  • 1‑bit output `out`
+//  • No clock needed – the module is combinational
+// ------------------------------------------------------------
+
+module TopModule (
+    input  wire [255:0] in,   // 256 packed inputs
+    input  wire [7:0]   sel,  // 8‑bit selector (0‑255)
+    output wire         out   // selected output bit
+);
+
+    // Combinational assignment – simply index the vector
+    assign out = in[sel];
+
+endmodule
+```
+
+### Why this works
+* The `sel` input directly indexes the 256‑bit vector `in`.  
+* Verilog allows vector indexing with a variable selector, so `in[sel]` yields a single bit.  
+* The result is wired to the output `out`.  
+* Because all signals are declared as `wire` (the default for outputs), the assignment is purely combinational and requires no clock.
+
+If you later need a registered version (i.e., the output changes only on a clock edge), you can add a `clk` input and wrap the assignment in a `always @(posedge clk)` block.

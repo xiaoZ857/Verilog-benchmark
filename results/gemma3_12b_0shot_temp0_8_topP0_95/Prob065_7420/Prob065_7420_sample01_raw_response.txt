@@ -1,0 +1,71 @@
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+  // NAND gate 1: p1y = NOT(p1a AND p1b AND p1c AND p1d)
+  assign p1y = ~ (p1a & p1b & p1c & p1d);
+
+  // NAND gate 2: p2y = NOT(p2a AND p2b AND p2c AND p2d)
+  assign p2y = ~ (p2a & p2b & p2c & p2d);
+
+endmodule
+```
+
+**Explanation:**
+
+* **Module Declaration:**  `module TopModule(...)` defines the module named `TopModule` and lists its input and output ports.
+* **NAND Gate Implementation:**  The core of the module is the implementation of two NAND gates.  A NAND gate is implemented as a combination of a logical AND and a logical NOT.
+    * `assign p1y = ~ (p1a & p1b & p1c & p1d);`  This line implements the first NAND gate.  It performs a logical AND operation on the four inputs `p1a`, `p1b`, `p1c`, and `p1d`. The result of the AND operation is then inverted using the `~` (NOT) operator and assigned to the output `p1y`.
+    * `assign p2y = ~ (p2a & p2b & p2c & p2d);`  This line does the same for the second NAND gate, using inputs `p2a`, `p2b`, `p2c`, and `p2d` to generate output `p2y`.
+* **Continuous Assignment:** The `assign` statement is used for continuous assignment. It means that the output signals `p1y` and `p2y` are updated whenever any of their input signals change. This is suitable for combinational logic like NAND gates.
+* **`endmodule`:**  Marks the end of the module definition.
+
+**How it replicates the 7420 functionality:**
+
+The 7420 chip contains two 4-input NAND gates. This Verilog code directly implements those two NAND gates using continuous assignment, which accurately reflects the functionality of the chip.  The input signals are directly connected to the inputs of the NAND gates, and the outputs of the NAND gates are connected to the module's outputs.
+
+**To use this module in a larger design:**
+
+1.  **Save the code:** Save the code in a `.v` file (e.g., `top_module.v`).
+2.  **Instantiate the module:**  In your top-level module, you would instantiate `TopModule` and connect its ports to the appropriate signals in your design.  For example:
+
+```verilog
+module TopLevelModule (
+  input clk,
+  // other inputs
+  output other_output
+);
+
+  wire nand1_out;
+  wire nand2_out;
+
+  TopModule my_7420 (
+    .p1a(input_signal_a),
+    .p1b(input_signal_b),
+    .p1c(input_signal_c),
+    .p1d(input_signal_d),
+    .p1y(nand1_out),
+    .p2a(input_signal_e),
+    .p2b(input_signal_f),
+    .p2c(input_signal_g),
+    .p2d(input_signal_h),
+    .p2y(nand2_out)
+  );
+
+  // connect nand2_out to other_output
+  assign other_output = nand2_out;
+
+endmodule
+```
+
+This example demonstrates how to instantiate the `TopModule` and connect its ports to other signals in your design. Remember to replace `input_signal_a`, `input_signal_b`, etc. with the actual signals from your larger design.

@@ -1,0 +1,45 @@
+module TopModule (
+  input logic mode,
+  input logic too_cold,
+  input logic too_hot,
+  input logic fan_on,
+  output logic heater,
+  output logic aircon,
+  output logic fan
+);
+
+// Assuming initial state is off for all outputs
+always_comb begin
+  heater <= 0;
+  aircon <= 0;
+  fan <= 0;
+end
+
+// Heating mode
+always @(posedge clk) begin
+  if (mode) begin
+    if (too_cold) begin
+      heater <= 1;
+      fan <= 1;
+      aircon <= 0;
+    end
+  end
+end
+
+// Cooling mode
+always @(posedge clk) begin
+  if (!mode) begin
+    if (too_hot) begin
+      aircon <= 1;
+      fan <= 1;
+      heater <= 0;
+    end
+  end
+end
+
+// User request for fan
+always @(posedge clk or negedge fan_on) begin
+  if (fan_on) begin
+    fan <= 1;
+  end
+end

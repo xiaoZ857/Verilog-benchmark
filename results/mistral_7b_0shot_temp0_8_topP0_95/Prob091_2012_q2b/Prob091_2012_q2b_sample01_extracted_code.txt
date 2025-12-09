@@ -1,0 +1,27 @@
+module TopModule (
+  input [5:0] y,        // Current one-hot encoded state
+  input w,              // Clock signal
+  output reg Y1,        // Next state of y[1]
+  output reg Y3         // Next state of y[3]
+);
+
+assign Y1 = y[1];             // Initial value for Y1 is the same as current y[1]
+assign Y3 = y[3];             // Initial value for Y3 is the same as current y[3]
+
+always @(posedge w) begin
+  case (y)
+    4'b0001 : Y1 <= 1'b0;        // From state A to B, y[1] becomes 0
+    4'b0010 : Y1 <= 1'b0;        // From state B to D, y[1] remains the same (0)
+    4'b0100 : Y1 <= 1'b0;        // From state C to D, y[1] remains the same (0)
+    4'b1000 : Y1 <= 1'b1;        // From state D to A, y[1] becomes 1
+    4'b0000 : Y1 <= Y1;          // For all other states, y[1] remains the same
+    4'b0001 : Y3 <= 1'b0;        // From state A to B, y[3] becomes 0
+    4'b0010 : Y3 <= 1'b0;        // From state B to D, y[3] remains the same (0)
+    4'b0100 : Y3 <= 1'b1;        // From state C to E, y[3] becomes 1
+    4'b0101 : Y3 <= 1'b0;        // From state E to D, y[3] remains the same (0)
+    4'b1000 : Y3 <= 1'b0;        // From state D to A, y[3] becomes 0
+    4'b1001 : Y3 <= 1'b1;        // From state F to C, y[3] becomes 1
+    4'b1010 : Y3 <= 1'b0;        // From state C to D, y[3] remains the same (0)
+    default : Y3 <= Y3;          // For all other states, y[3] remains the same
+  endcase
+end

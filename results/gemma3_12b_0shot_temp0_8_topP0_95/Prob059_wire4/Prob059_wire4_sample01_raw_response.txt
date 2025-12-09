@@ -1,0 +1,31 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+  assign w = a;
+  assign x = b;
+  assign y = b;
+  assign z = c;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares a Verilog module named `TopModule` and lists its input and output ports.
+* **`input a, input b, input c;`**:  Declares three input signals named `a`, `b`, and `c`.
+* **`output w, output x, output y, output z;`**: Declares four output signals named `w`, `x`, `y`, and `z`.
+* **`assign w = a;`**: This is a continuous assignment statement. It assigns the value of the input signal `a` to the output signal `w`.  Whenever `a` changes, `w` will immediately reflect that change.
+* **`assign x = b;`**:  Assigns the value of input `b` to output `x`.
+* **`assign y = b;`**:  Assigns the value of input `b` to output `y`.
+* **`assign z = c;`**:  Assigns the value of input `c` to output `z`.
+* **`endmodule`**:  Marks the end of the module definition.
+
+This code effectively implements the described wiring connections. The output signals simply mirror the values of the specified input signals.

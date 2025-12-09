@@ -1,0 +1,87 @@
+To implement the gshare branch predictor as described, we need to create a Verilog module named `TopModule`. This module will handle both prediction and training functionalities based on inputs from the processor. Here's how you can design this module:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+
+  // Prediction interface
+  input predict_valid,
+  input [6:0] predict_pc,
+  output reg predict_taken,
+  output reg [6:0] predict_history,
+
+  // Training interface
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+
+  reg [6:0] global_history;
+  reg [7:0][1:0] pattern_table[127:0]; // 128 entries, each with a 2-bit saturating counter
+
+  integer i;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      for (i = 0; i < 128; i = i + 1)
+        pattern_table[i] <= 2'b10; // Initialize with weakly taken state
+
+      global_history <= 7'b0000000;
+    end else begin
+      if (train_valid) begin
+        // Update the branch history register only if it was a misprediction
+        if (train_mispredicted)
+          global_history <= train_history;
+
+        // Compute index for PHT using gshare technique
+        reg [6:0] index;
+        index = {predict_pc ^ global_history};
+
+        // Saturating counter update logic
+        case (pattern_table[index])
+          2'b00: pattern_table[index] <= train_taken ? 2'b01 : 2'b00; // Weakly not taken to weakly taken or remain weakly not taken
+          2'b01: pattern_table[index] <= train_taken ? 2'b11 : 2'b00; // Strongly not taken to weakly taken or strongly not taken
+          2'b10: pattern_table[index] <= train_taken ? 2'b11 : 2'b01; // Weakly taken to strongly taken or weakly not taken
+          2'b11: pattern_table[index] <= 2'b11;                      // Strongly taken remains strongly taken
+        endcase
+
+      end else if (predict_valid) begin
+        reg [6:0] index;
+        index = {predict_pc ^ global_history};
+
+        // Prediction logic based on PHT state
+        predict_taken <= pattern_table[index][1];
+        predict_history <= global_history;
+
+        // Update the history register with predicted outcome
+        if (pattern_table[index] > 2'b01) begin // Predict taken
+          global_history <= {global_history[5:0], 1'b1};
+        end else begin
+          global_history <= {global_history[5:0], 1'b0};
+        end
+
+      end
+    end
+  end
+
+endmodule
+```
+
+### Key Points:
+
+- **Global History Register:** It's a 7-bit register that records the outcomes of recent branches.
+- **Pattern Table (PHT):** A 128-entry table with 2-bit saturating counters. Initialized to weakly taken (`10`).
+- **Prediction Logic:**
+  - Uses XOR between `predict_pc` and `global_history` to compute a PHT index.
+  - Predicts based on the most significant bit of the counter (taken if `1`).
+  - Updates global history with predicted outcome before actual execution.
+- **Training Logic:**
+  - Updates PHT only at the next clock cycle.
+  - If mispredicted, updates global history to the state immediately after this branch.
+- **Saturating Counter:** Changes from weakly not taken (`00`) to strongly not taken (`01`), then to weakly taken (`10`), and finally to strongly taken (`11`). The reverse direction is similar but does not go back to `00`.
+- **Asynchronous Reset:** Resets the global history and pattern table when asserted.
+
+This design ensures that training takes precedence over predictions, as per the specification.

@@ -1,0 +1,26 @@
+module TopModule (
+    input [4:0] a,
+    input [4:0] b,
+    input [4:0] c,
+    input [4:0] d,
+    input [4:0] e,
+    input [4:0] f,
+    output reg [7:0] w,
+    output reg [7:0] x,
+    output reg [7:0] y,
+    output reg [7:0] z
+);
+
+  // Concatenate inputs and append '11'
+  wire [31:0] concatenated;
+
+  assign concatenated = {2'b11, f, e, d, c, b, a};
+
+  always @(*) begin
+    w = concatenated[31:24];
+    x = concatenated[23:16];
+    y = concatenated[15:8];
+    z = concatenated[7:0];
+  end
+
+endmodule

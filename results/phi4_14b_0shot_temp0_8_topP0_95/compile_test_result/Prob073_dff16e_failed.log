@@ -1,0 +1,16 @@
+Problem: Prob073_dff16e
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'q' has 1 mismatches. First mismatch occurred at time 65.
+Hint: Total mismatched samples is 1 out of 443 samples
+
+Simulation finished at 2216 ps
+Mismatches: 1 in 443 samples

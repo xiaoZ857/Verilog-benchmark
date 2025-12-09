@@ -1,0 +1,34 @@
+
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output [4:0] sum
+);
+module FullAdder (
+  input a, b, cin,
+  output sum, cout
+);
+
+  always @(a or b or cin) begin
+    sum = a + b + cin;
+    cout = (a & b) | (cin & sum);
+  end
+
+endmodule
+
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output reg [4:0] sum,
+  output reg overflow
+);
+
+  assign cin = sum[3];
+  FullAdder fa0(x[0], y[0], cin, sum[0], overflow);
+  FullAdder fa1(x[1], y[1], sum[0], sum[1], overflow);
+  FullAdder fa2(x[2], y[2], sum[1], sum[2], overflow);
+  FullAdder fa3(x[3], y[3], sum[2], sum[3], overflow);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

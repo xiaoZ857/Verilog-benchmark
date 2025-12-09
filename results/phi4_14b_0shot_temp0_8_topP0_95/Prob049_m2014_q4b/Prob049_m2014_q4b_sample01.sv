@@ -1,0 +1,21 @@
+
+module TopModule (
+    input clk,
+    input d,
+    input ar,
+    output logic q
+);
+
+always_ff @(posedge clk or posedge ar) begin
+    if (ar) begin
+        // Asynchronously reset the flip-flop
+        q <= 1'b0;
+    end else begin
+        // Capture the input value on the rising edge of clock
+        q <= d;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,131 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+  // Define states
+  parameter WALK_LEFT = 2'b00;
+  parameter WALK_RIGHT = 2'b01;
+  parameter FALLING = 2'b10;
+  parameter DIGGING = 2'b11;
+
+  reg [1:0] current_state;
+  reg [4:0] fall_count; // Counter for fall cycles
+
+  // Output registers
+  reg temp_walk_left;
+  reg temp_walk_right;
+  reg temp_aaah;
+  reg temp_digging;
+
+
+  // Output logic (Moore machine)
+  always @(current_state, ground, dig) begin
+    case (current_state)
+      WALK_LEFT: begin
+        temp_walk_left = 1;
+        temp_walk_right = 0;
+        temp_aaah = 0;
+        temp_digging = 0;
+      end
+      WALK_RIGHT: begin
+        temp_walk_left = 0;
+        temp_walk_right = 1;
+        temp_aaah = 0;
+        temp_digging = 0;
+      end
+      FALLING: begin
+        temp_walk_left = 0;
+        temp_walk_right = 0;
+        temp_aaah = 1;
+        temp_digging = 0;
+      end
+      DIGGING: begin
+        temp_walk_left = 0;
+        temp_walk_right = 0;
+        temp_aaah = 0;
+        temp_digging = 1;
+      end
+      default: begin
+        temp_walk_left = 0;
+        temp_walk_right = 0;
+        temp_aaah = 0;
+        temp_digging = 0;
+      end
+    endcase
+  end
+
+  // Sequential logic (State transitions)
+  always @(posedge clk) begin
+    if (areset) begin
+      current_state <= WALK_LEFT;
+      fall_count <= 0;
+    end else begin
+      case (current_state)
+        WALK_LEFT: begin
+          if (bump_left) begin
+            current_state <= WALK_RIGHT;
+          end else if (bump_right) begin
+            current_state <= WALK_LEFT;
+          end else if (!ground) begin
+            current_state <= FALLING;
+            fall_count <= 0;
+          end else if (dig && !fall_count[3:0]) begin
+            current_state <= DIGGING;
+          end
+          else begin
+            current_state <= WALK_LEFT;
+          end
+        end
+        WALK_RIGHT: begin
+          if (bump_left) begin
+            current_state <= WALK_LEFT;
+          end else if (bump_right) begin
+            current_state <= WALK_RIGHT;
+          end else if (!ground) begin
+            current_state <= FALLING;
+            fall_count <= 0;
+          end else if (dig && !fall_count[3:0]) begin
+            current_state <= DIGGING;
+          end
+          else begin
+            current_state <= WALK_RIGHT;
+          end
+        end
+        FALLING: begin
+          if (ground) begin
+            if (fall_count >= 20) begin
+              // Splatter
+              current_state <= WALK_LEFT; // Reset to a default state
+              fall_count <= 0;
+            } else begin
+              current_state <= WALK_LEFT; // Go back to walking left, assuming ground reappears
+              fall_count <= 0;
+            end
+          end else begin
+            fall_count <= fall_count + 1;
+            current_state <= FALLING;
+          end
+        end
+        DIGGING: begin
+          if (!ground) begin
+            current_state <= FALLING;
+            fall_count <= 0;
+          end else if (dig) begin
+            current_state <= DIGGING;
+          end else begin
+            current_state <= WALK_LEFT;
+          end
+        end
+        default: begin
+          current_state <= WALK_LEFT;
+          fall_count <= 0

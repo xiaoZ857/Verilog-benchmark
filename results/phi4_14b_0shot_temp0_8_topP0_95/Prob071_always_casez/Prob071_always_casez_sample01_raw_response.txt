@@ -1,0 +1,50 @@
+To implement a priority encoder for an 8-bit input vector where the output reports the index of the first (least significant) bit that is high, you can use a Verilog module like `TopModule`. The design involves checking each bit from LSB to MSB and assigning its position as soon as a '1' is found.
+
+Here's how you can implement it in Verilog:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+always @(*) begin
+  if (in[0]) begin
+    pos = 3'b000;
+  end else if (in[1]) begin
+    pos = 3'b001;
+  end else if (in[2]) begin
+    pos = 3'b010;
+  end else if (in[3]) begin
+    pos = 3'b011;
+  end else if (in[4]) begin
+    pos = 3'b100;
+  end else if (in[5]) begin
+    pos = 3'b101;
+  end else if (in[6]) begin
+    pos = 3'b110;
+  end else if (in[7]) begin
+    pos = 3'b111;
+  end else begin
+    pos = 3'b000; // Default to zero if no bits are high
+  end
+end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Inputs and Outputs**:
+   - `input [7:0] in`: An 8-bit input vector.
+   - `output reg [2:0] pos`: A 3-bit output that indicates the position of the first '1' bit found from LSB to MSB.
+
+2. **Priority Logic**:
+   - The always block uses a combinational logic style (sensitivity list with `@(*)`) to determine which is the highest-priority bit set.
+   - It checks each bit starting from the least significant bit (`in[0]`) and assigns its position in binary form to `pos`.
+   - Once it finds a bit that is high, it stops checking further bits and sets the corresponding position.
+
+3. **Default Behavior**:
+   - If no bits are set in the input vector, `pos` defaults to zero (i.e., `3'b000`).
+
+This implementation ensures that the least significant '1' has priority over more significant '1's. The use of an always block with sensitivity list `@(*)` allows for a combinational logic evaluation, automatically updating the output whenever there is a change in the input vector.

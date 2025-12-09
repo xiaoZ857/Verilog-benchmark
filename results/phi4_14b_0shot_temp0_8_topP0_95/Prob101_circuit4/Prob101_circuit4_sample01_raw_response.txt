@@ -1,0 +1,46 @@
+To implement the Verilog module based on the given simulation waveforms, we need to identify how the inputs `a`, `b`, `c`, and `d` affect the output `q`. By examining the provided values over time, we can derive a logical expression for `q`.
+
+### Analysis of the Waveform:
+
+1. **When \( a = 0 \):**
+   - \( q = 0 \) only when \( d = 1 \).
+   - \( q = 1 \) for all other combinations of \( b \), \( c \), and \( d \).
+
+2. **When \( a = 1 \):**
+   - \( q = 0 \) only when \( b = 0 \) and \( c = 0 \).
+   - \( q = 1 \) for all other combinations of \( b \), \( c \), and \( d \).
+
+From this analysis, we can derive the following logical expression for `q`:
+
+- When \( a = 0 \): 
+  - \( q = 1 \) when \( d = 0 \).
+  - \( q = 0 \) only when \( a = 0 \), \( d = 1 \).
+
+- When \( a = 1 \):
+  - \( q = 1 \) unless both \( b = 0 \) and \( c = 0 \).
+
+This can be expressed as:
+\[ 
+q = (\overline{a} \cdot \overline{d}) + (a \cdot (\overline{\overline{b}} + \overline{\overline{c}}))
+\]
+
+Simplifying the expression:
+- \( q = (\overline{a} \cdot \overline{d}) + (a \cdot (b + c)) \)
+
+### Verilog Implementation:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (~a & ~d) | (a & (b | c));
+
+endmodule
+```
+
+This implementation uses the derived logical expression to compute `q` based on inputs `a`, `b`, `c`, and `d`. The use of bitwise AND (`&`) and OR (`|`) operations, along with negation (`~`), reflects the logic deduced from the waveform analysis.

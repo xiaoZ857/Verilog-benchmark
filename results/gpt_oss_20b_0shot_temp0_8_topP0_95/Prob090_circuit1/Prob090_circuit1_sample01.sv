@@ -1,0 +1,16 @@
+
+// TopModule.v
+// Simple combinational AND gate
+
+module TopModule (
+    input  wire a,   // first operand
+    input  wire b,   // second operand
+    output wire q    // AND of a and b
+);
+
+    // Continuous assignment – combinational logic
+    assign q = a & b;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,14 @@
+
+module TopModule (
+  input x,
+  input y,
+  output reg z // Using 'reg' since this is a sequential logic output
+);
+
+always @(*) begin
+    z = (x ^ y) & x;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

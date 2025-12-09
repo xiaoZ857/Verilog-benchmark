@@ -1,0 +1,75 @@
+// TopModule.v
+
+module TopModule (
+  input  a,
+  input  b,
+  input  c,
+  input  d,
+  input  e,
+  output reg [24:0] out
+);
+
+wire [1:0] ab;
+wire [1:0] ac;
+wire [1:0] ad;
+wire [1:0] ae;
+wire [1:0] bc;
+wire [1:0] bd;
+wire [1:0] be;
+wire [1:0] cd;
+wire [1:0] de;
+
+assign ab = a | b; // ~a ^ b
+assign ac = a | c; // ~a ^ c
+assign ad = a | d; // ~a ^ d
+assign ae = a | e; // ~a ^ e
+
+assign bc = b | c; // ~b ^ c
+assign bd = b | d; // ~b ^ d
+assign be = b | e; // ~b ^ e
+
+assign cd = c | d; // ~c ^ d
+assign de = c | e; // ~c ^ e
+
+assign ab = ~ab;
+assign ac = ~ac;
+assign ad = ~ad;
+assign ae = ~ae;
+
+assign bc = ~bc;
+assign bd = ~bd;
+assign be = ~be;
+
+assign cd = ~cd;
+assign de = ~de;
+
+assign out[24] = ab | bc | cd | de; // out[24]
+assign out[23] = ab | bd | cd | de; // out[23]
+assign out[22] = ac | bc | ad | de; // out[22]
+assign out[21] = ac | bd | cd | de; // out[21]
+assign out[20] = ae | be | ce | de;
+assign out[19] = ab | bf | cd | de; // out[19]
+assign out[18] = ac | bf | ad | de; // out[18]
+assign out[17] = ae | bf | ce | de; // out[17]
+
+assign out[16] = ab & bd;
+assign out[15] = ~ab ^ ~bd;
+assign out[14] = ac & cd;
+assign out[13] = ~ac ^ ~cd;
+assign out[12] = ad & de;
+assign out[11] = ~ad ^ ~de;
+
+assign out[10] = ae & be;
+assign out[9] = ~ae ^ ~be;
+assign out[8] = ab & bf;
+assign out[7] = ~ab ^ ~bf;
+assign out[6] = ac & cf;
+assign out[5] = ~ac ^ ~cf;
+assign out[4] = ad & df;
+assign out[3] = ~ad ^ ~df;
+
+assign out[2] = ae & ef;
+assign out[1] = ~ae ^ ~ef;
+assign out[0] = ab & bf ^ ac & cf ^ ad & df ^ ae & ef;
+
+endmodule

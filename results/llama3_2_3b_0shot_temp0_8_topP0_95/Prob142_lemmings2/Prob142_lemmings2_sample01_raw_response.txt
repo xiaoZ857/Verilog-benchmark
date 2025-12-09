@@ -1,0 +1,56 @@
+Here is the Verilog implementation of the Moore state machine for the Lemmings:
+
+```verilog
+module TopModule(
+  input clk, // Positive edge triggered clock signal
+  input areset, // Positive edge triggered asynchronous reset
+  input bump_left, // Input from left side of the world
+  input bump_right, // Input from right side of the world
+  input ground, // Ground state (0 means falling, 1 means not falling)
+  output walk_left, // Output signal to walk left
+  output walk_right, // Output signal to walk right
+  output aaah // Output signal for "aaah!" sound
+);
+
+  reg [1:0] state; // Current state of the Lemming
+  reg fall_state; // State when falling (only 1)
+
+wire [1:0] left_bump, right_bump; // Signals from bump_left and bump_right
+
+// Initialize states
+assign left_bump = ~bump_left;
+assign right_bump = ~bump_right;
+
+// Moore machine logic
+always @(posedge clk) begin
+  if(areset) begin
+    state <= 0; // Reset to walking left
+    fall_state <= 0; // Reset fall state
+  end else begin
+    if((state == 1 && !ground) || (state == 2 && ground)) begin // Falling from the ground
+      state <= 2;
+    end else if(bump_left) begin
+      state <= (state==0)? 1: 0;
+    end else if(bump_right) begin
+      state <= (state==1)? 2: 1;
+    end else if(!left_bump && !right_bump) begin // No bump and not falling, stay in current direction
+      state <= state;
+    end else begin // Bumped either left or right (or both), switch direction
+      fall_state <= 0; // Reset fall state
+      state <= state == 1? 2: 1;
+    end
+  end
+end
+
+assign walk_left = ~(state==1);
+assign walk_right = ~(state==0);
+
+assign aaah = (fall_state == 1); // Produce "aaah!" when falling
+
+
+endmodule
+```
+
+This Verilog code simulates the Lemmings' behavior. The `state` variable tracks the current state of the Lemming (`walk_left` or `walk_right`). If the Lemming is falling and then the ground appears again, it will resume walking in its original direction. The `fall_state` variable keeps track of whether the Lemming is currently falling. It produces a signal for "aaah!" when the Lemming is falling, regardless of what the bump signals are.
+
+This code implements a Moore state machine where the output depends on the current state only and not on any inputs that may occur later.

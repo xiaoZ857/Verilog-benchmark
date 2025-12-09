@@ -1,0 +1,74 @@
+```verilog
+module TopModule (
+  input [3:0] a,
+  input [3:0] b,
+  input [3:0] c,
+  input [3:0] d,
+  input [3:0] e,
+  output reg [3:0] q
+);
+
+  always @(*) begin
+    case (c)
+      4'd0: q = b;
+      4'd1: q = e;
+      4'd2: q = a;
+      4'd3: q = d;
+      4'd4: q = d;
+      4'd5: q = d;
+      4'd6: q = d;
+      4'd7: q = d;
+      4'd8: q = d;
+      4'd9: q = d;
+      default: q = 4'd0; // Default case to handle unexpected values
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+The simulation waveforms show that the output `q` depends on the value of the input `c`.  Specifically:
+
+*   When `c` is 0, `q` equals `b`.
+*   When `c` is 1, `q` equals `e`.
+*   When `c` is 2, `q` equals `a`.
+*   When `c` is 3, `q` equals `d`.
+*   When `c` is 4, 5, 6, 7, 8, or 9, `q` equals `d`.
+
+The Verilog code implements this logic using a `case` statement.  The `always @(*)` block ensures that the output `q` is updated whenever any of the inputs change.  The `default` case is added for robustness to handle any unexpected values of `c`.
+
+**How to test the module:**
+
+To test this module, you would need to create a testbench that provides different combinations of inputs `a`, `b`, `c`, `d`, and `e` and verifies that the output `q` matches the expected values based on the simulation waveforms.
+
+Example Testbench:
+
+```verilog
+module TopModule_tb;
+
+  reg [3:0] a, b, c, d, e;
+  wire [3:0] q;
+
+  TopModule uut (
+    .a(a),
+    .b(b),
+    .c(c),
+    .d(d),
+    .e(e),
+    .q(q)
+  );
+
+  initial begin
+    // Test cases
+    a = 4'd0; b = 4'd0; c = 4'd0; d = 4'd0; e = 4'd0; #10;
+    a = 4'd1; b = 4'd2; c = 4'd1; d = 4'd3; e = 4'd4; #10;
+    a = 4'd5; b = 4'd6; c = 4'd2; d = 4'd7; e = 4'd8; #10;
+    a = 4'd9; b = 4'd10; c = 4'd3; d = 4'd11; e = 4'd12; #10;
+    a = 4'd13; b = 4'd14; c = 4'd4; d = 4'd15; e = 4'd16; #10;
+    a = 4'd17; b = 4'd18; c = 4'd5; d = 4'd19; e = 4'd20; #10;
+    a = 4'd21; b = 4'd22; c = 4'd6; d = 4'd23; e = 4'd24; #10;
+    a = 4'd25; b = 4'd26; c = 4'd7; d = 4'd27; e = 4'd28; #10;
+    a = 4'd29; b = 4'd30; c = 4'd8; d = 4'd31; e = 4'd32; #10;
+    a =

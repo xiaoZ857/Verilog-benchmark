@@ -1,0 +1,13 @@
+
+module TopModule (
+  input wire [99:0] a,
+  input wire [99:0] b,
+  input wire sel,
+  output reg [99:0] out
+);
+
+assign out = sel ? b : a; // This assign statement is equivalent to the mux function in Verilog.
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

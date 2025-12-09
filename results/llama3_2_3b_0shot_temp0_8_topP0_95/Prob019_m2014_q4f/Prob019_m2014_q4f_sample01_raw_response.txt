@@ -1,0 +1,16 @@
+Here's the Verilog module based on your description:
+
+```verilog
+module TopModule (
+    input in1,
+    input in2,
+    output logic out
+);
+
+    // Create an AND gate with 'in1' as its two inputs.
+    assign out = in1 & (~in2);
+
+endmodule
+```
+
+In this implementation, we use the `assign` keyword to directly link the output of the AND operation to the output port of the module. The `~` operator is used to implement a bubble for the 'in2' signal at the input of the AND gate.

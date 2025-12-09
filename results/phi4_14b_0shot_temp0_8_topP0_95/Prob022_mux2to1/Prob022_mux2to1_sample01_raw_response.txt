@@ -1,0 +1,35 @@
+To implement a one-bit wide, 2-to-1 multiplexer in Verilog based on the given description, you can use an `always` block that triggers on the positive edge of the clock. However, since this is a combinational logic circuit (a basic multiplexer), we don't actually need to trigger it with a clock; it should respond immediately to changes in its inputs.
+
+Here's how you could implement such a module:
+
+```verilog
+module TopModule (
+  input wire a,
+  input wire b,
+  input wire sel,
+  output reg out
+);
+
+  // Combinational logic using an always block
+  always @(*) begin
+    if (sel == 1'b0) begin
+      out = a;
+    end else begin
+      out = b;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module `TopModule` takes three inputs: `a`, `b`, and `sel`. It has one output, `out`.
+  
+- **Always Block**: The `always @(*)` block indicates that the logic inside should be evaluated whenever any of its input signals change. This is a way to specify combinational logic in Verilog.
+  
+- **Conditional Logic**:
+  - If `sel` is `0`, the output `out` is set to the value of `a`.
+  - If `sel` is `1`, the output `out` is set to the value of `b`.
+
+This simple multiplexer can be used in larger designs where you need to choose between two signals based on a single control line.

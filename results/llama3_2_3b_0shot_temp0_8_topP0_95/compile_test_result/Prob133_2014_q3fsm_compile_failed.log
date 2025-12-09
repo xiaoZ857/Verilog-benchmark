@@ -1,0 +1,20 @@
+Problem: Prob133_2014_q3fsm
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:114: error: port ``reset'' is not a port of top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:39: warning: Part select [2:0] is selecting after the vector w_count[1:0].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:39:        : Replacing the out of bound bits with 'bx.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:41: warning: Part select [2:0] is selecting after the vector w_count[1:0].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:41:        : Replacing the out of bound bits with 'bx.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:60: warning: Part select [2:0] is selecting after the vector w_count[1:0].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:60:        : Replacing the out of bound bits with 'bx.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:62: warning: Part select [2:0] is selecting after the vector w_count[1:0].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:62:        : Replacing the out of bound bits with 'bx.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:114: warning: Instantiating module TopModule with dangling input port 2 (reset_n) floating.
+1 error(s) during elaboration.

@@ -1,0 +1,37 @@
+**Explanation**
+
+Looking at the truth‑table in the waveform:
+
+| a | b | q |
+|---|---|---|
+| 0 | 0 | 0 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 1 |
+
+`q` is **1 only when both `a` and `b` are 1** – i.e. an AND function.  
+Since the problem states it’s a combinational circuit, no clock or edge
+sensitivity is involved.
+
+---
+
+```verilog
+// TopModule.v
+// Simple combinational AND gate
+
+module TopModule (
+    input  wire a,   // first operand
+    input  wire b,   // second operand
+    output wire q    // AND of a and b
+);
+
+    // Continuous assignment – combinational logic
+    assign q = a & b;
+
+endmodule
+```
+
+* `wire` is the default type for combinational signals, but it’s shown
+explicitly for clarity.
+* The `assign` statement makes `q` drive the logical AND of `a` and `b`
+immediately whenever either input changes.

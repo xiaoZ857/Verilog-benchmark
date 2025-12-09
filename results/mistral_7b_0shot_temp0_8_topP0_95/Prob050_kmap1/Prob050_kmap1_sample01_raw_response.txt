@@ -1,0 +1,22 @@
+ Based on the Karnaugh map provided, the logic for the given circuit can be simplified to the following boolean expression:
+
+f(a,b,c) = a'bc + abc'
+
+Here, `a'` denotes the complement of signal `a`.
+
+In Verilog, this can be implemented as follows:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output out
+);
+
+assign out = ~a & b & c | a & ~b & c;
+
+endmodule
+```
+
+In this code snippet, `~a` represents the complement of signal `a`. The `&` symbol is used for AND operator and the `|` symbol is used for OR operator. This Verilog module implements the given Karnaugh map circuit description.

@@ -1,0 +1,40 @@
+Here's the implementation of the Moore state machine in Verilog:
+
+```verilog
+module TopModule (
+    input clk,      // Positive clock signal
+    input j,         // Input signal
+    input k,         // Input signal
+    input areset,    // Active-high asynchronous reset
+    output out        // Output signal
+);
+
+wire [1:0] state;  // State variable
+
+// Initialize state to OFF (out=0)
+assign state = 2'b00;
+
+always @(posedge clk or negedge areset) begin
+    if (~areset) begin
+        state <= 2'b00;  // Reset to OFF state
+    end else if (state == 2'b00 && j == 1) begin
+        state <= 2'b01;  // Transition to ON state
+    elseif (state == 2'b01 && k == 0) begin
+        state <= 2'b00;  // Stay in OFF state
+    elseif (state == 2'b01 && k == 1) begin
+        state <= 2'b10;  // Transition to OFF state
+    elseif (state == 2'b10 && j == 0) begin
+        state <= 2'b01;  // Transition back to ON state
+    elseif (state == 2'b10 && k == 1) begin
+        state <= 2'b00;  // Stay in OFF state
+    end
+end
+
+assign out = {state[1], state[0]};  // Output the current state
+
+endmodule
+```
+
+This implementation defines a Moore state machine with two states, `OFF` and `ON`, and two inputs, `j` and `k`. The output `out` is assigned the current state of the machine. The state transitions are defined using an always block that checks for rising or falling edges on the clock signal `clk` and the asynchronous reset `areset` signal.
+
+Note that this implementation assumes a positive clock signal, where signals change on the rising edge of the clock. If you need to implement a negative clock signal (where signals change on the falling edge), you'll need to modify the always block accordingly.

@@ -72,6 +72,14 @@ def read_file(filepath: str) -> str:
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             return f.read().strip()
+    except UnicodeDecodeError:
+        # Fallback to system default encoding if UTF-8 fails
+        try:
+            with open(filepath, 'r') as f:
+                return f.read().strip()
+        except Exception as e:
+            print(f"Error reading {filepath}: {e}")
+            return ""
     except Exception as e:
         print(f"Error reading {filepath}: {e}")
         return ""
@@ -99,13 +107,16 @@ def prepare_prompt(problem_name: str) -> tuple:
 
     return full_prompt, prompt_content, ifc_content
 
-def get_model_output_dir(model_name: str) -> str:
+def get_model_output_dir(model_name: str, temperature: float = 0.0, top_p: float = 0.01) -> str:
     """Get output directory for a model, using consistent naming"""
     # Convert model name to safe directory name (remove file system unsafe characters)
     model_name_safe = model_name.replace(':', '_').replace('-', '_').replace('.', '_')
-    return f"results/{model_name_safe}_0shot_temp0.0"
+    # Format temperature and top_p for folder name
+    temp_str = str(temperature).replace('.', '_')
+    top_p_str = str(top_p).replace('.', '_')
+    return f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}"
 
-def generate_single_problem(model_name: str, problem_name: str) -> bool:
+def generate_single_problem(model_name: str, problem_name: str, temperature: float = 0.0, top_p: float = 0.01) -> bool:
     """
     Generate code for a single problem using model interface
 
@@ -121,7 +132,9 @@ def generate_single_problem(model_name: str, problem_name: str) -> bool:
             model_name=model_name,
             problem_name=problem_name,
             prompt=full_prompt,
-            interface=ifc_content
+            interface=ifc_content,
+            temperature=temperature,
+            top_p=top_p
         )
 
         return success
@@ -130,7 +143,7 @@ def generate_single_problem(model_name: str, problem_name: str) -> bool:
         print(f"Error generating {problem_name} with {model_name}: {e}")
         return False
 
-def generate_for_model(model_name: str, problems: List[str]) -> Dict[str, int]:
+def generate_for_model(model_name: str, problems: List[str], temperature: float = 0.0, top_p: float = 0.01) -> Dict[str, int]:
     """
     Generate code for all problems with a specific model
 
@@ -138,10 +151,11 @@ def generate_for_model(model_name: str, problems: List[str]) -> Dict[str, int]:
         Dictionary with success/failure counts
     """
     print(f"\nGenerating code with {model_name}...")
+    print(f"Parameters: temperature={temperature}, top_p={top_p}")
     print("-" * 50)
 
     # Get output directory
-    output_dir = get_model_output_dir(model_name)
+    output_dir = get_model_output_dir(model_name, temperature, top_p)
     os.makedirs(output_dir, exist_ok=True)
 
     # Check for resume - skip already completed problems
@@ -173,7 +187,7 @@ def generate_for_model(model_name: str, problems: List[str]) -> Dict[str, int]:
     error_count = 0
 
     for problem_name in tqdm(remaining_problems, desc=f"Generating {model_name}"):
-        if generate_single_problem(model_name, problem_name):
+        if generate_single_problem(model_name, problem_name, temperature, top_p):
             success_count += 1
         else:
             error_count += 1
@@ -252,6 +266,21 @@ Examples:
         help='Start from problem N (0-indexed)'
     )
 
+    # Generation parameters
+    parser.add_argument(
+        '--temperature',
+        type=float,
+        default=0.0,
+        help='Generation temperature (default: 0.0)'
+    )
+    parser.add_argument(
+        '--top-p',
+        type=float,
+        default=0.01,
+        dest='top_p',
+        help='Generation top_p (default: 0.01)'
+    )
+
     args = parser.parse_args()
 
     # Handle list models
@@ -280,7 +309,7 @@ Examples:
     print(f"\nVerilogEval Model Generator")
     print("=" * 50)
     print(f"Dataset: {DATASET_DIR}")
-    print(f"Mode: Zero-shot, temp=0.0, top_p=0.01")
+    print(f"Mode: Zero-shot, temp={args.temperature}, top_p={args.top_p}")
 
     # Get problem list
     problems = get_problem_list()
@@ -322,7 +351,7 @@ Examples:
 
         # If no exact match, try to match with common variations
         if not matching_model:
-            # Common model name mappings
+            # Common model name mappings (user-friendly input -> actual Ollama name)
             name_mappings = {
                 'llama3.2-3b': 'llama3.2:3b',
                 'llama3_2_3b': 'llama3.2:3b',
@@ -385,7 +414,7 @@ Examples:
     }
 
     for model_name in models_to_generate:
-        result = generate_for_model(model_name, problems)
+        result = generate_for_model(model_name, problems, args.temperature, args.top_p)
         overall_results["models"][model_name] = result
 
     # Overall summary

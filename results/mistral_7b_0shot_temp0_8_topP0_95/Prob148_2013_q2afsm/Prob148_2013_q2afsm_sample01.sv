@@ -1,0 +1,68 @@
+
+module TopModule (
+    input wire clk,
+    input wire resetn,
+    input [3:1] r,
+    output reg [3:1] g
+);
+
+// State codes
+parameter A = 0, B = 1, C = 2, D = 3;
+
+// FSM structure
+reg current_state, next_state;
+
+// Flip-flop state transition function
+always @(posedge clk or negedge resetn)
+begin
+    if (!resetn)
+        next_state <= A;
+    else
+        next_state <= current_state;
+end
+
+// State table
+always @(posedge clk)
+begin
+    case (current_state)
+        A: begin
+            if (r[1] == 1 && r[2] == 0 && r[3] == 0)
+                next_state = B;
+            else if (r[1] == 0 && r[2] == 1 && r[3] == 0)
+                next_state = C;
+            else if (r[1] == 0 && r[2] == 0 && r[3] == 0)
+                next_state = D;
+        end
+        B: begin
+            if (r[1] == 1)
+                next_state = B;
+            else
+                next_state = A;
+        end
+        C: begin
+            if (r[2] == 1)
+                next_state = C;
+            else
+                next_state = A;
+        end
+        D: begin
+            if ((r[1] == 0 && r[2] == 0) || (r[3] == 1))
+                next_state = D;
+            else
+                next_state = A;
+        end
+    endcase
+end
+
+// Output assignments
+always @* begin
+    g[0] = (current_state == B);
+    g[1] = (current_state == C);
+    g[2] = (current_state == D);
+end
+
+assign current_state = next_state;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

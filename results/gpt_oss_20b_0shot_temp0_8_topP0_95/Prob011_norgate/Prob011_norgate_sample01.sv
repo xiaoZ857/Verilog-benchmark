@@ -1,0 +1,30 @@
+
+// -----------------------------------------------------------------------------
+//  TopModule : 2‑input NOR gate
+//  Description: This module implements a simple combinational NOR gate.
+//  Inputs : a, b  (logic 0/1)
+//  Output: out    (out = ~(a | b))
+//  -----------------------------------------------------------------------------
+//  NOTE: No clock is required – the operation is purely combinational.
+// -----------------------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // NOR output
+);
+
+    // -----------------------------------------------
+    // Gate‑level implementation (preferred for simple logic)
+    // -----------------------------------------------
+    nor u_nor (out, a, b);
+
+    // -----------------------------------------------
+    // Alternative – continuous assignment
+    // -----------------------------------------------
+    // assign out = ~(a | b);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

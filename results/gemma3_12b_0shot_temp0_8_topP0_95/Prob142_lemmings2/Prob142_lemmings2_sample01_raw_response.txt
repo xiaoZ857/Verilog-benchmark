@@ -1,0 +1,121 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+
+  // Define states
+  parameter LEFT = 2'b00
+  parameter RIGHT = 2'b01
+
+  // State register
+  reg [1:0] current_state;
+
+  // Output registers
+  reg walk_left_reg;
+  reg walk_right_reg;
+  reg aaah_reg;
+
+  // State transition logic (synchronous with clk)
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= LEFT;
+    end else begin
+      case (current_state)
+        LEFT: begin
+          if (bump_left) begin
+            current_state <= RIGHT;
+          end else if (bump_right) begin
+            current_state <= RIGHT;
+          end else if (!ground) begin
+            current_state <= LEFT; // Stay in LEFT state while falling
+          end
+        end
+        RIGHT: begin
+          if (bump_left) begin
+            current_state <= LEFT;
+          end else if (bump_right) begin
+            current_state <= LEFT;
+          end else if (!ground) begin
+            current_state <= RIGHT; // Stay in RIGHT state while falling
+          end
+        end
+        default: begin
+          current_state <= LEFT; // Default to LEFT state in case of undefined state
+        end
+      endcase
+    end
+  end
+
+  // Output logic (Moore machine)
+  always @(current_state) begin
+    walk_left_reg = 0;
+    walk_right_reg = 0;
+    aaah_reg = 0;
+
+    case (current_state)
+      LEFT: begin
+        walk_left_reg = 1;
+      end
+      RIGHT: begin
+        walk_right_reg = 1;
+      end
+      default: begin
+        // Default outputs in case of undefined state
+      end
+    endcase
+    
+    if (!ground) begin
+        aaah_reg = 1;
+    end
+  end
+
+  // Assign outputs
+  assign walk_left = walk_left_reg;
+  assign walk_right = walk_right_reg;
+  assign aaah = aaah_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **States:**
+   - `LEFT`: The Lemming is walking left.
+   - `RIGHT`: The Lemming is walking right.
+
+2. **State Register (`current_state`):**
+   - This register holds the current state of the Lemming.
+
+3. **Output Registers (`walk_left_reg`, `walk_right_reg`, `aaah_reg`):**
+   - These registers hold the output values, which are updated based on the current state.
+
+4. **State Transition Logic (Synchronous with `clk`):**
+   - The `always @(posedge clk or posedge areset)` block handles state transitions.
+   - **Asynchronous Reset:**  `areset` resets the state machine to `LEFT`.
+   - **State Transitions:**
+     - The `case` statement defines how the state changes based on the input signals (`bump_left`, `bump_right`, `ground`).
+     - If bumped on either side, the state flips to the opposite direction.
+     - If the ground disappears (`!ground`), the state remains in its current state. This allows the Lemming to fall.
+   - **Default State:** The `default` case handles unexpected states by resetting to `LEFT`.
+
+5. **Output Logic (Moore Machine):**
+   - The `always @(current_state)` block defines the output values based on the current state.  This is the key characteristic of a Moore machine: outputs are a function of the current state only.
+   - **Output Assignment:**
+     - `walk_left` is set to 1 when in the `LEFT` state.
+     - `walk_right` is set to 1 when in the `RIGHT` state.
+     - `aaah` is set to 1 when the ground disappears (`!ground`).
+
+6. **Output Assignments:**
+   - The `assign` statements connect the output registers to the module's output ports.
+
+**Key Features and Considerations:**
+
+* **Moore Machine:** The output logic is directly dependent on the current state. This simplifies the design and makes it easier to understand.
+*

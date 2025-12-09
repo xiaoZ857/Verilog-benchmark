@@ -1,0 +1,55 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input reset,
+  output out
+);
+
+  // Define the states
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  // Declare the state register
+  reg current_state;
+
+  // State register is updated on the clock edge when reset is not asserted
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= OFF;
+    end else begin
+      case (current_state)
+        OFF: begin
+          if (j) begin
+            current_state <= ON;
+          end else begin
+            current_state <= OFF;
+          end
+        end
+        ON: begin
+          if (k) begin
+            current_state <= OFF;
+          end else begin
+            current_state <= ON;
+          end
+        end
+        default: begin
+          current_state <= OFF;  // Default state for safety
+        end
+      endcase
+    end
+  end
+
+  // Output logic based on the current state
+  always @(current_state) begin
+    case (current_state)
+      OFF: out = 0;
+      ON:  out = 1;
+      default: out = 0; // Default output for safety
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

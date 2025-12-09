@@ -1,0 +1,43 @@
+Here's an example implementation of a decade counter in Verilog that counts from 1 to 10, inclusive. It uses a synchronous reset and positive clock edge triggered signals.
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+reg [3:0] q;
+reg [4:0] counter;
+
+// Initial value of the counter (counts start at 1)
+initial begin
+  counter = 1;
+end
+
+always @(posedge clk) begin
+  // Check for reset to avoid infinite loop
+  if (reset) begin
+    q <= 1;
+    counter <= 1;
+  end else begin
+    // Increment the counter
+    counter <= counter + 1;
+    
+    // Limit the counter value to 10
+    if (counter > 9) {
+      q <= 10;
+      counter <= 0;
+    } else {
+      // Convert the value of the counter to a 4-bit value
+      q <= counter;
+    }
+  end
+end
+
+endmodule
+```
+
+This module will count up from 1, resetting to 1 when the reset input is high. The count then wraps around and resets back to 0 after reaching 10.
+
+Please note that Verilog doesn't have a native binary-to-ten's complement conversion. This code works by simply counting down if the desired number (in this case, 10) exceeds the current value of `counter`.

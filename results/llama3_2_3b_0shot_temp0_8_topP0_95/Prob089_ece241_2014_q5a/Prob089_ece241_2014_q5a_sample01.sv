@@ -1,0 +1,67 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+module top_module(
+    input clk,
+    input asetreset,
+    input x,
+    output reg [7:0] z
+);
+
+    // Initialize the state to all zeros.
+    reg [7:0] z;
+    reg [7:0] carry_out;
+    reg [1:0] state;
+
+    // State transitions:
+    always @ (posedge clk) begin
+        if (asetreset) begin // Reset on rising edge of clock and falling edge of asetreset
+            state <= 2'b00; // Reset to 0.
+            z <= 8'b00000000;
+            carry_out <= 1'b0;
+        end else begin // Regular operation at rising clock edge
+            if (state == 2'b00) begin // Most significant bit is 1
+                if (x == 1'b1) begin // If the least significant bit of x equals 1
+                    state <= 2'b10; // Move to next state with carry set.
+                    z <= 8'b00011111;
+                    carry_out <= 1'b1;
+                end else begin // Otherwise, it's a 0.
+                    state <= 2'b01; // Move to next state without carry.
+                    z <= 8'b00000000;
+                    carry_out <= 1'b0;
+                end
+            elseif (state == 2'b10) begin // Most significant bit is 0
+                if (x == 1'b1) begin // If the least significant bit of x equals 0
+                    state <= 2'b11; // Move to final state.
+                    z <= 8'b11100000;
+                    carry_out <= 1'b0;
+                end else begin // Otherwise, it's a positive number.
+                    state <= 2'b01; // Move to next state without carry.
+                    z <= 8'b00000000;
+                    carry_out <= 1'b0;
+                end
+            elseif (state == 2'b11) begin // Most significant bit is 0 and there was a previous carry from MSB, which equals 1
+                if (x == 1'b1) begin // If the least significant bit of x equals 0
+                    state <= 2'b00; // Reset state.
+                    z <= 8'b11100011;
+                    carry_out <= 1'b0;
+                end else begin // Otherwise, it's a negative number without previous carry from MSB.
+                    state <= 2'b01; // Move to next state with no carry.
+                    z <= 8'b10001111;
+                    carry_out <= 1'b1;
+                end
+            end
+        end
+    end
+
+    always @ (posedge clk) begin
+        if (!asetreset && state != 0) begin // If it's regular operation and the machine is not resetting.
+            z = ~z + carry_out; // Calculate the output by inverting z and adding the carryout bit to result at end of MSB.
+        end
+    end
+
+endmodule

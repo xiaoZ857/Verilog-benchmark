@@ -1,0 +1,52 @@
+To implement a dual-edge triggered flip-flop using Verilog, we can use two separate always blocks to capture the data on both the positive and negative edges of the clock. Here's how you can structure the `TopModule`:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  // Temporary registers to hold intermediate values
+  reg pos_edge_data;
+  reg neg_edge_data;
+
+  // Capture data on the positive edge of the clock
+  always @(posedge clk) begin
+    pos_edge_data <= d;
+  end
+
+  // Capture data on the negative edge of the clock
+  always @(negedge clk) begin
+    neg_edge_data <= d;
+  end
+
+  // Combine both edges to update the output q
+  always @(*) begin
+    if ($time % (2 * $period(clk)) < $period(clk))
+      q = pos_edge_data; // Use data captured on the positive edge
+    else
+      q = neg_edge_data; // Use data captured on the negative edge
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Intermediate Registers**:
+   - `pos_edge_data` and `neg_edge_data` are used to store the input `d` at the respective clock edges.
+
+2. **Positive Edge Capture**:
+   - The first always block captures the value of `d` on the positive edge of the clock into `pos_edge_data`.
+
+3. **Negative Edge Capture**:
+   - The second always block captures the value of `d` on the negative edge of the clock into `neg_edge_data`.
+
+4. **Combining Edges**:
+   - The third always block is a combinational block that checks whether the current time within a clock cycle is in the first half (positive edge) or the second half (negative edge). It assigns `q` accordingly.
+
+5. **Time Calculation**:
+   - `$time` gives the simulation time, and `$period(clk)` provides the period of the clock signal. This logic helps determine which half of the clock cycle we are in to decide whether to use `pos_edge_data` or `neg_edge_data`.
+
+This design effectively simulates a dual-edge triggered flip-flop using separate always blocks for each edge and a combinational block to update the output based on the current edge.

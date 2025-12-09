@@ -1,0 +1,31 @@
+Below is a minimal, synthesizable implementation that satisfies the specification:
+
+```verilog
+// 8‑bit register with active‑high synchronous reset
+module TopModule (
+    input  wire        clk,   // positive‑edge clock
+    input  wire [7:0]  d,     // data input
+    input  wire        reset, // synchronous active‑high reset
+    output reg  [7:0]  q      // 8‑bit output register
+);
+
+    // One clock‑edge triggered process that implements the 8 D‑FFs.
+    // On each rising edge of clk, the register either loads d
+    // (normal operation) or clears to 0 when reset is asserted.
+    always @(posedge clk) begin
+        if (reset)          // synchronous active‑high reset
+            q <= 8'b0;      // clear all bits
+        else
+            q <= d;         // normal D‑FF behaviour
+    end
+
+endmodule
+```
+
+### Why this works
+
+* **Positive‑edge trigger** – The `always @(posedge clk)` block guarantees that the assignments happen on the rising edge of `clk`, exactly as requested.
+* **Synchronous reset** – The reset is evaluated *inside* the clocked block, so the reset action only takes effect on a clock edge. When `reset` is high, the output `q` is forced to zero; otherwise, it simply latches the value of `d`.
+* **8 D‑FFs** – The 8‑bit vector `q` acts as eight independent D‑flip‑flops. The single assignment `q <= d;` updates all bits simultaneously, which is semantically equivalent to eight separate flip‑flops.
+
+If you prefer to see the logic as a set of *individual* D‑FF modules, you can use a generate block or write eight separate instantiations, but the above code is functionally identical and far simpler to read and maintain.

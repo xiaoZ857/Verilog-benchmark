@@ -1,0 +1,65 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+reg [2:0] current_state, next_state;
+
+// State flip-flops
+always @(posedge clk) begin
+  if (reset)
+    current_state <= 3'b000; // State A
+  else
+    current_state <= next_state;
+end
+
+// State transition logic
+always @(*) begin
+  case (current_state)
+    3'b000: begin // State A
+      if (w)
+        next_state = 3'b001; // B
+      else
+        next_state = 3'b000; // A
+    end
+    3'b001: begin // State B
+      if (w)
+        next_state = 3'b010; // C
+      else
+        next_state = 3'b011; // D
+    end
+    3'b010: begin // State C
+      if (w)
+        next_state = 3'b100; // E
+      else
+        next_state = 3'b011; // D
+    end
+    3'b011: begin // State D
+      if (w)
+        next_state = 3'b101; // F
+      else
+        next_state = 3'b000; // A
+    end
+    3'b100: begin // State E
+      if (w)
+        next_state = 3'b100; // E
+      else
+        next_state = 3'b011; // D
+    end
+    3'b101: begin // State F
+      if (w)
+        next_state = 3'b010; // C
+      else
+        next_state = 3'b011; // D
+    end
+    default:
+      next_state = 3'b000; // Default to A
+  endcase
+end
+
+// Output logic
+assign z = (current_state == 3'b100) || (current_state == 3'b101);
+
+endmodule

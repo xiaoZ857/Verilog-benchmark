@@ -1,0 +1,43 @@
+Here is a Verilog module that implements the specified D flip-flops:
+
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [7:0][3:0] q[1:0]
+);
+
+// Declare a register array to hold the D flip-flops
+reg [1:0][7:0] dq[1:0];
+
+// Initialize the registers with default values (0)
+assign q = {dq[0], dq[1]};
+
+// Create 16 D flip-flops, one for each bit in both bytes
+for (int i = 0; i < 2; i++) begin
+    assign dq[i][7:0] = d[i*8+1:8+i*8]; // Select byte 'i'
+end
+
+// Define the logic to update the registers based on the clock and reset inputs
+always @(posedge clk) begin
+    if (!resetn) begin
+        for (int i = 0; i < 2; i++) dq[i][7:0] <= {8'd0, 8'd0}; // Reset all D flip-flops to 0
+    end else begin
+        for (int i = 0; i < 2; i++) begin
+            if (byteena[1-i] == 1) begin
+                dq[i][7:0] <= d[i*8+1:8+i*8]; // Update the current byte of registers
+            end else begin
+                dq[i][7:0] <= dq[i][7:0]; // No update if not in current byte
+            end
+        end
+    end
+end
+```
+
+In this implementation, we use a single module that can be instantiated multiple times to create 16 D flip-flops. The module takes inputs `clk`, `resetn`, `byteena`, and `d` and produces output `q`. The `dq` array is used to hold the current values of the registers, which are updated based on the clock edge or reset input.
+
+Note that we use a loop in Verilog to create multiple instances of the same logic. In this case, we have two loops, one for each byte of the register: upper byte (`byteena[1]`) and lower byte (`byteena[0]`). The inner loop selects the correct value from the `d` input based on the current byte being updated.
+
+When `resetn` is low (active-high), all 16 D flip-flops are reset to 0. When `resetn` is high, only the current byte of registers is updated based on the `byteena` and `d` inputs.

@@ -1,0 +1,51 @@
+To implement the Verilog module based on your description, we need to design a simple logic that controls whether the ringer or the vibration motor is activated. The inputs are `ring` and `vibrate_mode`, and the outputs are `ringer` and `motor`. According to the requirements:
+
+- If `vibrate_mode` is 1 (true), the motor should be turned on, and the ringer off.
+- If `vibrate_mode` is 0 (false) and there's a ring signal, the ringer should be turned on, and the motor off.
+
+Here is how you can implement this logic in Verilog:
+
+```verilog
+module TopModule (
+    input wire ring,
+    input wire vibrate_mode,
+    output reg ringer,
+    output reg motor
+);
+
+always @(*) begin
+    if (vibrate_mode) begin
+        // If in vibrate mode, activate the motor and deactivate the ringer.
+        ringer = 0;
+        motor = 1;
+    end else if (ring) begin
+        // If not in vibrate mode but there's a ring signal, activate the ringer.
+        ringer = 1;
+        motor = 0;
+    end else begin
+        // Otherwise, both outputs are off.
+        ringer = 0;
+        motor = 0;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `ring`: Indicates an incoming call signal.
+  - `vibrate_mode`: If set to 1, the phone should vibrate instead of ringing.
+
+- **Outputs**:
+  - `ringer`: Controls the ringer. It is turned on when a ring is detected and not in vibrate mode.
+  - `motor`: Controls the vibration motor. It is activated if the phone is in vibrate mode.
+
+- **Logic Implementation**:
+  - The logic is implemented using an always block with a sensitivity list of (*) which means it is combinational and will execute whenever any of its inputs change.
+  - If `vibrate_mode` is true, set `motor = 1` and `ringer = 0`.
+  - If `vibrate_mode` is false but `ring` is true, set `ringer = 1` and `motor = 0`.
+  - In any other case (i.e., no ring signal), both `ringer` and `motor` are off.
+
+This design ensures that the ringer and motor never operate simultaneously, adhering to your specification.

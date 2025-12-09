@@ -1,0 +1,23 @@
+
+// Define the module
+module TopModule(
+    // Inputs
+    input clk, 
+    input [7:0] d, 
+    // Outputs
+    output reg [7:0] q
+);
+
+// DFF instantiation
+for (int i = 0; i < 8; i++) begin : DFF_i
+    wire data;
+    
+    assign data = d[i];
+    
+    /* Clocked D Flip-Flop */
+    DFF DFF_i(clk, data, q[i]);
+endfor
+
+endmodule // TopModule
+
+// VERILOG-EVAL: errant inclusion of module definition

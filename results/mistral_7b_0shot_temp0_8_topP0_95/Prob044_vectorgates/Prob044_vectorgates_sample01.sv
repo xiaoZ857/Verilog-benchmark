@@ -1,0 +1,32 @@
+
+module TopModule (
+  input [2:0] a,
+  input [2:0] b,
+  output reg [2:0] out_or_bitwise,
+  output reg out_or_logical,
+  output reg [5:0] out_not
+);
+
+always @(posedge clk) begin
+  // Bitwise OR of a and b
+  out_or_bitwise <= a | b;
+
+  // Logical OR of a and b
+  out_or_logical <= a | b;
+
+  // Inverting each bit of b (place the inverse of b in the upper half of out_not)
+  out_not[2:0] <= ~b;
+  out_not[3] = out_not[0];
+  out_not[4] = out_not[1];
+  out_not[5] = out_not[2];
+
+  // Inverting each bit of a (place the inverse of a in the lower half)
+  out_not[0] <= ~a[0];
+  out_not[1] = out_not[2];
+  out_not[2] = out_not[3];
+  out_not[3] = out_not[4];
+  out_not[4] = out_not[5];
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

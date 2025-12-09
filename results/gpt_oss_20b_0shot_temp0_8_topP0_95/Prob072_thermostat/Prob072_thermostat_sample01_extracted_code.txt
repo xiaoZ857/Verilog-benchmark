@@ -1,0 +1,26 @@
+// TopModule.v
+// ---------------------------------------------------------------
+//  Heating / cooling thermostat
+// ---------------------------------------------------------------
+
+module TopModule (
+    input  wire mode,      // 1 → heating mode, 0 → cooling mode
+    input  wire too_cold,  // asserted when the temperature is below the set point
+    input  wire too_hot,   // asserted when the temperature is above the set point
+    input  wire fan_on,    // user‑requested fan activation (regardless of heater / AC)
+    output wire heater,    // heater control signal
+    output wire aircon,    // air‑conditioner control signal
+    output wire fan        // blower‑fan control signal
+);
+
+    //  Heater is on only in heating mode when it is too cold
+    assign heater = mode & too_cold;
+
+    //  Air‑conditioner is on only in cooling mode when it is too hot
+    assign aircon = ~mode & too_hot;
+
+    //  Fan turns on if the heater or air‑con is on,
+    //  or if the user explicitly requests the fan.
+    assign fan = heater | aircon | fan_on;
+
+endmodule

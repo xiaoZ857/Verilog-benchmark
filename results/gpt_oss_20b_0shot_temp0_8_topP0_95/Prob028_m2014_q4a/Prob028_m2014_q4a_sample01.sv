@@ -1,0 +1,24 @@
+
+module TopModule (
+    input  logic d,     // Data input
+    input  logic ena,   // Enable (level‑sensitive)
+    output logic q      // Latch output
+);
+
+    /* 
+     * Transparent latch:
+     *   When ena == 1 → q <= d
+     *   When ena == 0 → q holds its previous value
+     *
+     * Use an always block that is sensitive to any change
+     * on d or ena.  A non‑blocking assignment (`<=`) keeps
+     * the latch behavior.
+     */
+    always @ (d or ena) begin
+        if (ena)        // Only update when enabled
+            q <= d;    // Non‑blocking assignment
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

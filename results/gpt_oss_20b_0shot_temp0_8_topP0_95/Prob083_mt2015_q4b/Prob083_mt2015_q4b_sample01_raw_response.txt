@@ -1,0 +1,12 @@
+**Answer – Verilog implementation**
+
+The waveform shows that the output is **high only when the two inputs are equal**.  
+That is exactly the definition of an *XNOR* (equality) gate:
+
+```
+z = 1  <=>  (x == y)
+z = 0  <=>  (x != y)
+```
+
+A minimal Verilog implementation can be written with a continuous assignment,
+or with an `always

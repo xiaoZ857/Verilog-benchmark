@@ -1,0 +1,22 @@
+
+// TopModule.v
+// Implements the Boolean function:
+//     z = (x ^ y) & x
+//  ^  : XOR
+//  &  : AND
+//
+// Since there is no clock in the specification, the logic is purely combinational.
+
+module TopModule (
+    input  wire x,   // first operand (single‑bit)
+    input  wire y,   // second operand (single‑bit)
+    output wire z    // result of (x ^ y) & x
+);
+
+    // Continuous assignment – z is driven whenever x or y changes
+    assign z = (x ^ y) & x;
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

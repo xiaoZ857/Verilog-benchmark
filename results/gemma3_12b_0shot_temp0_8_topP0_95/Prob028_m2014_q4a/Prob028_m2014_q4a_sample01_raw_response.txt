@@ -1,0 +1,91 @@
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always_ff @(posedge clk) begin
+    if (ena) begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input d, input ena, output logic q);`**:  This declares the module named `TopModule` with inputs `d` and `ena` and an output `q`. The `logic` keyword is used for the output `q`, which is a preferred choice in SystemVerilog.
+* **`always_ff @(posedge clk) begin ... end`**: This is an `always_ff` block, which is used to describe sequential logic, specifically flip-flops (latches in this case).  `always_ff` is a SystemVerilog construct that automatically infers a flip-flop.  The `@(posedge clk)` sensitivity list specifies that the block should be triggered on the positive edge of the clock signal `clk`.  **Important:** The original prompt didn't mention a clock signal. I'm assuming a clock-triggered latch is intended. If the intention was a level-triggered latch, you would use `always @(d or ena)` and omit the clock.
+* **`if (ena) begin ... end`**: This conditional statement checks the value of the enable signal `ena`.
+* **`q <= d;`**: If `ena` is high (asserted), the value of the input `d` is assigned to the output `q`.  The non-blocking assignment `<=` is used because `q` is a flip-flop, and we want the assignment to occur concurrently with the other statements in the block.  This is crucial for proper flip-flop behavior.
+
+**How it works as a D latch:**
+
+* When `ena` is high, the latch is enabled. Any change in the input `d` is immediately captured and stored in the output `q` on the positive edge of the clock.
+* When `ena` is low, the latch is disabled. The output `q` holds its last value, and is no longer affected by changes in the input `d`.  The value of `q` is essentially frozen.
+
+**To use this module:**
+
+You would need to instantiate it in another module and provide clock and enable signals.  Here's a simple example:
+
+```verilog
+module TestModule;
+
+  logic d_in;
+  logic ena_in;
+  logic q_out;
+
+  TopModule my_latch (
+    .d(d_in),
+    .ena(ena_in),
+    .q(q_out)
+  );
+
+  initial begin
+    // Example Stimulus
+    clk = 0;
+    forever #5 clk = ~clk;
+  end
+
+  initial begin
+    d_in = 0;
+    ena_in = 0;
+    #10;
+    d_in = 1;
+    ena_in = 1;
+    #10;
+    ena_in = 0;
+    #10;
+    $finish;
+  end
+
+  logic clk;
+endmodule
+```
+
+**Important Considerations:**
+
+* **Clock Signal:** This implementation *requires* a clock signal (`clk`).  If you intended a level-triggered latch, remove the `@(posedge clk)` and the clock signal.
+* **SystemVerilog vs. Verilog:** I'm using `logic` for the output `q` because it's the preferred data type in SystemVerilog.  In older Verilog, you might use `wire` or `reg`. `logic` combines the features of `wire` and `reg`.
+* **Simulation:**  To verify the latch's functionality, you'll need to write a testbench that applies different input values and enable signals and observes the output `q`.  The `TestModule` example above provides a basic testbench.
+* **Synthesis:**  Synthesis tools will automatically infer a D latch based on this `always_ff` block.
+* **Level-Triggered Latch (if no clock):** If a level-triggered latch is desired, the `always` block would look like this:
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always @(d or ena) begin
+    if (ena) begin
+      q = d;
+    end
+  end
+
+endmodule
+```
+In this case, `q` is assigned to `d` whenever `ena` is high, regardless of the clock signal.  The `=`

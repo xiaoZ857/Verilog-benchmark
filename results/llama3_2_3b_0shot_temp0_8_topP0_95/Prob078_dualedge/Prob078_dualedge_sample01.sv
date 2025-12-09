@@ -1,0 +1,28 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+module DualEdgeTriggeredFlipFlop (
+  input clk,
+  input d,
+  output reg q1,
+  output reg q0
+);
+
+  always @(posedge clk)
+    begin
+      // Triggering on positive edge
+      q1 <= d;
+    end
+
+  always @(negedge clk)
+    begin
+      // Triggering on negative edge
+      q0 <= d;
+    end
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

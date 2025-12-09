@@ -1,0 +1,39 @@
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+  always @(in) begin
+    for (int i = 0; i < 100; i++) begin
+      out[i] = in[99-i];
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [99:0] in, output reg [99:0] out);`**: This declares the module `TopModule` with a 100-bit input `in` and a 100-bit output `out`.  The `out` signal is declared as `reg` because it's assigned within an `always` block.
+
+* **`always @(in) begin ... end`**: This `always` block is triggered whenever the input `in` changes. This ensures that the output `out` is updated whenever the input is modified.
+
+* **`for (int i = 0; i < 100; i++) begin ... end`**: This loop iterates through the bits of the input vector.
+
+* **`out[i] = in[99-i];`**: This is the core of the reversal logic.  For each bit index `i` in the output, it assigns the bit at index `99-i` from the input to that output bit. This effectively reverses the bit order.
+
+**How it works:**
+
+The loop iterates from `i = 0` to `i = 99`.
+
+* When `i = 0`, `out[0]` gets assigned `in[99]`.
+* When `i = 1`, `out[1]` gets assigned `in[98]`.
+* ...
+* When `i = 99`, `out[99]` gets assigned `in[0]`.
+
+This process reverses the order of the bits from the input and places them into the output.
+
+**Example:**
+
+If `in = 10010101...` (a 100-bit vector), the `out` signal will be `...10101001`.

@@ -1,0 +1,59 @@
+To implement the described Verilog module, we need to create a mechanism that detects when each bit of a 32-bit vector changes from `1` to `0` between consecutive clock cycles. The detected change should be captured and held on the output until an active-high synchronous reset is applied.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input [31:0] in,
+    output reg [31:0] out
+);
+
+    // Temporary registers to hold current and previous states of the input
+    reg [31:0] prev_in;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Synchronous reset: clear all outputs on reset
+            out <= 32'b0;
+            prev_in <= 32'b0; // Also, reset the previous state register
+        end else begin
+            // Shift previous input to current for next cycle comparison
+            prev_in <= in;
+
+            // Check each bit for a transition from 1 to 0
+            for (int i = 0; i < 32; i = i + 1) begin
+                if ((prev_in[i] == 1'b1) && (in[i] == 1'b0)) begin
+                    out[i] <= 1'b1;
+                end else if (reset) begin
+                    // Ensure the output is cleared on reset, even if not set by transition
+                    out[i] <= 1'b0;
+                end
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers**:
+   - `prev_in`: A register to store the previous state of the input vector for comparison with the current cycle.
+
+2. **Reset Handling**:
+   - Both `out` and `prev_in` are cleared upon a reset signal, ensuring that all outputs start at zero when the system is reset.
+
+3. **Main Logic in Always Block**:
+   - The block is triggered on the positive edge of the clock or the positive edge of the reset.
+   - If the reset signal is asserted, both `out` and `prev_in` are set to 0.
+
+4. **Bit Transition Detection**:
+   - For each bit position from 0 to 31, we check if it transitioned from `1` in `prev_in` to `0` in `in`.
+   - If such a transition is detected, the corresponding output bit is set to `1`.
+
+5. **Output Stability**:
+   - Each output bit remains high once it captures a falling edge (transition from 1 to 0) until reset.
+
+This implementation ensures that each bit of the output vector correctly captures the specified transitions and behaves as expected under reset conditions.

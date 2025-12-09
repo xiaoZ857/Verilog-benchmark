@@ -1,0 +1,74 @@
+
+module TopModule (
+  input [3:1] y,
+  input w,
+  output reg Y2
+);
+// Define state codes and their corresponding state names
+parameter [
+    STATE_A = 4'h0, // State A
+    STATE_B = 4'h1, // State B
+    STATE_C = 4'h2, // State C
+    STATE_D = 4'h3, // State D
+    STATE_E = 4'h4, // State E
+    STATE_F = 4'h5   // State F
+] ;
+
+// Define the next-state logic for y[2]
+module NextStateLogic (
+    input [3:1] y,
+    output reg Y2
+);
+
+    // Initialize state variables (3 flip-flops)
+    reg [3:1] y_prev;
+    
+    always @(posedge w) begin
+        // Load previous state into the flip-flops
+        y_prev <= {y[0], y[1], y[2]};
+        
+        // Calculate next state based on current state and input w
+        case (y)
+            State_A : if (w == 1) Y2 <= 0; else Y2 <= 1;
+            State_B : if (w == 1) Y2 <= 0; else Y2 <= 0;
+            State_C : if (w == 1) Y2 <= 0; else Y2 <= 1;
+            State_D : if (w == 1) Y2 <= 0; else Y2 <= 1;
+            State_E : if (w == 1) Y2 <= 0; else Y2 <= 1;
+            State_F : if (w == 1) Y2 <= 0; else Y2 <= 1;
+        endcase
+    end
+
+endmodule // NextStateLogic
+
+// Instantiate the next-state logic module and connect outputs
+module TopModule (
+    input [3:1] y,
+    input w,
+    output reg Y2
+);
+
+    NextStateLogic next_state_logic;
+
+    always @(output) begin
+        next_state_logic.Y2 <= Y2;
+    end
+
+    initial begin
+        // Initialize state variables (3 flip-flops)
+        y[0] = 0;
+        y[1] = 0;
+        y[2] = 0;
+        
+        // Enable the FSM
+        w <= 1; // Example clock and reset edge
+        
+        // Wait for the next clock cycle
+        #10;
+        
+        // Print current state of Y2
+        $display("Current state of Y2: %d", Y2);
+    end
+
+endmodule // TopModule
+
+// VERILOG-EVAL: errant inclusion of module definition

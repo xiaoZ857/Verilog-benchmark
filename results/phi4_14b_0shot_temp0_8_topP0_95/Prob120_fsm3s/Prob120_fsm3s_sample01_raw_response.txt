@@ -1,0 +1,67 @@
+To implement the Moore state machine described in your question using Verilog, we need to define a module that maintains four states (A, B, C, D) and transitions between them based on the input `in`. The state machine also includes an active high reset signal which resets it to state A. The output is determined by the current state according to the Moore model.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire reset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    STATE_A = 2'b00,
+    STATE_B = 2'b01,
+    STATE_C = 2'b10,
+    STATE_D = 2'b11
+  } state_t;
+
+  // Registers for current and next states
+  state_t current_state, next_state;
+
+  // Output logic based on the current state
+  always @(*) begin
+    case (current_state)
+      STATE_A: out = 1'b0;
+      STATE_B: out = 1'b0;
+      STATE_C: out = 1'b0;
+      STATE_D: out = 1'b1;
+      default: out = 1'bx; // Undefined state
+    endcase
+  end
+
+  // Next state logic
+  always @(*) begin
+    case (current_state)
+      STATE_A: next_state = in ? STATE_B : STATE_A;
+      STATE_B: next_state = in ? STATE_B : STATE_C;
+      STATE_C: next_state = in ? STATE_D : STATE_A;
+      STATE_D: next_state = in ? STATE_B : STATE_C;
+      default: next_state = STATE_A; // Undefined state
+    endcase
+  end
+
+  // State transition and reset logic
+  always @(posedge clk or posedge reset) begin
+    if (reset)
+      current_state <= STATE_A;
+    else
+      current_state <= next_state;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We use a `typedef enum` to define the four states with binary encoding for simplicity.
+  
+- **Output Logic**: The output is determined by the current state in a combinational block. This follows the Moore machine principle where outputs depend solely on the current state.
+
+- **Next State Logic**: Another combinational block determines the next state based on the current state and input `in`.
+
+- **State Transition and Reset Logic**: A sequential block handles the transition from the current state to the next state at every positive edge of the clock. If the reset signal is high, it resets the machine to state A.
+
+This Verilog code captures the behavior described in the state transition table for a Moore FSM with synchronous active-high reset functionality.

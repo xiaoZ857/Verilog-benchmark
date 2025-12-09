@@ -1,0 +1,38 @@
+Here is a clean, synthesizable implementation that respects every detail of the specification:
+
+```verilog
+// TopModule.v
+// 16‑bit register with two byte‑enable inputs.
+// resetn is a *synchronous* active‑low reset.
+// All 16 D‑flip‑flops are edge‑triggered on the positive edge of clk.
+//
+// byteena[1] – enables the upper byte (d[15:8]) to be written.
+// byteena[0] – enables the lower byte (d[7:0]) to be written.
+//
+// The implementation is written in a register‑style always block,
+// but a generate loop is also provided to make the 16 individual
+// DFFs explicit (useful for readability or when you need to map
+// to a specific cell library).
+
+module TopModule (
+    input          clk,        // system clock
+    input          resetn,     // synchronous active‑low reset
+    input  [1:0]   byteena,    // byte‑enable signals
+    input  [15:0]  d,          // data input
+    output reg [15:0] q         // 16‑bit output
+);
+
+    // ------------------------------------------------------------------
+    // Option 1 – simple register style (implicit 16 DFFs)
+    // ------------------------------------------------------------------
+    /* Uncomment this block if you prefer the concise register style.
+       It synthesises to the same hardware as the generate loop below
+       (i.e., 16 DFFs with per‑bit write enable).
+    */
+    /*
+    always @(posedge clk) begin
+        if (!resetn) begin
+            q <= 16'b0;                      // synchronous reset
+        end else begin
+            // Upper byte – enabled by byteena[1]
+            if (byteena[1]) q[

@@ -1,0 +1,34 @@
+Here's the Verilog implementation for the described module:
+
+```verilog
+module TopModule (
+    input ring,
+    input vibrate_mode,
+    output ringer,
+    output motor
+);
+    
+    always @(*) begin
+        motor = ring & vibrate_mode;
+        ringer = ring & (~vibrate_mode);
+    end
+
+endmodule
+```
+
+**Explanation:**
+
+- **Inputs:** The module takes two inputs: `ring` and `vibrate_mode`.
+  - `ring`: Indicates an incoming call (1 when ringing is needed).
+  - `vibrate_mode`: Determines if the phone should vibrate instead of ring (1 for vibration, 0 for ringer).
+
+- **Outputs:** The module has two outputs: `ringer` and `motor`.
+  - `ringer`: Activates the ringer (1) when in standard mode.
+  - `motor`: Activates the vibration motor (1) when in vibrate mode.
+
+**Logic Flow:**
+- When `ring` is active (1), the module checks `vibrate_mode`.
+  - If `vibrate_mode` is 1, it sets `motor` to 1 and `ringer` to 0.
+  - If `vibrate_mode` is 0, it sets `ringer` to 1 and `motor` to 0.
+
+This implementation ensures that only one of the outputs is active at any time when `ring` is active, adhering to the specified requirements.

@@ -1,0 +1,32 @@
+To implement a Verilog module with 8 D flip-flops, you need to ensure each flip-flop captures the input data on the positive edge of the clock signal. The outputs of these flip-flops will be stored in an 8-bit output register `q`. Here's how you can define such a module:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire [7:0] d,
+    output reg [7:0] q
+);
+
+    // Declare internal registers for each D flip-flop
+    reg [7:0] ff; // This will hold the current state of all 8 flip-flops
+
+    always @(posedge clk) begin
+        // On positive edge of clock, update the flip-flops with input data
+        ff <= d;
+        q <= ff;  // Assign the internal register to output
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The `TopModule` module is declared with inputs `clk` and `d[7:0]`, and an output `q[7:0]`.
+
+- **Internal Register**: An internal 8-bit register `ff` is used to store the state of each D flip-flop. This acts as a buffer between the input data and the final output.
+
+- **Always Block**: The `always @(posedge clk)` block ensures that the logic inside it executes on every positive edge of the clock signal.
+
+- **Data Capture**: Within this block, `ff` is updated with the current value of `d`, effectively capturing the D flip-flop behavior. Immediately after updating `ff`, its value is assigned to `q`.
+
+This setup allows for synchronous operation where changes in input data `d` are reflected at output `q` on each positive clock edge.

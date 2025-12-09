@@ -1,0 +1,19 @@
+Looking at the waveform, we can see that q is 1 whenever at least two of the inputs are 1. This is a majority function, but specifically for 4 inputs where the output is 1 when two or more inputs are 1.
+
+Let's verify with the truth table:
+- When 0 or 1 inputs are 1: q = 0 (e.g., 0000, 0001, 0010, 0100, 1000)
+- When 2, 3, or 4 inputs are 1: q = 1 (all other combinations)
+
+This matches all the given waveform points.
+
+We can implement this using a sum-of-products or by counting. Here's a straightforward implementation:
+
+```verilog
+  wire [3:0] inputs;
+  wire [2:0] count;
+  
+  assign inputs = {a, b, c, d};
+  assign count = inputs[0] + inputs[1] + inputs[2] + inputs[3];
+  assign q = (count >= 2'd2);
+endmodule
+```

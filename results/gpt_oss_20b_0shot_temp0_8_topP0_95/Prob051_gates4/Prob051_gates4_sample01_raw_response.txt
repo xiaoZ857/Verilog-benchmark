@@ -1,0 +1,40 @@
+Here is a straightforward, synthesizable Verilog implementation of the requested combinational circuit.  
+The three outputs are driven by continuous assignments, so the module contains **no** clock logic – it is purely combinational.
+
+```verilog
+//===================================================
+//  TopModule
+//  ---------
+//  4‑input combinational logic
+//  out_and : 4‑input AND gate
+//  out_or  : 4‑input OR  gate
+//  out_xor : 4‑input XOR gate
+//===================================================
+
+`timescale 1ns / 1ps          // Optional: define simulation time unit and precision
+
+module TopModule (
+    input  wire [3:0] in,     // 4‑bit input vector
+    output wire       out_and, // 4‑input AND
+    output wire       out_or,  // 4‑input OR
+    output wire       out_xor  // 4‑input XOR
+);
+
+    // 4‑input AND:  out_and = in[3] & in[2] & in[1] & in[0]
+    assign out_and = in[3] & in[2] & in[1] & in[0];
+
+    // 4‑input OR:   out_or  = in[3] | in[2] | in[1] | in[0]
+    assign out_or  = in[3] | in[2] | in[1] | in[0];
+
+    // 4‑input XOR:  out_xor = in[3] ^ in[2] ^ in[1] ^ in[0]
+    assign out_xor = in[3] ^ in[2] ^ in[1] ^ in[0];
+
+endmodule
+```
+
+### Notes
+* `input wire [3:0] in` – the four input bits are treated as a single vector.
+* All outputs are declared as `wire` because they are driven by continuous assignments.
+* The module is purely combinational; no clock or reset signals are required.
+* The `timescale` directive is optional but handy for simulation.  
+* The code is synthesizable by most FPGA/ASIC toolflows.

@@ -1,0 +1,20 @@
+module TopModule (
+    input [7:0] a,
+    input [7:0] b,
+    output reg [7:0] s,
+    output overflow
+);
+
+    // Internal wire to hold the 9-bit sum (to detect overflow)
+    wire [8:0] temp_sum;
+
+    // Perform addition and assign result
+    assign temp_sum = a + b;
+    always @(*) begin
+        s = temp_sum[7:0]; // Assign lower 8 bits as the sum output
+    end
+
+    // Determine overflow condition
+    assign overflow = ((a[7] & b[7]) & (~temp_sum[7])) | ((~a[7]) & (~b[7]) & (temp_sum[7]));
+
+endmodule

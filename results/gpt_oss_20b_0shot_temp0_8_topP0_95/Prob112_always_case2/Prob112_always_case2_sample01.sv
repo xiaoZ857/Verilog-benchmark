@@ -1,0 +1,14 @@
+
+module TopModule (
+    input  wire [3:0] in,     // 4‑bit input vector
+    output reg  [1:0] pos     // 2‑bit position output
+);
+
+    // The always @(*) block guarantees a purely combinational logic.
+    // A simple priority chain (LSB → MSB) selects the lowest‑index ‘1’.
+    always @(*) begin
+        if
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,16 @@
+Problem: Prob037_review2015_count1k
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv:18: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv:20: Syntax in assignment statement l-value.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv:26: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv:31: error: invalid module item.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv:32: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob037_review2015_count1k_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob037_review2015_count1k_test.sv:12: error: invalid module item.

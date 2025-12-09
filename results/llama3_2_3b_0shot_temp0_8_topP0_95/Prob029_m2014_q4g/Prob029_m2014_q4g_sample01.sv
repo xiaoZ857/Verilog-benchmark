@@ -1,0 +1,25 @@
+
+// Define the module TopModule
+module TopModule (
+  // Inputs
+  input in1, 
+  input in2, 
+  input in3, 
+  // Output
+  output logic out
+);
+
+// Instantiate two XNOR gates
+// Assuming XNOR gate has a single input
+logic xnor_result1;
+logic xnor_result2;
+
+assign xnor_result1 = ~in1 & ~in2;
+assign xnor_result2 = ~in1 | in2;
+
+// Instantiate an XOR gate with 'xnor_result1' and 'in3' as inputs
+assign out = xnor_result1 ^ in3;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,13 @@
+The bug in the original code is that `out` is declared as a single-bit output, but the inputs `a` and `b` are 8-bit wide, so the mux should produce an 8-bit output. The fixed module uses `output reg [7:0] out` to match the input width.
+
+Here is the corrected Verilog code:
+
+```verilog
+  always @(*) begin
+      if (sel == 1'b0)
+          out = a;
+      else
+          out = b;
+  end
+endmodule
+```

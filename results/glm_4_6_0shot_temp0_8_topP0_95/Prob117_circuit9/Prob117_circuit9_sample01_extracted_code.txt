@@ -1,0 +1,23 @@
+
+// Based on the waveform analysis, this is a 3-bit counter with enable control.
+// When a=1, the counter holds its value (disabled)
+// When a=0, the counter increments by 1 on each positive clock edge
+// The counter wraps around from 7 to 0
+// Initial value is 4
+
+always @(posedge clk) begin
+  if (a) begin
+    // When a=1, hold current value
+    q <= q;
+  end else begin
+    // When a=0, increment counter (with wrap-around)
+    q <= q + 1;
+  end
+end
+
+// Initialize to 4 (as seen in the waveform)
+initial begin
+  q = 3'b100;
+end
+
+endmodule

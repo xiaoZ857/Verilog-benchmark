@@ -1,0 +1,24 @@
+Here's the Verilog code for the module as described:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output reg w,  // Use a register to store the signal
+  output reg x,
+  output reg y,
+  output reg z   // Reg is required to make signals clock/clk triggered.
+);
+  always @(posedge clk) begin  // Clock/clk edge detection is necessary for some designs
+    w <= a;
+    x <= b;
+    y <= b;     // This makes both 'x' and 'y' equal to signal 'b'
+    z <= c;
+  end
+endmodule
+```
+
+Note the following:
+1. `reg` keyword is used with `output` signals to indicate that they are combinational logic (i.e., always true when their inputs are true).
+2. The use of an `always` block with a `posedge` clause ensures that the logic inside is executed on the positive edge of the clock signal (`clk`).

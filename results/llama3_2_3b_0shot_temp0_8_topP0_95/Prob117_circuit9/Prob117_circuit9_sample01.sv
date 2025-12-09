@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+reg [3:0] state;
+always @(posedge clk) begin
+    if (state == 1 && a == 1) 
+        state <= 4;
+    else if ((a == 0 || a == 1) && (clk == 0)) 
+        state <= 2;
+    else 
+        state <= 1;
+end
+
+assign q = state;
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

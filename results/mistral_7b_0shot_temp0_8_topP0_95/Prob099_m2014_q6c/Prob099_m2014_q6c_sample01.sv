@@ -1,0 +1,38 @@
+
+module TopModule (
+  input [6:1] y, // Current state
+  input w,       // Input signal
+  output reg Y2, // Next state for y[2]
+  output reg Y4  // Next state for y[4]
+);
+
+// Decode current state y and input w to next states Y2 and Y4
+always @(posedge clk) begin
+  if (y[6]) begin // If current state is A
+    Y2 <= 0;
+    Y4 <= 0;
+  end else if (y[5]) begin // If current state is B
+    Y2 <= w;
+    Y4 <= 0;
+  end else if (y[3]) begin // If current state is D
+    Y2 <= 0;
+    Y4 <= w;
+  end else if (y[2]) begin // If current state is A or C or E or F
+    Y2 <= y[2]; // Copy current value for y[2]
+    Y4 <= y[4]; // Copy current value for y[4]
+  end else if (y[1]) begin // If current state is B
+    Y2 <= !w;
+    Y4 <= 0;
+  end else if (y[0]) begin // If current state is C or D
+    if (w) begin // If input is 1, transition to D or F
+      Y2 <= y[4];
+      Y4 <= !y[2];
+    end else begin // If input is 0, transition to E or C
+      Y2 <= y[2];
+      Y4 <= !y[4];
+    end
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

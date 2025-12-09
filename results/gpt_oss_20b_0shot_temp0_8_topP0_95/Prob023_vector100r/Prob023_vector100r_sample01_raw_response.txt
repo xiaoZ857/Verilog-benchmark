@@ -1,0 +1,34 @@
+Here is a simple, fully‑combinational implementation that simply copies each bit of the 100‑bit input into the output in reverse order.  
+Because the design is purely combinational, we use an `always @(*)` block (which synthesizes to a combinational logic block) and a loop to generate the wiring.
+
+```verilog
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  [99:0] in,
+    output reg [99:0] out
+);
+
+    /*------------------------------------------------------------
+     *  Reverse the bit order of the 100‑bit input vector.
+     *  out[0]  = in[99]
+     *  out[1]  = in[98]
+     *  ...
+     *  out[99] = in[0]
+     *------------------------------------------------------------*/
+    always @(*) begin
+        integer i;
+        for (i = 0; i < 100; i = i + 1) begin
+            out[i] = in[99 - i];
+        end
+    end
+
+endmodule
+```
+
+### Notes
+- `out` is declared as a `reg` because it is assigned within an `always` block.  
+- The `always @(*)` block makes the module combinational; no clock is required.  
+- The loop iterates over all 100 bit positions and assigns each reversed bit.  
+
+This code is synthesizable for any standard Verilog‑2001 (or newer) tool and will correctly reverse a 100‑bit wide vector.

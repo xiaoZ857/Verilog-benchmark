@@ -1,0 +1,16 @@
+Problem: Prob085_shift4
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob085_shift4/Prob085_shift4_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be asynchronous, but doesn't appear to be.
+Hint: Output 'q' has 73 mismatches. First mismatch occurred at time 40.
+Hint: Total mismatched samples is 73 out of 427 samples
+
+Simulation finished at 2136 ps
+Mismatches: 73 in 427 samples

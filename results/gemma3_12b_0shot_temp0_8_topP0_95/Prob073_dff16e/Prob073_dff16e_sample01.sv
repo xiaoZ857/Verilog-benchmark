@@ -1,0 +1,39 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [15:0] q
+);
+
+  reg [15:0] dff_q [15:0];
+
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      q <= 0;
+      for (integer i = 0; i < 16; i = i + 1) begin
+        dff_q[i] <= 0;
+      end
+    end else begin
+      q <= 0;
+      for (integer i = 0; i < 16; i = i + 1) begin
+        if (byteena == 2'b00 && i < 8) begin
+          dff_q[i] <= d[i];
+        end else if (byteena == 2'b01 && i < 8) begin
+           dff_q[i] <= d[i];
+        end else if (byteena == 2'b00 && i >= 8) begin
+          dff_q[i] <= d[i];
+        end else if (byteena == 2'b01 && i >= 8) begin
+           dff_q[i] <= d[i];
+        end else begin
+          dff_q[i] <= dff_q[i];
+        end
+      end
+      q <= dff_q;
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

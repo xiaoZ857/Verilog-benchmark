@@ -1,0 +1,17 @@
+Problem: Prob094_gatesv
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob094_gatesv/Prob094_gatesv_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_both' has no mismatches.
+Hint: Output 'out_any' has 55 mismatches. First mismatch occurred at time 5.
+Hint: Output 'out_different' has 213 mismatches. First mismatch occurred at time 5.
+Hint: Total mismatched samples is 213 out of 213 samples
+
+Simulation finished at 1066 ps
+Mismatches: 213 in 213 samples

@@ -1,0 +1,55 @@
+To implement a Verilog module for Rule 90 cellular automaton with the given specifications, we need to design a system that updates its state every clock cycle based on the current configuration of cells. The edge conditions assume that both out-of-bound neighbors are zero.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire load,
+    input wire [511:0] data,
+    output reg [511:0] q
+);
+
+    always @(posedge clk) begin
+        if (load) begin
+            // Load the given state into q when `load` is asserted
+            q <= data;
+        end else begin
+            // Update each cell according to Rule 90
+            reg [511:0] next_state;
+
+            for (int i = 0; i < 512; i = i + 1) begin
+                // Calculate the next state of each cell using XOR
+                // Assume q[-1] and q[512] are zero as per the specification
+                next_state[i] <= q[i-1] ^ q[i+1];
+            end
+
+            // Update q to the new state after computing all cells' next states
+            q <= next_state;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Input and Output Ports:**
+   - `clk`: Positive edge-triggered clock input.
+   - `load`: Input that determines whether the current state should be loaded with new data.
+   - `data[511:0]`: The 512-bit input representing the initial or loaded state of the system.
+   - `q[511:0]`: The output register representing the current state of the cellular automaton.
+
+2. **Behavioral Block (`always @(posedge clk)`):**
+   - We trigger changes on each positive edge of the clock.
+
+3. **Conditional Logic Inside the Block:**
+   - If the `load` signal is high, the new data is loaded into `q`.
+   - Otherwise, the next state for all cells in `next_state` is computed based on Rule 90:
+     - Each cell's next value depends on its left and right neighbors' XOR operation.
+     - Out-of-bounds are treated as zero: `q[-1]` and `q[512]`.
+
+4. **Updating the State:**
+   - Once all new states are calculated for every cell, the entire register `q` is updated to reflect these changes.
+
+This module captures the desired behavior of advancing through time steps in a Rule 90 cellular automaton with specified edge conditions.

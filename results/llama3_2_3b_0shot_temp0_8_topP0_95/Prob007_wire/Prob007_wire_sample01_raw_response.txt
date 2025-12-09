@@ -1,0 +1,37 @@
+Here's an example of how you can implement this Verilog module:
+
+```verilog
+// Define the top-level module
+module TopModule (
+  input in, // Input signal
+  output reg out  // Output signal (reg is used to ensure it's always initialized)
+);
+
+// Wire behavior
+assign out = in; // Assign the input signal to the output
+
+endmodule
+```
+
+In this code:
+
+*   We declare an input port `in` and an output port `out`.
+*   The `output reg out` declaration ensures that the `out` signal is always initialized.
+*   The `assign out = in;` statement assigns the value of the `in` signal to the `out` signal, effectively behaving like a wire.
+
+However, since Verilog doesn't explicitly set the initial state of signals when they're assigned at the top level (this behavior was added in Verilog 2001), you might want to use an `always @(*)` block to always initialize the output signal:
+
+```verilog
+module TopModule (
+    input in,
+    output reg out
+);
+
+always @(*) begin
+    out = in;
+end
+
+endmodule
+```
+
+In this version, the `out` signal is always updated based on the value of the `in` signal.

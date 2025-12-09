@@ -1,0 +1,15 @@
+Problem: Prob099_m2014_q6c
+Code file: results\glm_4_6_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:12: error: Y2 is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:5:      : Y2 is declared here as wire.
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:20: error: Y4 is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:6:      : Y4 is declared here as wire.
+results\glm_4_6_0shot_temp0_8_topP0_95\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:9: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

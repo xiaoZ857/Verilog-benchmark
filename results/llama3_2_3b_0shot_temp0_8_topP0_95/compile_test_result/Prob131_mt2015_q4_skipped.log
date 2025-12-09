@@ -1,0 +1,7 @@
+Problem: Prob131_mt2015_q4
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: top_z depends on itself in assign statement

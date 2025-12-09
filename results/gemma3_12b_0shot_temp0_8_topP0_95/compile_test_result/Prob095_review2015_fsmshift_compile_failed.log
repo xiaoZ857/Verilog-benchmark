@@ -1,0 +1,16 @@
+Problem: Prob095_review2015_fsmshift
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:13: error: shift_ena is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:5:      : shift_ena is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:17: error: shift_ena is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:5:      : shift_ena is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:20: error: shift_ena is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:5:      : shift_ena is declared here as wire.
+3 error(s) during elaboration.

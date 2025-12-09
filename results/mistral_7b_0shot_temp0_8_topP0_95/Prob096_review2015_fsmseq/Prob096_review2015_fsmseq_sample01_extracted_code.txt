@@ -1,0 +1,35 @@
+module TopModule (
+    input wire clk,
+    input wire reset,
+    input wire data,
+    output reg start_shifting
+);
+
+reg state; // Current state of the FSM (0: Idle, 1: Expecting 1, 2: Expecting 0, 3: Found Sequence)
+reg sequence_counter; // Counter for sequence detection (0: Reset, 1: First bit, 2: Second bit, 3: Third bit)
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 0; // Idle state when reset is active
+        sequence_counter <= 0; // Reset sequence counter
+    end else if (state == 0) begin
+        state <= 1; // Start expecting first bit of the sequence
+        sequence_counter <= 1;
+    end else if (sequence_counter < 3 && data == sequence_counter) begin
+        sequence_counter <= sequence_counter + 1;
+    end else if (sequence_counter == 3 && data == 1) begin // Found the sequence, start shifting
+        state <= 3;
+        start_shifting <= 1;
+    end else begin
+        state <= 0; // Reset to idle state on any invalid input or after finding a sequence
+    end
+end
+
+always @(posedge clk) begin
+    if (state == 3) begin
+        start_shifting <= start_shifting; // Hold start_shifting high, forever
+    end
+end
+
+// Add missing reset synchronization for data input here:
+assign data = (!reset) ? data : 1'bx; // Replace 'x' with your preferred unknown value

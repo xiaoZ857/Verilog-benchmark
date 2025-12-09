@@ -1,0 +1,36 @@
+ Here is the Verilog code for the 4-bit wide, 256-to-1 multiplexer with a 1024-bit input vector as described:
+
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output reg [3:0] out
+);
+
+always @(posedge clk) begin
+    case(sel)
+        0: out <= in[3:0];
+        1: out <= in[7:4];
+        2: out <= in[11:8];
+        // Add more cases for other sel values up to 7
+        8'b1111_1111: out <= in[15:12]; // The last case for sel equals 7
+    endcase
+end
+
+// If you want to make the reset default value of out to be 0, add a reset signal as below
+reg [3:0] reset = 4'b0000; // Initialize to 0s
+always @* begin
+    if (reset)
+        out <= reset;
+end
+
+// If you want to include an active-high synchronous reset signal
+input sync_rst;
+reg [3:0] reset = 4'b0000; // Initialize to 0s
+always @* begin
+    if (sync_rst && !clk)
+        reset <= 4'b0000;
+end
+```
+
+This Verilog code creates a TopModule with 1024 input bits, an 8-bit select signal called sel, and a 4-bit output vector called out. The case statement is used to assign the corresponding input bits based on the current value of sel. A reset signal can be added to initialize the output vector to zero at the beginning of simulation. In this example, I've added an asynchronous reset that resets the output when the synchronization signal (clk) is low and the active-high synchronous reset (sync_rst) is high.

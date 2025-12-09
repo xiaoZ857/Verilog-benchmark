@@ -1,0 +1,20 @@
+Problem: Prob079_fsm3onehot
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:9: warning: implicit definition of wire 'A'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:10: warning: implicit definition of wire 'B'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:11: warning: implicit definition of wire 'C'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:12: warning: implicit definition of wire 'D'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:27: error: out is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:6:      : out is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:17: warning: A non-blocking assignment should not be used in an always_comb process.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:19: warning: A non-blocking assignment should not be used in an always_comb process.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:21: warning: A non-blocking assignment should not be used in an always_comb process.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:23: warning: A non-blocking assignment should not be used in an always_comb process.
+1 error(s) during elaboration.

@@ -1,0 +1,13 @@
+// Combinational logic for next state and output
+wire next_state;
+assign next_state = (state & ~a & ~b) | (~state & a & b);
+
+// D flip-flop for state
+always @(posedge clk) begin
+    state <= next_state;
+end
+
+// Output logic
+assign q = (state & ~a & ~b) | (~state & a & b);
+
+endmodule

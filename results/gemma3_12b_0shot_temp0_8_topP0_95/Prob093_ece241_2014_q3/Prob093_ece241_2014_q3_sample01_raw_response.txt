@@ -1,0 +1,61 @@
+```verilog
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+
+  // Intermediate signals
+  wire s1, s2, s3, s4;
+
+  // Calculate intermediate signals based on c and d
+  assign s1 = c & d;
+  assign s2 = ~c & d;
+  assign s3 = ~c & ~d;
+  assign s4 = c & ~d;
+
+
+  // Implement the K-map logic using 2-to-1 multiplexers
+  // mux_in[0]
+  assign mux_in[0] = (s3) ? 0 : 0;  // K-map entry 00
+
+  // mux_in[1]
+  assign mux_in[1] = (s4) ? 0 : 0;  // K-map entry 01
+
+  // mux_in[2]
+  assign mux_in[2] = (s2) ? 0 : 0;  // K-map entry 11
+
+  // mux_in[3]
+  assign mux_in[3] = (s1) ? 0 : 0; // K-map entry 10
+
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Intermediate Signals:**
+   - `s1 = c & d`: Represents the 'ab' value when 'a' is 'c' and 'b' is 'd'.
+   - `s2 = ~c & d`: Represents 'ab' when 'a' is ~c and 'b' is 'd'.
+   - `s3 = ~c & ~d`: Represents 'ab' when 'a' is ~c and 'b' is ~d.
+   - `s4 = c & ~d`: Represents 'ab' when 'a' is 'c' and 'b' is ~d.
+
+2. **2-to-1 Multiplexer Implementation:**
+   - Each `mux_in[i]` is implemented using a 2-to-1 multiplexer. The select input of each 2-to-1 mux is implicitly the 'ab' value represented by the corresponding intermediate signal.  The output of each 2-to-1 mux is the appropriate value for the K-map based on the given conditions.
+
+3. **K-Map Mapping:**
+   - `mux_in[0]` maps to the value in the K-map for 'ab' = 00.
+   - `mux_in[1]` maps to the value in the K-map for 'ab' = 01.
+   - `mux_in[2]` maps to the value in the K-map for 'ab' = 11.
+   - `mux_in[3]` maps to the value in the K-map for 'ab' = 10.
+
+**How it Works with the 4-to-1 Mux:**
+
+The `mux_in` signals will be fed into a 4-to-1 multiplexer. The `a` and `b` inputs of the 4-to-1 multiplexer will be the same signals as used as the selector inputs in the 2-to-1 multiplexers.
+
+* When `a=0, b=0`: The 4-to-1 mux selects `mux_in[0]`.
+* When `a=0, b=1`: The 4-to-1 mux selects `mux_in[1]`.
+* When `a=1, b=1`: The 4-to-1 mux selects `mux_in[2]`.
+* When `a=1, b=0`: The 4-to-1 mux selects `mux_in[3]`.
+
+This combination of the Verilog module and the 4-to-1 multiplexer will implement the logic described by the Karnaugh map.  The module directly implements the logic functions needed for the 4-to-1 multiplexer to produce the correct output based on the K-map.

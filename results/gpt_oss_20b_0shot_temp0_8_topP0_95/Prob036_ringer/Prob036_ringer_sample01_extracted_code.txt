@@ -1,0 +1,30 @@
+// TopModule – ringer / vibration motor controller
+//
+//   ring          :  incoming call ring pulse (high → phone must ring)
+//   vibrate_mode  :  1 = vibrate mode, 0 = normal ringing mode
+//
+//   ringer        :  drives the phone’s speaker (1 = on)
+//   motor         :  drives the vibration motor (1 = on)
+//
+//   Behaviour:  When `ring` is asserted, either the ringer or the motor
+//   is enabled – never both.  In vibrate mode the motor is used,
+//   otherwise the ringer is used.  When `ring` is low, both outputs
+//   are forced to 0.
+//
+//   The design is purely combinational – no clock is required.
+//   (If a synchronous latch/flip‑flop is desired the logic can be
+//   wrapped in an always @* block.)
+
+module TopModule (
+    input  wire ring,          // incoming call ring pulse
+    input  wire vibrate_mode,  // 1 = vibrate mode
+    output wire ringer,        // ringer output
+    output wire motor          // vibration motor output
+);
+
+//  Only one of the outputs can be high at any time.
+//  The following assignments implement the desired behaviour.
+assign ringer = ring & ~vibrate_mode;  // ringer on if ring & not vibrate
+assign motor  = ring & vibrate_mode;   // motor on if ring & vibrate
+
+endmodule

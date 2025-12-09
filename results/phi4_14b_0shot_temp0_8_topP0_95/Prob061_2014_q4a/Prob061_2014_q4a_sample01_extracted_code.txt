@@ -1,0 +1,21 @@
+module TopModule (
+  input clk,
+  input w,     // Input to the first stage of the shift register
+  input R,     // Value to be loaded when L is asserted
+  input E,     // Enable signal for shifting
+  input L,     // Load enable signal
+  output reg Q // Output of this stage of the shift register
+);
+
+always @(posedge clk) begin
+  if (L) begin
+    // If load signal is asserted, load value R into Q
+    Q <= R;
+  end else if (E) begin
+    // If enable signal is asserted, perform the shift operation
+    Q <= w; // Shift in from input `w`
+  end
+  // Otherwise, retain current state of Q
+end
+
+endmodule

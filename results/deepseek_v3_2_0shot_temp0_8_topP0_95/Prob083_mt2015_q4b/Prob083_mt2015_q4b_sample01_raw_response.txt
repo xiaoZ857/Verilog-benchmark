@@ -1,0 +1,59 @@
+We need to derive the logic for `z` based on the given waveform.  
+Let’s first list the `(x, y, z)` values at each time step where a change occurs, ignoring the times where they stay the same.
+
+From the table:
+
+| time | x | y | z |
+|------|---|---|---|
+| 0ns  | 0 | 0 | 1 |
+| 25ns | 1 | 0 | 0 |
+| 35ns | 0 | 1 | 0 |
+| 45ns | 1 | 1 | 1 |
+| 55ns | 0 | 0 | 1 |
+| 60ns | 0 | 1 | 0 |
+| 70ns | 1 | 1 | 1 |
+| 75ns | 0 | 1 | 0 |
+| 90ns | 1 | 0 | 0 |
+
+We can see `z` is not just a simple combinational function of `x` and `y` at the same time, because:
+
+- At (x=0, y=0): z=1 (times 0ns, 55ns)
+- At (x=1, y=0): z=0 (times 25ns, 90ns)
+- At (x=0, y=1): z=0 (times 35ns, 60ns, 75ns)
+- At (x=1, y=1): z=1 (times 45ns, 70ns)
+
+So actually, looking at these:  
+z = 1 when (x == y)  
+z = 0 when (x != y)  
+
+Check:  
+(0,0): x==y → z=1 ✓  
+(1,0): x!=y → z=0 ✓  
+(0,1): x!=y → z=0 ✓  
+(1,1): x==y → z=1 ✓  
+
+So it’s simply `z = ~(x ^ y)` or `z = x ~^ y` (XNOR).
+
+But wait — the waveform shows changes at 5ns intervals, and inputs change only at multiples of 5ns, so likely this is just combinational XNOR.  
+But the problem says “positive clock/clk triggered unless otherwise stated” — but here there’s no clock in ports, so maybe it’s just combinational.
+
+Given the module ports are only `x, y, z`, no clock, no reset, it must be combinational.
+
+Thus:
+
+```verilog
+  assign z = ~(x ^ y);
+```
+
+But let’s double-check the last few entries:  
+At 85ns: (x=0, y=1) → z=0 ✓ matches XNOR=0.  
+At 90ns: (x=1, y=0) → z=0 ✓ matches XNOR=0.
+
+Yes, consistent.
+
+So final code:
+
+```verilog
+  assign z = x ~^ y;
+endmodule
+```

@@ -1,0 +1,91 @@
+To implement the described Moore machine, we need to define two states: A and B. The machine starts in state B when the asynchronous reset (`areset`) is asserted. Based on the current state and the input `in`, it transitions between these states as follows:
+
+- From state B:
+  - On input `0`, transition to state A.
+  - On input `1`, remain in state B.
+
+- From state A:
+  - On input `0`, transition to state B.
+  - On input `1`, remain in state A.
+
+The output `out` is determined by the current state. According to Moore machine conventions, this means that the output depends only on the current state, not on the input:
+
+- When in state A, `out = 0`.
+- When in state B, `out = 1`.
+
+Here's the Verilog implementation of this Moore machine:
+
+```verilog
+module TopModule (
+    input clk,
+    input in,
+    input areset,
+    output reg out
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        STATE_B = 2'b01, // State B
+        STATE_A = 2'b00  // State A
+    } state_t;
+
+    // Declare the current and next state registers
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset to state B
+            current_state <= STATE_B;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    // Next state logic
+    always_comb begin
+        case (current_state)
+            STATE_B: begin
+                if (in == 1'b0) 
+                    next_state = STATE_A;
+                else
+                    next_state = STATE_B; // Stay in B on input '1'
+            end
+            STATE_A: begin
+                if (in == 1'b0) 
+                    next_state = STATE_B;
+                else
+                    next_state = STATE_A; // Stay in A on input '1'
+            end
+            default: begin
+                next_state = STATE_B; // Default to state B for safety
+            end
+        endcase
+    end
+
+    // Output logic based on current state (Moore machine)
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            out <= 1'b1; // Reset to output of state B
+        end else begin
+            case (current_state)
+                STATE_B: out <= 1'b1;
+                STATE_A: out <= 1'b0;
+                default: out <= 1'b1; // Default for safety
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### Key Components:
+
+- **State Encoding**: We use a 2-bit enumeration to encode the states A and B. This allows us to easily manage state transitions.
+  
+- **Asynchronous Reset**: The machine resets asynchronously to state B if `areset` is high.
+
+- **Next State Logic**: Determines the next state based on the current state and input `in`.
+
+- **Output Logic**: Sets the output `out` based solely on the current state, following Moore machine behavior. 
+
+This implementation ensures that the machine behaves as specified, with transitions occurring on positive clock edges and an asynchronous reset to state B.

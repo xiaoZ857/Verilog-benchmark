@@ -1,0 +1,43 @@
+ Based on the provided simulation waveform, it appears that the given sequential circuit follows the following behavior:
+
+1. Initially, both `p` and `q` are reset to 0.
+2. When `a` transitions from 0 to 1, `p` stays at 0, but `q` starts toggling (changing from 0 to 1 and then back to 0). This behavior continues until `a` transitions back to 0.
+3. After `a` returns to 0, both `p` and `q` are reset to their initial values of 0.
+4. When `a` transitions from 0 to 1 for the second time, the circuit behaves similarly as before: `p` stays at 0, and `q` starts toggling until `a` returns to 0 again.
+5. After the second reset, when `a` transitions from 0 to 1 a third time, both `p` and `q` stay at their last values (which were 1) for the remainder of the simulation.
+
+Here's the Verilog code that implements this behavior:
+
+```verilog
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+
+reg tempQ = 0; // Temporary signal for storing q's value during the first rising edge of 'a'
+
+always @(posedge clock) begin
+  if (a) begin
+    if (tempQ == 1'b0) begin
+      p <= 0;
+      tempQ <= ~tempQ; // Toggle q for each rising edge of 'a'
+    end else begin
+      p <= 1;
+      tempQ <= 0; // Reset tempQ to 0 when 'a' goes back to 0
+    end
+  end else begin
+    if (tempQ == 1'b1) begin
+      q <= tempQ; // Assign tempQ value to q after each reset of 'a'
+      tempQ <= 0; // Reset tempQ to 0 when 'a' goes back to 0
+    end
+  end
+end
+
+initial begin
+  #5 (posedge clock);
+  p <= 0;
+  q <= 0;
+end
+```

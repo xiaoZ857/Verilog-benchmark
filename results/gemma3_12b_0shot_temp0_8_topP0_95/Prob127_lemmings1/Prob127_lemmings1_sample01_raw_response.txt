@@ -1,0 +1,76 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+
+  // Define the states
+  parameter LEFT = 1'b0;
+  parameter RIGHT = 1'b1;
+
+  // State register
+  reg current_state;
+
+  // Output registers
+  reg temp_walk_left;
+  reg temp_walk_right;
+
+  // State transitions based on inputs
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= LEFT; // Reset to walk left
+    end else begin
+      case (current_state)
+        LEFT: begin
+          if (bump_left) begin
+            current_state <= RIGHT;
+          end else if (bump_right) begin
+            current_state <= LEFT;
+          end
+        end
+        RIGHT: begin
+          if (bump_right) begin
+            current_state <= LEFT;
+          end else if (bump_left) begin
+            current_state <= RIGHT;
+          end
+        end
+        default: begin
+          current_state <= LEFT; // Should not happen, but handle it
+        end
+      endcase
+    end
+  end
+
+  // Output logic (Moore machine) - outputs are a function of the current state
+  always @(current_state) begin
+    temp_walk_left = (current_state == LEFT);
+    temp_walk_right = (current_state == RIGHT);
+  end
+
+  assign walk_left = temp_walk_left;
+  assign walk_right = temp_walk_right;
+
+endmodule
+```
+
+Key improvements and explanations:
+
+* **Clear State Definitions:** Using `parameter` makes the code much more readable and maintainable.  `LEFT` and `RIGHT` are named constants instead of just magic numbers.
+* **Asynchronous Reset:**  The `always @(posedge clk or posedge areset)` clause correctly handles the asynchronous reset. The reset value is assigned during the reset condition.
+* **Moore Machine Implementation:** The output signals (`walk_left`, `walk_right`) are *directly* assigned based on the `current_state` in an `always @(current_state)` block. This is the defining characteristic of a Moore machine.  The `temp_walk_left` and `temp_walk_right` registers are used to avoid combinatorial loops and ensure proper behavior in synthesis.
+* **Default State Handling:** The `default` case in the `case` statement is important. While it *shouldn't* happen, it prevents undefined behavior if the state register somehow gets into an unexpected value.
+* **Correct Logic:**  The logic accurately implements the Lemming's movement rules:
+    * Walking left, bumped left -> walk right
+    * Walking right, bumped right -> walk left
+    * Walking left, bumped right -> walk left (stays left)
+    * Walking right, bumped left -> walk right (stays right)
+* **Conciseness:** The code is well-structured and avoids unnecessary complexity.
+* **Synthesizability:** The code is written in a way that is suitable for synthesis into hardware.
+* **Correct Reset Behavior:**  The Lemming starts walking left when reset.
+
+This revised solution provides a complete, correct, and well-documented Verilog implementation of the Lemming finite state machine as described in the problem statement, adhering to the requirements of a Moore machine.  It is also robust and synthesizable.

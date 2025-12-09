@@ -1,0 +1,18 @@
+`timescale 1ns / 1ps          // (optional – useful for simulation)
+
+module TopModule (
+    input  logic clk,          // clock – positive edge triggered
+    input  logic d,            // data input
+    input  logic r,            // active‑high synchronous reset
+    output logic q             // registered output
+);
+
+    // Positive‑edge triggered always block – synchronous logic
+    always_ff @(posedge clk) begin
+        if (r)          // synchronous reset
+            q <= 1'b0;  // reset output to zero
+        else
+            q <= d;     // normal D‑FF behaviour
+    end
+
+endmodule

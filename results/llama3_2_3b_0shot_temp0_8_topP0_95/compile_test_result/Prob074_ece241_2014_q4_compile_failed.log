@@ -1,0 +1,21 @@
+Problem: Prob074_ece241_2014_q4
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:28: error: 'ff0' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:18:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:32: error: 'ff1' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:19:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:36: error: 'ff2' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:20:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:42: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:42: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:43: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:44: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:47: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:47: error: syntax error in continuous assignment

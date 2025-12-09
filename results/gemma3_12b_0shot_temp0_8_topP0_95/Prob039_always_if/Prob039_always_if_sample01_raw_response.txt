@@ -1,0 +1,86 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+  // Using assign statements
+  assign out_assign = (sel_b1 & sel_b2) ? b : a;
+
+  // Using procedural if statement
+  always @(*) begin
+    if (sel_b1 & sel_b2) begin
+      out_always = b;
+    end else begin
+      out_always = a;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule(...)`**:  Defines the module named `TopModule` with the specified input and output signals.
+* **`assign out_assign = (sel_b1 & sel_b2) ? b : a;`**: This line uses the continuous assignment operator (`assign`) and the ternary operator (`? :`) to implement the 2-to-1 multiplexer.  It checks if `sel_b1` AND `sel_b2` are both true.  If they are, `out_assign` is assigned the value of `b`. Otherwise, `out_assign` is assigned the value of `a`.  This is a concise way to implement the logic.
+* **`always @(*) begin ... end`**:  This is a procedural block that is triggered whenever any of the input signals change (`@(*)`).  This ensures that the output `out_always` is updated whenever the inputs change.
+* **`if (sel_b1 & sel_b2) begin ... end else begin ... end`**: This is a standard `if-else` statement.  It checks if `sel_b1` AND `sel_b2` are both true.  If they are, `out_always` is assigned the value of `b`.  Otherwise (the `else` block), `out_always` is assigned the value of `a`.
+* **`output reg out_always`**: Declares `out_always` as a registered output.  This is necessary because it's being assigned within an `always` block.  Without `reg`, the compiler might optimize the code in unexpected ways.  `out_assign` does not need to be declared as `reg` because it's an `assign` statement, which means it's continuous and doesn't need a clock.
+
+**How it works (2-to-1 MUX):**
+
+A 2-to-1 multiplexer (MUX) selects one of two input signals and passes it to the output based on a selection signal. In this case:
+
+* **`a`**:  One input signal.
+* **`b`**:  The other input signal.
+* **`sel_b1` and `sel_b2`**: The selection signals.
+    * If `sel_b1` and `sel_b2` are both `1` (true), the MUX selects `b`.
+    * Otherwise, the MUX selects `a`.
+
+**Testing (Example Testbench):**
+
+To verify the functionality, you can create a testbench like this:
+
+```verilog
+module TopModule_tb;
+
+  // Inputs
+  reg a;
+  reg b;
+  reg sel_b1;
+  reg sel_b2;
+
+  // Outputs
+  wire out_assign;
+  reg out_always;
+
+  // Instantiate the Unit Under Test (UUT)
+  TopModule uut (
+    .a(a),
+    .b(b),
+    .sel_b1(sel_b1),
+    .sel_b2(sel_b2),
+    .out_assign(out_assign),
+    .out_always(out_always)
+  );
+
+  initial begin
+    // Initialize Inputs
+    a = 0;
+    b = 0;
+    sel_b1 = 0;
+    sel_b2 = 0;
+
+    // Test Cases
+    #10;  // Wait 10 time units
+    a = 1; b = 0; sel_b1 = 0; sel_b2 = 0;  // a selected
+    #10;
+    a = 0; b = 1; sel_b1 = 0; sel_b2 = 0;  // a selected
+    #10;
+    a = 0; b = 0; sel_b1 = 1; sel_b2 = 0;  // a selected
+    #10;
+    a =

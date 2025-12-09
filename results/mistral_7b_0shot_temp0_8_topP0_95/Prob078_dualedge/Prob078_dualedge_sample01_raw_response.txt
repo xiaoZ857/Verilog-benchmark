@@ -1,0 +1,33 @@
+ To create a Verilog module that behaves like a dual-edge triggered flip-flop using positive edge sensitive FF, we can add a delay that captures the state on both edges of the clock. Here's a simple implementation:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q,
+  output reg q_negedge,
+  output reg q_posedge
+);
+
+always @(posedge clk) begin
+    if (clk_last != clk) begin
+        q_negedge <= q; // Store the previous value for negative edge condition
+        q_posedge <= d; // Store the new value for positive edge condition
+        clk_last <= clk;
+    end
+end
+
+always @(posedge clk or negedge clk) begin
+    if (clk == 0) begin
+        q <= q_negedge; // Assign output on negative edge
+    end else begin
+        q <= q_posedge; // Assign output on positive edge
+    end
+end
+
+reg clk_last;
+```
+
+In this implementation, we are using two registers (q_negedge and q_posedge) to store the new values for both edges of the clock. The 'clk_last' register keeps track of the previous state of the clock signal.
+
+On the positive edge of clk, it stores the new value for the positive edge condition (q_posedge). On the negative edge of clk, it stores the previous value (q_negedge). By using this approach, the flip-flop behaves like a dual-edge triggered one while still being compatible with FPGA's single edge-triggered flip-flops.

@@ -1,0 +1,16 @@
+Problem: Prob145_circuit8
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob145_circuit8/Prob145_circuit8_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'p' has 130 mismatches. First mismatch occurred at time 95.
+Hint: Output 'q' has 133 mismatches. First mismatch occurred at time 120.
+Hint: Total mismatched samples is 165 out of 240 samples
+
+Simulation finished at 1200 ps
+Mismatches: 165 in 240 samples

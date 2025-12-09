@@ -1,0 +1,88 @@
+```verilog
+module TopModule (
+  input [6:1] y,
+  input w,
+  output Y2,
+  output Y4
+);
+
+  // Y2 corresponds to state B (y[2] = 1)
+  assign Y2 = (y[2] == 1);
+
+  // Y4 corresponds to state D (y[4] = 1)
+  assign Y4 = (y[4] == 1);
+
+endmodule
+```
+
+**Explanation:**
+
+* **State Encoding:** The problem states that states A through F are represented by a one-hot encoded vector `y[6:1]`.  Specifically:
+    * A: `y[6:1] = 000001`
+    * B: `y[6:1] = 000010`
+    * C: `y[6:1] = 000100`
+    * D: `y[6:1] = 001000`
+    * E: `y[6:1] = 010000`
+    * F: `y[6:1] = 100000`
+
+* **Y2 (State B):**  The one-hot code for state B is `000010`. Therefore, `Y2` is high when `y[2]` is high (i.e., `y[2] == 1`).
+
+* **Y4 (State D):** The one-hot code for state D is `001000`. Therefore, `Y4` is high when `y[4]` is high (i.e., `y[4] == 1`).
+
+The `assign` statements directly implement these conditions.  The problem states that the equations are derived by inspection, which is exactly what's done here. The input `w` (the next state input) is not used because the problem only asks for the next state signals `Y2` and `Y4`, and the state transitions are determined solely by the current state `y` and the input `w` in the state machine.
+
+**How to Test (Simulation):**
+
+To verify this module, you would need to create a testbench that:
+
+1.  Applies various combinations of `y` and `w` as input.
+2.  Asserts that `Y2` and `Y4` are high only when the state machine is in state B and D respectively.
+
+For example:
+
+```verilog
+module TopModuleTest;
+  reg [6:1] y;
+  reg w;
+  wire Y2, Y4;
+
+  TopModuleDUT dut (
+    .y(y),
+    .w(w),
+    .Y2(Y2),
+    .Y4(Y4)
+  );
+
+  initial begin
+    // Initialize
+    y = 7'b000001; // State A
+    w = 0;
+
+    // Test case 1: State A, w = 0 (should stay in A, Y2=0, Y4=0)
+    #10;
+    if (Y2 != 0 || Y4 != 0) $display("Test 1 failed");
+
+    // Test case 2: State A, w = 1 (should go to A, Y2=0, Y4=0)
+    y = 7'b000001;
+    w = 1;
+    #10;
+    if (Y2 != 0 || Y4 != 0) $display("Test 2 failed");
+
+    // Test case 3: State B, w = 0 (should go to C, Y2=1, Y4=0)
+    y = 7'b000010;
+    w = 0;
+    #10;
+    if (Y2 != 1 || Y4 != 0) $display("Test 3 failed");
+
+    // Test case 3: State D, w = 0 (should go to F, Y2=0, Y4=1)
+    y = 7'b001000;
+    w = 0;
+    #10;
+    if (Y2 != 0 || Y4 != 1) $display("Test 4 failed");
+
+
+    $finish;
+  end
+endmodule
+```
+This testbench provides a basic framework for verifying the correctness of the `TopModule`.  More comprehensive testing would involve exploring all possible state transitions.

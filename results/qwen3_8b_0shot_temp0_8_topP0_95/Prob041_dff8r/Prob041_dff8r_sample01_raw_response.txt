@@ -1,0 +1,16 @@
+Here is the correct and well-structured Verilog implementation of the `TopModule` based on the given specification:
+
+---
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    q <= 8'b0;
+  end else begin

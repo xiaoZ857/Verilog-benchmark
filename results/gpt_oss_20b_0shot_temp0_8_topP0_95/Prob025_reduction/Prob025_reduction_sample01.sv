@@ -1,0 +1,23 @@
+
+// ------------------------------------------------------------
+// TopModule
+//
+// Computes an even parity bit for an 8‑bit input.  The parity
+// bit is the XOR (reduction XOR) of all data bits.
+//
+// ------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule
+(
+    input  wire [7:0] in,    // 8‑bit data input
+    output wire       parity // 9th parity bit
+);
+
+    // The reduction XOR operator (^) computes the parity of all
+    // bits in 'in'.  This is a combinational assignment.
+    assign parity = ^in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

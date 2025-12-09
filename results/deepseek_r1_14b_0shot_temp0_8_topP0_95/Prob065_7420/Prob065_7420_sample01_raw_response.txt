@@ -1,0 +1,41 @@
+Here¡¯s a Verilog implementation of a module that replicates the functionality of the 7420 chip (two 4-input NAND gates):
+
+```verilog
+module TopModule (
+    input p1a,
+    input p1b,
+    input p1c,
+    input p1d,
+    output p1y,
+    input p2a,
+    input p2b,
+    input p2c,
+    input p2d,
+    output p2y
+);
+    
+    // For the first NAND gate (p1y)
+    wire nand1;
+    assign nand1 = ~(p1a & p1b & p1c & p1d);
+    assign p1y = nand1;
+
+    // For the second NAND gate (p2y)
+    wire nand2;
+    assign nand2 = ~(p2a & p2b & p2c & p2d);
+    assign p2y = nand2;
+    
+endmodule
+```
+
+### Explanation:
+1. **NAND Gate Implementation**:
+   - A NAND gate can be implemented as the negation (`~`) of an AND operation between its inputs.
+   - For each set of 4 inputs (p1a, p1b, p1c, p1d for the first NAND gate and p2a, p2b, p2c, p2d for the second), we compute the logical AND of all four inputs and then negate the result to produce the output.
+
+2. **Wire Declaration**:
+   - We declare intermediate wires (`nand1` and `nand2`) to represent the internal computations of each NAND gate before assigning them to the final outputs (`p1y` and `p2y`).
+
+3. **Output Assignment**:
+   - The outputs `p1y` and `p2y` are assigned directly from the computed NAND results.
+
+This module correctly implements the functionality of a 7420 chip with two independent 4-input NAND gates.

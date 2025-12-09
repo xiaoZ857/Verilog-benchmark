@@ -1,0 +1,27 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output out
+);
+
+  assign out = (a & b) | (a & c) | (b & c);
+
+endmodule
+```
+
+**Explanation:**
+
+The Karnaugh map shows the output `out` for different combinations of inputs `a`, `b`, and `c`.  We can derive a Boolean expression directly from the map:
+
+* **Row bc = 00:**  `out` is 0 when `a` is 0 and 1 when `a` is 1.  This is equivalent to `a`.
+* **Row bc = 01:** `out` is 1 for all values of `a`.
+* **Row bc = 11:** `out` is 1 for all values of `a`.
+* **Row bc = 10:** `out` is 1 for all values of `a`.
+
+Combining these observations, we can see that `out` is 1 when *either* `a AND b` is true, *or* `a AND c` is true, *or* `b AND c` is true.  Therefore, the Boolean expression is:
+
+`out = (a & b) | (a & c) | (b & c)`
+
+The Verilog code simply translates this Boolean expression into a continuous assignment (`assign`) statement.

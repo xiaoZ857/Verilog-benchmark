@@ -1,0 +1,38 @@
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+reg [1:0] state;
+
+always @(posedge clk) begin
+    if (areset)
+        state <= 2'd0; // A
+
+    case(state)
+        2'd0:
+            if (in == 0)
+                state <= 2'd0;
+            else
+                state <= 2'd1;
+        2'd1:
+            if (in == 0)
+                state <= 2'd1;
+            else
+                state <= 2'd2;
+        2'd2:
+            if (in == 1 || in == 0)
+                state <= 2'd0;
+            else
+                state <= 2'd3;
+        2'd3:
+            if (in == 0)
+                state <= 2'd3;
+            else
+                state <= 2'd2;
+    endcase
+
+    out = state[1];
+endmodule

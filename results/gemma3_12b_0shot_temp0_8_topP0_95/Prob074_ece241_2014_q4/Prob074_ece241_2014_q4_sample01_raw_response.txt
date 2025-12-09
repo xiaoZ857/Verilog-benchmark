@@ -1,0 +1,82 @@
+```verilog
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+
+  // Internal signals
+  wire ff1_data, ff2_data, ff3_data;
+  wire ff1_q, ff2_q, ff3_q;
+  wire ff1_bar, ff2_bar, ff3_bar;
+
+  // D flip-flops
+  dff ff1 (clk, ff1_data, ff1_q, ff1_bar);
+  dff ff2 (clk, ff2_data, ff2_q, ff2_bar);
+  dff ff3 (clk, ff3_data, ff3_q, ff3_bar);
+
+  // Gates
+  wire xor_out = x ^ ff1_q;
+  wire and_out = x & ~ff2_q;
+  wire or_out = x | ~ff3_q;
+
+  // NOR gate for Z
+  nor nor_gate (ff1_q, ff2_q, ff3_q, z);
+
+
+  // Assign inputs to D flip-flops
+  assign ff1_data = xor_out;
+  assign ff2_data = and_out;
+  assign ff3_data = or_out;
+
+endmodule
+
+// D flip-flop module (simplified)
+module dff (
+  input clk,
+  input d,
+  output q,
+  output bar
+);
+
+  reg q_reg;
+
+  always @(posedge clk) begin
+    q_reg <= d;
+  end
+
+  assign q = q_reg;
+  assign bar = ~q_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input clk, input x, output z);` declares the top-level module with inputs `clk` (clock), `x`, and output `z`.
+
+2. **Internal Signals:**
+   - `wire ff1_data, ff2_data, ff3_data;` declare wires to hold the data inputs to the flip-flops.
+   - `wire ff1_q, ff2_q, ff3_q;` declare wires to hold the outputs of the flip-flops (Q).
+   - `wire ff1_bar, ff2_bar, ff3_bar;` declare wires to hold the complemented outputs of the flip-flops (Q').
+
+3. **D Flip-Flops:**
+   - `dff ff1 (clk, ff1_data, ff1_q, ff1_bar);` instantiates three `dff` modules (defined below) for each flip-flop.  The `dff` module takes `clk`, `d` (data input), `q` (output), and `bar` (complemented output) as ports.
+
+4. **Gates:**
+   - `wire xor_out = x ^ ff1_q;` implements the XOR gate with input `x` and `ff1_q`.
+   - `wire and_out = x & ~ff2_q;` implements the AND gate with input `x` and the complemented `ff2_q`.
+   - `wire or_out = x | ~ff3_q;` implements the OR gate with input `x` and the complemented `ff3_q`.
+
+5. **NOR Gate:**
+   - `nor nor_gate (ff1_q, ff2_q, ff3_q, z);` implements the three-input NOR gate, which takes the outputs of the flip-flops (`ff1_q`, `ff2_q`, `ff3_q`) as inputs and assigns the result to the output `z`.
+
+6. **Data Assignments:**
+   - `assign ff1_data = xor_out;` assigns the output of the XOR gate to the data input of the first flip-flop.
+   - `assign ff2_data = and_out;` assigns the output of the AND gate to the data input of the second flip-flop.
+   - `assign ff3_data = or_out;` assigns the output of the OR gate to the data input of the third flip-flop.
+
+7. **D Flip-Flop Module:**
+   - The `dff` module is a simplified implementation of a D flip-flop.  It takes the clock and data input, and on each positive clock edge, it assigns the data input to the output.
+   - `reg q_reg;` declares a register `q_reg` to hold the flip-flop's state.  

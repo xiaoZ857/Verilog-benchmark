@@ -1,0 +1,12 @@
+Problem: Prob035_count1to10
+Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob035_count1to10/Prob035_count1to10_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob035_count1to10/Prob035_count1to10_sample01.sv:7: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob035_count1to10_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob035_count1to10/Prob035_count1to10_sample01.sv:7: error: Invalid module instantiation

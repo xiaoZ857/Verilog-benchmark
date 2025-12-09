@@ -1,0 +1,36 @@
+Here is a simple, synthesizable Verilog implementation that follows the description:
+
+* Two inputs (`in1` and `in2`) are fed into an AND gate.  
+* The `in2` input is inverted (the “bubble” on the AND gate input).  
+* The result is driven to the output `out`.
+
+```verilog
+// TopModule.v
+module TopModule (
+    input  logic in1,   // First input
+    input  logic in2,   // Second input (to be inverted before AND)
+    output logic out    // Result of in1 AND (NOT in2)
+);
+
+    // Internal wire for the inverted version of in2
+    logic n_in2;
+
+    // Invert in2 – this is the “bubble” on the AND input
+    not u_not_in2 (n_in2, in2);
+
+    // AND gate: out = in1 AND n_in2
+    and u_and_gate (out, in1, n_in2);
+
+    // Alternative (pure combinational) implementation:
+    // assign out = in1 & ~in2;
+
+endmodule
+```
+
+### How it works
+
+1. **Inversion (`NOT`)** – The `not` gate creates a wire `n_in2` that is the logical NOT of `in2`.  
+2. **AND** – The `and` gate then combines `in1` and `n_in2`.  
+3. **Output** – The result drives `out`.
+
+This code is fully synthesizable, follows gate‑level instantiation conventions, and uses `logic` for the output as requested. No clock is needed because the circuit is purely combinational; the comment about positive‑edge‑triggered signals is irrelevant here.

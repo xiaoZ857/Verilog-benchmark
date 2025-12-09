@@ -1,0 +1,54 @@
+
+// File: shift_register_controler.v
+// Author: [Your Name]
+
+module TopModule(
+  // Input signals
+  input clk,
+  input reset,
+  
+  // Output signal
+  output reg shift_ena
+);
+
+reg shift_ena_prev;
+reg shift_ena_next;
+
+// Initialize shift_ena on reset
+always @(reset) begin
+  if (reset)
+    shift_ena <= 1'b0; // Set shift_ena to 0 during reset
+end
+
+// Update shift_ena based on current and previous states
+always @(posedge clk) begin
+  if (!reset)
+    shift_ena_next <= shift_ena_prev;
+  
+  // Enable the shift register for exactly 4 clock cycles when a proper bit pattern is detected
+  else if (shift_ena_prev == 1'b1 && count_clock_cycles < 4)
+    shift_ena_next <= 1'b1; // Shift_ena remains high for 4 clock cycles
+    
+  // Reset the counter on detection of the proper bit pattern
+  else
+    shift_ena_next <= 0'b0;
+end
+
+// Update the previous state and increment the count
+always @(posedge clk) begin
+  if (!reset)
+    shift_ena_prev <= 1'b1; // Default value during reset
+  
+  count_clock_cycles <= count_clock_cycles + 1'b1;
+  
+  // Reset the counter on detection of a proper bit pattern
+  else if (shift_ena_prev == 1'b1 && count_clock_cycles >= 4)
+    count_clock_cycles <= 0;
+end
+
+// Initialize count_clock_cycles
+reg count_clock_cycles = 0;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

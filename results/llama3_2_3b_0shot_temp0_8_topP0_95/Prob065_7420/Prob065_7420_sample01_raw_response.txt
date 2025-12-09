@@ -1,0 +1,54 @@
+Here's a Verilog module that mimics the functionality of a 7400-series NAND gate, which is equivalent to two 4-input NAND gates in a single chip:
+
+```verilog
+module TopModule (
+  input p1a, 
+  input p1b, 
+  input p1c, 
+  input p1d, 
+  output p1y,
+  input p2a, 
+  input p2b, 
+  input p2c, 
+  input p2d, 
+  output p2y
+);
+
+// NAND function using XOR and AND gates
+always @(posedge clk) begin
+  // Calculate output A and B
+  assign p1y = (~p1a & ~p1b & ~p1c & ~p1d);
+  assign p2y = (~p2a & ~p2b & ~p2c & ~p2d);
+
+end
+
+endmodule
+```
+
+Note: The signal 'clk' is assumed to be a positive clock trigger. It's not part of the NAND gate logic but is necessary for the always @(posedge clk) block.
+
+However, this solution does not fully meet the requirement since you're using two separate outputs for p1y and p2y which are actually supposed to represent one 4-bit NAND function. Here's a revised implementation that correctly models a single 7400-series chip with two 4-input NAND gates:
+
+```verilog
+module TopModule (
+  input p1a, 
+  input p1b, 
+  input p1c, 
+  input p1d,
+  input p2a, 
+  input p2b, 
+  input p2c, 
+  input p2d,
+  output [3:0] p4y
+);
+
+always @(posedge clk) begin
+  // Calculate output A and B
+  assign p4y = ~(p1a & p2a & p1b & p2b) | 
+             (~p1c & ~p2c & p1d & ~p2d);
+end
+
+endmodule
+```
+
+In this revised version, the `assign` statement calculates a single 4-bit output using NAND gate logic.

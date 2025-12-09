@@ -1,0 +1,23 @@
+**Verilog implementation**
+
+```verilog
+// TopModule.v
+// -------------
+// A simple FSM that contains three D‑flip‑flops.  
+//   • Q0 is updated by  X XOR Q0
+//   • Q1 is updated by  X AND ~Q1
+//   • Q2 is updated by  X OR  ~Q2
+// The three flip‑flop outputs are fed into a 3‑input NOR to generate Z.
+// All flip‑flops are synchronous (posedge clk) and are assumed to start
+// in the 0 state before the first clock edge.
+
+module TopModule (
+    input  wire clk,   // positive‑edge clock
+    input  wire x,     // data input
+    output wire z      // FSM output
+);
+
+    // Flip‑flop outputs (state)
+    reg q0, q1, q2;
+
+    // Initialise the state to 0 (

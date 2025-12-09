@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+module Timer(
+  input wire clk,
+  input wire load,
+  input [9:0] data,
+  output wire tc
+);
+
+reg [9:0] counter; // The internal counter
+always @(posedge clk) begin
+  if (load) begin
+    counter <= data; // Load the counter with the given value when load is high
+  end else if (counter > 0) begin
+    counter <= counter - 1; // Decrement the counter when load is low and counter is not zero
+  end
+end
+
+assign tc = (counter == 0); // Assign tc as the output that indicates when the counter has reached 0
+
+endmodule

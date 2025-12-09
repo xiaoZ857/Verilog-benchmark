@@ -1,0 +1,31 @@
+The code has two issues:  
+1. The `shut_off_computer` is not assigned a value in all branches of the combinational `always` block, causing an inferred latch.  
+2. The `keep_driving` is also not assigned in all branches, causing another inferred latch.  
+
+Here is the corrected version:  
+
+```verilog
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+
+  always @(*) begin
+    if (cpu_overheated)
+      shut_off_computer = 1;
+    else
+      shut_off_computer = 0;
+  end
+
+  always @(*) begin
+    if (~arrived)
+      keep_driving = ~gas_tank_empty;
+    else
+      keep_driving = 0;
+  end
+
+endmodule
+```

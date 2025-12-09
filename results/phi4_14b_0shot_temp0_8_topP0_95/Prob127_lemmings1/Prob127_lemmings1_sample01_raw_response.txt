@@ -1,0 +1,100 @@
+To implement the described behavior using a Moore state machine in Verilog, we need to define two states: one for walking left and another for walking right. The state transitions occur based on the inputs `bump_left` and `bump_right`. Let's break down the solution step-by-step:
+
+1. **Define States**: We'll use an enumerated type for clarity:
+   - `IDLE_LEFT`: Lemming walks left.
+   - `IDLE_RIGHT`: Lemming walks right.
+
+2. **State Transition Logic**: The state transitions are as follows:
+   - If in `IDLE_LEFT` and `bump_left` is active, transition to `IDLE_RIGHT`.
+   - If in `IDLE_RIGHT` and `bump_right` is active, transition to `IDLE_LEFT`.
+   - If either bump occurs when both states are affected (i.e., both bumps), the state transitions appropriately.
+
+3. **Outputs**: The outputs `walk_left` and `walk_right` depend solely on the current state:
+   - In `IDLE_LEFT`, `walk_left = 1` and `walk_right = 0`.
+   - In `IDLE_RIGHT`, `walk_left = 0` and `walk_right = 1`.
+
+4. **Reset Logic**: When an asynchronous reset (`areset`) is active, the state machine resets to `IDLE_LEFT`.
+
+Here's the Verilog implementation of this state machine:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire bump_left,
+    input wire bump_right,
+    output reg walk_left,
+    output reg walk_right
+);
+
+    // State definitions
+    typedef enum logic [1:0] { 
+        IDLE_LEFT,  // 00: Walk left
+        IDLE_RIGHT  // 01: Walk right
+    } state_t;
+
+    // Current and next state registers
+    state_t current_state, next_state;
+
+    // Asynchronous reset and synchronous state update logic
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            current_state <= IDLE_LEFT;  // Reset to walk left on areset
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    // Next state logic
+    always @(*) begin
+        case (current_state)
+            IDLE_LEFT: begin
+                if (bump_left || bump_right) begin
+                    next_state = IDLE_RIGHT;  // Switch to walk right on any bump
+                end else begin
+                    next_state = IDLE_LEFT;   // Remain walking left if no bump
+                end
+            end
+
+            IDLE_RIGHT: begin
+                if (bump_left || bump_right) begin
+                    next_state = IDLE_LEFT;  // Switch to walk left on any bump
+                end else begin
+                    next_state = IDLE_RIGHT;  // Remain walking right if no bump
+                end
+            end
+
+            default: begin
+                next_state = IDLE_LEFT;  // Default state is walk left
+            end
+        endcase
+    end
+
+    // Output logic based on current state
+    always @(*) begin
+        case (current_state)
+            IDLE_LEFT: begin
+                walk_left = 1'b1;
+                walk_right = 1'b0;
+            end
+            
+            IDLE_RIGHT: begin
+                walk_left = 1'b0;
+                walk_right = 1'b1;
+            end
+
+            default: begin
+                walk_left = 1'b1;   // Default to walking left if undefined state
+                walk_right = 1'b0;
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Key Points:
+- **State Transitions** are determined by the presence of `bump_left` or `bump_right`. 
+- The outputs (`walk_left`, `walk_right`) depend on the current state only, adhering to Moore machine properties.
+- An asynchronous reset sets the initial state to `IDLE_LEFT`.
+- Both synchronous and combinational logic blocks are used appropriately to ensure correct behavior according to clock cycles and input events.

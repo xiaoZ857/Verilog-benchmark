@@ -1,0 +1,91 @@
+Here's the implementation of the Verilog module based on the provided state-assigned table:
+
+```verilog
+// Define the states and inputs for the state machine
+enum defaut {
+    S0, // Initial state
+    S1
+} state;
+
+// States used in the next state logic
+enum reg [2:0] {
+    S00,
+    S01,
+    S10
+}
+state_next reg;
+
+// Outputs from the state machine
+output reg Y00;
+output reg Y01;
+output reg Y10;
+output reg z;
+
+module TopModule (
+  input clk,
+  input x,
+  input [2:0] y,
+  output reg Y0,
+  output reg z
+);
+  
+    // Define the internal wires and logic
+reg state_int;
+reg [1:0] nxt_state;
+reg[Y0];
+reg[Y10];
+reg[Y01];
+
+// The next state logic, defined from the given table
+always @(*) begin
+    case(state_int)
+        S0:
+            if(y == 2'b00) nxt_state = S0;
+            else if(y == 2'b01) nxt_state = S1;
+            else nxt_state = S0;
+            break
+        S1:
+            if(y == 2'b00 || y == 2'b10) nxt_state = S0;
+            else if(y == 2'b01 || y == 2'b11) nxt_state = S1;
+            else nxt_state = S1;
+            break
+    endcase
+end
+
+// Always block for updating the current state
+always @(posedge clk) begin
+    state_int <= state;
+end
+
+// State machine outputs logic
+assign Y0 = nxt_state[2:1];
+assign Y10 = nxt_state[3:2]; // 1st bit to be outputed
+assign Y01 = nxt_state[1:0]; // 2nd bit to be outputed
+
+
+// Next state logic 
+always @(posedge clk) begin
+    case(state_int)
+        S0:
+            if(x == 0){
+                z <= 1'b0;
+            } else{
+                z <= 1'b1;
+            }
+            break
+        S1: // always 1'b1
+            z <= 1'b1;
+            break 
+    endcase 
+end
+
+// Initial state assignment
+initial begin
+    state_int = S0;
+    state <= S0;
+end
+
+endmodule
+```
+
+The above code implements a basic finite state machine based on the provided table. The module accepts two inputs (`clk` and `x`) and one input (`y`). It generates an output for each possible value of `y`.

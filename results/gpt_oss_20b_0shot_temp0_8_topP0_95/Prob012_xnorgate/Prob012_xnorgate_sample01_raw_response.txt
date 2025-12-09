@@ -1,0 +1,40 @@
+Below is a minimal, synthesizable Verilog‑2001 implementation of a two‑input XNOR gate.  
+The module is named **TopModule** as requested.  
+The output is a pure combinational function of the inputs, so no clock or edge‑triggered logic is required.
+
+```verilog
+`timescale 1ns / 1ps
+
+/// @brief  Two‑input XNOR gate
+/// @details
+///   Implements the logical function
+///   out = a XNOR b  (i.e. out = ~(a ^ b))
+///
+///   All signals are assumed to be synchronous to the positive clock edge
+///   when used in a larger design – but this module itself is purely
+///   combinational.
+///
+///   @param a  First input
+///   @param b  Second input
+///   @param out  XOR‑NOT of the inputs
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // XNOR output
+);
+
+    // Combinational assignment
+    assign out = ~(a ^ b);   // Equivalent to: assign out = a XNOR b;
+
+endmodule
+```
+
+**Key points**
+
+| Item | Explanation |
+|------|-------------|
+| `wire` | Declares the signals as combinational nets. |
+| `assign` | Provides a continuous assignment – the output updates immediately when either input changes. |
+| `~(a ^ b)` | Logical XNOR; the expression is equivalent to the built‑in `XNOR` operator. |
+
+This module can be instantiated directly in a top‑level design or used as a component in larger logic blocks. No additional clock logic is necessary unless you integrate it into a clock‑synchronous system.

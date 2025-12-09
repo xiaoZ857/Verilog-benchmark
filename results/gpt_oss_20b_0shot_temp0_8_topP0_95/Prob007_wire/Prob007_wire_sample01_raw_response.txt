@@ -1,0 +1,24 @@
+Here’s a minimal, syntactically‑correct Verilog module that simply forwards the input signal to the output—exactly like a wire.  
+No clock is needed because the connection is combinational.
+
+```verilog
+// TopModule.v
+`timescale 1ns/1ps          // Optional: set simulation time units
+
+module TopModule (
+    input  wire in,         // One input signal
+    output wire out         // One output signal
+);
+
+    // Continuous assignment – behaves like a wire
+    assign out = in;
+
+endmodule
+```
+
+### What this does
+* `input wire in` and `output wire out` declare the ports as wires.
+* `assign out = in;` is a continuous assignment that drives `out` with the current value of `in`.  
+  This is equivalent to wiring `out` directly to `in`, so the module behaves like a simple wire.
+
+Feel free to instantiate `TopModule` anywhere you need a pass‑through connection.

@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input a,
+  output reg q
+);
+  always @(posedge clk) begin
+    if (a) begin
+      q <= ~q;  // Toggle when a is 1
+    end else begin
+      q <= q;   // Maintain value when a is 0
+    end
+  end
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

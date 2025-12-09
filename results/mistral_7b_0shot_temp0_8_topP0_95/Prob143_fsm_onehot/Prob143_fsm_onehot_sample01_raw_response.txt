@@ -1,0 +1,92 @@
+ Here is the Verilog implementation for the given state machine with one-hot encoding:
+
+```verilog
+module TopModule (
+  input in,
+  input [9:0] state,
+  output reg [9:0] next_state,
+  output out1,
+  output out2
+);
+
+// Define the states and their corresponding output values
+reg [1:0] outputs_S0 = {0'b0, 0'b0};
+reg [1:0] outputs_S1 = {0'b0, 0'b0};
+reg [1:0] outputs_S2 = {0'b0, 0'b0};
+reg [1:0] outputs_S3 = {0'b0, 0'b0};
+reg [1:0] outputs_S4 = {0'b0, 0'b0};
+reg [1:0] outputs_S5 = {0'b0, 0'b1};
+reg [1:0] outputs_S6 = {0'b0, 0'b0};
+reg [1:0] outputs_S7 = {0'b0, 0'b1};
+reg [1:0] outputs_S8 = {0'b1, 0'b0};
+reg [1:0] outputs_S9 = {0'b1, 0'b1};
+
+always @(posedge clk) begin
+  if (state[0]) begin // S0
+    next_state <= state;
+    out1 <= outputs_S0[(int)state];
+    out2 <= state[9] ^ state[8];
+  end else if (state[1]) begin // S1
+    next_state <= state;
+    out1 <= outputs_S1[(int)state];
+    out2 <= state[5];
+  end else if (state[2]) begin // S2
+    next_state <= state;
+    out1 <= outputs_S2[(int)state];
+    out2 <= state[3];
+  end else if (state[3]) begin // S3
+    next_state <= state;
+    out1 <= outputs_S3[(int)state];
+    out2 <= state[4];
+  end else if (state[4]) begin // S4
+    next_state <= state;
+    out1 <= outputs_S4[(int)state];
+    out2 <= state[6];
+  end else if (state[5]) begin // S5
+    next_state <= state;
+    out1 <= outputs_S5[(int)state];
+    out2 <= state[7] ^ state[6];
+  end else if (state[6]) begin // S6
+    next_state <= state;
+    out1 <= outputs_S6[(int)state];
+    out2 <= state[8];
+  end else if (state[7]) begin // S7
+    next_state <= state;
+    out1 <= outputs_S7[(int)state];
+    out2 <= state[7] ^ state[6];
+  end else if (state[8]) begin // S8
+    next_state[0] = 1'b1;
+    next_state <= state[8:1];
+    out1 <= outputs_S8[(int)state];
+    out2 <= 0;
+  end else if (state[9]) begin // S9
+    next_state[0] = 1'b1;
+    next_state <= state[9:1];
+    out1 <= outputs_S9[(int)state];
+    out2 <= 0;
+  end
+end
+
+// Assuming clock is connected to clk input
+reg clk; // Assume clk is the positive-edge triggered clock signal
+
+// Initialize and drive clock signal if needed
+always @(posedge reset) begin
+  if (reset) begin
+    clk <= 0;
+  end else begin
+    clk <= ~clk;
+  end
+end
+
+// Input reset and output enable/disable signals, if applicable
+reg [7:0] reset; // Assume reset is an active-low 8-bit signal
+output reg out_en1, out_en2;
+
+always @(posedge clk) begin
+  if (reset[0]) begin
+    out_en1 <= 'b0;
+    out_en2 <= 'b0;
+  end else begin
+    out_en1 <= 'b1;
+    out_en2

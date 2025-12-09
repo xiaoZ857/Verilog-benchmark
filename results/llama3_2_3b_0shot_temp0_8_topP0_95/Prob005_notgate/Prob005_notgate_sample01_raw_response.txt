@@ -1,0 +1,17 @@
+Here is a simple implementation of a NOT gate as a Verilog module:
+
+```verilog
+module not_gate (
+    input clk, // Positive edge trigger
+    input in,   // Input to the NOT gate
+    output out  // Output of the NOT gate
+);
+
+    always @(posedge clk) begin
+        // The output of a NOT gate is the inverse of the input
+        out <= ~in;
+    end
+endmodule
+```
+
+This Verilog module `not_gate` has one input (`in`) and one output (`out`). It uses a positive edge-triggered clock (`clk`) to toggle between states on each rising edge. The output of the NOT gate is always the inverse of the input.

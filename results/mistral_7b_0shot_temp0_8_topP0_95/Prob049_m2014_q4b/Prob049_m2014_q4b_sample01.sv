@@ -1,0 +1,19 @@
+
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+reg q; // Flip-flop data register
+always @(posedge clk) begin
+  if (!ar) q <= d; // If asynchronous reset is active, override flip-flop's state with input 'd'
+  else q <= q ^ d; // Else, update the flip-flop's state on the rising edge of clock using XOR gate
+end
+
+assign q = q[0]; // Ensure output type matches the assign statement in test bench
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

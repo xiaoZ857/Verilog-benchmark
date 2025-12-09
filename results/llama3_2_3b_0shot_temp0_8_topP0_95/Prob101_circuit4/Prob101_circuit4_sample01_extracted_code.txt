@@ -1,0 +1,11 @@
+module TopModule(
+    input a, // Present for 55ns to 90ns period
+    input b,
+    input c,
+    input d,
+    output q
+);
+
+    always @(*)
+        q <= (c & ~d) | (~a & ~b);
+endmodule

@@ -1,0 +1,44 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  // Declare an array of D flip-flops
+  reg [7:0] dff_q;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      q <= 8'b0;
+    end else begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, d, reset, q);` declares the module named `TopModule` with the specified input and output signals.
+
+2. **Signal Declarations:**
+   - `input clk, d, reset;` defines the input signals: `clk` (clock), `d` (data input), and `reset` (synchronous reset).
+   - `output reg [7:0] q;` declares the output signal `q` as an 8-bit register.  It's a `reg` because it needs to hold the state of the flip-flops.
+
+3. **Sequential Logic (D Flip-Flops):**
+   - `always @(posedge clk or posedge reset) begin ... end` is a sequential block that executes on the positive edge of the clock (`posedge clk`) or the positive edge of the reset signal (`posedge reset`).  This is essential for creating flip-flops.
+   - `if (reset) begin q <= 8'b0; end`  This is the synchronous reset logic. When `reset` is high, the output `q` is forced to all zeros (`8'b0`). The `<=` operator is used for non-blocking assignment, which is crucial for sequential logic.
+   - `else begin q <= d; end`  When the reset is not asserted, the output `q` takes the value of the data input `d` on the positive edge of the clock.
+
+**Key Concepts and Considerations:**
+
+* **Synchronous Reset:**  The reset is *synchronous* because it only takes effect on the clock edge. This makes the reset predictable and avoids metastability issues that can occur with asynchronous resets.
+* **Non-Blocking Assignment (`<=`):** Using the non-blocking assignment operator (`<=`) is *critical* in sequential logic. It ensures that all assignments within the `always` block are evaluated simultaneously and then applied to the outputs on the next clock cycle.  Using blocking assignments (`=`) would lead to incorrect behavior.
+* **8-bit Register:** The `q` signal is declared as an 8-bit register (`reg [7:0] q`). This is because the module's description specifies that we need to implement 8 flip-flops.
+* **`8'b0`:**  This is a Verilog literal representing an 8-bit binary number with all bits set to 0.
+
+This implementation creates a single 8-bit register that acts as a block of 8 D flip-flops.  This is a common and efficient way to implement a set of flip-flops in Verilog.  If you needed more complex logic between the inputs and outputs, you would need to create individual DFF modules and instantiate them within the `TopModule`.

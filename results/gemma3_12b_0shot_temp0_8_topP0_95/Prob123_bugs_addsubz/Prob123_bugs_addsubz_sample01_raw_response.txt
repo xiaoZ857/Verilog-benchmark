@@ -1,0 +1,43 @@
+```verilog
+  synthesis verilog_input_version verilog_2001
+  module top_module (
+      input do_sub,
+      input [7:0] a,
+      input [7:0] b,
+      output reg [7:0] out,
+      output reg result_is_zero
+  );
+
+      always @(a, b, do_sub) begin
+          if (do_sub) begin
+              out = a - b;
+          end else begin
+              out = a + b;
+          end
+
+          if (out == 0) begin
+              result_is_zero = 1;
+          end else begin
+              result_is_zero = 0;
+          end
+      end
+
+  endmodule
+```
+
+**Explanation of the fix:**
+
+1. **`always @(a, b, do_sub)`:** The original code used `always @(*)` which is a combinational always block. While this works, it's generally better to explicitly list the signals that trigger the block.  In this case, `a`, `b`, and `do_sub` are the inputs that determine the output `out`.  Using `always @(*)` can lead to unintended consequences and difficult-to-debug issues because it can trigger on unexpected signals.
+
+2. **Conditional Assignment:** The original code used a `case` statement, which is perfectly valid.  However, it's often more readable and slightly more efficient to use a simple `if-else` statement for this kind of selection.
+
+3. **Zero Flag Logic:**  The original zero flag logic `if (~out)` is incorrect.  The `~` operator is the bitwise NOT operator.  It inverts *every bit* of the `out` signal.  To correctly check if `out` is zero, you need to compare it to zero using the equality operator (`==`).  The `else` condition is also added to ensure that `result_is_zero` is correctly set to 0 when the result is not zero.
+
+**Key Improvements:**
+
+* **Explicit Sensitivity List:** Makes the always block's behavior more predictable and easier to debug.
+* **Readability:**  The `if-else` structure improves code clarity.
+* **Correct Zero Flag Logic:** The `result_is_zero` flag now correctly indicates whether the output is zero.
+* **Completeness:** The `else` clause in the zero flag logic ensures that the flag is correctly set when the result is non-zero.
+
+This corrected code provides a functional adder-subtractor with a zero flag that accurately performs the intended operations and sets the flag appropriately.

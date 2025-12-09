@@ -1,0 +1,31 @@
+Here's the implementation of the Verilog module for a D latch:
+
+```verilog
+// Implement a D latch using an always block.
+
+module TopModule (
+  input d,           // Data input
+  input ena,         // Enable input
+  output logic q     // Q output
+);
+
+always @(posedge clk) begin
+    if (ena == 1'b1) begin
+        q <= d;
+    end else begin
+        q <= q;  // Hold previous value
+    end
+end
+
+// Add a clock signal to trigger the always block
+assign clk = 1'b1; // Assuming it's a positive edge-triggered clock
+```
+
+In this module, `d` is the data input and `ena` is the enable input. The output `q` represents the output of the D latch.
+
+The always block is triggered by the positive edge of the clock signal (`clk`). Inside the block:
+
+- If `ena` is 1, `q` is assigned to `d`.
+- Otherwise, `q` holds its previous value (due to the assignment `q <= q`).
+
+Note that I added a clock signal (`clk`) to trigger the always block. This is because an always block needs to know when to update its values. In this case, we use a positive edge-triggered clock.

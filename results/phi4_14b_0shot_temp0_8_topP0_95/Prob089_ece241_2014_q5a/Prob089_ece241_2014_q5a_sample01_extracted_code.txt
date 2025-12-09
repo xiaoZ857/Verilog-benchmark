@@ -1,0 +1,52 @@
+module TopModule (
+  input wire clk,
+  input wire areset, // asynchronous reset
+  input wire x,      // serial input bit
+  output reg z       // serial output bit (2's complement)
+);
+
+  // Define states for the state machine
+  typedef enum logic [1:0] {
+    IDLE,     // Waiting or resetting
+    COMPLEMENT // Flipping bits until a '1' is found
+  } state_t;
+
+  state_t current_state, next_state;
+  
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Asynchronous reset logic
+      current_state <= IDLE;
+    end else begin
+      // Synchronous state transition
+      current_state <= next_state;
+    end
+  end
+
+  always_comb begin
+    z = x; // Default output is the same as input
+    case (current_state)
+      IDLE: begin
+        if (!areset) begin
+          next_state = COMPLEMENT;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+      
+      COMPLEMENT: begin
+        z = ~x; // Invert the input bit for 2's complement
+        if (x == 1'b1) begin
+          next_state = IDLE; // Stop flipping after encountering '1'
+        end else begin
+          next_state = COMPLEMENT;
+        end
+      end
+      
+      default: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+
+endmodule

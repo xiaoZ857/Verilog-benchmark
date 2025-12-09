@@ -1,0 +1,20 @@
+To implement the described circuit in Verilog, we need to invert the `in2` signal before applying it to the AND gate along with `in1`. The inverted `in2` is then used in the AND operation to determine the output `out`.
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // Invert in2 and apply AND with in1
+  assign out = in1 & (~in2);
+
+endmodule
+```
+
+**Explanation:**
+
+- The module declaration defines `TopModule` with inputs `in1` and `in2`, and output `out`.
+- Inside the module, an assignment statement uses a logical AND operation between `in1` and the negated value of `in2` (`~in2`). This represents the inverted input due to the bubble on `in2`.
+- The result of this operation is assigned to `out`, which reflects the desired behavior where `out` is high only when `in1` is high and `in2` is low.

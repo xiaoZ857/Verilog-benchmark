@@ -1,0 +1,50 @@
+Here is the implementation of the Verilog module based on your description:
+
+```verilog
+// Define the module parameters
+module TopModule (
+  input [2:0] vec, // 3-bit vector input
+  output [2:0] outv, // same vector as input
+  output o2,
+  output o1,
+  output o0 // split into 1-bit outputs
+);
+
+// Create a copy of the input vector for the output
+assign outv = vec;
+
+// Extract each bit of the input vector and assign to separate outputs
+assign o0 = vec[0];
+assign o1 = vec[1];
+assign o2 = vec[2];
+
+endmodule
+```
+
+In this implementation, we create a copy of the `vec` input using an `assign` statement. Then, we use another set of `assign` statements to split each bit of the vector into separate outputs. 
+
+This module can be used in a larger design as follows:
+
+```verilog
+// Define the module parameters
+module MainModule (
+  input clk,
+  input [2:0] vec,
+  output [2:0] outv,
+  output o2,
+  output o1,
+  output o0
+);
+
+TopModule top_module(
+  .vec(vec),
+  .outv(outv),
+  .o2(o2),
+  .o1(o1),
+  .o0(o0)
+);
+
+endmodule
+```
+
+This `MainModule` is the top-level module in your design and contains an instance of the `TopModule`. The outputs from the `TopModule` are then used by other modules in your design.

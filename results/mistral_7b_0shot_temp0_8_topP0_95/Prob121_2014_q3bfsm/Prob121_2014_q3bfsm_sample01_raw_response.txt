@@ -1,0 +1,54 @@
+ Here is a Verilog implementation of the finite state machine based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire x,
+  output reg [2:0] y,
+  output reg z
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    y <= 3'b000; // Reset to state 000
+    z <= 0;
+  end else begin
+    case (y)
+      3'b000: begin
+        if (x) y <= 3'b001;
+        else y <= 3'b000;
+        z <= 0;
+      end,
+      3'b001: begin
+        if (x) y <= 3'b001;
+        else y <= 3'b100;
+        z <= 0;
+      end,
+      3'b010: begin
+        if (x) y <= 3'b001;
+        else y <= 3'b010;
+        z <= 0;
+      end,
+      3'b011: begin
+        if (x) y <= 3'b010;
+        else y <= 3'b001;
+        z <= 1;
+      end,
+      3'b100: begin
+        if (x) y <= 3'b100;
+        else y <= 3'b011;
+        z <= 1;
+      enddefault: begin
+        $error("Invalid state encountered: %b", y); // Add this line to trigger an error when invalid state is reached
+      end
+    endcase
+  end
+end
+
+endmodule
+```
+
+This implementation uses an `always` block with sensitive clauses for both the clock and reset signals. It sets the initial state (000) when reset is active high, and then changes the state based on the current state and input value x. The output z is calculated accordingly as per your state-transition table.
+
+The default case in the `case` statement ensures that an error occurs if the FSM encounters an invalid state during simulation. You can remove this line when you are certain that all possible states have been accounted for.

@@ -1,0 +1,55 @@
+To implement the specified truth table in Verilog, we need to derive a Boolean expression for the output `f` based on the inputs `x3`, `x2`, and `x1`. Let's analyze the truth table:
+
+```
+  x3 | x2 | x1 | f
+  --+---+---+--
+  0 | 0 | 0 | 0
+  0 | 0 | 1 | 0
+  0 | 1 | 0 | 1
+  0 | 1 | 1 | 1
+  1 | 0 | 0 | 0
+  1 | 0 | 1 | 1
+  1 | 1 | 0 | 0
+  1 | 1 | 1 | 1
+```
+
+From the truth table, we can see that `f` is true (1) for the following input combinations:
+- `x3 = 0`, `x2 = 1`, `x1 = 0`
+- `x3 = 0`, `x2 = 1`, `x1 = 1`
+- `x3 = 1`, `x2 = 0`, `x1 = 1`
+- `x3 = 1`, `x2 = 1`, `x1 = 1`
+
+We can express this using a sum of products (SOP) form:
+
+\[
+f = (\overline{x_3} \cdot x_2 \cdot \overline{x_1}) + (\overline{x_3} \cdot x_2 \cdot x_1) + (x_3 \cdot \overline{x_2} \cdot x_1) + (x_3 \cdot x_2 \cdot x_1)
+\]
+
+This can be simplified by factoring:
+
+\[
+f = (\overline{x_3} \cdot x_2) + (x_3 \cdot x_1)
+\]
+
+Now, we can implement this in Verilog as follows:
+
+```verilog
+module TopModule (
+  input wire x3,
+  input wire x2,
+  input wire x1,
+  output wire f
+);
+
+  // Implement the simplified Boolean expression for f
+  assign f = (~x3 & x2) | (x3 & x1);
+
+endmodule
+```
+
+In this Verilog module:
+- `~` is used to denote NOT.
+- `&` denotes AND.
+- `|` denotes OR.
+
+The `assign` statement assigns the result of the Boolean expression to the output `f`. This implementation directly reflects the simplified SOP expression derived from the truth table.

@@ -1,0 +1,43 @@
+```verilog
+// Define the module and its inputs, outputs, and signals
+module TopModule(
+    // Input signal
+    input in,
+
+    // Output signal (assigns the same value as the input)
+    output out
+);
+
+// Assign the output port to the same value as the input port combinationally
+assign out = in;
+
+endmodule
+```
+
+Explanation:
+
+- The `module` keyword is used to define a new module.
+- In this case, we're defining a simple module called `TopModule`.
+- The `input` keyword is used to declare an input signal, which is `in`. 
+- The `output` keyword is used to declare an output signal, which is `out`. Since the description states that signals are positive clock/clk triggered unless otherwise stated, we've assumed that this module does not include any clock-related logic.
+- The `assign` statement is used to connect or assign the value of one signal to another signal. In this case, the output `out` is assigned the same value as the input `in`. 
+
+This module can be instantiated in a larger design like so:
+
+```verilog
+// Instantiate the TopModule instance
+module top_instance(
+    input clk,
+    input in,
+    output out
+);
+
+TopModule top_module(
+    .in(in),
+    .out(out)
+);
+
+endmodule
+```
+
+In this example, we're instantiating two modules that are identical to our `TopModule`. The `clk` signal is assumed to be a positive clock/clk triggered signal.

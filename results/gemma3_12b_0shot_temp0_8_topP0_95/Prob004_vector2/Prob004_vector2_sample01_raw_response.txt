@@ -1,0 +1,51 @@
+```verilog
+module TopModule (
+  input [31:0] in,
+  output [31:0] out
+);
+
+  // Intermediate signals to store the byte-swapped values
+  wire [7:0] byte0, byte1, byte2, byte3;
+
+  // Byte swapping logic
+  assign byte0 = in[7:0];
+  assign byte1 = in[15:8];
+  assign byte2 = in[23:16];
+  assign byte3 = in[31:24];
+
+  // Concatenate the swapped bytes to form the output
+  assign out = {byte3, byte2, byte1, byte0};
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [31:0] in, output [31:0] out);`**:  Defines the module named `TopModule` with a 32-bit input `in` and a 32-bit output `out`.
+
+2. **`wire [7:0] byte0, byte1, byte2, byte3;`**:  Declares four 8-bit wires to hold the individual bytes of the input.  This makes the logic more readable and easier to understand.
+
+3. **`assign byte0 = in[7:0];`**:  Assigns the least significant byte (LSB) of the input `in` (bits 7:0) to the `byte0` wire.
+
+4. **`assign byte1 = in[15:8];`**: Assigns the second byte of the input (bits 15:8) to the `byte1` wire.
+
+5. **`assign byte2 = in[23:16];`**: Assigns the third byte of the input (bits 23:16) to the `byte2` wire.
+
+6. **`assign byte3 = in[31:24];`**: Assigns the most significant byte (MSB) of the input (bits 31:24) to the `byte3` wire.
+
+7. **`assign out = {byte3, byte2, byte1, byte0};`**:  Concatenates the byte wires in reverse order to form the output `out`.  The `{}` operator is used for concatenation in Verilog.
+
+**How it works:**
+
+The code breaks down the 32-bit input into four 8-bit bytes.  Then, it rearranges these bytes by assigning them to wires in the reversed order. Finally, it concatenates these rearranged bytes to form the 32-bit output, effectively reversing the byte order.
+
+**Example:**
+
+If `in = 32'h12345678;`
+
+* `byte0 = in[7:0] = 32'h78`
+* `byte1 = in[15:8] = 32'h56`
+* `byte2 = in[23:16] = 32'h34`
+* `byte3 = in[31:24] = 32'h12`
+
+Then, `out = {byte3, byte2, byte1, byte0} = 32'h12345678` becomes `out = 32'h78563412`.

@@ -1,0 +1,22 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  assign out = ~(in1 | in2);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares a Verilog module named `TopModule` and lists its ports (inputs and outputs).
+* **`input in1, input in2;`**:  Declares `in1` and `in2` as input signals.
+* **`output logic out;`**:  Declares `out` as an output signal of type `logic`.  `logic` is a versatile type suitable for both combinational and sequential logic.
+* **`assign out = ~(in1 | in2);`**: This is the core of the NOR gate implementation.
+    * `in1 | in2`:  This is the OR operation between the two inputs.  It outputs a '1' if either `in1` or `in2` (or both) are '1'.
+    * `~`:  This is the NOT operator.  It inverts the result of the OR operation.  So, `out` will be '1' only if *both* `in1` and `in2` are '0'.
+
+This module correctly implements a 2-input NOR gate.  The `assign` statement ensures that `out` is updated combinatorially, meaning it changes immediately whenever `in1` or `in2` changes.

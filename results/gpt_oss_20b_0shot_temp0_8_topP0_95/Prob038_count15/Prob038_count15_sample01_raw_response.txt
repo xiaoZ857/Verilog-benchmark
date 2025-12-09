@@ -1,0 +1,41 @@
+Here is a clean, synthesizable Verilog implementation of a 4‑bit binary counter that counts from **0** to **15** (inclusive) with a period of **16**.  
+The `reset` input is **synchronous** and **active‑high** – when it is asserted on the rising edge of `clk` the counter is forced to **0**.
+
+```verilog
+//===================================================================
+//  TopModule
+//  4‑bit binary counter (0‑15) with synchronous active‑high reset
+//===================================================================
+
+module TopModule (
+    input  wire        clk,    // Clock (positive‑edge triggered)
+    input  wire        reset,  // Synchronous active‑high reset
+    output reg  [3:0]  q       // 4‑bit counter output
+);
+
+    // On each rising edge of the clock:
+    always @(posedge clk) begin
+        if (reset)                   // Synchronous reset
+            q <= 4'd0;               // Reset counter to 0
+        else
+            q <= q + 1'b1;           // Increment (wraps automatically to 0 after 15)
+    end
+
+endmodule
+```
+
+### Explanation
+
+1. **Clock Edge**  
+   The counter updates only on the positive edge of `clk`, ensuring synchronous operation.
+
+2. **Synchronous Reset**  
+   `reset` is evaluated **inside** the clocked block. When it is high, the counter `q` is set to `4'd0` on that same clock edge.
+
+3. **Counting**  
+   If `reset` is low, the counter simply adds `1` to its current value. Because `q` is 4‑bits wide, adding `1` to `4'b1111` overflows back to `4'b0000`, giving a natural period of 16.
+
+4. **Non‑blocking Assignment (`<=`)**  
+   Using non‑blocking assignments is the recommended style for clocked logic to avoid race conditions and to match synthesis behavior.
+
+Feel free to integrate this module into a larger design or add parameters if you wish to make the bit‑width configurable.

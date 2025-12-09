@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+
+  reg [99:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      shift_reg <= data;
+    end else begin
+      case (ena)
+        2'b01: begin // Rotate right by one bit
+          shift_reg <= {shift_reg[98:0], shift_reg[99]};
+        end
+        2'b10: begin // Rotate left by one bit
+          shift_reg <= {shift_reg[99], shift_reg[98:0]};
+        end
+        default: begin // No rotation
+          shift_reg <= shift_reg;
+        end
+      endcase
+    end
+  end
+
+  assign q = shift_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [99:0] shift_reg;`**:  Declares a 100-bit register named `shift_reg` to hold the rotating data. This register is the core of the rotator.
+
+2. **`always @(posedge clk) begin ... end`**:  Defines a synchronous sequential block triggered by the positive edge of the clock signal `clk`.
+
+3. **`if (load) begin ... end`**:  Implements the synchronous load functionality. When `load` is high, the `shift_reg` is loaded with the value of the input `data`.  This overrides the rotation.
+
+4. **`else begin ... end`**:  Handles the rotation logic when `load` is low.
+
+5. **`case (ena) ... endcase`**:  A `case` statement selects the rotation direction based on the value of the `ena` input:
+   - **`2'b01: begin ... end`**:  Rotates the register right by one bit.  The most significant bit (MSB) `shift_reg[99]` is shifted to the least significant bit (LSB) `shift_reg[0]` (effectively rotating right).  The concatenation operator `{shift_reg[98:0], shift_reg[99]}` achieves this.
+   - **`2'b10: begin ... end`**:  Rotates the register left by one bit. The least significant bit (LSB) `shift_reg[0]` is shifted to the most significant bit (MSB) `shift_reg[99]` (effectively rotating left). The concatenation operator `{shift_reg[99], shift_reg[98:0]}` achieves this.
+   - **`default: begin ... end`**:  When `ena` is either `2'b00` or `2'b11`, no rotation is performed.  The `shift_reg` remains unchanged (`shift_reg <= shift_reg;`).
+
+6. **`assign q = shift_reg;`**:  Assigns the value of the `shift_reg` to the output signal `q`.  This makes the contents of the rotator available as the output.
+
+**How the Rotator Works (Rotating Right):**
+
+Imagine the register as a circular array of bits. Rotating right means moving each bit one position to the right, and the bit that was at the rightmost end moves to the leftmost end. The code implements this by copying the bits and moving the rightmost bit to the leftmost position.
+
+**How the Rotator Works (Rotating Left):**
+
+Rotating left is the reverse of rotating right. The bit at the leftmost end moves to the rightmost end.
+
+**Key Improvements and Considerations:**
+
+* **Synchronous Logic:** The entire rotator is synchronous, meaning all operations are triggered by the clock signal. This makes it easier to control and debug.
+* **Clear and Concise Code:** The code is well-commented and uses a `case` statement for clear selection of rotation directions.
+* **Efficient Implementation:**  The concatenation operator `{}` is a standard way to shift bits in Verilog, making the implementation efficient.
+* **Default Case:** The `default` case in the `case` statement handles the situations where no rotation is desired, ensuring proper behavior.

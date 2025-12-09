@@ -1,0 +1,12 @@
+Problem: Prob058_alwaysblock2
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob058_alwaysblock2/Prob058_alwaysblock2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob058_alwaysblock2_test.sv:100: error: port ``out_always_comb'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob058_alwaysblock2_test.sv:100: error: port ``out_always_ff'' is not a port of top_module1.
+2 error(s) during elaboration.

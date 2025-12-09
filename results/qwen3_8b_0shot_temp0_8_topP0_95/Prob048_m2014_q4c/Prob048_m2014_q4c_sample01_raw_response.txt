@@ -1,0 +1,25 @@
+Here is the implementation of a **synchronous D flip-flop with an active high reset** in Verilog. The module is named `TopModule`, and the behavior is defined as follows:
+
+- On the **rising edge** of the clock (`clk`), the output `q` is updated.
+- If the **reset signal** (`r`) is high, the output `q` is **set to 0**.
+- Otherwise, the output `q` takes the value of the input `d`.
+
+This is a **synchronous reset** because the reset condition is evaluated **only on the rising edge** of the clock, ensuring that the reset action is synchronized with the clock.
+
+---
+
+### ✅ **Correct Implementation**
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+always @(posedge clk) begin
+  if (r) begin
+    q <= 1'b0;
+  end else begin
+    q <=

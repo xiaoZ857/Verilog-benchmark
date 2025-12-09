@@ -1,0 +1,28 @@
+ Here is the Verilog code for a simple D flip-flop with an active high synchronous reset as per your description:
+
+```verilog
+module TopModule (
+  input clock,
+  input data,
+  input reset,
+  output reg q
+);
+
+always @(posedge clock) begin
+  if (reset)
+    q <= 0;
+  else
+    q <= data;
+end
+
+assign q_bar = !q; // Providing the complement of 'q' as 'q_bar' for convenience
+
+endmodule
+```
+
+In this code:
+- `clock`, `data`, and `reset` are input signals.
+- `q` is the output register signal, representing the current state stored in the D flip-flop.
+- The `always @(posedge clock)` block ensures that the changes to the register happen on the rising edge of the clock signal.
+- Inside this block, if the reset signal is high (1), then the register's value is set to 0 (active high). Otherwise, it takes on the value of the data input.
+- Finally, we have an assign statement for convenience that provides the complement of `q` as `q_bar`. This can be useful if you need both `q` and its complement in your design.

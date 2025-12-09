@@ -1,0 +1,13 @@
+To create a Verilog module that always outputs a LOW (0), you can assign the value 0 directly to the output without any conditions since there are no inputs involved.
+
+Here's how the code would look:
+
+```verilog
+module TopModule (
+  output zero
+);
+  assign zero = 0;
+endmodule
+```
+
+This module assigns `zero` to be 0, ensuring it is always LOW.

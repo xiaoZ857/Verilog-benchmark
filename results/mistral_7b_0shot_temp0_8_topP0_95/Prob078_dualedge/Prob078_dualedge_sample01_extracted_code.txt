@@ -1,0 +1,25 @@
+module TopModule (
+  input clk,
+  input d,
+  output reg q,
+  output reg q_negedge,
+  output reg q_posedge
+);
+
+always @(posedge clk) begin
+    if (clk_last != clk) begin
+        q_negedge <= q; // Store the previous value for negative edge condition
+        q_posedge <= d; // Store the new value for positive edge condition
+        clk_last <= clk;
+    end
+end
+
+always @(posedge clk or negedge clk) begin
+    if (clk == 0) begin
+        q <= q_negedge; // Assign output on negative edge
+    end else begin
+        q <= q_posedge; // Assign output on positive edge
+    end
+end
+
+reg clk_last;

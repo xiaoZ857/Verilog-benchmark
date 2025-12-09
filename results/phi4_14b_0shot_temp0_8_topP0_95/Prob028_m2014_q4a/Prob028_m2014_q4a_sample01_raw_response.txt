@@ -1,0 +1,43 @@
+To implement a D latch using an `always` block in Verilog, you need to create a module that captures the value of the input `d` when the enable signal `ena` is high. The output `q` should retain its last captured value when `ena` is low.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always_ff @ (posedge clk or negedge reset_n) begin
+    if (!reset_n)
+      q <= 1'b0; // Optional: Reset logic to initialize `q` to a known state
+    else if (ena)
+      q <= d;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module has three ports:
+  - `d`: The data input.
+  - `ena`: The enable signal. When high, the latch captures the value of `d`.
+  - `q`: The output that holds the captured value.
+
+- **Always Block**:
+  - The `always_ff` block is used for flip-flop or latch behavior.
+  - It triggers on either a positive edge of `clk` or a negative edge of `reset_n`. This allows for synchronous reset capability, which is often desirable in digital design for initialization purposes.
+
+- **Reset Logic**: 
+  - When `reset_n` is low (active-low reset), `q` is set to zero. This is optional but commonly used to ensure that the latch starts in a known state.
+  
+- **Latch Behavior**:
+  - If `ena` is high, `q` captures and holds the value of `d`.
+  - When `ena` is low, `q` retains its last captured value.
+
+### Note:
+
+- The module assumes the presence of a clock signal `clk` and an active-low reset signal `reset_n`. You may need to modify this if your design doesn't use these signals.
+- If you don't require asynchronous reset behavior, you can simplify the code by removing the reset logic.

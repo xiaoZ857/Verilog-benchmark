@@ -1,0 +1,30 @@
+Here is the Verilog implementation of the population count module:
+
+```verilog
+// Population Count Module
+module population_count(
+  input [254:0] in, // Input vector of size 255 bits
+  output reg [7:0] out  // Output register to store population count
+);
+
+always_comb
+begin
+    // Calculate population count by counting the number of '1's in the input vector
+    int pop_count = $countmas($signed(in));
+    
+    // Convert signed integer back to unsigned and limit it within the range [8:0]
+    out[7] = (pop_count >> 24) + 8;
+    for(int i = 7; i >= 0; i--)
+        if ((i < pop_count && pop_count % (2^(i+1)) != 0) || 
+            (i > 0 && pop_count == 0))
+            out[i] = 1;
+        else
+            out[i] = 0;
+end
+```
+
+This Verilog module works by using the `$countmas` function to count the number of '1's in the input vector. It then limits this value within the range [8:0] and outputs the population count as an 8-bit unsigned integer.
+
+Note that we use a technique called "exponential reduction" to reduce the size of the population count from 255 bits down to 8 bits. This involves shifting the result left by 24 bits, then dividing it into two regions of 2^7 and 2^6 bits respectively. The region with at least one '1' is assigned to the most significant bit (`out[7]`). All other bits are set based on whether the population count falls within certain ranges.
+
+Please note that this module does not support all edge cases (e.g., negative input or very large inputs) as the `$countmas` function only works for non-negative integers.

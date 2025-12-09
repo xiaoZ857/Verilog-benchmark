@@ -1,0 +1,56 @@
+We need to compute the next state for each cell based on the number of living neighbors (with wrap-around toroidal topology).  
+
+We can break this into steps:  
+
+1. For each cell, compute neighbor indices with wrap-around.  
+2. Count how many of the 8 neighbors are alive.  
+3. Apply the rules to determine the next state.  
+
+We'll do this using combinational logic for the neighbor counting, then a synchronous update on the clock edge.  
+
+```verilog
+  reg [255:0] q_next;
+  integer i, row, col, ncount;
+  integer row_above, row_below, col_left, col_right;
+  integer idx_self, idx_n;
+
+  always @(*) begin
+    for (i = 0; i < 256; i = i + 1) begin
+      // Convert linear index to row and column
+      row = i / 16;
+      col = i % 16;
+      ncount = 0;
+
+      // Check all 8 neighbors with wrap-around
+      for (integer dr = -1; dr <= 1; dr = dr + 1) begin
+        for (integer dc = -1; dc <= 1; dc = dc + 1) begin
+          if (dr == 0 && dc == 0) continue; // skip self
+
+          row_above = (row + dr + 16) % 16;
+          col_left  = (col + dc + 16) % 16;
+
+          idx_n = row_above * 16 + col_left;
+
+          if (q[idx_n] == 1'b1) ncount = ncount + 1;
+        end
+      end
+
+      // Apply rules
+      case (ncount)
+        0, 1: q_next[i] = 1'b0; // rule (1)
+        2:    q_next[i] = q[i]; // rule (2)
+        3:    q_next[i] = 1'b1; // rule (3)
+        default: q_next[i] = 1'b0; // rule (4) for 4+
+      endcase
+    end
+  end
+
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= q_next;
+    end
+  end
+endmodule
+```

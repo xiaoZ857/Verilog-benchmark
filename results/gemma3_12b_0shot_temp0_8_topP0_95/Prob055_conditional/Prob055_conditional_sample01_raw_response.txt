@@ -1,0 +1,55 @@
+```verilog
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+
+  always @* begin
+    min = a; // Initialize min to a
+
+    if (b < min) begin
+      min = b;
+    end
+
+    if (c < min) begin
+      min = c;
+    end
+
+    if (d < min) begin
+      min = d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Initialization:**  The `min` register is initialized to `a`. This provides a starting value for the comparison.
+2. **Comparisons:**  The code then uses a series of `if` statements to compare `min` with `b`, `c`, and `d`.
+3. **Update `min`:**  If a smaller number is found (e.g., `b < min`), the `min` register is updated to store that smaller value.
+4. **`always @*` Block:** The `always @*` block ensures that the comparison logic is re-evaluated whenever any of the input signals (`a`, `b`, `c`, or `d`) change.  This is essential for correct behavior.  The `@*` is a shorthand for "whenever any input changes".
+
+**How it works:**
+
+The module systematically compares each input number with the current minimum value stored in the `min` register.  If a smaller number is found, it replaces the current minimum.  By the end of the comparison sequence, the `min` register will hold the smallest of the four input numbers.
+
+**Example Usage:**
+
+If:
+
+* `a = 10`
+* `b = 5`
+* `c = 20`
+* `d = 12`
+
+The module will first initialize `min = 10`. Then:
+
+* `b < min` (5 < 10) is true, so `min` becomes 5.
+* `c < min` (20 < 5) is false.
+* `d < min` (12 < 5) is false.
+
+The final value of `min` will be 5.

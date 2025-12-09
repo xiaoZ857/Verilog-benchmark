@@ -1,0 +1,34 @@
+**Verilog – Transparent D‑latch**
+
+A D‑latch is *level‑sensitive*: while the enable (`ena`) is high, the output `q` follows the input `d`.  
+When `ena` goes low the latch “holds” the last value of `q`.
+
+```verilog
+module TopModule (
+    input  logic d,     // Data input
+    input  logic ena,   // Enable (level‑sensitive)
+    output logic q      // Latch output
+);
+
+    /* 
+     * Transparent latch:
+     *   When ena == 1 → q <= d
+     *   When ena == 0 → q holds its previous value
+     *
+     * Use an always block that is sensitive to any change
+     * on d or ena.  A non‑blocking assignment (`<=`) keeps
+     * the latch behavior.
+     */
+    always @ (d or ena) begin
+        if (ena)        // Only update when enabled
+            q <= d;    // Non‑blocking assignment
+    end
+
+endmodule
+```
+
+### Why this works
+
+- **Level‑sensitivity**: The `always @ (d or ena)` (or equivalently `always @*`) block triggers whenever `d` or `ena` changes, just like a latch should respond to level changes.
+- **Transparent when enabled**: The `if (ena)` guard lets the assignment `q <= d` happen only while the enable is high.
+- **Hold when disabled**: If `ena` is low the block does nothing, so `q` retains its previous value –

@@ -1,0 +1,33 @@
+module TopModule (
+    input clk,
+    input j,
+    input k,
+    input areset,
+    output out
+);
+
+    parameter OFF = 0;
+    parameter ON  = 1;
+
+    reg state;
+    
+    always @(posedge clk) begin
+        if (areset) begin
+            state <= OFF;
+        end else begin
+            case (state)
+                OFF: 
+                    if (j == 1) state <= ON;
+                    else         state <= OFF; // redundant, but explicit
+                ON:
+                    if (k == 1) state <= OFF;
+                    else          state <= ON; // redundant, but explicit
+                default: 
+                    state <= OFF; // In case of unexpected states, reset to OFF
+            endcase
+        end
+    end
+
+    assign out = (state == ON) ? 1 : 0;
+
+endmodule

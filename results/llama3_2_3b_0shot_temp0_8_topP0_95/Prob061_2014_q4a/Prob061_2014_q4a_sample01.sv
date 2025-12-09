@@ -1,0 +1,41 @@
+
+// Define a module named top_module that shifts data through a single stage
+module TopModule (
+  input clk,            // Positive clock signal
+  input w,              // Input to the first stage of the shift register
+  input R,              // Value to load into the flip-flop
+  input E,              // Enable to start shifting
+  input L,              // Load signal to assert when it should load
+  output reg Q          // Output of the single-stage shift register
+);
+
+// Declare internal signals for storing data in the flip-flop
+internal wire prev_Q;
+internal reg [n-1:0] stage_data;
+
+// Define the module's behavior
+always @(posedge clk) begin
+  // Initialize the stage data to zero if E is asserted and Q has changed
+  if (E && ~Q) begin
+    stage_data = 0;
+  end
+  
+  // If L is asserted, load a new value into the flip-flop
+  else if (L) begin
+    prev_Q <= R;
+  end
+  
+  // Otherwise, shift data to the next stage
+  else if (E) begin
+    stage_data <= Q;
+  end
+end
+
+// Connect the output of the single-stage shift register to the input of the next stage
+assign Q = prev_Q;
+
+// Assume that the n-bit width is defined elsewhere in your code.
+
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

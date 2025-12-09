@@ -1,0 +1,44 @@
+To implement the Verilog module `TopModule` that adds two 8-bit 2's complement numbers and detects signed overflow, we'll follow these steps:
+
+1. **Addition**: Use an adder to compute the sum of `a` and `b`.
+2. **Overflow Detection**: For signed 2¡¯s complement addition:
+   - Overflow occurs if the sign bits of the operands are the same, but the sign bit of the result is different.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [7:0] a,
+    input [7:0] b,
+    output reg [7:0] s,
+    output overflow
+);
+
+    // Internal wire to hold the 9-bit sum (to detect overflow)
+    wire [8:0] temp_sum;
+
+    // Perform addition and assign result
+    assign temp_sum = a + b;
+    always @(*) begin
+        s = temp_sum[7:0]; // Assign lower 8 bits as the sum output
+    end
+
+    // Determine overflow condition
+    assign overflow = ((a[7] & b[7]) & (~temp_sum[7])) | ((~a[7]) & (~b[7]) & (temp_sum[7]));
+
+endmodule
+```
+
+### Explanation:
+
+- **Addition**:
+  - We use a `wire` to store the result of the addition, allowing us to check for overflow. The sum is calculated using an implicit adder with `assign temp_sum = a + b;`.
+  - We extract the lower 8 bits (`temp_sum[7:0]`) as our output sum `s`.
+
+- **Overflow Detection**:
+  - Overflow in signed addition occurs if both operands have the same sign, but the result has a different sign.
+  - `(a[7] & b[7])` checks if both inputs are negative (both MSBs are 1).
+  - `(~temp_sum[7])` checks if the result is positive (MSB of sum is 0), indicating an overflow when adding two negatives.
+  - `((~a[7]) & (~b[7]) & (temp_sum[7]))` checks if both inputs are positive and the result is negative, also indicating an overflow.
+
+This module efficiently computes both the sum and detects signed overflow for 8-bit two's complement numbers.

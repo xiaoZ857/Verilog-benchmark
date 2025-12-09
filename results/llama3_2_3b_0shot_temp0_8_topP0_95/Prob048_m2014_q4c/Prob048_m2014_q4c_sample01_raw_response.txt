@@ -1,0 +1,27 @@
+Here is the implementation of the Verilog module for the described D flip flop with an active high synchronous reset:
+
+```verilog
+module TopModule (
+    input clk, // Positive clock signal
+    input d,   // Data to be loaded into Q
+    input r,   // Reset input (active high)
+    output logic q // Output of the D flip-flop
+);
+
+    always @(posedge clk) begin
+        if (!r) begin  // If reset is active high
+            q <= 0;
+        end else begin  // Otherwise, load new value into Q
+            q <= d;
+        end
+    end
+
+endmodule
+```
+
+In this implementation:
+
+- We first define the input and output signals of the module.
+- Then we use an `always` block to create a combinational logic that captures the state changes on the clock edge.
+- Inside this logic, we check whether the reset signal is active high or not. If it's active high, we clear the output `q` to 0. Otherwise, we load the new value of `d` into `q`.
+- Note that in Verilog, the assignment operator `<=` can be used to create a logic expression where the left-hand side defines the target register and the right-hand side defines its current value. This is exactly what we need for a D flip-flop.

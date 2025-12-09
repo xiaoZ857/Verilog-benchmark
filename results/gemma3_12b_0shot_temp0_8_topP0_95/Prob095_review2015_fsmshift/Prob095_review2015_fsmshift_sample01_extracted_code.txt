@@ -1,0 +1,24 @@
+module TopModule (
+  input clk,
+  input reset,
+  output shift_ena
+);
+
+  reg [2:0] count; // Counter to track the number of shift enable cycles
+
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 0;
+      shift_ena <= 1;
+    end else begin
+      if (count < 4) begin
+        count <= count + 1;
+        shift_ena <= 1;
+      end else begin
+        count <= 0;
+        shift_ena <= 0;
+      end
+    end
+  end
+
+endmodule

@@ -1,0 +1,10 @@
+Problem: Prob058_alwaysblock2
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob058_alwaysblock2/Prob058_alwaysblock2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+Assertion failed: prb->pin_count() == 1, file elaborate.cc, line 6643

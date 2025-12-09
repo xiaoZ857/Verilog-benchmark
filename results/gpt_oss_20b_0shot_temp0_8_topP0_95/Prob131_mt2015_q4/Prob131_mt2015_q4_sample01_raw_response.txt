@@ -1,0 +1,41 @@
+**Verilog implementation**
+
+```verilog
+`timescale 1ns / 1ps
+
+// -------------  Module A  ---------------------------------
+// Implements:  z = (x ^ y) & x
+module A (
+    input  wire x,
+    input  wire y,
+    output wire z
+);
+    assign z = (x ^ y) & x;
+endmodule
+
+// -------------  Module B  ---------------------------------
+// Implements:  z = ~(x ^ y)   // XNOR of x and y
+module B (
+    input  wire x,
+    input  wire y,
+    output wire z
+);
+    assign z = ~(x ^ y);
+endmodule
+
+// -------------  TopModule  --------------------------------
+module TopModule (
+    input  wire x,
+    input  wire y,
+    output wire z
+);
+    // Wires for the four sub‑module outputs
+    wire a1_z, a2_z;
+    wire b1_z, b2_z;
+
+    // Wires for the intermediate gates
+    wire or_out;
+    wire and_out;
+
+    // Instantiate the two A modules
+    A A1 ( .x(x), .y(y), .

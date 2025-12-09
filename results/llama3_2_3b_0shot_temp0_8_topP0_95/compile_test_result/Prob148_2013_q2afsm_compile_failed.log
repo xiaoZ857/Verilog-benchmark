@@ -1,0 +1,17 @@
+Problem: Prob148_2013_q2afsm
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:50: sorry: part selects straddling the start of signal (g['sd0]) are not currently supported.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:20: error: Concatenation operand "'sd0" has indefinite width.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:20: error: Concatenation operand "'sd0" has indefinite width.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:20: error: Concatenation operand "'sd0" has indefinite width.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:20: error: Unable to elaborate condition expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob148_2013_q2afsm_test.sv:145: warning: Port 3 (r) of TopModule expects 4 bits, got 3.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob148_2013_q2afsm_test.sv:145:        : Padding 1 high bits of the port.
+5 error(s) during elaboration.

@@ -1,0 +1,54 @@
+To implement a 32-bit Galois Linear Feedback Shift Register (LFSR) in Verilog with taps at bit positions 32, 22, 2, and 1, we need to follow the description provided. The LFSR should shift right, and certain bits will be XORed together to form the new MSB (q[31]). Additionally, an active-high synchronous reset is required that sets `q` to `32'h1`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+  // Internal signal for the new MSB after feedback operation
+  wire feedback;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      // Active-high synchronous reset to set `q` to 32'h1
+      q <= 32'h1;
+    end else begin
+      // Shift right by one bit position
+      q[31:1] <= q[30:0];
+      
+      // Calculate the new MSB using XOR feedback from tapped positions
+      // Taps are at positions 32, 22, 2, and 1 (q[31], q[21], q[1], q[0])
+      feedback = q[31] ^ q[21] ^ q[1] ^ q[0];
+      
+      // Set the new MSB
+      q[0] <= feedback;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Input and Output:**
+  - `clk`: Clock signal.
+  - `reset`: Active-high synchronous reset signal.
+  - `q`: A 32-bit register representing the state of the LFSR.
+
+- **Feedback Calculation:**
+  - The feedback is calculated using XOR operations on the specified tap positions. For a Galois LFSR, these taps are located at bit positions 31 (for bit position 32), 21 (for bit position 22), 1, and 0.
+  
+- **Shift and Feedback Assignment:**
+  - On each clock edge (except when reset is active):
+    - Shift the entire register right by one bit (`q[31:1] <= q[30:0];`).
+    - Calculate `feedback` using XOR of taps, which determines the new MSB.
+    - Assign this feedback to the LSB (`q[0] <= feedback;`).
+
+- **Reset Logic:**
+  - If `reset` is high on a clock edge, set `q` to `32'h1`, ensuring all bits start correctly for generating pseudo-random numbers. 
+
+This implementation ensures that the LFSR behaves according to the specified requirements and can be used in applications like random number generation or digital signal processing where pseudorandom sequences are needed.

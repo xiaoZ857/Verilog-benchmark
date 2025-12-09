@@ -1,0 +1,47 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  reg q_n; // Internal signal for the next state
+
+  always @(posedge clk) begin
+    q_n <= d;
+  end
+
+  always @(negedge clk) begin
+    q_n <= q_n; // Hold the value
+  end
+
+  always @(posedge clk) begin
+    q <= q_n;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg q_n;`**:  We introduce an internal register `q_n`. This register will hold the value that *will* be latched into `q`.  This is the key to simulating a dual-edge triggered flip-flop.
+
+2. **`always @(posedge clk) begin q_n <= d; end`**:  On the *positive* clock edge, we assign the input `d` to `q_n`. This is the first part of the dual-edge behavior.  We're "preparing" the next value for `q`.
+
+3. **`always @(negedge clk) begin q_n <= q_n; end`**:  This is the crucial part that mimics the negative clock edge triggering.  We are assigning `q_n` to itself. This has the effect of "holding" the value of `q_n` that was set on the previous positive clock edge.  It effectively prevents `q_n` from changing when the negative clock edge arrives.
+
+4. **`always @(posedge clk) begin q <= q_n; end`**:  On the *positive* clock edge, we assign the value of `q_n` to the output `q`. This is the second part of the dual-edge behavior.  The actual data is latched into the output `q` *after* the negative clock edge has had a chance to affect the internal state.
+
+**How it Works (Functionally):**
+
+* **Positive Clock Edge:**  `d` is copied into `q_n`.
+* **Negative Clock Edge:** `q_n` holds the value of `d` that was set on the previous positive edge.
+* **Next Positive Clock Edge:** The value of `q_n` (which is either `d` or the previous value of `d` if the clock was previously negative) is latched into `q`.
+
+This sequence of events effectively makes the flip-flop respond to both the positive and negative edges of the clock signal.
+
+**Why this is a valid workaround:**
+
+* **Uses only legal sensitivity lists:** The code only uses `posedge clk` and `negedge clk` in the `always` blocks, which are valid sensitivity lists in Verilog.
+* **Functional equivalence:** The circuit functionally behaves like a dual-edge triggered flip-flop.
+* **No `posedge clk or negedge clk`**:  The code avoids the illegal sensitivity list.

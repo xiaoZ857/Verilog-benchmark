@@ -1,0 +1,40 @@
+Here’s a minimal, fully‑synthesizable implementation of the requested decade counter.  
+The counter is **synchronous** and **active‑high**: on a rising edge of `clk`, if `reset` is high the counter is forced to `1`.  
+Otherwise it increments each clock cycle, and after reaching `10` it wraps back to `1`.
+
+```verilog
+// TopModule.v
+// 10‑state decade counter (1‑10 inclusive)
+// Synchronous active‑high reset
+
+module TopModule (
+    input  wire        clk,    // Clock
+    input  wire        reset,  // Synchronous active‑high reset
+    output reg  [3:0]  q       // 4‑bit counter output
+);
+
+    // Synchronous logic
+    always @(posedge clk) begin
+        if (reset) begin
+            q <= 4'd1;          // Reset counter to 1
+        end
+        else if (q == 4'd10) begin
+            q <= 4'd1;          // Wrap from 10 back to 1
+        end
+        else begin
+            q <= q + 4'd1;      // Increment counter
+        end
+    end
+
+endmodule
+```
+
+### Explanation
+1. **Clock Edge** – The `always @(posedge clk)` block ensures that all state changes happen only on the rising edge of the clock, making the counter synchronous.
+2. **Reset** – When `reset` is high, the counter is immediately set to `1`. Because this assignment happens inside the same clock edge as the reset signal, it is a *synchronous* reset.
+3. **Counting** –  
+   - If the current value `q` is `10` (`4'd10`), the next value is set to `1`.  
+   - Otherwise the counter simply increments (`q <= q + 4'd1`).  
+   The use of non‑blocking assignments (`<=`) ensures that all updates occur simultaneously and eliminates race conditions.
+
+This module satisfies the specification: it counts from 1 through 10 inclusively, wraps back to 1, and resets synchronously to 1 on an active‑high reset.

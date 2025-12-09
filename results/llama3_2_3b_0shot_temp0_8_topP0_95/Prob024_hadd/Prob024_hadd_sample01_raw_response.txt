@@ -1,0 +1,63 @@
+```verilog
+// Half Adder Module
+
+module half_adder(
+  // inputs
+  input clk, // Clock signal
+  input [1:0] in_a, // First binary input
+  input [1:0] in_b, // Second binary input
+  output [1:0] out_sum, // Sum of the two inputs
+  output cout        // Carry-out bit
+);
+
+  // Initialize outputs to zero
+  reg [1:0] sum_reg = 0;
+  wire cout_wire;
+
+  always @(posedge clk) begin
+    // Compute sum and carry using bitwise operations
+    if (in_a == in_b) begin
+      sum_reg <= 0;         // No carry when inputs are same
+      cout_wire <= 0;       // No carry when inputs are same
+    else if ((~in_a & in_b) || (~in_b & in_a)) begin
+      sum_reg <= {1'b1, 1'b0}; // Carry bit is set for one of the inputs
+      cout_wire <= 1;
+    end else if ((~in_a & ~in_b)) begin
+      sum_reg <= {{1'b0}, {in_a[0], in_b[0]}};
+      cout_wire <= 1;
+    end else begin // If not, then there's no need for the else statement 
+      sum_reg <= {1'b1, 1'b0}; // Carry bit is set
+      cout_wire <= 1;
+   end
+
+  end
+
+endmodule
+```
+
+In this module, I've used a simple always block to update `sum` and `cout` when the `clk` signal goes high. If the inputs are same, then there's no carry but both bits in `out_sum` will be set to one (0b11). If at least one of the inputs is different from the other one, then there's a carry but only the bit that makes the input different will be set in `out_sum`. 
+
+You can use this module inside your top-level module like this:
+
+```verilog
+module TopModule (
+  // inputs
+  input clk,
+  input [1:0] in_a,
+  input [1:0] in_b, 
+  output [1:0] sum_out,
+  output cout
+);
+
+// Instantiate half adder
+half_adder h(
+  .clk(clk),
+  .in_a(in_a), 
+  .in_b(in_b), 
+  .out_sum(sum_out), // Assigning the output of half_adder to sum_out of TopModule
+  .cout(cout)       // Assigning cout_wired from half_adder to cout in TopModule
+);
+
+endmodule
+```
+In this way, `TopModule` is a more convenient interface for any module that needs to perform simple half additions.

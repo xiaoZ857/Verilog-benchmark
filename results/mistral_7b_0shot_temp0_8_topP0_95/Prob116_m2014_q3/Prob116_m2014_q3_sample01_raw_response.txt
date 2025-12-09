@@ -1,0 +1,14 @@
+ Based on the provided Karnaugh map, the function `f` can be expressed in sum-of-products form as follows:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+always @(posedge clk) begin
+  assign f = ~x[3] & x[2] | x[3] & ~x[4] | x[2] & x[4];
+end
+```
+
+In this Verilog code, the function `f` is implemented as a positive edge-triggered combinational circuit with respect to the clock signal (clk). The assignment of `f` uses De Morgan's laws to simplify the expression given in sum-of-products form.

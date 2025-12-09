@@ -1,0 +1,35 @@
+module TopModule (
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+reg [31:1] temp;
+
+always @(*) begin
+    // Extract each byte from the input vector and place them at their new positions
+    for (int i = 31; i >= 0; i--)
+        if (i % 8 == 0)
+            temp[i + 7] = in[i];
+        else
+            temp[7 - i] = in[i];
+
+    // Reverse the byte order of each extracted byte
+    for (int i = 7; i > 0; i--)
+        out[i] = temp[i];
+
+end
+
+// Optional: Clock and Reset logic can be added as follows:
+// reg clk = 1'b0;
+// reg rst = 1'b0;
+
+// always #({Clk Period}) clk_eq
+// begin: always_comb
+//     if (clk) 
+//       out = in;
+// end 
+
+// always @(posedge clk)
+// begin: always_posedge
+//   if (rst) 
+//     out <= 32'd0; // Reset value (optional)

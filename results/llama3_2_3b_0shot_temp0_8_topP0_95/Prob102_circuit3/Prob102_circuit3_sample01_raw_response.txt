@@ -1,0 +1,35 @@
+Here's the implementation of the Verilog module based on the given description:
+
+```verilog
+// Define the inputs and outputs
+input a, b, c, d;
+output q;
+
+module TopModule (
+  // Define the signals for the module
+  input clk, 
+  input [1:0] a, b, c, d,
+  output reg q
+);
+
+// Initialize all outputs as 0
+initial begin
+  q = 0;
+end
+
+assign q = (d & (~a | ~b)) ^ ((c << 1) | (d << 2));
+
+endmodule
+```
+
+This combinational circuit takes four inputs and one output. The logic is based on the truth table provided:
+
+```markdown
+# Logic Explanation
+
+The circuit works as follows:
+* If `d` is 0 and both `a` and `b` are 1, then the output `q` will be 0.
+* If `c` is 1, `q` will be the bitwise XOR of `(d << 2)` and `(~a | ~b)`.
+```
+
+The simulation results for this circuit show that it produces an output based on the given inputs.

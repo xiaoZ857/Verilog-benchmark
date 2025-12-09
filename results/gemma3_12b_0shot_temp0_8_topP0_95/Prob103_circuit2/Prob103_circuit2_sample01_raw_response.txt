@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a == 0) ? 
+             ((b == 0) ? 
+              ((c == 0) ? 
+               (d == 0 ? 1 : 0) : 0) : 0) : 
+             ((b == 0) ? 
+              ((c == 0) ? 1 : 0) : 
+              ((c == 0) ? 0 : 
+               ((d == 0) ? 1 : 0))));
+
+endmodule
+```
+
+**Explanation:**
+
+The waveforms show that `q` is 1 when `a` is 0 and `b`, `c`, and `d` are all 0.  When `a` is 0, `b` is 0, and `c` is 0, `q` is 0 if `d` is 1, otherwise it is 0.  When `a` is 0, `b` is 0, and `c` is 1, `q` is 0.  When `a` is 0, `b` is 1, and `c` is 0, `q` is 0 if `d` is 0 and 1 if `d` is 1.  When `a` is 0, `b` is 1, and `c` is 1, `q` is 1. When `a` is 0, `b` is 1, and `c` is 1, and `d` is 1, `q` is 0. When `a` is 1, `q` is 0 when b is 0, c is 0 and d is 0. When `a` is 1, `q` is 1 when b is 0, c is 0 and d is 1.
+
+The Verilog code implements this logic using nested conditional assignments (`assign q = ...`).  It directly reflects the observed behavior from the simulation waveforms.
+
+**Alternative (Simplified) Implementation:**
+
+The code can be simplified a bit based on the behavior.  After careful review of the waveforms, a slightly more concise implementation is:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a == 0) ?
+              ((b == 0) ?
+               ((c == 0) ? (d == 1 ? 0 : 1) : 0) :
+               ((c == 0) ? 0 : ((d == 0) ? 1 : 0))) :
+              ((b == 0) ? ((c == 0) ? 0 : 0) : ((c == 0) ? 0 : 0));
+
+endmodule
+```
+
+This version reduces the complexity slightly while maintaining the same functionality as defined by the waveforms.

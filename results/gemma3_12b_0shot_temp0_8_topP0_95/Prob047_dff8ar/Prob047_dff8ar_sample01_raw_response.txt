@@ -1,0 +1,35 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input areset,
+  output reg [7:0] q
+);
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      q <= 8'b00000000;
+    end else begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (clk, d, areset, q);`**:  Defines the module named `TopModule` with inputs `clk`, `d`, `areset` and output `q`.
+* **`reg [7:0] q;`**: Declares `q` as a 8-bit register.  Registers hold their value until explicitly changed.  This is essential for storing the output of the flip-flops.
+* **`always @(posedge clk or posedge areset) begin ... end`**:  This is a procedural block that defines the behavior of the D flip-flops.
+    * **`always @(posedge clk or posedge areset)`**:  This sensitivity list specifies that the block should execute whenever there's a positive edge of the clock signal (`posedge clk`) or a positive edge of the asynchronous reset signal (`posedge areset`).  This ensures that the flip-flops update correctly when either the clock edges or the reset is asserted.
+* **`if (areset) begin ... end else begin ... end`**:  This conditional statement implements the asynchronous reset functionality.
+    * **`if (areset)`**: If the `areset` signal is high (asserted), the `q` register is immediately set to 8'b00000000, resetting all flip-flops to 0.  This happens regardless of the clock signal.
+    * **`else`**: If the `areset` signal is low (not asserted), the `q` register takes on the value of the input `d`. This means that on the positive edge of the clock, the value of `d` is loaded into `q`.
+* **`q <= d;`**:  This is a non-blocking assignment.  This is crucial for sequential logic.  It means that the assignment to `q` doesn't happen immediately. Instead, the value of `d` is captured and assigned to `q` at the end of the current simulation time step when the block finishes executing. This prevents race conditions that can occur in sequential logic.
+
+**How it works as 8 D flip-flops:**
+
+The code implicitly creates 8 D flip-flops because the `q` register is 8 bits wide. Each bit of `q` represents the output of a single D flip-flop. The `d` input is also 8 bits wide, so each bit of `d` is connected to the corresponding D input of a flip-flop. The `clk` signal triggers all 8 flip-flops simultaneously on its positive edge, and the `areset` signal resets all 8 flip-flops to 0 asynchronously.
+
+This is a compact way to represent 8 D flip-flops in Verilog.  A more explicit implementation might use a loop or an array of D flip-flop modules, but this approach is perfectly valid and common for simplicity.

@@ -1,0 +1,16 @@
+
+module TopModule (
+  input wire a,
+  input wire b,
+  output reg out_assign,
+  output reg out_alwaysblock
+);
+
+assign out_assign = a & b; // Assign statement for a synchronous AND gate.
+
+always @(posedge clk) begin
+  out_alwaysblock <= a & b; // Combinational always block for an AND gate
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

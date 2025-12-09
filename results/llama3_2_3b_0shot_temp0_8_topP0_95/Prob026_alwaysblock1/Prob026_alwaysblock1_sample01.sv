@@ -1,0 +1,74 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+// Define the inputs
+input a, b;
+
+// Define the outputs
+output out_assign;
+output reg out_alwaysblock;
+
+module and_gate (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+    // Assign statement for output
+    assign out_assign = a & b;
+
+    always @(posedge clk) begin
+        if (a && b)
+            out_alwaysblock <= 1;
+        else
+            out_alwaysblock <= 0;
+    end
+
+endmodule
+
+// Instantiate the AND gate module in TopModule
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+) {
+  and_gate u_andgate(
+    .a(a),
+    .b(b),
+    .out_assign(out_assign),
+    .out_alwaysblock(out_alwaysblock)
+  );
+}
+
+// Example usage:
+module test_module (
+  input clk,
+  input a,
+  input b,
+  output out_test
+) {
+  TopModule u_topmodule(
+    .a(a),
+    .b(b),
+    .out_assign(out_test),
+    .out_alwaysblock(1)
+  );
+
+endmodule
+
+// Instantiation
+test_module u_test(
+  .clk(clk),
+  .a(a),
+  .b(b),
+  .out_test(out_test)
+);
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

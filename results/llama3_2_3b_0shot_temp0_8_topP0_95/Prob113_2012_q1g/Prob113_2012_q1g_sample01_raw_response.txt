@@ -1,0 +1,24 @@
+To implement the function f based on the provided Karnaugh map, we can use a combination of AND and OR gates.
+
+Here's how you could do it in Verilog:
+
+```verilog
+module TopModule(
+    input [4:1] x,
+    output logic f
+);
+
+    assign f = 
+        x[0] & (x[2] | ~x[3]) & (~x[1] | (x[2] & ~x[4]));
+
+endmodule
+```
+
+This implementation works as follows:
+
+- The expression `x[0]` selects the first row of the Karnaugh map, which has a value of 1 for `00`, `01`, and `11`.
+- `(x[2] | ~x[3])` selects one of two combinations from the second column: either both `x[2]` and `x[4]` are 1 (`11`), or `x[2]` is 0 and `~x[3]` (the inverse of `x[3]`) is 1 (`10`). This effectively covers the 00, 01, 11, and 10 combinations in the Karnaugh map.
+- `(~x[1] | (~x[2] & ~x[4]))` selects one of two combinations from the third column: either both `x[1]`, `x[2]`, and `~x[4]` are 0, or any other combination. This effectively covers the 01, 00, and 10 combinations in the Karnaugh map.
+- By using the OR operator (`|`) between these three expressions, we ensure that both the AND and OR operators within each expression are applied to all four possible combinations of inputs, which corresponds to the entire row.
+
+This Verilog code should accurately implement the function f as described by the provided Karnaugh map.

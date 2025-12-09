@@ -1,0 +1,133 @@
+To implement the specified HDLC framing decoder as a Moore-type finite state machine, we need to manage states that track sequences of consecutive `1`s. We'll define the following states:
+
+- **State S0**: Initial/default state, expecting any bit, and acts like previous input was `0`.
+- **State S1**: After seeing one `1`.
+- **State S2**: After seeing two consecutive `1`s.
+- **State S3**: After seeing three consecutive `1`s.
+- **State S4**: After seeing four consecutive `1`s.
+- **State S5**: After seeing five consecutive `1`s.
+- **State S6**: After seeing six consecutive `1`s, indicating a potential flag or error.
+- **State S7**: Error state for seven or more consecutive `1`s.
+
+The transitions between these states depend on the input bit (`in`). The outputs are triggered based on reaching specific states:
+
+- **disc** is asserted when transitioning from `S5` to `S6`.
+- **flag** is asserted when transitioning from `S6` to `S0`.
+- **err** is asserted when transitioning into or remaining in `S7`.
+
+Below is the Verilog implementation of this finite state machine:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output reg disc,
+  output reg flag,
+  output reg err
+);
+
+  // State encoding
+  typedef enum logic [2:0] {
+    S0 = 3'b000, // Initial/default state
+    S1 = 3'b001, // One consecutive '1'
+    S2 = 3'b010, // Two consecutive '1's
+    S3 = 3'b011, // Three consecutive '1's
+    S4 = 3'b100, // Four consecutive '1's
+    S5 = 3'b101, // Five consecutive '1's
+    S6 = 3'b110, // Six consecutive '1's
+    S7 = 3'b111  // Error state for seven or more consecutive '1's
+  } state_t;
+
+  state_t current_state, next_state;
+
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+      current_state <= S0;
+    else
+      current_state <= next_state;
+  end
+
+  always_comb begin
+    // Default output signals
+    disc = 1'b0;
+    flag = 1'b0;
+    err = 1'b0;
+
+    case (current_state)
+      S0: begin
+        if (in == 1'b1) 
+          next_state = S1; 
+        else 
+          next_state = S0;
+      end
+
+      S1: begin
+        if (in == 1'b1) 
+          next_state = S2; 
+        else 
+          next_state = S0;
+      end
+      
+      S2: begin
+        if (in == 1'b1) 
+          next_state = S3; 
+        else 
+          next_state = S0;
+      end
+
+      S3: begin
+        if (in == 1'b1) 
+          next_state = S4; 
+        else 
+          next_state = S0;
+      end
+
+      S4: begin
+        if (in == 1'b1) 
+          next_state = S5; 
+        else 
+          next_state = S0;
+      end
+
+      S5: begin
+        if (in == 1'b1) 
+          next_state = S6; 
+        else begin
+          // Discard the bit as it is a stuffed zero
+          disc = 1'b1;
+          next_state = S0;
+        end
+      end
+
+      S6: begin
+        if (in == 1'b1) 
+          next_state = S7; 
+        else begin
+          // Detected flag sequence
+          flag = 1'b1;
+          next_state = S0;
+        end
+      end
+      
+      S7: begin
+        err = 1'b1;
+        next_state = S7; // Remain in error state for seven or more consecutive '1's
+      end
+
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Transitions**: The FSM progresses from `S0` to `S6`, following consecutive `1`s. Upon reaching `S5`, the next input dictates whether a bit is discarded (if `0`) or an error occurs if another `1` follows, transitioning into `S7`.
+  
+- **Output Signals**:
+  - **disc**: Asserted in the transition from `S5` to `S0`.
+  - **flag**: Asserted when transitioning from `S6` to `S0`.
+  - **err**: Continuously asserted when in `S7`.
+
+- **Reset Behavior**: The FSM resets to state `S

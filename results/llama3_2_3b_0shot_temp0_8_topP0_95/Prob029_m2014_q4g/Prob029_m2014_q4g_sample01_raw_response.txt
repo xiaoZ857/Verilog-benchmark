@@ -1,0 +1,44 @@
+```verilog
+// Define the module TopModule
+module TopModule (
+  // Inputs
+  input in1, 
+  input in2, 
+  input in3, 
+  // Output
+  output logic out
+);
+
+// Instantiate two XNOR gates
+// Assuming XNOR gate has a single input
+logic xnor_result1;
+logic xnor_result2;
+
+assign xnor_result1 = ~in1 & ~in2;
+assign xnor_result2 = ~in1 | in2;
+
+// Instantiate an XOR gate with 'xnor_result1' and 'in3' as inputs
+assign out = xnor_result1 ^ in3;
+endmodule
+```
+
+However, it's worth noting that in a real-world implementation, you would typically use an XOR gate directly, as `~x | y` is equivalent to `~y & ~x`. Here is how the module could be implemented using an actual XOR gate:
+
+```verilog
+// Define the module TopModule
+module TopModule (
+  // Inputs
+  input in1, 
+  input in2, 
+  input in3, 
+  // Output
+  output logic out
+);
+
+// Instantiate a single XOR gate with all three inputs
+assign out = ~(~in1 & ~in2) | in3;
+
+endmodule
+```
+
+This form is often preferred over the previous one because it directly uses the XOR function `~x | y` instead of trying to simulate it using NOT gates and AND gates.

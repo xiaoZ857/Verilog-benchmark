@@ -1,0 +1,51 @@
+
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+//==============================================================
+//  Top‑level control module
+//
+//  Description:
+//    • All logic is synchronous – updates happen on the
+//      rising edge of *clk*.
+//    • When the CPU overheats the computer must be shut
+//      down immediately.
+//    • The car keeps driving only when it has not yet
+//      arrived *and* the gas tank is not empty.
+//==============================================================
+
+module top_module (
+    input  wire clk,               // positive‑edge clock
+    input  wire cpu_overheated,    // high → shut down immediately
+    input  wire arrived,           // high → destination reached
+    input  wire gas_tank_empty,    // high → no fuel
+    output reg  shut_off_computer, // asserted when CPU overheats
+    output reg  keep_driving       // asserted only if not arrived
+                                        // and the tank is not empty
+);
+
+  // ------------------------------------------------------------------
+  //  Shut‑off logic
+  // ------------------------------------------------------------------
+  always @(posedge clk) begin
+    if (cpu_overheated)
+      shut_off_computer <= 1'b1;   // shut down
+    else
+      shut_off_computer <= 1'b0;   // keep running
+  end
+
+  // ------------------------------------------------------------------
+  //  Driving logic
+  // ------------------------------------------------------------------
+  always @(posedge clk) begin
+    if (!arrived)                         // still on the road
+      keep_driving <= ~gas_tank_empty;    // only if there is fuel
+    else
+      keep_driving <= 1'b0;               // arrived → stop
+  end
+
+endmodule

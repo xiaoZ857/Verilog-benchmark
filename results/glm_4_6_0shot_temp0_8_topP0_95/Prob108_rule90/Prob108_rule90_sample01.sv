@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+always @(posedge clk) begin
+  if (load) begin
+    q <= data;
+  end else begin
+    // Implement Rule 90: next state is XOR of two neighbors
+    // For each cell i, next_q[i] = q[i-1] XOR q[i+1]
+    // Boundaries are 0: q[-1] = 0 and q[512] = 0
+    q[0] <= q[1];  // q[0] = 0 XOR q[1]
+    q[511] <= q[510];  // q[511] = q[510] XOR 0
+    
+    // For cells 1 through 510
+    for (integer i = 1; i < 511; i = i + 1) begin
+      q[i] <= q[i-1] ^ q[i+1];
+    end
+  end
+end
+
+endmodule

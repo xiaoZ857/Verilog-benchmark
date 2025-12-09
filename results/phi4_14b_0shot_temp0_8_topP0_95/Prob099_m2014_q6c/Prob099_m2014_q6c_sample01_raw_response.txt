@@ -1,0 +1,57 @@
+To implement the Verilog module for the given state machine using one-hot encoding, we need to derive the logic equations for `Y2` and `Y4`, which correspond to `y[2]` and `y[4]`. We'll analyze the transitions based on the current states and inputs.
+
+### State Encoding:
+
+- A: 000001
+- B: 000010
+- C: 000100
+- D: 001000
+- E: 010000
+- F: 100000
+
+### Transition Analysis:
+
+1. **Y2 (y[2]):**
+   - From A to B: `A` (000001) ¡ú `B` (000010), Y2 = 1
+   - From C to D: `C` (000100) ¡ú `D` (001000), Y2 = 0
+   - From E to D: `E` (010000) ¡ú `D` (001000), Y2 = 1
+   - From F to A: `F` (100000) ¡ú `A` (000001), Y2 = 0
+
+   **Logic Equation for Y2:**
+   \[
+   Y2 = y_6w + y_5 \overline{w} + y_4w
+   \]
+
+2. **Y4 (y[4]):**
+   - From B to D: `B` (000010) ¡ú `D` (001000), Y4 = 1
+   - From C to D: `C` (000100) ¡ú `D` (001000), Y4 = 1
+   - From E to D: `E` (010000) ¡ú `D` (001000), Y4 = 0
+   - From F to A: `F` (100000) ¡ú `A` (000001), Y4 = 0
+
+   **Logic Equation for Y4:**
+   \[
+   Y4 = y_3w + y_2\overline{w}
+   \]
+
+### Verilog Module:
+
+```verilog
+module TopModule (
+    input [6:1] y,
+    input w,
+    output reg Y2,
+    output reg Y4
+);
+
+always @(*) begin
+    // Logic for Y2
+    Y2 = (y[6] & w) | (y[5] & ~w) | (y[4] & w);
+    
+    // Logic for Y4
+    Y4 = (y[3] & w) | (y[2] & ~w);
+end
+
+endmodule
+```
+
+This Verilog module implements the logic equations derived from the state transitions using one-hot encoding. The always block is sensitive to any change in inputs `y` and `w`, ensuring that `Y2` and `Y4` are updated accordingly based on the current state and input.

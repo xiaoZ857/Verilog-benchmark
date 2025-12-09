@@ -1,0 +1,16 @@
+Problem: Prob128_fsm_ps2
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:36: warning: returning 'bx for out of bounds array access messageBytes[3].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:37: error: done is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:6:      : done is declared here as wire.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:46: warning: ignoring out of bounds l-value array access messageBytes[3].
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:47: error: done is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:6:      : done is declared here as wire.
+2 error(s) during elaboration.

@@ -1,0 +1,22 @@
+Below is a clean, fully‑combinational implementation of the three requested relationships.  
+All outputs are driven with continuous assignments, so the module has no internal state and therefore no clock is required.
+
+```verilog
+// TopModule.v
+// 4‑bit input vector `in[3:0]`
+// 3‑bit output   `out_both[2:0]` – both this bit and the bit to its left are 1
+// 3‑bit output   `out_any[3:1]`  – either this bit or the bit to its right is 1
+// 4‑bit output   `out_different[3:0]` – this bit differs from its left neighbour
+// (the vector wraps around, so the left neighbour of in[3] is in[0])
+
+module TopModule (
+    input  wire [3:0] in,
+    output wire [2:0] out_both,
+    output wire [3:1] out_any,
+    output wire [3:0] out_different
+);
+
+    /* 1) out_both[i] = in[i] & in[i+1]   (i = 2,1,0) */
+    assign out_both[2] = in[2] & in[3];
+    assign out_both[1] = in[1] & in[2];
+    assign out_both[0] = in[0

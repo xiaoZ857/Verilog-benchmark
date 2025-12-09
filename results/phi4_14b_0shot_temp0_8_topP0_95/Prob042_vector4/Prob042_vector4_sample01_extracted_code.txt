@@ -1,0 +1,11 @@
+module TopModule (
+    input [7:0] in,
+    output reg [31:0] out
+);
+
+    always @(*) begin
+        // Replicate the sign bit (in[7]) 24 times and concatenate with the original 8-bit number
+        out = {{24{in[7]}}, in};
+    end
+
+endmodule

@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+always @(posedge clk) begin
+  if (a) begin
+    // Increment the counter when 'a' is high
+    if (q == 3'b111) // Reset the counter when it reaches its maximum value
+      q <= 3'b000;
+    else
+      q <= q + 1'b1;
+  end else begin
+    // Reset the counter when 'a' is low
+    if (q == 3'b000 || q == 3'b111) // Reset twice at t=45ns and t=75ns in simulation waveform
+      q <= 3'b000;
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

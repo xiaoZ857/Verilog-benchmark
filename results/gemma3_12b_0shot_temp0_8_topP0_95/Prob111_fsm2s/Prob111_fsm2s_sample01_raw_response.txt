@@ -1,0 +1,91 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input reset,
+  output out
+);
+
+  // Define the states
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  // Declare the state register
+  reg current_state;
+
+  // State register is updated on the clock edge when reset is not asserted
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= OFF;
+    end else begin
+      case (current_state)
+        OFF: begin
+          if (j) begin
+            current_state <= ON;
+          end else begin
+            current_state <= OFF;
+          end
+        end
+        ON: begin
+          if (k) begin
+            current_state <= OFF;
+          end else begin
+            current_state <= ON;
+          end
+        end
+        default: begin
+          current_state <= OFF;  // Default state for safety
+        end
+      endcase
+    end
+  end
+
+  // Output logic based on the current state
+  always @(current_state) begin
+    case (current_state)
+      OFF: out = 0;
+      ON:  out = 1;
+      default: out = 0; // Default output for safety
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (...)`: Defines the module named `TopModule` with the specified input and output ports.
+
+2. **State Definition:**
+   - `parameter OFF = 2'b00;` and `parameter ON = 2'b01;`:  Define named constants for the two states, `OFF` and `ON`, using two bits. This makes the code more readable and easier to modify.
+
+3. **State Register:**
+   - `reg current_state;`: Declares a register named `current_state` to store the current state of the state machine.
+
+4. **Synchronous Reset:**
+   - `always @(posedge clk) begin ... end`:  This block describes the sequential logic, triggered by the positive edge of the clock (`posedge clk`).
+   - `if (reset) begin current_state <= OFF; end`: This is the synchronous reset. When `reset` is high, the state machine is forced to the `OFF` state on the next clock edge.  The non-blocking assignment (`<=`) is used for sequential logic.
+
+5. **State Transition Logic:**
+   - `case (current_state) ... endcase`:  This `case` statement implements the state transition logic based on the inputs `j` and `k`.
+   - Inside each `case` label (OFF and ON), `if` statements determine the next state based on the inputs.
+   - For example:
+     - `OFF: if (j) begin current_state <= ON; end else begin current_state <= OFF; end`:  If the state is `OFF` and `j` is high, the next state is `ON`; otherwise, it remains in the `OFF` state.
+
+6. **Output Logic:**
+   - `always @(current_state) begin ... end`:  This block describes the combinational logic that generates the output `out` based on the current state.
+   - `case (current_state) ... endcase`:  The `case` statement assigns the output value based on the current state.
+     - `OFF: out = 0;`: If the state is `OFF`, the output is 0.
+     - `ON: out = 1;`: If the state is `ON`, the output is 1.
+     - `default: out = 0;`: This `default` case is included for safety.  It ensures that if the state machine somehow enters an undefined state, the output is set to a safe value (0 in this case).
+
+**Key Concepts Used:**
+
+* **Moore State Machine:** The output depends only on the current state, not the inputs.
+* **Synchronous Logic:** The state updates happen on the clock edge.
+* **Synchronous Reset:**  The reset is also synchronized with the clock.
+* **Non-Blocking Assignments (`<=`):**  Used in sequential logic blocks to avoid race conditions and ensure correct behavior.
+* **Case Statement:**  A convenient way to handle multiple state transitions or output assignments.
+* **Parameters:** Used to define symbolic constants for states, making the code more readable and maintainable.

@@ -1,0 +1,90 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  reg [3:0] count;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 1;
+    end else begin
+      if (count == 10) begin
+        count <= 1;
+      end else begin
+        count <= count + 1;
+      end
+    end
+  end
+
+  assign q = count;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (clk, reset, q)`:** Defines the module named `TopModule` with inputs `clk`, `reset`, and output `q` (a 4-bit register).
+2. **`reg [3:0] count;`:** Declares a 4-bit register named `count`. This register will store the current count value.
+3. **`always @(posedge clk)`:** This block describes sequential logic that is triggered by the positive edge of the clock signal.
+4. **`if (reset)`:**  Checks if the `reset` input is high (active high).
+5. **`count <= 1;`:** If `reset` is high, the counter `count` is reset to 1.  The `<=` operator performs a non-blocking assignment, which is crucial for sequential logic.
+6. **`else`:** If `reset` is low, the counter increments.
+7. **`if (count == 10)`:** Checks if the counter has reached 10.
+8. **`count <= 1;`:** If the counter is at 10, it resets to 1, completing the decade count.
+9. **`else`:** If the counter is not at 10, it increments.
+10. **`count <= count + 1;`:** Increments the counter by 1.
+11. **`assign q = count;`:**  This continuous assignment assigns the value of the `count` register to the output `q`. This ensures that `q` always reflects the current count value.
+
+**How it works:**
+
+* The `always @(posedge clk)` block is the heart of the counter. It's triggered every time the clock signal transitions from low to high.
+* When `reset` is high, the counter is immediately set to 1.
+* When `reset` is low, the counter increments on each clock cycle.  When it reaches 10, it wraps back to 1, creating a decade counter that counts from 1 to 10.
+* The `assign q = count;` statement ensures that the output `q` always reflects the current value of the `count` register.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg reset;
+  wire [3:0] q;
+
+  TopModule uut (
+    .clk(clk),
+    .reset(reset),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    reset = 1;
+    #10 reset = 0;  // Release reset after 10 time units
+
+    #100 $finish; // End simulation after 100 time units
+  end
+
+  always #5 clk = ~clk; // Toggle clock every 5 time units
+
+  initial begin
+    $monitor("Time=%g, reset=%b, q=%d", $time, reset, q);
+  end
+
+endmodule
+```
+
+**To run this code:**
+
+1.  Save the counter module as `TopModule.v`.
+2.  Save the testbench as `TopModule_tb.v`.
+3.  Use a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado) to compile and run the testbench.  For example, using Icarus Verilog:
+    ```bash
+    iverilog -o TopModule_tb TopModule_tb.v TopModule.v
+    vvp TopModule_tb
+    ```
+
+The simulator will output the values of `reset` and `q` at different time steps, allowing you to verify the functionality of the decade counter. You should observe it counting from 1 to 10 repeatedly after the `reset` signal is released.

@@ -1,0 +1,29 @@
+ Here is a Verilog implementation of the rule 90 cellular automaton with 512 cells as per your description. The boundaries are assumed to be zero (off) as you specified. Note that this code uses posedge clock sensitive design.
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+reg [512:0] next_state;
+always @(posedge clk) begin
+    if (load)
+        next_state <= data;
+    else
+        for (int i = 0; i < 512; i++)
+            if ((i > 0) && (i < 511))
+                next_state[i] = next_state[i-1] ^ next_state[i+1];
+
+    q <= next_state;
+end
+
+assign q[-1] = 0;
+assign q[512] = 0;
+
+endmodule
+```
+
+This TopModule will take in a clock signal, load signal, and data input of size 512. It will output the current state of the cellular automaton into the q register. The load input is used to set the initial conditions for the system. The boundaries are handled by assigning values to q[-1] and q[512].

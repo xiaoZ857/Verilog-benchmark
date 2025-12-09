@@ -1,0 +1,29 @@
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+
+  // Calculate the starting index of the selected 4-bit input based on sel.
+  assign out = in[ (sel * 4) : (sel * 4 + 3) ];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out = in[ (sel * 4) : (sel * 4 + 3) ];`**:  This is the core of the multiplexer.  It uses a slice operation on the `in` input vector.
+    * `sel * 4`:  Calculates the starting index of the 4-bit input to select.  Since `sel` ranges from 0 to 7, this will result in indices 0, 4, 8, 12, 16, 20, 24, and 28 respectively.
+    * `sel * 4 + 3`:  Calculates the ending index (exclusive) of the 4-bit input. This ensures we select exactly 4 bits.
+    * `in[ (sel * 4) : (sel * 4 + 3) ]`:  This extracts the 4-bit slice of the `in` input based on the calculated start and end indices. The result is assigned to the `out` output.
+
+**How it works with the description:**
+
+* **`sel = 0`**:  `sel * 4 = 0`.  The slice `in[0:3]` is selected, which corresponds to the first 4 bits of the 1024-bit input.
+* **`sel = 1`**:  `sel * 4 = 4`.  The slice `in[4:7]` is selected, which corresponds to the next 4 bits.
+* **`sel = 2`**:  `sel * 4 = 8`.  The slice `in[8:11]` is selected.
+* **...and so on...**
+* **`sel = 7`**: `sel * 4 = 28`. The slice `in[28:31]` is selected, which corresponds to the last 4 bits.
+
+This implementation directly fulfills the requirement to select 4-bit chunks of the input vector based on the value of the `sel` input, creating the desired 256-to-1 multiplexer.

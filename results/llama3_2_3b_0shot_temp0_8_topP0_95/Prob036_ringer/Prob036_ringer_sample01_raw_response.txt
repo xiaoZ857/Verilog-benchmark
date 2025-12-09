@@ -1,0 +1,42 @@
+Here's a simple Verilog implementation of the circuit described in the problem:
+
+```verilog
+// Define the module that controls the cellphone's ring and vibration motors
+module TopModule(
+    // Inputs
+    input ring,  // Indicates an incoming call
+    input vibrate_mode,  // Indicates if the phone is in vibrate mode
+
+    // Outputs
+    output ringer,  // Signal to turn on the ringer
+    output motor    // Signal to turn on the vibration motor
+) {
+    // Use the positive edge of the clock signal (clk)
+    always @(posedge clk) begin
+        // If an incoming call is detected and the phone is not in vibrate mode:
+        if(ring && !vibrate_mode) begin
+            ringer <= 1;     // Turn on the ringer
+            motor <= 0;      // Turn off the vibration motor
+        end else if (!ring && vibrate_mode) begin
+            ringer <= 0;     // Turn off the ringer
+            motor <= 1;      // Turn on the vibration motor
+        end else if (ring && vibrate_mode) begin
+            ringer <= 0;     // Turn off the ringer
+            motor <= 1;      // Turn on the vibration motor
+        end else if (!ring && !vibrate_mode) begin
+            ringer <= 0;     // Turn off the ringer
+            motor <= 0;      // Turn off the vibration motor
+        end
+    end
+
+    // Default value for outputs
+    assign default: ringer = 1'b0;
+    assign default: motor = 1'b0;
+}
+```
+
+In this module, we're using a combination of conditions to determine which output should be driven. The behavior is as follows:
+
+- When the ring input is high and the vibrate_mode input is low, turn on the ringer and off the motor.
+- When the ring input is low and the vibrate_mode input is high, turn off the ringer and turn on the motor.
+- If both inputs are high or both are low, the behavior is undefined.

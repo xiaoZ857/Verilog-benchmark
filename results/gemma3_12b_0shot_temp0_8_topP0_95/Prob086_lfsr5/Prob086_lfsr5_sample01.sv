@@ -1,0 +1,38 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+
+  // Internal signal to hold the next state
+  reg [4:0] next_q;
+
+  // Define the taps (positions where XOR operation occurs)
+  localparam TAP_POS1 = 5;  // Tap at position 5 (MSB)
+  localparam TAP_POS2 = 3;  // Tap at position 3
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      // Synchronous reset: set all bits to 1
+      q <= 5'b11111;
+    end else begin
+      // Calculate the next state based on the Galois LFSR logic
+      next_q <= q >> 1; // Shift right
+
+      // Apply XOR operations at tap positions
+      if (q[TAP_POS1 - 1] == 1) begin // Tap at position 5
+        next_q[0] <= ~next_q[0]; // XOR with LSB (q[0])
+      end
+      if (q[TAP_POS2 - 1] == 1) begin // Tap at position 3
+        next_q[0] <= ~next_q[0]; // XOR with LSB (q[0])
+      end
+
+      // Update the LFSR output with the next state
+      q <= next_q;
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

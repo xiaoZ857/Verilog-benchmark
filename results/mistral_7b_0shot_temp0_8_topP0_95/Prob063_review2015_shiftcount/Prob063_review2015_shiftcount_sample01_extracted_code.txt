@@ -1,0 +1,23 @@
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+    if (shift_ena || !count_ena) begin
+        q <= {q[3:1], data}; // Shift data in most-significant-bit first when shift_ena is 1
+    end else if (count_ena) begin
+        if(q[0] == 1'b1) // If the MSB is already '1', set it to '0' and carry over a '1' to LSB
+            q[3] <= 1'b0;
+        q[3:1] <= q[2:0]; // Decrement the number in the shift register
+    end
+end
+
+initial begin
+    $dumpfile("top_module.vcd"); // Verilog VCD file for waveform visualization
+    $dumpvars(0,TopModule);      // Dump all variables at time 0
+    finish;                       // End the initial block
+end

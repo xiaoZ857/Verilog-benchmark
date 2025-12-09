@@ -1,0 +1,35 @@
+Here is a straightforward, purely combinational implementation of the described logic.  
+The XNOR of **in1** and **in2** feeds the first input of the XOR, whose second input is **in3**. The XOR’s output is the module’s `out`.
+
+```verilog
+// TopModule.v
+// 2‑input XNOR feeding a 2‑input XOR (second input = in3)
+// Output of the XOR is `out`.
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  logic in1,
+    input  logic in2,
+    input  logic in3,
+    output logic out
+);
+    // Intermediate signal for the XNOR result
+    logic xnor_out;
+
+    // XNOR gate
+    xnor (xnor_out, in1, in2);
+
+    // XOR gate
+    xor  (out, xnor_out, in3);
+
+    // (Optional) you could also write this in one line:
+    // assign out = (in1 xnor in2) ^ in3;
+
+endmodule
+```
+
+### Notes
+- The module is purely combinational – no clock or reset signals are involved.  
+- The `logic` type (IEEE‑1800) is used for both the outputs and the intermediate wire for clarity and modern coding style.  
+- The commented `assign` line shows an equivalent one‑liner if you prefer a behavioral description.

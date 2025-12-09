@@ -1,0 +1,57 @@
+```verilog
+module TopModule (
+  input clk,
+  input w,
+  input R,
+  input E,
+  input L,
+  output reg Q
+);
+
+  // The flip-flop stores the current state of the shift register stage.
+  // It is clocked by the positive edge of the clock signal.
+  always @(posedge clk) begin
+    if (L) begin // Load enable
+      Q <= R;
+    end else if (E) begin // Shift enable
+      Q <= w;
+    end else begin
+      // Maintain the current value.
+      // This is implied by the default state of a reg.
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (...)`: Defines the module named `TopModule` and lists its input and output signals.
+
+2. **Input Signals:**
+   - `clk`: Clock signal (positive edge triggered).
+   - `w`: Input to the first stage of the shift register (shifted-in data).
+   - `R`: Value to load.
+   - `E`: Enable shift (shift in data).
+   - `L`: Load enable (loads the value `R` into the flip-flop).
+
+3. **Output Signal:**
+   - `output reg Q`:  The output of the flip-flop stage. Declared as `reg` because its value is updated within an `always` block.
+
+4. **`always @(posedge clk)` Block:**
+   - `always @(posedge clk)`:  This block is triggered on the positive edge of the clock signal (`clk`). This ensures that the flip-flop updates synchronously.
+   - `if (L)`:  If the `L` (Load) signal is asserted (high), the value of `R` (the value to load) is assigned to `Q`. This loads the value `R` into the flip-flop.
+   - `else if (E)`: If the `L` signal is not asserted, and the `E` (Enable) signal is asserted, the value of `w` (the input data to be shifted in) is assigned to `Q`. This shifts the data `w` into the flip-flop.
+   - `else`: If neither `L` nor `E` are asserted, the flip-flop retains its current value.  The `reg` data type implicitly maintains its value in this case.  This is crucial for the shift register to maintain its state between clock cycles when no loading or shifting is being performed.
+
+**How this implements the shift register stage:**
+
+This Verilog code represents a single stage of an n-bit shift register. The key elements are:
+
+* **Flip-Flop:** The `reg Q` and the `always @(posedge clk)` block implement the behavior of a flip-flop.  It stores the current state and updates it based on the clock signal and control signals.
+* **Multiplexer (Implicit):** The `if-else if-else` structure effectively acts as a multiplexer.  It selects one of three inputs (`R`, `w`, or the current value of `Q`) based on the control signals `L` and `E`.
+* **Load Enable (`L`):**  When `L` is high, the value `R` is loaded into the flip-flop, overriding the shifted-in data and the current value.
+* **Shift Enable (`E`):** When `E` is high, the data `w` is shifted into the flip-flop.
+
+This single-stage module would be instantiated `n` times to create a complete `n`-bit shift register. Each stage's `w` input would be connected to the `Q` output of the previous stage, and the first stage's `w` input would receive the external input data.

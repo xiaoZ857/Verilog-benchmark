@@ -1,0 +1,42 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+  logic q_next;
+
+  always_ff @(posedge clk, posedge ar) begin
+    if (ar) begin
+      q <= 1'b0;
+    end else begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`logic q_next;`**:  Declares a temporary signal `q_next` which is needed for sequential logic.  Although not directly used in this specific implementation, it's a good practice to include it for more complex flip-flops or registers.
+* **`always_ff @(posedge clk, posedge ar)`**: This is the core of the D flip-flop.
+    * `always_ff`:  Specifies that this is a sequential logic block (a flip-flop in this case).  It's the recommended way to write sequential logic in modern Verilog.
+    * `@(posedge clk, posedge ar)`:  This is the sensitivity list.  It tells the simulator that the block should be re-evaluated whenever the positive edge of the clock signal (`clk`) or the positive edge of the asynchronous reset signal (`ar`) occurs.
+* **`if (ar) begin ... end`**: This handles the asynchronous reset.  If `ar` is high (active high reset), the output `q` is forced to 0, regardless of the clock.
+* **`else begin ... end`**: If the reset is not active, the output `q` takes the value of the input `d` on the positive edge of the clock.
+* **`q <= d;`**:  This is the assignment statement that updates the output `q`. The `<=` operator is the non-blocking assignment operator, which is essential for sequential logic.  It ensures that the value of `d` is sampled at the edge of the clock and assigned to `q` *after* the simulation time step.
+
+**How it Works:**
+
+1. **Asynchronous Reset:** When `ar` is high, the output `q` is immediately forced to 0.  This happens *independently* of the clock signal.
+2. **Clocked Operation:** When `ar` is low, the flip-flop waits for the positive edge of the `clk` signal.  On that positive edge, the value of the input `d` is captured and assigned to the output `q`.  This is the "D" in D flip-flop - the output `q` follows the input `d`.
+
+**Key Considerations:**
+
+* **Asynchronous Reset:** The reset signal `ar` is asynchronous, meaning it can affect the output `q` at any time, regardless of the clock.
+* **Non-Blocking Assignment:**  The non-blocking assignment operator (`<=`) is crucial for sequential logic.  Using blocking assignments (`=`) can lead to unpredictable behavior and simulation errors.
+* **Modern Verilog:**  The `always_ff` construct is the recommended way to write sequential logic in modern Verilog.  It clearly indicates that the block is a flip-flop or register.
+* **Active High/Low Reset:** This implementation assumes an *active-high* asynchronous reset. If it were an active-low reset, the `if (ar)` condition would become `if (!ar)`.  The prompt did not specify active-high or active-low, so active-high is the common default assumption.

@@ -1,0 +1,16 @@
+Problem: Prob037_review2015_count1k
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'q' has 834 mismatches. First mismatch occurred at time 55.
+Hint: Total mismatched samples is 834 out of 8027 samples
+
+Simulation finished at 40136 ps
+Mismatches: 834 in 8027 samples

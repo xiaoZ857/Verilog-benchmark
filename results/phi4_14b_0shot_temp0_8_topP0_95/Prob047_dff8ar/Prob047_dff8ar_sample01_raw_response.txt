@@ -1,0 +1,51 @@
+To implement the described Verilog module with 8 D flip-flops having an active high asynchronous reset, you need to ensure that each flip-flop resets to 0 when the `areset` signal is asserted. The design should capture inputs on the positive edge of the clock (`clk`) and immediately reset if needed.
+
+Here's how you can implement it:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] d,
+    input areset,
+    output reg [7:0] q
+);
+
+    // Declare individual registers for each flip-flop
+    reg [7:0] dff;
+
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset to 0
+            dff <= 8'b00000000;
+        end else begin
+            // Capture input on positive edge of clock
+            dff <= d;
+        end
+    end
+
+    // Assign the output from registers to q
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            q <= 8'b00000000;
+        end else begin
+            q <= dff;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+- **Registers Declaration:** The `dff` register is used to store the current state of each flip-flop.
+  
+- **Asynchronous Reset Handling:**
+  - The reset (`areset`) is asynchronous, meaning it can override the clock edge. This is achieved by including `posedge areset` in the sensitivity list and checking for its assertion before capturing new values on the positive edge of `clk`.
+  - If `areset` is high, all flip-flops are set to `0`.
+
+- **Clock Edge Capture:**
+  - On every rising edge of `clk`, if `areset` is not asserted, the input data (`d`) is latched into the flip-flops (`dff`).
+
+- **Output Assignment:**
+  - A separate always block ensures that the output `q` reflects the state stored in `dff`. It's structured similarly to handle asynchronous reset.
+
+This module provides a clear and functional implementation of 8 D flip-flops with an active high asynchronous reset, triggered by the positive edge of the clock.

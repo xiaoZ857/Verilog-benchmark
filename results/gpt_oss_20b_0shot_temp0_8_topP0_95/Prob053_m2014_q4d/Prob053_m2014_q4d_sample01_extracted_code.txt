@@ -1,0 +1,33 @@
+//  TopModule.v
+//  -------------------------------------------
+//  A D‑flip‑flop that takes the result of a two‑input XOR as its data input.
+//  The XOR uses the flip‑flop’s current output together with the external
+//  signal `in`.  The flip‑flop is edge‑triggered on the positive edge of
+//  `clk`.  No reset is provided.
+//
+//  out = (in XOR out)  on every rising edge of clk
+//
+//  The implementation uses a combinational XOR and a standard
+//  positive‑edge‑triggered always_ff block.
+//
+//  Note: `out` is declared as a `logic` type so that the synthesis tool
+//  can infer a register (D‑flip‑flop) automatically.
+//
+//  -------------------------------------------
+
+module TopModule (
+  input  logic clk,   // active‑high clock
+  input  logic in,    // data input to the XOR
+  output logic out    // flip‑flop output (feedback)
+);
+
+  // Combinational XOR: current out is used to generate the next state
+  logic xor_out;
+  assign xor_out = in ^ out;
+
+  // D‑flip‑flop: update out on the rising edge of clk
+  always_ff @(posedge clk) begin
+    out <= xor_out;
+  end
+
+endmodule

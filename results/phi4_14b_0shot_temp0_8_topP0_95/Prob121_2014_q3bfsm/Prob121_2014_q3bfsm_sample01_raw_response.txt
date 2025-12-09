@@ -1,0 +1,82 @@
+To implement the finite-state machine (FSM) as described, we need to create a Verilog module that follows the state transition table and produces the correct output. The FSM has three states represented by `y[2:0]`, which are manipulated based on input `x` and produce an output `z`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input x,
+    output reg z
+);
+
+    // State encoding
+    parameter S000 = 3'b000;
+    parameter S001 = 3'b001;
+    parameter S010 = 3'b010;
+    parameter S011 = 3'b011;
+    parameter S100 = 3'b100;
+
+    // Current state register
+    reg [2:0] y;
+
+    // State transition and output logic
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            y <= S000; // Reset to initial state
+            z <= 0;
+        end else begin
+            case (y)
+                S000: begin
+                    y <= (x == 0) ? S000 : S001;
+                    z <= 0;
+                end
+
+                S001: begin
+                    y <= (x == 0) ? S001 : S100;
+                    z <= 0;
+                end
+
+                S010: begin
+                    y <= (x == 0) ? S010 : S001;
+                    z <= 0;
+                end
+
+                S011: begin
+                    y <= (x == 0) ? S001 : S010;
+                    z <= (x == 1);
+                end
+
+                S100: begin
+                    y <= (x == 0) ? S011 : S100;
+                    z <= (x == 0);
+                end
+
+                default: begin
+                    y <= S000; // Default case to handle unexpected states
+                    z <= 0;
+                end
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding:** We define parameters for each state (`S000`, `S001`, etc.) to improve readability and maintainability.
+  
+- **Registers and Inputs/Outputs:**
+  - `y` is a 3-bit register that holds the current state of the FSM.
+  - `z` is an output that depends on the current state and input.
+
+- **Always Block:** The block triggers on the positive edge of `clk` or when `reset` is high, ensuring synchronous reset behavior.
+  
+- **Reset Logic:** When `reset` is asserted (`posedge reset`), `y` is set to `S000`, and `z` is initialized to 0.
+
+- **State Transition Logic:**
+  - The FSM uses a `case` statement on the current state `y`.
+  - For each state, it determines the next state based on input `x` and assigns the appropriate value to `z`.
+
+This module correctly implements the described finite-state machine with synchronous reset functionality.

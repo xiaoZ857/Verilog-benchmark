@@ -1,0 +1,30 @@
+
+// ------------------------------------------------------------
+//  TopModule
+//  Detect a 0 → 1 transition on each bit of the 8‑bit input `in`.
+//  The corresponding bit of `pedge` is asserted for **one clock
+//  cycle** immediately after the edge occurs.
+// ------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire        clk,   // active‑high clock
+    input  wire [7:0]  in,    // 8‑bit input vector
+    output reg  [7:0]  pedge  // 8‑bit one‑cycle pulse on rising edge
+);
+
+    // Register to hold the previous value of `in`
+    reg [7:0] prev_in;
+
+    // On every rising edge of clk
+    always @(posedge clk) begin
+        // Generate one‑cycle pulse: current 1 & previous 0
+        pedge   <= in & ~prev_in;
+
+        // Update the previous value for the next cycle
+        prev_in <= in;
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

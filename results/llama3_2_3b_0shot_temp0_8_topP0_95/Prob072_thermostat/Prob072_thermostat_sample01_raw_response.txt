@@ -1,0 +1,67 @@
+```verilog
+// Define a module that implements the thermostat control circuit.
+// This module takes in inputs from the user and outputs the state of the heating/cooling system.
+
+module TopModule(
+    // Inputs:
+    input mode,      // Mode: 1 for heating, 0 for cooling
+    input too_cold,  // Too cold signal (1) or 0
+    input too_hot,   // Too hot signal (1) or 0
+    input fan_on     // Requested state of the fan (1) or 0
+    // Outputs:
+    output heater     // State of the heating element (1) or 0
+    output aircon     // State of the air conditioning element (1) or 0
+    output fan        // State of the blower fan (1) or 0
+);
+
+// Instantiate a local instance of the thermostat control logic.
+localinst top_ththerat;
+top_ththerat: TopThermostat(
+    .mode(mode),
+    .too_cold(too_cold),
+    .too_hot(too_hot)
+);
+
+// Assign outputs based on mode and signals.
+assign heater = top_ththerat.heater;
+assign aircon = top_ththerat.aircon;
+assign fan = fan_on || top_ththerat.fan; // fan is always turned on when requested, unless heater or AC are on
+
+endmodule
+```
+
+This code defines a `TopModule` that takes in inputs from the user and outputs the state of the heating/cooling system. A local instance of the thermostat control logic (`TopThermostat`) is instantiated inside this module.
+
+The `assign` statements connect the output signals of the `TopThermostat` module to the corresponding output pins of the `TopModule`. The fan signal is always turned on when requested by the user, unless the heater or air conditioner are on.
+
+Note: This code assumes that you have already defined a module for the `TopThermostat` logic. If not, here is an example implementation:
+
+```verilog
+// Define a local instance of the thermostat control logic.
+module TopThermostat(
+    input mode,
+    input too_cold,
+    input too_hot
+);
+
+// Declare output signals
+output heater = 1'b0;
+output aircon = 1'b0;
+output fan = 1'b0;
+
+// Heating mode: turn on heater when too cold, do not use AC.
+assign heater = (mode == 1) && too_cold;
+assign aircon = (mode == 1) ? 1'b0 : 1'b1;
+assign fan = (heater[0]) || (aircon[0]);
+
+// Cooling mode: turn on AC when too hot, do not use heater.
+assign heater = 1'b0;
+assign aircon = (mode == 0) && too_hot;
+assign fan = (aircon[0]) || (mode != 0);
+
+endmodule
+```
+
+In this example implementation, the `TopThermostat` module contains local instance variables to represent the state of the heating/cooling system. The output signals are connected using `assign` statements based on the mode and input signals.
+
+Note: This is a simplified implementation and may not cover all edge cases or complexities.

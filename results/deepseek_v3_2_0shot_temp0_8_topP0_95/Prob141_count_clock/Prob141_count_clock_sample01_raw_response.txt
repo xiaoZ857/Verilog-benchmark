@@ -1,0 +1,96 @@
+We'll implement a 12-hour clock with BCD digits for hours (01-12), minutes (00-59), and seconds (00-59). The design will use synchronous reset with higher priority than enable.
+
+```verilog
+  // Internal BCD counters for seconds, minutes, and hours
+  reg [3:0] ss_ones, ss_tens;
+  reg [3:0] mm_ones, mm_tens;
+  reg [3:0] hh_ones, hh_tens;
+  
+  // Seconds counter (00-59)
+  always @(posedge clk) begin
+    if (reset) begin
+      ss_ones <= 4'd0;
+      ss_tens <= 4'd0;
+    end
+    else if (ena) begin
+      if (ss_ones == 4'd9) begin
+        ss_ones <= 4'd0;
+        if (ss_tens == 4'd5) begin
+          ss_tens <= 4'd0;
+        end
+        else begin
+          ss_tens <= ss_tens + 4'd1;
+        end
+      end
+      else begin
+        ss_ones <= ss_ones + 4'd1;
+      end
+    end
+  end
+  
+  // Minutes counter (00-59) - increments when seconds reach 59
+  wire min_ena = ena && (ss_tens == 4'd5) && (ss_ones == 4'd9);
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      mm_ones <= 4'd0;
+      mm_tens <= 4'd0;
+    end
+    else if (min_ena) begin
+      if (mm_ones == 4'd9) begin
+        mm_ones <= 4'd0;
+        if (mm_tens == 4'd5) begin
+          mm_tens <= 4'd0;
+        end
+        else begin
+          mm_tens <= mm_tens + 4'd1;
+        end
+      end
+      else begin
+        mm_ones <= mm_ones + 4'd1;
+      end
+    end
+  end
+  
+  // Hours counter (01-12 with AM/PM) - increments when minutes reach 59 and seconds reach 59
+  wire hour_ena = min_ena && (mm_tens == 4'd5) && (mm_ones == 4'd9);
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      hh_ones <= 4'd2;      // 12:00 AM
+      hh_tens <= 4'd1;
+      pm <= 1'b0;
+    end
+    else if (hour_ena) begin
+      // Handle hour increment with BCD rollover from 12 to 01
+      if (hh_ones == 4'd2 && hh_tens == 4'd1) begin
+        // Currently at 12, go to 01
+        hh_ones <= 4'd1;
+        hh_tens <= 4'd0;
+      end
+      else if (hh_ones == 4'd9) begin
+        // Ones digit is 9, increment tens and reset ones
+        hh_ones <= 4'd0;
+        hh_tens <= hh_tens + 4'd1;
+      end
+      else begin
+        // Normal increment
+        hh_ones <= hh_ones + 4'd1;
+      end
+      
+      // Toggle PM when going from 11:59:59 to 12:00:00
+      if (hh_ones == 4'd1 && hh_tens == 4'd1) begin
+        // At 11:59:59, next is 12:00:00 - toggle PM
+        pm <= ~pm;
+      end
+    end
+  end
+  
+  // Combine BCD digits into output registers
+  always @(*) begin
+    ss = {ss_tens, ss_ones};
+    mm = {mm_tens, mm_ones};
+    hh = {hh_tens, hh_ones};
+  end
+endmodule
+```

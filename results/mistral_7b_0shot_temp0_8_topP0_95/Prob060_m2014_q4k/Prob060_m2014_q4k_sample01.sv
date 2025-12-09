@@ -1,0 +1,26 @@
+
+module TopModule (
+  input wire clk,
+  input wire resetn,
+  input wire in,
+  output reg [3:0] out
+);
+
+always @(posedge clk) begin
+  if (!resetn) begin
+    out <= 4'b0001; // Reset all flip-flops to 1 when resetn is high
+  end else begin
+    out[3] <= in; // Shift data into the most significant bit (MSB)
+    out[0:2] <= out[1:3]; // Shift rest of the bits
+  end
+end
+
+initial begin
+  $dumpfile("shift_register.vcd");
+  $dumpvars(0, TopModule);
+  #100; // Simulation waveform dump after 100 time units (for testing purposes)
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

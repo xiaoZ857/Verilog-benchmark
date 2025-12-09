@@ -1,0 +1,10 @@
+
+module TopModule (
+  output wire zero // Declare 'zero' as an output wire
+);
+
+  assign zero = 1'b0; // Always assign logic low (0) to the output
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

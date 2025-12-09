@@ -1,0 +1,46 @@
+To implement a decade counter in Verilog as described, we need to create a module that counts from 0 to 9 using a 4-bit register. The counter should increment with each clock cycle and wrap around back to 0 after reaching 9. Additionally, it needs to have an active-high synchronous reset input that sets the count to 0.
+
+Here's how you can implement the Verilog module:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire reset,
+    output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Synchronous active-high reset sets the counter to 0
+        q <= 4'b0000;
+    end else begin
+        // Increment the counter
+        if (q == 4'b1001) begin
+            // If the current count is 9, wrap around to 0
+            q <= 4'b0000;
+        end else begin
+            // Otherwise, increment the counter
+            q <= q + 1;
+        end
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `clk`: The clock signal which triggers counting.
+  - `reset`: An active-high synchronous reset input. When high, it resets `q` to 0 on the next positive edge of the clock.
+  - `q`: A 4-bit register that holds the current count value (ranging from 0000 to 1001).
+
+- **Behavior:**
+  - The counter uses an always block triggered by a positive edge of either the `clk` or `reset`.
+  - If `reset` is high, regardless of `q`'s current state, `q` is set to `4'b0000`.
+  - If `reset` is low and it's a rising edge of the clock (`posedge clk`):
+    - The counter checks if `q` equals `4'b1001` (decimal 9). 
+      - If true, it resets `q` to `4'b0000`, thus wrapping around.
+      - Otherwise, it increments `q` by 1.
+
+This module effectively implements a decade counter that counts from 0 through 9 and wraps back to 0 upon reaching 10, all while supporting an active-high synchronous reset.

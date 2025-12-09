@@ -1,0 +1,19 @@
+
+module TopModule (
+    input wire clk,
+    input wire [7:0] d,
+    output reg [7:0] q
+);
+
+    // Declare internal registers for each D flip-flop
+    reg [7:0] ff; // This will hold the current state of all 8 flip-flops
+
+    always @(posedge clk) begin
+        // On positive edge of clock, update the flip-flops with input data
+        ff <= d;
+        q <= ff;  // Assign the internal register to output
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

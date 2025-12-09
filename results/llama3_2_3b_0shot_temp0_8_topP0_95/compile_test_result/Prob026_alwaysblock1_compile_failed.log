@@ -1,0 +1,22 @@
+Problem: Prob026_alwaysblock1
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 10):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:9: error: port a already has a port declaration.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:3: error: Port ``a'' has already been declared a port.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:9: error: port b already has a port declaration.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:4: error: Port ``b'' has already been declared a port.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:12: error: port out_assign already has a port declaration.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:5: error: Port ``out_assign'' has already been declared a port.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:13: out_alwaysblock definition conflicts with definition at results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:6.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:40: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:46: error: invalid module item.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:47: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:61: error: invalid module item.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob026_alwaysblock1/Prob026_alwaysblock1_sample01.sv:66: syntax error
+I give up.

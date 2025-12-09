@@ -1,0 +1,12 @@
+To create a Verilog module with no inputs and an output that always drives 0, we can use a continuous assignment to set the output to 0.
+
+```verilog
+module TopModule (
+  output out
+);
+  // Assign 0 to the output continuously
+  assign out = 0;
+endmodule
+```
+
+This code defines a module with no inputs and one output. The `assign` statement ensures that the output `out` is always driven to 0, meeting the requirement.

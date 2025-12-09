@@ -1,0 +1,15 @@
+
+// Implement the circuit described by the Karnaugh map below.
+//              ab
+//   cd   00  01  11  10
+//   00 | 1 | 1 | 0 | 1 |
+//   01 | 1 | 0 | 0 | 1 |
+//   11 | 0 | 1 | 1 | 1 |
+//   10 | 1 | 1 | 0 | 0 |
+
+// From the Karnaugh map, we can derive the simplified Boolean expression:
+// out = ~a & ~b & ~d + ~a & ~c & ~d + ~b & ~c & ~d + ~b & c & d
+
+  assign out = (~a & ~b & ~d) | (~a & ~c & ~d) | (~b & ~c & ~d) | (~b & c & d);
+
+endmodule

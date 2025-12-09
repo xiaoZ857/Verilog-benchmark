@@ -1,0 +1,53 @@
+Here is the implementation of a **half adder** in Verilog, as requested. A half adder is a fundamental combinational logic circuit that adds two single-bit binary numbers and produces two outputs: the **sum** and the **carry-out**. The logic is defined as:
+
+- **Sum** = `a XOR b`  
+- **Carry-out** = `a AND b`
+
+---
+
+### ✅ **Verilog Module: `TopModule`**
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+
+  // Assign sum as XOR of a and b
+  assign sum = a ^ b;
+
+  // Assign carry-out as AND of a and b
+  assign cout = a & b;
+
+endmodule
+```
+
+---
+
+### 🔍 **Explanation**
+
+- **Inputs**:  
+  - `a` and `b` are single-bit inputs representing the two binary digits to be added.
+
+- **Outputs**:  
+  - `sum`: This is the result of the XOR operation between `a` and `b`, which gives the binary sum without considering any carry.
+  - `cout`: This is the result of the AND operation between `a` and `b`, which gives the carry-out when both bits are 1.
+
+- **Operators**:  
+  - `^` is the XOR operator.  
+  - `&` is the AND operator.
+
+---
+
+### 🧪 **Truth Table for Reference**
+
+| a | b | sum | cout |
+|---|---|-----|------|
+| 0 | 0 |  0  |  0   |
+| 0 | 1 |  1  |  0   |
+| 1 | 0 |  1  |  0   |
+| 1 | 1 |  0  |  1   |
+
+This implementation matches the expected behavior of a half adder and is suitable for use in combinational logic circuits.

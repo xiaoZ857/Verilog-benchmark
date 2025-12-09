@@ -1,0 +1,27 @@
+Here¡¯s a minimal Verilog implementation that always drives the output `zero` low.  
+Since the specification says the circuit should **always** output LOW, no clock or logic is required¡ªjust a continuous assignment.
+
+```verilog
+// TopModule.v
+// Simple circuit that drives the output `zero` permanently LOW.
+// No clock or state needed.
+
+`timescale 1ns/1ps
+
+module TopModule (
+    output zero                // output port
+);
+
+    // Continuous assignment: zero is always 0
+    assign zero = 1'b0;
+
+endmodule
+```
+
+### Explanation
+
+- **`output zero`** ¨C Declares `zero` as an output port (implicitly a `wire`).
+- **`assign zero = 1'b0;`** ¨C A continuous assignment that ties the output permanently to logic `0`.  
+  This is the simplest way to achieve a constant low output without any clock or state logic.
+
+You can compile this file directly or instantiate it in a testbench to verify that `zero` is always low.

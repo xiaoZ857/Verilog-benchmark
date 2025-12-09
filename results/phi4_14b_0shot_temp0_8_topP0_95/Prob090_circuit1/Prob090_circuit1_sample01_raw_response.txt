@@ -1,0 +1,45 @@
+To implement the Verilog module for this combinational circuit, we need to analyze the provided simulation waveforms to determine the logic relationship between inputs `a`, `b` and output `q`.
+
+### Observations from Simulation Waveform
+
+1. **When both a and b are 0:**
+   - For time intervals [0ns-20ns], [55ns-60ns], and [65ns-70ns], q is 0.
+
+2. **When a is 0 and b is 1:**
+   - For time intervals [25ns-30ns] and [65ns-70ns], q is 0.
+
+3. **When a is 1 and b is 0:**
+   - For time intervals [35ns-40ns] and [75ns-80ns], q is 0.
+
+4. **When both a and b are 1:**
+   - For time intervals [45ns-50ns] and [85ns-90ns], q is 1.
+
+From these observations, we can deduce the following logic for `q`:
+- `q` is 1 only when both `a` and `b` are 1.
+- In all other cases (`a` or `b` is 0), `q` is 0.
+
+This behavior corresponds to a logical AND operation between inputs `a` and `b`. Therefore, the output `q` should be the result of an AND gate applied to `a` and `b`.
+
+### Verilog Implementation
+
+Here's how you can implement this logic in a Verilog module:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output q
+);
+
+  // Implementing the AND operation between inputs 'a' and 'b'
+  assign q = a & b;
+
+endmodule
+```
+
+### Explanation
+
+- The `assign` statement is used for continuous assignment in combinational logic, which makes this an appropriate choice given that `q` should immediately reflect changes in `a` or `b`.
+- The expression `a & b` represents the bitwise AND operation. Since `a` and `b` are single-bit inputs, it effectively performs a logical AND.
+
+This module will produce the correct output for the described waveform scenarios based on the determined logic relationship.

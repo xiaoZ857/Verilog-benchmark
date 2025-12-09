@@ -1,0 +1,35 @@
+// Define the module
+module TopModule(
+    // Inputs
+    input clk,
+    input reset,
+
+    // Outputs
+    output reg [3:0] q
+);
+
+// Instantiate a counter for each bit position
+reg [1:0] carry;
+reg [3:0] q;
+
+// Counter implementation based on 4-bit D-flip-flop counters
+assign q = {carry, (carry << 1), (carry << 2)};
+
+// Define the internal counter logic for each bit position
+always @(posedge clk or reset)
+begin
+    if (reset == 1'b1) begin
+        carry <= 2'b00;
+    } else begin
+        case(carry)
+            2'b00: carry <= 2'b01;
+            2'b01: carry <= 2'b10;
+            2'b10: carry <= 2'b11;
+            2'b11: carry <= 2'b00; // Carry will be set to 0 at count 16
+        endcase
+    end
+end
+
+// The counter is complete after 16 increments, regardless of the clock frequency
+
+endmodule

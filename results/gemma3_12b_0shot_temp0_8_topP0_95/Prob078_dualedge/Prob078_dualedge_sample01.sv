@@ -1,0 +1,24 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  reg q_n; // Internal signal for the next state
+
+  always @(posedge clk) begin
+    q_n <= d;
+  end
+
+  always @(negedge clk) begin
+    q_n <= q_n; // Hold the value
+  end
+
+  always @(posedge clk) begin
+    q <= q_n;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

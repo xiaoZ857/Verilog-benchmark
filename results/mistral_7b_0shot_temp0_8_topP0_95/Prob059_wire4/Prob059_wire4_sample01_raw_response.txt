@@ -1,0 +1,22 @@
+ Here's the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+assign w = a; // Assign 'a' to 'w'
+assign x = b; // Assign 'b' to 'x'
+assign y = b; // Assign 'b' to 'y'
+assign z = c; // Assign 'c' to 'z'
+
+endmodule
+```
+
+This code defines a module named `TopModule` with 3 inputs (`a`, `b`, and `c`) and 4 outputs (`w`, `x`, `y`, and `z`). The `assign` keyword is used to connect each input signal directly to the corresponding output, creating wires that simply pass the values through.

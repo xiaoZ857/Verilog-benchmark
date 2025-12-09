@@ -1,0 +1,46 @@
+To implement a 6-to-1 multiplexer in Verilog based on the given description, you need to create a module that selects one of six 4-bit wide inputs (`data0` through `data5`) and outputs it. The selection is determined by a 3-bit signal `sel`. If `sel` is between 0 and 5 (inclusive), the corresponding input is selected; otherwise, the output should be 0.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [2:0] sel,
+    input [3:0] data0,
+    input [3:0] data1,
+    input [3:0] data2,
+    input [3:0] data3,
+    input [3:0] data4,
+    input [3:0] data5,
+    output reg [3:0] out
+);
+
+always @(*) begin
+    case (sel)
+        3'b000: out = data0;
+        3'b001: out = data1;
+        3'b010: out = data2;
+        3'b011: out = data3;
+        3'b100: out = data4;
+        3'b101: out = data5;
+        default: out = 4'b0000; // Default case for sel values outside 0-5
+    endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Declaration**: 
+   - The module is named `TopModule`.
+   - It has inputs `sel`, `data0` to `data5`, and an output `out`.
+
+2. **Always Block**:
+   - The `always @(*)` block is used for combinational logic, which means the output will be updated whenever any of the inputs change.
+   
+3. **Case Statement**:
+   - A `case` statement is used to select one of the data inputs based on the value of `sel`.
+   - Each possible value of `sel` (from 0 to 5) corresponds to a specific input (`data0` to `data5`).
+   - The `default` case handles any values of `sel` outside the range 0-5 by setting `out` to 4'b0000.
+
+This implementation ensures that the output is correctly set based on the value of `sel`, and defaults to zero if `sel` is not in the valid range.

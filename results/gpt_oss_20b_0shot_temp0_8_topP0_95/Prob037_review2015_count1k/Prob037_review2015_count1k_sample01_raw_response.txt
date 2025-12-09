@@ -1,0 +1,41 @@
+Here’s a minimal, fully‑synthesizable Verilog implementation that satisfies all the requirements:
+
+```verilog
+// TopModule.v
+// ---------------
+// 10‑bit counter that counts 0 … 999 (period = 1000 clock cycles)
+// Synchronous active‑high reset that forces the counter back to 0
+// All signals are positive‑edge triggered.
+
+module TopModule (
+    input  wire        clk,   // Clock input
+    input  wire        reset, // Synchronous active‑high reset
+    output reg  [9:0]  q      // 10‑bit counter output
+);
+
+    // Positive‑edge triggered counter
+    always @(posedge clk) begin
+        if (reset)                // Synchronous reset
+            q <= 10'd0;
+        else if (q == 10'd999)    // Wrap‑around at 999
+            q <= 10'd0;
+        else                      // Normal counting
+            q <= q + 10'd1;
+    end
+
+endmodule
+```
+
+**Explanation**
+
+1. **Clock domain** – The `always @(posedge clk)` block guarantees that all logic is triggered on the rising edge of `clk`.
+
+2. **Synchronous reset** – The `if (reset)` condition executes *after* the clock edge, so the reset is synchronous. When `reset` is high, the counter `q` is forced to `0`.
+
+3. **Counting logic** –  
+   * If `q` has reached `999`, the next value is reset to `0`.  
+   * Otherwise, `q` simply increments by one.
+
+4. **Output width** – `q` is declared as a 10‑bit register (`[9:0]`), which can represent values up to 1023, comfortably covering the 0‑999 range.
+
+5. **No other logic** – The module contains only the required counter logic; no extra signals or parameters are added, keeping the design simple and clean.

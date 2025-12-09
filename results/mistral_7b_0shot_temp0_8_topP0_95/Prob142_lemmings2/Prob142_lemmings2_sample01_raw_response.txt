@@ -1,0 +1,75 @@
+ Here is a possible implementation of the Verilog module based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah
+);
+
+reg state; // finite state machine state (0 for walking left and 1 for walking right)
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state <= 0;
+  end else if (ground == 0) begin
+    aaah <= 1'b1; // Lemming says "aaah!" when ground disappears
+    if (state == 0) begin // If Lemming was walking left, it will fall
+      walk_left <= 0;
+      walk_right <= 0;
+    end else begin // If Lemming was walking right, it will still walk right but say "aaah!"
+      walk_left <= 0;
+      walk_right <= 1;
+    end
+  end else begin
+    if (state == bump_left) begin // If Lemming is bumped on the left
+      walk_left <= 0;
+      walk_right <= 1;
+    end else if (state == bump_right) begin // If Lemming is bumped on the right
+      walk_left <= 1;
+      walk_right <= 0;
+    end else begin // If Lemming is not yet bumping or falling, it will keep walking in the same direction
+      if (bump_left && state != bump_left) begin
+        walk_left <= 0;
+        walk_right <= 1;
+        state = bump_left;
+      end else if (bump_right && state != bump_right) begin
+        walk_left <= 1;
+        walk_right <= 0;
+        state = bump_right;
+      end else begin
+        walk_left <= state; // walk left or right depending on the current state of the FSM
+        walk_right <= !state;
+      end
+    end
+  end
+end
+
+always @(posedge clk) begin
+  if (ground == 1 && aaah == 1'b0) begin // If ground reappears and Lemming is not saying "aaah!", it will resume walking in the same direction
+    walk_left <= state;
+    walk_right <= !state;
+  end
+end
+
+// Default initial conditions
+always @* begin
+  if (areset) begin
+    state <= 0;
+  end else begin
+    walk_left <= 0;
+    walk_right <= 1; // By default, the Lemming is walking right
+    aaah <= 1'b0;
+  end
+end
+```
+
+This module implements a Moore state machine with two states (walking left and walking right) based on your description. The `state` variable stores the current state of the FSM, and the `areset`, `bump_left`, `bump_right`, `ground`, `walk_left`, `walk_right`, and `aaah` signals are all input/output as specified in your question.
+
+The module uses two always blocks to handle transitions between states: one block for handling state transitions based on external events (such as bumping or ground changes) and another block for handling the resumption of walking when the ground reappears after a fall. The `always @(posedge clk)` block is used to ensure that the FSM only updates its state at positive clock edges, following your assumption that signals are positive-edge triggered unless otherwise stated.
+
+The default initial conditions are set in an always block with no sensitivity list (`@*`) to ensure that the FSM is initialized properly whenever any input signal changes. In this case, by default, the Lemming will be walking right when reset.

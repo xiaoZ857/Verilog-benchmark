@@ -1,0 +1,100 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+We need to track two things: whether the Lemming is currently walking left or right, and whether it is currently falling.  
+We can represent this with two state bits:  
+
+- `walk_dir`: 1 for left, 0 for right (or vice versa — let's define: `walk_dir = 1` means walking left, `walk_dir = 0` means walking right).  
+- `falling`: 1 if currently falling (ground=0), 0 if on ground.  
+
+The outputs:  
+- `walk_left = ~falling & walk_dir`  
+- `walk_right = ~falling & ~walk_dir`  
+- `aaah = falling`  
+
+State transitions:  
+1. If `areset` is high, set `walk_dir = 1` (walk left) and `falling = 0`.  
+2. Else on posedge clk:  
+   - If `ground == 0`:  
+     - `falling` becomes 1.  
+     - `walk_dir` stays the same (direction preserved while falling).  
+   - If `ground == 1`:  
+     - If `falling == 1`: we just landed, so `falling` becomes 0, `walk_dir` unchanged.  
+     - If `falling == 0`: we are walking, so check bump inputs to possibly change direction:  
+       - If `bump_left` and `bump_right` both 1, or just `bump_left` 1: switch to walk right (`walk_dir = 0`).  
+       - If `bump_right` 1 (and `bump_left` 0): switch to walk left (`walk_dir = 1`).  
+       - Else keep `walk_dir`.  
+
+But careful: The problem says: "If it's bumped on both sides at the same time, it will still switch directions."  
+That means: if both bumps are 1, it toggles direction.  
+Also: "if bumped on left, walk right; if bumped on right, walk left."  
+So if both, it still toggles (so from left → right, from right → left).  
+
+So walking logic when on ground and not falling:  
+- If `bump_left ^ bump_right` (exactly one side bumped):  
+  - If `bump_left`, next_dir = right (0).  
+  - If `bump_right`, next_dir = left (1).  
+- If both bumped (`bump_left & bump_right`): toggle direction.  
+- If none bumped: keep direction.  
+
+But simpler:  
+Let’s encode walking direction state as:  
+`state[1:0]`:  
+00 = WALK_RIGHT,  
+01 = WALK_LEFT,  
+10 = FALL_RIGHT,  
+11 = FALL_LEFT.  
+
+Then:  
+- `walk_left = (state == 2'b01)`  
+- `walk_right = (state == 2'b00)`  
+- `aaah = state[1]`  
+
+Transitions:  
+If `areset`: state = 2'b01 (walk left).  
+Else:  
+Case (state):  
+  2'b00 (walk right):  
+    if (!ground) next_state = 2'b10 (fall right)  
+    else if (bump_right) next_state = 2'b01 (walk left)  
+    else next_state = 2'b00 (walk right)  
+  2'b01 (walk left):  
+    if (!ground) next_state = 2'b11 (fall left)  
+    else if (bump_left) next_state = 2'b00 (walk right)  
+    else next_state = 2'b01 (walk left)  
+  2'b10 (fall right):  
+    if (ground) next_state = 2'b00 (walk right)  
+    else next_state = 2'b10 (fall right)  
+  2'b11 (fall left):  
+    if (ground) next_state = 2'b01 (walk left)  
+    else next_state = 2'b11 (fall left)  
+
+This matches the spec: bumps ignored while falling, direction preserved after fall.  
+
+Let's write the Verilog:  
+
+  reg [1:0] state, next_state;
+  
+  // State encoding
+  parameter WALK_RIGHT = 2'b00,
+            WALK_LEFT  = 2'b01,
+            FALL_RIGHT = 2'b10,
+            FALL_LEFT  = 2'b11;
+  
+  // State transition
+  always @(*) begin
+    case (state)
+      WALK_RIGHT: next_state = (!ground) ? FALL_RIGHT :
+                               (bump_right) ? WALK_LEFT : WALK_RIGHT;
+      WALK_LEFT:  next_state
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

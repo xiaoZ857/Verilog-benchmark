@@ -1,0 +1,41 @@
+Here's how you can implement a NOR gate in Verilog:
+
+```verilog
+// Define the module with inputs, outputs and signal assignment
+module NorGate(
+  // Clock signal (not used explicitly but needed for combinational logic)
+  input clk,
+
+  // Input signals
+  input a,
+  input b,
+
+  // Output signal
+  output out
+);
+
+always @(*clk) // Always block to include the clock in the sensitivity list
+begin
+  // Use the NOR operator to compute the output based on inputs 'a' and 'b'
+  out = ~ (a & b);
+end
+```
+
+In this implementation:
+
+- `clk` is a positive edge-triggered signal, which is required for combinational logic.
+- The output of the NOR gate is calculated using the `~` operator to negate the result of `a & b`, which represents the AND operation between signals 'a' and 'b'.
+- The `always @(*clk)` block includes the clock in its sensitivity list. This ensures that the logic inside this block will be executed on each rising edge of the positive clock signal.
+ 
+
+The NOR gate can also be represented by a single line of code:
+
+```verilog
+module NorGate(
+  input clk,
+  input a, b;
+  output out
+);
+assign out = ~(a & b);
+```
+This version is more concise and achieves the same result as the previous implementation.

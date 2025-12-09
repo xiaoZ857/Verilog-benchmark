@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [99:0] a,
+  input [99:0] b,
+  input sel,
+  output [99:0] out
+);
+
+// Assignation of 'a' and 'b' values to 'out'
+assign out[99] = sel ? a[99] : b[99];
+assign out[98] = sel ? a[98] : b[98];
+assign out[97:0] = sel ? a[97:0] : b[97:0];
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

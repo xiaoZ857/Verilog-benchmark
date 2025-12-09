@@ -1,0 +1,16 @@
+Problem: Prob096_review2015_fsmseq
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'start_shifting' has 81 mismatches. First mismatch occurred at time 50.
+Hint: Total mismatched samples is 81 out of 643 samples
+
+Simulation finished at 3216 ps
+Mismatches: 81 in 643 samples

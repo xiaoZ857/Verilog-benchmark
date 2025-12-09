@@ -1,0 +1,84 @@
+To implement the described Moore state machine in Verilog, we'll follow these steps:
+
+1. Define an enumerated type for the states (A, B, C, D).
+2. Create registers to hold the current and next state.
+3. Implement logic to determine the next state based on the current state and input.
+4. Implement logic to set the output based on the current state.
+5. Add a synchronous reset that resets the FSM to state A.
+
+Here's the Verilog code for the Moore state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset,
+  output reg out
+);
+
+  // Define states as an enumerated type
+  typedef enum logic [1:0] {
+    A = 2'b00,
+    B = 2'b01,
+    C = 2'b10,
+    D = 2'b11
+  } state_t;
+
+  // Registers for current and next state
+  state_t current_state, next_state;
+
+  // Always block to handle state transitions on positive clock edge or reset
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= A; // Reset to state A
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Always block to determine the next state based on current state and input
+  always_comb begin
+    case (current_state)
+      A: begin
+        if (!in) next_state = A;
+        else     next_state = B;
+      end
+      B: begin
+        next_state = (in == 0) ? B : C; // Next state in=0 is B, in=1 is C
+      end
+      C: begin
+        if (!in) next_state = A;
+        else     next_state = D;
+      end
+      D: begin
+        next_state = (in == 0) ? C : B; // Next state in=0 is C, in=1 is B
+      end
+    endcase
+  end
+
+  // Always block to determine the output based on current state
+  always_comb begin
+    case (current_state)
+      A: out = 0;
+      B: out = 0;
+      C: out = 0;
+      D: out = 1;
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding:** We use a 2-bit enumerated type `state_t` to represent the four states (A, B, C, D).
+  
+- **Current and Next State Registers:** Two registers (`current_state` and `next_state`) are used to manage state transitions.
+
+- **Synchronous Reset:** The `always_ff` block updates `current_state` on every positive clock edge. If `areset` is high, it resets the machine to state A.
+
+- **Next State Logic:** The `always_comb` block determines `next_state` based on the current state and input `in`.
+
+- **Output Logic:** Another `always_comb` block sets the output `out` based solely on the `current_state`, as this is a Moore machine where outputs depend only on states.
+
+This code correctly implements the specified behavior of the Moore state machine with an asynchronous reset.

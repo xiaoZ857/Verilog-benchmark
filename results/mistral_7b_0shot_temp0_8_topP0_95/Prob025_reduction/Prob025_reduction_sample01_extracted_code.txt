@@ -1,0 +1,21 @@
+module TopModule (
+  input [7:0] in,
+  output reg parity
+);
+
+always @(posedge clk) begin
+  parity <= xor(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7]);
+end
+
+// Optional: if you need to reset the parity bit to 0 at specific times
+always @* begin
+  if (reset) parity <= 0;
+end
+
+// Input and output port declarations
+input clk, reset;
+output reg [1:0] io_in, io_parity; // For testbench connectivity
+assign io_in = {in[7], in[6], in[5], in[4], in[3], in[2], in[1], in[0]};
+assign io_parity = parity;
+
+endmodule

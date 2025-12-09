@@ -1,0 +1,38 @@
+Here is the Verilog code for the given description:
+
+```verilog
+// Using assign statements
+module TopModule(
+  input a, 
+  input b, 
+  input sel_b1, 
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+assign out_assign = (sel_b1 && sel_b2) ? b : a;
+assign out_always = (sel_b1 && sel_b2) ? b : a;
+
+// Using procedural if statement
+module TopModule(
+  input a, 
+  input b, 
+  input sel_b1, 
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+reg out_assign_reg;
+reg out_always_reg;
+
+always @(posedge clk) begin
+  out_assign_reg = (sel_b1 && sel_b2) ? b : a;
+end
+
+assign out_assign = out_assign_reg;
+assign out_always = out_always_reg;
+```
+
+In the first code snippet, we use assign statements to directly assign values to `out_assign` and `out_always`. In the second code snippet, we are assuming that you have a clock signal (`clk`) available for your module. We then create two registers (`out_assign_reg`, `out_always_reg`) using the always block of Verilog, which is triggered on every positive edge of the clock signal. Inside this block, we set the values of these two registers based on our condition. We then assign these register values to `out_assign` and `out_always`.

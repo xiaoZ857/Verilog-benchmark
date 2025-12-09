@@ -1,0 +1,61 @@
+To implement the described finite state machine (FSM) in Verilog, we need to define the states and their transitions based on the input `w`. The FSM will be synchronous with a positive clock edge trigger and an active-high synchronous reset. We'll use separate `always` blocks for the combinational logic that determines the next state (`next_state`) and for updating the current state (`current_state`) on the clock's rising edge.
+
+Here is the Verilog code implementing the described FSM:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+
+  // State encoding (arbitrary assignment)
+  parameter A = 3'b000, B = 3'b001, C = 3'b010, D = 3'b011, E = 3'b100, F = 3'b101;
+  
+  reg [2:0] current_state, next_state;
+
+  // Output logic for z
+  assign z = (current_state == E) | (current_state == F);
+
+  // Combinational logic to determine the next state
+  always @(*) begin
+    case (current_state)
+      A: next_state = (w) ? B : A;
+      B: next_state = (w) ? C : D;
+      C: next_state = (w) ? E : D;
+      D: next_state = (w) ? F : A;
+      E: next_state = (w) ? E : D;
+      F: next_state = (w) ? C : D;
+      default: next_state = A; // Default case to handle unexpected states
+    endcase
+  end
+
+  // Sequential logic to update the current state on clock edge
+  always @(posedge clk or posedge reset) begin
+    if (reset)
+      current_state <= A; // Reset to state A
+    else
+      current_state <= next_state;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a 3-bit binary encoding for the states, which allows us to represent up to 8 states. The encoding is arbitrary:
+   - `A = 3'b000`
+   - `B = 3'b001`
+   - `C = 3'b010`
+   - `D = 3'b011`
+   - `E = 3'b100`
+   - `F = 3'b101`
+
+2. **Output Logic (`z`)**: The output `z` is high when the current state is either `E` or `F`. This is implemented using a simple combinational logic assignment.
+
+3. **Next State Logic**: In the first `always` block, we use a case statement to determine the next state based on the current state and input `w`.
+
+4. **Current State Update**: The second `always` block handles the synchronous update of the current state with respect to the clock's positive edge and the reset signal. If `reset` is high, the state transitions back to `A`. Otherwise, it takes the value from `next_state`.
+
+This implementation ensures that the FSM behaves as described, transitioning between states based on the input `w` and resetting synchronously to state `A` when required.

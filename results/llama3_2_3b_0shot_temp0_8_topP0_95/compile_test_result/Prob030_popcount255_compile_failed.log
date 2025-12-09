@@ -1,0 +1,13 @@
+Problem: Prob030_popcount255
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv:15: warning: Static variable initialization requires explicit lifetime in this context.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob030_popcount255_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob030_popcount255_ref.sv:15: syntax error
+I give up.

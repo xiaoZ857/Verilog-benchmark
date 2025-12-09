@@ -1,0 +1,57 @@
+
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input wire bump_left,
+  input wire bump_right,
+  input wire ground,
+  input wire dig,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah,
+  output reg digging
+);
+
+// States: WALKING_LEFT, WALKING_RIGHT, FALLING, DIGGING
+enum {WALKING_LEFT, WALKING_RIGHT, FALLING, DIGGING} state;
+
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state <= WALKING_LEFT;
+  end else begin
+    case(state)
+      WALKING_LEFT: begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+        if (bump_left) state <= WALKING_RIGHT;
+      end
+      WALKING_RIGHT: begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b1;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+        if (bump_right) state <= WALKING_LEFT;
+      end
+      FALLING: begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b0;
+        aaah <= 1'b1;
+        digging <= 1'b0;
+        if (ground) state <= WALKING_LEFT; // walk left when ground appears
+      end
+      DIGGING: begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        if (ground && !aaah) digging <= dig; // start digging only when ground is present and not falling
+        else digging <= 1'b0;
+        if (ground == 0) state <= FALLING; // fall when no more ground
+      end
+    endcase
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

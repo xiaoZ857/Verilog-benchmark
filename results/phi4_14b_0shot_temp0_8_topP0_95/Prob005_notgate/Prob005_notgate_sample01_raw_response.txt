@@ -1,0 +1,31 @@
+To implement a NOT gate using a Verilog module, you can create a simple module named `TopModule` that takes one input signal and outputs the logical negation of that signal. A NOT gate is a basic digital logic gate that inverts its input: if the input is `1`, it outputs `0`, and vice versa.
+
+Here's how you can write the Verilog code for such a module:
+
+```verilog
+module TopModule (
+  input wire in,        // Declare the input signal
+  output reg out        // Declare the output signal as 'reg' since we will assign it within an always block
+);
+
+// Use an always_comb block to continuously evaluate the logic
+always @(*) begin
+  out = ~in;            // Assign the negation of `in` to `out`
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module is named `TopModule`, and it has one input (`in`) and one output (`out`).
+
+- **Input and Output Types**:
+  - The input signal `in` is declared as a `wire`. This is because inputs are typically declared as `wire` since they represent connections to other modules or external sources.
+  - The output signal `out` is declared as a `reg` because it needs to be assigned within an always block.
+
+- **always_comb Block**: 
+  - `always @(*)`: This construct means that the logic inside this block should be evaluated whenever any of its sensitivity list signals change. In this case, since there are no explicit signal dependencies listed in the parentheses (`*` is a wildcard for all), it effectively means "recalculate whenever an input changes."
+  - Inside the always block, `out = ~in;` performs the NOT operation on the input `in`. The tilde (`~`) operator is used to perform bitwise negation.
+
+This module will correctly implement a NOT gate in Verilog.

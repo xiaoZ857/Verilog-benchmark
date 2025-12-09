@@ -1,0 +1,58 @@
+To implement the Verilog module for the given Mealy machine using one-hot encoding, we need to define states and transitions according to the diagram. Here¡¯s how you can implement this:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire x,
+    output reg z
+);
+
+    // State encoding using one-hot representation
+    parameter A = 1'b0;
+    parameter B = 1'b1;
+
+    reg [1:0] state, next_state;
+
+    // Asynchronous reset and synchronous state update
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= A; // Reset to state A
+        else
+            state <= next_state;
+    end
+
+    // Next state logic using one-hot encoding
+    always @(*) begin
+        case (state)
+            A: begin
+                next_state = (x == 1'b0) ? A : B;
+                z = 1'b0; // Output when in state A or transitioning from A to B
+            end
+            B: begin
+                next_state = B; // Always transition to state B
+                z = (x == 1'b0) ? 1'b1 : 1'b0; // Output depends on x value in state B
+            end
+            default: begin
+                next_state = A;
+                z = 1'b0;
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We use one-hot encoding for the states. In this case, we have two states, `A` and `B`, represented as `1'b0` and `1'b1`.
+
+- **Asynchronous Reset**: The state register is reset asynchronously to state `A` when `areset` is high.
+
+- **State Transition Logic**:
+  - From state `A`, if `x = 0`, it stays in `A` and outputs `z = 0`. If `x = 1`, it transitions to `B` and outputs `z = 1`.
+  - In state `B`, regardless of the input `x`, it remains in `B`. The output `z` is `1` if `x = 0` and `0` if `x = 1`.
+
+- **Output Logic**: The output `z` is determined based on both the current state and the input `x`.
+
+This implementation ensures that the Mealy machine behaves as specified, with correct handling of asynchronous reset and one-hot encoding for states.

@@ -1,0 +1,29 @@
+Here's the Verilog implementation for the module:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] d,
+    input reset,
+    output reg [7:0] q
+);
+
+always_ff @(negedge clk) begin
+    if (reset)
+        q <= 8'b00110100; // 0x34 in binary
+    else
+        q <= d;
+end
+
+endmodule
+```
+
+**Explanation:**
+
+- The `TopModule` contains an 8-bit D flip-flop implemented using a single `always_ff` block because all bits are updated uniformly.
+  
+- **clk**: Positive edge is the default, but since we're using the negative edge (`negedge`), all flip-flops update on the falling edge of the clock.
+
+- **reset**: When asserted (high), it sets all bits in `q` to `0x34` (binary 00110100).
+
+- **

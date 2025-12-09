@@ -1,0 +1,33 @@
+
+module TopModule (
+    input clk,
+    input [7:0] d,
+    input areset,
+    output reg [7:0] q
+);
+
+    // Declare individual registers for each flip-flop
+    reg [7:0] dff;
+
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset to 0
+            dff <= 8'b00000000;
+        end else begin
+            // Capture input on positive edge of clock
+            dff <= d;
+        end
+    end
+
+    // Assign the output from registers to q
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            q <= 8'b00000000;
+        end else begin
+            q <= dff;
+        end
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

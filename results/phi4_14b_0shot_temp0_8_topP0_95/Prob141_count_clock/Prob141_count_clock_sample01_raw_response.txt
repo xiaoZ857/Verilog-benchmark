@@ -1,0 +1,109 @@
+To implement a Verilog module for a 12-hour clock with an AM/PM indicator, we need to create counters for hours, minutes, and seconds. The module will be driven by a fast clock (`clk`) and incremented once per second when `ena` is asserted. The `reset` signal will reset the time to "12:00 AM". Let's break down the implementation:
+
+1. **BCD Encoding**: Each digit (hh, mm, ss) will be represented using BCD encoding, which means two digits are stored in an 8-bit register.
+
+2. **Counters**:
+   - Seconds (`ss`): Counts from `00` to `59`.
+   - Minutes (`mm`): Resets to `00` when seconds reach `60`, counts from `00` to `59`.
+   - Hours (`hh`): Resets to `01` when minutes reach `60`. It toggles between `01` and `12` for a 12-hour format.
+   
+3. **AM/PM Indicator**:
+   - The `pm` signal is asserted when the hour counter reaches or exceeds `12`.
+
+4. **Reset Logic**: When `reset` is high, all counters reset to "12:00 AM".
+
+Here's the Verilog implementation:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+
+  // Internal registers for counting
+  reg [3:0] sec_tens;
+  reg [3:0] sec_ones;
+  reg [3:0] min_tens;
+  reg [3:0] min_ones;
+  reg [3:0] hour_tens;
+  reg [3:0] hour_ones;
+
+  // Synchronize the enable signal
+  always @(posedge clk) begin
+    if (reset) begin
+      sec_tens <= 0;
+      sec_ones <= 0;
+      min_tens <= 0;
+      min_ones <= 0;
+      hour_tens <= 1; // For "01"
+      hour_ones <= 2;
+      pm <= 0;
+    end else if (ena) begin
+      // Increment seconds
+      if (sec_ones == 9) begin
+        sec_ones <= 0;
+        if (sec_tens == 5) begin
+          sec_tens <= 0;
+          // Increment minutes
+          if (min_ones == 9) begin
+            min_ones <= 0;
+            if (min_tens == 5) begin
+              min_tens <= 0;
+              // Increment hours
+              if (hour_tens == 1 && hour_ones == 2) begin
+                // Transition from 12 to 01
+                hour_tens <= 0; 
+                hour_ones <= 1;
+                pm <= ~pm; // Toggle PM/AM
+              end else if (hour_ones == 9) begin
+                hour_ones <= 0;
+                if (hour_tens == 1) begin
+                  hour_tens <= 2; // Transition from 11 to 12
+                end else begin
+                  hour_tens <= 0; // Transition from 01 to 02, etc.
+                end
+              end else begin
+                hour_ones <= hour_ones + 1;
+              end
+            end else begin
+              min_tens <= min_tens + 1;
+            end
+          end else begin
+            min_ones <= min_ones + 1;
+          end
+        end else begin
+          sec_tens <= sec_tens + 1;
+        end
+      end else begin
+        sec_ones <= sec_ones + 1;
+      end
+    end
+  end
+
+  // Output assignment
+  always @(*) begin
+    hh = {hour_tens, hour_ones};
+    mm = {min_tens, min_ones};
+    ss = {sec_tens, sec_ones};
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Reset Logic**: When `reset` is high, the clock resets to "12:00 AM" with `pm` set to `0`.
+
+- **Enable Signal**: The counter increments when `ena` is asserted. This simulates a pulse every second.
+
+- **Counters**:
+  - Seconds (`ss`) are incremented first. When they reach `59`, they reset to `00`.
+  - Minutes (`mm`) increment when seconds roll over from `59` to `00`. They follow the same logic for rolling over.
+  - Hours (`hh`) increment when minutes roll over. The hour counter rolls over from `12` to `01` and toggles the `pm` signal.
+
+- **

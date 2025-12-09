@@ -1,0 +1,18 @@
+// ------------------------------------------------------------
+// 3‑bit Population Count
+// ------------------------------------------------------------
+//  in  : 3‑bit input vector (each bit is either 0 or 1)
+//  out : 2‑bit output vector holding the number of 1‑bits in 'in'
+//
+//  The module is purely combinational – no clock is required.
+//
+// ------------------------------------------------------------
+module TopModule (
+    input  wire [2:0] in,   // 3‑bit input vector
+    output wire [1:0] out   // 2‑bit population count
+);
+
+    // Simple combinational sum of the three bits
+    assign out = in[0] + in[1] + in[2];
+
+endmodule

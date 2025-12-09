@@ -1,0 +1,18 @@
+Problem: Prob103_circuit2
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:28: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:28: error: malformed statement
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:29: error: malformed statement
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:42: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob103_circuit2_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob103_circuit2_test.sv:11: error: invalid module item.

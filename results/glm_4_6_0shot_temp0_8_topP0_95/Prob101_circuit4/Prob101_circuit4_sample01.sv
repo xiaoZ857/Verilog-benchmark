@@ -1,0 +1,16 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+Looking at the waveform table, I can analyze the relationship between inputs a, b, c, d and output q:
+
+When q=0 (4 cases):
+- a=0, b=0, c=0, d=0
+- a=0, b=0
+
+// VERILOG-EVAL: endmodule not found

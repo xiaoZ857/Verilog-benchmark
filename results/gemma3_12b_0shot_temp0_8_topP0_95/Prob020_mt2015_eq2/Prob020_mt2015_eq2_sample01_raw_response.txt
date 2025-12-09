@@ -1,0 +1,21 @@
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output z
+);
+
+  assign z = (A[1] == B[1]) & (A[0] == B[0]);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign z = ...;`**: This statement uses the `assign` keyword, which is used for continuous assignments.  This means that `z` will continuously update its value based on the condition on the right-hand side.
+* **`(A[1] == B[1]) & (A[0] == B[0]);`**: This is the comparison logic.
+    * `A[1] == B[1]` compares the most significant bits of A and B.
+    * `A[0] == B[0]` compares the least significant bits of A and B.
+    * `&` is the logical AND operator. The output `z` will be 1 only if both comparisons are true (i.e., both bits are equal).  If either or both bits are different, `z` will be 0.
+
+This implementation directly implements the described behavior:  `z` is 1 if and only if A and B are equal bit-by-bit.

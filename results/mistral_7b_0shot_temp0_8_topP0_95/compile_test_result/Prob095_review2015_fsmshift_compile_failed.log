@@ -1,0 +1,12 @@
+Problem: Prob095_review2015_fsmshift
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:12: error: shift_ena Unable to assign to unresolved wires.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:17: error: shift_ena Unable to assign to unresolved wires.
+2 error(s) during elaboration.

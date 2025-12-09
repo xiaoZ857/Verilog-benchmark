@@ -1,0 +1,22 @@
+module TopModule (
+    input wire clock,
+    input wire a,
+    output reg p,
+    output reg q
+);
+
+    always @(posedge clock or negedge clock) begin
+        if (!clock) begin
+            // When clock is low, reset both outputs
+            p <= 0;
+            q <= 0;
+        end else begin
+            // On positive edge of the clock
+            p <= a; // p follows a on rising edge of clock
+
+            // q latches the value of p when clock goes low
+            q <= p;
+        end
+    end
+
+endmodule

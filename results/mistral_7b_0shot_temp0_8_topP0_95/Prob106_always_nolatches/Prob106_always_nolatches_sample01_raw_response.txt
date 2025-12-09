@@ -1,0 +1,25 @@
+ Here's a Verilog implementation of the described circuit:
+
+```verilog
+module TopModule (
+  input [15:0] scancode,
+  output reg left,
+  output reg down,
+  output reg right,
+  output reg up
+);
+
+always @(posedge clk) begin
+    case(scancode)
+        16'he06b : left <= 1; down <= 0; right <= 0; up <= 0; // left arrow
+        16'he072 : left <= 0; down <= 1; right <= 0; up <= 0; // down arrow
+        16'he074 : left <= 0; down <= 0; right <= 1; up <= 0; // right arrow
+        16'he075 : left <= 0; down <= 0; right <= 0; up <= 1; // up arrow
+        default   : left <= 0; down <= 0; right <= 0; up <= 0; // none
+    endcase
+end
+```
+
+This Verilog module implements the described circuit. The `scancode` input is a 16-bit signal, and the outputs are four registers (`left`, `down`, `right`, and `up`) which are updated on the positive edge of the implied clock signal.
+
+The `case` statement checks the value of the `scancode` input and assigns corresponding values to the output signals based on the described mapping for scancodes indicating arrow keys. If the scancode does not match any of the specified cases, all outputs are set to 0 (assuming they're initially reset to 0).

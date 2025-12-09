@@ -1,0 +1,71 @@
+We need to track the previous water level to determine if we need to open the supplemental flow valve (dfr).  
+Let¡¯s define states based on the sensor readings and previous state.
+
+From the description:
+
+- **State encoding idea**: We can store the previous sensor pattern (or a state variable representing last level) to decide dfr.  
+- The nominal flows (fr1, fr2, fr3) depend only on current sensors, except dfr depends on whether water level was previously lower.
+
+Let¡¯s define 4 level ranges as per table:
+
+1. **Level 3**: Above s[3] ¡ú s[1]=1, s[2]=1, s[3]=1 ¡ú outputs: fr3=0, fr2=0, fr1=0, dfr=0  
+2. **Level 2**: Between s[3] and s[2] ¡ú s[1]=1, s[2]=1, s[3]=0 ¡ú outputs: fr3=0, fr2=0, fr1=1, dfr=0 unless previous level was lower  
+3. **Level 1**: Between s[2] and s[1] ¡ú s[1]=1, s[2]=0, s[3]=0 ¡ú outputs: fr3=0, fr2=1, fr1=1, dfr=0 unless previous level was lower  
+4. **Level 0**: Below s[1] ¡ú s[1]=0, s[2]=0, s[3]=0 ¡ú outputs: fr3=1, fr2=1, fr1=1, dfr=1 (always max flow)
+
+The dfr is supplemental flow valve: open if previous level was lower than current level (i.e., water level was rising from a lower state to current state in last transition).  
+But careful: dfr is not just for transition ¡ª it seems from description:  
+> If the sensor change indicates that the previous level was lower than the current level, the flow rate should be increased by opening the Supplemental flow valve (controlled by dfr).
+
+So dfr = 1 if (previous_level < current_level) AND current_level is 1 or 2 (because in level 0, dfr=1 always; in level 3, dfr=0 always). Wait, check:  
+- In level 0 (below s1), dfr=1 anyway (max flow).  
+- In level 3 (above s3), dfr=0 anyway (no flow).  
+- In level 1 or 2, dfr=1 if water was lower before.
+
+Also, on reset: all outputs asserted (fr3=1, fr2=1, fr1=1, dfr=1) and state as if water level had been low for long time (so previous_level = 0).
+
+Let¡¯s implement:
+
+    reg [1:0] state, next_state;
+    reg [1:0] prev_level;
+    
+    // Encoding for water level from sensors:
+    // level = 0: s[1]=0, s[2]=0, s[3]=0
+    // level = 1: s[1]=1, s[2]=0, s[3]=0
+    // level = 2: s[1]=1, s[2]=1, s[3]=0
+    // level = 3: s[1]=1, s[2]=1, s[3]=1
+    
+    wire [1:0] current_level;
+    assign current_level = (s[3]) ? 2'd3 :
+                           (s[2]) ? 2'd2 :
+                           (s[1]) ? 2'd1 : 2'd0;
+    
+    // State register update
+    always @(posedge clk) begin
+        if (reset) begin
+            state <= 2'd0; // level 0
+            prev_level <= 2'd0;
+        end else begin
+            state <= next_state;
+            prev_level <= current_level;
+        end
+    end
+    
+    // Next state logic (just equal to current_level)
+    assign next_state = current_level;
+    
+    // Output logic
+    always @(*) begin
+        case (state)
+            2'd0: begin // below s1
+                fr3 = 1'b1;
+                fr2 = 1'b1;
+                fr1 = 1'b1;
+                dfr = 1'b1;
+            end
+            2'd1: begin // between s2 and s1
+                fr3 = 1'b0;
+                fr2 = 1'b1;
+                fr1 = 1'b1;
+                // dfr = 1 if previous level was lower (i.e., prev_level < state)
+                dfr = (prev_level < state

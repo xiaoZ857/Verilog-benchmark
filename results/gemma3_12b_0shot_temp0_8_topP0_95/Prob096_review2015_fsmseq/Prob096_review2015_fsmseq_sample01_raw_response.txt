@@ -1,0 +1,91 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+
+  // Define the states
+  typedef enum logic [1:0] {
+    S0, // Initial state
+    S1, // Saw a '1'
+    S11, // Saw '11'
+    S110, // Saw '110'
+    S1101 // Saw '1101'
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // State register
+  always_ff @(posedge clk, posedge reset) begin
+    if (reset) begin
+      current_state <= S0;
+    else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next-state logic
+  always_comb begin
+    next_state = current_state; // Default: stay in the current state
+
+    case (current_state)
+      S0: begin
+        if (data == 1) begin
+          next_state = S1;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S1: begin
+        if (data == 1) begin
+          next_state = S11;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S11: begin
+        if (data == 0) begin
+          next_state = S110;
+        end else begin
+          next_state = S1; // Go back to S1 if we see another 1
+        end
+      end
+      S110: begin
+        if (data == 1) begin
+          next_state = S1101;
+        end else begin
+          next_state = S0; // Go back to S0 if we see a 0
+        end
+      end
+      S1101: begin
+        next_state = S1101; // Stay in S1101 once the sequence is found
+      end
+      default: begin
+        next_state = S0;
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    start_shifting = (current_state == S1101);
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`:** Defines the module with the specified inputs and output.
+2. **`typedef enum logic [1:0] { ... } state_t;`:**  Defines an enumerated type `state_t` to represent the states of the FSM.  Using an `enum` makes the code more readable and maintainable. The `[1:0]` specifies that we need 2 bits to represent our 4 states.
+3. **`state_t current_state, next_state;`:** Declares the current and next state variables.
+4. **`always_ff @(posedge clk, posedge reset) begin ... end`:** This is a sequential block that defines the state register. It updates the `current_state` with the value of `next_state` on the positive edge of the clock (`posedge clk`), or synchronously resets the state to `S0` when `reset` is high.
+5. **`always_comb begin ... end`:** This is a combinational block that defines the next-state logic. It determines the next state based on the current state and the input data.
+6. **`case (current_state) ... endcase`:**  A `case` statement is used to implement the state transitions.
+   - **`S0` (Initial State):** If the input `data` is 1, transition to `S1`. Otherwise, stay in `S0`.
+   - **`S1` (Saw a '1'):** If the input `data` is 1, transition to `S11`. Otherwise, go back to `S0`.
+   - **`S11` (Saw '11'):** If the input `data` is 0, transition to `S110`. Otherwise, go back to `S1`.
+   - **`S110` (Saw '110'):** If the input `data` is 1, transition to `S1101`. Otherwise, go back to `S0`.
+   - **`S1101` (Saw '1101'):** Once the sequence is found, the FSM stays in this state indefinitely.

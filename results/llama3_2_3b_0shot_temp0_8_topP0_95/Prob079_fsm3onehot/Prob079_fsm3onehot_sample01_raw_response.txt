@@ -1,0 +1,50 @@
+```verilog
+// State Machine Module
+
+// Define the one-hot state encoding
+typedef enum logic[3:0]
+{
+    A = 4'b0001,
+    B = 4'b0010,
+    C = 4'b0100,
+    D = 4'b1000
+} State;
+
+module TopModule (
+    input in,
+    input [3:0] state,
+    output reg [3:0] next_state,
+    output reg out
+);
+
+// Initialize the current state to A
+reg [3:0] curr_state = A;
+
+// Define the state transition table
+always @(posedge clk)
+begin
+    // Determine the next state based on the current state and input signal
+    case(curr_state)
+        A: if(in == 1'b0) next_state = A; else next_state = B;
+        B: if(in == 1'b0) next_state = B; else next_state = C;
+        C: if(in == 1'b0) next_state = A; else next_state = D;
+        D: if(in == 1'b0) next_state = C; else next_state = B;
+    endcase
+
+    // Update the current state
+    curr_state = next_state;
+end
+
+// Define the output logic based on the next state
+assign out = (curr_state == D) ? 1'b1 : 1'b0;
+
+endmodule
+```
+
+In this implementation, we use a one-hot state encoding to represent the four states. The `State` enum defines the possible states, and the `curr_state` register keeps track of the current state.
+
+The state transition logic is implemented using an always block that updates the `next_state` variable based on the current state and input signal. The output logic is assigned based on whether the current state is D or not.
+
+Note that this implementation assumes a positive edge-triggered clock, which means that the inputs are latched to their new values only when the clock transitions from 0 to 1. If your project requires a different trigger type, you'll need to adjust the logic accordingly.
+
+Also, keep in mind that this implementation assumes that the input signal is always valid (i.e., it never exceeds its maximum value). If your project requires more robust handling of input signals, you may need to add additional logic to handle invalid or unexpected inputs.

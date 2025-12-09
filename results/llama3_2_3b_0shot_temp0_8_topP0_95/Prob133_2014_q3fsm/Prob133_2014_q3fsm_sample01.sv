@@ -1,0 +1,77 @@
+
+module TopModule(
+    input clk,      // Positive edge of clock signal
+    input reset_n,   // Active high synchronous active low reset
+    input s,         // Input signal (synchronous on rising edge)
+    input w,         // Input signal (async on rising edge)
+    output reg z     // Output signal (syncronized on falling edge)
+);
+
+reg [1:0] state;  // State of the FSM (2 states: A and B)
+reg [1:0] w_count; // Count of consecutive ones in 'w' (4 bits)
+
+// Reset the FSM to state A
+always @(posedge clk) begin
+    if (!reset_n) begin
+        state <= 2'b00;
+        w_count <= 2'b00;
+        z <= 1'b0;
+    end else begin
+        state <= 2'b00; // Assume reset clears both states
+        w_count <= 2'b00;
+        z <= 1'b0;
+    end
+end
+
+// If in state A, move to state B if s = 1
+always @(posedge clk) begin
+    if (state == 2'b00 && s) begin
+        state <= 2'b01; // Move to state B only on s = 1
+    end else if (state == 2'b00) begin
+        w_count <= 2'b00;
+    end
+end
+
+// If in state A, decrement w_count and set z accordingly
+always @(posedge clk) begin
+    if (state == 2'b01) begin
+        w_count <= {w_count[1:0], w_count[0]};
+        if (w == 1 && w_count[2:0] == 2'b11) begin // If two consecutive ones in 'w'
+            z <= 1'b1;
+        end else if (~w && w_count[2:0] == 2'b01) begin // If two zeros in 'w' after a one
+            z <= 1'b1;
+        end 
+    end else if (state == 2'b00) begin // Clear z on clock edge
+        z <= 1'b0;    
+    end
+end
+
+// If in state B, reset w_count when w changes
+always @(posedge clk) begin
+    if (state == 2'b01 && ~w) begin
+        w_count <= 2'b00;
+    end else if (state == 2'b01 && w) begin // Increment w_count on rising edge of 'w'
+        w_count[0] = w;
+    end
+end
+
+// If w_count indicates that two consecutive ones in 'w' have occurred, set z to 1
+always @(posedge clk) begin
+    if (state == 2'b01 && w_count[2:0] == 2'b11) begin // Set z on next clock cycle after two consecutive ones in 'w'
+        z <= 1'b1;
+    end else if (state == 2'b01 && w_count[2:0] == 2'b00) begin // Reset w_count when two zeros in a row
+        w_count <= 2'b00;
+        z <= 1'b0;
+    end 
+end
+
+// If in state B, move back to state A on rising edge of 'w'
+always @(posedge clk) begin
+    if (state == 2'b01 && ~w) begin // Move back on rising edge of w
+        state <= 2'b00;
+    end 
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

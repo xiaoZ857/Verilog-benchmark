@@ -1,0 +1,16 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output reg w,  // Use a register to store the signal
+  output reg x,
+  output reg y,
+  output reg z   // Reg is required to make signals clock/clk triggered.
+);
+  always @(posedge clk) begin  // Clock/clk edge detection is necessary for some designs
+    w <= a;
+    x <= b;
+    y <= b;     // This makes both 'x' and 'y' equal to signal 'b'
+    z <= c;
+  end
+endmodule

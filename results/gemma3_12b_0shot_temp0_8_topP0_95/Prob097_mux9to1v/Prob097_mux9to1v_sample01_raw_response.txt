@@ -1,0 +1,89 @@
+```verilog
+module TopModule (
+  input [15:0] a,
+  input [15:0] b,
+  input [15:0] c,
+  input [15:0] d,
+  input [15:0] e,
+  input [15:0] f,
+  input [15:0] g,
+  input [15:0] h,
+  input [15:0] i,
+  input [3:0] sel,
+  output logic [15:0] out
+);
+
+  always_comb begin
+    case (sel)
+      4'd0: out = a;
+      4'd1: out = b;
+      4'd2: out = c;
+      4'd3: out = d;
+      4'd4: out = e;
+      4'd5: out = f;
+      4'd6: out = g;
+      4'd7: out = h;
+      4'd8: out = i;
+      default: out = 16'hFFFF; // Set all bits to 1 for sel = 9 to 15
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`always_comb` block:**  This block ensures that the output `out` is updated whenever any of the inputs change.  `always_comb` is preferred over `always` when the logic is purely combinational, as it automatically infers the sensitivity list.
+* **`case (sel)`:** This statement evaluates the value of the `sel` input.
+* **`4'd0: out = a;` ... `4'd8: out = i;`:**  For `sel` values from 0 to 8, the corresponding input signal (a, b, c, ..., i) is assigned to the output `out`.  `4'd0` represents the decimal value 0 in a 4-bit format.
+* **`default: out = 16'hFFFF;`:**  This is the crucial part for handling the unused cases.  When `sel` is 9 to 15, the `default` case is executed.  `16'hFFFF` represents a 16-bit hexadecimal value where all bits are set to 1.  This ensures that the output is '1' for all unused `sel` values as required by the problem description.
+
+**How to Test:**
+
+You can test this module using a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado).  Here's a simple testbench example:
+
+```verilog
+module TopModule_tb;
+
+  logic [15:0] a, b, c, d, e, f, g, h, i;
+  logic [3:0] sel;
+  logic [15:0] out;
+
+  TopModule dut (
+    .a(a),
+    .b(b),
+    .c(c),
+    .d(d),
+    .e(e),
+    .f(f),
+    .g(g),
+    .h(h),
+    .i(i),
+    .sel(sel),
+    .out(out)
+  );
+
+  initial begin
+    // Initialize inputs
+    a = 16'h1111;
+    b = 16'h2222;
+    c = 16'h3333;
+    d = 16'h4444;
+    e = 16'h5555;
+    f = 16'h6666;
+    g = 16'h7777;
+    h = 16'h8888;
+    i = 16'h9999;
+
+    // Test cases
+    sel = 0; #10;  // sel = 0, out should be a
+    sel = 1; #10;  // sel = 1, out should be b
+    sel = 2; #10;
+    sel = 3; #10;
+    sel = 4; #10;
+    sel = 5; #10;
+    sel = 6; #10;
+    sel = 7; #10;
+    sel = 8; #10;
+    sel = 9; #10;  // sel = 9, out should be all 1s
+    

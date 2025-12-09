@@ -1,0 +1,51 @@
+Here's a Verilog implementation for the described left/right rotator module:
+
+```verilog
+module TopModule (
+    // Clock, load and enable signals
+    input clk,
+    input load,
+    input [1:0] ena,
+    
+    // Input data signal
+    input [99:0] data,
+    
+    // Output register contents
+    output reg [99:0] q
+);
+
+    // Rotate right by one bit if ena = 2'b01
+    assign q = (ena == 2'b01) ? data[1:1] & data[99:0] : 
+               (ena == 2'b10) ? data[98:0] & data[0:0] : 
+               data;
+
+endmodule
+```
+
+However, this design can be simplified by using a single assignment to combine the left and right rotations:
+
+```verilog
+module TopModule (
+    // Clock, load and enable signals
+    input clk,
+    input load,
+    input [1:0] ena,
+    
+    // Input data signal
+    input [99:0] data,
+    
+    // Output register contents
+    output reg [99:0] q
+);
+
+    // Rotate either left or right one bit based on the value of 'ena'
+    assign q = (lena == 2'b01) ? data[1:0] & data[98:0] : 
+               (ena == 2'b10) ? data[96:0] & data[0:1] : 
+               data;
+
+endmodule
+```
+
+This version is more concise but still achieves the same result as the original design. Note that for rotation in both directions, we shift the bits to the left or right and then use bitwise AND to combine them.
+
+Also note that if you want to implement a full binary rotator (including a 4-bit width), it would be better to extend this code using more complex bit shifting operations or even to write two separate modules, one for 1-bit rotation and another for higher-precision rotations.

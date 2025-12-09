@@ -1,0 +1,34 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      state <= 2'b01;
+    end else if (train_valid) begin
+      if (train_taken) begin
+        if (state == 2'b11) begin
+          state <= 2'b11; // Saturate at 3
+        end else begin
+          state <= state + 1'b1;
+        end
+      end else begin
+        if (state == 2'b00) begin
+          state <= 2'b00; // Saturate at 0
+        end else begin
+          state <= state - 1'b1;
+        end
+      end
+    end else begin
+      // Keep current state
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

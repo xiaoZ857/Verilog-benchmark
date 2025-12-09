@@ -1,0 +1,40 @@
+
+module TopModule (
+  input wire clk,
+  input wire load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+reg [2:0] next_state_table [3]; // Table for next state based on Rule 110
+
+initial begin
+  // Initialize next_state_table with values from Rule 110
+  next_state_table[0] = 0b000; // Left[i+1] = 1, Center[i] = 1, Right[i-1] = 1 => Next state: 0
+  next_state_table[1] = 0b001; // Left[i+1] = 1, Center[i] = 1, Right[i-1] = 0 => Next state: 1
+  next_state_table[2] = 0b011; // Left[i+1] = 1, Center[i] = 0, Right[i-1] = 1 => Next state: 1
+  next_state_table[3] = 0b000; // Left[i+1] = 0, Center[i] = 0, Right[i-1] = 0 => Next state: 0
+end
+
+always @(posedge clk) begin
+  if (load) begin
+    q <= data;
+  end else begin
+    for (int i = 0; i < 512; i++) begin
+      q[i] <= next_state_table[(q[(i+1)%512], q[i], q[(i-1+512)%512])];
+    end
+  end
+end
+
+// Assign initial values for q (assuming q is initialized to 0 by default)
+always @* begin
+  if (load == 0 && clk == 1'b0) begin
+    q = 0; // Reset q when load is not high and clock is low
+    for (int i = 0; i < 512; i++) begin
+      q[(i+256)%512] = data[i]; // Load the initial state in the middle of the array
+    end
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,71 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+
+reg predict_taken_reg;
+  reg [6:0] predict_history_reg;
+  
+  // Prediction logic
+  always @(*) begin
+    if (predict_valid) begin
+      predict_taken_reg = pht[predict_index][1];  // MSB of 2-bit counter
+      predict_history_reg = global_history;
+    end else begin
+      predict_taken_reg = 1'b0;
+      predict_history_reg = 7'b0;
+    end
+  end
+  
+  // Assign outputs
+  assign predict_taken = predict_taken_reg;
+  assign predict_history = predict_history_reg;
+  
+  // Update logic at clock edge
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Reset all registers
+      global_history <= 7'b0;
+      integer i;
+      for (i = 0; i < 128; i = i + 1) begin
+        pht[i] <= 2'b01;  // Weakly not taken
+      end
+    end else begin
+      // Handle training (higher priority)
+      if (train_valid) begin
+        // Update PHT entry based on actual outcome
+        if (train_taken) begin
+          if (pht[train_index] != 2'b11) begin
+            pht[train_index] <= pht[train_index] + 1'b1;
+          end
+        end else begin
+          if (pht[train_index] != 2'b00) begin
+            pht[train_index] <= pht[train_index] - 1'b1;
+          end
+        end
+        
+        // If mispredicted, recover history register
+        if (train_mispredicted) begin
+          global_history <= {train_history[5:0], train_taken};
+        end else if (!predict_valid) begin
+          // Normal history update if no prediction
+          global_history <= {global_history[5:0], train_taken};
+        end
+      end
+      // Handle prediction (only if no training)
+      else if (predict_valid) begin
+        // Update global history register with prediction
+
+// VERILOG-EVAL: endmodule not found

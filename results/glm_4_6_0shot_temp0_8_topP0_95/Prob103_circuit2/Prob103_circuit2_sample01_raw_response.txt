@@ -1,0 +1,34 @@
+
+Looking at the truth table, I can analyze the pattern:
+
+a b c d | q
+--------|---
+0 0 0 0 | 1
+0 0 0 1 | 0
+0 0 1 0 | 0
+0 0 1 1 | 1
+0 1 0 0 | 0
+0 1 0 1 | 1
+0 1 1 0 | 1
+0 1 1 1 | 0
+1 0 0 0 | 0
+1 0 0 1 | 1
+1 0 1 0 | 1
+1 0 1 1 | 0
+1 1 0 0 | 1
+1 1 0 1 | 0
+1 1 1 0 | 0
+1 1 1 1 | 1
+
+This pattern shows that q = 1 when:
+- a⊕b⊕c⊕d = 0 (even number of 1s in inputs)
+
+So this is a parity checker circuit that outputs 1 when there's an even number of 1s in the inputs.
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output

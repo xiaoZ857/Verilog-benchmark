@@ -1,0 +1,53 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output [23:0] out_bytes,
+  output done
+);
+module MessageFinder(
+    input clk,
+    input [7:0] in,
+    input reset,
+    output reg [2:0] state,
+    output reg data_valid,
+    output reg [7:0] data
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 0;
+        data_valid <= 0;
+    end else if (state === 0 && in[3] === 1) begin // First byte of the message found
+        state <= 1;
+        data <= in;
+    end else if (state === 1) begin // Second byte of the message found
+        state <= 2;
+        data <= {in, data}; // Concatenate the new and old data for the next clock cycle
+    end else if (state === 2) begin // Third byte of the message found
+        state <= 0;
+        data_valid <= 1;
+    end
+end
+
+always @(posedge clk) begin
+    if (data_valid) begin
+        out_bytes <= data;
+    end
+end
+
+endmodule
+
+module MessageOutput(
+    input clk,
+    input [7:0] in,
+    input reset,
+    output reg [23:0] out_bytes,
+    output done
+);
+
+wire [2:0] state; // Externalizing the state for use by MessageFinder
+MessageFinder message_finder(clk, in, reset, state, .data_valid(done), out_bytes);
+
+endmodule

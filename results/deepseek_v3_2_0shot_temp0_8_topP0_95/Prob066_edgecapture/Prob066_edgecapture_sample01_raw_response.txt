@@ -1,0 +1,9 @@
+always @(posedge clk) begin
+    if (reset) begin
+        out <= 32'b0;
+    end else begin
+        out <= out | ((in << 1) & ~in);
+    end
+end
+
+endmodule

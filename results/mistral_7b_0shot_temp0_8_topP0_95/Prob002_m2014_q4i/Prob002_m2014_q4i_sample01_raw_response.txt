@@ -1,0 +1,17 @@
+ In Verilog, to create a module that always outputs '0', you can use the following code:
+
+```verilog
+module TopModule (
+  output reg out
+);
+
+always_comb begin
+  out = 0;
+end
+
+initial begin
+  $finish; // To end simulation immediately after compilation.
+end
+```
+
+This code defines a module called `TopModule` with an output signal named `out`. The `always_comb` block ensures that the output is always set to '0' by default. The initial block ends the simulation immediately after compilation to prevent any unintentional timing errors or behavior during simulation. This circuit has no inputs and will always drive a logic low at its output.

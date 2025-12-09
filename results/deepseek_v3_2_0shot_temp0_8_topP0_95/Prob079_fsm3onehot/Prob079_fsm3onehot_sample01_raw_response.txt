@@ -1,0 +1,24 @@
+  // State transition logic
+  always @(*) begin
+    next_state = 4'b0000; // default to avoid latch
+    case (1'b1)
+      state[0]: // state A
+        if (in) next_state = 4'b0010; // B
+        else    next_state = 4'b0001; // A
+      state[1]: // state B
+        if (in) next_state = 4'b0010; // B
+        else    next_state = 4'b0100; // C
+      state[2]: // state C
+        if (in) next_state = 4'b1000; // D
+        else    next_state = 4'b0001; // A
+      state[3]: // state D
+        if (in) next_state = 4'b0010; // B
+        else    next_state = 4'b0100; // C
+      default: next_state = 4'b0001; // default to A
+    endcase
+  end
+
+  // Output logic (Moore: output depends only on state)
+  assign out = state[3]; // Output is 1 only in state D
+
+endmodule

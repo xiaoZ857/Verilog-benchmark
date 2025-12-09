@@ -1,0 +1,67 @@
+To implement a Verilog module that performs left/right rotation on a 100-bit wide register with synchronous loading and direction control, you can follow the description provided. This design includes handling for synchronous load operations and selecting rotation directions based on input signals.
+
+Here is how you could write this Verilog module:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire load,
+    input wire [1:0] ena,
+    input wire [99:0] data,
+    output reg [99:0] q
+);
+
+    // On every positive edge of the clock, determine the next state.
+    always @(posedge clk) begin
+        if (load) begin
+            // Synchronous load operation
+            q <= data;  // Load the data into the register directly
+        end else begin
+            case (ena)
+                2'b01: begin
+                    // Rotate right by one bit
+                    q[99] <= q[0];       // The leftmost bit becomes the rightmost
+                    q[98:0] <= q[99:1];  // Shift all bits to the right
+                end
+
+                2'b10: begin
+                    // Rotate left by one bit
+                    q[0] <= q[99];       // The rightmost bit becomes the leftmost
+                    q[99:1] <= q[98:0];  // Shift all bits to the left
+                end
+
+                // If ena is 2'b00 or 2'b11, do nothing (no rotation)
+
+                default: begin
+                    // Default case does nothing if no valid ena code is received
+                end
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Declaration**: 
+   - Inputs include `clk` for the clock signal, `load` for loading new data into the register, `ena` to select rotation direction, and `data` as the input data.
+   - The output is a 100-bit wide register `q`.
+
+2. **Clock-Edge Sensitivity**:
+   - A sequential always block sensitive to the positive edge of the clock (`posedge clk`) ensures operations occur synchronously with the clock.
+
+3. **Synchronous Load**: 
+   - If `load` is high, the module loads `data` into `q` on every rising edge of the clock.
+
+4. **Rotation Handling**:
+   - The `case` statement checks the value of `ena`.
+     - `2'b01`: Rotate right by 1 bit.
+     - `2'b10`: Rotate left by 1 bit.
+     - `2'b00` and `2'b11`: No rotation occurs.
+
+5. **Rotation Logic**:
+   - For a right rotate (`2'b01`), the first bit of `q` is moved to the last position, and all bits are shifted one position to the right.
+   - For a left rotate (`2'b10`), the last bit of `q` is moved to the first position, and all bits are shifted one position to the left.
+
+This module efficiently implements a 100-bit left/right rotator with synchronous loading capabilities, adhering to the specified behavior.

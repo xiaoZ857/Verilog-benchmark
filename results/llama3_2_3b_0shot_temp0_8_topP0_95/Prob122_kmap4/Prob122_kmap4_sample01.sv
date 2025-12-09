@@ -1,0 +1,22 @@
+
+module TopModule (
+  input a,    // A and B inputs
+  input b,    // C and D inputs 
+  output reg out// Output signal
+);
+
+reg [1:0] q; // Two-bit state variable
+
+always @(posedge clk) begin
+  // Apply the Karnaugh map rules to compute the next state
+  if(a && b && !c && d)   q <= 10;
+  else if(!a && b && !c && d) q <= 01;
+  else if(a && !b && c && d)  q <= 11;
+  else if(!a && !b && !c && d) q <= 00;
+
+  out = q; // Output the current state
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

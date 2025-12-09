@@ -1,0 +1,27 @@
+Here's the Verilog implementation for the next-state signals Y2 and Y4 based on the given state machine description:
+
+```verilog
+module TopModule(
+    input [7:0] y, // Assuming a one-hot code for state assignment
+    input w,
+    output [1:0] Y2,
+    output [1:0] Y4
+);
+
+// Define the next-state signals for each state transition
+assign Y2 = (y == 6'b000001) || (y == 6'b010000); // State A to B, or F to D
+assign Y4 = (y == 6'b000100) || (y == 6'b011000); // State C to E, or F to B
+
+// Always true assignments for resetting the states
+assign w' == ~w; // Ensure that we only get the correct state on clock edge
+
+endmodule
+```
+
+In this implementation:
+
+1. We use a one-hot code for the `y` signal which means it will take an active value of 1 while the others are at 0.
+2. The next-state signals Y2 and Y4 are derived by inspecting the state machine transitions.
+3. The always true assignment is used to ensure that we reset the states on every clock edge, given the lack of any explicit reset conditions.
+
+Please note that these Verilog codes assumes some state assignments for `y[6:1]`. For correct functioning, you should define this according to your one-hot code definition (in this case  `y[6:1] = 000001, 000010, 000100, 001000, 010000, 100000`).

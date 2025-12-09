@@ -1,0 +1,39 @@
+To implement the described Verilog module with both `assign` statements and a procedural `if` statement, we'll create two separate logic sections within the same module. The `assign` block will handle combinational logic, while the `always` block will be used for the procedural logic.
+
+Here is how you can structure the Verilog code:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+  // Using assign statements
+  assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+  // Using procedural if statement in an always block
+  always @(*) begin
+    if (sel_b1 && sel_b2)
+      out_always = b;
+    else
+      out_always = a;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Assign Statement (`out_assign`)**:
+  - The `assign` statement is used for continuous assignments, which are automatically evaluated whenever any of the right-hand side variables change.
+  - We use a ternary operator `(condition) ? true_value : false_value` to implement the mux logic. If both `sel_b1` and `sel_b2` are true, it selects `b`; otherwise, it selects `a`.
+
+- **Procedural Always Block (`out_always`)**:
+  - The `always @(*)` block is used for combinational logic where the outputs depend on the current inputs.
+  - Inside this block, we use an `if` statement to implement the same mux logic. If both selectors are true, it assigns `b` to `out_always`; otherwise, it assigns `a`.
+
+This module effectively demonstrates two methods of implementing the same logic in Verilog: using continuous assignment for combinational logic and procedural statements within an always block.

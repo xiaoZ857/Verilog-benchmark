@@ -1,0 +1,91 @@
+To implement the described state machine in Verilog, we need to define a finite state machine with states A through F. We will use a synchronous design approach where the next state is determined by the current state and input `w` on each clock cycle. The reset signal will be used to initialize the state machine to state A.
+
+Here's how you can implement this state machine in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output reg z
+);
+
+  // State encoding
+  typedef enum logic [2:0] {
+    A = 3'b000,
+    B = 3'b001,
+    C = 3'b010,
+    D = 3'b011,
+    E = 3'b100,
+    F = 3'b101
+  } state_t;
+
+  // Registers to hold the current and next states
+  state_t current_state, next_state;
+
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A; // Initialize to state A on reset
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic and output logic
+  always_comb begin
+    case (current_state)
+      A: begin
+        next_state = w ? A : B;
+        z = 1'b0; // No specific output for this transition, assume default
+      end
+      B: begin
+        next_state = w ? D : C;
+        z = 1'b0; // No specific output for this transition, assume default
+      end
+      C: begin
+        next_state = w ? D : E;
+        z = 1'b0; // No specific output for this transition, assume default
+      end
+      D: begin
+        next_state = w ? A : F;
+        z = 1'b0; // No specific output for this transition, assume default
+      end
+      E: begin
+        next_state = w ? D : E;
+        z = 1'b0; // No specific output for this transition, assume default
+      end
+      F: begin
+        next_state = w ? D : C;
+        z = 1'b0; // No specific output for this transition, assume default
+      end
+    endcase
+
+    // Default case to handle unexpected states
+    if (current_state == 'bx) begin
+      next_state = A; // Reset to state A on undefined state
+      z = 1'b0;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a `typedef enum` for the states, encoding them with 3 bits from A (`000`) to F (`101`). This allows us to have unique binary representations for each state.
+
+2. **Registers**: 
+   - `current_state`: Holds the current state of the FSM.
+   - `next_state`: Computes the next state based on the current state and input `w`.
+
+3. **State Transition Logic**:
+   - The `always_ff` block is triggered on the positive edge of `clk` or `reset`. If `reset` is high, it sets `current_state` to A. Otherwise, it updates `current_state` with `next_state`.
+   
+4. **Next State and Output Logic**:
+   - The `always_comb` block computes the next state based on the current state and input `w`.
+   - For each state transition, we determine `next_state` using a conditional operator (`?:`) to select between two possible states.
+   - The output `z` is set to 0 in this example as no specific conditions for setting `z` are given. You can modify the logic if there's any condition under which `z` should be set differently.
+
+5. **Default Case**: Handles unexpected states by resetting to state A and ensuring `z` remains consistent. This is a safeguard against undefined behavior.
+
+This Verilog module implements the specified finite state machine with synchronous reset capability. Adjust the output logic as necessary based on any additional requirements not covered in the description.

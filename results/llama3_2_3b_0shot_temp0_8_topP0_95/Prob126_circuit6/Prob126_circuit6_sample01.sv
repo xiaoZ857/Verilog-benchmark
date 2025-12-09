@@ -1,0 +1,26 @@
+
+module TopModule (
+    input [2:0] a,
+    output reg [15:0] q
+);
+
+reg [3:0] counter;
+
+always @(posedge clk) begin
+    counter <= counter + 1;
+    
+    if (counter == 4'b0000) 
+        q <= 16'h1232; // q[15:10]
+    else if (counter == 4'b0010)
+        q <= 16'haae0; // q[11:6]
+    else if (counter == 4'b0100)
+        q <= 16'h27d4; // q[7:2]
+    else if (counter == 4'b1000) 
+        q <= 16'ha0e; // q[1:0]
+    else
+        q <= 16'h2066; // q[15:10]
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

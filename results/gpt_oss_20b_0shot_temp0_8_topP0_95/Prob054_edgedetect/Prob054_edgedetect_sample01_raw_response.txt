@@ -1,0 +1,42 @@
+**Verilog – 8‑bit per‑bit rising‑edge detector**
+
+```verilog
+// ------------------------------------------------------------
+//  TopModule
+//  Detect a 0 → 1 transition on each bit of the 8‑bit input `in`.
+//  The corresponding bit of `pedge` is asserted for **one clock
+//  cycle** immediately after the edge occurs.
+// ------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire        clk,   // active‑high clock
+    input  wire [7:0]  in,    // 8‑bit input vector
+    output reg  [7:0]  pedge  // 8‑bit one‑cycle pulse on rising edge
+);
+
+    // Register to hold the previous value of `in`
+    reg [7:0] prev_in;
+
+    // On every rising edge of clk
+    always @(posedge clk) begin
+        // Generate one‑cycle pulse: current 1 & previous 0
+        pedge   <= in & ~prev_in;
+
+        // Update the previous value for the next cycle
+        prev_in <= in;
+    end
+
+endmodule
+```
+
+### How it works
+
+| Signal | Value during cycle |
+|--------|--------------------|
+| `prev_in` | Holds the value of `in` from the **previous** clock cycle. |
+| `pedge` | Assigned `in & ~prev_in`.  
+- If `prev_in` was `0` and `in` is `1`, the result is `1` → a pulse for that cycle.  
+- Otherwise it is `0`. |
+
+The assignment order inside the synchronous block guarantees that `pedge` uses the *old* `prev_in` value while `prev_in` is updated to the current `in`. This yields a clean one‑clock‑cycle pulse for each 0→1 transition on every bit of the 8‑bit vector.

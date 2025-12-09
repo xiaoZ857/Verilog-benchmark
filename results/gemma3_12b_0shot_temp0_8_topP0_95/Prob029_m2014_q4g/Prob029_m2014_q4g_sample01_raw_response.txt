@@ -1,0 +1,79 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  input in3,
+  output logic out
+);
+
+  logic xnor_out;
+
+  // Two-input XNOR
+  assign xnor_out = ~(in1 ^ in2);
+
+  // Two-input XOR
+  assign out = xnor_out ^ in3;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule ( ... );`**: This defines the module named `TopModule` with the specified inputs (`in1`, `in2`, `in3`) and output (`out`).
+2. **`logic xnor_out;`**:  This declares a wire named `xnor_out` to hold the output of the XNOR gate.  Using `logic` is preferred in SystemVerilog as it can be both input and output.
+3. **`assign xnor_out = ~(in1 ^ in2);`**: This line implements the XNOR gate.  The `^` operator performs XOR.  The `~` operator inverts the XOR result to get the XNOR.
+4. **`assign out = xnor_out ^ in3;`**: This line implements the second XOR gate.  It takes the output of the XNOR gate (`xnor_out`) and XORs it with the input `in3`, and assigns the result to the output `out`.
+5. **`endmodule`**:  This marks the end of the module definition.
+
+**How it works:**
+
+The circuit first calculates the XNOR of `in1` and `in2`. Then, it takes that XNOR result and XORs it with `in3` to produce the final output `out`.
+
+**Example Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  logic in1, in2, in3;
+  logic out;
+
+  TopModule dut (
+    .in1(in1),
+    .in2(in2),
+    .in3(in3),
+    .out(out)
+  );
+
+  initial begin
+    // Test cases
+    in1 = 0; in2 = 0; in3 = 0; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 0; in2 = 0; in3 = 1; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 0; in2 = 1; in3 = 0; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 0; in2 = 1; in3 = 1; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 1; in2 = 0; in3 = 0; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 1; in2 = 0; in3 = 1; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 1; in2 = 1; in3 = 0; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    in1 = 1; in2 = 1; in3 = 1; #10;
+    $display("in1=%b in2=%b in3=%b out=%b", in1, in2, in3, out);
+
+    $finish;
+  end
+
+endmodule
+```
+
+This testbench provides a set of test cases to verify that the circuit behaves as expected.  You would need a Verilog simulator (like ModelSim, Icarus Verilog, or Vivado) to run this testbench.

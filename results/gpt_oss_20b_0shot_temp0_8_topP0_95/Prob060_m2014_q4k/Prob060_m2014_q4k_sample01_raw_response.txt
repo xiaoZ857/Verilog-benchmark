@@ -1,0 +1,42 @@
+Below is a clean, synthesizable Verilog implementation of the requested 4‑bit shift register.  
+* The register is synchronous and uses an **active‑low reset** (`resetn`).  
+* On every rising edge of `clk` the contents shift left, inserting the new `in` value into the first flip‑flop.  
+* The output `out` is the value of the last flip‑flop (bit 3).  
+* All assignments inside the `always` block are **non‑blocking** (`<=`) which is the recommended style for synchronous logic.
+
+```verilog
+// 4‑bit synchronous shift register with active‑low reset
+module TopModule (
+    input  wire clk,     // positive‑edge clock
+    input  wire resetn,  // active‑low synchronous reset
+    input  wire in,      // serial data input
+    output wire out      // serial data output (bit 3 of the shift register)
+);
+
+    // 4‑bit shift register
+    reg [3:0] shift_reg;
+
+    // Synchronous logic
+    always @(posedge clk) begin
+        if (!resetn)                     // active‑low reset
+            shift_reg <= 4'b0000;
+        else
+            shift_reg <= {shift_reg[2:0], in};   // shift left
+    end
+
+    // Output assignment
+    assign out = shift_reg[3];
+
+endmodule
+```
+
+### How it works
+1. **Reset** – When `resetn` is **low** at the rising edge of `clk`, the register is cleared to `0000`.  
+2. **Shift** – When `resetn` is **high**, the contents shift left:  
+   * `shift_reg[3]` gets the previous `shift_reg[2]`  
+   * `shift_reg[2]` gets the previous `shift_reg[1]`  
+   * `shift_reg[1]` gets the previous `shift_reg[0]`  
+   * `shift_reg[0]` gets the new input `in`  
+3. **Output** – `out` reflects the value of `shift_reg[3]`, i.e., the oldest bit that has passed through the register.
+
+Feel free to adjust the shift direction or the output bit if your design requires a different configuration.

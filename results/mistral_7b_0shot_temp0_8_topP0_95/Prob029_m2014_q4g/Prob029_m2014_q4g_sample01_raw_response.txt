@@ -1,0 +1,27 @@
+ Here is the Verilog code for the described circuit:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  input in3,
+  output logic out
+);
+
+// XNOR gate implementation
+logic [1:0] xnor_output; // 2-bit output for XNOR gate since it has 2 inputs
+xnor #(2) xnor_instance (in1, in2, xnor_output); // Instantiate XNOR gate
+
+// XOR gate implementation
+logic xor_input_1 = xnor_output[0]; // Connect output of XNOR to input 1 of XOR
+logic xor_input_2 = in3; // Connect input 3 to input 2 of XOR
+logic [1:0] xor_output; // 2-bit output for XOR gate since it has 2 inputs
+xor #(2) xor_instance (xor_input_1, xor_input_2, xor_output); // Instantiate XOR gate
+
+// Assign the output of XOR to 'out'
+assign out = xor_output[0];
+
+endmodule
+```
+
+This code defines a Verilog module named `TopModule`, which consists of two gates: an XNOR and an XOR. The XNOR gate takes inputs `in1` and `in2` and its output is stored in the `xnor_output` array. The XOR gate takes the first element of the `xnor_output` array as its first input (connected to the output of the XNOR) and takes `in3` as its second input. The output of the XOR gate is stored in the `xor_output` array, and this output is assigned to the module's output `out`.

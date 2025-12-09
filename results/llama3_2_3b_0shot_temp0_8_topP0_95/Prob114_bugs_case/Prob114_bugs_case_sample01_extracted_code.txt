@@ -1,0 +1,41 @@
+module TopModule(
+    // Input - 8-bit scancode of keyboard key
+    input [7:0] code,
+    
+    // Output - 4-bit index (1-10) and valid flag (1=valid, 0=invalid)
+    output reg [3:0] out,
+    output reg valid
+);
+
+// Valid flag initialized to 0 by default
+reg valid = 0;
+
+// Combinational logic to determine key press (out) and its validity (valid)
+always_comb begin
+    // Define the valid cases for scancodes
+    case(code)
+        8'h45 : out = 0, valid = 1;
+        8'h16 : out = 1, valid = 1;
+        8'h1e : out = 2, valid = 1;
+        8'h26 : out = 3, valid = 1;
+        8'h25 : out = 4, valid = 1;
+        8'h2e : out = 5, valid = 1;
+        8'h36 : out = 6, valid = 1;
+        8'h3d : out = 7, valid = 1;
+        8'h3e : out = 8, valid = 1;
+        8'h46 : out = 9, valid = 1;
+        
+        // Default case (input does not match any scancodes)
+        default : 
+            out = 0;
+            valid = 0;
+    endcase
+end
+
+// Initialize the output port to default values (0 for all bits and 0 for valid flag)
+initial begin
+    out <= 4'b0000; // Output initialized to default value (00) regardless of input
+    valid <= 0;      // Valid flag remains at its initial value (0) until updated by combinational logic
+end
+
+endmodule // TopModule

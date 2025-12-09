@@ -1,0 +1,23 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  assign out = in1 & ~in2;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the Verilog module named `TopModule` and lists the input and output ports.
+* **`input in1, in2;`**: Defines `in1` and `in2` as input signals.
+* **`output logic out;`**: Defines `out` as an output signal.  Using `logic` instead of `wire` is recommended for modern Verilog.
+* **`assign out = in1 & ~in2;`**: This is the crucial line.  It uses the `assign` statement to continuously assign a value to the `out` signal.
+    * `in1`:  The first input is taken directly.
+    * `~in2`:  The `~` operator is the bitwise NOT operator. It inverts the `in2` signal, creating a bubble.  This effectively implements the bubbled `in2` input to the AND gate.
+    * `&`: The `&` operator performs a bitwise AND operation.  So, `in1 & ~in2` is equivalent to an AND gate with a bubble on the second input.
+
+This implementation directly translates the description into Verilog code, clearly reflecting the AND gate with the bubbled `in2` input.

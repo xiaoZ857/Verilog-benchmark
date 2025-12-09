@@ -1,0 +1,19 @@
+Here is a minimal, synthesizable Verilog implementation that satisfies the specification:
+
+```verilog
+// TopModule: drives the output `one` high at all times
+module TopModule (
+    output one                     // output port
+);
+
+    // Continuous assignment – `one` is always logic ‘1’
+    assign one = 1'b1;
+
+endmodule
+```
+
+**Explanation**
+
+- `output one` declares a single output port.
+- The `assign` statement is a continuous assignment that permanently drives `one` with the logic value `1'b1`.  
+- No clock or other logic is required because the output is constant. This module will compile and synthesize on any standard Verilog toolchain.

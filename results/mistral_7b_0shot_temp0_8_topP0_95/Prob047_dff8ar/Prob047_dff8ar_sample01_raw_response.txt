@@ -1,0 +1,28 @@
+ Here's a Verilog implementation for the TopModule you described:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input [7:0] d,
+    output reg [7:0] q
+);
+
+// Define DFF with active high asynchronous reset
+logic [1:0] d_ff_ctrl; // 1-bit control signal for the D flip-flop
+assign d_ff_ctrl[0] = ~areset; // Active high asynchronous reset
+assign d_ff_ctrl[1] = clk; // Positive edge triggered clock
+
+always @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        q <= 8'b0; // Reset all DFFs to 0 when areset is high
+    end else begin
+        for (int i = 0; i < 8; i++)
+            q[i] <= d[i] & ~d_ff_ctrl[1]; // Update DFFs on positive edge of clk
+    end
+end
+
+endmodule
+```
+
+In this implementation, the `TopModule` has an input clock signal (clk), a 8-bit data input (d), an active high asynchronous reset signal (areset), and an output reg (q). The D flip-flops are defined using a control logic signal (`d_ff_ctrl`) that is updated on both the positive edge of `clk` or the negative edge of `areset`. When `areset` is high, all the DFFs will be reset to 0. On every positive edge of clk, the data stored in the D flip-flops gets updated based on the current value of the input data and the active high asynchronous reset control signal.

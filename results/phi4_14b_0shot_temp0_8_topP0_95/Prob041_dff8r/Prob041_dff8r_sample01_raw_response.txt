@@ -1,0 +1,39 @@
+To implement the described Verilog module, you need to create an 8-bit register using D flip-flops. Each flip-flop should be triggered by a positive edge of the clock (`clk`) and have a synchronous active-high reset signal that sets its output to zero when asserted.
+
+Here's how you can implement the `TopModule`:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire [7:0] d,
+    input wire reset,
+    output reg [7:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Synchronous reset to zero
+        q <= 8'b00000000;
+    end else begin
+        // On positive edge of clock, load the input data
+        q <= d;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `clk`: The clock signal.
+  - `d`: An 8-bit input that provides data to be loaded into the flip-flops.
+  - `reset`: A synchronous active-high reset signal.
+  - `q`: An 8-bit output representing the current state of the register.
+
+- **Behavior**:
+  - The always block is sensitive to both the positive edge of `clk` and the positive edge of `reset`.
+  - When `reset` is high, all bits in `q` are set to zero (`8'b00000000`) synchronously with the clock.
+  - On a rising edge of `clk`, if `reset` is not asserted, the data from `d` is loaded into `q`.
+
+This setup ensures that all operations (loading data or resetting) occur on the positive edge of the clock, maintaining synchronous behavior.

@@ -1,0 +1,56 @@
+To implement the functionality of the 7458 chip in Verilog, we need to create a module that matches its behavior using AND and OR gates. Below is a Verilog implementation for the `TopModule`:
+
+```verilog
+module TopModule (
+    input p1a,
+    input p1b,
+    input p1c,
+    input p1d,
+    input p1e,
+    input p1f,
+    output p1y,
+    input p2a,
+    input p2b,
+    input p2c,
+    input p2d,
+    output p2y
+);
+
+    // Intermediate wires for AND gate outputs
+    wire and_p1_abc;  // Output of the first 3-input AND gate (p1a, p1b, p1c)
+    wire and_p1_def;  // Output of the second 3-input AND gate (p1d, p1e, p1f)
+    wire and_p2_ab;   // Output of the first 2-input AND gate (p2a, p2b)
+    wire and_p2_cd;   // Output of the second 2-input AND gate (p2c, p2d)
+
+    // Implementing the AND gates
+    assign and_p1_abc = p1a & p1b & p1c;
+    assign and_p1_def = p1d & p1e & p1f;
+    assign and_p2_ab  = p2a & p2b;
+    assign and_p2_cd  = p2c & p2d;
+
+    // Implementing the OR gates
+    assign p1y = and_p1_abc | and_p1_def;
+    assign p2y = and_p2_ab | and_p2_cd;
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs:** We have 10 inputs: `p1a` to `p1f` for the first set of gates, and `p2a` to `p2d` for the second set.
+  
+- **Outputs:** Two outputs, `p1y` and `p2y`.
+
+- **Intermediate Wires:** Four intermediate wires are used to store the outputs from each AND gate.
+
+- **AND Gates:**
+  - The first AND gate (`and_p1_abc`) takes three inputs: `p1a`, `p1b`, and `p1c`.
+  - The second AND gate (`and_p1_def`) takes three inputs: `p1d`, `p1e`, and `p1f`.
+  - The third AND gate (`and_p2_ab`) takes two inputs: `p2a` and `p2b`.
+  - The fourth AND gate (`and_p2_cd`) takes two inputs: `p2c` and `p2d`.
+
+- **OR Gates:**
+  - `p1y` is the output of an OR gate that combines the outputs of the first two AND gates.
+  - `p2y` is the output of an OR gate that combines the outputs of the last two AND gates. 
+
+This implementation effectively replicates the behavior of the 7458 chip in Verilog using basic logic operations.

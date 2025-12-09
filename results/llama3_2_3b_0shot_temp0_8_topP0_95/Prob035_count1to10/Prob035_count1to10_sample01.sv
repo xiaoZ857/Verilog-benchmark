@@ -1,0 +1,38 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+reg [3:0] q;
+reg [4:0] counter;
+
+// Initial value of the counter (counts start at 1)
+initial begin
+  counter = 1;
+end
+
+always @(posedge clk) begin
+  // Check for reset to avoid infinite loop
+  if (reset) begin
+    q <= 1;
+    counter <= 1;
+  end else begin
+    // Increment the counter
+    counter <= counter + 1;
+    
+    // Limit the counter value to 10
+    if (counter > 9) {
+      q <= 10;
+      counter <= 0;
+    } else {
+      // Convert the value of the counter to a 4-bit value
+      q <= counter;
+    }
+  end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

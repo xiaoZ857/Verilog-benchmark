@@ -1,0 +1,16 @@
+Problem: Prob146_fsm_serialdata
+Code file: results\deepseek_v3_2_0shot_temp0_8_topP0_95\Prob146_fsm_serialdata/Prob146_fsm_serialdata_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_byte' has 10 mismatches. First mismatch occurred at time 950.
+Hint: Output 'done' has 20 mismatches. First mismatch occurred at time 210.
+Hint: Total mismatched samples is 20 out of 905 samples
+
+Simulation finished at 4526 ps
+Mismatches: 20 in 905 samples

@@ -1,0 +1,21 @@
+Here is the Verilog code for the described combinational circuit:
+```
+module TopModule (
+  input [3:0] in, // four-bit inputs
+  output out_and, // output of AND gate with 4 input bits combined as [3 2 1 0]
+  output out_or,  // output of OR gate with 4 input bits combined as [3 2 1 0]
+  output out_xor  // output of XOR gate with 4 input bits combined as [3 2 1 0]
+);
+
+// Output combinational logic to calculate AND, OR and XOR from single bit inputs
+assign out_and   = in[3] & in[2] & in[1] & in[0]; // AND operation on all four bits
+assign out_or    = ~in[3 | in[2] | in[1] | in[0]]; // OR operation with complement of the sum
+assign out_xor   = (in[3] ^ in[2]) ^ (in[1] ^ in[0]); // XOR operations between pairs, then combining
+
+endmodule
+```
+In this code:
+- The four-bit input is assigned to three output signals.
+- The `out_and` signal is calculated by using the bitwise AND operator (&) on each bit individually (`in[3] & in[2] & in[1] & in[0]`).
+- The `out_or` signal is calculated by taking the complement of the sum of all four input bits, achieved with the logical OR (`|`) and the NOT operator (`~`): `~(in[3 | in[2] | in[1] | in[0]])`.
+- The `out_xor` signal calculates XOR on each pair of adjacent bits first, then takes the result of combining these pairs using the bitwise XOR operator (`^`).

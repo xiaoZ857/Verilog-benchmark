@@ -1,0 +1,23 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output q
+);
+
+  assign q = (a & b) | (!a & !b);
+
+endmodule
+```
+
+**Explanation:**
+
+The provided waveforms show that `q` is 1 only when both `a` and `b` are 1.  Otherwise, `q` is 0.  This can be expressed as an OR gate with inputs `a & b` and `!a & !b`.
+
+* **`q = (a & b) | (!a & !b)`:** This is the Verilog code that implements the logic.
+    * `a & b`:  This is the AND operation between `a` and `b`.  It's 1 only when both `a` and `b` are 1.
+    * `!a`: This is the NOT operation on `a`. It inverts the value of `a`.
+    * `!a & !b`: This is the AND operation between the inverted values of `a` and `b`.  It's 1 only when both `a` and `b` are 0.
+    * `|`: This is the OR operation.  The output `q` is 1 if either `(a & b)` or `(!a & !b)` is 1.
+
+This logic precisely matches the behavior demonstrated in the simulation waveforms.

@@ -1,0 +1,21 @@
+  reg [1:0] count;
+  reg state; // 0 = SHIFTING, 1 = DONE
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= 1'b0; // SHIFTING
+      count <= 2'b00;
+    end else begin
+      if (state == 1'b0) begin // SHIFTING
+        if (count == 2'b11) begin
+          state <= 1'b1; // DONE
+        end else begin
+          count <= count + 1;
+        end
+      end
+      // if state == DONE, do nothing
+    end
+  end
+  
+  assign shift_ena = (state == 1'b0);
+endmodule

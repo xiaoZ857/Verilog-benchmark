@@ -1,0 +1,19 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Continuous assignment for out_assign using an assign statement
+assign out_assign = a & b;
+
+// Combinational always block for out_alwaysblock
+always @(a or b) begin
+  out_alwaysblock = a & b;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

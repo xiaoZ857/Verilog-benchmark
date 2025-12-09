@@ -1,0 +1,41 @@
+Here's the Verilog module implementation for the described 2-1 multiplexer:
+
+```verilog
+module TopModule (
+  input [99:0] a,
+  input [99:0] b,
+  input sel,
+  output [99:0] out
+);
+
+// Assignation of 'a' and 'b' values to 'out'
+assign out[99] = sel ? a[99] : b[99];
+assign out[98] = sel ? a[98] : b[98];
+assign out[97:0] = sel ? a[97:0] : b[97:0];
+
+endmodule
+```
+
+In this implementation, we use the `assign` keyword to directly assign values from `a` and `b` to `out`. The values are assigned based on the value of `sel`, which determines whether the corresponding bits in `a` or `b` should be used.
+
+Note: You can optimize this for lower values by using `wire reg [99] out;` for signals a, b if you need lower clock/clk rates. 
+
+Here's an optimized version for lower values:
+
+```verilog
+module TopModule (
+  input [31:0] a,
+  input [31:0] b,
+  input sel,
+  output [31:0] out
+);
+
+wire reg [31:0] temp_a, temp_b;
+
+assign temp_a = sel ? a : b;
+assign temp_b = !sel ? b : a;
+
+assign out = {temp_a[30], temp_b[30], temp_a[29:0], temp_b[29:0]};
+
+endmodule
+```

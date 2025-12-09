@@ -1,0 +1,24 @@
+ Here is a Verilog implementation of the described module:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+
+always @(posedge clk) begin
+  for (int i = 0; i < 8; i++) begin
+    if (in[i] && ~pedge[i]) // if previous state was 0 and current state is 1
+      pedge[i] <= 1;        // set output bit the cycle after a 0 to 1 transition occurs
+    else if (!in[i] && pedge[i])
+      pedge[i] <= 0;        // reset output bit when current state is 0 and previous state was 1
+  end
+end
+
+initial begin
+  pedge <= 0;                   // initialize all output bits to 0
+end
+```
+
+This module uses positive edge-sensitive assignments on the clock signal (`posedge clk`) to detect changes in the input vector `in`. For each bit, it checks if the current state is 1 and the previous state was 0, setting the corresponding output bit. If the current state is 0 and the previous state was 1, the output bit is reset. The initial block sets all output bits to 0 at the start.

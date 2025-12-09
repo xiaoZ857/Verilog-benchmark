@@ -1,0 +1,10 @@
+To solve this problem, we need to design a combinational circuit with four inputs and three outputs. The outputs are derived from applying AND, OR, and XOR operations on all four input bits.
+
+### Approach
+The approach involves creating a Verilog module that takes a 4-bit input vector and computes the results of a 4-input AND gate, a 4-input OR gate, and a 4-input XOR (also known as parity) function. 
+
+1. **AND Gate**: The output is `1` only if all four inputs are `1`. This can be computed by performing a bitwise AND operation on all four input bits.
+2. **OR Gate**: The output is `1` if at least one of the inputs is `1`. This is achieved using a bitwise OR operation across all four input bits.
+3. **XOR (Parity) Gate**: The output is `1` if an odd number of the input bits are `1`. This can be computed by performing XOR operations cumulatively across all four input bits.
+
+### Solution Code

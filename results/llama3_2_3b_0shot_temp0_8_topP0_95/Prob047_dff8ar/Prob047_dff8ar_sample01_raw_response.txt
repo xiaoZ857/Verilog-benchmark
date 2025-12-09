@@ -1,0 +1,81 @@
+Here's how you can implement the 8-bit D flip-flop module in Verilog:
+
+```verilog
+module TopModule (
+  input clk, // Positive edge triggered clock signal
+  input [7:0] d, // Data to be written into the DFFs
+  input areset, // Active high asynchronous reset signal
+  output reg [7:0] q // Output of all 8 DFFs
+);
+
+reg [7:0] q; // Outputs of all 8 DFFs
+
+// Creating 8-bit D flip-flop module with active high asynchronous reset
+assign q = {d[7], d[6], d[5], d[4], d[3], d[2], d[1], d[0]};
+
+endmodule // TopModule
+```
+
+In the given code:
+
+- We have defined an 8-bit data signal (`d`) which is used as the input for all DFFs.
+- The `q` array stores the outputs of all eight DFFs, each storing a single bit from the `d` array. The output value of each DFF corresponds to its respective input bit in the `d` signal.
+
+However, in this code, the outputs will be directly tied to `d`, which can be problematic because the values in `d` are not exclusive and may change on either the rising or falling edge of the clock (depending on how you choose to synchronize them). To fix this issue, we need an additional stage that ensures that the value assigned to each DFF is the latest input it has seen. We should implement a separate signal for this purpose.
+
+Here's the corrected code:
+
+```verilog
+module TopModule (
+  input clk, // Positive edge triggered clock signal
+  input [7:0] d, // Data to be written into the DFFs
+  input areset, // Active high asynchronous reset signal
+  output reg [7:0] q // Output of all 8 DFFs
+);
+
+reg [7:0] q; // Outputs of all 8 DFFs
+
+// Creating 8-bit D flip-flop module with active high asynchronous reset
+always @(posedge clk) begin
+    if (areset) begin
+        q <= 8'b00000000;
+    end else if (d[7:0]) begin
+        // Update all bits of q based on d[7:0]
+        assign q = {d[7], d[6], d[5], d[4], d[3], d[2], d[1], d[0]};
+    end
+end
+
+endmodule // TopModule
+```
+
+In the above corrected code, we use a `always` block that updates all bits of `q` every clock cycle when `d[7:0]` changes. We only update when `areset` is high to ensure both the initial values and any updated values remain valid for comparison purposes.
+
+However, this solution can be optimized further by using always_comb:
+
+```verilog
+module TopModule (
+  input clk, // Positive edge triggered clock signal
+  input [7:0] d, // Data to be written into the DFFs
+  input areset, // Active high asynchronous reset signal
+  output reg [7:0] q // Output of all 8 DFFs
+);
+
+reg [7:0] q; // Outputs of all 8 DFFs
+
+// Creating 8-bit D flip-flop module with active high asynchronous reset
+always_comb begin
+    if (areset) begin
+        q <= 8'b00000000;
+    end else if (d[7:0]) begin
+        q <= d[7:0];
+    end
+end
+
+endmodule // TopModule
+```
+
+This is the most efficient form of implementing DFFs, as it allows you to directly assign values to `q` based on changes in `d`, ensuring that all bits in `q` always match their corresponding input value.
+
+In general, Verilog has two ways of synchronizing signals: through a simple assignment (`q <= d[7:0];`) or by using an `always` block that triggers only when the clock edge is seen. The former case directly assigns values at each possible clock edge, resulting in potential issues with data timing if not properly handled.
+
+In contrast, the latter method (`always @(posedge clk);`) synchronizes signals by updating them inside a loop that runs once for every positive edge of the clock signal, making your code much more efficient and easier to read.

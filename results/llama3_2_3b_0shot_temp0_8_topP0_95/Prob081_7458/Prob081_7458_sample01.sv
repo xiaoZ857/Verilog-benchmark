@@ -1,0 +1,39 @@
+
+module TopModule (
+    // Inputs
+    input p1a,      // A
+    input p1b,      // B
+    input p1c,      // C
+    input p1d,      // D
+    input p1e,      // E
+    input p1f,      // F
+    input p2a,      // A
+    input p2b,      // B
+    input p2c,      // C
+    input p2d,      // D
+    // Outputs
+    output p1y,     // OR gate 1 output
+    output p2y      // OR gate 2 output
+);
+
+// Intermediate signals for AND gates
+localreg p1and = 0;
+localreg p2and1 = 0;
+localreg p2and2 = 0;
+
+// Driver to drive intermediate signal for the first OR gate
+assign p1y = (p1a & p1b & p1c) | (p1d & p1e & p1f);
+
+// Driver to drive one of the two AND gates in the second OR gate
+assign p2and2 = (p2a & p2b) | (p2c & p2d);
+
+// Driver to drive the final output for the second OR gate
+assign p2y = p2and1 | p2and2;
+
+// Drivers to set the intermediate signals
+assign p1and = p1y;
+assign p2and1 = p2y;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

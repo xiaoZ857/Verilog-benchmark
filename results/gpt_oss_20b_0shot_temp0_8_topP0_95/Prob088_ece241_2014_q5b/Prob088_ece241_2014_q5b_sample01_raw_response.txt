@@ -1,0 +1,14 @@
+**Verilog implementation – one‑hot Mealy 2’s‑complementer**
+
+```verilog
+// 2’s‑complement Mealy machine
+//   A  --x=0 (z=0)-->  A
+//   A  --x=1 (z=1)-->  B
+//   B  --x=0 (z=1)-->  B
+//   B  --x=1 (z=0)-->  B
+//
+// Asynchronous active‑high reset → state A (one‑hot encoding)
+
+module TopModule (
+    input  wire clk,     // active‑high clock
+    input  wire areset,  //

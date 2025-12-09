@@ -1,0 +1,25 @@
+
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+    if (reset) begin
+        // Synchronous active-high reset
+        q <= 4'b0000;
+    end else if (slowena) begin
+        // Increment the counter when slowena is high
+        if (q == 9) begin
+            q <= 4'b0000; // Reset to 0 after reaching 9
+        end else begin
+            q <= q + 1;
+        end
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

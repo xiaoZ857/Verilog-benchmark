@@ -1,0 +1,25 @@
+ Based on the provided simulation waveform, the sequential circuit seems to increment a 4-bit counter when `a` is high and reset it to 0 when `a` is low. The reset occurs twice at t=45ns and t=75ns. Here's a Verilog implementation of this circuit:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+always @(posedge clk) begin
+  if (a) begin
+    // Increment the counter when 'a' is high
+    if (q == 3'b111) // Reset the counter when it reaches its maximum value
+      q <= 3'b000;
+    else
+      q <= q + 1'b1;
+  end else begin
+    // Reset the counter when 'a' is low
+    if (q == 3'b000 || q == 3'b111) // Reset twice at t=45ns and t=75ns in simulation waveform
+      q <= 3'b000;
+  end
+end
+```
+
+This Verilog code creates a top-level module with an input clock signal, an input `a` signal, and a 3-bit output register `q`. The behavior of the circuit is defined in an always block that triggers on every positive edge of the clock signal. When `a` is high, the counter increments until it reaches its maximum value (111 in binary), at which point it resets to 0. When `a` is low, the counter resets twice, as observed in the provided simulation waveform.

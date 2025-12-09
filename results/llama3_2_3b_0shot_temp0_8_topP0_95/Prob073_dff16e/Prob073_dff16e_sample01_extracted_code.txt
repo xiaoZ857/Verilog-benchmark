@@ -1,0 +1,33 @@
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [7:0][3:0] q[1:0]
+);
+
+// Declare a register array to hold the D flip-flops
+reg [1:0][7:0] dq[1:0];
+
+// Initialize the registers with default values (0)
+assign q = {dq[0], dq[1]};
+
+// Create 16 D flip-flops, one for each bit in both bytes
+for (int i = 0; i < 2; i++) begin
+    assign dq[i][7:0] = d[i*8+1:8+i*8]; // Select byte 'i'
+end
+
+// Define the logic to update the registers based on the clock and reset inputs
+always @(posedge clk) begin
+    if (!resetn) begin
+        for (int i = 0; i < 2; i++) dq[i][7:0] <= {8'd0, 8'd0}; // Reset all D flip-flops to 0
+    end else begin
+        for (int i = 0; i < 2; i++) begin
+            if (byteena[1-i] == 1) begin
+                dq[i][7:0] <= d[i*8+1:8+i*8]; // Update the current byte of registers
+            end else begin
+                dq[i][7:0] <= dq[i][7:0]; // No update if not in current byte
+            end
+        end
+    end
+end

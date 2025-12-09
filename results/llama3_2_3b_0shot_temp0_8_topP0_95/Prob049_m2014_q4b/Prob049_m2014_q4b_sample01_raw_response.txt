@@ -1,0 +1,26 @@
+Here's the Verilog module for the described D flip flop:
+
+```verilog
+// Define a module named 'TopModule'
+module TopModule(
+    // Input ports: clk, d, and reset 'ar' for asynchronous reset
+    input clk,           // Positive edge triggered clock
+    input d,              // Data to be fed into the flip flop
+    input ar,             // Asynchronous reset signal
+    output logic q         // Output of the D flip flop
+);
+
+// Variable declaration for internal state and feedback
+logic state;
+
+// Initialize the state on rising edge of clk (positive edge triggered)
+always @(posedge clk) begin
+    if (ar == 1) state <= 0;   // Reset to 0 on ar = 1
+    else state <= d;          // Set to input value 'd' on rising edge of clk
+end
+
+// Create the output q based on the current state on rising edge of clk
+assign q = state;
+```
+
+In this module, a logic variable `state` is used as the internal state of the D flip flop. On each positive clock edge, if the asynchronous reset signal is active (i.e., ar = 1), then it resets the state to 0. Otherwise, it sets the state to the input value of 'd'. The output q is assigned based on this current state.

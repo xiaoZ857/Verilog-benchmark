@@ -1,0 +1,113 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input x,
+  output reg z
+);
+
+  reg [2:0] y;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      y <= 0;
+      z <= 0;
+    end else begin
+      case (y)
+        3'000: begin
+          if (x == 0)
+            y <= 3'000;
+          else
+            y <= 3'001;
+          z <= 0;
+        end
+        3'001: begin
+          if (x == 0)
+            y <= 3'001;
+          else
+            y <= 3'100;
+          z <= 0;
+        end
+        3'010: begin
+          if (x == 0)
+            y <= 3'010;
+          else
+            y <= 3'001;
+          z <= 0;
+        end
+        3'011: begin
+          if (x == 0)
+            y <= 3'001;
+          else
+            y <= 3'010;
+          z <= 1;
+        end
+        3'100: begin
+          if (x == 0)
+            y <= 3'011;
+          else
+            y <= 3'100;
+          z <= 1;
+        end
+        default: begin
+          y <= 3'000;
+          z <= 0;
+        end
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:** Defines the module `TopModule` with inputs `clk`, `reset`, `x`, and output `z`.
+2. **State Register:** Declares a 3-bit register `y[2:0]` to represent the current state of the FSM.
+3. **Synchronous Reset:**  The `always @(posedge clk or posedge reset)` block handles both the positive clock edge and the positive reset edge. This ensures a synchronous reset.  When `reset` is high, the FSM is reset to state `000` and `z` is set to `0`.
+4. **State Transition Logic:** The `case (y)` statement implements the state transition logic based on the provided state table.  For each state, it checks the value of the input `x` and updates the next state `y` accordingly.  The output `z` is also updated in each state based on the state table.
+5. **Default Case:** The `default` case in the `case` statement handles unexpected or invalid states. It resets the FSM to a known state (`000`) and sets the output `z` to `0`.  This is good practice for robustness.
+
+**How to use:**
+
+1. **Save:** Save the code as a `.v` file (e.g., `top_module.v`).
+2. **Simulation:** Use a Verilog simulator (like ModelSim, Icarus Verilog, or Vivado simulator) to simulate the module and verify its behavior.  You'll need to create a testbench to provide clock, reset, and input `x` signals.
+3. **Synthesis:** Use a synthesis tool to convert the Verilog code into a gate-level netlist for implementation on an FPGA or ASIC.
+
+**Example Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg reset;
+  reg x;
+  wire z;
+
+  TopModule dut (
+    .clk(clk),
+    .reset(reset),
+    .x(x),
+    .z(z)
+  );
+
+  initial begin
+    clk = 0;
+    reset = 1;
+    x = 0;
+
+    #10 reset = 0;  // Release reset
+
+    #100 $finish;
+  end
+
+  always #5 clk = ~clk;  // Toggle clock
+
+  initial begin
+    $monitor("Time=%g, clk=%b, reset=%b, x=%b, y=%b, z=%b", $time, clk, reset, x, dut.y, z);
+  end
+
+endmodule
+```
+
+This testbench applies a clock, releases the reset, and then applies various input `x` sequences to test the FSM's functionality. The `$monitor` statement displays the state

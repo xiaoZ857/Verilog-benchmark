@@ -1,0 +1,69 @@
+```verilog
+// Define the states and their corresponding inputs
+typedef enum signed [4:0] {
+    A = 0, // State 0 with input in
+    B = 1, // State 1 with input in
+    C = 2, // State 2 with input in
+    D = 3, // State 3 with input in
+    E = 4, // State 4 with input out
+    F = 5  // State 5 with input out
+} next_state_type;
+
+// Define the state assignments for Y1 and Y3
+localparam [5:0] y1_value = {1, 0, 0, 0, 0};
+localparam [5:0] y3_value = {0, 0, 1, 0, 0};
+
+// Create a combinational logic block to determine the state based on the input
+always_comb {
+    next_state_type next_state = y[2]; // The second bit of Y determines the state
+
+    // Check for transitions due to w or the change in y
+    if (!w && y != y_value) begin
+        case(next_state)
+            A: next_state = B;
+            B: next_state = C;
+            C: next_state = D;
+            D: next_state = E;
+            E: next_state = F;
+            default: next_state = A; // Ensure we don't get stuck in an infinite loop
+        endcase
+    end
+
+    // Set the output for the state flip-flop based on the current and next states
+    if (next_state != y[2]) begin
+        Y1 = 1;
+    else begin
+        Y1 = 0;
+    end
+}
+
+// Create a combinational logic block to determine the state based on the input
+always_comb {
+    next_state_type next_state = y[3]; // The third bit of Y determines the state
+
+    // Check for transitions due to w or the change in y
+    if (!w && y != y_value) begin
+        case(next_state)
+            A: next_state = B;
+            B: next_state = C;
+            C: next_state = D;
+            D: next_state = E;
+            E: next_state = F;
+            default: next_state = A; // Ensure we don't get stuck in an infinite loop
+        endcase
+    end
+
+    // Set the output for the state flip-flop based on the current and next states
+    if (next_state != y[3]) begin
+        Y3 = 1;
+    else begin
+        Y3 = 0;
+    end
+}
+```
+
+This code defines a state machine with six states A, B, C, D, E, F. Each state is represented by its corresponding one-hot value [5:0] where the first bit represents whether input is in or out.
+
+The `next_state_type` enum type is used to represent the current and next states of the state machine. The logic for determining the state based on the input signal 'y' and the transition due to w (change in y) are implemented using two combinational logic blocks: one for Y1 and one for Y3.
+
+The `Y1` output is set to 1 if there's a transition from the current state to a different state. Otherwise, it's set to 0. Similarly, the `Y3` output is set to 1 if there's a transition from the current state to a different state.

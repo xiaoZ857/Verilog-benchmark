@@ -1,0 +1,15 @@
+
+module TopModule (
+  output reg one
+);
+
+always_comb begin
+  one = 1'b1; // Output always drives logic high
+end
+
+initial begin
+  $finish; // Finalizes simulation when the initial block completes, since there are no inputs
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

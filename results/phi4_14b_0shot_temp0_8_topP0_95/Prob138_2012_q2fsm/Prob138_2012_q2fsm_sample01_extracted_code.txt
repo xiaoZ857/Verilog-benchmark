@@ -1,0 +1,37 @@
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+
+  // State encoding (arbitrary assignment)
+  parameter A = 3'b000, B = 3'b001, C = 3'b010, D = 3'b011, E = 3'b100, F = 3'b101;
+  
+  reg [2:0] current_state, next_state;
+
+  // Output logic for z
+  assign z = (current_state == E) | (current_state == F);
+
+  // Combinational logic to determine the next state
+  always @(*) begin
+    case (current_state)
+      A: next_state = (w) ? B : A;
+      B: next_state = (w) ? C : D;
+      C: next_state = (w) ? E : D;
+      D: next_state = (w) ? F : A;
+      E: next_state = (w) ? E : D;
+      F: next_state = (w) ? C : D;
+      default: next_state = A; // Default case to handle unexpected states
+    endcase
+  end
+
+  // Sequential logic to update the current state on clock edge
+  always @(posedge clk or posedge reset) begin
+    if (reset)
+      current_state <= A; // Reset to state A
+    else
+      current_state <= next_state;
+  end
+
+endmodule

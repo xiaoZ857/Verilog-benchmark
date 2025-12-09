@@ -1,0 +1,31 @@
+Here's a simple implementation of an 8-bit D Flip-Flop in Verilog using the given description:
+
+```verilog
+// Define the module
+module TopModule(
+    // Inputs
+    input clk, 
+    input [7:0] d, 
+    // Outputs
+    output reg [7:0] q
+);
+
+// DFF instantiation
+for (int i = 0; i < 8; i++) begin : DFF_i
+    wire data;
+    
+    assign data = d[i];
+    
+    /* Clocked D Flip-Flop */
+    DFF DFF_i(clk, data, q[i]);
+endfor
+
+endmodule // TopModule
+```
+
+In this code:
+
+- We define a module named `TopModule`.
+- The inputs are `clk` (the clock signal) and `d` (the data input).
+- The output is `q`, which is an 8-bit vector representing the state of each D Flip-Flop.
+- Inside the module, we instantiate 8 DFFs using a for loop. Each DFF takes the current bit of `d` as its clocked input and assigns it to the corresponding bit of `q`.

@@ -1,0 +1,96 @@
+
+// Rule 110 implementation in Verilog
+
+module TopModule(
+    input clk, // Clock signal
+    input load,  // Synchronous active high load input
+    input [511:0] data, // System state (q[511:0])
+    output reg [511:0] q // Output system state
+);
+
+// Define the number of cells in the Rule 110 array
+#define NUM CELLS 512
+
+// Initialize all bits to zero (off)
+reg [511:0] q = '{ 
+    1'd0, 
+    1'd0,
+    1'd0,
+    ... // repeat for 512 bits
+    1'd0 
+};
+
+// Rule 110 table as a 2D array
+wire [511:0][3:0] rule_110_table = 
+{
+    {11, 11, 10, 10}, // Left[i+1] | Center[i]
+    {11, 11, 01, 00},
+    {11, 10, 10, 01},
+    {11, 10, 00, 00},
+    {10, 11, 11, 01},
+    {10, 11, 10, 01},
+    {10, 10, 10, 01},
+    {10, 10, 00, 00}
+};
+
+// Next state calculation
+reg [511:0] next_q = q;
+
+// Synthesize Rule 110 into a finite state machine (FSM) with four states:
+//  A, B, C, D. States A and D initialize the system to all zeros.
+assign next_q[0] = { 
+    rule_110_table[q[2]][3:0], // Center[i]
+    rule_110_table[q[1]][3:0],
+    rule_110_table[q[0]][3:0],
+    0 // Left[i+1]
+};
+
+// Synthesize Rule 110 into a finite state machine (FSM) with four states:
+//  A, B, C, D. States B and C initialize the system to all ones.
+assign next_q[NUM CELLS-2] = { 
+    rule_110_table[q[2]][3:0], // Center[i]
+    rule_110_table[q[1]][3:0],
+    rule_110_table[q[0]][3:0],
+    1 // Left[i+1]
+};
+
+// Synthesize Rule 110 into a finite state machine (FSM) with four states:
+//  A, B, C, D. State A initializes the system to all zeros.
+assign next_q[NUM CELLS-1] = { 
+    rule_110_table[q[2]][3:0], // Center[i]
+    rule_110_table[q[1]][3:0],
+    rule_110_table[q[0]][3:0],
+    1 // Left[i+1]
+};
+
+// Synthesize Rule 110 into a finite state machine (FSM) with four states:
+//  A, B, C, D. State B initializes the system to all ones.
+assign next_q[NUM CELLS] = { 
+    rule_110_table[q[2]][3:0], // Center[i]
+    rule_110_table[q[1]][3:0],
+    rule_110_table[q[0]][3:0],
+    1 // Left[i+1]
+};
+
+// Update q with the next state
+always_ff @(posedge clk) begin
+    q <= next_q;
+end
+
+// Load input
+always_ff @(posedge load or reset) begin
+    if (load) then 
+        q <= data;
+    else 
+        q <= '{ 
+            1'd0, 
+            1'd0,
+            1'd0,
+            ... // repeat for 512 bits
+            1'd0 
+        };
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

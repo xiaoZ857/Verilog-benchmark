@@ -1,0 +1,15 @@
+To implement a Verilog module for an AND gate, we can use continuous assignment to directly compute the output based on the inputs.
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = a & b;
+
+endmodule
+```
+
+This code defines a module with two inputs and one output. The output is assigned the logical AND of the two inputs using the `&` operator, which ensures that the output is 1 only when both inputs are 1.

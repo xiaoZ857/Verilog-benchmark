@@ -1,0 +1,14 @@
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+
+always @(*) begin
+  // State transition logic
+  next_state[0] = (state[0] & ~in) | (state[2] & ~in);  // A -> A when in=0, C -> A when in=0
+  next_state[1] = (state[0] & in) | (state[1] & in) | (state[3] & in);  // A -> B when in=1, B -> B when in=1, D
+
+// VERILOG-EVAL: endmodule not found

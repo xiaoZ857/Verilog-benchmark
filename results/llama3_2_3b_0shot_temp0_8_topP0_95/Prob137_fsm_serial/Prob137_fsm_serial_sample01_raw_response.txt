@@ -1,0 +1,71 @@
+Here's an implementation of the finite state machine using Verilog:
+```verilog
+// Define the states for the FSM
+typedef enum logic[1:0] {
+    IDLE,  // Idle state, waiting for start bit
+    START   // Start state, received start bit, waiting for data bits
+} state_type;
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+// Shared variables and signals
+
+state_type current_state;
+logic[7:0] data_bytes[8]; // Store received data bytes
+int byte_index = 0; // Index of the current byte being processed
+
+reg next_state; // Next state based on current state and inputs
+
+// FSM logic
+always @(posedge clk or reset) begin
+    if (reset) begin
+        current_state <= IDLE;
+    end else begin
+        case (current_state)
+            IDLE: // Idle state
+                if (in == '1') begin // Start bit received
+                    next_state <= START;
+                end
+            START:
+                if (~in && byte_index < 8) begin // Data bit received, check stop bit on last bit
+                    data_bytes[byte_index] = in;
+                    byte_index++;
+                    if (~in) begin
+                        next_state <= IDLE;
+                        done <= '1';
+                    end else if (byte_index == 7 && ~in) begin // Stop bit not received, wait for start bit again
+                        current_state <= IDLE;
+                    end else begin
+                        next_state <= START;
+                    end
+                end
+                if (~in) begin // Stop bit received, done processing byte
+                    done <= '1';
+                    current_state <= IDLE;
+                end
+        endcase
+    end
+end
+
+// Update state based on inputs
+assign next_state = current_state + in + reset;
+
+// Display the state and outputs
+always @(posedge clk) begin
+    $display("Current State: %d", current_state);
+    if (done)
+        $display("  Byte received");
+end
+endmodule
+```
+This code implements a finite state machine that waits for a start bit, then collects the next eight data bits and checks the stop bit. The `in` signal is used as the clock edge to update the state. When all eight data bits have been collected and the correct stop bit has been detected, the FSM signals completion by setting the `done` output.
+
+Note: Verilog does not directly support a synchronous reset like in other programming languages. We use a combination of the reset input and an always block to reset the current state when the clock goes high or low (edge-triggered).
+
+You can run this code using Vivado or another tool that supports Verilog design. This will generate an implementation for your hardware, where you'll be able to verify the behavior by testing it with various inputs.
+
+Note: In a real-world scenario, we'd want to add more robust error checking and handling mechanisms to ensure that the FSM can correctly recover from potential errors during data transmission.

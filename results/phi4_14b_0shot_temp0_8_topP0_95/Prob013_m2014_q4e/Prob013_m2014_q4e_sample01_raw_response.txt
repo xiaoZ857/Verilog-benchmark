@@ -1,0 +1,25 @@
+To implement a 2-input NOR gate in Verilog, you need to describe the behavior of the NOR operation. A NOR gate outputs true (or high, typically represented as `1`) only when both inputs are false (or low, typically represented as `0`). Otherwise, it outputs false.
+
+Here is how you can define such a module in Verilog:
+
+```verilog
+module TopModule (
+  input logic in1,
+  input logic in2,
+  output logic out
+);
+
+  // Implement the NOR gate using an always block or continuous assignment
+  assign out = ~(in1 | in2);
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Output**: The module `TopModule` takes two inputs, `in1` and `in2`, both of type `logic`, and produces one output, `out`, also of type `logic`.
+- **NOR Operation**:
+  - The expression `(in1 | in2)` performs a logical OR operation between the two inputs.
+  - The tilde operator (`~`) is used to negate the result of the OR operation. This negation turns the OR gate into a NOR gate.
+- **Continuous Assignment**: The `assign` statement ensures that changes in the input signals are immediately reflected in the output without needing any clock signal or procedural blocks.
+
+This Verilog code effectively models a 2-input NOR gate, providing the correct output based on its inputs.

@@ -1,0 +1,12 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+// XNOR gate implementation based on the waveform analysis
+// Output z is 1 when x and y are equal, 0 when they are different
+assign z = ~(x ^ y);
+
+endmodule

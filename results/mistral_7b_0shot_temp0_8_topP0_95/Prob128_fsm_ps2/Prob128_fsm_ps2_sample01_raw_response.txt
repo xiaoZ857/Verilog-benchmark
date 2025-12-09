@@ -1,0 +1,61 @@
+ Here's a possible Verilog implementation for the described finite state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire [7:0] in,
+  input wire reset,
+  output wire done
+);
+
+reg [2:0] data_buffer; // Three-byte buffer to store received message
+reg state = 0; // FSM state
+reg done = 0; // Message reception flag
+
+always @(posedge clk) begin
+    if (reset) begin
+        data_buffer <= 3'b000; // Reset the buffer to empty
+        state <= START; // Start in idle state
+    end
+
+    // Idle state: wait for first byte with in[3]=1
+    if (state == START && in[3]) begin
+        data_buffer[0] <= in; // Store the first byte
+        state <= WAITING_FOR_SECOND;
+    end
+
+    // Waiting for second byte: store it and wait for third or done
+    if (state == WAITING_FOR_SECOND && in[3]) begin
+        data_buffer[1] <= in; // Store the second byte
+        state <= WAITING_FOR_THIRD;
+    end else if (in[3] == 0) begin
+        // If another non-message byte is received, discard it and wait for the next one
+        state <= START;
+    end
+
+    // Waiting for third byte: store it and signal done immediately after
+    if (state == WAITING_FOR_THIRD && in[3]) begin
+        data_buffer[2] <= in; // Store the third byte
+        state <= DONE;
+    end else if (in[3] == 0) begin
+        // If another non-message byte is received, discard it and wait for the next one
+        state <= WAITING_FOR_THIRD;
+    end
+
+    // Done: signal done flag immediately after receiving the third byte and enter idle state
+    if (state == DONE) begin
+        done <= 1'b1;
+        state <= START;
+    end
+end
+
+// FSM states
+parameter START = 0;
+parameter WAITING_FOR_SECOND = 1;
+parameter WAITING_FOR_THIRD = 2;
+parameter DONE = 3;
+
+endmodule
+```
+
+This module implements the finite state machine as described. The `data_buffer` stores the received three-byte message, and the `state` variable keeps track of the current FSM state. When a message is successfully received, the `done` output signal is set to 1 in the following clock cycle.

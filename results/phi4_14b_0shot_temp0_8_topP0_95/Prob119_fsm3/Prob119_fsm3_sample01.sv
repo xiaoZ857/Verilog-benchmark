@@ -1,0 +1,61 @@
+
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset,
+  output reg out
+);
+
+  // Define states as an enumerated type
+  typedef enum logic [1:0] {
+    A = 2'b00,
+    B = 2'b01,
+    C = 2'b10,
+    D = 2'b11
+  } state_t;
+
+  // Registers for current and next state
+  state_t current_state, next_state;
+
+  // Always block to handle state transitions on positive clock edge or reset
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= A; // Reset to state A
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Always block to determine the next state based on current state and input
+  always_comb begin
+    case (current_state)
+      A: begin
+        if (!in) next_state = A;
+        else     next_state = B;
+      end
+      B: begin
+        next_state = (in == 0) ? B : C; // Next state in=0 is B, in=1 is C
+      end
+      C: begin
+        if (!in) next_state = A;
+        else     next_state = D;
+      end
+      D: begin
+        next_state = (in == 0) ? C : B; // Next state in=0 is C, in=1 is B
+      end
+    endcase
+  end
+
+  // Always block to determine the output based on current state
+  always_comb begin
+    case (current_state)
+      A: out = 0;
+      B: out = 0;
+      C: out = 0;
+      D: out = 1;
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

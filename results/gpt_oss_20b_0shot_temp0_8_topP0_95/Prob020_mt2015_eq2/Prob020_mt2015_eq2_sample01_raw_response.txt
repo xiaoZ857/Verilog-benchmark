@@ -1,0 +1,71 @@
+Below is a minimal, synthesizable implementation of the required logic.  
+Because the specification only talks about **combinational** behaviour (no clock is mentioned), the module is written as a purely combinational circuit using a continuous assignment.
+
+```verilog
+//====================================================================
+// TopModule.v
+//
+// Description:
+//   Two 2‑bit inputs A[1:0] and B[1:0] are compared.  The output z is
+//   driven to logic‑1 when the two vectors are identical; otherwise z
+//   is logic‑0.
+//
+//   The design is purely combinational – there is no clock edge or
+//   register.  The expression `A == B` produces a 1‑bit result that
+//   directly drives the output.
+//
+//====================================================================
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [1:0] A,   // 2‑bit source vector
+    input  wire [1:0] B,   // 2‑bit compare vector
+    output wire       z    // 1 if A == B, else 0
+);
+
+    // A simple equality comparison.  The Verilog `==` operator
+    // returns 1 when the vectors are equal; otherwise it returns 0.
+    assign z = (A == B);
+
+endmodule
+```
+
+### Why this works
+
+* **Combinational logic** – The `assign` statement continuously drives `z` with the result of the comparison. No flip‑flops or clock edges are required.
+* **Synthesis‑friendly** – The equality operator is synthesizable and maps to a small combinational network of XOR/AND gates.
+* **Clear and maintainable** – The code is concise and directly expresses the intended behaviour.
+
+### Optional Testbench (for simulation)
+
+```verilog
+`timescale 1ns/1ps
+module tb_TopModule;
+    reg  [1:0] A, B;
+    wire z;
+
+    TopModule uut (.A(A), .B(B), .z(z));
+
+    initial begin
+        $display("time\tA\tB\tz");
+        $monitor("%0t\t%b\t%b\t%b", $time, A, B, z);
+
+        // Test all combinations
+        repeat (4) begin
+            A = $random % 4;
+            B = $random % 4;
+            #5;   // Wait a bit to see the result
+        end
+
+        // Specific test cases
+        A = 2'b00; B = 2'b00; #5;
+        A = 2'b01; B = 2'b10; #5;
+        A = 2'b11; B = 2'b11; #5;
+
+        $finish;
+    end
+endmodule
+```
+
+Feel free to drop the testbench into your simulation environment to verify the logic.

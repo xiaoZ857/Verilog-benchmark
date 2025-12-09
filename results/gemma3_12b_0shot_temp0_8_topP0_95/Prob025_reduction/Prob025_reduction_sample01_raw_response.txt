@@ -1,0 +1,19 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output parity
+);
+
+  assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [7:0] in, output parity);`**:  This declares the module named `TopModule` with an 8-bit input `in` and a single-bit output `parity`.
+* **`assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7];`**: This is the core of the parity checker. It uses the `assign` statement to continuously assign the value of the XOR operation to the `parity` output. The XOR operator (`^`) compares each bit of the input `in` and sets the corresponding bit in the `parity` output to 1 if the bits are different and to 0 if they are the same. The final `parity` bit is the result of XORing all the input bits together.
+
+**How it works (Even Parity):**
+
+Even parity means the total number of 1s in the data (including the parity bit) should be even.  The circuit calculates the number of 1s in the 8 data bits. If the number of 1s is even, the parity bit will be 0 (to keep the total number of 1s even).  If the number of 1s is odd, the parity bit will be 1 (to make the total number of 1s even).

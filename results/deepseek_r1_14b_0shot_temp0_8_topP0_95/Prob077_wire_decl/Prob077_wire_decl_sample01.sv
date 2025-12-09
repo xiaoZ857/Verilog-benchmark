@@ -1,0 +1,26 @@
+
+module TopModule (
+    input a,
+    input b,
+    input c,
+    input d,
+    output out,
+    output out_n
+);
+
+   // Intermediate wires for the AND gates' outputs
+   wire y, z;
+
+   // First layer: two AND gates
+   and gate1 (y, a, b);       // Output y = a & b
+   and gate2 (z, c, d);       // Output z = c & d
+
+   // Second layer: OR gate combining the AND outputs
+   or or_gate(out, y, z);     // out = y | z
+
+   // Inverted output
+   not not_gate(out_n, out);  // out_n
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

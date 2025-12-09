@@ -1,0 +1,22 @@
+Here is a minimal, fully‑combinational implementation of `TopModule` that simply forwards the value of `in` to `out`:
+
+```verilog
+// TopModule.v
+// Simple combinational pass‑through
+// out = in
+
+module TopModule (
+    input  wire in,
+    output wire out
+);
+
+    // Combinational assignment
+    assign out = in;
+
+endmodule
+```
+
+**Explanation**
+
+* `input wire in` and `output wire out` are declared as 1‑bit wide (the default for `wire`).
+* The `assign` statement creates a continuous, combinational connection so `out` reflects `in` on every delta cycle. No clock or reset is involved, matching the “combinational” requirement.

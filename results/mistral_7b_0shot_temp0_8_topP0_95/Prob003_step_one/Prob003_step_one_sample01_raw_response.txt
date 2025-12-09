@@ -1,0 +1,19 @@
+ Here is a simple Verilog implementation for your requirement:
+
+```verilog
+module TopModule (
+  output reg one
+);
+
+always_comb begin
+  one = 1'b1; // Output always drives logic high
+end
+
+initial begin
+  $finish; // Finalizes simulation when the initial block completes, since there are no inputs
+end
+```
+
+This TopModule will produce a constant output of '1'. The `always_comb` block specifies that this is a combinational logic where the output depends only on the current values of input signals. Since there are no inputs in this case, it always outputs '1'.
+
+The `initial` block finalizes simulation when the initial block completes since there are no inputs to wait for. This way, the simulation will run as quickly as possible without having to wait for potentially unchanged inputs.

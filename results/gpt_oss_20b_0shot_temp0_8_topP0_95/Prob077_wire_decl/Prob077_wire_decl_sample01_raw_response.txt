@@ -1,0 +1,49 @@
+Here’s a clean, gate‑based implementation that follows the description exactly.  
+The two intermediate wires (`w1` and `w2`) carry the results of the two AND gates.  
+The `or` gate drives the primary output `out`, and the `not` gate drives the inverted
+output `out_n`.  No extra wire is needed for the NOT gate’s input because we can
+feed it directly from `out`.
+
+```verilog
+// TopModule.v
+// Two‑layer combinational logic: (a & b) | (c & d)
+// with an inverted output.
+
+module TopModule (
+    input  a,
+    input  b,
+    input  c,
+    input  d,
+    output out,
+    output out_n
+);
+
+    // Intermediate wires for the two AND gates
+    wire w1, w2;
+
+    // First layer – two AND gates
+    and (w1, a, b);   // w1 = a & b
+    and (w2, c, d);   // w2 = c & d
+
+    // Second layer – OR gate producing the main output
+    or  (out, w1, w2);   // out = w1 | w2
+
+    // Inverted output
+    not (out_n, out);    // out_n = ~out
+
+endmodule
+```
+
+### How it works
+
+| Gate | Inputs | Output |
+|------|--------|--------|
+| `and` | `a, b` | `w1` |
+| `and` | `c, d` | `w2` |
+| `or`  | `w1, w2` | `out` |
+| `not` | `out` | `out_n` |
+
+Each wire (`w1`, `w2`, and `out`) is driven by a single source, satisfying the
+requirement that wires are driven by exactly one source but can fan‑out to
+multiple inputs. The module is fully combinational and can be synthesized
+directly by any standard Verilog tool.

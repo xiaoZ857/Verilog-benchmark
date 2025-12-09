@@ -1,0 +1,38 @@
+ Here's a simple Verilog implementation for the given description:
+
+```verilog
+module TopModule (
+  input wire in,
+  output reg out
+);
+
+always @(posedge clk) begin
+  out <= in;
+end
+
+// Add a reset signal if necessary
+reg reset;
+assign RESET = 1'b0; // Reset value (assuming active low reset)
+
+initial begin
+  #10 $finish; // Simulation stops after 10 time units
+end
+
+// If a clock is required, add the following:
+input clock;
+always @(posedge clock) begin
+  if (reset) begin
+    out <= 1'b0;
+    reset <= ~reset; // Toggle reset after 1 time unit
+  end else begin
+    out <= in;
+  end
+end
+```
+
+In this code:
+- The `TopModule` has an input signal `in` and an output signal `out`.
+- The `always` block with the sensitivity list of `posedge clk` assigns the value of the input to the output combinatorially.
+- An initial block is used for simulation finalization.
+- A reset signal `reset` is added, which can be toggled in the second always block when clock is active. The reset will asynchronously force the output to 0 after a specified delay. You can modify the delay value by changing the number inside the `#10`.
+- The optional part of the code includes an input clock signal and an assumption that the module should work with any clock signal provided it's positive edge-triggered.

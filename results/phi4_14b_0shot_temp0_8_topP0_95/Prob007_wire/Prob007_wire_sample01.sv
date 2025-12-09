@@ -1,0 +1,12 @@
+
+module TopModule (
+  input in,
+  output out
+);
+
+  // Direct assignment: the output 'out' simply mirrors the input 'in'
+  assign out = in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

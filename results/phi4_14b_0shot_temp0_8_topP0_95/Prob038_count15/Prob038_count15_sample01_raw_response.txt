@@ -1,0 +1,39 @@
+Below is a Verilog module that implements a 4-bit binary counter with an active-high synchronous reset. The counter counts from 0 through 15 and resets to 0 when the `reset` signal is high.
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    output reg [3:0] q
+);
+
+    // Always block triggered on the positive edge of the clock or reset
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Synchronous reset to 0 when reset is high
+            q <= 4'b0000;
+        end else begin
+            // Increment the counter
+            q <= q + 1;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs:**
+  - `clk`: Clock input.
+  - `reset`: Synchronous reset input, active high.
+  - `q`: A 4-bit output register representing the current count.
+
+- **Always Block:**
+  - The always block is triggered on the positive edge of either the `clk` or the `reset`. This ensures that changes to the counter occur on clock edges and also handles the reset condition immediately when it occurs.
+  
+- **Reset Logic:**
+  - When `reset` is high, the output register `q` is set to 4'b0000 synchronously. This means at every positive clock edge where `reset` is active high, the counter resets.
+
+- **Counter Logic:**
+  - If `reset` is not high, the counter increments by one on each rising edge of the clock.
+  
+This design ensures that the counter will count from 0 to 15 and then wrap around back to 0, providing a period of 16 cycles. The reset functionality allows for immediate synchronization with system requirements whenever it's needed.

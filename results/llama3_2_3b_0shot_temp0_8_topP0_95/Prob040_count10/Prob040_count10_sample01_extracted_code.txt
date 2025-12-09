@@ -1,0 +1,46 @@
+module TopModule(
+    input clk,
+    input reset,
+    output reg [3:0] q
+) {
+    
+    // D flip-flop array to store counter values
+    reg [3:0] dff[10:0];
+    
+    // Counter states
+    reg [4:0] cs;
+    
+    // Clock and reset signals
+    always @(posedge clk) begin
+        if (reset) begin
+            q <= 0;
+            dff[1:0] <= 0;
+            cs <= 0;
+        end else begin
+            cs <= cs + 1;
+            
+            if (cs >= 10) begin
+                cs <= 0;
+            end
+            
+            // Reset counter value to 0 when reset is asserted
+            if (~reset) begin
+                for (int i = 10:0; i > 0; i--) begin
+                    dff[i] <= dff[i - 1];
+                end
+                q <= cs[3:0];
+            end
+            
+            // Update counter value
+            if (~reset) begin
+                q <= dff[cs + 5];
+                for (int i = cs + 6; i >= 2; i--) begin
+                    dff[i] <= dff[i - 1];
+                end
+            end
+        end
+    end
+    
+    // Assign output signal
+    assign q = dff[10];
+}

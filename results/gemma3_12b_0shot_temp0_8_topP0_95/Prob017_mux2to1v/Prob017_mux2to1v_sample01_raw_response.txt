@@ -1,0 +1,20 @@
+```verilog
+module TopModule (
+  input [99:0] a,
+  input [99:0] b,
+  input sel,
+  output [99:0] out
+);
+
+  assign out = sel ? b : a;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out = sel ? b : a;`**: This is a conditional assignment. It's a shorthand for an `if-else` statement.
+    * `sel ? b : a` means:  "If `sel` is 1 (true), then assign the value of `b` to `out`. Otherwise (if `sel` is 0), assign the value of `a` to `out`."
+* **`[99:0]`**: This specifies that both `a`, `b`, and `out` are 100-bit wide signals.
+
+This implementation is concise and efficient, directly implementing the described 2-1 multiplexer functionality.  It's also synthesizable, meaning it can be converted into a physical circuit.

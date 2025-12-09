@@ -1,0 +1,24 @@
+Problem: Prob138_2012_q2fsm
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:78: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:79: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:80: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:81: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:82: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:83: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:84: error: z is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:6:      : z is declared here as wire.
+7 error(s) during elaboration.

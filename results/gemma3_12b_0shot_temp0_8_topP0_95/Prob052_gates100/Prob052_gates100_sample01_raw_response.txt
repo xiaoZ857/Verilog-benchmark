@@ -1,0 +1,30 @@
+```verilog
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+
+  assign out_and = & in;  // 100-input AND gate
+  assign out_or  = | in;  // 100-input OR gate
+  assign out_xor = ^ in;  // 100-input XOR gate
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  Defines the module named `TopModule` with the specified input and output ports.
+* **`input [99:0] in;`**: Declares a 100-bit input signal named `in`.  `[99:0]` indicates a vector of bits from index 99 down to 0.
+* **`output out_and, out_or, out_xor;`**: Declares three output signals: `out_and`, `out_or`, and `out_xor`.
+* **`assign out_and = & in;`**:  This line uses the `&` operator, which is the Verilog shorthand for a logical AND of all the bits in the `in` vector.  The result is assigned to the `out_and` output.
+* **`assign out_or = | in;`**:  This line uses the `|` operator, which is the Verilog shorthand for a logical OR of all the bits in the `in` vector. The result is assigned to the `out_or` output.
+* **`assign out_xor = ^ in;`**: This line uses the `^` operator, which is the Verilog shorthand for a logical XOR of all the bits in the `in` vector. The result is assigned to the `out_xor` output.
+* **`endmodule`**: Marks the end of the module definition.
+
+**How it works:**
+
+The code directly uses Verilog's built-in logical operators (`&`, `|`, and `^`) to implement the AND, OR, and XOR gates respectively.  These operators automatically iterate over all the bits in the input vector `in` and perform the corresponding logical operation.  The result of each operation is then assigned to the corresponding output signal.
+
+This is a concise and efficient way to implement the described combinational circuit in Verilog.  No explicit gate instances (like `and`, `or`, or `xor`) are needed, as the operators perform the functionality directly.

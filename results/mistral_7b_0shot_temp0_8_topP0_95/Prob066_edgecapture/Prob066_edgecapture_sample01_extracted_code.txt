@@ -1,0 +1,30 @@
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+reg [31:0] previous_values; // Stores the values of 'in' from the previous clock cycle
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    previous_values <= 0; // Reset all previous values to zero when reset is active
+  end else begin
+    previous_values <= in; // Store current 'in' values for the next clock cycle
+  end
+end
+
+always @(posedge clk) begin
+  for (int i = 0; i < 32; i = i + 1) begin
+    if (previous_values[i] == 1'b1 && in[i] == 1'b0) begin
+      out[i] <= 1'b1; // Set the corresponding output bit to 1 when the condition is met
+    end
+  end
+end
+
+initial begin
+  previous_values <= 0; // Initialize all previous values to zero at the start
+end
+
+endmodule

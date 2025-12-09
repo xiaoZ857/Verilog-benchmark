@@ -1,0 +1,59 @@
+To implement the `TopModule` in Verilog based on the given waveform, we need to analyze how the output `z` changes with respect to inputs `x` and `y`. Here's a breakdown of the behavior:
+
+1. **Initial State (0ns - 20ns):**  
+   - Both `x` and `y` are 0.
+   - Output `z` is always 1.
+
+2. **At 25ns:**  
+   - `x` becomes 1, while `y` remains 0.
+   - Output `z` changes to 0.
+
+3. **At 35ns:**  
+   - `x` returns to 0, and `y` becomes 1.
+   - Output `z` is 0.
+
+4. **At 45ns:**  
+   - Both `x` and `y` become 1.
+   - Output `z` changes to 1.
+
+5. **At 55ns:**  
+   - `x` returns to 0, and `y` becomes 0.
+   - Output `z` is 1.
+
+6. **At 60ns:**  
+   - `x` remains 0, and `y` becomes 1 again.
+   - Output `z` changes back to 0.
+
+7. **At 70ns:**  
+   - Both `x` and `y` become 1.
+   - Output `z` changes to 1.
+
+8. **At 75ns:**  
+   - `x` becomes 0, while `y` remains 1.
+   - Output `z` is 0.
+
+9. **At 90ns:**  
+   - `x` becomes 1, and `y` returns to 0.
+   - Output `z` changes to 0.
+
+From this analysis, we can deduce the logic for `z`:
+
+- `z` is 1 when both `x` and `y` are either (0, 0) or (1, 1).
+- `z` is 0 when `x` and `y` are (0, 1) or (1, 0).
+
+This behavior can be implemented using an XOR gate followed by a NOT gate. The XOR of `x` and `y` will be 1 only when `x` and `y` are different, so negating it will give us the desired output.
+
+Here's the Verilog implementation:
+
+```verilog
+module TopModule (
+    input x,
+    input y,
+    output z
+);
+    assign z = ~(x ^ y); // z is 1 when x equals y
+
+endmodule
+```
+
+This module uses an XOR gate to detect when `x` and `y` are different, then negates the result to produce the desired output `z`.

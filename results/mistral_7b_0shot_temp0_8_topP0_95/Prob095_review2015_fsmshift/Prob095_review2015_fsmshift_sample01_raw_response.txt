@@ -1,0 +1,34 @@
+ Here is a simple Verilog implementation based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg shift_ena
+);
+
+reg count = 0; // Counter for the number of clock cycles
+
+always @(posedge clk) begin
+    if (reset) begin
+        shift_ena <= 1'b1; // Assert shift_ena during reset
+        count <= 4'b0000; // Reset counter to 0
+    end
+    else if (count < 4) begin
+        count <= count + 1; // Increment the counter on each clock cycle
+        shift_ena <= count == 4 ? 1'b1 : 1'b0; // Enable shift_ena for exactly 4 cycles
+    end
+end
+
+// To make sure that the shifting is limited to 4 cycles, add a D-type flip flop
+reg shift_ena_ff;
+always @(posedge clk) begin
+    shift_ena_ff <= shift_ena;
+end
+
+assign shift_ena = shift_ena_ff; // Assign output as the flip flop's output
+
+endmodule
+```
+
+This implementation uses a counter to keep track of the number of clock cycles and enables the `shift_ena` signal for exactly 4 clock cycles whenever the reset is deasserted. After the 4th cycle, the `shift_ena` will remain unchanged (0) until the next reset occurs. The `shift_ena` signal is also captured by a D-type flip flop to ensure that the shifting is limited to only four cycles.

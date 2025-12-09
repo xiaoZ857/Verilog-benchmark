@@ -1,0 +1,28 @@
+
+// TopModule.v
+// 2‑input XNOR feeding a 2‑input XOR (second input = in3)
+// Output of the XOR is `out`.
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  logic in1,
+    input  logic in2,
+    input  logic in3,
+    output logic out
+);
+    // Intermediate signal for the XNOR result
+    logic xnor_out;
+
+    // XNOR gate
+    xnor (xnor_out, in1, in2);
+
+    // XOR gate
+    xor  (out, xnor_out, in3);
+
+    // (Optional) you could also write this in one line:
+    // assign out = (in1 xnor in2) ^ in3;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

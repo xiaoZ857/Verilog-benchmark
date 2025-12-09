@@ -1,0 +1,11 @@
+Below is a compact, purely combinational implementation of the **Moore** state‑machine described in the table.  
+The module receives the current one‑hot state (`state[3:0]`) and the input bit `in`.  
+It outputs the next state (`next_state[3:0]`) and the Moore output `out`.  
+The output is `1` only when the machine is in state **D** (the MSB of the one‑hot word).  
+
+```verilog
+// ------------------------------------------------------------
+// TopModule – combinational part of a one‑hot Moore FSM
+// ------------------------------------------------------------
+module TopModule (
+   

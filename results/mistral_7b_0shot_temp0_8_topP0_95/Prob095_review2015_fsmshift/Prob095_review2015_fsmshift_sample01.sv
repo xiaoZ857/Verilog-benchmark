@@ -1,0 +1,31 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg shift_ena
+);
+
+reg count = 0; // Counter for the number of clock cycles
+
+always @(posedge clk) begin
+    if (reset) begin
+        shift_ena <= 1'b1; // Assert shift_ena during reset
+        count <= 4'b0000; // Reset counter to 0
+    end
+    else if (count < 4) begin
+        count <= count + 1; // Increment the counter on each clock cycle
+        shift_ena <= count == 4 ? 1'b1 : 1'b0; // Enable shift_ena for exactly 4 cycles
+    end
+end
+
+// To make sure that the shifting is limited to 4 cycles, add a D-type flip flop
+reg shift_ena_ff;
+always @(posedge clk) begin
+    shift_ena_ff <= shift_ena;
+end
+
+assign shift_ena = shift_ena_ff; // Assign output as the flip flop's output
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

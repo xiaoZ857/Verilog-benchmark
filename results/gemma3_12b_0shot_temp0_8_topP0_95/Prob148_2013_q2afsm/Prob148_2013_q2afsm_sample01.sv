@@ -1,0 +1,79 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+
+  // State definitions
+  parameter A = 0;
+  parameter B = 1;
+  parameter C = 2;
+  parameter D = 3;
+
+  // State register
+  reg [1:0] current_state;
+
+  // Next state logic
+  reg [1:0] next_state;
+
+  // Output logic
+  wire g1;
+  wire g2;
+  wire g3;
+
+  // State table (always block)
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      current_state <= A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic (always block)
+  always @(*) begin
+    next_state = current_state; // Default: stay in the current state
+
+    case (current_state)
+      A: begin
+        if (r[1]) begin
+          next_state = B;
+        end else if (r[2]) begin
+          next_state = C;
+        end else if (r[3]) begin
+          next_state = D; // Not strictly necessary based on description, but handles the case
+        end
+      end
+      B: begin
+        if (r[1]) begin
+          next_state = B;
+        end else begin
+          next_state = A;
+        end
+      end
+      C: begin
+        if (r[2]) begin
+          next_state = C;
+        end else begin
+          next_state = A;
+        end
+      end
+      D: begin
+        next_state = A; // Goes back to A - not explicitly mentioned in problem, but to handle state D
+      end
+      default: begin
+        next_state = A; // Default: go to state A for safety
+      end
+    endcase
+  end
+
+  // Output logic (continuous assignments)
+  assign g1 = (current_state == B);
+  assign g2 = (current_state == C);
+  assign g3 = (current_state == D);  // Corrected assignment for g3
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

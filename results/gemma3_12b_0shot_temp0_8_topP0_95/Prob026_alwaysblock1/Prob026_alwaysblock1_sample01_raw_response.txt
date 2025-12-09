@@ -1,0 +1,60 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+  // AND gate using assign statement
+  assign out_assign = a & b;
+
+  // AND gate using combinational always block
+  always @(a, b) begin
+    out_alwaysblock = a & b;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... )`**:  Defines the module named `TopModule` and its input/output ports.
+* **`input a, input b`**: Declares `a` and `b` as input signals.
+* **`output out_assign`**: Declares `out_assign` as an output signal.  This will be driven by the `assign` statement.
+* **`output reg out_alwaysblock`**: Declares `out_alwaysblock` as an output signal and also declares it as a `reg`.  `reg` is required for signals that are assigned within an `always` block.
+* **`assign out_assign = a & b;`**:  This is the `assign` statement. It continuously assigns the bitwise AND of inputs `a` and `b` to the output signal `out_assign`.  This creates a combinational AND gate.  Since it's an `assign` statement, the output is updated immediately whenever `a` or `b` changes.
+* **`always @(a, b) begin ... end`**:  This is a combinational `always` block.  The `@(a, b)` part is a sensitivity list.  It tells the simulator to execute the block whenever either `a` or `b` changes.
+* **`out_alwaysblock = a & b;`**:  Inside the `always` block, this statement assigns the bitwise AND of inputs `a` and `b` to the `reg` output `out_alwaysblock`.  Like the `assign` statement, this creates a combinational AND gate.  The `always` block ensures that the output `out_alwaysblock` is updated whenever `a` or `b` changes.
+
+**How to Test:**
+
+You can create a testbench to verify that both implementations produce the expected output.  Here's a simple testbench example:
+
+```verilog
+module TopModule_tb;
+
+  reg a, b;
+  wire out_assign;
+  reg out_alwaysblock;
+
+  TopModule dut (
+    .a(a),
+    .b(b),
+    .out_assign(out_assign),
+    .out_alwaysblock(out_alwaysblock)
+  );
+
+  initial begin
+    // Test cases
+    a = 0; b = 0; #10; $display("a=%b, b=%b, out_assign=%b, out_alwaysblock=%b", a, b, out_assign, out_alwaysblock);
+    a = 0; b = 1; #10; $display("a=%b, b=%b, out_assign=%b, out_alwaysblock=%b", a, b, out_assign, out_alwaysblock);
+    a = 1; b = 0; #10; $display("a=%b, b=%b, out_assign=%b, out_alwaysblock=%b", a, b, out_assign, out_alwaysblock);
+    a = 1; b = 1; #10; $display("a=%b, b=%b, out_assign=%b, out_alwaysblock=%b", a, b, out_assign, out_alwaysblock);
+    $finish;
+  end
+
+endmodule
+```
+
+This testbench will print the values of the inputs and both outputs for different combinations of `a` and `b`.  You should see that `out_assign` and `out_alwaysblock` produce identical results.

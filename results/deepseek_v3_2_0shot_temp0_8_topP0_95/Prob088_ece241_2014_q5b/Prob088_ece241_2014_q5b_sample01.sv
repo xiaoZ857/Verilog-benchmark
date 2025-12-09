@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= 2'b01; // State A is active
+    end else begin
+        case (state)
+            2'b01: // State A
+                if (x) begin
+                    state <= 2'b10; // Transition to state B
+                end else begin
+                    state <= 2'b01; // Remain in state A
+                end
+            2'b10: // State B
+                state <= 2'b10; // Always remain in state B
+            default:
+                state <= 2'b01; // Default to state A
+        endcase
+    end
+end
+
+assign z = (state == 2'b01 && x) || (state == 2'b10 && ~x);
+
+endmodule

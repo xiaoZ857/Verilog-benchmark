@@ -1,0 +1,12 @@
+Problem: Prob122_kmap4
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\gemma3_12b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

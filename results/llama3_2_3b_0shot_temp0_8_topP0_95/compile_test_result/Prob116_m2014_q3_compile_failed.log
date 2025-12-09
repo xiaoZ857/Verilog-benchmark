@@ -1,0 +1,14 @@
+Problem: Prob116_m2014_q3
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:21: error: the number of indices (2) is greater than the number of dimensions (1).
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:21: error: the number of indices (2) is greater than the number of dimensions (1).
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:21: error: Unable to elaborate r-value: ((x['sd2]['sd0])&(x['sd2]['sd1]))|(((lut_lookup[x['sd1]])==('sd0))&(d_choice))
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob116_m2014_q3/Prob116_m2014_q3_sample01.sv:8: error: Cannot assign to array lut_lookup. Did you forget a word index?
+4 error(s) during elaboration.

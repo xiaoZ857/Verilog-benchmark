@@ -1,0 +1,62 @@
+Here is a Verilog module that implements the finite state machine to detect PS/2 mouse protocol messages:
+```
+module TopModule(
+    input clk,            // Positive edge triggered clock signal
+    input [7:0] in,         // Byte stream with MSB on top
+    input reset,           // Asynchronous active high reset signal
+    output done             // Signal indicating message has been received
+);
+
+// Internal signals for the state machine
+reg [2:0] state;
+reg [7:0] messageBytes[3];  // Storing the last 3 bytes of a message
+
+// Constructor for the state machine
+always @(posedge clk or negedge reset) begin
+    if(reset)
+        state <= 2;      // Reset to idle state
+    else
+        case(state)
+            0: state <= 1;    // Start byte detected, start searching for message boundary
+            1: state <= 2;
+            2: state <= 3;    // Message boundary found, start reading the first byte of a message
+            3: state <= 0;    // First byte of a message read, start reading the second byte
+            default: state <= 0;
+        endcase
+end
+
+// Reading bytes from the input stream and checking if they form a valid message
+always @(posedge clk or (in[7] == 1)) begin
+    if(state == 3) begin
+        if(in[7:0] == messageBytes[2])   // Check if second byte matches the last one of the previous message
+            state <= 4;                  // Continue reading the third and final byte of a message
+        else
+            state <= 0;
+    end
+    else if(state == 4) begin
+        if(in[7:0] == messageBytes[3])   // Check if last one of this message matches the second to last of previous one's (message boundary)
+            done <= 1;                   // A full message has been received
+        else
+            state <= 0;
+    end
+end
+
+// Writing the bytes to internal memory and signaling when a message is read
+always @(posedge clk) begin
+    if(state == 4) begin
+        messageBytes[3] <= in[7:0];
+        done <= 1;
+    end
+end
+
+endmodule
+```
+
+The state machine's behavior can be explained as follows:
+
+1. `state = 0`: Idle, waiting for start byte.
+2. `state = 1`: Start byte detected, waiting for message boundary. When the clock edge is triggered or a change in MSB occurs, the FSM moves to `state = 2`.
+3. `state = 2`: Message boundary found; reading first byte of a message (`messageBytes[0]`). When another change in MSB or clock edge triggers the FSM, it proceeds to `state = 3`. 
+4. `state = 3`: Reading second byte of a message (`messageBytes[1]`). When another change in MSB occurs, it proceeds to `state = 4`. If the wrong value appears instead, it goes back to `state = 0`.
+5. `state = 4` : The third and last byte of the current message (`messageBytes[2]`) is being read. When a correct match is found for `messageBytes[3]`, the state moves to `state = 0` (resetting) or if it finds an incoherent value on MSB, it resets again. The FSM transitions out of this mode immediately after detecting the message's final byte.
+6. `state = 2, 3`: These states are used for keeping track of previous messages while current messages (`messageBytes`) is still being read and to reset them if necessary.

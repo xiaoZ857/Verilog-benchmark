@@ -1,0 +1,33 @@
+// 10‑bit countdown timer
+//  - When load = 1, the counter is loaded with the value of data
+//  - When load = 0, the counter decrements (if it is not already 0)
+//  - The output tc is asserted when the counter reaches 0 and stays asserted
+//    until the counter is re‑loaded.
+//
+// All operations are synchronous with the rising edge of clk.
+
+module TopModule (
+    input        clk,    // clock input
+    input        load,   // load enable
+    input  [9:0] data,   // value to load into the counter
+    output       tc      // terminal count flag
+);
+
+    // Internal 10‑bit counter
+    reg [9:0] cnt;
+
+    // Counter logic
+    always @(posedge clk) begin
+        if (load) begin
+            cnt <= data;          // load new value
+        end
+        else if (cnt != 10'd0) begin
+            cnt <= cnt - 1'b1;    // decrement if not already zero
+        end
+        // else: cnt remains zero (terminal count)
+    end
+
+    // tc is high when the counter is zero
+    assign tc = (cnt == 10'd0);
+
+endmodule

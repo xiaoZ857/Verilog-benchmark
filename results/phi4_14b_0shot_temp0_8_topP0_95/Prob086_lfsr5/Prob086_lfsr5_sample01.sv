@@ -1,0 +1,24 @@
+
+module TopModule (
+    input clk,
+    input reset,
+    output reg [4:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset the LFSR to state 00001 (binary)
+        q <= 5'b00001;
+    end else begin
+        // Compute new bit using taps at position 5 and 3 (1-based index)
+        // Convert to zero-based indexing: taps are at positions 4 and 2
+        reg feedback = q[4] ^ q[2];
+        
+        // Shift right with the feedback going into the MSB
+        q <= {feedback, q[4:1]};
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

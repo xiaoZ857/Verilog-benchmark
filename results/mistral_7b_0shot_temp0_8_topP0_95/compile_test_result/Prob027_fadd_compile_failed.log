@@ -1,0 +1,20 @@
+Problem: Prob027_fadd
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:18: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:19: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:20: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:20: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:26: warning: implicit definition of wire 'carry_in_sum'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:33: warning: implicit definition of wire 'carry_xor'.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:40: warning: implicit definition of wire 'sum_ab'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob027_fadd_ref.sv:14: syntax error
+I give up.

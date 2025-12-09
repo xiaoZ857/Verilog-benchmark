@@ -1,0 +1,14 @@
+module TopModule (
+  input [2:0] vec,
+  output reg [2:0] outv,
+  output reg o2,
+  output reg o1,
+  output reg o0
+);
+
+always @(posedge clk) begin
+  outv <= vec; // Output the same vector as input
+  o2 <= vec[2]; // Connect output o2 to input vector's position 2
+  o1 <= vec[1]; // Connect output o1 to input vector's position 1
+  o0 <= vec[0]; // Connect output o0 to input vector's position 0
+end

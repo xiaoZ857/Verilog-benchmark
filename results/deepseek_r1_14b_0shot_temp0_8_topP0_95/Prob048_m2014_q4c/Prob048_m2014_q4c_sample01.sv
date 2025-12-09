@@ -1,0 +1,19 @@
+
+module TopModule (
+    input clk,
+    input d,
+    input r,
+    output logic q
+);
+
+always @(posedge clk) begin
+    if (r == 1) begin
+        q <= 0;
+    end else begin
+        q <= d;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,19 @@
+// 8‑bit register with active‑high synchronous reset
+module TopModule (
+    input  wire        clk,   // positive‑edge clock
+    input  wire [7:0]  d,     // data input
+    input  wire        reset, // synchronous active‑high reset
+    output reg  [7:0]  q      // 8‑bit output register
+);
+
+    // One clock‑edge triggered process that implements the 8 D‑FFs.
+    // On each rising edge of clk, the register either loads d
+    // (normal operation) or clears to 0 when reset is asserted.
+    always @(posedge clk) begin
+        if (reset)          // synchronous active‑high reset
+            q <= 8'b0;      // clear all bits
+        else
+            q <= d;         // normal D‑FF behaviour
+    end
+
+endmodule

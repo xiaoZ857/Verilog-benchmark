@@ -1,0 +1,8 @@
+
+module TopModule (
+  output one
+);
+
+// Always drive the output to 1
+assign one = 1'b1;
+endmodule

@@ -1,0 +1,34 @@
+Here is a Verilog implementation for the described module:
+
+```verilog
+module TopModule(
+    input [7:0] signed_in, // Signed 8-bit input
+    output [31:0] signed_out  // Signed 32-bit output
+);
+
+    always @(posedge clk) begin
+        signed_out = {
+            signed_in[7], {signed_in[6:0]}, // Sign extension
+            signed_in
+        };
+    end
+
+endmodule
+```
+
+However, if we want to implement the logic without using a clock, and assuming that the input is always signed (i.e., one of the bits will be 1), we can use the following implementation:
+
+```verilog
+module TopModule(
+    input [7:0] signed_in,
+    output reg [31:0] signed_out // Signed 32-bit output
+);
+
+    assign signed_out = {
+        {signed_in[7]}, {signed_in[6:0]} // Sign extension
+    };
+
+endmodule
+```
+
+In this implementation, we are using the `assign` keyword to directly connect the input signal to the output. This will ensure that the output is always correctly sign-extended, without needing a clock.

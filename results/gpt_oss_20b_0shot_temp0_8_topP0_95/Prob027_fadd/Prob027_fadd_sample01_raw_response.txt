@@ -1,0 +1,47 @@
+Below is a **pure combinational** Verilog implementation of a full‑adder.  
+Since a full‑adder does not need a clock edge, the logic is expressed with continuous
+assignments (or an `always @(*)` block – both are equivalent).  
+
+```verilog
+// ------------------------------------------------------------
+//  Full Adder
+//  Adds three 1‑bit inputs (a, b, cin) and produces a 1‑bit sum
+//  and a 1‑bit carry‑out (cout).
+// ------------------------------------------------------------
+module TopModule (
+    input  wire a,      // first addend
+    input  wire b,      // second addend
+    input  wire cin,    // carry‑in from previous stage
+    output wire cout,   // carry‑out to next stage
+    output wire sum     // sum of a, b and cin
+);
+
+    // Sum is the XOR of the three inputs
+    assign sum = a ^ b ^ cin;
+
+    // Carry‑out is true if at least two of the inputs are 1
+    assign cout = (a & b) | (a & cin) | (b & cin);
+
+endmodule
+```
+
+### Why this works
+
+- **Sum**: The XOR of three bits is the odd‑parity function, which matches the
+  definition of a full‑adder sum.
+- **Carry‑out**: A carry occurs when at least two of the three bits are 1.
+  The Boolean expression `(a & b) | (a & cin) | (b & cin)` implements exactly that.
+
+### Alternative (always @(*) block)
+
+If you prefer to use procedural assignments, you can replace the two `assign`
+statements with:
+
+```verilog
+always @(*) begin
+    sum  = a ^ b ^ cin;
+    cout = (a & b) | (a & cin) | (b & cin);
+end
+```
+
+Both styles are equivalent for synthesizable combinational logic.

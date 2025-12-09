@@ -1,0 +1,26 @@
+ Here is the Verilog code for a positive-edge triggered D flip-flop with an asynchronous reset:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+reg q; // Flip-flop data register
+always @(posedge clk) begin
+  if (!ar) q <= d; // If asynchronous reset is active, override flip-flop's state with input 'd'
+  else q <= q ^ d; // Else, update the flip-flop's state on the rising edge of clock using XOR gate
+end
+
+assign q = q[0]; // Ensure output type matches the assign statement in test bench
+
+endmodule
+```
+
+This code creates a D flip-flop with an asynchronous reset (`ar`) and a positive edge-triggered feature on the `clk` input. The `always @(posedge clk)` block specifies that the logic within will be updated on the rising edge of the clock signal.
+
+The `if (!ar) q <= d;` statement checks if the asynchronous reset is active and overrides the flip-flop's state with input 'd'. The `else q <= q ^ d;` statement updates the flip-flop's state on the rising edge of the clock using an XOR gate.
+
+Lastly, to ensure the output type matches the assign statement in a test bench, we have added `assign q = q[0];`.

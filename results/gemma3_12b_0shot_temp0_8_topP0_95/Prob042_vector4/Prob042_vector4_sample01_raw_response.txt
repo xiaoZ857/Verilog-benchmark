@@ -1,0 +1,28 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [31:0] out
+);
+
+  assign out = {24{in[7]}, in};
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [7:0] in, output [31:0] out);`**: This declares the module named `TopModule` with an 8-bit input `in` and a 32-bit output `out`.
+* **`assign out = {24{in[7]}, in};`**:  This is the core of the sign extension. Let's break it down:
+    * **`in[7]`**: This refers to the most significant bit (MSB) of the input `in`, which represents the sign bit.
+    * **`{24{in[7]}}`**: This is a concatenation operator.  `24{in[7]}` replicates the value of `in[7]` (the sign bit) 24 times.  So, it creates a 24-bit sequence of the sign bit.
+    * **`{24{in[7]}, in}`**: This concatenates the 24 replicated sign bits with the original 8-bit input `in`.  The result is a 32-bit value where the upper 24 bits are copies of the sign bit, and the lower 8 bits are the original input.
+* **`endmodule`**:  This marks the end of the module definition.
+
+**How it works (Sign Extension):**
+
+The circuit takes an 8-bit number and expands it to 32 bits by replicating the sign bit (the most significant bit) to the left. This ensures that the sign of the number is preserved during the extension.  For example:
+
+* If `in = 8'b00000101` (positive 5), then `in[7] = 0`. The output `out` will be `32'b000000000000000000000101`.
+* If `in = 8'b11111101` (negative -3), then `in[7] = 1`. The output `out` will be `32'b111111111111111111111101`.
+
+This process effectively converts the 8-bit number into its 32-bit signed representation.

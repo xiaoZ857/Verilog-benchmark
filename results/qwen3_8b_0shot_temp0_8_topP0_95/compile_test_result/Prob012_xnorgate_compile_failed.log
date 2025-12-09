@@ -1,0 +1,13 @@
+Problem: Prob012_xnorgate
+Code file: results\qwen3_8b_0shot_temp0_8_topP0_95\Prob012_xnorgate/Prob012_xnorgate_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\qwen3_8b_0shot_temp0_8_topP0_95\Prob012_xnorgate/Prob012_xnorgate_sample01.sv:15: warning: macro a undefined (and assumed null) at this point.
+results\qwen3_8b_0shot_temp0_8_topP0_95\Prob012_xnorgate/Prob012_xnorgate_sample01.sv:7: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob012_xnorgate_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\qwen3_8b_0shot_temp0_8_topP0_95\Prob012_xnorgate/Prob012_xnorgate_sample01.sv:7: error: Invalid module instantiation

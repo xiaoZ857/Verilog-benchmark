@@ -1,0 +1,88 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+
+  // Define states using one-hot encoding
+  localparam STATE_A = 2'b00;
+  localparam STATE_B = 2'b01;
+
+  // State register
+  reg [1:0] current_state;
+
+  // Output register
+  reg z;
+
+  // Synchronous logic (clocked by clk)
+  always @(posedge clk) begin
+    if (areset) begin
+      current_state <= STATE_A;
+      z <= 0;
+    end else begin
+      case (current_state)
+        STATE_A: begin
+          if (x) begin
+            current_state <= STATE_B;
+            z <= 0;
+          end else begin
+            current_state <= STATE_A;
+            z <= 0;
+          end
+        end
+        STATE_B: begin
+          if (x) begin
+            current_state <= STATE_B;
+            z <= 0;
+          end else begin
+            current_state <= STATE_B;
+            z <= 1;
+          end
+        end
+        default: begin
+          current_state <= STATE_A;
+          z <= 0;
+        end
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**: Defines the module with input `clk`, `areset`, `x`, and output `z`.
+2. **`localparam STATE_A = 2'b00;`** and **`localparam STATE_B = 2'b01;`**: Define the states A and B using one-hot encoding. This makes the code more readable and easier to debug.
+3. **`reg [1:0] current_state;`**: Declares a 2-bit register `current_state` to hold the current state of the Mealy machine.
+4. **`reg z;`**: Declares a register `z` to hold the output value.
+5. **`always @(posedge clk)`**:  Specifies a sequential block triggered on the positive edge of the clock signal.
+6. **`if (areset)`**: Handles the asynchronous reset condition. When `areset` is high, the state machine is reset to state A and output z is set to 0.
+7. **`case (current_state)`**:  The core of the Mealy machine logic. This `case` statement examines the current state and determines the next state and output based on the input `x`.
+8. **State A:**
+   - If `x` is 1, transition to state B and output `z = 0`.
+   - Otherwise (if `x` is 0), remain in state A and output `z = 0`.
+9. **State B:**
+   - If `x` is 1, remain in state B and output `z = 0`.
+   - Otherwise (if `x` is 0), remain in state B and output `z = 1`.
+10. **`default:`**:  A good practice to handle unexpected state values.  This ensures that the state machine returns to a known state (STATE_A) if it somehow enters an undefined state.
+
+**How it Implements the Mealy Machine:**
+
+The code directly translates the state diagram provided:
+
+- **A --x=0 (z=0)--> A:**  When in state A and x=0, the machine stays in A and z=0.
+- **A --x=1 (z=1)--> B:** When in state A and x=1, the machine goes to B and z=0.
+- **B --x=0 (z=1)--> B:** When in state B and x=0, the machine stays in B and z=1.
+- **B --x=1 (z=0)--> B:** When in state B and x=1, the machine stays in B and z=0.
+
+**To use this module:**
+
+1.  **Save:** Save the code as a `.v` file (e.g., `top_module.v`).
+2.  **Instantiate:** Instantiate the module in your top-level design.
+3.  **Connect Signals:** Connect the `clk`, `areset`, and `x` signals to appropriate sources.
+4.  **Observe Output:** Observe the `z` output to see the result of the 2's complementer operation.
+
+This implementation is clear

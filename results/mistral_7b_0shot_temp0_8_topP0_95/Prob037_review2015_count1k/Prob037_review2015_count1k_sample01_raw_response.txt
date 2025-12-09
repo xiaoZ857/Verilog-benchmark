@@ -1,0 +1,34 @@
+ Here's the Verilog code for the desired counter module based on your description:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire reset,
+    output reg [9:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 10'b0000000000; // Reset the counter to 0
+    end else begin
+        if (q >= 10'd999) begin
+            q <= 10'b000; // Wraparound to 0 when reaching 999
+        end else begin
+            q <= q + 1; // Increment the counter
+        end
+    end
+end
+
+// For synthesis
+initial begin
+    $dumpfile("top_module.vcd");
+    $dumpvars(0, topModule);
+    #1000 end
+end
+
+endmodule
+```
+
+This Verilog module defines a counter with a 10-bit register, counting from 0 to 999, inclusive. The counter is reset to 0 when the `reset` input is high (active-high synchronous). The counter increments on every positive edge of the clock signal `clk`. If the counter exceeds its maximum value (999), it wraps around to 0.
+
+The module also includes an initial block that generates a VCD dump for waveform simulation, which may be useful for debugging and visualizing the output of the module.

@@ -1,0 +1,45 @@
+To implement a Verilog module that describes a 4-bit shift register with the specified functionalities, we need to handle asynchronous reset, synchronous loading, and shifting operations. Below is a possible implementation:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire load,
+    input wire ena,
+    input wire [3:0] data,
+    output reg [3:0] q
+);
+
+    // Asynchronous reset and synchronous load/shift operations
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Reset the shift register to zero on asynchronous reset
+            q <= 4'b0000;
+        end else begin
+            if (load) begin
+                // Load new data into the shift register
+                q <= data;
+            end else if (ena) begin
+                // Shift right by one position with ena enabled
+                q <= {1'b0, q[3:1]};  // q[0] is discarded
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Asynchronous Reset (`areset`)**:
+  - The reset signal `areset` is asynchronous and positive edge-triggered. When asserted, it sets the shift register output `q` to zero immediately, regardless of the clock.
+
+- **Synchronous Load and Shift Operations**:
+  - These operations occur on the positive edge of `clk`.
+  - **Load Operation**: If the `load` signal is high (`1`), the shift register loads the input `data[3:0]`.
+  - **Shift Right Operation**: If `ena` is high and `load` is not asserted, the contents of `q` are right-shifted by one position. The least significant bit (LSB) is discarded, and a zero is inserted at the most significant bit (MSB).
+
+- **Priority Handling**:
+  - When both `load` and `ena` signals are high, the `load` operation takes priority, meaning the shift register will load new data instead of shifting.
+
+This implementation ensures that the behavior described in your requirements is met by using conditional checks to determine whether to reset, load, or shift based on the current state of inputs.

@@ -1,0 +1,77 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+  // State encoding
+  parameter WL = 2'b00;  // Walking Left
+  parameter WR = 2'b01;  // Walking Right
+  parameter FL = 2'b10;  // Falling Left
+  parameter FR = 2'b11;  // Falling Right
+  
+  reg [1:0] state, next_state;
+  
+  // State transition logic
+  always @(*) begin
+    case (state)
+      WL: begin
+        if (ground == 0) begin
+          next_state = FL;
+        end else if (bump_left || bump_right) begin
+          next_state = WR;
+        end else begin
+          next_state = WL;
+        end
+      end
+      
+      WR: begin
+        if (ground == 0) begin
+          next_state = FR;
+        end else if (bump_left || bump_right) begin
+          next_state = WL;
+        end else begin
+          next_state = WR;
+        end
+      end
+      
+      FL: begin
+        if (ground == 1) begin
+          next_state = WL;
+        end else begin
+          next_state = FL;
+        end
+      end
+      
+      FR: begin
+        if (ground == 1) begin
+          next_state = WR;
+        end else begin
+          next_state = FR;
+        end
+      end
+      
+      default: next_state = WL;
+    endcase
+  end
+  
+  // State register with asynchronous reset
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      state <= WL;
+    end else begin
+      state <= next_state;
+    end
+  end
+  
+  // Output logic (Moore machine - outputs depend only on state)
+  assign walk_left = (state == WL);
+  assign walk_right = (state == WR);
+  assign aaah = (state == FL) || (state == FR);
+
+endmodule

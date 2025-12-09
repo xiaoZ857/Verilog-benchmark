@@ -1,0 +1,30 @@
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input wire x,
+  output reg z,
+  output reg state_A,
+  output reg state_B
+);
+
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state_A <= 1'b0;
+    state_B <= 1'b0;
+    z <= 1'b0;
+  end else if (state_A && x) begin
+    state_A <= 1'b0;
+    state_B <= 1'b1;
+    z <= ~x; // Complement the input when transitioning from State A to B
+  end else if (state_B && !x) begin
+    state_A <= 1'b1;
+    state_B <= 1'b0;
+  end else begin
+    state_A <= 1'b0;
+    state_B <= 1'b1;
+  end
+end
+
+assign z = (state_A ? ~x : state_B); // Assign the output z based on current state
+
+endmodule

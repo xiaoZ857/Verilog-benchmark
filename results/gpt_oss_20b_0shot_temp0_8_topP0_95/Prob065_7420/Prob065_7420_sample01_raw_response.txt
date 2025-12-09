@@ -1,0 +1,50 @@
+```verilog
+//------------------------------------------------------------------------------
+// 7420 – Dual 4‑input NAND gate
+//
+//  This module implements the behaviour of the 7420 IC.  
+//  It contains two independent 4‑input NAND gates:
+//
+//      p1y = ¬(p1a · p1b · p1c · p1d)
+//      p2y = ¬(p2a · p2b · p2c · p2d)
+//
+//  All signals are combinational – no clock is required.
+//------------------------------------------------------------------------------
+
+// (Optional) Define the simulation time unit and precision
+`timescale 1ns/1ps
+
+module TopModule (
+    // First 4‑input NAND gate
+    input  p1a,
+    input  p1b,
+    input  p1c,
+    input  p1d,
+    output p1y,
+
+    // Second 4‑input NAND gate
+    input  p2a,
+    input  p2b,
+    input  p2c,
+    input  p2d,
+    output p2y
+);
+
+//--------------------------------------------------------------------------
+//  Combinational implementation using assign statements
+//--------------------------------------------------------------------------
+//  NAND = NOT of the AND of all four inputs
+assign p1y = ~(p1a & p1b & p1c & p1d);
+assign p2y = ~(p2a & p2b & p2c & p2d);
+
+endmodule
+```
+
+**Explanation**
+
+* `p1y` and `p2y` are the outputs of two independent 4‑input NAND gates.  
+* The `assign` statements generate the required logic directly – the Verilog
+  synthesis tools will map them to the appropriate NAND gates on the target
+  FPGA/ASIC.  
+* Because the behavior is purely combinational, no clock or edge‑triggered
+  logic is needed.

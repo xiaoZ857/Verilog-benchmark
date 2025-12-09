@@ -1,0 +1,86 @@
+To implement the Mealy-type finite state machine (FSM) that recognizes the sequence "101" on an input signal `x`, with an output signal `z` asserted to logic-1 upon detection, we need to design a simple FSM. The FSM will have three states and recognize overlapping sequences.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+  // Define state encoding
+  typedef enum logic [1:0] {
+    IDLE = 2'b00,   // Initial state, waiting for '1'
+    S1 = 2'b01,     // State after detecting '1', waiting for '0'
+    S10 = 2'b10     // State after detecting '10', waiting for another '1' to complete "101"
+  } state_t;
+
+  // Declare the current and next states
+  state_t current_state, next_state;
+
+  // Sequential logic for state transition
+  always_ff @(posedge clk or negedge aresetn) begin
+    if (!aresetn) begin
+      current_state <= IDLE;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Combinational logic for determining the next state and output
+  always_comb begin
+    z = 1'b0; // Default value for output
+    
+    case (current_state)
+      IDLE: begin
+        if (x) begin
+          next_state = S1;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+      
+      S1: begin
+        if (!x) begin
+          next_state = S10;
+        end else begin
+          next_state = S1; // Stay in S1 for consecutive '1's
+        end
+      end
+      
+      S10: begin
+        if (x) begin
+          z = 1'b1; // Sequence "101" detected
+          next_state = S1; // Go back to state S1 for potential overlap
+        end else begin
+          next_state = IDLE; // Reset on '0'
+        end
+      end
+      
+      default: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **States**:
+  - `IDLE`: Waiting for the first '1' of the sequence.
+  - `S1`: Detected a '1', waiting for a '0'.
+  - `S10`: Detected "10", waiting for another '1' to complete "101".
+
+- **State Transition**:
+  - From `IDLE`, if '1' is detected, transition to `S1`.
+  - From `S1`, if '0' is detected, transition to `S10`; otherwise, stay in `S1` (for overlapping sequences like "11101").
+  - From `S10`, if '1' is detected, output `z` is asserted and transition back to `S1` for potential overlap; otherwise, reset to `IDLE`.
+
+- **Output**:
+  - The output `z` is asserted only when transitioning from `S10` on detecting the final '1' of "101".
+
+This FSM design efficiently detects overlapping sequences by resetting to state `S1` after a successful detection.

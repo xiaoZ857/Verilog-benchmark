@@ -1,0 +1,54 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+  // State encoding for Moore FSM
+  // S0: idle/no pattern
+  // S1-S6: saw 0 followed by 1-6 consecutive 1s
+  // S7: discard state (saw 0111110)
+  // S8: flag state (saw 01111110)
+  // S9: error state (saw 7+ consecutive 1s)
+  reg [3:0] current_state, next_state;
+  
+  // State definitions
+  localparam S0 = 4'd0;   // idle
+  localparam S1 = 4'd1;   // saw 01
+  localparam S2 = 4'd2;   // saw 011
+  localparam S3 = 4'd3;   // saw 0111
+  localparam S4 = 4'd4;   // saw 01111
+  localparam S5 = 4'd5;   // saw 011111
+  localparam S6 = 4'd6;   // saw 0111111
+  localparam S7 = 4'd7;   // discard state
+  localparam S8 = 4'd8;   // flag state
+  localparam S9 = 4'd9;   // error state
+  
+  // State transition logic
+  always @(*) begin
+    next_state = current_state;
+    
+    case (current_state)
+      S0: begin
+        if (in == 1'b0)
+          next_state = S0;
+        else  // in == 1
+          next_state = S1;
+      end
+      
+      S1: begin
+        if (in == 1'b1)
+          next_state = S2;
+        else  // in == 0
+          next_state = S0;
+      end
+      
+      S2: begin
+        if (in == 1'b1)
+          next_state = S
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

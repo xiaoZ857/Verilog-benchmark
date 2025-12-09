@@ -1,0 +1,77 @@
+module TopModule (
+    input wire clk,
+    input wire reset,
+    output reg [3:1] ena,
+    output reg [15:0] q
+);
+
+// BCD to 7-segment mapping for each digit
+parameter d0_seg = 48; // A
+parameter d0_seg1 = 56; // F
+parameter d0_seg2 = 64; // B
+parameter d0_seg3 = 52; // G
+parameter d0_seg4 = 59; // C
+parameter d0_seg5 = 63; // E
+parameter d0_seg6 = 47; // D
+parameter d0_seg7 = 61; // E
+parameter d0_seg8 = 58; // G
+parameter d0_seg9 = 42; // B
+parameter d0_seg10 = 60; // D
+parameter d0_seg11 = 55; // F
+parameter d0_seg12 = 51; // G
+parameter d0_seg13 = 57; // C
+parameter d0_sec_comm = 49; // P
+parameter d0_decade_comm = 45; // X
+
+parameter d1_seg = 36; // A
+parameter d1_seg1 = 40; // F
+parameter d1_seg2 = 48; // B
+parameter d1_seg3 = 32; // G
+parameter d1_seg4 = 39; // C
+parameter d1_seg5 = 47; // E
+parameter d1_seg6 = 37; // D
+parameter d1_seg7 = 43; // G
+parameter d1_seg8 = 35; // B
+parameter d1_seg9 = 46; // D
+parameter d1_seg10 = 41; // F
+parameter d1_seg11 = 44; // C
+parameter d1_seg12 = 33; // P
+parameter d1_sec_comm = 45; // X
+parameter d1_decade_comm = 39; // X
+
+parameter d2_seg = 24; // A
+parameter d2_seg1 = 28; // F
+parameter d2_seg2 = 36; // B
+parameter d2_seg3 = 20; // G
+parameter d2_seg4 = 31; // C
+parameter d2_seg5 = 35; // E
+parameter d2_seg6 = 25; // D
+parameter d2_seg7 = 29; // G
+parameter d2_seg8 = 23; // B
+parameter d2_seg9 = 34; // D
+parameter d2_seg10 = 27; // F
+parameter d2_seg11 = 30; // C
+parameter d2_seg12 = 19; // P
+parameter d2_sec_comm = 32; // X
+parameter d2_decade_comm = 28; // X
+
+parameter d3_seg = 12; // A
+parameter d3_seg1 = 16; // F
+parameter d3_seg2 = 24; // B
+parameter d3_seg3 = 8; // G
+parameter d3_seg4 = 17; // C
+parameter d3_seg5 = 20; // E
+parameter d3_seg6 = 12; // D
+parameter d3_seg7 = 16; // G
+parameter d3_seg8 = 10; // B
+parameter d3_seg9 = 23; // D
+parameter d3_seg10 = 14; // F
+parameter d3_seg11 = 15; // C
+parameter d3_seg12 = 7; // P
+parameter d3_sec_comm = 16; // X
+parameter d3_decade_comm = 12; // X
+
+// BCD to Decimal conversion macro for each digit
+#define BCDtoDec(x) (((x & 8)'s0) + ((x & 4)'s1) + ((x & 2)'s2) + ((x & 1)'s3))
+
+always @

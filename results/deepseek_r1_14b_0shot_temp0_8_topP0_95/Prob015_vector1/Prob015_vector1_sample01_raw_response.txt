@@ -1,0 +1,34 @@
+To solve this problem, we need to design a combinational Verilog module that splits a 16-bit input into two 8-bit outputs: one containing the upper byte (bits 15-8) and the other containing the lower byte (bits 7-0).
+
+### Approach
+The task involves splitting a 16-bit input into two 8-bit parts. The key steps are:
+
+1. **Extract Upper Byte**: Extract bits 15 through 8 from the input.
+2. **Extract Lower Byte**: Extract bits 7 through 0 from the input.
+3. **Assign Outputs**: Directly assign these extracted bits to the respective output ports.
+
+This approach uses bit slicing, a straightforward method in Verilog for extracting specific ranges of bits from a larger bus. No additional logic or sequential elements are needed since it's purely combinational.
+
+### Solution Code
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+  
+  // Assign the higher byte (bits 15-8) to out_hi
+  assign out_hi = in[15:8];
+  
+  // Assign the lower byte (bits 7-0) to out_lo
+  assign out_lo = in[7:0];
+  
+endmodule
+```
+
+### Explanation
+- **Bit Slicing**: In Verilog, `in[15:8]` extracts bits from 15 down to 8, forming the upper byte. Similarly, `in[7:0]` extracts bits from 7 down to 0, forming the lower byte.
+- **Combinational Logic**: The module uses simple assignments without any sequential elements, making it a combinational circuit that operates based on the current input value.
+
+This solution efficiently splits the input into two parts using minimal Verilog constructs, ensuring clarity and correctness.

@@ -1,0 +1,101 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+
+  reg [3:0] ones_count;
+  reg [3:0] tens_count;
+  reg [3:0] hundreds_count;
+  reg [3:0] thousands_count;
+
+  // Ones digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      ones_count <= 0;
+    end else begin
+      if (ones_count == 9) begin
+        ones_count <= 0;
+      end else begin
+        ones_count <= ones_count + 1;
+      end
+    end
+  end
+
+  // Tens digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      tens_count <= 0;
+    end else begin
+      if (tens_count == 9) begin
+        tens_count <= 0;
+      end else begin
+        tens_count <= tens_count + 1;
+      end
+    end
+  end
+
+  // Hundreds digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      hundreds_count <= 0;
+    end else begin
+      if (hundreds_count == 9) begin
+        hundreds_count <= 0;
+      end else begin
+        hundreds_count <= hundreds_count + 1;
+      end
+    end
+  end
+
+  // Thousands digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      thousands_count <= 0;
+    end else begin
+      if (thousands_count == 9) begin
+        thousands_count <= 0;
+      end else begin
+        thousands_count <= thousands_count + 1;
+      end
+    end
+  end
+
+  // Output assignment
+  always @(*) begin
+    q = {thousands_count, hundreds_count, tens_count, ones_count};
+
+    ena[0] = 1'b0;  // No enable needed for ones digit
+    ena[1] = (ones_count == 9) ? 1'b1 : 1'b0; // tens enable
+    ena[2] = (tens_count == 9) ? 1'b1 : 1'b0; // hundreds enable
+    ena[3] = (hundreds_count == 9) ? 1'b1 : 1'b0; // thousands enable
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - Declares the module `TopModule` with the specified input (`clk`, `reset`) and output ports (`ena`, `q`).
+
+2. **Digit Counters:**
+   - `ones_count`, `tens_count`, `hundreds_count`, and `thousands_count` are registers to hold the count for each digit.
+   - Each counter uses an `always @(posedge clk or posedge reset)` block for synchronous operation.
+   - When `reset` is high, the counter is initialized to 0.
+   - When `reset` is low, the counter increments on each positive clock edge.
+   - When the count reaches 9, it resets to 0 to ensure correct BCD counting.
+
+3. **Output Assignment:**
+   - An `always @(*)` block assigns the output `q` based on the values of the digit counters.
+   - The `q` signal is concatenated using `{}` to form the 16-bit BCD count.
+   - `ena[0]` is always 0 because it is only for the ones digit which is always incremented
+   - `ena[1]` is high when the `ones_count` reaches 9, indicating that the tens digit should be incremented.
+   - `ena[2]` is high when the `tens_count` reaches 9, indicating that the hundreds digit should be incremented.
+   - `ena[3]` is high when the `hundreds_count` reaches 9, indicating that the thousands digit should be incremented.
+
+**How it works:**
+
+The code implements a 4-digit BCD counter using four separate counters for each digit. The `ena` signals are generated based on when the previous digit reaches 9.  This allows for a more controlled incrementation of the higher-order digits, as they only need to be incremented when the lower-

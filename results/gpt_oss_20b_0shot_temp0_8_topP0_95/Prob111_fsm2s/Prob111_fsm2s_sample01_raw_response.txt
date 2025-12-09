@@ -1,0 +1,16 @@
+**Verilog – Moore FSM (OFF ↔ ON)**  
+
+```verilog
+//  TopModule.v
+//
+//  Moore state machine with two states:
+//      OFF : out = 0   (stay OFF when j = 0, go to ON when j = 1)
+//      ON  : out = 1   (stay ON  when k = 0, go to OFF when k = 1)
+//
+//  Synchronous active‑high reset → state OFF
+//
+//  All signals are positive‑edge clock‑triggered.
+
+module TopModule (
+    input  wire clk,    // clock
+    input  wire j,      // input that drives OFF →

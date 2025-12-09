@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+reg [512:0] next_state;
+always @(posedge clk) begin
+    if (load)
+        next_state <= data;
+    else
+        for (int i = 0; i < 512; i++)
+            if ((i > 0) && (i < 511))
+                next_state[i] = next_state[i-1] ^ next_state[i+1];
+
+    q <= next_state;
+end
+
+assign q[-1] = 0;
+assign q[512] = 0;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

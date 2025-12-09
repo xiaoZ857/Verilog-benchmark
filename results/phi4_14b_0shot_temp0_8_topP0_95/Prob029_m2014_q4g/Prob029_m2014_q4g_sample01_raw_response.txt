@@ -1,0 +1,32 @@
+To implement the described circuit using Verilog, you need to create a module that takes three inputs (`in1`, `in2`, and `in3`) and produces one output (`out`). The circuit consists of an XNOR gate with inputs `in1` and `in2`, whose output is then fed into an XOR gate along with the input `in3`. Below is the Verilog code for this module:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  input in3,
+  output logic out
+);
+
+  // Intermediate signal to hold XNOR result
+  logic xnor_result;
+
+  // Implement the XNOR gate with inputs 'in1' and 'in2'
+  assign xnor_result = ~(in1 ^ in2); // Equivalent to (in1 === in2)
+
+  // Implement the XOR gate with inputs 'xnor_result' and 'in3'
+  assign out = xnor_result ^ in3;
+
+endmodule
+```
+
+### Explanation:
+
+1. **XNOR Gate**: 
+   - The XNOR operation can be defined as `~(A ^ B)` or equivalently `(A === B)`.
+   - Here, we compute the XNOR of `in1` and `in2`, storing the result in an intermediate signal `xnor_result`.
+
+2. **XOR Gate**:
+   - The output `out` is computed by XORing `xnor_result` with `in3`.
+
+This module correctly implements the described circuit using combinational logic, where outputs depend only on current inputs without any clock dependency.

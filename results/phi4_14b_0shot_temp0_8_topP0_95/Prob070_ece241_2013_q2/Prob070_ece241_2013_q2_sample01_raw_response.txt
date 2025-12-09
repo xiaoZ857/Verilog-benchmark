@@ -1,0 +1,62 @@
+To implement the Verilog module for this digital system, we need to determine the logic expressions for both the sum-of-products (SOP) and product-of-sums (POS) forms based on the given conditions.
+
+### Sum-of-Products (SOP) Form
+
+The output `out_sop` should be 1 when the inputs correspond to the numbers 2, 7, or 15. Let's express these numbers in binary:
+
+- **2**: a=0, b=1, c=0, d=0
+- **7**: a=0, b=1, c=1, d=1
+- **15**: a=1, b=1, c=1, d=1
+
+The SOP expression is derived by creating minterms for these combinations:
+
+1. For 2: \( \overline{a} \cdot b \cdot \overline{c} \cdot \overline{d} \)
+2. For 7: \( \overline{a} \cdot b \cdot c \cdot d \)
+3. For 15: \( a \cdot b \cdot c \cdot d \)
+
+The SOP expression is:
+\[ out\_sop = (\overline{a} \cdot b \cdot \overline{c} \cdot \overline{d}) + (\overline{a} \cdot b \cdot c \cdot d) + (a \cdot b \cdot c \cdot d) \]
+
+### Product-of-Sums (POS) Form
+
+The output `out_pos` should be 0 for the numbers 0, 1, 4, 5, 6, 9, 10, 13, or 14. We need to find the maxterms for these combinations:
+
+- **0**: a=0, b=0, c=0, d=0
+- **1**: a=0, b=0, c=0, d=1
+- **4**: a=0, b=1, c=0, d=0
+- **5**: a=0, b=1, c=0, d=1
+- **6**: a=0, b=1, c=1, d=0
+- **9**: a=1, b=0, c=0, d=1
+- **10**: a=1, b=0, c=1, d=0
+- **13**: a=1, b=1, c=0, d=1
+- **14**: a=1, b=1, c=1, d=0
+
+The POS expression is derived by creating maxterms for these combinations:
+
+1. For 0: \( (a + b + c + d) \)
+2. For 1: \( (a + b + c + \overline{d}) \)
+3. For 4: \( (\overline{a} + \overline{b} + c + d) \)
+4. For 5: \( (\overline{a} + \overline{b} + c + \overline{d}) \)
+5. For 6: \( (\overline{a} + \overline{b} + \overline{c} + d) \)
+6. For 9: \( (a + b + c + \overline{d}) \)
+7. For 10: \( (a + b + \overline{c} + d) \)
+8. For 13: \( (a + \overline{b} + c + \overline{d}) \)
+9. For 14: \( (a + \overline{b} + \overline{c} + d) \)
+
+The POS expression is:
+\[ out\_pos = (a + b + c + d) \cdot (a + b + c + \overline{d}) \cdot (\overline{a} + \overline{b} + c + d) \cdot (\overline{a} + \overline{b} + c + \overline{d}) \cdot (\overline{a} + \overline{b} + \overline{c} + d) \cdot (a + b + c + \overline{d}) \cdot (a + b + \overline{c} + d) \cdot (a + \overline{b} + c + \overline{d}) \cdot (a + \overline{b} + \overline{c} + d) \]
+
+### Verilog Implementation
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+  // Sum-of-Products form
+  assign out_s

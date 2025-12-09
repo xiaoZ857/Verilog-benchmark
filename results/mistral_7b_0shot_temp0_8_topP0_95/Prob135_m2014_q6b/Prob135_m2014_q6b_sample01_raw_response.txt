@@ -1,0 +1,24 @@
+ Here's the Verilog code for the next-state logic of `y[2]` based on your description:
+
+```verilog
+module TopModule (
+  input [3:1] y, // Current state
+  input w,        // Input signal
+  output reg Y2   // Next state of y[2]
+);
+
+always @(posedge clk) begin
+    case (y) // Current state
+      3'b000 : Y2 <= w; // A
+      3'b001 : Y2 <= y; // B
+      3'b010 : Y2 <= 3'b000; // C
+      3'b011 : Y2 <= 3'b010; // D
+      3'b100 : Y2 <= 3'b101; // E
+      3'b101 : Y2 <= 3'b010; // F
+    endcase
+end
+```
+
+In this code, I've implemented the next-state logic for `y[2]` based on your provided state transition diagram. The Verilog module defines an asynchronous RTL always block that determines the next value of `Y2` based on the current state `y`. The output `Y2` represents the next state of `y[2]`.
+
+The clock signal is not explicitly defined in your question, so I assumed it's named `clk`, and I've made the `Y2` output register-based (`output reg Y2`) to hold the value until the next positive edge of the clock.

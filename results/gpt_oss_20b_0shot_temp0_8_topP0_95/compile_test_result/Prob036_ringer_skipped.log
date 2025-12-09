@@ -1,0 +1,7 @@
+Problem: Prob036_ringer
+Code file: results\gpt_oss_20b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: ringer depends on itself in assign statement

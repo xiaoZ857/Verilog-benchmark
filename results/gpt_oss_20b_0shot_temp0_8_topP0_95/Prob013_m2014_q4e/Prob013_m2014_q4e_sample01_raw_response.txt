@@ -1,0 +1,27 @@
+Here is a minimal, synthesizable Verilog implementation of a 2‑input NOR gate.  
+Because a NOR gate is purely combinational, no clock is required – the output reacts immediately to changes on the inputs.
+
+```verilog
+// 2‑input NOR gate – combinational logic
+// ---------------------------------------------------
+//  in1, in2 : 1‑bit inputs
+//  out      : 1‑bit output (logic type)
+// ---------------------------------------------------
+
+module TopModule (
+    input  in1,
+    input  in2,
+    output logic out
+);
+
+    // Combinational assignment – NOR of in1 and in2
+    assign out = ~(in1 | in2);
+
+endmodule
+```
+
+**Explanation**
+
+* `logic` is used for the output type (SystemVerilog), which is synthesizable and allows the continuous assignment below.
+* `assign out = ~(in1 | in2);` implements the NOR operation: the output is `1` only when both inputs are `0`, otherwise it is `0`.
+* No clock edge or sequential block is needed because the logic is purely combinational.

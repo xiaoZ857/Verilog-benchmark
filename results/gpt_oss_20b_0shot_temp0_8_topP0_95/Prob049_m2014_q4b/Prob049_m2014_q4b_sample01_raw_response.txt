@@ -1,0 +1,43 @@
+Below is a minimal, fully‑synthetic SystemVerilog implementation of a **positive‑edge‑triggered D‑flip‑flop with an active‑high asynchronous reset**.  
+The reset drives `q` to `0` immediately (regardless of the clock) when `ar` is asserted; otherwise the value of `d` is sampled on the rising edge of `clk`.
+
+```systemverilog
+//=====================================================================
+//  TopModule
+//  ---------
+//  Positive‑edge‑triggered D‑flip‑flop with asynchronous reset
+//  (reset is active‑high).
+//
+//  Ports:
+//    clk  – main clock (posedge)
+//    d    – data input
+//    ar   – asynchronous reset (active‑high)
+//    q    – output (registered)
+//=====================================================================
+module TopModule (
+    input  logic clk,   // clock input
+    input  logic d,     // data input
+    input  logic ar,    // async reset (active‑high)
+    output logic q      // registered output
+);
+
+    // Use an always_ff block: synchronous logic with async reset
+    always_ff @(posedge clk or posedge ar) begin
+        if (ar) begin
+            q <= 1'b0;   // asynchronous reset to 0
+        end else begin
+            q <= d;      // capture d on clock edge
+        end
+    end
+
+endmodule
+```
+
+### Notes
+
+1. **Asynchronous Reset** – The `or posedge ar` clause makes the reset **asynchronous**; it takes effect immediately when `ar` goes high, independent of the clock.  
+2. **Active‑High Reset** – If your design requires an active‑low reset, replace `or posedge ar` with `or negedge ar` and change `q <= 1'b0;` accordingly.  
+3. **`logic` Type** – The use of `logic` (SystemVerilog) allows `q` to be driven in both procedural and continuous assignments without the `reg`/`wire` distinction.  
+4. **Synthesis** – The code is synthesis‑ready for any standard Verilog‑2001/2017 or SystemVerilog‑2017 tool.  
+
+Feel free to adapt the reset polarity or add additional features (e.g., synchronous reset, enable signals) as needed.

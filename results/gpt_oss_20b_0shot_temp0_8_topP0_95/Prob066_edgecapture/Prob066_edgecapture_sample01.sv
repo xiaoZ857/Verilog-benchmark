@@ -1,0 +1,30 @@
+
+// TopModule:  Detects a 1→0 transition on each bit of *in*.
+//              When a transition is seen the corresponding bit of *out* is
+//              set high and stays high until *reset* is asserted.
+//              All logic is synchronous to *clk* (positive‑edge triggered).
+
+module TopModule (
+    input  wire        clk,     // clock
+    input  wire        reset,   // active‑high synchronous reset
+    input  wire [31:0] in,      // 32‑bit input vector
+    output reg  [31:0] out      // 32‑bit output vector
+);
+
+    // Register to hold the previous value of *in* for edge detection
+    reg [31:0] prev_in;
+
+    always @(posedge clk) begin
+        if (reset) begin
+            out      <= 32'b0;   // clear all bits
+            prev_in  <= 32'b0;   // reset previous value
+        end else begin
+            // Detect 1→0 transitions: (prev_in == 1) & (in == 0)
+            out     <= out | (prev_in & ~in);
+            prev_in <= in;       // update previous value
+        end
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

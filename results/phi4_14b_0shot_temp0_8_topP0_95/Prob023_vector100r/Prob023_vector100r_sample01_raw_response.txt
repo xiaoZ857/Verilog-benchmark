@@ -1,0 +1,33 @@
+To implement the Verilog module that reverses a 100-bit input vector, you can follow these steps. The task is to take an input vector `in` of 100 bits and reverse its bit order, storing the result in the `out` output register.
+
+Here's how you can achieve this:
+
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+  // On every positive edge of the clock (or on reset/other trigger if applicable), 
+  // reverse the bits of the input vector and assign to output.
+  always @(*) begin
+    integer i;
+    for (i = 0; i < 100; i = i + 1) begin
+      out[i] = in[99-i];
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` has two ports: a 100-bit input vector `in` and a 100-bit output register `out`.
+
+- **always block**: We use an `always @(*)` construct which is an event-driven block. This type of block is sensitive to any changes in the inputs, making it suitable for combinational logic.
+
+- **Loop through each bit**: The loop iterates over all bits from 0 to 99 (total 100 iterations).
+
+- **Bit Reversal Logic**: For each index `i`, we assign `out[i]` the value of `in[99-i]`. This effectively reverses the bit order. For example, the least significant bit of `in` becomes the most significant bit of `out`.
+
+This code will reverse the input vector every time there is a change in its state, suitable for use cases where `out` needs to reflect an immediate update from any changes in `in`. If you're working with clocked logic, ensure appropriate sensitivity (like using always @(posedge clk) if it's clock-triggered).

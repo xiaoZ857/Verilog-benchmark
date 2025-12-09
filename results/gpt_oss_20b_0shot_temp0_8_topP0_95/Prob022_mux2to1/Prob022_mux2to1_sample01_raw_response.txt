@@ -1,0 +1,29 @@
+Here is a straightforward Verilog implementation of a 1‑bit, 2‑to‑1 multiplexer.  
+It is a purely combinational module – no clock is needed because the
+description does not specify any storage elements.
+
+```verilog
+// ------------------------------------------------------------
+// 1‑bit 2‑to‑1 Multiplexer
+//   sel = 0 → out = a
+//   sel = 1 → out = b
+// ------------------------------------------------------------
+module TopModule (
+    input  wire a,      // First input
+    input  wire b,      // Second input
+    input  wire sel,    // Select signal
+    output wire out     // Selected output
+);
+
+// Combinational assignment (no clock required)
+assign out = sel ? b : a;
+
+endmodule
+```
+
+### Notes
+- The `assign` statement provides a simple continuous assignment that
+  implements the multiplexer logic.
+- The module uses `wire` types for all ports.  
+- No clock or register is involved because the specification only
+  requires combinational selection.

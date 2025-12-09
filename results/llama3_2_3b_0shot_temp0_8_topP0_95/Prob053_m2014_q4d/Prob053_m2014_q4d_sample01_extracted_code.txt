@@ -1,0 +1,42 @@
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+
+// Two-input XOR gate using the AND and OR gates
+logic xor_out;
+
+assign xor_out = (in ^ out);
+
+// D flip-flop with positive edge trigger
+DFlipFlop dut(
+  .clk(clk),
+  .d(in),
+  .q(out)
+);
+
+endmodule
+
+module DFlipFlop (
+  input clk,
+  input d,
+  output logic q
+);
+
+logic prev_q;
+logic q_next;
+
+always @(posedge clk) begin
+  // Update the previous state
+  prev_q <= q;
+
+  // Calculate the next state
+  if (d == 1'b0)
+    q_next <= 1'b0;
+  else
+    q_next <= 1'b1;
+
+  // Update the current state for the next clock cycle
+  q <= q_next;
+endmodule

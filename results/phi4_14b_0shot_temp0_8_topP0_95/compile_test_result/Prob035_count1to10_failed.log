@@ -1,0 +1,16 @@
+Problem: Prob035_count1to10
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95\Prob035_count1to10/Prob035_count1to10_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset should be synchronous, but doesn't appear to be.
+Hint: Output 'q' has 185 mismatches. First mismatch occurred at time 55.
+Hint: Total mismatched samples is 185 out of 439 samples
+
+Simulation finished at 2196 ps
+Mismatches: 185 in 439 samples

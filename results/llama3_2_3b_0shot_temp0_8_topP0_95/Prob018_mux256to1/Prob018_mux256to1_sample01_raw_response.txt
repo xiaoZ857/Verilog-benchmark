@@ -1,0 +1,30 @@
+Here is the Verilog module implementation for a 1-bit wide, 256-to-1 multiplexer as per your description:
+
+```verilog
+// Define the multiplexer module
+module TopModule (
+  // 256-bit input vector
+  input [255:0] in,
+  
+  // Select bit (0-indexed)
+  input [7:0] sel,
+  
+  // Output port
+  output logic out
+);
+
+// Assign the input bits based on the select signal
+assign out = ((sel <= 2) ? in[ sel : 8 ] : 
+               (sel <= 15) ? in[ sel - 8 : 16 ] : 
+               (sel <= 30) ? in[ sel - 16 : 32 ] : 
+               (sel <= 62) ? in[ sel - 32 : 64 ] : 
+               (sel <= 94) ? in[ sel - 64 : 128 ] : 
+               (sel <= 126) ? in[ sel - 128 : 256 ] : 
+               (sel == 127) ? in[0] : 1'b0);
+```
+
+In this implementation, the select signal `sel` is used to determine which bits of the input vector `in` should be selected. The range of each segment of the input vector is determined by the value of `sel`.
+
+For example, when `sel` equals 2, it selects the second segment of the input vector (`in[8:16]`). Similarly, when `sel` equals 15, it selects the third segment (`in[16:32]`). This pattern continues up to `sel` equaling 127, which selects the last segment (`in[128:256]`).
+
+When `sel` is greater than 127 or less than 1, the selected bit is set to 0.

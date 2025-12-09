@@ -1,0 +1,32 @@
+Problem: Prob032_vector0
+Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14: warning: macro vec undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14: warning: macro outv undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14: warning: macro o0 undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14: warning: macro o1 undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14: warning: macro o2 undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:15: warning: macro outv undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:17: warning: macro vec undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:17: warning: macro o0 undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:18: warning: macro vec undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:18: warning: macro o1 undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:19: warning: macro vec undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:19: warning: macro o2 undefined (and assumed null) at this point.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:9: syntax error
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14: error: Stray tic (`) here. Perhaps you put white space
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:14:      : between the tic and preprocessor directive?
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:17: error: Stray tic (`) here. Perhaps you put white space
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:17:      : between the tic and preprocessor directive?
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:18: error: Stray tic (`) here. Perhaps you put white space
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:18:      : between the tic and preprocessor directive?
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:19: error: Stray tic (`) here. Perhaps you put white space
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:19:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob032_vector0_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95\Prob032_vector0/Prob032_vector0_sample01.sv:9: error: Invalid module instantiation

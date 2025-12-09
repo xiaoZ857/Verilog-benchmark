@@ -1,0 +1,17 @@
+Problem: Prob155_lemmings4
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:25: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:26: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:25: error: Malformed conditional expression.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:36: error: Sized numeric constant must have a size greater than zero.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:36: error: Sized numeric constant must have a size greater than zero.
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:54: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv:1: error: `timescale directive can not be inside a module definition.
+I give up.

@@ -1,0 +1,64 @@
+We'll implement the gshare predictor with the specified behavior. The key points are:  
+- 7-bit global history register (ghr)  
+- 7-bit index = predict_pc[6:0] ^ ghr  
+- 128-entry PHT (2-bit saturating counters)  
+- Prediction uses current ghr, then updates ghr with predicted direction at next clock edge  
+- Training updates PHT based on train_pc ^ train_history, and recovers ghr if mispredicted  
+- Priority: training overrides prediction updates in same cycle  
+
+Here's the implementation:  
+
+```verilog
+reg [6:0] ghr;
+reg [1:0] pht [0:127];
+
+wire [6:0] predict_index = predict_pc ^ ghr;
+wire [1:0] predict_counter = pht[predict_index];
+
+assign predict_taken = predict_counter[1];
+assign predict_history = ghr;
+
+wire [6:0] train_index = train_pc ^ train_history;
+reg [1:0] train_counter;
+
+// PHT update logic
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        ghr <= 7'b0;
+        // Initialize PHT to weakly not-taken (01)
+        for (integer i = 0; i < 128; i = i + 1) begin
+            pht[i] <= 2'b01;
+        end
+    end else begin
+        // Training has priority over prediction updates
+        if (train_valid) begin
+            // Update PHT for training
+            train_counter = pht[train_index];
+            if (train_taken) begin
+                // Saturating increment
+                if (train_counter != 2'b11) begin
+                    pht[train_index] <= train_counter + 1;
+                end
+            end else begin
+                // Saturating decrement
+                if (train_counter != 2'b00) begin
+                    pht[train_index] <= train_counter - 1;
+                end
+            end
+
+            // Recover ghr if mispredicted
+            if (train_mispredicted) begin
+                // ghr becomes train_history shifted with actual outcome
+                ghr <= {train_history[5:0], train_taken};
+            end else if (predict_valid) begin
+                // Normal update with predicted direction (only if no misprediction recovery)
+                ghr <= {ghr[5:0], predict_taken};
+            end
+        end else if (predict_valid) begin
+            // Normal update with predicted direction
+            ghr <= {ghr[5:0], predict_taken};
+        end
+    end
+end
+endmodule
+```

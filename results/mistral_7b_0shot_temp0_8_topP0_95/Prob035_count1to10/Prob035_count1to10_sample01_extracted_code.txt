@@ -1,0 +1,21 @@
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset)
+begin
+  if (reset)
+    q <= 4'b0001; // Set the counter to 1 when reset is active high
+  else if (q < 10'b1010) // Increment the counter unless it has reached 10
+    q <= q + 1;
+end
+
+// Optionally add an output for counting from 0 to 9
+reg [3:0] temp_q;
+always @(posedge clk)
+begin
+  temp_q <= q - 1; // Decrement the counter by 1, effectively counting from 0 to 9
+end
+assign count_from_zero = temp_q + 1; // Add 1 to get the actual value counting from 0

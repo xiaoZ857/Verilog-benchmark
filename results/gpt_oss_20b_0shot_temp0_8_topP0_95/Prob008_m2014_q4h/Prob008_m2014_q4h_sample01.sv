@@ -1,0 +1,16 @@
+
+// TopModule.v
+// Simple combinational pass‑through
+// out = in
+
+module TopModule (
+    input  wire in,
+    output wire out
+);
+
+    // Combinational assignment
+    assign out = in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

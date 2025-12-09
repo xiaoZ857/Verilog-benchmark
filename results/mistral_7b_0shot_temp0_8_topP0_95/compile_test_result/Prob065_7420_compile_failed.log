@@ -1,0 +1,15 @@
+Problem: Prob065_7420
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95\Prob065_7420/Prob065_7420_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob065_7420/Prob065_7420_sample01.sv:16: error: Unknown module type: nand2
+results\mistral_7b_0shot_temp0_8_topP0_95\Prob065_7420/Prob065_7420_sample01.sv:17: error: Unknown module type: nand2
+3 error(s) during elaboration.
+*** These modules were missing:
+        nand2 referenced 2 times.
+***

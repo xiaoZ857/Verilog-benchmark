@@ -1,0 +1,20 @@
+Problem: Prob067_countslow
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 10):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:11: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:9: error: Invalid module instantiation
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:14: error: 'q' has already been declared in this scope.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:6:      : It was declared here as a variable.
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:23: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:23: error: malformed statement
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:33: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95\Prob067_countslow/Prob067_countslow_sample01.sv:33: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob067_countslow_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob067_countslow_ref.sv:21: syntax error
+I give up.

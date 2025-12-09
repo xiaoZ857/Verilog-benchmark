@@ -1,0 +1,80 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+
+  // State definition
+  typedef enum logic [1:0] {
+    IDLE,
+    BYTE1_SEARCH,
+    BYTE2_RECEIVED,
+    BYTE3_RECEIVED
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // Internal signals
+  reg [7:0] received_byte;
+  reg [1:0] byte_count;
+  reg message_received;
+
+  // State register
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      current_state <= IDLE;
+      message_received <= 0;
+    end else begin
+      current_state <= next_state;
+      message_received <= message_received;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = current_state;
+    done = 0;
+
+    case (current_state)
+      IDLE: begin
+        if (in[3] == 1) begin
+          next_state = BYTE1_SEARCH;
+          received_byte = in;
+          byte_count = 0;
+        end
+      end
+      BYTE1_SEARCH: begin
+        if (in[3] == 1) begin
+            next_state = BYTE2_SEARCH;
+            received_byte = in;
+            byte_count = 1;
+        end else begin
+            next_state = BYTE1_SEARCH;
+        end
+      end
+
+      BYTE2_SEARCH: begin
+          if (in[3] == 1) begin
+              next_state = BYTE3_SEARCH;
+              received_byte = in;
+              byte_count = 2;
+          end else begin
+              next_state = BYTE2_SEARCH;
+          end
+      end
+
+      BYTE3_SEARCH: begin
+          next_state = IDLE;
+          done = 1;
+      end
+
+      default: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

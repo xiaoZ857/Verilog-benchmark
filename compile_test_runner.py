@@ -22,8 +22,44 @@ from dataclasses import dataclass
 from pathlib import Path
 from tqdm import tqdm
 
-# Import static analyzer
-from static_analyzer import will_hang_simulation
+# Static Analysis Functions
+def will_hang_simulation(verilog_code: str) -> Tuple[bool, Optional[str]]:
+    """
+    Check for patterns that cause simulation to hang.
+    Detects combinational loops and other problematic patterns.
+    """
+    lines = [line.strip() for line in verilog_code.split('\n') if line.strip()]
+
+    # Pattern 1: Direct combinational loop in assign statement
+    for line in lines:
+        if line.startswith('assign '):
+            # Look for pattern where a signal depends on itself in the same assign statement
+            match = re.match(r'assign\s+(\w+)\s*=.*\b\1\b', line)
+            if match:
+                signal = match.group(1)
+                return True, f"Direct combinational loop: {signal} depends on itself in assign statement"
+
+    # Pattern 2: Complex feedback loops through assign and always blocks
+    # Specifically: assign A = B; and always block uses A to set B
+    assign_signals = {}
+    for line in lines:
+        if line.startswith('assign '):
+            match = re.match(r'assign\s+(\w+)\s*=\s*([^;]+)', line)
+            if match:
+                signal = match.group(1)
+                expression = match.group(2)
+                assign_signals[signal] = expression
+
+    # Look for patterns like: assign prev_state = state; and always blocks using prev_state to update state
+    for signal, expression in assign_signals.items():
+        if '=' in expression:  # Simple assignment
+            dep = expression.split('=')[0].strip()
+            # Check if there are always blocks that use the assigned signal to update the dependency
+            for line in lines:
+                if 'always' in line and '<=' in line and signal in line and dep in line:
+                    return True, f"Complex feedback loop: {signal} and {dep} create circular dependency"
+
+    return False, None
 
 @dataclass
 class ModelResult:
@@ -39,8 +75,8 @@ class ModelResult:
     compile_rate: float
     pass_rate: float
 
-def find_result_directories() -> List[str]:
-    """Find all model result directories in results/ - supports unified format"""
+def find_result_directories(temperature: Optional[float] = None, top_p: Optional[float] = None) -> List[str]:
+    """Find all model result directories in results/ - supports unified format with optional filtering"""
     results_dir = Path("results")
     if not results_dir.exists():
         print("Error: results/ directory not found")
@@ -49,7 +85,31 @@ def find_result_directories() -> List[str]:
     # Find all directories with result patterns
     model_dirs = []
     for item in results_dir.iterdir():
-        if item.is_dir() and item.name.endswith("_0shot_temp0.0"):
+        if item.is_dir() and ("_0shot_temp" in item.name):
+            # Parse temperature and top_p from directory name
+            import re
+            dir_name = item.name
+
+            # Extract temperature and top_p from directory name
+            # Pattern: {model}_0shot_temp{temp}_topP{top_p}
+            match = re.search(r'_0shot_temp(.+?)(?:_topP(.+?))?$', dir_name)
+            if match:
+                dir_temp_str = match.group(1).replace('_', '.')
+                dir_top_p_str = match.group(2).replace('_', '.') if match.group(2) else "0.01"
+
+                try:
+                    dir_temp = float(dir_temp_str)
+                    dir_top_p = float(dir_top_p_str)
+
+                    # Apply filters if specified
+                    if temperature is not None and abs(dir_temp - temperature) > 0.001:
+                        continue
+                    if top_p is not None and abs(dir_top_p - top_p) > 0.001:
+                        continue
+                except ValueError:
+                    # If parsing fails, include the directory
+                    pass
+
             # Check if this directory contains model results using unified format
             # Unified format: problem directories with sample01.sv files
             sample01_files = list(item.glob("*/*_sample01.sv"))
@@ -65,9 +125,12 @@ def find_result_directories() -> List[str]:
 def extract_model_name(directory: str) -> str:
     """Extract clean model name from directory path"""
     dir_name = os.path.basename(directory)
-    # Remove timestamp suffix if present
-    if "_0shot_temp0.0" in dir_name:
-        return dir_name.replace("_0shot_temp0.0", "")
+    # Remove temperature suffix if present (supports new format with temperature and top_p)
+    import re
+    # Match pattern like "_0shot_tempX_X_topPY_Y" and remove it
+    match = re.search(r'(.+?)_0shot_temp.*$', dir_name)
+    if match:
+        return match.group(1)
     return dir_name
 
 def get_problem_list() -> List[str]:
@@ -133,7 +196,7 @@ def compile_and_test_code(code_file: str, problem_name: str, test_dir: str) -> T
     log_lines.append("=== Static Analysis ===")
     try:
         # Read the code content for static analysis
-        with open(code_file, 'r') as f:
+        with open(code_file, 'r', encoding='utf-8') as f:
             code_content = f.read()
         will_hang, reason = will_hang_simulation(code_content)
         if will_hang:
@@ -265,7 +328,7 @@ def test_model(model_dir: str) -> ModelResult:
                 skipped_static_analysis.append(problem_name)
                 # Save log for skipped files
                 log_file = os.path.join(test_dir, f"{problem_name}_skipped.log")
-                with open(log_file, 'w') as f:
+                with open(log_file, 'w', encoding='utf-8') as f:
                     f.write(f"Problem: {problem_name}\n")
                     f.write(f"Code file: {complete_file}\n")
                     f.write("Status: SKIPPED (static analysis)\n")
@@ -282,7 +345,7 @@ def test_model(model_dir: str) -> ModelResult:
 
                     # Save detailed log for failed tests
                     log_file = os.path.join(test_dir, f"{problem_name}_failed.log")
-                    with open(log_file, 'w') as f:
+                    with open(log_file, 'w', encoding='utf-8') as f:
                         f.write(f"Problem: {problem_name}\n")
                         f.write(f"Code file: {complete_file}\n")
                         f.write("Compilation: SUCCESS\n")
@@ -294,7 +357,7 @@ def test_model(model_dir: str) -> ModelResult:
 
                 # Save detailed log for compilation failures
                 log_file = os.path.join(test_dir, f"{problem_name}_compile_failed.log")
-                with open(log_file, 'w') as f:
+                with open(log_file, 'w', encoding='utf-8') as f:
                     f.write(f"Problem: {problem_name}\n")
                     f.write(f"Code file: {complete_file}\n")
                     f.write("Compilation: FAILED\n")
@@ -304,7 +367,7 @@ def test_model(model_dir: str) -> ModelResult:
         except Exception as e:
             failed_compilation.append(problem_name)
             error_log = os.path.join(test_dir, f"{problem_name}_error.log")
-            with open(error_log, 'w') as f:
+            with open(error_log, 'w', encoding='utf-8') as f:
                 f.write(f"Error testing {problem_name}: {str(e)}")
 
     compile_rate = (compiled / total_problems * 100) if total_problems > 0 else 0.0
@@ -325,7 +388,7 @@ def test_model(model_dir: str) -> ModelResult:
 
     # Save detailed results
     results_file = os.path.join(test_dir, "compile_test_results.json")
-    with open(results_file, 'w') as f:
+    with open(results_file, 'w', encoding='utf-8') as f:
         json.dump({
             'model_name': model_name,
             'total_problems': total_problems,
@@ -337,7 +400,7 @@ def test_model(model_dir: str) -> ModelResult:
             'skipped_static_analysis': skipped_static_analysis,
             'compile_rate': compile_rate,
             'pass_rate': pass_rate
-        }, f, indent=2)
+        }, f, indent=2, ensure_ascii=False)
 
     # Print immediate results for this model
     print(f"\n{model_name}: {compiled}/{total_problems} compiled ({compile_rate:.1f}%) | {passed}/{total_problems} passed ({pass_rate:.1f}%)")
@@ -375,7 +438,7 @@ def generate_comparison_report(results: List[ModelResult]):
 
     # Save CSV report
     csv_file = "results/compile_test_summary.csv"
-    with open(csv_file, 'w') as f:
+    with open(csv_file, 'w', encoding='utf-8') as f:
         f.write("model,total_problems,generated,compiled,passed,compile_rate,pass_rate\n")
         for result in results:
             f.write(f"{result.model_name},{result.total_problems},{result.generated},"
@@ -393,9 +456,12 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python compile_test_runner.py                    # Test all models
-  python compile_test_runner.py --model deepseek_v3_2  # Test specific model
-  python compile_test_runner.py --list           # List available models
+  python compile_test_runner.py                           # Test all models
+  python compile_test_runner.py --model deepseek_v3_2     # Test specific model
+  python compile_test_runner.py --list                      # List available models
+  python compile_test_runner.py --temperature 0.8          # Test all models with temp=0.8
+  python compile_test_runner.py --temperature 0.8 --top-p 0.95  # Test with specific params
+  python compile_test_runner.py --model llama3_2_3b --temperature 0.8  # Test specific model with temp=0.8
         """
     )
     parser.add_argument(
@@ -408,16 +474,38 @@ Examples:
         action='store_true',
         help='List all available models'
     )
+    parser.add_argument(
+        '--temperature',
+        type=float,
+        help='Filter models by generation temperature (e.g., 0.8)'
+    )
+    parser.add_argument(
+        '--top-p',
+        type=float,
+        dest='top_p',
+        help='Filter models by generation top_p (e.g., 0.95)'
+    )
 
     args = parser.parse_args()
 
     print("VerilogEval Compile Test Runner - Safe Mode with Static Analysis")
     print("="*70)
     print("Re-evaluating model results with correct compilation and testing logic")
-    print("Including static analysis for infinite loop detection\n")
+    print("Including static analysis for infinite loop detection")
 
-    # Find all model result directories
-    all_model_dirs = find_result_directories()
+    # Show filtering criteria if applied
+    if args.temperature is not None or args.top_p is not None:
+        filter_criteria = []
+        if args.temperature is not None:
+            filter_criteria.append(f"temperature={args.temperature}")
+        if args.top_p is not None:
+            filter_criteria.append(f"top_p={args.top_p}")
+        print(f"\nFiltering models by: {', '.join(filter_criteria)}")
+
+    print()
+
+    # Find model result directories with optional filtering
+    all_model_dirs = find_result_directories(args.temperature, args.top_p)
 
     if not all_model_dirs:
         print("No model result directories found in results/")
@@ -425,7 +513,7 @@ Examples:
 
     # Filter for specific model if requested
     if args.model:
-        # Find the specific model directory
+        # Find the specific model directory (considering temperature/top_p filters)
         target_dir = None
         for model_dir in all_model_dirs:
             model_name = extract_model_name(model_dir)
@@ -434,19 +522,24 @@ Examples:
                 break
 
         if not target_dir:
-            # Try to construct the directory name
-            potential_dir = f"results/{args.model}_0shot_temp0.0"
-            if os.path.exists(potential_dir):
-                target_dir = potential_dir
-            else:
-                print(f"Error: Model '{args.model}' not found")
-                print(f"Available models:")
-                for model_dir in all_model_dirs:
-                    print(f"  - {extract_model_name(model_dir)}")
-                return
+            print(f"Error: Model '{args.model}' not found")
+            if args.temperature is not None or args.top_p is not None:
+                print(f"with the specified filters (temperature={args.temperature}, top_p={args.top_p})")
+            print(f"Available models:")
+            for model_dir in all_model_dirs:
+                model_name = extract_model_name(model_dir)
+                print(f"  - {model_name}")
+            return
 
         model_dirs = [target_dir]
         print(f"Testing specific model: {args.model}")
+        if args.temperature is not None or args.top_p is not None:
+            filter_info = []
+            if args.temperature is not None:
+                filter_info.append(f"temp={args.temperature}")
+            if args.top_p is not None:
+                filter_info.append(f"top_p={args.top_p}")
+            print(f"with parameters: {', '.join(filter_info)}")
     else:
         model_dirs = all_model_dirs
 

@@ -1,0 +1,24 @@
+To implement a NOR gate in Verilog, you can create a module where the output is true only when both inputs are false. Here's how you can define such a module named `TopModule`:
+
+```verilog
+module TopModule (
+  input wire a,
+  input wire b,
+  output wire out
+);
+
+  // NOR logic: out = ~ (a | b)
+  assign out = ~(a | b);
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs**: The module `TopModule` has two inputs, `a` and `b`, and one output, `out`.
+- **NOR Logic**: A NOR gate is the negation of an OR gate. It outputs true (logic 1) only when both inputs are false (logic 0).
+- **Verilog Code**:
+  - The `assign` statement is used to implement combinational logic.
+  - `a | b` performs a logical OR on inputs `a` and `b`.
+  - `~(a | b)` negates the result, implementing the NOR operation.
+
+This module will correctly function as a two-input NOR gate in any digital design.

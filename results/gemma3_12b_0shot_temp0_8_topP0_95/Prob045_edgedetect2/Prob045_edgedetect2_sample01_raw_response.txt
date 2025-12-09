@@ -1,0 +1,55 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    int i;
+    for (i = 0; i < 8; i++) begin
+      if (in[i] != prev_in[i]) begin
+        anyedge[i] = 1;
+      end else begin
+        anyedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [7:0] prev_in;`**:  This register stores the input `in` from the previous clock cycle.  It's crucial for detecting changes between cycles.
+
+2. **`always @(posedge clk)`**: This block executes on the positive edge of the clock signal.
+
+3. **`for (i = 0; i < 8; i++)`**: This loop iterates through each bit of the 8-bit input vector.
+
+4. **`if (in[i] != prev_in[i])`**: This is the core logic. It compares the current bit `in[i]` with the corresponding bit from the previous clock cycle `prev_in[i]`.  If they are different, it means an edge has occurred.
+
+5. **`anyedge[i] = 1;`**:  If an edge is detected, the corresponding bit in the `anyedge` output register is set to 1.  This happens *on the next clock cycle* after the edge is detected.
+
+6. **`else begin anyedge[i] = 0; end`**: If no edge is detected, the output bit `anyedge[i]` is set to 0.
+
+7. **`prev_in = in;`**:  After processing all bits for the current clock cycle, the current input `in` is assigned to `prev_in` to be used in the next cycle.  This is essential for the comparison in the next `always` block.
+
+**How it Works:**
+
+The module compares the current input `in` to the previous input `prev_in` on each clock cycle.  If a bit changes from 0 to 1 or 1 to 0, the corresponding bit in the `anyedge` output is set to 1 *on the next clock cycle*.  The `prev_in` register effectively remembers the input from the prior cycle, allowing for the edge detection.
+
+**Example:**
+
+Let's say `in` is initially `8'b00000000` and then changes to `8'b00000001` on the first clock cycle.
+
+* **First Clock Cycle:** `in = 8'b00000000`. `prev_in` is initialized to 0. `anyedge` remains 0.
+* **Second Clock Cycle:** `in = 8'b00000001`. The `always` block executes. The `if` condition detects a change in the first bit (from 0 to 1). `anyedge[0]` is set to 1. `prev_in` becomes `8'b00000001`.
+* **Third Clock Cycle:** `in = 8'b00000001`. The `if` condition for the first bit is now false. `anyedge[0]` remains 0.  `prev_in` becomes `8'b00000000`.
+
+Therefore, `anyedge` will be `8'b00000000` for the first two clock cycles, and then `anyedge[0]` will be 1 on the third clock cycle.
+
+This logic repeats for each bit in the input vector.

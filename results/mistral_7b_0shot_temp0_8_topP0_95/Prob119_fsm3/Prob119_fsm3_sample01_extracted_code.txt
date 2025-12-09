@@ -1,0 +1,65 @@
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset,
+  output reg out,
+  output reg state_reg
+);
+
+// Define the states
+param state_A = 2'b00;
+param state_B = 2'b01;
+param state_C = 2'b10;
+param state_D = 2'b11;
+
+always @(posedge clk) begin
+  if (areset) begin
+    state_reg <= state_A;
+    out <= 0;
+  end else begin
+    case (state_reg)
+      state_A: begin
+        if (in == 0) begin
+          state_reg <= state_B;
+        end
+        else begin
+          state_reg <= state_B;
+          out <= 0;
+        end
+      end
+      state_B: begin
+        if (in == 0) begin
+          state_reg <= state_C;
+        end
+        else begin
+          state_reg <= state_B;
+        end
+      end
+      state_C: begin
+        if (in == 0) begin
+          state_reg <= state_A;
+          out <= 0;
+        end
+        else begin
+          state_reg <= state_D;
+          out <= 1;
+        end
+      end
+      state_D: begin
+        if (in == 0) begin
+          state_reg <= state_C;
+        end
+        else begin
+          state_reg <= state_B;
+        end
+      end
+    endcase
+  end
+end
+
+initial begin
+  // Reset the FSM to state A at time 0
+  #0 clk = 1; areset = 1; clk = 0; areset = 0;
+end
+
+endmodule

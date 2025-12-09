@@ -1,0 +1,29 @@
+```verilog
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+
+  assign out_hi = in[15:8];
+  assign out_lo = in[7:0];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [15:0] in, output [7:0] out_hi, output [7:0] out_lo);`**: This line defines the module named `TopModule` and declares its inputs and outputs.
+    * `input [15:0] in`:  Declares a 16-bit input signal named `in`.
+    * `output [7:0] out_hi`: Declares an 8-bit output signal named `out_hi`.
+    * `output [7:0] out_lo`: Declares an 8-bit output signal named `out_lo`.
+
+* **`assign out_hi = in[15:8];`**:  This line uses the `assign` statement (for combinational logic) to assign the upper 8 bits of the input signal `in` (bits [15:8]) to the output signal `out_hi`.  `in[15:8]` selects bits 15 through 8 of the `in` signal.
+
+* **`assign out_lo = in[7:0];`**: This line uses the `assign` statement to assign the lower 8 bits of the input signal `in` (bits [7:0]) to the output signal `out_lo`. `in[7:0]` selects bits 7 through 0 of the `in` signal.
+
+* **`endmodule`**:  This line marks the end of the module definition.
+
+**How it works:**
+
+The code directly assigns portions of the input signal to the output signals.  It's a straightforward bit selection process.  The combinational `assign` statements ensure that the outputs update immediately whenever the input `in` changes.  Because the assignment is combinational, there are no registers or memory involved; the outputs reflect the input in real-time.

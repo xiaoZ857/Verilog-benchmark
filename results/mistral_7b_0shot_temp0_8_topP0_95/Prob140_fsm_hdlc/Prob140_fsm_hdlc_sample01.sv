@@ -1,0 +1,68 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output reg disc,
+  output reg flag,
+  output reg err
+);
+
+// Moore-type finite state machine states
+enum {IDLE, FIVE_ONES, SIX_ONES, SEVEN_OR_MORE_ONES};
+reg current_state;
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    current_state <= IDLE;
+  end else begin
+    case (current_state)
+      IDLE: begin
+        if (in && !disc && !flag && !err) begin
+          current_state <= FIVE_ONES;
+          disc <= 1'b0;
+          flag <= 1'b0;
+          err <= 1'b0;
+        end
+      end
+      FIVE_ONES: begin
+        if (in && !disc && !flag && !err) begin
+          current_state <= SIX_ONES;
+          disc <= 1'b0;
+        end else begin
+          disc <= in; // signal to be discarded
+          current_state <= IDLE;
+        end
+      end
+      SIX_ONES: begin
+        if (!in) begin
+          current_state <= IDLE;
+          flag <= 1'b1; // flag the beginning/end of a frame
+        end
+      end
+      SEVEN_OR_MORE_ONES: begin
+        err <= 1'b1; // error signal
+        current_state <= IDLE;
+      end
+    endcase
+  end
+end
+
+// Add reset synchronization for outputs
+always @(posedge clk) begin
+  if (reset) begin
+    disc <= 1'b0;
+    flag <= 1'b0;
+    err <= 1'b0;
+  end else begin
+    disc <= disc_next;
+    flag <= flag_next;
+    err <= err_next;
+  end
+end
+
+// Assign next-state logic (not shown)
+// ...
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,23 @@
+
+// TopModule.v
+module TopModule (
+    input  logic in1,   // First input
+    input  logic in2,   // Second input (to be inverted before AND)
+    output logic out    // Result of in1 AND (NOT in2)
+);
+
+    // Internal wire for the inverted version of in2
+    logic n_in2;
+
+    // Invert in2 – this is the “bubble” on the AND input
+    not u_not_in2 (n_in2, in2);
+
+    // AND gate: out = in1 AND n_in2
+    and u_and_gate (out, in1, n_in2);
+
+    // Alternative (pure combinational) implementation:
+    // assign out = in1 & ~in2;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

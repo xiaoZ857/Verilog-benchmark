@@ -1,0 +1,37 @@
+
+// ------------------------------------------------------------
+//  TopModule
+//  Implements an XOR gate in three different ways:
+//
+//    1. Continuous assignment (combinational)
+//    2. Combinational always block
+//    3. Clock‑synchronous always block (flip‑flop)
+// ------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire clk,          // Clock input
+    input  wire a,            // First XOR operand
+    input  wire b,            // Second XOR operand
+    output wire out_assign,   // Continuous‑assignment output
+    output reg  out_always_comb, // Combinational always‑block output
+    output reg  out_always_ff    // Clocked always‑block output (FF)
+);
+
+    // 1) Continuous assignment – purely combinational
+    assign out_assign = a ^ b;
+
+    // 2) Combinational always block
+    //    The sensitivity list uses * to capture all inputs.
+    always @(*) begin
+        out_always_comb = a ^ b;
+    end
+
+    // 3) Clocked always block – introduces a flip‑flop
+    always @(posedge clk) begin
+        out_always_ff <= a ^ b;
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

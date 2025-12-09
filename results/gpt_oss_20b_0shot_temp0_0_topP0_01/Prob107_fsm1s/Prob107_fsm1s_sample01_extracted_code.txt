@@ -1,0 +1,65 @@
+//=====================================================================
+//  TopModule.v
+//  Moore state‑machine with two states (A & B) and one input.
+//  Reset is active‑high, synchronous, and forces the machine into state B.
+//  Output depends only on the current state:
+//      state B → out = 1
+//      state A → out = 0
+//
+//  Transition table
+//      Current |  in  | Next | out
+//      --------------------------------
+//      B       |  0   |  A   | 1
+//      B       |  1   |  B   | 1
+//      A       |  0   |  B   | 0
+//      A       |  1   |  A   | 0
+//=====================================================================
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire clk,    // Clock (positive edge)
+    input  wire in,     // Data input
+    input  wire reset,  // Active‑high synchronous reset
+    output wire out     // Moore output
+);
+
+    // State encoding
+    localparam STATE_A = 1'b0;
+    localparam STATE_B = 1'b1;
+
+    // Current state register
+    reg state;
+
+    // Next state logic (combinational)
+    reg next_state;
+    always @(*) begin
+        case (state)
+            STATE_A: begin
+                // In state A: stay in A if in==1, else go to B
+                next_state = (in) ? STATE_A : STATE_B;
+            end
+            STATE_B: begin
+                // In state B: stay in B if in==1, else go to A
+                next_state = (in) ? STATE_B : STATE_A;
+            end
+            default: begin
+                // Default to B (should never happen)
+                next_state = STATE_B;
+            end
+        endcase
+    end
+
+    // State register update (synchronous, active‑high reset)
+    always @(posedge clk) begin
+        if (reset) begin
+            state <= STATE_B;          // Reset to state B
+        end else begin
+            state <= next_state;       // Normal state transition
+        end
+    end
+
+    // Moore output: depends only on the current state
+    assign out = (state == STATE_B) ? 1'b1 : 1'b0;
+
+endmodule

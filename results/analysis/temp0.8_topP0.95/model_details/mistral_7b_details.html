@@ -178,11 +178,11 @@
     </head>
     <body>
         <div class="container">
-            <a href="..\unified_analysis.html" class="back-link">← 返回统一分析</a>
+            <a href="../unified_analysis.html" class="back-link">← 返回统一分析</a>
 
             <h1>mistral_7b 详细分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 14:33:44</p>
+            <p><strong>生成时间:</strong> 2025-12-09 06:58:22</p>
 
             <div class="summary-grid">
                 <div class="summary-card">
@@ -196,16 +196,708 @@
                 </div>
                 <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
                     <h3>编译成功率</h3>
-                    <div class="value">0.0%</div>
-                    <p>0/156</p>
+                    <div class="value">17.3%</div>
+                    <p>27/156</p>
                 </div>
                 <div class="summary-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
                     <h3>测试通过率</h3>
-                    <div class="value">0.0%</div>
-                    <p>0/156</p>
+                    <div class="value">5.1%</div>
+                    <p>8/156</p>
                 </div>
             </div>
-    <h2>[编译成功] 编译失败</h2><p>没有编译失败的情况</p><h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p><h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>
+    
+            <h2>[编译失败] 编译失败详情</h2>
+        
+            <div class="error-details">
+                <h3>Prob002_m2014_q4i</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob002_m2014_q4i_ref.sv:10: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob003_step_one</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob003_step_one_ref.sv:10: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob004_vector2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob004_vector2/Prob004_vector2_sample01.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob007_wire</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob007_wire_ref.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob008_m2014_q4h</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob008_m2014_q4h_ref.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob009_popcount3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob009_popcount3/Prob009_popcount3_sample01.sv:9: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob010_mt2015_q4a</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob010_mt2015_q4a_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob011_norgate</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob011_norgate/Prob011_norgate_sample01.sv:8: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob012_xnorgate</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob012_xnorgate_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob014_andgate</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob014_andgate/Prob014_andgate_sample01.sv:8: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob015_vector1</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob015_vector1_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob016_m2014_q4j</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob016_m2014_q4j_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob019_m2014_q4f</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob019_m2014_q4f/Prob019_m2014_q4f_sample01.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob020_mt2015_eq2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob020_mt2015_eq2_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob021_mux256to1v</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob021_mux256to1v_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob022_mux2to1</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob022_mux2to1/Prob022_mux2to1_sample01.sv:9: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob023_vector100r</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob023_vector100r/Prob023_vector100r_sample01.sv:7: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob024_hadd</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob024_hadd_ref.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob025_reduction</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob025_reduction/Prob025_reduction_sample01.sv:8: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob026_alwaysblock1</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob026_alwaysblock1_ref.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob027_fadd</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob027_fadd/Prob027_fadd_sample01.sv:18: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob028_m2014_q4a</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:9: error: Unable to bind wire/reg/memory `reset&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `reset&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob029_m2014_q4g</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> warning: Found both default and explicit timescale based delays. Use</p>
+                <p><strong>错误模式:</strong> Found both default and explicit timescale based delays. Use</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob030_popcount255</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob030_popcount255/Prob030_popcount255_sample01.sv:17: error: &#x27;ps&#x27; bit select must be a constant in this context.</p>
+                <p><strong>错误模式:</strong> &#x27;ps&#x27; bit select must be a constant in this context.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob031_dff</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob031_dff_test.sv:86: error: port ``clk&#x27;&#x27; is not a port of top_module1.</p>
+                <p><strong>错误模式:</strong> port ``clk&#x27;&#x27; is not a port of top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob032_vector0</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob032_vector0_ref.sv:15: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob033_ece241_2014_q1c</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob033_ece241_2014_q1c/Prob033_ece241_2014_q1c_sample01.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob035_count1to10</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob035_count1to10_ref.sv:16: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob036_ringer</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:9: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob037_review2015_count1k</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob037_review2015_count1k/Prob037_review2015_count1k_sample01.sv:24: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob038_count15</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob038_count15/Prob038_count15_sample01.sv:20: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob039_always_if</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob039_always_if/Prob039_always_if_sample01.sv:13: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob040_count10</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob040_count10_ref.sv:16: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob042_vector4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob042_vector4_ref.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob044_vectorgates</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob044_vectorgates_ref.sv:16: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob051_gates4</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob051_gates4/Prob051_gates4_sample01.sv:10: warning: implicit definition of wire &#x27;U1&#x27;.</p>
+                <p><strong>错误模式:</strong> implicit definition of wire &#x27;U1&#x27;.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob052_gates100</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob052_gates100/Prob052_gates100_sample01.sv:25: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob053_m2014_q4d</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob054_edgedetect</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob054_edgedetect_ref.sv:17: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob057_kmap2</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob057_kmap2/Prob057_kmap2_sample01.sv:10: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob058_alwaysblock2</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob058_alwaysblock2_test.sv:100: error: port ``out_always_comb&#x27;&#x27; is not a port of top_module1.</p>
+                <p><strong>错误模式:</strong> port ``out_always_comb&#x27;&#x27; is not a port of top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob060_m2014_q4k</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:14: error: part select out[0:2] is reversed.</p>
+                <p><strong>错误模式:</strong> 2] is reversed.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob061_2014_q4a</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:20: warning: implicit definition of wire &#x27;D&#x27;.</p>
+                <p><strong>错误模式:</strong> implicit definition of wire &#x27;D&#x27;.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob062_bugs_mux2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob062_bugs_mux2_ref.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob063_review2015_shiftcount</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob063_review2015_shiftcount_ref.sv:19: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob064_vector3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob064_vector3/Prob064_vector3_sample01.sv:17: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob065_7420</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob065_7420/Prob065_7420_sample01.sv:16: error: Unknown module type: nand2</p>
+                <p><strong>错误模式:</strong> nand2</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob067_countslow</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob067_countslow_ref.sv:21: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob068_countbcd</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:76: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob069_truthtable1</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:10: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob070_ece241_2013_q2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob071_always_casez</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_ref.sv:23: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob072_thermostat</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob072_thermostat_ref.sv:18: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob073_dff16e</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:27: error: Array d_upper needs an array index here.</p>
+                <p><strong>错误模式:</strong> Array d_upper needs an array index here.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob074_ece241_2014_q4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob075_counter_2bc</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob075_counter_2bc_ref.sv:23: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob076_always_case</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob076_always_case/Prob076_always_case_sample01.sv:20: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob078_dualedge</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob078_dualedge_ref.sv:26: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob079_fsm3onehot</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:9: warning: implicit definition of wire &#x27;A&#x27;.</p>
+                <p><strong>错误模式:</strong> implicit definition of wire &#x27;A&#x27;.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob082_lfsr32</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob082_lfsr32_ref.sv:26: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob083_mt2015_q4b</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob083_mt2015_q4b_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob086_lfsr5</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob086_lfsr5/Prob086_lfsr5_sample01.sv:9: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob089_ece241_2014_q5a</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob089_ece241_2014_q5a_ref.sv:27: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob092_gatesv100</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob093_ece241_2014_q3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob093_ece241_2014_q3/Prob093_ece241_2014_q3_sample01.sv:20: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob095_review2015_fsmshift</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:12: error: shift_ena Unable to assign to unresolved wires.</p>
+                <p><strong>错误模式:</strong> shift_ena Unable to assign to unresolved wires.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob097_mux9to1v</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob097_mux9to1v_ref.sv:33: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob098_circuit7</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob098_circuit7_ref.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob099_m2014_q6c</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob099_m2014_q6c_ref.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob100_fsm3comb</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_ref.sv:24: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob101_circuit4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob101_circuit4_ref.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob103_circuit2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:28: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob105_rotate100</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob105_rotate100/Prob105_rotate100_sample01.sv:18: error: part select shift_register[0:98] is out of order.</p>
+                <p><strong>错误模式:</strong> 98] is out of order.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob106_always_nolatches</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob108_rule90</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob108_rule90/Prob108_rule90_sample01.sv:22: error: Index q[512] is out of range.</p>
+                <p><strong>错误模式:</strong> Index q[512] is out of range.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob112_always_case2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob112_always_case2_ref.sv:31: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob113_2012_q1g</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:2: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob114_bugs_case</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob114_bugs_case/Prob114_bugs_case_sample01.sv:17: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob115_shift18</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob115_shift18/Prob115_shift18_sample01.sv:17: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob116_m2014_q3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob116_m2014_q3_ref.sv:30: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob117_circuit9</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_ref.sv:18: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob118_history_shift</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob118_history_shift_ref.sv:26: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob119_fsm3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob119_fsm3/Prob119_fsm3_sample01.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob121_2014_q3bfsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:20: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob122_kmap4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:2: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob123_bugs_addsubz</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob124_rule110</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob124_rule110/Prob124_rule110_sample01.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob125_kmap3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob125_kmap3_ref.sv:33: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob126_circuit6</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob126_circuit6/Prob126_circuit6_sample01.sv:9: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob128_fsm_ps2</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:11: error: &#x27;done&#x27; has already been declared in this scope.</p>
+                <p><strong>错误模式:</strong> &#x27;done&#x27; has already been declared in this scope.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob130_circuit5</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob130_circuit5_ref.sv:22: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob131_mt2015_q4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob131_mt2015_q4_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob132_always_if2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob132_always_if2_ref.sv:26: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob133_2014_q3fsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:36: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob134_2014_q3c</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob135_m2014_q6b</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob135_m2014_q6b_ref.sv:28: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob136_m2014_q6</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob136_m2014_q6/Prob136_m2014_q6_sample01.sv:19: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob138_2012_q2fsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob139_2013_q2bfsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:25: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob140_fsm_hdlc</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob140_fsm_hdlc/Prob140_fsm_hdlc_sample01.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob141_count_clock</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob141_count_clock_ref.sv:48: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob142_lemmings2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob142_lemmings2_ref.sv:37: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob143_fsm_onehot</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:25: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob144_conwaylife</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:10: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob145_circuit8</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob145_circuit8/Prob145_circuit8_sample01.sv:29: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob146_fsm_serialdata</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob146_fsm_serialdata/Prob146_fsm_serialdata_sample01.sv:28: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob147_circuit10</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob147_circuit10_ref.sv:19: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob149_ece241_2013_q4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob149_ece241_2013_q4_ref.sv:47: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob150_review2015_fsmonehot</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob150_review2015_fsmonehot/Prob150_review2015_fsmonehot_sample01.sv:61: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob151_review2015_fsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:57: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob152_lemmings3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:49: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob153_gshare</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob153_gshare_ref.sv:50: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob154_fsm_ps2data</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob154_fsm_ps2data/Prob154_fsm_ps2data_sample01.sv:51: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob155_lemmings4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\mistral_7b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:25: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob156_review2015_fancytimer</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:79: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div><h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p><h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>
         </div>
     </body>
     </html>

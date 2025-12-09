@@ -178,11 +178,11 @@
     </head>
     <body>
         <div class="container">
-            <a href="..\unified_analysis.html" class="back-link">← 返回统一分析</a>
+            <a href="../unified_analysis.html" class="back-link">← 返回统一分析</a>
 
             <h1>gemma3_12b 详细分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 14:33:44</p>
+            <p><strong>生成时间:</strong> 2025-12-09 06:58:22</p>
 
             <div class="summary-grid">
                 <div class="summary-card">
@@ -196,16 +196,312 @@
                 </div>
                 <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
                     <h3>编译成功率</h3>
-                    <div class="value">0.0%</div>
-                    <p>0/156</p>
+                    <div class="value">67.3%</div>
+                    <p>105/156</p>
                 </div>
                 <div class="summary-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
                     <h3>测试通过率</h3>
-                    <div class="value">0.0%</div>
-                    <p>0/156</p>
+                    <div class="value">37.2%</div>
+                    <p>58/156</p>
                 </div>
             </div>
-    <h2>[编译成功] 编译失败</h2><p>没有编译失败的情况</p><h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p><h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>
+    
+            <h2>[编译失败] 编译失败详情</h2>
+        
+            <div class="error-details">
+                <h3>Prob021_mux256to1v</h3>
+                <p><span class="error-type error-semantic">semantic</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:9: error: A reference to a wire or reg (`sel&#x27;) is not allowed in a constant expression.</p>
+                <p><strong>错误模式:</strong> A reference to a wire or reg (`sel&#x27;) is not allowed in a constant expression.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob028_m2014_q4a</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:8: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob036_ringer</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob036_ringer/Prob036_ringer_sample01.sv:13: error: ringer is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> ringer is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob042_vector4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob042_vector4/Prob042_vector4_sample01.sv:7: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob054_edgedetect</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob054_edgedetect/Prob054_edgedetect_sample01.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob062_bugs_mux2</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:9: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob068_countbcd</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob068_countbcd/Prob068_countbcd_sample01.sv:70: error: ena[&#x27;sd0] is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> ena[&#x27;sd0] is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob070_ece241_2013_q2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob070_ece241_2013_q2/Prob070_ece241_2013_q2_sample01.sv:26: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob073_dff16e</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob073_dff16e/Prob073_dff16e_sample01.sv:33: error: Array dff_q needs an array index here.</p>
+                <p><strong>错误模式:</strong> Array dff_q needs an array index here.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob076_always_case</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob076_always_case/Prob076_always_case_sample01.sv:13: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob077_wire_decl</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob077_wire_decl/Prob077_wire_decl_sample01.sv:15: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob079_fsm3onehot</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:17: error: out is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> out is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob083_mt2015_q4b</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob083_mt2015_q4b/Prob083_mt2015_q4b_sample01.sv:10: error: z is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> z is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob089_ece241_2014_q5a</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob089_ece241_2014_q5a/Prob089_ece241_2014_q5a_sample01.sv:65: error: z is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> z is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob094_gatesv</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> </p>
+                <p><strong>错误模式:</strong> </p>
+            </div>
+            <div class="error-details">
+                <h3>Prob095_review2015_fsmshift</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv:13: error: shift_ena is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> shift_ena is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob096_review2015_fsmseq</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:24: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob100_fsm3comb</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob100_fsm3comb/Prob100_fsm3comb_sample01.sv:16: error: out is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> out is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob101_circuit4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob101_circuit4/Prob101_circuit4_sample01.sv:24: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob103_circuit2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob103_circuit2/Prob103_circuit2_sample01.sv:17: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob109_fsm1</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob109_fsm1/Prob109_fsm1_sample01.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob110_fsm2</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob110_fsm2/Prob110_fsm2_sample01.sv:20: error: out is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> out is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob111_fsm2s</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:47: error: out is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> out is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob116_m2014_q3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob116_m2014_q3_test.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob119_fsm3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob119_fsm3/Prob119_fsm3_sample01.sv:11: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob120_fsm3s</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob120_fsm3s/Prob120_fsm3s_sample01.sv:64: error: out is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> out is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob121_2014_q3bfsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:17: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob122_kmap4</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob122_kmap4/Prob122_kmap4_sample01.sv:10: error: Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+                <p><strong>错误模式:</strong> Unable to bind wire/reg/memory `clk&#x27; in `tb.top_module1&#x27;</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob123_bugs_addsubz</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:9: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob125_kmap3</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob125_kmap3_test.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob128_fsm_ps2</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:38: error: done is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> done is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob129_ece241_2013_q8</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob129_ece241_2013_q8/Prob129_ece241_2013_q8_sample01.sv:22: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob131_mt2015_q4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob131_mt2015_q4_ref.sv:12: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob133_2014_q3fsm</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> :0: error: Enumeration name E has an inferred value that overflowed.</p>
+                <p><strong>错误模式:</strong> Enumeration name E has an inferred value that overflowed.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob134_2014_q3c</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob134_2014_q3c/Prob134_2014_q3c_sample01.sv:15: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob135_m2014_q6b</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:10: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob136_m2014_q6</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob136_m2014_q6/Prob136_m2014_q6_sample01.sv:22: error: z is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> z is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob138_2012_q2fsm</h3>
+                <p><span class="error-type error-unknown">unknown</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob138_2012_q2fsm/Prob138_2012_q2fsm_sample01.sv:78: error: z is not a valid l-value in tb.top_module1.</p>
+                <p><strong>错误模式:</strong> z is not a valid l-value in tb.top_module1.</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob139_2013_q2bfsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:37: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob140_fsm_hdlc</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob140_fsm_hdlc/Prob140_fsm_hdlc_sample01.sv:57: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob142_lemmings2</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:15: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob143_fsm_onehot</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob144_conwaylife</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:29: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob147_circuit10</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:6: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob149_ece241_2013_q4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob151_review2015_fsm</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob151_review2015_fsm/Prob151_review2015_fsm_sample01.sv:15: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob153_gshare</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob153_gshare/Prob153_gshare_sample01.sv:39: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob155_lemmings4</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:110: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div>
+            <div class="error-details">
+                <h3>Prob156_review2015_fancytimer</h3>
+                <p><span class="error-type error-syntax">syntax</span></p>
+                <p><strong>错误信息:</strong> results\gemma3_12b_0shot_temp0_8_topP0_95\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:14: syntax error</p>
+                <p><strong>错误模式:</strong> syntax error</p>
+            </div><h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p><h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>
         </div>
     </body>
     </html>

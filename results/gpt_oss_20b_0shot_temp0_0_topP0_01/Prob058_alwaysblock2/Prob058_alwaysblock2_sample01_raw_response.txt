@@ -1,0 +1,48 @@
+Here is a minimal, synthesizable Verilog implementation that follows the specification:
+
+```verilog
+// ------------------------------------------------------------
+//  TopModule
+//  Implements an XOR gate in three different ways:
+//
+//    1. Continuous assignment (combinational)
+//    2. Combinational always block
+//    3. Clock‑synchronous always block (flip‑flop)
+// ------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire clk,          // Clock input
+    input  wire a,            // First XOR operand
+    input  wire b,            // Second XOR operand
+    output wire out_assign,   // Continuous‑assignment output
+    output reg  out_always_comb, // Combinational always‑block output
+    output reg  out_always_ff    // Clocked always‑block output (FF)
+);
+
+    // 1) Continuous assignment – purely combinational
+    assign out_assign = a ^ b;
+
+    // 2) Combinational always block
+    //    The sensitivity list uses * to capture all inputs.
+    always @(*) begin
+        out_always_comb = a ^ b;
+    end
+
+    // 3) Clocked always block – introduces a flip‑flop
+    always @(posedge clk) begin
+        out_always_ff <= a ^ b;
+    end
+
+endmodule
+```
+
+### What each part does
+
+| Output | Implementation | Behavior |
+|--------|----------------|----------|
+| `out_assign` | `assign out_assign = a ^ b;` | Immediate, combinational XOR. |
+| `out_always_comb` | `always @(*) out_always_comb = a ^ b;` | Same combinational logic, but expressed in an always block. |
+| `out_always_ff` | `always @(posedge clk) out_always_ff <= a ^ b;` | Synchronous flip‑flop; the XOR result is captured on the rising edge of `clk`, so the output is delayed by one clock cycle. |
+
+This module is fully synthesizable and demonstrates the three requested styles of XOR implementation.

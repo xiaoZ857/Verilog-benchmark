@@ -1026,13 +1026,9 @@ def generate_css_styles() -> str:
 def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
     """生成统一分析HTML报告"""
 
-    def get_rate_class(rate):
-        if rate >= 80:
-            return "style='background-color: #2ecc71; color: white;'"
-        elif rate >= 60:
-            return "style='background-color: #f39c12; color: white;'"
-        else:
-            return "style='background-color: #e74c3c; color: white;'"
+    def get_bar_width(rate):
+        """根据百分比返回进度条宽度"""
+        return min(100, max(5, rate))  # 最小5%，最大100%
 
     html_content = f"""
     <!DOCTYPE html>
@@ -1041,6 +1037,23 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
         <title>VerilogEval 失败分析报告 - Temp {analysis.temperature} TopP {analysis.top_p}</title>
         <meta charset="utf-8">
         {generate_css_styles()}
+        <style>
+            .rate-bar {{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }}
+            .rate-bar-fill {{
+                height: 20px;
+                background: linear-gradient(90deg, #a8d8ea, #6bb9f0);
+                border-radius: 3px;
+                min-width: 5px;
+            }}
+            .rate-text {{
+                white-space: nowrap;
+                font-size: 0.9em;
+            }}
+        </style>
     </head>
     <body>
         <div class="container">
@@ -1048,16 +1061,15 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
             <p><strong>参数配置:</strong> Temperature = {analysis.temperature}, Top_p = {analysis.top_p}</p>
             <p><strong>生成时间:</strong> {time.strftime('%Y-%m-%d %H:%M:%S')}</p>
 
-            <h2>[性能概览] 模型性能概览</h2>
+            <h2>模型性能概览</h2>
             <table>
                 <thead>
                     <tr>
                         <th>模型</th>
-                        <th>生成率</th>
-                        <th>编译率</th>
-                        <th>通过率</th>
-                        <th>编译失败</th>
-                        <th>测试失败</th>
+                        <th>生成成功</th>
+                        <th>编译成功</th>
+                        <th>测试通过</th>
+                        <th>总数</th>
                         <th>详细分析</th>
                     </tr>
                 </thead>
@@ -1068,11 +1080,25 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
         html_content += f"""
                     <tr>
                         <td><strong>{model.model_name}</strong></td>
-                        <td {get_rate_class(model.generation_rate)}>{model.generation_rate:.1f}%</td>
-                        <td {get_rate_class(model.compile_rate)}>{model.compile_rate:.1f}%</td>
-                        <td {get_rate_class(model.pass_rate)}>{model.pass_rate:.1f}%</td>
-                        <td>{len(model.compilation_failures)}</td>
-                        <td>{len(model.test_failures)}</td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: {get_bar_width(model.generation_rate)}px;"></div>
+                                <span class="rate-text">{model.generated}({model.generation_rate:.1f}%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: {get_bar_width(model.compile_rate)}px;"></div>
+                                <span class="rate-text">{model.compiled}({model.compile_rate:.1f}%)</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rate-bar">
+                                <div class="rate-bar-fill" style="width: {get_bar_width(model.pass_rate)}px;"></div>
+                                <span class="rate-text">{model.passed}({model.pass_rate:.1f}%)</span>
+                            </div>
+                        </td>
+                        <td>{model.total_problems}</td>
                         <td><a href="model_details/{model.model_name}_details.html" class="model-link">查看详情</a></td>
                     </tr>
         """
@@ -1081,7 +1107,7 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
                 </tbody>
             </table>
 
-            <h2>[编译分析] 编译错误模式分析</h2>
+            <h2>编译错误模式分析</h2>
             <div class="stats-grid">
     """
 
@@ -1175,7 +1201,7 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
     html_content += """
             <div class="stats-grid">
                 <div class="stats-card">
-                    <h3>[最难题] 最具挑战性的问题 (通过率最低)</h3>
+                    <h3>最具挑战性的问题 (通过率最低)</h3>
                     <ul class="problem-list">
     """
 
@@ -1187,7 +1213,7 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
                 </div>
 
                 <div class="stats-card">
-                    <h3>[简单题] 最简单的问题 (通过率最高)</h3>
+                    <h3>最简单的问题 (通过率最高)</h3>
                     <ul class="problem-list">
     """
 
@@ -1257,7 +1283,7 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
     # 编译失败详情
     if model.compilation_failures:
         html_content += """
-            <h2>[编译失败] 编译失败详情</h2>
+            <h2>编译失败详情</h2>
         """
 
         for failure in model.compilation_failures:
@@ -1326,12 +1352,12 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
 
             html_content += "</div>"
     else:
-        html_content += "<h2>[编译成功] 编译失败</h2><p>没有编译失败的情况</p>"
+        html_content += "<h2>编译失败详情</h2><p>没有编译失败的情况</p>"
 
     # 测试失败详情
     if model.test_failures:
         html_content += """
-            <h2>[测试失败] 测试失败详情</h2>
+            <h2>测试失败详情</h2>
         """
 
         for failure in model.test_failures:
@@ -1388,12 +1414,12 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
 
             html_content += "</div>"
     else:
-        html_content += "<h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p>"
+        html_content += "<h2>测试失败详情</h2><p>没有测试失败的情况</p>"
 
     # 静态分析失败
     if model.static_analysis_failures:
         html_content += f"""
-            <h2>[静态分析] 静态分析失败</h2>
+            <h2>静态分析失败</h2>
             <p>以下问题被静态分析器标记为可能存在问题：</p>
             <ul>
         """
@@ -1403,7 +1429,7 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
 
         html_content += "</ul>"
     else:
-        html_content += "<h2>[静态分析] 静态分析</h2><p>所有问题都通过了静态分析检查</p>"
+        html_content += "<h2>静态分析</h2><p>所有问题都通过了静态分析检查</p>"
 
     html_content += """
         </div>

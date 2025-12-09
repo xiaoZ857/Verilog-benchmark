@@ -54,6 +54,13 @@ class CompilationFailure:
     error_pattern: str  # 提取的关键错误模式
     line_number: Optional[int] = None
     code_snippet: Optional[str] = None
+    # 新增：详细错误分析字段
+    full_generated_code: Optional[str] = None  # 完整生成的代码
+    error_context: Optional[str] = None  # 错误上下文（错误行前后代码）
+    problem_prompt: Optional[str] = None  # 原始问题描述
+    interface_definition: Optional[str] = None  # 接口定义
+    compiler_full_output: Optional[str] = None  # 完整编译器输出
+    suggested_fix: Optional[str] = None  # 建议的修复方向
 
 @dataclass
 class TestFailure:
@@ -63,6 +70,13 @@ class TestFailure:
     test_pattern: str  # 测试失败的模式
     description: str
     reference_diff: Optional[str] = None
+    # 新增：详细错误分析字段
+    full_generated_code: Optional[str] = None  # 完整生成的代码
+    test_output: Optional[str] = None  # 完整测试输出
+    problem_prompt: Optional[str] = None  # 原始问题描述
+    interface_definition: Optional[str] = None  # 接口定义
+    mismatch_details: Optional[str] = None  # 不匹配的详细信息
+    expected_behavior: Optional[str] = None  # 期望行为描述
 
 @dataclass
 class ModelAnalysis:
@@ -223,6 +237,109 @@ def read_generated_code(problem_dir: str, problem_name: str) -> Optional[str]:
                     break  # 读取错误，尝试下一个文件
 
     return None
+
+
+def read_problem_prompt(problem_name: str) -> Optional[str]:
+    """读取问题描述"""
+    prompt_file = f"dataset_code-complete-iccad2023/{problem_name}_prompt.txt"
+    if os.path.exists(prompt_file):
+        return read_log_file(prompt_file)
+    return None
+
+
+def read_interface_definition(problem_name: str) -> Optional[str]:
+    """读取接口定义"""
+    ifc_file = f"dataset_code-complete-iccad2023/{problem_name}_ifc.txt"
+    if os.path.exists(ifc_file):
+        return read_log_file(ifc_file)
+    return None
+
+
+def extract_error_context(code: str, line_number: int, context_lines: int = 5) -> str:
+    """提取错误行周围的代码上下文"""
+    if not code or not line_number:
+        return ""
+
+    lines = code.split('\n')
+    start = max(0, line_number - context_lines - 1)
+    end = min(len(lines), line_number + context_lines)
+
+    context_lines_list = []
+    for i in range(start, end):
+        line_num = i + 1
+        prefix = ">>> " if line_num == line_number else "    "
+        context_lines_list.append(f"{prefix}{line_num:4d} | {lines[i]}")
+
+    return '\n'.join(context_lines_list)
+
+
+def suggest_fix_for_error(error_type: str, error_message: str, code_snippet: str) -> str:
+    """根据错误类型和信息建议修复方向"""
+    suggestions = []
+
+    error_lower = error_message.lower() if error_message else ""
+    snippet_lower = code_snippet.lower() if code_snippet else ""
+
+    # 语法错误建议
+    if error_type == "syntax":
+        if "missing" in error_lower and ";" in error_lower:
+            suggestions.append("检查语句末尾是否缺少分号")
+        if "unexpected" in error_lower:
+            suggestions.append("检查括号是否匹配，关键字是否正确")
+        if "endmodule" in error_lower or "module" in error_lower:
+            suggestions.append("检查module和endmodule是否配对")
+        if not suggestions:
+            suggestions.append("检查Verilog语法，确保关键字、括号、分号使用正确")
+
+    # 语义错误建议
+    elif error_type == "semantic":
+        if "undeclared" in error_lower:
+            suggestions.append("声明所有使用的信号和变量")
+        if "redeclaration" in error_lower or "multiple" in error_lower:
+            suggestions.append("检查是否有重复声明的信号")
+        if "width" in error_lower or "mismatch" in error_lower:
+            suggestions.append("检查信号位宽是否匹配")
+        if "driver" in error_lower:
+            suggestions.append("确保每个信号只有一个驱动源")
+        if not suggestions:
+            suggestions.append("检查信号声明和使用是否一致")
+
+    # 静态分析错误建议
+    elif error_type == "static_analysis":
+        if "infinite" in error_lower or "loop" in error_lower:
+            suggestions.append("避免组合逻辑环路，检查assign语句中的自引用")
+        if "feedback" in error_lower:
+            suggestions.append("检查是否存在反馈回路")
+        if not suggestions:
+            suggestions.append("检查代码是否存在可能导致仿真卡死的模式")
+
+    # 默认建议
+    if not suggestions:
+        suggestions.append("仔细检查错误信息，参考Verilog语法规范")
+
+    return "\n".join(f"• {s}" for s in suggestions)
+
+
+def extract_mismatch_details(log_content: str) -> str:
+    """从测试日志中提取不匹配的详细信息"""
+    if not log_content:
+        return ""
+
+    details = []
+    lines = log_content.split('\n')
+
+    # 查找mismatch相关的行
+    for i, line in enumerate(lines):
+        line_lower = line.lower()
+        if any(keyword in line_lower for keyword in ['mismatch', 'error', 'fail', 'tb_match']):
+            # 获取这一行及其上下文
+            start = max(0, i - 2)
+            end = min(len(lines), i + 3)
+            for j in range(start, end):
+                if lines[j].strip() and lines[j] not in details:
+                    details.append(lines[j])
+
+    return '\n'.join(details[:20])  # 限制长度
 
 # ============================================================================
 # Analysis Functions
@@ -445,7 +562,8 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
         # JSON中的generated应该与我们计算的一致，但以实际文件为准
         # 分析编译失败的详情
         failed_compilation = json_results.get('failed_compilation', [])
-        failed_tests = json_results.get('failed_tests', [])
+        # 注意：JSON文件中字段名可能是 'failed_test' 或 'failed_tests'
+        failed_tests = json_results.get('failed_tests', json_results.get('failed_test', []))
 
         # 从compile_test_result目录读取失败日志
         for problem_name in failed_compilation:
@@ -455,13 +573,34 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                 log_content = read_log_file(str(compile_log))
                 if log_content:
                     error_type, error_pattern, line_num, code_snippet = classify_compilation_error(log_content)
+
+                    # 读取完整生成的代码
+                    problem_dir = model_path / problem_name
+                    full_code = read_generated_code(str(problem_dir), problem_name)
+
+                    # 提取错误上下文
+                    error_context = extract_error_context(full_code, line_num) if full_code and line_num else ""
+
+                    # 读取问题描述和接口定义
+                    problem_prompt = read_problem_prompt(problem_name)
+                    interface_def = read_interface_definition(problem_name)
+
+                    # 生成修复建议
+                    suggested_fix = suggest_fix_for_error(error_type, error_pattern, code_snippet)
+
                     compilation_failures.append(CompilationFailure(
                         problem_name=problem_name,
                         error_type=error_type,
                         error_message=error_pattern,
                         error_pattern=extract_error_pattern(error_pattern),
                         line_number=line_num,
-                        code_snippet=code_snippet
+                        code_snippet=code_snippet,
+                        full_generated_code=full_code,
+                        error_context=error_context,
+                        problem_prompt=problem_prompt,
+                        interface_definition=interface_def,
+                        compiler_full_output=log_content,
+                        suggested_fix=suggested_fix
                     ))
 
         for problem_name in failed_tests:
@@ -471,11 +610,28 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                 log_content = read_log_file(str(test_log))
                 if log_content:
                     failure_type, description = classify_test_failure(log_content, problem_name)
+
+                    # 读取完整生成的代码
+                    problem_dir = model_path / problem_name
+                    full_code = read_generated_code(str(problem_dir), problem_name)
+
+                    # 读取问题描述和接口定义
+                    problem_prompt = read_problem_prompt(problem_name)
+                    interface_def = read_interface_definition(problem_name)
+
+                    # 提取不匹配详情
+                    mismatch_details = extract_mismatch_details(log_content)
+
                     test_failures.append(TestFailure(
                         problem_name=problem_name,
                         failure_type=failure_type,
                         test_pattern=extract_test_pattern(log_content),
-                        description=description
+                        description=description,
+                        full_generated_code=full_code,
+                        test_output=log_content,
+                        problem_prompt=problem_prompt,
+                        interface_definition=interface_def,
+                        mismatch_details=mismatch_details
                     ))
     else:
         # 没有JSON，从日志文件分析
@@ -513,22 +669,58 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
                     else:
                         # 测试失败
                         failure_type, description = classify_test_failure(log_content, problem_name)
+
+                        # 读取完整生成的代码
+                        full_code = read_generated_code(str(problem_dir), problem_name)
+
+                        # 读取问题描述和接口定义
+                        problem_prompt = read_problem_prompt(problem_name)
+                        interface_def = read_interface_definition(problem_name)
+
+                        # 提取不匹配详情
+                        mismatch_details = extract_mismatch_details(log_content)
+
                         test_failures.append(TestFailure(
                             problem_name=problem_name,
                             failure_type=failure_type,
                             test_pattern=extract_test_pattern(log_content),
-                            description=description
+                            description=description,
+                            full_generated_code=full_code,
+                            test_output=log_content,
+                            problem_prompt=problem_prompt,
+                            interface_definition=interface_def,
+                            mismatch_details=mismatch_details
                         ))
                 else:
                     # 编译失败
                     error_type, error_pattern, line_num, code_snippet = classify_compilation_error(log_content)
+
+                    # 读取完整生成的代码
+                    full_code = read_generated_code(str(problem_dir), problem_name)
+
+                    # 提取错误上下文
+                    error_context = extract_error_context(full_code, line_num) if full_code and line_num else ""
+
+                    # 读取问题描述和接口定义
+                    problem_prompt = read_problem_prompt(problem_name)
+                    interface_def = read_interface_definition(problem_name)
+
+                    # 生成修复建议
+                    suggested_fix = suggest_fix_for_error(error_type, error_pattern, code_snippet)
+
                     compilation_failures.append(CompilationFailure(
                         problem_name=problem_name,
                         error_type=error_type,
                         error_message=error_pattern,
                         error_pattern=extract_error_pattern(error_pattern),
                         line_number=line_num,
-                        code_snippet=code_snippet
+                        code_snippet=code_snippet,
+                        full_generated_code=full_code,
+                        error_context=error_context,
+                        problem_prompt=problem_prompt,
+                        interface_definition=interface_def,
+                        compiler_full_output=log_content,
+                        suggested_fix=suggested_fix
                     ))
 
                 # 检查静态分析失败
@@ -1078,12 +1270,58 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
             """
 
             if failure.line_number:
-                html_content += f"<p><strong>行号:</strong> {failure.line_number}</p>"
+                html_content += f"<p><strong>错误行号:</strong> 第 {failure.line_number} 行</p>"
 
-            if failure.code_snippet:
+            # 新增：显示问题描述
+            if failure.problem_prompt:
                 html_content += f"""
-                <p><strong>代码片段:</strong></p>
-                <div class="code-snippet">{html.escape(failure.code_snippet)}</div>
+                <details>
+                    <summary><strong>问题描述</strong></summary>
+                    <div class="code-snippet" style="background-color: #34495e;">{html.escape(failure.problem_prompt)}</div>
+                </details>
+                """
+
+            # 新增：显示接口定义
+            if failure.interface_definition:
+                html_content += f"""
+                <details>
+                    <summary><strong>接口定义</strong></summary>
+                    <div class="code-snippet" style="background-color: #2c3e50;">{html.escape(failure.interface_definition)}</div>
+                </details>
+                """
+
+            # 新增：显示错误上下文
+            if failure.error_context:
+                html_content += f"""
+                <p><strong>错误上下文 (>>> 标记错误行):</strong></p>
+                <div class="code-snippet" style="background-color: #c0392b;">{html.escape(failure.error_context)}</div>
+                """
+
+            # 新增：显示完整生成的代码
+            if failure.full_generated_code:
+                html_content += f"""
+                <details>
+                    <summary><strong>完整生成代码</strong></summary>
+                    <div class="code-snippet">{html.escape(failure.full_generated_code)}</div>
+                </details>
+                """
+
+            # 新增：显示修复建议
+            if failure.suggested_fix:
+                html_content += f"""
+                <div style="background-color: #d5f4e6; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                    <strong>修复建议:</strong><br>
+                    {html.escape(failure.suggested_fix).replace(chr(10), '<br>')}
+                </div>
+                """
+
+            # 新增：显示完整编译器输出
+            if failure.compiler_full_output:
+                html_content += f"""
+                <details>
+                    <summary><strong>完整编译器输出</strong></summary>
+                    <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">{html.escape(failure.compiler_full_output)}</div>
+                </details>
                 """
 
             html_content += "</div>"
@@ -1103,8 +1341,52 @@ def generate_model_detail_html(model: ModelAnalysis, output_path: str, unified_r
                 <p><span class="error-type failure-{failure.failure_type}">{failure.failure_type}</span></p>
                 <p><strong>失败描述:</strong> {html.escape(failure.description)}</p>
                 <p><strong>失败模式:</strong> {html.escape(failure.test_pattern)}</p>
-            </div>
             """
+
+            # 新增：显示问题描述
+            if failure.problem_prompt:
+                html_content += f"""
+                <details>
+                    <summary><strong>问题描述</strong></summary>
+                    <div class="code-snippet" style="background-color: #34495e;">{html.escape(failure.problem_prompt)}</div>
+                </details>
+                """
+
+            # 新增：显示接口定义
+            if failure.interface_definition:
+                html_content += f"""
+                <details>
+                    <summary><strong>接口定义</strong></summary>
+                    <div class="code-snippet" style="background-color: #2c3e50;">{html.escape(failure.interface_definition)}</div>
+                </details>
+                """
+
+            # 新增：显示完整生成的代码
+            if failure.full_generated_code:
+                html_content += f"""
+                <details>
+                    <summary><strong>生成的代码</strong></summary>
+                    <div class="code-snippet">{html.escape(failure.full_generated_code)}</div>
+                </details>
+                """
+
+            # 新增：显示不匹配详情
+            if failure.mismatch_details:
+                html_content += f"""
+                <p><strong>不匹配详情:</strong></p>
+                <div class="code-snippet" style="background-color: #e74c3c;">{html.escape(failure.mismatch_details)}</div>
+                """
+
+            # 新增：显示完整测试输出
+            if failure.test_output:
+                html_content += f"""
+                <details>
+                    <summary><strong>完整测试输出</strong></summary>
+                    <div class="code-snippet" style="background-color: #1a1a2e; max-height: 300px; overflow-y: auto;">{html.escape(failure.test_output)}</div>
+                </details>
+                """
+
+            html_content += "</div>"
     else:
         html_content += "<h2>[测试成功] 测试失败</h2><p>没有测试失败的情况</p>"
 

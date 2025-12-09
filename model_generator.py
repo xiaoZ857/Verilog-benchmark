@@ -16,6 +16,8 @@ VerilogEval Model Generator - 统一模型输出脚本
     python model_generator.py --model llama3.2-3b      # 生成指定Ollama模型
     python model_generator.py --limit 10               # 小测试模式（前10个问题）
     python model_generator.py --list                   # 列出所有可用模型
+    python model_generator.py --check-empty            # 检查所有空文件
+    python model_generator.py --regenerate-empty       # 检查并重新生成空文件
 
 SPDX-FileCopyrightText: Copyright (c) 2024
 SPDX-License-Identifier: MIT
@@ -106,6 +108,224 @@ def prepare_prompt(problem_name: str) -> tuple:
     full_prompt = PROMPT_PREFIX + prompt_content
 
     return full_prompt, prompt_content, ifc_content
+
+def find_empty_files(results_dir: str = "results") -> List[Dict]:
+    """
+    扫描所有结果目录，查找空的.sv文件
+
+    Returns:
+        List of dicts with keys: model_dir, problem_name, file_path, temperature, top_p
+    """
+    import re
+    empty_files = []
+    results_path = Path(results_dir)
+
+    if not results_path.exists():
+        print(f"Error: Results directory '{results_dir}' not found")
+        return empty_files
+
+    # Pattern to match directory names with temp and top_p
+    pattern = re.compile(r'(.+?)_0shot_temp(.+?)_topP(.+)$')
+
+    for model_dir in results_path.iterdir():
+        if not model_dir.is_dir():
+            continue
+
+        # Skip analysis directory
+        if model_dir.name == "analysis":
+            continue
+
+        # Parse directory name for model info
+        match = pattern.fullmatch(model_dir.name)
+        if not match:
+            continue
+
+        model_name, temp_str, top_p_str = match.groups()
+        temperature = float(temp_str.replace('_', '.'))
+        top_p = float(top_p_str.replace('_', '.'))
+
+        # Scan problem directories
+        for problem_dir in model_dir.iterdir():
+            if not problem_dir.is_dir():
+                continue
+
+            # Skip compile_test_result directory
+            if problem_dir.name == "compile_test_result":
+                continue
+
+            problem_name = problem_dir.name
+            sv_file = problem_dir / f"{problem_name}_sample01.sv"
+
+            if sv_file.exists():
+                # Check if file is empty or whitespace-only
+                try:
+                    content = sv_file.read_text(encoding='utf-8')
+                    if not content or not content.strip():
+                        empty_files.append({
+                            'model_dir': str(model_dir),
+                            'model_name': model_name,
+                            'problem_name': problem_name,
+                            'file_path': str(sv_file),
+                            'temperature': temperature,
+                            'top_p': top_p
+                        })
+                except Exception as e:
+                    # Try another encoding
+                    try:
+                        content = sv_file.read_text(encoding='latin-1')
+                        if not content or not content.strip():
+                            empty_files.append({
+                                'model_dir': str(model_dir),
+                                'model_name': model_name,
+                                'problem_name': problem_name,
+                                'file_path': str(sv_file),
+                                'temperature': temperature,
+                                'top_p': top_p
+                            })
+                    except:
+                        pass
+
+    return empty_files
+
+
+def check_empty_files(results_dir: str = "results") -> List[Dict]:
+    """
+    检查并报告所有空文件
+
+    Returns:
+        Empty files list
+    """
+    print("\n检查空文件...")
+    print("=" * 60)
+
+    empty_files = find_empty_files(results_dir)
+
+    if not empty_files:
+        print("没有发现空文件！所有生成的代码都有内容。")
+        return empty_files
+
+    print(f"发现 {len(empty_files)} 个空文件：\n")
+
+    # 按模型分组显示
+    from collections import defaultdict
+    by_model = defaultdict(list)
+    for item in empty_files:
+        key = f"{item['model_name']} (temp={item['temperature']}, top_p={item['top_p']})"
+        by_model[key].append(item['problem_name'])
+
+    for model_key, problems in by_model.items():
+        print(f"\n{model_key}:")
+        for problem in problems:
+            print(f"  - {problem}")
+
+    print(f"\n{'=' * 60}")
+    print(f"总计: {len(empty_files)} 个空文件需要重新生成")
+
+    return empty_files
+
+
+def regenerate_empty_files(results_dir: str = "results") -> Dict[str, int]:
+    """
+    检查并重新生成所有空文件
+
+    Returns:
+        Dictionary with success/failure counts
+    """
+    empty_files = check_empty_files(results_dir)
+
+    if not empty_files:
+        return {"success": 0, "failed": 0, "total": 0}
+
+    print(f"\n开始重新生成 {len(empty_files)} 个空文件...")
+    print("-" * 50)
+
+    success_count = 0
+    error_count = 0
+
+    for item in tqdm(empty_files, desc="重新生成"):
+        # 需要将model_name转换回实际的模型名称格式
+        # 例如：deepseek_v3_2 -> deepseek-v3.2 或其他映射
+        model_name_safe = item['model_name']
+        problem_name = item['problem_name']
+        temperature = item['temperature']
+        top_p = item['top_p']
+
+        # 尝试推断原始模型名称
+        # 常见的转换规则
+        model_name = infer_original_model_name(model_name_safe)
+
+        if not is_model_available(model_name):
+            print(f"\n警告: 模型 {model_name} 不可用，跳过 {problem_name}")
+            error_count += 1
+            continue
+
+        # 删除现有的空文件和相关文件
+        problem_dir = Path(item['model_dir']) / problem_name
+        for old_file in problem_dir.glob(f"{problem_name}_*"):
+            try:
+                old_file.unlink()
+            except:
+                pass
+
+        # 重新生成
+        if generate_single_problem(model_name, problem_name, temperature, top_p):
+            success_count += 1
+        else:
+            error_count += 1
+
+        # 小延迟避免过载
+        time.sleep(0.5)
+
+    print(f"\n重新生成完成:")
+    print(f"  成功: {success_count}")
+    print(f"  失败: {error_count}")
+    print(f"  总计: {len(empty_files)}")
+
+    return {
+        "success": success_count,
+        "failed": error_count,
+        "total": len(empty_files)
+    }
+
+
+def infer_original_model_name(safe_name: str) -> str:
+    """
+    从安全目录名称推断原始模型名称
+
+    Args:
+        safe_name: 目录安全名称，如 'deepseek_v3_2'
+
+    Returns:
+        原始模型名称，如 'deepseek-v3.2'
+    """
+    # 已知的映射规则
+    known_mappings = {
+        'deepseek_v3_2': 'deepseek-v3.2',
+        'deepseek_r1_14b': 'deepseek-r1:14b',
+        'gpt_oss_20b': 'gpt-oss:20b',
+        'llama3_2_3b': 'llama3.2:3b',
+        'qwen3_8b': 'qwen3:8b',
+        'phi4_14b': 'phi4:14b',
+        'mistral_7b': 'mistral:7b',
+        'gemma3_12b': 'gemma3:12b',
+        'glm_4_6': 'glm-4.6',
+    }
+
+    if safe_name in known_mappings:
+        return known_mappings[safe_name]
+
+    # 尝试通用转换规则
+    # 1. 检查是否匹配 Ollama 格式 (name_size)
+    import re
+    ollama_pattern = re.match(r'(.+?)_(\d+b)$', safe_name, re.IGNORECASE)
+    if ollama_pattern:
+        name_part = ollama_pattern.group(1).replace('_', '-')
+        size_part = ollama_pattern.group(2)
+        return f"{name_part}:{size_part}"
+
+    # 2. 默认转换：将下划线转为点或连字符
+    return safe_name.replace('_', '-')
+
 
 def get_model_output_dir(model_name: str, temperature: float = 0.0, top_p: float = 0.01) -> str:
     """Get output directory for a model, using consistent naming"""
@@ -221,6 +441,8 @@ Examples:
   python model_generator.py --list                   # List all available models
   python model_generator.py --limit 10               # Quick test with first 10 problems
   python model_generator.py --start 50              # Start from problem 50 (resume)
+  python model_generator.py --check-empty           # Check for empty generated files
+  python model_generator.py --regenerate-empty      # Check and regenerate empty files
         """
     )
 
@@ -250,6 +472,16 @@ Examples:
         '--list',
         action='store_true',
         help='List all available models'
+    )
+    model_group.add_argument(
+        '--check-empty',
+        action='store_true',
+        help='Check for empty generated files'
+    )
+    model_group.add_argument(
+        '--regenerate-empty',
+        action='store_true',
+        help='Check and regenerate empty files'
     )
 
     # Problem selection options
@@ -304,6 +536,16 @@ Examples:
                 status = "[OK]" if model.available else "[X]"
                 print(f"  {model.name:<20} {status}")
 
+        return
+
+    # Handle check empty files
+    if args.check_empty:
+        check_empty_files()
+        return
+
+    # Handle regenerate empty files
+    if args.regenerate_empty:
+        regenerate_empty_files()
         return
 
     print(f"\nVerilogEval Model Generator")

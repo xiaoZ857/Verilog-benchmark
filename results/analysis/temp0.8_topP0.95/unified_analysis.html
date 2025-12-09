@@ -180,7 +180,7 @@
         <div class="container">
             <h1>VerilogEval 失败分析报告</h1>
             <p><strong>参数配置:</strong> Temperature = 0.8, Top_p = 0.95</p>
-            <p><strong>生成时间:</strong> 2025-12-09 06:58:22</p>
+            <p><strong>生成时间:</strong> 2025-12-09 07:22:36</p>
 
             <h2>[性能概览] 模型性能概览</h2>
             <table>
@@ -203,7 +203,7 @@
                         <td style='background-color: #e74c3c; color: white;'>16.0%</td>
                         <td style='background-color: #e74c3c; color: white;'>15.4%</td>
                         <td>131</td>
-                        <td>0</td>
+                        <td>1</td>
                         <td><a href="model_details/deepseek_r1_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -213,7 +213,7 @@
                         <td style='background-color: #e74c3c; color: white;'>59.0%</td>
                         <td style='background-color: #e74c3c; color: white;'>48.7%</td>
                         <td>64</td>
-                        <td>0</td>
+                        <td>16</td>
                         <td><a href="model_details/deepseek_v3_2_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -223,7 +223,7 @@
                         <td style='background-color: #f39c12; color: white;'>67.3%</td>
                         <td style='background-color: #e74c3c; color: white;'>37.2%</td>
                         <td>49</td>
-                        <td>0</td>
+                        <td>47</td>
                         <td><a href="model_details/gemma3_12b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -233,7 +233,7 @@
                         <td style='background-color: #e74c3c; color: white;'>28.8%</td>
                         <td style='background-color: #e74c3c; color: white;'>25.0%</td>
                         <td>111</td>
-                        <td>0</td>
+                        <td>6</td>
                         <td><a href="model_details/glm_4_6_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -243,7 +243,7 @@
                         <td style='background-color: #e74c3c; color: white;'>42.9%</td>
                         <td style='background-color: #e74c3c; color: white;'>41.7%</td>
                         <td>86</td>
-                        <td>0</td>
+                        <td>2</td>
                         <td><a href="model_details/gpt_oss_20b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -253,7 +253,7 @@
                         <td style='background-color: #e74c3c; color: white;'>17.9%</td>
                         <td style='background-color: #e74c3c; color: white;'>4.5%</td>
                         <td>117</td>
-                        <td>0</td>
+                        <td>21</td>
                         <td><a href="model_details/llama3_2_3b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -263,7 +263,7 @@
                         <td style='background-color: #e74c3c; color: white;'>17.3%</td>
                         <td style='background-color: #e74c3c; color: white;'>5.1%</td>
                         <td>115</td>
-                        <td>0</td>
+                        <td>19</td>
                         <td><a href="model_details/mistral_7b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -273,7 +273,7 @@
                         <td style='background-color: #f39c12; color: white;'>76.9%</td>
                         <td style='background-color: #e74c3c; color: white;'>39.7%</td>
                         <td>33</td>
-                        <td>0</td>
+                        <td>58</td>
                         <td><a href="model_details/phi4_14b_details.html" class="model-link">查看详情</a></td>
                     </tr>
         
@@ -411,19 +411,132 @@
         
                 <div class="stats-card">
                     <h3>测试失败模式分析</h3>
-    <p>没有发现测试失败模式</p></div></div>
+    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>失败模式</th>
+                                <th>出现次数</th>
+                                <th>分布</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        
+                            <tr>
+                                <td>Mismatches: 1 in 100 samples</td>
+                                <td>3</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100.0%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 60 in 60 samples</td>
+                                <td>3</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100.0%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 20 in 20 samples</td>
+                                <td>3</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100.0%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 235 in 266 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 121 in 121 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 1 in 199 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 61 in 94 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 109 in 110 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 41 in 432 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td>Mismatches: 14 in 299 samples</td>
+                                <td>2</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 66.66666666666666%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+                    </table>
+        </div></div>
             <div class="stats-grid">
                 <div class="stats-card">
                     <h3>[最难题] 最具挑战性的问题 (通过率最低)</h3>
                     <ul class="problem-list">
-    <li><strong>Prob134_2014_q3c</strong> - 通过率: 0.0%</li><li><strong>Prob092_gatesv100</strong> - 通过率: 0.0%</li><li><strong>Prob138_2012_q2fsm</strong> - 通过率: 0.0%</li><li><strong>Prob084_ece241_2013_q12</strong> - 通过率: 0.0%</li><li><strong>Prob106_always_nolatches</strong> - 通过率: 0.0%</li><li><strong>Prob058_alwaysblock2</strong> - 通过率: 0.0%</li><li><strong>Prob095_review2015_fsmshift</strong> - 通过率: 0.0%</li><li><strong>Prob129_ece241_2013_q8</strong> - 通过率: 0.0%</li><li><strong>Prob059_wire4</strong> - 通过率: 0.0%</li><li><strong>Prob115_shift18</strong> - 通过率: 0.0%</li>
+    <li><strong>Prob122_kmap4</strong> - 通过率: 0.0%</li><li><strong>Prob129_ece241_2013_q8</strong> - 通过率: 0.0%</li><li><strong>Prob014_andgate</strong> - 通过率: 0.0%</li><li><strong>Prob011_norgate</strong> - 通过率: 0.0%</li><li><strong>Prob080_timer</strong> - 通过率: 0.0%</li><li><strong>Prob062_bugs_mux2</strong> - 通过率: 0.0%</li><li><strong>Prob151_review2015_fsm</strong> - 通过率: 0.0%</li><li><strong>Prob061_2014_q4a</strong> - 通过率: 0.0%</li><li><strong>Prob016_m2014_q4j</strong> - 通过率: 0.0%</li><li><strong>Prob132_always_if2</strong> - 通过率: 0.0%</li>
                     </ul>
                 </div>
 
                 <div class="stats-card">
                     <h3>[简单题] 最简单的问题 (通过率最高)</h3>
                     <ul class="problem-list">
-    <li><strong>Prob134_2014_q3c</strong> - 通过率: 0.0%</li><li><strong>Prob092_gatesv100</strong> - 通过率: 0.0%</li><li><strong>Prob138_2012_q2fsm</strong> - 通过率: 0.0%</li><li><strong>Prob084_ece241_2013_q12</strong> - 通过率: 0.0%</li><li><strong>Prob106_always_nolatches</strong> - 通过率: 0.0%</li><li><strong>Prob058_alwaysblock2</strong> - 通过率: 0.0%</li><li><strong>Prob095_review2015_fsmshift</strong> - 通过率: 0.0%</li><li><strong>Prob129_ece241_2013_q8</strong> - 通过率: 0.0%</li><li><strong>Prob059_wire4</strong> - 通过率: 0.0%</li><li><strong>Prob115_shift18</strong> - 通过率: 0.0%</li>
+    <li><strong>Prob122_kmap4</strong> - 通过率: 0.0%</li><li><strong>Prob129_ece241_2013_q8</strong> - 通过率: 0.0%</li><li><strong>Prob014_andgate</strong> - 通过率: 0.0%</li><li><strong>Prob011_norgate</strong> - 通过率: 0.0%</li><li><strong>Prob080_timer</strong> - 通过率: 0.0%</li><li><strong>Prob062_bugs_mux2</strong> - 通过率: 0.0%</li><li><strong>Prob151_review2015_fsm</strong> - 通过率: 0.0%</li><li><strong>Prob061_2014_q4a</strong> - 通过率: 0.0%</li><li><strong>Prob016_m2014_q4j</strong> - 通过率: 0.0%</li><li><strong>Prob132_always_if2</strong> - 通过率: 0.0%</li>
                     </ul>
                 </div>
             </div>

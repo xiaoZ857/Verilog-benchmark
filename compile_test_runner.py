@@ -6,7 +6,10 @@ This script reads all generated model results from the results/ directory
 and re-evaluates compilation and test pass rates using the correct logic.
 
 Usage:
-    python retest_all_models.py
+    python compile_test_runner.py                                    # Test all models
+    python compile_test_runner.py --model deepseek_v3_2              # Test specific model
+    python compile_test_runner.py --prompt-strategy v1               # Test only v1 strategy results
+    python compile_test_runner.py --temperature 0.8 --top-p 0.95     # Filter by parameters
 
 SPDX-FileCopyrightText: Copyright (c) 2024
 SPDX-License-Identifier: MIT
@@ -75,8 +78,18 @@ class ModelResult:
     compile_rate: float
     pass_rate: float
 
-def find_result_directories(temperature: Optional[float] = None, top_p: Optional[float] = None) -> List[str]:
-    """Find all model result directories in results/ - supports unified format with optional filtering"""
+def find_result_directories(temperature: Optional[float] = None, top_p: Optional[float] = None,
+                            prompt_strategy: Optional[str] = None) -> List[str]:
+    """Find all model result directories in results/ - supports unified format with optional filtering
+
+    Args:
+        temperature: Filter by temperature (optional)
+        top_p: Filter by top_p (optional)
+        prompt_strategy: Filter by prompt strategy (optional). Use "default" for no-suffix dirs.
+
+    Returns:
+        List of matching directory paths
+    """
     results_dir = Path("results")
     if not results_dir.exists():
         print("Error: results/ directory not found")
@@ -86,16 +99,16 @@ def find_result_directories(temperature: Optional[float] = None, top_p: Optional
     model_dirs = []
     for item in results_dir.iterdir():
         if item.is_dir() and ("_0shot_temp" in item.name):
-            # Parse temperature and top_p from directory name
-            import re
+            # Parse temperature, top_p, and prompt_strategy from directory name
             dir_name = item.name
 
-            # Extract temperature and top_p from directory name
-            # Pattern: {model}_0shot_temp{temp}_topP{top_p}
-            match = re.search(r'_0shot_temp(.+?)(?:_topP(.+?))?$', dir_name)
+            # Extract temperature, top_p, and optional prompt strategy from directory name
+            # Pattern: {model}_0shot_temp{temp}_topP{top_p}[_prompt{strategy}]
+            match = re.search(r'_0shot_temp(.+?)_topP(.+?)(?:_prompt(.+))?$', dir_name)
             if match:
                 dir_temp_str = match.group(1).replace('_', '.')
-                dir_top_p_str = match.group(2).replace('_', '.') if match.group(2) else "0.01"
+                dir_top_p_str = match.group(2).replace('_', '.')
+                dir_prompt_strategy = match.group(3) if match.group(3) else "default"
 
                 try:
                     dir_temp = float(dir_temp_str)
@@ -105,6 +118,8 @@ def find_result_directories(temperature: Optional[float] = None, top_p: Optional
                     if temperature is not None and abs(dir_temp - temperature) > 0.001:
                         continue
                     if top_p is not None and abs(dir_top_p - top_p) > 0.001:
+                        continue
+                    if prompt_strategy is not None and dir_prompt_strategy != prompt_strategy:
                         continue
                 except ValueError:
                     # If parsing fails, include the directory
@@ -125,13 +140,22 @@ def find_result_directories(temperature: Optional[float] = None, top_p: Optional
 def extract_model_name(directory: str) -> str:
     """Extract clean model name from directory path"""
     dir_name = os.path.basename(directory)
-    # Remove temperature suffix if present (supports new format with temperature and top_p)
-    import re
-    # Match pattern like "_0shot_tempX_X_topPY_Y" and remove it
+    # Match pattern like "_0shot_tempX_X_topPY_Y[_promptZ]" and remove it
+    # Supports both old format and new format with prompt strategy suffix
     match = re.search(r'(.+?)_0shot_temp.*$', dir_name)
     if match:
         return match.group(1)
     return dir_name
+
+
+def extract_prompt_strategy(directory: str) -> str:
+    """Extract prompt strategy from directory path"""
+    dir_name = os.path.basename(directory)
+    # Match pattern like "_prompt{strategy}" at the end
+    match = re.search(r'_prompt([^_]+)$', dir_name)
+    if match:
+        return match.group(1)
+    return "default"
 
 def get_problem_list() -> List[str]:
     """Get list of all problems from dataset directory"""
@@ -458,10 +482,11 @@ def main():
 Examples:
   python compile_test_runner.py                           # Test all models
   python compile_test_runner.py --model deepseek_v3_2     # Test specific model
-  python compile_test_runner.py --list                      # List available models
-  python compile_test_runner.py --temperature 0.8          # Test all models with temp=0.8
+  python compile_test_runner.py --list                    # List available models
+  python compile_test_runner.py --temperature 0.8         # Test all models with temp=0.8
   python compile_test_runner.py --temperature 0.8 --top-p 0.95  # Test with specific params
-  python compile_test_runner.py --model llama3_2_3b --temperature 0.8  # Test specific model with temp=0.8
+  python compile_test_runner.py --prompt-strategy v1      # Test only v1 strategy results
+  python compile_test_runner.py --model llama3_2_3b --prompt-strategy v1  # Test specific model with v1
         """
     )
     parser.add_argument(
@@ -485,6 +510,12 @@ Examples:
         dest='top_p',
         help='Filter models by generation top_p (e.g., 0.95)'
     )
+    parser.add_argument(
+        '--prompt-strategy',
+        type=str,
+        dest='prompt_strategy',
+        help='Filter models by prompt strategy (e.g., default, v1)'
+    )
 
     args = parser.parse_args()
 
@@ -494,18 +525,20 @@ Examples:
     print("Including static analysis for infinite loop detection")
 
     # Show filtering criteria if applied
-    if args.temperature is not None or args.top_p is not None:
+    if args.temperature is not None or args.top_p is not None or args.prompt_strategy is not None:
         filter_criteria = []
         if args.temperature is not None:
             filter_criteria.append(f"temperature={args.temperature}")
         if args.top_p is not None:
             filter_criteria.append(f"top_p={args.top_p}")
+        if args.prompt_strategy is not None:
+            filter_criteria.append(f"prompt_strategy={args.prompt_strategy}")
         print(f"\nFiltering models by: {', '.join(filter_criteria)}")
 
     print()
 
     # Find model result directories with optional filtering
-    all_model_dirs = find_result_directories(args.temperature, args.top_p)
+    all_model_dirs = find_result_directories(args.temperature, args.top_p, args.prompt_strategy)
 
     if not all_model_dirs:
         print("No model result directories found in results/")
@@ -523,22 +556,32 @@ Examples:
 
         if not target_dir:
             print(f"Error: Model '{args.model}' not found")
-            if args.temperature is not None or args.top_p is not None:
-                print(f"with the specified filters (temperature={args.temperature}, top_p={args.top_p})")
+            if args.temperature is not None or args.top_p is not None or args.prompt_strategy is not None:
+                filter_info = []
+                if args.temperature is not None:
+                    filter_info.append(f"temperature={args.temperature}")
+                if args.top_p is not None:
+                    filter_info.append(f"top_p={args.top_p}")
+                if args.prompt_strategy is not None:
+                    filter_info.append(f"prompt_strategy={args.prompt_strategy}")
+                print(f"with the specified filters: {', '.join(filter_info)}")
             print(f"Available models:")
             for model_dir in all_model_dirs:
                 model_name = extract_model_name(model_dir)
-                print(f"  - {model_name}")
+                prompt_strat = extract_prompt_strategy(model_dir)
+                print(f"  - {model_name} (prompt: {prompt_strat})")
             return
 
         model_dirs = [target_dir]
         print(f"Testing specific model: {args.model}")
-        if args.temperature is not None or args.top_p is not None:
+        if args.temperature is not None or args.top_p is not None or args.prompt_strategy is not None:
             filter_info = []
             if args.temperature is not None:
                 filter_info.append(f"temp={args.temperature}")
             if args.top_p is not None:
                 filter_info.append(f"top_p={args.top_p}")
+            if args.prompt_strategy is not None:
+                filter_info.append(f"prompt={args.prompt_strategy}")
             print(f"with parameters: {', '.join(filter_info)}")
     else:
         model_dirs = all_model_dirs

@@ -7,6 +7,7 @@ VerilogEval Model Generator - 统一模型输出脚本
 功能：
 - 支持小测试模式（--limit）和全量模式
 - 支持分模型测试（--model）
+- 支持提示词策略（--prompt-strategy）
 - 调用model_interface.py的抽象接口
 - 保存模型原始输出到results目录
 
@@ -16,6 +17,8 @@ VerilogEval Model Generator - 统一模型输出脚本
     python model_generator.py --model llama3.2-3b      # 生成指定Ollama模型
     python model_generator.py --limit 10               # 小测试模式（前10个问题）
     python model_generator.py --list                   # 列出所有可用模型
+    python model_generator.py --list-strategies        # 列出所有可用提示词策略
+    python model_generator.py --prompt-strategy v1     # 使用优化提示词策略v1
     python model_generator.py --check-empty            # 检查所有空文件
     python model_generator.py --regenerate-empty       # 检查并重新生成空文件
 
@@ -43,12 +46,96 @@ except ImportError:
     sys.exit(1)
 
 # ============================================================================
+# Prompt Strategies - 优化提示词定义
+# ============================================================================
+# 将提示词放在文件最开始，方便修改和扩展
+# 使用方法：python model_generator.py --prompt-strategy v1
+
+VERILOG_PROMPT_V1 = """You are an expert Verilog/SystemVerilog code generator. Generate ONLY the module body code (the content between the module declaration and endmodule). Follow these CRITICAL SYNTAX RULES:
+
+### CRITICAL SYNTAX RULES - MUST FOLLOW ###
+
+1. **Module Boundary**
+   - The module declaration is ALREADY provided in the prompt
+   - You MUST end your code with `endmodule`
+   - Do NOT redeclare the module header
+
+2. **Continuous Assignment (for combinational logic on wire outputs)**
+   - ALWAYS use `assign` keyword for wire-type outputs
+   - Correct: `assign out = a & b;`
+   - Wrong: `out = a & b;` (missing assign)
+
+3. **Output Port Types**
+   - If output is assigned in `always` block -> declare as `reg` or use `logic`
+   - If output uses `assign` statement -> leave as `wire` (default)
+   - Check the module interface: if output is already declared as `reg`, use always block
+   - If output is NOT declared as `reg`, use `assign` for combinational logic
+
+4. **Always Block Assignments**
+   - Sequential logic (with clk): use non-blocking `<=`
+   - Combinational logic (always @* or always_comb): use blocking `=`
+   - NEVER mix blocking and non-blocking in same always block
+
+5. **Signal Declarations**
+   - Only use signals that are defined in module ports or declared internally
+   - Do NOT use `clk` in combinational-only circuits
+   - Check module ports before using any signal
+
+6. **Common Patterns**
+
+   Combinational logic (wire output):
+   ```verilog
+   assign out = a & b;
+   endmodule
+   ```
+
+   Combinational logic (reg output, using always):
+   ```verilog
+   always @(*) begin
+       out = a & b;
+   end
+   endmodule
+   ```
+
+   Sequential logic (D flip-flop):
+   ```verilog
+   always @(posedge clk) begin
+       if (reset)
+           q <= 1'b0;
+       else
+           q <= d;
+   end
+   endmodule
+   ```
+
+### OUTPUT FORMAT ###
+- Generate ONLY the module body (between declaration and endmodule)
+- Must include `endmodule` at the end
+- No explanations, no comments unless necessary for complex logic
+- No markdown code blocks
+
+### VERIFICATION CHECKLIST ###
+Before outputting, verify:
+[ ] Code ends with `endmodule`
+[ ] All wire outputs use `assign` keyword
+[ ] All reg outputs are assigned in always blocks
+[ ] Only declared signals are used
+[ ] Blocking/non-blocking assignments are correct
+"""
+
+# 提示词策略字典 - 在此添加新策略
+PROMPT_STRATEGIES = {
+    "default": "",  # 原始无优化（基线）
+    "v1": VERILOG_PROMPT_V1,  # 语法规则优化 v1
+}
+
+# ============================================================================
 # Configuration
 # ============================================================================
 
 DATASET_DIR = "dataset_code-complete-iccad2023"
 
-# Prompt prefix (from sv-generate)
+# Prompt prefix (from sv-generate) - 基础提示词，所有策略都会保留
 PROMPT_PREFIX = """// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
 """
 
@@ -86,9 +173,13 @@ def read_file(filepath: str) -> str:
         print(f"Error reading {filepath}: {e}")
         return ""
 
-def prepare_prompt(problem_name: str) -> tuple:
+def prepare_prompt(problem_name: str, prompt_strategy: str = "default") -> tuple:
     """
-    Prepare prompt for the problem
+    Prepare prompt for the problem with optional prompt strategy
+
+    Args:
+        problem_name: Name of the problem
+        prompt_strategy: Prompt strategy to use (default, v1, etc.)
 
     Returns:
         (full_prompt, prompt_content, interface_content)
@@ -105,7 +196,14 @@ def prepare_prompt(problem_name: str) -> tuple:
     if not ifc_content:
         raise ValueError(f"Could not read interface file: {ifc_file}")
 
-    full_prompt = PROMPT_PREFIX + prompt_content
+    # 获取策略优化提示词
+    strategy_prompt = PROMPT_STRATEGIES.get(prompt_strategy, "")
+
+    # 组合：策略提示词 + 原始基础前缀 + 问题描述
+    if strategy_prompt:
+        full_prompt = strategy_prompt + "\n\n" + PROMPT_PREFIX + prompt_content
+    else:
+        full_prompt = PROMPT_PREFIX + prompt_content  # 基线保持不变
 
     return full_prompt, prompt_content, ifc_content
 
@@ -327,25 +425,51 @@ def infer_original_model_name(safe_name: str) -> str:
     return safe_name.replace('_', '-')
 
 
-def get_model_output_dir(model_name: str, temperature: float = 0.0, top_p: float = 0.01) -> str:
-    """Get output directory for a model, using consistent naming"""
+def get_model_output_dir(model_name: str, temperature: float = 0.0, top_p: float = 0.01,
+                         prompt_strategy: str = "default") -> str:
+    """Get output directory for a model, using consistent naming
+
+    Args:
+        model_name: Name of the model
+        temperature: Generation temperature
+        top_p: Generation top_p
+        prompt_strategy: Prompt strategy used (default, v1, etc.)
+
+    Returns:
+        Output directory path
+    """
     # Convert model name to safe directory name (remove file system unsafe characters)
     model_name_safe = model_name.replace(':', '_').replace('-', '_').replace('.', '_')
     # Format temperature and top_p for folder name
     temp_str = str(temperature).replace('.', '_')
     top_p_str = str(top_p).replace('.', '_')
-    return f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}"
 
-def generate_single_problem(model_name: str, problem_name: str, temperature: float = 0.0, top_p: float = 0.01) -> bool:
+    base_dir = f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}"
+
+    # 只有非默认策略才添加后缀（保持向后兼容）
+    if prompt_strategy and prompt_strategy != "default":
+        base_dir += f"_prompt{prompt_strategy}"
+
+    return base_dir
+
+def generate_single_problem(model_name: str, problem_name: str, temperature: float = 0.0,
+                            top_p: float = 0.01, prompt_strategy: str = "default") -> bool:
     """
     Generate code for a single problem using model interface
+
+    Args:
+        model_name: Name of the model
+        problem_name: Name of the problem
+        temperature: Generation temperature
+        top_p: Generation top_p
+        prompt_strategy: Prompt strategy to use
 
     Returns:
         True if successful, False otherwise
     """
     try:
-        # Prepare prompt
-        full_prompt, prompt_content, ifc_content = prepare_prompt(problem_name)
+        # Prepare prompt with strategy
+        full_prompt, prompt_content, ifc_content = prepare_prompt(problem_name, prompt_strategy)
 
         # Use model interface to generate code
         success = generate_code_for_problem(
@@ -363,19 +487,27 @@ def generate_single_problem(model_name: str, problem_name: str, temperature: flo
         print(f"Error generating {problem_name} with {model_name}: {e}")
         return False
 
-def generate_for_model(model_name: str, problems: List[str], temperature: float = 0.0, top_p: float = 0.01) -> Dict[str, int]:
+def generate_for_model(model_name: str, problems: List[str], temperature: float = 0.0,
+                       top_p: float = 0.01, prompt_strategy: str = "default") -> Dict[str, int]:
     """
     Generate code for all problems with a specific model
+
+    Args:
+        model_name: Name of the model
+        problems: List of problem names
+        temperature: Generation temperature
+        top_p: Generation top_p
+        prompt_strategy: Prompt strategy to use
 
     Returns:
         Dictionary with success/failure counts
     """
     print(f"\nGenerating code with {model_name}...")
-    print(f"Parameters: temperature={temperature}, top_p={top_p}")
+    print(f"Parameters: temperature={temperature}, top_p={top_p}, prompt_strategy={prompt_strategy}")
     print("-" * 50)
 
-    # Get output directory
-    output_dir = get_model_output_dir(model_name, temperature, top_p)
+    # Get output directory (includes prompt strategy in name if not default)
+    output_dir = get_model_output_dir(model_name, temperature, top_p, prompt_strategy)
     os.makedirs(output_dir, exist_ok=True)
 
     # Check for resume - skip already completed problems
@@ -407,7 +539,7 @@ def generate_for_model(model_name: str, problems: List[str], temperature: float 
     error_count = 0
 
     for problem_name in tqdm(remaining_problems, desc=f"Generating {model_name}"):
-        if generate_single_problem(model_name, problem_name, temperature, top_p):
+        if generate_single_problem(model_name, problem_name, temperature, top_p, prompt_strategy):
             success_count += 1
         else:
             error_count += 1
@@ -439,10 +571,16 @@ Examples:
   python model_generator.py --api-models            # Generate for all API models only
   python model_generator.py --ollama-models         # Generate for all Ollama models only
   python model_generator.py --list                   # List all available models
+  python model_generator.py --list-strategies        # List all available prompt strategies
+  python model_generator.py --prompt-strategy v1     # Use optimized prompt strategy v1
   python model_generator.py --limit 10               # Quick test with first 10 problems
   python model_generator.py --start 50              # Start from problem 50 (resume)
   python model_generator.py --check-empty           # Check for empty generated files
   python model_generator.py --regenerate-empty      # Check and regenerate empty files
+
+Prompt Strategy Examples:
+  python model_generator.py --model deepseek-v3.2 --prompt-strategy v1
+  python model_generator.py --all --prompt-strategy v1 --limit 10
         """
     )
 
@@ -482,6 +620,20 @@ Examples:
         '--regenerate-empty',
         action='store_true',
         help='Check and regenerate empty files'
+    )
+    model_group.add_argument(
+        '--list-strategies',
+        action='store_true',
+        help='List all available prompt strategies'
+    )
+
+    # Prompt strategy option
+    parser.add_argument(
+        '--prompt-strategy',
+        type=str,
+        default='default',
+        choices=list(PROMPT_STRATEGIES.keys()),
+        help=f'Prompt strategy to use (default: default). Available: {", ".join(PROMPT_STRATEGIES.keys())}'
     )
 
     # Problem selection options
@@ -538,6 +690,22 @@ Examples:
 
         return
 
+    # Handle list strategies
+    if args.list_strategies:
+        print("\nAvailable Prompt Strategies:")
+        print("=" * 60)
+        for strategy_name, strategy_prompt in PROMPT_STRATEGIES.items():
+            if strategy_prompt:
+                # 显示提示词的前100个字符作为预览
+                preview = strategy_prompt[:100].replace('\n', ' ').strip() + "..."
+                print(f"\n  {strategy_name}:")
+                print(f"    Preview: {preview}")
+            else:
+                print(f"\n  {strategy_name}: (no optimization - baseline)")
+        print("\n" + "=" * 60)
+        print("Usage: python model_generator.py --model <model> --prompt-strategy <strategy>")
+        return
+
     # Handle check empty files
     if args.check_empty:
         check_empty_files()
@@ -552,6 +720,7 @@ Examples:
     print("=" * 50)
     print(f"Dataset: {DATASET_DIR}")
     print(f"Mode: Zero-shot, temp={args.temperature}, top_p={args.top_p}")
+    print(f"Prompt Strategy: {args.prompt_strategy}")
 
     # Get problem list
     problems = get_problem_list()
@@ -652,11 +821,12 @@ Examples:
     # Generate for each model
     overall_results = {
         "total_problems": len(problems),
+        "prompt_strategy": args.prompt_strategy,
         "models": {}
     }
 
     for model_name in models_to_generate:
-        result = generate_for_model(model_name, problems, args.temperature, args.top_p)
+        result = generate_for_model(model_name, problems, args.temperature, args.top_p, args.prompt_strategy)
         overall_results["models"][model_name] = result
 
     # Overall summary

@@ -9,13 +9,14 @@ VerilogEval Results Analyzer - 失败分析和统计分类工具
 - 分析编译失败的具体原因和模式
 - 分析测试失败的行为模式
 - 生成详细的HTML分析报告
-- 按温度和top_p参数组织结果
+- 按温度、top_p和提示词策略参数组织结果
 
 用法：
-    python results_analyzer.py                         # 分析所有模型
-    python results_analyzer.py --temp 0.8 --top-p 0.95 # 分析特定参数
-    python results_analyzer.py --temp 0.0             # 分析下限测试
-    python results_analyzer.py --stats-only           # 仅生成统计信息
+    python results_analyzer.py                              # 分析所有模型
+    python results_analyzer.py --temp 0.8 --top-p 0.95      # 分析特定参数
+    python results_analyzer.py --temp 0.0                   # 分析下限测试
+    python results_analyzer.py --prompt-strategy v1         # 分析特定提示词策略
+    python results_analyzer.py --stats-only                 # 仅生成统计信息
 
 SPDX-FileCopyrightText: Copyright (c) 2024
 SPDX-License-Identifier: MIT
@@ -83,6 +84,7 @@ class ModelAnalysis:
     model_name: str
     temperature: float
     top_p: float
+    prompt_strategy: str  # 提示词策略
     total_problems: int
     generated: int
     compiled: int
@@ -108,6 +110,7 @@ class UnifiedAnalysis:
     """统一分析结果（同一参数下的所有模型）"""
     temperature: float
     top_p: float
+    prompt_strategy: str  # 提示词策略
     models: List[ModelAnalysis]
     compilation_error_patterns: Dict[str, int]  # 错误模式 -> 出现次数
     test_failure_patterns: Dict[str, int]  # 失败模式 -> 出现次数
@@ -120,40 +123,53 @@ class UnifiedAnalysis:
 # ============================================================================
 
 def find_result_directories(temp_filter: Optional[float] = None,
-                           top_p_filter: Optional[float] = None) -> List[Tuple[str, float, float]]:
-    """Find all model result directories with temperature and top_p parameters"""
+                           top_p_filter: Optional[float] = None,
+                           prompt_strategy_filter: Optional[str] = None) -> List[Tuple[str, float, float, str]]:
+    """Find all model result directories with temperature, top_p and prompt_strategy parameters
+
+    Args:
+        temp_filter: Filter by temperature (optional)
+        top_p_filter: Filter by top_p (optional)
+        prompt_strategy_filter: Filter by prompt strategy (optional). Use "default" for no-suffix dirs.
+
+    Returns:
+        List of tuples: (directory_path, temperature, top_p, prompt_strategy)
+    """
     results_dir = Path("results")
     if not results_dir.exists():
         print("Error: results/ directory not found")
         return []
 
-    # Pattern to match directory names with temp and top_p
-    # Format: model_name_0shot_tempX_X_topPX_X
-    pattern = re.compile(r'(.+?)_0shot_temp(.+?)_topP(.+)$')
+    # Pattern to match directory names with temp, top_p, and optional prompt strategy
+    # Format: model_name_0shot_tempX_X_topPX_X[_promptSTRATEGY]
+    pattern = re.compile(r'(.+?)_0shot_temp(.+?)_topP(.+?)(?:_prompt(.+))?$')
 
     model_dirs = []
     for item in results_dir.iterdir():
         if item.is_dir():
             match = pattern.fullmatch(item.name)
             if match:
-                model_name, temp_str, top_p_str = match.groups()
+                model_name, temp_str, top_p_str, prompt_strategy = match.groups()
 
                 # Convert string representations back to numbers
                 temp = float(temp_str.replace('_', '.'))
                 top_p = float(top_p_str.replace('_', '.'))
+                prompt_strategy = prompt_strategy if prompt_strategy else "default"
 
                 # Apply filters
                 if temp_filter is not None and abs(temp - temp_filter) > 1e-6:
                     continue
                 if top_p_filter is not None and abs(top_p - top_p_filter) > 1e-6:
                     continue
+                if prompt_strategy_filter is not None and prompt_strategy != prompt_strategy_filter:
+                    continue
 
                 # Check if this directory contains model results
                 sample01_files = list(item.glob("*/*_sample01.sv"))
                 if sample01_files:
-                    model_dirs.append((str(item), temp, top_p))
+                    model_dirs.append((str(item), temp, top_p, prompt_strategy))
 
-    return sorted(model_dirs, key=lambda x: (x[1], x[2], x[0]))
+    return sorted(model_dirs, key=lambda x: (x[1], x[2], x[3], x[0]))
 
 def extract_model_name(directory: str) -> str:
     """从目录路径中提取模型名称"""
@@ -530,12 +546,13 @@ def classify_test_failure(log_content: str, problem_name: str) -> Tuple[str, str
 
     return failure_type, description
 
-def analyze_model_directory(model_dir: str, temperature: float, top_p: float) -> ModelAnalysis:
+def analyze_model_directory(model_dir: str, temperature: float, top_p: float,
+                            prompt_strategy: str = "default") -> ModelAnalysis:
     """分析单个模型目录"""
     model_name = extract_model_name(model_dir)
     model_path = Path(model_dir)
 
-    print(f"分析 {model_name} (temp={temperature}, top_p={top_p})...")
+    print(f"分析 {model_name} (temp={temperature}, top_p={top_p}, prompt={prompt_strategy})...")
 
     # 初始化统计
     total_problems = len(get_problem_list())
@@ -746,6 +763,7 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float) ->
         model_name=model_name,
         temperature=temperature,
         top_p=top_p,
+        prompt_strategy=prompt_strategy,
         total_problems=total_problems,
         generated=generated,
         compiled=compiled,
@@ -785,7 +803,8 @@ def extract_test_pattern(log_content: str) -> str:
 
     return signal_lines[-1] if signal_lines else "Unknown pattern"
 
-def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top_p: float) -> UnifiedAnalysis:
+def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top_p: float,
+                            prompt_strategy: str = "default") -> UnifiedAnalysis:
     """生成统一分析"""
     compilation_error_patterns = defaultdict(int)
     test_failure_patterns = defaultdict(int)
@@ -889,6 +908,7 @@ def analyze_unified_results(models: List[ModelAnalysis], temperature: float, top
     return UnifiedAnalysis(
         temperature=temperature,
         top_p=top_p,
+        prompt_strategy=prompt_strategy,
         models=models,
         compilation_error_patterns=dict(compilation_error_patterns),
         test_failure_patterns=dict(test_failure_patterns),
@@ -1082,11 +1102,12 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
         """根据百分比返回进度条宽度"""
         return min(100, max(5, rate))  # 最小5%，最大100%
 
+    prompt_display = f" Prompt={analysis.prompt_strategy}" if analysis.prompt_strategy != "default" else ""
     html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
-        <title>VerilogEval 失败分析报告 - Temp {analysis.temperature} TopP {analysis.top_p}</title>
+        <title>VerilogEval 失败分析报告 - Temp {analysis.temperature} TopP {analysis.top_p}{prompt_display}</title>
         <meta charset="utf-8">
         {generate_css_styles()}
         <style>
@@ -1105,12 +1126,22 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
                 white-space: nowrap;
                 font-size: 0.9em;
             }}
+            .prompt-badge {{
+                display: inline-block;
+                padding: 4px 12px;
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border-radius: 15px;
+                font-size: 0.85em;
+                font-weight: 600;
+                margin-left: 10px;
+            }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>VerilogEval 失败分析报告</h1>
-            <p><strong>参数配置:</strong> Temperature = {analysis.temperature}, Top_p = {analysis.top_p}</p>
+            <h1>VerilogEval 失败分析报告{f'<span class="prompt-badge">Prompt: {analysis.prompt_strategy}</span>' if analysis.prompt_strategy != "default" else ""}</h1>
+            <p><strong>参数配置:</strong> Temperature = {analysis.temperature}, Top_p = {analysis.top_p}, Prompt Strategy = {analysis.prompt_strategy}</p>
             <p><strong>生成时间:</strong> {time.strftime('%Y-%m-%d %H:%M:%S')}</p>
 
             <h2>模型性能概览</h2>
@@ -1633,6 +1664,7 @@ def main():
   python results_analyzer.py                           # 分析所有参数配置
   python results_analyzer.py --temp 0.8 --top-p 0.95   # 分析特定参数
   python results_analyzer.py --temp 0.0               # 分析下限测试
+  python results_analyzer.py --prompt-strategy v1     # 分析特定提示词策略
   python results_analyzer.py --stats-only             # 仅生成统计信息
         """
     )
@@ -1649,6 +1681,12 @@ def main():
         help='过滤特定top_p参数'
     )
     parser.add_argument(
+        '--prompt-strategy',
+        type=str,
+        dest='prompt_strategy',
+        help='过滤特定提示词策略 (e.g., default, v1)'
+    )
+    parser.add_argument(
         '--stats-only',
         action='store_true',
         help='仅生成统计信息，不生成详细报告'
@@ -1662,7 +1700,7 @@ def main():
     start_time = time.time()
 
     # 查找所有结果目录
-    result_dirs = find_result_directories(args.temp, args.top_p)
+    result_dirs = find_result_directories(args.temp, args.top_p, args.prompt_strategy)
 
     if not result_dirs:
         print("没有找到匹配的结果目录")
@@ -1670,32 +1708,35 @@ def main():
 
     print(f"找到 {len(result_dirs)} 个结果目录")
 
-    # 按温度和top_p分组
+    # 按温度、top_p和提示词策略分组
     groups = defaultdict(list)
-    for dir_path, temp, top_p in result_dirs:
-        groups[(temp, top_p)].append((dir_path, temp, top_p))
+    for dir_path, temp, top_p, prompt_strategy in result_dirs:
+        groups[(temp, top_p, prompt_strategy)].append((dir_path, temp, top_p, prompt_strategy))
 
     print(f"发现 {len(groups)} 个参数配置组合")
 
     # 为每个参数组合生成分析
-    for (temp, top_p), directories in groups.items():
+    for (temp, top_p, prompt_strategy), directories in groups.items():
         print(f"\n{'='*60}")
-        print(f"分析参数配置: Temperature = {temp}, Top_p = {top_p}")
+        print(f"分析参数配置: Temperature = {temp}, Top_p = {top_p}, Prompt = {prompt_strategy}")
         print(f"{'='*60}")
 
-        # 创建输出目录结构
-        analysis_dir = f"results/analysis/temp{temp}_topP{top_p}"
+        # 创建输出目录结构（包含提示词策略）
+        if prompt_strategy and prompt_strategy != "default":
+            analysis_dir = f"results/analysis/temp{temp}_topP{top_p}_prompt{prompt_strategy}"
+        else:
+            analysis_dir = f"results/analysis/temp{temp}_topP{top_p}"
         model_details_dir = os.path.join(analysis_dir, "model_details")
         os.makedirs(model_details_dir, exist_ok=True)
 
         # 分析所有模型
         models = []
-        for dir_path, model_temp, model_top_p in directories:
-            model_analysis = analyze_model_directory(dir_path, model_temp, model_top_p)
+        for dir_path, model_temp, model_top_p, model_prompt_strategy in directories:
+            model_analysis = analyze_model_directory(dir_path, model_temp, model_top_p, model_prompt_strategy)
             models.append(model_analysis)
 
         # 生成统一分析
-        unified_analysis = analyze_unified_results(models, temp, top_p)
+        unified_analysis = analyze_unified_results(models, temp, top_p, prompt_strategy)
 
         if not args.stats_only:
             # 生成统一分析HTML报告
@@ -1710,7 +1751,7 @@ def main():
                 print(f"  [完成] 生成模型详情报告: {model.model_name}_details.html")
 
         # 打印详细统计表格
-        print(f"\n[统计] 参数配置 {temp}/{top_p} 详细结果:")
+        print(f"\n[统计] 参数配置 temp={temp}/top_p={top_p}/prompt={prompt_strategy} 详细结果:")
         print(f"{'模型名称':<20} {'参数规模':>10} {'生成成功':>12} {'编译成功':>12} {'测试通过':>12} {'总数':>6} {'编译失败':>12} {'测试失败':>12}")
         print("-" * 110)
 

@@ -478,7 +478,8 @@ def generate_single_problem(model_name: str, problem_name: str, temperature: flo
             prompt=full_prompt,
             interface=ifc_content,
             temperature=temperature,
-            top_p=top_p
+            top_p=top_p,
+            prompt_strategy=prompt_strategy
         )
 
         return success

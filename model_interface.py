@@ -406,7 +406,7 @@ def extract_verilog_code(response: str, module_interface: str) -> Tuple[str, str
 
     return complete_code, extracted_code
 
-def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, interface: str, temperature: float = 0.0, top_p: float = 0.01) -> bool:
+def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, interface: str, temperature: float = 0.0, top_p: float = 0.01, prompt_strategy: str = "default") -> bool:
     """
     Generate code for a specific problem using specified model
 
@@ -417,6 +417,7 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
         interface: Module interface code
         temperature: Generation temperature
         top_p: Generation top_p
+        prompt_strategy: Prompt strategy name (default, v1, etc.)
 
     Returns:
         True if successful, False otherwise
@@ -464,6 +465,9 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
         temp_str = str(temperature).replace('.', '_')
         top_p_str = str(top_p).replace('.', '_')
         output_dir = f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}"
+        # Add prompt strategy suffix if not default
+        if prompt_strategy and prompt_strategy != "default":
+            output_dir = f"{output_dir}_prompt{prompt_strategy}"
         problem_dir = os.path.join(output_dir, problem_name)
 
         os.makedirs(problem_dir, exist_ok=True)

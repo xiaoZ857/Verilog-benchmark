@@ -1,0 +1,12 @@
+assign out_assign = a ^ b;
+
+always @(*) begin
+    out_always_comb = a ^ b;
+end
+
+always @(posedge clk) begin
+    if (reset)
+        out_always_ff <= 1'b0;
+    else
+        out_always_ff <= a ^ b;
+end

@@ -1,0 +1,68 @@
+logic [2:0] state;
+logic next_state;
+logic [2:0] next_state_temp;
+assign disc = (state == 3);
+assign flag = (state == 6);
+assign err = (state == 7);
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 0;
+  end else begin
+    state <= next_state;
+  end
+end
+
+always @(*) begin
+  next_state = state;
+  case (state)
+    0: begin
+      if (in)
+        next_state = 1;
+      else
+        next_state = 0;
+    end
+    1: begin
+      if (in)
+        next_state = 2;
+      else
+        next_state = 0;
+    end
+    2: begin
+      if (in)
+        next_state = 3;
+      else
+        next_state = 0;
+    end
+    3: begin
+      if (in)
+        next_state = 4;
+      else
+        next_state = 0;
+    end
+    4: begin
+      if (in)
+        next_state = 5;
+      else
+        next_state = 0;
+    end
+    5: begin
+      if (in)
+        next_state = 6;
+      else
+        next_state = 0;
+    end
+    6: begin
+      if (in)
+        next_state = 7;
+      else
+        next_state = 0;
+    end
+    7: begin
+      if (in)
+        next_state = 7;
+      else
+        next_state = 0;
+    end
+  endcase
+endmodule

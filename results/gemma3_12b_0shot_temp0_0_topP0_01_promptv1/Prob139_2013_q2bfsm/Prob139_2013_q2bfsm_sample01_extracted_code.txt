@@ -1,0 +1,62 @@
+logic state;
+logic x_reg, x_reg_1, x_reg_2;
+logic y_reg;
+logic y_reg_1;
+logic y_reg_2;
+logic g_temp;
+
+always @(posedge clk) begin
+  if (!resetn) begin
+    state <= 0;
+    g_temp <= 0;
+  end else begin
+    case (state)
+      0: begin
+        f <= 1;
+        state <= 1;
+      end
+      1: begin
+        f <= 0;
+        x_reg <= x;
+        state <= 2;
+      end
+      2: begin
+        if (x_reg == 1 && x_reg_1 == 0 && x_reg_2 == 1) begin
+          g_temp <= 1;
+          state <= 3;
+        end else begin
+          g_temp <= 0;
+          state <= 2;
+        end
+        x_reg_2 <= x_reg_1;
+        x_reg_1 <= x_reg;
+      end
+      3: begin
+        if (y == 1) begin
+          g_temp <= 1;
+          state <= 4;
+        end else if (y == 0) begin
+          g_temp <= 0;
+          state <= 5;
+        end else begin
+          g_temp <= 1;
+          state <= 3;
+        end
+      end
+      4: begin
+        g_temp <= 1;
+        state <= 4;
+      end
+      5: begin
+        g_temp <= 0;
+        state <= 5;
+      end
+    endcase
+  end
+end
+
+assign f = f;
+assign g = g_temp;
+assign x_reg_2 = x_reg_1;
+assign x_reg_1 = x_reg;
+endmodule

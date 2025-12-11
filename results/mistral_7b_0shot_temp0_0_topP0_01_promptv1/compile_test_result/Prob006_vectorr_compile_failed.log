@@ -1,0 +1,19 @@
+Problem: Prob006_vectorr
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:6: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:6: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:8: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:9: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:9: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob006_vectorr/Prob006_vectorr_sample01.sv:11: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob006_vectorr_test.sv:11: error: invalid module item.

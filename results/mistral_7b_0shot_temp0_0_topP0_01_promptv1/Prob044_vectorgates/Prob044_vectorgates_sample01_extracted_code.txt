@@ -1,0 +1,11 @@
+ ```verilog
+assign out_or_bitwise = a | b;
+always @(*) out_or_logical = a || b;
+
+reg [5:0] out_not_temp;
+always @(posedge clk) begin
+  out_not_temp[2:0] = ~a;
+  out_not_temp[5:3] = ~b;
+  out_not = out_not_temp;
+end
+endmodule

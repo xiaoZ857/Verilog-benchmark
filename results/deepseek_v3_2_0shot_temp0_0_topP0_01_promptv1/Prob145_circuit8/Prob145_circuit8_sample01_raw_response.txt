@@ -1,0 +1,11 @@
+always @(posedge clock) begin
+    if (a) begin
+        p <= ~q;
+        q <= p;
+    end
+    else begin
+        p <= 1'b0;
+        q <= q;
+    end
+end
+endmodule

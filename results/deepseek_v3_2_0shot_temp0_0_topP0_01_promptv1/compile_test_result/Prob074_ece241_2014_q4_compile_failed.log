@@ -1,0 +1,17 @@
+Problem: Prob074_ece241_2014_q4
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:13: error: Unable to bind wire/reg/memory `q1' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:13: error: Unable to bind wire/reg/memory `q2' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:13: error: Unable to bind wire/reg/memory `q3' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:13: error: Unable to elaborate r-value: ~(((q1)|(q2))|(q3))
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:8: error: Could not find variable ``q1'' in ``tb.top_module1''
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:9: error: Could not find variable ``q2'' in ``tb.top_module1''
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:10: error: Could not find variable ``q3'' in ``tb.top_module1''
+7 error(s) during elaboration.

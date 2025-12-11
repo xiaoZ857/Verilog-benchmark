@@ -1,0 +1,75 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+logic state;
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state <= 2'b00;
+  end else begin
+    case (state)
+      2'b00: begin // Walk Left
+        walk_left <= 1;
+        walk_right <= 0;
+        aaah <= 0;
+        digging <= 0;
+        if (bump_left)
+          state <= 2'b01;
+        else if (bump_right)
+          state <= 2'b01;
+        else if (ground == 0)
+          state <= 2'b10;
+        else if (dig && ground)
+          state <= 2'b11;
+        else
+          state <= 2'b00;
+      end
+      2'b01: begin // Walk Right
+        walk_left <= 0;
+        walk_right <= 1;
+        aaah <= 0;
+        digging <= 0;
+        if (bump_left)
+          state <= 2'b10;
+        else if (bump_right)
+          state <= 2'b00;
+        else if (ground == 0)
+          state <= 2'b10;
+        else if (dig && ground)
+          state <= 2'b11;
+        else
+          state <= 2'b01;
+      end
+      2'b10: begin // Falling
+        walk_left <= 0;
+        walk_right <= 0;
+        aaah <= 1;
+        digging <= 0;
+        if (ground)
+          state <= 2'b00;
+        else
+          state <= 2'b10;
+      end
+      2'b11: begin // Digging
+        walk_left <= 0;
+        walk_right <= 0;
+        aaah <= 0;
+        digging <= 1;
+        if (!ground)
+          state <= 2'b10;
+        else
+          state <= 2'b11;
+      end
+      default: state <= 2'b00;
+    endcase
+  end
+endmodule

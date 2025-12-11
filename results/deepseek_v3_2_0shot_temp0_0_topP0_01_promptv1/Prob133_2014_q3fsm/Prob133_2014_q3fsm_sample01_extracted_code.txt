@@ -1,0 +1,10 @@
+always @(posedge clk) begin
+    if (reset) begin
+        z <= 1'b0;
+    end else begin
+        // Default assignment for z
+        z <= 1'b0;
+    end
+end
+
+endmodule

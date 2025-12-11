@@ -1,0 +1,33 @@
+ ```verilog
+reg [3:0] delay;
+reg start_seq_detected = 0;
+reg counter = 0;
+reg remaining_time = 4'b1111; // initial value for remaining time
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        start_seq_detected <= 0;
+        delay <= 4'b1111;
+        counter <= 0;
+        remaining_time <= 4'b1111;
+    end else if (!start_seq_detected && data == 4'b1101) begin
+        start_seq_detected <= 1;
+        delay <= {data[3:0]}; // shift in the next 4 bits
+        counter <= 0;
+        remaining_time = delay;
+    end else if (start_seq_detected && counter < (remaining_time + 1) * 1000) begin
+        counter += 1;
+        if (counter == remaining_time * 1000) begin
+            counting <= 1'b1;
+            remaining_time -= 1;
+        end
+    end else if (start_seq_detected && counter >= (remaining_time + 1) * 1000) begin
+        counting <= 1'b0;
+        done <= 1'b1;
+        wait(ack); // wait for user acknowledgement
+        start_seq_detected <= 0;
+    end
+end
+
+assign count = counter [3:0];
+```

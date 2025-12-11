@@ -1,0 +1,34 @@
+Problem: Prob133_2014_q3fsm
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 20):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:9: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:37: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:38: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:12: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:23: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:23: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:25: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:25: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:28: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:29: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:32: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:36: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:37: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:37:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:38: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:38:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:36: error: Invalid module instantiation

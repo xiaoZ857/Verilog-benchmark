@@ -1,0 +1,7 @@
+assign o0 = vec[0];
+assign o1 = vec[1];
+assign o2 = vec[2];
+
+always @(posedge clk) begin
+    assign outv = {o0, o1, o2};
+endmodule

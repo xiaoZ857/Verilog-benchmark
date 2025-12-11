@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+ ```verilog
+always @(posedge clk or posedge load) begin
+    if (load)
+        q <= data;
+    for (int i = 0; i < 512; i = i + 1) begin
+        if ((i > 0) && (i < 511)) begin
+            q[i] <= q[i-1] ^ q[i+1];
+        end
+    end
+end
+assign q[-1] = 0;
+assign q[512] = 0;
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

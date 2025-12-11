@@ -1,0 +1,19 @@
+Problem: Prob073_dff16e
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:9: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:12: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv:17: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob073_dff16e_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob073_dff16e_test.sv:13: error: invalid module item.

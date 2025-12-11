@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+ ```verilog
+reg [1:0] reg_x;
+assign wire_z = ~(reg_x[1] | ((reg_x[0] << 1) & (~reg_x[1])));
+
+always @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        reg_x <= 2'b0;
+    end else begin
+        reg_x <= {x, reg_x[1]};
+    end
+end
+
+assign z = wire_z;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

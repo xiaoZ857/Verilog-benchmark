@@ -1,0 +1,32 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 16'h0000;
+    end else begin
+        // Ones digit
+        if (q[3:0] == 4'd9) begin
+            q[3:0] <= 4'd0;
+        end else begin
+            q[3:0] <= q[3:0] + 1;
+        end
+        
+        // Tens digit
+        if (q[3:0] == 4'd9) begin
+            if (q[7:4] == 4'd9) begin
+                q[7:4] <= 4'd0;
+            end else begin
+                q[7:4] <= q[7:4] + 1;
+            end
+        end
+        
+        // Hundreds digit
+        if ((q[3:0] == 4'd9) && (q[7:4] == 
+
+// VERILOG-EVAL: endmodule not found

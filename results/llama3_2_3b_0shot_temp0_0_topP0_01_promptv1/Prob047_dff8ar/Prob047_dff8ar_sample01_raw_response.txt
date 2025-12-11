@@ -1,0 +1,7 @@
+assign q = d;
+always @(posedge clk) begin
+    if (areset)
+        q <= 1'b0;
+    else
+        q <= d;
+endmodule

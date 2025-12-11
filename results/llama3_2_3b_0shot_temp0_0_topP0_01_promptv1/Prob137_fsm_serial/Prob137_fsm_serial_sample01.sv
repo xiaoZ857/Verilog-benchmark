@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+assign done = (in[7:0] == 8'b10101010) && (in[8] == 1);
+
+always @(posedge clk or reset) begin
+    if (reset)
+        done <= 1'b0;
+    else
+        done <= in[7] == 0;
+end
+
+assign in[7:0] = in[15:8];
+assign in[8] = in[16];
+
+assign in[15:8] = in[23:16];
+assign in[16] = in[24];
+
+// VERILOG-EVAL: endmodule not found

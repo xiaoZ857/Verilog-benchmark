@@ -1,0 +1,7 @@
+always @(posedge clk) begin
+    if (reset)
+        q <= 8'b00000000;
+    else
+        q <= d;
+end
+endmodule

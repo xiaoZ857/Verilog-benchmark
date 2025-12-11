@@ -1,0 +1,61 @@
+
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+  // State encoding for 3-state Mealy FSM
+  parameter S0 = 2'b00;
+  parameter S1 = 2'b01;
+  parameter S2 = 2'b10;
+  
+  reg [1:0] current_state, next_state;
+  
+  // State transition logic
+  always @(posedge clk or negedge aresetn) begin
+    if (!aresetn) begin
+      current_state <= S0;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+  
+  // Next state and output logic (Mealy machine)
+  always @(*) begin
+    // Default assignments
+    next_state = current_state;
+    z = 1'b0;
+    
+    case (current_state)
+      S0: begin
+        if (x) begin
+          next_state = S1;
+        end
+      end
+      
+      S1: begin
+        if (x) begin
+          next_state = S1;  // Stay in S1 for overlapping sequences
+        end else begin
+          next_state = S2;
+        end
+      end
+      
+      S2: begin
+        if (x) begin
+          next_state = S1;  // Go to S1 after detecting "101"
+          z = 1'b1;         // Output asserted for Mealy machine
+        end else begin
+          next_state = S0;
+        end
+      end
+      
+      default: begin
+        next_state = S0;
+        z = 1'b0;
+      end
+    endcase
+  end
+endmodule

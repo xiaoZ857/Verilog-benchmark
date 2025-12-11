@@ -1,0 +1,13 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output [23:0] out_bytes,
+  output done
+);
+assign in[3] == 1 ? done <= 1 : done <= 0;
+assign done <= (done & ~in[2]) | ((~done) & in[2]);
+assign done <= (done & ~in[1]) | ((~done) & in[1]);
+assign out_bytes = {in[2], in[1], in[0]};
+endmodule

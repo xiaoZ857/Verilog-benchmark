@@ -1,0 +1,11 @@
+
+always @(*) begin
+  if (clock)
+    p = a;
+end
+
+always @(*) begin
+  if (!clock)
+    q = p;
+end
+endmodule

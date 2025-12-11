@@ -1,0 +1,14 @@
+Problem: Prob053_m2014_q4d
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:7: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:7: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:10: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob053_m2014_q4d_test.sv:9: error: invalid module item.

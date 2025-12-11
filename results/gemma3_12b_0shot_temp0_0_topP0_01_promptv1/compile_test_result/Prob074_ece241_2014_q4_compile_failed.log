@@ -1,0 +1,18 @@
+Problem: Prob074_ece241_2014_q4
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:13: error: Unknown module type: dff_xor_1
+results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:20: error: Unknown module type: dff_and_2
+results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob074_ece241_2014_q4/Prob074_ece241_2014_q4_sample01.sv:27: error: Unknown module type: dff_or_3
+4 error(s) during elaboration.
+*** These modules were missing:
+        dff_and_2 referenced 1 times.
+        dff_or_3 referenced 1 times.
+        dff_xor_1 referenced 1 times.
+***

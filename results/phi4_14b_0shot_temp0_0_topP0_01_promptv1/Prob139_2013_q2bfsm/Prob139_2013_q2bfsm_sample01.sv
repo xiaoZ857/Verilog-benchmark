@@ -1,0 +1,89 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+reg [2:0] state, next_state;
+reg [1:0] counter_y;
+
+always @(posedge clk or negedge resetn) begin
+    if (!resetn)
+        state <= 3'b000; // State A
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        3'b000: begin // State A
+            f = 1'b0;
+            g = 1'b0;
+            if (!resetn) begin
+                next_state = 3'b001; // Transition to State B on reset de-assertion
+            end else begin
+                next_state = 3'b000; // Remain in State A
+            end
+        end
+        3'b001: begin // State B (Set f for one cycle)
+            f = 1'b1;
+            g = 1'b0;
+            next_state = 3'b010; // Transition to State C after setting f
+        end
+        3'b010: begin // State C (Monitor x sequence)
+            f = 1'b0;
+            g = 1'b0;
+            if (x == 1) begin
+                next_state = 3'b011; // Move to State D on x=1
+            end else begin
+                next_state = 3'b010; // Remain in State C
+            end
+        end
+        3'b011: begin // State D (Monitor x sequence)
+            f = 1'b0;
+            g = 1'b0;
+            if (!x) begin
+                next_state = 3'b100; // Move to State E on x=0
+            end else begin
+                next_state = 3'b010; // Remain in State C
+            end
+        end
+        3'b100: begin // State E (Monitor x sequence)
+            f = 1'b0;
+            g = 1'b0;
+            if (x) begin
+                next_state = 3'b101; // Move to State F on x=1
+            end else begin
+                next_state = 3'b010; // Remain in State C
+            end
+        end
+        3'b101: begin // State F (Set g and monitor y)
+            f = 1'b0;
+            if (counter_y < 2) begin
+                g = 1'b1;
+                counter_y <= counter_y + 1; // Increment y counter
+            end else begin
+                g = (y == 1) ? 1'b1 : 1'b0; // Set g based on y
+            end
+            if (y == 1 || counter_y >= 2) begin
+                next_state = 3'b101; // Remain in State F
+            end else begin
+                next_state = 3'b010; // Reset to State C if sequence not met
+            end
+        end
+    endcase
+end
+
+always @(posedge clk or negedge resetn) begin
+    if (!resetn)
+        counter_y <= 2'b00;
+    else if (state == 3'b101 && g == 1'b0)
+        counter_y <= 2'b00; // Reset y counter when g is set to 0
+end
+
+assign f = (state == 3'b001) ? 1'b1 : 1'b0;
+
+endmodule

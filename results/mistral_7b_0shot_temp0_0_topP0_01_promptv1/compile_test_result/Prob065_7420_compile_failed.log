@@ -1,0 +1,14 @@
+Problem: Prob065_7420
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob065_7420/Prob065_7420_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob065_7420/Prob065_7420_sample01.sv:14: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob065_7420/Prob065_7420_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob065_7420/Prob065_7420_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob065_7420/Prob065_7420_sample01.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob065_7420_test.sv:12: error: invalid module item.

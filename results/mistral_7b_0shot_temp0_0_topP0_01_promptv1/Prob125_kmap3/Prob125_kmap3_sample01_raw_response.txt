@@ -1,0 +1,8 @@
+ ```verilog
+always @(posedge c) begin
+    if (d)
+        out <= a ^ b;
+    else
+        out <= a & ~b;
+end
+```

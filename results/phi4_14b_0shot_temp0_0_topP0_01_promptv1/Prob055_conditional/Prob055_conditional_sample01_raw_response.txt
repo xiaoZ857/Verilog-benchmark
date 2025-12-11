@@ -1,0 +1,19 @@
+```verilog
+always @(*) begin
+    if (a < b) begin
+        if (a < c)
+            min = a;
+        else
+            min = c;
+    end else begin
+        if (b < c)
+            min = b;
+        else
+            min = c;
+    end
+
+    if (min > d)
+        min = d;
+end
+endmodule
+```

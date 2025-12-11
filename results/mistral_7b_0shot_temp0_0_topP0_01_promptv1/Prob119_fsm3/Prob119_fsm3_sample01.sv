@@ -1,0 +1,27 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+ ```verilog
+reg [1:0] state;
+always @(posedge clk or negedge areset) begin
+    if (!areset)
+        state <= 2'b00;
+    else if (state == 2'b00 && in == 0)
+        state <= 2'b01;
+    else if (state == 2'b00 && in == 1)
+        state <= 2'b10;
+    else if (state == 2'b01)
+        state <= 2'b01;
+    else if (state == 2'b10)
+        state <= 2'b11;
+    else if (state == 2'b11)
+        state <= 2'b00;
+end
+assign out = state[0];
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

@@ -1,0 +1,17 @@
+Problem: Prob072_thermostat
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:12: error: heater is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:7:      : heater is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:13: error: aircon is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:8:      : aircon is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:14: error: fan is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:9:      : fan is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:11: warning: @* found no sensitivities so it will never trigger.
+3 error(s) during elaboration.

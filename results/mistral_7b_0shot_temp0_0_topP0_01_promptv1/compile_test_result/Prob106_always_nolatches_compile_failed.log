@@ -1,0 +1,26 @@
+Problem: Prob106_always_nolatches
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 16):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:9: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:12: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv:16: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv:11: error: invalid module item.

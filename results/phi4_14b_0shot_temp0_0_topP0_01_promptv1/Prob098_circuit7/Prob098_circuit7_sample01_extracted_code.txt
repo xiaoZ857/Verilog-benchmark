@@ -1,0 +1,5 @@
+always @(posedge clk) begin
+    if (a)
+        q <= ~q;
+end
+endmodule

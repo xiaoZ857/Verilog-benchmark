@@ -1,0 +1,20 @@
+Problem: Prob060_m2014_q4k
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 10):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:36: error: Unable to bind wire/reg/memory `q4' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:36: error: Unable to elaborate r-value: q4
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:10: error: Could not find variable ``q1'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:12: error: Could not find variable ``q1'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:17: error: Could not find variable ``q2'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:19: error: Could not find variable ``q2'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:24: error: Could not find variable ``q3'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:26: error: Could not find variable ``q3'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:31: error: Could not find variable ``q4'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob060_m2014_q4k/Prob060_m2014_q4k_sample01.sv:33: error: Could not find variable ``q4'' in ``tb.top_module1''
+10 error(s) during elaboration.

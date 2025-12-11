@@ -1,0 +1,84 @@
+always @(posedge clk) begin
+    if (reset) begin
+        fr3 <= 1'b1;
+        fr2 <= 1'b1;
+        fr1 <= 1'b1;
+        dfr <= 1'b1;
+    end
+    else begin
+        // Determine current water level state based on sensors
+        case (s)
+            3'b111: begin // Above s[3]
+                fr1 <= 1'b0;
+                fr2 <= 1'b0;
+                fr3 <= 1'b0;
+                dfr <= 1'b0;
+            end
+            3'b110: begin // Between s[3] and s[2]
+                fr1 <= 1'b1;
+                fr2 <= 1'b0;
+                fr3 <= 1'b0;
+                // dfr depends on previous state (handled below)
+            end
+            3'b100: begin // Between s[2] and s[1]
+                fr1 <= 1'b1;
+                fr2 <= 1'b1;
+                fr3 <= 1'b0;
+                // dfr depends on previous state (handled below)
+            end
+            default: begin // Below s[1] (s = 3'b000 or any other pattern with no sensors)
+                fr1 <= 1'b1;
+                fr2 <= 1'b1;
+                fr3 <= 1'b1;
+                dfr <= 1'b1;
+            end
+        endcase
+
+        // Determine dfr based on previous sensor state vs current
+        // Need to store previous sensor state
+        reg [3:1] prev_s;
+        prev_s <= s; // Store current s for next cycle
+
+        // Compare previous and current sensor readings to determine if level was rising
+        // A simple heuristic: if previous sensor reading (as binary) is less than current, level was rising.
+        // This assumes sensor encoding where more sensors asserted = higher level.
+        // For dfr to be asserted (Supplemental flow), we need previous level lower than current.
+        // We only set dfr in the intermediate levels (cases 3'b110 and 3'b100).
+        if (s == 3'b110 || s == 3'b100) begin
+            // Check if previous state indicates a lower level
+            // We can compare the number of sensors asserted.
+            // Count '1's in prev_s and s (simplify by comparing directly for these two cases)
+            // For case 3'b110: previous could be 3'b100 (rising) or 3'b111 (falling) etc.
+            // We'll implement a simple comparison: if prev_s has fewer '1's than s, then level was rising.
+            // But s is fixed in each case, so we need to compare prev_s to a threshold.
+            // Actually, the description says: if sensor change indicates previous level was lower.
+            // So we need to detect a transition from a state with fewer sensors to current state.
+            // We'll store the previous state and compare.
+
+            // Since we cannot use prev_s before it's assigned, we need to store it in a separate always block or use a flip-flop.
+            // We'll declare a reg for prev_s and update it after using it? Let's restructure.
+
+            // Note: The above prev_s <= s; happens concurrently. We need to use the prev_s from the previous clock cycle.
+            // We should move the prev_s logic to a separate always block or handle it before the case.
+            // For simplicity, we assume prev_s is available from the previous cycle.
+
+            // We'll compute if level was rising: if the number of '1's in prev_s is less than in s.
+            // Helper: count bits. Since only 3 bits, we can do manually.
+            integer prev_count, curr_count;
+            prev_count = (prev_s[1] + prev_s[2] + prev_s[3]);
+            curr_count = (s[1] + s[2] + s[3]);
+            if (prev_count < curr_count) begin
+                dfr <= 1'b1; // Supplemental flow on because level was rising (i.e., previously lower)
+            end
+            else begin
+                dfr <= 1'b0; // No supplemental flow
+            end
+        end
+        // For other cases, dfr is already set in the case statement (0 for above s[3], 1 for below s[1]).
+        // So we don't need to change dfr here for those cases.
+    end
+end
+
+// We need to store prev_s in a separate always block or within the same block but with proper ordering.
+// Let's add a reg declaration for prev_s and update it at the end of the always block.
+// But note: we used prev_s in the combinational part

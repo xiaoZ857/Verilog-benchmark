@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+assign z = (x ^ a) & (~b | ~c);
+always @(posedge clk) begin
+    if (reset)
+        a <= 1'b0;
+    else
+        a <= x & b;
+end
+assign b = ~a;
+assign c = ~b;
+endmodule

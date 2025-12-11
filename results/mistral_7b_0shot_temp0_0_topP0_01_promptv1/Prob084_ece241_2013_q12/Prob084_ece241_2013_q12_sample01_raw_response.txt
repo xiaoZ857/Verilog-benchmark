@@ -1,0 +1,16 @@
+ ```verilog
+reg [7:0] data;
+always @(posedge clk) if (enable)
+    begin
+        data <= {S, data[1:7]};
+    end
+assign Z = data[A + B*8 + C*8*7];
+endmodule
+```
+
+Verification Checklist:
+- Code ends with `endmodule` [checked]
+- All wire outputs use `assign` keyword [checked]
+- All reg outputs are assigned in always blocks [checked]
+- Only declared signals are used [checked]
+- Blocking/non-blocking assignments are correct [checked]

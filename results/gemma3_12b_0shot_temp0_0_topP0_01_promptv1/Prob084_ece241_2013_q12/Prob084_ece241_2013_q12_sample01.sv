@@ -1,0 +1,48 @@
+
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg Z
+);
+logic Q0, Q1, Q2, Q3, Q4, Q5, Q6, Q7;
+
+reg Q0_reg, Q1_reg, Q2_reg, Q3_reg, Q4_reg, Q5_reg, Q6_reg, Q7_reg;
+
+assign Q0 = Q0_reg;
+assign Q1 = Q1_reg;
+assign Q2 = Q2_reg;
+assign Q3 = Q3_reg;
+assign Q4 = Q4_reg;
+assign Q5 = Q5_reg;
+assign Q6 = Q6_reg;
+assign Q7 = Q7_reg;
+
+always @(posedge clk) begin
+  if (enable) begin
+    Q0_reg <= S;
+    Q1_reg <= Q0;
+    Q2_reg <= Q1;
+    Q3_reg <= Q2;
+    Q4_reg <= Q3;
+    Q5_reg <= Q4;
+    Q6_reg <= Q5;
+    Q7_reg <= Q6;
+  end
+end
+
+always @(*) begin
+  case ( {A, B, C} )
+    3'b000: Z = Q0;
+    3'b001: Z = Q1;
+    3'b010: Z = Q2;
+    3'b011: Z = Q3;
+    3'b100: Z = Q4;
+    3'b101: Z = Q5;
+    3'b110: Z = Q6;
+    3'b111: Z = Q7;
+  endcase
+endmodule

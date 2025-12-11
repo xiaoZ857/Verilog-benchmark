@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+localparam [1:0] STATE_A = 2'b00,
+                  STATE_B = 2'b01,
+                  STATE_C = 2'b10,
+                  STATE_D = 2'b11;
+
+reg [1:0] state, next_state;
+
+// State transition logic
+always @(*) begin
+    case (state)
+        STATE_A: begin
+            if (r[1])          next_state = STATE_B;
+            else if (r[2])     next_state = STATE_C;
+            else if (r[3])    
+
+// VERILOG-EVAL: endmodule not found

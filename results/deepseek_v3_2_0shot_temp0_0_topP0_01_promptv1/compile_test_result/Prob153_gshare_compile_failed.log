@@ -1,0 +1,17 @@
+Problem: Prob153_gshare
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:19: error: predict_history is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_history is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:22: error: predict_history is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_history is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:24: error: predict_history is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_history is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob153_gshare_test.sv:247: warning: output port predict_history is coerced to inout.
+3 error(s) during elaboration.

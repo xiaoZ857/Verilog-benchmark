@@ -1,0 +1,53 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+reg state;
+reg out_reg;
+
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state <= 0;
+  end else begin
+    case (state)
+      0: begin
+        if (in == 0)
+          state <= 0;
+        else
+          state <= 1;
+      end
+      1: begin
+        if (in == 0)
+          state <= 2;
+        else
+          state <= 1;
+      end
+      2: begin
+        if (in == 0)
+          state <= 0;
+        else
+          state <= 3;
+      end
+      3: begin
+        if (in == 0)
+          state <= 0;
+        else
+          state <= 1;
+      end
+    endcase
+  end
+end
+
+assign out = out_reg;
+
+always @(state) begin
+  case (state)
+    0: out_reg = 0;
+    1: out_reg = 0;
+    2: out_reg = 0;
+    3: out_reg = 1;
+  endcase
+endmodule

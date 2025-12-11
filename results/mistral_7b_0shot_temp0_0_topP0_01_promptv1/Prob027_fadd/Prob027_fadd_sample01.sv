@@ -1,0 +1,19 @@
+
+module TopModule (
+  input a,
+  input b,
+  input cin,
+  output cout,
+  output sum
+);
+ ```verilog
+always @(posedge clk) begin
+    reg [1:0] temp;
+    assign temp[0] = a ^ b ^ cin;
+    assign temp[1] = a & b & cin | a & cin ^ b & cin | b & a ^ cin;
+    cout <= temp[1];
+    sum <= temp[0] ^ cin;
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

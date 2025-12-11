@@ -1,0 +1,36 @@
+Problem: Prob142_lemmings2
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 13):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:14: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:8:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:15: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:9:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:16: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:10:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:19: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:10:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:22: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:8:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:23: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:9:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:25: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:8:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:26: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:9:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:30: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:8:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:31: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:9:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:33: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:8:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:34: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:9:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:38: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob142_lemmings2/Prob142_lemmings2_sample01.sv:10:      : aaah is declared here as wire.
+13 error(s) during elaboration.

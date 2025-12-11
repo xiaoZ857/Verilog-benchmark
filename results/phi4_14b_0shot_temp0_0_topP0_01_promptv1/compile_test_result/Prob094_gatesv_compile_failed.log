@@ -1,0 +1,20 @@
+Problem: Prob094_gatesv
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:15: sorry: part selects straddling the start of signal (out_any['sd0]) are not currently supported.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:18: error: out_different['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:19: error: out_different['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:20: error: out_different['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:21: error: out_different['sd0] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd0] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:17: warning: @* found no sensitivities so it will never trigger.
+5 error(s) during elaboration.

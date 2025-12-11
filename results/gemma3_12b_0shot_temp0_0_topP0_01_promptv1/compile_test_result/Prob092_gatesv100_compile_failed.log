@@ -1,0 +1,13 @@
+Problem: Prob092_gatesv100
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:9: warning: Part select [100:0] is selecting after the vector in[99:0].
+results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:9:        : Replacing the out of bound bits with 'bx.
+results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:10: error: part select in[0:99] is out of order.
+1 error(s) during elaboration.

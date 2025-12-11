@@ -1,0 +1,4 @@
+always @(posedge clk) begin
+    if (ena)
+        q <= d;
+endmodule

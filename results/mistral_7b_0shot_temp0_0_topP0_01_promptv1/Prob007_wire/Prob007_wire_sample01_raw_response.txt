@@ -1,0 +1,11 @@
+ ```verilog
+assign out = in;
+endmodule
+```
+
+Verification Checklist:
+[ ] Code ends with `endmodule` - checked
+[ ] All wire outputs use `assign` keyword - checked
+[ ] All reg outputs are assigned in always blocks - not applicable (no reg output)
+[ ] Only declared signals are used - checked (only 'in' and 'out' are used)
+[ ] Blocking/non-blocking assignments are correct - checked (using assign statement for wire output)

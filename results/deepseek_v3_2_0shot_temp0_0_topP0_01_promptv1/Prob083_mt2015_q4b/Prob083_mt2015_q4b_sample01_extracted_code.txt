@@ -1,0 +1,4 @@
+always @(*) begin
+    z = (~x & ~y) | (x & y);
+end
+endmodule

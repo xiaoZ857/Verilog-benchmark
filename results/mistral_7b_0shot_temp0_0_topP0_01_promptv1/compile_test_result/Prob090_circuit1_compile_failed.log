@@ -1,0 +1,17 @@
+Problem: Prob090_circuit1
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv:7: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv:7: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv:10: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv:12: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob090_circuit1/Prob090_circuit1_sample01.sv:13: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob090_circuit1_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob090_circuit1_test.sv:11: error: invalid module item.

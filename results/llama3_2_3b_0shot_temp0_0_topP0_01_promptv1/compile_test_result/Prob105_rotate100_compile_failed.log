@@ -1,0 +1,16 @@
+Problem: Prob105_rotate100
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:10: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:11: error: Index q[100] is out of range.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:11: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:15: error: q Unable to assign to unresolved wires.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:17: error: q Unable to assign to unresolved wires.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:19: error: q Unable to assign to unresolved wires.
+6 error(s) during elaboration.

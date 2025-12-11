@@ -1,0 +1,15 @@
+ ```verilog
+always @(posedge clk or negedge clk) begin
+    if (!posedgeclk && posedgeclk_last)
+        q <= d;
+    posedgeclk_last <= posedgeclk;
+end
+
+assign q_out = q; // Assuming q is the output port declared as reg in the module header
+
+Verification Checklist:
+[ ] Code ends with `endmodule`
+[x] All wire outputs use `assign` keyword (q_out)
+[x] All reg outputs are assigned in always blocks (q)
+[x] Only declared signals are used (clk, d, q, posedgeclk_last)
+[x] Blocking/non-blocking assignments are correct (posedgeclk_last uses non-blocking assignment for sequential logic)

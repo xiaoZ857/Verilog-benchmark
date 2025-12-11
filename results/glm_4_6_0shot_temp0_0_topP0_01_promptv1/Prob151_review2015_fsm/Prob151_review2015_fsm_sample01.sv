@@ -1,0 +1,66 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+parameter IDLE = 2'b00;
+parameter SHIFTING = 2'b01;
+parameter COUNTING = 2'b10;
+parameter DONE = 2'b11;
+
+reg [1:0] state, next_state;
+reg [3:0] pattern_shift_reg;
+reg [1:0] shift_counter;
+
+always @(posedge clk) begin
+    if (reset) begin
+        state <= IDLE;
+        pattern_shift_reg <= 4'b0000;
+        shift_counter <= 2'b00;
+    end else begin
+        state <= next_state;
+        
+        if (state == IDLE) begin
+            pattern_shift_reg <= {pattern_shift_reg[2:0], data};
+        end
+        
+        if (state == SHIFTING) begin
+            shift_counter <= shift_counter + 1;
+        end else begin
+            shift_counter <= 2'b00;
+        end
+    end
+end
+
+always @(*) begin
+    next_state = state;
+    
+    case (state)
+        IDLE: begin
+            if (pattern_shift_reg == 4'b1101) begin
+                next_state = SHIFTING;
+            end
+        end
+        
+        SHIFTING: begin
+            if (shift_counter == 2'b11) begin
+                next_state = COUNTING;
+            end
+        end
+        
+        COUNTING: begin
+            if (done_counting) begin
+                next_state = DONE;
+            end
+        end
+        
+        DONE: begin
+
+// VERILOG-EVAL: endmodule not found

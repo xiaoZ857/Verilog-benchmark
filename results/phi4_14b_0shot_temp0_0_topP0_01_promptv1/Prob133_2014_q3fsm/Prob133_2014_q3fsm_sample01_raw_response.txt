@@ -1,0 +1,39 @@
+```verilog
+reg [1:0] count;
+reg [1:0] state;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 2'b00; // Reset to initial state A
+        count <= 2'b00;
+        z <= 1'b0;
+    end else begin
+        case (state)
+            2'b00: begin // State A
+                if (s == 1'b1) begin
+                    state <= 2'b01; // Move to state B
+                    count <= 2'b00;
+                end
+            end
+            2'b01: begin // State B
+                if (count < 2'b11) begin
+                    count <= count + 1'b1;
+                end else begin
+                    count <= 2'b00; // Reset count after three cycles
+                end
+
+                case (count)
+                    2'b00, 2'b01: z <= 1'b0; // Default to 0
+                    2'b10: if (w == 1'b1) z <= 1'b1;
+                    2'b11: begin
+                        if ((w == 1'b1) && (z == 1'b1)) state <= 2'b00; // Return to A if condition met
+                        else state <= 2'b01; // Stay in B otherwise
+                    end
+                endcase
+            end
+        endcase
+    end
+end
+
+endmodule
+```

@@ -1,0 +1,6 @@
+ ```verilog
+always @(posedge clk) begin
+    for (int i = 0; i < 100; i++)
+        out[i] <= in[99-i];
+end
+```

@@ -1,0 +1,22 @@
+Problem: Prob068_countbcd
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:15: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:18: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:24: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:27: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:33: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:36: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd3] is declared here as wire.
+6 error(s) during elaboration.

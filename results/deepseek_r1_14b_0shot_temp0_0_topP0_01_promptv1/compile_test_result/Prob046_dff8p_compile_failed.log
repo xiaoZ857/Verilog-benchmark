@@ -1,0 +1,12 @@
+Problem: Prob046_dff8p
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob046_dff8p/Prob046_dff8p_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob046_dff8p_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob046_dff8p_ref.sv:17: syntax error
+I give up.

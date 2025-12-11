@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+assign state = {state[1], state[0]} + (train_valid & ~train_taken) * 2'b11;
+assign state = {state[1], state[0]} - (train_valid & train_taken) * 2'b01;
+
+always @(posedge clk or areset)
+begin
+    if (areset)
+        state <= 2'b00;
+    else if (train_valid & train_taken)
+        state <= state + 1;
+    else if (train_valid & ~train_taken)
+        state <= state - 1;
+end
+
+endmodule

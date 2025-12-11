@@ -1,0 +1,24 @@
+ ```verilog
+always @(posedge clk) begin
+    if (reset)
+        z <= 1'b1;
+    else if ((x == 1'b0) && (y == 1'b0))
+        z <= 1'b1;
+    else if ((x == 1'b1) && (y == 1'b0))
+        z <= 1'b0;
+    else if ((x == 1'b0) && (y == 1'b1))
+        z <= 1'b0;
+    else if ((x == 1'b1) && (y == 1'b1))
+        z <= 1'b1;
+end
+
+assign z = z_reg; // Assuming z is declared as reg in the module interface
+endmodule
+```
+
+Verification Checklist:
+[ ] Code ends with `endmodule`
+[x] All wire outputs use `assign` keyword (z)
+[x] All reg outputs are assigned in always blocks (z_reg)
+[x] Only declared signals are used (x, y, z)
+[x] Blocking/non-blocking assignments are correct

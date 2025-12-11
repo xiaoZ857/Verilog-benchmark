@@ -1,0 +1,8 @@
+always @(posedge clk) begin
+    if (sel)
+        out = b;
+    else
+        out = a;
+end
+assign out = out;
+endmodule

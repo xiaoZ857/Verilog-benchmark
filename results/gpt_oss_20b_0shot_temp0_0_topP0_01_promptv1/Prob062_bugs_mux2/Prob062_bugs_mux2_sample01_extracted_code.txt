@@ -1,0 +1,4 @@
+always @(*) begin
+    out = sel ? b : a;
+end
+endmodule

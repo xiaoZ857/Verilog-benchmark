@@ -1,0 +1,8 @@
+assign out = a + b;
+assign result_is_zero = ~out;
+
+if (do_sub)
+    if (~out)
+        result_is_zero = 1'b1;
+else
+    out = a - b;

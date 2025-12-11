@@ -1,0 +1,8 @@
+The issue was using non-blocking assignment (`<=`) for a `reg` output in an always block. It should use blocking assignment (`=`) since it's combinational logic within sequential structure.
+
+```verilog
+always @(posedge clk) begin
+    out = (~sel & a) | (sel & b);
+end
+endmodule
+```

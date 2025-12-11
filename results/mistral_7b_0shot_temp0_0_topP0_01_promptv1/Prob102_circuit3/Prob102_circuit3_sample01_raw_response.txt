@@ -1,0 +1,23 @@
+ Based on the provided waveform data, it appears that this combinational circuit implements a XOR gate for inputs `a` and `b`, and an OR gate for inputs `c` and `d`. The output `q` is the result of applying these two operations sequentially.
+
+Here's the Verilog code for the TopModule:
+
+```verilog
+always @* begin
+    xor_out = a ^ b;
+end
+
+always @* begin
+    or_out = c | d;
+end
+
+assign q = xor_out & or_out;
+endmodule
+```
+
+Verification checklist:
+[ ] Code ends with `endmodule` (checked)
+[ ] All wire outputs use `assign` keyword (checked)
+[ ] All reg outputs are not used in this example (not applicable)
+[ ] Only declared signals are used (checked)
+[ ] Blocking/non-blocking assignments are correct (checked)

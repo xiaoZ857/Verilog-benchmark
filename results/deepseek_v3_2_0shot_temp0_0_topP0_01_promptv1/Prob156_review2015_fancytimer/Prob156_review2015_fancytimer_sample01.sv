@@ -1,0 +1,83 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+always @(posedge clk) begin
+    if (reset) begin
+        state <= S_IDLE;
+        shift_reg <= 4'b0;
+        bit_count <= 2'b0;
+        delay <= 4'b0;
+        timer <= 10'b0;
+        count <= 4'b0;
+        counting <= 1'b0;
+        done <= 1'b0;
+    end else begin
+        case (state)
+            S_IDLE: begin
+                shift_reg <= {shift_reg[2:0], data};
+                if (shift_reg == 4'b1101) begin
+                    state <= S_READ_DELAY;
+                    bit_count <= 2'b0;
+                end
+                counting <= 1'b0;
+                done <= 1'b0;
+                count <= 4'b0;
+            end
+            S_READ_DELAY: begin
+                delay <= {delay[2:0], data};
+                bit_count <= bit_count + 1;
+                if (bit_count == 3) begin
+                    state <= S_COUNT;
+                    timer <= 10'd999;
+                    count <= delay;
+                end
+                counting <= 1'b0;
+                done <= 1'b0;
+            end
+            S_COUNT: begin
+                counting <= 1'b1;
+                if (timer == 0) begin
+                    if (count == 0) begin
+                        state <= S_DONE;
+                        done <= 1'b1;
+                        counting <= 1'b0;
+                    end else begin
+                        count <= count - 1;
+                        timer <= 10'd999;
+                    end
+                end else begin
+                    timer <= timer - 1;
+                end
+            end
+            S_DONE: begin
+                if (ack) begin
+                    state <= S_IDLE;
+                    shift_reg <= 4'b0;
+                end
+                done <= 1'b1;
+                counting <= 1'b0;
+            end
+            default: state <= S_IDLE;
+        endcase
+    end
+end
+
+localparam S_IDLE = 2'd0,
+           S_READ_DELAY = 2'd1,
+           S_COUNT = 2'd2,
+           S_DONE = 2'd3;
+
+reg [1:0] state;
+reg [3:0] shift_reg;
+reg [1:0] bit_count;
+reg [3:0] delay;
+reg [9:0] timer;
+
+endmodule

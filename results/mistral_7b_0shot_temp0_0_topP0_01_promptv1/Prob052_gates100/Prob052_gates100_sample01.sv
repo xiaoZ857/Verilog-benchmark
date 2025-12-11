@@ -1,0 +1,14 @@
+
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+ ```verilog
+assign out_and = in[99] & in[98] & ... & in[1] & in[0]; // 100-input AND gate
+assign out_or = in[99] | in[98] | ... | in[1] | in[0]; // 100-input OR gate
+assign out_xor = in[99] ^ in[98] ^ ... ^ in[1] ^ in[0]; // 100-input XOR gate
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

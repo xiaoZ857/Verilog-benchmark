@@ -1,0 +1,21 @@
+ ```verilog
+always @(posedge clk or negedge areset) begin
+    if (areset)
+        out <= 1'b0;
+    else if (in == areset)
+        out <= 1'b1;
+    else if (in == out)
+        out <= 1'b0;
+    else
+        out <= 1'b1;
+end
+assign out_wire = out;
+endmodule
+```
+
+Verification checklist:
+- Code ends with `endmodule` [checked]
+- All wire outputs use `assign` keyword [checked]
+- All reg outputs are assigned in always blocks [checked]
+- Only declared signals are used [checked]
+- Blocking/non-blocking assignments are correct [checked]

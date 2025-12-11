@@ -1,0 +1,6 @@
+```verilog
+always @(posedge clk) begin
+    out <= in ^ out;
+end
+endmodule
+```

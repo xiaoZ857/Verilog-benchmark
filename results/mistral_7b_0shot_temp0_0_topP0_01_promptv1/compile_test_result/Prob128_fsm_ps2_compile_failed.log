@@ -1,0 +1,13 @@
+Problem: Prob128_fsm_ps2
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:8: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:8: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:30: warning: implicit definition of wire 'out'.

@@ -1,0 +1,5 @@
+ ```verilog
+always @* begin
+    assign q = (a & b) + (c << 4) + (d << 8) + (e << 12);
+end
+endmodule

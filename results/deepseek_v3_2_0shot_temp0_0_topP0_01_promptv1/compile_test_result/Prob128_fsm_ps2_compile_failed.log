@@ -1,0 +1,14 @@
+Problem: Prob128_fsm_ps2
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:10: error: done is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:6:      : done is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:12: error: done is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:6:      : done is declared here as wire.
+2 error(s) during elaboration.

@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [15:0] q
+);
+assign q = d[7:0];
+assign q[8:15] = d[15:8];
+
+always @(posedge clk) begin
+    if (resetn)
+        q <= 16'b0;
+    else
+        case (byteena)
+            2'b00 : q <= d[7:0];
+            2'b01 : q <= d[15:8];
+            default : q <= d;
+        endcase
+endmodule

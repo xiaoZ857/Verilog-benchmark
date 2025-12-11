@@ -1,0 +1,17 @@
+
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 4'b0001; // Reset value is 4'b0001 (decimal 9)
+    else if (slowena)
+        q <= q + 1;   // Increment counter when slowena is high
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

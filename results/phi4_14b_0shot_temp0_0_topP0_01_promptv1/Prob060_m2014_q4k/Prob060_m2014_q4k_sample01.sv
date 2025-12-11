@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output out
+);
+  wire [3:0] dff_chain;
+
+  assign dff_chain[0] = in;
+  
+  always @(posedge clk or negedge resetn) begin
+      if (!resetn)
+          dff_chain <= 4'b0000;
+      else
+          dff_chain <= {dff_chain[2:0], dff_chain[3]};
+  end
+
+  assign out = dff_chain[3];
+endmodule

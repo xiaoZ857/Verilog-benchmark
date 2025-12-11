@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+assign out = (a & b) ? d : 1'b0;
+always @(posedge clk) begin
+    if (reset)
+        q <= 1'b0;
+    else
+        q <= d;
+end
+assign a = q;
+assign b = q;
+endmodule

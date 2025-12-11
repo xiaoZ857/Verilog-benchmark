@@ -1,0 +1,12 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+always @(posedge clk or negedge clk) begin
+  if (clk == 1'b1 && clk != 1'b0)
+    q <= d;
+  else if (clk == 1'b0 && clk != 1'b1)
+    q <= d;
+endmodule

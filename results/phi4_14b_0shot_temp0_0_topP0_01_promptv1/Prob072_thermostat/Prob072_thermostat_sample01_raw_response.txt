@@ -1,0 +1,10 @@
+```verilog
+assign heater = (mode == 1) && too_cold;
+assign aircon = (mode == 0) && too_hot;
+
+always @(*) begin
+    fan = ((heater || aircon) || fan_on);
+end
+
+endmodule
+```

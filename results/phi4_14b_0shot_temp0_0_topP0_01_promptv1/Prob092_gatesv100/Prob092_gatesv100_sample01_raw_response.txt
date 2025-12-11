@@ -1,0 +1,12 @@
+```verilog
+assign out_both = {in[98:0] & in[99:1], 1'b0};
+
+assign out_any = {in[99:1] | in[98:0], 1'b0};
+
+always @(*) begin
+    out_different[98:0] = in[98:0] ^ in[99:1];
+    out_different[99] = in[99] ^ in[0];
+end
+
+endmodule
+```

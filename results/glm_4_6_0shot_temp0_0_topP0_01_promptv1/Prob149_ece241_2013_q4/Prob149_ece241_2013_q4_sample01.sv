@@ -1,0 +1,67 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [3:1] s,
+  output reg fr3,
+  output reg fr2,
+  output reg fr1,
+  output reg dfr
+);
+
+  // State encoding for water levels
+  localparam STATE_BELOW = 2'b00;     // Below s[1] (000)
+  localparam STATE_MID_LOW = 2'b01;   // Between s[2] and s[1] (100)
+  localparam STATE_MID_HIGH = 2'b10;  // Between s[3] and s[2] (110)
+  localparam STATE_ABOVE = 2'b11;     // Above s[3] (111)
+  
+  reg [1:0] current_state, next_state;
+  reg [1:0] prev_state;
+  
+  // State transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= STATE_BELOW;
+      prev_state <= STATE_BELOW;
+    end else begin
+      prev_state <= current_state;
+      current_state <= next_state;
+    end
+  end
+  
+  // Next state logic based on sensor inputs
+  always @(*) begin
+    case (s)
+      3'b111: next_state = STATE_ABOVE;
+      3'b110: next_state = STATE_MID_HIGH;
+      3'b100: next_state = STATE_MID_LOW;
+      3'b000: next_state = STATE_BELOW;
+      default: next_state = current_state; // Invalid sensor combination
+    endcase
+  end
+  
+  // Output logic
+  always @(posedge clk) begin
+    if (reset) begin
+      fr1 <= 1'b1;
+      fr2 <= 1'b1;
+      fr3 <= 1'b1;
+      dfr <= 1'b0;
+    end else begin
+      case (current_state)
+        STATE_ABOVE: begin
+          fr1 <= 1'b0;
+          fr2 <= 1'b0;
+          fr3 <= 1'b0;
+          dfr <= 1'b0;
+        end
+        STATE_MID_HIGH: begin
+          fr1 <= 1'b1;
+          fr2 <= 1'b0;
+          fr3 <= 1'b0;
+          dfr <= (next_state > current_state) ? 1'b1 : 1'b0;
+        end
+        STATE_MID_LOW: begin
+          fr1 <= 1'b1
+
+// VERILOG-EVAL: endmodule not found

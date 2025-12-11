@@ -1,0 +1,17 @@
+Problem: Prob111_fsm2s
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:30: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:30: error: Unable to elaborate r-value: state
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:10: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:10: error: Unable to bind wire/reg/memory `OFF' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:10: error: Unable to elaborate condition expression.
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:25: error: Could not find variable ``state'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:27: error: Could not find variable ``state'' in ``tb.top_module1''
+7 error(s) during elaboration.

@@ -1,0 +1,38 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+logic [2:0] state;
+logic [7:0] byte1, byte2, byte3;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 3'b000;
+        done <= 1'b0;
+    end else begin
+        case (state)
+            3'b000: begin
+                if (in[3]) begin
+                    byte1 <= in;
+                    state <= 3'b001;
+                end
+            end
+            3'b001: begin
+                byte2 <= in;
+                state <= 3'b010;
+            end
+            3'b010: begin
+                byte3 <= in;
+                done <= 1'b1;
+                state <= 3'b000;
+            end
+        endcase
+    end
+end
+
+assign done = (state == 3'b010) ? 1'b1 : 1'b0;
+
+endmodule

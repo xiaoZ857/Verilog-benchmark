@@ -1,0 +1,12 @@
+Problem: Prob031_dff
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob031_dff/Prob031_dff_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob031_dff/Prob031_dff_sample01.sv:8: error: Unable to bind wire/reg/memory `reset' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob031_dff/Prob031_dff_sample01.sv:8: error: Unable to elaborate condition expression.
+2 error(s) during elaboration.

@@ -1,0 +1,13 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 5'b00001;
+    else
+        q <= {q[3] ^ q[4], q[2:0]};
+end
+endmodule

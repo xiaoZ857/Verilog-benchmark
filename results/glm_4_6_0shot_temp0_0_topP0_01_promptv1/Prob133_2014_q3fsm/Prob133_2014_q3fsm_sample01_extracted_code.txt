@@ -1,0 +1,46 @@
+
+  // State encoding
+  localparam [1:0] A = 2'b00,  // Initial state
+                    B1 = 2'b01, // First w check
+                    B2 = 2'b10, // Second w check
+                    B3 = 2'b11; // Third w check
+  
+  reg [1:0] state, next_state;
+  reg [1:0] count; // Count of w=1 in current 3-cycle window
+  
+  // State transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= A;
+      count <= 2'b00;
+      z <= 1'b0;
+    end else begin
+      state <= next_state;
+      
+      // Update count based on current state and w input
+      case (state)
+        A: count <= 2'b00; // Reset count when starting new sequence
+        B1: count <= w ? 2'b01 : 2'b00;
+        B2: count <= w ? (count + 1'b1) : count;
+        B3: begin
+          // Set output based on count
+          z <= (count == 2'b10) ? 1'b1 : 1'b0;
+          // Reset count for next sequence
+          count <= w ? 2'b01 : 2'b00;
+        end
+      endcase
+    end
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      A: next_state = s ? B1 : A;
+      B1: next_state = B2;
+      B2: next_state = B3;
+      B3: next_state = B1; // Continue checking next 3 cycles
+      default: next_state = A;
+    endcase
+  end
+
+endmodule

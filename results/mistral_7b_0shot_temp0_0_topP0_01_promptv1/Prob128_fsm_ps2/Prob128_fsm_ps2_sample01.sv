@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+ ```verilog
+reg [2:0] state = {3'b000, 3'b001, 3'b010, 3'b011};
+reg [7:0] data_buffer = 8'b0;
+reg done = 0;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 3'b000;
+        data_buffer <= 8'b0;
+        done <= 0;
+    end else if (state == 3'b011 && in[3] == 1) begin
+        state <= state + 1'b1;
+        data_buffer <= in;
+    end else if (state < 4'b111) begin
+        state <= state + 1'b1;
+        data_buffer <= {in[7:0], data_buffer[6:0]};
+    end else if (state == 4'b111 && in[3] == 1) begin
+        done <= 1;
+        state <= 3'b000;
+    end
+end
+
+assign out = done;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

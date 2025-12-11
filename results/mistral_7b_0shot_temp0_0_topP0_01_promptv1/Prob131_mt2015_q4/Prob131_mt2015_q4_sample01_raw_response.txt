@@ -1,0 +1,45 @@
+ ```verilog
+reg [1:0] a_out1, a_out2;
+logic [1:0] b_out1, b_out2;
+logic or_out, and_out;
+
+assign z = or_out ^ and_out;
+
+// A module implementation
+always @(posedge clk) begin
+    if (reset)
+        a_out1 <= 1'b0;
+    else
+        a_out1 <= x ^ y;
+end
+
+always @(posedge clk) begin
+    if (reset)
+        a_out2 <= 1'b0;
+    else
+        a_out2 <= x & x;
+end
+
+// B module implementation
+always @(posedge clk) begin
+    if (reset)
+        b_out1 <= 1'b1;
+    else if (x == 0 && y == 0)
+        b_out1 <= 1'b0;
+end
+
+always @(posedge clk) begin
+    if (reset)
+        b_out2 <= 1'b0;
+    else if (x == 0)
+        b_out2 <= 1'b1;
+    else if (y == 1)
+        b_out2 <= 1'b0;
+end
+
+// OR gate
+assign or_out = a_out1 | b_out1;
+
+// AND gate
+assign and_out = a_out2 & b_out2;
+```

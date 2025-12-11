@@ -1,0 +1,11 @@
+ ```verilog
+assign out = a & b;
+endmodule
+```
+
+Verification Checklist:
+- Code ends with `endmodule` [checked]
+- All wire outputs use `assign` keyword [checked]
+- All reg outputs are not used (since there are no sequential elements)
+- Only declared signals are used (a, b, out) [checked]
+- Blocking/non-blocking assignments are correct (combinational logic) [checked]

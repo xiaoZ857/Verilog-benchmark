@@ -1,0 +1,34 @@
+parameter IDLE  = 3'd0;
+parameter BYTE1 = 3'd1;
+parameter BYTE2 = 3'd2;
+parameter BYTE3 = 3'd3;
+parameter DONE  = 3'd4;
+
+reg [2:0] state, next_state;
+
+always @(posedge clk) begin
+    if (reset)
+        state <= IDLE;
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        IDLE: begin
+            if (in[3])
+                next_state = BYTE1;
+            else
+                next_state = IDLE;
+        end
+        BYTE1: next_state = BYTE2;
+        BYTE2: next_state = BYTE3;
+        BYTE3: next_state = DONE;
+        DONE:  next_state = IDLE;
+        default: next_state = IDLE;
+    endcase
+end
+
+assign done = (state == DONE);
+
+endmodule

@@ -1,0 +1,36 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input predict_valid,
+  input predict_taken,
+  output logic [31:0] predict_history,
+
+  input train_mispredicted,
+  input train_taken,
+  input [31:0] train_history
+);
+assign predict_history = {predict_taken, predict_history[1:0]};
+assign predict_history[31] = predict_taken;
+assign predict_history[30:1] = predict_history[31:1];
+
+always @(posedge clk) begin
+    if (areset)
+        predict_history <= 32'd0;
+    else if (train_mispredicted && !predict_valid)
+        predict_history <= train_history;
+    else if (predict_valid && !train_taken)
+        predict_history <= {predict_taken, predict_history[1:0]};
+end
+
+assign train_history = {predict_history[31], train_taken};
+assign train_history[30:1] = predict_history[31:2];
+
+always @(posedge clk) begin
+    if (areset)
+        train_history <= 32'd0;
+    else if (train_mispredicted && !predict_valid)
+        train_history <= {predict_history[31], train_taken};
+end
+
+// VERILOG-EVAL: endmodule not found

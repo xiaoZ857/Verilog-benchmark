@@ -1,0 +1,11 @@
+
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+always @(*) begin
+  out = in[99:0];
+  for (int i = 0; i < 100; i++) begin
+    out[i] = in[99-i];
+  end
+endmodule

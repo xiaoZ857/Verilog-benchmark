@@ -1,0 +1,28 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+ ```verilog
+reg [3:0] state;
+reg start_shifting;
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        start_shifting <= 0;
+    else if (state[0] == 1 && state[1] == 1 && state[2] == 0 && state[3] == 1)
+        start_shifting <= 1;
+    else
+        case ({state, data})
+            4'b0000: state <= {data, 0, 0, 0};
+            4'b0001: state <= {0, data, 0, 0};
+            4'b0010: state <= {0, 0, data, 0};
+            4'b0011: state <= {0, 0, 0, data};
+            default: state <= state;
+        endcase
+end
+assign start_shifting;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

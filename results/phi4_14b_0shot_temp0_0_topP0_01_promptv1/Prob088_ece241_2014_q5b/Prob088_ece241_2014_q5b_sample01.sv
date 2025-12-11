@@ -1,0 +1,37 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+  reg [1:0] state, next_state;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset)
+      state <= 2'b01; // Reset to state A (one-hot encoding: 01)
+    else
+      state <= next_state;
+  end
+
+  always @(*) begin
+    case (state)
+      2'b01: begin // State A
+        z = x ? 1'b1 : 1'b0;
+        if (x)
+          next_state = 2'b10; // Transition to B
+        else
+          next_state = 2'b01; // Remain in A
+      end
+      2'b10: begin // State B
+        z = ~x;
+        next_state = 2'b10; // Remain in B
+      end
+      default: begin
+        z = 1'b0;
+        next_state = 2'b01; // Default to state A
+      end
+    endcase
+  end
+
+endmodule

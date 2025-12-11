@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+assign z = (w == 1) ? (w[2:0] == 3'b111) : 1'b0;
+
+always @(posedge clk or reset) begin
+    if (reset)
+        z <= 1'b0;
+    else if (~s && w == 1)
+        z <= 1'b1;
+    else if (~s && w == 0)
+        z <= 1'b0;
+end
+
+// VERILOG-EVAL: endmodule not found

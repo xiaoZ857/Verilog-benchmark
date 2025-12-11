@@ -1,0 +1,39 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output shift_ena
+);
+always @(posedge clk) begin
+    if (reset)
+        shift_ena <= 1'b1;
+    else if (shift_ena) begin
+        // This is a simple counter to keep shift_ena high for 4 cycles after reset.
+        // We need to track how many cycles have passed.
+        // We'll use a small internal counter.
+        // Since the problem states "assert shift_ena for 4 cycles, then 0 forever",
+        // we need to count 3 more cycles after the first cycle where shift_ena is high.
+        // We'll implement a 2-bit counter.
+    end
+end
+
+// Actually, let's implement it properly with a counter.
+reg [1:0] count;
+
+always @(posedge clk) begin
+    if (reset) begin
+        shift_ena <= 1'b1;
+        count <= 2'b00;
+    end else begin
+        if (shift_ena) begin
+            if (count == 2'b11) begin
+                shift_ena <= 1'b0;
+                count <= 2'b00;
+            end else begin
+                count <= count + 1;
+            end
+        end
+    end
+end
+
+endmodule

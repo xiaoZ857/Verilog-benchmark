@@ -1,0 +1,52 @@
+always @(posedge clk) begin
+    if (reset) begin
+        pm <= 1'b0;
+        hh <= 8'h12;
+        mm <= 8'h00;
+        ss <= 8'h00;
+    end
+    else if (ena) begin
+        // Seconds counter
+        if (ss == 8'h59) begin
+            ss <= 8'h00;
+            // Minutes counter
+            if (mm == 8'h59) begin
+                mm <= 8'h00;
+                // Hours counter
+                if (hh == 8'h12) begin
+                    hh <= 8'h01;
+                end
+                else if (hh == 8'h09) begin
+                    hh <= 8'h10;
+                end
+                else if (hh[3:0] == 4'h9) begin
+                    hh <= hh + 8'h7; // Increment tens digit and set ones to 0 (e.g., 09->10, 19->20)
+                end
+                else begin
+                    hh <= hh + 8'h1;
+                end
+                // Toggle PM at 12:00:00
+                if (hh == 8'h11) begin
+                    pm <= ~pm;
+                end
+            end
+            else begin
+                if (mm[3:0] == 4'h9) begin
+                    mm <= mm + 8'h7; // Increment tens digit and set ones to 0
+                end
+                else begin
+                    mm <= mm + 8'h1;
+                end
+            end
+        end
+        else begin
+            if (ss[3:0] == 4'h9) begin
+                ss <= ss + 8'h7; // Increment tens digit and set ones to 0
+            end
+            else begin
+                ss <= ss + 8'h1;
+            end
+        end
+    end
+end
+endmodule

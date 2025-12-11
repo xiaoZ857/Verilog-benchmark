@@ -1,0 +1,5 @@
+reg carry;
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        carry <=

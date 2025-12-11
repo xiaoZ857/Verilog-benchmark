@@ -1,0 +1,36 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+assign shift_ena = (data[2:0] == 4'h1101) && ~shift_ena;
+
+always @(posedge clk)
+ begin
+ if (done_counting && counting == 0'b0)
+   shift_ena <= 1;
+ if (~done_counting && shift_ena)
+   counting <= 1'b0;
+ end
+
+assign done = ((~done_counting) ^ counting);
+assign counting = ~counting;
+
+always @(posedge clk)
+ begin
+ if (!reset)
+   if (done_counting && counting == 1'b0)
+     done <= 1;
+ if (ack)
+   done <= 0;
+ else
+   done <= 1;
+ end
+
+endmodule

@@ -1,0 +1,21 @@
+
+parameter STATE_A = 1'b0;
+parameter STATE_B = 1'b1;
+
+reg current_state;
+
+always @(posedge clk) begin
+    if (reset) begin
+        current_state <= STATE_B;
+    end else begin
+        case (current_state)
+            STATE_A: current_state <= in ? STATE_A : STATE_B;
+            STATE_B: current_state <= in ? STATE_B : STATE_A;
+            default: current_state <= STATE_B;
+        endcase
+    end
+end
+
+assign out = (current_state == STATE_B);
+
+endmodule

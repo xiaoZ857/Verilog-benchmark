@@ -1,0 +1,16 @@
+always @(*) begin
+    case (c)
+        0: q = b;
+        1: q = e;
+        2: q = a;
+        3: q = d;
+        4: q = d;
+        5: q = d;
+        6: q = d;
+        7: q = d;
+        8: q = d;
+        9: q = d;
+        default: q = d;
+    endcase
+end
+endmodule

@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+assign anyedge[0] = ~in & (~in[7] | (clk & in));
+assign anyedge[1] = in[0];
+assign anyedge[2] = ~((~in[6] | (clk & in[7])) & ~in);
+assign anyedge[3] = in[1];
+assign anyedge[4] = (~((~in[5] | (clk & in[6])) & ~in) | ~((~in[7] | (clk & in)) & ~in));
+assign anyedge[5] = in[2];
+assign anyedge[6] = (~((~(in[3]|(~in[4]&in[1]))|~in) | ((~in[7]|~in)|~in[0])));
+assign anyedge[7] = in[3];
+
+// VERILOG-EVAL: endmodule not found

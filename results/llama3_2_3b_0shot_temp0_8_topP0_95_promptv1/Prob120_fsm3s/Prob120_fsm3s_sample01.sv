@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+assign out = (in == 0) ? (!in) : ((in == 1) ? !in : 1'b1);
+
+always @(posedge clk or posedge reset)
+begin
+    if (reset)
+        out <= 1'b0;
+    else
+        case(out)
+            0'b0: out <= (in == 0) ? (!in) : ((in == 1) ? !in : 1'b1);
+            0'b1: out <= (in == 1) ? !in : (in == 0) ? !in : 1'b1;
+        endcase
+end
+
+// VERILOG-EVAL: endmodule not found

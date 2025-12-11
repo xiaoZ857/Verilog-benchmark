@@ -1,0 +1,11 @@
+
+always @(*) begin
+    case (do_sub)
+        0: out = a + b;
+        1: out = a - b;
+    endcase
+    
+    // Check if result is zero (use equality comparison, not bitwise NOT)
+    result_is_zero = (out == 8'h00);
+end
+endmodule

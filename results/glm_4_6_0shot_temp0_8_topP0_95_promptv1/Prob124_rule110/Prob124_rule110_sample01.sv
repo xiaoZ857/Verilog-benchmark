@@ -1,0 +1,28 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+always @(posedge clk) begin
+    if (load) begin
+        q <= data;
+    end else begin
+        reg [511:0] next_q;
+        integer i;
+        
+        for (i = 0; i < 512; i = i + 1) begin
+            reg left, center, right;
+            
+            if (i == 0)
+                left = 1'b0;  // Boundary
+            else
+                left = q[i-1];
+                
+            center = q[i];
+            
+            if (i == 5
+
+// VERILOG-EVAL: endmodule not found

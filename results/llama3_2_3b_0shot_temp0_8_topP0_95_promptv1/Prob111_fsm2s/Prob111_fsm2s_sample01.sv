@@ -1,0 +1,13 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input reset,
+  output out
+);
+assign out = $signed(reset) ? 0 : ($signed(j) == 0 ? 0 : (k == 0 ? 1 : $unsigned(2'b11)^$unsigned(k)));
+
+always @(posedge clk or posedge reset)
+    assign out = $signed(reset) ? 0 : (($signed(j) == 0 ? 0 : (k == 0 ? 1 : $unsigned(2'b11)^$unsigned(k))));
+endmodule

@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 4'b0001; // Reset to 4 bits, all others are '0'
+
+    else if (slowena)
+        case ({q[3], q[2], q[1]})
+            4'b1001: q <= 4'b0000; // If counting from 9 to 0, reset counter
+            default: q <= {q[1:0], q[3] + 1}; // Else increment by 1
+        endcase
+    else if (q[3] == 1'b1) // If already at maximum value (10), do not count further
+        q <= q;
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,6 @@
+always @(*) begin
+    heater = mode & too_cold;
+    aircon = ~mode & too_hot;
+    fan = heater | aircon | fan_on;
+end
+endmodule

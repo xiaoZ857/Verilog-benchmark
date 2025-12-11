@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+always @(posedge clk, posedge areset) begin
+    if (areset) begin
+        out <= 1'b1;
+    end
+    else begin
+        case (out)
+            1'b0: out <= in ? 1'b0 : 1'b1;
+            1'b1: out <= in ? 1'b1 : 1'b0;
+            default: out <= 1'b1;
+        endcase
+    end
+end
+endmodule

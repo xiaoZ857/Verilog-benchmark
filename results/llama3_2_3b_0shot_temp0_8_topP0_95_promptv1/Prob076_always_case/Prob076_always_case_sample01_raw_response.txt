@@ -1,0 +1,6 @@
+assign out = sel[2:0] == 5'b000 ? data0 : 
+               sel[2:0] == 5'b001 ? data1 : 
+               sel[2:0] == 5'b010 ? data2 : 
+               sel[2:0] == 5'b011 ? data3 : 
+               sel[2:0] == 5'b100 ? data4 : 
+               sel[2:0] == 5'b101 ? data5 : 4'b0;

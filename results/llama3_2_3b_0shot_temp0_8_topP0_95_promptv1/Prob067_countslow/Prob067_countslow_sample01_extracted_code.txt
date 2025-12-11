@@ -1,0 +1,11 @@
+assign q = (clk && ~reset) ? $signed(slowena + $signed(q)) : 4'b0000;
+
+always @(posedge clk or posedge slowena)
+begin
+    if (reset)
+        q <= 4'b0000;
+    else if (~slowena)
+        q <= q + 1;
+end
+
+endmodule

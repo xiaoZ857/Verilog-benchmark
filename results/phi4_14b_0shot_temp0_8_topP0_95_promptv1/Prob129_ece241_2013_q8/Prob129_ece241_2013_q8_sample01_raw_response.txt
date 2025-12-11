@@ -1,0 +1,46 @@
+```verilog
+reg [1:0] current_state, next_state;
+
+localparam IDLE = 2'b00;
+localparam S1 = 2'b01;
+localparam S2 = 2'b10;
+
+always @(posedge clk or negedge aresetn) begin
+    if (!aresetn)
+        current_state <= IDLE;
+    else
+        current_state <= next_state;
+end
+
+always @(*) begin
+    case (current_state)
+        IDLE: 
+            if (x)
+                next_state = S1;
+            else
+                next_state = IDLE;
+
+        S1:
+            if (x)
+                next_state = S1;
+            else
+                next_state = S2;
+
+        S2:
+            if (x)
+                next_state = S1;
+            else
+                next_state = IDLE;
+    endcase
+end
+
+always @(*) begin
+    z = 1'b0; // Default value for z
+    case (current_state)
+        S2: 
+            if (!x) z = 1'b1; // Detecting the sequence "101"
+    endcase
+end
+
+endmodule
+```

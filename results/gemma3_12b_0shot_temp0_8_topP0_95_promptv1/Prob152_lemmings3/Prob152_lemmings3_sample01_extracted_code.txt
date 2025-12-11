@@ -1,0 +1,57 @@
+logic state;
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state <= 1'b0;
+  end else begin
+    case (state)
+      1'b0: begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+        if (bump_left)
+          state <= 1'b1;
+        else if (bump_right)
+          state <= 1'b1;
+        else if (!ground)
+          state <= 2'b10;
+        else if (dig && ground)
+          state <= 2'b11;
+        else
+          state <= 1'b0;
+      end
+      1'b1: begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b1;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+        if (!ground)
+          state <= 2'b10;
+        else if (dig && ground)
+          state <= 2'b11;
+        else
+          state <= 1'b1;
+      end
+      2'b10: begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b0;
+        aaah <= 1'b1;
+        digging <= 1'b0;
+        if (ground)
+            state <= 1'b0;
+        else
+            state <= 2'b10;
+      end
+      2'b11: begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        digging <= 1'b1;
+        if (!ground)
+            state <= 2'b10;
+        else
+            state <= 1'b0;
+      end
+    endcase
+  end
+endmodule

@@ -1,0 +1,39 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+assign min_a = a[7];
+assign min_b = b[7];
+assign min_c = c[7];
+assign min_d = d[7];
+
+always @(posedge clk) begin
+    if ((min_a == a[7]) && (min_b == b[7]) && (min_c == c[7]) && (min_d == d[7]))
+        // all inputs are equal, min is unchanged
+        ;
+    else if (min_a < min_b) begin
+        if (min_a < min_c)
+            if (min_a < min_d)
+                min <= a;
+            else
+                min <= d;
+        else if (min_b < min_c)
+            if (min_b < min_d)
+                min <= b;
+            else
+                min <= d;
+    end else if (min_c < min_d) begin
+        if (min_a > min_c)
+            min <= c;
+        else if (min_b > min_c)
+            min <= b;
+        else
+            min <= a;
+    end
+end
+
+// VERILOG-EVAL: endmodule not found

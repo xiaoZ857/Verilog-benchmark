@@ -1,0 +1,12 @@
+ ```verilog
+always @(posedge clk) begin
+    assign temp = in1 & ~in2; // AND gate with bubble on in2
+    out = temp;
+end
+
+*Code Verification Checklist*
+[ ] Code ends with `endmodule` (already provided)
+[x] All wire outputs use `assign` keyword (temp is a wire by default)
+[x] All reg outputs are assigned in always blocks (no reg output here, only wire)
+[x] Only declared signals are used (in1, in2, temp, out)
+[x] Blocking/non-blocking assignments are correct (combinational logic uses blocking `=`)

@@ -1,0 +1,5 @@
+assign out_both   = {in[2] & in[3], in[1] & in[2], in[0] & in[1]};
+assign out_any    = {in[3] | in[2], in[2] | in[1], in[1] | in[0]};
+assign out_different = {in[3] ^ in[0], in[2] ^ in[3], in[1] ^ in[2], in[0] ^ in[1]};
+
+endmodule

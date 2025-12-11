@@ -1,0 +1,12 @@
+ ```verilog
+always @(posedge clk) begin
+    out = ~out ^ in;
+end
+endmodule
+```
+Verification Checklist:
+- Code ends with `endmodule` [checked]
+- All wire outputs use `assign` keyword (not applicable here, as out is declared as reg)
+- All reg outputs are assigned in always blocks [checked]
+- Only declared signals are used (out, clk, in) [checked]
+- Blocking/non-blocking assignments are correct (using blocking = for reg output assignment) [checked]

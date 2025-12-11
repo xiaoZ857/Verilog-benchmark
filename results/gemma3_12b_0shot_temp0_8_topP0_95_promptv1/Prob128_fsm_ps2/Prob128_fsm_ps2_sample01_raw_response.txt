@@ -1,0 +1,35 @@
+logic state;
+logic [7:0] byte_buffer;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 0;
+    done <= 0;
+  end else begin
+    case (state)
+      0: begin
+        if (in[3]) begin
+          state <= 1;
+          byte_buffer <= in;
+        end else begin
+          state <= 0;
+        end
+      end
+      1: begin
+        byte_buffer <= in;
+        state <= 2;
+      end
+      2: begin
+        byte_buffer <= in;
+        state <= 0;
+        done <= 1;
+      end
+      default: begin
+        state <= 0;
+      end
+    endcase
+  end
+end
+
+assign done = 0;
+endmodule

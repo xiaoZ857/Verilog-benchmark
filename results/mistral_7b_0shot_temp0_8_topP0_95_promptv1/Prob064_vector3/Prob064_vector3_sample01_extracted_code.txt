@@ -1,0 +1,7 @@
+ ```verilog
+always @(posedge clk) begin
+    assign w = {a, b, c, d, e, f}; // Concatenate inputs a-f
+    assign x = w[25:16];            // Extract bits 16-25 (outputs x)
+    assign y = w[15:8];             // Extract bits 8-15 (outputs y)
+    assign z = w[7:0];              // Extract bits 0-7 (outputs z)
+end

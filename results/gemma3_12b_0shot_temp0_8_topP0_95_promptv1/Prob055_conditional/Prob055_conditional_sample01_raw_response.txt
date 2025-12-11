@@ -1,0 +1,12 @@
+always @(*) begin
+  min = a;
+  if (b < min) begin
+    min = b;
+  end
+  if (c < min) begin
+    min = c;
+  end
+  if (d < min) begin
+    min = d;
+  end
+endmodule

@@ -1,0 +1,22 @@
+
+module TopModule (
+  input ring,
+  input vibrate_mode,
+  output ringer,
+  output motor
+);
+ ```verilog
+always @(posedge clk) begin
+    if (vibrate_mode)
+        motor <= 1'b1;
+    else if (ring)
+        ringer <= 1'b1;
+    else
+        motor <= 1'b0;
+end
+
+assign ringer = ringer == 1'b1 ? 1'b1 : 1'b0;
+assign motor = motor == 1'b1 ? 1'b1 : 1'b0;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

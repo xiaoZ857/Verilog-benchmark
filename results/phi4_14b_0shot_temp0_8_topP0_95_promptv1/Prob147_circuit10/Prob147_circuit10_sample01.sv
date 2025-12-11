@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output q,
+  output state
+);
+reg d;
+
+always @(posedge clk) begin
+    if (a & !b)
+        d <= 1'b1;
+    else if (!a & b)
+        d <= 1'b0;
+    else if (a & b)
+        d <= ~q; 
+end
+
+assign state = q;
+assign q = d;
+
+endmodule

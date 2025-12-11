@@ -1,0 +1,8 @@
+always @(*) begin
+    if (cpu_overheated && !shut_off_computer)
+        shut_off_computer = 1;
+    end
+
+    assign keep_driving = ~gas_tank_empty;
+
+endmodule

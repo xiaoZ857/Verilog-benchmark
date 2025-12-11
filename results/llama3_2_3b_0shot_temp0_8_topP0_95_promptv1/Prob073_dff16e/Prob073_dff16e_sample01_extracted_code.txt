@@ -1,0 +1,2 @@
+assign q = d & (byteena == 2'b01) ? d[15:8] : d[7:0];
+endmodule

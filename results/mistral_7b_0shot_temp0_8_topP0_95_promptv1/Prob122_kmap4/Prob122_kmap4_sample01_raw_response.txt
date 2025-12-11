@@ -1,0 +1,11 @@
+ Based on the given Karnaugh map and the rules provided:
+
+```verilog
+always @(posedge clk) begin
+    if ((a & ~b) || (~c & b))
+        out <= 1'b1;
+    else
+        out <= 1'b0;
+end
+endmodule
+```

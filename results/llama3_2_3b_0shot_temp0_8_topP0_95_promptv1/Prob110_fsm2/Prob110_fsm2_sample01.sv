@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+assign out = $signed(a & b | $unsigned(!a & !b));
+
+always @(posedge clk or async_reset) begin
+    if (areset)
+        q <= 0;
+    else if (!!a && !k)
+        q <= 1;
+    else
+        q <= 0;
+end
+
+// VERILOG-EVAL: endmodule not found

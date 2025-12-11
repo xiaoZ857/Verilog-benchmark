@@ -1,0 +1,46 @@
+  reg [1:0] current_state, next_state;
+  always @(posedge clk or posedge reset) begin
+      if (reset)
+          current_state <= 2'b00; // State A
+      else
+          current_state <= next_state;
+  end
+
+  always @(*) begin
+      case (current_state)
+          2'b00: // State A
+              begin
+                  out = 1'b0;
+                  if (in == 1'b0)
+                      next_state = 2'b00; // A
+                  else
+                      next_state = 2'b01; // B
+              end
+          2'b01: // State B
+              begin
+                  out = 1'b0;
+                  if (in == 1'b0)
+                      next_state = 2'b10; // C
+                  else
+                      next_state = 2'b01; // B
+              end
+          2'b10: // State C
+              begin
+                  out = 1'b0;
+                  if (in == 1'b0)
+                      next_state = 2'b00; // A
+                  else
+                      next_state = 2'b11; // D
+              end
+          2'b11: // State D
+              begin
+                  out = 1'b1;
+                  if (in == 1'b0)
+                      next_state = 2'b10; // C
+                  else
+                      next_state = 2'b01; // B
+              end
+      endcase
+  end
+
+endmodule

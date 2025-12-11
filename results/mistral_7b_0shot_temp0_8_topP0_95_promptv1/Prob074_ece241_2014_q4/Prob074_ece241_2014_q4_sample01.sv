@@ -1,0 +1,37 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+ ```verilog
+reg d_xor, d_and, d_or;
+logic q_xor, q_and, q_or;
+assign z = !(d_xor ^ x) | (~q_and & x) | (~q_or & x);
+
+always @(posedge clk) begin
+    if (resetn) begin
+        d_xor <= 0;
+        d_and <= 0;
+        d_or <= 0;
+    end else begin
+        d_xor <= q_xor ^ x;
+        d_and <= ~q_and & x;
+        d_or <= ~q_or & x;
+    end
+end
+
+always @(posedge clk) begin
+    q_xor <= d_xor;
+end
+
+always @(posedge clk) begin
+    q_and = d_and[1];
+end
+
+always @(posedge clk) begin
+    q_or = ~d_or[1];
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

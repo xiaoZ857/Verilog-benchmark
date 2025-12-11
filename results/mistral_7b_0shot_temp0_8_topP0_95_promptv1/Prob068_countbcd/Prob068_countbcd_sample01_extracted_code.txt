@@ -1,0 +1,26 @@
+ ```verilog
+always @(posedge clk or negedge reset) begin
+    if (!reset) begin
+        q <= 4'b0000; // Reset to zero
+    end else begin
+        q[3] <= q[3] + (q[3]<4)'1; // Increment ones digit
+        if (q[3] > 9) begin // If ones digit overflow, reset it and increment tens
+            q[3] = 0;
+            q[4] <= q[4] + (q[4]<6)'1;
+        end
+        if (q[4] > 5) begin // If tens digit overflow, reset it and increment hundreds
+            q[4] = 0;
+            q[7] <= q[7] + (q[7]<8)'1;
+        end
+        if (q[7] > 3) begin // If hundreds digit overflow, reset it and increment thousands
+            q[7] = 0;
+            q[11] <= q[11] + (q[11]<4)'1; // Increment thousands digit
+        end
+    end
+end
+
+always @(posedge clk) begin
+    ena[3] = (q[3] > 9); // Enable for tens, hundreds and thousands digits
+    ena[2] = (ena[3] || (q[4] > 5)); // Enable for units digit if tens digit has changed or is reset
+    ena[1] = ena[2]; // Enable for tens digit if hundreds digit has changed or is reset
+end

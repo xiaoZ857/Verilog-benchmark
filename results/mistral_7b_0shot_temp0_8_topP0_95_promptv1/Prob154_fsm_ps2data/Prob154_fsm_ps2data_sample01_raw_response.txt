@@ -1,0 +1,32 @@
+ ```verilog
+reg [2:0] state;
+reg [7:0] data_reg;
+reg done;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 2'b00;
+        data_reg <= 8'bx;
+        done <= 1'b0;
+    end else if (state === 2'b00 && in[3] === 1) begin
+        state <= 2'b01;
+    end else if (state === 2'b01) begin
+        data_reg <= {data_reg[7:0], in};
+        if ((data_reg === 8'b0c || data_reg === 8'bd || data_reg === 8'd6b || data_reg === 8'd8d || data_reg === 8'ded) && (state === 2'b01)) begin
+            state <= 2'b10;
+        end
+    end else if (state === 2'b10) begin
+        data_reg <= {data_reg[7:0], in};
+        if ((data_reg === 8'b01 || data_reg === 8'be || data_reg === 8'd76 || data_reg === 8'd3d || data_reg === 8'ded) && (state === 2'b10)) begin
+            state <= 2'b11;
+        end
+    end else if (state === 2'b11) begin
+        data_reg <= {data_reg[7:0], in};
+        done <= 1'b1;
+    end
+end
+
+always @* begin
+    assign out_bytes = data_reg[23:0];
+end
+```

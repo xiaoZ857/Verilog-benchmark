@@ -1,0 +1,91 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+always @(posedge clk) begin
+    if (reset) begin
+        z <= 1'b0;
+    end else begin
+        // FSM logic will be implemented here
+        // Since the description requires tracking w over three cycles after entering B,
+        // we need states to count cycles and check condition.
+        // We'll use a minimal state encoding.
+        // States: A (wait for s=1), B0 (first cycle after A), B1 (second cycle), B2 (third cycle), B3 (evaluate and set z)
+        // We'll need a state register and a counter/tracker for w=1 occurrences.
+        // However, the problem says "use as few states as possible" and the output z is set in the cycle after three checks.
+        // We can combine counting and checking in a small state machine.
+
+        // Let's define states: A, B, C, D, E where:
+        // A: reset state, wait for s=1
+        // B: first cycle after A (check w)
+        // C: second cycle (check w)
+        // D: third cycle (check w)
+        // E: set z based on count (then go back to B for next three cycles)
+        // But note: after E, it should continue checking next three cycles, so go to B, not A.
+
+        // We need to store count of w=1 in B, C, D. Use a 2-bit counter.
+        // Alternatively, we can have a state machine that transitions and accumulates count.
+
+        // Since the module ports define z as reg, we'll use a state machine with always block.
+
+        // We'll declare internal registers for state and count.
+        // But the prompt says only generate module body, so we assume these are declared elsewhere?
+        // Actually, the module body can include local declarations. We'll add them.
+
+        // Local declarations:
+        reg [2:0] state, next_state;
+        reg [1:0] count, next_count;
+
+        // We need to initialize state and count on reset, but reset is handled above.
+        // We'll define the state transitions and counting logic.
+
+        // However, note: the always block already handles reset for z, but not for state and count.
+        // We need to include state and count in the reset logic. But we cannot declare registers inside always block.
+        // We must declare them outside. Since the prompt says only module body, we'll assume we can declare them here.
+
+        // Actually, in Verilog, we can declare regs inside the module body but outside always blocks.
+        // But the prompt says "Generate ONLY the module body code", which includes internal reg declarations.
+        // So we'll include them.
+
+        // Let's restructure: we'll have a separate always block for state and count, but we can combine.
+        // Since we already have an always block for z, we need to handle state and count too.
+        // We'll use a single always block for sequential logic (state, count, z) and combinational logic for next_state and next_count.
+        // But that would require two always blocks. However, we can do it in one by using blocking assignments for next values?
+        // To keep it simple and correct, we'll use two always blocks: one sequential for state, count, z and one combinational for next_state and next_count.
+
+        // But the prompt says "Generate ONLY the module body code", so we can include multiple always blocks.
+
+        // Let's implement:
+
+        // First, declare internal registers for state and count.
+        // Since we are inside an always block, we cannot declare them here. We need to declare them outside.
+        // We'll assume they are declared in the module body before the always blocks.
+
+        // Given the constraints, I'll write the module body with internal regs and the always blocks.
+
+        // Note: the module already has output reg z, so we don't need to redeclare z.
+
+        // We'll define states as parameters.
+        parameter A = 3'b000, B = 3'b001, C = 3'b010, D = 3'b011, E = 3'b100;
+
+        reg [2:0] state, next_state;
+        reg [1:0] count, next_count;
+
+        // Sequential always block for state, count, and z
+        always @(posedge clk) begin
+            if (reset) begin
+                state <= A;
+                count <= 2'b00;
+                z <= 1'b0;
+            end else begin
+                state <= next_state;
+                count <= next_count;
+                // z is set in state E, but we need to set it for one cycle.
+                // We'll set z in the combinational block for next_state, but assign it here sequentially.
+                // Alternatively, we can set z in the
+
+// VERILOG-EVAL: endmodule not found

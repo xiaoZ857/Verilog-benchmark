@@ -1,0 +1,8 @@
+
+always @(*) begin
+    out = 8'b0;
+    for (integer i = 0; i < 255; i = i + 1) begin
+        out = out + in[i];
+    end
+end
+endmodule

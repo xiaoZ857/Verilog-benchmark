@@ -1,0 +1,9 @@
+ ```verilog
+assign z = ~(x & y);
+
+always @(posedge clk) begin
+    if (~reset)
+        z <= ~(x & y);
+end
+endmodule
+```

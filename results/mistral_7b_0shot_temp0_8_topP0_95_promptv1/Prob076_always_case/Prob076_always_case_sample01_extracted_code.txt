@@ -1,0 +1,7 @@
+ ```verilog
+always @(posedge clk) begin
+    if (sel < 6 && sel >= 0)
+        out = {data{sel}};
+    else
+        out <= 4'b0;
+end

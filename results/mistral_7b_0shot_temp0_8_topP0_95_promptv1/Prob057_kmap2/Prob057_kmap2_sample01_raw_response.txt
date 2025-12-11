@@ -1,0 +1,13 @@
+ Here is the Verilog code for the Karnaugh map circuit:
+
+```verilog
+assign out = ~(a & c) | (b & ~d);
+endmodule
+```
+
+Verification Checklist:
+- Code ends with `endmodule` [checked]
+- All wire outputs use `assign` keyword [checked]
+- All reg outputs are NOT used since there are no sequential elements
+- Only declared signals (a, b, c, d, out) are used [checked]
+- Blocking/non-blocking assignments are correct [checked]

@@ -1,0 +1,8 @@
+ ```verilog
+always @* begin
+    if (d)
+        q = a | (b & !c); // OR gate with c as inverted input
+    else
+        q = 1'b0;
+end
+```

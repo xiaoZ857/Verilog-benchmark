@@ -1,0 +1,96 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+reg [3:0] state, next_state;
+
+// State encoding
+localparam S_SEARCH = 4'd0;
+localparam S_MATCH_1 = 4'd1;
+localparam S_MATCH_11 = 4'd2;
+localparam S_MATCH_110 = 4'd3;
+localparam S_SHIFT = 4'd4;
+localparam S_WAIT_COUNTING = 4'd5;
+localparam S_DONE = 4'd6;
+
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= S_SEARCH;
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        S_SEARCH: 
+            if (data == 1'b1)
+                next_state = S_MATCH_1;
+            else
+                next_state = S_SEARCH;
+
+        S_MATCH_1:
+            if (data == 1'b1)
+                next_state = S_MATCH_11;
+            else
+                next_state = S_SEARCH;
+
+        S_MATCH_11:
+            if (data == 1'b0)
+                next_state = S_MATCH_110;
+            else
+                next_state = S_MATCH_1;
+
+        S_MATCH_110:
+            if (data == 1'b1)
+                next_state = S_SHIFT;
+            else
+                next_state = S_SEARCH;
+
+        S_SHIFT: 
+            if ($countones({state, data}) < 4) // shift_ena for 4 cycles
+                next_state = S_WAIT_COUNTING;
+            else
+                next_state = S_SHIFT;
+
+        S_WAIT_COUNTING:
+            if (done_counting)
+                next_state = S_DONE;
+            else
+                next_state = S_WAIT_COUNTING;
+
+        S_DONE: 
+            if (ack)
+                next_state = S_SEARCH;
+            else
+                next_state = S_DONE;
+
+        default:
+            next_state = S_SEARCH;
+    endcase
+end
+
+always @(*) begin
+    shift_ena = 1'b0;
+    counting = 1'b0;
+    done = 1'b0;
+
+    case (state)
+        S_SHIFT: 
+            shift_ena = 1'b1;
+
+        S_WAIT_COUNTING:
+            counting = 1'b1;
+
+        S_DONE: 
+            done = 1'b1;
+    endcase
+end
+
+endmodule

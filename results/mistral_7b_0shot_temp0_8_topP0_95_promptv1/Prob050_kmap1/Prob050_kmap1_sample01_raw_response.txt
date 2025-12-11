@@ -1,0 +1,11 @@
+ ```verilog
+assign {out} = ~a & (!b | !c); // combinational logic with wire output
+endmodule
+```
+
+**Verification Checklist:**
+[ ] Code ends with `endmodule`
+[ ] All wire outputs use `assign` keyword (done)
+[ ] All reg outputs are assigned in always blocks (not applicable as there is no reg output)
+[ ] Only declared signals are used (done, only a, b, c and out are used)
+[ ] Blocking/non-blocking assignments are correct (combinational logic uses blocking assignment)

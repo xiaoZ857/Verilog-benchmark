@@ -1,0 +1,55 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+ ```verilog
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+    end else begin
+        logic internal ground_prev = ground;
+        if (ground != ground_prev) begin
+            if (ground) begin
+                if (!dig && !aaah) begin
+                    if (walk_left) begin
+                        walk_right <= ~bump_right & bump_left;
+                        walk_left <= ~bump_left;
+                    end else begin
+                        walk_left <= bump_left;
+                        walk_right <= ~bump_right;
+                    end
+                end
+            end else begin
+                aaah <= 1'b1;
+            end
+        end
+
+        if (digging) begin
+            if (ground && !aaah) begin
+                digging <= ground_prev;
+            end
+        end else begin
+            if (ground && !aaah) begin
+                if (!walk_left && !walk_right) begin
+                    dig <= 1'b1;
+                    digging <= 1'b1;
+                end
+            end
+        end
+    end
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+ ```verilog
+reg [4:0] temp;
+assign q = temp[4];
+
+always @(posedge clk) begin
+    if (reset)
+        temp <= 5'b1;
+    else begin
+        temp[0] = temp[4];
+        temp[4] = temp[3] ^ temp[0];
+        temp[3] = temp[2];
+        temp[2] = temp[1];
+    end
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,15 @@
+
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+assign pos = { (in[6]&~in[5]&~in[4]&~in[3]&~in[2]&~in[1]) ? 2'd0 : 
+              (in[5]&~in[4]&~in[3]&~in[2]&~in[1]&~in[0] ? 2'd1 :
+               (in[6]&~in[5]&~in[4]&~in[3]&~in[2]&in[1] ? 2'd2 : 
+                (in[7]&~in[6]&~in[5]&~in[4]&in[3] ? 2'd3 :
+                 (in[7]&~in[6]&~in[5]&~in[4]&~in[3]&in[2] ? 2'd4 :
+                  (in[7]&~in[6]&~in[5]&~in[4]&~in[3]&~in[2]&in[1] ? 2'd5 : 
+                   (in[7]&~in[6]&~in[5]&~in[4]&~in[3]&~in[2]&~in[1] ? 2'd6 :
+                    in[7])))};
+
+// VERILOG-EVAL: endmodule not found

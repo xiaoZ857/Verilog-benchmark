@@ -1,0 +1,22 @@
+
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+ ```verilog
+always @* begin
+    out_and = in[99] & in[98] & ... & in[1] & in[0];
+end
+
+always @* begin
+    out_or = in[99] | in[98] | ... | in[1] | in[0];
+end
+
+always @* begin
+    out_xor = in[99] ^ in[98] ^ ... ^ in[1] ^ in[0];
+end
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

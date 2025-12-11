@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+assign ena[2] = q[7];
+assign ena[1] = q[6];
+assign ena[0] = q[5];
+
+always @(posedge clk) begin
+   assign q[7] = q[3] & q[4] & q[5] & q[6];
+   assign q[6] = q[2] & q[3] & q[4] & q[5];
+   assign q[5] = q[1] & q[2] & q[3] & q[4];
+   assign q[4] = q[0] & q[1] & q[2] & q[3];
+   assign q[3] = q[0] & q[1];
+endmodule

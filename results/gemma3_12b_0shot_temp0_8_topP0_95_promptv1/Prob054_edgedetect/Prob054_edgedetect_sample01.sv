@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+always @(posedge clk) begin
+  pedge[0] <= in[0] & ~in[0,1];
+  pedge[1] <= in[1] & ~in[1,2];
+  pedge[2] <= in[2] & ~in[2,3];
+  pedge[3] <= in[3] & ~in[3,4];
+  pedge[4] <= in[4] & ~in[4,5];
+  pedge[5] <= in[5] & ~in[5,6];
+  pedge[6] <= in[6] & ~in[6,7];
+  pedge[7] <= in[7] & ~in[7,0];
+endmodule

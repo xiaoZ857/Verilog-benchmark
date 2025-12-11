@@ -1,0 +1,48 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+  reg [2:0] state;
+  reg [1:0] byte_count;
+  reg done_reg;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      state <= 3'b000;
+      byte_count <= 2'b00;
+      done_reg <= 1'b0;
+    end else begin
+      case (state)
+        3'b000: // Look for first byte
+          if (in[7]) begin
+            state <= 3'b001;
+            byte_count <= 2'b01;
+          end
+
+        3'b001: // Receive second byte
+          if (byte_count == 2'b11) begin
+            state <= 3'b010;
+            done_reg <= 1'b1; // Signal message is complete
+          end else begin
+            byte_count <= byte_count + 1'b1;
+          end
+
+        3'b010: // Look for next first byte
+          if (in[7]) begin
+            state <= 3'b001;
+            byte_count <= 2'b01;
+            done_reg <= 1'b0; // Reset done signal until new message is fully received
+          end
+
+        default: 
+          state <= 3'b000;
+      endcase
+    end
+  end
+
+  assign done = done_reg;
+
+endmodule

@@ -1,0 +1,12 @@
+ ```verilog
+always @(posedge clk) begin
+    // AND gates for p1y
+    p1y_3a = p1a & p1b & p1c;
+    p1y_3b = p1d & p1e & p1f;
+    p1y = p1y_3a | p1y_3b;
+
+    // AND gates for p2y
+    p2y_2a = p2a & p2b;
+    p2y_2b = p2c & p2d;
+    p2y = p2y_2a | p2y_2b;
+end

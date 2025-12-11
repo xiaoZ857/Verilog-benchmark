@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input x,
+  input [2:0] y,
+  output reg Y0,
+  output reg z
+);
+ ```verilog
+always @(posedge clk) begin
+    if (x) begin
+        case(y)
+            000 : Y0 <= 0'b0;
+            001 : Y0 <= 3'b011;
+            010 : Y0 <= 3'b001;
+            011 : Y0 <= 3'b010;
+            100 : Y0 <= 3'b100;
+            default: Y0 <= 3'bX; // assuming X for unknown input
+        endcase
+    end
+    always @(*) begin
+        if (x)
+            z = Y[2] ^ Y[1]; // Exclusive OR of next state bits
+        else
+            z = 0;
+    end
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

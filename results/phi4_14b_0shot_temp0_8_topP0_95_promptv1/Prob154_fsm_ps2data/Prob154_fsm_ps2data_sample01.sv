@@ -1,0 +1,56 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output [23:0] out_bytes,
+  output done
+);
+logic [2:0] state;
+logic [23:0] message;
+logic valid_byte, receive_next;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 3'b000;
+        done <= 1'b0;
+        out_bytes <= 24'bxxxx_xxxx_xxxx_xxxx_xxxx_xxxx;
+        message <= 24'bxxxx_xxxx_xxxx_xxxx_xxxx_xxxx;
+    end else begin
+        case (state)
+            3'b000: begin // Idle, waiting for start byte (in[3] = 1)
+                if (in[3]) begin
+                    state <= 3'b001;
+                    valid_byte <= 1'b1;
+                    message[15:8] <= in; // Load first byte
+                end
+            end
+            3'b001: begin // Received first byte, load second byte
+                if (valid_byte) begin
+                    message[7:0] <= in;
+                    state <= 3'b010;
+                    valid_byte <= 1'b1;
+                end else begin
+                    if (in[3]) begin
+                        state <= 3'b001;
+                        message[15:8] <= in;
+                    end
+                end
+            end
+            3'b010: begin // Received second byte, load third byte
+                if (valid_byte) begin
+                    message[23:16] <= in;
+                    done <= 1'b1;
+                    out_bytes <= message;
+                    state <= 3'b000; // Reset to idle after message is complete
+                end else begin
+                    if (in[3]) begin
+                        state <= 3'b001;
+                        message[15:8] <= in;
+                    end
+                end
+            end
+        endcase
+    end
+end
+endmodule

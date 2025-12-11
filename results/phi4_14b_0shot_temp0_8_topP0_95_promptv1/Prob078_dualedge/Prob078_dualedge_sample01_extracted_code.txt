@@ -1,0 +1,23 @@
+reg edge_detected;
+reg last_d;
+
+always @(posedge clk or negedge clk) begin
+    if (negedge clk) begin
+        last_d <= d; // Capture the input on negative clock edge
+    end
+end
+
+always @(*) begin
+    edge_detected = 0;
+    if ((clk == 1'b1 && !last_clk) || (!clk && last_clk)) begin
+        edge_detected = 1;
+    end
+end
+
+always @(posedge clk or negedge clk) begin
+    if (edge_detected) begin
+        q <= d; // Update output on both edges when an edge is detected
+    end
+end
+
+endmodule

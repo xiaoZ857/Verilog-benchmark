@@ -1,0 +1,57 @@
+```verilog
+logic [2:0] state, next_state;
+logic [7:0] data_shift_reg;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 3'b000;
+    else
+        state <= next_state;
+end
+
+always_comb begin
+    case(state)
+        3'b000: begin // Idle state, looking for start bit
+            done = 1'b0;
+            if (in == 1'b0)
+                next_state = 3'b001; // Detected start bit
+            else
+                next_state = 3'b000; // Remain in idle
+        end
+        3'b001: begin // Received start bit, now read data bits
+            done = 1'b0;
+            if (state == 3'b001)
+                next_state = 3'b010;
+            else
+                next_state = state + 1;
+        end
+        default: begin
+            for (int i = 2; i > 0; i--) begin
+                data_shift_reg[i] = data_shift_reg[i-1];
+            end
+            data_shift_reg[0] = in;
+            
+            if (state == 3'b011)
+                next_state = 3'b100;
+            else
+                next_state = state + 1;
+        end
+    endcase
+    
+    // Check stop bit condition
+    if (next_state == 3'b101) begin
+        done = (in == 1'b1) ? 1'b1 : 1'b0; // Valid byte received
+        if (done)
+            next_state = 3'b000; // Return to idle after successful receive
+        else
+            next_state = 3'b100; // Wait for stop bit
+    end
+end
+
+always_ff @(posedge clk) begin
+    if (next_state == 3'b101 && !done) begin
+        state <= 3'b100; // Move to wait for stop bit
+    end
+end
+endmodule
+```

@@ -1,0 +1,13 @@
+ ```verilog
+always @(posedge clk) begin
+    if (~do_sub)
+        assign out = a + b;
+    else
+        assign out = a - b;
+
+    if (out == 0)
+        result_is_zero <= 1'b1;
+    else
+        result_is_zero <= 1'b0;
+end
+```

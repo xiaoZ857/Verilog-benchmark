@@ -1,0 +1,51 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+logic state;
+logic next_state;
+always_ff @(posedge clk) begin
+  if (reset) begin
+    state <= 0;
+  end else begin
+    state <= next_state;
+  end
+end
+
+always @(*) begin
+  next_state = state;
+  case (state)
+    0: begin
+      if (data == 1)
+        next_state = 1;
+      else
+        next_state = 0;
+    end
+    1: begin
+      if (data == 1)
+        next_state = 2;
+      else
+        next_state = 0;
+    end
+    2: begin
+      if (data == 0)
+        next_state = 3;
+      else
+        next_state = 0;
+    end
+    3: begin
+      if (data == 1) begin
+        next_state = 1;
+      end else begin
+        next_state = 0;
+      end
+    end
+    default: next_state = 0;
+  endcase
+end
+
+assign start_shifting = (state == 3);
+endmodule

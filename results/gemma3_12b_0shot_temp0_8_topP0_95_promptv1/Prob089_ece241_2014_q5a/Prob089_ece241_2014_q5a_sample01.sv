@@ -1,0 +1,34 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+logic state;
+logic x_reg;
+
+always @(posedge clk) begin
+  if (areset) begin
+    state <= 2'b00;
+    x_reg <= 1'b0;
+  end else begin
+    x_reg <= x;
+  end
+end
+
+always @(posedge clk) begin
+  if (areset) begin
+    z <= 1'b0;
+  end else begin
+    case (state)
+      2'b00: z <= ~x_reg;
+      2'b01: z <= 1'b1;
+      2'b10: z <= ~x_reg;
+      2'b11: z <= 1'b0;
+      default: z <= 1'b0;
+    endcase
+    state <= state + 1'b1;
+  end
+end
+endmodule

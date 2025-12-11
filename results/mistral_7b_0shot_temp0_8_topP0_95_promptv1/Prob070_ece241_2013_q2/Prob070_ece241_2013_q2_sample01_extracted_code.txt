@@ -1,0 +1,11 @@
+ ```verilog
+assign out_sop = ~(a & b & ~c & d) | (b & ~c & c & ~d) | (~a & c & c & ~d);
+always @(posedge clk) begin
+    if (reset)
+        out_pos <= 1'b0;
+    else if ((a & b & ~c & d) || (b & ~c & c & ~d) || (!a & c & c & ~d))
+        out_pos <= 1'b1;
+    else
+        out_pos <= ~(a | b | c | d); // Minimum product-of-sums form for the given conditions
+end
+endmodule

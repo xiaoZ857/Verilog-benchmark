@@ -1,0 +1,12 @@
+ ```verilog
+always @(posedge clk) begin
+    int i;
+    logic [99:0] temp;
+
+    for (i = 0; i < 100; i++) begin
+        temp[i] = in[99-i];
+    end
+    out = temp;
+end
+endmodule
+```

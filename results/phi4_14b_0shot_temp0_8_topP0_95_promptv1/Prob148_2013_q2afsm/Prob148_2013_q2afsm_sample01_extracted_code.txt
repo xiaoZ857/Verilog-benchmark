@@ -1,0 +1,45 @@
+  reg [2:0] current_state, next_state;
+  
+  always @(posedge clk or negedge resetn) begin
+      if (!resetn)
+          current_state <= 3'b000; // State A
+      else
+          current_state <= next_state;
+  end
+
+  always @(*) begin
+      case (current_state)
+          3'b000: begin // State A
+              if (r[1])
+                  next_state = 3'b001; // Go to state B
+              else if (r[2])
+                  next_state = 3'b010; // Go to state C
+              else if (!r[1] && !r[2] && !r[3])
+                  next_state = 3'b100; // Stay in A
+              else
+                  next_state = 3'b000; // Remain in A
+          end
+          3'b001: begin // State B
+              if (r[1])
+                  next_state = 3'b001; // Remain in state B
+              else
+                  next_state = 3'b000; // Go to state A
+          end
+          3'b010: begin // State C
+              if (r[2])
+                  next_state = 3'b010; // Remain in state C
+              else
+                  next_state = 3'b000; // Go to state A
+          end
+          default: 
+              next_state = 3'b000;
+      endcase
+  end
+
+  always @(*) begin
+      g[1] = (current_state == 3'b001);
+      g[2] = (current_state == 3'b010);
+      g[3] = 1'b0; // Device 3 never gets a grant in this FSM configuration
+  end
+  
+endmodule

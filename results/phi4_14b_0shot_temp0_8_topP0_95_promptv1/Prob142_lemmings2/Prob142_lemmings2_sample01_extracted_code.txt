@@ -1,0 +1,47 @@
+reg [1:0] state, next_state;
+assign walk_left = (state == 2'b00 || state == 2'b10) ? 1'b1 : 1'b0;
+assign walk_right = (state == 2'b01 || state == 2'b11) ? 1'b1 : 1'b0;
+assign aaah = (state == 2'b10 || state == 2'b11) ? 1'b1 : 1'b0;
+
+always @(posedge areset or posedge clk) begin
+    if (areset)
+        state <= 2'b00; // Default to walking left after reset
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case(state)
+        2'b00: // Walking Left
+            if (!ground)
+                next_state = 2'b10; // Falling while walking left
+            else if (bump_right)
+                next_state = 2'b01; // Bumped on right, switch to walk right
+            else
+                next_state = 2'b00;
+
+        2'b01: // Walking Right
+            if (!ground)
+                next_state = 2'b11; // Falling while walking right
+            else if (bump_left)
+                next_state = 2'b00; // Bumped on left, switch to walk left
+            else
+                next_state = 2'b01;
+
+        2'b10: // Falling from Left Walk
+            if (!ground)
+                next_state = 2'b10;
+            else
+                next_state = 2'b00; // Resume walking left
+
+        2'b11: // Falling from Right Walk
+            if (!ground)
+                next_state = 2'b11;
+            else
+                next_state = 2'b01; // Resume walking right
+                
+        default:
+            next_state = 2'b00;
+    endcase
+end
+endmodule

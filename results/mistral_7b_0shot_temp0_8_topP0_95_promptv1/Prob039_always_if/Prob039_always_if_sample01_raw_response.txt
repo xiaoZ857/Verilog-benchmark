@@ -1,0 +1,18 @@
+ Here are the two versions you requested:
+
+Version with `assign` statements:
+```verilog
+assign out_assign = (sel_b1 & sel_b2) ? b : a;
+endmodule
+```
+
+Version with procedural if statement and a reg output:
+```verilog
+always @(posedge clk) begin
+  if ((sel_b1 & sel_b2) == 2'b10)
+    out_always <= b;
+  else
+    out_always <= a;
+end
+endmodule
+```

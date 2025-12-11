@@ -1,0 +1,10 @@
+```verilog
+reg [7:0] prev_in;
+
+always @(posedge clk) begin
+    pedge <= (in & ~prev_in);
+    prev_in <= in;
+end
+
+endmodule
+```

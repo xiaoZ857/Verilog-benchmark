@@ -1,0 +1,38 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+logic [1:0] state, next_state;
+assign walk_left = (state == 2'b01);
+assign walk_right = (state == 2'b10);
+
+always_ff @(posedge clk or posedge areset) begin
+    if (areset)
+        state <= 2'b01; // Reset to walking left
+    else
+        state <= next_state;
+end
+
+always_comb begin
+    case (state)
+        2'b01: begin // Walking left
+            if (bump_left || bump_right)
+                next_state = 2'b10; // Switch to walking right
+            else
+                next_state = 2'b01;
+        end
+        2'b10: begin // Walking right
+            if (bump_left || bump_right)
+                next_state = 2'b01; // Switch to walking left
+            else
+                next_state = 2'b10;
+        end
+    endcase
+end
+
+endmodule

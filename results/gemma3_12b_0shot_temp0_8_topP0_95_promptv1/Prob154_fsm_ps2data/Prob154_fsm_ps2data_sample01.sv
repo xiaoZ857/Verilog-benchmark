@@ -1,0 +1,50 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output [23:0] out_bytes,
+  output done
+);
+logic [23:0] message_bytes;
+logic [2:0] state;
+logic byte_count;
+logic done_reg;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 0;
+    byte_count <= 0;
+    done_reg <= 1'b0;
+  end else begin
+    case (state)
+      0: begin
+        if (in[3] == 1'b1) begin
+          state <= 1;
+          byte_count <= 1;
+          message_bytes <= in;
+        end else begin
+          state <= 0;
+        end
+      end
+      1: begin
+        byte_count <= byte_count + 1;
+        message_bytes <= {message_bytes[23:8], in};
+        if (byte_count == 3) begin
+          state <= 2;
+        end else begin
+          state <= 1;
+        end
+      end
+      2: begin
+        state <= 0;
+        done_reg <= 1'b1;
+      end
+      default: state <= 0;
+    endcase
+  end
+end
+
+assign out_bytes = message_bytes;
+assign done = done_reg;
+endmodule

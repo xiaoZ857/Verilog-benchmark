@@ -1,0 +1,10 @@
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 4'b0001;
+    else
+        case (q)
+            4'b1110, 4'b1111: q <= 4'b0001;
+            default: q <= q + 1'b1;
+        endcase
+end
+endmodule

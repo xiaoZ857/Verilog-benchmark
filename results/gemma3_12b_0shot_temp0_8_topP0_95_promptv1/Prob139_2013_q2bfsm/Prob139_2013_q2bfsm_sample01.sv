@@ -1,0 +1,73 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+logic state;
+logic x_reg, x_reg_1, x_reg_2;
+logic y_reg, y_reg_1;
+logic g_temp;
+
+always @(posedge clk) begin
+  if (!resetn) begin
+    state <= 0;
+    g_temp <= 0;
+  end else begin
+    case (state)
+      0: begin
+        f <= 1;
+        state <= 1;
+      end
+      1: begin
+        x_reg <= x;
+        if (x_reg == 1) begin
+          x_reg_1 <= 1;
+        end else if (x_reg_1 == 1) begin
+          x_reg_2 <= 1;
+        end else begin
+          x_reg_1 <= 0;
+          x_reg_2 <= 0;
+        end
+        if (x_reg_1 == 1 && x_reg_2 == 1) begin
+          state <= 2;
+        end else begin
+          state <= 1;
+        end
+        f <= 0;
+      end
+      2: begin
+        y_reg <= y;
+        if (y_reg == 1) begin
+          state <= 4;
+          g_temp <= 1;
+        end else begin
+          y_reg_1 <= 1;
+        end
+        f <= 0;
+      end
+      3: begin
+        state <= 1;
+        f <= 0;
+      end
+      4: begin
+        if (y_reg_1 == 1) begin
+          state <= 4;
+          g_temp <= 1;
+        end else if (y_reg_1 == 0) begin
+          state <= 3;
+          g_temp <= 0;
+        end
+        f <= 0;
+      end
+      default: state <= 1;
+    endcase
+  end
+end
+
+assign f = f;
+assign g = g_temp;
+endmodule

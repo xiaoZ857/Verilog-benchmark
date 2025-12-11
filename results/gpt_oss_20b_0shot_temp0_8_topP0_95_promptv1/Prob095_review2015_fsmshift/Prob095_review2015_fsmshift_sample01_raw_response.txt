@@ -1,0 +1,12 @@
+reg [2:0] cycle_cnt;
+
+always @(posedge clk) begin
+    if (reset) begin
+        cycle_cnt <= 3'd0;
+    end else begin
+        if (cycle_cnt < 3'd4)
+            cycle_cnt <= cycle_cnt + 1'b1;
+    end
+end
+
+assign shift_ena = (

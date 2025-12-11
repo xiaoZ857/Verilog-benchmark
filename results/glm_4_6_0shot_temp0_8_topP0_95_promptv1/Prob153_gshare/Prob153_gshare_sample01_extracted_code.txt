@@ -1,0 +1,43 @@
+
+// Internal registers and wires
+reg [6:0] history_reg;
+reg [1:0] pht [0:127];
+wire [6:0] predict_index;
+wire [1:0] predict_counter;
+wire predict_taken_wire;
+wire [6:0] train_index;
+reg [1:0] new_train_counter;
+reg [6:0] next_history;
+
+// Calculate indices
+assign predict_index = predict_pc ^ predict_history;
+assign train_index = train_pc ^ train_history;
+
+// Get prediction counter value
+assign predict_counter = pht[predict_index];
+assign predict_taken_wire = predict_counter[1];
+
+// Output assignments
+assign predict_taken = predict_taken_wire;
+assign predict_history = history_reg;
+
+// Calculate new training counter value
+always @(*) begin
+    case (pht[train_index])
+        2'b00: new_train_counter = train_taken ? 2'b01 : 2'b00;
+        2'b01: new_train_counter = train_taken ? 2'b10 : 2'b00;
+        2'b10: new_train_counter = train_taken ? 2'b11 : 2'b01;
+        2'b11: new_train_counter = train_taken ? 2'b11 : 2'b10;
+        default: new_train_counter = 2'b00;
+    endcase
+end
+
+// Determine next history value
+always @(*) begin
+    if (train_valid && train_mispredicted) begin
+        // If training for misprediction, recover to train_history + actual outcome
+        next_history = {train_history[5:0], train_taken};
+    end else if (train_valid) begin
+        // If training for correct prediction, update history with actual outcome
+        next_history = {train_history[5:0], train_taken};
+    end else if

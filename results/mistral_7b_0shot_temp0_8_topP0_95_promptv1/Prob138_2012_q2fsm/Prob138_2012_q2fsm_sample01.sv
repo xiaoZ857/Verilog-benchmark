@@ -1,0 +1,24 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+ ```verilog
+reg [2:0] state; // State variables
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 3'b000; // Reset to state A
+    else if (!state[0])
+        case (state[1:2])
+            2'b00: state <= 3'b001; // From A to B on w=0
+            2'b01: state <= 3'b000; // From A to A on w=1
+            2'b10: state <= 3'b100; // Invalid transition, ignore
+            2'b11: state <= 3'b101; // Invalid transition, ignore
+    endcase
+end
+assign z = state[2]; // Output is state F (F=E=C) or D, depending on current state
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

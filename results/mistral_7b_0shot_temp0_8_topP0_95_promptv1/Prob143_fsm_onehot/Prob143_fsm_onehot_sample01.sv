@@ -1,0 +1,44 @@
+
+module TopModule (
+  input in,
+  input [9:0] state,
+  output [9:0] next_state,
+  output out1,
+  output out2
+);
+ ```verilog
+always @(posedge clk) begin
+    always_comb begin
+        assign {out1, out2} = (state[9]) ? (1'b0, 1'b1) :
+                                ((state[8]) ? (1'b1, 1'b0) :
+                                ((state[7]) ? (1'b0, 1'b0) :
+                                ((state[6]) ? (1'b0, 1'b0) :
+                                ((state[5]) ? (1'b0, 1'b1) :
+                                ((state[4]) ? (1'b0, 1'b0) :
+                                ((state[3]) ? (1'b0, 1'b0) :
+                                ((state[2]) ? (1'b0, 1'b0) :
+                                ((state[1]) ? (1'b0, 1'b0) :
+                                ((state[0]) ? (1'b0, 1'b0) : (1'b0, 1'b0))))))));
+    end
+
+    always @(*) begin
+        next_state = state;
+        if (in) begin
+            case({state})
+                  0: next_state[0] <= 1'b0; next_state[1] <= in;
+                  1: next_state[0] <= in;       next_state[1] <= 1'b0;
+                  2:                            next_state[2] <= 1'b0;
+                  3:                            next_state[3] <= 1'b0;
+                  4:                            next_state[4] <= 1'b0;
+                  5:                            next_state[5] <= in;
+                  6:                            next_state[6] <= 1'b0;
+                  7:                            next_state[7] <= 1'b0;
+                  8:                            next_state[8] <= in;
+                  9:                            next_state[9] <= 1'b0;
+            endcase
+        end
+    end
+end
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

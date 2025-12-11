@@ -1,0 +1,17 @@
+
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+ ```verilog
+always @(posedge clk) begin
+    if (a)
+        q <= 4'b0101;
+    else
+        if (({a} ^ {a}) && ~q[2]) // edge detected on 'a' from 0 to 1
+            q <= {1'b0, q[1], q[0]}; // shift right and set msb to 0
+end
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

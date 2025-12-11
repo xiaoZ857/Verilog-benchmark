@@ -1,0 +1,47 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input predict_valid,
+  input predict_taken,
+  output logic [31:0] predict_history,
+
+  input train_mispredicted,
+  input train_taken,
+  input [31:0] train_history
+);
+assign predict_history = {predict_taken[1:], {predict_taken[0], predict_taken[4:]}, {predict_taken[2:], predict_taken[5:]}};
+assign predict_history[7:0] = {predict_taken[3:], predict_taken[6:]};
+assign train_history[31:8] = train_history[7:0];
+assign train_history[27:1] = train_history[15:8];
+assign train_history[23:2] = train_history[11:4];
+assign train_history[19:3] = train_history[9:2];
+
+always @(*) begin
+  predict_taken <= areset ? 32'b0 : {predict_taken[29:28],1'b0, predict_taken[27:26], pred_taken[25:24], 
+                               1'b0, pred_taken[23:22], 1'b0, pred_taken[21:20], 1'b0, pred_taken[19:18]};
+end
+
+always @(*) begin
+  train_taken <= areset ? 32'b0 : {train_taken[29:28],1'b0, train_taken[27:26], train_taken[25:24], 
+                                1'b0, train_taken[23:22], 1'b0, train_taken[21:20], 1'b0, train_taken[19:18]};
+end
+
+assign predict_taken = areset ? 32'b0 : train_taken[31:28];
+assign train_taken = areset ? 32'b0 : train_taken[31:28];
+
+always @(posedge clk) begin
+  if (areset)
+    train_history <= {32'b0};
+  else
+    train_history <= train_history[15:8] & train_history[7:0]; 
+end
+
+assign train_history[23:16] = {train_taken[22:20],1'b0, train_taken[21:19]};
+assign train_history[19:12] = {train_taken[18:16], 1'b0, train_taken[15:13]};
+assign train_history[15:8] = {train_taken[14:12],1'b0, train_taken[11:9]};
+assign train_history[11:4] = {train_taken[10:8],1'b0, train_taken[7:5]};
+assign train_history[7:0] = {train_taken[6:4], 1'b0, train_taken[3:1]};
+assign train_history[31:28] = train_taken[2:0];
+
+endmodule

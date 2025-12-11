@@ -1,0 +1,9 @@
+ ```verilog
+assign out_assign = a & b;
+
+always @* begin
+    out_alwaysblock = a & b;
+end
+
+endmodule
+```

@@ -1,0 +1,9 @@
+```verilog
+assign Y1 = (y[4] & ~w) | (y[2] & w);
+
+always @(*) begin
+    Y3 = (y[0] & ~w) | (y[3] & w);
+end
+
+endmodule
+```

@@ -1,0 +1,36 @@
+assign start = (data == 4'b1101) && (!start);
+reg [3:0] delay;
+reg counting = 0;
+reg done = 0;
+
+always @(posedge clk) begin
+    if (start)
+        for (int i = 3; i >= 0; i--)
+            delay[i] <= data[4 + i];
+end
+
+if (~start)
+    count <= 4'b1111;
+else
+    count <= delay;
+
+assign acked = ack;
+assign done_out = done;
+always @(posedge done) begin
+    counting <= 1;
+end : COUNTING
+always #((delay[3] * 1000) + 1 - counting) @(posedge clk) begin
+    if (start)
+        counting <= delay[3] * 1000;
+    else if (counting >= delay[3] * 1000 && counting < (delay[3] + 1) * 1000)
+        done <= 1;
+end : UPDATE_COUNT
+
+assign ack = acked;
+
+always @(posedge done) begin
+    if (!done)
+        start <= 1;
+end : RESET
+
+assign reset_out = reset;

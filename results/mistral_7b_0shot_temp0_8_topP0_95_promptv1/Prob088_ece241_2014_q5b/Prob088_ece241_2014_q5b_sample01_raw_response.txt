@@ -1,0 +1,25 @@
+ Here is the Verilog module body for the 2's complementer Mealy machine as per your description:
+
+```verilog
+reg state = 0;
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 0;
+    end else if (state == 1'b0 && x == 1'b1) begin
+        state <= 1'b1;
+    end else if (state == 1'b1 && x == 1'b0) begin
+        state <= 1'b1;
+    end else if (state == 1'b1 && x == 1'b1) begin
+        state <= 1'b0;
+    end
+end
+assign z = state == 1'b1;
+endmodule
+```
+
+Verification Checklist:
+[ ] Code ends with `endmodule` (checked)
+[ ] All wire outputs use `assign` keyword (checked, there is only one wire output and it is using assign)
+[ ] All reg outputs are assigned in always blocks (checked)
+[ ] Only declared signals are used (checked)
+[ ] Blocking/non-blocking assignments are correct (checked)

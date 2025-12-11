@@ -1,0 +1,7 @@
+Problem: Prob095_review2015_fsmshift
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob095_review2015_fsmshift/Prob095_review2015_fsmshift_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: shift_ena depends on itself in assign statement

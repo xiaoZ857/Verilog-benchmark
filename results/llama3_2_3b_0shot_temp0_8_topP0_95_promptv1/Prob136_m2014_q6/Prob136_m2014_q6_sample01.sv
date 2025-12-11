@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+assign z = ~w;
+assign z <= ~w; // NOT using always block because z is already declared as wire
+
+always @(posedge clk) begin
+    if (reset)
+        z <= 1'b0;
+    else if(w == 1'b0)
+        z <= 1'b1;
+    else
+        z <= 1'b0;
+endmodule

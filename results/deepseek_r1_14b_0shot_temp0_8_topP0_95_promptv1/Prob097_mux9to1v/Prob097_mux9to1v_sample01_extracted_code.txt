@@ -1,0 +1,16 @@
+always @(sel) begin
+    case (sel)
+        0: out = a;
+        1: out = b;
+        2: out = c;
+        3: out = d;
+        4: out = e;
+        5: out = f;
+        6: out = g;
+        7: out = h;
+        8: out = i;
+        default: out = 15'hFFFF; // All bits set to '1' for unused cases
+    endcase
+end
+
+endmodule

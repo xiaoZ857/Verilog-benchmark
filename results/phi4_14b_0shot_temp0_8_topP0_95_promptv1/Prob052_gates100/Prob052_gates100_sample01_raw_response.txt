@@ -1,0 +1,13 @@
+```verilog
+assign out_and = &in;
+assign out_or = |in;
+
+reg xor_tmp;
+always @(*) begin
+    xor_tmp = ^in;
+end
+
+assign out_xor = xor_tmp;
+
+endmodule
+```

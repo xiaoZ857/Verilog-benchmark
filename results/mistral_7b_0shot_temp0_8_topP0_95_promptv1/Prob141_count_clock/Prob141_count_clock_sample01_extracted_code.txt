@@ -1,0 +1,47 @@
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        pm <= 1'b0;
+        hh <= 8'b00_0000;
+        mm <= 8'b00_0000;
+        ss <= 8'b00_0000;
+    end else if (ena) begin
+        if (pm) begin
+            // PM counter
+            if (hh == 12'b1111_1111) begin
+                hh <= 8'b00_0000;
+            end else begin
+                hh <= hh + 1;
+            end
+        end else begin
+            // AM counter
+            if (hh == 12'b0000_0000) begin
+                hh <= 8'b12_0000;
+            end else begin
+                hh <= hh + 1;
+            end
+        end
+
+        // Update minutes and seconds
+        if (hh[7]) begin
+            if (mm == 63'b1111_1111) begin
+                mm <= 8'b00_0000;
+            end else begin
+                mm <= mm + 1;
+            end
+        end
+
+        if (mm[7]) begin
+            ss <= ss + 1;
+            if (ss == 64'b1111_1111) begin
+                ss <= 8'b00_0000;
+            end
+        end
+    end
+end
+
+always @* begin
+    pm <= (hh[7]) ^ (mm[7]); // PM if hours and minutes contain the decimal point
+end
+
+assign pm_bar = !pm; // Invert PM output for easier visibility

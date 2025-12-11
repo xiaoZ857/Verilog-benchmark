@@ -1,0 +1,10 @@
+
+module TopModule (
+  input [2:0] a,
+  output reg [15:0] q
+);
+assign q = a[1] * 16#1232 + (a[0] == 1'b1) ? 16#aae0 : 16#a;
+ 
+always @(*) begin
+    q <= (a[2] == 1'b1) ? 16#27d4 : (a[1] == 1'b1 && a[0] != 1'b1) ? 16#5a0e : (a[2] != 1'b1 && a[1] == 1'b1) ? 16#2066 : (a[1] != 1'b1 && a[0] == 1'b1) ? 16#c526 : 16#64ce;
+endmodule

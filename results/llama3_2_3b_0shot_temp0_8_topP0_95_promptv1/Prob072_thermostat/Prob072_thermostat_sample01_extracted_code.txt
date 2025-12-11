@@ -1,0 +1,10 @@
+assign heater = !mode ? (fan_on || to_cold) : !(fan_on && too_cold);
+assign aircon = !mode & to_hot;
+assign fan = mode;
+
+always @(posedge clk)
+begin
+    heater <= !mode ? (fan_on || to_cold) : !(fan_on && to_cold);
+    aircon <= !mode & to_hot;
+    fan <= mode;
+end

@@ -1,0 +1,47 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+
+reg current_state;
+reg next_state;
+parameter LEFT = 1'b0;
+parameter RIGHT = 1'b1;
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        current_state <= LEFT;
+    end else begin
+        current_state <= next_state;
+    end
+end
+
+always @(*) begin
+    case (current_state)
+        LEFT: begin
+            if (bump_left || bump_right) begin
+                next_state = RIGHT;
+            end else begin
+                next_state = LEFT;
+            end
+        end
+        RIGHT: begin
+            if (bump_left || bump_right) begin
+                next_state = LEFT;
+            end else begin
+                next_state = RIGHT;
+            end
+        end
+        default: next_state = LEFT;
+    endcase
+end
+
+assign walk_left = (current_state == LEFT);
+assign walk_right = (current_state == RIGHT);
+
+endmodule

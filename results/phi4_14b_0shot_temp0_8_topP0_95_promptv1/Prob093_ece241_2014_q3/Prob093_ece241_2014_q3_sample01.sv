@@ -1,0 +1,35 @@
+
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+always @(*) begin
+    mux_in[0] = 1'b0;
+    mux_in[1] = 1'b0;
+    mux_in[2] = 1'b0;
+    mux_in[3] = c | d;
+
+    if (c == 1'b1 && d == 1'b0)
+        mux_in[0] = 1'b1;
+    
+    if (c == 1'b1 && d == 1'b1)
+        begin
+            mux_in[2] = 1'b1;
+            mux_in[3] = 1'b1;
+        end
+    
+    if (c == 1'b0 && d == 1'b1)
+        mux_in[0] = 1'b1;
+    
+    if (c == 1'b1 && d == 1'b1) 
+        begin
+            mux_in[2] = 1'b1;
+            mux_in[3] = 1'b1;
+        end
+
+    if (c == 1'b0 && d == 1'b0)
+        mux_in[3] = 1'b1;
+
+end
+endmodule

@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+reg [31:0] in_prev;
+
+always @(posedge clk) begin
+    if (reset) begin
+        out <= 32'b0;
+        in_prev <= in;
+    end else begin
+        // Detect falling edges: bit was 1, now it's 0
+        // Use OR to maintain previously captured bits
+        out <= out | (in_prev & ~in);
+        in_prev <= in;
+    end
+end
+endmodule

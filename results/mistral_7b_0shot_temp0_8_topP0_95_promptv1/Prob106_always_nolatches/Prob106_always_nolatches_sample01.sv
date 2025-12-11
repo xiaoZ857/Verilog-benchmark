@@ -1,0 +1,26 @@
+
+module TopModule (
+  input [15:0] scancode,
+  output reg left,
+  output reg down,
+  output reg right,
+  output reg up
+);
+ ```verilog
+always @(posedge clk) begin
+    case(scancode)
+        16'he06b : left <= 1'b1;
+        16'he072 : down <= 1'b1;
+        16'he074 : right <= 1'b1;
+        16'he075 : up <= 1'b1;
+        default   : left <= 1'b0, down <= 1'b0, right <= 1'b0, up <= 1'b0;
+    endcase
+end
+
+assign left_out = left;
+assign down_out = down;
+assign right_out = right;
+assign up_out = up;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

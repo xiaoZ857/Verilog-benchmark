@@ -1,0 +1,13 @@
+ ```verilog
+always @(posedge clk) begin
+    zero = 1'b0;
+end
+endmodule
+```
+
+Verification checklist:
+[ ] Code ends with `endmodule`
+[x] All wire outputs use assign keyword (not applicable as output is declared as reg)
+[x] All reg outputs are assigned in always blocks (output is assigned in the always block)
+[ ] Only declared signals are used (only clk and zero are defined in ports)
+[ ] Blocking/non-blocking assignments are correct (using blocking assignment in always block for sequential logic)

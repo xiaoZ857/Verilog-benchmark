@@ -1,0 +1,20 @@
+always @(posedge clk) begin
+    if (in[0])
+        pos <= 3'b1;
+    else if (in[1])
+        pos <= 3'b2;
+    else if (in[2])
+        pos <= 3'b4;
+    else if (in[3])
+        pos <= 3'b8;
+    else if (in[4])
+        pos <= 3'b16;
+    else if (in[5])
+        pos <= 3'b32;
+    else if (in[6])
+        pos <= 3'b64;
+    else if (in[7])
+        pos <= 3'b128;
+    else
+        pos <= 3'b0;
+end

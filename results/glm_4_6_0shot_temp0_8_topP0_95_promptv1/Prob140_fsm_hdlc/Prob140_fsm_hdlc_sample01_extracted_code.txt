@@ -1,0 +1,45 @@
+
+  // State encoding
+  reg [3:0] state, next_state;
+  
+  // State definitions
+  localparam IDLE   = 4'd0;
+  localparam S0     = 4'd1;  // saw 0
+  localparam S1     = 4'd2;  // saw 01
+  localparam S2     = 4'd3;  // saw 011
+  localparam S3     = 4'd4;  // saw 0111
+  localparam S4     = 4'd5;  // saw 01111
+  localparam S5     = 4'd6;  // saw 011111
+  localparam S6     = 4'd7;  // saw 0111111
+  localparam DISC   = 4'd8;  // output discard
+  localparam FLAG   = 4'd9;  // output flag
+  localparam ERR    = 4'd10; // output error
+  
+  // Output registers (Moore machine)
+  reg disc_reg, flag_reg, err_reg;
+  
+  // State transition logic
+  always @(*) begin
+    next_state = state;
+    
+    case (state)
+      IDLE: begin
+        if (in == 1'b0)
+          next_state = S0;
+        else
+          next_state = IDLE;
+      end
+      
+      S0: begin  // saw 0
+        if (in == 1'b1)
+          next_state = S1;
+        else
+          next_state = S0;
+      end
+      
+      S1: begin  // saw 01
+        if (in == 1'b1)
+          next_state = S2;
+        else
+          next_state = S0;
+     

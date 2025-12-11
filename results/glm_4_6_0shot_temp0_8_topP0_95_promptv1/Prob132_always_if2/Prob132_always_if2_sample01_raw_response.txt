@@ -1,0 +1,10 @@
+
+always @(*) begin
+    shut_off_computer = cpu_overheated;
+    
+    if (~arrived)
+        keep_driving = ~gas_tank_empty;
+    else
+        keep_driving = 1'b0;
+end
+endmodule

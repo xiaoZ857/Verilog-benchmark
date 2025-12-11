@@ -1,0 +1,21 @@
+ ```verilog
+reg [1:0] aOrBO; // Output of OR and AND gates
+
+A aInst1 (.x(x), .y(y), .out(aOrBO[0]));
+A aInst2 (.x(aOrBO[0]), .y(aOrBO[1]), .out(!(aOrBO[0])));
+B bInst1 (.x(x), .y(y), .out(aOrBO[1]));
+B bInst2 (!aOrBO[0], aOrBO[1], z); // XOR gate for final output
+
+always @(posedge clk) begin
+    if (reset) begin
+        aOrBO[0] <= 2'b00;
+        aOrBO[1] <= 1'b0;
+        z <= 1'b0;
+    end else begin
+        // Combination logic for A and B modules
+        aInst1.out = x ^ y & x;
+        aInst2.out = ~aInst1.out;
+        bInst1.out = aInst1.out || bInst1.out;
+    end
+end
+```

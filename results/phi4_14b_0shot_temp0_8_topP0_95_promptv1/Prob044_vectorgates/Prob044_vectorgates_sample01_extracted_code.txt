@@ -1,0 +1,9 @@
+assign out_or_bitwise = a | b;
+
+always @(*) begin
+    out_or_logical = (a != 3'b000) | (b != 3'b000);
+end
+
+assign out_not[5:3] = ~b;
+assign out_not[2:0] = ~a;
+endmodule

@@ -1,0 +1,11 @@
+assign Q = w;
+assign Q[0] = R;
+
+always @(*) begin
+    if (L)
+        Q[0] <= 1'b0;
+    else
+        Q[0] <= w;
+end 
+
+endmodule

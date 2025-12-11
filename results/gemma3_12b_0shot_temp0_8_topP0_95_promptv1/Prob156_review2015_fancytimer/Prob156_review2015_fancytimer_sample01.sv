@@ -1,0 +1,63 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+logic [4:0] state;
+logic [3:0] delay;
+logic [4:0] shift_reg;
+logic start;
+logic [3:0] remaining_time;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 0;
+    shift_reg <= 0;
+    delay <= 0;
+    remaining_time <= 0;
+    counting <= 0;
+    done <= 0;
+  end else begin
+    if (state == 0) begin
+      if (data == 1) begin
+        shift_reg <= {shift_reg[3:0], 1};
+        if (shift_reg == 5'b1101) begin
+          state <= 1;
+          remaining_time <= 0;
+        end
+      end else begin
+        shift_reg <= {shift_reg[3:0], 0};
+      end
+    end else if (state == 1) begin
+      if (remaining_time == 0) begin
+        delay = shift_reg[3:0];
+        remaining_time = delay;
+        state <= 2;
+      end else begin
+        state <= 2;
+      end
+    end else if (state == 2) begin
+      if (remaining_time > 0) begin
+        remaining_time <= remaining_time - 1;
+      end else begin
+        state <= 3;
+      end
+    end else if (state == 3) begin
+        counting <= 1;
+        done <= 1;
+        if (ack) begin
+            state <= 0;
+            counting <= 0;
+            done <= 0;
+        end
+    end
+  end
+end
+
+assign count = remaining_time;
+endmodule

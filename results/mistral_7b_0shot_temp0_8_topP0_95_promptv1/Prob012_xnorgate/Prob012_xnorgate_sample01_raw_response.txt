@@ -1,0 +1,11 @@
+ ```verilog
+assign out = ~(a ^ b);
+endmodule
+```
+
+Verification Checklist:
+[x] Code ends with `endmodule`
+[x] All wire outputs use `assign` keyword
+[x] All reg outputs are not used in this case (since it's a combinational circuit)
+[x] Only declared signals (a, b, out) are used
+[x] Blocking assignments are correct (no non-blocking assigned in the code)

@@ -1,0 +1,52 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [15:0] q
+);
+logic [3:0] enable_upper, enable_lower;
+
+always @(posedge clk) begin
+    if (!resetn) begin
+        q <= 16'b0;
+    end else begin
+        // Upper byte
+        enable_upper[0] = ~byteena[1] & d[15];
+        enable_upper[1] = ~byteena[1] & d[14];
+        enable_upper[2] = ~byteena[1] & d[13];
+        enable_upper[3] = ~byteena[1] & d[12];
+
+        // Lower byte
+        enable_lower[0] = ~byteena[0] & d[11];
+        enable_lower[1] = ~byteena[0] & d[10];
+        enable_lower[2] = ~byteena[0] & d[9];
+        enable_lower[3] = ~byteena[0] & d[8];
+
+        // Update registers based on byte enables
+        q[15:12] <= enable_upper;
+        q[11:8]  <= enable_lower;
+        q[7:0]   <= (byteena[0]) ? d[7:0] : q[7:0];
+    end
+end
+
+always @(posedge clk) begin
+    if (!resetn) begin
+        q <= 16'b0;
+    end else begin
+        // Upper byte
+        q[15]   <= enable_upper[0];
+        q[14]   <= enable_upper[1];
+        q[13]   <= enable_upper[2];
+        q[12]   <= enable_upper[3];
+
+        // Lower byte
+        q[11:8]  <= enable_lower;
+
+        // Update registers based on byte enables
+        q[7:0]   <= (byteena[0]) ? d[7:0] : q[7:0];
+    end
+end
+
+endmodule

@@ -1,0 +1,64 @@
+always @(posedge clk) begin
+    if (!resetn) begin
+        f <= 1'b0;
+        g <= 1'b0;
+        state <= A;
+        x_history <= 3'b000;
+        y_timer <= 2'b00;
+    end else begin
+        case (state)
+            A: begin
+                f <= 1'b1;
+                state <= B;
+                x_history <= 3'b000;
+                y_timer <= 2'b00;
+            end
+            B: begin
+                f <= 1'b0;
+                x_history <= {x_history[1:0], x};
+                if (x_history == 3'b101) begin
+                    g <= 1'b1;
+                    state <= C;
+                    y_timer <= 2'b10;
+                end
+            end
+            C: begin
+                if (y) begin
+                    state <= D;
+                    y_timer <= 2'b00;
+                end else if (y_timer > 2'b00) begin
+                    y_timer <= y_timer - 1'b1;
+                end else begin
+                    g <= 1'b0;
+                    state <= E;
+                end
+            end
+            D: begin
+                // g remains 1 permanently
+            end
+            E: begin
+                // g remains 0 permanently
+            end
+            default: begin
+                state <= A;
+                f <= 1'b0;
+                g <= 1'b0;
+                x_history <= 3'b000;
+                y_timer <= 2'b00;
+            end
+        endcase
+    end
+end
+
+// State encoding and internal register declarations
+localparam A = 3'b000,
+           B = 3'b001,
+           C = 3'b010,
+           D = 3'b011,
+           E = 3'b100;
+
+reg [2:0] state;
+reg [2:0] x_history; // shift register to store last 3 values of x
+reg [1:0] y_timer;   // counts down from 2 to 0 while waiting for y=1
+
+endmodule

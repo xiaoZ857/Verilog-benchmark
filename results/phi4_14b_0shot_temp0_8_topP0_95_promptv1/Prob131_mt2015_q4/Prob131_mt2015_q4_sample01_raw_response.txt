@@ -1,0 +1,22 @@
+```verilog
+wire a1_out;
+wire b1_out;
+wire a2_out;
+wire b2_out;
+
+// Submodules A and B instantiation
+A uut_A1 (.x(x), .y(y), .z(a1_out));
+B uut_B1 (.x(x), .y(y), .z(b1_out));
+A uut_A2 (.x(x), .y(y), .z(a2_out));
+B uut_B2 (.x(x), .y(y), .z(b2_out));
+
+// Combinational logic for top module
+assign or_out = a1_out | b1_out;
+assign and_out = a2_out & b2_out;
+
+always @(*) begin
+    z = or_out ^ and_out;
+end
+
+endmodule
+```

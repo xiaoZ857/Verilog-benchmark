@@ -1,0 +1,8 @@
+  reg [7:0] in_reg;
+
+  always @(posedge clk) begin
+    anyedge <= ^in ^ in_reg; // XOR to detect changes
+    in_reg <= in;
+  end
+
+endmodule

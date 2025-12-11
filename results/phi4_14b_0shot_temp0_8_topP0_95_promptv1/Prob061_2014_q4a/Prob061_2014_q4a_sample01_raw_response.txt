@@ -1,0 +1,9 @@
+```verilog
+always @(posedge clk) begin
+    if (L)
+        Q <= R;
+    else if (E)
+        Q <= {Q[n-2:0], w};
+endmodule
+```
+This implementation defines a single stage of the n-bit shift register, utilizing an `always` block triggered by the positive edge of `clk`. It employs non-blocking assignments (`<=`) for sequential logic. The multiplexer functionality is handled within this always block, using conditional statements to determine whether to load a value or to perform a shift operation based on the control signals `L` and `E`.

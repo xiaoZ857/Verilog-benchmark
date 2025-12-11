@@ -1,0 +1,10 @@
+ ```verilog
+assign one = 1'b1;
+endmodule
+```
+
+[ ] Code ends with `endmodule`
+[x] All wire outputs use `assign` keyword
+[x] All reg outputs are not present, no always blocks needed
+[x] Only declared signals (one) are used
+[x] Blocking/non-blocking assignments are correct

@@ -1,0 +1,17 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 1'b0;
+    end else begin
+        if (q == 10'b1010) begin
+            q <= 1'b0;
+        end else begin
+            q <= q + 1'b1;
+        end
+    end
+endmodule

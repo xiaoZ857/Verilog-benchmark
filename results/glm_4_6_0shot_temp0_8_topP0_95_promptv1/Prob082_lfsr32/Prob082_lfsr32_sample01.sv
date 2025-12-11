@@ -1,0 +1,24 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 32'h1;
+    end else begin
+      // Galois LFSR with taps at positions 32, 22, 2, 1 (0-based: 31, 21, 1, 0)
+      // Feedback bit is the current LSB (q[0])
+      q[31] <= q[0] ^ q[30];  // Tap at position 32
+      q[21] <= q[0] ^ q[20];  // Tap at position 22
+      q[1]  <= q[0] ^ q[0];   // Tap at position 2 (self-XOR, becomes 0)
+      q[0]  <= q[0] ^ q[0];   // Tap at position 1 (self-XOR, becomes 0)
+      
+      // Shift right for non-tap positions
+      q[30:22] <= q[31:23];
+      q[20:2]  <= q[21:3];
+    end
+  end
+endmodule

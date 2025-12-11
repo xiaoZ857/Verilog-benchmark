@@ -1,0 +1,63 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+always @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        // Resetting all counter values, history register, and prediction signals
+        repeat (128)
+            predict_pc[i] <= 7'b0;
+        predict_taken <= 1'b0;
+        repeat (7)
+            predict_history[j] <= 7'b0;
+    end
+
+    always @(posedge clk) begin
+        // Global branch history register update
+        if (predict_valid && !train_valid) begin
+            reg [6:0] temp_history;
+            temp_history = predict_history + 1 << predict_pc;
+            always @* begin
+                predict_history[7-1] <= temp_history[7];
+                for (int i = 7-2; i >= 0; i--)
+                    predict_history[i] <= temp_history[i+1];
+            end
+
+            // Prediction based on XOR of Global History and PC
+            assign predict_taken = (7'bxor(predict_pc, predict_history))[6];
+        end
+
+        always @(posedge clk) begin
+            if (train_valid) begin
+                reg [127:0] PHT;
+                // Recovering the affected counter and updating the history register in case of misprediction
+                if (train_mispredicted) begin
+                    always @* begin
+                        PHT[train_pc] <= PHT[train_pc] + train_taken << (7-1);
+                    end
+
+                    // Reset the branch history register to the state after the mispredicted branch completes execution
+                    repeat (7)
+                        predict_history[j] <= PHT[train_pc][6-j];
+                end
+
+                // Training the counter for the given PC with the provided taken and mispredicted values
+                always @* begin
+                    PHT[train_pc] <= PHT[train_pc] + train_taken << (7-1);
+                end
+            end
+        end
+    end
+endmodule

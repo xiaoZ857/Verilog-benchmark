@@ -1,0 +1,14 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+always @(posedge clk) begin
+    wire [7:0] prev_in;
+    prev_in <= in;
+    for (i=0; i<8; i++) begin
+        anyedge[i] <= (prev_in[i] != in[i]);
+    end
+end
+endmodule

@@ -1,0 +1,35 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+always @(posedge clk) begin
+  if (reset) begin
+    hh <= 8'b00000012;
+    mm <= 8'b00000000;
+    ss <= 8'b00000000;
+    pm <= 1'b0;
+  end else if (ena) begin
+    if (ss == 8'b00000111) begin
+      ss <= 8'b00000000;
+      if (mm == 8'b00001001) begin
+        mm <= 8'b00000000;
+        if (hh == 8'b00001010) begin
+          hh <= 8'b00000100;
+          pm <= ~pm;
+        end else begin
+          hh <= hh + 1;
+          if(hh == 8'b00001111)
+            hh <= 8'b00000001;
+        end
+      end else begin
+        mm <= mm + 1;
+      end
+    end
+  end
+endmodule

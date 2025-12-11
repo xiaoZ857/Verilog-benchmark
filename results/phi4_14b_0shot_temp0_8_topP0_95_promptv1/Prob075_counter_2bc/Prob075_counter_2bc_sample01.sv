@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+always @(posedge areset or posedge clk) begin
+    if (areset)
+        state <= 2'b01;
+    else if (train_valid) begin
+        if (state == 2'b11 && train_taken)
+            state <= 2'b11;
+        else if (state == 2'b00 && ~train_taken)
+            state <= 2'b00;
+        else begin
+            if (train_taken)
+                state <= state + 1;
+            else
+                state <= state - 1;
+        end
+    end
+end
+
+endmodule

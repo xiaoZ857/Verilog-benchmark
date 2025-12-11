@@ -1,0 +1,104 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+logic [4:0] state, next_state;
+logic [3:0] fall_count;
+
+always_ff @(posedge areset or posedge clk) begin
+    if (areset)
+        state <= 5'b00001; // Initial state: walk_left
+    else
+        state <= next_state;
+end
+
+always_ff @(posedge clk) begin
+    if (!ground && aaah == 1'b0)
+        fall_count <= fall_count + 4'd1;
+    else if (aaah == 1'b1)
+        fall_count <= 4'd0;
+end
+
+always_comb begin
+    // Defaults: remain in current state unless directed to change
+    next_state = state;
+
+    aaah = 1'b0; digging = 1'b0;
+    walk_left = 1'b0; walk_right = 1'b0;
+
+    case (state)
+        5'b00001, 5'b00011: begin // Walking left or digging while walking left
+            if (!ground) begin
+                next_state = 5'b00100; // Start falling
+            end else if (bump_right) begin
+                next_state = 5'b10000; // Switch to walk right
+            end else if (dig && !aaah) begin
+                next_state = 5'b00011; // Start digging
+            end
+        end
+
+        5'b00100: begin // Falling state
+            aaah = 1'b1;
+            if (ground) begin
+                if (fall_count > 4'd20) begin
+                    next_state = 5'b01000; // Splatter
+                end else begin
+                    next_state = 5'b00001; // Resume walk left
+                end
+            end
+        end
+
+        5'b10000, 5'b11000: begin // Walking right or digging while walking right
+            if (!ground) begin
+                next_state = 5'b01000; // Start falling
+            end else if (bump_left) begin
+                next_state = 5'b00001; // Switch to walk left
+            end else if (dig && !aaah) begin
+                next_state = 5'b11000; // Start digging
+            end
+        end
+
+        5'b01000: begin // Falling state, resume original direction
+            aaah = 1'b1;
+            if (ground) begin
+                if (fall_count > 4'd20) begin
+                    next_state = 5'b10000; // Splatter
+                end else begin
+                    next_state = state[3:0]; // Resume walking in the original direction
+                end
+            end
+        end
+
+        5'b00011, 5'b11000: begin // Digging states
+            digging = 1'b1;
+            if (!ground) begin
+                aaah = 1'b1; next_state = state[3:0]; // Start falling but resume walking in the original direction
+            end else if (bump_left || bump_right) begin
+                // Bumps have no effect while digging.
+            end 
+        end
+
+        5'b01000, 5'b10000: begin // Splatter states
+            walk_left = 1'b0; walk_right = 1'b0;
+            aaah = 1'b0; digging = 1'b0;
+        end
+    endcase
+
+    case (next_state)
+        5'b00001: begin walk_left = 1'b1; walk_right = 1'b0; end
+        5'b10000: begin walk_left = 1'b0; walk_right = 1'b1; end
+        default: begin walk_left = 1'b0; walk_right = 1'b0; end
+    endcase
+
+end
+
+endmodule

@@ -1,0 +1,77 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [3:1] s,
+  output reg fr3,
+  output reg fr2,
+  output reg fr1,
+  output reg dfr
+);
+assign 
+    if ((s[3]) && !((s[2]) && (s[1])))
+        fr3 = 0;
+    else if (!((s[1]) && (s[2]))
+            && (s[3])){
+        fr3=1'b1;
+        } else{
+        assign
+        if ((s[3])
+        || (s[2])
+         && !(s[1])
+       )
+           {fr3 = 0;}
+        else 
+          {
+            fr3 = 1'b0;
+            }
+
+   }
+assign 
+    if (!((s[1]) && (s[2]))
+            && (s[3]))
+        fr2=1'b1;
+    else
+    assign 
+      begin
+       if(!(s[1])
+       && s[2]
+       && !(s[3]
+              )
+           {fr2 = 0;}
+         else 
+          {
+           fr2 = 1'b1;
+          }
+
+      end
+
+      ;
+assign 
+     if (!((s[1]) && (s[2]))
+            && !(s[3])
+        ){
+
+    fr2=0;
+}
+else
+assign
+begin 
+     if (!(s[1])
+         && s[2]
+         && (s[3] )
+          ){
+           fr2 = 1'b1;}
+       else
+         {
+         fr2 = 1'b0;
+         }
+      end
+
+      ;
+assign 
+fr1=fr2 | fr3;
+
+assign dfr = (s[3]) ? 1'b0 : (s[2] && !(s[1])) ? 1'b1 : 1'b0;
+
+endmodule

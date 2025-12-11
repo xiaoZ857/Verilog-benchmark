@@ -1,0 +1,6 @@
+assign pos = $signed(in[2]);
+assign pos[1] = !in[2];
+
+assign pos[0] = in[1]; 
+
+endmodule

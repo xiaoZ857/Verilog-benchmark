@@ -1,0 +1,23 @@
+ Here is the module body code for Y1 and Y3 signals as per your request:
+
+```verilog
+assign Y1 = y[0]; // Y1 is directly assigned the A state
+
+always @(posedge w) begin
+    if (Y1 && !y[1] && y[2])
+        Y3 <= 1'b0; // Y3 becomes 0 when transitioning from A to B
+    else if (!Y1 && !y[1] && y[2])
+        Y3 <= 1'b1; // Y3 becomes 1 when transitioning from A to C
+    else if (Y1)
+        Y3 <= Y3; // No change for Y3 when staying in state A
+end
+```
+
+For Y3, since it is the output of an always block, it is declared as a reg. The above code checks the current state (A), the next state (B or C) and the present states (1 for B and 2 for C) of the one-hot encoded y signal to determine the transition.
+
+Now let's verify the output format:
+[ ] Code ends with `endmodule` (Not provided, as we only generated module body.)
+[ ] All wire outputs use `assign` keyword (Y1 is correctly assigned using assign.)
+[ ] All reg outputs are assigned in always blocks (Y3 is correctly assigned in an always block.)
+[ ] Only declared signals are used (We only use y and w which are provided in the module interface, as well as internal signal Y3.)
+[ ] Blocking/non-blocking assignments are correct (Correct blocking assignments for combinational logic in the always block.)

@@ -1,0 +1,17 @@
+ Here is the Verilog code for the given combinational circuit:
+
+```verilog
+always @* begin
+    if (a == b)
+        q = 1'b1;
+    else
+        q = 1'b0;
+end
+endmodule
+```
+
+Here is a brief explanation of the code:
+- The circuit compares two input signals 'a' and 'b'. If they are equal, output 'q' will be '1', otherwise '0'.
+- The always @* block represents combinational logic since there are no clock or event sensitive statements.
+- We use blocking assignments as the logic is combinational.
+- All declared signals (a, b and q) are used in this module.

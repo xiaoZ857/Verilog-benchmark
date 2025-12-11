@@ -1,0 +1,59 @@
+
+  reg [1:0] current_state, next_state;
+  
+  // State encoding
+  localparam STATE_LOW      = 2'b00;  // s = 000
+  localparam STATE_MID      = 2'b01;  // s = 100
+  localparam STATE_MID_HIGH = 2'b10;  // s = 110
+  localparam STATE_HIGH     = 2'b11;  // s = 111
+  
+  reg [1:0] prev_state;
+  
+  // State transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= STATE_LOW;
+      prev_state <= STATE_LOW;
+    end else begin
+      prev_state <= current_state;
+      current_state <= next_state;
+    end
+  end
+  
+  // Next state logic based on sensors
+  always @(*) begin
+    case (s)
+      3'b000: next_state = STATE_LOW;
+      3'b100: next_state = STATE_MID;
+      3'b110: next_state = STATE_MID_HIGH;
+      3'b111: next_state = STATE_HIGH;
+      default: next_state = STATE_LOW;
+    endcase
+  end
+  
+  // Output logic
+  always @(posedge clk) begin
+    if (reset) begin
+      fr1 <= 1'b1;
+      fr2 <= 1'b1;
+      fr3 <= 1'b1;
+      dfr <= 1'b0;
+    end else begin
+      case (current_state)
+        STATE_LOW: begin
+          fr1 <= 1'b1;
+          fr2 <= 1'b1;
+          fr3 <= 1'b1;
+          dfr <= 1'b0;
+        end
+        STATE_MID: begin
+          fr1 <= 1'b1;
+          fr2 <= 1'b1;
+          fr3 <= 1'b0;
+          dfr <= (next_state > current_state) ? 1'b1 : 1'b0;
+        end
+        STATE_MID_HIGH: begin
+          fr1 <= 1'b1;
+          fr2 <= 1'b0;
+          fr3 <= 1'b0;
+          dfr <= (next_state > current_state) ?

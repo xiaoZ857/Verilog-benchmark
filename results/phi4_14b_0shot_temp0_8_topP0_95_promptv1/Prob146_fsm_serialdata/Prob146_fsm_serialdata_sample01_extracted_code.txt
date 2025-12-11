@@ -1,0 +1,49 @@
+logic [2:0] state, next_state;
+logic [7:0] shift_reg;
+logic [3:0] bit_cnt;
+
+assign done = (state == 3'b101);
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= 3'd0;
+        bit_cnt <= 4'd0;
+        shift_reg <= 8'd0;
+    end else begin
+        state <= next_state;
+        if ((state == 3'b000 || state == 3'b001) && in == 1'b0) begin
+            bit_cnt <= 4'd0;
+            shift_reg <= 8'd0;
+        end
+        if (bit_cnt < 8) begin
+            shift_reg[bit_cnt] <= in;
+            bit_cnt <= bit_cnt + 1;
+        end
+    end
+end
+
+always_comb begin
+    next_state = state;
+    case(state)
+        3'b000: // Idle, looking for start bit
+            if (in == 1'b0) begin
+                next_state = 3'b001; // Start bit detected
+            end
+        3'b001: // In data bits
+            if (bit_cnt == 8) begin
+                next_state = 3'b010; // All data bits received
+            end
+        3'b010: // Looking for stop bit
+            if (in == 1'b1) begin
+                next_state = 3'b101; // Stop bit correct, byte valid
+            end else begin
+                next_state = 3'b000; // Invalid, return to idle
+            end
+        default:
+            next_state = 3'b000;
+    endcase
+end
+
+assign out_byte = (done) ? shift_reg : 8'd0;
+
+endmodule

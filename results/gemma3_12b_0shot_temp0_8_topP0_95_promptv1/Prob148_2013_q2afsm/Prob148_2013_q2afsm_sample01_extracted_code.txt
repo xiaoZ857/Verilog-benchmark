@@ -1,0 +1,49 @@
+logic [1:0] state;
+logic g1, g2, g3;
+
+always @(posedge clk) begin
+  if (!resetn) begin
+    state <= 2'b00;
+    g1 <= 1'b0;
+    g2 <= 1'b0;
+    g3 <= 1'b0;
+  end else begin
+    case (state)
+      2'b00: begin // A
+        if (r[1])
+          state <= 2'b01;
+        else if (r[2])
+          state <= 2'b10;
+        else if (r[3])
+          state <= 2'b11;
+        else
+          state <= 2'b00;
+      end
+      2'b01: begin // B
+        if (r[1])
+          state <= 2'b01;
+        else
+          state <= 2'b00;
+      end
+      2'b10: begin // C
+        if (r[2])
+          state <= 2'b10;
+        else
+          state <= 2'b00;
+      end
+      2'b11: begin // D
+        if (r[3])
+          state <= 2'b11;
+        else
+          state <= 2'b00;
+      end
+      default: state <= 2'b00;
+    endcase
+  end
+end
+
+assign g1 = (state == 2'b01);
+assign g2 = (state == 2'b10);
+assign g3 = (state == 2'b11);
+
+endmodule

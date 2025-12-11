@@ -1,0 +1,43 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    walk_left <= 1'b1;
+    walk_right <= 1'b0;
+    aaah <= 1'b0;
+  end else begin
+    if (ground) begin
+      if (bump_left) begin
+        walk_right <= 1'b1;
+        walk_left <= 1'b0;
+        aaah <= 1'b0;
+      end else if (bump_right) begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+      end else begin
+        walk_left <= walk_left;
+        walk_right <= walk_right;
+        aaah <= 1'b0;
+      end
+    end else begin
+      aaah <= 1'b1;
+      walk_left <= walk_left;
+      walk_right <= walk_right;
+    end
+  end
+end
+
+assign walk_left = walk_left;
+assign walk_right = walk_right;
+assign aaah = aaah;
+endmodule

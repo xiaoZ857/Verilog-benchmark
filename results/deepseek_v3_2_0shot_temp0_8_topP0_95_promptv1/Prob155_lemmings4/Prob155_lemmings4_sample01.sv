@@ -1,0 +1,93 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+    end else begin
+        // Default outputs (will be overridden by state transitions)
+        walk_left <= 1'b0;
+        walk_right <= 1'b0;
+        aaah <= 1'b0;
+        digging <= 1'b0;
+        
+        // State transitions based on current state and inputs
+        case ({walk_left, walk_right, aaah, digging})
+            // State: Walking Left
+            4'b1000: begin
+                if (~ground) begin
+                    // Start falling
+                    aaah <= 1'b1;
+                end else if (dig) begin
+                    // Start digging
+                    digging <= 1'b1;
+                end else if (bump_left) begin
+                    // Switch to walking right
+                    walk_right <= 1'b1;
+                end else begin
+                    // Continue walking left
+                    walk_left <= 1'b1;
+                end
+            end
+            // State: Walking Right
+            4'b0100: begin
+                if (~ground) begin
+                    // Start falling
+                    aaah <= 1'b1;
+                end else if (dig) begin
+                    // Start digging
+                    digging <= 1'b1;
+                end else if (bump_right) begin
+                    // Switch to walking left
+                    walk_left <= 1'b1;
+                end else begin
+                    // Continue walking right
+                    walk_right <= 1'b1;
+                end
+            end
+            // State: Falling (aaah)
+            4'b0010: begin
+                if (ground) begin
+                    // Hit ground, resume walking in original direction
+                    if (walk_left) begin
+                        walk_left <= 1'b1;
+                    end else begin
+                        walk_right <= 1'b1;
+                    end
+                end else begin
+                    // Continue falling
+                    aaah <= 1'b1;
+                end
+            end
+            // State: Digging
+            4'b0001: begin
+                if (~ground) begin
+                    // Ground disappears, start falling
+                    aaah <= 1'b1;
+                end else begin
+                    // Continue digging
+                    digging <= 1'b1;
+                end
+            end
+            default: begin
+                // Handle any unexpected state (should not happen)
+                walk_left <= 1'b1;
+            end
+        endcase
+    end
+end
+
+endmodule

@@ -1,0 +1,21 @@
+ Here's the Verilog code for the specified two-bit saturating counter:
+
+```verilog
+always @(posedge clk or negedge areset) begin
+    if (!areset)
+        state <= 2'b01;
+    else if (train_valid && train_taken)
+        state <= state + 1'b1;
+    else if (train_valid && !train_taken)
+        state <= state - 1'b1;
+end
+assign state_out = state[1:0];
+endmodule
+```
+
+Verification checklist:
+- Code ends with `endmodule`
+- Wire output `state_out` uses `assign` keyword
+- Reg output `state` is assigned in always block
+- Only declared signals are used (`clk`, `areset`, `train_valid`, `train_taken`, and `state`)
+- Blocking assignments are correct

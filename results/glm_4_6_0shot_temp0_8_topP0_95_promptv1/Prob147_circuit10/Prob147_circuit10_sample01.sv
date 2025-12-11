@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output q,
+  output state
+);
+
+  always @(posedge clk) begin
+    // Next state logic: state toggles when a != b, otherwise stays the same
+    if (state == 1'b0) begin
+      if (a != b) begin
+        state <= 1'b1;
+      end else begin
+        state <= 1'b0;
+      end
+    end else begin
+      if (a != b) begin
+        state <= 1'b0;
+      end else begin
+        state <= 1'b1;
+      end
+    end
+  end
+  
+  // Output q follows the state
+  assign q = state;
+endmodule

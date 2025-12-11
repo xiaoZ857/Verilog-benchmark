@@ -1,0 +1,40 @@
+integer i, j;
+
+always @(posedge clk) begin
+    if (load)
+        q <= data;
+    else begin
+        wire [3:0] neighbors;
+        
+        for (i = 0; i < 16; i++) begin
+            for (j = 0; j < 16; j++) begin
+                integer ni, nj;
+                
+                // Count the number of live neighbors
+                neighbors = 4'b0000;
+                
+                for (ni = -1; ni <= 1; ni++) begin
+                    for (nj = -1; nj <= 1; nj++) begin
+                        if (!(ni == 0 && nj == 0)) begin
+                            integer row, col;
+                            
+                            // Wrap around using modulo arithmetic to handle the toroidal grid
+                            row = (i + ni) % 16;
+                            col = (j + nj) % 16;
+
+                            neighbors += q[row*16 + col];
+                        end
+                    end
+                end
+                
+                // Apply game rules based on neighbor count
+                if ((neighbors == 3) || ((q[i*16 + j] == 1'b1) && (neighbors == 2)))
+                    q[i*16 + j] <= 1'b1;
+                else
+                    q[i*16 + j] <= 1'b0;
+            end
+        end
+    end
+end
+
+endmodule

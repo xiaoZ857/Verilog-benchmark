@@ -1,0 +1,10 @@
+always @(posedge clk) begin
+    if (reset)
+        q <= 4'b0; // reset the counter to 0
+    else
+        if (q == 4'b15) // if the current count is 15
+            q <= 4'b0;  // reset to 0 and start counting again
+        else
+            q <= q + 1; // increment the counter by 1
+end
+endmodule

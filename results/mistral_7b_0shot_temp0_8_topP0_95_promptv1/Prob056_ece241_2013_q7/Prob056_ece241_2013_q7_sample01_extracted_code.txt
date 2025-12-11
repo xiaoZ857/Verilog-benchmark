@@ -1,0 +1,14 @@
+always @(posedge clk) begin
+    if (reset)
+        Q <= 1'b0;
+    else if (j == 1'b0 && k == 1'b0)
+        Q <= Qold;
+    else if (j == 1'b0 && k == 1'b1)
+        Q <= 1'b0;
+    else if (j == 1'b1 && k == 1'b0)
+        Q <= 1'b1;
+    else // j == 1'b1 && k == 1'b1
+        Q <= ~Qold;
+end
+assign Q_out = Q; // Assigning output to wire for testing purposes if needed
+endmodule

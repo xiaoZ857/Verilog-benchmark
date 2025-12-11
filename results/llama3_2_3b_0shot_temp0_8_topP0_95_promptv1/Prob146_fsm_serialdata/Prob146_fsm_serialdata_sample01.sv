@@ -1,0 +1,28 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+assign out_byte = in[6:1]'s & in[8];
+
+always @(*) begin
+    if (done)
+        out_byte <= in[6:0];
+    else if ((in[0] == '0') && !(in[7] == '1'))
+        done <= 1;
+    else if (!(in[0] == '1')) && !(in[8] != '1')
+        done <= 0;
+end
+
+assign in[7] = !in[6];
+assign in[6] = clk & reset;
+
+always @(posedge clk) begin
+if (reset)
+    done <= 1'b0;
+end
+
+// VERILOG-EVAL: endmodule not found

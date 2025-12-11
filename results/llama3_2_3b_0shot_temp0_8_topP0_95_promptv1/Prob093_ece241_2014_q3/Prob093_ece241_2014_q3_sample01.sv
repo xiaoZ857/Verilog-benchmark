@@ -1,0 +1,28 @@
+
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+assign mux_in[3] = ab;
+assign mux_in[2] = a & ~b;
+assign mux_in[1] = a & b;
+assign mux_in[0] = cd;
+
+always @(posedge clk) begin
+    mux_in[0] <= c * ~d + d;
+    mux_in[1] <= cd;
+end
+
+always @(posedge clk) begin
+    mux_in[2] <= ~c * d + c;
+end
+
+assign ab = a & b;
+
+always @(posedge clk) begin
+    a <= c;
+    b <= d;
+end
+
+// VERILOG-EVAL: endmodule not found

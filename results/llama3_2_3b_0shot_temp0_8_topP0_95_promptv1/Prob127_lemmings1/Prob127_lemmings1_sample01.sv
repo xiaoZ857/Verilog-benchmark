@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+assign walk_left = !walk_right;
+assign walk_right = (bump_left | bump_right);
+always @(*) begin
+    if (!areset)
+        walk_left <= 1'b0;
+    else
+        if ((a & ~b) || (~a & b))
+            walk_left <= 1'b1;
+        else
+            walk_left <= a;
+endmodule

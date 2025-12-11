@@ -1,0 +1,16 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+assign out = $count_masked(in[7:0]);
+
+always @(posedge clk) begin
+    assign out[7:1] = $count_masked(in[8:0]);
+end
+
+always @(posedge clk) begin
+    assign out[0] = $count_masked(in[16:8]);
+end
+
+// VERILOG-EVAL: endmodule not found

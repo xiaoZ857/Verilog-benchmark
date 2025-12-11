@@ -1,0 +1,8 @@
+assign q = $signed(8'b000_00000);
+always @(posedge clk) begin
+    if (reset)
+        q <= 8'b000_00000;
+    else if ((clk == 1'b1) & (q[2:0] < 6'b111))
+        q[4:0] <= q[5:0]+1;
+    end 
+endmodule

@@ -1,0 +1,64 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+always @(posedge clk) begin
+    if (reset) begin
+        shift_ena <= 1'b0;
+        counting <= 1'b0;
+        done <= 1'b0;
+        state <= S_IDLE;
+        pattern_reg <= 4'b0;
+        shift_count <= 2'b0;
+    end else begin
+        case (state)
+            S_IDLE: begin
+                shift_ena <= 1'b0;
+                counting <= 1'b0;
+                done <= 1'b0;
+                pattern_reg <= {pattern_reg[2:0], data};
+                if (pattern_reg == 4'b1101) begin
+                    state <= S_SHIFT;
+                    shift_ena <= 1'b1;
+                    shift_count <= 2'b0;
+                end
+            end
+            S_SHIFT: begin
+                shift_ena <= 1'b1;
+                shift_count <= shift_count + 1;
+                if (shift_count == 2'b11) begin
+                    state <= S_COUNT;
+                    shift_ena <= 1'b0;
+                    counting <= 1'b1;
+                end
+            end
+            S_COUNT: begin
+                counting <= 1'b1;
+                if (done_counting) begin
+                    state <= S_DONE;
+                    counting <= 1'b0;
+                    done <= 1'b1;
+                end
+            end
+            S_DONE: begin
+                done <= 1'b1;
+                if (ack) begin
+                    state <= S_IDLE;
+                    done <= 1'b0;
+                end
+            end
+            default: begin
+                state <= S_IDLE;
+            end
+        endcase
+    end
+end
+
+endmodule

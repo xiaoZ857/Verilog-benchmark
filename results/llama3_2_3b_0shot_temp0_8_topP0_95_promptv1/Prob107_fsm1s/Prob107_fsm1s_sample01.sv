@@ -1,0 +1,19 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+assign out = $signed(in[1]);
+
+always @(posedge clk or reset) begin
+    if (reset) out <= 1'b0;
+    else
+        case ($unsigned(in))
+            0: out <= 1'b0;
+            1: out <= 1'b1;
+        endcase
+end
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,53 @@
+logic state_a, state_b;
+
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state_a <= 1'b0;
+    state_b <= 1'b0;
+  end else begin
+    case (state_a)
+      2'b00: begin
+        if (bump_left)
+          state_a <= 2'b01;
+        else if (bump_right)
+          state_a <= 2'b10;
+        else if (dig)
+          state_a <= 2'b11;
+        else
+          state_a <= 2'b00;
+      end
+      2'b01: begin
+        if (bump_left)
+          state_a <= 2'b10;
+        else if (bump_right)
+          state_a <= 2'b00;
+        else if (dig)
+          state_a <= 2'b11;
+        else
+          state_a <= 2'b01;
+      end
+      2'b10: begin
+        if (bump_left)
+          state_a <= 2'b00;
+        else if (bump_right)
+          state_a <= 2'b01;
+        else if (dig)
+          state_a <= 2'b11;
+        else
+          state_a <= 2'b10;
+      end
+      2'b11: begin
+        if (dig)
+          state_a <= 2'b00;
+        else
+          state_a <= 2'b00;
+      end
+    endcase
+  end
+end
+
+assign walk_left = state_a == 2'b11 ? 1 : (state_a == 2'b00 ? 1 : (state_a == 2'b10 ? 1 : 0));
+assign walk_right = state_a == 2'b11 ? 0 : (state_a == 2'b00 ? 0 : (state_a == 2'b10 ? 0 : 1));
+assign aaah = ground;
+assign digging = state_a == 2'b11 ? 1 : 0;
+endmodule

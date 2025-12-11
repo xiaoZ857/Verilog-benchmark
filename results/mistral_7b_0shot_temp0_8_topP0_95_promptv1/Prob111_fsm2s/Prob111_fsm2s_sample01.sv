@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input reset,
+  output out
+);
+ ```verilog
+reg internal state;
+assign out = state;
+
+always @(posedge clk) begin
+    if (reset)
+        state <= 0;
+    else if (j == 1 && k == 0)
+        state <= 0;
+    else if (j == 0 && k == 1)
+        state <= 1;
+end
+
+[ ] Code ends with `endmodule`
+[ ] All wire outputs use `assign` keyword (not applicable)
+[ ] All reg outputs are assigned in always blocks (checked)
+[ ] Only declared signals are used (checked)
+[ ] Blocking/non-blocking assignments are correct (checked)
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,5 @@
+
+always @(*) begin
+  out = (a ^ b) & (c ^ d) | (~a ^ b) & ~(c ^ d);
+end
+endmodule

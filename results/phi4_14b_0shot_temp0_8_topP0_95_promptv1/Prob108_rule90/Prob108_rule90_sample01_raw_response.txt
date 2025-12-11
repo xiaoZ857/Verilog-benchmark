@@ -1,0 +1,16 @@
+```verilog
+  always @(posedge clk) begin
+      if (load)
+          q <= data;
+      else begin
+          q[0] <= 1'b0; // Boundary condition: leftmost cell
+          q[511] <= 1'b0; // Boundary condition: rightmost cell
+
+          integer i;
+          for (i = 1; i < 511; i = i + 1) begin
+              q[i] <= q[i-1] ^ q[i+1];
+          end
+      end
+  end
+endmodule
+```

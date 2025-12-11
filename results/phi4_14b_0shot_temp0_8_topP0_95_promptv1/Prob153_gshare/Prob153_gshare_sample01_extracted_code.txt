@@ -1,0 +1,33 @@
+  wire [6:0] index;
+  reg [127:0][1:0] pattern_table; // Two-bit saturating counters for the PHT
+  reg [6:0] global_history;       // Global branch history register
+
+  assign index = predict_pc ^ global_history;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      global_history <= 7'b0000000;
+      pattern_table <= '0;
+    end else if (train_valid) begin
+      // Update PHT on train_valid
+      case (pattern_table[train_pc ^ global_history])
+        2'b00: pattern_table[train_pc ^ global_history] <= (train_taken) ? 2'b01 : 2'b00;
+        2'b01: pattern_table[train_pc ^ global_history] <= (train_taken) ? 2'b11 : 2'b10;
+        2'b10: pattern_table[train_pc ^ global_history] <= (train_taken) ? 2'b11 : 2'b00;
+        2'b11: pattern_table[train_pc ^ global_history] <= (train_taken) ? 2'b11 : 2'b10;
+      endcase
+
+      // Update global history
+      if (train_mispredicted)
+        global_history <= train_history;
+
+    end else begin
+      // Normal update of global history on next positive clock edge when predicting
+      global_history <= {global_history[5:0], predict_valid & pattern_table[index][1]};
+    end
+  end
+
+  assign predict_taken = (pattern_table[index][1:0] > 2'b01);
+  assign predict_history = global_history;
+
+endmodule

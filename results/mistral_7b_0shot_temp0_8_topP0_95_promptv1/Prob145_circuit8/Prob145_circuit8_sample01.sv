@@ -1,0 +1,25 @@
+
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+ ```verilog
+always @(posedge clock) begin
+    if (a == 1 && !p && q == 0)
+        p <= 1;
+    else if (a == 0 && p && q == 1)
+        p <= 0;
+
+    if (a == 1 && !q)
+        q <= 1;
+    else if (a == 0 && q)
+        q <= 0;
+end
+
+assign p_out = p;
+assign q_out = q;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

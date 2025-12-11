@@ -1,0 +1,48 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+always @(posedge clk) begin
+    if (load) begin
+        q <= data;
+    end
+    else begin
+        for (int i = 0; i < 16; i = i + 1) begin
+            for (int j = 0; j < 16; j = j + 1) begin
+                // Compute neighbor count with wrap-around (toroidal grid)
+                // Indices for neighbors with wrap-around
+                integer up = (i == 0) ? 15 : (i - 1);
+                integer down = (i == 15) ? 0 : (i + 1);
+                integer left = (j == 0) ? 15 : (j - 1);
+                integer right = (j == 15) ? 0 : (j + 1);
+                
+                // Extract neighbor bits
+                logic nw, n, ne, w, e, sw, s, se;
+                nw = q[up*16 + left];
+                n  = q[up*16 + j];
+                ne = q[up*16 + right];
+                w  = q[i*16 + left];
+                e  = q[i*16 + right];
+                sw = q[down*16 + left];
+                s  = q[down*16 + j];
+                se = q[down*16 + right];
+                
+                // Count live neighbors
+                integer neighbor_count;
+                neighbor_count = nw + n + ne + w + e + sw + s + se;
+                
+                // Apply Game of Life rules
+                case (neighbor_count)
+                    0, 1: q[i*16 + j] <= 1'b0; // Rule (1)
+                    2: q[i*16 + j] <= q[i*16 + j]; // Rule (2) - keep state
+                    3: q[i*16 + j] <= 1'b1; // Rule (3)
+                    default: q[i*16 + j] <= 1'b0; // Rule (4) for 4+
+                endcase
+            end
+        end
+    end
+end
+endmodule

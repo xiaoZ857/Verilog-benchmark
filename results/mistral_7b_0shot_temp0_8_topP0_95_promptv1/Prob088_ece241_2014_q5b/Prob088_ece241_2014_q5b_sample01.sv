@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+reg state = 0;
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 0;
+    end else if (state == 1'b0 && x == 1'b1) begin
+        state <= 1'b1;
+    end else if (state == 1'b1 && x == 1'b0) begin
+        state <= 1'b1;
+    end else if (state == 1'b1 && x == 1'b1) begin
+        state <= 1'b0;
+    end
+end
+assign z = state == 1'b1;
+endmodule

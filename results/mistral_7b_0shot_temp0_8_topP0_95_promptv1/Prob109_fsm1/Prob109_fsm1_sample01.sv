@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+reg internal_state_A, internal_state_B; // Internal state variables
+always @(posedge clk or negedge areset) begin
+    if (areset) // Asynchronous reset
+        internal_state_A <= 0;
+        internal_state_B <= 1;
+    else // Synchronous clock-controlled transition
+        case(internal_state_A)
+            0: begin
+                if (in == internal_state_B)
+                    internal_state_A <= 1;
+            end,
+            1: begin
+                if (in == !internal_state_B)
+                    internal_state_A <= 0;
+            end
+        endcase
+end
+assign out = internal_state_B; // Wire output connected to the state B
+endmodule

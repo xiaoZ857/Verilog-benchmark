@@ -1,0 +1,13 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+assign disc = (in == 1'b1) && (!((~in & ~in) | ((in & in))) > 4);
+assign flag = (~in & ~in & ~in & ~in & ~in & in);
+assign err = (in == 1'b1) && ((in & in) >= 7);
+endmodule

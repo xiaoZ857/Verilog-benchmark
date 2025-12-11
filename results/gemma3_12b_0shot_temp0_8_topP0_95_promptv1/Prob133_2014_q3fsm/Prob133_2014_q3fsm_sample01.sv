@@ -1,0 +1,67 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+always @(posedge clk) begin
+  if (reset) begin
+    z <= 0;
+  end else begin
+    case (state)
+      'A': begin
+        if (s)
+          state <= 'B';
+        else
+          state <= 'A';
+      end
+      'B': begin
+        if (count == 0) begin
+            if (w)
+                count <= 1;
+            else
+                count <= 0;
+        end else if (count == 1) begin
+            if (w)
+                count <= 2;
+            else
+                count <= 0;
+        end else if (count == 2) begin
+            if (w)
+                count <= 3;
+            else
+                count <= 0;
+        end else if (count == 3) begin
+            if (w)
+                count <= 0;
+            else
+                count <= 0;
+        end
+        if (count == 2)
+            z <= 1;
+        else
+            z <= 0;
+    endcase
+  end
+end
+
+always @(posedge clk) begin
+  if (reset)
+    state <= 'A';
+  else
+    state <= next_state;
+end
+
+assign next_state = state;
+if (s == 1 && state == 'A')
+    assign next_state = 'B';
+else if (s == 0 && state == 'B')
+    assign next_state = 'B';
+else
+    assign next_state = state;
+
+reg state;
+reg [1:0] count;
+endmodule

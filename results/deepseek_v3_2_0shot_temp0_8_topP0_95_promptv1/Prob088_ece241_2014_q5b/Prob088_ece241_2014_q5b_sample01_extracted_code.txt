@@ -1,0 +1,32 @@
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        z <= 1'b0;
+    end else begin
+        case ({x})
+            1'b0: z <= 1'b0; // State A, x=0 -> z=0
+            1'b1: z <= 1'b1; // State A, x=1 -> z=1, transition to B
+        endcase
+    end
+end
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        // Reset to state A (one-hot: A=1, B=0)
+    end else begin
+        // State transitions based on current state and input x
+        case ({x})
+            1'b0: begin
+                // In state A, x=0 -> stay in A
+                // In state B, x=0 -> stay in B
+            end
+            1'b1: begin
+                // In state A, x=1 -> go to B
+                // In state B, x=1 -> stay in B
+            end
+        endcase
+    end
+end
+
+assign z = (state == 2'b01) ? (x ? 1'b0 : 1'b1) : (x ? 1'b1 : 1'b0); // Mealy output based on state and input
+
+endmodule

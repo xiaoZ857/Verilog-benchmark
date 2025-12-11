@@ -1,0 +1,4 @@
+assign out = a + b;
+
+if (~out)
+    result_is_zero <= 1'b1;

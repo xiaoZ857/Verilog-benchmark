@@ -1,0 +1,46 @@
+always @(posedge clk) begin
+  if (reset) begin
+    present_state <= 0;
+  end else begin
+    case (present_state)
+      0: begin
+        if (w)
+          next_state = 0;
+        else
+          next_state = 1;
+      end
+      1: begin
+        if (w)
+          next_state = 2;
+        else
+          next_state = 0;
+      end
+      2: begin
+        if (w)
+          next_state = 3;
+        else
+          next_state = 0;
+      end
+      3: begin
+        if (w)
+          next_state = 4;
+        else
+          next_state = 0;
+      end
+      4: begin
+        if (w)
+          next_state = 0;
+        else
+          next_state = 0;
+      end
+      default:
+        next_state = 0;
+    endcase
+    present_state <= next_state;
+  end
+end
+
+assign z = present_state == 4;
+
+logic present_state, next_state;
+endmodule

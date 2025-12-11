@@ -1,0 +1,9 @@
+ ```verilog
+assign out = ~(in1 | in2);
+endmodule
+```
+[ ] Code ends with `endmodule`
+[ ] All wire outputs use `assign` keyword
+[ ] All reg outputs are assigned in always blocks
+[ ] Only declared signals are used
+[ ] Blocking/non-blocking assignments are correct

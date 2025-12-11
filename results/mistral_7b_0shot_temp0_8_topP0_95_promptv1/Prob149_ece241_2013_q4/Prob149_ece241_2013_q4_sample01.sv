@@ -1,0 +1,63 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [3:1] s,
+  output reg fr3,
+  output reg fr2,
+  output reg fr1,
+  output reg dfr
+);
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        fr1 <= 0;
+        fr2 <= 0;
+        fr3 <= 0;
+        dfr <= 0;
+    end else begin
+        // Flow rate logic based on water level and sensor changes
+        always_comb begin
+            case(s[2])
+                0: begin
+                    if (s[1] && !prev_s[1])
+                        fr1 = fr1 + 1'b1;
+                    assign fr2 = 0;
+                end
+                1: begin
+                    if (!s[3] && s[2])
+                        fr1 = fr1 - 1'b1;
+                    if (s[1] && !prev_s[1])
+                        fr1 = fr1 + 1'b1;
+                    assign fr2 = fr1;
+                end
+                2: begin
+                    if (!s[3] && s[2] && !prev_s[2])
+                        fr1 = fr1 - 2'b10;
+                    else if (s[1] && s[2] && !prev_s[1])
+                        fr1 = fr1 + 1'b1;
+                    assign fr2 = fr1;
+                end
+                3: begin
+                    assign fr1 = 0;
+                    assign fr2 = 0;
+                end
+            endcase
+
+        // Determine dfr based on sensor change
+        always @(posedge clk or posedge reset) begin
+            if (s[2] != prev_s[2]) begin
+                if (s[2])
+                    dfr <= 1'b1;
+                else
+                    dfr <= 0;
+            end
+        end
+    end
+end
+
+// Internal signal for storing previous sensor state
+reg [3:1] prev_s = s;
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

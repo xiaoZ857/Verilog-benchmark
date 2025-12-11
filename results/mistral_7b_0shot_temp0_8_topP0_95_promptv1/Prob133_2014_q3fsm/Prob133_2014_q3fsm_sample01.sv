@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        z <= 1'b0;
+    else if (s) begin
+        if (!reg state) begin
+            state = 1'b1; // transition to state B
+        end
+    end
+    else if (state == 1'b1) begin
+        count = count + 1;
+        if (count < 4) begin
+            if (w != reg w_last) begin
+                w_last = w;
+                count = 0;
+            end
+        end
+        if (count == 3) begin
+            z <= 1'b1;
+            state = 1'b0; // reset the counter and stay in state B
+            count = 0;
+        end
+    end
+    else begin
+        count = 0;
+        state = 1'b0; // return to initial state A
+    end
+end
+
+assign z_out = z; // wire-type output for z uses assign statement
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

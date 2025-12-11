@@ -1,0 +1,16 @@
+ ```verilog
+always @(posedge clk or negedge areset) begin
+    if (!areset)
+        q <= 8'b0;
+    else
+        q <= d;
+end
+endmodule
+```
+
+Verification checklist:
+- Code ends with `endmodule`: [x]
+- All wire outputs use `assign` keyword: N/A (no wire outputs)
+- All reg outputs are assigned in always blocks: [x]
+- Only declared signals are used: [x] (only using clk, d, areset, q which are all module ports)
+- Blocking/non-blocking assignments are correct: [x] (using non-blocking for both positive edge and asynchronous reset conditions)

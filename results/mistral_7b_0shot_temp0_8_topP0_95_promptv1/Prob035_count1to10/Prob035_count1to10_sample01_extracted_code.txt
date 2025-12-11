@@ -1,0 +1,13 @@
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 4'b0001;
+    else if (q[3])
+        q <= 4'b0101;
+    else if (q[2])
+        q <= 4'b0111;
+    else if (q[1])
+        q <= 4'b1011;
+    else if (q[0])
+        q <= 4'b1111;
+end

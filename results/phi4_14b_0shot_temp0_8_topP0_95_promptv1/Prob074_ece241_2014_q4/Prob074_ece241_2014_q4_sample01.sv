@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+wire ff1_out;
+wire ff2_out;
+wire ff3_out;
+
+// Flip-Flops with D inputs derived from gates
+always @(posedge clk) begin
+    ff1 <= (x ^ ff1);
+    ff2 <= (x & ~ff2);
+    ff3 <= (x | ~ff3);
+end
+
+// Final output Z, connected to the NOR of flip-flop outputs
+assign z = ~(ff1_out | ff2_out | ff3_out);
+
+endmodule

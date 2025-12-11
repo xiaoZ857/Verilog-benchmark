@@ -1,0 +1,27 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= START;
+    else if (state == START && in[3])
+        state <= BYTE1;
+    else if (state == BYTE1 && in[3])
+        state <= BYTE2;
+    else if (state == BYTE2 && in[3])
+        state <= BYTE3;
+    else if (state == BYTE3)
+        done <= 1;
+    state <= START;
+end
+assign done_reg = done;
+
+This code defines the TopModule with an input clock, a 8-bit input vector `in`, a reset signal, and an output `done`. Inside the always block, the finite state machine (FSM) is implemented. The signals used in the FSM are START, BYTE1, BYTE2, and BYTE3. The state variable determines which stage of the protocol the FSM is currently at. When a new byte arrives, if it's the first byte of a message (in[3] equals 1), the state transitions to BYTE1. Each subsequent byte (also with in[3] equals 1) will cause the state to transition from BYTE1 to BYTE2 and then to BYTE3. Once at BYTE3, the output `done` is set to 1 and stays there until the next rising edge of the clock or reset signal occurs. The FSM then returns to START state, ready to accept new messages. Also, a continuous assignment statement assigns the value of done to a reg output named done_reg.
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

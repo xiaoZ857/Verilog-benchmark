@@ -1,0 +1,7 @@
+Problem: Prob067_countslow
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob067_countslow/Prob067_countslow_sample01.sv
+Status: SKIPPED (static analysis)
+==================================================
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: q depends on itself in assign statement

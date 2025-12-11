@@ -1,0 +1,4 @@
+always @(d ena) begin
+  q = d & ena;
+end
+endmodule

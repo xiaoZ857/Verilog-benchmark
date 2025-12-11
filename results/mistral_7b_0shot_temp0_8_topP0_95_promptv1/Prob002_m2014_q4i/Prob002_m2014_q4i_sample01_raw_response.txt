@@ -1,0 +1,7 @@
+ ```verilog
+always @* begin
+    out = 0;
+end
+endmodule
+```
+This code generates a module that always drives the 'out' output to 0. The `always @*` block represents combinational logic without any input, and it assigns a constant value of 0 to the output 'out'.

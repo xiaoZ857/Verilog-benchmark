@@ -1,0 +1,10 @@
+always @(*) begin
+    case ({c, d})
+        2'b00: out = {b, a} == 2'b01 ? 1'b1 : 1'b0;
+        2'b01: out = {b, a} == 2'b00 || {b, a} == 2'b11 ? 1'b0 : out;
+        2'b11: out = 1'b1;
+        2'b10: out = 1'b1;
+        default: out = out; // Do nothing for don't-care
+    endcase
+end
+endmodule

@@ -1,0 +1,23 @@
+
+module TopModule (
+  input [99:0] in,
+  output [98:0] out_both,
+  output [99:1] out_any,
+  output [99:0] out_different
+);
+ ```verilog
+assign out_both[98:0] = in[98+1:0] & in[98:0];
+assign out_any[99:1] = (in[99-1:1] | in[99]) >> 1;
+always @(posedge clk) begin
+    out_different[99:0] = ^(in[99:0] & in[98:0-1]);
+end
+
+Verification checklist:
+[ ] Code ends with `endmodule` (already provided by the question)
+[ ] All wire outputs use `assign` keyword (check rule 2, all are wire outputs)
+[ ] All reg outputs are assigned in always blocks (there are no reg outputs)
+[ ] Only declared signals are used (inputs and outputs are defined in module header)
+[ ] Blocking/non-blocking assignments are correct (using assign for wire outputs and always for out_different which is sequential logic, check rule 4)
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

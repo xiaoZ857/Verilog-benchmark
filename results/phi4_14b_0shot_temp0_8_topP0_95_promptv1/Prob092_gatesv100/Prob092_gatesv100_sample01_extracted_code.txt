@@ -1,0 +1,9 @@
+assign out_both = {in[98:0] & in[99:1], 1'b0};
+
+assign out_any = {in[99:1] | in[98:0], 1'b0};
+
+always @(*) begin
+    out_different = (in ^ {in[0], in[99:1]});
+end
+
+endmodule

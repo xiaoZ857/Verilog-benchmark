@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+ ```verilog
+reg [1:0] state; // internal signals: current state
+assign cur_input = in; // current input signal from the port (wire type)
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 2'b00; // reset to idle state
+    else if (state == 2'b10 && cur_input == 1'b1) // check for transition from idle to 1
+        state <= 2'b01; // transition to count 5 consecutive 1s
+    else if (state == 2'b01 && cur_input == 1'b1)
+        begin
+            cur_input <= cur_input + 1; // increment counter for counting 5 consecutive 1s
+            if (cur_input == 6'b111111) // check for 5 consecutive 1s
+                state <= 2'b10; // transition to discard state
+        end
+    else if (state == 2'b10 && cur_input == 1'b0) // check for transition from discard to idle
+        begin
+            state <= 2'b00; // reset counter and transition back to idle
+            cur_input <= 2'b00; // clear current input since it was a discarded bit
+        end
+    else if (cur_input == 1'b1 && state != 2'b11) // check for additional 1s while counting or in other states
+        begin
+            cur_input <= cur_input + 1; // increment counter for potential error
+            if (cur_input >= 8'b11111110) // check for error condition
+                state <= 2'b11; // transition to error state
+        end
+end
+assign disc = (state == 2'b01); // output when counting 5 consecutive 1s
+assign flag = (state == 2'b10); // output at frame boundaries
+assign err = (state == 2'b11); // output for error condition
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

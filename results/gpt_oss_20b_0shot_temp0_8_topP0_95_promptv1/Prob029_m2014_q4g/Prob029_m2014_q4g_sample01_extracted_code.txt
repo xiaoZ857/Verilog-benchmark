@@ -1,0 +1,7 @@
+logic temp;
+
+always @(*) begin
+    temp = ~(in1 ^ in2);
+    out  = temp ^ in3;
+end
+endmodule

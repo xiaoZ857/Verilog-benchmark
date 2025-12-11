@@ -1,0 +1,92 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+reg [2:0] state, next_state;
+reg [1:0] shift_counter;
+
+parameter IDLE = 3'd0;
+parameter GOT_1 = 3'd1;
+parameter GOT_11 = 3'd2;
+parameter GOT_110 = 3'd3;
+parameter SHIFT = 3'd4;
+parameter COUNT = 3'd5;
+parameter DONE_STATE = 3'd6;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= IDLE;
+    shift_counter <= 2'b00;
+  end else begin
+    state <= next_state;
+    if (state == SHIFT) begin
+      shift_counter <= shift_counter + 1;
+    end else begin
+      shift_counter <= 2'b00;
+    end
+  end
+end
+
+always @(*) begin
+  next_state = state;
+  shift_ena = 1'b0;
+  counting = 1'b0;
+  done = 1'b0;
+  
+  case (state)
+    IDLE: begin
+      if (data == 1'b1) begin
+        next_state = GOT_1;
+      end
+    end
+    
+    GOT_1: begin
+      if (data == 1'b1) begin
+        next_state = GOT_11;
+      end else if (data == 1'b0) begin
+        next_state = IDLE;
+      end
+    end
+    
+    GOT_11: begin
+      if (data == 1'b0) begin
+        next_state = GOT_110;
+      end else if (data == 1'b1) begin
+        next_state = GOT_11;
+      end
+    end
+    
+    GOT_110: begin
+      if (data == 1'b1) begin
+        next_state = SHIFT;
+      end else if (data == 1'b0) begin
+        next_state = IDLE;
+      end
+    end
+    
+    SHIFT: begin
+      shift_ena = 1'b1;
+      if (shift_counter == 2'b11) begin
+        next_state = COUNT;
+      end
+    end
+    
+    COUNT: begin
+      counting = 1'b1;
+      if (done_counting) begin
+        next_state = DONE_STATE;
+      end
+    end
+    
+    DONE_STATE: begin
+     
+
+// VERILOG-EVAL: endmodule not found

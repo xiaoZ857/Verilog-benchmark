@@ -1,0 +1,31 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+assign out = ($eq(in, 0) ? 0 : $eq(in, 1) ? 1 : 0);
+
+always @(posedge clk or negedge areset)
+begin
+    if (areset)
+        out <= 1'b0;
+    else
+        case(out)
+            0:     begin
+                if ($eq(in, 0)) 
+                    out <= 0;
+                else 
+                    out <= 1'b1;
+            end
+            1:     begin
+                if ($eq(in, 0))
+                    out <= 1'b1;
+                else 
+                    out <= 0;
+            end
+        endcase
+end
+
+endmodule

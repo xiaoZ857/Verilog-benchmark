@@ -1,0 +1,4 @@
+assign or = (x & x) ^ y;
+assign z = or | ((~a & ~b) | (~a & b));
+
+endmodule

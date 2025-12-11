@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+assign out = (in & ~a) | (~in & a);
+
+always @(*) begin
+    case(in)
+        1'b0: q <= b;
+        1'b1: q <= a;
+        default: q <= b;
+    endcase
+endmodule

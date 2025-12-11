@@ -1,0 +1,78 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+
+reg [3:0] state, next_state;
+reg [7:0] data_reg;
+reg done_reg;
+
+// State encoding
+parameter IDLE = 4'b0000;
+parameter START = 4'b0001;
+parameter DATA0 = 4'b0010;
+parameter DATA1 = 4'b0011;
+parameter DATA2 = 4'b0100;
+parameter DATA3 = 4'b0101;
+parameter DATA4 = 4'b0110;
+parameter DATA5 = 4'b0111;
+parameter DATA6 = 4'b1000;
+parameter DATA7 = 4'b1001;
+parameter STOP = 4'b1010;
+parameter WAIT_STOP = 4'b1011;
+
+// State transition logic
+always @(*) begin
+  next_state = state;
+  case (state)
+    IDLE: 
+      if (in == 1'b0)
+        next_state = START;
+    
+    START:
+      next_state = DATA0;
+    
+    DATA0: next_state = DATA1;
+    DATA1: next_state = DATA2;
+    DATA2: next_state = DATA3;
+    DATA3: next_state = DATA4;
+    DATA4: next_state = DATA5;
+    DATA5: next_state = DATA6;
+    DATA6: next_state = DATA7;
+    DATA7: next_state = STOP;
+    
+    STOP:
+      if (in == 1'b1)
+        next_state = IDLE;
+      else
+        next_state = WAIT_STOP;
+    
+    WAIT_STOP:
+      if (in == 1'b1)
+        next_state = IDLE;
+  endcase
+end
+
+// Output and data collection logic
+always @(posedge clk) begin
+  if (reset) begin
+    state <= IDLE;
+    data_reg <= 8'b0;
+    done_reg <= 1'b0;
+  end else begin
+    state <= next_state;
+    done_reg <= 1'b0;
+    
+    case (state)
+      START:
+        data_reg[0] <= in;
+      
+      DATA0:
+        data_reg[1] <= in;
+     
+
+// VERILOG-EVAL: endmodule not found

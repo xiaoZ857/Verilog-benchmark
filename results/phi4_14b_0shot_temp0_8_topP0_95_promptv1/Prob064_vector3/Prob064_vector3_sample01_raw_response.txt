@@ -1,0 +1,5 @@
+```verilog
+assign {w, x, y[7], y[6:0]} = {f, e, d, c, b, a};
+assign z = 8'b11;
+endmodule
+```

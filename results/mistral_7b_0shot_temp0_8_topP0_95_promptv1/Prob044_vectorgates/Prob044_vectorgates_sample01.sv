@@ -1,0 +1,26 @@
+
+module TopModule (
+  input [2:0] a,
+  input [2:0] b,
+  output [2:0] out_or_bitwise,
+  output out_or_logical,
+  output [5:0] out_not
+);
+ ```verilog
+always @(posedge clk) begin
+    assign out_or_bitwise = a | b;
+    reg [2:0] temp_or_logical;
+    temp_or_logical = a | b;
+    out_or_logical = temp_or_logical[2] || temp_or_logical[1] || temp_or_logical[0];
+    reg [5:0] temp_not;
+    temp_not[0] = ~a[0];
+    temp_not[1] = ~a[1];
+    temp_not[2] = ~a[2];
+    temp_not[3] = ~b[0];
+    temp_not[4] = ~b[1];
+    temp_not[5] = ~b[2];
+    out_not = [temp_not, temp_not[3:0]];
+end
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

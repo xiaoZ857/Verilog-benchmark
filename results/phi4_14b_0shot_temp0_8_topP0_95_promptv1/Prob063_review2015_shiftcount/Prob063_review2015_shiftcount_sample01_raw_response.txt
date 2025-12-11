@@ -1,0 +1,9 @@
+```verilog
+always @(posedge clk) begin
+    if (shift_ena)
+        q <= {data, q[3:1]};
+    else if (count_ena && |q)
+        q <= q - 1;
+end
+endmodule
+```

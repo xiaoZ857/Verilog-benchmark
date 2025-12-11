@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+ ```verilog
+reg [1:0] internal_data;
+always @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        internal_data <= 2'b00; // Reset the internal data to zero
+    end else begin
+        if (internal_data[0] == 1 && x == 1) internal_data[1] <= ~internal_data[1]; // Toggle MSB when LSB is 1 and input is 1
+        assign z = internal_data; // Assign output as internal data
+    end
+end
+assign z_inv = ~z; // Invert the output for testing purposes (optional)
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

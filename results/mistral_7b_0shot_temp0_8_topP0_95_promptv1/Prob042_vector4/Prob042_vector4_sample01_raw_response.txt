@@ -1,0 +1,5 @@
+ ```verilog
+always_comb begin
+    out = {8'b0, in[7], repeat(24, in[7]) , in[6:0]};
+end
+```

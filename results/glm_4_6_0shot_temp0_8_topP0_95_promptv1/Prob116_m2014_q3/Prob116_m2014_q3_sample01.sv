@@ -1,0 +1,15 @@
+
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+always @(*) begin
+  // Simplified logic from Karnaugh map
+  // f = x[3]x[4]'x[1] + x[3]x[4] + x[3]'x[4]x[1]'x[2] + x[3]x[4]'x[2]'
+  f = (x[3] & ~x[4] & x[1]) | 
+      (x[3] & x[4]) | 
+      (~x[3] & x[4] & ~x[1] & x[2]) | 
+      (x[3] & ~x[4] & ~x[2]);
+end
+endmodule

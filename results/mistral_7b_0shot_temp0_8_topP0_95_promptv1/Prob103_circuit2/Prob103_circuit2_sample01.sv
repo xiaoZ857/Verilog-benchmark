@@ -1,0 +1,27 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+ ```verilog
+always @* begin
+    if(a && !b)
+        q = c;
+    else if(b && !c)
+        q = d;
+    else
+        q = 1'b0;
+end
+
+Verification Checklist:
+[ ] Code ends with `endmodule` (already included in your prompt)
+[x] All wire outputs use `assign` keyword (not applicable as no wire output is used)
+[x] All reg outputs are assigned in always blocks (applicable as q is a reg output)
+[x] Only declared signals are used
+[x] Blocking/non-blocking assignments are correct
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

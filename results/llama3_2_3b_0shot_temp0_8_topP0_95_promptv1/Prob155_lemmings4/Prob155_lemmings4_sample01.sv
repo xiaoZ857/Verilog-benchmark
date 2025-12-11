@@ -1,0 +1,81 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+assign walk_left = !walk_right;
+assign walk_right = !walk_left;
+assign aaah = (ground == 0);
+
+always @(posedge clk or negedge areset)
+begin
+    if (areset)
+        walk_left <= 1'b0, walk_right <= 1'b0, aaah <= 1'b0, digging <= 1'b0;
+    else
+        if (ground == 0 && dig == 1)
+            digging <= 1'b1;
+        else if (ground == 0 || dig != 1) // not falling or digging
+            walking_state <= walk_left;
+        else if (digging[0] == 1 && walking_state == walk_right)
+            walking_state <= walk_left;
+
+        walking_state <= walk_left;
+end
+
+assign walk_left = walking_state;
+assign walk_right = walking_state;
+
+assign (dign[0]) = digging;
+assign (walk_left) = walking_state;
+assign (walk_right) = walking_state;
+assign (aaah) = ground == 0;
+
+always @(posedge clk or negedge areset)
+begin
+    if (areset)
+        walking_state <= 2'b00, aaah[0] <= 1'b0;
+    else
+        if (!falling || digging == 1)
+            splattered <= 1'b0;
+        else if (falling && !digging) // falling and not digging
+            splattered <= 1'b1;
+
+        if ((splattered && ground != 0) || digging[0] == 1)
+            falling_state <= walk_left;
+        else
+            falling_state <= walking_state;
+
+        falling_state <= walk_right;
+end
+
+assign (digging) = digging;
+assign (walk_left) = walking_state;
+assign (walk_right) = walking_state;
+assign (aaah) = ground == 0;
+
+always @(posedge clk or negedge areset)
+begin
+    if (areset)
+        splattered <= 1'b0, falling_state[0] <= 2'b00, aaah[0] <= 1'b0;
+    else if (splattered && ground == 0) // splatter and hit ground
+        walking_state <= walk_left;
+    else if (!splattered && walking_state != walk_right)
+        walking_state <= walk_right;
+
+    falling_state <= walk_left;
+end
+
+assign (digging) = digging;
+assign (walk_left) = walking_state;
+assign (walk_right) = walking_state;
+assign (aaah) = ground == 0;
+
+// VERILOG-EVAL: endmodule not found

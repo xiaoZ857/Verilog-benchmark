@@ -1,0 +1,35 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+assign g[0] = !r[2] && !r[1];
+assign g[1] = (r[1] && !(r[0] || r[2])) ? 1'b1 : r[0];
+assign g[2] = (r[2] && ~(r[0] && r[1])) ? 1'b1 : r[0];
+assign g[3] = !r[2]; 
+
+always @(posedge clk) begin
+    if (resetn)
+        state <= A;
+    else if (r[0])
+        state <= B;
+    else if (r[1])
+        state <= C;
+    else if (r[2])
+        state <= D;
+end
+
+always #({state}) begin
+    case(state)
+        A:  q <= "011"; break
+        B:  q <= "010"; break
+        C:  q <= "101"; break
+        D:  q <= "100"; break
+    endcase
+end 
+
+assign out = q;
+
+// VERILOG-EVAL: endmodule not found

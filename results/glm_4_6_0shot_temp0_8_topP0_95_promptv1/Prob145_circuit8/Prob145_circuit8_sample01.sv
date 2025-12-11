@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+
+  // Sequential circuit implementing a two-stage shift register
+  // Stage 1 (p) captures input 'a' on rising edge of clock
+  // Stage 2 (q) captures p's value on falling edge of clock
+  
+  always @(posedge clock) begin
+    p <= a;
+  end
+  
+  always @(negedge clock) begin
+    q <= p;
+  end
+
+endmodule

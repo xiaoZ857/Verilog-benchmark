@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+reg z, next_z;
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        z <= 1'b0;
+    else
+        z <= next_z;
+end
+
+assign next_z = x ^ z;
+
+endmodule

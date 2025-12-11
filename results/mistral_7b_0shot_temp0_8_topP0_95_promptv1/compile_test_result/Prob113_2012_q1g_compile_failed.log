@@ -2,4 +2,16 @@ Problem: Prob113_2012_q1g
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:6: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:6: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:11: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob113_2012_q1g/Prob113_2012_q1g_sample01.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:9: error: invalid module item.

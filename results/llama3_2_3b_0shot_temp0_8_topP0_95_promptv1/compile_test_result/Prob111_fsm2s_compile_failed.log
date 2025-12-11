@@ -2,4 +2,11 @@ Problem: Prob111_fsm2s
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:12: error: out is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob111_fsm2s/Prob111_fsm2s_sample01.sv:7:      : out is declared here as wire.
+1 error(s) during elaboration.

@@ -1,0 +1,27 @@
+Problem: Prob143_fsm_onehot
+Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: next_state[0] is incorrect.
+Hint: next_state[1] is incorrect.
+Hint: next_state[2] is   correct.
+Hint: next_state[3] is   correct.
+Hint: next_state[4] is   correct.
+Hint: next_state[5] is incorrect.
+Hint: next_state[6] is incorrect.
+Hint: next_state[7] is incorrect.
+Hint: next_state[8] is incorrect.
+Hint: next_state[9] is incorrect.
+Hint: Output 'next_state' has 146 mismatches. First mismatch occurred at time 25.
+Hint: Output 'out1' has 63 mismatches. First mismatch occurred at time 55.
+Hint: Output 'out2' has 7 mismatches. First mismatch occurred at time 105.
+Hint: Total mismatched samples is 157 out of 224 samples
+
+Simulation finished at 1121 ps
+Mismatches: 157 in 224 samples

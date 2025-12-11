@@ -2,4 +2,31 @@ Problem: Prob133_2014_q3fsm
 Code file: results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 19):
+
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:75: error: 'state' has already been declared in this scope.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:40:      : It was declared here as a variable.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:75: error: 'next_state' has already been declared in this scope.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:40:      : It was declared here as a variable.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:76: error: 'count' has already been declared in this scope.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:41:      : It was declared here as a variable.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:76: error: 'next_count' has already been declared in this scope.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:41:      : It was declared here as a variable.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:79: syntax error
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:81: Syntax in assignment statement l-value.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:84: syntax error
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:85: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:6: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:13: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:13: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:14: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:14: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:16: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:17: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:21: Syntax in assignment statement l-value.

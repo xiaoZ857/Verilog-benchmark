@@ -2,4 +2,33 @@ Problem: Prob018_mux256to1
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 16):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This lsb expression violates the rule: (sel)*('sd8)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This msb expression violates the rule: ((sel)*('sd8))+('sd7)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This lsb expression violates the rule: ((sel)*('sd8))+('sd1)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This msb expression violates the rule: ((sel)*('sd8))+('sd6)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This lsb expression violates the rule: (sel)*('sd8)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This msb expression violates the rule: ((sel)*('sd8))+('sd7)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This lsb expression violates the rule: ((sel)*('sd8))+('sd1)
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7: error: Part select expressions must be constant.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob018_mux256to1/Prob018_mux256to1_sample01.sv:7:      : This msb expression violates the rule: ((sel)*('sd8))+('sd6)
+16 error(s) during elaboration.

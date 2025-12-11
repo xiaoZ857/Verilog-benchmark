@@ -2,8 +2,8 @@
   "model_name": "mistral_7b",
   "total_problems": 156,
   "generated": 156,
-  "compiled": 0,
-  "passed": 0,
+  "compiled": 5,
+  "passed": 1,
   "failed_compilation": [
     "Prob001_zero",
     "Prob002_m2014_q4i",
@@ -19,7 +19,6 @@
     "Prob012_xnorgate",
     "Prob013_m2014_q4e",
     "Prob014_andgate",
-    "Prob015_vector1",
     "Prob016_m2014_q4j",
     "Prob017_mux2to1v",
     "Prob018_mux256to1",
@@ -40,7 +39,6 @@
     "Prob035_count1to10",
     "Prob037_review2015_count1k",
     "Prob038_count15",
-    "Prob039_always_if",
     "Prob040_count10",
     "Prob041_dff8r",
     "Prob042_vector4",
@@ -58,7 +56,6 @@
     "Prob054_edgedetect",
     "Prob055_conditional",
     "Prob056_ece241_2013_q7",
-    "Prob057_kmap2",
     "Prob058_alwaysblock2",
     "Prob059_wire4",
     "Prob060_m2014_q4k",
@@ -75,7 +72,6 @@
     "Prob072_thermostat",
     "Prob073_dff16e",
     "Prob074_ece241_2014_q4",
-    "Prob075_counter_2bc",
     "Prob076_always_case",
     "Prob077_wire_decl",
     "Prob078_dualedge",
@@ -88,7 +84,6 @@
     "Prob085_shift4",
     "Prob086_lfsr5",
     "Prob087_gates",
-    "Prob088_ece241_2014_q5b",
     "Prob089_ece241_2014_q5a",
     "Prob090_circuit1",
     "Prob092_gatesv100",
@@ -156,7 +151,12 @@
     "Prob155_lemmings4",
     "Prob156_review2015_fancytimer"
   ],
-  "failed_test": [],
+  "failed_test": [
+    "Prob039_always_if",
+    "Prob057_kmap2",
+    "Prob075_counter_2bc",
+    "Prob088_ece241_2014_q5b"
+  ],
   "skipped_static_analysis": [
     "Prob024_hadd",
     "Prob027_fadd",
@@ -165,6 +165,6 @@
     "Prob091_2012_q2b",
     "Prob099_m2014_q6c"
   ],
-  "compile_rate": 0.0,
-  "pass_rate": 0.0
+  "compile_rate": 3.205128205128205,
+  "pass_rate": 0.641025641025641
 }

@@ -2,4 +2,20 @@ Problem: Prob034_dff8
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 11):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:7: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:7: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:10: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:11: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:12: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:13: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:14: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:15: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob034_dff8/Prob034_dff8_sample01.sv:16: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob034_dff8_test.sv:11: error: invalid module item.

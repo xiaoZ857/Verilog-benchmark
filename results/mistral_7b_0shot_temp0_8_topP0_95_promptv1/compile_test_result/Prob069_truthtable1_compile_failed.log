@@ -2,4 +2,23 @@ Problem: Prob069_truthtable1
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:12: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:14: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:17: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:19: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:22: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:25: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:27: error: f is not a valid l-value in tb.top_module1.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob069_truthtable1/Prob069_truthtable1_sample01.sv:6:      : f is declared here as wire.
+7 error(s) during elaboration.

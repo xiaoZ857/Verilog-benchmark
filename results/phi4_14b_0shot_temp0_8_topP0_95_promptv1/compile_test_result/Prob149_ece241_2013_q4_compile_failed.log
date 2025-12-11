@@ -2,4 +2,14 @@ Problem: Prob149_ece241_2013_q4
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:35: error: Unable to bind wire/reg/memory `prev_s' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:35: error: Unable to elaborate condition expression.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:35: error: Unable to bind wire/reg/memory `prev_s' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:35: error: Unable to elaborate condition expression.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob149_ece241_2013_q4/Prob149_ece241_2013_q4_sample01.sv:52: error: Could not find variable ``prev_s'' in ``tb.top_module1''
+5 error(s) during elaboration.

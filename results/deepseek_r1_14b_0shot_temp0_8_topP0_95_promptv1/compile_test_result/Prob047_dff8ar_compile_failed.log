@@ -2,4 +2,10 @@ Problem: Prob047_dff8ar
 Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob047_dff8ar/Prob047_dff8ar_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob047_dff8ar/Prob047_dff8ar_sample01.sv:8: error: 'q' has already been declared in this scope.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob047_dff8ar/Prob047_dff8ar_sample01.sv:6:      : It was declared here as a variable.

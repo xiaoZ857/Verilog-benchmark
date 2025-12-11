@@ -2,4 +2,12 @@ Problem: Prob148_2013_q2afsm
 Code file: results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:14: error: g1 Unable to assign to unresolved wires.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:15: error: g2 Unable to assign to unresolved wires.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:16: error: g3 Unable to assign to unresolved wires.
+3 error(s) during elaboration.

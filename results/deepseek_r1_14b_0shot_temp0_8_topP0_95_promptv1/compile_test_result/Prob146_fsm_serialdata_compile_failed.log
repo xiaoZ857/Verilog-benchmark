@@ -2,4 +2,11 @@ Problem: Prob146_fsm_serialdata
 Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob146_fsm_serialdata/Prob146_fsm_serialdata_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:47: syntax error
+I give up.

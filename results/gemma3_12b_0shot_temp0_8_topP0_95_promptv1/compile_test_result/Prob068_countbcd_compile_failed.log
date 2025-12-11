@@ -2,4 +2,17 @@ Problem: Prob068_countbcd
 Code file: results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:8: sorry: part selects straddling the start of signal (ena['sd0]) are not currently supported.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:18: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd1] is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:19: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd2] is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:20: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:5:      : ena['sd3] is declared here as wire.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:17: warning: @* found no sensitivities so it will never trigger.
+4 error(s) during elaboration.

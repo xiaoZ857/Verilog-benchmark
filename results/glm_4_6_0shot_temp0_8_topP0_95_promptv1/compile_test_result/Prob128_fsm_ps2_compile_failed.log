@@ -2,4 +2,14 @@ Problem: Prob128_fsm_ps2
 Code file: results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:12: error: done is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:6:      : done is declared here as wire.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:14: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob128_fsm_ps2/Prob128_fsm_ps2_sample01.sv:14: error: Unable to elaborate this case expression.
+3 error(s) during elaboration.

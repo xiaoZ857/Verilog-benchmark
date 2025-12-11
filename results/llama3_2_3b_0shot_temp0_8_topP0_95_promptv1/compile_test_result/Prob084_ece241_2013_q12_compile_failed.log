@@ -2,4 +2,39 @@ Problem: Prob084_ece241_2013_q12
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 27):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd7]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd6]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd5]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd4]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd3]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd2]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd1]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: can not select part of scalar: A
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to bind wire/reg/memory `Q['sd0]' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:11: error: Unable to elaborate r-value: ((((((((A['sd7])*(Q['sd7]))+((A['sd6])*(Q['sd6])))+((A['sd5])*(Q['sd5])))+((A['sd4])*(Q['sd4])))+((A['sd3])*(Q['sd3])))+((A['sd2])*(Q['sd2])))+((A['sd1])*(Q['sd1])))+((A['sd0])*(Q['sd0]))
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:13: error: Net Q['sd7] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:14: error: Net Q['sd6] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:15: error: Net Q['sd5] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:16: error: Net Q['sd4] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:17: error: Net Q['sd3] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:18: error: Net Q['sd2] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:19: error: Net Q['sd1] is not defined in this context.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:20: error: Net Q['sd0] is not defined in this context.
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:27: error: Could not find variable ``Q[(i)+('sd1)]'' in ``tb.top_module1.$ivl_for_loop0''
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob084_ece241_2013_q12/Prob084_ece241_2013_q12_sample01.sv:32: error: Could not find variable ``Q[i]'' in ``tb.top_module1.$ivl_for_loop1''
+27 error(s) during elaboration.

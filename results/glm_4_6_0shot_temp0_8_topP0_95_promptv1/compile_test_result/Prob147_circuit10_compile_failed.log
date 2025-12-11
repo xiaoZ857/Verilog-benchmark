@@ -2,4 +2,18 @@ Problem: Prob147_circuit10
 Code file: results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:14: error: state is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:7:      : state is declared here as wire.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:16: error: state is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:7:      : state is declared here as wire.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:20: error: state is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:7:      : state is declared here as wire.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:22: error: state is not a valid l-value in tb.top_module1.
+results\glm_4_6_0shot_temp0_8_topP0_95_promptv1\Prob147_circuit10/Prob147_circuit10_sample01.sv:7:      : state is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:112: warning: output port state is coerced to inout.
+4 error(s) during elaboration.

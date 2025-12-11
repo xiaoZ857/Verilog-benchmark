@@ -1,0 +1,18 @@
+Problem: Prob155_lemmings4
+Code file: results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'walk_left' has 542 mismatches. First mismatch occurred at time 60.
+Hint: Output 'walk_right' has 354 mismatches. First mismatch occurred at time 40.
+Hint: Output 'aaah' has 885 mismatches. First mismatch occurred at time 5.
+Hint: Output 'digging' has 224 mismatches. First mismatch occurred at time 40.
+Hint: Total mismatched samples is 977 out of 1003 samples
+
+Simulation finished at 5016 ps
+Mismatches: 977 in 1003 samples

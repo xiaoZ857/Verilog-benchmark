@@ -2,4 +2,12 @@ Problem: Prob061_2014_q4a
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:11: error: can not select part of scalar: Q
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:15: error: can not select part of scalar: Q
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob061_2014_q4a/Prob061_2014_q4a_sample01.sv:17: error: can not select part of scalar: Q
+3 error(s) during elaboration.

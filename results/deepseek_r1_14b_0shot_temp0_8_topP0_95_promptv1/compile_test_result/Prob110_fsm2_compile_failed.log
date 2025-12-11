@@ -2,4 +2,15 @@ Problem: Prob110_fsm2
 Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv:30: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv:30: error: Unable to elaborate r-value: (current_state)?('sd1):('sd0)
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv:13: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv:13: error: Unable to elaborate this case expression.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob110_fsm2/Prob110_fsm2_sample01.sv:27: error: Could not find variable ``current_state'' in ``tb.top_module1''
+5 error(s) during elaboration.

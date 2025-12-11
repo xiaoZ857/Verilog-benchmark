@@ -2,4 +2,23 @@ Problem: Prob155_lemmings4
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 14):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:35: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:37: Syntax in assignment statement l-value.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:38: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:39: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:40: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:41: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:42: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:42: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:46: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:47: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:14: warning: macro verilog undefined (and assumed null) at this point.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv:16: error: invalid module item.

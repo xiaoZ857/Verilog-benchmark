@@ -2,4 +2,16 @@ Problem: Prob148_2013_q2afsm
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:47: error: g['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:6:      : g['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:48: error: g['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:6:      : g['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:49: error: g['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:6:      : g['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:46: warning: @* found no sensitivities so it will never trigger.
+3 error(s) during elaboration.

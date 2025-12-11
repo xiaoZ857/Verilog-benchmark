@@ -2,4 +2,11 @@ Problem: Prob028_m2014_q4a
 Code file: results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:7: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:7: error: Malformed event control expression.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob028_m2014_q4a/Prob028_m2014_q4a_sample01.sv:7: error: Invalid event control.

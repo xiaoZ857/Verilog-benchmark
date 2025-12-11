@@ -2,4 +2,12 @@ Problem: Prob131_mt2015_q4
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:7: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:7: error: syntax error in left side of continuous assignment.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:8: syntax error
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:8: error: syntax error in continuous assignment

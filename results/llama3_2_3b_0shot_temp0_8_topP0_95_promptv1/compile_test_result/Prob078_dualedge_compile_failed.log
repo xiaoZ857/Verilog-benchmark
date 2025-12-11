@@ -2,4 +2,11 @@ Problem: Prob078_dualedge
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:13: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:10: error: q Unable to assign to unresolved wires.
+2 error(s) during elaboration.

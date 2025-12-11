@@ -1,0 +1,16 @@
+Problem: Prob075_counter_2bc
+Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob075_counter_2bc/Prob075_counter_2bc_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset doesn't seem to be working.
+Hint: Output 'state' has 765 mismatches. First mismatch occurred at time 20.
+Hint: Total mismatched samples is 765 out of 1051 samples
+
+Simulation finished at 5256 ps
+Mismatches: 765 in 1051 samples

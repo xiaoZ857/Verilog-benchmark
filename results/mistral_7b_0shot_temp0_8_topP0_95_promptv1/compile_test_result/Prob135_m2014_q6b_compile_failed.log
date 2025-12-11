@@ -2,4 +2,50 @@ Problem: Prob135_m2014_q6b
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 37):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:7: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:30: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:31: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:7: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:10: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:11: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:12: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:17: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:18: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:19: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:20: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:20: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:21: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:22: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:22: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:23: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:23: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:24: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:24: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:25: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:25: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:26: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:30: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:30:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:31: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob135_m2014_q6b/Prob135_m2014_q6b_sample01.sv:31:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob135_m2014_q6b_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob135_m2014_q6b_test.sv:10: error: invalid module item.

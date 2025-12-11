@@ -1,0 +1,16 @@
+Problem: Prob073_dff16e
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob073_dff16e/Prob073_dff16e_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Your reset doesn't seem to be working.
+Hint: Output 'q' has 442 mismatches. First mismatch occurred at time 10.
+Hint: Total mismatched samples is 442 out of 443 samples
+
+Simulation finished at 2216 ps
+Mismatches: 442 in 443 samples

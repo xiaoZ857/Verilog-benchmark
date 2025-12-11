@@ -2,4 +2,26 @@ Problem: Prob030_popcount255
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 13):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:6: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:30: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:31: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:6: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:8: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:9: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:10: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:11: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:12: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:27: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:30: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:30:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:31: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:31:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob030_popcount255_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob030_popcount255_test.sv:11: error: invalid module item.

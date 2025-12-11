@@ -2,4 +2,61 @@ Problem: Prob155_lemmings4
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 24):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:52: warning: Numeric constant truncated to 4 bits.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:73: warning: Numeric constant truncated to 4 bits.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:35: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:35: error: digging is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:12:      : digging is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:36: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:36: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:50: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:71: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:82: error: digging is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:12:      : digging is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:84: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:82: error: digging is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:12:      : digging is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:84: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:91: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:91: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:92: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:92: error: digging is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:12:      : digging is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:91: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:91: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:92: error: aaah is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:11:      : aaah is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:92: error: digging is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:12:      : digging is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:97: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:97: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:98: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:98: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:99: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:99: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob155_lemmings4/Prob155_lemmings4_sample01.sv:31: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv:243: warning: output port aaah is coerced to inout.
+24 error(s) during elaboration.

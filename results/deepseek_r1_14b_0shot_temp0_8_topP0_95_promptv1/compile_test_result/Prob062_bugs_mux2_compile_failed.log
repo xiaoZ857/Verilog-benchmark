@@ -2,4 +2,11 @@ Problem: Prob062_bugs_mux2
 Code file: results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:8: syntax error
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:8: error: Malformed event control expression.
+results\deepseek_r1_14b_0shot_temp0_8_topP0_95_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:8: error: Invalid event control.

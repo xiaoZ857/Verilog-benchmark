@@ -2,4 +2,13 @@ Problem: Prob001_zero
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob001_zero/Prob001_zero_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob001_zero/Prob001_zero_sample01.sv:5: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob001_zero/Prob001_zero_sample01.sv:5: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob001_zero/Prob001_zero_sample01.sv:7: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob001_zero/Prob001_zero_sample01.sv:8: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob001_zero_test.sv:9: error: invalid module item.

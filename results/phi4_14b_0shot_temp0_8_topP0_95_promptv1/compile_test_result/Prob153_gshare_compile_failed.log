@@ -2,4 +2,14 @@ Problem: Prob153_gshare
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:46: error: A reference to a wire or reg (`index') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:46: error: Array index expressions must be constant here.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:46: error: Unable to elaborate r-value: (pattern_table[index]['sd1:'sd0])>(2'd1)
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:42: error: A reference to a wire or reg (`index') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:42: error: Array index expressions must be constant here.
+5 error(s) during elaboration.

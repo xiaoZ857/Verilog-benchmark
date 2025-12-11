@@ -2,4 +2,37 @@ Problem: Prob082_lfsr32
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 16):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:7: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:24: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: warning: macro q_out undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: warning: macro q undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:27: warning: macro temp undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:27: warning: macro q undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:27: warning: macro q_out undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:7: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:10: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:14: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:15: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:16: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:23: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:25:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:27: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:27:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob082_lfsr32/Prob082_lfsr32_sample01.sv:23: error: Invalid module instantiation

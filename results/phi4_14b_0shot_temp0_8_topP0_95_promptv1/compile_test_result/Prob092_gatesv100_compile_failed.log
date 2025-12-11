@@ -2,4 +2,11 @@ Problem: Prob092_gatesv100
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:13: error: out_different is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:6:      : out_different is declared here as wire.
+1 error(s) during elaboration.

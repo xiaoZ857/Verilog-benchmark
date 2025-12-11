@@ -2,4 +2,22 @@ Problem: Prob119_fsm3
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:8: error: System function $eq not defined in system table or SFT file(s).
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:8: error: System function $eq not defined in system table or SFT file(s).
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:8: internal error: Failed to synthesize expression: (($eq(in, 32'sd0))!=(32'b00000000000000000000000000000000)) ? (2'sd0) : ((($eq(in, 32'sd1))!=(32'b00000000000000000000000000000000)) ? (2'sd1) : (2'sd0))
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:13: error: out is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:6:      : out is declared here as wire.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:18: error: out is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:6:      : out is declared here as wire.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:20: error: out is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:6:      : out is declared here as wire.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:24: error: out is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:6:      : out is declared here as wire.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:26: error: out is not a valid l-value in tb.top_module1.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob119_fsm3/Prob119_fsm3_sample01.sv:6:      : out is declared here as wire.
+8 error(s) during elaboration.

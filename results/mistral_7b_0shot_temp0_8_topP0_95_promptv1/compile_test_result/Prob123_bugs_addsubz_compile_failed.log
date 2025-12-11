@@ -2,4 +2,19 @@ Problem: Prob123_bugs_addsubz
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 10):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:9: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:12: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:17: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob123_bugs_addsubz/Prob123_bugs_addsubz_sample01.sv:19: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:14: error: invalid module item.

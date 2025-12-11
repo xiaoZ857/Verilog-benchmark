@@ -2,4 +2,21 @@ Problem: Prob107_fsm1s
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:8: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: warning: macro state undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: warning: macro out undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:8: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob107_fsm1s_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob107_fsm1s/Prob107_fsm1s_sample01.sv:27: error: Invalid module instantiation

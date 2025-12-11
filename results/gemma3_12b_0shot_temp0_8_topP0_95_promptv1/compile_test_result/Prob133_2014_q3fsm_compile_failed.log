@@ -2,4 +2,33 @@ Problem: Prob133_2014_q3fsm
 Code file: results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 25):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:14: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:16: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:16: error: malformed statement
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:18: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:18: error: malformed statement
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:14: error: Incomprehensible case expression.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:20: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:46: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:52: error: malformed statement
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:53: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:54: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:20: error: Incomprehensible case expression.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:57: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:66: error: malformed statement
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:66: error: Incomprehensible case expression.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob133_2014_q3fsm/Prob133_2014_q3fsm_sample01.sv:67: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:78: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:78: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:79: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:11: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:13: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:20: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:34: syntax error
+I give up.

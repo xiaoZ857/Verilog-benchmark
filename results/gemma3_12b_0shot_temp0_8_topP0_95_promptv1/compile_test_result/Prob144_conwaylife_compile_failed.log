@@ -2,4 +2,73 @@ Problem: Prob144_conwaylife
 Code file: results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 62):
+
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:19: warning: Static variable initialization requires explicit lifetime in this context.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:26: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:26: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:26: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:27: error: malformed statement
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:29: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:29: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:35: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:40: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:41: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:42: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:43: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:44: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:45: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:46: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:47: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:48: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:49: syntax error
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:50: Syntax in assignment statement l-value.
+results\gemma3_12b_0shot_temp0_8_topP0_95_promptv1\Prob144_conwaylife/Prob144_conwaylife_sample01.sv:52: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:13: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:15: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:15: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:16: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:16: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:19: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:99: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:101: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:103: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:104: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:105: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:105: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:106: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:106: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:107: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:107: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:109: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:109: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:110: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:110: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:112: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:112: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:115: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:115: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:116: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:116: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:117: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:117: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:119: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:119: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:120: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:121: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:123: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:123: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:124: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:124: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:125: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:125: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:126: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:126: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:128: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:129: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:146: warning: implicit definition of wire 'q_ref'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:152: warning: implicit definition of wire 'q_dut'.

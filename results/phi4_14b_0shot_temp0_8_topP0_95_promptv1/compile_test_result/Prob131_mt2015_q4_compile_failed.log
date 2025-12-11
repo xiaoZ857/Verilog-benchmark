@@ -2,4 +2,19 @@ Problem: Prob131_mt2015_q4
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:19: warning: implicit definition of wire 'or_out'.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:20: warning: implicit definition of wire 'and_out'.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:13: error: Unknown module type: A
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:14: error: Unknown module type: B
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:15: error: Unknown module type: A
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob131_mt2015_q4/Prob131_mt2015_q4_sample01.sv:16: error: Unknown module type: B
+5 error(s) during elaboration.
+*** These modules were missing:
+        A referenced 2 times.
+        B referenced 2 times.
+***

@@ -2,4 +2,18 @@ Problem: Prob079_fsm3onehot
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:8: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:8: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:20: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob079_fsm3onehot_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob079_fsm3onehot/Prob079_fsm3onehot_sample01.sv:21: error: Invalid module instantiation

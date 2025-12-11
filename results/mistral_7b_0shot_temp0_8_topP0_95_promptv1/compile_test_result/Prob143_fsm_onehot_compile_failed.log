@@ -2,4 +2,44 @@ Problem: Prob143_fsm_onehot
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 35):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:9: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:9: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:22: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:25: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:28: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:28: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:28: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:29: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:29: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:29: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:29: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:30: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:31: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:31: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:32: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:32: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:33: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:33: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:34: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:34: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:35: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:35: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:36: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:36: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:37: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:37: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob143_fsm_onehot/Prob143_fsm_onehot_sample01.sv:38: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:15: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:65: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:67: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_test.sv:183: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_ref.sv:8: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob143_fsm_onehot_ref.sv:24: syntax error
+I give up.

@@ -2,4 +2,30 @@ Problem: Prob148_2013_q2afsm
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 18):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:8: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:50: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:51: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:8: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:19: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:20: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:27: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:30: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:30: error: malformed statement
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:28: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:35: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:36: error: Incomprehensible case expression.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:46: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:46: error: syntax error in continuous assignment
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:47: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:47: error: syntax error in continuous assignment
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:49: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:51: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:51:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob148_2013_q2afsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:49: error: Invalid module instantiation

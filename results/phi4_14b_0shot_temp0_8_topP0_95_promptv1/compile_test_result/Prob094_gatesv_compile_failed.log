@@ -2,4 +2,25 @@ Problem: Prob094_gatesv
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:13: error: out_any['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:5:      : out_any['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:14: error: out_any['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:5:      : out_any['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:15: error: out_any['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:5:      : out_any['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:12: warning: @* found no sensitivities so it will never trigger.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:19: error: out_different['sd3] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd3] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:20: error: out_different['sd2] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd2] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:21: error: out_different['sd1] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd1] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:22: error: out_different['sd0] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:6:      : out_different['sd0] is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob094_gatesv/Prob094_gatesv_sample01.sv:18: warning: @* found no sensitivities so it will never trigger.
+7 error(s) during elaboration.

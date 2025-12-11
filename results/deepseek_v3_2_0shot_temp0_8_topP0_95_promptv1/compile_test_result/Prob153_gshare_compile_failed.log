@@ -2,4 +2,18 @@ Problem: Prob153_gshare
 Code file: results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 4):
+
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:19: error: predict_history is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_history is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:21: error: predict_history is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_history is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:23: error: predict_history is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:9:      : predict_history is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:63: error: predict_taken is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob153_gshare/Prob153_gshare_sample01.sv:8:      : predict_taken is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob153_gshare_test.sv:247: warning: output port predict_history is coerced to inout.
+4 error(s) during elaboration.

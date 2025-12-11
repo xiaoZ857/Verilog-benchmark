@@ -2,4 +2,13 @@ Problem: Prob137_fsm_serial
 Code file: results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:10: error: done is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:6:      : done is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:12: error: done is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:6:      : done is declared here as wire.
+2 error(s) during elaboration.

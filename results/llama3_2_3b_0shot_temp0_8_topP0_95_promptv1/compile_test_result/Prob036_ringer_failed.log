@@ -1,0 +1,16 @@
+Problem: Prob036_ringer
+Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob036_ringer/Prob036_ringer_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'ringer' has 19 mismatches. First mismatch occurred at time 5.
+Hint: Output 'motor' has 8 mismatches. First mismatch occurred at time 20.
+Hint: Total mismatched samples is 19 out of 19 samples
+
+Simulation finished at 97 ps
+Mismatches: 19 in 19 samples

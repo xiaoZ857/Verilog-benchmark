@@ -2,4 +2,14 @@ Problem: Prob121_2014_q3bfsm
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:10: error: Could not find variable ``y'' in ``tb.top_module1''
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:11: error: Unable to bind wire/reg/memory `y' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:11: error: Unable to elaborate this case expression.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:22: error: Unable to bind wire/reg/memory `y' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob121_2014_q3bfsm/Prob121_2014_q3bfsm_sample01.sv:22: error: Unable to elaborate this case expression.
+3 error(s) during elaboration.

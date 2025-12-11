@@ -2,4 +2,18 @@ Problem: Prob137_fsm_serial
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:8: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:45: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:46: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:8: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:9: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:45: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:46: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob137_fsm_serial/Prob137_fsm_serial_sample01.sv:46:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:10: error: invalid module item.

@@ -2,4 +2,26 @@ Problem: Prob108_rule90
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 12):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:8: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:19: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:20: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:8: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:11: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:13: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:13: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:13: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:19: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:19:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:20: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:20:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:23: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob108_rule90/Prob108_rule90_sample01.sv:23:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob108_rule90_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob108_rule90_test.sv:12: error: invalid module item.

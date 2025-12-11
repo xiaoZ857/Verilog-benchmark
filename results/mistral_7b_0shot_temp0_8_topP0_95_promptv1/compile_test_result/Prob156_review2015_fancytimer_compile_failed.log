@@ -2,4 +2,26 @@ Problem: Prob156_review2015_fancytimer
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 15):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:11: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:16: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:17: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:17: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:21: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:22: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:22: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:23: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:26: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:27: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4: error: `default_nettype directives must appear
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : outside module definitions. The containing
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : module TopModule starts on line results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob156_review2015_fancytimer/Prob156_review2015_fancytimer_sample01.sv:2.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:14: error: invalid module item.

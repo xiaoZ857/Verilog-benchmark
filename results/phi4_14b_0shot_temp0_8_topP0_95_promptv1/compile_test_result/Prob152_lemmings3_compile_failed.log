@@ -2,4 +2,33 @@ Problem: Prob152_lemmings3
 Code file: results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 12):
+
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:91: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:92: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:96: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:97: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:101: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:102: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:106: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:107: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:106: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:107: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:111: error: walk_left is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:112: error: walk_right is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_8_topP0_95_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+12 error(s) during elaboration.

@@ -2,4 +2,25 @@ Problem: Prob139_2013_q2bfsm
 Code file: results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:12: error: f is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:7:      : f is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:13: error: g is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:8:      : g is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:20: error: f is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:7:      : f is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:26: error: f is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:7:      : f is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:29: error: g is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:8:      : g is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:41: error: g is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:8:      : g is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:53: error: f is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:7:      : f is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:54: error: g is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob139_2013_q2bfsm/Prob139_2013_q2bfsm_sample01.sv:8:      : g is declared here as wire.
+8 error(s) during elaboration.

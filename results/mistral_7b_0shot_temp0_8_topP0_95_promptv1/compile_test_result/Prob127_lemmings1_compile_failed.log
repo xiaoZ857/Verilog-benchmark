@@ -2,4 +2,28 @@ Problem: Prob127_lemmings1
 Code file: results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 15):
+
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:10: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:27: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:28: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:10: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:13: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:17: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:20: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:23: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:23: error: invalid module item.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:26: syntax error
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:27: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:27:      : between the tic and preprocessor directive?
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:28: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:28:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob127_lemmings1_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:26: error: Invalid module instantiation

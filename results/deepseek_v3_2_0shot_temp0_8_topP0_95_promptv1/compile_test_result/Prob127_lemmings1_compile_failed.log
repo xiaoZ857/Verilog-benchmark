@@ -2,4 +2,33 @@ Problem: Prob127_lemmings1
 Code file: results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 12):
+
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:12: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:13: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:19: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:20: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:23: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:24: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:29: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:30: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:33: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:34: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:38: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:7:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:39: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_8_topP0_95_promptv1\Prob127_lemmings1/Prob127_lemmings1_sample01.sv:8:      : walk_right is declared here as wire.
+12 error(s) during elaboration.

@@ -2,4 +2,28 @@ Problem: Prob105_rotate100
 Code file: results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv
 Compilation: FAILED
 ==================================================
-Compilation error: [WinError 2] 系统找不到指定的文件。
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 14):
+
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:9: warning: Part select [100:2] is selecting after the vector data[99:0].
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:9:        : Replacing the out of bound bits with 'bx.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:12: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:13: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:20: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:21: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:23: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:24: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:25: warning: Part select q[100:6] is out of range.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:25: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:27: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:28: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:29: warning: Part select q[100:6] is out of range.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:29: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:31: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:32: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:33: warning: Part select q[100:6] is out of range.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:33: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_8_topP0_95_promptv1\Prob105_rotate100/Prob105_rotate100_sample01.sv:17: error: q Unable to assign to unresolved wires.
+14 error(s) during elaboration.

@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+ ```verilog
+always @(posedge clk) begin
+    if (a)
+        q <= 4'b0101;
+    else
+        case ({a, a})
+            2'b00: q <= 4'b0000;
+            2'b01: q <= 4'b0100;
+            2'b10: q <= 4'b0010;
+            default: q <= 4'b0001;
+        endcase
+end
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

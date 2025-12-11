@@ -1,0 +1,3 @@
+always @(*) begin
+  out = ~ (in1 | in2);
+endmodule

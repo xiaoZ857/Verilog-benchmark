@@ -1,0 +1,22 @@
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 10h; // Reset value is hexadecimal 10 (decimal 16)
+    else begin
+        if (q[2] + 1 == 10)
+            q[2] <= 0;
+        else
+            q[2] <= q[2] + 1; // Increment hundreds place
+
+        if ((q[2] >= 1 && q[1] + 1 == 9) || (q[2] == 0 && q[1] == 9))
+            q[1] <= 0;
+        else
+            q[1] <= q[1] + 1; // Increment tens place
+
+        if ((q[2] >= 1 && q[1] < 10) || (q[2] == 0 && q[1] > 9))
+            q[0] <= 9;
+        else
+            q[0] <= q[0] + 1; // Increment units place
+    end
+end
+```

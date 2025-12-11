@@ -1,0 +1,9 @@
+always @(*) begin
+    case (do_sub)
+        1'b0: out = a + b;
+        1'b1: out = a - b;
+    endcase
+
+    result_is_zero = (out == 8'd0);
+end
+endmodule

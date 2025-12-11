@@ -1,0 +1,10 @@
+wire [31:0] full;
+
+assign full = {a, b, c, d, e, f, 2'b11};
+
+assign w = full[31:24];
+assign x = full[23:16];
+assign y = full[15:8];
+assign z = full[7:0];
+
+endmodule

@@ -1,0 +1,24 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+reg pos_reg, neg_reg;
+
+// Positive edge triggered flip-flop
+always @(posedge clk) begin
+    pos_reg <= d;
+end
+
+// Negative edge triggered flip-flop
+always @(negedge clk) begin
+    neg_reg <= d;
+end
+
+// Select output based on clock level
+always @(*) begin
+    q = clk ? pos_reg : neg_reg;
+end
+endmodule

@@ -1,0 +1,23 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+assign z = (x & y) ^ x;
+
+assign out1 = a & b;
+assign out2 = c & d;
+assign out3 = e & f;
+assign out4 = g & h;
+
+always @(posedge clk) begin
+    if (reset)
+        q <= 1'b0;
+    else
+        q <= d;
+end
+
+assign z = out1 | out2;
+
+// VERILOG-EVAL: endmodule not found

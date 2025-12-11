@@ -1,0 +1,29 @@
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        pm <= 1'b0;
+        hh <= 8'h12; // 12 for 12-hour format, BCD representation
+        mm <= 8'h00;
+        ss <= 8'h00;
+    end else if (ena) begin
+        if (ss == 8'h59) begin
+            ss <= 8'h00;
+            if (mm == 8'h59) begin
+                mm <= 8'h00;
+                if (hh == 8'h12) begin
+                    hh <= 8'h01;
+                    pm <= ~pm; // Toggle PM/AM indicator
+                end else if (hh[3:0] == 4'h9) begin
+                    hh <= {1'b0, hh[7:4] + 1'b1}; // Increment tens place of hours
+                end else begin
+                    hh <= hh + 8'h01; // Increment BCD hour
+                end
+            end else begin
+                mm <= mm + 8'h01; // Increment BCD minute
+            end
+        end else begin
+            ss <= ss + 8'h01; // Increment BCD second
+        end
+    end
+end
+
+endmodule

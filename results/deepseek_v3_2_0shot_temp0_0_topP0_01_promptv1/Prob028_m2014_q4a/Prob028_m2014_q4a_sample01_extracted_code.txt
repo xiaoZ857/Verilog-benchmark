@@ -1,0 +1,6 @@
+always @(*) begin
+    if (ena) begin
+        q = d;
+    end
+end
+endmodule

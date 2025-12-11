@@ -1,0 +1,15 @@
+Problem: Prob030_popcount255
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:6: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:6: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:8: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:14: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob030_popcount255/Prob030_popcount255_sample01.sv:14: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob030_popcount255_test.sv:11: error: invalid module item.

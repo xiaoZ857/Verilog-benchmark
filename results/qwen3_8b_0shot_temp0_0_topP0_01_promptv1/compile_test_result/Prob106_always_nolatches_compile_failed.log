@@ -1,0 +1,12 @@
+Problem: Prob106_always_nolatches
+Code file: results\qwen3_8b_0shot_temp0_0_topP0_01_promptv1\Prob106_always_nolatches/Prob106_always_nolatches_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob106_always_nolatches_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob106_always_nolatches_ref.sv:22: syntax error
+I give up.

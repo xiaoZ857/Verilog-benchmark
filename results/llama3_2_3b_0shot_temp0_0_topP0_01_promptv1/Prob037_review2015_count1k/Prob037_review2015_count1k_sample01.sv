@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [9:0] q
+);
+assign q = $signed({{8'b000_000}, {8'b111_111}}[counter % 1000]);
+
+always @(posedge clk) begin
+    if (reset)
+        counter <= 0;
+    else
+        counter <= counter + 1;
+end
+
+assign q = $signed(counter);
+
+always @(*) begin
+    counter = (counter + 1) % 1000;
+endmodule

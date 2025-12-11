@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+assign anyedge[0] = (in[0] == 0) && (in[0] != clk);
+assign anyedge[1] = (in[1] == 0) && (in[1] != clk);
+assign anyedge[2] = (in[2] == 0) && (in[2] != clk);
+assign anyedge[3] = (in[3] == 0) && (in[3] != clk);
+assign anyedge[4] = (in[4] == 0) && (in[4] != clk);
+assign anyedge[5] = (in[5] == 0) && (in[5] != clk);
+assign anyedge[6] = (in[6] == 0) && (in[6] != clk);
+assign anyedge[7] = (in[7] == 0) && (in[7] != clk);
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,27 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+ ```verilog
+reg [1:0] flops_out; // Declare internal reg signals for D flip-flop outputs
+logic [1:0] flops_compl_out; // Declare internal logic signals for complemented D flip-flop outputs
+
+assign flops_out[0] = x ^ flops_out[0]; // XOR gate for first flip-flop
+assign flops_out[1] = flops_out[1] & x;   // AND gate for second flip-flop
+assign flops_out[2] = flops_out[2] | x;   // OR gate for third flip-flop
+
+always @(posedge clk) begin
+    if (clk) begin
+        flops_compl_out[0] = ~flops_out[0]; // Complement first flip-flop output
+        flops_compl_out[1] = ~flops_out[1]; // Complement second flip-flop output
+        flops_compl_out[2] = ~flops_out[2]; // Complement third flip-flop output
+    end
+end
+
+assign z = ~(flops_out[0] | flops_compl_out[1] | flops_compl_out[2]); // NOR gate for final output
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

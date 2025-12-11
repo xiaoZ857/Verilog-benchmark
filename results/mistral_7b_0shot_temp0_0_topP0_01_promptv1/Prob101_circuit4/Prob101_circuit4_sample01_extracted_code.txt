@@ -1,0 +1,9 @@
+always @* begin
+    xor_out = a ^ b;
+end
+
+always @* begin
+    and_out = c & d;
+end
+
+assign q = xor_out & and_out;

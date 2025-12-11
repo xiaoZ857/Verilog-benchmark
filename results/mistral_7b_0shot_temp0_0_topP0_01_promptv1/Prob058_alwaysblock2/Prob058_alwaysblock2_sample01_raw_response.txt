@@ -1,0 +1,31 @@
+ Here are the three implementations of an XOR gate as requested:
+
+1. Using `assign` statement (output `out_assign`) for combinational logic on wire outputs:
+
+```verilog
+assign out_assign = a ^ b;
+```
+
+2. Combinational logic (reg output, using always block) for `out_always_comb`:
+
+```verilog
+always @* begin
+    out_always_comb = a ^ b;
+end
+```
+
+3. Sequential logic (D flip-flop) for `out_always_ff`:
+
+```verilog
+always @(posedge clk) begin
+    if (a ^ b)
+        out_always_ff <= ~out_always_ff;
+end
+```
+
+Verification checklist:
+[ ] Code ends with `endmodule` (not provided, but it will be added in the final code)
+[ ] All wire outputs use `assign` keyword (only one wire output is used here)
+[ ] All reg outputs are assigned in always blocks (two reg outputs are used here)
+[ ] Only declared signals are used (all signals are defined in module ports or declared internally)
+[ ] Blocking/non-blocking assignments are correct (combinational logic uses blocking `=`, sequential logic uses non-blocking `<=`)

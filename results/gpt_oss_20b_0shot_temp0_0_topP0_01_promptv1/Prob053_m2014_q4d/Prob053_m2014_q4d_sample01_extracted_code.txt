@@ -1,0 +1,7 @@
+assign d = in ^ out;
+
+always @(posedge clk) begin
+    out <= d;
+end
+
+endmodule

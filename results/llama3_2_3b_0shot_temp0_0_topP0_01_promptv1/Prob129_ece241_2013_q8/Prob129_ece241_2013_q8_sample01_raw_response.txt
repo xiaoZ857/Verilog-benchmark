@@ -1,0 +1,9 @@
+assign z = (x & ~z) | (~x & z);
+
+always @(posedge clk or negedge aresetn)
+begin
+    if (!aresetn)
+        z <= 1'b0;
+    else if ((x & ~z) && (~x & z))
+        z <= 1'b1;
+end

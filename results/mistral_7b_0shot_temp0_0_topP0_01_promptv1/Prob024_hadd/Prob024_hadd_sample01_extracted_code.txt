@@ -1,0 +1,5 @@
+ ```verilog
+always @(posedge clk) begin
+    assign sum = a ^ b;
+    assign cout = a & b;
+end

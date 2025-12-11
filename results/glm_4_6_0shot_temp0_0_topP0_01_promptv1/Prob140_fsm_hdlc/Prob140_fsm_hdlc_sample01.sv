@@ -1,0 +1,75 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+  reg [3:0] current_state, next_state;
+  
+  // State encoding
+  localparam IDLE = 4'd0;
+  localparam SAW_0 = 4'd1;
+  localparam SAW_01 = 4'd2;
+  localparam SAW_011 = 4'd3;
+  localparam SAW_0111 = 4'd4;
+  localparam SAW_01111 = 4'd5;
+  localparam SAW_011111 = 4'd6;
+  localparam DISC = 4'd7;
+  localparam FLAG = 4'd8;
+  localparam ERR = 4'd9;
+  
+  // State register
+  always @(posedge clk) begin
+    if (reset)
+      current_state <= IDLE;
+    else
+      current_state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (current_state)
+      IDLE: begin
+        if (in == 1'b0)
+          next_state = SAW_0;
+        else
+          next_state = IDLE;
+      end
+      
+      SAW_0: begin
+        if (in == 1'b1)
+          next_state = SAW_01;
+        else
+          next_state = SAW_0;
+      end
+      
+      SAW_01: begin
+        if (in == 1'b1)
+          next_state = SAW_011;
+        else
+          next_state = SAW_0;
+      end
+      
+      SAW_011: begin
+        if (in == 1'b1)
+          next_state = SAW_0111;
+        else
+          next_state = SAW_0;
+      end
+      
+      SAW_0111: begin
+        if (in == 1'b1)
+          next_state = SAW_01111;
+        else
+          next_state = SAW_0;
+      end
+      
+      SAW_01111: begin
+        if (in == 1'b1)
+          next_state = S
+
+// VERILOG-EVAL: endmodule not found

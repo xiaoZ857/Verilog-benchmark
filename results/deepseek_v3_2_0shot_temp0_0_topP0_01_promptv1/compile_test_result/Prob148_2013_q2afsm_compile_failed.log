@@ -1,0 +1,23 @@
+Problem: Prob148_2013_q2afsm
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 12):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:49: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:49: error: Unable to bind wire/reg/memory `B' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:49: error: Unable to elaborate r-value: (state)==(B)
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:50: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:50: error: Unable to bind wire/reg/memory `C' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:50: error: Unable to elaborate r-value: (state)==(C)
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:51: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:51: error: Unable to bind wire/reg/memory `D' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:51: error: Unable to elaborate r-value: (state)==(D)
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:10: error: Could not find variable ``state'' in ``tb.top_module1''
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:12: error: Could not find variable ``state'' in ``tb.top_module1''
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:16: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob148_2013_q2afsm/Prob148_2013_q2afsm_sample01.sv:16: error: Unable to elaborate this case expression.
+12 error(s) during elaboration.

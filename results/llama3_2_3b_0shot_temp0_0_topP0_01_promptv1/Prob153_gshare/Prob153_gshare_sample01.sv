@@ -1,0 +1,65 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+assign predict_taken = (predict_valid) ? (a & b) : (c | d);
+
+assign predict_history = {predict_history[1:0], a ^ b};
+
+always @(posedge clk or reset) begin
+    if (!areset)
+        q <= 1'b0;
+    else
+        q <= d;
+end
+
+assign out = (q == 7'b1111111) ? (e | f) : (g & h);
+
+assign pht[0] = {pht[1:0], a ^ b};
+
+always @(posedge clk or train_valid) begin
+    if (!areset)
+        pht[0] <= 7'b0000000;
+    else if (train_valid && !train_taken)
+        pht[0] <= {pht[0][1:0], train_pc};
+    else if (train_valid && train_taken && train_mispredicted)
+        pht[0] <= {pht[0][1:0], train_history};
+end
+
+assign out = (q == 7'b1111111) ? (e | f) : (g & h);
+
+always @(posedge clk or train_valid) begin
+    if (!areset)
+        q <= 1'b0;
+    else if (train_valid && !train_taken)
+        q <= d;
+    else if (train_valid && train_taken && train_mispredicted)
+        q <= {q[1:0], train_history};
+end
+
+assign out = (q == 7'b1111111) ? (e | f) : (g & h);
+
+always @(posedge clk or train_valid) begin
+    if (!areset)
+        pht[0] <= 7'b0000000;
+    else if (train_valid && !train_taken)
+        pht[0] <= {pht[0][1:0], train_pc};
+    else if (train_valid && train_taken && train_mispredicted)
+        pht[0] <= {pht[0][1:0], train_history};
+end
+
+assign out = (q == 7'b1111111) ? (e | f) : (g & h);
+
+endmodule

@@ -1,0 +1,7 @@
+always @(posedge clk) begin
+    for (i=0; i<8; i++) begin
+        D <= d[i];
+        q[i] <= D;
+    end
+end
+endmodule

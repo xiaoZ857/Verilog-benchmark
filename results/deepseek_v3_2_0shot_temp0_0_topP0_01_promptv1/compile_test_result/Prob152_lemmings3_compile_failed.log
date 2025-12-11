@@ -1,0 +1,56 @@
+Problem: Prob152_lemmings3
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 23):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:16: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:17: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:18: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:19: error: digging is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:12:      : digging is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:22: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:23: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:24: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:25: error: digging is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:12:      : digging is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:30: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:31: error: digging is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:12:      : digging is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:35: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:36: error: digging is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:12:      : digging is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:42: error: digging is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:12:      : digging is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:43: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:47: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:51: error: digging is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:12:      : digging is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:52: error: aaah is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:11:      : aaah is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:54: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:55: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:57: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:58: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:61: error: walk_left is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:9:      : walk_left is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:62: error: walk_right is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:10:      : walk_right is declared here as wire.
+23 error(s) during elaboration.

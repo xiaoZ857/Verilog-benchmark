@@ -1,0 +1,1 @@
+assign out = $signed(reset) ? 1'b0 : ($signed(j) == 1'b1 && $signed(k) == 1'b0) ? 1'b1 : 1'b0;

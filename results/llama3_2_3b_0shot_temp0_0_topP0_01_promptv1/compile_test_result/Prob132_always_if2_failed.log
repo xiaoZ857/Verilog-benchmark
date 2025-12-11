@@ -1,0 +1,16 @@
+Problem: Prob132_always_if2
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob132_always_if2/Prob132_always_if2_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'shut_off_computer' has no mismatches.
+Hint: Output 'keep_driving' has 60 mismatches. First mismatch occurred at time 30.
+Hint: Total mismatched samples is 60 out of 121 samples
+
+Simulation finished at 605 ps
+Mismatches: 60 in 121 samples

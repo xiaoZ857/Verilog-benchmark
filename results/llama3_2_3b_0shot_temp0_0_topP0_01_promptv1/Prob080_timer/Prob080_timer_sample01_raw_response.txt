@@ -1,0 +1,7 @@
+assign tc = !count;
+always @(posedge clk) begin
+    if (load)
+        count <= data;
+    else
+        count <= count - 1'b1;
+endmodule

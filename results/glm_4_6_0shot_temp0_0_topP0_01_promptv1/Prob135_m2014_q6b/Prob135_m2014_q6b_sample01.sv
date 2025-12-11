@@ -1,0 +1,23 @@
+
+module TopModule (
+  input [3:1] y,
+  input w,
+  output reg Y2
+);
+
+  always @(*) begin
+    // Y2 is the second bit of the next state
+    // Based on the state transitions, Y2 = 1 when:
+    // - Current state is B (001) and input is 0 → Next state C (010)
+    // - Current state is B (001) and input is 1 → Next state D (011)
+    // - Current state is C (010) and input is 1 → Next state D (011)
+    // - Current state is E (100) and input is 1 → Next state D (011)
+    // - Current state is F (101) and input is 0 → Next state C (010)
+    // - Current state is F (101) and input is 1 → Next state D (011)
+    
+    // Simplified logic:
+    // Y2 = 1 when (y[1] & ~y[3]) | (y[3] & y[1] & w) | (y[3] & ~y[1] & ~w)
+    Y2 = (y[1] & ~y[3]) | (y[3] & y[1] & w) | (y[3] & ~y[1] & ~w);
+  end
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,19 @@
+
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+assign q = $signed({1'b0, 1'b1, 2'b10, 3'b100, 4'b1000, 5'b10000, 6'b100000, 7'b1000000, 8'b10000000, 9'b100000000});
+
+always @(posedge clk or posedge slowena) begin
+    if (reset)
+        q <= 1'b0;
+    else if (~slowena && ~q[3:2])
+        q <= $signed({q[2:1], q[0]});
+    else if (~slowena && q[3:2] == 9'b1111)
+        q <= 1'b0;
+end
+
+// VERILOG-EVAL: endmodule not found

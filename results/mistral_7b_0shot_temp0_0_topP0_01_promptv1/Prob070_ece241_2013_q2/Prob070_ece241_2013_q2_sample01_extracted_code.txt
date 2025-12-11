@@ -1,0 +1,22 @@
+ ```verilog
+always @(posedge clk) begin
+    reg [1-1] s0 = 1'b0; // Sum of Products (SOP)
+    assign out_sop = s0[1];
+
+    always @* begin
+        if (a & b & ~c & d) s0[0] = 1'b1; // 2
+        else if (~a & b & c & d) s0[0] = 1'b1; // 7
+        else if (a & ~b & c & ~d) s0[0] = 1'b1; // 15
+        else s0[0] = 1'b0;
+    end
+
+    reg [3-1] p0 = 1'b0; // Product of Sums (POS)
+    assign out_pos = ~p0[2];
+
+    always @* begin
+        if (a & b & c & d) p0[0] = 1'b1; // 0, 4, 5, 6, 9, 10, 13, 14
+        else if (~a | b | ~c | d) p0[1] = 1'b1; // 1, 8, 11, 12
+        else if (a | ~b | c | ~d) p0[2] = 1'b1; // 3, 7, 15
+        else p0[3] = 1'b1; // All other inputs
+    end
+endmodule

@@ -1,0 +1,5 @@
+ ```verilog
+always @(posedge clk) begin
+    parity <= ^in; // XOR operation for even parity
+end
+```

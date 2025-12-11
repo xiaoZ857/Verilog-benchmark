@@ -1,0 +1,12 @@
+ ```verilog
+always @* begin
+    case(a)
+        2'b00: q <= 1232;
+        2'b01: q <= aee0;
+        2'b10: q <= 27d4;
+        2'b11: q <= 5a0e;
+    default: q <= 0; // for any other input combination, set q to zero
+    endcase
+end
+endmodule
+```

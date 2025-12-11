@@ -1,0 +1,17 @@
+Problem: Prob085_shift4
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:11: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:12: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:13: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:14: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:18: error: q Unable to assign to unresolved wires.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:20: error: q Unable to assign to unresolved wires.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob085_shift4/Prob085_shift4_sample01.sv:22: error: q Unable to assign to unresolved wires.
+7 error(s) during elaboration.

@@ -1,0 +1,10 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+assign out = $signed(in) & $signed(areset) ? 0 : $signed(in) & $signed(!areset) ? 1'b0 : ($signed(in) & $signed(1'b1)) | ($signed(in) & $signed(1'b0));
+
+// VERILOG-EVAL: endmodule not found

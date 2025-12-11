@@ -1,0 +1,50 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+reg [1:0] state, next_state;
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        state <= 2'b00; // Reset to state A
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        2'b00: begin // State A
+            out = 1'b0;
+            if (in == 1'b0)
+                next_state = 2'b00; // Stay in A
+            else
+                next_state = 2'b01; // Go to B
+        end
+        2'b01: begin // State B
+            out = 1'b0;
+            if (in == 1'b0)
+                next_state = 2'b10; // Go to C
+            else
+                next_state = 2'b01; // Stay in B
+        end
+        2'b10: begin // State C
+            out = 1'b0;
+            if (in == 1'b0)
+                next_state = 2'b00; // Go to A
+            else
+                next_state = 2'b11; // Go to D
+        end
+        2'b11: begin // State D
+            out = 1'b1;
+            if (in == 1'b0)
+                next_state = 2'b10; // Go to C
+            else
+                next_state = 2'b01; // Go to B
+        end
+    endcase
+end
+
+endmodule

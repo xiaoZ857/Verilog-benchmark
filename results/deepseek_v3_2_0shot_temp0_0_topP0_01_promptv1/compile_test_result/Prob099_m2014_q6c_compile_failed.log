@@ -1,0 +1,15 @@
+Problem: Prob099_m2014_q6c
+Code file: results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:9: error: Y2 is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:5:      : Y2 is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:11: error: Y4 is not a valid l-value in tb.top_module1.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:6:      : Y4 is declared here as wire.
+results\deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1\Prob099_m2014_q6c/Prob099_m2014_q6c_sample01.sv:8: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

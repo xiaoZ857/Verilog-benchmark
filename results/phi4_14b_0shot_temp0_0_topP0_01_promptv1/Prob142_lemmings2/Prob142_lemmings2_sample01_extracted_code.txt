@@ -1,0 +1,55 @@
+logic [1:0] state, next_state;
+logic fall;
+
+assign walk_left = (state == 2'b00 || state == 2'b10);
+assign walk_right = (state == 2'b01 || state == 2'b11);
+
+always @(*) begin
+    aaah = fall && !ground;
+end
+
+always @(posedge areset or posedge clk) begin
+    if (areset)
+        state <= 2'b00; // Initial state: walk left
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        2'b00: begin // Walking left
+            if (!ground)
+                next_state = 2'b10; // Start falling
+            else if (bump_right)
+                next_state = 2'b01; // Switch to walk right
+            else
+                next_state = 2'b00;
+        end
+        2'b01: begin // Walking right
+            if (!ground)
+                next_state = 2'b11; // Start falling
+            else if (bump_left)
+                next_state = 2'b00; // Switch to walk left
+            else
+                next_state = 2'b01;
+        end
+        2'b10: begin // Falling, previously walked left
+            if (ground)
+                next_state = 2'b00; // Resume walking left
+            else
+                next_state = 2'b10;
+        end
+        2'b11: begin // Falling, previously walked right
+            if (ground)
+                next_state = 2'b01; // Resume walking right
+            else
+                next_state = 2'b11;
+        end
+    endcase
+end
+
+always @(*) begin
+    fall = state == 2'b10 || state == 2'b11;
+end
+
+endmodule

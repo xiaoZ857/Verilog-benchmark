@@ -1,0 +1,5 @@
+
+always @(*) begin
+    out = (c == 1'b0) ? (b ^ d) : ~(b ^ d);
+end
+endmodule

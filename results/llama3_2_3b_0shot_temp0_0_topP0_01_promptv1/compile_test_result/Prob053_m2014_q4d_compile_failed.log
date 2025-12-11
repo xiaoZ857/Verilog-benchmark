@@ -1,0 +1,20 @@
+Problem: Prob053_m2014_q4d
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:14: warning: implicit definition of wire 'a'.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:15: warning: implicit definition of wire 'b'.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:7: error: Unable to bind wire/reg/memory `d' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:7: error: Unable to elaborate r-value: ((a)&(b))?(d):(1'd0)
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:14: error: Unable to bind wire/reg/memory `q' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:14: error: Unable to elaborate r-value: q
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:15: error: Unable to bind wire/reg/memory `q' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:15: error: Unable to elaborate r-value: q
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:9: error: Unable to bind wire/reg/memory `reset' in `tb.top_module1'
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob053_m2014_q4d/Prob053_m2014_q4d_sample01.sv:9: error: Unable to elaborate condition expression.
+8 error(s) during elaboration.

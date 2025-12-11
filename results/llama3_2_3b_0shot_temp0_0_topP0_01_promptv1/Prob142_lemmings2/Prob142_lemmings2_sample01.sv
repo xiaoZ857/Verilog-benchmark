@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output walk_left,
+  output walk_right,
+  output aaah
+);
+assign walk_left = !walk_right;
+assign walk_right = !walk_left;
+
+always @(posedge clk) begin
+    if (areset)
+        walk_left <= 1'b0;
+    else
+        if (!ground && ((bump_left & ~bump_right) | (~bump_left & bump_right)))
+            walk_left <= 1'b1;
+        else if (!ground && !((bump_left & ~bump_right) | (~bump_left & bump_right)))
+            walk_left <= 1'b0;
+        else
+            walk_left <= walk_left;
+end
+
+assign aaah = (ground == 0);
+
+always @(posedge clk) begin
+    if (areset)
+        walk_right <= 1'b0;
+    else
+        if (!ground && ((bump_left & ~bump_right) | (~bump_left & bump_right)))
+            walk_right <= 1'b1;
+        else if (!ground && !((bump_left & ~bump_right) | (~bump_left & bump_right)))
+            walk_right <= 1'b0;
+        else
+            walk_right <= walk_right;
+end
+
+// VERILOG-EVAL: endmodule not found

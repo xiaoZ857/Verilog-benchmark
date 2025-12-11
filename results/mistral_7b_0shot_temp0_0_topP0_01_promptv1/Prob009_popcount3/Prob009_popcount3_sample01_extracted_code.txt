@@ -1,0 +1,10 @@
+ ```verilog
+always @(posedge clk) begin
+    reg [1:0] temp;
+    temp[0] = in[0];
+    temp[1] = in[0] + in[1];
+    temp[2] = in[0] + in[1] + in[2];
+
+    out[0] = temp[2] > temp[1];
+    out[1] = temp[1] > temp[0];
+end

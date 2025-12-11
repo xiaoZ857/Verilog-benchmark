@@ -1,0 +1,8 @@
+assign out = in & ~a;
+
+always @(posedge clk or negedge areset) begin
+    if (areset)
+        out <= 1'b0;
+    else
+        out <= in;
+end

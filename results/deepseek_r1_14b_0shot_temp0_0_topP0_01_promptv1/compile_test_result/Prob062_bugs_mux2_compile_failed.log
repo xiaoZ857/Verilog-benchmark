@@ -1,0 +1,12 @@
+Problem: Prob062_bugs_mux2
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:8: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob062_bugs_mux2/Prob062_bugs_mux2_sample01.sv:8: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

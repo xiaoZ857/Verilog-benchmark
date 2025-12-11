@@ -1,0 +1,46 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+wire a1_out;
+wire b1_out;
+wire a2_out;
+wire b2_out;
+
+// Module A: z = (x ^ y) & x
+assign a1_out = (x ^ y) & x;
+assign a2_out = (x ^ y) & x;
+
+// Module B based on the waveform description
+reg b1_z, b2_z;
+
+always @(*) begin
+    case ({x, y})
+        2'b00: b1_z = 1'b1;
+        2'b01: b1_z = 1'b0;
+        2'b10: b1_z = 1'b0;
+        2'b11: b1_z = 1'b1;
+    endcase
+end
+
+always @(*) begin
+    case ({x, y})
+        2'b00: b2_z = 1'b1;
+        2'b01: b2_z = 1'b0;
+        2'b10: b2_z = 1'b0;
+        2'b11: b2_z = 1'b1;
+    endcase
+end
+
+// Combine outputs of A and B modules
+wire or_out, and_out;
+
+assign or_out = a1_out | b1_z;
+assign and_out = a2_out & b2_z;
+
+// Final XOR operation
+assign z = or_out ^ and_out;
+
+endmodule

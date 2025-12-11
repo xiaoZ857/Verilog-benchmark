@@ -1,0 +1,12 @@
+Problem: Prob104_mt2015_muxdff
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob104_mt2015_muxdff/Prob104_mt2015_muxdff_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_ref.sv:16: syntax error
+I give up.

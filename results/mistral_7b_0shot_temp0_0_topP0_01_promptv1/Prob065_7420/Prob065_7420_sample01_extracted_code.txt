@@ -1,0 +1,8 @@
+ ```verilog
+always @(posedge clk) begin
+    assign p1y = ~(p1a & p1b & p1c & p1d);
+    always @(*) begin
+        p2y = ~(p2a & p2b & p2c & p2d);
+    end
+end
+endmodule

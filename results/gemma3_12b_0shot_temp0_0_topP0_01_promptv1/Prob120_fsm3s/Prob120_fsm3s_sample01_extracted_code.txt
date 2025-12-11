@@ -1,0 +1,43 @@
+reg state_reg;
+reg [1:0] next_state_reg;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state_reg <= 0;
+  end else begin
+    state_reg <= next_state_reg;
+  end
+end
+
+always @(*) begin
+  case (state_reg)
+    0: begin
+      if (in == 0)
+        next_state_reg = 0;
+      else
+        next_state_reg = 1;
+    end
+    1: begin
+      if (in == 0)
+        next_state_reg = 2;
+      else
+        next_state_reg = 1;
+    end
+    2: begin
+      if (in == 0)
+        next_state_reg = 0;
+      else
+        next_state_reg = 3;
+    end
+    3: begin
+      if (in == 0)
+        next_state_reg = 2;
+      else
+        next_state_reg = 1;
+    end
+    default: next_state_reg = 0;
+  endcase
+end
+
+assign out = (state_reg == 3) ? 1 : 0;
+endmodule

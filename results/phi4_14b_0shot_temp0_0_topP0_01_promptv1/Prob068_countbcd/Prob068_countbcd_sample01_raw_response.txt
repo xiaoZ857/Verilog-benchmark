@@ -1,0 +1,49 @@
+```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 16'b0000_0000_0000_0000;
+    end else begin
+        // Increment the ones digit
+        if (q[3:0] == 4'b1001) begin
+            q[3:0] <= 4'b0000;
+            ena[1] <= 1'b1; // Enable tens digit increment
+        end else begin
+            q[3:0] <= q[3:0] + 4'b0001;
+            ena[1] <= 1'b0;
+        end
+
+        // Increment the tens digit
+        if (q[7:4] == 4'b1001) begin
+            q[7:4] <= 4'b0000;
+            ena[2] <= 1'b1; // Enable hundreds digit increment
+        end else if (ena[1]) begin
+            q[7:4] <= q[7:4] + 4'b0001;
+            ena[2] <= 1'b0;
+        end
+
+        // Increment the hundreds digit
+        if (q[11:8] == 4'b1001) begin
+            q[11:8] <= 4'b0000;
+            ena[3] <= 1'b1; // Enable thousands digit increment
+        end else if (ena[2]) begin
+            q[11:8] <= q[11:8] + 4'b0001;
+            ena[3] <= 1'b0;
+        end
+
+        // Increment the thousands digit
+        if (ena[3]) begin
+            if (q[15:12] == 4'b1001) begin
+                q[15:12] <= 4'b0000; // Reset to zero after reaching 9999
+            end else begin
+                q[15:12] <= q[15:12] + 4'b0001;
+            end
+        end
+    end
+end
+
+assign ena[1] = (q[3:0] == 4'b1001);
+assign ena[2] = (q[7:4] == 4'b1001) && ena[1];
+assign ena[3] = (q[11:8] == 4'b1001) && ena[2];
+
+endmodule
+```

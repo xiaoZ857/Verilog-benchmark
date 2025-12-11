@@ -1,0 +1,8 @@
+ ```verilog
+reg [7:0] data;
+always @(posedge clk) if (enable)
+    begin
+        data <= {S, data[1:7]};
+    end
+assign Z = data[A + B*8 + C*8*7];
+endmodule

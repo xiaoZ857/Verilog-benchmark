@@ -1,0 +1,13 @@
+Problem: Prob066_edgecapture
+Code file: results\gpt_oss_20b_0shot_temp0_0_topP0_01_promptv1\Prob066_edgecapture/Prob066_edgecapture_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 3):
+
+results\gpt_oss_20b_0shot_temp0_0_topP0_01_promptv1\Prob066_edgecapture/Prob066_edgecapture_sample01.sv:11: error: Could not find variable ``prev_in'' in ``tb.top_module1''
+results\gpt_oss_20b_0shot_temp0_0_topP0_01_promptv1\Prob066_edgecapture/Prob066_edgecapture_sample01.sv:13: error: Unable to bind wire/reg/memory `prev_in' in `tb.top_module1'
+results\gpt_oss_20b_0shot_temp0_0_topP0_01_promptv1\Prob066_edgecapture/Prob066_edgecapture_sample01.sv:14: error: Could not find variable ``prev_in'' in ``tb.top_module1''
+3 error(s) during elaboration.

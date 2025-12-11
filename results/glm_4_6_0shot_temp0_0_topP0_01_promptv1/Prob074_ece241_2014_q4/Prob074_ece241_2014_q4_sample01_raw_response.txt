@@ -1,0 +1,20 @@
+
+  reg ff1_q, ff2_q, ff3_q;
+  wire xor_out, and_out, or_out;
+  
+  // Three gates
+  assign xor_out = x ^ ff1_q;
+  assign and_out = x & ~ff2_q;
+  assign or_out = x | ~ff3_q;
+  
+  // Three D flip-flops with reset
+  always @(posedge clk) begin
+    ff1_q <= xor_out;
+    ff2_q <= and_out;
+    ff3_q <= or_out;
+  end
+  
+  // Three-input NOR gate
+  assign z = ~(ff1_q | ff2_q | ff3_q);
+  
+endmodule

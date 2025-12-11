@@ -1,0 +1,17 @@
+Problem: Prob044_vectorgates
+Code file: results\gemma3_12b_0shot_temp0_0_topP0_01_promptv1\Prob044_vectorgates/Prob044_vectorgates_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_or_bitwise' has no mismatches.
+Hint: Output 'out_or_logical' has 51 mismatches. First mismatch occurred at time 120.
+Hint: Output 'out_not' has no mismatches.
+Hint: Total mismatched samples is 51 out of 261 samples
+
+Simulation finished at 1306 ps
+Mismatches: 51 in 261 samples

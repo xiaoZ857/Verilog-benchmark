@@ -1,0 +1,10 @@
+```verilog
+assign out = in;
+endmodule
+```
+
+Verification:
+- Code ends with `endmodule`
+- Wire output uses `assign` keyword
+- Only declared signals (in, out) are used
+- Correct blocking assignment for combinational logic

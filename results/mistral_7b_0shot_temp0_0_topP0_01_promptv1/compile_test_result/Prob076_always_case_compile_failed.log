@@ -1,0 +1,17 @@
+Problem: Prob076_always_case
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 7):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv:12: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv:12: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv:15: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv:17: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob076_always_case/Prob076_always_case_sample01.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob076_always_case_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob076_always_case_test.sv:17: error: invalid module item.

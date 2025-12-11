@@ -1,0 +1,36 @@
+ ```verilog
+always @(posedge clk or posedge load) begin
+    if (load) begin
+        q <= data;
+    end else begin
+        logic [15:0] neighbors[256]; // 16x16 array for neighbor count calculation
+
+        // Calculate neighbor count for each cell
+        always @* begin
+            for (int i = 0; i < 256; i++) begin
+                int count = 0;
+                if ((i+1)%16 != 0 && q[i+1] == 1) count++; // right neighbor
+                if ((i-15)%16 != 0 && q[(i-15)+1] == 1) count++; // left neighbor
+                if (q[i-16] == 1) count++; // upper neighbor
+                if (q[i+16] == 1) count++; // lower neighbor
+                if ((i+15)%16 != 0 && q[(i+15)+1] == 1) count++; // right-upper neighbor
+                if ((i-14)%16 != 0 && q[(i-14)+1] == 1) count++; // left-upper neighbor
+                if ((i+14)%16 != 0 && q[(i+14)+1] == 1) count++; // right-lower neighbor
+                if ((i-13)%16 != 0 && q[(i-13)+1] == 1) count++; // left-lower neighbor
+                neighbors[i] = count;
+            end
+        end
+
+        always @(posedge clk) begin
+            for (int i = 0; i < 256; i++) begin
+                if (neighbors[i] == 2 || (neighbors[i] == 3 && q[i] == 1))
+                    q[i] <= q[i]; // no change for 2 neighbors or alive cell with 3 neighbors
+                else if (neighbors[i] == 3)
+                    q[i] <= ~q[i]; // toggle for 3 neighbors
+                else if (neighbors[i] >= 4)
+                    q[i] <= 0; // die for 4+ neighbors
+            end
+        end
+    end
+end
+```

@@ -1,0 +1,4 @@
+assign out_assign = a & b;
+always @(posedge clk) begin
+    out_alwaysblock = a & b;
+endmodule

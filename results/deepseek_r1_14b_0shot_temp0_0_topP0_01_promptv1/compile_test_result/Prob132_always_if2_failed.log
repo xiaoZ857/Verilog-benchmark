@@ -1,0 +1,16 @@
+Problem: Prob132_always_if2
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob132_always_if2/Prob132_always_if2_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'shut_off_computer' has 52 mismatches. First mismatch occurred at time 50.
+Hint: Output 'keep_driving' has 20 mismatches. First mismatch occurred at time 80.
+Hint: Total mismatched samples is 65 out of 121 samples
+
+Simulation finished at 605 ps
+Mismatches: 65 in 121 samples

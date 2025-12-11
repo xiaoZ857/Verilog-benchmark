@@ -1,0 +1,49 @@
+always @(posedge clk) begin
+    if (reset) begin
+        start_shifting <= 1'b0;
+    end else begin
+        case (state)
+            2'b00: begin
+                if (data == 1'b1) begin
+                    state <= 2'b01;
+                end else begin
+                    state <= 2'b00;
+                end
+                start_shifting <= 1'b0;
+            end
+            2'b01: begin
+                if (data == 1'b1) begin
+                    state <= 2'b10;
+                end else begin
+                    state <= 2'b00;
+                end
+                start_shifting <= 1'b0;
+            end
+            2'b10: begin
+                if (data == 1'b0) begin
+                    state <= 2'b11;
+                end else begin
+                    state <= 2'b10;
+                end
+                start_shifting <= 1'b0;
+            end
+            2'b11: begin
+                if (data == 1'b1) begin
+                    state <= 2'b11;
+                    start_shifting <= 1'b1;
+                end else begin
+                    state <= 2'b00;
+                    start_shifting <= 1'b0;
+                end
+            end
+            default: begin
+                state <= 2'b00;
+                start_shifting <= 1'b0;
+            end
+        endcase
+    end
+end
+
+reg [1:0] state;
+
+endmodule

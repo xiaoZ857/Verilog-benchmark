@@ -1,0 +1,15 @@
+Problem: Prob092_gatesv100
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 2):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:13: error: out_different['sd98:'sd0] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:6:      : out_different['sd98:'sd0] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:14: error: out_different['sd99] is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:6:      : out_different['sd99] is declared here as wire.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob092_gatesv100/Prob092_gatesv100_sample01.sv:12: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

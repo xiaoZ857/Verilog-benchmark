@@ -1,0 +1,11 @@
+```verilog
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        q <= 4'b0000;
+    else if (load)
+        q <= data;
+    else if (ena)
+        q <= {q[2:0], 1'b0};
+end
+endmodule
+```

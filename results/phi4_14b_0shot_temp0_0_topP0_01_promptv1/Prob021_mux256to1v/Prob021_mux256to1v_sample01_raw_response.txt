@@ -1,0 +1,4 @@
+```verilog
+assign out = in[(sel + 1) * 4 - 1 : sel * 4];
+endmodule
+```

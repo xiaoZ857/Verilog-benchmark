@@ -1,0 +1,20 @@
+Problem: Prob072_thermostat
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 10):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:11: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:15: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:15: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:17: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:18: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:18: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:20: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob072_thermostat_test.sv:11: error: invalid module item.

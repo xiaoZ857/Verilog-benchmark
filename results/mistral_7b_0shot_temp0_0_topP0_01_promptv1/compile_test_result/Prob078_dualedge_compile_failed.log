@@ -1,0 +1,22 @@
+Problem: Prob078_dualedge
+Code file: results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 9):
+
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:7: warning: macro verilog undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:17: warning: macro endmodule undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:18: warning: macro assign undefined (and assumed null) at this point.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:7: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:10: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:11: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:11: error: Invalid module instantiation
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:14: error: invalid module item.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:16: syntax error
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:18: error: Stray tic (`) here. Perhaps you put white space
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:18:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob078_dualedge_test.sv:1: error: `timescale directive can not be inside a module definition.
+results\mistral_7b_0shot_temp0_0_topP0_01_promptv1\Prob078_dualedge/Prob078_dualedge_sample01.sv:16: error: Invalid module instantiation

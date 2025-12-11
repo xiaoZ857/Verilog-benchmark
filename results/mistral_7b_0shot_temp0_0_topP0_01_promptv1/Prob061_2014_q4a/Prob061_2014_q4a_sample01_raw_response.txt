@@ -1,0 +1,8 @@
+ ```verilog
+always @(posedge clk) begin
+    if (L)
+        Q <= R;
+    else if (E)
+        Q <= {Q[1:0], w}; // concatenate Q[1:0] and w for shifting
+end
+```

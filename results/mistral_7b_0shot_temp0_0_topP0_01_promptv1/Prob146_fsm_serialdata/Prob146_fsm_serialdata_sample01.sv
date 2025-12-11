@@ -1,0 +1,43 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+ ```verilog
+reg [7:0] data;
+reg start = 1'b0;
+reg done = 1'b0;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        start <= 1'b0;
+        data <= 8'bx;
+        done <= 1'b0;
+    end else if (start && !data[7]) begin
+        data <= data << 1 | in;
+    end else if (!start && data[0]) begin
+        start <= 1'b1;
+    end else if (start) begin
+        data <= data << 1;
+        if (data[8] == in) begin
+            done <= 1'b1;
+            start <= 1'b0;
+        end
+    end
+end
+
+assign out_byte = data;
+assign done_out = done;
+
+always @(posedge clk) begin
+    if (done) begin
+        data <= 8'bx;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

@@ -1,0 +1,12 @@
+ ```verilog
+reg shift_ena;
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        shift_ena <= 1'b1;
+    else if (~reset && !shift_ena) // Reset has fallen and shift_ena is still high from previous cycle
+        shift_ena <= 1'b0;
+    else if (shift_ena && (clk >= 4)) // Shift register enabled for 4 clock cycles
+        shift_ena <= 1'b0;
+end
+endmodule
+```

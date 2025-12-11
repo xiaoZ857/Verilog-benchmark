@@ -1,0 +1,58 @@
+
+  reg [2:0] current_state, next_state;
+  reg [1:0] x_history;  // Store last 2 x values
+  reg [1:0] y_counter;   // Counter for y monitoring
+  
+  // State encoding
+  parameter A = 3'b000;  // Reset state
+  parameter B = 3'b001;  // Set f=1 for one cycle
+  parameter C = 3'b010;  // Monitor x for 1,0,1 pattern
+  parameter D = 3'b011;  // Pattern detected, set g=1, monitor y
+  parameter E = 3'b100;  // y=1 detected, maintain g=1 permanently
+  parameter F = 3'b101;  // y=0 for 2 cycles, set g=0 permanently
+  
+  // State register
+  always @(posedge clk) begin
+    if (!resetn) begin
+      current_state <= A;
+      x_history <= 2'b00;
+      y_counter <= 2'b00;
+    end else begin
+      current_state <= next_state;
+      x_history <= {x_history[0], x};
+      if (current_state == D) begin
+        y_counter <= y_counter + 1'b1;
+      end else begin
+        y_counter <= 2'b00;
+      end
+    end
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (current_state)
+      A: begin
+        if (resetn) next_state = B;
+        else next_state = A;
+      end
+      B: next_state = C;
+      C: begin
+        if (x_history == 2'b10 && x == 1'b1) next_state = D;
+        else next_state = C;
+      end
+      D: begin
+        if (y == 1'b1) next_state = E;
+        else if (y_counter == 2'b01) next_state = F;
+        else next_state = D;
+      end
+      E: next_state = E;
+      F: next_state = F;
+      default: next_state = A;
+    endcase
+  end
+  
+  // Output logic
+  assign f = (current_state == B);
+  assign g = (current_state == D) || (current_state == E);
+
+endmodule

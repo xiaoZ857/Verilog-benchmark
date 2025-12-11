@@ -1,0 +1,89 @@
+```verilog
+reg [3:0] state;
+reg [3:0] delay;
+reg [15:0] counter; // 16 bits to handle up to 6000 cycles (6 * 1000)
+reg [3:0] remaining_time;
+
+localparam IDLE = 4'd0,
+           DETECT_PATTERN = 4'd1,
+           READ_DELAY = 4'd2,
+           COUNTING = 4'd3,
+           WAIT_ACK = 4'd4;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        state <= IDLE;
+        delay <= 4'b0;
+        counter <= 16'b0;
+        counting <= 1'b0;
+        done <= 1'b0;
+        remaining_time <= 4'b0;
+    end else begin
+        case (state)
+            IDLE: begin
+                if (data == 1'b1) state <= DETECT_PATTERN; // Start detecting pattern
+            end
+
+            DETECT_PATTERN: begin
+                if (data == 1'b1) state <= DETECT_PATTERN; // Shift in '11'
+                else if (data == 1'b0) state <= READ_DELAY; // Shift in '10', start reading delay
+            end
+
+            READ_DELAY: begin
+                delay[3] <= data;
+                state <= READ_DELAY_2;
+            end
+
+            READ_DELAY_2: begin
+                delay[2] <= data;
+                state <= READ_DELAY_3;
+            end
+
+            READ_DELAY_3: begin
+                delay[1] <= data;
+                state <= READ_DELAY_4;
+            end
+
+            READ_DELAY_4: begin
+                delay[0] <= data;
+                counting <= 1'b1; // Start counting
+                counter <= (delay + 1) * 1000;
+                remaining_time <= delay;
+                state <= COUNTING;
+            end
+
+            COUNTING: begin
+                if (counter > 0) begin
+                    counter <= counter - 1;
+                    if (counter % 1000 == 0 && counter != 0)
+                        remaining_time <= remaining_time - 1;
+                end else begin
+                    counting <= 1'b0;
+                    done <= 1'b1;
+                    state <= WAIT_ACK;
+                end
+            end
+
+            WAIT_ACK: begin
+                if (ack) begin
+                    done <= 1'b0;
+                    state <= IDLE; // Reset to search for new pattern
+                end
+            end
+
+        endcase
+    end
+end
+
+assign count = remaining_time;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset logic handled in main always block
+    end else if (state == COUNTING && counter > 0) begin
+        // Counting state is managed by the main always block
+    end
+end
+
+endmodule
+```

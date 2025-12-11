@@ -1,0 +1,33 @@
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+assign out = (state == 4'b1000);
+
+always @(*) begin
+  next_state = 0;
+  if (state == 4'b0001) begin
+    if (in == 0)
+      next_state = 4'b0001;
+    else
+      next_state = 4'b0010;
+  end else if (state == 4'b0010) begin
+    if (in == 0)
+      next_state = 4'b0100;
+    else
+      next_state = 4'b0010;
+  end else if (state == 4'b0100) begin
+    if (in == 0)
+      next_state = 4'b0001;
+    else
+      next_state = 4'b1000;
+  end else if (state == 4'b1000) begin
+    if (in == 0)
+      next_state = 4'b0100;
+    else
+      next_state = 4'b0010;
+  end
+endmodule

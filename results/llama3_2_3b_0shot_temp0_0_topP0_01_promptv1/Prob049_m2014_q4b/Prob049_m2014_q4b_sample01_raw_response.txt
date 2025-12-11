@@ -1,0 +1,1 @@
+assign q = (ar) ? 1'b0 : ((d & ~q) ? d : q);

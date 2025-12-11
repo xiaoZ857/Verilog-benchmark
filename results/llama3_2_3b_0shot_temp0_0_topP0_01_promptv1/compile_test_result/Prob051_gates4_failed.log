@@ -1,0 +1,17 @@
+Problem: Prob051_gates4
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob051_gates4/Prob051_gates4_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'out_and' has no mismatches.
+Hint: Output 'out_or' has 25 mismatches. First mismatch occurred at time 5.
+Hint: Output 'out_xor' has 71 mismatches. First mismatch occurred at time 30.
+Hint: Total mismatched samples is 96 out of 234 samples
+
+Simulation finished at 1170 ps
+Mismatches: 96 in 234 samples

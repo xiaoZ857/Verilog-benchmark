@@ -1,0 +1,14 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output shift_ena
+);
+always @(posedge clk) begin
+    if (reset)
+        shift_ena <= 1'b1;
+    else if (shift_ena)
+        shift_ena <= 1'b0;
+end
+
+endmodule

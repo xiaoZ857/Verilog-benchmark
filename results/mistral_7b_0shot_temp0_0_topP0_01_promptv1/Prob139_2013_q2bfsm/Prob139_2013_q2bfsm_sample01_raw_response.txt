@@ -1,0 +1,20 @@
+ ```verilog
+reg f, g;
+always @(posedge clk or negedge resetn) begin
+    if (resetn) begin
+        f <= 1'b0;
+        g <= 1'b0;
+    end else if (!f && x == 1'b1 && posedge clk) begin
+        f <= 1'b1;
+    end else if (f && (x == 1'b0 || posedge clk)) begin
+        f <= 1'b0;
+    end else if ((g == 1'b0 && y == 1'b1 && posedge clk) || (g == 1'b1 && (y == 1'b1 || posedge clk))) begin
+        g <= g;
+    end else begin
+        g <= 1'b0;
+    end
+end
+assign f_out = f;
+assign g_out = g;
+endmodule
+```

@@ -1,0 +1,15 @@
+Problem: Prob118_history_shift
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob118_history_shift/Prob118_history_shift_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 5):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob118_history_shift/Prob118_history_shift_sample01.sv:13: error: Unable to bind wire/reg/memory `history' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob118_history_shift/Prob118_history_shift_sample01.sv:13: error: Unable to elaborate r-value: history
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob118_history_shift/Prob118_history_shift_sample01.sv:17: error: Could not find variable ``history'' in ``tb.top_module1''
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob118_history_shift/Prob118_history_shift_sample01.sv:19: error: Could not find variable ``history'' in ``tb.top_module1''
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob118_history_shift/Prob118_history_shift_sample01.sv:21: error: Could not find variable ``history'' in ``tb.top_module1''
+5 error(s) during elaboration.

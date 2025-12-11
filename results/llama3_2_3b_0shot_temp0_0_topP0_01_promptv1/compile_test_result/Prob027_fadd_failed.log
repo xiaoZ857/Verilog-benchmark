@@ -1,0 +1,16 @@
+Problem: Prob027_fadd
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob027_fadd/Prob027_fadd_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'cout' has 26 mismatches. First mismatch occurred at time 60.
+Hint: Output 'sum' has 105 mismatches. First mismatch occurred at time 60.
+Hint: Total mismatched samples is 105 out of 214 samples
+
+Simulation finished at 1070 ps
+Mismatches: 105 in 214 samples

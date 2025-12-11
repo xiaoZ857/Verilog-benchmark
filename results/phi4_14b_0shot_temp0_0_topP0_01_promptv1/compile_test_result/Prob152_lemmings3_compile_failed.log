@@ -1,0 +1,16 @@
+Problem: Prob152_lemmings3
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 6):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:80: error: Unable to bind wire/reg/memory `previous_state' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:80: error: Unable to elaborate r-value: ((state)==(IDLE_LEFT))|(((state)==(FALLING))&&((previous_state)!=(WALK_RIGHT)))
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:81: error: Unable to bind wire/reg/memory `previous_state' in `tb.top_module1'
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:81: error: Unable to elaborate r-value: ((((state)==(WALK_RIGHT))|((state)==(DIGGING)))|((state)==(IDLE_RIGHT)))|(((state)==(FALLING))&&((previous_state)==(WALK_RIGHT)))
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:85: error: Could not find variable ``previous_state'' in ``tb.top_module1''
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob152_lemmings3/Prob152_lemmings3_sample01.sv:87: error: Could not find variable ``previous_state'' in ``tb.top_module1''
+6 error(s) during elaboration.

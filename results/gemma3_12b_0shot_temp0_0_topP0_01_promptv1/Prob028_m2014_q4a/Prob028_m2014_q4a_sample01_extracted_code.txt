@@ -1,0 +1,7 @@
+always @(d ena) begin
+  if (ena)
+    q = d;
+  else
+    q = 1'b0;
+end
+endmodule

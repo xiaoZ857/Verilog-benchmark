@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+assign ena[2:0] = {ena[2], ena[1], ena[0]};
+assign q[7:4] = (q[3:0] + 1) & (~ena[2]);
+assign q[3:0] = (q[5:4] + 1) & (~ena[1]);
+assign q[5:4] = (q[6:5] + 1) & (~ena[0]);
+assign q[6:5] = (q[7:6] + 1) & (~ena[2]);
+assign q[7:6] = (q[8:7] + 1) & (~ena[1]);
+assign q[8:7] = (q[9:8] + 1) & (~ena[0]);
+assign q[9:8] = (q[10:9] + 1) & (~ena[2]);
+assign q[10:9] = (q[11:10] + 1) & (~ena[1]);
+assign q[11:10] = (q[12:11] + 1) & (~ena[0]);
+assign q[12:11] = (q[13:12] + 1) & (~ena[2]);
+assign q[13:12] = (q[14:13] + 1) & (~ena[1]);
+assign q[14:13] = (q[15:14] + 1) & (~ena[0]);
+assign q[15:14] = (reset) ? 16'd14 : q[15:14] + 1;
+endmodule

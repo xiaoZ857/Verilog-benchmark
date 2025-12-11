@@ -1,0 +1,4 @@
+assign xnor_out = in ^ out;
+always @(posedge clk) out <= xnor_out;
+
+endmodule

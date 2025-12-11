@@ -1,0 +1,32 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+logic state;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 1'b0;
+  end else begin
+    case (state)
+      1'b0: begin
+        if (in == 0)
+          state <= 1'b1;
+        else
+          state <= 1'b0;
+      end
+      1'b1: begin
+        if (in == 0)
+          state <= 1'b0;
+        else
+          state <= 1'b1;
+      end
+    endcase
+  end
+end
+
+assign out = (state == 1'b1) ? 1'b1 : 1'b0;
+endmodule

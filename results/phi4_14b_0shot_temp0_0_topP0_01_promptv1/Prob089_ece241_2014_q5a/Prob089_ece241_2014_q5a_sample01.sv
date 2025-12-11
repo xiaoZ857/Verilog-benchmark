@@ -1,0 +1,53 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+reg [1:0] state, next_state;
+wire negated_x;
+
+assign negated_x = ~x; // Combinational logic for bit negation
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        state <= 2'b00; // Reset to initial state
+    else
+        state <= next_state;
+end
+
+always @(*) begin
+    case (state)
+        2'b00: begin
+            z = x; // Pass through the input bit
+            if (x == 1'b0) 
+                next_state = 2'b01; // Transition to find first '1'
+            else
+                next_state = 2'b10; // Already found, start negation
+        end
+        2'b01: begin
+            z = x; // Pass through the input bit
+            if (x == 1'b1) 
+                next_state = 2'b10; // Found first '1', start negation
+            else
+                next_state = 2'b01; // Continue searching for '1'
+        end
+        2'b10: begin
+            z = negated_x; // Output the negated bit
+            if (x == 1'b0) 
+                next_state = 2'b11; // Add one to LSB after negation
+            else
+                next_state = 2'b10; // Continue negating bits
+        end
+        2'b11: begin
+            z = 1'b1; // Output '1' for the carry bit addition
+            if (x == 1'b0) 
+                next_state = 2'b00; // Reset state after adding one
+            else
+                next_state = 2'b11; // Continue carrying over
+        end
+    endcase
+end
+
+endmodule

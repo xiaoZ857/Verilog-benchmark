@@ -1,0 +1,12 @@
+ ```verilog
+reg [7:0] temp_sum;
+always @(posedge clk) begin
+    if (overflow_last)
+        temp_sum <= a + b - 2'b1111_1111; // subtract maximum value to check for overflow
+    else
+        temp_sum <= a + b;
+    s <= temp_sum;
+    overflow <= (temp_sum > 'hFF) ^ (temp_sum < '00); // compare with zero and maximum value
+end
+assign overflow_last = overflow;
+```

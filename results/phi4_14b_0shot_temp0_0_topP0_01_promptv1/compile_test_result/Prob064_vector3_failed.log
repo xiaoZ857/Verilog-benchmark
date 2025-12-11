@@ -1,0 +1,18 @@
+Problem: Prob064_vector3
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob064_vector3/Prob064_vector3_sample01.sv
+Compilation: SUCCESS
+Test: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Test exit code: 0
+VCD info: dumpfile wave.vcd opened for output.
+Hint: Output 'w' has 101 mismatches. First mismatch occurred at time 130.
+Hint: Output 'x' has 100 mismatches. First mismatch occurred at time 130.
+Hint: Output 'y' has 125 mismatches. First mismatch occurred at time 10.
+Hint: Output 'z' has no mismatches.
+Hint: Total mismatched samples is 125 out of 126 samples
+
+Simulation finished at 630 ps
+Mismatches: 125 in 126 samples

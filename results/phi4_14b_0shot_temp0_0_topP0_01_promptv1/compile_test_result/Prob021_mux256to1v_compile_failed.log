@@ -1,0 +1,22 @@
+Problem: Prob021_mux256to1v
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 8):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7:      : This lsb expression violates the rule: (sel)*('sd4)
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7:      : This msb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd1)
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7:      : This lsb expression violates the rule: (sel)*('sd4)
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7: error: Part select expressions must be constant.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob021_mux256to1v/Prob021_mux256to1v_sample01.sv:7:      : This msb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd1)
+8 error(s) during elaboration.

@@ -1,0 +1,35 @@
+reg [6:0] global_history;
+wire [6:0] index;
+wire [1:0] pht_entry;
+
+assign index = predict_pc ^ global_history;
+assign pht_entry = PHT[index];
+
+assign predict_taken = (pht_entry[1]);
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        global_history <= 7'b0;
+    else if (predict_valid)
+        global_history <= {global_history[5:0], predict_taken};
+end
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        PHT[127:0] <= 128'h0000_0000_0000_0000;
+    end else if (train_valid) begin
+        if (train_mispredicted)
+            global_history <= train_history;
+
+        case (pht_entry)
+            2'b00, 2'b01: PHT[train_pc ^ train_history] <= pht_entry + 1;
+            2'b10, 2'b11: PHT[train_pc ^ train_history] <= pht_entry - 1;
+        endcase
+    end
+end
+
+assign predict_history = global_history;
+
+reg [127:0] PHT; // Pattern History Table with 128 entries of 2-bit saturating counters
+
+endmodule

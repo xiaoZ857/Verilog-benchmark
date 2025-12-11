@@ -1,0 +1,9 @@
+always @(posedge cpu_overheated or posedge shut_off_computer) begin
+    if (cpu_overheated)
+        shut_off_computer <= 1;
+end
+
+always @(*) begin
+    if (~arrived)
+        keep_driving = ~gas_tank_empty;
+end

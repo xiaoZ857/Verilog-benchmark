@@ -1,0 +1,6 @@
+ ```verilog
+always @(posedge clk) begin
+    assign out = ~(in1 | in2);
+end
+endmodule
+```

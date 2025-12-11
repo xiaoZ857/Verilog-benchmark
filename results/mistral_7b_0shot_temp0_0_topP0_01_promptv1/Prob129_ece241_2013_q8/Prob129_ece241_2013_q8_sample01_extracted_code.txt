@@ -1,0 +1,17 @@
+ ```verilog
+reg [1:0] state;
+always @(posedge clk or negedge aresetn) begin
+    if (!aresetn)
+        state <= 2'b00;
+    else if (state == 2'b01 && x)
+        state <= 2'b10;
+    else if (state == 2'b10 && x && !state[1])
+        state <= 2'b11;
+    else if (state == 2'b11 && x)
+        z <= 1'b1;
+    else
+        state <= state;
+    z <= 1'b0;
+end
+assign z_out = z;
+endmodule

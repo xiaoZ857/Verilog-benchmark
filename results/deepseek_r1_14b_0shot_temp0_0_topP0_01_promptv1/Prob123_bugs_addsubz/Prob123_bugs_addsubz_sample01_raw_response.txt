@@ -1,0 +1,11 @@
+always @(*) begin
+    case (do_sub)
+        0: out <= a + b;
+        1: out <= a - b;
+    endcase
+
+    if (!out)  // Changed from ~out to !out for correct zero detection
+        result_is_zero = 1;
+end
+
+endmodule

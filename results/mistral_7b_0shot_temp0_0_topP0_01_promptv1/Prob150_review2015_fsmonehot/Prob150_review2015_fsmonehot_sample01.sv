@@ -1,0 +1,43 @@
+
+module TopModule (
+  input d,
+  input done_counting,
+  input ack,
+  input [9:0] state, // 10-bit one-hot current state
+  output B3_next,
+  output S_next,
+  output S1_next,
+  output Count_next,
+  output Wait_next,
+  output done,
+  output counting,
+  output shift_ena
+);
+always @(posedge clk) begin
+    if (state[0] && !state[1]) // S state
+        S_next = 1'b1;
+    else if (!state[0] && state[1]) // S1 state
+        S1_next = 1'b1;
+    else if (!state[1] && state[2]) // S11 state
+        S11_next = 1'b1;
+    else if (!state[2] && state[3]) // S110 state
+        S110_next = 1'b1;
+    else if (!state[3] && state[4]) // B0 state
+        B0_next = 1'b1;
+    else if (state[4] && state[5]) // B1 state
+        B1_next = 1'b1;
+    else if (state[5] && state[6]) // B2 state
+        B2_next = 1'b1;
+    else if (state[6] && state[7]) // B3 state
+        B3_next = 1'b1;
+    else if (state[8]) // Count state
+        Count_next = 1'b1;
+    else if (!done_counting) // Wait state
+        Wait_next = 1'b1;
+
+    counting = state[8];
+    done = !d && counting && done_counting;
+    shift_ena = B3_next || Count_next;
+end
+
+// VERILOG-EVAL: endmodule not found

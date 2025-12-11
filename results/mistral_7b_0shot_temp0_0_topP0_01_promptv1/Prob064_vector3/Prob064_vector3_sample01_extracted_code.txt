@@ -1,0 +1,7 @@
+ ```verilog
+always @(posedge clk) begin
+    assign w = {a, b, c, d, e, f}; // Concatenate inputs a-f
+    assign x = w[25:16];            // Extract 8 bits from the concatenated input (LSB to MSB)
+    assign y = w[30:22];            // Extract another 8 bits from the concatenated input (LSB to MSB)
+    assign z = w[31:23] | 2'b1;      // Extract remaining 5 bits and add two LSB 1s
+end

@@ -1,0 +1,78 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+logic [2:0] state, next_state;
+logic [7:0] data_bits;
+logic start_bit_detected, stop_bit_valid;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+        state <= 3'b000;
+    else
+        state <= next_state;
+end
+
+always_comb begin
+    case (state)
+        3'b000: // Idle state
+            if (in == 1'b0)
+                next_state = 3'b001; // Start bit detected
+            else
+                next_state = 3'b000;
+
+        3'b001: // After start bit, expecting data bits
+            if (state[1:0] < 2'b11) // Less than 8 data bits received
+                next_state = {state[1:0] + 2'b01, 1'b0};
+            else
+                next_state = 3'b010; // Move to stop bit state
+
+        3'b010: // Expecting stop bit
+            if (in == 1'b1)
+                next_state = 3'b000; // Valid byte received
+            else
+                next_state = 3'b011; // Invalid stop bit, go back to idle
+
+        3'b011: // Invalid stop bit detected, wait for valid stop bit
+            if (in == 1'b1)
+                next_state = 3'b000;
+            else
+                next_state = 3'b011;
+
+        default:
+            next_state = 3'b000;
+    endcase
+end
+
+always_ff @(posedge clk) begin
+    if (state[1:0] < 2'b11 && state == 3'b001)
+        data_bits <= {in, data_bits[7:1]};
+end
+
+assign done = (state == 3'b000) & start_bit_detected & stop_bit_valid;
+
+always_comb begin
+    case (state)
+        3'b001:
+            start_bit_detected = 1'b1;
+        default:
+            start_bit_detected = 1'b0;
+    endcase
+end
+
+always_comb begin
+    case (state)
+        3'b010:
+            if (in == 1'b1)
+                stop_bit_valid = 1'b1;
+            else
+                stop_bit_valid = 1'b0;
+        default:
+            stop_bit_valid = 1'b0;
+    endcase
+end
+
+endmodule

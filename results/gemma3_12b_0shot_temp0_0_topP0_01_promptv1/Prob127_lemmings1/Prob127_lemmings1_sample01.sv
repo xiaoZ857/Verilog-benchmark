@@ -1,0 +1,25 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    walk_left <= 1'b1;
+    walk_right <= 1'b0;
+  end else begin
+    if (bump_left == 1 || bump_right == 1) begin
+      if (walk_left == 1) begin
+        walk_left <= 1'b0;
+        walk_right <= 1'b1;
+      end else begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+      end
+    end
+  end
+endmodule

@@ -1,0 +1,26 @@
+
+reg state;
+
+// State register with asynchronous reset
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= 1'b1; // Reset to state B
+    end else begin
+        case (state)
+            1'b0: // State A
+                if (in)
+                    state <= 1'b0; // Stay in A
+                else
+                    state <= 1'b1; // Go to B
+            1'b1: // State B
+                if (in)
+                    state <= 1'b1; // Stay in B
+                else
+                    state <= 1'b0; // Go to A
+        endcase
+    end
+end
+
+// Output logic (Moore machine - output depends only on state)
+assign out = state;
+endmodule

@@ -1,0 +1,10 @@
+ ```verilog
+always @(posedge clk or posedge reset) begin
+    if (reset)
+        q <= 5'b10101;
+    else begin
+        q[0] = ~q[4] ^ q[3];
+        for (int i = 1; i < 5; i = i + 1)
+            q[i] = q[i - 1];
+    end
+end

@@ -1,0 +1,7 @@
+always @(negedge clk) begin
+    if (reset)
+        q <= 8'b00110100;
+    else
+        q <= d;
+end
+endmodule

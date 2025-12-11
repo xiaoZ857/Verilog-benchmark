@@ -1,0 +1,10 @@
+assign f = !resetn;
+assign g = (!resetn && ((x[2:0] == 3'b111) || (g && (y < 2))));
+always @(posedge clk) begin
+    if (resetn)
+        g <= 1'b0;
+    else if (g)
+        y <= y;
+    else if (~y && ~x[2:0])
+        g <= 1'b0;
+end

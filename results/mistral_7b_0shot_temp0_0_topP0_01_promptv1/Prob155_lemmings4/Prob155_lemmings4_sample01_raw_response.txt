@@ -1,0 +1,18 @@
+ ```verilog
+reg [1:0] state; // FSM state (00: walking left, 01: falling, 10: digging, 11: splattered)
+always @(posedge clk or negedge areset) begin
+    if (areset)
+        state <= 2'b00;
+    else if (ground == 1 && dig == 0) // Walking left
+        state = (bump_left || bump_right)? 2'b01 : state;
+    else if (dig == 1 && ground == 1) // Digging
+        state = (ground == 0)? 2'b10 : state;
+    else if (state != 2'b11) // Falling or splattered
+        state <= 2'b01;
+end
+
+assign walk_left = state[0];
+assign walk_right = state[1];
+assign aaah = state == 2'b01;
+assign digging = state == 2'b10;
+```

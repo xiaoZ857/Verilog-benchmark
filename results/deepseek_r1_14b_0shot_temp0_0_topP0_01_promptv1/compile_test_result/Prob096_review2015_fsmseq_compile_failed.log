@@ -1,0 +1,26 @@
+Problem: Prob096_review2015_fsmseq
+Code file: results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 16):
+
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:33: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:10: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:13: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:14: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:15: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:16: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:17: error: Unable to bind wire/reg/memory `S2' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:18: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:19: error: Unable to bind wire/reg/memory `S2' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:20: error: Unable to bind wire/reg/memory `S3' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:21: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:22: error: Unable to bind wire/reg/memory `S3' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:24: error: Unable to bind wire/reg/memory `S4' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:26: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:27: error: Unable to bind wire/reg/memory `S4' in `tb.top_module1'
+results\deepseek_r1_14b_0shot_temp0_0_topP0_01_promptv1\Prob096_review2015_fsmseq/Prob096_review2015_fsmseq_sample01.sv:28: error: Unable to bind wire/reg/memory `S4' in `tb.top_module1'
+16 error(s) during elaboration.

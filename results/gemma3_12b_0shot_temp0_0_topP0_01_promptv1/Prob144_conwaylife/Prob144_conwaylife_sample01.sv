@@ -1,0 +1,100 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+always @(posedge clk) begin
+  if (load) begin
+    q <= data;
+  end else begin
+    logic [255:0] next_q;
+    for (int i = 0; i < 256; i++) begin
+      logic count;
+      count = 0;
+      logic north, south, east, west, northeast, northwest, southeast, southwest;
+
+      // North
+      if (i >= 16) begin
+        north = q[i - 16];
+      end else if (i < 16) begin
+        north = q[255 - (16 - (i))];
+      end else begin
+        north = 1'b0;
+      end
+
+      // South
+      if (i < 240) begin
+        south = q[i + 16];
+      end else if (i >= 240) begin
+        south = q[i - (256 - 16)];
+      end else begin
+        south = 1'b0;
+      end
+
+      // East
+      if ((i + 1) % 16 != 0) begin
+        east = q[i + 1];
+      end else if ((i + 1) % 16 == 0) begin
+        east = q[i - 15];
+      end else begin
+        east = 1'b0;
+      end
+
+      // West
+      if ((i) % 16 != 0) begin
+        west = q[i - 1];
+      end else if ((i) % 16 == 0) begin
+        west = q[i + 15];
+      end else begin
+        west = 1'b0;
+      end
+
+      // Northeast
+      if ((i + 1) % 16 != 0 && i >= 16) begin
+        northeast = q[i + 1];
+      end else if ((i + 1) % 16 == 0 && i >= 16) begin
+        northeast = q[i - 15];
+      end else if ((i + 1) % 16 != 0 && i < 16) begin
+        northeast = q[i + 1];
+      end else if ((i + 1) % 16 == 0 && i < 16) begin
+        northeast = q[i - 15];
+      end else begin
+        northeast = 1'b0;
+      end
+
+      // Northwest
+      if ((i - 1) % 16 != 0 && i >= 16) begin
+        northwest = q[i - 1];
+      end else if ((i - 1) % 16 == 0 && i >= 16) begin
+        northwest = q[i + 15];
+      end else if ((i - 1) % 16 != 0 && i < 16) begin
+        northwest = q[i - 1];
+      end else if ((i - 1) % 16 == 0 && i < 16) begin
+        northwest = q[i + 15];
+      end else begin
+        northwest = 1'b0;
+      end
+
+      // Southeast
+      if ((i + 1) % 16 != 0 && i < 240) begin
+        southeast = q[i + 1];
+      end else if ((i + 1) % 16 == 0 && i < 240) begin
+        southeast = q[i - 15];
+      end else if ((i + 1) % 16 != 0 && i >= 240) begin
+        southeast = q[i + 1];
+      end else if ((i + 1) % 16 == 0 && i >= 240) begin
+        southeast = q[i - 15];
+      end else begin
+        southeast = 1'b0;
+      end
+
+      // Southwest
+      if ((i - 1) % 16 != 0 && i < 240) begin
+        southwest = q[i - 1];
+      end else if ((i - 1) % 16 == 0 && i < 240) begin
+        southwest = q[i + 15];
+      end else if ((i - 1) % 
+
+// VERILOG-EVAL: endmodule not found

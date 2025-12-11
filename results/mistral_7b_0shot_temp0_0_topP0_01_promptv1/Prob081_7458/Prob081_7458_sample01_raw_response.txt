@@ -1,0 +1,13 @@
+ ```verilog
+always @(posedge clk) begin
+    // AND gates for p1y
+    wire p1g = p1a & p1b & p1c;
+    wire p1h = p1d & p1e & p1f;
+    p1y = p1g | p1h;
+
+    // AND gates for p2y
+    wire p2i = p2a & p2b;
+    wire p2j = p2c & p2d;
+    p2y = p2i | p2j;
+end
+```

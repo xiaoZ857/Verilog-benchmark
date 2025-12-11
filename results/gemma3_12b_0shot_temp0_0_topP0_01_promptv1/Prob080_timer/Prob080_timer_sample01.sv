@@ -1,0 +1,27 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+reg [9:0] counter;
+wire tc_internal;
+
+assign tc = tc_internal;
+
+always @(posedge clk) begin
+  if (load) begin
+    counter <= data;
+  end else if (counter > 0) begin
+    counter <= counter - 1;
+  end
+end
+
+always @(counter) begin
+  if (counter == 0)
+    tc_internal = 1;
+  else
+    tc_internal = 0;
+end
+endmodule

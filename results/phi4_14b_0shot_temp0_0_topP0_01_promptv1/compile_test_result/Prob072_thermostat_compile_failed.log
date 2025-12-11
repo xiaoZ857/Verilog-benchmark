@@ -1,0 +1,12 @@
+Problem: Prob072_thermostat
+Code file: results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 1):
+
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:15: error: fan is not a valid l-value in tb.top_module1.
+results\phi4_14b_0shot_temp0_0_topP0_01_promptv1\Prob072_thermostat/Prob072_thermostat_sample01.sv:9:      : fan is declared here as wire.
+1 error(s) during elaboration.

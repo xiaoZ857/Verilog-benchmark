@@ -1,0 +1,18 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+ ```verilog
+always @(posedge clk) begin
+    reg [254:0] temp;
+    always @* begin
+        temp[0] = in[0];
+        for (int i = 1; i <= 254; i = i + 1)
+            temp[i] = temp[i-1] + in[i];
+    end
+    out = temp[0] + temp[1];
+end
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

@@ -1,0 +1,40 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+logic d1, d2, d3;
+logic q1, q2, q3;
+wire x_xor;
+wire x_and;
+wire x_or;
+
+dff_xor_1 u1 (
+    .clk(clk),
+    .x(x),
+    .d(x_xor),
+    .q(q1)
+);
+
+dff_and_2 u2 (
+    .clk(clk),
+    .x(x),
+    .d(x_and),
+    .q(q2)
+);
+
+dff_or_3 u3 (
+    .clk(clk),
+    .x(x),
+    .d(x_or),
+    .q(q3)
+);
+
+assign x_xor = x ^ q1;
+assign x_and = x & ~q2;
+assign x_or = x | ~q3;
+
+assign z = ~(q1 | q2 | q3);
+
+endmodule

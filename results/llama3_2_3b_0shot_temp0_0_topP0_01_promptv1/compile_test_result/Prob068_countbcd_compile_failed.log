@@ -1,0 +1,24 @@
+Problem: Prob068_countbcd
+Code file: results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv
+Compilation: FAILED
+==================================================
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+Compilation failed (exit code 12):
+
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:8: warning: Part select ena[2:0] is out of range.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:8: sorry: part selects straddling the start of signal (ena['sd2:'sd0]) are not currently supported.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:11: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:12: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:13: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:14: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:15: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:16: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:17: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:18: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:19: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:20: error: Unresolved net/uwire q cannot have multiple drivers.
+results\llama3_2_3b_0shot_temp0_0_topP0_01_promptv1\Prob068_countbcd/Prob068_countbcd_sample01.sv:21: error: Unresolved net/uwire q cannot have multiple drivers.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob068_countbcd_test.sv:125: warning: output port ena is coerced to inout.
+12 error(s) during elaboration.

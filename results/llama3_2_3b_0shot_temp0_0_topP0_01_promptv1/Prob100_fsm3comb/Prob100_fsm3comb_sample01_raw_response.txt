@@ -1,0 +1,2 @@
+assign next_state = {state[1], state[0]};
+assign out = (state == 2'b00) ? 1 : 0;

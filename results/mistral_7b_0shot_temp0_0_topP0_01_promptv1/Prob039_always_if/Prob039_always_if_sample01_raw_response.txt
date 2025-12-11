@@ -1,0 +1,27 @@
+ Here are the two implementations as per your requirements:
+
+**Implementation using assign statements:**
+
+```verilog
+assign out_assign = (sel_b1 & sel_b2) ? b : a;
+endmodule
+```
+
+**Implementation using procedural if statement:**
+
+```verilog
+always @(posedge clk) begin
+    if ((sel_b1 && sel_b2) || (!sel_b1 && !sel_b2))
+        out_always <= b;
+    else
+        out_always <= a;
+end
+endmodule
+```
+
+**Verification Checklist:**
+- Code ends with `endmodule`: [x]
+- All wire outputs use `assign` keyword: [x] (out_assign)
+- All reg outputs are assigned in always blocks: [x] (out_always)
+- Only declared signals are used: [x]
+- Blocking/non-blocking assignments are correct: [x] (out_assign uses assign, out_always uses non-blocking assignment inside always block)

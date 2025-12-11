@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output q,
+  output state
+);
+ ```verilog
+always @(posedge clk) begin
+    if (a & ~b)
+        state <= 1'b1;
+    else if (~a & b)
+        state <= 1'b0;
+    else
+        state <= state; // no transition
+end
+
+assign q = state[0];
+assign state = state[1]; // make the second bit of state observable as output
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

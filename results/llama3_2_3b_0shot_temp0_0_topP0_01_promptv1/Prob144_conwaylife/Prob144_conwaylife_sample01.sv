@@ -1,0 +1,13 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+assign q = {data[15:0], data[31:16], data[47:32], data[63:48], 
+             data[79:64], data[95:72], data[111:96], data[127:112],
+             data[143:128], data[159:144], data[175:160], data[191:176],
+             data[207:192], data[223:208], data[239:224], data[255:240]};
+
+// VERILOG-EVAL: endmodule not found

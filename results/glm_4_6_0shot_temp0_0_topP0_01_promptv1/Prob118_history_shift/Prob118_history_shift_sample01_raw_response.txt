@@ -1,0 +1,15 @@
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        predict_history <= 32'b0;
+    end else begin
+        if (train_mispredicted) begin
+            // Misprediction takes precedence
+            predict_history <= {train_history[31:1], train_taken};
+        end else if (predict_valid) begin
+            // Normal prediction - shift in new prediction
+            predict_history <= {predict_history[31:1], predict_taken};
+        end
+    end
+end
+endmodule

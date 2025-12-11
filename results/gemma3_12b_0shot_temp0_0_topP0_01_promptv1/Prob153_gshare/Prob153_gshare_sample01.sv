@@ -1,0 +1,47 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+logic [7:0] global_history;
+logic [6:0] history_register;
+logic [7:0] pht [0:127];
+logic [6:0] index;
+logic taken;
+
+assign index = (predict_pc ^ global_history[7:1]) [6:0];
+
+always @(posedge clk) begin
+  if (areset) begin
+    global_history <= 8'b0;
+    history_register <= 7'b0;
+    for (int i = 0; i < 128; i++) begin
+      pht[i] <= 8'b00000000;
+    end
+  end else begin
+    if (train_valid) begin
+      pht[index] <= pht[index] + (train_taken ? 2 : -1);
+      if (train_mispredicted) begin
+        global_history <= global_history ^ (1 << (train_pc[6]));
+      end
+    end
+    if (predict_valid) begin
+      taken = pht[index][1];
+    end
+  end
+end
+
+assign predict_taken = taken;
+assign predict_history = history_register;
+endmodule

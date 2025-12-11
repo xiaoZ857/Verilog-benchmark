@@ -1,0 +1,13 @@
+reg state; // 0 = walk_left, 1 = walk_right
+
+always @(posedge clk or posedge areset) begin
+    if (areset)
+        state <= 1'b0; // reset to walk left
+    else
+        state <= state ^ (bump_left | bump_right); // toggle on any bump
+end
+
+assign walk_left  = (state == 1'b0);
+assign walk_right = (state == 1'b1);
+
+endmodule

@@ -46,7 +46,7 @@
 
 **关键发现**:
 - gpt-oss:20b 表现最佳，测试通过率 56.4%
-- phi4:14b 编译成功率最高（68.6%），但通过率仅为 30.1%，说明编译成功不等于功能正确
+- phi4:14b 编译成功率最高（68.6%），但通过率仅为 30.1%，编译成功不等于功能正确
 
 
 #### 模型基线测试（参数组2：高温/高top-p）
@@ -78,9 +78,7 @@
 - **deepseek_v3_2 表现最佳**，相比基线测试（参数组1）提升了3.2个百分点（从46.2%到48.7%）
 - **phi4_14b 编译成功率最高**（76.9%），但通过率相对较低，与基线测试（参数组1）保持一致
 - **模型性能与参数规模大致正相关**，除了glm-4.6外，其他的模型整体按照模型参数越大通过率越高的规律
-- **高温参数整体提升了模型性能**，相比基线测试（参数组1）有显著改善，特别是API模型和开源大模型提升幅度更明显
 - **qwen3_8b 编译和测试通过率完全一致**（10.3%），说明其生成的代码要么完全正确要么完全错误，没有中间状态
-- phi4_14b 和 gemma3_12b 在高温下编译和测试通过率均有明显提升
 
 #### 基线参数组对比
 | 模型名称 | 参数规模 | 编译成功率 (temp=0.0) | 编译成功率 (temp=0.8) | 编译变化 | 测试通过率 (temp=0.0) | 测试通过率 (temp=0.8) | 测试变化 |
@@ -129,21 +127,12 @@
 - **glm_4_6 表现最佳**，测试通过率达到 67.9%，相比基线测试（参数组1）提升了42.9个百分点（从25.0%到67.9%），提升效果显著
 - **deepseek_v3_2 位列第二**，测试通过率 59.0%，相比基线测试（参数组1）提升了12.8个百分点（从46.2%到59.0%）
 - **gpt_oss_20b 表现稳定**，测试通过率 55.1%，相比基线测试（参数组1）下降了1.3个百分点（从56.4%到55.1%），基本持平
-
 - **优化提示词对不同模型效果差异明显**：
-  - 对 glm_4_6 提升最显著（+42.9%）
-  - 对 deepseek_v3_2 有明显提升
-  - 对 gpt_oss_20b 基本持平
-  - 对其他模型提升有限或略有下降
-- **提示词优化效果与模型架构强相关**，说明不同模型对提示词的响应模式存在显著差异
+  - 对 glm_4_6、deepseek-V3.2这些参数量大的模型 提升最显著
+  - 对gpt_oss_20b、mistral_7b、gemma3_12b、llama3_2_3b是负面效果
 
 
-
-
-
-
-
-#### 优化提示词对比（基于参数组1）
+#### 优化提示词与基线对比（基于参数组1）
 
 | 模型名称 | 参数规模 | 编译成功率 (基线) | 编译成功率 (优化) | 编译变化 | 测试通过率 (基线) | 测试通过率 (优化) | 测试变化 |
 |---------|---------|------------------|------------------|----------|------------------|------------------|----------|
@@ -192,7 +181,7 @@
 - **高温参数 + 优化提示词组合效果显著**，多数模型在此配置下表现优于基线
 
 
-#### 优化提示词对比（基于参数组2）
+#### 优化提示词与基线对比（基于参数组2）
 
 | 模型名称 | 参数规模 | 编译成功率 (基线) | 编译成功率 (优化) | 编译变化 | 测试通过率 (基线) | 测试通过率 (优化) | 测试变化 |
 |---------|---------|------------------|------------------|----------|------------------|------------------|----------|
@@ -207,7 +196,7 @@
 | mistral_7b | 7B | 17.3% | 3.2% | -14.1% | 5.1% | 0.6% | -4.5% |
 
 
-#### 优化提示词参数组对比
+#### 优化提示词不同参数组对比
 
 | 模型名称 | 参数规模 | 测试通过率 (参数组1优化) | 测试通过率 (参数组2优化) | 变化 |
 |---------|---------|------------------------|------------------------|------|
@@ -249,16 +238,88 @@
 1. **glm_4_6 对优化提示词响应最敏感**，测试通过率从基线的25.0%提升至71.2%，提升幅度达46.2个百分点
 2. **deepseek系列模型（v3_2和r1_14b）均有显著提升**，说明该系列对提示词优化友好
 3. **gpt_oss_20b 在高温+优化提示词配置下表现最佳**，达到60.9%通过率
-4. **mistral_7b 与优化提示词严重不兼容**，编译成功率从基线的21.8%骤降至0.6%，可能存在格式兼容性问题
-5. **gemma3_12b 在优化提示词下表现下降**，说明该模型更适合基线提示词
-6. **小参数模型（llama3_2_3b）对提示词优化收益有限**，能力受模型规模制约
-7. **温度参数对不同模型影响差异明显**：
+4. **mistral_7b 与优化提示词严重不兼容**，编译成功率从基线的21.8%骤降至0.6%，可能存在理解性问题，gemma3_12b同样
+5. **小参数模型（llama3_2_3b）对提示词优化收益有限**，能力受模型规模制约
+6. **温度参数对不同模型影响差异明显**：
    - API模型（glm_4_6、deepseek_v3_2）在高温下表现更好
    - 部分开源模型（phi4_14b、gemma3_12b）在高温下编译成功率提升但功能正确率波动
 
+#### 优化提示词V1
+
+VERILOG_PROMPT_V1 = """You are an expert Verilog/SystemVerilog code generator. Generate ONLY the module body code (the content between the module declaration and endmodule). Follow these CRITICAL SYNTAX RULES:
 
 
+### CRITICAL SYNTAX RULES - MUST FOLLOW ###
 
+1. **Module Boundary**
+   - The module declaration is ALREADY provided in the prompt
+   - You MUST end your code with `endmodule`
+   - Do NOT redeclare the module header
+
+2. **Continuous Assignment (for combinational logic on wire outputs)**
+   - ALWAYS use `assign` keyword for wire-type outputs
+   - Correct: `assign out = a & b;`
+   - Wrong: `out = a & b;` (missing assign)
+
+3. **Output Port Types**
+   - If output is assigned in `always` block -> declare as `reg` or use `logic`
+   - If output uses `assign` statement -> leave as `wire` (default)
+   - Check the module interface: if output is already declared as `reg`, use always block
+   - If output is NOT declared as `reg`, use `assign` for combinational logic
+
+4. **Always Block Assignments**
+   - Sequential logic (with clk): use non-blocking `<=`
+   - Combinational logic (always @* or always_comb): use blocking `=`
+   - NEVER mix blocking and non-blocking in same always block
+
+5. **Signal Declarations**
+   - Only use signals that are defined in module ports or declared internally
+   - Do NOT use `clk` in combinational-only circuits
+   - Check module ports before using any signal
+
+6. **Common Patterns**
+
+   Combinational logic (wire output):
+   ```verilog
+   assign out = a & b;
+   endmodule
+   ```
+
+   Combinational logic (reg output, using always):
+   ```verilog
+   always @(*) begin
+       out = a & b;
+   end
+   endmodule
+   ```
+
+   Sequential logic (D flip-flop):
+   ```verilog
+   always @(posedge clk) begin
+       if (reset)
+           q <= 1'b0;
+       else
+           q <= d;
+   end
+   endmodule
+   ```
+
+### OUTPUT FORMAT ###
+- Generate ONLY the module body (between declaration and endmodule)
+- Must include `endmodule` at the end
+- No explanations, no comments unless necessary for complex logic
+- No markdown code blocks
+
+### VERIFICATION CHECKLIST ###
+Before outputting, verify:
+[ ] Code ends with `endmodule`
+[ ] All wire outputs use `assign` keyword
+[ ] All reg outputs are assigned in always blocks
+[ ] Only declared signals are used
+[ ] Blocking/non-blocking assignments are correct
+"""
+
+------
 
 
 

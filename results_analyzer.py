@@ -79,6 +79,22 @@ class TestFailure:
     expected_behavior: Optional[str] = None  # 期望行为描述
 
 @dataclass
+class IterationStats:
+    """迭代修复统计信息"""
+    improved_by_compile_iteration: int = 0  # 通过编译迭代改进的数量
+    improved_by_test_iteration: int = 0     # 通过测试迭代改进的数量
+    total_compile_attempts: int = 0         # 总编译迭代次数
+    total_test_attempts: int = 0            # 总测试迭代次数
+    avg_compile_attempts: float = 0.0       # 平均编译迭代次数
+    avg_test_attempts: float = 0.0          # 平均测试迭代次数
+    problems_improved: List[str] = None     # 通过迭代改进的问题列表
+
+    def __post_init__(self):
+        if self.problems_improved is None:
+            self.problems_improved = []
+
+
+@dataclass
 class ModelAnalysis:
     """单个模型的分析结果"""
     model_name: str
@@ -92,6 +108,7 @@ class ModelAnalysis:
     compilation_failures: List[CompilationFailure]
     test_failures: List[TestFailure]
     static_analysis_failures: List[str]
+    iteration_stats: Optional[IterationStats] = None  # 迭代统计（仅迭代模式）
 
     @property
     def compile_rate(self) -> float:
@@ -104,6 +121,10 @@ class ModelAnalysis:
     @property
     def generation_rate(self) -> float:
         return (self.generated / self.total_problems * 100) if self.total_problems > 0 else 0.0
+
+    @property
+    def is_iterative_mode(self) -> bool:
+        return self.prompt_strategy == "iterative"
 
 @dataclass
 class UnifiedAnalysis:
@@ -130,7 +151,9 @@ def find_result_directories(temp_filter: Optional[float] = None,
     Args:
         temp_filter: Filter by temperature (optional)
         top_p_filter: Filter by top_p (optional)
-        prompt_strategy_filter: Filter by prompt strategy (optional). Use "default" for no-suffix dirs.
+        prompt_strategy_filter: Filter by prompt strategy (optional).
+                              Use "default" for no-suffix dirs.
+                              Use "iterative" for iterative fix mode dirs.
 
     Returns:
         List of tuples: (directory_path, temperature, top_p, prompt_strategy)
@@ -140,21 +163,35 @@ def find_result_directories(temp_filter: Optional[float] = None,
         print("Error: results/ directory not found")
         return []
 
-    # Pattern to match directory names with temp, top_p, and optional prompt strategy
-    # Format: model_name_0shot_tempX_X_topPX_X[_promptSTRATEGY]
-    pattern = re.compile(r'(.+?)_0shot_temp(.+?)_topP(.+?)(?:_prompt(.+))?$')
+    # Pattern to match directory names with temp, top_p, and optional prompt strategy or iterative suffix
+    # Format: model_name_0shot_tempX_X_topPX_X[_promptSTRATEGY][_iterative]
+    # Examples:
+    #   - deepseek_v3_2_0shot_temp0_0_topP0_01 (default)
+    #   - deepseek_v3_2_0shot_temp0_0_topP0_01_promptv1 (v1 strategy)
+    #   - deepseek_v3_2_0shot_temp0_0_topP0_01_iterative (iterative fix mode)
+    pattern = re.compile(r'(.+?)_0shot_temp(.+?)_topP(.+?)(?:_prompt(.+?))?(?:_(iterative))?$')
 
     model_dirs = []
     for item in results_dir.iterdir():
         if item.is_dir():
             match = pattern.fullmatch(item.name)
             if match:
-                model_name, temp_str, top_p_str, prompt_strategy = match.groups()
+                model_name, temp_str, top_p_str, prompt_strategy, iterative_flag = match.groups()
 
                 # Convert string representations back to numbers
                 temp = float(temp_str.replace('_', '.'))
                 top_p = float(top_p_str.replace('_', '.'))
-                prompt_strategy = prompt_strategy if prompt_strategy else "default"
+
+                # Determine the strategy:
+                # - If iterative_flag is set, use "iterative"
+                # - Else if prompt_strategy is set, use that
+                # - Otherwise use "default"
+                if iterative_flag:
+                    prompt_strategy = "iterative"
+                elif prompt_strategy:
+                    pass  # Keep the prompt_strategy value
+                else:
+                    prompt_strategy = "default"
 
                 # Apply filters
                 if temp_filter is not None and abs(temp - temp_filter) > 1e-6:
@@ -394,6 +431,59 @@ def read_compile_test_results_json(model_dir: str) -> Optional[Dict]:
         except Exception as e:
             print(f"Warning: Could not read JSON file {json_path}: {e}")
     return None
+
+
+def read_iteration_summary(problem_dir: str) -> Optional[Dict]:
+    """读取单个问题的 iteration_summary.json"""
+    summary_path = os.path.join(problem_dir, "iteration_summary.json")
+    if os.path.exists(summary_path):
+        try:
+            with open(summary_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            pass
+    return None
+
+
+def collect_iteration_stats(model_dir: str) -> Optional[IterationStats]:
+    """收集迭代模式的统计信息"""
+    model_path = Path(model_dir)
+
+    # Check if this is an iterative mode directory
+    if not model_path.name.endswith('_iterative'):
+        return None
+
+    stats = IterationStats()
+    problem_count = 0
+
+    for problem_dir in model_path.iterdir():
+        if not problem_dir.is_dir() or problem_dir.name == "compile_test_result":
+            continue
+
+        summary = read_iteration_summary(str(problem_dir))
+        if summary:
+            problem_count += 1
+            stats.total_compile_attempts += summary.get('compile_attempts', 0)
+            stats.total_test_attempts += summary.get('test_attempts', 0)
+
+            if summary.get('improved_by_iteration', False):
+                stats.problems_improved.append(problem_dir.name)
+
+            # Count improvements by type
+            if summary.get('compile_attempts', 0) > 1 and summary.get('final_compile_success', False):
+                if not summary.get('first_attempt_compile_success', False):
+                    stats.improved_by_compile_iteration += 1
+
+            if summary.get('test_attempts', 0) > 0 and summary.get('final_test_success', False):
+                if not summary.get('first_attempt_test_success', False):
+                    stats.improved_by_test_iteration += 1
+
+    # Calculate averages
+    if problem_count > 0:
+        stats.avg_compile_attempts = stats.total_compile_attempts / problem_count
+        stats.avg_test_attempts = stats.total_test_attempts / problem_count
+
+    return stats
 
 def classify_compilation_error(log_content: str) -> Tuple[str, str, Optional[int], str]:
     """
@@ -759,6 +849,11 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float,
                 if "SKIP: Simulation-hanging pattern detected" in log_content:
                     static_analysis_failures.append(problem_name)
 
+    # 收集迭代统计信息（仅迭代模式）
+    iteration_stats = None
+    if prompt_strategy == "iterative":
+        iteration_stats = collect_iteration_stats(model_dir)
+
     return ModelAnalysis(
         model_name=model_name,
         temperature=temperature,
@@ -770,7 +865,8 @@ def analyze_model_directory(model_dir: str, temperature: float, top_p: float,
         passed=passed,
         compilation_failures=compilation_failures,
         test_failures=test_failures,
-        static_analysis_failures=static_analysis_failures
+        static_analysis_failures=static_analysis_failures,
+        iteration_stats=iteration_stats
     )
 
 def extract_error_pattern(error_message: str) -> str:
@@ -1203,7 +1299,73 @@ def generate_unified_analysis_html(analysis: UnifiedAnalysis, output_path: str):
     html_content += """
                 </tbody>
             </table>
+    """
 
+    # 添加迭代统计信息（仅迭代模式）
+    if analysis.prompt_strategy == "iterative":
+        # 收集所有模型的迭代统计
+        total_improved_compile = 0
+        total_improved_test = 0
+        total_compile_attempts = 0
+        total_test_attempts = 0
+        all_improved_problems = []
+
+        for model in analysis.models:
+            if model.iteration_stats:
+                total_improved_compile += model.iteration_stats.improved_by_compile_iteration
+                total_improved_test += model.iteration_stats.improved_by_test_iteration
+                total_compile_attempts += model.iteration_stats.total_compile_attempts
+                total_test_attempts += model.iteration_stats.total_test_attempts
+                all_improved_problems.extend(model.iteration_stats.problems_improved)
+
+        html_content += f"""
+            <h2>迭代修复效果分析</h2>
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <h3>迭代改进统计</h3>
+                    <table>
+                        <tr><td>通过编译迭代改进的问题</td><td><strong>{total_improved_compile}</strong> 个</td></tr>
+                        <tr><td>通过测试迭代改进的问题</td><td><strong>{total_improved_test}</strong> 个</td></tr>
+                        <tr><td>总编译迭代次数</td><td>{total_compile_attempts}</td></tr>
+                        <tr><td>总测试迭代次数</td><td>{total_test_attempts}</td></tr>
+                    </table>
+                </div>
+                <div class="stats-card">
+                    <h3>各模型迭代详情</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模型</th>
+                                <th>编译改进</th>
+                                <th>测试改进</th>
+                                <th>平均编译迭代</th>
+                                <th>平均测试迭代</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        """
+
+        for model in analysis.models:
+            if model.iteration_stats:
+                stats = model.iteration_stats
+                html_content += f"""
+                            <tr>
+                                <td>{model.model_name}</td>
+                                <td>{stats.improved_by_compile_iteration}</td>
+                                <td>{stats.improved_by_test_iteration}</td>
+                                <td>{stats.avg_compile_attempts:.2f}</td>
+                                <td>{stats.avg_test_attempts:.2f}</td>
+                            </tr>
+                """
+
+        html_content += """
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        """
+
+    html_content += """
             <h2>编译错误模式分析</h2>
             <div class="stats-grid">
     """

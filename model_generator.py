@@ -36,7 +36,16 @@ from typing import List, Dict, Optional
 from pathlib import Path
 
 # Import model interface
-from model_interface import get_available_models, generate_code_for_problem, is_model_available
+from model_interface import (
+    get_available_models,
+    generate_code_for_problem,
+    is_model_available,
+    generate_initial_code,
+    generate_code_with_feedback
+)
+
+# Import compile/test functions for iterative fix mode
+from compile_test_runner import compile_and_test_single
 
 try:
     from tqdm import tqdm
@@ -560,6 +569,459 @@ def generate_for_model(model_name: str, problems: List[str], temperature: float 
         "total": len(problems)
     }
 
+# ============================================================================
+# Iterative Fix Mode Functions
+# ============================================================================
+
+def generate_with_iterative_fix(
+    model_name: str,
+    problems: List[str],
+    temperature: float = 0.0,
+    top_p: float = 0.01,
+    max_compile_attempts: int = 3,
+    max_test_attempts: int = 3
+) -> Dict:
+    """
+    Generate code for all problems with iterative fix mode.
+
+    This mode:
+    1. Generates initial code
+    2. Compiles and tests
+    3. If compilation fails, feeds error back to model and retries (up to max_compile_attempts)
+    4. If test fails, feeds error back to model and retries (up to max_test_attempts)
+    5. Records all iterations in iteration_summary.json
+
+    Args:
+        model_name: Name of the model
+        problems: List of problem names
+        temperature: Generation temperature
+        top_p: Generation top_p
+        max_compile_attempts: Max compilation retry attempts
+        max_test_attempts: Max test retry attempts
+
+    Returns:
+        Dictionary with success/failure counts and details
+    """
+    print(f"\n[Iterative Fix Mode] Generating code with {model_name}...")
+    print(f"Parameters: temperature={temperature}, top_p={top_p}")
+    print(f"Max attempts: compile={max_compile_attempts}, test={max_test_attempts}")
+    print("-" * 60)
+
+    # Get output directory with _iterative suffix
+    model_name_safe = model_name.replace(':', '_').replace('-', '_').replace('.', '_')
+    temp_str = str(temperature).replace('.', '_')
+    top_p_str = str(top_p).replace('.', '_')
+    output_dir = f"results/{model_name_safe}_0shot_temp{temp_str}_topP{top_p_str}_iterative"
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Check for resume - skip already completed problems
+    completed_problems = set()
+    for problem in problems:
+        problem_dir = os.path.join(output_dir, problem)
+        summary_file = os.path.join(problem_dir, "iteration_summary.json")
+        if os.path.exists(summary_file):
+            completed_problems.add(problem)
+
+    if completed_problems:
+        print(f"Found {len(completed_problems)} already completed problems, will skip them")
+        remaining_problems = [p for p in problems if p not in completed_problems]
+        print(f"Remaining problems to generate: {len(remaining_problems)}")
+    else:
+        remaining_problems = problems
+
+    if not remaining_problems:
+        print("All problems already completed!")
+        return {"success": len(problems), "failed": 0, "total": len(problems)}
+
+    # Check if model is available
+    if not is_model_available(model_name):
+        print(f"Error: Model {model_name} is not available")
+        return {"success": 0, "failed": len(problems), "total": len(problems)}
+
+    # Statistics
+    stats = {
+        'total': len(remaining_problems),
+        'generated': 0,
+        'compiled': 0,
+        'passed': 0,
+        'failed_compilation': [],
+        'failed_test': [],
+        'iteration_stats': {
+            'improved_by_compile_iteration': 0,
+            'improved_by_test_iteration': 0,
+            'total_compile_attempts': 0,
+            'total_test_attempts': 0
+        }
+    }
+
+    # Process each problem
+    for problem_name in tqdm(remaining_problems, desc=f"Iterative Fix {model_name}"):
+        result = process_problem_iterative(
+            model_name=model_name,
+            problem_name=problem_name,
+            output_dir=output_dir,
+            temperature=temperature,
+            top_p=top_p,
+            max_compile_attempts=max_compile_attempts,
+            max_test_attempts=max_test_attempts
+        )
+
+        # Update statistics
+        if result['generated']:
+            stats['generated'] += 1
+
+        if result['final_compile_success']:
+            stats['compiled'] += 1
+            if result['final_test_success']:
+                stats['passed'] += 1
+            else:
+                stats['failed_test'].append(problem_name)
+        else:
+            stats['failed_compilation'].append(problem_name)
+
+        # Update iteration stats
+        stats['iteration_stats']['total_compile_attempts'] += result['compile_attempts']
+        stats['iteration_stats']['total_test_attempts'] += result['test_attempts']
+
+        if result['compile_attempts'] > 1 and result['final_compile_success']:
+            stats['iteration_stats']['improved_by_compile_iteration'] += 1
+
+        if result['test_attempts'] > 1 and result['final_test_success']:
+            stats['iteration_stats']['improved_by_test_iteration'] += 1
+
+        # Small delay to avoid overwhelming the system
+        time.sleep(0.1)
+
+    # Generate compile_test_results.json for compatibility
+    result_dir = os.path.join(output_dir, "compile_test_result")
+    os.makedirs(result_dir, exist_ok=True)
+
+    total_problems = len(problems)
+    compile_rate = (stats['compiled'] / total_problems * 100) if total_problems > 0 else 0.0
+    pass_rate = (stats['passed'] / total_problems * 100) if total_problems > 0 else 0.0
+
+    results_json = {
+        'model_name': model_name,
+        'total_problems': total_problems,
+        'generated': stats['generated'] + len(completed_problems),
+        'compiled': stats['compiled'],
+        'passed': stats['passed'],
+        'failed_compilation': stats['failed_compilation'],
+        'failed_test': stats['failed_test'],
+        'skipped_static_analysis': [],
+        'compile_rate': compile_rate,
+        'pass_rate': pass_rate,
+        'iterative_mode': True,
+        'iteration_stats': stats['iteration_stats']
+    }
+
+    with open(os.path.join(result_dir, "compile_test_results.json"), 'w', encoding='utf-8') as f:
+        json.dump(results_json, f, indent=2, ensure_ascii=False)
+
+    # Print summary
+    print(f"\n[Results for {model_name} - Iterative Fix Mode]")
+    print(f"  Total: {total_problems}")
+    print(f"  Generated: {stats['generated']}")
+    print(f"  Compiled: {stats['compiled']} ({compile_rate:.1f}%)")
+    print(f"  Passed: {stats['passed']} ({pass_rate:.1f}%)")
+    print(f"  Improved by compile iteration: {stats['iteration_stats']['improved_by_compile_iteration']}")
+    print(f"  Improved by test iteration: {stats['iteration_stats']['improved_by_test_iteration']}")
+    print(f"  Output directory: {output_dir}")
+
+    return {
+        "success": stats['passed'],
+        "compiled": stats['compiled'],
+        "failed": total_problems - stats['passed'],
+        "total": total_problems
+    }
+
+
+def process_problem_iterative(
+    model_name: str,
+    problem_name: str,
+    output_dir: str,
+    temperature: float,
+    top_p: float,
+    max_compile_attempts: int,
+    max_test_attempts: int
+) -> Dict:
+    """
+    Process a single problem with iterative fix.
+
+    Returns:
+        Dictionary with iteration results
+    """
+    problem_dir = os.path.join(output_dir, problem_name)
+    os.makedirs(problem_dir, exist_ok=True)
+
+    # Prepare prompt
+    full_prompt, prompt_content, ifc_content = prepare_prompt(problem_name, "default")
+
+    # Initialize result tracking
+    result = {
+        'problem_name': problem_name,
+        'model_name': model_name,
+        'generated': False,
+        'compile_attempts': 0,
+        'test_attempts': 0,
+        'total_attempts': 0,
+        'final_compile_success': False,
+        'final_test_success': False,
+        'first_attempt_compile_success': False,
+        'first_attempt_test_success': False,
+        'improved_by_iteration': False,
+        'history': []
+    }
+
+    current_code = None
+    extracted_code = None
+    compile_log = ""
+    test_log = ""
+
+    # Phase 1: Generate initial code and try to compile
+    compile_attempt = 0
+    compile_success = False
+
+    while compile_attempt < max_compile_attempts and not compile_success:
+        compile_attempt += 1
+        result['compile_attempts'] = compile_attempt
+        result['total_attempts'] += 1
+
+        attempt_dir = os.path.join(problem_dir, f"attempt_{result['total_attempts']}")
+        os.makedirs(attempt_dir, exist_ok=True)
+
+        if compile_attempt == 1:
+            # Initial generation
+            success, current_code, extracted_code, raw_response = generate_initial_code(
+                model_name=model_name,
+                prompt=full_prompt,
+                interface=ifc_content,
+                temperature=temperature,
+                top_p=top_p
+            )
+
+            if not success or not current_code:
+                # Generation failed
+                result['history'].append({
+                    'attempt': result['total_attempts'],
+                    'phase': 'initial',
+                    'compile_success': False,
+                    'compile_error': 'Code generation failed',
+                    'test_success': None,
+                    'test_error': None,
+                    'mismatch_count': None
+                })
+                break
+
+            result['generated'] = True
+
+            # Save raw response
+            if raw_response:
+                with open(os.path.join(attempt_dir, f"{problem_name}_raw_response.txt"), 'w', encoding='utf-8') as f:
+                    f.write(raw_response)
+
+        else:
+            # Regenerate with compile error feedback
+            success, current_code, extracted_code = generate_code_with_feedback(
+                model_name=model_name,
+                problem_name=problem_name,
+                original_prompt=full_prompt,
+                interface=ifc_content,
+                previous_code=extracted_code or "",
+                error_type="compile",
+                error_message=compile_log,
+                attempt=compile_attempt,
+                temperature=temperature,
+                top_p=top_p
+            )
+
+            if not success or not current_code:
+                result['history'].append({
+                    'attempt': result['total_attempts'],
+                    'phase': 'compile_fix',
+                    'compile_success': False,
+                    'compile_error': 'Feedback code generation failed',
+                    'test_success': None,
+                    'test_error': None,
+                    'mismatch_count': None
+                })
+                continue
+
+        # Save code for this attempt
+        code_file = os.path.join(attempt_dir, f"{problem_name}_code.sv")
+        with open(code_file, 'w', encoding='utf-8') as f:
+            f.write(current_code)
+
+        # Compile and test
+        c_success, t_success, c_log, t_log, mismatch = compile_and_test_single(
+            code_file=code_file,
+            problem_name=problem_name,
+            output_dir=attempt_dir
+        )
+
+        compile_log = c_log
+        test_log = t_log
+
+        # Save logs
+        with open(os.path.join(attempt_dir, "compile.log"), 'w', encoding='utf-8') as f:
+            f.write(c_log)
+
+        if c_success:
+            with open(os.path.join(attempt_dir, "test.log"), 'w', encoding='utf-8') as f:
+                f.write(t_log)
+
+        # Record history
+        phase = 'initial' if compile_attempt == 1 else 'compile_fix'
+        result['history'].append({
+            'attempt': result['total_attempts'],
+            'phase': phase,
+            'compile_success': c_success,
+            'compile_error': c_log if not c_success else None,
+            'test_success': t_success if c_success else None,
+            'test_error': t_log if c_success and not t_success else None,
+            'mismatch_count': mismatch if c_success else None
+        })
+
+        if compile_attempt == 1:
+            result['first_attempt_compile_success'] = c_success
+            if c_success:
+                result['first_attempt_test_success'] = t_success
+
+        if c_success:
+            compile_success = True
+            result['final_compile_success'] = True
+
+            # Check if test passed
+            if t_success:
+                result['final_test_success'] = True
+                break
+
+    # Phase 2: If compiled but test failed, try to fix test failures
+    if compile_success and not result['final_test_success']:
+        test_attempt = 0
+
+        while test_attempt < max_test_attempts and not result['final_test_success']:
+            test_attempt += 1
+            result['test_attempts'] = test_attempt
+            result['total_attempts'] += 1
+
+            attempt_dir = os.path.join(problem_dir, f"attempt_{result['total_attempts']}")
+            os.makedirs(attempt_dir, exist_ok=True)
+
+            # Regenerate with test error feedback
+            success, current_code, extracted_code = generate_code_with_feedback(
+                model_name=model_name,
+                problem_name=problem_name,
+                original_prompt=full_prompt,
+                interface=ifc_content,
+                previous_code=extracted_code or "",
+                error_type="test",
+                error_message=test_log,
+                attempt=test_attempt,
+                temperature=temperature,
+                top_p=top_p
+            )
+
+            if not success or not current_code:
+                result['history'].append({
+                    'attempt': result['total_attempts'],
+                    'phase': 'test_fix',
+                    'compile_success': False,
+                    'compile_error': 'Feedback code generation failed',
+                    'test_success': None,
+                    'test_error': None,
+                    'mismatch_count': None
+                })
+                continue
+
+            # Save code for this attempt
+            code_file = os.path.join(attempt_dir, f"{problem_name}_code.sv")
+            with open(code_file, 'w', encoding='utf-8') as f:
+                f.write(current_code)
+
+            # Compile and test
+            c_success, t_success, c_log, t_log, mismatch = compile_and_test_single(
+                code_file=code_file,
+                problem_name=problem_name,
+                output_dir=attempt_dir
+            )
+
+            compile_log = c_log
+            test_log = t_log
+
+            # Save logs
+            with open(os.path.join(attempt_dir, "compile.log"), 'w', encoding='utf-8') as f:
+                f.write(c_log)
+
+            if c_success:
+                with open(os.path.join(attempt_dir, "test.log"), 'w', encoding='utf-8') as f:
+                    f.write(t_log)
+
+            # Record history
+            result['history'].append({
+                'attempt': result['total_attempts'],
+                'phase': 'test_fix',
+                'compile_success': c_success,
+                'compile_error': c_log if not c_success else None,
+                'test_success': t_success if c_success else None,
+                'test_error': t_log if c_success and not t_success else None,
+                'mismatch_count': mismatch if c_success else None
+            })
+
+            if c_success and t_success:
+                result['final_test_success'] = True
+                break
+
+    # Check if iteration improved the result
+    if result['final_compile_success'] and not result['first_attempt_compile_success']:
+        result['improved_by_iteration'] = True
+    elif result['final_test_success'] and not result['first_attempt_test_success']:
+        result['improved_by_iteration'] = True
+
+    # Save final code as sample01.sv for compatibility
+    if current_code:
+        final_code_file = os.path.join(problem_dir, f"{problem_name}_sample01.sv")
+        with open(final_code_file, 'w', encoding='utf-8') as f:
+            f.write(current_code)
+
+        # Also save extracted code
+        if extracted_code:
+            extracted_file = os.path.join(problem_dir, f"{problem_name}_sample01_extracted_code.txt")
+            with open(extracted_file, 'w', encoding='utf-8') as f:
+                f.write(extracted_code)
+
+    # Save iteration summary
+    summary = {
+        'problem_name': problem_name,
+        'model_name': model_name,
+        'parameters': {
+            'temperature': temperature,
+            'top_p': top_p,
+            'max_compile_attempts': max_compile_attempts,
+            'max_test_attempts': max_test_attempts
+        },
+        'compile_attempts': result['compile_attempts'],
+        'test_attempts': result['test_attempts'],
+        'total_attempts': result['total_attempts'],
+        'final_compile_success': result['final_compile_success'],
+        'final_test_success': result['final_test_success'],
+        'first_attempt_compile_success': result['first_attempt_compile_success'],
+        'first_attempt_test_success': result['first_attempt_test_success'],
+        'improved_by_iteration': result['improved_by_iteration'],
+        'history': result['history']
+    }
+
+    summary_file = os.path.join(problem_dir, "iteration_summary.json")
+    with open(summary_file, 'w', encoding='utf-8') as f:
+        json.dump(summary, f, indent=2, ensure_ascii=False)
+
+    return result
+
+
+# ============================================================================
+# Main Entry Point
+# ============================================================================
+
 def main():
     parser = argparse.ArgumentParser(
         description="Generate Verilog code using various models",
@@ -582,6 +1044,12 @@ Examples:
 Prompt Strategy Examples:
   python model_generator.py --model deepseek-v3.2 --prompt-strategy v1
   python model_generator.py --all --prompt-strategy v1 --limit 10
+
+Iterative Fix Mode Examples:
+  python model_generator.py --model deepseek-v3.2 --iterative-fix
+  python model_generator.py --model deepseek-v3.2 --iterative-fix --limit 10
+  python model_generator.py --model glm-4.6 --iterative-fix --max-compile-attempts 5
+  python model_generator.py --all --iterative-fix --limit 5
         """
     )
 
@@ -666,6 +1134,28 @@ Prompt Strategy Examples:
         help='Generation top_p (default: 0.01)'
     )
 
+    # Iterative fix mode parameters
+    parser.add_argument(
+        '--iterative-fix',
+        action='store_true',
+        dest='iterative_fix',
+        help='Enable iterative fix mode: retry on compile/test failures with feedback'
+    )
+    parser.add_argument(
+        '--max-compile-attempts',
+        type=int,
+        default=3,
+        dest='max_compile_attempts',
+        help='Max compilation retry attempts in iterative fix mode (default: 3)'
+    )
+    parser.add_argument(
+        '--max-test-attempts',
+        type=int,
+        default=3,
+        dest='max_test_attempts',
+        help='Max test retry attempts in iterative fix mode (default: 3)'
+    )
+
     args = parser.parse_args()
 
     # Handle list models
@@ -721,7 +1211,12 @@ Prompt Strategy Examples:
     print("=" * 50)
     print(f"Dataset: {DATASET_DIR}")
     print(f"Mode: Zero-shot, temp={args.temperature}, top_p={args.top_p}")
-    print(f"Prompt Strategy: {args.prompt_strategy}")
+    if args.iterative_fix:
+        print(f"[ITERATIVE FIX MODE ENABLED]")
+        print(f"  Max compile attempts: {args.max_compile_attempts}")
+        print(f"  Max test attempts: {args.max_test_attempts}")
+    else:
+        print(f"Prompt Strategy: {args.prompt_strategy}")
 
     # Get problem list
     problems = get_problem_list()
@@ -822,12 +1317,25 @@ Prompt Strategy Examples:
     # Generate for each model
     overall_results = {
         "total_problems": len(problems),
-        "prompt_strategy": args.prompt_strategy,
+        "prompt_strategy": args.prompt_strategy if not args.iterative_fix else "iterative",
+        "iterative_mode": args.iterative_fix,
         "models": {}
     }
 
     for model_name in models_to_generate:
-        result = generate_for_model(model_name, problems, args.temperature, args.top_p, args.prompt_strategy)
+        if args.iterative_fix:
+            # Use iterative fix mode
+            result = generate_with_iterative_fix(
+                model_name=model_name,
+                problems=problems,
+                temperature=args.temperature,
+                top_p=args.top_p,
+                max_compile_attempts=args.max_compile_attempts,
+                max_test_attempts=args.max_test_attempts
+            )
+        else:
+            # Use standard generation mode
+            result = generate_for_model(model_name, problems, args.temperature, args.top_p, args.prompt_strategy)
         overall_results["models"][model_name] = result
 
     # Overall summary
@@ -835,19 +1343,39 @@ Prompt Strategy Examples:
     print("OVERALL SUMMARY")
     print(f"{'='*60}")
 
-    total_success = sum(r["success"] for r in overall_results["models"].values())
-    total_possible = len(overall_results["models"]) * len(problems)
+    if args.iterative_fix:
+        # Iterative fix mode summary
+        total_passed = sum(r.get("success", 0) for r in overall_results["models"].values())
+        total_compiled = sum(r.get("compiled", 0) for r in overall_results["models"].values())
+        total_possible = len(overall_results["models"]) * len(problems)
 
-    print(f"Total problems: {len(problems)}")
-    print(f"Total models: {len(models_to_generate)}")
-    print(f"Total possible generations: {total_possible}")
-    print(f"Total successful: {total_success}")
-    print(f"Success rate: {total_success/total_possible*100:.1f}%")
+        print(f"[Iterative Fix Mode]")
+        print(f"Total problems: {len(problems)}")
+        print(f"Total models: {len(models_to_generate)}")
+        print(f"Total compiled: {total_compiled}/{total_possible} ({total_compiled/total_possible*100:.1f}%)")
+        print(f"Total passed: {total_passed}/{total_possible} ({total_passed/total_possible*100:.1f}%)")
 
-    print(f"\nModel breakdown:")
-    for model_name, result in overall_results["models"].items():
-        success_rate = result["success"]/result["total"]*100
-        print(f"  {model_name:<20} {result['success']:>3}/{result['total']} ({success_rate:>5.1f}%)")
+        print(f"\nModel breakdown:")
+        for model_name, result in overall_results["models"].items():
+            compiled = result.get("compiled", 0)
+            passed = result.get("success", 0)
+            total = result.get("total", len(problems))
+            print(f"  {model_name:<20} compiled: {compiled:>3}/{total} passed: {passed:>3}/{total}")
+    else:
+        # Standard mode summary
+        total_success = sum(r["success"] for r in overall_results["models"].values())
+        total_possible = len(overall_results["models"]) * len(problems)
+
+        print(f"Total problems: {len(problems)}")
+        print(f"Total models: {len(models_to_generate)}")
+        print(f"Total possible generations: {total_possible}")
+        print(f"Total successful: {total_success}")
+        print(f"Success rate: {total_success/total_possible*100:.1f}%")
+
+        print(f"\nModel breakdown:")
+        for model_name, result in overall_results["models"].items():
+            success_rate = result["success"]/result["total"]*100
+            print(f"  {model_name:<20} {result['success']:>3}/{result['total']} ({success_rate:>5.1f}%)")
 
 if __name__ == "__main__":
     main()

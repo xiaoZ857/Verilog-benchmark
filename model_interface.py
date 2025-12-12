@@ -494,6 +494,204 @@ def generate_code_for_problem(model_name: str, problem_name: str, prompt: str, i
         return False
 
 # ============================================================================
+# Iterative Fix - Feedback-based Code Generation
+# ============================================================================
+
+# Feedback prompt templates for iterative fix mode
+COMPILE_ERROR_FEEDBACK_TEMPLATE = """Your previous Verilog code has compilation errors. Please fix them.
+
+### Compilation Error ###
+{error_message}
+
+### Your Previous Code ###
+{previous_code}
+
+### Original Problem ###
+{original_prompt}
+
+Please generate the corrected module body code. Follow these rules:
+1. Fix the specific error mentioned above
+2. Keep the module interface unchanged
+3. End your code with `endmodule`
+4. Do not include the module declaration (it's already provided)
+"""
+
+TEST_FAILURE_FEEDBACK_TEMPLATE = """Your previous Verilog code compiled successfully but failed functional tests.
+
+### Test Result ###
+{error_message}
+
+### Your Previous Code ###
+{previous_code}
+
+### Original Problem ###
+{original_prompt}
+
+Please analyze the logic error and generate corrected module body code. Follow these rules:
+1. The test shows mismatches between expected and actual output
+2. Review the problem description carefully
+3. Fix the logic to produce correct output
+4. End your code with `endmodule`
+5. Do not include the module declaration (it's already provided)
+"""
+
+
+def generate_code_with_feedback(
+    model_name: str,
+    problem_name: str,
+    original_prompt: str,
+    interface: str,
+    previous_code: str,
+    error_type: str,
+    error_message: str,
+    attempt: int,
+    temperature: float = 0.0,
+    top_p: float = 0.01
+) -> Tuple[bool, Optional[str], Optional[str]]:
+    """
+    Generate code with feedback from previous attempt's error.
+
+    Args:
+        model_name: Name of the model to use
+        problem_name: Name of the problem
+        original_prompt: Original problem prompt
+        interface: Module interface code
+        previous_code: Code from previous attempt
+        error_type: Type of error ("compile" or "test")
+        error_message: Error message from compiler/test
+        attempt: Current attempt number
+        temperature: Generation temperature
+        top_p: Generation top_p
+
+    Returns:
+        (success, complete_code, extracted_code)
+        - success: True if generation succeeded
+        - complete_code: Complete code with interface
+        - extracted_code: Extracted code only
+    """
+    # Build feedback prompt based on error type
+    if error_type == "compile":
+        feedback_prompt = COMPILE_ERROR_FEEDBACK_TEMPLATE.format(
+            error_message=error_message,
+            previous_code=previous_code,
+            original_prompt=original_prompt
+        )
+    elif error_type == "test":
+        feedback_prompt = TEST_FAILURE_FEEDBACK_TEMPLATE.format(
+            error_message=error_message,
+            previous_code=previous_code,
+            original_prompt=original_prompt
+        )
+    else:
+        return False, None, None
+
+    try:
+        # Determine model type and call appropriate API
+        if model_name in API_MODELS:
+            # API model
+            model_config = API_MODELS[model_name]
+            api_type = model_config["api_type"]
+
+            # Load API keys
+            keys = load_api_keys()
+            if api_type not in keys:
+                print(f"Error: API key not configured for {api_type}")
+                return False, None, None
+
+            # Call API
+            if api_type == "deepseek":
+                result = call_deepseek_api(keys[api_type], feedback_prompt, model_config, temperature, top_p)
+            elif api_type == "zhipuai":
+                result = call_glm_api(keys[api_type], feedback_prompt, model_config, temperature, top_p)
+            else:
+                print(f"Error: Unsupported API type: {api_type}")
+                return False, None, None
+        else:
+            # Ollama model
+            if not check_ollama_service():
+                print(f"Error: Ollama service not available")
+                return False, None, None
+
+            result = call_ollama_api(model_name, feedback_prompt, temperature, top_p)
+
+        if not result.success:
+            print(f"Error generating feedback code for {problem_name} (attempt {attempt}): {result.error_message}")
+            return False, None, None
+
+        # Extract code
+        complete_code, extracted_code = extract_verilog_code(result.response_text, interface)
+
+        return True, complete_code, extracted_code
+
+    except Exception as e:
+        print(f"Error in generate_code_with_feedback: {str(e)}")
+        return False, None, None
+
+
+def generate_initial_code(
+    model_name: str,
+    prompt: str,
+    interface: str,
+    temperature: float = 0.0,
+    top_p: float = 0.01
+) -> Tuple[bool, Optional[str], Optional[str], Optional[str]]:
+    """
+    Generate initial code for a problem (without saving to file).
+
+    Args:
+        model_name: Name of the model to use
+        prompt: Full prompt for the model
+        interface: Module interface code
+        temperature: Generation temperature
+        top_p: Generation top_p
+
+    Returns:
+        (success, complete_code, extracted_code, raw_response)
+    """
+    try:
+        # Determine model type and call appropriate API
+        if model_name in API_MODELS:
+            # API model
+            model_config = API_MODELS[model_name]
+            api_type = model_config["api_type"]
+
+            # Load API keys
+            keys = load_api_keys()
+            if api_type not in keys:
+                print(f"Error: API key not configured for {api_type}")
+                return False, None, None, None
+
+            # Call API
+            if api_type == "deepseek":
+                result = call_deepseek_api(keys[api_type], prompt, model_config, temperature, top_p)
+            elif api_type == "zhipuai":
+                result = call_glm_api(keys[api_type], prompt, model_config, temperature, top_p)
+            else:
+                print(f"Error: Unsupported API type: {api_type}")
+                return False, None, None, None
+        else:
+            # Ollama model
+            if not check_ollama_service():
+                print(f"Error: Ollama service not available")
+                return False, None, None, None
+
+            result = call_ollama_api(model_name, prompt, temperature, top_p)
+
+        if not result.success:
+            print(f"Error generating initial code: {result.error_message}")
+            return False, None, None, None
+
+        # Extract code
+        complete_code, extracted_code = extract_verilog_code(result.response_text, interface)
+
+        return True, complete_code, extracted_code, result.response_text
+
+    except Exception as e:
+        print(f"Error in generate_initial_code: {str(e)}")
+        return False, None, None, None
+
+
+# ============================================================================
 # Model Discovery Interface
 # ============================================================================
 

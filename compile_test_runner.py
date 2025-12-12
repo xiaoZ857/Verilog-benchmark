@@ -30,10 +30,17 @@ def will_hang_simulation(verilog_code: str) -> Tuple[bool, Optional[str]]:
     """
     Check for patterns that cause simulation to hang.
     Detects combinational loops and other problematic patterns.
+
+    Enhanced to detect:
+    - Direct combinational loops: assign sig = ... sig ...
+    - Loops with bit selection: assign sig[n:m] = ... sig ...
+    - Loops with unary operators: assign sig = ... ~sig ...
+    - Complex feedback loops through assign and always blocks
     """
     lines = [line.strip() for line in verilog_code.split('\n') if line.strip()]
 
     # Pattern 1: Direct combinational loop in assign statement
+    # Original pattern: assign signal = ... signal ...
     for line in lines:
         if line.startswith('assign '):
             # Look for pattern where a signal depends on itself in the same assign statement
@@ -42,12 +49,27 @@ def will_hang_simulation(verilog_code: str) -> Tuple[bool, Optional[str]]:
                 signal = match.group(1)
                 return True, f"Direct combinational loop: {signal} depends on itself in assign statement"
 
-    # Pattern 2: Complex feedback loops through assign and always blocks
+    # Pattern 2: Combinational loop with bit selection on left side
+    # Example: assign q[3:0] = ( ~reset & clk ) ? {15'b1111} : ( ~q + 1'b1 );
+    # The signal 'q' appears on both sides
+    for line in lines:
+        if line.startswith('assign '):
+            # Match: assign signal[...] = expression  OR  assign signal = expression
+            match = re.match(r'assign\s+(\w+)(?:\s*\[.*?\])?\s*=(.+)', line)
+            if match:
+                signal = match.group(1)
+                expression = match.group(2)
+                # Check if the same signal appears in the expression (with word boundary)
+                # This catches cases like: ~q, q+1, q[0], etc.
+                if re.search(rf'\b{re.escape(signal)}\b', expression):
+                    return True, f"Combinational loop: {signal} depends on itself (found in expression)"
+
+    # Pattern 3: Complex feedback loops through assign and always blocks
     # Specifically: assign A = B; and always block uses A to set B
     assign_signals = {}
     for line in lines:
         if line.startswith('assign '):
-            match = re.match(r'assign\s+(\w+)\s*=\s*([^;]+)', line)
+            match = re.match(r'assign\s+(\w+)(?:\s*\[.*?\])?\s*=\s*([^;]+)', line)
             if match:
                 signal = match.group(1)
                 expression = match.group(2)
@@ -61,6 +83,24 @@ def will_hang_simulation(verilog_code: str) -> Tuple[bool, Optional[str]]:
             for line in lines:
                 if 'always' in line and '<=' in line and signal in line and dep in line:
                     return True, f"Complex feedback loop: {signal} and {dep} create circular dependency"
+
+    # Pattern 4: Output declared as reg but assigned with continuous assignment (common error)
+    # This often leads to simulation issues
+    reg_outputs = set()
+    for line in lines:
+        # Find output reg declarations
+        if re.match(r'output\s+reg\s+', line) or re.match(r'output\s+\[.*?\]\s*reg\s+', line):
+            # Extract signal name
+            match = re.search(r'(\w+)\s*[,;)\]]?\s*$', line)
+            if match:
+                reg_outputs.add(match.group(1))
+
+    # Check if any reg output is used in assign statement (potential issue)
+    for line in lines:
+        if line.startswith('assign '):
+            for reg_sig in reg_outputs:
+                if re.match(rf'assign\s+{re.escape(reg_sig)}\b', line):
+                    return True, f"Invalid assignment: {reg_sig} is declared as reg but used in continuous assignment"
 
     return False, None
 
@@ -171,6 +211,191 @@ def get_problem_list() -> List[str]:
         problems.append(problem_name)
 
     return problems
+
+# ============================================================================
+# Standalone Compile/Test Functions (for iterative fix mode)
+# ============================================================================
+
+def compile_verilog_only(code_file: str, problem_name: str, output_dir: str) -> Tuple[bool, str, Optional[str]]:
+    """
+    Compile Verilog code only (without running tests).
+
+    Args:
+        code_file: Path to the Verilog code file
+        problem_name: Name of the problem
+        output_dir: Directory to store compiled binary
+
+    Returns:
+        (success, log_content, bin_file_path)
+        - success: True if compilation succeeded
+        - log_content: Compilation log/error messages
+        - bin_file_path: Path to compiled binary (None if failed)
+    """
+    dataset_dir = os.path.abspath("dataset_code-complete-iccad2023")
+    test_file = f"{dataset_dir}/{problem_name}_test.sv"
+    ref_file = f"{dataset_dir}/{problem_name}_ref.sv"
+    sample_name = os.path.basename(code_file).replace('.sv', '')
+    bin_file = os.path.join(output_dir, sample_name)
+
+    log_lines = []
+
+    # Check if required files exist
+    if not os.path.exists(test_file):
+        return False, f"Test file not found: {test_file}", None
+    if not os.path.exists(ref_file):
+        return False, f"Reference file not found: {ref_file}", None
+
+    # Static analysis for potential infinite loops
+    log_lines.append("=== Static Analysis ===")
+    try:
+        with open(code_file, 'r', encoding='utf-8') as f:
+            code_content = f.read()
+        will_hang, reason = will_hang_simulation(code_content)
+        if will_hang:
+            log_lines.append("SKIP: Simulation-hanging pattern detected")
+            log_lines.append(f"Reason: {reason}")
+            return False, '\n'.join(log_lines), None
+        else:
+            log_lines.append("PASS: No simulation-hanging patterns detected")
+    except Exception as e:
+        log_lines.append(f"WARNING: Static analysis failed: {e}")
+        log_lines.append("Proceeding with compilation...")
+    log_lines.append("=" * 50)
+
+    # Compile
+    try:
+        os.makedirs(output_dir, exist_ok=True)
+        compile_cmd = [
+            'iverilog',
+            '-Wall',
+            '-Winfloop',
+            '-Wno-timescale',
+            '-g2012',
+            '-s', 'tb',
+            '-o', bin_file,
+            code_file,
+            test_file,
+            ref_file
+        ]
+
+        result = subprocess.run(
+            compile_cmd,
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+
+        log_lines.append("=== Compilation ===")
+        log_lines.append(f"Return code: {result.returncode}")
+        if result.stdout:
+            log_lines.append(result.stdout)
+        if result.stderr:
+            log_lines.append(result.stderr)
+
+        if result.returncode != 0:
+            return False, '\n'.join(log_lines), None
+
+        return True, '\n'.join(log_lines), bin_file
+
+    except subprocess.TimeoutExpired:
+        log_lines.append("Compilation timeout")
+        return False, '\n'.join(log_lines), None
+    except Exception as e:
+        log_lines.append(f"Compilation error: {str(e)}")
+        return False, '\n'.join(log_lines), None
+
+
+def run_test_only(bin_file: str) -> Tuple[bool, str, int]:
+    """
+    Run test on compiled Verilog binary.
+
+    Args:
+        bin_file: Path to compiled binary (from iverilog)
+
+    Returns:
+        (success, log_content, mismatch_count)
+        - success: True if test passed (0 mismatches)
+        - log_content: Test output log
+        - mismatch_count: Number of mismatches (-1 if could not parse)
+    """
+    log_lines = []
+
+    if not os.path.exists(bin_file):
+        return False, f"Binary file not found: {bin_file}", -1
+
+    try:
+        test_cmd = ['vvp', bin_file]
+        result = subprocess.run(
+            test_cmd,
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+
+        log_lines.append("=== Test Execution ===")
+        log_lines.append(f"Return code: {result.returncode}")
+        if result.stdout:
+            log_lines.append(result.stdout)
+        if result.stderr:
+            log_lines.append(result.stderr)
+
+        # Parse mismatch count
+        mismatch_pattern = r'Mismatches: (\d+) in \d+ samples'
+        match = re.search(mismatch_pattern, result.stdout)
+
+        if match:
+            mismatch_count = int(match.group(1))
+            test_success = (result.returncode == 0 and mismatch_count == 0)
+        else:
+            # Fallback for other output formats
+            if "Mismatches: 0" in result.stdout:
+                mismatch_count = 0
+                test_success = (result.returncode == 0)
+            else:
+                mismatch_count = -1
+                test_success = False
+
+        return test_success, '\n'.join(log_lines), mismatch_count
+
+    except subprocess.TimeoutExpired:
+        log_lines.append("Test timeout - possible infinite loop detected")
+        return False, '\n'.join(log_lines), -1
+    except Exception as e:
+        log_lines.append(f"Test execution error: {str(e)}")
+        return False, '\n'.join(log_lines), -1
+    finally:
+        # Clean up binary file
+        try:
+            if os.path.exists(bin_file):
+                os.remove(bin_file)
+        except:
+            pass
+
+
+def compile_and_test_single(code_file: str, problem_name: str, output_dir: str) -> Tuple[bool, bool, str, str, int]:
+    """
+    Compile and test a single Verilog file (convenience function).
+
+    Args:
+        code_file: Path to the Verilog code file
+        problem_name: Name of the problem
+        output_dir: Directory to store compiled binary
+
+    Returns:
+        (compile_success, test_success, compile_log, test_log, mismatch_count)
+    """
+    compile_success, compile_log, bin_file = compile_verilog_only(code_file, problem_name, output_dir)
+
+    if not compile_success:
+        return False, False, compile_log, "", -1
+
+    test_success, test_log, mismatch_count = run_test_only(bin_file)
+    return compile_success, test_success, compile_log, test_log, mismatch_count
+
+
+# ============================================================================
+# File Discovery Functions
+# ============================================================================
 
 def find_complete_file(model_dir: str, problem_name: str) -> Optional[str]:
     """Find the complete Verilog file for a problem - supports unified format"""

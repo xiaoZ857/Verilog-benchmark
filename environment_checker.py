@@ -253,26 +253,36 @@ class EnvironmentChecker:
             self.check("API keys file exists", False,
                       warning_msg="API keys file not found")
 
-        # Test API connectivity if model_interface is available
+        # Test model connectivity if model_interface is available
         try:
             from model_interface import get_available_models
             models = get_available_models()
-            api_models = [m for m in models if m.get('type') == 'api']
+            api_models = [m for m in models if hasattr(m, 'type') and m.type == 'api']
+            ollama_models = [m for m in models if hasattr(m, 'type') and m.type == 'ollama']
 
             if api_models:
                 self.check(f"Found {len(api_models)} API models configured", True)
                 for model in api_models:
-                    status = "Available" if model.get('available') else "Not Available"
-                    print(f"    - {model['name']}: {status}")
+                    status = "Available" if model.available else "Not Available"
+                    print(f"    - {model.name}: {status}")
             else:
                 self.check("API models configured", False,
                           warning_msg="No API models found")
+
+            if ollama_models:
+                self.check(f"Found {len(ollama_models)} Ollama models available", True)
+                for model in ollama_models:
+                    status = "Available" if model.available else "Not Available"
+                    print(f"    - {model.name}: {status}")
+            else:
+                self.check("Ollama models available", False,
+                          warning_msg="No Ollama models found")
         except ImportError:
             self.check("Model interface available", False,
                       warning_msg="model_interface.py not available")
         except Exception as e:
-            self.check("API model check", False,
-                      warning_msg=f"Error checking API models: {str(e)}")
+            self.check("Model check", False,
+                      warning_msg=f"Error checking models: {str(e)}")
 
     def check_static_analyzer(self):
         """Check static analyzer (optional component)"""

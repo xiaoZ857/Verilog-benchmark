@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 12
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:11: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:12: error: Could not find variable ``count'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:13: error: Could not find variable ``cycle'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:16: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:17: error: Could not find variable ``count'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:18: error: Could not find variable ``cycle'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:19: error: Unable to bind wire/reg/memory `z_next' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:24: error: Could not find variable ``next_state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:25: error: Could not find variable ``next_count'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:26: error: Could not find variable ``next_cycle'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:27: error: Could not find variable ``z_next'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:29: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:29: error: Unable to elaborate this case expression.
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:23: warning: @* found no sensitivities so it will never trigger.
+12 error(s) during elaboration.

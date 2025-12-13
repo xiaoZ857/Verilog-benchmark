@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+  reg [3:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (areset) begin
+      shift_reg <= 0;
+    end else if (load) begin
+      shift_reg <= data;
+    end else if (ena) begin
+      shift_reg <= {shift_reg[2:0], 1'b0};
+    end else begin
+      shift_reg <= {shift_reg[2:0], shift_reg[0]};
+    end
+  end
+
+  assign q = shift_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [3:0] shift_reg;`**:  Declares a 4-bit register named `shift_reg` to hold the contents of the shift register.  This is where the shifting happens.
+
+2. **`always @(posedge clk) begin ... end`**: This block describes the sequential logic that operates on the positive edge of the clock signal.
+
+3. **`if (areset) begin shift_reg <= 0; end`**:  If the asynchronous reset signal `areset` is asserted (high), the shift register is reset to all zeros.  The `<=` operator is used for non-blocking assignments within the `always` block.
+
+4. **`else if (load) begin shift_reg <= data; end`**: If the `load` signal is asserted (high), the shift register is loaded with the value of the input `data`.  This overrides the shifting operation.
+
+5. **`else if (ena) begin shift_reg <= {shift_reg[2:0], 1'b0}; end`**: If the `ena` (enable) signal is asserted (high) and `load` is not asserted, the shift register performs a right shift.  `{shift_reg[2:0], 1'b0}` constructs a new 4-bit value where the upper 3 bits are the current values of `shift_reg[2:0]` and the most significant bit (MSB) is set to 0.  This effectively shifts the register to the right, discarding the least significant bit.
+
+6. **`else begin shift_reg <= {shift_reg[1:0], shift_reg[0]}; end`**: If none of the above conditions are met (i.e., `areset` is low, `load` is low, and `ena` is low), the shift register performs a standard right shift.  `{shift_reg[1:0], shift_reg[0]}` constructs a new 4-bit value where the upper 3 bits are the current values of `shift_reg[1:0]` and the least significant bit is the current value of `shift_reg[0]`.
+
+7. **`assign q = shift_reg;`**:  This continuous assignment statement connects the output `q` to the current value of the `shift_reg`.  This makes the contents of the shift register available as the output.
+
+**Key Concepts:**
+
+* **Asynchronous Reset:**  The `areset` signal is asynchronous, meaning it can affect the shift register's state at any time, regardless of the clock signal.
+* **Synchronous Load:** The `load` signal is synchronous, meaning it only affects the shift register's state on the positive edge of the clock.
+* **Enable (ena):** The `ena` signal controls whether the shift register shifts or holds its current value.
+* **Non-Blocking Assignments (`<=`):**  Used within the `always` block to ensure that all assignments are evaluated concurrently and updated at the end of the clock cycle.  This is crucial for predictable sequential logic behavior.
+* **Concatenation (`{}`):** Used to combine individual bits or registers into a larger value.

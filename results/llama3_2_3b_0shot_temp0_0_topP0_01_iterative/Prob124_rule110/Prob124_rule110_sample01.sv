@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+always @(posedge clk) begin
+  for (int i = 0; i < NUM CELLS; i++) begin
+    int left_index = (i + SHIFT - 1) % NUM CELLS;
+    int right_index = (i + 1) % NUM CELLS;
+
+    // Calculate the index of the Rule 110 table based on the current state and neighbors
+    int rule_index = {left_index, q_init[i], right_index};
+
+    // Get the next state from the Rule 110 table
+    int next_state = rule_110_table[rule_index];
+
+    // Update the state of each cell
+    q_init[i] = next_state;
+  end
+
+  // Load the new state into the output register
+  if (load) begin
+    q <= data;
+  end else begin
+    q <= q_init;
+  end
+endmodule

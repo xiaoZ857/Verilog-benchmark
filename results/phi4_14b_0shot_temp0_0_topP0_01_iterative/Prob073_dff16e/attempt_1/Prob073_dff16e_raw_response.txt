@@ -1,0 +1,52 @@
+To implement the Verilog module as described, we need to create a module with 16 D flip-flops. Each flip-flop will store one bit of data from the `d` input and output it on `q`. The `byteena` signal controls which bytes are updated during each clock cycle. Specifically, `byteena[1]` enables updates for the upper byte (`d[15:8]`) and `byteena[0]` enables updates for the lower byte (`d[7:0]`). The `resetn` is a synchronous active-low reset that resets all flip-flops when asserted low.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [15:0] q
+);
+
+  // Internal registers for each bit of the flip-flops
+  reg [15:0] ff;
+
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      // Synchronous active-low reset
+      ff <= 16'b0;
+    end else begin
+      // Update only the enabled bytes
+      if (byteena[1]) begin
+        ff[15:8] <= d[15:8];
+      end
+      if (byteena[0]) begin
+        ff[7:0] <= d[7:0];
+      end
+    end
+  end
+
+  // Output the current state of the flip-flops
+  always @(posedge clk) begin
+    q <= ff;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers (`ff`)**: We use a single 16-bit register `ff` to hold the state of all 16 D flip-flops.
+
+2. **Synchronous Reset**: The reset is synchronous and active-low, meaning that when `resetn` is low, all bits in `ff` are set to zero on the next positive edge of `clk`.
+
+3. **Byte Enable Logic**:
+   - If `byteena[1]` is high, the upper byte (`d[15:8]`) is loaded into `ff[15:8]`.
+   - If `byteena[0]` is high, the lower byte (`d[7:0]`) is loaded into `ff[7:0]`.
+
+4. **Output Assignment**: The output `q` is updated on every positive edge of `clk` to reflect the current state stored in `ff`.
+
+This design ensures that only the specified bytes are updated based on the `byteena` signals, while maintaining a synchronous reset behavior.

@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    if (x[1] == 0 && x[2] == 0) begin
+      f = 0;
+    end else if (x[1] == 0 && x[2] == 1) begin
+      f = 1;
+    end else if (x[1] == 1 && x[2] == 1) begin
+      f = 1;
+    end else if (x[1] == 1 && x[2] == 0) begin
+      f = 0;
+    end else begin
+      f = 0; // Default case, handles the don't cares.  Could also be 1.
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [4:1] x, output logic f);`**:  This declares the module named `TopModule` with an input `x` (a 4-bit vector) and an output `f`.
+
+2. **`always_comb begin ... end`**: This block defines a combinational logic block.  `always_comb` ensures that the output `f` is updated whenever any of the inputs `x` change.
+
+3. **`if (x[1] == 0 && x[2] == 0) begin f = 0; end`**:  This corresponds to the `x[1]x[2] = 00` case in the K-map.  The output `f` is set to 0.
+
+4. **`else if (x[1] == 0 && x[2] == 1) begin f = 1; end`**: This corresponds to the `x[1]x[2] = 01` case in the K-map. The output `f` is set to 1.
+
+5. **`else if (x[1] == 1 && x[2] == 1) begin f = 1; end`**: This corresponds to the `x[1]x[2] = 11` case in the K-map. The output `f` is set to 1.
+
+6. **`else if (x[1] == 1 && x[2] == 0) begin f = 0; end`**: This corresponds to the `x[1]x[2] = 10` case in the K-map. The output `f` is set to 0.
+
+7. **`else begin f = 0; end`**: This is the default case.  Since `d` represents don't-care conditions, we can assign any value to `f` in these cases.  I'm setting it to 0 here, but you could also set it to 1 without affecting the functionality of the circuit for the specified inputs.
+
+**Alternative Implementation (using a simplified expression):**
+
+The K-map can be simplified to:
+
+f = (x[1] == 0 && x[2] == 1) || (x[1] == 1 && x[2] == 1)
+
+This can be implemented as:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    if ((x[1] == 0 && x[2] == 1) || (x[1] == 1 && x[2] == 1)) begin
+      f = 1;
+    end else begin
+      f = 0;
+    end
+  end
+
+endmodule
+```
+
+This version is more concise and potentially more efficient.  Both implementations are functionally equivalent based on the provided K-map.  The choice between them often depends on coding style and potential optimization considerations.

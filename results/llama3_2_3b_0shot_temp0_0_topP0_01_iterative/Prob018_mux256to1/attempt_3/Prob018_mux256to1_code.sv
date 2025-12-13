@@ -1,0 +1,19 @@
+
+module TopModule (
+  input [255:0] in,
+  input [7:0] sel,
+  output wire [7:0] out
+);
+
+// Calculate the index based on the select signal
+reg [8:0] idx;
+
+assign idx = sel + 1;
+
+// Use the calculated index to select from the input vector
+assign out = in[idx-1:idx-8];
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

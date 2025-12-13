@@ -1,0 +1,14 @@
+
+// Y1 is the input to flip-flop y[1] (state B)
+// Y1 = 1 when next state is B, which happens when current state is A and w=1
+assign Y1 = y[0] & w;
+
+// Y3 is the input to flip-flop y[3] (state D)
+// Y3 = 1 when next state is D, which happens when:
+// - current state is B and w=0
+// - current state is C and w=0
+// - current state is E and w=0
+// - current state is F and w=0
+assign Y3 = (y[1] & ~w) | (y[2] & ~w) | (y[4] & ~w) | (y[5] & ~w);
+
+endmodule

@@ -1,0 +1,23 @@
+
+// 8‑bit register made of 8 D‑flip‑flops
+// • Active‑high synchronous reset
+// • Reset value = 8'h34 (0011 0100)
+// • Triggered on the negative edge of clk
+module TopModule (
+    input          clk,    // clock
+    input  [7:0]   d,      // data input
+    input          reset,  // active‑high synchronous reset
+    output reg [7:0] q      // 8‑bit output (register)
+);
+
+    // Negative‑edge triggered, synchronous reset
+    always @(negedge clk) begin
+        if (reset)          // synchronous reset
+            q <= 8'h34;     // reset to 0x34
+        else
+            q <= d;         // normal data transfer
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

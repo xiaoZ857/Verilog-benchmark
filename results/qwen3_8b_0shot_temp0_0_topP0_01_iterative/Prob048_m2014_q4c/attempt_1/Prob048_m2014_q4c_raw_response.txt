@@ -1,0 +1,44 @@
+Here's a well-structured and correct implementation of a **synchronous D flip-flop with an active high reset** in **SystemVerilog** (as indicated by the use of `logic` for output and `always @(posedge clk)` syntax). This implementation ensures that the reset signal is only effective on the rising edge of the clock, as required.
+
+---
+
+### ✅ **Module Description**
+
+- **Inputs:**
+  - `clk`: Clock signal (positive edge-triggered).
+  - `d`: Data input.
+  - `r`: Active high synchronous reset signal.
+- **Output:**
+  - `q`: Output of the flip-flop, which is reset to `0` when `r` is high on a rising clock edge.
+
+---
+
+### 📌 **Implementation**
+
+```systemverilog
+module TopModule (
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+always @(posedge clk) begin
+  if (r) begin
+    q <= 1'b0;
+  end else begin
+    q <= d;
+  end
+end
+
+endmodule
+```
+
+---
+
+### 🧠 **Explanation**
+
+- The `always @(posedge clk)` block ensures that the logic is only executed on the rising edge of the clock, making the reset **synchronous**.
+- The `if (r)` condition checks whether the reset signal is active. If it is, the output `q` is set to `0`.
+- If the reset is not active, the output `q` follows the input `d`, which is the standard behavior of a D flip-flop.
+

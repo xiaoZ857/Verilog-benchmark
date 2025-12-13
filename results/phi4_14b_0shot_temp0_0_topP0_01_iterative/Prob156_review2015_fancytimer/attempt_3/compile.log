@@ -1,0 +1,26 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 13
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:25: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:26: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:27: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:28: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:33: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:34: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:35: sorry: This cast operation is not yet supported.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:100: error: Unable to bind wire/reg/memory `READ_DELAY_2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:103: error: Unable to bind wire/reg/memory `READ_DELAY_2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:105: error: Unable to bind wire/reg/memory `READ_DELAY_3' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:108: error: Unable to bind wire/reg/memory `READ_DELAY_3' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:110: error: Unable to bind wire/reg/memory `READ_DELAY_4' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:113: error: Unable to bind wire/reg/memory `READ_DELAY_4' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:99: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:104: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:109: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:114: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:115: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:116: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:117: warning: A non-blocking assignment should not be used in an always_comb process.
+13 error(s) during elaboration.

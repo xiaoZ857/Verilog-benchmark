@@ -1,0 +1,25 @@
+always @(posedge clk) begin
+    if (load) begin
+        // Synchronous load operation
+        q <= data;
+    end else begin
+        case (ena)
+            2'b01: begin
+                // Rotate right by one bit
+                q[99] <= q[0];
+                q[98:0] <= q[99:1];
+            end
+            2'b10: begin
+                // Rotate left by one bit
+                q[0] <= q[99];
+                q[99:1] <= q[98:0]; // Corrected range here
+            end
+            default: begin
+                // No rotation for ena = 2'b00 or 2'b11
+                q <= q;
+            end
+        endcase
+    end
+end
+
+endmodule

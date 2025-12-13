@@ -1,0 +1,32 @@
+ Here is a simple Verilog implementation for the given description:
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output reg [7:0] out_hi,
+  output reg [7:0] out_lo
+);
+
+always @(posedge clk) begin
+  out_hi <= in[15:8];
+  out_lo <= in[7:0];
+end
+
+// Add clock input and synchronization if needed
+// (clk is assumed to be a posedge-triggered reset-asynchronous resetable flip-flop)
+// e.g.,
+// input wire clk, reset;
+// always @(posedge clk or negedge reset) begin
+//   if (!reset) begin
+//     out_hi <= 8'b0;
+//     out_lo <= 8'b0;
+//   end else begin
+//     out_hi <= in[15:8];
+//     out_lo <= in[7:0];
+//   end
+// end
+```
+
+This Verilog module takes a 16-bit input `in`, and outputs the upper byte (bits [15:8]) to `out_hi` and the lower byte (bits [7:0]) to `out_lo`. The circuit is combinational, as it does not have any internal registers or memory elements.
+
+If you need a clock input and synchronization for the module, you can add the necessary code in the comments above.

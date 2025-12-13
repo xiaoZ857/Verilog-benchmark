@@ -1,0 +1,62 @@
+To implement the Verilog module based on the given simulation waveforms, we need to determine the logic function that maps inputs `a`, `b`, `c`, and `d` to the output `q`. By analyzing the waveform table, we can derive a truth table for the circuit:
+
+```
+  a b c d | q
+  -------|---
+   0 0 0 0 | 1
+   0 0 0 1 | 0
+   0 0 1 0 | 0
+   0 0 1 1 | 1
+   0 1 0 0 | 0
+   0 1 0 1 | 1
+   0 1 1 0 | 1
+   0 1 1 1 | 0
+   1 0 0 0 | 0
+   1 0 0 1 | 1
+   1 0 1 0 | 1
+   1 0 1 1 | 0
+   1 1 0 0 | 1
+   1 1 0 1 | 0
+   1 1 1 0 | 0
+   1 1 1 1 | 1
+```
+
+From this truth table, we can derive the logic expression for `q`. The output `q` is `1` for the following input combinations:
+
+- `a'b'c'd'`
+- `a'b'cd`
+- `a'bc'd`
+- `a'bc'd'`
+- `ab'c'd`
+- `abc'd'`
+- `ab'c'd'`
+- `abcd`
+
+We can express this as a sum of minterms:
+
+\[ q = \overline{a} \cdot \overline{b} \cdot \overline{c} \cdot \overline{d} + \overline{a} \cdot \overline{b} \cdot c \cdot d + \overline{a} \cdot b \cdot \overline{c} \cdot d + \overline{a} \cdot b \cdot c \cdot \overline{d} + a \cdot \overline{b} \cdot \overline{c} \cdot d + a \cdot b \cdot \overline{c} \cdot \overline{d} + a \cdot \overline{b} \cdot \overline{c} \cdot \overline{d} + a \cdot b \cdot c \cdot d \]
+
+Now, let's implement this logic in Verilog:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (~a & ~b & ~c & ~d) |
+             (~a & ~b & c & d)   |
+             (~a & b & ~c & d)   |
+             (~a & b & c & ~d)   |
+             (a & ~b & ~c & d)   |
+             (a & b & ~c & ~d)   |
+             (a & ~b & ~c & ~d)  |
+             (a & b & c & d);
+
+endmodule
+```
+
+This Verilog module uses the `assign` statement to define the combinational logic for output `q` based on the derived expression. Each term in the expression corresponds to a minterm where `q` is `1`.

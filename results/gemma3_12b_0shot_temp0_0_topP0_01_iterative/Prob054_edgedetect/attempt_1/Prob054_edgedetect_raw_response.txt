@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    for (int i = 0; i < 8; i++) begin
+      if (prev_in[i] == 0 && in[i] == 1) begin
+        pedge[i] = 1;
+      else begin
+        pedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [7:0] prev_in;`**:  This register stores the value of the input signal `in` from the previous clock cycle.  It's crucial for detecting the change from 0 to 1.
+
+2. **`always @(posedge clk)`**: This block executes on the positive edge of the clock signal.
+
+3. **`for (int i = 0; i < 8; i++) begin ... end`**: This loop iterates through each bit of the 8-bit input vector `in`.
+
+4. **`if (prev_in[i] == 0 && in[i] == 1) begin ... end`**: This is the core logic for positive edge detection.  It checks if the previous value of the `i`-th bit (`prev_in[i]`) was 0 and the current value of the `i`-th bit (`in[i]`) is 1.  If this condition is true, it means a positive edge has occurred.
+
+5. **`pedge[i] = 1;`**: If a positive edge is detected, the corresponding bit in the `pedge` output register is set to 1.
+
+6. **`else begin pedge[i] = 0; end`**: If a positive edge is *not* detected, the corresponding bit in the `pedge` output register is set to 0.
+
+7. **`prev_in = in;`**:  After processing all bits for the current clock cycle, the current value of the input `in` is stored in the `prev_in` register.  This prepares the register for the next clock cycle's comparison.
+
+**How it works:**
+
+The module compares the current input value (`in`) with the previous input value (`prev_in`) on each clock cycle.  If a bit transitioned from 0 to 1 between two consecutive clock cycles, the corresponding bit in the `pedge` output will be set to 1 *on the next clock cycle*.  This is because the edge detection happens on the positive edge of the clock, but the output is valid one clock cycle later.
+
+**Example:**
+
+Let's say `in` is initially `8'b00000000`.  On the first clock cycle, `prev_in` will be initialized to `8'b00000000`.  `pedge` will be `8'b00000000`.
+
+Now, let's say on the second clock cycle, `in` becomes `8'b00000001`.  The `always` block will execute, and the first bit (bit 0) will satisfy the condition `prev_in[0] == 0 && in[0] == 1`.  Therefore, `pedge[0]` will be set to 1.  All other bits in `pedge` will remain 0.
+
+On the third clock cycle, `in` might be `8'b00000010`.  The `always` block will execute again.  Now, `pedge[0]` will be 0 (because the edge was detected in the previous cycle), and `pedge[1]` will be set to 1 (because the edge was detected for bit 1).
+
+This process continues for each bit in the input vector.

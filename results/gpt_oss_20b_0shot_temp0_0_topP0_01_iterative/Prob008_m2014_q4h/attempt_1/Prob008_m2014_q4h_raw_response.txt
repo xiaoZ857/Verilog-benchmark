@@ -1,0 +1,31 @@
+Here is a minimal, synthesizable Verilog implementation that simply forwards the input `in` to the output `out` in a combinational fashion:
+
+```verilog
+// TopModule.v
+// -------------------------------------------
+//  Simple combinational pass‑through
+// -------------------------------------------
+//  The output `out` is driven directly by the input `in`.
+//  No clock or reset is required – the assignment is purely combinational.
+// -------------------------------------------
+
+`timescale 1ns / 1ps   // (optional, for simulation only)
+
+module TopModule (
+    input  wire in,   // 1‑bit input
+    output wire out   // 1‑bit output
+);
+
+    // Combinational assignment
+    assign out = in;
+
+endmodule
+```
+
+### Explanation
+
+* **`input wire in` / `output wire out`** – Declares the ports as 1‑bit wires.  
+* **`assign out = in;`** – A continuous assignment that drives `out` with the current value of `in`.  
+* No `always` block or clock is needed because the relationship is purely combinational.  
+
+This module will work in both simulation and synthesis, and it satisfies the requirement that the output port is assigned the same value as the input port combinationally.

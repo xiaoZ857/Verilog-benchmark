@@ -1,0 +1,29 @@
+
+// ------------------------------------------------------------
+//  TopModule
+//  3‑bit input vector  -> 3‑bit output vector (identity)
+//  3‑bit input vector  -> 3 separate 1‑bit outputs
+//  o0  = vec[0]
+//  o1  = vec[1]
+//  o2  = vec[2]
+// ------------------------------------------------------------
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [2:0] vec,   // 3‑bit input vector
+    output wire [2:0] outv,  // 3‑bit output vector (same as input)
+    output wire       o2,    // bit 2 of the input
+    output wire       o1,    // bit 1 of the input
+    output wire       o0     // bit 0 of the input
+);
+
+// Continuous assignments – purely combinational logic
+assign outv = vec;   // pass the whole vector through unchanged
+assign o0   = vec[0];
+assign o1   = vec[1];
+assign o2   = vec[2];
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

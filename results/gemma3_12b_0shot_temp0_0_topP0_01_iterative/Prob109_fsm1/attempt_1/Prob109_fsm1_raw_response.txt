@@ -1,0 +1,106 @@
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+  // Define states
+  parameter A = 2'b00
+  parameter B = 2'b01
+
+  // State register
+  reg current_state;
+
+  // Output register
+  reg out;
+
+  // Synchronous reset
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= B;
+    end else begin
+      case (current_state)
+        A: begin
+          if (in == 0) begin
+            current_state <= B;
+          end else begin
+            current_state <= A;
+          end
+        end
+        B: begin
+          if (in == 0) begin
+            current_state <= B;
+          end else begin
+            current_state <= B;
+          end
+        end
+        default: begin
+          current_state <= B; // Default to B in case of unexpected state
+        end
+      endcase
+    end
+  end
+
+  // Output logic (Moore machine)
+  always @(current_state) begin
+    case (current_state)
+      A: out = 1;
+      B: out = 0;
+      default: out = 0; // Default output
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, in, areset, out);` declares the module with the specified input and output signals.
+
+2. **State Definition:**
+   - `parameter A = 2'b00` and `parameter B = 2'b01` define symbolic names for the states A and B.  This makes the code more readable and maintainable.
+
+3. **State Register:**
+   - `reg current_state;` declares a register to hold the current state of the state machine.
+
+4. **Output Register:**
+   - `reg out;` declares a register to hold the output value.
+
+5. **Synchronous Reset:**
+   - `always @(posedge clk or posedge areset)`: This block is triggered on the positive edge of the clock signal (`posedge clk`) or the positive edge of the asynchronous reset signal (`posedge areset`).
+   - `if (areset) begin current_state <= B; end`:  If the `areset` signal is high, the state machine is asynchronously reset to state B.
+   - `else begin ... end`: If the reset is not asserted, the state transitions are determined by the input `in` and the current state.
+
+6. **State Transition Logic:**
+   - `case (current_state)`: This `case` statement defines the state transitions based on the current state and the input `in`.
+   - Inside each state (A and B), the `if (in == 0) ... else ...` statements determine the next state based on the value of the input signal.  The transitions are implemented according to the problem description.
+
+7. **Output Logic (Moore Machine):**
+   - `always @(current_state)`: This block is triggered whenever the `current_state` changes.  This is characteristic of a Moore machine, where the output depends only on the current state.
+   - `case (current_state)`: This `case` statement assigns the output `out` based on the current state.
+   - `A: out = 1;` and `B: out = 0;` assign the output values according to the problem description.
+   - `default: out = 0;` provides a default output value in case the state machine somehow enters an unexpected state.
+
+**How to Use:**
+
+1.  **Save:** Save the code as a `.v` file (e.g., `top_module.v`).
+2.  **Simulation:** Use a Verilog simulator (like ModelSim, Icarus Verilog, or Vivado simulator) to simulate the module.  You'll need to create a testbench to provide clock, input, and reset signals and observe the output.
+3.  **Synthesis:**  You can synthesize the Verilog code into a hardware implementation using a synthesis tool (like Xilinx Vivado or Intel Quartus Prime).
+
+**Testbench Example (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg in;
+  reg areset;
+  wire out;
+
+  TopModule uut (
+    .clk(clk),
+    .in(in),
+    .ares

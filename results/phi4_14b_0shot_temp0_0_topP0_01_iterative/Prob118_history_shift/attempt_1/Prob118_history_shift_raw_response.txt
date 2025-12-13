@@ -1,0 +1,54 @@
+To implement the described Verilog module, we need to create a shift register that maintains a 32-bit global history of branch predictions. The module should handle both normal updates and rollback operations in case of mispredictions.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input areset,
+    input predict_valid,
+    input predict_taken,
+    output logic [31:0] predict_history,
+
+    input train_mispredicted,
+    input train_taken,
+    input [31:0] train_history
+);
+
+    // Internal register to hold the branch history
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset, set history to zero
+            predict_history <= 32'b0;
+        end else begin
+            if (train_mispredicted) begin
+                // Load the branch history register with the corrected history
+                predict_history <= {train_history, train_taken};
+            end else if (predict_valid) begin
+                // Shift in the prediction result from the LSB side
+                predict_history <= {predict_history[30:0], predict_taken};
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Asynchronous Reset (`areset`)**:
+   - The `always_ff` block is sensitive to both the positive edge of `clk` and the positive edge of `areset`.
+   - If `areset` is asserted, the `predict_history` register is reset to zero.
+
+2. **Handling Mispredictions**:
+   - When `train_mispredicted` is high, it indicates a branch misprediction.
+   - The history should be updated by concatenating `train_history` with `train_taken`. This effectively rolls back the state to what it was before the mispredicted branch and updates it with the actual outcome.
+
+3. **Normal Prediction Update**:
+   - If there's no misprediction (`train_mispredicted` is low) and a prediction is valid (`predict_valid` is high), the history register shifts left by one bit, and `predict_taken` is inserted at the LSB.
+   - This operation updates the branch history with the latest prediction.
+
+4. **Priority**:
+   - The misprediction handling takes precedence over normal updates because it occurs first in the conditional checks within the clocked block.
+
+This implementation ensures that the global history register correctly reflects both regular updates and corrections due to mispredictions, maintaining accurate branch prediction history for future decisions.

@@ -1,0 +1,28 @@
+
+module TopModule (
+  input [15:0] scancode,
+  output reg left,
+  output reg down,
+  output reg right,
+  output reg up
+);
+always @(posedge clk) begin
+  case(scancode)
+    16'h06b : left <= 1;
+    16'h072 : down <= 1;
+    16'h074 : right <= 1;
+    16'h075 : up <= 1;
+    default : begin
+      left <= 0;
+      down <= 0;
+      right <= 0;
+      up <= 0;
+    end
+  endcase
+end
+
+// Assuming clk is an external clock signal provided to the top_module1 instance in testbench
+
+assign clk = <your_clock_signal>; // Replace with your actual clock signal name
+
+endmodule

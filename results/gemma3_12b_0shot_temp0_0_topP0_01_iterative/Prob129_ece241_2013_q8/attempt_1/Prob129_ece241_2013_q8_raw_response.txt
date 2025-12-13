@@ -1,0 +1,104 @@
+```verilog
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+  // Define the states
+  typedef enum logic [1:0] {
+    S0,
+    S1,
+    S2
+  } state_t;
+
+  reg state_t current_state, next_state;
+
+  // State register update on positive clock edge
+  always_ff @(posedge clk) begin
+    if (!aresetn) begin
+      current_state <= S0;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = current_state; // Default: stay in the current state
+
+    case (current_state)
+      S0: begin
+        if (x == 1) begin
+          next_state = S1;
+        end
+      end
+      S1: begin
+        if (x == 0) begin
+          next_state = S2;
+        end else begin
+          next_state = S1; // Stay in S1 if x is 1
+        end
+      end
+      S2: begin
+        if (x == 1) begin
+          next_state = S1; // Go back to S1 to recognize overlapping sequences
+        end else begin
+          next_state = S0; // Go back to S0 if x is 0
+        end
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    z = 0; // Default: z is 0
+    if (current_state == S2) begin
+      z = 1;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **States:**
+   - `S0`: Initial state.  No part of the sequence has been detected yet.
+   - `S1`: The first '1' has been detected.
+   - `S2`: The sequence "10" has been detected.
+
+2. **State Register:**
+   - `current_state`: Holds the current state of the FSM.
+   - `next_state`: Holds the next state to transition to.
+   - The `always_ff` block updates `current_state` on the positive edge of the clock.  If `aresetn` is low (active low reset), the FSM is reset to `S0`.
+
+3. **Next State Logic (always_comb):**
+   - This block determines the next state based on the current state and the input `x`.
+   - **S0:** If `x` is 1, transition to `S1`.
+   - **S1:** If `x` is 0, transition to `S2`. If `x` is 1, stay in `S1` (to handle overlapping sequences).
+   - **S2:** If `x` is 1, transition to `S1` (to handle overlapping sequences). If `x` is 0, transition to `S0`.
+
+4. **Output Logic (always_comb):**
+   - `z` is asserted to 1 when the FSM is in state `S2`, indicating that the sequence "101" has been detected.
+
+**Overlapping Sequence Handling:**
+
+The key to handling overlapping sequences is the transitions from `S1` and `S2`.
+
+- **From S1:** If `x` is 1, the FSM stays in `S1`. This allows it to continue looking for the '0' that completes the sequence, even if the input sequence overlaps.
+- **From S2:** If `x` is 1, the FSM transitions back to `S1`. This allows it to recognize sequences like "101101" where the second "101" overlaps with the first.
+
+**Example:**
+
+Let's trace the execution for the input sequence "101101":
+
+| Clock | x | aresetn | current_state | next_state | z |
+|---|---|---|---|---|---|
+| 1 | - | 0 | S0 | S0 | 0 |
+| 2 | 1 | 1 | S0 | S1 | 0 |
+| 3 | 0 | 1 | S1 | S2 | 0 |
+| 4 | 1 | 1 | S2 | S1 | 1 |  // "101" detected
+| 5 | 1 | 1 | S1 | S1 | 0 |
+| 6

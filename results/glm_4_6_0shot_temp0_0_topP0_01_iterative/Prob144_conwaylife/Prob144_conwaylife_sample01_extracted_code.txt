@@ -1,0 +1,46 @@
+always @(posedge clk) begin
+  if (load) begin
+    q <= data;
+  end else begin
+    integer i, j, neighbor_count;
+    reg [255:0] next_q;
+    
+    for (i = 0; i < 16; i = i + 1) begin
+      for (j = 0; j < 16; j = j + 1) begin
+        neighbor_count = 0;
+        
+        // Calculate neighbor positions with toroidal wrapping
+        integer row_up, row_down, col_left, col_right;
+        row_up = (i == 0) ? 15 : i - 1;
+        row_down = (i == 15) ? 0 : i + 1;
+        col_left = (j == 0) ? 15 : j - 1;
+        col_right = (j == 15) ? 0 : j + 1;
+        
+        // Count all 8 neighbors
+        neighbor_count = neighbor_count + q[row_up * 16 + col_left];
+        neighbor_count = neighbor_count + q[row_up * 16 + j];
+        neighbor_count = neighbor_count + q[row_up * 16 + col_right];
+        neighbor_count = neighbor_count + q[i * 16 + col_left];
+        neighbor_count = neighbor_count + q[i * 16 + col_right];
+        neighbor_count = neighbor_count + q[row_down * 16 + col_left];
+        neighbor_count = neighbor_count + q[row_down * 16 + j];
+        neighbor_count = neighbor_count + q[row_down * 16 + col_right];
+        
+        // Apply Conway's Game of Life rules
+        if (neighbor_count <= 1) begin
+          next_q[i * 16 + j] = 1'b0;
+        end else if (neighbor_count == 2) begin
+          next_q[i * 16 + j] = q[i * 16 + j];
+        end else if (neighbor_count == 3) begin
+          next_q[i * 16 + j] = 1'b1;
+        end else begin
+          next_q[i * 16 + j] = 1'b0;
+        end
+      end
+    end
+    
+    q <= next_q;
+  end
+end
+
+endmodule

@@ -1,0 +1,19 @@
+ Based on the provided Karnaugh map, the function for the given circuit can be expressed as follows:
+
+```verilog
+function bool f;
+  input [1:0] a, b, c;
+  f = a & ~b | (~a & b) | (c & b);
+endfunction
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output out
+);
+  assign out = f(a, b, c);
+endmodule
+```
+
+This Verilog code defines a function `f` that implements the logic based on the Karnaugh map. The `TopModule` is then created with inputs `a`, `b`, and `c`, and an output `out`. The output `out` is assigned the value of the function `f(a, b, c)`.

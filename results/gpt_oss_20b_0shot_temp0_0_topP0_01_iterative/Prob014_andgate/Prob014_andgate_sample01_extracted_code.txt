@@ -1,0 +1,11 @@
+// TopModule implements a simple 2‑input AND gate
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // AND of a and b
+);
+
+    // Combinational assignment – out is always a & b
+    assign out = a & b;
+
+endmodule

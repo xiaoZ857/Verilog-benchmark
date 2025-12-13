@@ -1,0 +1,44 @@
+ Here is the Verilog code for the 4-bit shift register as per your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+  if (!areset) begin
+    q <= 4'b0; // Reset the shift register to zero
+  end else if (load && ena) begin
+    // Both load and ena are asserted, so load the data into the shift register
+    q <= data;
+  end else if (ena) begin
+    // Shift right when only ena is asserted
+    q[3:1] <= q[2:0];
+    q[0] <= 4'b0; // q[0] is shifted out and disappears
+  end
+end
+
+// Assign the load and ena signals to active high
+assign load_n = !load;
+assign ena_n = !ena;
+
+// For convenience, assign a constant zero for the shift register when reset
+always @* begin
+  if (areset) q <= 4'b0;
+end
+
+endmodule
+```
+
+This Verilog code creates a module named `TopModule` with inputs `clk`, `areset`, `load`, `ena`, and `data`. The output is `q`, which represents the contents of the shift register.
+
+The `always @(posedge clk)` block describes the behavior that occurs on the positive edge of the clock signal. Inside this block, there are three conditions: when `areset` is asserted, when both `load` and `ena` are asserted, and when only `ena` is asserted.
+
+When `areset` is asserted, the shift register is reset to zero. When both `load` and `ena` are asserted, the data is loaded into the shift register instead of shifting. When only `ena` is asserted, the shift register shifts right, with q[0] being shifted out and disappearing.
+
+The load and ena signals are assigned to active high by using the `assign` statements at the end of the code. Additionally, a constant zero is assigned to the shift register when it is reset for convenience.

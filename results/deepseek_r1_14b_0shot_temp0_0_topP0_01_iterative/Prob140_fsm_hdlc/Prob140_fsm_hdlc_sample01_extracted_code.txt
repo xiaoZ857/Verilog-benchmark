@@ -1,0 +1,67 @@
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+  // Define state machine states
+  typedef enum {
+    Start,
+    OneCount1,
+    OneCount2,
+    OneCount3,
+    OneCount4,
+    OneCount5,
+    OneCount6
+  ) StateType;
+
+  // FSM registers
+  reg [7:0] count;
+  reg current_state;
+  reg disc_out;
+  reg flag_out;
+  reg err_out;
+
+  // Output signals
+  assign disc = disc_out;
+  assign flag = flag_out;
+  assign err = err_out;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state = Start;
+      count = 0;
+      disc_out = 0;
+      flag_out = 0;
+      err_out = 0;
+    end else begin
+      case (current_state)
+        Start: 
+          if (in == 1) begin
+            current_state = OneCount1;
+            count = 1;
+          end else begin
+            current_state = Start;
+            count = 0;
+          end
+        OneCount1:
+          if (in == 1) begin
+            current_state = OneCount2;
+            count = 2;
+          end else begin
+            current_state = Start;
+            count = 0;
+          end
+        OneCount2:
+          if (in == 1) begin
+            current_state = OneCount3;
+            count = 3;
+          end else begin
+            current_state = Start;
+            count = 0;
+          end
+        OneCount3:
+          if (in == 1) begin

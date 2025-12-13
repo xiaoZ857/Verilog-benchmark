@@ -1,0 +1,14 @@
+Here is the Verilog code for the described module:
+
+```verilog
+module TopModule (
+  output zero
+);
+
+    // Always output low
+    assign zero = 0;
+
+endmodule
+```
+
+In this code, we define a module named `TopModule` with an output signal named `zero`. The `assign` keyword is used to specify the value of the output signal. In this case, it's always set to 0, which means the output will be low.

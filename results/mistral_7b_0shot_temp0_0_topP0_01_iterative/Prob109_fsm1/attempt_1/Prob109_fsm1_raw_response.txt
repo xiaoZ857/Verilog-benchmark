@@ -1,0 +1,35 @@
+ Here is the Verilog implementation for the Moore finite state machine described:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input wire in,
+  output reg out
+);
+
+reg A, B;
+
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    A <= 0;
+    B <= 1;
+  end else if (A == B) begin
+    A <= in;
+  end else begin
+    B <= A ^ in; // XOR operation to determine next state of B
+  end
+end
+
+assign out = B;
+
+endmodule
+```
+
+In this implementation, the Moore machine is modeled using two registers `A` and `B`. The state transitions are defined based on the given diagram. When the asynchronous reset signal (areset) is high, both `A` and `B` are set to 0, initializing the state machine in state B.
+
+During normal operation, when the reset signal is low, the state machine follows the transition rules defined by the diagram:
+- If the current state is A, it will transition to B if input `in` is 1.
+- If the current state is B, it will stay in B if input `in` is 0 or transition to A if input `in` is 1.
+
+The output of the state machine is assigned to the value of register `B`.

@@ -1,0 +1,48 @@
+```verilog
+module TopModule (
+  input [15:0] a,
+  input [15:0] b,
+  input [15:0] c,
+  input [15:0] d,
+  input [15:0] e,
+  input [15:0] f,
+  input [15:0] g,
+  input [15:0] h,
+  input [15:0] i,
+  input [3:0] sel,
+  output logic [15:0] out
+);
+
+  always_comb begin
+    case (sel)
+      4'd0: out = a;
+      4'd1: out = b;
+      4'd2: out = c;
+      4'd3: out = d;
+      4'd4: out = e;
+      4'd5: out = f;
+      4'd6: out = g;
+      4'd7: out = h;
+      4'd8: out = i;
+      default: out = 16'hFFFF; // Set all bits to 1 for sel=9 to 15
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule(...)`**: Defines the module named `TopModule` with the specified input and output ports.
+* **`input [15:0] a, ... input [3:0] sel;`**: Declares the input signals with their widths and names.
+* **`output logic [15:0] out;`**: Declares the output signal `out` as a 16-bit logic signal.
+* **`always_comb begin ... end`**:  This block describes combinational logic.  `always_comb` ensures that the output `out` is updated whenever any of the inputs change.
+* **`case (sel)`**:  A `case` statement is used to select the appropriate input based on the value of the `sel` signal.
+* **`4'd0: out = a;`**:  If `sel` is 0, the output `out` is assigned the value of input `a`.  `4'd0` specifies a 4-bit decimal value of 0.
+* **`4'd1: out = b;`**:  If `sel` is 1, the output `out` is assigned the value of input `b`.
+* **...**:  Similar assignments are made for `sel` values 2 through 8, assigning the corresponding inputs to the output.
+* **`default: out = 16'hFFFF;`**:  This is the `default` case of the `case` statement.  If `sel` is 9 through 15, the output `out` is assigned the value `16'hFFFF`.  `16'hFFFF` represents a 16-bit hexadecimal value where all bits are set to 1.  This fulfills the requirement that unused cases set all output bits to '1'.
+* **`endcase`**:  Ends the `case` statement.
+* **`endmodule`**:  Ends the module definition.
+
+This code implements a 9-to-1 multiplexer as described in the problem statement.  The `always_comb` block ensures that the output is updated whenever the inputs change, and the `case` statement selects the appropriate input based on the value of the `sel` signal. The `default` case handles the cases where `sel` is greater than 8, setting all output bits to 1.

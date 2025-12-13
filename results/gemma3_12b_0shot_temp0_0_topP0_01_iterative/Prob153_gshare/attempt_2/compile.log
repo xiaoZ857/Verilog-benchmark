@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:36: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:45: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:37: error: predict_taken is not a valid l-value in tb.top_module1.$unm_blk_2.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:8:      : predict_taken is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:85: error: Cannot assign to array pht. Did you forget a word index?
+2 error(s) during elaboration.

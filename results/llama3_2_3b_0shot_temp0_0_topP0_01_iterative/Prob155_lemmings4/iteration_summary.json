@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob155_lemmings4",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 272 mismatches. First mismatch occurred at time 5.\nHint: Output 'walk_right' has 179 mismatches. First mismatch occurred at time 60.\nHint: Output 'aaah' has 408 mismatches. First mismatch occurred at time 80.\nHint: Output 'digging' has 306 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 860 out of 1003 samples\n\nSimulation finished at 5016 ps\nMismatches: 860 in 1003 samples\n",
+      "mismatch_count": 860
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 12\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:42: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:43: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:49: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:51: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:53: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:54: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:55: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:55: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:56: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:59: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:60: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_2\\Prob155_lemmings4_code.sv:63: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 12\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:41: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:42: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:48: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:50: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:52: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:53: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:54: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:54: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:55: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:58: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:59: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_3\\Prob155_lemmings4_code.sv:62: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 12\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:48: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:49: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:59: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:61: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:67: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:68: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:69: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:69: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:70: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:73: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:74: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob155_lemmings4\\attempt_4\\Prob155_lemmings4_code.sv:77: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

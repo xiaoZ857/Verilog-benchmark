@@ -1,0 +1,36 @@
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+  always @(in) begin
+    for (int i = 0; i < 100; i++) begin
+      out[i] = in[99 - i];
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [99:0] in, output reg [99:0] out);`**:  This declares the module named `TopModule` with a 100-bit input `in` and a 100-bit registered output `out`.  The `reg` keyword is necessary because `out` is assigned within an `always` block.
+* **`always @(in) begin ... end`**: This is a combinational `always` block.  It means that the code inside the block will execute whenever the input `in` changes.  This is appropriate for a bit reversal operation, which is a purely combinational function.
+* **`for (int i = 0; i < 100; i++) begin ... end`**: This loop iterates through each bit of the input vector.
+* **`out[i] = in[99 - i];`**: This is the core of the bit reversal logic.  It assigns the bit at index `99 - i` of the input `in` to the bit at index `i` of the output `out`.  This effectively reverses the order of the bits.
+
+**How it works:**
+
+The loop iterates from `i = 0` to `i = 99`.  For each iteration:
+
+* When `i = 0`, `out[0] = in[99]` (the most significant bit of the input becomes the least significant bit of the output).
+* When `i = 1`, `out[1] = in[98]`
+* ...
+* When `i = 99`, `out[99] = in[0]` (the least significant bit of the input becomes the most significant bit of the output).
+
+This process effectively swaps the positions of the bits, reversing their order.
+
+**Example:**
+
+If `in = 10010101...` (a 100-bit vector), then `out` will be `...10101001`.

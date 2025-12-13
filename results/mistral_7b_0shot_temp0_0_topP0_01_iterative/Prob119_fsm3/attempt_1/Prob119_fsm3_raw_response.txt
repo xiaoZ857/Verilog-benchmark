@@ -1,0 +1,74 @@
+ Here is the Verilog code for the Moore state machine based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset,
+  output reg out,
+  output reg state_A,
+  output reg state_B,
+  output reg state_C,
+  output reg state_D
+);
+
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state_A <= 1'b1;
+    state_B <= 1'b0;
+    state_C <= 1'b0;
+    state_D <= 1'b0;
+    out <= 1'b0;
+  end else begin
+    case (state_A)
+      1'b1: begin
+        if (in == 1'b0) begin
+          state_A <= 1'b1;
+          state_B <= 1'b0;
+          out <= 1'b0;
+        end else begin
+          state_A <= 1'b0;
+          state_B <= 1'b1;
+        end
+      end,
+      1'b0: begin
+        if (in == 1'b0) begin
+          state_C <= 1'b0;
+          state_B <= 1'b1;
+          out <= 1'b0;
+        end else begin
+          state_C <= 1'b1;
+          state_B <= 1'b0;
+          out <= 1'b0;
+        end
+      end,
+      1'b0: begin
+        if (in == 1'b0) begin
+          state_A <= 1'b0;
+          state_D <= 1'b0;
+          out <= 1'b0;
+        end else begin
+          state_A <= 1'b1;
+          state_C <= 1'b1;
+          out <= 1'b1;
+        end
+      end,
+      1'b0: begin
+        if (in == 1'b0) begin
+          state_C <= 1'b0;
+          state_B <= 1'b1;
+          out <= 1'b0;
+        end else begin
+          state_C <= 1'b1;
+          state_B <= 1'b0;
+          out <= 1'b0;
+        end
+      end
+    endcase
+  end
+end
+```
+
+This Verilog code defines a module named `TopModule` with four internal signals (`state_A`, `state_B`, `state_C`, and `state_D`) to represent the current state of the Moore state machine. The `areset` signal is used for asynchronous reset, which sets all states to their initial values when asserted.
+
+The `out` signal represents the output of the state machine based on the current state and input value. The state transitions are defined using a case statement in the always block triggered by the positive edge of the clock or negative edge of the asynchronous reset signal.

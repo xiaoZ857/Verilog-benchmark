@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [9:0] q
+);
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 0; // Reset the counter to 0
+  end else begin
+    if (q < 999) begin
+      q <= q + 1; // Increment the counter
+    end else begin
+      // Wrap around to 0 when reaching 1000
+      q <= 0;
+    end
+  end
+end
+
+// Add a clock enable for safety (optional)
+always @(posedge clk) begin
+  if (!reset) begin
+    q <= q + ((clk_period - $time) >= 1000 ? 1'b1 : 1'b0); // Enable counting only after 1000 cycles
+  end
+end
+
+// Define the clock period (in ns) for simulation purposes (optional)
+parameter clk_period = 10; // Assuming a 100 MHz clock frequency
+
+// Move the timescale directive outside of the module definition
+`timescale 1ns / 1ps
+
+endmodule

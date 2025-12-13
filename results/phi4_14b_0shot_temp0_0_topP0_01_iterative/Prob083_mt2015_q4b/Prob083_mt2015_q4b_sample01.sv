@@ -1,0 +1,17 @@
+
+module TopModule (
+  input x,
+  input y,
+  output reg z
+);
+
+always @(*) begin
+    if ((~x & ~y) | (x & y))
+        z = 1;
+    else
+        z = 0;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

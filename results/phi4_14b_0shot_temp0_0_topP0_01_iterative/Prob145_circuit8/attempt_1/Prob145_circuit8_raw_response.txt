@@ -1,0 +1,63 @@
+To implement the Verilog module based on the given simulation waveforms, we need to analyze how the outputs `p` and `q` change with respect to the inputs `clock` and `a`. Let's break down the behavior:
+
+1. **Initial State (0ns - 25ns):**
+   - The clock is low (`0`) and both `p` and `q` are undefined (`x`). This indicates that no state changes occur when the clock is inactive.
+
+2. **Clock Rising Edge at 25ns:**
+   - When the clock goes high, `a` is `0`. Both `p` and `q` remain `0`.
+
+3. **Clock Low Period (55ns - 70ns):**
+   - The clock is low again, and both `p` and `q` remain `0`.
+
+4. **Clock Rising Edge at 70ns:**
+   - When the clock goes high with `a = 1`, `p` becomes `1` while `q` remains `0`.
+
+5. **Subsequent Clock Cycles (80ns - 115ns):**
+   - The pattern shows that when `a` is `1` and the clock rises, `p` follows `a`.
+   - When `a` is `0`, both `p` and `q` reset to `0`.
+
+6. **Clock Low Period with `a = 1` (115ns - 145ns):**
+   - During this period, when the clock is low and `a` was previously `1`, `q` follows `p` from the last rising edge.
+
+7. **Final Clock Rising Edge at 145ns:**
+   - When the clock rises with `a = 0`, both `p` and `q` reset to `0`.
+
+8. **Clock Low Period (175ns - 190ns):**
+   - The pattern continues where `q` holds the last value of `p` when `a` was `1` during a previous rising edge.
+
+From this analysis, we can deduce that:
+- `p` is set to the current value of `a` on every clock rising edge.
+- `q` captures the last value of `p` when `a` was `1` and holds it until the next clock rising edge where `a = 0`.
+
+Here's the Verilog implementation:
+
+```verilog
+module TopModule (
+    input wire clock,
+    input wire a,
+    output reg p,
+    output reg q
+);
+
+reg last_a;
+
+always @(posedge clock) begin
+    // Set p to the current value of a on every rising edge of the clock
+    p <= a;
+    
+    // If a was 1 during the last cycle, set q to the last value of p
+    if (last_a == 1'b1) begin
+        q <= p;
+    end else begin
+        // Otherwise, reset q to 0
+        q <= 1'b0;
+    end
+    
+    // Store the current value of a for use in the next cycle
+    last_a <= a;
+end
+
+endmodule
+```
+
+This module captures the behavior described by the waveforms: `p` follows `a` on each clock rising edge, and `q` holds the last value of `p` when `a` was `1`, resetting to `0` otherwise.

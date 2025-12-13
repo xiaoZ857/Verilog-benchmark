@@ -1,0 +1,40 @@
+**Solution – Verilog implementation**
+
+The Karnaugh map shows that the output is the XOR of all four input bits.  
+The simplest combinational implementation is therefore
+
+```verilog
+out = a ^ b ^ c ^ d;
+```
+
+Below is a clean, synthesizable Verilog‑2001/SystemVerilog module that implements this logic.
+
+```verilog
+// TopModule.v
+// Implements the function described by the Karnaugh map.
+// out = a XOR b XOR c XOR d
+
+module TopModule (
+    input  wire a,      // Input bit a
+    input  wire b,      // Input bit b
+    input  wire c,      // Input bit c
+    input  wire d,      // Input bit d
+    output reg  out     // Output bit
+);
+
+    // Combinational logic – always_comb (or always @*)
+    always @* begin
+        out = a ^ b ^ c ^ d;   // XOR of all four inputs
+    end
+
+endmodule
+```
+
+**Explanation**
+
+* The Karnaugh map reduces to the Boolean expression  
+  `out = a ⊕ b ⊕ c ⊕ d` (XOR of all four inputs).
+* The `always @*` block (or `always_comb` in SystemVerilog) guarantees that `out` is updated whenever any of the inputs change, making the module purely combinational.
+* The output is declared as `reg` because it is driven inside an `always` block, which is the standard practice in Verilog‑2001.  
+
+This module is fully synthesizable and matches the truth table given by the Karnaugh map.

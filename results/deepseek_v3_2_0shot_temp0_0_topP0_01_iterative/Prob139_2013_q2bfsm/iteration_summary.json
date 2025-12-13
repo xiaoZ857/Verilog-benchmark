@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob139_2013_q2bfsm",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'f' has 36 mismatches. First mismatch occurred at time 20.\nHint: Output 'g' has 688 mismatches. First mismatch occurred at time 60.\nHint: Total mismatched samples is 724 out of 1002 samples\n\nSimulation finished at 5011 ps\nMismatches: 724 in 1002 samples\n",
+      "mismatch_count": 724
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'f' has 36 mismatches. First mismatch occurred at time 20.\nHint: Output 'g' has 250 mismatches. First mismatch occurred at time 60.\nHint: Total mismatched samples is 286 out of 1002 samples\n\nSimulation finished at 5011 ps\nMismatches: 286 in 1002 samples\n",
+      "mismatch_count": 286
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'f' has 36 mismatches. First mismatch occurred at time 20.\nHint: Output 'g' has 250 mismatches. First mismatch occurred at time 60.\nHint: Total mismatched samples is 286 out of 1002 samples\n\nSimulation finished at 5011 ps\nMismatches: 286 in 1002 samples\n",
+      "mismatch_count": 286
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 17\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob139_2013_q2bfsm\\attempt_4\\Prob139_2013_q2bfsm_code.sv:10: syntax error\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob139_2013_q2bfsm\\attempt_4\\Prob139_2013_q2bfsm_code.sv:10: error: Invalid module instantiation\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob139_2013_q2bfsm\\attempt_4\\Prob139_2013_q2bfsm_code.sv:122: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:10: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:12: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:13: Syntax in assignment statement l-value.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:27: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:45: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:45: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_test.sv:46: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_ref.sv:12: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_ref.sv:12: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_ref.sv:14: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_ref.sv:21: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob139_2013_q2bfsm_ref.sv:37: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

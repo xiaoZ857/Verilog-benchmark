@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob142_lemmings2",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_1\\Prob142_lemmings2_code.sv:15: syntax error\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_1\\Prob142_lemmings2_code.sv:14: error: syntax error in parameter list.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:14: syntax error\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:13: error: syntax error in parameter list.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:14: syntax error\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:13: error: syntax error in parameter list.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

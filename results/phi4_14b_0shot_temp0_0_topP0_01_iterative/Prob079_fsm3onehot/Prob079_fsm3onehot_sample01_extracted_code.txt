@@ -1,0 +1,29 @@
+always @(*) begin
+    // Default next_state to zero
+    next_state = 4'b0000;
+
+    // Next state logic
+    if (state[3]) begin // Current state is D
+        next_state[2] = ~in; // C if in=0, B if in=1
+        next_state[1] = in;  // B if in=1
+    end else if (state[2]) begin // Current state is C
+        next_state[3] = in;   // D if in=1
+        next_state[0] = ~in;  // A if in=0
+    end else if (state[1]) begin // Current state is B
+        next_state[2] = ~in; // C if in=0
+        // Stay in B if in=1, already default to zero
+    end else if (state[0]) begin // Current state is A
+        next_state[1] = in;   // B if in=1
+        // Stay in A if in=0, already default to zero
+    end
+
+    // Ensure only one bit is set for the next state
+    if (next_state != 4'b0000) begin
+        next_state = next_state & ~state;
+    end
+end
+
+// Output logic
+assign out = state[3];  // D outputs 1, others output 0
+
+endmodule

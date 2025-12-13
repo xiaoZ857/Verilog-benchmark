@@ -1,0 +1,55 @@
+Below is a minimal, synthesizable Verilog implementation that reproduces the waveform you posted.  
+The output `z` is simply the XNOR of the two inputs – i.e. `z = 1` when `x` and `y` are equal and `z = 0` otherwise.
+
+```verilog
+// TopModule.v
+// -------------
+//  Combinational XNOR of two 1‑bit inputs.
+//  The waveform in the problem statement matches the truth table of an XNOR gate.
+//
+//  Inputs:
+//      x : 1‑bit input
+//      y : 1‑bit input
+//
+//  Output:
+//      z : 1‑bit output (z = x XNOR y)
+//
+//  Note:  No clock is required – the logic is purely combinational.
+//  The module is written in two equivalent styles: a continuous assignment
+//  and an always @(*) block.  Either style is acceptable for synthesis.
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire x,
+    input  wire y,
+    output wire z
+);
+
+// ------------------------------------------------------------------
+// 1) Continuous assignment (preferred for simple combinational logic)
+// ------------------------------------------------------------------
+assign z = ~(x ^ y);          // XNOR: 1 when x == y, 0 otherwise
+
+// ------------------------------------------------------------------
+// 2) Alternative always @(*) block (useful if you want to add
+//    additional logic later)
+// ------------------------------------------------------------------
+/*
+always @(*) begin
+    z = ~(x ^ y);   // same as above
+end
+*/
+
+endmodule
+```
+
+### How the waveform matches
+
+| time | x | y | x ^ y | ~ (x ^ y) | z |
+|------|---|---|-------|-----------|---|
+| 0‑20 ns | 0 | 0 | 0 | 1 | 1 |
+| 25 ns | 1 | 0 | 1 | 0 | 0 |
+| 35 ns | 0 | 1 | 1 | 0 | 0 |
+| 45 ns | 1 | 1 | 0 | 1 | 1 |
+| 

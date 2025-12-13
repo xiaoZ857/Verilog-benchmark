@@ -1,0 +1,113 @@
+  // Define states
+  parameter WALK_LEFT = 2'b00;
+  parameter WALK_RIGHT = 2'b01;
+  parameter FALLING = 2'b10;
+  parameter DIGGING = 2'b11;
+
+  reg [1:0] current_state;
+  reg [4:0] fall_count;
+
+  // Output registers
+  reg walk_left_reg;
+  reg walk_right_reg;
+  reg aaah_reg;
+  reg digging_reg;
+
+  // Assign outputs based on current state
+  always @(current_state) begin
+    walk_left_reg = 0;
+    walk_right_reg = 0;
+    aaah_reg = 0;
+    digging_reg = 0;
+
+    case (current_state)
+      WALK_LEFT: begin
+        walk_left_reg = 1;
+      end
+      WALK_RIGHT: begin
+        walk_right_reg = 1;
+      end
+      FALLING: begin
+        aaah_reg = 1;
+      end
+      DIGGING: begin
+        digging_reg = 1;
+      end
+      default: begin
+        walk_left_reg = 1; // Default to walking left
+      end
+    endcase
+  end
+
+  // Sequential logic (state transition and counter)
+  always @(posedge clk) begin
+    if (areset) begin
+      current_state <= WALK_LEFT;
+      fall_count <= 0;
+    end else begin
+      case (current_state)
+        WALK_LEFT: begin
+          if (bump_right) begin
+            current_state <= WALK_RIGHT;
+          end else if (dig && ground) begin
+            current_state <= DIGGING;
+          end else if (!ground) begin
+            current_state <= FALLING;
+            fall_count <= 0;
+          end else begin
+            current_state <= WALK_LEFT;
+          end
+        end
+        WALK_RIGHT: begin
+          if (bump_left) begin
+            current_state <= WALK_LEFT;
+          end else if (dig && ground) begin
+            current_state <= DIGGING;
+          end else if (!ground) begin
+            current_state <= FALLING;
+            fall_count <= 0;
+          end else begin
+            current_state <= WALK_RIGHT;
+          end
+        end
+        FALLING: begin
+          if (ground) begin
+            if (fall_count >= 20) begin
+              // Splatter - stay in this state (effectively frozen)
+              current_state <= FALLING;
+              walk_left_reg <= 0;
+              walk_right_reg <= 0;
+              aaah_reg <= 0;
+              digging_reg <= 0;
+            end else begin
+              current_state <= WALK_LEFT; // Resume walking left
+            end
+          end else begin
+            fall_count <= fall_count + 1;
+            current_state <= FALLING;
+          end
+        end
+        DIGGING: begin
+          if (!ground) begin
+            current_state <= FALLING;
+            fall_count <= 0;
+          end else if (dig == 0) begin
+            current_state <= WALK_LEFT;
+          end else begin
+            current_state <= DIGGING;
+          end
+        end
+        default: begin
+          current_state <= WALK_LEFT;
+        end
+      endcase
+    end
+  end
+
+  // Assign outputs
+  assign walk_left = walk_left_reg;
+  assign walk_right = walk_right_reg;
+  assign aaah = aaah_reg;
+  assign digging = digging_reg;
+
+endmodule

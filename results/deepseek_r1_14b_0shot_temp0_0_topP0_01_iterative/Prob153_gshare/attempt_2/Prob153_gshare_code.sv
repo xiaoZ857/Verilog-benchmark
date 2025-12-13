@@ -1,0 +1,73 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+
+// Define internal signals and variables
+reg [6:0] ghr;          // Global history register
+reg [7:0][1:0] pht[128]; // 128-entry PHT with two-bit counters
+
+wire [6:0] index;       // Index into PHT
+wire [1:0] counter;     // Current counter value for prediction
+wire predict_taken_d;   // Predict taken decision
+wire train_index;       // Index for training
+wire [1:0] new_counter; // New counter value after training
+
+// Calculate the index by XORing PC and GHR
+always @(*) begin
+    index = predict_pc ^ ghr;
+end
+
+// Calculate predicted branch direction based on PHT counter
+always @(*) begin
+    if (predict_valid) begin
+        counter = pht[index];
+        predict_taken_d = (counter != 0);
+    end else begin
+        counter = 0;
+        predict_taken_d = 0;
+    end
+end
+
+// Handle training logic when train_valid is asserted
+always @(*) begin
+    new_counter = pht[train_index];
+    if (train_mispredicted) begin
+        // Rollback the GHR to its state before the mispredicted branch
+        case(train_history)
+            0: ghr = ghr[6:1] << 1; // Shift right by one bit
+            1: ghr = ghr[6:2] << 2; // Shift right by two bits
+            default: ghr = 0;
+        endcase
+    end else if (train_valid) begin
+        // Update the counter based on branch outcome
+        if (train_taken) begin
+            new_counter = counter + 1;
+        end else begin
+            new_counter = counter - 1;
+        end
+        // Ensure counters stay within bounds [0,3]
+        new_counter = (new_counter > 2) ? 2 : 
+                     ((new_counter < 0) ? 0 : new_counter);
+    end
+end
+
+// Clocked block for synchronous updates
+always @(posedge clk or areset) begin
+    if (
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

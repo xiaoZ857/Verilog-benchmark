@@ -1,0 +1,4 @@
+assign mux_in[0] = (sel_mux == 00) ? c : (sel_mux == 01) ? d : (sel_mux == 11) ? d : (sel_mux == 10) ? c : 0;
+assign mux_in[1] = (sel_mux == 01) ? d : (sel_mux == 11) ? c : (sel_mux == 10) ? d : 1;
+assign mux_in[2] = (sel_mux == 11) ? c : (sel_mux == 10) ? d : (sel_mux == 00) ? d : 1;
+assign mux_in[3] = (sel_mux == 10) ? c : (sel_mux == 00) ? d : (sel_mux == 01) ? d : 1;

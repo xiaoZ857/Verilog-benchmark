@@ -1,0 +1,26 @@
+
+// TopModule.v
+// -------------
+// D‑latch (level‑sensitive)
+//   - When ena = 1, q follows d
+//   - When ena = 0, q holds its previous value
+//   - Uses a plain always block (no clock edge)
+//   - Non‑blocking assignment (<=) keeps the latch behavior
+//   - Sensitivity list includes both d and ena
+
+module TopModule (
+    input  logic d,   // Data input
+    input  logic ena, // Enable (level‑sensitive)
+    output logic q    // Latch output
+);
+
+    // Level‑sensitive latch
+    always @ (d or ena) begin
+        if (ena)
+            q <= d;   // Update output while enabled
+        // else: no assignment → latch holds previous value
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

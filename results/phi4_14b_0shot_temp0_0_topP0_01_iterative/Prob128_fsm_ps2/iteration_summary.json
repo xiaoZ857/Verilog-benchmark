@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob128_fsm_ps2",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 1 mismatches. First mismatch occurred at time 935.\nHint: Total mismatched samples is 1 out of 400 samples\n\nSimulation finished at 2001 ps\nMismatches: 1 in 400 samples\n",
+      "mismatch_count": 1
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 9\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:11: error: done is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `RECEIVE_3' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `next_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `IDLE' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:14: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:19: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:24: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:24: error: Unable to elaborate this case expression.\n9 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 9\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:11: error: done is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `RECEIVE_3' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `next_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `IDLE' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:14: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:19: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:24: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:24: error: Unable to elaborate this case expression.\n9 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 9\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:11: error: done is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `RECEIVE_3' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `next_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `IDLE' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:14: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:19: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:24: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_4\\Prob128_fsm_ps2_code.sv:24: error: Unable to elaborate this case expression.\n9 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

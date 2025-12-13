@@ -1,0 +1,22 @@
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+always @(posedge clk) begin
+  if(state[0]) begin // Checking A
+    next_state <= state; // Next state for A when in=0 and in=1
+  end else if(state[1]) begin // Checking B
+    next_state <= (state == 4'b0010) ? state : 4'b0100; // Next state for B when in=0 and in=1
+  end else if(state[2]) begin // Checking C
+    next_state <= (state == 4'b0100) ? state : 4'b0001; // Next state for C when in=0 and in=1
+  end else if(state[3]) begin // Checking D
+    next_state <= (state == 4'b1000) ? 4'b0100 : 4'b0010; // Next state for D when in=0 and in=1
+  end
+end
+
+assign out = (state[1] && !in) ? 1'b1 : 1'b0; // Output logic
+
+endmodule

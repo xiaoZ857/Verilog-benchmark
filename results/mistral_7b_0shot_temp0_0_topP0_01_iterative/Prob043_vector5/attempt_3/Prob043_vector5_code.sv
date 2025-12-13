@@ -1,0 +1,42 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  input e,
+  output [24:0] out
+);
+always @(posedge clk) begin
+  out[0] = (a == e); // out[0] checks if a and e are equal
+  out[1] = (a == b); // out[1] checks if a and b are equal
+  out[2] = (a == c); // out[2] checks if a and c are equal
+  out[3] = (a == d); // out[3] checks if a and d are equal
+  out[4] = (a == a); // out[4] is redundant, but it doesn't cause an error
+  out[5] = (b == c); // out[5] checks if b and c are equal
+  out[6] = (b == d); // out[6] checks if b and d are equal
+  out[7] = (b == a); // out[7] checks if b and a are equal
+  out[8] = (c == d); // out[8] checks if c and d are equal
+  out[9] = (c == a); // out[9] checks if c and a are equal
+  out[10] = (d == a); // out[10] checks if d and a are equal
+  out[11] = (d == e); // out[11] checks if d and e are equal
+  out[12] = (a == d); // out[12] is redundant, but it doesn't cause an error
+  out[13] = (b == a); // out[13] is already defined
+  out[14] = (c == b); // out[14] checks if c and b are equal
+  out[15] = (d == c); // out[15] checks if d and c are equal
+  out[16] = (e == d); // out[16] is already defined
+  out[17] = (e == c); // out[17] checks if e and c are equal
+  out[18] = (c == e); // out[18] checks if c and e are equal
+  out[19] = (d == e); // out[19] is already defined
+  out[20] = (b == e); // out[20] checks if b and e are equal
+  out[21] = (a == e); // out[21] is already defined
+  out[22] = (e == a); // out[22] checks if e and a are equal
+  out[23] = (a == b); // out[23] is already defined
+  out[24] = (a == c); // out[24] is already defined
+end
+
+// Add timescale directive outside the module definition
+timescale 1ns / 1ps
+
+
+// VERILOG-EVAL: endmodule not found

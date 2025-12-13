@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob142_lemmings2",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob142_lemmings2_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob142_lemmings2_ref.sv:37: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 29\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:16: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:18: Syntax in assignment statement l-value.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:19: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:20: error: invalid module item.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:21: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:24: error: invalid module item.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:25: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:25: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:26: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:30: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:30: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:32: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:32: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:34: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:34: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:38: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:38: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:40: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:40: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:42: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:42: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:45: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:45: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:47: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:47: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:49: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:49: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_2\\Prob142_lemmings2_code.sv:53: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob142_lemmings2_test.sv:15: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob142_lemmings2_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob142_lemmings2_ref.sv:37: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

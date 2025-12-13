@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:9: error: 'next_state' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:5:      : It was declared here as a variable.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_ref.sv:24: syntax error
+I give up.

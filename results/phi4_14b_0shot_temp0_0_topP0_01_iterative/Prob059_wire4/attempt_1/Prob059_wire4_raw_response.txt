@@ -1,0 +1,33 @@
+To implement the described Verilog module, you need to create a simple combinational logic circuit where each input is directly connected to one or more outputs. Here's how you can define the `TopModule`:
+
+```verilog
+module TopModule (
+    input a,
+    input b,
+    input c,
+    output w,
+    output x,
+    output y,
+    output z
+);
+
+    // Directly assign inputs to outputs as specified
+    assign w = a;
+    assign x = b;
+    assign y = b;
+    assign z = c;
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module has three inputs (`a`, `b`, `c`) and four outputs (`w`, `x`, `y`, `z`).
+  
+- **Assignments**:
+  - `assign w = a;`: Connects input `a` directly to output `w`.
+  - `assign x = b;`: Connects input `b` directly to output `x`.
+  - `assign y = b;`: Connects input `b` directly to output `y`.
+  - `assign z = c;`: Connects input `c` directly to output `z`.
+
+This module uses continuous assignments (`assign`) to create the specified connections, making it a purely combinational logic circuit.

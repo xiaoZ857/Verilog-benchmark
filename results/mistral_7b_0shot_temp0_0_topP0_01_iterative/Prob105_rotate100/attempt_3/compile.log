@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob105_rotate100\attempt_3\Prob105_rotate100_code.sv:15: error: part select shift_register[0:98] is out of order.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob105_rotate100\attempt_3\Prob105_rotate100_code.sv:17: error: part select shift_register[1:99] is out of order.
+2 error(s) during elaboration.

@@ -1,0 +1,25 @@
+Here's how you can implement the next-state logic for `Y2` using three flip-flops:
+
+```verilog
+module TopModule (
+  input [3:1] y, // current state
+  input w,     // clock/enable signal
+  output reg Y2 // next state of y[2]
+);
+
+reg [3:1] prev_y; // previous state
+
+// Initialize the flip-flops with initial states
+assign prev_y = {0, 0, 0, 0}; // assuming initial state is A (000)
+
+// Next-state logic for y[2]
+always @(posedge w) begin
+    Y2 <= (y[1] & ~prev_y[3]) | (~y[1] & prev_y[3]);
+end
+
+endmodule
+```
+
+In this code, `prev_y` is used to store the previous state of the FSM. The next-state logic for `Y2` is implemented using an always block that checks the current state and the previous state. If the current state's second bit (`y[1]`) is 0 and the third bit of the previous state (`prev_y[3]`) is 1, then `Y2` will be set to 1; otherwise, it will be set to 0.
+
+Note that this code assumes that the initial state of the FSM is A (000). If you want to implement a different initial state, you can modify the initialization of `prev_y`.

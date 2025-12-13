@@ -1,0 +1,68 @@
+Here's the implementation of the Verilog module based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+
+  // State definition
+  typedef enum {
+    IDLE = 0,
+    EXPECTING_SECOND_BYTE = 1,
+    EXPECTING_THIRD_BYTE = 2
+  } state_t;
+
+  state_t state, next_state;
+  
+  // Additional signals
+  reg message_received;  // To indicate when a message has started
+
+  // FSM transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      message_received <= 0;
+      done <= 0;
+    end else begin
+      case (state)
+        IDLE: begin
+          if (in[3]) begin
+            next_state <= EXPECTING_SECOND_BYTE;
+            message_received <= 1;
+            done <= 0;  // Reset done when starting a new message
+          end else begin
+            next_state <= IDLE;
+          end
+        end
+        
+        EXPECTING_SECOND_BYTE: begin
+          next_state <= EXPECTING_THIRD_BYTE;
+        end
+        
+        EXPECTING_THIRD_BYTE: begin
+          // After receiving the third byte, set done and reset state
+          next_state <= IDLE;
+          done <= 1;
+        end
+      endcase
+      
+      state <= next_state;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+- **State Machine**: The module uses a finite state machine with three states: `IDLE`, `EXPECTING_SECOND_BYTE`, and `EXPECTING_THIRD_BYTE`.
+- **Reset Handling**: When the reset signal is active, the FSM returns to the `IDLE` state.
+- **Message Detection**:
+  - In `IDLE`, it waits for a byte where `in[3] == 1` to indicate the start of a message.
+  - Once detected, it transitions to `EXPECTING_SECOND_BYTE`.
+  - From there, it moves to `EXPECTING_THIRD_BYTE` upon receiving the second byte.
+  - Finally, after receiving the third byte, it asserts the `done` signal and resets to `IDLE`.
+
+This implementation efficiently tracks message boundaries according to the PS/2 protocol description.

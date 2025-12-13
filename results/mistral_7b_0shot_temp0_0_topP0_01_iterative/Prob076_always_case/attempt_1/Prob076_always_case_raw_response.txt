@@ -1,0 +1,22 @@
+ Here is the Verilog code for a 6-to-1 multiplexer as per your description:
+
+```verilog
+module TopModule (
+  input [2:0] sel,
+  input [3:0] data0,
+  input [3:0] data1,
+  input [3:0] data2,
+  input [3:0] data3,
+  input [3:0] data4,
+  input [3:0] data5,
+  output reg [3:0] out
+);
+
+assign out = sel == 0 ? data0 : (sel == 1 ? data1 : (sel == 2 ? data2 : (sel == 3 ? data3 : (sel == 4 ? data4 : (sel == 5 ? data5 : 4'b0))));
+
+endmodule
+```
+
+In this code, the `TopModule` is a 6-to-1 multiplexer with 6 input data signals and one output signal. The `sel` input is a 3-bit binary number that determines which of the six data inputs should be selected for the output. If `sel` is between 0 and 5, the corresponding data input will be chosen; otherwise, the output will be zero (4'b0).
+
+The assignment statement uses conditional operators to check the value of `sel` and select the appropriate data input. The `==` operator checks for equality, and the `? :` operator is used as a shorthand for an if-else statement in Verilog.

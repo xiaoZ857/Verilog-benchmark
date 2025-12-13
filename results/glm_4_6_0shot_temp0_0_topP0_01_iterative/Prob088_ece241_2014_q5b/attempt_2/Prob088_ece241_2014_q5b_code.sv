@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+
+parameter [1:0] STATE_A = 2'b01;
+parameter [1:0] STATE_B = 2'b10;
+
+reg [1:0] state, next_state;
+
+// State register
+always @(posedge clk or posedge areset) begin
+  if (areset)
+    state <= STATE_A;
+  else
+    state <= next_state;
+end
+
+// Next state logic
+always @(*) begin
+  case (state)
+    STATE_A: begin
+      if (x)
+        next_state = STATE_B;
+      else
+        next_state = STATE_A;
+    end
+    STATE_B: begin
+      next_state = STATE_B;
+    end
+    default: next_state = STATE_A;
+  endcase
+end
+
+// Output logic (Mealy machine)
+assign z = (state == STATE_A) ? x : ~x;
+
+endmodule

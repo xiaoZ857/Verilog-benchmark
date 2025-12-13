@@ -1,0 +1,26 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a == 0) ?
+             ((b == 0) ?
+              ((c == 0) ? d : 1) : 1) : 0;
+
+endmodule
+```
+
+**Explanation:**
+
+The provided waveforms show that `q` is 0 only when `a` is 1.  When `a` is 0, `q` is 1 if `b` is 1. If `b` is 0, then `q` is equal to `d`.
+
+* **`assign q = ...;`**:  This declares `q` as a continuous assignment, meaning its value is updated whenever any of its input signals change.
+* **`(a == 0) ? ... : 0;`**: This is a ternary operator.  If `a` is 0, the expression after the first colon is evaluated. Otherwise, `q` is assigned 0.
+* **`(b == 0) ? ... : 1;`**:  If `b` is 0, the expression after the first colon is evaluated. Otherwise, `q` is assigned 1.
+* **`(c == 0) ? d : 1;`**: If `c` is 0, `q` is equal to `d`. Otherwise, `q` is 1.
+
+This Verilog code accurately reflects the behavior observed in the provided simulation waveforms.  It's a concise and efficient implementation of the described combinational circuit.

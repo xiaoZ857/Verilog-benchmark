@@ -1,0 +1,34 @@
+ Here is a simple Verilog implementation of the described Moore state machine for the Lemmings game:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output reg walk_left,
+  output reg walk_right
+);
+
+// State variables
+reg [1:0] state; // 2-state machine: 0 - walking left, 1 - walking right
+
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 0; // Reset to walking left
+    end else if (bump_left && !bump_right) begin
+        state <= 1; // Switch to walking right when bumped on the left
+    end else if (!bump_left && bump_right) begin
+        state <= 0; // Switch to walking left when bumped on the right
+    end
+end
+
+assign walk_left = state[0];
+assign walk_right = state[1];
+```
+
+This Verilog code defines a module named `TopModule` with inputs for clock, asynchronous reset, bump_left, and bump_right. The outputs are walk_left and walk_right. The Moore state machine has two states: 0 (walking left) and 1 (walking right).
+
+The always block triggers on the positive edge of the clock or the active level change of the asynchronous reset signal. When the asynchronous reset is asserted, the state is set to walking left (state = 0). If a Lemming is bumped on the left and not on the right, it will switch directions by setting the state to walking right (state = 1). Similarly, if a Lemming is bumped on the right and not on the left, it will switch directions by setting the state to walking left (state = 0).
+
+The walk_left and walk_right outputs are assigned based on the current state value.

@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob154_fsm_ps2data",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:21: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:30: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:36: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:41: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:48: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_1\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\n5 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:21: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:30: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:36: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:41: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:48: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_2\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\n5 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:21: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:30: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:36: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:41: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:48: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob154_fsm_ps2data\\attempt_3\\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.\n5 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

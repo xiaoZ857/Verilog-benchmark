@@ -1,0 +1,33 @@
+Here is the Verilog module implementation for the 2-to-1 mux based on your description:
+
+```verilog
+module TopModule (
+  input a, // input signal A
+  input b, // input signal B
+  input sel_b1, // select bit 1
+  input sel_b2, // select bit 2
+  output out_assign, // output signal for assign statement
+  output reg out_always // output signal for always block
+);
+
+// Assign statement implementation
+assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+// Always block implementation
+always @(posedge clk)
+begin
+  if (sel_b1 && sel_b2)
+    out_always <= b;
+  else
+    out_always <= a;
+end
+
+endmodule
+```
+
+In this code:
+
+- The `assign` statement is used to directly assign the output signal based on the condition.
+- The `always` block is used with a positive edge-triggered clock (`clk`) to update the output signal. It checks the current values of `sel_b1` and `sel_b2`, and updates `out_always` accordingly.
+
+Note that in your original description, you mentioned that signals are positive clock/clk triggered unless otherwise stated. However, I've used a non-clock trigger (`posedge clk`) for the always block to make it clear that this is not a clock-triggered signal. If you want to use a clock trigger, please let me know and I can modify the code accordingly.

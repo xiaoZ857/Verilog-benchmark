@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob079_fsm3onehot\attempt_3\Prob079_fsm3onehot_code.sv:16: error: out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob079_fsm3onehot\attempt_3\Prob079_fsm3onehot_code.sv:6:      : out is declared here as wire.
+1 error(s) during elaboration.

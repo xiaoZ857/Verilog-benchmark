@@ -1,0 +1,98 @@
+To implement this finite state machine (FSM) in Verilog, we'll define a module `TopModule` with the specified inputs and outputs. The FSM will have two states: A and B. State A checks for the condition to transition to state B based on input `s`. In state B, it counts occurrences of `w = 1` over three clock cycles and sets output `z` accordingly.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input s,
+    input w,
+    output reg z
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        A = 2'b00,  // Reset state
+        B = 2'b01   // Check state
+    } state_t;
+
+    state_t current_state, next_state;
+    integer count_w_ones;  // Counter for occurrences of w = 1
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= A;
+            z <= 0;
+            count_w_ones <= 0;
+        end else begin
+            current_state <= next_state;
+
+            // Reset counter and output when transitioning to state B
+            if (current_state == A && next_state == B) begin
+                count_w_ones <= 0;
+                z <= 0;
+            end
+
+            // Count occurrences of w = 1 in state B
+            if (current_state == B) begin
+                if (w) begin
+                    count_w_ones <= count_w_ones + 1;
+                end
+
+                // After three clock cycles, determine the value of z
+                if (count_w_ones == 2) begin
+                    z <= 1;
+                end else begin
+                    z <= 0;
+                end
+
+                // Reset counter after checking for three cycles
+                if (count_w_ones >= 3) begin
+                    count_w_ones <= 0;
+                end
+            end
+        end
+    end
+
+    always_comb begin
+        case (current_state)
+            A: begin
+                if (s == 1) begin
+                    next_state = B;
+                end else begin
+                    next_state = A;
+                end
+            end
+
+            B: begin
+                // Remain in state B to continue checking w
+                next_state = B;
+            end
+
+            default: begin
+                next_state = A;  // Default case for safety
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a `typedef enum` to define two states, A and B.
+
+2. **State Transition**:
+   - In state A, the FSM checks if `s = 1`. If true, it transitions to state B.
+   - In state B, the FSM remains in this state to check the input `w`.
+
+3. **Counting Logic**:
+   - We use an integer `count_w_ones` to count how many times `w = 1` over three clock cycles.
+   - If `count_w_ones` equals 2 after three cycles, we set `z = 1`; otherwise, `z = 0`.
+   - The counter resets after checking for three cycles.
+
+4. **Reset Handling**:
+   - On a reset signal (`reset`), the FSM transitions to state A and initializes `z` and `count_w_ones`.
+
+This implementation efficiently uses two states and handles the counting logic within state B, ensuring minimal state usage while meeting the requirements.

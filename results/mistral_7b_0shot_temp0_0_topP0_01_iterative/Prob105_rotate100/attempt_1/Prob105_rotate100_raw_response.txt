@@ -1,0 +1,33 @@
+ Here is a Verilog implementation for the 100-bit left/right rotator as described:
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+
+reg [99:0] shift_register;
+
+always @(posedge clk) begin
+    if (load)
+        shift_register <= data;
+    else if (ena[1]) // Right rotation
+        shift_register <= {shift_register[98], shift_register[0:98]};
+    else if (ena[0]) // Left rotation
+        shift_register <= {shift_register[99], shift_register[1:99]};
+end
+
+assign q = shift_register;
+
+endmodule
+```
+
+This Verilog module implements a 100-bit left/right rotator with synchronous load and enable. The `shift_register` is used to store the data, and it gets loaded with the input `data` when the `load` signal is high. When `load` is low, the rotator shifts the bits around based on the value of the `ena` signals:
+
+- `ena[1]` enables right rotation by one bit.
+- `ena[0]` enables left rotation by one bit.
+
+The `q` output is assigned to the current state of the shift register, so it always reflects the current contents of the rotator.

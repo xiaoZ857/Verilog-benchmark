@@ -1,0 +1,14 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+always @(posedge clk) begin
+  assign out = ~(a ^ b); // Assign instead of using <= to make 'out' a valid l-value
+end
+
+// Add clock input if not provided
+// input wire clk;
+
+endmodule

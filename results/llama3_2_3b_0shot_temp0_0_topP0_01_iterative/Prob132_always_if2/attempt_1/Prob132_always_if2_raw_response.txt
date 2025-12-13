@@ -1,0 +1,31 @@
+Here's the corrected code:
+
+```verilog
+module top_module (
+    input      cpu_overheated,
+    output     shut_off_computer, // Changed from reg to output
+    input      arrived,
+    input      gas_tank_empty,
+    output     keep_driving  // Changed from reg to output
+);
+
+    always @(*) begin
+        if (cpu_overheated)
+            shut_off_computer = 1;
+    end
+
+    always @(*) begin
+        if (~arrived) // Added parentheses around ~arrived
+            keep_driving = !gas_tank_empty; // Changed from ~ to !
+    end
+
+endmodule
+```
+
+Explanation of the changes:
+
+1. `output reg shut_off_computer` was changed to `output shut_off_computer`. The `reg` keyword is not needed for output signals in Verilog.
+2. In the second always block, I added parentheses around `~arrived` to ensure that the NOT operator is applied correctly.
+3. In the same block, I changed `~gas_tank_empty` to `!gas_tank_empty`. The `!` operator is used for negation in Verilog, not the `~` operator.
+
+Note: It's generally a good practice to use the `!` operator for negation instead of `~` to avoid confusion with the bitwise NOT operator.

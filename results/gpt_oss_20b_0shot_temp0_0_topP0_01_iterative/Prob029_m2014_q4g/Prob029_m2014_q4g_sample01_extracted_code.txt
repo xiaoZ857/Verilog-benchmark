@@ -1,0 +1,26 @@
+// ------------------------------------------------------------
+//  TopModule
+//  Implements:  out = (in1 XNOR in2) XOR in3
+// ------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  logic in1,   // First input to the XNOR
+    input  logic in2,   // Second input to the XNOR
+    input  logic in3,   // Second input to the XOR
+    output logic out    // Final output
+);
+
+    // Combinational logic: XNOR followed by XOR
+    //  XNOR:  in1 ~^ in2   (bitwise XNOR)
+    //  XOR :  (in1 ~^ in2) ^ in3
+    assign out = (in1 ~^ in2) ^ in3;
+
+    // If you prefer an always_comb block, uncomment the following:
+    /*
+    always_comb begin
+        out = (in1 ~^ in2) ^ in3;
+    end
+    */
+
+endmodule

@@ -1,0 +1,88 @@
+// Define the A submodule
+Module A (
+  input x, 
+  input y, 
+  output z
+);
+
+  // Boolean function for the submodule
+  assign z = (x ^ y) & x;
+
+endmodule
+
+// Define the B submodule
+Module B (
+  input x, 
+  input y, 
+  output z
+);
+
+  // Boolean function for the submodule
+  always @(x and y)
+    z <= (x == 1 && y == 0) || (y == 1 && x == 0);
+endmodule
+
+// Define the TopModule
+Module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+  // Instantiate two A modules
+  Module A1 (
+    input x, 
+    input y, 
+    output z1
+  );
+
+  Module A2 (
+    input x, 
+    input y, 
+    output z2
+  );
+
+  // Instantiate two B modules
+  Module B1 (
+    input x, 
+    input y, 
+    output z3
+  );
+
+  Module B2 (
+    input x, 
+    input y, 
+    output z4
+  );
+
+  // Connect inputs and outputs of A and B instances to the TopModule
+  assign x = x;
+  assign y = y;
+
+  // Assign outputs of A1 and B1 to an OR gate
+  Module orGate (
+    input z1,
+    input z3,
+    output z5
+  );
+
+  assign z5 = z1 | z3;
+
+  // Assign outputs of A2 and B2 to an AND gate
+  Module andGate (
+    input z2,
+    input z4,
+    output z6
+  );
+
+  assign z6 = z2 & z4;
+
+  // Connect the OR and AND gates to an XOR gate
+  Module xorGate (
+    input z5, 
+    input z6, 
+    output z7
+  );
+
+  assign z7 = z5 | z6; // Fix: Use | instead of &
+endmodule

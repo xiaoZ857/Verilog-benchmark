@@ -1,0 +1,14 @@
+// 2‑to‑1 one‑bit multiplexer
+// When sel = 0 → out = a
+// When sel = 1 → out = b
+module TopModule (
+    input  wire a,    // first data input
+    input  wire b,    // second data input
+    input  wire sel,  // select line
+    output wire out   // selected output
+);
+
+    // Combinational assignment – no clock needed
+    assign out = sel ? b : a;
+
+endmodule

@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob150_review2015_fsmonehot",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'B3_next' has 43 mismatches. First mismatch occurred at time 10.\nHint: Output 'S_next' has 40 mismatches. First mismatch occurred at time 60.\nHint: Output 'S1_next' has no mismatches.\nHint: Output 'Count_next' has 13 mismatches. First mismatch occurred at time 270.\nHint: Output 'Wait_next' has 10 mismatches. First mismatch occurred at time 60.\nHint: Output 'done' has no mismatches.\nHint: Output 'counting' has no mismatches.\nHint: Output 'shift_ena' has no mismatches.\nHint: Total mismatched samples is 96 out of 300 samples\n\nSimulation finished at 1501 ps\nMismatches: 96 in 300 samples\n",
+      "mismatch_count": 96
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'B3_next' has 56 mismatches. First mismatch occurred at time 10.\nHint: Output 'S_next' has 60 mismatches. First mismatch occurred at time 30.\nHint: Output 'S1_next' has no mismatches.\nHint: Output 'Count_next' has 13 mismatches. First mismatch occurred at time 270.\nHint: Output 'Wait_next' has 10 mismatches. First mismatch occurred at time 60.\nHint: Output 'done' has no mismatches.\nHint: Output 'counting' has no mismatches.\nHint: Output 'shift_ena' has no mismatches.\nHint: Total mismatched samples is 123 out of 300 samples\n\nSimulation finished at 1501 ps\nMismatches: 123 in 300 samples\n",
+      "mismatch_count": 123
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob150_review2015_fsmonehot\\attempt_3\\Prob150_review2015_fsmonehot_code.sv:28: syntax error\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob150_review2015_fsmonehot\\attempt_3\\Prob150_review2015_fsmonehot_code.sv:28: error: syntax error in continuous assignment\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_ref.sv:31: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'B3_next' has 56 mismatches. First mismatch occurred at time 10.\nHint: Output 'S_next' has 60 mismatches. First mismatch occurred at time 30.\nHint: Output 'S1_next' has no mismatches.\nHint: Output 'Count_next' has 13 mismatches. First mismatch occurred at time 270.\nHint: Output 'Wait_next' has 25 mismatches. First mismatch occurred at time 30.\nHint: Output 'done' has no mismatches.\nHint: Output 'counting' has no mismatches.\nHint: Output 'shift_ena' has no mismatches.\nHint: Total mismatched samples is 123 out of 300 samples\n\nSimulation finished at 1501 ps\nMismatches: 123 in 300 samples\n",
+      "mismatch_count": 123
+    }
+  ]
+}

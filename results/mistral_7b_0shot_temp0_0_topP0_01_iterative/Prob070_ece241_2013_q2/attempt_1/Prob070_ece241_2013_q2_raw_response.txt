@@ -1,0 +1,32 @@
+ To implement the given description in Verilog, we first need to identify the logic for both `out_sop` (Sum-of-Products) and `out_pos` (Product-of-Sums).
+
+Let's start by finding the Sum-of-Products expression:
+1. When 2 appears on the inputs, it corresponds to a,b,c,d being set to 1,0,0,1 respectively.
+2. When 7 appears on the inputs, it corresponds to a,b,c,d being set to 0,1,1,1 respectively.
+3. When 15 appears on the inputs, it corresponds to a,b,c,d being set to 1,1,1,1 respectively.
+
+Now let's write the Verilog code for `out_sop`:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+assign out_sop = ~(a & b & ~c & d) | (~a & b & c & ~d) | (a & ~b & c & ~d) | (a & b & c & d);
+```
+
+Now let's find the Product-of-Sums expression:
+1. When 0, 1, 4, 5, 6, 9, 10, 13, or 14 appears on the inputs, it means that at least one of the following conditions is true: a=0, b=0, c=0, d=0, a=1, b=0, c=1, d=0, a=1, b=1, c=0, d=1, a=1, b=1, c=1, d=1.
+2. When 2, 7, or 15 appears on the inputs, it means that none of the above conditions are true.
+
+Now let's write the Verilog code for `out_pos`:
+
+```verilog
+assign out_pos = (a | b | ~c | d) & (~a | b | c | ~d) & (a | ~b | c | ~d) & (a | b | c | d);
+assign out_pos = ~out_pos; // Since we want a logic-1 when the conditions are not met.
+```

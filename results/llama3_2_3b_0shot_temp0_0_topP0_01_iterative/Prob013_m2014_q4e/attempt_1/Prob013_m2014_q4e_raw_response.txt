@@ -1,0 +1,20 @@
+Here's how you can implement a 2-input NOR gate using Verilog:
+
+```verilog
+// Implement a 2-input NOR gate
+
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// Define the NOR gate logic
+assign out = ~ (in1 & in2);
+
+endmodule
+```
+
+In this code, `~` is the NOT operator and `&` is the AND operator. The `out` signal is assigned to be the inverse of the product of `in1` and `in2`, which is the definition of a NOR gate.
+
+Note that we use an `assign` statement instead of a traditional `output` statement because in Verilog, signals are always assigned values at some point during simulation. The `assign` statement allows us to explicitly define this assignment for clarity and readability.

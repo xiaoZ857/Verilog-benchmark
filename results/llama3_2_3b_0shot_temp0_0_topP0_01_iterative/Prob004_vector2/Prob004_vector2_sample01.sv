@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [31:0] in,
+  output [31:0] out
+);
+// Initialize the output signal to zero
+assign out = 0;
+
+// Loop through each byte in the input vector
+for (int i = 0; i < TOTAL_BYTES; i++) begin : byte_loop
+    // Extract the current byte from the input vector
+    assign out[BIT_WIDTH * i] = in[(TOTAL_BYTES - i) * BIT_WIDTH + i];
+endfor
+
+// End of module definition
+
+// VERILOG-EVAL: endmodule not found

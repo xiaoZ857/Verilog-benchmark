@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:44: error: out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:6:      : out is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:45: error: out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:6:      : out is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:46: error: out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:6:      : out is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:47: error: out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:6:      : out is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:48: error: out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob100_fsm3comb\attempt_2\Prob100_fsm3comb_code.sv:6:      : out is declared here as wire.
+5 error(s) during elaboration.

@@ -1,0 +1,2 @@
+reg [7:0] min_val = 8'd255; // Initialize with maximum possible value
+assign min = min_val < a ? min_val : (min_val < b ? min_val : (min_val < c ? min_val : (min_val < d ? min_val : a)));

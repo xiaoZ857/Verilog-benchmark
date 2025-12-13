@@ -1,0 +1,55 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output reg predict_taken,
+  output reg [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc,
+  output reg train_enable
+);
+
+reg [127:0] PHT; // Pattern History Table (128-entry table of two-bit saturating counters)
+reg [6:0] branch_history; // 7-bit global branch history register
+
+always @(posedge clk or negedge areset) begin
+  if (!areset) begin
+    PHT <= 0;
+    branch_history <= 0;
+  end
+end
+
+always @(posedge clk) begin
+  if (train_valid && train_enable) begin // Train the branch predictor
+    PHT[train_pc] <= train_taken ? (PHT[train_pc] + 1) : (PHT[train_pc] - 1);
+    if (train_mispredicted) branch_history <= train_history;
+  end
+end
+
+always @(posedge clk) begin // Predict the branch direction
+  if (predict_valid) begin
+    predict_taken <= PHT[pc_to_index(predict_pc)] > 63'b1;
+    predict_history <= branch_history[7:0];
+  end
+end
+
+always @(posedge clk) begin // Enable training when needed
+  train_enable <= (train_valid && !predict_valid);
+end
+
+function [6:0] pc_to_index;
+  input [6:0] pc;
+  variable temp;
+  temp = {pc[6], pc[5], pc[4], pc[3], pc[2], pc[1], pc[0], pc[6] ^ pc[5] ^ pc[4] ^ pc[3] ^ pc[2] ^ pc[1] ^ pc[0]};
+  return temp;
+endfunction
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

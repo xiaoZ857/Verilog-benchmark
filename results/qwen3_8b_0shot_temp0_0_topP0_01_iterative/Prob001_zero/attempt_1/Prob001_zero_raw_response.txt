@@ -1,0 +1,51 @@
+To implement a Verilog module that always outputs a **LOW** signal, we can take advantage of the fact that the output is a single-bit signal and does not depend on any inputs. Since the problem specifies that the output should be **always LOW**, we can directly assign the output to the logic level `0`.
+
+---
+
+### ✅ Key Observations:
+
+- The module has **no inputs**, so there is no need for any combinational or sequential logic.
+- The output `zero` is declared as an `output`, which in Verilog implies it is a `wire` by default.
+- To make the output always `0`, we can use a **continuous assignment**.
+
+---
+
+### ✅ Final Implementation:
+
+```verilog
+module TopModule (
+  output zero
+);
+  assign zero = 1'b0;
+endmodule
+```
+
+---
+
+### 📝 Explanation:
+
+- `assign zero = 1'b0;` sets the output `zero` to a **single-bit 0**.
+- The `1'b0` explicitly denotes a **1-bit** value of `0`, which is safe and clear in Verilog.
+- Since there are no inputs or clocks, this is a **combinational logic** module that simply drives the output to `0` at all times.
+
+---
+
+### ✅ Alternative (Simpler) Version:
+
+If the context is clear that `zero` is a single-bit signal, the following is also valid and more concise:
+
+```verilog
+module TopModule (
+  output zero
+);
+  assign zero = 0;
+endmodule
+```
+
+This version is functionally equivalent and is acceptable in most Verilog contexts.
+
+---
+
+### ✅ Conclusion:
+
+The simplest and most direct way to implement a module that always outputs a **LOW** signal is to assign the output to `0` using a continuous assignment. This approach is both efficient and idiomatic in Verilog.

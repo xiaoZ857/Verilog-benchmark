@@ -1,0 +1,146 @@
+
+module TopModule (
+    input wire clk,
+    input wire reset,
+    input wire data,
+    output wire [3:0] count,
+    output reg counting,
+    output reg done,
+    input wire ack
+);
+
+reg [7:0] delay;
+reg [7:0] state;
+reg [9:0] remaining_time;
+reg [1:0] current_state;
+
+wire [7:0] data_shifted;
+
+// State machine states
+enum logic [2:0] {
+    START,
+    COUNTING,
+    WAITING_FOR_ACK
+} state_next;
+
+always_comb begin : calc_next_state
+    case(state)
+        START:
+            if (data == 1 && data[3] == 1 && data[4] == 1 && data[5] == 0) {
+                state_next = COUNTING;
+            } else {
+                state_next = WAITING_FOR_ACK;
+            }
+            break
+        COUNTING:
+            state_next = COUNTING;
+            break
+        WAITING_FOR_ACK:
+            if (data == 1 && data[3] == 1 && data[4] == 0 && data[5] == 0) {
+                state_next = START;
+            } else if (ack == 1) {
+                state_next = START;
+            } else {
+                state_next = WAITING_FOR_ACK;
+            }
+            break
+    endcase
+endalways
+
+// State machine logic
+always_ff @(posedge clk or reset) begin : calc_state
+    if (reset) begin
+        state <= START;
+        counting <= 0;
+        done <= 1;
+        remaining_time <= 1000;
+        current_state <= 0;
+    end else begin
+        state <= state_next;
+        if (state == COUNTING) begin
+            counting <= 1;
+            if (remaining_time > 1000) begin
+                remaining_time <= remaining_time - 1000;
+            end else begin
+                done <= 1;
+                counting <= 0;
+            end
+        end else if (state == WAITING_FOR_ACK) begin
+            if (data == 1 && data[3] == 1 && data[4] == 0 && data[5] == 0) {
+                state <= START;
+                counting <= 0;
+                done <= 1;
+                remaining_time <= 1000;
+                current_state <= 0;
+            } else if (ack == 1) begin
+                state <= START;
+                counting <= 0;
+                done <= 1;
+                remaining_time <= 1000;
+                current_state <= 0;
+            end else begin
+                counting <= 0;
+                done <= 1;
+                remaining_time <= 1000;
+                current_state <= 0;
+            end
+        end
+    end
+end
+
+// Delay logic
+always_ff @(posedge clk or reset) begin : calc_delay
+    if (reset) begin
+        delay <= 7;
+    end else if (state == START && data[3] == 1 && data[4] == 1 && data[5] == 0) begin
+        delay <= delay + 1;
+    end else if (state == COUNTING) begin
+        if (remaining_time > 1000) begin
+            delay <= delay - 1;
+        end
+    end
+end
+
+// Data shifting logic
+always_ff @(posedge clk or reset) begin : calc_data_shifted
+    if (reset) begin
+        data_shifted <= 8;
+    end else if (state == START && data[3] == 1 && data[4] == 1 && data[5] == 0) begin
+        data_shifted <= data << 1;
+    end
+end
+
+// Count logic
+always_ff @(posedge clk or reset) begin : calc_count
+    if (reset) begin
+        count <= 8;
+    end else if (state == COUNTING && remaining_time > 1000) begin
+        count <= delay + 4;
+    end else if (state == WAITING_FOR_ACK) begin
+        count <= 8;
+    end
+end
+
+// Output logic
+assign done = counting == 0;
+
+assign acked = ack == 1;
+
+always_ff @(posedge clk or reset) begin : calc_ack
+    if (reset) begin
+        acked <= 0;
+    end else if (state == WAITING_FOR_ACK && data[3] == 1 && data[4] == 0 && data[5] == 0) begin
+        acked <= 1;
+    end
+end
+
+assign counting = current_state == COUNTING;
+
+assign remaining_time = 1000 * (delay + 1);
+
+// Shift in the next 4 bits of delay
+always_ff @(posedge
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

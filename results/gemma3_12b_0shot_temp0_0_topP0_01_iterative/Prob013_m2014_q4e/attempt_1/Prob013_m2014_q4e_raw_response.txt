@@ -1,0 +1,30 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  assign out = ~(in1 | in2);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and lists its input and output ports.
+* **`input in1, in2;`**:  Declares `in1` and `in2` as input signals.
+* **`output logic out;`**: Declares `out` as an output signal of type `logic`.  `logic` is a versatile type that can represent both 0 and 1.
+* **`assign out = ~(in1 | in2);`**: This is the core of the NOR gate implementation.
+    * `in1 | in2`:  This performs a logical OR operation between the inputs `in1` and `in2`.  The result is 1 if either `in1` or `in2` (or both) are 1.
+    * `~(...)`: This is the logical NOT operator. It inverts the result of the OR operation.  So, if the OR result is 1, the NOT operator makes it 0, and vice versa.  This is the definition of a NOR gate.
+* **`endmodule`**:  Marks the end of the module definition.
+
+This code directly implements the truth table of a NOR gate:
+
+| in1 | in2 | out |
+|---|---|---|
+| 0 | 0 | 1 |
+| 0 | 1 | 0 |
+| 1 | 0 | 0 |
+| 1 | 1 | 0 |

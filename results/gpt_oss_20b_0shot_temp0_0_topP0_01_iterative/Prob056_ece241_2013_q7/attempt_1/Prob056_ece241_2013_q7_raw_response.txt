@@ -1,0 +1,49 @@
+Below is a minimal, synthesizable Verilog implementation of a **JK flip‑flop** that follows the truth table you supplied.  
+The module is clock‑sensitive (positive‑edge triggered) and updates `Q` according to the current values of `J` and `K` and the previous value of `Q` (`Qold`).
+
+```verilog
+// ---------------------------------------------------------------------------
+//  JK Flip‑Flop
+//  -------------------------------------------
+//  Truth table (on the rising edge of clk):
+//      J | K | Qnew
+//      0 | 0 | Qold          // no change
+//      0 | 1 | 0             // clear
+//      1 | 0 | 1             // set
+//      1 | 1 | ~Qold         // toggle
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input  wire clk,   // positive‑edge clock
+    input  wire j,     // J input
+    input  wire k,     // K input
+    output reg  Q      // current state
+);
+
+    // Optional: initialise Q to 0 (useful for simulation)
+    // In real hardware this may be an asynchronous reset instead.
+    initial Q = 1'b0;
+
+    // Positive‑edge triggered process
+    always @(posedge clk) begin
+        case ({j, k})          // combine J and K into a 2‑bit vector
+            2'b00: Q <= Q;     // no change
+            2'b01: Q <= 1'b0;  // clear
+            2'b10: Q <= 1'b1;  // set
+            2'b11: Q <= ~Q;    // toggle
+        endcase
+    end
+
+endmodule
+```
+
+### How it works
+1. **Clock edge** – The `always @(posedge clk)` block ensures that the logic inside is evaluated only on the rising edge of `clk`.
+2. **Case statement** – The two‑bit vector `{j,k}` selects the appropriate action:
+   * `00` → keep the old value (`Q <= Q`).
+   * `01` → clear (`Q <= 0`).
+   * `10` → set (`Q <= 1`).
+   * `11` → toggle (`Q <= ~Q`).
+3. **Non‑blocking assignment (`<=`)** – Guarantees that all updates happen simultaneously, which is the standard practice for synchronous logic.
+
+Feel free to add an asynchronous reset or other control signals if your design requires them.

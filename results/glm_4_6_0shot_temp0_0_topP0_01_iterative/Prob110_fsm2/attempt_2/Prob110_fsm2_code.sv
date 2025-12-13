@@ -1,0 +1,44 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+// State encoding
+parameter OFF = 1'b0, ON = 1'b1;
+
+reg state, next_state;
+
+// State register with asynchronous reset
+always @(posedge clk or posedge areset) begin
+  if (areset)
+    state <= OFF;
+  else
+    state <= next_state;
+end
+
+// Next state logic
+always @(*) begin
+  case (state)
+    OFF: begin
+      if (j)
+        next_state = ON;
+      else
+        next_state = OFF;
+    end
+    ON: begin
+      if (k)
+        next_state = OFF;
+      else
+        next_state = ON;
+    end
+    default: next_state = OFF;
+  endcase
+end
+
+// Output logic (Moore machine - output depends only on current state)
+assign out = state;
+
+endmodule

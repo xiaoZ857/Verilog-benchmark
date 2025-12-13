@@ -1,0 +1,30 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 22
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:22: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:23: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:25: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:29: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:29: Syntax in assignment statement l-value.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:29: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:30: error: malformed statement
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:32: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:32: Syntax in assignment statement l-value.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:33: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:33: Syntax in assignment statement l-value.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:34: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:34: Syntax in assignment statement l-value.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:37: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:42: Syntax in assignment statement l-value.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:43: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:44: Syntax in assignment statement l-value.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:45: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:46: error: invalid module item.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:47: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:48: error: invalid module item.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:49: syntax error
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:50: error: invalid module item.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob144_conwaylife\attempt_1\Prob144_conwaylife_code.sv:51: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_test.sv:13: error: invalid module item.

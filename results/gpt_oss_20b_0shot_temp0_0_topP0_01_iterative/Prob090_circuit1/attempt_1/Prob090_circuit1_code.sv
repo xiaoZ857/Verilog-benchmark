@@ -1,0 +1,22 @@
+
+// TopModule.v
+// -------------
+// Implements a combinational AND gate: q = a & b
+// No clock or reset signals are required.
+
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire q    // output
+);
+
+    // Combinational assignment
+    assign q = a & b;
+
+    // (Alternatively, you could instantiate a gate:
+    //  and u_and (q, a, b);
+    // )
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

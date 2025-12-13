@@ -1,0 +1,48 @@
+Here is the Verilog implementation of the Mealy machine based on the given description:
+
+```verilog
+module TopModule(
+    input clk, // Positive clock/clk triggered
+    input areset, // Asynchronous active-high reset
+    input x, // Input signal
+    output reg [1:0] z // Output signal in one-hot encoding
+);
+
+reg [1:0] state; // State variable
+
+// Initial state is A (z=0)
+initial begin
+    state = 2'b00;
+end
+
+always @(posedge clk) begin
+    if (areset) begin
+        state <= 2'b00; // Reset to state A
+    end else begin
+        case(state)
+            2'b00: // State A
+                if (!x) begin
+                    state <= 2'b01; // Transition to B
+                end
+            2'b01: // State B
+                if (x) begin
+                    state <= 2'b10; // Transition to B
+                end else begin
+                    state <= 2'b00; // Stay in state B
+                end
+            2'b10: // State B
+                if (!x) begin
+                    state <= 2'b01; // Stay in state B
+                end
+        endcase
+    end
+end
+
+assign z = {state[1], state[0]}; // Output signal in one-hot encoding
+
+endmodule
+```
+
+This implementation uses a Mealy machine with two states (A and B) and one input signal (x). The output signal `z` is represented using one-hot encoding, where the most significant bit represents the current state. The module also includes an asynchronous active-high reset for the state variable.
+
+Note that this implementation assumes that the clock signal is positive edge-triggered, meaning that the next state of the machine is determined on the rising edge of the clock signal. If you need to use a different trigger, you can modify the `always` block accordingly.

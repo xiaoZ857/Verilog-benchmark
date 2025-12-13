@@ -1,0 +1,55 @@
+To implement the described Verilog module for a two-bit saturating counter, we need to handle three main operations based on the inputs `train_valid` and `train_taken`: incrementing, decrementing, or holding the current value. Additionally, an asynchronous reset (`areset`) should set the counter to 2'b01 when triggered.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input areset,
+    input train_valid,
+    input train_taken,
+    output logic [1:0] state
+);
+
+    // Always block for handling the asynchronous reset and synchronous operations
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset to weakly not-taken (2'b01)
+            state <= 2'b01;
+        end else if (train_valid) begin
+            if (state == 2'b11 && train_taken) begin
+                // Saturate at maximum value (3 or 2'b11), do nothing on increment
+                state <= 2'b11;
+            end else if (state == 2'b00 && !train_taken) begin
+                // Saturate at minimum value (0 or 2'b00), do nothing on decrement
+                state <= 2'b00;
+            end else if (train_taken) begin
+                // Increment the counter
+                state <= state + 1;
+            end else begin
+                // Decrement the counter
+                state <= state - 1;
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Asynchronous Reset (`areset`)**: The `always_ff` block is sensitive to both the positive edge of `clk` and the positive edge of `areset`. When `areset` is asserted, it immediately sets `state` to 2'b01.
+
+- **Synchronous Operations**: If `areset` is not active, the logic checks if `train_valid` is high. This indicates that a training operation should occur.
+
+  - **Incrementing**: If `train_taken` is high and the current state is less than 3 (i.e., not already at maximum), increment the counter.
+  
+  - **Decrementing**: If `train_taken` is low and the current state is greater than 0, decrement the counter.
+  
+  - **Saturating Conditions**:
+    - When the counter is at its maximum value (2'b11) and an increment operation is requested, it remains unchanged to prevent overflow.
+    - Similarly, when the counter is at its minimum value (2'b00) and a decrement operation is requested, it remains unchanged to prevent underflow.
+
+- **Holding State**: If `train_valid` is low, no changes are made to `state`, effectively holding its current value. 
+
+This implementation ensures that the counter behaves as specified, with proper handling of saturation limits and asynchronous reset functionality.

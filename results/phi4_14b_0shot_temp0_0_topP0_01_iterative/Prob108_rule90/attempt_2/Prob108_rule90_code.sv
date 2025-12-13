@@ -1,0 +1,32 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+always @(posedge clk) begin
+  if (load) begin
+    // Load new data into the system
+    q <= data;
+  end else begin
+    // Calculate next state for each cell using XOR of neighbors
+    for (int i = 0; i < 512; i++) begin
+      if (i == 0) begin
+        // Left boundary, consider left neighbor as 0
+        next_q[i] <= q[1];
+      end else if (i == 511) begin
+        // Right boundary, consider right neighbor as 0
+        next_q[i] <= q[510];
+      end else {
+        // Middle cells
+        next_q[i] <= q[i-1] ^ q[i+1];
+      }
+    end
+
+    // Update the current state with the calculated next state
+    q <= next_q;
+  end
+end
+
+// VERILOG-EVAL: endmodule not found

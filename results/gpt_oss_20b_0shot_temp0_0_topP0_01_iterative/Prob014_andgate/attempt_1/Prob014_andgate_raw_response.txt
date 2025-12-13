@@ -1,0 +1,22 @@
+Here’s a minimal, clean Verilog implementation of a two‑input AND gate.  
+Because the module has no clock input, the logic is purely combinational – the output follows the inputs immediately.
+
+```verilog
+// TopModule implements a simple 2‑input AND gate
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // AND of a and b
+);
+
+    // Combinational assignment – out is always a & b
+    assign out = a & b;
+
+endmodule
+```
+
+**Explanation**
+
+* `input wire` and `output wire` are the default signal types for combinational logic.  
+* The `assign` statement drives `out` continuously with the logical AND of `a` and `b`.  
+* No clock or edge‑triggered logic is required for a simple AND gate.

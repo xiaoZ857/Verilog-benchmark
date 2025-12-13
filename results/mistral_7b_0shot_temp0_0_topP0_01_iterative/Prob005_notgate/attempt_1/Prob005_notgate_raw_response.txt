@@ -1,0 +1,14 @@
+ Here is a simple Verilog implementation for a NOT gate:
+
+```verilog
+module TopModule (
+  input wire in,
+  output wire out
+);
+
+assign out = !in;
+
+endmodule
+```
+
+In this code, `TopModule` is the name of the module. It has an input signal named `in` and an output signal named `out`. The `assign` statement is used to assign the value of `out` as the logical negation (`!`) of the input `in`. This creates a NOT gate that inverts the input signal.

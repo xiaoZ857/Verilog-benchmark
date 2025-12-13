@@ -1,0 +1,49 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+  // Stage 1: Count 1s in each 4-bit chunk (255 bits -> 64 chunks, last chunk only 3 bits)
+  wire [7:0] stage1 [0:63];
+  genvar i;
+  generate
+    for (i = 0; i < 63; i = i + 1) begin : stage1_gen
+      assign stage1[i] = {6'b0, in[i*4 + 3]} + {6'b0, in[i*4 + 2]} + 
+                         {6'b0, in[i*4 + 1]} + {6'b0, in[i*4]};
+    end
+    // Last chunk (bits 252, 253, 254) -> 3 bits only
+    assign stage1[63] = {6'b0, in[254]} + {6'b0, in[253]} + {6'b0, in[252]};
+  endgenerate
+
+  // Stage 2: Add stage1 results in groups of 4 (64 -> 16 groups)
+  wire [7:0] stage2 [0:15];
+  generate
+    for (i = 0; i < 16; i = i + 1) begin : stage2_gen
+      assign stage2[i] = stage1[i*4] + stage1[i*4 + 1] + 
+                         stage1[i*4 + 2] + stage1[i*4 + 3];
+    end
+  endgenerate
+
+  // Stage 3: Add stage2 results in groups of 4 (16 -> 4 groups)
+  wire [7:0] stage3 [0:3];
+  generate
+    for (i = 0; i < 4; i = i + 1) begin : stage3_gen
+      assign stage3[i] = stage2[i*4] + stage2[i*4 + 1] + 
+                         stage2[i*4 + 2] + stage2[i*4 + 3];
+    end
+  endgenerate
+
+  // Stage 4: Add stage3 results (4 -> 2 groups)
+  wire [7:0] stage4 [0:1];
+  assign stage4[0] = stage3[0] + stage3[1];
+  assign stage4[1] = stage3[2] + stage3[3];
+
+  // Stage 5: Final sum
+  wire [7:0] stage5;
+  assign stage5 = stage4[0] + stage4[1];
+
+  // Combinational output - use always @* for reg output
+  always @* begin
+    out = stage5;
+  end
+endmodule

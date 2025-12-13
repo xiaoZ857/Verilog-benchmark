@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg Z
+);
+
+  reg [7:0] Q;
+
+  always @(posedge clk) begin
+    if (enable) begin
+      Q[7:1] <= Q[7:2];
+      Q[0] <= S;
+    end
+  end
+
+  always @(*) begin
+    case (A * 8 + B * 2 + C)
+      0: Z = Q[0];
+      1: Z = Q[1];
+      2: Z = Q[2];
+      3: Z = Q[3];
+      4: Z = Q[4];
+      5: Z = Q[5];
+      6: Z = Q[6];
+      7: Z = Q[7];
+      default: Z = 0; // Default case to avoid latching
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Shift Register:**
+   - `reg [7:0] Q;`: Declares an 8-bit register `Q` to hold the shift register's outputs.
+   - `always @(posedge clk) begin ... end`:  This block describes the synchronous shift register behavior.  It triggers on the positive edge of the clock signal.
+   - `if (enable) begin ... end`:  The shift operation only happens when the `enable` signal is high.
+   - `Q[7:1] <= Q[7:2];`: Shifts the contents of the register one position to the left.  `Q[7]` becomes `Q[6]`, `Q[6]` becomes `Q[5]`, and so on.
+   - `Q[0] <= S;`:  The input `S` is loaded into the least significant bit (LSB) `Q[0]`.
+
+2. **Multiplexer Logic (using `case` statement):**
+   - `always @(*) begin ... end`: This block is combinational logic, meaning its output `Z` depends only on the current inputs.  The `@(*)` sensitivity list means it will re-evaluate whenever any of the inputs change.
+   - `case (A * 8 + B * 2 + C) ... endcase`: This `case` statement acts as a multiplexer.  It effectively selects one of the `Q[i]` outputs based on the values of `A`, `B`, and `C`.
+     - `A * 8 + B * 2 + C`: This expression converts the binary values of `A`, `B`, and `C` into a decimal number from 0 to 7.  For example:
+       - If `A=0`, `B=0`, `C=0`, the expression evaluates to `0 * 8 + 0 * 2 + 0 = 0`.
+       - If `A=0`, `B=0`, `C=1`, the expression evaluates to `0 * 8 + 0 * 2 + 1 = 1`.
+       - If `A=0`, `B=1`, `C=0`, the expression evaluates to `0 * 8 + 1 * 2 + 0 = 2`.
+       - And so on...
+     - `Z = Q[0];`, `Z = Q[1];`, ..., `Z = Q[7];`:  Each case assigns the corresponding `Q[i]` value to the output `Z`.
+     - `default: Z = 0;`: This is a crucial `default` case.  It ensures that if the `case` statement doesn't match any of the defined cases (which shouldn't happen with the given inputs, but it's good practice), `Z` is assigned a default value (0 in this case).  Without a `default` case, the `case` statement could create a latch, which is generally undesirable in combinational logic.
+
+**How it works:**
+
+1. **Shift Register:** The shift register stores a sequence of bits that are shifted in one position to the left on each clock cycle when `enable` is high. The new bit is loaded into the LSB.
+2. **Multiplexer:** The `case` statement acts as a multiplexer.  It selects one of the 8 bits from the shift register (`Q[0]` to `Q[7]`) and assigns it to the output `Z` based on the values of the inputs `A`, `B`, and `C`.
+
+**To test this code:**
+
+1.  Create a testbench to

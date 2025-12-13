@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input w,
+  input R,
+  input E,
+  input L,
+  output reg Q
+);
+
+always @(posedge clk) begin
+    if (L) // Load the value on R when L is asserted
+        Q <= R;
+    else if (E) // Shift the current Q to the right and load w at the leftmost position
+        Q <= {w, Q[1:n-1]};
+end
+
+assign Q_next = Q; // Assign the current Q value as the next Q value when not shifting
+always @(posedge clk) begin
+    if (E)
+        Q_next <= {w, Q_next[1:n-1]};
+end
+
+// Add a synchronizer for Q to ensure that it is updated only on positive edge of clock
+assign #1 Q = Q_next;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

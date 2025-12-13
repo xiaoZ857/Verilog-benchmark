@@ -1,0 +1,84 @@
+We need to track consecutive 1s and the zero after them.  
+Let’s define states based on how many consecutive 1s we have seen,  
+and whether we are in normal mode or after a possible zero insertion scenario.
+
+We can use a Moore FSM, so outputs depend only on the current state.
+
+**State encoding idea:**  
+Let’s track count of consecutive 1s (0 to 7+), but also handle the zero after five 1s specially.
+
+Actually, simpler:  
+States represent the last few bits pattern relevant to detection:
+
+- S0: prev bit 0 (or reset state)  
+- S1: 1  
+- S2: 11  
+- S3: 111  
+- S4: 1111  
+- S5: 11111 (five 1s)  
+- S6: 111110 (five 1s then 0 → this is the “discard” condition)  
+- S7: 111111 (six 1s)  
+- S8: 1111111 (seven 1s → error)  
+- S9: 1111111… (more than seven 1s, stay in error until a 0 appears)
+
+But Moore outputs:  
+- disc: asserted only in state S6 (after seeing 111110).  
+- flag: asserted only in state S7 (after seeing 1111110? Wait, careful: flag is 01111110, meaning zero, six 1s, zero).  
+Actually, the problem says: flag is exactly 6 consecutive 1s between zeros: 01111110.  
+So we detect flag when we are in state S7 (six 1s) and next input is 0. But Moore outputs depend only on current state, so we need a state for “just saw six 1s then 0” to raise flag for one cycle.
+
+Similarly, disc is 0111110 (five 1s then 0 after five 1s) — that’s state S6.  
+So S6 = disc state.  
+S7 = six 1s (no output yet, waiting for next bit).  
+S8 = seven 1s (error).  
+S9 = more than seven 1s (error).
+
+But flag: We need a state for “flag detected” (01111110) — that’s state after S7 when input=0. Let’s call it S_FLAG.
+
+Let’s define states clearly:
+
+S0: last bit 0 (or start)  
+S1: 1  
+S2: 11  
+S3: 111  
+S4: 1111  
+S5: 11111  
+S6: 111110 → output disc=1 (this is the zero after five 1s)  
+S7: 111111 (six 1s)  
+S8: 1111111 (seven 1s) → output err=1  
+S9: 11111111… (more 1s beyond 7) → output err=1  
+S10: 1111110 (six 1s then 0) → output flag=1  
+
+But S6 already is 111110 (five 1s then 0), which is disc.  
+S10 is 1111110 (six 1s then 0), which is flag.
+
+We can merge S8 and S9 into one error state S_ERR (7 or more 1s), with err=1.
+
+So states:  
+S0, S1, S2, S3, S4, S5, S6, S7, S_ERR, S_FLAG.
+
+Wait, but after S6 (disc), next state depends on next input:  
+If after S6 we get 1, we go to S1 (because pattern was …0111110 1, but the 0 after five 1s was discarded, so effectively we have 1 now).  
+If after S6 we get 0, we go to S0 (because pattern was …0111110 0, after discarding the stuffed 0, we have 0 now).
+
+Similarly, after S_FLAG, we go to S0 (because flag is 01111110, last bit 0).
+
+Also, from S7 (six 1s), if input=1, go to S_ERR. If input=0, go to S_FLAG.
+
+From S_ERR, stay in S_ERR while input=1, go to S0 when input=0.
+
+Let’s code this.
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+  // State encoding: 4 bits for 10 states
+  localparam S0 = 4'd0;
+ 

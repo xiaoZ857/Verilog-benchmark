@@ -1,0 +1,35 @@
+To implement the Verilog module that reverses the bit order of a 100-bit input vector, you can use an always block triggered by the positive edge of a clock signal. The reversed bits will be assigned to the output register `out`. Here's how you can write this module:
+
+```verilog
+module TopModule (
+  input clk,
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+always @(posedge clk) begin
+  integer i;
+  for (i = 0; i < 100; i = i + 1) begin
+    out[i] <= in[99 - i];
+  end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `clk`: The clock signal that triggers the bit reversal process.
+  - `in`: A 100-bit input vector whose bits need to be reversed.
+  - `out`: A 100-bit output register where the reversed bits are stored.
+
+- **Always Block:**
+  - The always block is sensitive to the positive edge of the clock (`posedge clk`), meaning it will execute its contents every time the clock signal transitions from low to high.
+  
+- **Loop for Bit Reversal:**
+  - An integer `i` is used as an index in a loop that iterates over each bit position from 0 to 99.
+  - For each iteration, the bit at position `i` of the output (`out[i]`) is assigned the value of the bit at position `99-i` of the input (`in[99-i]`). This effectively reverses the order of bits.
+
+- **Non-blocking Assignment:**
+  - The non-blocking assignment operator (`<=`) is used to ensure that all assignments within the always block are evaluated simultaneously, which is important for sequential logic in Verilog.

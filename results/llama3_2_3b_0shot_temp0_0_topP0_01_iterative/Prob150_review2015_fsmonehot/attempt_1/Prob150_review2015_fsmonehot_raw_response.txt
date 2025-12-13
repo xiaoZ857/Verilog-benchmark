@@ -1,0 +1,38 @@
+Here is the Verilog code that implements the Moore state machine based on your description:
+
+```verilog
+module TopModule (
+  input d,
+  input done_counting,
+  input ack,
+  input [9:0] state, // 10-bit one-hot current state
+  output B3_next,
+  output S_next,
+  output S1_next,
+  output Count_next,
+  output Wait_next,
+  output done,
+  output counting,
+  output shift_ena
+);
+
+// State transition logic equations
+assign B3_next = (state == 9'b1000000000);
+assign S_next = (state == 9'b0000000001);
+assign S1_next = (state == 9'b0000000010);
+assign Count_next = (state == 9'b1000000100);
+assign Wait_next = (state == 9'b1000000000);
+
+// Output logic equations
+assign done = (state == 9'b1000000000) || (state == 9'b1000000100);
+assign counting = (state == 9'b1000000100);
+assign shift_ena = (state != 9'b0000000001) && (state != 9'b0000000010);
+
+endmodule
+```
+
+This code defines a module called `TopModule` that takes the input signals `d`, `done_counting`, and `ack`, as well as the current state `state`. It also outputs the next-state signals `B3_next`, `S_next`, `S1_next`, `Count_next`, and `Wait_next`, as well as the output signals `done`, `counting`, and `shift_ena`.
+
+The state transition logic equations are assigned using the `assign` keyword, which is a shorthand for "always" in Verilog. The output logic equations are also assigned using the `assign` keyword.
+
+Note that this code assumes a 10-bit one-hot encoding for the states, where each bit represents a unique state. The states are represented as binary numbers, with the most significant bit representing the S state and the least significant bit representing the B3 state.

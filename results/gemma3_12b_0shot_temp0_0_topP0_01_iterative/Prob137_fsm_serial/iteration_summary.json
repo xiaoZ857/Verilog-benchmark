@@ -1,0 +1,74 @@
+{
+  "problem_name": "Prob137_fsm_serial",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 3,
+  "total_attempts": 6,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_1\\Prob137_fsm_serial_code.sv:54: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_1\\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_1\\Prob137_fsm_serial_code.sv:92: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_1\\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.\n2 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_2\\Prob137_fsm_serial_code.sv:33: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_2\\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_2\\Prob137_fsm_serial_code.sv:54: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_2\\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_2\\Prob137_fsm_serial_code.sv:92: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob137_fsm_serial\\attempt_2\\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 38 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 38 out of 905 samples\n\nSimulation finished at 4526 ps\nMismatches: 38 in 905 samples\n",
+      "mismatch_count": 38
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 38 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 38 out of 905 samples\n\nSimulation finished at 4526 ps\nMismatches: 38 in 905 samples\n",
+      "mismatch_count": 38
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 38 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 38 out of 905 samples\n\nSimulation finished at 4526 ps\nMismatches: 38 in 905 samples\n",
+      "mismatch_count": 38
+    },
+    {
+      "attempt": 6,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 38 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 38 out of 905 samples\n\nSimulation finished at 4526 ps\nMismatches: 38 in 905 samples\n",
+      "mismatch_count": 38
+    }
+  ]
+}

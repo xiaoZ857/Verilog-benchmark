@@ -1,0 +1,19 @@
+Here's an implementation of a NOT gate in Verilog:
+
+```verilog
+// Define the NOT gate module
+module NotGate(
+  // Input signal
+  input in,
+  
+  // Output signal
+  output out
+);
+
+  // Assign the NOT operation to the output signal
+  assign out = !in;
+
+endmodule
+```
+
+In this code, we define a new module called `NotGate` that takes an input signal `in` and produces an output signal `out`. The `assign` keyword is used to specify the assignment of the output signal based on the NOT operation applied to the input signal.

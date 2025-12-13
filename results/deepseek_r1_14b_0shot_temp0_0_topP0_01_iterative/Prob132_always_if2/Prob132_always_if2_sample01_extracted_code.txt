@@ -1,0 +1,6 @@
+      always @(*) begin
+          if (~arrived) 
+              keep_driving = ~gas_tank_empty;
+          else 
+              keep_driving = 0;
+      end

@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_4\Prob092_gatesv100_code.sv:10: error: part select in[1:100] is out of order.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_4\Prob092_gatesv100_code.sv:11: sorry: part selects straddling the start of signal (out_any['sd0]) are not currently supported.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_4\Prob092_gatesv100_code.sv:13: error: part select in[0:99] is out of order.
+3 error(s) during elaboration.

@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_1\Prob061_2014_q4a_code.sv:13: error: Unknown module type: DFlipFlop
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_1\Prob061_2014_q4a_code.sv:20: error: Unknown module type: Mux2
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_1\Prob061_2014_q4a_code.sv:28: error: Unknown module type: Mux2
+4 error(s) during elaboration.
+*** These modules were missing:
+        DFlipFlop referenced 1 times.
+        Mux2 referenced 2 times.
+***

@@ -1,0 +1,69 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        current_state <= A;
+        z <= 0;
+        count_w_ones <= 0;
+        cycle_count <= 0; // Counter for cycles in state B
+    end else begin
+        current_state <= next_state;
+
+        if (current_state == A && next_state == B) begin
+            count_w_ones <= 0;
+            cycle_count <= 0;
+            z <= 0;
+        end
+
+        if (current_state == B) begin
+            // Count occurrences of w = 1 in state B
+            if (w) begin
+                count_w_ones <= count_w_ones + 1;
+            end
+
+            // Increment cycle counter and check every three cycles
+            cycle_count <= cycle_count + 1;
+
+            if (cycle_count == 3) begin
+                // Set z based on the count of w = 1 in the last three cycles
+                if (count_w_ones == 2) begin
+                    z <= 1;
+                end else begin
+                    z <= 0;
+                end
+
+                // Reset counters after checking for three cycles
+                count_w_ones <= 0;
+            end
+        end
+    end
+end
+
+always_comb begin
+    case (current_state)
+        A: begin
+            if (s == 1) begin
+                next_state = B;
+            end else begin
+                next_state = A;
+            end
+        end
+
+        B: begin
+            // Remain in state B to continue checking w
+            next_state = B;
+        end
+
+        default: begin
+            next_state = A;  // Default case for safety
+        end
+    endcase
+end
+
+endmodule

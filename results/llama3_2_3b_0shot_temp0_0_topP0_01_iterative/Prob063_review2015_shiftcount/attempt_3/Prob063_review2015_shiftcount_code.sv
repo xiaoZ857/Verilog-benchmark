@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+// Initialize the register with all zeros
+reg [3:0] q = 0;
+
+// Shift data into the register when shift_ena is high
+assign q[0] = (shift_ena && !count_ena) ? data[0] : 1'b0; // Assign a default value to avoid combinational loop
+
+// Decrement the current value in the register when count_ena is high
+always @(posedge clk)
+begin
+    if(count_ena)
+        q <= {q[1:0], q[2:0]};
+end
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,45 @@
+Here is the Verilog implementation of the Moore state machine based on your description:
+
+```verilog
+module TopModule(
+    input clk, // Positive clock/clk triggered signal
+    input j,     // Input signal
+    input k,     // Input signal
+    input areset, // Active-high asynchronous reset signal
+    output out   // Output signal
+);
+
+reg [1:0] state; // State variable
+
+// Initialize the state to OFF when the module is instantiated
+initial begin
+    state = 2'b00;
+end
+
+always @(posedge clk) begin // Clock edge
+    if (areset) begin // Active-high asynchronous reset
+        state <= 2'b00;
+    end else if (state == 2'b00 && j == 1) begin // Transition from OFF to ON
+        state <= 2'b01;
+    end else if (state == 2'b01 && k == 0) begin // Stay in ON
+        state <= 2'b01;
+    end else if (state == 2'b01 && k == 1) begin // Transition from ON to OFF
+        state <= 2'b00;
+    end
+end
+
+assign out = state[1]; // Output the current state
+
+endmodule
+```
+
+This implementation uses a Moore state machine, where the output is determined by the current state and the input signals. The `state` variable keeps track of the current state, and the `out` signal outputs this value.
+
+The module has two states: OFF (0) and ON (1). The transitions between these states are defined in the Verilog code:
+
+- When the clock edge occurs and the reset is active-high, the state resets to OFF.
+- When the input signal `j` is high while the state is OFF, the state transitions to ON.
+- When the input signal `k` is low while the state is ON, the state stays in ON.
+- When the input signal `k` is high while the state is ON, the state transitions to OFF.
+
+Note that this implementation assumes that the clock edge occurs on the rising edge of the clock signal. If you want to implement a different clock edge, you can modify the `always @(posedge clk)` block accordingly.

@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:14: error: tc is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:6:      : tc is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:19: error: tc is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:6:      : tc is declared here as wire.
+2 error(s) during elaboration.

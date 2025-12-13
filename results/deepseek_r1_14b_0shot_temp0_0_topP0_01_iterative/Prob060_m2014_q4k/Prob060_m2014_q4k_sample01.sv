@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output out
+);
+
+  // Declare four D flip-flops
+  D_Flop flop1 (.clk(clk), .resetn(resetn), .d(in), .q(out1));
+  D_Flop flop2 (.clk(clk), .resetn(resetn), .d(out1), .q(out2));
+  D_Flop flop3 (.clk(clk), .resetn(resetn), .d(out2), .q(out3));
+  D_Flop flop4 (.clk(clk), .resetn(resetn), .d(out3), .q(out));
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

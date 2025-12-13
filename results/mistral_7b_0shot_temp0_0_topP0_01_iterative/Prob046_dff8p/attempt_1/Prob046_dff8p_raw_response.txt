@@ -1,0 +1,23 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+always @(posedge clk or negedge reset) begin
+  if (reset)
+    q <= 8'b0110_0100; // Setting initial value to 0x34
+  else
+    q <= d; // Assigning the value of 'd' when reset is not active
+end
+
+assign q[7] = ~q[7]; // Inverting the most significant bit (MSB) for active high reset
+
+endmodule
+```
+
+In this code, I added an assignment to invert the MSB (most significant bit) of the output `q`, as you requested that the synchronous reset should be active high. The rest of the code follows your description closely.

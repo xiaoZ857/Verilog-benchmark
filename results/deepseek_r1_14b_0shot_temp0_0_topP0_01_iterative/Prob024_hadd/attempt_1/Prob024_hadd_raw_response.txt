@@ -1,0 +1,22 @@
+Here is the Verilog implementation of a half adder based on the given description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+  
+  assign sum = a ^ b;
+  assign cout = a & b;
+
+endmodule
+```
+
+**Explanation:**
+
+- The module `TopModule` takes two inputs, `a` and `b`.
+- It computes the sum using an XOR operation (`a ^ b`), which gives 1 when exactly one of `a` or `b` is 1.
+- It computes the carry-out using an AND operation (`a & b`), which gives 1 only when both `a` and `b` are 1.
+- The results are assigned to the outputs `sum` and `cout`, respectively.

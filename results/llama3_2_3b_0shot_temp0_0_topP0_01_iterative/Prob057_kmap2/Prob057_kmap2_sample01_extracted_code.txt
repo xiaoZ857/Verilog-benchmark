@@ -1,0 +1,32 @@
+// Implement logic equation 1: ab = 1
+assign temp_out_ab = a & b;
+
+// Implement logic equation 2: cd = 0
+assign out_cd = ~c & d;
+
+// Implement logic equation 3: ad = 1
+assign temp_out_ad = a & d;
+
+// Implement logic equation 4: bc = 1
+assign temp_out_bc = b & c;
+
+// Use the intermediate results to implement the final output
+assign out = temp_out_ab | temp_out_ad;
+
+// Add timescale directive outside of module definition
+timescale 1ps / 10ps;
+
+// Assigning outputs to wires explicitly
+wire temp_out_ab;
+wire out_cd;
+wire temp_out_ad;
+wire temp_out_bc;
+wire out;
+
+assign temp_out_ab = a & b;
+assign out_cd = ~c & d;
+assign temp_out_ad = a & d;
+assign temp_out_bc = b & c;
+assign out = temp_out_ab | temp_out_ad;
+
+endmodule

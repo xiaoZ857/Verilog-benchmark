@@ -1,0 +1,94 @@
+// Define the states and their corresponding next states
+typedef enum logic [2:0] {
+    state_000, // Initial state
+    state_001,
+    state_010,
+    state_011,
+    state_100
+} State;
+
+// Define the output function for each state
+always_comb begin : OUTPUT_FUNCTION
+    case (State(z))
+        state_000:
+            z <= 0;
+        state_001:
+            if (x == 1) z <= 1; // x=1, next state is 001
+            else z <= 0;
+        state_010:
+            if (x == 1) z <= 1; // x=1, next state is 011
+            else z <= 0;
+        state_011:
+            if (x == 0) z <= 0; // x=0, next state is 001
+            else if (x == 1) z <= 1; // x=1, next state is 100
+            else z <= 0;
+        state_100:
+            if (x == 0) z <= 0; // x=0, next state is 011
+            else if (x == 1) z <= 1; // x=1, next state is 100
+            else z <= 0;
+    endcase
+end
+
+// Define the state transition function
+always_comb begin : STATE_TRANSITION
+    case (State(z))
+        state_000:
+            if (reset) State(z) = state_000;
+            else State(z) = State(x);
+        state_001:
+            if (x == 0) State(z) = state_000;
+            else if (x == 1) State(z) = state_011;
+            else State(z) = state_001;
+        state_010:
+            if (x == 0) State(z) = state_001;
+            else if (x == 1) State(z) = state_100;
+            else State(z) = state_010;
+        state_011:
+            if (x == 0) State(z) = state_001;
+            else if (x == 1) State(z) = state_100;
+            else State(z) = state_011;
+        state_100:
+            if (x == 0) State(z) = state_010;
+            else if (x == 1) State(z) = state_100;
+            else State(z) = state_100;
+    endcase
+end
+
+// Define the module
+module TopModule (
+    input clk,
+    input reset,
+    input x,
+    output reg z
+);
+
+    // Instantiate the state machine
+    State state;
+
+    always @(posedge clk) begin : STATE_TRANSITION
+        if (reset) state <= state_000;
+        else state <= State(x);
+    end
+
+    always @(state) begin : OUTPUT_FUNCTION
+        case (state)
+            state_000:
+                z <= 0;
+            state_001:
+                if (x == 1) z <= 1; // x=1, next state is 001
+                else z <= 0;
+            state_010:
+                if (x == 1) z <= 1; // x=1, next state is 011
+                else z <= 0;
+            state_011:
+                if (x == 0) z <= 0; // x=0, next state is 001
+                else if (x == 1) z <= 1; // x=1, next state is 100
+                else z <= 0;
+            state_100:
+                if (x == 0) z <= 0; // x=0, next state is 011
+                else if (x == 1) z <= 1; // x=1, next state is 100
+                else z <= 0;
+        endcase
+    end
+
+endmodule

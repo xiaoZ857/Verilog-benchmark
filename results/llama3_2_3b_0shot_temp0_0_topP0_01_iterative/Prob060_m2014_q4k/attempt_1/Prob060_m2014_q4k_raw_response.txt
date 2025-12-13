@@ -1,0 +1,33 @@
+Here's the Verilog module implementation for the described shift register:
+
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output reg [3:0] out
+);
+
+reg [3:0] q[3:0];
+
+always @(posedge clk) begin
+  if (!resetn) begin
+    // Reset the shift register on rising edge of clock when resetn is low
+    q <= 4'd0;
+  end else begin
+    // Shift in new data on rising edge of clock
+    q[3] <= in;
+    q[2] <= q[3];
+    q[1] <= q[2];
+    q[0] <= q[1];
+  end
+end
+
+assign out = q;
+
+endmodule
+```
+
+This module implements a synchronous shift register with four D flip-flops. The `resetn` input is used to activate the reset, which sets all bits of the shift register to zero when it's low. On each rising edge of the clock signal, the new data is shifted into the shift register from right to left.
+
+Note that we use a reg declaration for the output port `out`, as Verilog requires that outputs be declared with the `reg` keyword if they are not explicitly initialized in the module.

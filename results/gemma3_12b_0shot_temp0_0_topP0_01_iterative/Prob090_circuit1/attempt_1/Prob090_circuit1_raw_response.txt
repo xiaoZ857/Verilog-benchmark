@@ -1,0 +1,19 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output q
+);
+
+  assign q = (a & b) ? 1 : 0;
+
+endmodule
+```
+
+**Explanation:**
+
+The simulation waveforms show that `q` is high (1) only when both `a` and `b` are high (1).  Therefore, the circuit is a simple AND gate.  The Verilog code implements this logic using the `&` operator.
+
+*   `assign q = (a & b) ? 1 : 0;`  This line assigns the value of `q` based on the result of the AND operation between `a` and `b`. If `a & b` is true (both `a` and `b` are 1), then `q` is assigned 1. Otherwise, `q` is assigned 0.
+
+This code directly reflects the observed behavior in the provided simulation waveforms.

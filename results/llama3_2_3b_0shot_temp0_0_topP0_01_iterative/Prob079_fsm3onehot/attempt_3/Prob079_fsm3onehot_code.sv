@@ -1,0 +1,53 @@
+
+module TopModule (
+    input in,
+    input [3:0] state,
+    output reg [3:0] next_state,
+    output out
+);
+
+// State transition table for the Moore state machine
+reg [1:0] nextState;
+
+assign nextState = $signed(state[2:0]); // Extracting the one-hot encoded state
+
+always @(*) begin
+    case ($signed(nextState))
+        4'b0001 : next_state = 4'b0001; // State A
+        4'b0010 : next_state = 4'b0010; // State B
+        4'b0100 : next_state = 4'b0100; // State C
+        4'b1000 : next_state = 4'b1000; // State D
+    endcase
+end
+
+always @(*) begin
+    case ($signed(state))
+        4'b0001 : out = 0; // Output for state A
+        4'b0010 : out = 0; // Output for state B
+        4'b0100 : out = 1; // Output for state C
+        4'b1000 : out = 1; // Output for state D
+    endcase
+end
+
+// State transition logic
+always @(*) begin
+    if (in == 0) begin
+        case ($signed(state))
+            4'b0001 : next_state = 4'b0010;
+            4'b0010 : next_state = 4'b0100;
+            4'b0100 : next_state = 4'b1000;
+            4'b1000 : next_state = 4'b0001;
+        endcase
+    end else begin // in == 1
+        case ($signed(state))
+            4'b0001 : next_state = 4'b0001;
+            4'b0010 : next_state = 4'b0010;
+            4'b0100 : next_state = 4'b0100;
+            4'b1000 : next_state = 4'b1000;
+        endcase
+    end
+end
+
+endmodule // TopModule
+
+// VERILOG-EVAL: errant inclusion of module definition

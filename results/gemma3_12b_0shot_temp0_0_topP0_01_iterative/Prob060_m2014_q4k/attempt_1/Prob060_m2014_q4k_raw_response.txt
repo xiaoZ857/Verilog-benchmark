@@ -1,0 +1,46 @@
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output out
+);
+
+  // Internal signals for the shift register
+  reg [3:0] shift_reg;
+
+  // Assign the output to the most significant bit of the shift register
+  assign out = shift_reg[3];
+
+  // Shift register logic
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      shift_reg <= 0; // Reset to 0 when resetn is low
+    end else begin
+      shift_reg <= {shift_reg[2:0], in}; // Shift register logic
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (clk, resetn, in, out);`**:  Defines the module named `TopModule` with the specified input and output ports.
+* **`reg [3:0] shift_reg;`**: Declares a 4-bit register named `shift_reg` to hold the shift register's state.  `[3:0]` indicates a 4-bit register, with bit 3 being the most significant bit and bit 0 being the least significant bit.
+* **`assign out = shift_reg[3];`**:  Assigns the value of the most significant bit (MSB) of the `shift_reg` to the output `out`. This means the output will represent the value that was initially in the first flip-flop.
+* **`always @(posedge clk or negedge resetn) begin ... end`**:  This is a clocked `always` block.  It specifies that the code inside the block will execute on the positive edge of the clock signal (`posedge clk`) or the negative edge of the reset signal (`negedge resetn`).  This implements the synchronous reset.
+* **`if (!resetn) begin ... end`**:  This `if` statement checks if the reset signal is active (low).
+* **`shift_reg <= 0;`**:  If the reset signal is active, the `shift_reg` is reset to all zeros.  The `<=` operator is a non-blocking assignment, which is crucial for sequential logic.
+* **`else begin ... end`**:  If the reset signal is not active, the following code executes.
+* **`shift_reg <= {shift_reg[2:0], in};`**: This is the core shift register logic.  It performs a right shift of the `shift_reg` and loads the input `in` into the least significant bit (LSB).  The `{shift_reg[2:0], in}` expression concatenates the bits `shift_reg[2:0]` (bits 2, 1, and 0) with the input `in`.  This effectively shifts the existing values in the register one position to the right, and places the new input value into the LSB.  Again, the `<=` operator is a non-blocking assignment.
+
+**How it works:**
+
+1. **Reset:** When `resetn` is low, the shift register is cleared to all zeros.
+2. **Clocked Operation:** On each positive clock edge (when `resetn` is high), the shift register shifts its contents one position to the right, and the input `in` is loaded into the least significant bit.
+3. **Output:** The output `out` is always the value of the most significant bit of the shift register.
+
+**Example Usage:**
+
+If you apply a clock signal and a sequence of inputs to this module, the output will be a delayed version of the input sequence, shifted by four clock cycles.  The reset signal will clear the register to zero at the beginning.

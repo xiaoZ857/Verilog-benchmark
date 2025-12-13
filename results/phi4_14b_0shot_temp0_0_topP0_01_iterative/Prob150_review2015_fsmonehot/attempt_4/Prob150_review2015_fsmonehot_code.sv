@@ -1,0 +1,39 @@
+
+module TopModule (
+  input d,
+  input done_counting,
+  input ack,
+  input [9:0] state, // 10-bit one-hot current state
+  output B3_next,
+  output S_next,
+  output S1_next,
+  output Count_next,
+  output Wait_next,
+  output done,
+  output counting,
+  output shift_ena
+);
+
+  assign B3_next = state[7]; // Always transition from B3 to Count
+
+  assign S_next  = (state[0] & ~d) | 
+                   (state[1] & ~d) | 
+                   (state[2] & ~d) | 
+                   (state[6] & d); // From S, S1, S11, S110 to S
+
+  assign S1_next = state[0] & d; // From S to S1
+
+  assign Count_next = state[7]; // Always transition from B3 to Count
+
+  assign Wait_next  = (state[8] & done_counting) | 
+                      (state[9] & ack); // From Count to Wait, and from Wait to S
+
+  assign done = state[9]; // Output in Wait state
+
+  assign counting = state[8]; // Output in Count state
+
+  assign shift_ena = state[4] | state[5] | state[6] | state[7]; // Outputs in B0, B1, B2, B3 states
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

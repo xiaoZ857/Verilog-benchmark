@@ -1,0 +1,38 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+wire out_A1, out_B1, out_A2, out_B2;
+wire or_out, and_out;
+
+A inst_A1 (
+    .x(x),
+    .y(y),
+    .z(out_A1)
+);
+
+B inst_B1 (
+    .x(x),
+    .y(y),
+    .z(out_B1)
+);
+
+A inst_A2 (
+    .x(x),
+    .y(y),
+    .z(out_A2)
+);
+
+B inst_B2 (
+    .x(x),
+    .y(y),
+    .z(out_B2)
+);
+
+assign or_out = out_A1 | out_B1;
+assign and_out = out_A2 & out_B2;
+assign z = or_out ^ and_out;
+
+endmodule

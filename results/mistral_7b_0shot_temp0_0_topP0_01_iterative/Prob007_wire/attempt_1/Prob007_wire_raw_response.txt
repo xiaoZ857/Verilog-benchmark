@@ -1,0 +1,30 @@
+ Here is a simple Verilog implementation of a module that acts as a wire, passing the input signal to the output:
+
+```verilog
+module TopModule (
+  input wire in,
+  output reg out
+);
+
+always @(posedge clk) begin
+  out <= in;
+end
+
+initial begin
+  $finish;
+end
+
+// Add clock input if needed
+// module TopModule (
+//   input wire in,
+//   input wire clk,
+//   output reg out
+// );
+// always @(posedge clk) begin
+//   out <= in;
+// end
+```
+
+In this example, the `TopModule` has an input signal `in` of type `wire` and an output signal `out` of type `reg`. The module uses a positive edge-triggered always block to copy the value of the input signal to the output signal at each clock cycle.
+
+If you want to add a clock input, replace `clk` with your desired clock signal in both the input and output declarations, as well as in the always block.

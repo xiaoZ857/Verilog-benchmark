@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob146_fsm_serialdata",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out_byte' has 38 mismatches. First mismatch occurred at time 110.\nHint: Output 'done' has 226 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 232 out of 905 samples\n\nSimulation finished at 4526 ps\nMismatches: 232 in 905 samples\n",
+      "mismatch_count": 232
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 10\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:12: error: out_byte is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:6:      : out_byte is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:13: error: done is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:7:      : done is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:14: error: Could not find variable ``bit_counter'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:16: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:16: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:63: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:63: error: Unable to bind wire/reg/memory `CHECK_STOP' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:63: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:67: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:72: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:72: error: Unable to elaborate this case expression.\n10 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out_byte' has 38 mismatches. First mismatch occurred at time 110.\nHint: Output 'done' has 57 mismatches. First mismatch occurred at time 110.\nHint: Total mismatched samples is 57 out of 905 samples\n\nSimulation finished at 4526 ps\nMismatches: 57 in 905 samples\n",
+      "mismatch_count": 57
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Direct combinational loop: out_byte depends on itself in assign statement",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

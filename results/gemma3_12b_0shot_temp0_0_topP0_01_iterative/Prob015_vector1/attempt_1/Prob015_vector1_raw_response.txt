@@ -1,0 +1,19 @@
+```verilog
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+
+  assign out_hi = in[15:8];
+  assign out_lo = in[7:0];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out_hi = in[15:8];`**: This line assigns the upper byte (bits 15 to 8) of the input `in` to the output `out_hi`.  The `[15:8]` notation is a range selector, extracting the bits from index 15 down to index 8.
+* **`assign out_lo = in[7:0];`**: This line assigns the lower byte (bits 7 to 0) of the input `in` to the output `out_lo`.  Similarly, `[7:0]` selects the bits from index 7 down to index 0.
+
+This is a purely combinational circuit because the outputs are directly determined by the input without any memory elements or sequential logic.  The `assign` statement is used for continuous assignments in Verilog.

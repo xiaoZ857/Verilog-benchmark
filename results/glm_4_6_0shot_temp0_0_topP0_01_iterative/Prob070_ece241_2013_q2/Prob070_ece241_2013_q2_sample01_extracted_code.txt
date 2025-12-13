@@ -1,0 +1,16 @@
+
+// For out_sop (sum of products), we need to output 1 for minterms 2, 7, 15
+// and can use don't cares 3, 8, 11, 12 for minimization
+// Minterms: 2(0010), 7(0111), 15(1111)
+// Don't cares: 3(0011), 8(1000), 11(1011), 12(1100)
+// Simplified SOP: bcd + a'cd'
+
+assign out_sop = (b & c & d) | (~a & c & ~d);
+
+// For out_pos (product of sums), we need to output 0 for minterms 0, 1, 4, 5, 6, 9, 10, 13, 14
+// and can use don't cares 3, 8, 11, 12 for minimization
+// Zero minterms: 0(0000), 1(0001), 4(0100), 5(0101), 6(0110), 9(1001), 10(1010), 13(1101), 14(1110)
+// Don't cares: 3(0011), 8(1000), 11(1011), 12(1100)
+// Simplified POS: (a + c)(b + d)
+
+assign out_pos = (a | c) & (b | d

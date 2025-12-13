@@ -1,0 +1,19 @@
+To implement an XNOR gate in Verilog, we can use the equality operator to check if both inputs are the same. Here's how the code would look:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+assign out = (a == b);
+
+endmodule
+```
+
+**Explanation:**
+
+- The module `TopModule` has two input signals, `a` and `b`, and one output signal, `out`.
+- The assignment statement `assign out = (a == b);` directly computes the XNOR function. When `a` equals `b`, `out` is 1; otherwise, it's 0.
+- This approach is efficient and readable, leveraging Verilog's equality operator to achieve the desired functionality with minimal code.

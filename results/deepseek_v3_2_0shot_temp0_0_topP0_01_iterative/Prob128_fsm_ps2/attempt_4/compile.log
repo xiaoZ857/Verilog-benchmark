@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:39: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:39: error: Unable to bind wire/reg/memory `WAIT_BYTE3' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:39: error: Unable to elaborate r-value: (state)==(WAIT_BYTE3)
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:10: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:12: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:17: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_4\Prob128_fsm_ps2_code.sv:17: error: Unable to elaborate this case expression.
+6 error(s) during elaboration.

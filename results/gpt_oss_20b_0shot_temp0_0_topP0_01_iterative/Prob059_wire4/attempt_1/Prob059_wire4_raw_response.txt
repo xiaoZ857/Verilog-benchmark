@@ -1,0 +1,37 @@
+Here is a minimal, synthesizable Verilog implementation that simply forwards the three input signals to the four outputs as described:
+
+```verilog
+// TopModule.v
+// 3‑input, 4‑output module that behaves like wires:
+//   a -> w
+//   b -> x
+//   b -> y
+//   c -> z
+//
+// All signals are combinational (no clock required).
+
+module TopModule (
+    input  wire a,   // input a
+    input  wire b,   // input b
+    input  wire c,   // input c
+    output wire w,   // output w
+    output wire x,   // output x
+    output wire y,   // output y
+    output wire z    // output z
+);
+
+// Continuous assignments – the outputs are simply wired to the inputs.
+assign w = a;   // a -> w
+assign x = b;   // b -> x
+assign y = b;   // b -> y
+assign z = c;   // c -> z
+
+endmodule
+```
+
+### Explanation
+- **Inputs/Outputs**: Declared as `wire` by default for combinational logic.  
+- **Continuous assignments** (`assign`) create direct connections between the inputs and outputs, exactly matching the required wiring.  
+- No clock or state elements are needed because the behavior is purely combinational.  
+
+This module can be instantiated in any higher‑level design or used directly in a testbench.

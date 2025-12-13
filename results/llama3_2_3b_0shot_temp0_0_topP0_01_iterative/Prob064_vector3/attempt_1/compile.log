@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:19: warning: Part select [23:16] is selecting before the vector concat_input[29:24].
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:19:        : Replacing the out of bound bits with 'bx.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:20: warning: Part select [19:12] is selecting before the vector concat_input[29:24].
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:20:        : Replacing the out of bound bits with 'bx.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:21: warning: Part select [15:8] is selecting before the vector concat_input[29:24].
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:21:        : Replacing the out of bound bits with 'bx.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:22: warning: Part select [11:4] is selecting before the vector concat_input[29:24].
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:22:        : Replacing the out of bound bits with 'bx.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:25: warning: Part select w[31:30] is out of range.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:26: warning: Part select x[31:30] is out of range.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:27: warning: Part select y[31:30] is out of range.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob064_vector3\attempt_1\Prob064_vector3_code.sv:28: warning: Part select z[31:30] is out of range.

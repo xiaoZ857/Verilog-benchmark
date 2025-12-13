@@ -1,0 +1,20 @@
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+
+  assign out = ~in;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input in, output out);`**: This line declares the module named `TopModule` and defines its input (`in`) and output (`out`) ports.
+* **`assign out = ~in;`**: This is the core logic of the NOT gate.  The `assign` statement is used for continuous assignment.  The `~` operator is the bitwise NOT operator in Verilog.  It inverts the value of the input signal `in` and assigns the result to the output signal `out`.
+* **`endmodule`**: This line marks the end of the module definition.
+
+**How it works:**
+
+When the input `in` is high (logic 1), the output `out` will be low (logic 0).  Conversely, when the input `in` is low (logic 0), the output `out` will be high (logic 1).  This is the behavior of a NOT gate.

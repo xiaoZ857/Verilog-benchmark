@@ -1,0 +1,72 @@
+To implement the Verilog module for a thermostat that controls a heater, an air conditioner, and a blower fan based on the given description, we need to consider the following logic:
+
+1. **Inputs:**
+   - `mode`: Determines whether the system is in heating mode (`1`) or cooling mode (`0`).
+   - `too_cold`: Indicates if it's too cold (only relevant in heating mode).
+   - `too_hot`: Indicates if it's too hot (only relevant in cooling mode).
+   - `fan_on`: User request to turn on the fan.
+
+2. **Outputs:**
+   - `heater`: Controls the heater.
+   - `aircon`: Controls the air conditioner.
+   - `fan`: Controls the blower fan.
+
+3. **Logic:**
+   - In heating mode (`mode = 1`):
+     - Turn on the heater if it's too cold (`too_cold = 1`).
+     - Do not turn on the air conditioner.
+     - The fan should be on if either the heater is on or `fan_on` is requested.
+
+   - In cooling mode (`mode = 0`):
+     - Turn on the air conditioner if it's too hot (`too_hot = 1`).
+     - Do not turn on the heater.
+     - The fan should be on if either the air conditioner is on or `fan_on` is requested.
+
+Here's how you can implement this logic in Verilog:
+
+```verilog
+module TopModule (
+    input mode,
+    input too_cold,
+    input too_hot,
+    input fan_on,
+    output reg heater,
+    output reg aircon,
+    output reg fan
+);
+
+always @(*) begin
+    // Default outputs to 0 (off)
+    heater = 0;
+    aircon = 0;
+    fan = 0;
+
+    if (mode == 1) begin
+        // Heating mode
+        if (too_cold) begin
+            heater = 1; // Turn on the heater if it's too cold
+        end
+        // Fan logic in heating mode
+        if (heater || fan_on) begin
+            fan = 1; // Turn on the fan if heater is on or user requests
+        end
+    end else begin
+        // Cooling mode
+        if (too_hot) begin
+            aircon = 1; // Turn on the air conditioner if it's too hot
+        end
+        // Fan logic in cooling mode
+        if (aircon || fan_on) begin
+            fan = 1; // Turn on the fan if aircon is on or user requests
+        end
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+- The `always @(*)` block ensures that the outputs are updated whenever any of the inputs change.
+- We initialize all outputs to `0` (off) at the start of each evaluation.
+- Depending on the mode, we check the conditions (`too_cold` or `too_hot`) and set the respective device (`heater` or `aircon`) accordingly.
+- The fan is turned on if either the heater/air conditioner is active or if there's a user request to turn it on (`fan_on`).

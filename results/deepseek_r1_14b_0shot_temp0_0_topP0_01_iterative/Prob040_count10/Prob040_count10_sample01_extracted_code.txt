@@ -1,0 +1,6 @@
+To fix the compilation errors in the Verilog code, we need to address two main issues:
+
+1. **Move the `timescale` directive outside of any module definitions** as it's a file-level directive and not allowed inside modules.
+2. **Correct the syntax error** within the module body by ensuring proper use of Verilog constructs for counting and resetting.
+
+Here is the corrected

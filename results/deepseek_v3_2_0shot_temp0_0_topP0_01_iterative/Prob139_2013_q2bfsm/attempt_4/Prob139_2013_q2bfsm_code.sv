@@ -1,0 +1,125 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+Looking at the test results and the problem description, I can identify several issues:
+
+1. **State B timing**: The description says "after the next clock edge" when reset is de-asserted, f should be 1 for one clock cycle. In the previous code, state A transitions to B immediately when resetn=1, but f=1 should occur in the cycle AFTER reset is de-asserted.
+
+2. **Pattern detection timing**: The pattern "1,0,1" should be detected in three successive clock cycles, and g should be set to 1 on the following clock cycle. The previous code sets g=1 immediately when entering state D, but it should wait one cycle.
+
+3. **State D behavior**: In state D, g should be 1 while monitoring y. If y=1 within two cycles, go to permanent g=1 state (E). If not, go to permanent g=0 state (F). The counter logic needs to track two cycles correctly.
+
+4. **Output logic**: The outputs need to be properly synchronized with state transitions.
+
+Here's the corrected code:
+
+  // State definitions
+  localparam A = 3'd0,
+             B = 3'd1,
+             C = 3'd2,
+             D = 3'd3,
+             E = 3'd4,
+             F = 3'd5;
+  
+  reg [2:0] state, next_state;
+  reg [1:0] x_history;  // Stores last two x values
+  reg [1:0] y_counter;  // Counts cycles in state D
+  reg f_reg, g_reg;
+  
+  // State register (synchronous reset)
+  always @(posedge clk) begin
+    if (!resetn)
+      state <= A;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    next_state = state;  // Default: stay in current state
+    
+    case (state)
+      A: begin
+        if (resetn)  // When reset is de-asserted
+          next_state = B;
+        else
+          next_state = A;
+      end
+      B: next_state = C;  // Move to C after one cycle in B
+      C: begin
+        // Check for pattern 1,0,1 in x_history[1:0] and current x
+        // x_history[1] is two cycles ago, x_history[0] is previous cycle
+        if (x_history == 2'b10 && x == 1'b1)
+          next_state = D;
+        else
+          next_state = C;
+      end
+      D: begin
+        if (y == 1'b1)
+          next_state = E;
+        else if (y_counter == 2'd0)
+          next_state = F;
+        else
+          next_state = D;
+      end
+      E: next_state = E;  // Permanent g=1 state
+      F: next_state = F;  // Permanent g=0 state
+      default: next_state = A;
+    endcase
+  end
+  
+  // x history shift register - track last two x values
+  always @(posedge clk) begin
+    if (!resetn)
+      x_history <= 2'b00;
+    else if (state == C || state == B)  // Start tracking in B and continue in C
+      x_history <= {x_history[0], x};
+    else
+      x_history <= 2'b00;
+  end
+  
+  // y counter (counts down from 2 in state D)
+  always @(posedge clk) begin
+    if (!resetn)
+      y_counter <= 2'd2;
+    else if (state == D) begin
+      if (y_counter > 2'd0)
+        y_counter <= y_counter - 1'b1;
+    end else
+      y_counter <= 2'd2;
+  end
+  
+  // Output logic (registered outputs)
+  always @(posedge clk) begin
+    if (!resetn) begin
+      f_reg <= 1'b0;
+      g_reg <= 1'b0;
+    end else begin
+      // Default outputs
+      f_reg <= 1'b0;
+      g_reg <= 1'b0;
+      
+      case (state)
+        A: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        B: begin
+          f_reg <= 1'b1;  // f=1 for one cycle after reset deassertion
+          g_reg <= 1'b0;
+        end
+        C: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        D: begin
+          f_reg <= 1'b
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

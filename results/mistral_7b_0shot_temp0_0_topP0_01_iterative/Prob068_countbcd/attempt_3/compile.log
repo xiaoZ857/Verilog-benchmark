@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:11: error: ena is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:17: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd1] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:23: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd2] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:28: error: ena['sd0] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd0] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:40: error: ena is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena is declared here as wire.
+5 error(s) during elaboration.

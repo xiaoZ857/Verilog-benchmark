@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: A reference to a wire or reg (`start_bit') is not allowed in a constant expression.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: Part select expressions must be constant.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14:      : This lsb expression violates the rule: start_bit
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: A reference to a wire or reg (`start_bit') is not allowed in a constant expression.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: Part select expressions must be constant.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14:      : This msb expression violates the rule: (start_bit)+('sd3)
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: A reference to a wire or reg (`start_bit') is not allowed in a constant expression.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: Part select expressions must be constant.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14:      : This lsb expression violates the rule: start_bit
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: A reference to a wire or reg (`start_bit') is not allowed in a constant expression.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14: error: Part select expressions must be constant.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:14:      : This msb expression violates the rule: (start_bit)+('sd3)
+8 error(s) during elaboration.

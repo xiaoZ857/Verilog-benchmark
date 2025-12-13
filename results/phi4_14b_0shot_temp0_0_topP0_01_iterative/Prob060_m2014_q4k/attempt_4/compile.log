@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob060_m2014_q4k\attempt_4\Prob060_m2014_q4k_code.sv:18: error: Unable to bind wire/reg/memory `shift_reg['sd3]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob060_m2014_q4k\attempt_4\Prob060_m2014_q4k_code.sv:18: error: Unable to elaborate r-value: shift_reg['sd3]
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob060_m2014_q4k\attempt_4\Prob060_m2014_q4k_code.sv:11: error: Could not find variable ``shift_reg'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob060_m2014_q4k\attempt_4\Prob060_m2014_q4k_code.sv:14: error: Could not find variable ``shift_reg'' in ``tb.top_module1''
+4 error(s) during elaboration.

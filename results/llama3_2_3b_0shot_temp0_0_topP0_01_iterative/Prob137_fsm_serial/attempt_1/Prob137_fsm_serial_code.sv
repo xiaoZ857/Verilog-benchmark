@@ -1,0 +1,68 @@
+
+// Define the states for the finite state machine
+typedef enum logic [1:0] {
+    IDLE, START_BIT, DATA_BITS, STOP_BIT, ERROR
+} State;
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+
+State state;
+logic [7:0] data_bits;
+logic stop_bit;
+
+// Initialize the state and data bits to default values
+always @(reset) begin
+    state = IDLE;
+    data_bits <= 8'd0;
+    stop_bit <= 1'b0;
+end
+
+always @(posedge clk) begin
+    // Check for start bit
+    if (in == 1'b0 && state != START_BIT) begin
+        state <= START_BIT;
+    end else if (in == 1'b0 && state == START_BIT) begin
+        state <= DATA_BITS;
+    end
+
+    // Wait for data bits
+    if (state == DATA_BITS) begin
+        data_bits <= in | data_bits(7:1);
+        if (data_bits[7] == 1'b1) begin
+            state <= STOP_BIT;
+        end
+    end
+
+    // Check stop bit and verify data bits
+    if (in == 1'b1 && state == STOP_BIT) begin
+        if (data_bits[7:0] == 8'd255) begin
+            done <= 1'b1;
+            state <= IDLE;
+        end else begin
+            state <= ERROR;
+        end
+    end
+
+    // Wait for next byte if error or stop bit not received
+    if (state != STOP_BIT && in != 1'b0) begin
+        state <= START_BIT;
+    end
+end
+
+// Synchronous reset
+always @(posedge clk) begin
+    if (reset) begin
+        state <= IDLE;
+        data_bits <= 8'd0;
+        stop_bit <= 1'b0;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

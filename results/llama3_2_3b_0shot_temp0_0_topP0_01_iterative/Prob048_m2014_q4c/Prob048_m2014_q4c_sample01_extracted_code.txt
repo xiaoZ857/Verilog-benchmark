@@ -1,0 +1,14 @@
+// D Flip-Flop Logic
+always @(posedge clk) begin
+  if (!r) begin  // If reset is active high, set to 0
+    q <= 0;
+  else begin  // Otherwise, update next state based on current data and previous state
+    q <= d;
+  end
+end
+
+// Assign the output of the flip-flop
+assign q = q; // This line should be removed as it creates a loop.
+
+// Alternatively, you can use a different assignment statement like this:
+// assign q = !r ? 0 : d;

@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:10: error: Y2 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:5:      : Y2 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:11: error: Y4 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:6:      : Y4 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:15: error: Y2 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:5:      : Y2 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:19: error: Y4 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:6:      : Y4 is declared here as wire.
+4 error(s) during elaboration.

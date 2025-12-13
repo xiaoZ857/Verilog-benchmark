@@ -1,0 +1,56 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+  always @(in) begin
+    if (in[0] == 1) begin
+      pos = 0;
+    end else if (in[1] == 1) begin
+      pos = 1;
+    end else if (in[2] == 1) begin
+      pos = 2;
+    end else if (in[3] == 1) begin
+      pos = 3;
+    end else if (in[4] == 1) begin
+      pos = 4;
+    end else if (in[5] == 1) begin
+      pos = 5;
+    end else if (in[6] == 1) begin
+      pos = 6;
+    end else if (in[7] == 1) begin
+      pos = 7;
+    end else begin
+      pos = 0; // No bits are high
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input [7:0] in, output reg [2:0] pos);` declares the module named `TopModule` with an 8-bit input `in` and a 3-bit output `pos`.  The `reg` keyword is used for `pos` because it's assigned within an `always` block.
+
+2. **`always @(in)` Block:**
+   - `always @(in)` creates a sequential block that executes whenever any of the signals in the sensitivity list (`in`) changes.  This ensures that the output `pos` is updated whenever the input `in` changes.
+
+3. **Priority Encoding Logic:**
+   - The `if-else if-else` chain implements the priority encoding logic.  It checks each bit of the input `in` from the least significant bit (LSB) to the most significant bit (MSB).
+   - If a bit is found to be high (equal to 1), the corresponding value is assigned to `pos`.  The priority is determined by the order of the `if-else if` statements; the first high bit encountered determines the output.
+   - If none of the bits are high, the `else` block assigns 0 to `pos`, indicating that no bits are high.
+
+**How it works with the example:**
+
+If `in` is `8'b10010000`, the code will execute as follows:
+
+1. `in[0] == 1` is false.
+2. `in[1] == 1` is false.
+3. `in[2] == 1` is false.
+4. `in[3] == 1` is false.
+5. `in[4] == 1` is true.  Therefore, `pos` is assigned the value 4.
+6. The remaining `if` statements are skipped because a high bit has already been found.
+
+Therefore, the output `pos` will be 4, which is the correct result.

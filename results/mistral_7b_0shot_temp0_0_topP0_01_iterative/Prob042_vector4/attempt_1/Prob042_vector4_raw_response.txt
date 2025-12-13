@@ -1,0 +1,33 @@
+ Here is a Verilog implementation for the sign-extending circuit as described:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [31:0] out
+);
+
+// Create a constant for the number of replications
+parameter N = 24;
+
+// Create a helper module to replicate the sign bit
+module sign_extender (
+  input wire sig,
+  output reg [N-1:0] extended
+);
+
+assign extended[0] = sig;
+always @(posedge clk) begin
+  for (int i = 1; i < N; i++)
+    extended[i] = sig;
+end
+
+// Instantiate the helper module four times to cover all bits of the input
+sign_extender se0 (in[7], out[31:24]);
+sign_extender se1 (in[6], out[23:16]);
+sign_extender se2 (in[5], out[15:8]);
+sign_extender se3 (in[4], out[7:0]);
+
+endmodule
+```
+
+This Verilog code defines a top-level module `TopModule` that takes an 8-bit input signal `in` and produces a 32-bit output signal `out`. Inside the `TopModule`, four instances of the helper module `sign_extender` are created to replicate the sign bit for each position in the final 32-bit output. The `sign_extender` module takes an input `sig` and creates a copy of it with `N` bits, where `N` is defined as a parameter. In this case, `N = 24`, which means that the sign bit will be replicated 24 times to cover all the bits in the final output.

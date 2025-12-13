@@ -1,0 +1,73 @@
+To implement the described Moore state machine in Verilog, we need to define a module that handles the state transitions and outputs based on the given table. The FSM has four states (A, B, C, D), one input (`in`), one output (`out`), and a synchronous active high reset signal (`reset`). Here's how you can implement it:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire reset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    A = 2'b00,
+    B = 2'b01,
+    C = 2'b10,
+    D = 2'b11
+  } state_t;
+
+  // Declare the current and next state registers
+  state_t current_state, next_state;
+
+  // State transition logic
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A; // Reset to state A
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state and output logic
+  always_comb begin
+    case (current_state)
+      A: begin
+        next_state = in ? B : A;
+        out = 0;
+      end
+      B: begin
+        next_state = in ? B : C;
+        out = 0;
+      end
+      C: begin
+        next_state = in ? D : A;
+        out = 0;
+      end
+      D: begin
+        next_state = in ? B : C;
+        out = 1;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a `typedef enum` to define the states A, B, C, and D with binary encoding for simplicity.
+
+2. **Registers**:
+   - `current_state`: Holds the current state of the FSM.
+   - `next_state`: Determines the next state based on the current state and input.
+
+3. **State Transition Logic**: 
+   - This is a synchronous process triggered by the positive edge of `clk` or `reset`.
+   - If `reset` is high, the FSM transitions to state A.
+   - Otherwise, it updates `current_state` with `next_state`.
+
+4. **Next State and Output Logic**:
+   - This combinational logic block determines the next state and output based on the current state and input.
+   - The `case` statement handles each state's transition and output according to the given table.
+
+This implementation ensures that the FSM behaves as specified, with a synchronous reset capability.

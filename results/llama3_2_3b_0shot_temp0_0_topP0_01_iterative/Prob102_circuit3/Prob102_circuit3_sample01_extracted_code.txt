@@ -1,0 +1,4 @@
+always @(*) begin
+    // Determine the value of q based on the inputs a, b, c, and d
+    q <= (a & ~c) | (~d & c);
+end

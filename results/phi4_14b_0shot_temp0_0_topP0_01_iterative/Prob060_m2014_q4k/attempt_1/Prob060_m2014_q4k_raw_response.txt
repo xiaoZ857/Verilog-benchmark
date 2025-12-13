@@ -1,0 +1,43 @@
+To implement the described Verilog module, we need to create a shift register using four D flip-flops with an active-low synchronous reset. The shift register will take an input signal `in` and shift it through each of the four stages on every clock cycle. The output `out` will be taken from the last stage.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input resetn,    // Active-low synchronous reset
+  input in,
+  output out
+);
+
+  reg [3:0] shift_reg; // 4-bit register to hold the shifted values
+
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      // Synchronous active-low reset
+      shift_reg <= 4'b0000;
+    end else begin
+      // Shift operation on positive edge of clock
+      shift_reg <= {shift_reg[2:0], in}; // Shift left and insert new input at LSB
+    end
+  end
+
+  assign out = shift_reg[3]; // Output from the last stage
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Declaration**: The module `TopModule` is declared with inputs `clk`, `resetn`, and `in`, and an output `out`.
+
+2. **Register Declaration**: A 4-bit register `shift_reg` is used to store the current state of the shift register.
+
+3. **Always Block**:
+   - The always block triggers on the positive edge of `clk` or the negative edge of `resetn`.
+   - If `resetn` is low (active-low reset), the register is set to 4'b0000.
+   - Otherwise, on each clock cycle, the contents of `shift_reg` are shifted left by one position. The new input `in` is inserted at the least significant bit (LSB).
+
+4. **Output Assignment**: The output `out` is assigned the value of the most significant bit (MSB) of `shift_reg`, which corresponds to the last stage of the shift register.
+
+This implementation ensures that the shift register operates correctly with a synchronous reset and shifts the input signal through four stages on each clock cycle.

@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob061_2014_q4a",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob061_2014_q4a\\attempt_1\\Prob061_2014_q4a_code.sv:13: error: Unknown module type: DFlipFlop\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob061_2014_q4a\\attempt_1\\Prob061_2014_q4a_code.sv:20: error: Unknown module type: Mux2\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob061_2014_q4a\\attempt_1\\Prob061_2014_q4a_code.sv:28: error: Unknown module type: Mux2\n4 error(s) during elaboration.\n*** These modules were missing:\n        DFlipFlop referenced 1 times.\n        Mux2 referenced 2 times.\n***\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Invalid assignment: Q is declared as reg but used in continuous assignment",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Invalid assignment: Q is declared as reg but used in continuous assignment",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

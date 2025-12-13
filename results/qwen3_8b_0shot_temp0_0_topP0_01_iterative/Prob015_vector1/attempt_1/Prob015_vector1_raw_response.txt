@@ -1,0 +1,28 @@
+Here's the implementation of the `TopModule` in Verilog, which splits a 16-bit input into two 8-bit outputs representing the lower and upper bytes:
+
+---
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+
+assign out_lo = in[7:0];
+assign out_hi = in[15:8];
+
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `in` is a 16-bit input signal.
+  - `out_lo` and `out_hi` are 8-bit output signals representing the lower and upper bytes of the input, respectively.
+
+- **Bit Slicing:**
+  - `in[7:0]` extracts the lower 8 bits (bits 0 to 7) and assigns them to `out_lo`.
+  - `in[15:8]` extracts the upper 8 bits

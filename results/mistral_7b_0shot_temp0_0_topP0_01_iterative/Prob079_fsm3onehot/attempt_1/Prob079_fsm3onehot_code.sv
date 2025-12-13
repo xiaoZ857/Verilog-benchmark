@@ -1,0 +1,31 @@
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+
+// One-hot encoding for states
+reg A = (state == 1'b0001);
+reg B = (state == 1'b0010);
+reg C = (state == 1'b0100);
+reg D = (state == 1'b1000);
+
+always @(posedge clk) begin
+  if(A) begin
+    next_state <= A ? state : B; // Next state for A when in=0 and in=1
+  end else if(B) begin
+    next_state <= C ? state : B; // Next state for B when in=0 and in=1
+  end else if(C) begin
+    next_state <= A ? state : D; // Next state for C when in=0 and in=1
+  end else if(D) begin
+    next_state <= C ? state : B; // Next state for D when in=0 and in=1
+  end
+end
+
+assign out = (B && !in) ? 1'b1 : 1'b0; // Output logic
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:8: error: 'q' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:6:      : It was declared here as a variable.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:13: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:13: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob046_dff8p_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob046_dff8p_ref.sv:17: syntax error
+I give up.

@@ -1,0 +1,56 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= A;
+      count <= 2'b00;
+      z <= 1'b0;
+    end else begin
+      state <= next_state;
+      count <= next_count;
+      z <= z_next;
+    end
+  end
+  
+  always @(*) begin
+    next_state = state;
+    next_count = count;
+    z_next = 1'b0;
+    
+    case (state)
+      A: begin
+        if (s) begin
+          next_state = B0;
+          next_count = (w) ? 2'b01 : 2'b00;
+        end
+      end
+      B0: begin
+        next_state = B1;
+        next_count = (w) ? count + 2'b01 : count;
+      end
+      B1: begin
+        next_state = B2;
+        next_count = (w) ? count + 2'b01 : count;
+      end
+      B2: begin
+        // Check if count equals 2 (exactly two w=1 in the window)
+        // Set z_next for the next cycle (after the window ends)
+        z_next = (count == 2'b10);
+        
+        // Start next window
+        next_state = B0;
+        next_count = (w) ? 2'b01 : 2'b00;
+      end
+      default: begin
+        next_state = A;
+        next_count = 2'b00;
+      end
+    endcase
+  end
+endmodule

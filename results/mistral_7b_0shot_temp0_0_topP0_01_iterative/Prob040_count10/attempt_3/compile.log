@@ -1,0 +1,19 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 14
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:7: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:9: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:10: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:12: error: invalid module item.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:13: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:14: error: invalid module item.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:15: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:23: error: invalid module item.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:24: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:31: error: invalid module item.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:32: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob040_count10\attempt_3\Prob040_count10_code.sv:36: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob040_count10_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob040_count10_test.sv:12: error: invalid module item.

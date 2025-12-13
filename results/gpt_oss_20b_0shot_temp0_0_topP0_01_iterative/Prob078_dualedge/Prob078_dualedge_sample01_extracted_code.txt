@@ -1,0 +1,19 @@
+// Register to remember the previous clock value
+reg prev_clk;
+
+// Initialize registers (optional, for simulation)
+initial begin
+  prev_clk = 0;
+  q       = 0;
+end
+
+// Detect both rising and falling edges of clk
+always @(clk) begin
+  // If the clock value changed, we have an edge
+  if (clk !== prev_clk) begin
+    q <= d;          // Update output on either edge
+  end
+  prev_clk <= clk;   // Store current clock value for next comparison
+end
+
+endmodule

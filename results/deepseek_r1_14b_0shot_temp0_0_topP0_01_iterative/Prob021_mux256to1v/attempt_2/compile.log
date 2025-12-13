@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:17: error: out is not a valid l-value in tb.top_module1.$unm_blk_1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:8:      : out is declared here as wire.
+1 error(s) during elaboration.

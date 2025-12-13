@@ -1,0 +1,22 @@
+Here's how you can implement an AND gate in Verilog:
+
+```verilog
+// Define the module
+module TopModule (
+  // Input signals
+  input a, 
+  input b, 
+  // Output signal
+  output out
+);
+
+// Implement the AND gate logic
+assign out = a & b;
+
+endmodule
+```
+
+In this code:
+
+- We define the `TopModule` with inputs `a` and `b`, and an output `out`.
+- The `assign` keyword is used to create a new signal that is equal to the result of the bitwise AND operation between `a` and `b`.

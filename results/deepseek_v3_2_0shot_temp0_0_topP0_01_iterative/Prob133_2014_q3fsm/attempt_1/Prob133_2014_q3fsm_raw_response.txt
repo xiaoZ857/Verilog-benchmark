@@ -1,0 +1,78 @@
+We need to track the number of times w = 1 over each 3‑cycle window in state B.  
+We can use a 2‑bit counter for the number of 1’s seen in the current window, and another counter for the position in the window (0, 1, 2).  
+When position reaches 2 (third cycle), we check if the count is exactly 2, and set z in the next cycle.  
+
+We’ll use these states:  
+- A: waiting for s = 1  
+- B0: in state B, at window position 0 (first cycle of a new window)  
+- B1: in state B, at window position 1  
+- B2: in state B, at window position 2  
+
+Alternatively, we can embed position into a state variable, but here we’ll encode states explicitly for clarity.  
+
+We also need to store the count of 1’s in the current window (2 bits).  
+When in B2, we check w for the third time, update count, then in the next cycle (which will be B0 of the next window) we set z if the previous window’s count was 2.  
+
+So we need to remember the count from the previous window to output z at the right time.  
+
+Let’s implement:  
+
+```verilog
+  reg [1:0] state, next_state;
+  reg [1:0] count, next_count;
+  reg [1:0] prev_count_for_z;
+  reg z_next;
+  
+  localparam A  = 2'b00;
+  localparam B0 = 2'b01;
+  localparam B1 = 2'b10;
+  localparam B2 = 2'b11;
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= A;
+      count <= 2'b00;
+      prev_count_for_z <= 2'b00;
+      z <= 1'b0;
+    end else begin
+      state <= next_state;
+      count <= next_count;
+      // Store count at the end of a window to use for z next cycle
+      if (state == B2) begin
+        prev_count_for_z <= next_count;
+      end
+      z <= z_next;
+    end
+  end
+  
+  always @(*) begin
+    next_state = state;
+    next_count = count;
+    z_next = 1'b0;
+    
+    case (state)
+      A: begin
+        if (s) begin
+          next_state = B0;
+          next_count = (w) ? 2'b01 : 2'b00;
+        end
+      end
+      B0: begin
+        next_state = B1;
+        next_count = (w) ? count + 2'b01 : count;
+      end
+      B1: begin
+        next_state = B2;
+        next_count = (w) ? count + 2'b01 : count;
+      end
+      B2: begin
+        next_state = B0;
+        next_count = (w) ? 2'b01 : 2'b00; // reset count for new window, starting with this w
+        // z for previous window is set now (one cycle after window ends)
+        z_next = (prev_count_for_z == 2'b10);
+      end
+      default: next_state = A;
+    endcase
+  end
+endmodule
+```

@@ -1,0 +1,40 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+  logic q_reg;
+
+  always_ff @(posedge clk, posedge ar) begin
+    if (ar) begin
+      q_reg <= 1'b0;
+    end else begin
+      q_reg <= d;
+    end
+  end
+
+  assign q = q_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`logic q_reg;`**:  Declares an internal register `q_reg` to hold the state of the flip-flop.  Using `logic` is preferred over `reg` in SystemVerilog.
+* **`always_ff @(posedge clk, posedge ar)`**: This is a sequential block that describes the behavior of the flip-flop.  `always_ff` is a SystemVerilog construct specifically for sequential logic (flip-flops and latches).  The sensitivity list `(posedge clk, posedge ar)` specifies that the block is triggered on the positive edge of the clock signal (`clk`) *or* the positive edge of the asynchronous reset signal (`ar`).
+* **`if (ar) begin ... end`**: This is the asynchronous reset logic.  If the reset signal `ar` is high (positive edge), the flip-flop's output `q_reg` is forced to 0, regardless of the clock signal.
+* **`else begin ... end`**: If the reset signal is not active, the flip-flop's output `q_reg` takes on the value of the data input `d` on the positive edge of the clock.
+* **`assign q = q_reg;`**: This assigns the value of the internal register `q_reg` to the output signal `q`.  This makes the output `q` reflect the current state of the flip-flop.
+
+**Key Features and Considerations:**
+
+* **Asynchronous Reset:** The `ar` signal is asynchronous, meaning it can affect the flip-flop's output at any time, independent of the clock signal.
+* **Positive Edge Triggered:** The flip-flop captures the value of the data input `d` on the positive edge of the clock signal.
+* **SystemVerilog `logic`:** Using `logic` instead of `reg` is generally preferred in SystemVerilog for clarity and to avoid potential warnings.
+* **`always_ff`**:  Using `always_ff` explicitly indicates that this block describes sequential logic, which helps with synthesis and verification.
+* **Reset Priority:**  The asynchronous reset takes precedence over the clock.  If `ar` is high when the clock edge occurs, the flip-flop will be reset.
+
+This implementation provides a clear and concise description of a D flip-flop with an asynchronous reset, suitable for synthesis and simulation.

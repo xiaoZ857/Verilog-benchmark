@@ -1,0 +1,42 @@
+ Here's the Verilog code for the 4-bit binary counter as per your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 4'b0000; // Reset the counter to 0
+  end else begin
+    if (q < 16'b1111) begin
+      q <= q + 1; // Increment the counter
+    end
+  end
+end
+
+// Alternatively, you can use a loop for counting up to 15:
+// always @(posedge clk or posedge reset) begin
+//   if (reset) begin
+//     q <= 4'b0000; // Reset the counter to 0
+//   end else begin
+//     if (q == 4'b0000) begin
+//       q <= 4'b0001; // Increment the first bit
+//     end else begin
+//       for (int i = 3; i >= 0; i--) begin
+//         if (q[i] == 1) begin
+//           q[i] <= 0; // Reset the current bit
+//           q <= q << 1 | 1'b1; // Shift all other bits left and set the next bit to 1
+//           break;
+//         end
+//       end
+//     end
+//   end
+// end
+
+endmodule
+```
+
+The first implementation uses a simple if-else statement for counting up to 15, while the second one utilizes a loop structure. Both versions will work as expected and produce a 4-bit binary counter with a period of 16.

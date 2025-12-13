@@ -1,0 +1,60 @@
+We can determine each mux_in value from the K-map by looking at the column corresponding to each ab combination:
+
+- For ab = 00 (column 00):  
+  cd = 00 → 0  
+  cd = 01 → 1  
+  cd = 11 → 1  
+  cd = 10 → 1  
+  So mux_in[0] = c + d
+
+- For ab = 01 (column 01):  
+  cd = 00 → 0  
+  cd = 01 → 0  
+  cd = 11 → 0  
+  cd = 10 → 0  
+  So mux_in[1] = 0
+
+- For ab = 11 (column 11):  
+  cd = 00 → 0  
+  cd = 01 → 0  
+  cd = 11 → 1  
+  cd = 10 → 0  
+  So mux_in[3] = c d
+
+- For ab = 10 (column 10):  
+  cd = 00 → 1  
+  cd = 01 → 0  
+  cd = 11 → 1  
+  cd = 10 → 1  
+  So mux_in[2] = d' + c
+
+We can implement these using only 2-to-1 multiplexers:
+
+- mux_in[0] = c + d → Use mux: sel = c, in0 = d, in1 = 1  
+- mux_in[1] = 0  
+- mux_in[3] = c d → Use mux: sel = c, in0 = 0, in1 = d  
+- mux_in[2] = d' + c → Use mux: sel = c, in0 = ~d, in1 = 1  
+
+Here’s the Verilog implementation:
+
+```verilog
+wire mux0_in0, mux0_in1;
+wire mux2_in0, mux2_in1;
+wire mux3_in0, mux3_in1;
+
+assign mux0_in0 = d;
+assign mux0_in1 = 1'b1;
+assign mux_in[0] = c ? mux0_in1 : mux0_in0;
+
+assign mux_in[1] = 1'b0;
+
+assign mux2_in0 = ~d;
+assign mux2_in1 = 1'b1;
+assign mux_in[2] = c ? mux2_in1 : mux2_in0;
+
+assign mux3_in0 = 1'b0;
+assign mux3_in1 = d;
+assign mux_in[3] = c ? mux3_in1 : mux3_in0;
+```
+
+endmodule

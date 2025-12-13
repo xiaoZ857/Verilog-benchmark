@@ -1,0 +1,7 @@
+always @(negedge clk) begin
+    if (reset) begin
+        q <= 8'h34;
+    end else begin
+        q <= d;
+    end
+end

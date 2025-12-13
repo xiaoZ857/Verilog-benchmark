@@ -1,0 +1,13 @@
+
+module TopModule (
+  input wire a,
+  input wire b,
+  output wire out
+);
+
+  // Implementing the XNOR gate using logical operators
+  assign out = ~(a ^ b); // XNOR is equivalent to NOT XOR
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

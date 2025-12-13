@@ -1,0 +1,16 @@
+Here's how you can implement the described circuit using Verilog:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// Create an AND gate with a bubble on the in2 input
+assign out = (in1 & ~in2);
+
+endmodule
+```
+
+In this code, `~` is used to create a NOT gate for the `in2` signal. The `&` operator performs an AND operation between `in1` and the inverted version of `in2`. This effectively creates a circuit where the output is true only when both inputs are true, regardless of the state of `in2`.

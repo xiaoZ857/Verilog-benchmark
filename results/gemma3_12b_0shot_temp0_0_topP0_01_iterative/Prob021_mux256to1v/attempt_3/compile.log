@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: A reference to a wire or reg (`index') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12:      : This lsb expression violates the rule: index
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: A reference to a wire or reg (`index') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12:      : This msb expression violates the rule: (index)+('sd3)
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: A reference to a wire or reg (`index') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12:      : This lsb expression violates the rule: index
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: A reference to a wire or reg (`index') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12:      : This msb expression violates the rule: (index)+('sd3)
+8 error(s) during elaboration.

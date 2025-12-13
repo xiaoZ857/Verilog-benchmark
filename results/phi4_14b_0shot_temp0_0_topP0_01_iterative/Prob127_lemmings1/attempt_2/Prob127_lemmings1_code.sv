@@ -1,0 +1,62 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+// Internal state register
+state_t current_state;
+
+// Synchronous reset and state transition logic
+always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+        current_state <= WALK_LEFT;
+    end else begin
+        case (current_state)
+            WALK_LEFT: 
+                if (bump_left || bump_right) 
+                    current_state <= WALK_RIGHT;
+                else 
+                    current_state <= WALK_LEFT;
+
+            WALK_RIGHT: 
+                if (bump_left || bump_right) 
+                    current_state <= WALK_LEFT;
+                else 
+                    current_state <= WALK_RIGHT;
+
+            default: 
+                current_state <= WALK_LEFT; // Default case to handle unexpected states
+        endcase
+    end
+end
+
+// Output logic based on current state (Moore machine)
+always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+        walk_left <= 1'b1;
+        walk_right <= 1'b0;
+    end else begin
+        case (current_state)
+            WALK_LEFT: begin
+                walk_left <= 1'b1;
+                walk_right <= 1'b0;
+            end
+
+            WALK_RIGHT: begin
+                walk_left <= 1'b0;
+                walk_right <= 1'b1;
+            end
+
+            default: begin
+                walk_left <= 1'b1; // Default case to handle unexpected states
+                walk_right <= 1'b0;
+            end
+        endcase
+    end
+end
+
+endmodule

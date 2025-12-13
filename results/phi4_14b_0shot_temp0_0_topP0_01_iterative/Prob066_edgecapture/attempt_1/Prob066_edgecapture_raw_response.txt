@@ -1,0 +1,65 @@
+To implement the described Verilog module, we need to create a mechanism that detects when each bit of a 32-bit vector changes from `1` to `0` between consecutive clock cycles. Once detected, this change should be captured and held until an active high synchronous reset is applied.
+
+Here's how you can implement the `TopModule`:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input [31:0] in,
+    output reg [31:0] out
+);
+
+    // Internal register to hold the previous state of 'in'
+    reg [31:0] prev_in;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Synchronous reset: clear the output and previous input state
+            out <= 32'b0;
+            prev_in <= 32'b0;
+        end else begin
+            // Capture changes from '1' to '0'
+            for (int i = 0; i < 32; i++) begin
+                if (prev_in[i] == 1 && in[i] == 0) begin
+                    out[i] <= 1'b1;
+                end else if (reset) begin
+                    // Ensure output is cleared on reset
+                    out[i] <= 1'b0;
+                end else begin
+                    // Retain the current state of 'out' unless changed
+                    out[i] <= out[i];
+                end
+            end
+
+            // Update previous input state for next cycle
+            prev_in <= in;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers**:
+   - `prev_in`: This register holds the value of `in` from the previous clock cycle to detect changes.
+
+2. **Always Block**:
+   - The block is triggered on the positive edge of `clk` or when `reset` is high.
+   
+3. **Reset Logic**:
+   - When `reset` is asserted, both `out` and `prev_in` are cleared to zero synchronously with the clock.
+
+4. **Change Detection**:
+   - For each bit in the 32-bit vector, check if it was `1` in the previous cycle (`prev_in[i] == 1`) and has changed to `0` in the current cycle (`in[i] == 0`).
+   - If such a change is detected, set the corresponding bit in `out` to `1`.
+
+5. **Output Retention**:
+   - Once a bit in `out` is set to `1`, it remains `1` until reset.
+   - The `else if (reset)` condition ensures that during reset, all bits of `out` are cleared.
+
+6. **State Update**:
+   - After processing each cycle, update `prev_in` with the current value of `in` for use in the next clock cycle.
+
+This implementation captures and holds changes from `1` to `0` as specified, using a synchronous reset mechanism.

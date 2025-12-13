@@ -1,0 +1,13 @@
+always @(posedge clk) begin
+  reg [29:0] concatenated_input; // 30 bits to store the concatenated input vectors
+
+  concatenated_input <= {a, b, c, d, e, f}; // Concatenate the input vectors
+  concatenated_input[28:27] <= 2'b11; // Add two 1 bits at the LSB positions
+
+  assign w = concatenated_input[27:0]; // Assign output vector w
+  assign x = concatenated_input[29:27]; // Assign output vector x
+  assign y = concatenated_input[30:28]; // Assign output vector y
+  assign z = concatenated_input[31:30]; // Assign output vector z
+end
+
+endmodule

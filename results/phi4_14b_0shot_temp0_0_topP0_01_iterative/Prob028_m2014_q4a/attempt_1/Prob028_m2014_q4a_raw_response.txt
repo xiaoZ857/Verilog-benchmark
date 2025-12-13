@@ -1,0 +1,24 @@
+To implement a D latch in Verilog, you can use an `always` block with a sensitivity list that includes the enable signal (`ena`) and the clock. The D latch should capture the value of `d` when `ena` is high (assuming active-high enable). Here's how you can implement it:
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always_ff @(posedge ena) begin
+    if (ena) begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+- **`always_ff`**: This block type is used for flip-flop-like behavior, which is suitable for latches and registers.
+- **Sensitivity List `@(posedge ena)`**: The latch captures the value of `d` on the rising edge of `ena`. This means that whenever `ena` transitions from low to high, the value of `d` is transferred to `q`.
+- **Non-blocking Assignment (`<=`)**: Used for sequential logic to ensure correct simulation and synthesis behavior.
+
+This implementation assumes an active-high enable signal. If you need a different behavior (e.g., active-low), adjust the sensitivity list or conditions accordingly.

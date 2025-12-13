@@ -1,0 +1,60 @@
+// Truth table for outputs:
+// a b c d | out
+// 0 0 0 0 | 0
+// 0 0 0 1 | 0
+// 0 0 1 0 | 0 (don't care? No, 2 is 0010 -> out=1, so this is 2? Wait, 2 is 0010, so out=1 for 2. Let's list carefully.)
+// Actually, numbers: 
+// 0:0000 out=0
+// 1:0001 out=0
+// 2:0010 out=1
+// 3:0011 never occur
+// 4:0100 out=0
+// 5:0101 out=0
+// 6:0110 out=0
+// 7:0111 out=1
+// 8:1000 never occur
+// 9:1001 out=0
+// 10:1010 out=0
+// 11:1011 never occur
+// 12:1100 never occur
+// 13:1101 out=0
+// 14:1110 out=0
+// 15:1111 out=1
+
+// So minterms where out=1: 2 (0010), 7 (0111), 15 (1111)
+// Minterms where out=0: 0,1,4,5,6,9,10,13,14
+// Don't cares: 3,8,11,12
+
+// K-map for SOP (minimize for 1s with don't cares):
+// ab\cd 00 01 11 10
+//   00   0  0  x  1  (2)
+//   01   0  0  1  0  (7 at 0111)
+//   11   0  0  1  x  (15 at 1111, 14 is 0)
+//   10   x  0  x  0
+
+// Group 1s:
+// - 2 (0010) and don't care 3 (0011) -> a'·b'·c·d' + a'·b'·c·d = a'·b'·c
+// - 7 (0111) and 15 (1111) -> a·b·c·d + a'·b·c·d = b·c·d
+// So out_sop = a'·b'·c + b·c·d
+
+// K-map for POS (minimize for 0s with don't cares):
+// Zeros at: 0,1,4,5,6,9,10,13,14
+// ab\cd 00 01 11 10
+//   00   0  0  x  1
+//   01   0  0  1  0
+//   11   0  0  1  x
+//   10   x  0  x  0
+
+// Group zeros (largest groups possible, using don't cares as 0 if helpful):
+// Group covering zeros at ab=00, cd=00 and 01: (a + b + c)  [since a=0,b=0,c=0 for both, d varies]
+// Group covering zeros at ab=01, cd=00 and 01: (a + b' + c)  [a=0,b=1,c=0]
+// Group covering zero at ab=01, cd=10: (a + b' + c' + d')? But better to combine with above? Actually, zero at 0110 (6) is separate.
+// Alternatively, group zeros at cd=00 for ab=00,01,11,10 (with don't cares as 0): (c + d)
+// Group zeros at cd=01 for ab=00,01,11,10: (c + d')
+// Group zeros at ab=10, cd=01 (9:1001) and ab=11, cd=01 (13:1101): (a' + b' + c + d')? Not minimal.
+
+// Let's derive POS from complement of SOP:
+// out_sop = a'·b'·c + b·c·d
+// Complement: out_sop' = (a'·b'·c + b·c·d)' = (a'·b'·c)' · (b·c·d)' = (a + b + c') · (b' + c' + d')
+// Then out_pos = (out_sop')'? That would give back SOP. Actually, POS is the product of sums expression for out, not the complement.
+// We can get POS by factoring out_sop'? Wait,

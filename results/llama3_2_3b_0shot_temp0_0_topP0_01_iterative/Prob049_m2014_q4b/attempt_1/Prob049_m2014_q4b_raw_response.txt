@@ -1,0 +1,37 @@
+Here's the implementation of the Verilog module for a positive edge-triggered D flip-flop with an asynchronous reset:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+// Define the internal state variable
+logic [1:0] state;
+
+// Initialize the state to 0 (default value)
+assign state = 0;
+
+// Positive edge-triggered D flip-flop with asynchronous reset
+always @(posedge clk) begin
+    if (ar) begin // Asynchronous reset
+        state <= 0;
+    else if (d) begin // Set input
+        state <= d;
+    end
+end
+
+// Output the current state
+assign q = state;
+
+endmodule
+```
+
+In this implementation, we use a single-bit state variable `state` to represent the internal state of the D flip-flop. The `always` block is triggered by the positive edge of the clock signal `clk`. Inside the block, we check for two conditions:
+
+1.  Asynchronous reset: If the asynchronous reset input `ar` is high, we set the state to 0.
+2.  Set input: If the set input `d` is high and the asynchronous reset is low, we set the state to the value of `d`.
+
+Finally, we assign the current state to the output signal `q`.

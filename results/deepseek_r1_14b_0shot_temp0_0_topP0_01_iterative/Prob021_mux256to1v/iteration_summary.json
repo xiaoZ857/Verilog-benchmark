@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob021_mux256to1v",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob021_mux256to1v_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob021_mux256to1v_ref.sv:12: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 1\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_2\\Prob021_mux256to1v_code.sv:17: error: out is not a valid l-value in tb.top_module1.$unm_blk_1.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_2\\Prob021_mux256to1v_code.sv:8:      : out is declared here as wire.\n1 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 8\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11:      : This lsb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd4)\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11:      : This msb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd1)\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11:      : This lsb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd4)\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob021_mux256to1v\\attempt_3\\Prob021_mux256to1v_code.sv:11:      : This msb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd1)\n8 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

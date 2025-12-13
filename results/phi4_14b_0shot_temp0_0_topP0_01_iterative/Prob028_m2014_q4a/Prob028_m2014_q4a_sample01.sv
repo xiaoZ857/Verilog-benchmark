@@ -1,0 +1,16 @@
+
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+always_comb begin
+  if (ena) begin
+    q = d;
+  end else begin
+    // Hold the current value of q when ena is low
+    q = q;
+  end
+end
+
+endmodule

@@ -1,0 +1,23 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:10: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:11: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:12: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:13: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:14: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:15: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:16: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:17: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:4:      : out is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob009_popcount3_test.sv:84: warning: Instantiating module TopModule with dangling input port 3 (clk) floating.
+8 error(s) during elaboration.

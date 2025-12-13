@@ -1,0 +1,52 @@
+**Solution Overview**
+
+The FSM has only two functional parts:
+
+| Part | What it does |
+|------|--------------|
+| **State A** | Waits for `s = 1`. While `s = 0` it stays in A. |
+| **States B0‑B2** | Count the next three clock cycles of `w`.  
+  After the third cycle it sets `z = 1` if exactly two of the three `w` values were `1`, otherwise `z = 0`.  
+  Then it starts the next 3‑cycle window again. |
+
+Only the `w` input is relevant once we leave state A, so we can encode the 3‑cycle counter in the state itself.  
+We need a 2‑bit register to keep the number of `1`’s seen in the current window.
+
+Thus the minimal state set is:
+
+```
+A   – reset / waiting for s
+B0  – first cycle of the 3‑cycle window
+B1  – second cycle
+B2  – third cycle (output decision made here)
+```
+
+**Verilog implementation**
+
+```verilog
+module TopModule (
+    input  wire clk,
+    input  wire reset,   // active‑high synchronous reset
+    input  wire s,
+    input  wire w,
+    output reg  z
+);
+
+    // State encoding
+    localparam A  = 2'b00,
+              B0 = 2'b01,
+              B1 = 2'b10,
+              B2 = 2'b11;
+
+    reg [1:0] state, next_state;
+    reg [1:0] ones_cnt;          // counts number of 1's in current 3‑cycle window
+
+    // Sequential logic – state transition and counter update
+    always @(posedge clk) begin
+        if (reset) begin
+            state    <= A;
+            ones_cnt <= 2'b00;
+            z        <= 1'b0;
+        end else begin
+            state    <= next_state;
+            ones_cnt <= (state == B2) ? 2'b

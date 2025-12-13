@@ -1,0 +1,61 @@
+
+//  TopModule implements a 2‑state Moore machine
+//  States :  A (output 0)  <->  B (output 1)
+//  Transitions :
+//      B (1) --0--> A
+//      B (1) --1--> B
+//      A (0) --0--> B
+//      A (0) --1--> A
+//
+//  Asynchronous reset (areset) forces the machine into state B.
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire clk,     // clock
+    input  wire in,      // input to the FSM
+    input  wire areset,  // asynchronous reset
+    output wire out      // Moore output (state dependent)
+);
+
+    // State encoding
+    localparam STATE_A = 1'b0;   // output 0
+    localparam STATE_B = 1'b1;   // output 1
+
+    // Current state register
+    reg state;
+
+    // Next state logic (combinational)
+    reg next_state;
+    always @(*) begin
+        case (state)
+            STATE_A: begin
+                if (in == 1'b0)
+                    next_state = STATE_B;   // A --0--> B
+                else
+                    next_state = STATE_A;   // A --1--> A
+            end
+            STATE_B: begin
+                if (in == 1'b0)
+                    next_state = STATE_A;   // B --0--> A
+                else
+                    next_state = STATE_B;   // B --1--> B
+            end
+            default: next_state = STATE_B; // safety
+        endcase
+    end
+
+    // State register with asynchronous reset
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= STATE_B;          // reset to state B
+        else
+            state <= next_state;       // normal state transition
+    end
+
+    // Moore output: directly tied to the current state
+    assign out = state;   // out = 1 when in state B, 0 when in state A
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

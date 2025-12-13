@@ -1,0 +1,12 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+**Verilog implementation**
+
+// 8
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

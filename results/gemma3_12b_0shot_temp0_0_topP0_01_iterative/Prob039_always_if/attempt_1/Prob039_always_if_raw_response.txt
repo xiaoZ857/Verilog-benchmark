@@ -1,0 +1,40 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+  // Implementation using assign statements
+  assign out_assign = (sel_b1 & sel_b2) ? b : a;
+
+  // Implementation using a procedural if statement
+  always @(*) begin
+    if (sel_b1 & sel_b2) begin
+      out_always = b;
+    end else begin
+      out_always = a;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule(...)`**:  Defines the module named `TopModule` with the specified input and output ports.
+* **`assign out_assign = (sel_b1 & sel_b2) ? b : a;`**: This line implements the 2-to-1 multiplexer using an `assign` statement.  The ternary operator `? :` is used for concise conditional assignment.  It reads as: "If `sel_b1 & sel_b2` is true, then `out_assign` is assigned the value of `b`; otherwise, `out_assign` is assigned the value of `a`."  `assign` statements are used for continuous assignment, meaning the output is updated whenever any of the inputs change.
+* **`always @(*) begin ... end`**: This block defines a procedural block that executes whenever any of the inputs to the block change.  The `@(*)` sensitivity list ensures that the block is triggered whenever any of the inputs `a`, `b`, `sel_b1`, `sel_b2` change.
+* **`if (sel_b1 & sel_b2) begin ... end else begin ... end`**: This is a standard `if-else` statement.  It checks if `sel_b1` AND `sel_b2` are both true.  If they are, `out_always` is assigned the value of `b`.  Otherwise, `out_always` is assigned the value of `a`.  `out_always` is declared as a `reg` because it's assigned a value within an `always` block.
+
+**How it works (2-to-1 MUX):**
+
+The 2-to-1 multiplexer (MUX) selects one of two input signals (`a` or `b`) and passes it to the output based on the value of the select signal (`sel_b1` and `sel_b2`).
+
+* **If `sel_b1` and `sel_b2` are both true (1):** The MUX selects input `b` and passes it to the output.
+* **If either `sel_b1` or `sel_b2` is false (0):** The MUX selects input `a` and passes it to the output.
+
+Both implementations achieve the same functionality, but they use different Verilog constructs.  The `assign` statement is generally preferred for simple combinational logic because it's more concise and often results in more efficient hardware.  The `always` block with an `if` statement is more flexible and can be used for more complex logic or sequential circuits.

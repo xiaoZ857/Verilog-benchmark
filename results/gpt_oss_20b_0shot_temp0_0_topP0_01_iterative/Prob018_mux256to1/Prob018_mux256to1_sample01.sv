@@ -1,0 +1,15 @@
+
+// 1‑bit wide, 256‑to‑1 multiplexer
+//  in  : 256‑bit input vector (in[255] … in[0])
+//  sel : 8‑bit select (0‑255)
+//  out : 1‑bit output
+module TopModule (
+    input  [255:0] in,
+    input  [7:0]   sel,
+    output         out
+);
+    // Variable part‑select – synthesizable and very compact
+    assign out = in[sel];
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

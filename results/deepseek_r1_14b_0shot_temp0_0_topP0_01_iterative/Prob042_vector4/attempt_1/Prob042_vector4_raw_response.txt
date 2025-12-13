@@ -1,0 +1,25 @@
+To implement a Verilog module that sign-extends an 8-bit number to 32 bits, we can follow these steps:
+
+1. **Understand Sign Extension**: The goal is to replicate the most significant bit (sign bit) of the input to fill the higher-order bits in the output.
+
+2. **Replicate the Sign Bit**: Use Verilog's replication operator to create a 24-bit wide signal consisting solely of the sign bit from the input.
+
+3. **Concatenate with Input**: Combine the replicated sign bits with the original 8-bit input to form a 32-bit output.
+
+Here is the Verilog code implementing this functionality:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [31:0] out
+);
+  
+  // Assign the output by concatenating 24 copies of the sign bit (in[7]) followed by the input.
+  assign out = { {24{in[7]}}, in };
+endmodule
+```
+
+**Explanation**:
+- The `assign` statement directly computes the output.
+- `{24{in[7]}}` creates a 24-bit wide signal where each bit is the value of `in[7]`.
+- Concatenating this with `in` (the original 8 bits) results in a 32-bit output, effectively sign-extending the input.

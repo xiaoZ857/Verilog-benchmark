@@ -1,0 +1,19 @@
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input areset,
+  output reg [7:0] q
+);
+
+  // Declare an array of D flip-flops
+  reg [7:0] dff_q;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      q <= 8'b00000000; // Asynchronous reset to 0
+    end else begin
+      q <= d; // Assign the input 'd' to the output 'q' on the positive clock edge
+    end
+  end
+
+endmodule

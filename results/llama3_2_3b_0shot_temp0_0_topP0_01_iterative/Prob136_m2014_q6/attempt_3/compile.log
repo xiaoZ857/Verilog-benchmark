@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 17
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name E_0 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name E_0 and A_0 have the same value: 2'd0
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name F_0 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name F_0 and B_0 have the same value: 2'd1
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name A_1 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name A_1 and C_0 have the same value: 2'd2
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name B_1 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name B_1 and D_0 have the same value: 2'd3
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name C_1 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name C_1 and A_0 have the same value: 2'd0
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name D_1 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name D_1 and B_0 have the same value: 2'd1
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name E_1 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name E_1 and A_1 have the same value: 2'd2
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name F_1 has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob136_m2014_q6\attempt_3\Prob136_m2014_q6_code.sv:20: error: Enumeration name F_1 and B_1 have the same value: 2'd3
+17 error(s) during elaboration.

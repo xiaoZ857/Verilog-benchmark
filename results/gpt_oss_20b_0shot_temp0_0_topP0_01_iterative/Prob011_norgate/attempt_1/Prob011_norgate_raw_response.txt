@@ -1,0 +1,32 @@
+Here’s a minimal, clean implementation of a two‑input NOR gate in Verilog.  
+Because a NOR gate is purely combinational, no clock is required – the output reacts immediately to changes on the inputs.
+
+```verilog
+// TopModule.v
+// 2‑input NOR gate
+//   out = NOT (a OR b)
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // NOR output
+);
+
+    // Gate‑level instantiation (most compact)
+    nor (out, a, b);
+
+    // Alternative: continuous assignment
+    // assign out = ~(a | b);
+
+endmodule
+```
+
+**Explanation**
+
+- `nor (out, a, b);` is a built‑in gate primitive that implements the NOR operation directly.
+- The `wire` keyword is optional for ports in Verilog‑2001+, but it makes the intent explicit.
+- The `timescale` directive is included for simulation purposes; it can be omitted if not needed.
+
+This module can be instantiated in any higher‑level design or used in a testbench to verify its behavior.

@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob129_ece241_2013_q8\attempt_3\Prob129_ece241_2013_q8_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob129_ece241_2013_q8\attempt_3\Prob129_ece241_2013_q8_code.sv:12: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob129_ece241_2013_q8\attempt_3\Prob129_ece241_2013_q8_code.sv:19: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob129_ece241_2013_q8\attempt_3\Prob129_ece241_2013_q8_code.sv:19: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob129_ece241_2013_q8\attempt_3\Prob129_ece241_2013_q8_code.sv:16: warning: always_comb process has no sensitivities.
+3 error(s) during elaboration.

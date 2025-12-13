@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input clk,
+  input w,
+  input R,
+  input E,
+  input L,
+  output reg Q
+);
+
+  // The flip-flop will store the current value of the stage.
+  // It's clocked by clk and enabled by E.
+  always @(posedge clk) begin
+    if (E) begin
+      Q <= w; // Shift in the input w when E is high
+    end else if (L) begin
+      Q <= R; // Load the value R when L is high
+    end else begin
+      // Hold the current value
+      // Q <= Q; // This is redundant, but explicitly shows the hold condition
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule(...)`**: Defines the module named `TopModule` with the specified input and output ports.
+* **`input clk, w, R, E, L;`**: Declares the input signals:
+    * `clk`: Clock signal.
+    * `w`: Input data to be shifted in.
+    * `R`: Value to load into the flip-flop.
+    * `E`: Enable signal for shifting.
+    * `L`: Load signal.
+* **`output reg Q;`**: Declares the output signal `Q` as a registered output.  `reg` is necessary because `Q` is assigned within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This is a sequential block that executes on the positive edge of the clock signal.
+* **`if (E) begin Q <= w; end`**: If the enable signal `E` is high, the input `w` is loaded into the flip-flop `Q`. This implements the shift operation.
+* **`else if (L) begin Q <= R; end`**: If the load signal `L` is high, the value `R` is loaded into the flip-flop `Q`. This implements the load operation.
+* **`else begin ... end`**: If neither `E` nor `L` is high, the flip-flop holds its current value.  The `Q <= Q;` statement is technically redundant because the flip-flop would hold its value anyway, but it's included for clarity to explicitly show the hold condition.
+
+**How it works:**
+
+This module implements a single stage of an n-bit shift register.  The flip-flop `Q` stores the current value of the stage.  The `always` block determines how the flip-flop's value is updated based on the input signals:
+
+* **Shifting (E=1):** When `E` is high, the input `w` is shifted into the flip-flop.
+* **Loading (L=1):** When `L` is high, the value `R` is loaded into the flip-flop.
+* **Holding (E=0 and L=0):** When both `E` and `L` are low, the flip-flop retains its current value.
+
+This module would be instantiated `n` times to create the complete n-bit shift register.  The output `Q` of one instance would be connected to the input `w` of the next instance to implement the shifting action.

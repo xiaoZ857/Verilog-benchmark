@@ -1,0 +1,28 @@
+Here’s a minimal, synthesizable Verilog implementation that follows the description:
+
+```verilog
+// TopModule.v
+// Two inputs (in1, in2) feed an AND gate.
+// The in2 line is inverted (bubble) before the AND.
+// The result is driven to the output `out`.
+//
+// The design is purely combinational – no clock is required.
+
+module TopModule (
+    input  logic in1,   // First input
+    input  logic in2,   // Second input (will be inverted)
+    output logic out    // Result of in1 AND (NOT in2)
+);
+
+    // Combinational logic: out = in1 & ~in2
+    assign out = in1 & ~in2;
+
+endmodule
+```
+
+### Explanation
+
+* **`logic`** is used for all ports to keep the code SystemVerilog‑style and avoid implicit `wire`/`reg` confusion.
+* The **bubble** on `in2` is represented by the logical NOT operator `~`.
+* The `assign` statement implements a continuous assignment, making the module purely combinational.
+* No clock or edge‑triggered logic is needed because the specification only mentions a simple AND gate with an inverted input.

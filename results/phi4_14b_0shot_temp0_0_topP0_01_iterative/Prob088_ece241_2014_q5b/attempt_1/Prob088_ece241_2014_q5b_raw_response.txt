@@ -1,0 +1,79 @@
+To implement the given Mealy machine using one-hot encoding in Verilog, we need to define states and transitions based on the provided state diagram. The machine has two states: A and B. We'll use one-hot encoding for these states, meaning each state will be represented by a single bit set to 1.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire x,
+    output reg z
+);
+
+    // State encoding using one-hot representation
+    parameter A = 1'b0; // State A
+    parameter B = 1'b1; // State B
+
+    reg [1:0] state, next_state;
+
+    // Asynchronous reset and synchronous state transition
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            state <= A;
+        end else begin
+            state <= next_state;
+        end
+    end
+
+    // Next state logic
+    always @(*) begin
+        case (state)
+            A: begin
+                if (x == 1'b0) begin
+                    next_state = A;
+                end else begin
+                    next_state = B;
+                end
+            end
+            B: begin
+                next_state = B; // Always stay in state B regardless of x
+            end
+            default: begin
+                next_state = A; // Default to state A on undefined states
+            end
+        endcase
+    end
+
+    // Output logic based on current state and input
+    always @(*) begin
+        case (state)
+            A: begin
+                z = x ? 1'b1 : 1'b0;
+            end
+            B: begin
+                z = ~x; // Invert the input x
+            end
+            default: begin
+                z = 1'b0; // Default output
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We use a single bit for one-hot encoding. `A` is represented by `1'b0`, and `B` is represented by `1'b1`.
+
+- **Asynchronous Reset**: The state register is reset to `A` when `areset` is high, regardless of the clock.
+
+- **State Transition Logic**: 
+  - In state `A`, if `x` is `0`, it stays in `A`; if `x` is `1`, it transitions to `B`.
+  - In state `B`, it always remains in `B`.
+
+- **Output Logic**:
+  - In state `A`, the output `z` follows the input `x`.
+  - In state `B`, the output `z` is the complement of `x`.
+
+This implementation captures the behavior described by the Mealy machine using one-hot encoding.

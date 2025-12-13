@@ -1,0 +1,49 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      out <= 0;
+    end else begin
+      for (int i = 0; i < 32; i++) begin
+        if (in[i] == 0 && out[i] == 1) begin
+          out[i] <= 1;
+        end else begin
+          out[i] <= 0;
+        end
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**: Defines the module named `TopModule` with the specified input and output ports.
+2. **`input clk, reset, input [31:0] in, output reg [31:0] out`**: Declares the input clock (`clk`), synchronous reset (`reset`), input vector (`in`), and output register (`out`).  `out` is declared as `reg` because it's assigned within an `always` block.
+3. **`always @(posedge clk)`**: This block is triggered on the positive edge of the clock signal.
+4. **`if (reset) begin out <= 0; end`**:  This is the synchronous reset condition. When `reset` is high, the output `out` is reset to all zeros.
+5. **`else begin ... end`**:  This block executes when `reset` is low (inactive).
+6. **`for (int i = 0; i < 32; i++) begin ... end`**: This loop iterates through each bit of the 32-bit input vector `in`.
+7. **`if (in[i] == 0 && out[i] == 1) begin out[i] <= 1; end`**: This is the core logic.  It checks if the current input bit `in[i]` is 0 *and* the corresponding output bit `out[i]` is 1.  If both conditions are true, it means the input bit has transitioned from 1 to 0 in the previous clock cycle.  In this case, the output bit `out[i]` is set to 1, "capturing" the transition.
+8. **`else begin out[i] <= 0; end`**: If the input bit is not 0 or the output bit is not 1, the output bit is set to 0.  This clears the "captured" state.
+
+**How it works:**
+
+The module essentially monitors each bit of the input vector.  It remembers the state of the output bit.  When the input bit changes from 1 to 0, the output bit is set to 1, indicating that the transition has been captured.  The output bit remains 1 until the register is reset.
+
+**Example:**
+
+Let's say `in` is initially `32'b1111...1111` and `out` is `32'b0000...0000`.
+
+* **First Clock Cycle:** `in` is `32'b1111...1111`.  The `if` condition in the loop is never met, so `out` remains `32'b0000...0000`.
+* **Second Clock Cycle:** `in` changes to `32'b0000...0000`.  Now, for each bit `i`, `in[i]` is 0 and `out[i]` was 0 in the previous cycle.  The `if` condition is met, and `out[i]` becomes 1 for each bit.  So `out` becomes `32'b1111...1111`.
+* **Subsequent Clock Cycles:** If `in` remains `32'b0000...0000`, `out` remains `32'b1111...1111`.  If `in` changes to `32'b1111...1111`, the `else` condition is met, and `out` becomes `32'b0000...0000`.
+
+This implementation accurately captures the described behavior.  The synchronous reset ensures that the output is properly initialized.

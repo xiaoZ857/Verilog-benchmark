@@ -1,0 +1,23 @@
+Here is the Verilog module implementation based on your description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+// Assign signals to outputs
+assign w = a;
+assign x = b;
+assign y = b;
+assign z = c;
+
+endmodule
+```
+
+This module takes three inputs (a, b, and c) and assigns the values of these inputs to the corresponding outputs (w, x, y, and z). The `assign` keyword is used in Verilog to create a connection between two signals.

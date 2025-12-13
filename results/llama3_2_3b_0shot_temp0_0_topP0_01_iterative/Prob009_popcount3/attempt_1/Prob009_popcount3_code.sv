@@ -1,0 +1,30 @@
+
+module TopModule (
+  input [2:0] in,
+  output [1:0] out
+);
+// Population Count Circuit for 3-Bit Input Vector
+
+module population_count(
+    // 3-bit input vector
+    input [2:0] in,
+    
+    // Output indicating the number of '1's in the input vector
+    output [1:0] out
+);
+
+    always_comb begin
+        // Initialize output to zero
+        out = 2'b00;
+        
+        // Count the number of '1's in the input vector
+        if (in[2] == 1) 
+            out = out | 2'b01; // Set bit 0
+        if (in[1] == 1 && out[0] != 1) 
+            out = out | 2'b10; // Set bit 1
+        if (in[0] == 1 && out[0] == 1 && out[1] != 1) 
+            out = out | 2'b11; // Set bit 2
+        
+    end
+
+endmodule

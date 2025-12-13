@@ -1,0 +1,26 @@
+To implement the described Verilog module, you need to compare two 2-bit inputs `A` and `B`. The output `z` should be high (1) if `A` is equal to `B`, otherwise it should be low (0). This can be achieved by using a simple equality check in Verilog. Here's how you can implement the module:
+
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output z
+);
+
+  // Assign the output based on the comparison of A and B
+  assign z = (A == B) ? 1'b1 : 1'b0;
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs**: The module has two inputs, `A` and `B`, both are 2-bit wide (`[1:0]`).
+  
+- **Output**: There is a single output `z`.
+
+- **Equality Check**: The core of the logic uses an equality check `(A == B)`. This expression evaluates to true (or 1) if `A` and `B` have the same value, otherwise it evaluates to false (or 0).
+
+- **Assignment**: The result of the comparison is assigned to `z` using a ternary operator. If `A` equals `B`, `z` is set to `1'b1`; otherwise, it's set to `1'b0`.
+
+This implementation efficiently checks for equality between two 2-bit numbers and sets the output accordingly.

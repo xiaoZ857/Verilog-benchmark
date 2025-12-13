@@ -1,0 +1,25 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 19
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:8: error: 'q' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:5:      : It was declared here as a variable.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:15: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:18: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:19: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:19: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:20: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:20: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:21: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:21: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:22: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:28: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob117_circuit9\attempt_3\Prob117_circuit9_code.sv:31: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:18: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:23: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob117_circuit9_test.sv:28: Syntax in assignment statement l-value.

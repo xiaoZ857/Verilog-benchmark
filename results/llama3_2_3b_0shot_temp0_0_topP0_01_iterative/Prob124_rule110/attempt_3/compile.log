@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:9: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:10: warning: Static variable initialization requires explicit lifetime in this context.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:10: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:10: error: malformed statement
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:9: error: Incomprehensible for loop.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:11: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:11: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:11: error: malformed statement
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:14: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:14: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:17: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:17: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:25: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:25: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:27: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:27: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob124_rule110\attempt_3\Prob124_rule110_code.sv:2: assert: pform.cc:1465: failed assertion lexical_scope == cur_module

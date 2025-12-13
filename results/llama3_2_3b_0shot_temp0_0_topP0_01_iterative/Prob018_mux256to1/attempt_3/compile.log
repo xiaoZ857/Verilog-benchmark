@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: A reference to a wire or reg (`idx') is not allowed in a constant expression.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: Part select expressions must be constant.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14:      : This lsb expression violates the rule: (idx)-('sd8)
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: A reference to a wire or reg (`idx') is not allowed in a constant expression.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: Part select expressions must be constant.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14:      : This msb expression violates the rule: (idx)-('sd1)
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: A reference to a wire or reg (`idx') is not allowed in a constant expression.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: Part select expressions must be constant.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14:      : This lsb expression violates the rule: (idx)-('sd8)
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: A reference to a wire or reg (`idx') is not allowed in a constant expression.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14: error: Part select expressions must be constant.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob018_mux256to1\attempt_3\Prob018_mux256to1_code.sv:14:      : This msb expression violates the rule: (idx)-('sd1)
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob018_mux256to1_test.sv:71: warning: Port 3 (out) of TopModule expects 8 bits, got 1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob018_mux256to1_test.sv:71:        : Padding 7 high bits of the port.
+8 error(s) during elaboration.

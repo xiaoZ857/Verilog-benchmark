@@ -1,0 +1,27 @@
+Here’s a clean, synthesizable implementation of the 6‑to‑1 multiplexer.  
+Because the module has no clock input, the logic is purely combinational – the
+`always @(*)` block evaluates whenever any of the inputs change.
+
+```verilog
+// 6‑to‑1 multiplexer, 4‑bit wide data paths
+// If sel is 0‑5, output the corresponding data input; otherwise output 0.
+module TopModule (
+    input  [2:0] sel,
+    input  [3:0] data0,
+    input  [3:0] data1,
+    input  [3:0] data2,
+    input  [3:0] data3,
+    input  [3:0] data4,
+    input  [3:0] data5,
+    output reg [3:0] out
+);
+
+    always @(*) begin
+        case (sel)
+            3'd0: out = data0;
+            3'd1: out = data1;
+            3'd2: out = data2;
+            3'd3: out = data3;
+            3'd4: out = data4;
+            3'd5: out = data5;
+            default: out = 4'b

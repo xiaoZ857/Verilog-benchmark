@@ -1,0 +1,41 @@
+
+$timescale 1ns / 1ps
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+  // State definitions
+  parameter STATE_B = 0;
+  parameter STATE_A = 1;
+
+  reg [1:0] state;  // Using two bits for state to accommodate all transitions
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      state <= STATE_B;
+    end else begin
+      case (state)
+        STATE_B: 
+          if (in == 0) state <= STATE_A;  // B -> A on in=0
+          else         state <= STATE_B;  // B -> B on in=1
+        STATE_A:
+          if (in == 0) state <= STATE_B;  // A -> B on in=0
+          else         state <= STATE_A;  // A -> A on in=1
+      endcase
+    end
+  end
+
+  // Output assignment based on current state
+  always @(state) begin
+    case (state)
+      STATE_B: out = 1;
+      default:  out = 0;
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

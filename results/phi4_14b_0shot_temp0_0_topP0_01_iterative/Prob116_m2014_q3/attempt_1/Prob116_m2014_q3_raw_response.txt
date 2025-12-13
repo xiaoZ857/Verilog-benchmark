@@ -1,0 +1,64 @@
+To implement the function \( f \) based on the given Karnaugh map, we need to identify the minterms and don't-care conditions that will help us simplify the expression for \( f \).
+
+### Karnaugh Map Analysis
+
+The Karnaugh map is as follows:
+
+\[
+\begin{array}{c|cc|cc}
+x[3]x[4] & x[2]x[1] = 00 & 01 & 11 & 10 \\
+\hline
+00 & d & 0 & d & d \\
+01 & 0 & d & 1 & 0 \\
+11 & 1 & 1 & d & d \\
+10 & 1 & 1 & 0 & d \\
+\end{array}
+\]
+
+### Minterms and Don't-Cares
+
+- **Minterms (where \( f = 1 \)):**
+  - \( x[3]x[4]x[2]x[1] = 1101 \) (binary for decimal 13)
+  - \( x[3]x[4]x[2]x[1] = 1110 \) (binary for decimal 14)
+  - \( x[3]x[4]x[2]x[1] = 1111 \) (binary for decimal 15)
+  - \( x[3]x[4]x[2]x[1] = 1010 \) (binary for decimal 10)
+  - \( x[3]x[4]x[2]x[1] = 1011 \) (binary for decimal 11)
+
+- **Don't-Care Conditions:**
+  - \( x[3]x[4]x[2]x[1] = 0000, 0001, 0011, 0100, 0111, 1000, 1100, 1011 \)
+
+### Simplification
+
+Using the minterms and don't-cares, we can group them to simplify the expression:
+
+- Group 1: \( x[3]x[4]x[2]x[1] = 1110, 1111 \) (covers minterms 14, 15)
+  - Simplifies to: \( x_3 \cdot x_2 \)
+
+- Group 2: \( x[3]x[4]x[2]x[1] = 1010, 1011 \) (covers minterms 10, 11)
+  - Simplifies to: \( x_3 \cdot \overline{x_2} \)
+
+- Group 3: \( x[3]x[4]x[2]x[1] = 1110, 1111, 1010, 1011 \) (covers minterms 10, 11, 14, 15)
+  - Simplifies to: \( x_3 \)
+
+### Final Expression
+
+The simplified expression for \( f \) is:
+
+\[ f = x_3 \]
+
+### Verilog Implementation
+
+Here's the Verilog module implementing the function:
+
+```verilog
+module TopModule (
+    input [4:1] x,
+    output logic f
+);
+
+assign f = x[3];
+
+endmodule
+```
+
+This implementation uses the simplified expression \( f = x_3 \) derived from the Karnaugh map.

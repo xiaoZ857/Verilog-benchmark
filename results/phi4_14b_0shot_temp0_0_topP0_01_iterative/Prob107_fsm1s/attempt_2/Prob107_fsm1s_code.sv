@@ -1,0 +1,54 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+  // Declare the current and next state registers
+  state_t current_state, next_state;
+
+  // State transition logic (synchronous)
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      current_state <= STATE_B;  // Synchronous active-high reset to state B
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic (combinational)
+  always_comb begin
+    case (current_state)
+      STATE_B: begin
+        if (in == 0) begin
+          next_state = STATE_A;  // Transition to A on input 0
+        end else begin
+          next_state = STATE_B;  // Remain in B on input 1
+        end
+      end
+
+      STATE_A: begin
+        if (in == 0) begin
+          next_state = STATE_B;  // Transition to B on input 0
+        end else begin
+          next_state = STATE_A;  // Remain in A on input 1
+        end
+      end
+
+      default: begin
+        next_state = STATE_B;  // Default case, go to state B
+      end
+    endcase
+  end
+
+  // Output logic based on current state (Moore machine)
+  always_comb begin
+    case (current_state)
+      STATE_B: out = 1'b1;
+      STATE_A: out = 1'b0;
+      default: out = 1'b1;  // Default output is 1
+    endcase
+  end
+
+endmodule

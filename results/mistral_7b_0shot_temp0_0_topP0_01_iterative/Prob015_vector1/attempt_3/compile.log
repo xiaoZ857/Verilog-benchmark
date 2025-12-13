@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob015_vector1\attempt_3\Prob015_vector1_code.sv:17: error: out_hi is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob015_vector1\attempt_3\Prob015_vector1_code.sv:7:      : out_hi is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob015_vector1\attempt_3\Prob015_vector1_code.sv:18: error: out_lo is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob015_vector1\attempt_3\Prob015_vector1_code.sv:8:      : out_lo is declared here as wire.
+2 error(s) during elaboration.

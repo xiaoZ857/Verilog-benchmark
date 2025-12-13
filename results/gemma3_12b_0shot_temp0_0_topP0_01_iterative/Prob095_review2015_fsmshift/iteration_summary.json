@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob095_review2015_fsmshift",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 2,
+  "total_attempts": 3,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'shift_ena' has 91 mismatches. First mismatch occurred at time 400.\nHint: Total mismatched samples is 91 out of 200 samples\n\nSimulation finished at 1001 ps\nMismatches: 91 in 200 samples\n",
+      "mismatch_count": 91
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'shift_ena' has 91 mismatches. First mismatch occurred at time 400.\nHint: Total mismatched samples is 91 out of 200 samples\n\nSimulation finished at 1001 ps\nMismatches: 91 in 200 samples\n",
+      "mismatch_count": 91
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

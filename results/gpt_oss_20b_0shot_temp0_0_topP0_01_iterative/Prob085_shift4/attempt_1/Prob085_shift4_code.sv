@@ -1,0 +1,39 @@
+
+`timescale 1ns / 1ps
+
+// ---------------------------------------------------------------------------
+// 4‑bit right‑shift register
+//   areset : asynchronous active‑high reset (positive edge)
+//   load   : synchronous load of data[3:0] (higher priority than ena)
+//   ena    : synchronous enable – shift right (q[3] becomes 0, q[0] is discarded)
+//   q      : current contents of the register
+// ---------------------------------------------------------------------------
+module TopModule (
+    input  wire        clk,    // clock
+    input  wire        areset, // asynchronous reset (posedge)
+    input  wire        load,   // synchronous load
+    input  wire        ena,    // synchronous enable (shift)
+    input  wire [3:0]  data,   // data to load
+    output reg  [3:0]  q       // register output
+);
+
+    // Asynchronous reset + synchronous logic
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset – set register to zero
+            q <= 4'b0000;
+        end
+        else if (load) begin
+            // Load has higher priority than enable
+            q <= data;
+        end
+        else if (ena) begin
+            // Shift right: q[3] becomes 0, q[0] is discarded
+            q <= {1'b0, q[3:1]};
+        end
+        // else: retain current value
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

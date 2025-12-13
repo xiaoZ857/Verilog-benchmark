@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:10: error: out_both is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:4:      : out_both is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:11: error: out_any is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:5:      : out_any is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:12: error: out_different is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:6:      : out_different is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:15: error: out_both['sd0] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:4:      : out_both['sd0] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:17: error: out_both[i] is not a valid l-value in tb.top_module1.$ivl_for_loop0.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:4:      : out_both[i] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:21: error: out_any[i] is not a valid l-value in tb.top_module1.$ivl_for_loop1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:5:      : out_any[i] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:25: error: out_different[i] is not a valid l-value in tb.top_module1.$ivl_for_loop2.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:6:      : out_different[i] is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:8: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:8: error: Failed to evaluate event expression 'posedge clk'.
+9 error(s) during elaboration.

@@ -1,0 +1,13 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output reg out
+);
+always_comb begin
+  out = ~(a & b) | (~a & c) | (b & d);
+end
+
+endmodule

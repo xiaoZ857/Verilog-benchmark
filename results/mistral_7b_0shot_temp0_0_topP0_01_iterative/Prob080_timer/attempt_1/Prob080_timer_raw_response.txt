@@ -1,0 +1,32 @@
+ Here's a simple Verilog implementation of the described timer module:
+
+```verilog
+module Timer(
+    input clk,
+    input load,
+    input [9:0] data,
+    output reg tc
+);
+
+reg [9:0] counter; // 10-bit internal counter
+
+always @(posedge clk) begin
+    if (load) begin
+        counter <= data; // Load the counter with the given data when load is high
+    end
+    if (counter == 0 && !load) begin // Check if the counter has reached 0 and load is low
+        tc <= 1'b1; // Assert tc when the counter reaches 0
+    end
+    if (!load) begin // Decrement the counter on every clock cycle when load is low
+        counter <= counter - 1;
+    end
+end
+
+initial begin
+    counter <= 10'b0000000000; // Initialize the counter to 0 by default
+end
+
+endmodule
+```
+
+This Verilog module implements a 10-bit down counter that counts down from the loaded value (when `load` is high) until it reaches 0. When the counter reaches 0 and `load` is low, the `tc` output signal is asserted. The counter stops counting when `load` is high or when it has reached 0. The initial value of the counter is set to 0 by default.

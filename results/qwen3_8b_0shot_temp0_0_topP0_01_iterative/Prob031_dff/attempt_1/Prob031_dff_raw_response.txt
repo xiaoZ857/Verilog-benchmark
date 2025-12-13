@@ -1,0 +1,51 @@
+Here's a well-structured and correct implementation of a **single D flip-flop** in Verilog, based on the provided description and assumptions:
+
+---
+
+### ✅ **Module Description**
+
+- **Inputs:**
+  - `clk`: Clock signal (positive edge-triggered).
+  - `d`: Data input.
+- **Output:**
+  - `q`: Output of the flip-flop (reg type, as it is assigned within an `always` block).
+
+The flip-flop is **synchronous**, meaning it updates its output (`q`) only on the **rising edge** of the clock signal. There are no asynchronous control signals (like reset or clear) included, as they are not specified in the problem.
+
+---
+
+### 📜 **Verilog Code**
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  always @(posedge clk) begin
+    q <= d;
+  end
+
+endmodule
+```
+
+---
+
+### 📌 **Explanation**
+
+- The `always @(posedge clk)` block ensures that the logic inside is executed **only on the rising edge** of the clock signal.
+- The non-blocking assignment `q <= d;` is used to model the behavior of a **flip-flop**, where the output is updated **after** the clock edge.
+- The `output reg q` declaration is necessary because `q` is assigned within an `always` block.
+
+---
+
+### 🧠 **Key Notes**
+
+- This implementation assumes **no asynchronous control signals** (e.g., reset).
+- The flip-flop is **edge-triggered**, as specified.
+- The module is minimal and directly implements a **D-type flip-flop**.
+
+---
+
+This code is suitable for use in a synchronous digital design where the output `q` should reflect the value of `d` at the moment of the rising edge of `clk`.

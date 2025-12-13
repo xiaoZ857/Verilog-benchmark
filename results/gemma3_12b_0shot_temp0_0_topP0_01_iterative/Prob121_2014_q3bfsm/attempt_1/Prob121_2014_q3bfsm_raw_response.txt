@@ -1,0 +1,87 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input x,
+  output reg z
+);
+
+  reg [2:0] y;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      y <= 3'b000;
+      z <= 1'b0;
+    end else begin
+      case (y)
+        3'b000: begin
+          if (x == 0)
+            y <= 3'b000;
+          else
+            y <= 3'b001;
+          z <= 1'b0;
+        end
+        3'b001: begin
+          if (x == 0)
+            y <= 3'b001;
+          else
+            y <= 3'b100;
+          z <= 1'b0;
+        end
+        3'b010: begin
+          if (x == 0)
+            y <= 3'b010;
+          else
+            y <= 3'b001;
+          z <= 1'b0;
+        end
+        3'b011: begin
+          if (x == 0)
+            y <= 3'b001;
+          else
+            y <= 3'b010;
+          z <= 1'b1;
+        end
+        3'b100: begin
+          if (x == 0)
+            y <= 3'b011;
+          else
+            y <= 3'b100;
+          z <= 1'b1;
+        end
+        default: begin
+          y <= 3'b000;
+          z <= 1'b0;
+        end
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, reset, x, z);` declares the module named `TopModule` with inputs `clk`, `reset`, `x` and output `z`.
+
+2. **State Register:**
+   - `reg [2:0] y;` declares a 3-bit register `y` to store the current state of the FSM.
+
+3. **Synchronous Reset:**
+   - `always @(posedge clk) begin ... end` defines a sequential block that executes on the positive edge of the clock signal.
+   - `if (reset) begin ... end` implements the synchronous reset. When `reset` is high, the state `y` is initialized to `3'b000` and output `z` is initialized to `1'b0`.
+
+4. **State Transition Logic:**
+   - `case (y)`:  This statement evaluates the current state `y` and executes the corresponding block of code.
+   - Inside each `case` block:
+     - `if (x == 0) ... else ...`:  This conditional statement determines the next state `y` based on the value of the input `x`.
+     - `y <= ...`:  Assigns the next state to the state register `y`.
+     - `z <= ...`: Assigns the output value `z` based on the current state and input `x`.
+   - `default:`: This handles any unexpected state values, resetting the FSM to a known state (000).
+
+**How it works:**
+
+The code implements the state-assigned table directly.  For each present state `y`, it checks the value of the input `x`.  Based on the table, it determines the next state `y` and the output `z`.  The `always @(posedge clk)` block ensures that the state transitions and output updates happen synchronously with the clock signal.  The `reset` signal forces the FSM to its initial state (000) when asserted.
+
+**To test this module, you would need to create a testbench that provides clock, reset, and input `x` signals and observes the output `z` and state `y`.**

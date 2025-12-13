@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:45: warning: A non-blocking assignment should not be used in an always_comb process.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob133_2014_q3fsm\attempt_4\Prob133_2014_q3fsm_code.sv:47: warning: A non-blocking assignment should not be used in an always_comb process.

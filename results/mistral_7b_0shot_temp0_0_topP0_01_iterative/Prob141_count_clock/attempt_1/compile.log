@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:56: warning: implicit definition of wire 'hh_out'.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:57: warning: implicit definition of wire 'min_out'.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:58: warning: implicit definition of wire 'sec_out'.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:61: warning: implicit definition of wire 'out_hh'.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:62: warning: implicit definition of wire 'out_mm'.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:63: warning: implicit definition of wire 'out_ss'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob141_count_clock_ref.sv:48: syntax error
+I give up.

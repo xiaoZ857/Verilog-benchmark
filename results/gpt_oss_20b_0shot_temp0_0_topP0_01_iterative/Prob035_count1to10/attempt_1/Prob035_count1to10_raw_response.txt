@@ -1,0 +1,48 @@
+Here’s a compact, synthesizable implementation of the requested decade counter.  
+The counter counts **1 → 10** on every rising edge of `clk`.  
+A synchronous, active‑high `reset` forces the counter back to **1**.  
+
+```verilog
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire        clk,    // Positive‑edge clock
+    input  wire        reset,  // Active‑high synchronous reset
+    output reg  [3:0]  q       // 4‑bit counter output
+);
+
+    // ------------------------------------------------------------------
+    // Parameters
+    // ------------------------------------------------------------------
+    localparam MAX_COUNT = 4'd10;   // Highest value before wrap‑around
+
+    // ------------------------------------------------------------------
+    // Sequential logic – synchronous counter
+    // ------------------------------------------------------------------
+    always @(posedge clk) begin
+        if (reset) begin
+            // Reset the counter to 1
+            q <= 4'd1;
+        end
+        else if (q == MAX_COUNT) begin
+            // Wrap‑around: after 10 go back to 1
+            q <= 4'd1;
+        end
+        else begin
+            // Normal increment
+            q <= q + 1'b1;
+        end
+    end
+
+endmodule
+```
+
+### How it works
+
+| Condition | Action |
+|-----------|--------|
+| `reset` is high | `q` is set to `1` |
+| `q` equals `10` | `q` is set to `1` (wrap‑around) |
+| otherwise | `q` increments by 1 |
+
+Because the reset is synchronous, the counter only changes on the clock edge, ensuring predictable timing. The 4‑bit width is sufficient to represent values 1–10 (`4'd10` = `1010`).

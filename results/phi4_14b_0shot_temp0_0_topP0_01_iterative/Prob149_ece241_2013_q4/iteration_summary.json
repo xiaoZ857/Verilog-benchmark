@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob149_ece241_2013_q4",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset doesn't seem to be working.\nHint: Output 'fr3' has 309 mismatches. First mismatch occurred at time 30.\nHint: Output 'fr2' has 569 mismatches. First mismatch occurred at time 130.\nHint: Output 'fr1' has 256 mismatches. First mismatch occurred at time 140.\nHint: Output 'dfr' has 1240 mismatches. First mismatch occurred at time 10.\nHint: Total mismatched samples is 1808 out of 2040 samples\n\nSimulation finished at 10200 ps\nMismatches: 1808 in 2040 samples\n",
+      "mismatch_count": 1808
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 8\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:18: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:20: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:22: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:22: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:54: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:56: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:58: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:60: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:63: error: Could not find variable ``previous_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:51: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:51: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_2\\Prob149_ece241_2013_q4_code.sv:51: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\n8 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset doesn't seem to be working.\nHint: Output 'fr3' has 309 mismatches. First mismatch occurred at time 30.\nHint: Output 'fr2' has 282 mismatches. First mismatch occurred at time 130.\nHint: Output 'fr1' has 256 mismatches. First mismatch occurred at time 140.\nHint: Output 'dfr' has 1240 mismatches. First mismatch occurred at time 10.\nHint: Total mismatched samples is 1667 out of 2040 samples\n\nSimulation finished at 10200 ps\nMismatches: 1667 in 2040 samples\n",
+      "mismatch_count": 1667
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 8\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:17: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:19: error: Could not find variable ``previous_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:20: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:22: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:22: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:56: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:58: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:60: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:62: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:53: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:53: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob149_ece241_2013_q4\\attempt_4\\Prob149_ece241_2013_q4_code.sv:53: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\n8 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

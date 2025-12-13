@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:70: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:71: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:72: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:73: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:74: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:75: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:76: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:6:      : z is declared here as wire.
+7 error(s) during elaboration.

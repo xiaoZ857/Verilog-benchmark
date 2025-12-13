@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:46: error: walk_left is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:7:      : walk_left is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:47: error: walk_right is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:8:      : walk_right is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:51: error: walk_left is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:7:      : walk_left is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:52: error: walk_right is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:8:      : walk_right is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:56: error: walk_left is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:7:      : walk_left is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:57: error: walk_right is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:8:      : walk_right is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:61: error: walk_left is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:7:      : walk_left is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:62: error: walk_right is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob127_lemmings1\attempt_4\Prob127_lemmings1_code.sv:8:      : walk_right is declared here as wire.
+8 error(s) during elaboration.

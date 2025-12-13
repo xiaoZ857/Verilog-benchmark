@@ -1,0 +1,24 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+always @(posedge clk or negedge rst) begin
+  if (rst) begin
+    local_min <= 8'b0; // Reset value for min
+  end
+  else begin
+    local_min <= (a < b) ? (a < c) ? (a < d) ? a : d : (c < d) ? c : d : (b < c) ? b : c;
+    assign min = local_min; // Assign the minimum value to output min
+  end
+end
+
+// Add reset signal (rst) and clock input (clk) here as needed.
+
+// Example of how to add reset and clock:
+// input clk, rst;
+
+// VERILOG-EVAL: endmodule not found

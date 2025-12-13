@@ -1,0 +1,67 @@
+Looking at the waveform, we can see that q is 1 whenever (c OR d) is true, except when (a AND b) are both 0 and d is 1? Let's check the truth table:
+
+From the given times:
+- At 20ns: a=0,b=0,c=0,d=1 → q=0 (exception)
+- At 25ns: a=0,b=0,c=1,d=0 → q=1
+- At 30ns: a=0,b=0,c=1,d=1 → q=1
+- At 35ns: a=0,b=1,c=0,d=0 → q=1
+- At 40ns: a=0,b=1,c=0,d=1 → q=1
+- At 55ns: a=1,b=0,c=0,d=0 → q=0
+- At 60ns: a=1,b=0,c=0,d=1 → q=0
+
+Actually, looking more carefully: q seems to be 1 when (c OR (b AND d)) is true, but let's verify:
+
+Let me create a truth table from the data:
+
+a b c d | q
+0 0 0 0 | 0
+0 0 0 1 | 0  ← exception to c|d
+0 0 1 0 | 1
+0 0 1 1 | 1
+0 1 0 0 | 1
+0 1 0 1 | 1
+0 1 1 0 | 1
+0 1 1 1 | 1
+1 0 0 0 | 0
+1 0 0 1 | 0  ← exception to c|d
+1 0 1 0 | 1
+1 0 1 1 | 1
+1 1 0 0 | 1
+1 1 0 1 | 1
+1 1 1 0 | 1
+1 1 1 1 | 1
+
+The pattern shows q = 1 when:
+1. c = 1 (anytime c is 1, q is 1), OR
+2. b = 1 AND (c OR d) is not needed actually...
+
+Actually simpler: q = c OR (b AND ~a) OR (a AND b)
+But let's check: when a=0,b=0: q = c (since d alone doesn't make q=1)
+When a=0,b=1: q = 1 always
+When a=1,b=0: q = c (since d alone doesn't make q=1)
+When a=1,b=1: q = 1 always
+
+So: q = c OR b
+
+Wait, check: when a=0,b=0,c=0,d=1: q should be 0 according to OR, but q=0 ✓
+When a=1,b=0,c=0,d=1: q should be 0 according to OR, but q=0 ✓
+When a=0,b=0,c=1,d=0: q should be 1 according to OR, but q=1 ✓
+When a=0,b=1,c=0,d=0: q should be 1 according to OR, but q=1 ✓
+
+Yes! q = b OR c
+
+Let's verify all cases:
+- a=0,b=0,c=0: q=0 ✓
+- a=0,b=0,c=1: q=1 ✓
+- a=0,b=1,c=0: q=1 ✓
+- a=0,b=1,c=1: q=1 ✓
+- a=1,b=0,c=0: q=0 ✓
+- a=1,b=0,c=1: q=1 ✓
+- a=1,b=1,c=0: q=1 ✓
+- a=1,b=1,c=1: q=1 ✓
+
+The d input is irrelevant! It doesn't affect the output.
+
+```verilog
+  assign q = b | c;
+```

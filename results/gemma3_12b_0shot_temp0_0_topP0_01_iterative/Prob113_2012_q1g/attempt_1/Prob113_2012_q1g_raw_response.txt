@@ -1,0 +1,62 @@
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    if ((x[1] == 0 && x[2] == 0 && x[3] == 0 && x[4] == 0) ||
+        (x[1] == 1 && x[2] == 1 && x[3] == 1 && x[4] == 1) ||
+        (x[1] == 1 && x[2] == 1 && x[3] == 0 && x[4] == 1) ||
+        (x[1] == 0 && x[2] == 0 && x[3] == 1 && x[4] == 0)) begin
+      f = 1;
+    end else begin
+      f = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [4:1] x, output logic f);`**:  This declares the module named `TopModule` with an input `x` which is a 4-bit vector (x[4:1]) and an output `f` which is a single bit.
+
+2. **`always_comb begin ... end`**: This block defines a combinational logic block.  `always_comb` ensures that the output `f` is updated whenever any of the inputs `x[4:1]` change.
+
+3. **`if ((x[1] == 0 && x[2] == 0 && x[3] == 0 && x[4] == 0) || ...)`**: This `if` statement directly translates the Karnaugh map into a Boolean expression.  It checks for the conditions where `f` should be 1, based on the Karnaugh map:
+   - `(x[1] == 0 && x[2] == 0 && x[3] == 0 && x[4] == 0)`:  x[1]=0, x[2]=0, x[3]=0, x[4]=0
+   - `(x[1] == 1 && x[2] == 1 && x[3] == 1 && x[4] == 1)`:  x[1]=1, x[2]=1, x[3]=1, x[4]=1
+   - `(x[1] == 1 && x[2] == 1 && x[3] == 0 && x[4] == 1)`:  x[1]=1, x[2]=1, x[3]=0, x[4]=1
+   - `(x[1] == 0 && x[2] == 0 && x[3] == 1 && x[4] == 0)`:  x[1]=0, x[2]=0, x[3]=1, x[4]=0
+
+4. **`f = 1;`**: If any of the conditions in the `if` statement are true, then `f` is set to 1.
+
+5. **`else begin f = 0; end`**: If none of the conditions in the `if` statement are true, then `f` is set to 0.
+
+**Alternative (Simplified) Implementation using Boolean Algebra:**
+
+The Karnaugh map can be simplified to the following Boolean expression:
+
+f = x[1]x[2]x[3]x[4] + x[1]x[2]x[3]x[4] + (x[1] & x[2] & ~x[3] & x[4]) + (~x[1] & ~x[2] & x[3] & ~x[4])
+
+This can be further simplified to:
+
+f = (x[1] & x[2] & ~x[3] & x[4]) + (~x[1] & ~x[2] & x[3] & ~x[4])
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    f = (x[1] & x[2] & ~x[3] & x[4]) | (~x[1] & ~x[2] & x[3] & ~x[4]);
+  end
+
+endmodule
+```
+
+This alternative implementation is more concise and efficient because it directly implements the simplified Boolean expression.  It achieves the same functionality as the first implementation.  The `|` operator represents the OR operation.
+
+Both implementations

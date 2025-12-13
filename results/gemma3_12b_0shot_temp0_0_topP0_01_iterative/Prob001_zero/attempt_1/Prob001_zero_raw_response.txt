@@ -1,0 +1,17 @@
+```verilog
+module TopModule (
+  output zero
+);
+
+  assign zero = 0;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (output zero);`**: This line declares the module named `TopModule` and specifies that it has a single output signal named `zero`.
+* **`assign zero = 0;`**: This is a continuous assignment statement.  It continuously assigns the value `0` (LOW) to the `zero` output signal.  Because it's a continuous assignment, the output will always be LOW regardless of any other inputs.
+* **`endmodule`**: This marks the end of the module definition.
+
+This is the simplest possible Verilog module that fulfills the requirement of always outputting a LOW signal.  No input signals or other logic are needed.

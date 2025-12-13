@@ -1,0 +1,47 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  reg q_n; // Internal signal for the previous value of q
+
+  always @(posedge clk) begin
+    q_n <= q;
+  end
+
+  always @(negedge clk) begin
+    q <= d; // Update q on the negative edge
+  end
+
+  always @(posedge clk) begin
+    if (q_n != q) begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg q_n;`**:  This declares a register `q_n` to hold the previous value of `q`.  This is crucial for mimicking the dual-edge behavior.
+
+2. **`always @(posedge clk) begin q_n <= q; end`**: This block captures the current value of `q` and stores it in `q_n` on the positive edge of the clock.  This ensures that we have the previous state available for the negative edge trigger.
+
+3. **`always @(negedge clk) begin q <= d; end`**: This block updates `q` with the value of `d` on the negative edge of the clock.  This is the first part of the dual-edge behavior.
+
+4. **`always @(posedge clk) begin if (q_n != q) begin q <= d; end end`**: This block is the key to ensuring that the flip-flop updates on both edges.  It checks if the current value of `q` is different from the previous value (`q_n`). If they are different, it means that the negative edge trigger has already updated `q`.  If `q` has already been updated, then we update `q` again with the value of `d` on the positive edge.
+
+**How it works functionally:**
+
+* **Positive Edge:** The positive edge of the clock captures the current value of `d` and stores it in `q`.
+* **Negative Edge:** The negative edge of the clock updates `q` with the value of `d`.
+* **Combined Effect:**  The combination of these two blocks effectively makes the flip-flop respond to both the positive and negative edges of the clock, mimicking a dual-edge triggered flip-flop.
+
+**Important Considerations:**
+
+* **Metastability:**  This implementation, like any attempt to emulate a dual-edge triggered flip-flop, is susceptible to metastability issues.  Metastability occurs when the input data (`d`) changes close to the clock edge, potentially causing the output to become unpredictable.  In a real FPGA design, you would need to add metastability mitigation techniques (e.g., synchronizers) if this is a concern.
+* **Timing:**  The timing of this circuit is complex and depends on the delays of the registers and logic gates.  Careful timing analysis is required to ensure that the circuit functions correctly.
+* **FPGA Synthesis:**  FPGA synthesis tools will typically implement this as two separate flip-flops, one triggered on the positive edge and one on the negative edge.  The synthesis tool will optimize the circuit to minimize the area and delay.

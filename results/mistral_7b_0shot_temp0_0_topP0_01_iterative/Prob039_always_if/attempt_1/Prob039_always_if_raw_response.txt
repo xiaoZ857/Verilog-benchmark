@@ -1,0 +1,32 @@
+ Here is the Verilog code for your description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output reg out_assign,
+  output reg out_always
+);
+
+// Mux using assign statements
+always @(posedge clk) begin
+  if (sel_b1 && sel_b2)
+    out_assign = b;
+  else
+    out_assign = a;
+end
+
+// Mux using procedural if statement
+always @(posedge clk) begin
+  if (sel_b1 && sel_b2)
+    out_always <= b;
+  else
+    out_always <= a;
+end
+
+endmodule
+```
+
+In this code, I assumed that there is no clock signal provided (clk), so I used posedge clk as the event control for both always blocks. If you have a different clocking scheme, please replace `posedge clk` with your actual clock signal.

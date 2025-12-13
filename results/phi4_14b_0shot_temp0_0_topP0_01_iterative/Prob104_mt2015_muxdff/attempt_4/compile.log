@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob104_mt2015_muxdff\attempt_4\Prob104_mt2015_muxdff_code.sv:19: error: Could not find variable ``temp_q1'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob104_mt2015_muxdff\attempt_4\Prob104_mt2015_muxdff_code.sv:20: error: Could not find variable ``temp_q2'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob104_mt2015_muxdff\attempt_4\Prob104_mt2015_muxdff_code.sv:21: error: Unable to bind wire/reg/memory `temp_q1' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob104_mt2015_muxdff\attempt_4\Prob104_mt2015_muxdff_code.sv:21: error: Unable to bind wire/reg/memory `temp_q2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob104_mt2015_muxdff\attempt_4\Prob104_mt2015_muxdff_code.sv:25: error: Could not find variable ``temp_q0'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob104_mt2015_muxdff\attempt_4\Prob104_mt2015_muxdff_code.sv:26: error: Unable to bind wire/reg/memory `temp_q0' in `tb.top_module1'
+6 error(s) during elaboration.

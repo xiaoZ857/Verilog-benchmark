@@ -1,0 +1,55 @@
+To implement the Verilog module as described, we need to compute all pairwise comparisons between five 1-bit signals (a, b, c, d, and e) and store the results in a 25-bit output vector. Each bit of this vector will be set to 1 if the two corresponding input bits are equal.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input a,
+    input b,
+    input c,
+    input d,
+    input e,
+    output [24:0] out
+);
+
+    // Compute pairwise comparisons and assign to output vector
+    assign out[24] = ~(a ^ a);  // a == a
+    assign out[23] = ~(a ^ b);  // a == b
+    assign out[22] = ~(a ^ c);  // a == c
+    assign out[21] = ~(a ^ d);  // a == d
+    assign out[20] = ~(a ^ e);  // a == e
+
+    assign out[19] = ~(b ^ a);  // b == a
+    assign out[18] = ~(b ^ b);  // b == b
+    assign out[17] = ~(b ^ c);  // b == c
+    assign out[16] = ~(b ^ d);  // b == d
+    assign out[15] = ~(b ^ e);  // b == e
+
+    assign out[14] = ~(c ^ a);  // c == a
+    assign out[13] = ~(c ^ b);  // c == b
+    assign out[12] = ~(c ^ c);  // c == c
+    assign out[11] = ~(c ^ d);  // c == d
+    assign out[10] = ~(c ^ e);  // c == e
+
+    assign out[9]  = ~(d ^ a);  // d == a
+    assign out[8]  = ~(d ^ b);  // d == b
+    assign out[7]  = ~(d ^ c);  // d == c
+    assign out[6]  = ~(d ^ d);  // d == d
+    assign out[5]  = ~(d ^ e);  // d == e
+
+    assign out[4]  = ~(e ^ a);  // e == a
+    assign out[3]  = ~(e ^ b);  // e == b
+    assign out[2]  = ~(e ^ c);  // e == c
+    assign out[1]  = ~(e ^ d);  // e == d
+    assign out[0]  = ~(e ^ e);  // e == e
+
+endmodule
+```
+
+### Explanation:
+
+- Each comparison is done using the XOR operation (`^`). The result of `x ^ y` is `0` if `x` and `y` are equal, and `1` otherwise.
+- To convert this to a logic where `1` indicates equality, we use the NOT operator (`~`) on the XOR result. Thus, `~(x ^ y)` will be `1` when `x == y`.
+- The output vector `out` is indexed from 24 down to 0, with each index representing a specific pairwise comparison as described in the problem statement.
+
+This module efficiently computes all required comparisons and outputs them in the specified format.

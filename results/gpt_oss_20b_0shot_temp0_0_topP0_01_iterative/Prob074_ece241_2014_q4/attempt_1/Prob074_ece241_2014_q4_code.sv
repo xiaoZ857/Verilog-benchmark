@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+**Verilog implementation**
+
+//  TopModule – 3‑state FSM described in the problem statement
+//  -----------------------------------------------------------
+//  The module contains three D‑flip‑flops (Q1, Q2, Q3).  
+//  Each flip‑flop receives its D‑input from a two‑input gate that
+//  uses the external input `x` and the current value of the flip‑flop
+//  (or its complement).  The three flip‑flop outputs are fed into a
+//  3‑input NOR that produces the module output `z`.
+//
+// 
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

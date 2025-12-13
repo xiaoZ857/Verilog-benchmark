@@ -1,0 +1,25 @@
+Here is a minimal, synthesizable implementation that satisfies the specification:
+
+```verilog
+// TopModule – 8 independent D‑flip‑flops, all clocked on the positive edge of clk
+module TopModule (
+    input  wire        clk,   // global clock
+    input  wire [7:0]  d,     // 8‑bit data input
+    output reg  [7:0]  q      // 8‑bit registered output
+);
+
+    // One always block implements 8 D‑FFs in parallel
+    always @(posedge clk) begin
+        q <= d;          // each bit of q captures the corresponding bit of d
+    end
+
+endmodule
+```
+
+### Why this works
+
+* **Positive‑edge triggered** – The `always @(posedge clk)` block guarantees that the assignment to `q` occurs only on the rising edge of `clk`.
+* **8 independent D‑FFs** – The 8‑bit vector `q` is updated as a whole, but each bit behaves as an independent D‑flip‑flop because the assignment is performed bit‑wise.
+* **Synthesis‑friendly** – The code is concise, synthesizable, and maps directly to 8 D‑FFs in hardware.
+
+If you prefer to instantiate a separate D‑FF module for each bit, you can replace the always block with eight instances of a simple `DFF` module (see the optional snippet below). However, the single always block above is the most common and efficient way to implement the required functionality.

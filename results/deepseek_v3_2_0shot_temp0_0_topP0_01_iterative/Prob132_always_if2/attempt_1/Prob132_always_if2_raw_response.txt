@@ -1,0 +1,31 @@
+The code has two main issues:  
+1. The `shut_off_computer` output is not assigned in all branches of the combinational logic, causing inferred latches.  
+2. The module is declared twice (`top_module` and `TopModule`), but only one should exist.  
+
+Here is the corrected version:  
+
+```verilog
+module top_module (
+    input      cpu_overheated,
+    output reg shut_off_computer,
+    input      arrived,
+    input      gas_tank_empty,
+    output reg keep_driving
+);
+
+    always @(*) begin
+        if (cpu_overheated)
+            shut_off_computer = 1;
+        else
+            shut_off_computer = 0;
+    end
+
+    always @(*) begin
+        if (~arrived)
+            keep_driving = ~gas_tank_empty;
+        else
+            keep_driving = 0;
+    end
+
+endmodule
+```

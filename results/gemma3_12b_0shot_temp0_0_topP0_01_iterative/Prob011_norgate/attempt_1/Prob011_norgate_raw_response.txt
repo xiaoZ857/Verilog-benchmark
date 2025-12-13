@@ -1,0 +1,30 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = ~(a | b);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input a, input b, output out);`**: This line declares the module named `TopModule` and defines its input and output ports.  `a` and `b` are inputs, and `out` is the output.
+* **`assign out = ~(a | b);`**: This is the core logic of the NOR gate.
+    * `a | b`: This performs a logical OR operation between the inputs `a` and `b`.
+    * `~(...)`: This performs a logical NOT operation on the result of the OR operation.  This inverts the OR result, which is the definition of a NOR gate.
+* **`endmodule`**: This marks the end of the module definition.
+
+**How it works (NOR gate logic):**
+
+A NOR gate outputs a logic '0' only when *both* inputs are '1'.  Otherwise, the output is '1'.  The Verilog code directly implements this logic:
+
+* If `a` is 1 and `b` is 1, then `a | b` is 1, and `~(a | b)` is 0.
+* If `a` is 0 and `b` is 0, then `a | b` is 0, and `~(a | b)` is 1.
+* If `a` is 0 and `b` is 1, then `a | b` is 1, and `~(a | b)` is 0.
+* If `a` is 1 and `b` is 0, then `a | b` is 1, and `~(a | b)` is 0.
+
+This accurately reflects the behavior of a NOR gate.

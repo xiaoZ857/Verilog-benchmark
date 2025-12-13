@@ -1,0 +1,25 @@
+ Here is the Verilog code for the AND gate with both `assign` statement and a combinational `always` block:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Using assign statement
+assign out_assign = a & b;
+
+// Using combinational always block
+always @(posedge clk) begin
+  if (a && b)
+    out_alwaysblock <= 1'b1;
+  else
+    out_alwaysblock <= 1'b0;
+end
+
+endmodule
+```
+
+In this code, the `assign` statement creates a direct connection between the multiplication of signals `a` and `b`, which results in the output `out_assign`. The combinational `always` block checks for the AND condition at each positive edge of the clock (`posedge clk`) and assigns the result to `out_alwaysblock`.

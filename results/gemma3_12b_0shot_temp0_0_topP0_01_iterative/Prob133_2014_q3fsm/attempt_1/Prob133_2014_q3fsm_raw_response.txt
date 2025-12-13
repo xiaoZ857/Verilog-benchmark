@@ -1,0 +1,112 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+
+  // Define states
+  typedef enum logic [1:0] {
+    A,
+    B,
+    C,
+    D,
+    E
+  } state_t;
+
+  reg state, next_state;
+
+  // State register update
+  always_ff @(posedge clk, posedge reset) begin
+    if (reset) begin
+      state <= A;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = state; // Default: stay in the current state
+
+    case (state)
+      A: begin
+        if (s == 1) begin
+          next_state = B;
+        end
+      end
+      B: begin
+        if (w == 1) begin
+          next_state = C;
+        end else begin
+          next_state = B;
+        end
+      end
+      C: begin
+        if (w == 1) begin
+          next_state = D;
+        end else begin
+          next_state = B;
+        end
+      end
+      D: begin
+        if (w == 1) begin
+          next_state = E;
+        end else begin
+          next_state = B;
+        end
+      end
+      E: begin
+        next_state = B;
+      end
+      default: begin
+        next_state = A;
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    if (state == E) begin
+      z = 1;
+    end else begin
+      z = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **States:**
+   - `A`: Initial reset state.  Stays here as long as `s == 0`.
+   - `B`:  First check of `w`.
+   - `C`: Second check of `w`.
+   - `D`: Third check of `w`.
+   - `E`:  State where `z` is set to 1 if exactly two `w` values were 1 in the previous three cycles.
+
+2. **State Register:**
+   - `state`:  The current state of the FSM.
+   - `next_state`: The next state to transition to.
+
+3. **State Update (Synchronous Reset):**
+   - `always_ff @(posedge clk, posedge reset)`: This block updates the `state` register on the positive edge of the clock, but only if `reset` is high.  If `reset` is high, the FSM is forced back to state `A`.
+
+4. **Next State Logic (Combinational):**
+   - `always_comb`: This block determines the `next_state` based on the current `state` and the inputs `s` and `w`.
+   - **State A:**  If `s == 1`, transition to state `B`.
+   - **State B:**  If `w == 1`, transition to state `C`. Otherwise, stay in state `B`.
+   - **State C:**  If `w == 1`, transition to state `D`. Otherwise, stay in state `B`.
+   - **State D:**  If `w == 1`, transition to state `E`. Otherwise, stay in state `B`.
+   - **State E:** Transition back to state `B` to start the next three-cycle window.
+
+5. **Output Logic:**
+   - `always_comb`: This block determines the value of the output `z`.
+   - If the FSM is in state `E`, it means exactly two `w` values were 1 in the previous three cycles, so `z` is set to 1. Otherwise, `z` is 0.
+
+**How it works:**
+
+The FSM starts in state A. When `s` goes high, it transitions to state B. In state B, it checks the first `w` value. If `w` is 1, it moves to state C. If `w` is 0, it stays in state B.  This continues for the next two clock cycles. If exactly two of the three `w` values were 1, the FSM transitions to state E, and `z` is set to 1 in the following clock cycle.  Then, the FSM returns to state B to begin checking the next three `w` values

@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:18: error: Unable to bind wire/reg/memory `counter' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:18: error: Unable to elaborate r-value: (counter)==('sd0)
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:11: error: Could not find variable ``counter'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:12: error: Unable to bind wire/reg/memory `counter' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob080_timer\attempt_2\Prob080_timer_code.sv:12: error: Unable to elaborate condition expression.
+5 error(s) during elaboration.

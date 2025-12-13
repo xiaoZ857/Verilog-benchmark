@@ -1,0 +1,32 @@
+The provided simulation waveforms indicate that the circuit functions as an 8x16-bit Read-Only Memory (ROM). The input `a` serves as the address, and the output `q` provides the corresponding hexadecimal data stored at each address.
+
+**Verilog Implementation:**
+
+```verilog
+module TopModule (
+    input [2:0] a,
+    output reg [15:0] q
+);
+
+always @(*) begin
+    case (a)
+        0: q = 1232; // hex '1232'
+        1: q = aee0; // hex 'aee0'
+        2: q = 27d4; // hex '27d4'
+        3: q = 5a0e; // hex '5a0e'
+        4: q = 2066; // hex '2066'
+        5: q = 64ce; // hex '64ce'
+        6: q = c526; // hex 'c526'
+        7: q = 2f19; // hex '2f19'
+    endcase
+end
+
+endmodule
+```
+
+**Explanation:**
+
+- **Input (`a`):** A 3-bit address input that ranges from 0 to 7.
+- **Output (`q`):** A 16-bit data output corresponding to the hexadecimal value stored at the address specified by `a`.
+
+The module uses a case statement to map each possible value of `a` to its respective hexadecimal value, effectively creating a lookup table or ROM. Each time `a` changes, the output `q

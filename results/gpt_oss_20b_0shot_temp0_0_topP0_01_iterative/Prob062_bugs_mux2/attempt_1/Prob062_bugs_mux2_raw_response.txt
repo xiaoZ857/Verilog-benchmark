@@ -1,0 +1,44 @@
+Below is a clean, bug‑free implementation of an 8‑bit wide 2‑to‑1 multiplexer.  
+The original snippet had two problems:
+
+1. **Output width mismatch** – `out` was declared as a single bit (`output out`) while the logic used an 8‑bit vector (`a`, `b`).  
+2. **Inconsistent use of `reg`** – `out` was declared as a `reg` but driven by a continuous assignment (`assign`).  
+   If you want `out` to be a `reg`, you must drive it inside an `always` block; otherwise, keep it a wire and use `assign`.
+
+The corrected module below uses a **continuous assignment** (the simplest and most common way for a combinational mux) and declares the output as an 8‑bit wire.
+
+```verilog
+// 8‑bit 2‑to‑1 multiplexer
+module top_module (
+    input          sel,   // select line
+    input  [7:0]   a,     // input A
+    input  [7:0]   b,     // input B
+    output [7:0]   out    // 8‑bit output
+);
+
+    // Continuous assignment – combinational logic
+    assign out = sel ? b : a;   // equivalent to (~sel & a) | (sel & b)
+
+endmodule
+```
+
+### Alternative: Using an `always` block (if you prefer `reg`)
+
+If you specifically need `out` to be a `reg` (e.g., for future extensions or to match a coding style), you can write:
+
+```verilog
+module top_module (
+    input          sel,
+    input  [7:0]   a,
+    input  [7:0]   b,
+    output reg [7:0] out
+);
+
+    always @(*) begin
+        out = sel ? b : a;   // combinational assignment
+    end
+
+endmodule
+```
+
+Both versions are functionally identical; choose the one that best fits your coding guidelines.

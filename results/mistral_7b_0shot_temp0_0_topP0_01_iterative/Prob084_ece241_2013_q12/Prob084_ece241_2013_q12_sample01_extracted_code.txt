@@ -1,0 +1,7 @@
+always @(posedge clk) begin
+  if (enable) begin
+    Q <= {Q[6], S}; // Shift data into the shift register
+  end
+end
+
+assign Z = Q[(A + B + C)]; // Multiplexer selection for output Z based on ABC inputs

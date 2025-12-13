@@ -1,0 +1,19 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 12
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:48: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:50: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:58: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:60: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:65: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:67: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:76: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:78: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4: error: `default_nettype directives must appear
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : outside module definitions. The containing
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_test.sv:4:      : module TopModule starts on line results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:2.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:79: syntax error
+I give up.

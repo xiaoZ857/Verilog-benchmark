@@ -1,0 +1,42 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+reg [7:0] prev_in;
+reg [7:0] anyedge;
+
+always @(posedge clk) begin
+  // Store the previous value of the input signal
+  prev_in <= in;
+  
+  // Check for edges on each bit of the input signal
+  for (int i = 0; i < 8; i++) begin
+    if (prev_in[i] == 1 && in[i] == 0) begin
+      anyedge[i] <= 1;
+    end else if (prev_in[i] == 0 && in[i] == 1) begin
+      anyedge[i] <= 1;
+    end else begin
+      anyedge[i] <= 0;
+    end
+  end
+  
+end
+
+// Initialize the output signal to zero
+initial begin
+  for (int i = 0; i < 8; i++) begin
+    anyedge[i] = 0;
+  end
+end
+
+endmodule
+```
+
+This module uses a combinational logic block with an always clause that checks for edges on each bit of the input signal. The output signal `anyedge` is set to 1 when there's a transition from 0 to 1 or 1 to 0, and 0 otherwise.
+
+Note: This implementation assumes that the clock edge is triggered at the rising edge (i.e., when the clock goes high). If you want to detect edges on both rising and falling edges, you can modify the always clause accordingly.

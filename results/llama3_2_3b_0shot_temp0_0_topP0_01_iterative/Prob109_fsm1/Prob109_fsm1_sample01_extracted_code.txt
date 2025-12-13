@@ -1,0 +1,47 @@
+// Define the states of the Moore machine
+typedef enum reg [1:0] {
+    A, // State A
+    B  // State B
+} state_t;
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+state_t current_state;
+reg [1:0] next_state;
+
+// Initialize the states to their initial values
+initial begin
+    current_state = A;
+end
+
+always @(posedge clk) begin
+    // Asynchronous reset into state B if reset is high
+    if (areset && !current_state) {
+        current_state = B;
+    } else {
+        // Moore machine transitions
+        case(current_state)
+            A:     // State A
+                if (in == 0) next_state = B; // Transition to B on input 0
+                else if (in == 1) next_state = A; // Transition to A on input 1
+                break
+            B:     // State B
+                if (in == 0) next_state = A; // Transition to A on input 0
+                else if (in == 1) next_state = B; // Stay in state B on input 1
+                break
+        endcase
+        
+        // Update the current state for the next clock cycle
+        current_state = next_state;
+    }
+end
+
+// Output the current state
+assign out = $signed(current_state);
+
+endmodule

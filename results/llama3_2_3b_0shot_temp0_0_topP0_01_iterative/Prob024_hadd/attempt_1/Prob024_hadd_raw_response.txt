@@ -1,0 +1,32 @@
+Here's the Verilog module for a half adder:
+
+```verilog
+// Define the half adder module
+module HalfAdder(
+    // Input signals
+    input a, 
+    input b, 
+
+    // Output signals
+    output sum, 
+    output cout
+);
+
+    // Always block to generate the sum and carry-out
+    always @(*)
+        begin
+
+            // Calculate the sum using XOR operation
+            sum = (a ^ b);
+            
+            // Calculate the carry-out using AND operation
+            cout = ((a & b) == 1'b0); 
+
+        end 
+
+endmodule 
+```
+
+In this module, we use the XOR (`^`) operator to calculate the sum and the AND (`&`) operator to calculate the carry-out. The `always` block is used to generate the output signals based on the input signals.
+
+Note that in Verilog, the `@(*)` sensitivity list is used to specify that the always block should be triggered whenever any of the inputs change. This ensures that the outputs are updated correctly even when the inputs change simultaneously.

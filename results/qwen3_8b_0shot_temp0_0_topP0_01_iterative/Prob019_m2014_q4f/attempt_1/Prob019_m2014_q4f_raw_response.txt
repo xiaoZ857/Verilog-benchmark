@@ -1,0 +1,47 @@
+To implement the described logic in Verilog, we need to model a combinational circuit where two inputs, `in1` and `in2`, are connected to an AND gate. However, the `in2` signal is inverted due to the presence of a bubble, which is a common notation in digital logic to represent an inverter.
+
+---
+
+### **Circuit Behavior**
+
+- **Input 1 (`in1`)**: Directly connected to the AND gate.
+- **Input 2 (`in2`)**: Inverted before being connected to the AND gate (due to the bubble).
+- **Output (`out`)**: The result of the AND operation between `in1` and the inverted `in2`.
+
+This corresponds to the logical expression:
+
+```
+out = in1 & (~in2)
+```
+
+---
+
+### **Verilog Implementation**
+
+Since the problem does not mention any clock signal, we assume this is a **combinational circuit**. Therefore, we use a continuous assignment (`assign`) to compute the output based on the inputs.
+
+Here is the complete Verilog module:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+  assign out = in1 & (~in2);
+endmodule
+```
+
+---
+
+### **Explanation**
+
+- `input in1` and `input in2`: These are the two inputs to the circuit.
+- `output logic out`: This declares the output as a `logic` type, which is valid in SystemVerilog and can be used for both wires and registers.
+- `assign out = in1 & (~in2);`: This line implements the logic described. It computes the AND of `in1` and the negation of `in2`.
+
+---
+
+### **Conclusion**
+
+This implementation correctly models the described logic with a bubble on the `in2` input, resulting in an AND gate with one inverted input. The use of `logic` and `assign` ensures that the circuit is combinational and behaves as expected.

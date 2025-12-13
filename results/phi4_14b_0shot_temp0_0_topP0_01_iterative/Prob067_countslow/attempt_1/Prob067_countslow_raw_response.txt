@@ -1,0 +1,45 @@
+To implement a decade counter in Verilog that counts from 0 to 9, we need to design a module that increments its count on each clock cycle when the `slowena` signal is high. The counter should reset to 0 when the `reset` input is active high. Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input slowena,
+    input reset,
+    output reg [3:0] q
+);
+
+    // Always block triggered on the positive edge of the clock or reset
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Synchronous reset to 0
+            q <= 4'b0000;
+        end else if (slowena) begin
+            // Increment counter only when slowena is high
+            if (q == 9) begin
+                // Reset to 0 if the current count is 9
+                q <= 4'b0000;
+            end else begin
+                // Otherwise, increment the counter
+                q <= q + 1;
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `clk`: The clock signal.
+  - `slowena`: A control signal that determines whether the counter should increment on each clock cycle.
+  - `reset`: An active high synchronous reset input.
+  - `q`: A 4-bit output representing the current count of the decade counter.
+
+- **Behavior:**
+  - The always block is sensitive to the positive edge of `clk` and the positive edge of `reset`.
+  - If `reset` is high, the counter (`q`) is set to 0 synchronously with the clock.
+  - If `slowena` is high and `reset` is not active, the counter increments by 1 on each clock cycle.
+  - When the counter reaches 9, it resets back to 0 on the next clock cycle if `slowena` is still high.
+
+This design ensures that the counter behaves as a synchronous decade counter with an optional pause feature controlled by the `slowena` signal.

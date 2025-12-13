@@ -1,0 +1,22 @@
+
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+always @(*) begin
+    // Calculate the starting index of the selected 4-bit group
+    integer start_index;
+    
+    // Ensure sel is within valid range (0 to 255)
+    if (sel >= 0 && sel <= 255) begin
+        start_index = sel * 4;
+        // Select the appropriate 4 bits from the input vector using correct slicing syntax
+        out = in[start_index + 3 : start_index];
+    end else begin
+        // Handle invalid sel values by setting output to zero or some default value
+        out = 4'b0000; // Default value for out-of-range sel
+    end
+end
+
+endmodule

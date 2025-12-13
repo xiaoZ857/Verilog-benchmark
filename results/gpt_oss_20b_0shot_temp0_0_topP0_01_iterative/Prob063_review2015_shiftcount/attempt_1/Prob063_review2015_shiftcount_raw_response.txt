@@ -1,0 +1,19 @@
+**Verilog implementation**
+
+```verilog
+// 4‑bit shift register / down‑counter
+//  - shift_ena : when high, shift in `data` into the MSB (bit 3)
+//  - count_ena : when high, decrement the 4‑bit value
+//  - Both signals are never asserted together in the system, so
+//    the priority between the two operations is irrelevant.
+//  - All operations are synchronous to the rising edge of `clk`.
+
+module TopModule (
+    input  wire        clk,        // clock
+    input  wire        shift_ena,  // shift enable
+    input  wire        count_ena,  // count enable
+    input  wire        data,       // data to shift in (MSB first)
+    output reg  [3:0]  q           // 4‑bit register
+);
+
+    // S

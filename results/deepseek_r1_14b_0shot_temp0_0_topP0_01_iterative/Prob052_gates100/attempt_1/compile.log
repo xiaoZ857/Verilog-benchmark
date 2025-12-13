@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:18: error: xor_result is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:16:      : xor_result is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:20: error: xor_result is not a valid l-value in tb.top_module1.$ivl_for_loop0.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:16:      : xor_result is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:17: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

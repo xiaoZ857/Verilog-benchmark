@@ -1,0 +1,44 @@
+Here's a Verilog implementation of the 5-bit maximal-length Galois LFSR with taps at bit positions 5 and 3:
+
+```verilog
+// Define the module parameters
+parameter n = 5; // Number of bits in the LFSR
+
+// Define the tap positions
+parameter tap_pos_1 = n - 1;
+parameter tap_pos_2 = n - 3;
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [n-1:0] q
+);
+
+// Initialize the internal state variables
+reg [n-1:0] shift_reg_state = 0;
+
+// Define the LFSR logic
+always @(posedge clk) begin
+    // Check for active-high synchronous reset
+    if (reset) begin
+        shift_reg_state <= 0;
+    end else begin
+        // Calculate the next state of the LFSR
+        shift_reg_state = {shift_reg_state[n-2:1], ~q[tap_pos_1] & q[tap_pos_2]};
+        
+        // Shift the bits to the right
+        shift_reg_state = shift_reg_state[n-1:1];
+    end
+end
+
+// Assign the output of the LFSR
+assign q = shift_reg_state;
+
+endmodule
+```
+
+This implementation uses a 5-bit maximal-length Galois LFSR with taps at bit positions 5 and 3. The `TopModule` module takes an active-high synchronous clock signal, a reset input, and outputs the state of the LFSR.
+
+The internal state variables are stored in a register array, which is updated on each positive edge of the clock signal. The next state of the LFSR is calculated using the XOR operation with the tapped bits, and then the bits are shifted to the right.
+
+Note that this implementation assumes an active-high synchronous reset, where the output of the LFSR is set to 1 when the reset input is asserted.

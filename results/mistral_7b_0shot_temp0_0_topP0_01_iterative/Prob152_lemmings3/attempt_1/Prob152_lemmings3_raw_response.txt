@@ -1,0 +1,60 @@
+ Here is the Verilog implementation of the described Moore state machine for the Lemmings game:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah,
+  output reg digging
+);
+
+reg [1:0] state; // Finite State Machine states: 00 - Walk Left, 01 - Walk Right, 10 - Falling, 11 - Digging
+always @(posedge clk) begin
+  if (areset) begin
+    state <= 0; // Reset to Walk Left on positive edge of areset
+  end else begin
+    case (state)
+      0: begin
+        if (bump_left) begin
+          state <= 1; // Switch to Walk Right when bumped left
+        end
+        if (ground && !dig) begin
+          state <= 2; // Fall when on ground and not digging
+        end
+      end,
+      1: begin
+        if (bump_right) begin
+          state <= 0; // Switch to Walk Left when bumped right
+        end
+        if (!ground && state != 2) begin // Can't fall or dig when ground is 0
+          state <= 3; // Start digging when on ground and not falling
+        end
+      end,
+      2: begin // Falling state
+        aaah <= 1; // Lemming says "aaah!"
+        if (ground) begin
+          state <= 0; // Resume walking left once ground appears again
+        end
+      end,
+      3: begin // Digging state
+        digging <= 1;
+        if (!ground) begin
+          aaah <= 1; // Lemming says "aaah!" when ground disappears while digging
+          state <= 2; // Fall once ground disappears
+        end
+      end
+    endcase
+  end
+end
+
+assign walk_left = (state == 0);
+assign walk_right = (state == 1);
+```
+
+This Verilog code defines a module called `TopModule` that models the Lemmings' behavior as described. The FSM has four states: Walk Left, Walk Right, Falling, and Digging. The state machine transitions based on the current state and input signals. The output signals are `walk_left`, `walk_right`, `aaah`, and `digging`.

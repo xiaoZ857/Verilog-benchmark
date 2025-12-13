@@ -1,0 +1,19 @@
+
+module TopModule (
+  input [7:0] in,
+  output [31:0] out
+);
+always @(posedge clk) begin
+  // Create a helper variable to store the sign bit (msb) of the input
+  reg [7] sign_bit;
+  assign sign_bit = in[7];
+
+  // Shift the sign bit left for 24 times to replicate it
+  wire [30:1] repeated_sign_bit;
+  assigned repeated_sign_bit = sign_bit << (24 - 1);
+
+  // Concatenate the replicated sign bit and the original input
+  assign out = {repeated_sign_bit, in};
+end
+
+// VERILOG-EVAL: endmodule not found

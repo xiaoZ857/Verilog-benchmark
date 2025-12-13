@@ -1,0 +1,23 @@
+ Here is the Verilog code for the described circuit:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output reg out,
+  output reg out_n
+);
+
+wire and1 = a & b;
+wire and2 = c & d;
+wire or_input = and1 | and2;
+
+assign out = or_input;
+assign out_n = !or_input;
+
+endmodule
+```
+
+In this code, `and1`, `and2`, and `or_input` are the intermediate wires connecting the AND and OR gates together. The `assign` keyword is used to create combinational assignments for `out` and `out_n`. The `reg` keyword is used for output registers since `out` and `out_n` are clocked signals.

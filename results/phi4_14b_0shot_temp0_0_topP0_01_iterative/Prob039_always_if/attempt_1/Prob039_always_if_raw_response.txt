@@ -1,0 +1,39 @@
+To implement the described functionality in Verilog, we need to create two versions of a 2-to-1 multiplexer: one using `assign` statements and another using procedural logic with an `always` block. Below is the implementation for both approaches within the `TopModule`.
+
+```verilog
+module TopModule (
+    input wire a,
+    input wire b,
+    input wire sel_b1,
+    input wire sel_b2,
+    output wire out_assign,
+    output reg out_always
+);
+
+    // Using assign statement for combinatorial logic
+    assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+    // Using always block with procedural if statement
+    always @(*) begin
+        if (sel_b1 && sel_b2)
+            out_always = b;
+        else
+            out_always = a;
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Assign Statement:**
+   - The `assign` statement is used for continuous assignment, which is suitable for combinatorial logic.
+   - `out_assign` is assigned the value of `b` if both `sel_b1` and `sel_b2` are true; otherwise, it takes the value of `a`.
+
+2. **Procedural Logic with Always Block:**
+   - The `always @(*)` block indicates that the logic inside should be evaluated whenever any of its inputs change.
+   - Inside the block, an `if-else` statement is used to determine the output:
+     - If both `sel_b1` and `sel_b2` are true, `out_always` is assigned the value of `b`.
+     - Otherwise, `out_always` takes the value of `a`.
+
+This implementation ensures that both outputs (`out_assign` and `out_always`) behave identically according to the specified logic.

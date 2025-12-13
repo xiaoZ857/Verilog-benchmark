@@ -1,0 +1,19 @@
+
+module TopModule (
+  input [3:1] y,
+  input w,
+  output reg Y2
+);
+
+always @(*) begin
+  case (y)
+    3'b000: Y2 = 0;  // A -> B or A, y[2] is 0 in both cases
+    3'b001: Y2 = 1;  // B -> C or D, y[2] is 1 in both cases
+    3'b010: Y2 = w ? 1 : 0;  // C -> D (w=1) or E (w=0)
+    3'b011: Y2 = 0;  // D -> F or A, y[2] is 0 in both cases
+    3'b100: Y2 = w ? 1 : 0;  // E -> D (w=1) or E (w=0)
+    3'b101: Y2 = 1;  // F -> C or D, y[2] is 1 in both cases
+    default: Y2 = 0;
+  endcase
+end
+endmodule

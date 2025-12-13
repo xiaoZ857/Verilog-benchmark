@@ -1,0 +1,10 @@
+To solve this problem, we need to create a Verilog module that compares two 2-bit inputs and produces an output based on their equality. The output should be 1 if both inputs are equal and 0 otherwise.
+
+### Approach
+The approach involves using the equality operator in Verilog to directly compare the two 2-bit inputs. If the inputs are equal, the equality operator returns a single bit value of 1; otherwise, it returns 0. This simplifies the implementation as we can leverage the built-in comparison functionality without manually handling each bit.
+
+### Solution Code
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0]

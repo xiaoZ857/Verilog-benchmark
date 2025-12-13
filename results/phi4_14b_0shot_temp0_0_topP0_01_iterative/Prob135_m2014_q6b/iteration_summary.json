@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob135_m2014_q6b",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y2' has 44 mismatches. First mismatch occurred at time 10.\nHint: Total mismatched samples is 44 out of 100 samples\n\nSimulation finished at 501 ps\nMismatches: 44 in 100 samples\n",
+      "mismatch_count": 44
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y2' has 42 mismatches. First mismatch occurred at time 10.\nHint: Total mismatched samples is 42 out of 100 samples\n\nSimulation finished at 501 ps\nMismatches: 42 in 100 samples\n",
+      "mismatch_count": 42
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y2' has 13 mismatches. First mismatch occurred at time 10.\nHint: Total mismatched samples is 13 out of 100 samples\n\nSimulation finished at 501 ps\nMismatches: 13 in 100 samples\n",
+      "mismatch_count": 13
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y2' has 15 mismatches. First mismatch occurred at time 10.\nHint: Total mismatched samples is 15 out of 100 samples\n\nSimulation finished at 501 ps\nMismatches: 15 in 100 samples\n",
+      "mismatch_count": 15
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 20
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:8: Invalid `timescale unit constant (1st digit)
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:8: error: `timescale directive can not be inside a module definition.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:13: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:15: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:16: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:16: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:17: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:17: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:18: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:18: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:19: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:19: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob113_2012_q1g\attempt_2\Prob113_2012_q1g_code.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:9: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:11: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:13: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:16: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:16: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:17: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob113_2012_q1g_test.sv:21: error: invalid module item.

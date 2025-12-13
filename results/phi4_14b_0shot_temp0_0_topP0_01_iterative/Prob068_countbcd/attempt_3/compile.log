@@ -1,0 +1,24 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:11: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd1] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:12: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd2] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:13: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd3] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:18: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd1] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:21: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd1] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:27: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd2] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:30: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd2] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:36: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd3] is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:39: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd3] is declared here as wire.
+9 error(s) during elaboration.

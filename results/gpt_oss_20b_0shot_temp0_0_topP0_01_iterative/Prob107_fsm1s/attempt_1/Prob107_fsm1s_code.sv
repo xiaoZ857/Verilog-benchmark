@@ -1,0 +1,56 @@
+
+//  TopModule.v
+//  ------------------------------------------------------------
+//  Moore state machine with two states (A and B)
+//  ------------------------------------------------------------
+//  State encoding
+//      A : 0   (output = 0)
+//      B : 1   (output = 1)
+//  ------------------------------------------------------------
+//  Transitions
+//      B (out=1) --in=0--> A
+//      B (out=1) --in=1--> B
+//      A (out=0) --in=0--> B
+//      A (out=0) --in=1--> A
+//  ------------------------------------------------------------
+//  Reset: active‑high, synchronous, forces state to B
+//  ------------------------------------------------------------
+
+module TopModule (
+    input  wire clk,     // clock
+    input  wire in,      // input
+    input  wire reset,   // active‑high synchronous reset
+    output wire out      // state‑dependent output
+);
+
+    // State register (1‑bit)
+    reg state;          // 0 = A, 1 = B
+
+    // Next‑state logic (combinational)
+    reg next_state;
+
+    // State register update (synchronous reset)
+    always @(posedge clk) begin
+        if (reset)
+            state <= 1'b1;          // reset to B
+        else
+            state <= next_state;    // normal state transition
+    end
+
+    // Combinational next‑state logic
+    always @(*) begin
+        case (state)
+            1'b1:   // Current state = B
+                next_state = in ? 1'b1 : 1'b0;   // stay B if in=1, else go to A
+            1'b0:   // Current state = A
+                next_state = in ? 1'b0 : 1'b1;   // stay A if in=1, else go to B
+            default: next_state = 1'b1;          // safety default (B)
+        endcase
+    end
+
+    // Output is purely a function of the current state (Moore)
+    assign out = state;   // out = 1 when state = B, else 0
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

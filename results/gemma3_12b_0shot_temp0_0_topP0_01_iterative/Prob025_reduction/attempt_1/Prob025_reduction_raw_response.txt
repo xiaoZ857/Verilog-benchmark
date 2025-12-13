@@ -1,0 +1,39 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output parity
+);
+
+  // Calculate the parity bit using XOR
+  assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [7:0] in, output parity);`**: This line defines the module named `TopModule` with an 8-bit input `in` and a single-bit output `parity`.
+* **`assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7];`**: This is the core of the parity checker.  It uses the `assign` statement to continuously calculate the parity bit.  The `^` operator is the XOR (exclusive OR) operator.  The parity bit is the XOR of all 8 input bits.  If the number of 1s in the input is even, the parity bit will be 0. If the number of 1s is odd, the parity bit will be 1.
+
+**How it works (Even Parity):**
+
+Even parity means the total number of 1s in the data (including the parity bit) should be even.  This module calculates the parity bit such that when it's added to the data, the total number of 1s will be even.
+
+**Example:**
+
+Let's say the input `in` is `8'b00000001`.
+
+* `in[0] = 0`
+* `in[1] = 0`
+* `in[2] = 0`
+* `in[3] = 0`
+* `in[4] = 0`
+* `in[5] = 0`
+* `in[6] = 0`
+* `in[7] = 1`
+
+`parity = 0 ^ 0 ^ 0 ^ 0 ^ 0 ^ 0 ^ 0 ^ 1 = 1`
+
+So, the output `parity` will be 1.  The combined data (8 bits + parity bit) will be `000000011`, which has two 1s (an even number).
+
+If the input was `8'b00000000`, the output `parity` would be 0. The combined data would be `000000000`, which has zero 1s (an even number).

@@ -1,0 +1,21 @@
+To implement a Verilog module that behaves like a wire, you can simply assign the input directly to the output. This is because a wire in Verilog is used for connecting different parts of a circuit and does not hold any state or require clocking.
+
+Here's how you can define such a module:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+
+  // Directly assign the input to the output
+  assign out = in;
+
+endmodule
+```
+
+### Explanation:
+- **Input and Output Declaration**: The module `TopModule` has one input (`in`) and one output (`out`).
+- **Assignment**: The `assign` statement is used to connect the input directly to the output. This makes the behavior of the module similar to a wire, as it simply passes the signal from `in` to `out`.
+
+This module will pass any value on its input directly to its output without any modification or delay, mimicking the behavior of a simple wire in digital circuits.

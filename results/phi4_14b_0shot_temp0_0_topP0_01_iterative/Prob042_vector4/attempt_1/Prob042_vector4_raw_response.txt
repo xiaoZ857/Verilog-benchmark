@@ -1,0 +1,29 @@
+To implement a Verilog module that sign-extends an 8-bit number to a 32-bit number, you need to replicate the most significant bit (MSB) of the 8-bit input and concatenate it with the original 8 bits. The MSB is used as the sign bit in two's complement representation.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input [7:0] in,
+    output [31:0] out
+);
+
+    // Extract the sign bit (MSB) of the 8-bit input
+    wire sign_bit = in[7];
+
+    // Replicate the sign bit 24 times and concatenate with the original 8 bits
+    assign out = {24{sign_bit}, in};
+
+endmodule
+```
+
+### Explanation:
+
+1. **Sign Bit Extraction**: 
+   - `wire sign_bit = in[7];` extracts the MSB of the input, which is used as the sign bit.
+
+2. **Replication and Concatenation**:
+   - `{24{sign_bit}, in}` replicates the `sign_bit` 24 times using the replication operator `{}`.
+   - The replicated bits are then concatenated with the original 8-bit number `in`.
+
+This approach ensures that if the input is positive, the extended bits will be zeros, and if negative, they will be ones, preserving the signed value in a 32-bit representation.

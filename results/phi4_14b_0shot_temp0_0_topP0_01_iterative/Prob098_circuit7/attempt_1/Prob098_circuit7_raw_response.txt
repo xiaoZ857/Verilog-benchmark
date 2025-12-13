@@ -1,0 +1,32 @@
+Based on the provided simulation waveforms, we can deduce the behavior of the sequential circuit and implement it in Verilog. The key observations from the waveform are:
+
+1. When `a` is `0`, `q` remains unchanged.
+2. When `a` transitions to `1`, `q` toggles its state.
+
+This behavior suggests that the circuit implements a toggle flip-flop with an enable signal `a`. The output `q` changes state only when `a` is high (`1`) on the rising edge of the clock.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg q
+);
+
+always @(posedge clk) begin
+  if (a == 1'b1) begin
+    q <= ~q; // Toggle q when a is high
+  end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- The `always` block is triggered on the positive edge of the clock (`posedge clk`).
+- Inside the block, we check if `a` is `1`. If it is, we toggle the value of `q` using `q <= ~q;`.
+- When `a` is `0`, the condition inside the `if` statement is not satisfied, and `q` retains its previous state.
+
+This implementation matches the behavior observed in the simulation waveforms.

@@ -1,0 +1,36 @@
+Here’s a minimal, synthesizable Verilog implementation of a two‑input XNOR gate.  
+Because the operation is purely combinational, no clock is required – the output reacts immediately to changes on the inputs.
+
+```verilog
+// ------------------------------------------------------------
+//  TopModule : 2‑input XNOR gate
+// ------------------------------------------------------------
+//  Inputs:
+//      a, b   – 1‑bit logic inputs
+//  Output:
+//      out    – 1‑bit logic output (XNOR of a and b)
+// ------------------------------------------------------------
+
+`timescale 1ns / 1ps   // (optional) useful for simulation
+
+module TopModule (
+    input  wire a,      // first input
+    input  wire b,      // second input
+    output wire out     // XNOR result
+);
+
+    // Continuous assignment – synthesizable combinational logic
+    assign out = ~(a ^ b);   // XNOR: out = 1 when a == b, else 0
+
+    // Alternative (more readable) form:
+    // assign out = (a == b);
+
+endmodule
+```
+
+### Notes
+- **`wire`** is the default net type for module ports, so the explicit `wire` keyword is optional but added for clarity.
+- The `assign` statement creates a combinational logic block that updates `out` whenever `a` or `b` changes.
+- The expression `~(a ^ b)` is the canonical Verilog implementation of XNOR.  
+  The alternative `a == b` is equivalent and may be clearer to some readers.
+- No clock or reset signals are needed because the gate is purely combinational.

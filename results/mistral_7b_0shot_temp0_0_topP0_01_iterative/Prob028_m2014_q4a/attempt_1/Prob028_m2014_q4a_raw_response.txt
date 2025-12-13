@@ -1,0 +1,39 @@
+ Here is a simple implementation of a D Latch in Verilog based on your description:
+
+```verilog
+module TopModule (
+  input wire d,
+  input wire ena,
+  output logic q
+);
+
+reg internal q_internal; // Internal signal for storing the value of q
+
+always @(posedge clk or negedge reset) begin
+  if (!reset) begin
+    q_internal <= 0; // Reset the latch to 0
+  end
+  else if (ena) begin
+    q_internal <= d; // Assign the value of d to q_internal when ena is high
+  end
+end
+
+assign q = q_internal; // Assign the internal signal to the output q
+
+// Add clock and reset inputs here if not provided
+input wire clk, reset;
+
+// Example usage:
+// TopModule top (
+//   .d(data),
+//   .ena(enable),
+//   .clk(clock),
+//   .reset(reset_signal)
+// );
+```
+
+This Verilog code defines a module named `TopModule` with three signals: `d`, `ena`, and `q`. The `d` signal represents the data input, `ena` is an enable input, and `q` is the output.
+
+The internal register `q_internal` stores the value of the latch. An always block is used to update the latch based on the positive edge of the clock (`clk`) or the active low reset signal (`reset`). When the `ena` input is high, the data from the `d` input will be stored in the latch.
+
+The output `q` is assigned to the internal register `q_internal`. If you want to add a clock and reset input, you can do so by adding them as inputs in the module declaration and using them in the always block accordingly.

@@ -1,0 +1,35 @@
+**Verilog – combinational part of the Moore state‑machine**
+
+```verilog
+//  TopModule
+//  ---------------------------
+//  One‑hot encoded Moore state machine
+//  States :  A = 4'b0001
+//            B = 4'b0010
+//            C = 4'b0100
+//            D = 4'b1000
+//
+//  State transition table
+//  -----------------------
+//  State | Next state (in=0) | Next state (in=1) | Output
+//  A     | A                 | B                | 0
+//  B     | C                 | B                | 0
+//  C     | A                 | D                | 0
+//  D     | C                 | B                | 1
+//
+//  The module below implements only the combinational logic that
+//  produces the next state and the output from the current state
+//  and the input `in`.  The sequential part (clocked register)
+//  that stores the state is assumed to be handled elsewhere.
+//
+//  The output `out` is a Moore output – it depends only on the
+//  current state (not on the input).
+//  The next state logic is derived by inspection of the table
+//  and expressed with one‑hot signals.
+//
+//  Author:  <Your Name>
+//  Date:    <Date>
+//
+module TopModule (
+    input  wire        in,          // asynchronous input
+    input  wire [3:0]  state,       //

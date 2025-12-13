@@ -1,0 +1,28 @@
+```verilog
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+
+  assign out_and = & in;  // 100-input AND gate
+  assign out_or  = | in;  // 100-input OR gate
+  assign out_xor = ^ in;  // 100-input XOR gate
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  Defines the Verilog module named `TopModule` with the specified input and output ports.
+* **`input [99:0] in;`**: Declares a 100-bit input signal named `in`.  `[99:0]` indicates a vector of bits from index 99 down to 0.
+* **`output out_and, out_or, out_xor;`**: Declares the three output signals.
+* **`assign out_and = & in;`**:  This is the key line for the AND gate.  The `&` operator performs a bitwise AND operation on all the bits in the `in` vector.  The result is assigned to the `out_and` output.
+* **`assign out_or = | in;`**:  This line implements the OR gate. The `|` operator performs a bitwise OR operation on all the bits in the `in` vector, and the result is assigned to `out_or`.
+* **`assign out_xor = ^ in;`**: This line implements the XOR gate. The `^` operator performs a bitwise XOR operation on all the bits in the `in` vector, and the result is assigned to `out_xor`.
+* **`endmodule`**:  Marks the end of the module definition.
+
+**How it works:**
+
+The Verilog code directly uses the bitwise operators `&` (AND), `|` (OR), and `^` (XOR) to implement the desired logic.  These operators are applied to the entire input vector `in`, effectively creating 100-input AND, OR, and XOR gates respectively.  The `assign` statement ensures that the outputs are continuously updated whenever the input `in` changes.  This makes the circuit combinational, meaning its output depends only on its current inputs.

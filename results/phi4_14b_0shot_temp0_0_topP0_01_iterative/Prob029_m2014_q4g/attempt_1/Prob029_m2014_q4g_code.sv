@@ -1,0 +1,20 @@
+
+module TopModule (
+  input in1,
+  input in2,
+  input in3,
+  output logic out
+);
+
+  // Intermediate wire to hold the result of the XNOR operation
+  wire xnor_result;
+
+  // Implement the XNOR gate using the ~ and & operators
+  assign xnor_result = ~(in1 ^ in2);
+
+  // Implement the XOR gate using the intermediate result and in3
+  assign out = xnor_result ^ in3;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

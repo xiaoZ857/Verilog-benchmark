@@ -1,0 +1,26 @@
+ In Verilog, you can't directly create a dual-edge triggered flip-flop as FPGAs don't support it natively. However, you can create a workaround using two level-sensitive D flip-flops (rising and falling edge sensitive) to achieve the functionality of a dual-edge triggered flip-flop. Here is an example implementation:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q_r,
+  output reg q_f
+);
+
+// Level sensitive D flip-flop for positive edge
+always @(posedge clk) begin
+  if (d)
+    q_r <= ~q_r;
+end
+
+// Level sensitive D flip-flop for negative edge
+always @(negedge clk) begin
+  if (d)
+    q_f <= ~q_f;
+end
+
+assign q = q_r ^ q_f; // XOR of both outputs to get the dual-edge triggered behavior
+```
+
+In this implementation, `q_r` and `q_f` are the outputs for positive and negative edges respectively. The final output `q` is obtained by XORing both `q_r` and `q_f`. This circuit will behave like a dual-edge triggered flip-flop as it updates its state on both rising and falling edges of the clock signal.

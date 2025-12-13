@@ -1,0 +1,38 @@
+ Here is a Verilog implementation for the 64-bit arithmetic shift register as described:
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input ena,
+  input [1:0] amount,
+  input [63:0] data,
+  output reg [63:0] q
+);
+
+always @(posedge clk) begin
+    if (load)
+        q <= data;
+    else if (ena) begin
+        switch (amount)
+            // Shift left by 1 bit
+            (2'b00 : q <= {q[62], q[63]};
+             // Shift left by 8 bits
+             (2'b01 : q <= {q[71], q[64:0]});
+             // Shift right by 1 bit
+             (2'b10 : q <= {q[62], q[63:0]});
+             // Shift right by 8 bits
+             (2'b11 : begin
+                 local: [64:0] temp;
+                 for(int i = 0; i < 64; i++)
+                     temp[i] = q[i+amount];
+                 q <= temp;
+             end)
+        end
+    end
+end
+```
+
+This Verilog module implements a 64-bit arithmetic shift register with synchronous load, shift left and right by 1 or 8 bit positions, and the right shift is an arithmetic right shift. The signals `load`, `ena`, and `amount` are as described in your question. The output signal `q` represents the contents of the shifter.
+
+The module uses a case statement to handle different shift directions and amounts based on the value of the `amount` input signal. For shifts larger than 1 bit, it utilizes a local array (`temp`) to store the shifted values before assigning them to the output register `q`.

@@ -1,0 +1,19 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+
+  assign out = sel ? b : a;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out = sel ? b : a;`**: This is a concise way to implement the multiplexer logic using the conditional operator (`? :`).
+    * `sel ? b : a` means: "If `sel` is true (1), then assign `b` to `out`; otherwise, assign `a` to `out`."
+
+This single line of code directly implements the described functionality.  It's the most efficient and readable way to create this simple multiplexer in Verilog.

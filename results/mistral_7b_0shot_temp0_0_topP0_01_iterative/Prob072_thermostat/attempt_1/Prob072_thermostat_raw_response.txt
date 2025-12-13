@@ -1,0 +1,37 @@
+ Here is a simple Verilog implementation for the described thermostat circuit:
+
+```verilog
+module TopModule (
+  input logic mode,
+  input logic too_cold,
+  input logic too_hot,
+  input logic fan_on,
+  output logic heater,
+  output logic aircon,
+  output logic fan
+);
+
+reg heater_en, aircon_en, fan_en; // Enable signals for heater, air conditioner, and fan
+
+always @(posedge clk) begin
+  if (mode) begin // Heating mode
+    heater_en <= too_cold;
+    aircon_en <= 0;
+  end else begin // Cooling mode
+    heater_en <= 0;
+    aircon_en <= too_hot;
+  end
+
+  fan_en <= (heater_en || aircon_en) || fan_on; // Fan is on if either heater or air conditioner are on, or user requests it
+end
+
+assign heater = heater_en;
+assign aircon = aircon_en;
+assign fan = fan_en;
+```
+
+This Verilog module defines a `TopModule` with inputs for the mode (heating or cooling), too cold, too hot, and fan on signals. It also has outputs for heater, air conditioner, and fan. The module uses internal registers (`heater_en`, `aircon_en`, and `fan_en`) to control when each device is enabled based on the mode and temperature conditions.
+
+The `always @(posedge clk)` block represents a positive edge-triggered combinational logic block that updates the enable signals at every clock cycle. The `if (mode)` statement checks if the system is in heating mode, and sets the heater enable signal to 1 when it's too cold, while setting the air conditioner enable signal to 0. In cooling mode, the roles of heater and air conditioner are reversed.
+
+The fan enable signal is set to 1 if either the heater or air conditioner are enabled (or if the user requests the fan manually). Finally, the outputs for heater, air conditioner, and fan are assigned their respective enable signals.

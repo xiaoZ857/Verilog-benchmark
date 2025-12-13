@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob128_fsm_ps2",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:42: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:44: error: done is not a valid l-value in tb.top_module1.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\n2 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:53: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:54: Syntax in assignment statement l-value.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 10\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:48: syntax error\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:49: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:52: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:10: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:12: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:14: Syntax in assignment statement l-value.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:18: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:18: error: invalid module item.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:19: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:23: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

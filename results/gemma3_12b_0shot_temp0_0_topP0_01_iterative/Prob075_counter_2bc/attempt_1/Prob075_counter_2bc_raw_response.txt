@@ -1,0 +1,63 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      state <= 2'b01;
+    end else if (train_valid) begin
+      if (train_taken) begin
+        if (state == 2'b11) begin
+          state <= 2'b11; // Saturate at maximum value
+        end else begin
+          state <= state + 1'b1;
+        end
+      end else begin
+        if (state == 2'b00) begin
+          state <= 2'b00; // Saturate at minimum value
+        end else begin
+          state <= state - 1'b1;
+        end
+      end
+    end else begin
+      // Keep the current value
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`: Defines the module named `TopModule` with the specified input and output ports.
+
+2. **State Variable:**
+   - `logic [1:0] state`: Declares a 2-bit logic variable `state` to hold the counter value.
+
+3. **Synchronous Reset:**
+   - `always_ff @(posedge clk, posedge areset)`:  This block describes a sequential logic block (flip-flop) triggered by the positive edge of the clock (`clk`) or the positive edge of the asynchronous reset (`areset`).
+   - `if (areset) begin state <= 2'b01; end`: When `areset` is asserted (high), the counter is reset to the value `2'b01`.
+
+4. **Conditional Increment/Decrement:**
+   - `else if (train_valid) begin ... end`:  This block executes only when `train_valid` is high, indicating that training is active.
+   - `if (train_taken) begin ... end`:  If `train_taken` is also high, the counter increments.
+   - `if (state == 2'b11) begin state <= 2'b11; end else begin state <= state + 1'b1; end`:  This is the increment logic.  It checks if the counter is already at its maximum value (`2'b11`). If it is, the counter saturates (remains at `2'b11`). Otherwise, it increments by 1.
+   - `else begin ... end`: If `train_taken` is low, the counter decrements.
+   - `if (state == 2'b00) begin state <= 2'b00; end else begin state <= state - 1'b1; end`: This is the decrement logic. It checks if the counter is already at its minimum value (`2'b00`). If it is, the counter saturates (remains at `2'b00`). Otherwise, it decrements by 1.
+
+5. **No Change When Not Training:**
+   - `else begin ... end`:  If `train_valid` is low, the counter retains its current value.  This is the default behavior when no training is happening.
+
+**Key Features:**
+
+* **Saturating Counter:** The counter's value is limited to the range 0 to 3.  It doesn't wrap around.
+* **Asynchronous Reset:** The `areset` signal resets the counter asynchronously, meaning it can reset the counter regardless of the clock signal.
+* **Positive Edge Triggered:** The `always_ff` block ensures that the counter updates only on the positive edge of the clock or reset.
+* **Clear and Concise:** The code is well-structured and easy to understand.
+* **Verilog Logic:** Uses standard Verilog syntax for sequential logic.

@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_2\Prob039_always_if_code.sv:11: error: Unable to bind wire/reg/memory `resetn' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_2\Prob039_always_if_code.sv:11: error: Unable to elaborate condition expression.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_2\Prob039_always_if_code.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_2\Prob039_always_if_code.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_2\Prob039_always_if_code.sv:10: error: Unable to bind wire/reg/memory `resetn' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_2\Prob039_always_if_code.sv:10: error: Failed to evaluate event expression 'negedge resetn'.
+6 error(s) during elaboration.

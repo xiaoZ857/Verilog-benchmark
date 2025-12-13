@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_4\Prob033_ece241_2014_q1c_code.sv:10: error: Could not find variable ``carry_out'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_4\Prob033_ece241_2014_q1c_code.sv:10: error: s is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_4\Prob033_ece241_2014_q1c_code.sv:5:      : s is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_4\Prob033_ece241_2014_q1c_code.sv:13: error: overflow is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_4\Prob033_ece241_2014_q1c_code.sv:6:      : overflow is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_4\Prob033_ece241_2014_q1c_code.sv:8: warning: @* found no sensitivities so it will never trigger.
+3 error(s) during elaboration.

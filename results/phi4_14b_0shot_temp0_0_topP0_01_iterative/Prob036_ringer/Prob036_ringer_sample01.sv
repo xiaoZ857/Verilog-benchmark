@@ -1,0 +1,27 @@
+
+module TopModule (
+    input ring,
+    input vibrate_mode,
+    output reg ringer,
+    output reg motor
+);
+
+always @(*) begin
+    // Default state: both outputs are off
+    ringer = 0;
+    motor = 0;
+
+    if (ring) begin
+        if (vibrate_mode) begin
+            // If in vibrate mode, turn on the motor
+            motor = 1;
+        end else begin
+            // Otherwise, turn on the ringer
+            ringer = 1;
+        end
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

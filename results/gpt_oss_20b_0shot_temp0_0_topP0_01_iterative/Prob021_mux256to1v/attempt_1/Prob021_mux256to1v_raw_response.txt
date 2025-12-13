@@ -1,0 +1,28 @@
+Here’s a clean, synthesizable implementation of the 256‑to‑1, 4‑bit wide multiplexer.  
+The trick is to use a *variable part‑select* (`[sel*4 +: 4]`) which picks the 4‑bit slice that starts at the bit position `sel*4`.
+
+```verilog
+// 4‑bit wide, 256‑to‑1 multiplexer
+//  in  : 1024‑bit vector containing 256 4‑bit words (in[3:0], in[7:4], …)
+//  sel : 8‑bit select (0‑255)
+//  out : 4‑bit output chosen by sel
+module TopModule (
+    input  wire [1023:0] in,
+    input  wire [7:0]    sel,
+    output wire [3:0]    out
+);
+
+    // Variable part‑select: start at sel*4, take 4 bits
+    assign out = in[sel*4 +: 4];
+
+endmodule
+```
+
+### Why this works
+
+* `sel*4` gives the bit index of the first bit of the desired 4‑bit word.  
+  For example, if `sel = 2`, `sel*4 = 8`, so we pick bits `[11:8]`.  
+* The `+: 4` syntax tells Verilog to take a 4‑bit slice starting at that index.  
+* The assignment is purely combinational, so no clock is required.
+
+This single line is fully synthesizable and will generate a 256‑to‑1 multiplexer (or a large ROM‑style lookup table) in hardware.

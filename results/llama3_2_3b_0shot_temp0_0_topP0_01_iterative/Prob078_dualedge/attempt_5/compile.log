@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob078_dualedge\attempt_5\Prob078_dualedge_code.sv:20: error: 'q_next_f' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob078_dualedge\attempt_5\Prob078_dualedge_code.sv:11:      : It was declared here as a variable.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob078_dualedge\attempt_5\Prob078_dualedge_code.sv:21: error: 'q_prev_f' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob078_dualedge\attempt_5\Prob078_dualedge_code.sv:12:      : It was declared here as a variable.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob078_dualedge\attempt_5\Prob078_dualedge_code.sv:40: error: 'q_prev_f' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob078_dualedge\attempt_5\Prob078_dualedge_code.sv:12:      : It was declared here as a variable.

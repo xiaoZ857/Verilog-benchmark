@@ -1,0 +1,67 @@
+To implement the Moore state machine described, we need to create a Verilog module that computes the `next_state` and `out` based on the current `state` and input `in`. The state transition logic is combinational, meaning it should be implemented using always blocks sensitive to changes in inputs.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input wire in,
+  input wire [1:0] state,
+  output reg [1:0] next_state,
+  output wire out
+);
+
+  // Combinational logic for next_state and output
+  always @(*) begin
+    case (state)
+      2'b00: begin // State A
+        if (in == 1'b0) 
+          next_state = 2'b00; // Next state is A
+        else 
+          next_state = 2'b01; // Next state is B
+      end
+
+      2'b01: begin // State B
+        if (in == 1'b0) 
+          next_state = 2'b10; // Next state is C
+        else 
+          next_state = 2'b01; // Next state is B
+      end
+
+      2'b10: begin // State C
+        if (in == 1'b0) 
+          next_state = 2'b00; // Next state is A
+        else 
+          next_state = 2'b11; // Next state is D
+      end
+
+      2'b11: begin // State D
+        if (in == 1'b0) 
+          next_state = 2'b10; // Next state is C
+        else 
+          next_state = 2'b01; // Next state is B
+      end
+
+      default: 
+        next_state = 2'b00; // Default case, should not occur with valid inputs
+    endcase
+  end
+
+  // Moore output logic based on current state
+  assign out = (state == 2'b11) ? 1'b1 : 1'b0;
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: The states are encoded as `A=2'b00`, `B=2'b01`, `C=2'b10`, and `D=2'b11`.
+  
+- **Next State Logic**:
+  - For each state, the next state is determined based on the input `in`.
+  - This logic is implemented using a combinational always block sensitive to all inputs (`always @(*)`).
+
+- **Output Logic**:
+  - The output `out` depends only on the current state, as per Moore machine characteristics.
+  - It is assigned directly using an `assign` statement. Only in state `D` (encoded as `2'b11`) does the output become `1`.
+
+This module correctly implements the specified state transition and output logic for the given Moore state machine.

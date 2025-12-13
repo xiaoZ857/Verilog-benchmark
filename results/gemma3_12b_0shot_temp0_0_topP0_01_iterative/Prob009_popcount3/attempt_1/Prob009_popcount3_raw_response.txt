@@ -1,0 +1,66 @@
+```verilog
+module TopModule (
+  input [2:0] in,
+  output [1:0] out
+);
+
+  assign out = in | (in >> 1) | (in >> 2);
+
+endmodule
+```
+
+**Explanation:**
+
+This implementation uses a bitwise OR operation to efficiently calculate the population count.  Here's how it works:
+
+* **`in`**:  The 3-bit input vector.
+* **`in >> 1`**:  Right-shifts the input vector by one position. This effectively moves each bit to the right, and the leftmost bit is filled with a '0'.
+* **`in >> 2`**:  Right-shifts the input vector by two positions.  The leftmost two bits are filled with '0's.
+* **`out = in | (in >> 1) | (in >> 2)`**:  Performs a bitwise OR operation between the original input, the right-shifted input by one, and the right-shifted input by two.
+
+**How it counts:**
+
+Let's illustrate with an example:
+
+Suppose `in = 3'b101` (decimal 5).
+
+1. `in = 3'b101`
+2. `in >> 1 = 3'b010`
+3. `in >> 2 = 3'b001`
+4. `out = 3'b101 | 3'b010 | 3'b001 = 3'b111`
+
+The resulting `out` is `3'b111`, which is decimal 7.  This is the correct population count (three '1's in the input).
+
+**Why this works:**
+
+Each '1' bit in the input will contribute to the OR operation in at least one of the shifted versions.  Therefore, the final `out` will have a '1' in each position where there was a '1' in the original input.  The number of '1's in `out` is equal to the population count of `in`.
+
+**Alternative (more verbose) implementation using an adder:**
+
+While the above is the most efficient and common approach, here's an alternative using an adder, which might be easier to understand for beginners:
+
+```verilog
+module TopModule (
+  input [2:0] in,
+  output [1:0] out
+);
+
+  wire w1, w2;
+
+  assign w1 = in[0] + in[1];
+  assign w2 = in[0] + in[1] + in[2];
+
+  assign out[0] = w2 & 1;
+  assign out[1] = w2 >> 1;
+
+endmodule
+```
+
+This alternative adds the bits and then extracts the least significant bits to get the count.  However, it's generally less efficient than the bitwise OR approach.
+
+**Key improvements and considerations:**
+
+* **Efficiency:** The bitwise OR approach is the most efficient for this problem.
+* **Readability:** The bitwise OR approach is concise and relatively easy to understand once you grasp the concept.
+* **Scalability:**  The bitwise OR approach is easily scalable to larger input vectors.  For an `n`-bit input, you would shift by `i` for `i` from 0 to `n-1` and OR them together.
+* **Synthesis:**  The bitwise OR approach is well-suited for synthesis into efficient hardware.

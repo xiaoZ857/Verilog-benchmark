@@ -1,0 +1,67 @@
+Here is a clean, gate‑level implementation of the requested combinational circuit.  
+Each output is driven by a single logic gate (or a small chain of gates for the “and‑not” case).  
+No clock is involved – the logic is purely combinational.
+
+```verilog
+//=====================================================================
+//  TopModule
+//  ---------
+//  7‑output combinational logic block
+//
+//  Inputs:
+//      a, b          – 1‑bit operands
+//
+//  Outputs:
+//      out_and       – a AND b
+//      out_or        – a OR  b
+//      out_xor       – a XOR b
+//      out_nand      – a NAND b
+//      out_nor       – a NOR  b
+//      out_xnor      – a XNOR b
+//      out_anotb     – a AND (NOT b)
+//=====================================================================
+module TopModule (
+    input  wire a,
+    input  wire b,
+    output wire out_and,
+    output wire out_or,
+    output wire out_xor,
+    output wire out_nand,
+    output wire out_nor,
+    output wire out_xnor,
+    output wire out_anotb
+);
+
+    // 1) a AND b
+    and  g_and  (out_and,  a, b);
+
+    // 2) a OR  b
+    or   g_or   (out_or,   a, b);
+
+    // 3) a XOR b
+    xor  g_xor  (out_xor,  a, b);
+
+    // 4) a NAND b
+    nand g_nand (out_nand, a, b);
+
+    // 5) a NOR  b
+    nor  g_nor  (out_nor,  a, b);
+
+    // 6) a XNOR b
+    xnor g_xnor (out_xnor, a, b);
+
+    // 7) a AND (NOT b)
+    //    First invert b, then AND with a
+    wire not_b;
+    not  g_notb (not_b, b);
+    and  g_anotb(out_anotb, a, not_b);
+
+endmodule
+```
+
+### Notes
+* All gates are instantiated using the built‑in Verilog primitives (`and`, `or`, `xor`, `nand`, `nor`, `xnor`, `not`).  
+* The module is purely combinational – no clock or reset signals are required.  
+* The `wire` keyword is optional for ports in Verilog‑2001+, but it makes the intent explicit.  
+
+Feel free to integrate this module into your larger design or testbench.

@@ -1,0 +1,19 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+assign w = a; // Assign signal 'a' to 'w'
+wire x_copy, y_copy; // Add separate wires for 'x' and 'y' to avoid combinational loops
+assign x_copy = b;
+assign y_copy = b;
+assign x = x_copy; // Assign the copy of 'b' to 'x'
+assign y = y_copy; // Assign the copy of 'b' to 'y'
+assign z = c; // Assign signal 'c' to 'z'
+
+endmodule

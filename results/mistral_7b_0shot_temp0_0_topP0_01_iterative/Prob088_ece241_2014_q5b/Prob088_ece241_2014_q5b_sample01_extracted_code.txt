@@ -1,0 +1,29 @@
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 2'b0; // Reset to state A
+    end else if (state == 2'b1) begin // State B
+        if (x == 1'b1) begin
+            state <= 2'b0; // Transition back to state A
+        end else begin
+            state <= 2'b1; // Stay in state B
+        end
+    end else begin // State A
+        if (x == 1'b1) begin
+            state <= 2'b1; // Transition to state B
+        end else begin
+            state <= 2'b0; // Stay in state A
+        end
+    end
+end
+
+assign z = state[1]; // Assign output z based on current state
+
+initial begin
+    state <= 2'b0; // Initialize state to A at time 0
+end
+
+// One-hot encoding for the states
+reg [1:0] state_onehot = 2'b00, 2'b01, 2'b10, 2'b11;
+assign out_state = state_onehot[state]; // Assign output out_state based on current state for better visibility
+
+endmodule

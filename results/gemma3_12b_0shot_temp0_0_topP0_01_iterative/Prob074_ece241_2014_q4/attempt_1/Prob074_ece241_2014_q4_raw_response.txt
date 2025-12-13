@@ -1,0 +1,120 @@
+```verilog
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+
+  // Internal signals for flip-flop outputs
+  wire ff1_out, ff2_out, ff3_out;
+
+  // Flip-flops
+  dff ff1 (
+    .clk(clk),
+    .d(x ^ ff1_out),
+    .q(ff1_out)
+  );
+
+  dff ff2 (
+    .clk(clk),
+    .d(x & ~ff2_out),
+    .q(ff2_out)
+  );
+
+  dff ff3 (
+    .clk(clk),
+    .d(x | ~ff3_out),
+    .q(ff3_out)
+  );
+
+  // NOR gate for Z
+  nor nor_gate (
+    .a(ff1_out),
+    .b(ff2_out),
+    .c(ff3_out),
+    .z(z)
+  );
+
+endmodule
+
+// D flip-flop module
+module dff (
+  input clk,
+  input d,
+  output q
+);
+
+  reg q_reg;
+
+  always @(posedge clk) begin
+    q_reg <= d;
+  end
+
+  assign q = q_reg;
+
+endmodule
+
+// NOR gate module
+module nor (
+  input a,
+  input b,
+  input c,
+  output z
+);
+
+  assign z = ~(a | b | c);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`TopModule`:**
+   - Declares the input `clk` and `x`, and the output `z`.
+   - Declares three internal wires `ff1_out`, `ff2_out`, and `ff3_out` to represent the outputs of the three D flip-flops.
+   - Instantiates three `dff` modules (`ff1`, `ff2`, `ff3`) to represent the D flip-flops.
+   - Connects the inputs of the flip-flops according to the description:
+     - `ff1.d` is connected to `x ^ ff1_out` (XOR of `x` and `ff1_out`).
+     - `ff2.d` is connected to `x & ~ff2_out` (AND of `x` and the complement of `ff2_out`).
+     - `ff3.d` is connected to `x | ~ff3_out` (OR of `x` and the complement of `ff3_out`).
+   - Instantiates a `nor` module to calculate the final output `z` as the NOR of the three flip-flop outputs.
+
+2. **`dff` (D Flip-Flop Module):**
+   - This is a simple D flip-flop implemented using a `reg` and an `always` block triggered by the positive edge of the clock (`posedge clk`).
+   - On each positive clock edge, the value of the input `d` is assigned to the internal register `q_reg`, which is then assigned to the output `q`.
+
+3. **`nor` (NOR Gate Module):**
+   - This module implements a three-input NOR gate.
+   - The output `z` is the complement of the OR of the three inputs `a`, `b`, and `c`.
+
+**How it works:**
+
+The circuit implements a finite state machine where each flip-flop's output depends on the current input `x` and the previous state of the other flip-flops.  The XOR, AND, and OR gates, along with the flip-flops, create a feedback loop that determines the sequence of states the machine goes through. The final NOR gate combines the outputs of the flip-flops to produce the output `z`.
+
+**To simulate this code:**
+
+You'd need a testbench to provide clock and input signals and observe the output `z`.  Here's a basic example:
+
+```verilog
+module testbench;
+  reg clk;
+  reg x;
+  wire z;
+
+  TopModule dut (
+    .clk(clk),
+    .x(x),
+    .z(z)
+  );
+
+  initial begin
+    clk = 0;
+    x = 0;
+    #10 clk = 1;
+    #10 clk = 0;
+    #10 clk = 1;
+    #10 clk = 0;
+    #10 $finish;
+  end
+
+  always #5 clk = ~clk;

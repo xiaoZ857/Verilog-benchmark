@@ -1,0 +1,26 @@
+Here is a minimal, synthesizable Verilog implementation of a 2‑input NOR gate.  
+The module is purely combinational, so the output is driven directly from the inputs.
+
+```verilog
+// 2‑input NOR gate
+//  out = NOT (in1 OR in2)
+module TopModule (
+    input  logic in1,
+    input  logic in2,
+    output logic out
+);
+
+    // Combinational assignment
+    assign out = ~(in1 | in2);   // equivalent to: out = !in1 & !in2;
+
+endmodule
+```
+
+**Explanation**
+
+* `logic` is used for the ports to allow both `0`/`1` and `x/z` values.
+* The `assign` statement makes `out` a continuous assignment, so the gate is purely combinational.
+* The expression `~(in1 | in2)` implements the NOR operation.  
+  (You could also write `out = !in1 & !in2;` – both are equivalent.)
+
+This module can be instantiated anywhere you need a 2‑input NOR gate.

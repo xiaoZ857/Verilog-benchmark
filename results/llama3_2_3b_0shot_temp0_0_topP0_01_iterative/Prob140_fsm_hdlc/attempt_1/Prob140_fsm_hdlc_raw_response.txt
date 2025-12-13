@@ -1,0 +1,71 @@
+Here's an implementation of the Moore-type finite state machine (FSM) in Verilog:
+
+```verilog
+module TopModule(
+    input clk, // Positive clock signal
+    input reset, // Active high synchronous reset signal
+    input in, // Input bit stream
+    output disc, // Discard signal
+    output flag, // Flag signal for frame boundaries
+    output err  // Error signal for 7 or more consecutive 1s
+);
+
+// Define the states of the FSM
+typedef enum reg [2:0] {
+    START,
+    ONE,
+    FIVE,
+    FLAG,
+    ERROR
+} state_t;
+
+// Initialize the state to START when reset is active high
+state_t state = '0;
+
+// Define the next state for each input bit
+always @(posedge clk) begin
+    if (reset) begin // Reset condition
+        state <= START;
+    else if (in == 1) begin // One consecutive 1
+        if (state == START || state == ONE) begin // Transition from START or ONE to FIVE
+            state <= FIVE;
+        end else if (state == FLAG) begin // Transition from FLAG to ERROR
+            state <= ERROR;
+        end else if (state == ERROR) begin // Transition from ERROR back to START
+            state <= START;
+        end
+    else if (in == 0) begin // Zero after five consecutive 1s
+        if (state == FIVE) begin // Transition from FIVE to FLAG
+            state <= FLAG;
+        end else if (state == ONE || state == ERROR) begin // Reset the state
+            state <= START;
+        end
+    end
+end
+
+// Define the output signals based on the current state
+always @(*) begin
+    case(state)
+        START: disc = 0; flag = 0; err = 0;
+        ONE: disc = 0; flag = 0; err = 0;
+        FIVE: disc = 0; flag = 0; err = 0;
+        FLAG: disc = 1; flag = 1; err = 0;
+        ERROR: disc = 1; flag = 0; err = 1;
+    endcase
+end
+
+// Output signals
+assign disc = disc;
+assign flag = flag;
+assign err = err;
+
+endmodule
+```
+
+This implementation uses a Moore-type FSM, where the output bits are determined by the current state and the input bit. The states are defined as an enum `state_t`, which represents the possible states of the FSM: START, ONE, FIVE, FLAG, and ERROR.
+
+The next state for each input bit is determined using a combination of if-else statements within the always block that processes the clock edge. When the reset signal is active high, the state is initialized to START.
+
+The output signals are defined using a case statement within the always block that processes the current state. The output bits are assigned based on the current state and input bit.
+
+Note that this implementation assumes that the input bit stream is positive clock/clk triggered unless otherwise stated.

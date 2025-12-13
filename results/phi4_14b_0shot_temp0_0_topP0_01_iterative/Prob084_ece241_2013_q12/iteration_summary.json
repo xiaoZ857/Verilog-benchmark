@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob084_ece241_2013_q12",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Z' has 263 mismatches. First mismatch occurred at time 40.\nHint: Total mismatched samples is 263 out of 530 samples\n\nSimulation finished at 2650 ps\nMismatches: 263 in 530 samples\n",
+      "mismatch_count": 263
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Z' has 251 mismatches. First mismatch occurred at time 40.\nHint: Total mismatched samples is 251 out of 530 samples\n\nSimulation finished at 2650 ps\nMismatches: 251 in 530 samples\n",
+      "mismatch_count": 251
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Z' has 251 mismatches. First mismatch occurred at time 40.\nHint: Total mismatched samples is 251 out of 530 samples\n\nSimulation finished at 2650 ps\nMismatches: 251 in 530 samples\n",
+      "mismatch_count": 251
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Z' has 251 mismatches. First mismatch occurred at time 40.\nHint: Total mismatched samples is 251 out of 530 samples\n\nSimulation finished at 2650 ps\nMismatches: 251 in 530 samples\n",
+      "mismatch_count": 251
+    }
+  ]
+}

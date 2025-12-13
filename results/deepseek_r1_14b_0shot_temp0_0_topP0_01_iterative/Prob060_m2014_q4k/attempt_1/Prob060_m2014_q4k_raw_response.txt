@@ -1,0 +1,60 @@
+Here's the Verilog implementation of a 4-stage shift register using D flip-flops with a synchronous active-low reset:
+
+```verilog
+module TopModule (
+    input clk,
+    input resetn,
+    input in,
+    output out
+);
+
+    // Declare four D flip-flops for the shift register stages
+    dff ff1 (
+        .clk(clk),
+        .reset(resetn),  // Active-low reset connected directly
+        .d(in),
+        .q(q1)
+    );
+
+    dff ff2 (
+        .clk(clk),
+        .reset(resetn),
+        .d(q1),
+        .q(q2)
+    );
+
+    dff ff3 (
+        .clk(clk),
+        .reset(resetn),
+        .d(q2),
+        .q(q3)
+    );
+
+    dff ff4 (
+        .clk(clk),
+        .reset(resetn),
+        .d(q3),
+        .q(out)  // Output is the Q of the last flip-flop
+    );
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Definition:** The module `TopModule` has four ports:
+   - `clk`: Input clock signal.
+   - `resetn`: Active-low synchronous reset input.
+   - `in`: Data input to be shifted into the register.
+   - `out`: Output from the last flip-flop.
+
+2. **Flip-Flops:** Four D-type flip-flops (`dff`) are used, each connected in series:
+   - Each flip-flop's data input (D) is connected to the output (Q) of the previous flip-flop.
+   - The first flip-flop (`ff1`) takes the external `in` signal as its D input.
+   - The last flip-flop (`ff4`) provides the module's output (`out`).
+
+3. **Synchronous Reset:** All flip-flops receive the `resetn` signal at their reset (rst) port, which is active-low. When `resetn` is 0, all flip-flops are reset to 0.
+
+4. **Clock Signal:** Each flip-flop uses the positive-edge-triggered clock (`clk`) to capture data on each rising edge.
+
+This implementation creates a shift register where each flip-flop shifts its value to the next one on each clock cycle, with the final value appearing at `out`.

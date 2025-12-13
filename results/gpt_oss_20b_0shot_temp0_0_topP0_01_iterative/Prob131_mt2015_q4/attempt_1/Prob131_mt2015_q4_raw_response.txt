@@ -1,0 +1,32 @@
+Below is a clean, synthesizable Verilog implementation that follows the description exactly.
+
+```verilog
+// ------------------------------------------------------------
+//  Module A :  z = (x ^ y) & x
+// ------------------------------------------------------------
+module A (
+    input  wire x,
+    input  wire y,
+    output wire z
+);
+    assign z = (x ^ y) & x;          // combinational logic
+endmodule
+
+
+// ------------------------------------------------------------
+//  Module B :  z = x XNOR y   (output is 1 when x == y)
+// ------------------------------------------------------------
+module B (
+    input  wire x,
+    input  wire y,
+    output wire z
+);
+    assign z = ~(x ^ y);             // XNOR – matches the waveform
+endmodule
+
+
+// ------------------------------------------------------------
+//  Top‑level module
+//  - Two A instances (A1, A2)
+//  - Two B instances (B1, B2)
+//  - OR of A1.z

@@ -1,0 +1,50 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 16'b0000_0000_0000_0000;
+        ena <= 3'b000; // Reset all enable signals
+    end else begin
+        // Check for carry from ones to tens
+        if (q[3:0] == 4'b1001) begin
+            q[3:0] <= 4'b0000; // Reset ones digit
+            ena[1] = 1'b1;     // Enable tens increment
+        end else begin
+            q[3:0] <= q[3:0] + 4'b0001;
+            ena[1] = 1'b0;
+        end
+
+        // Check for carry from tens to hundreds
+        if (q[7:4] == 4'b1001) begin
+            q[7:4] <= 4'b0000; // Reset tens digit
+            ena[2] = 1'b1;     // Enable hundreds increment
+        end else if (ena[1]) begin
+            q[7:4] <= q[7:4] + 4'b0001;
+            ena[2] = 1'b0;
+        end
+
+        // Check for carry from hundreds to thousands
+        if (q[11:8] == 4'b1001) begin
+            q[11:8] <= 4'b0000; // Reset hundreds digit
+            ena[3] = 1'b1;     // Enable thousands increment
+        end else if (ena[2]) begin
+            q[11:8] <= q[11:8] + 4'b0001;
+            ena[3] = 1'b0;
+        end
+
+        // Check for carry from thousands to reset (if needed)
+        if (q[15:12] == 4'b1001) begin
+            q[15:12] <= 4'b0000; // Reset thousands digit
+        end else if (ena[3]) begin
+            q[15:12] <= q[15:12] + 4'b0001;
+        end
+
+    end
+end
+
+endmodule

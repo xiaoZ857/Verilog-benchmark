@@ -1,0 +1,37 @@
+ Here's the implementation of the XOR gate using Verilog as per your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+// Using assign statement for output out_assign
+assign out_assign = a ^ b;
+
+// Using combinational always block for output out_always_comb
+always @* begin
+    if(a == b)
+        out_always_comb <= 0;
+    else
+        out_always_comb <= 1;
+end
+
+// Using clocked always block for output out_always_ff (with a D flip-flop)
+reg out_always_ff_temp;
+always @(posedge clk) begin
+    if(a == b)
+        out_always_ff_temp <= 0;
+    else
+        out_always_ff_temp <= 1;
+    out_always_ff <= out_always_ff_temp;
+end
+
+endmodule
+```
+
+This code defines a module named `TopModule` with three inputs (`clk`, `a`, and `b`) and three outputs (`out_assign`, `out_always_comb`, and `out_always_ff`). The XOR gate is implemented using an assign statement, a combinational always block, and a clocked always block as described.

@@ -1,0 +1,37 @@
+Here’s a minimal, synthesizable implementation of a **level‑sensitive D‑latch** using an `always` block.  
+The latch follows the data input `d` while the enable `ena` is high; otherwise it holds its previous value.
+
+```verilog
+// TopModule.v
+// -------------
+// D‑latch (level‑sensitive)
+//   - When ena = 1, q follows d
+//   - When ena = 0, q holds its previous value
+//   - Uses a plain always block (no clock edge)
+//   - Non‑blocking assignment (<=) keeps the latch behavior
+//   - Sensitivity list includes both d and ena
+
+module TopModule (
+    input  logic d,   // Data input
+    input  logic ena, // Enable (level‑sensitive)
+    output logic q    // Latch output
+);
+
+    // Level‑sensitive latch
+    always @ (d or ena) begin
+        if (ena)
+            q <= d;   // Update output while enabled
+        // else: no assignment → latch holds previous value
+    end
+
+endmodule
+```
+
+### Why this works
+
+* **Level‑sensitive latch**: The latch is active while `ena` is high.  
+* **Sensitivity list**: `always @ (d or ena)` ensures the block is evaluated whenever either input changes.  
+* **Non‑blocking assignment (`<=`)**: Keeps the latch semantics and is the recommended style for sequential logic.  
+* **No clock**: Since the latch is level‑sensitive, no clock edge is required.
+
+Feel free to instantiate this module in a testbench or larger design.

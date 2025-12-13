@@ -1,0 +1,8 @@
+wire and1 = a & b;
+wire and2 = c & d;
+wire or_input = and1 | and2;
+
+assign out = or_input;
+assign out_n = !or_input;
+
+endmodule

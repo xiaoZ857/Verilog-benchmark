@@ -1,0 +1,91 @@
+
+module TopModule (
+    input clk,
+    input resetn,
+    input x,
+    input y,
+    output reg f,
+    output reg g
+);
+
+    typedef enum logic [2:0] {
+        STATE_A = 3'b000,  // Initial state
+        STATE_B = 3'b001,  // After setting f = 1 for one cycle
+        STATE_C = 3'b010,  // x == 1 detected
+        STATE_D = 3'b011,  // x == 0 after x == 1
+        STATE_E = 3'b100,  // x == 1 again (after x == 0)
+        STATE_F = 3'b101,  // g is set to 1, waiting for y = 1 within two cycles
+        STATE_G   = 3'b110, // g remains 1 permanently
+        STATE_H   = 3'b111  // Temporary state for checking y within two cycles
+    } state_t;
+
+    state_t current_state, next_state;
+    reg [1:0] x_sequence; // To track the sequence of x inputs
+
+    always_ff @(posedge clk or negedge resetn) begin
+        if (!resetn)
+            current_state <= STATE_A;
+        else
+            current_state <= next_state;
+
+        if (current_state == STATE_F && y == 1) begin
+            g <= 1; // Ensure g is set to 1 when y is detected
+        end
+
+        case (current_state)
+            STATE_B: x_sequence <= 2'b01;
+            STATE_C: x_sequence <= {x, x_sequence[1]};
+            STATE_D: x_sequence <= {1'b0, x_sequence[1:0]};
+            STATE_E: x_sequence <= {x, x_sequence[1:1]};
+        endcase
+    end
+
+    always_comb begin
+        // Default outputs and transitions
+        f = 0;
+        g = 0;
+
+        case (current_state)
+            STATE_A: begin
+                f = 1; // Set f to 1 for one cycle
+                next_state = STATE_B;
+            end
+            STATE_B: begin
+                if (x == 1) 
+                    next_state = STATE_C;
+                else 
+                    next_state = STATE_B; // Stay in STATE_B until x is 1
+            end
+            STATE_C: begin
+                if (x == 0)
+                    next_state = STATE_D;
+                else 
+                    next_state = STATE_C; // Stay in STATE_C until x is 0
+            end
+            STATE_D: begin
+                if (x == 1) 
+                    next_state = STATE_E;
+                else 
+                    next_state = STATE_B; // Reset sequence if x != 1
+            end
+            STATE_E: begin
+                if (x_sequence == 3'b101)
+                    next_state = STATE_F;
+                else 
+                    next_state = STATE_B; // Reset sequence if full pattern not matched
+            end
+            STATE_F: begin
+                g = 1; // Set g to 1
+                if (y) 
+                    next_state = STATE_G; // y detected, stay in STATE_G
+                else 
+                    next_state = STATE_H; // Move to check for y within two cycles
+            end
+            STATE_H: begin
+                if (y) 
+                    next_state = STATE_G;
+                else
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

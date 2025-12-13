@@ -1,0 +1,91 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+
+  // Define states using one-hot encoding
+  localparam STATE_A = 2'b00;
+  localparam STATE_B = 2'b01;
+
+  // State register
+  reg [1:0] current_state;
+
+  // Output register
+  reg z;
+
+  // Synchronous logic
+  always @(posedge clk) begin
+    if (areset) begin
+      current_state <= STATE_A;
+      z <= 0;
+    end else begin
+      case (current_state)
+        STATE_A: begin
+          if (x) begin
+            current_state <= STATE_B;
+            z <= 1;
+          end else begin
+            current_state <= STATE_A;
+            z <= 0;
+          end
+        end
+        STATE_B: begin
+          if (x) begin
+            current_state <= STATE_B;
+            z <= 0;
+          end else begin
+            current_state <= STATE_B;
+            z <= 1;
+          end
+        end
+        default: begin
+          current_state <= STATE_A;
+          z <= 0;
+        end
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, areset, x, z);` declares the module with the specified input and output signals.
+
+2. **State Definition (One-Hot Encoding):**
+   - `localparam STATE_A = 2'b00;` and `localparam STATE_B = 2'b01;` define the two states using one-hot encoding.  This means each state is represented by a unique binary pattern.
+
+3. **State Register:**
+   - `reg [1:0] current_state;` declares a 2-bit register to hold the current state.
+
+4. **Output Register:**
+   - `reg z;` declares a register to hold the output `z`.
+
+5. **Synchronous Logic (always @(posedge clk)):**
+   - `always @(posedge clk)` block describes the sequential logic that operates on the positive edge of the clock signal.
+
+6. **Asynchronous Reset:**
+   - `if (areset) begin ... end` handles the asynchronous reset. When `areset` is high, the state machine is reset to `STATE_A` and `z` is set to 0.
+
+7. **State Transition Logic (case statement):**
+   - `case (current_state)`:  This statement evaluates the current state and determines the next state and output based on the input `x`.
+   - **STATE_A:**
+     - If `x` is 1, the state transitions to `STATE_B` and `z` becomes 1.
+     - If `x` is 0, the state remains in `STATE_A` and `z` remains 0.
+   - **STATE_B:**
+     - If `x` is 1, the state remains in `STATE_B` and `z` becomes 0.
+     - If `x` is 0, the state remains in `STATE_B` and `z` becomes 1.
+   - **default:**  This handles any unexpected state values, resetting the state machine to `STATE_A`.
+
+**How it implements the Mealy Machine:**
+
+The code directly translates the state transition diagram into Verilog.  The `case` statement defines the state transitions based on the current state and the input `x`. The output `z` is determined *directly* by the current state and the input `x`, which is the defining characteristic of a Mealy machine.  The output is associated with the state transitions, not the states themselves.
+
+**To test this code:**
+
+You would need to create a testbench that provides clock signals, reset signals, and input `x` values to the `TopModule` and observes the output `z`.  The testbench should verify that the output `z` follows the specified behavior for different input sequences.

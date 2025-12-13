@@ -1,0 +1,38 @@
+{
+  "problem_name": "Prob032_vector0",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 1,
+  "total_attempts": 2,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'outv' has no mismatches.\nHint: Output 'o2' has 8 mismatches. First mismatch occurred at time 30.\nHint: Output 'o1' has no mismatches.\nHint: Output 'o0' has 8 mismatches. First mismatch occurred at time 30.\nHint: Total mismatched samples is 8 out of 21 samples\n\nSimulation finished at 107 ps\nMismatches: 8 in 21 samples\n",
+      "mismatch_count": 8
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

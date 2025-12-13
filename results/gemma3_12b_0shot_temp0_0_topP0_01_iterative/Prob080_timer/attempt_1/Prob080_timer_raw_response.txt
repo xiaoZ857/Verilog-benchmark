@@ -1,0 +1,54 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+
+  reg [9:0] counter;
+  reg tc_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      counter <= data;
+    end else if (counter > 0) begin
+      counter <= counter - 1;
+    end
+
+    if (counter == 0) begin
+      tc_reg <= 1;
+    end else begin
+      tc_reg <= 0;
+    end
+  end
+
+  assign tc = tc_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [9:0] counter;`**:  Declares a 10-bit register named `counter` to store the countdown value.  This is the internal counter.
+2. **`reg tc_reg;`**: Declares a register `tc_reg` to hold the value of the `tc` signal.  This is necessary because `tc` is an output and needs to be assigned within an `always` block.
+3. **`always @(posedge clk) begin ... end`**: This block describes the sequential logic that operates on the positive edge of the clock signal.
+4. **`if (load) begin counter <= data; end`**:  If the `load` signal is high, the `counter` is loaded with the value from the `data` input.  The `<=` operator is used for non-blocking assignment within the `always` block.
+5. **`else if (counter > 0) begin counter <= counter - 1; end`**: If `load` is low and the `counter` is greater than 0, the counter decrements by 1.  This is the countdown logic.
+6. **`if (counter == 0) begin tc_reg <= 1; end else begin tc_reg <= 0; end`**: This logic sets the `tc_reg` to 1 when the counter reaches 0, indicating a terminal count.  Otherwise, `tc_reg` is set to 0.
+7. **`assign tc = tc_reg;`**:  This continuous assignment connects the `tc_reg` register to the output signal `tc`.  This ensures that the output `tc` reflects the current value of the `tc_reg` register.
+
+**How it works:**
+
+* **Loading:** When `load` is high, the `counter` is initialized with the value provided by `data`.
+* **Counting Down:** When `load` is low, the `counter` decrements by 1 on each clock cycle.
+* **Terminal Count:** When the `counter` reaches 0, the `tc` signal is asserted (goes high).  The counter remains at 0 until the `load` signal is asserted again.
+
+**Key improvements and considerations:**
+
+* **Non-Blocking Assignments (`<=`):**  Using non-blocking assignments within the `always` block is crucial for correct sequential logic behavior.  This ensures that all assignments within the block are evaluated concurrently and updated at the end of the clock cycle.
+* **Register for Output:** The `tc` signal is assigned to a register (`tc_reg`) and then assigned to the output. This is necessary because outputs in sequential logic must be driven by registers.
+* **Clear Counter After Terminal Count:** The counter remains at 0 after reaching the terminal count until the `load` signal is asserted again. This behavior is consistent with the problem description.
+* **Positive Edge Triggered:** The `always @(posedge clk)` statement ensures that the logic is triggered on the positive edge of the clock signal.
+* **Conciseness and Readability:** The code is written to be concise and easy to understand.
+* **Correctness:** The code accurately implements the specified functionality.

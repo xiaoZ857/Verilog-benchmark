@@ -1,0 +1,105 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input cin,
+  output cout,
+  output sum
+);
+
+  // Internal signals
+  wire xor_ab;
+  wire xor_sum_cin;
+
+  // XOR gate for a XOR b
+  xor_ab = a ^ b;
+
+  // XOR gate for (a XOR b) XOR cin
+  xor_sum_cin = xor_ab ^ cin;
+
+  // Sum is the output of the second XOR gate
+  sum = xor_sum_cin;
+
+  // Carry-out is the OR of (a AND b) and ((a XOR b) AND cin)
+  cout = (a & b) | (xor_ab & cin);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule ( ... );` defines the module named `TopModule` and lists its input and output ports.
+
+2. **Input and Output Ports:**
+   - `input a, b, cin;`: Declares `a`, `b`, and `cin` as input signals.  `cin` is the carry-in.
+   - `output cout, sum;`: Declares `cout` (carry-out) and `sum` as output signals.
+
+3. **Internal Signals:**
+   - `wire xor_ab;`: Declares a wire named `xor_ab` to store the result of `a XOR b`.
+   - `wire xor_sum_cin;`: Declares a wire named `xor_sum_cin` to store the result of `(a XOR b) XOR cin`.
+
+4. **XOR Gates:**
+   - `xor_ab = a ^ b;`:  Performs the XOR operation between `a` and `b` and assigns the result to `xor_ab`.
+   - `xor_sum_cin = xor_ab ^ cin;`: Performs the XOR operation between `xor_ab` and `cin` and assigns the result to `xor_sum_cin`.
+
+5. **Sum Output:**
+   - `sum = xor_sum_cin;`:  Assigns the result of the second XOR gate (`xor_sum_cin`) to the `sum` output.  This is the sum bit.
+
+6. **Carry-Out Output:**
+   - `cout = (a & b) | (xor_ab & cin);`:  Calculates the carry-out.  The carry-out is high if either `a AND b` is high (meaning both `a` and `b` are 1) or if `(a XOR b) AND cin` is high.
+
+**How it works (Full Adder Logic):**
+
+A full adder calculates the sum and carry-out of three input bits: `a`, `b`, and `cin` (carry-in).
+
+* **Sum:** The sum is calculated as `(a XOR b) XOR cin`.
+* **Carry-out:** The carry-out is calculated as `(a AND b) OR ((a XOR b) AND cin)`.
+
+This Verilog code directly implements these equations using XOR and AND/OR gates.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  // Inputs
+  reg a;
+  reg b;
+  reg cin;
+
+  // Outputs
+  wire cout;
+  wire sum;
+
+  // Instantiate the Unit Under Test (UUT)
+  TopModule uut (
+    .a(a),
+    .b(b),
+    .cin(cin),
+    .cout(cout),
+    .sum(sum)
+  );
+
+  // Stimulus
+  initial begin
+    // Initialize Inputs
+    a = 0;
+    b = 0;
+    cin = 0;
+
+    // Test Cases
+    #10 a = 0; b = 0; cin = 0;
+    #10 a = 0; b = 0; cin = 1;
+    #10 a = 0; b = 1; cin = 0;
+    #10 a = 0; b = 1; cin = 1;
+    #10 a = 1; b = 0; cin = 0;
+    #10 a = 1; b = 0; cin = 1;
+    #10 a = 1; b = 1; cin = 0;
+    #10 a = 1; b = 1; cin = 1;
+
+    #10 $finish;
+  end
+
+  // Monitor the outputs
+  initial

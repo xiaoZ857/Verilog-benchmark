@@ -1,0 +1,91 @@
+To implement the Verilog module as described, we need to create a finite state machine (FSM) that controls the `shift_ena` signal. The FSM should enable `shift_ena` for exactly four clock cycles whenever a specific bit pattern is detected or when reset occurs. After these four cycles, `shift_ena` should remain low until another reset occurs.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg shift_ena
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    IDLE = 2'b00,
+    ENABLE_4_CYCLES = 2'b01,
+    WAIT_PATTERN = 2'b10
+  } state_t;
+
+  state_t current_state, next_state;
+  integer cycle_counter;
+
+  // Detect the specific bit pattern (assuming a simple example pattern)
+  reg [3:0] shift_reg; // Example shift register to detect pattern
+
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= IDLE;
+      cycle_counter <= 4;
+      shift_ena <= 1'b1; // Enable for 4 cycles on reset
+    end else begin
+      current_state <= next_state;
+
+      case (current_state)
+        IDLE: begin
+          if (shift_reg == 4'b1010) { // Example pattern to detect
+            next_state <= ENABLE_4_CYCLES;
+            cycle_counter <= 4;
+          } else begin
+            next_state <= WAIT_PATTERN;
+          end
+        end
+
+        ENABLE_4_CYCLES: begin
+          if (cycle_counter > 0) begin
+            shift_ena <= 1'b1;
+            cycle_counter <= cycle_counter - 1;
+            next_state <= ENABLE_4_CYCLES;
+          end else begin
+            shift_ena <= 1'b0;
+            next_state <= WAIT_PATTERN;
+          end
+        end
+
+        WAIT_PATTERN: begin
+          // Stay in this state until the pattern is detected again
+          if (shift_reg == 4'b1010) {
+            next_state <= ENABLE_4_CYCLES;
+            cycle_counter <= 4;
+          } else begin
+            next_state <= WAIT_PATTERN;
+          end
+        end
+
+      endcase
+    end
+  end
+
+  // Example shift register logic to detect pattern (for illustration)
+  always_ff @(posedge clk) begin
+    if (!reset) begin
+      shift_reg <= {shift_reg[2:0], 1'b0}; // Shift in a dummy bit for example
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Machine**: The FSM has three states:
+  - `IDLE`: Waits for the specific pattern to be detected.
+  - `ENABLE_4_CYCLES`: Enables `shift_ena` for four cycles.
+  - `WAIT_PATTERN`: Waits until the pattern is detected again.
+
+- **Pattern Detection**: A simple example pattern (`4'b1010`) is used. You can replace this with your actual pattern detection logic.
+
+- **Cycle Counter**: Used to count down from 4 during the `ENABLE_4_CYCLES` state to ensure `shift_ena` is enabled for exactly four cycles.
+
+- **Reset Logic**: On reset, the FSM goes to `IDLE`, and `shift_ena` is asserted for four cycles immediately.
+
+This module assumes a simple pattern detection mechanism. You may need to adjust the pattern detection logic based on your specific requirements.

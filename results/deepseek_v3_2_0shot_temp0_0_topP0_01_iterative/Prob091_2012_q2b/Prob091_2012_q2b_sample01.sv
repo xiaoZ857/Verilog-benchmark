@@ -1,0 +1,23 @@
+
+module TopModule (
+  input [5:0] y,
+  input w,
+  output Y1,
+  output Y3
+);
+  // Y1: next value for y[1] (state B)
+  // y[1] should be 1 only when next state is B
+  // From A to B when w=1
+  assign Y1 = (~y[5] & ~y[4] & ~y[3] & ~y[2] & ~y[1] & y[0] & w);
+  
+  // Y3: next value for y[3] (state D)
+  // y[3] should be 1 only when next state is D
+  // From B to D when w=0
+  // From C to D when w=0
+  // From E to D when w=0
+  // From F to D when w=0
+  assign Y3 = (~y[5] & ~y[4] & ~y[3] & ~y[2] & y[1] & ~y[0] & ~w) |  // B to D
+              (~y[5] & ~y[4] & ~y[3] & y[2] & ~y[1] & ~y[0] & ~w) |  // C to D
+              (~y[5] & y[4] & ~y[3] & ~y[2] & ~y[1] & ~y[0] & ~w) |  // E to D
+              (y[5] & ~y[4] & ~y[3] & ~y[2] & ~y[1] & ~y[0] & ~w);   // F to D
+endmodule

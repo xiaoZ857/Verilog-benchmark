@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:7: warning: macro full_adder undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:7: warning: macro TopModule undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:7: syntax error
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:7: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:7:      : between the tic and preprocessor directive?
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:10: error: `timescale directive can not be inside a module definition.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:7: error: Invalid module instantiation
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:21: warning: implicit definition of wire 's'.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:22: warning: implicit definition of wire 'cout'.

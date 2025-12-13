@@ -1,0 +1,32 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 26
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:11: error: can not select part of scalar: a
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:11: error: can not select part of scalar: b
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:11: error: can not select part of scalar: c
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:11: error: can not select part of scalar: d
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:12: error: can not select part of scalar: a
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:12: error: can not select part of scalar: a
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:12: error: can not select part of scalar: b
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:12: error: can not select part of scalar: b
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:13: error: can not select part of scalar: c
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:13: error: can not select part of scalar: c
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:13: error: can not select part of scalar: d
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:13: error: can not select part of scalar: d
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:11: error: Unable to elaborate r-value: ((((a[two])&(b[two]))&(c[two]))&(d[two]))|((((~((a[zero])|(a[one])))&(~((b[zero])|(b[one]))))&(~((c[zero])|(c[one]))))&(~((d[zero])|(d[one]))))
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:16: error: can not select part of scalar: a
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:16: error: can not select part of scalar: a
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:16: error: can not select part of scalar: a
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:17: error: can not select part of scalar: b
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:17: error: can not select part of scalar: b
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:17: error: can not select part of scalar: b
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:18: error: can not select part of scalar: c
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:18: error: can not select part of scalar: c
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:18: error: can not select part of scalar: c
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:19: error: can not select part of scalar: d
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:19: error: can not select part of scalar: d
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:19: error: can not select part of scalar: d
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob070_ece241_2013_q2\attempt_3\Prob070_ece241_2013_q2_code.sv:16: error: Unable to elaborate r-value: (((~(((a[two])|(a[seven]))|(a[fifteen])))&(~(((b[two])|(b[seven]))|(b[fifteen]))))&(~(((c[two])|(c[seven]))|(c[fifteen]))))&(~(((d[two])|(d[seven]))|(d[fifteen])))
+26 error(s) during elaboration.

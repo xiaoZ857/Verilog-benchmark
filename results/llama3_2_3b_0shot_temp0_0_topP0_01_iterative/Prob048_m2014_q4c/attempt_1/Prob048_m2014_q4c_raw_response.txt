@@ -1,0 +1,37 @@
+Here's the implementation of the Verilog module for the described D flip-flop:
+
+```verilog
+// Define the module
+module TopModule (
+  // Input signals
+  input clk,  // Positive clock signal
+  input d,    // Data to be stored in the flip-flop
+  input r,    // Reset signal (active high)
+  output logic q  // Output of the flip-flop
+);
+
+// Define the internal variables
+logic q_next;  // Next state of the flip-flop
+
+// D Flip-Flop Logic
+always @(posedge clk) begin
+  if (!r) begin  // If reset is active high, set to 0
+    q_next <= 0;
+  else begin  // Otherwise, update next state based on current data and previous state
+    q_next <= d;
+  end
+end
+
+// Assign the output of the flip-flop
+assign q = q_next;
+
+endmodule
+```
+
+In this implementation:
+
+- The `always` block is used to describe the behavior of the flip-flop.
+- The `posedge` keyword is used to specify that the logic inside should be executed when the clock signal transitions from 0 to 1 (i.e., on the rising edge).
+- The `q_next` variable represents the next state of the flip-flop, which is then assigned to the output `q`.
+- If the reset signal `r` is active high (i.e., it's 1), the flip-flop resets to 0. Otherwise, the next state is determined by the current data and previous state.
+- The `assign` statement assigns the value of `q_next` to the output `q`.

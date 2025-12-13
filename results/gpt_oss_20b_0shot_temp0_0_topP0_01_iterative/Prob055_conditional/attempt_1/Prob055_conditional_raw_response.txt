@@ -1,0 +1,43 @@
+Below is a clean, synthesizable implementation that simply compares the four 8‑bit inputs and drives the **min** output with the smallest value.  
+Because the module has no clock input, the logic is purely combinational – the `always @(*)` block is evaluated whenever any of the inputs change.
+
+```verilog
+// ------------------------------------------------------------
+//  TopModule : Find the minimum of four unsigned 8‑bit numbers
+// ------------------------------------------------------------
+module TopModule (
+    input  wire [7:0] a,      // first operand
+    input  wire [7:0] b,      // second operand
+    input  wire [7:0] c,      // third operand
+    input  wire [7:0] d,      // fourth operand
+    output reg  [7:0] min     // smallest of the four
+);
+
+    // Combinational logic – no clock required
+    always @(*) begin
+        // Start with a as the provisional minimum
+        min = a;
+
+        // Compare with b
+        if (b < min) min = b;
+
+        // Compare with c
+        if (c < min) min = c;
+
+        // Compare with d
+        if (d < min) min = d;
+    end
+
+endmodule
+```
+
+### How it works
+1. **Initial value** – `min` is first set to `a`.  
+2. **Sequential comparisons** – Each subsequent `if` statement checks whether the current input is smaller than the value already stored in `min`.  
+3. **Result** – After all four comparisons, `min` holds the smallest of the four inputs.
+
+### Why this is synthesizable
+- The block is purely combinational (`always @(*)`), so the synthesizer will generate a network of comparators and multiplexers.  
+- No clock edge or reset is required, matching the problem statement that signals are positive‑edge triggered only when a clock is explicitly present.
+
+Feel free to replace the `if` chain with a nested ternary expression or a `min` function if you prefer a more compact style, but the logic above is straightforward and easy to understand.

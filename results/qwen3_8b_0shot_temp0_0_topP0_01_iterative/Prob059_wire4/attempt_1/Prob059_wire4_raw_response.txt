@@ -1,0 +1,52 @@
+Here's the implementation of the `TopModule` in Verilog, as per the given description:
+
+---
+
+### ✅ **Module Description**
+
+- **Inputs**: `a`, `b`, `c`
+- **Outputs**: `w`, `x`, `y`, `z`
+- **Connections**:
+  - `a` → `w`
+  - `b` → `x`
+  - `b` → `y`
+  - `c` → `z`
+
+This is a **combinational logic** module, as no clock signal is involved. The outputs are directly assigned to the inputs using continuous assignments.
+
+---
+
+### 📜 **Verilog Code**
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+assign w = a;
+assign x = b;
+assign y = b;
+assign z = c;
+
+endmodule
+```
+
+---
+
+### 📌 **Explanation**
+
+- The `assign` statements create direct connections between the inputs and outputs.
+- Since there is no clock signal, the behavior is purely combinational.
+- This module will pass the input values to the corresponding output pins as specified.
+
+---
+
+### ✅ **Conclusion**
+
+This implementation satisfies the requirement of connecting the inputs to the outputs as described. It is a simple and efficient way to model the desired behavior using Verilog's continuous assignment syntax.

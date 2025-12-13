@@ -1,0 +1,30 @@
+Here's the Verilog module implementation for the described four-bit shift register and down counter:
+
+```verilog
+module TopModule(
+    input clk, // Positive clock signal
+    input shift_ena, // Enable to shift data into the register
+    input count_ena, // Enable to decrement the current value in the register
+    input [3:0] data, // Data to be shifted into the register
+    output reg [3:0] q // Current state of the register
+);
+
+// Initialize the register with all zeros
+reg [3:0] q = 0;
+
+// Shift data into the register when shift_ena is high
+assign q[0] = (shift_ena && !count_ena) ? data[0] : q[0];
+
+// Decrement the current value in the register when count_ena is high
+always @(posedge clk)
+begin
+    if(count_ena)
+        q <= {q[1:0], q[2:0]};
+end
+
+endmodule
+```
+
+In this implementation, we use a combination of `assign` statements and an `always` block to handle the shifting and decrementing operations. The `assign` statement is used to assign the new value of the most significant bit when shift_ena is high and count_ena is low. The `always` block is used to decrement the current value in the register when count_ena is high.
+
+Note that we use the `posedge` event to trigger the update of the q register, which means it will be updated on every positive edge of the clock signal. This ensures that the state of the register changes only when the clock signal transitions from low to high.

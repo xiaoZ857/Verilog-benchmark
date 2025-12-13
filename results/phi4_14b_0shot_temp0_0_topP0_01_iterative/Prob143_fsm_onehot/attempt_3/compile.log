@@ -1,0 +1,56 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 25
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:11: error: out1 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:6:      : out1 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:11: error: out2 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:7:      : out2 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:12: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:17: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:22: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:27: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:32: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:37: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:42: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:44: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:49: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:51: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:55: error: out1 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:6:      : out1 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:55: error: out2 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:7:      : out2 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:57: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:59: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:63: error: out1 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:6:      : out1 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:63: error: out2 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:7:      : out2 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:65: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:67: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:71: error: out1 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:6:      : out1 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:71: error: out2 is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:7:      : out2 is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:73: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:75: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:79: error: next_state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+25 error(s) during elaboration.

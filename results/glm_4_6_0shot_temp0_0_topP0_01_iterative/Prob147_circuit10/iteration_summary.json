@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob147_circuit10",
+  "model_name": "glm-4.6",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob147_circuit10_ref.sv:19: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/glm_4_6_0shot_temp0_0_topP0_01_iterative\\Prob147_circuit10\\attempt_2\\Prob147_circuit10_code.sv:11: error: state is not a valid l-value in tb.top_module1.\nresults/glm_4_6_0shot_temp0_0_topP0_01_iterative\\Prob147_circuit10\\attempt_2\\Prob147_circuit10_code.sv:7:      : state is declared here as wire.\nresults/glm_4_6_0shot_temp0_0_topP0_01_iterative\\Prob147_circuit10\\attempt_2\\Prob147_circuit10_code.sv:13: error: state is not a valid l-value in tb.top_module1.\nresults/glm_4_6_0shot_temp0_0_topP0_01_iterative\\Prob147_circuit10\\attempt_2\\Prob147_circuit10_code.sv:7:      : state is declared here as wire.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:112: warning: output port state is coerced to inout.\n2 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob147_circuit10_ref.sv:19: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

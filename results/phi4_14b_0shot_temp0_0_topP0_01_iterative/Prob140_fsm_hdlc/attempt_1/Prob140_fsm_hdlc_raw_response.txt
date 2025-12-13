@@ -1,0 +1,134 @@
+To implement the described Moore-type finite state machine (FSM) in Verilog, we need to define states that can recognize the specified bit patterns and produce the appropriate outputs. Here's a possible implementation:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input in,
+    output reg disc,
+    output reg flag,
+    output reg err
+);
+
+    // State encoding
+    typedef enum logic [2:0] {
+        IDLE,      // 000
+        ONE_1,     // 001
+        ONE_11,    // 010
+        ONE_111,   // 011
+        ONE_1111,  // 100
+        ONE_11110, // 101
+        ERROR      // 110
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= IDLE;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    always_comb begin
+        // Default outputs
+        disc = 1'b0;
+        flag = 1'b0;
+        err = 1'b0;
+
+        case (current_state)
+            IDLE: begin
+                if (in == 1) begin
+                    next_state = ONE_1;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            ONE_1: begin
+                if (in == 1) begin
+                    next_state = ONE_11;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            ONE_11: begin
+                if (in == 1) begin
+                    next_state = ONE_111;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            ONE_111: begin
+                if (in == 1) begin
+                    next_state = ONE_1111;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            ONE_1111: begin
+                if (in == 0) begin
+                    next_state = IDLE;
+                end else if (in == 1) begin
+                    next_state = ERROR;
+                end
+            end
+
+            ONE_11110: begin
+                if (in == 0) begin
+                    flag = 1'b1; // Assert flag for one cycle
+                    next_state = IDLE;
+                end else if (in == 1) begin
+                    next_state = ERROR;
+                end
+            end
+
+            ERROR: begin
+                err = 1'b1; // Assert error for one cycle
+                next_state = IDLE;
+            end
+
+            default: begin
+                next_state = IDLE;
+            end
+        endcase
+    end
+
+    always_ff @(posedge clk) begin
+        if (current_state == ONE_11110 && in == 0) begin
+            disc <= 1'b1; // Assert discard for one cycle
+        end else if (current_state == ERROR) begin
+            err <= 1'b1; // Assert error for one cycle
+        end else begin
+            disc <= 1'b0;
+            flag <= 1'b0;
+            err <= 1'b0;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We define states to track the sequence of consecutive `1`s. The FSM transitions through these states based on input bits.
+  
+- **IDLE State**: This is the default state, assuming the previous bit was `0`. It transitions to `ONE_1` if a `1` is detected.
+
+- **ONE_1 to ONE_1111 States**: These states track sequences of 1, 11, 111, and 1111. If another `1` follows, it moves to the next state; otherwise, it returns to `IDLE`.
+
+- **ONE_1111 State**: This is a critical state where:
+  - A `0` transitions back to `IDLE`.
+  - A `1` leads to an `ERROR` state due to more than six consecutive `1`s.
+
+- **ONE_11110 State**: If followed by `0`, it signals a frame boundary (`flag`) and returns to `IDLE`. If followed by `1`, it transitions to `ERROR`.
+
+- **ERROR State**: This handles sequences of seven or more consecutive `1`s, asserting an error signal.
+
+- **Outputs**: The outputs are asserted for one cycle after the condition is met. This is managed using a separate always block triggered on the positive edge of the clock.
+
+This FSM effectively decodes the bit stream according to the specified rules and signals the appropriate conditions.

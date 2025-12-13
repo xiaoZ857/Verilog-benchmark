@@ -1,0 +1,53 @@
+
+module TopModule(
+    input a, 
+    input b, 
+    input c, 
+    input d, 
+    output out
+);
+
+    // Create an internal module to implement the logic
+    module InternalLogic(
+        input a, 
+        input b, 
+        input c, 
+        input d,
+        output out
+    );
+
+    // Use the following logic equations based on the Karnaugh map:
+    // 1. ab = 1
+    // 2. cd = 0
+    // 3. ad = 1
+    // 4. bc = 1
+
+    // Create local variables to hold intermediate results
+    wire temp_out;
+
+    // Implement logic equation 1: ab = 1
+    assign temp_out = a & b;
+    
+    // Implement logic equation 2: cd = 0
+    assign out = ~c & d;
+
+    // Implement logic equation 3: ad = 1
+    assign temp_out = a & d;
+
+    // Implement logic equation 4: bc = 1
+    assign temp_out = b & c;
+
+    // Use the intermediate result to implement the final output
+    assign out = temp_out | ~temp_out;
+endmodule
+
+// Instantiate the internal module in the top-level module
+TopModule u_top_module(
+    .a(a),
+    .b(b),
+    .c(c),
+    .d(d),
+    .out(out)
+);
+
+// VERILOG-EVAL: errant inclusion of module definition

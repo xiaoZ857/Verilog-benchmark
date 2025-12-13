@@ -1,0 +1,22 @@
+Here's the Verilog implementation of a positive-edge triggered D flip-flop with an asynchronous reset:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+always @ (posedge clk) begin
+    if (ar) begin
+        q <= 0;
+    end else begin
+        q <= d;
+    end
+end
+
+endmodule
+```
+
+This code defines a D flip-flop that captures the data input `d` on each rising edge of the clock signal `clk`, unless an asynchronous reset is active (`ar` is high), in which case the output `q` is set to 0.

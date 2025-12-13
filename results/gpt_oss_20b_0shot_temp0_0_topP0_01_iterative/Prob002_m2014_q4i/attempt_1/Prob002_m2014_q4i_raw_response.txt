@@ -1,0 +1,35 @@
+Here is a minimal, synthesizable Verilog implementation that satisfies the specification:
+
+```verilog
+// TopModule.v
+// -------------
+// A module with no inputs and a single output that is permanently driven low.
+// No clock or other logic is required.
+
+`timescale 1ns / 1ps   // (optional – useful for simulation)
+
+module TopModule (
+    output out          // single output port
+);
+
+// Continuous assignment – drives the output low at all times
+assign out = 1'b0;
+
+endmodule
+```
+
+### Why this works
+
+* **No inputs** – The module has no input ports, so nothing can influence the output.
+* **Continuous assignment** – `assign out = 1'b0;` forces the output to logic `0` continuously, regardless of any clock or other signals.
+* **Synthesis‑friendly** – This is a simple combinational assignment that any synthesis tool will map to a constant‑0 driver (often just a ground connection).
+
+If you prefer an `always` block (e.g., for a style that explicitly uses clocking), you could write:
+
+```verilog
+always @* begin
+    out = 1'b0;
+end
+```
+
+but the continuous assignment is the most concise and idiomatic way to express a constant output.

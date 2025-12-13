@@ -1,0 +1,25 @@
+ Based on the provided simulation waveforms, it appears that the circuit is a simple counter with reset functionality. The counter counts up from 4 to 6 when `a` is high and resets to 0 when `a` is low. Here's the Verilog implementation of the TopModule:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+always @(posedge clk) begin
+  if (a) begin
+    if (q == 5'b10010) begin
+      q <= 3'b000; // reset counter when counting from 6 to 0
+    end
+    else begin
+      q <= q + 1; // increment counter when counting up
+    end
+  end
+  else begin
+    q <= 3'b000; // reset counter when a is low
+  end
+end
+```
+
+This Verilog code describes a synchronous sequential circuit that counts up from 4 to 6 when the `a` input is high and resets to 0 when `a` is low. The counter uses a 5-bit register, but since only the lower three bits are used in this example, I've defined an output `q` as a 3-bit register.

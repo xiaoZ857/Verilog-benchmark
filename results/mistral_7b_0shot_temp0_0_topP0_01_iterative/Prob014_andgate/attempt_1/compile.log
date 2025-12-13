@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob014_andgate\attempt_1\Prob014_andgate_code.sv:8: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob014_andgate\attempt_1\Prob014_andgate_code.sv:8: error: Failed to evaluate event expression 'posedge clk'.
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob014_andgate\attempt_1\Prob014_andgate_code.sv:17: error: Could not find variable ``clk'' in ``tb.top_module1''
+3 error(s) during elaboration.

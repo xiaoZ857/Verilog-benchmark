@@ -1,0 +1,35 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+  
+  // State definitions
+  localparam IDLE = 2'b00;
+  localparam SHIFTING = 2'b01;
+  localparam COUNTING = 2'b10;
+  localparam DONE = 2'b11;
+  
+  reg [1:0] state, next_state;
+  
+  // Pattern detection shift register
+  reg [3:0] pattern_reg;
+  
+  // Counter for shift_ena cycles
+  reg [1:0] shift_counter;
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      pattern_reg <= 4'b0000;
+      shift_counter <= 2'b00;
+      shift_ena <= 
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

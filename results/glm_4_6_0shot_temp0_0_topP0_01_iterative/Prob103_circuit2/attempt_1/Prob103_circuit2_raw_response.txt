@@ -1,0 +1,19 @@
+
+Looking at the waveform table, I can analyze the relationship between inputs a, b, c, d and output q:
+
+```
+a b c d | q
+--------|--
+0 0 0 0 | 1
+0 0 0 1 | 0
+0 0 1 0 | 0
+0 0 1 1 | 1
+0 1 0 0 | 0
+0 1 0 1 | 1
+0 1 1 0 | 1
+0 1 1 1 | 0
+1 0 0 0 | 0
+1 0 0 1 | 1
+1 0 1 0 | 1
+1 0 1 1 | 0
+1 1 0 0 | 

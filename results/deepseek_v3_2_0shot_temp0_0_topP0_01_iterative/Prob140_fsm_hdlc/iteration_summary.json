@@ -1,0 +1,65 @@
+{
+  "problem_name": "Prob140_fsm_hdlc",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 3,
+  "total_attempts": 5,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob140_fsm_hdlc_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob140_fsm_hdlc_ref.sv:38: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 52 mismatches. First mismatch occurred at time 70.\nHint: Output 'flag' has no mismatches.\nHint: Output 'err' has no mismatches.\nHint: Total mismatched samples is 52 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 52 in 801 samples\n",
+      "mismatch_count": 52
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob140_fsm_hdlc_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob140_fsm_hdlc_ref.sv:38: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has no mismatches.\nHint: Output 'flag' has no mismatches.\nHint: Output 'err' has 24 mismatches. First mismatch occurred at time 240.\nHint: Total mismatched samples is 24 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 24 in 801 samples\n",
+      "mismatch_count": 24
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has no mismatches.\nHint: Output 'flag' has no mismatches.\nHint: Output 'err' has 58 mismatches. First mismatch occurred at time 80.\nHint: Total mismatched samples is 58 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 58 in 801 samples\n",
+      "mismatch_count": 58
+    }
+  ]
+}

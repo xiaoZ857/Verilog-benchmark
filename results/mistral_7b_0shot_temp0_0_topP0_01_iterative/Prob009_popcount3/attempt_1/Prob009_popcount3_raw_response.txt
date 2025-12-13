@@ -1,0 +1,36 @@
+ Here is a simple Verilog implementation for a 3-bit population count circuit based on the given description:
+
+```verilog
+module TopModule (
+  input [2:0] in,
+  output reg [1:0] out
+);
+
+// Partial population count for each bit position
+reg pcount_msb [3:0];
+reg pcount_mid [2:0];
+reg pcount_lsb;
+
+always @(posedge clk) begin
+  // Calculate partial population counts for each bit position
+  pcount_msb[0] <= in[2] + pcount_mid[1];
+  pcount_msb[1] <= in[1] + pcount_mid[0];
+  pcount_msb[2] <= in[0] + pcount_lsb;
+
+  // Calculate partial population count for middle bit position
+  pcount_mid[0] <= (in[1] >> 1) + pcount_lsb;
+  pcount_mid[1] <= (in[1] & 1) + pcount_msb[1];
+
+  // Calculate partial population count for least significant bit position
+  pcount_lsb <= in[0] & 1'b1;
+end
+
+always @(posedge clk) begin
+  out[0] <= pcount_msb[2];
+  out[1] <= pcount_msb[1] + pcount_mid[1];
+end
+```
+
+This Verilog module calculates the population count of a 3-bit input vector using partial population counts for each bit position. The `out` signal represents the final population count, with the most significant bit (MSB) in `out[0]` and the least significant bit (LSB) in `out[1]`.
+
+The module uses two always blocks to calculate the population count at different clock edges: one block calculates the partial population counts for each bit position on the positive edge of the clock, and another block combines these partial counts to produce the final output on the next positive edge of the clock.

@@ -1,0 +1,15 @@
+Here is the Verilog code for the module described:
+
+```verilog
+module TopModule(
+    output one
+);
+
+    // Always block to ensure the output is driven high
+    always @(*) begin
+        one = 1;
+    end
+endmodule
+```
+
+In this code, we use an `always` block with a sensitivity list of zero (`@(*)`) to create a combinational logic that always sets the output `one` to 1. This ensures that the output is driven high regardless of any inputs or other signals in the module.

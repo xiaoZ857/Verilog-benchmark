@@ -1,0 +1,42 @@
+To implement the described Verilog module, we need to create a four-bit shift register that can also act as a down counter. The behavior is controlled by two inputs: `shift_ena` and `count_ena`. When `shift_ena` is high, data is shifted into the register from the most significant bit (MSB). When `count_ena` is high, the current value in the shift register is decremented.
+
+Here's how you can implement this module:
+
+```verilog
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+
+always @(posedge clk) begin
+    if (shift_ena) begin
+        // Shift in the new data from MSB
+        q <= {data, q[3:1]};
+    end else if (count_ena) begin
+        // Decrement the current value
+        q <= q - 1;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `clk`: The clock signal.
+  - `shift_ena`: When high, enables shifting of data into the register.
+  - `count_ena`: When high, enables decrementing the current value in the register.
+  - `data`: The new bit to be shifted into the MSB position when `shift_ena` is active.
+  - `q`: A four-bit output representing the current state of the shift register.
+
+- **Behavior**:
+  - On each positive edge of the clock (`posedge clk`), the module checks the control signals.
+  - If `shift_ena` is high, it shifts in the new data bit into the MSB position. The rest of the bits are shifted right by one position: `{data, q[3:1]}`.
+  - If `count_ena` is high and `shift_ena` is not active, it decrements the current value stored in `q`.
+  - If both `shift_ena` and `count_ena` are high, the behavior is undefined as per the problem statement, but this implementation prioritizes shifting over counting.
+
+This module effectively combines a shift register with a down counter, controlled by two separate enable signals.

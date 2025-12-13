@@ -1,0 +1,46 @@
+To implement the described Verilog module for a 4-bit shift register with asynchronous reset, synchronous load, and enable signals, you can follow this structure:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire load,
+    input wire ena,
+    input wire [3:0] data,
+    output reg [3:0] q
+);
+
+    // Asynchronous reset and synchronous operations
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Reset the shift register to zero on asynchronous reset
+            q <= 4'b0000;
+        end else begin
+            if (load) begin
+                // Load data into the shift register when load is asserted
+                q <= data;
+            end else if (ena) begin
+                // Shift right operation when enable is asserted
+                q <= {1'b0, q[3:1]};
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Asynchronous Reset (`areset`)**:
+  - The reset condition is checked first. If `areset` is high, the shift register `q` is set to zero regardless of other signals.
+
+- **Synchronous Operations**:
+  - These operations occur on the positive edge of the clock.
+  
+- **Load Operation**:
+  - When `load` is asserted (high), the data input `[3:0]` is loaded into the shift register `q`. This operation takes precedence over shifting if both `load` and `ena` are high.
+
+- **Shift Right Operation (`ena`)**:
+  - If `ena` is asserted, the contents of `q` are shifted right by one bit. The leftmost bit becomes zero, and the rightmost bit is discarded.
+
+This module ensures that the operations occur in the correct order with proper priority handling between loading and shifting.

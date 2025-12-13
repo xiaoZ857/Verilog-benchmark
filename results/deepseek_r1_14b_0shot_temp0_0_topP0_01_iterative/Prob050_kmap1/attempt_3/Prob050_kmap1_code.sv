@@ -1,0 +1,23 @@
+
+// Set the time scale for simulation (1 ns = 1 nanosecond)
+`timescale 1ns / 1ps
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output out
+);
+
+  // Implement the Karnaugh map logic
+  always_comb begin
+    if (~b & ~c) begin
+      out = ~a;
+    end else begin
+      out = 1;
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

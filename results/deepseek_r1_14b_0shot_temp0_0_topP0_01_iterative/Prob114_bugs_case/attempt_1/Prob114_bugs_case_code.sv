@@ -1,0 +1,32 @@
+
+module TopModule (
+    input [7:0] code,
+    output reg [3:0] out,
+    output reg valid
+);
+
+always @* begin
+    case (code)
+        8'h45: begin
+            out = 0;
+            valid = 1;
+        end
+        8'h16: begin
+            out = 1;
+            valid = 1;
+        end
+        8'h1e: begin
+            out = 2;
+            valid = 1;
+        end
+        8'h26: begin
+            out = 3;
+            valid = 1;
+        end
+        8'h25: begin
+            out = 4;
+            valid = 1
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

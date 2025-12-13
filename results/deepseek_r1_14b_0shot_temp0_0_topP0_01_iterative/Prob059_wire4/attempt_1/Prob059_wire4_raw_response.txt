@@ -1,0 +1,21 @@
+Here is the Verilog implementation of the TopModule based on the given connections:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+  // Assign each output to its corresponding input
+  assign w = a;
+  assign x = b;
+  assign y = b;
+  assign z = c;
+endmodule
+```
+
+This module directly connects the inputs `a`, `b`, and `c` to the outputs `w`, `x`, `y`, and `z` as specified.

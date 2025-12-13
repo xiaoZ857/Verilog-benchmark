@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    state <= 0; // Reset the FSM to the initial state
+    sequence_counter <= 1'b0; // Reset the counter and start searching from the first bit
+  end else if (state == 0) begin
+    // Move to the next state and start checking for the sequence
+    state <= 1;
+    sequence_counter <= 4'b1; // Set the counter to 4, representing the length of the sequence
+  end else if (sequence_counter > 0) begin
+    // Check if the current bit matches the expected bit in the sequence
+    if (data == sequence_counter % 4) begin
+      // Move to the next state and decrement the counter
+      state <= state + 1;
+      sequence_counter <= sequence_counter - 1;
+    end else begin
+      // Reset the counter and stay in the same state
+      sequence_counter <= 1'b0;
+    end
+  end else if (state == 4 && sequence_counter == 1'b0) begin
+    // Found the entire sequence, set start_shifting to 1 and loop back to the initial state
+    start_shifting <= 1;
+    state <= 0;
+  end
+end
+
+// VERILOG-EVAL: endmodule not found

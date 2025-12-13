@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_2\Prob137_fsm_serial_code.sv:23: error: done is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_2\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_2\Prob137_fsm_serial_code.sv:27: error: done is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_2\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_2\Prob137_fsm_serial_code.sv:49: error: done is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_2\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.
+3 error(s) during elaboration.

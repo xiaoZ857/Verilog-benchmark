@@ -1,0 +1,28 @@
+To implement a Verilog module with 8 D flip-flops, each triggered on the positive edge of the clock (`clk`), you can use an `always` block to describe the behavior. The input `d` is an 8-bit vector that represents the data inputs for the flip-flops, and `q` is an 8-bit output vector representing the state of the flip-flops.
+
+Here's how you can implement this module:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] d,
+    output reg [7:0] q
+);
+
+    // Always block triggered on the positive edge of the clock
+    always @(posedge clk) begin
+        q <= d;  // Capture the value of 'd' into 'q'
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` is declared with three ports: an input `clk`, an 8-bit input vector `d`, and an 8-bit output register vector `q`.
+
+- **Always Block**: 
+  - The `always @(posedge clk)` block specifies that the logic inside should be executed on every positive edge of the clock signal.
+  - Inside this block, `q <= d;` is used to update the value of `q` with the current value of `d`. The non-blocking assignment (`<=`) is typically used in sequential logic to ensure proper simulation and synthesis behavior.
+
+This module effectively creates a set of 8 D flip-flops that capture the input data on each rising edge of the clock.

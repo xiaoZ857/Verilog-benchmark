@@ -1,0 +1,28 @@
+ Here is the Verilog code for a simple half adder based on your description:
+
+```verilog
+module HalfAdder (
+  input wire a,
+  input wire b,
+  output wire sum,
+  output wire cout
+);
+
+// Internal signals
+wire xor_result;
+
+// XOR gate for sum calculation
+xor #1 xor_result (a, b);
+
+// Assign outputs based on internal signal
+assign sum = xor_result;
+assign cout = a & b; // AND gate implicitly created by the assignment
+
+endmodule
+```
+
+In this code, I've created a simple half adder module named `HalfAdder`. The inputs are `a` and `b`, and the outputs are `sum` (the sum of two bits) and `cout` (carry-out).
+
+The internal signal `xor_result` is used to store the result of the XOR operation between `a` and `b`. An XOR gate with a 1ns delay is created using the `xor #1` statement. The sum output is then assigned as the value of `xor_result`.
+
+The carry-out (`cout`) is calculated by performing an AND operation between `a` and `b`, which implicitly creates an AND gate due to the assignment statement. This AND operation checks if both inputs are 1, resulting in a carry-out of 1.

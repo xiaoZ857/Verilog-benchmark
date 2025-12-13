@@ -1,0 +1,53 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+always_ff @(posedge clk or posedge areset) begin
+  if (areset) begin
+    current_state <= IDLE;
+  end else begin
+    current_state <= next_state;
+  end
+end
+
+always_comb begin
+  case (current_state)
+    IDLE: begin
+      z = 1'b0; // Default output in IDLE state
+      if (!areset) begin
+        next_state = COMPLEMENT;
+      end else begin
+        next_state = IDLE;
+      end
+    end
+
+    COMPLEMENT: begin
+      if (x == 1'b1) begin
+        z = 1'b1; // Add one for 2's complement
+        next_state = DONE;
+      end else begin
+        z = ~x; // Complement the input bit
+        next_state = COMPLEMENT;
+      end
+    end
+
+    DONE: begin
+      z = x; // Pass through remaining bits
+      if (areset) begin
+        next_state = IDLE;
+      end else begin
+        next_state = DONE;
+      end
+    end
+
+    default: begin
+      z = 1'b0;
+      next_state = IDLE;
+    end
+  endcase
+end
+
+endmodule

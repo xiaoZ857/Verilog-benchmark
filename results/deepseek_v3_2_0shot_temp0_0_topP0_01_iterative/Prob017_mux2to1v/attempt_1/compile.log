@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob017_mux2to1v\attempt_1\Prob017_mux2to1v_code.sv:8: syntax error
+results/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\Prob017_mux2to1v\attempt_1\Prob017_mux2to1v_code.sv:8: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob017_mux2to1v_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob017_mux2to1v_ref.sv:13: syntax error
+I give up.

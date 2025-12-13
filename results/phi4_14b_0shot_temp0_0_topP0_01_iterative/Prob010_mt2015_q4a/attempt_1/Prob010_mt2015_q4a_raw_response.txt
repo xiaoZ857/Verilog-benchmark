@@ -1,0 +1,38 @@
+To implement the given Boolean function \( z = (x \oplus y) \land x \) in Verilog, we need to create a module that takes two inputs, `x` and `y`, and produces one output, `z`. The operation involves an XOR between `x` and `y`, followed by an AND with `x`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+  // Intermediate wire to hold the result of (x ^ y)
+  wire xor_result;
+
+  // Compute the XOR of x and y
+  assign xor_result = x ^ y;
+
+  // Compute the final output z as (xor_result) & x
+  assign z = xor_result & x;
+
+endmodule
+```
+
+### Explanation:
+
+1. **Inputs and Outputs:**
+   - The module `TopModule` has two inputs, `x` and `y`, and one output, `z`.
+
+2. **Intermediate Wire:**
+   - A wire named `xor_result` is declared to store the result of the XOR operation between `x` and `y`.
+
+3. **XOR Operation:**
+   - The XOR operation is performed using the `^` operator in Verilog, which computes \( x \oplus y \).
+
+4. **AND Operation:**
+   - The final output `z` is computed by performing an AND operation between `xor_result` and `x`, using the `&` operator.
+
+This implementation directly follows the logic described by the Boolean function \( z = (x \oplus y) \land x \).

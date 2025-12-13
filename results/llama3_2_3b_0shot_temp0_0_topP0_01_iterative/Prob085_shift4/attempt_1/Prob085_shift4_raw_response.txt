@@ -1,0 +1,38 @@
+Here is the Verilog module implementation for the described shift register:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+reg [3:0] q_reg;
+
+always @(posedge clk) begin
+  if (areset) begin
+    q_reg <= 4'b0000;
+  end else if (load && !ena) begin
+    q_reg <= data;
+  end else if (ena) begin
+    q_reg[3] <= 1'b0;
+    q_reg <= q_reg[2:0];
+  end
+end
+
+assign q = q_reg;
+
+endmodule
+```
+
+Explanation:
+
+- The `q_reg` is a register that holds the current state of the shift register.
+- In the always block, we check for three conditions:
+  - If `areset` is asserted, we reset `q_reg` to zero (4'b0000).
+  - If both `load` and `ena` are asserted, we load `q_reg` with the data provided on the `data` input.
+  - If only `ena` is asserted, we shift the bits of `q_reg` one position to the right by setting `q_reg[3]` to zero and assigning the rest of the bits from `q_reg[2:0]`.
+- The output `q` is assigned the value of `q_reg`.

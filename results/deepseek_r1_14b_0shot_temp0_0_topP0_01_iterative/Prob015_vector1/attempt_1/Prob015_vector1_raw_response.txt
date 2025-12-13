@@ -1,0 +1,34 @@
+To solve this problem, we need to design a combinational Verilog module that splits a 16-bit input into two 8-bit outputs: one containing the higher-order bits and the other containing the lower-order bits.
+
+### Approach
+The task is straightforward as it involves slicing the 16-bit input into two 8-bit parts. The key steps are:
+1. **Extracting Lower Byte**: The lower 8 bits (bits 7 to 0) of the input will form the `out_lo` output.
+2. **Extracting Higher Byte**: The higher 8 bits (bits 15 to 8) of the input will form the `out_hi` output.
+
+In Verilog, we can directly assign these bit ranges to the respective outputs using simple slice assignments.
+
+### Solution Code
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+  
+  // Assign higher byte (bits 15-8) to out_hi
+  assign out_hi = in[15:8];
+  
+  // Assign lower byte (bits 7-0) to out_lo
+  assign out_lo = in[7:0];
+  
+endmodule
+```
+
+### Explanation
+- **Module Definition**: The module `TopModule` is defined with an input `in` of width 16 bits and two outputs `out_hi` and `out_lo`, each of width 8 bits.
+- **Assignments**:
+  - `out_hi` is assigned the higher-order 8 bits of `in` using the slice `in[15:8]`.
+  - `out_lo` is assigned the lower-order 8 bits of `in` using the slice `in[7:0]`.
+
+This approach efficiently splits the input into two parts without any additional logic, ensuring a simple and fast solution.

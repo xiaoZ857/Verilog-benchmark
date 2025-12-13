@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16: warning: Constant bit select [4] is after vector sel[3:0].
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16:        : Replacing select with a constant 1'bx.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16: warning: Constant bit select [5] is after vector sel[3:0].
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16:        : Replacing select with a constant 1'bx.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16: warning: Constant bit select [6] is after vector sel[3:0].
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16:        : Replacing select with a constant 1'bx.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16: warning: Constant bit select [7] is after vector sel[3:0].
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:16:        : Replacing select with a constant 1'bx.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:17: warning: Constant bit select [8] is after vector sel[3:0].
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:17:        : Replacing select with a constant 1'bx.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:19: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob097_mux9to1v\attempt_3\Prob097_mux9to1v_code.sv:19: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

@@ -1,0 +1,25 @@
+ Here is a Verilog implementation for a 5-bit maximal-length Galois LFSR with taps at bit positions 5 and 3 as described:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+
+// Maximal-Length LFSR Polynomial for a 5-bit register: x^5 + x^3 + 1
+reg [4:0] lfsr = 5'b10101; // Initial value of the LFSR
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 5'b1; // Reset output to 1 when reset is active-high
+    end else begin
+        lfsr <= {lfsr[4:2], lfsr[0] ^ lfsr[4]}; // Shift LFSR right and XOR tap bits
+        q <= lfsr; // Assign output to current state of the LFSR
+    end
+end
+
+endmodule
+```
+
+This Verilog module defines a top-level entity called `TopModule`. The LFSR is implemented using an always block that updates the LFSR and output register on the positive edge of the clock or reset signal. The initial value of the LFSR is set to 5'b10101, which corresponds to the maximal-length polynomial for a 5-bit register with taps at bit positions 5 and 3. When the reset signal is active-high, the output is set to 1. Otherwise, the LFSR shifts right and XORs the tap bits (bits 5 and 0) before assigning the current state of the LFSR as the output.

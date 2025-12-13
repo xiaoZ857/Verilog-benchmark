@@ -1,0 +1,26 @@
+Here’s a minimal, synthesizable implementation that satisfies the specification.  
+The key trick is the *variable part‑select* (`in[sel]`), which lets you index a packed vector with a runtime value.
+
+```verilog
+// 1‑bit wide, 256‑to‑1 multiplexer
+//  in  : 256‑bit input vector (in[255] … in[0])
+//  sel : 8‑bit select (0‑255)
+//  out : 1‑bit output
+module TopModule (
+    input  [255:0] in,
+    input  [7:0]   sel,
+    output         out
+);
+    // Variable part‑select – synthesizable and very compact
+    assign out = in[sel];
+endmodule
+```
+
+### Why this works
+
+* `in[sel]` is a *variable part‑select* in Verilog‑2001 and later.  
+  It selects the bit of `in` whose index equals the value of `sel`.  
+* The synthesis tool will generate a 256‑to‑1 multiplexer (or a barrel‑shifter‑style implementation) automatically.  
+* No explicit `case` or `generate` block is required, keeping the code short and clear.
+
+If you prefer a more explicit (but larger) implementation, you could write a `case` statement or a `generate` loop, but the single continuous assignment above is the idiomatic Verilog solution.

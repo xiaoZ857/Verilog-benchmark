@@ -1,0 +1,74 @@
+{
+  "problem_name": "Prob128_fsm_ps2",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 3,
+  "total_attempts": 6,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:26: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:29: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:66: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_1\\Prob128_fsm_ps2_code.sv:33: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:25: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:34: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:65: error: done is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:31: sorry: constant selects in always_* processes are not currently supported (all bits will be included).\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 90 mismatches. First mismatch occurred at time 210.\nHint: Total mismatched samples is 90 out of 400 samples\n\nSimulation finished at 2001 ps\nMismatches: 90 in 400 samples\n",
+      "mismatch_count": 90
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 68 mismatches. First mismatch occurred at time 240.\nHint: Total mismatched samples is 68 out of 400 samples\n\nSimulation finished at 2001 ps\nMismatches: 68 in 400 samples\n",
+      "mismatch_count": 68
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 68 mismatches. First mismatch occurred at time 240.\nHint: Total mismatched samples is 68 out of 400 samples\n\nSimulation finished at 2001 ps\nMismatches: 68 in 400 samples\n",
+      "mismatch_count": 68
+    },
+    {
+      "attempt": 6,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'done' has 68 mismatches. First mismatch occurred at time 240.\nHint: Total mismatched samples is 68 out of 400 samples\n\nSimulation finished at 2001 ps\nMismatches: 68 in 400 samples\n",
+      "mismatch_count": 68
+    }
+  ]
+}

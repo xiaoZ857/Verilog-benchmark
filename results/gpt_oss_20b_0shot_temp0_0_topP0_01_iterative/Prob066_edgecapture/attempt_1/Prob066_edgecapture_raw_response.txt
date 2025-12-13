@@ -1,0 +1,12 @@
+Here’s a compact, synthesizable implementation that does exactly what you described:
+
+```verilog
+// TopModule.v
+// Detects a falling edge (1 → 0) on each bit of a 32‑bit vector.
+// When a falling edge occurs, the corresponding output bit is set to 1
+// and stays high until a synchronous active‑high reset clears it.
+
+module TopModule (
+    input  wire        clk,   // positive‑edge clock
+    input  wire        reset, // active‑high synchronous reset
+    input  wire [31:0] in,    // 32‑bit input vector

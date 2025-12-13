@@ -1,0 +1,41 @@
+Here's the Verilog module implementation based on the provided description:
+
+```verilog
+// Define the TopModule with inputs, outputs and internal signals
+module TopModule(
+    // Clock signal
+    input clk,
+
+    // Input signal 'a'
+    input a,
+
+    // Output signal 'q'
+    output reg q
+);
+
+// Initialize the output signal 'q' to 0
+initial begin
+    q <= 0;
+end
+
+// Define the always block for sequential logic
+always @(posedge clk) begin
+    if (a == 1) begin
+        q <= 1;
+    end else if (q == 1 && a == 0) begin
+        q <= 0;
+    end
+end
+
+endmodule
+```
+
+This implementation includes the following:
+
+- The `TopModule` is defined with inputs `clk`, `a`, and output `q`.
+- An initial block sets the output signal `q` to 0.
+- The always block uses a positive edge-triggered clock (`posedge clk`) to update the value of `q`. It checks for two conditions:
+    - If input `a` is high (1), then `q` is set to 1.
+    - If `q` is currently high and `a` is low, then `q` is reset to 0.
+
+This implementation matches the provided simulation waveforms.

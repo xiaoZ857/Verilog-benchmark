@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_1\Prob039_always_if_code.sv:15: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_1\Prob039_always_if_code.sv:15: error: Failed to evaluate event expression 'posedge clk'.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_1\Prob039_always_if_code.sv:15: error: Unable to bind wire/reg/memory `reset' in `tb.top_module1'
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob039_always_if\attempt_1\Prob039_always_if_code.sv:15: error: Failed to evaluate event expression 'negedge reset'.
+4 error(s) during elaboration.

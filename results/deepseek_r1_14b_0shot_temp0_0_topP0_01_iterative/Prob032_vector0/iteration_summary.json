@@ -1,0 +1,38 @@
+{
+  "problem_name": "Prob032_vector0",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 0,
+  "total_attempts": 2,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:13: warning: macro vec undefined (and assumed null) at this point.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:14: warning: macro outv undefined (and assumed null) at this point.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:15: warning: macro o0 undefined (and assumed null) at this point.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:9: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:15: error: Stray tic (`) here. Perhaps you put white space\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:15:      : between the tic and preprocessor directive?\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob032_vector0_test.sv:1: error: `timescale directive can not be inside a module definition.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob032_vector0\\attempt_1\\Prob032_vector0_code.sv:9: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+Below is a minimal, synthesizable Verilog implementation of a **half‑adder**.  
+The module is purely combinational – no clock is required – so the logic is expressed with continuous assignments (`assign`).  
+
+```verilog
+//=====================================================================
+//  Half‑Adder
+//  Adds two single‑bit inputs (a, b) and produces:
+//      sum  – the XOR of the inputs
+//      cout – the AND of the inputs (carry out)
+//=====================================================================
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire a,      // First operand
+    input  wire b,      // Second operand
+    output wire sum,    // Sum output (a XOR b)
+    output wire cout    // Carry‑out output (a AND b)
+);
+
+// Combinational logic
+assign sum  = a ^ b;   // XOR gives the sum bit
+assign cout = a & b;   // AND gives the carry bit
+
+endmodule
+```
+
+### Notes
+- **No clock** – the half‑adder is a combinational circuit, so the outputs change immediately when the inputs change.
+- **Synthesis‑friendly** – using `wire` and continuous assignments keeps the design simple and portable across tools.
+- **Testbench** – you can create a simple stimulus that toggles `a` and `b` to verify the truth table.

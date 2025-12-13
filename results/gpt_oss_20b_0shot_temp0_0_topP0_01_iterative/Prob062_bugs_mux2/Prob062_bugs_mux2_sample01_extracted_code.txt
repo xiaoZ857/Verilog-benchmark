@@ -1,0 +1,5 @@
+always @(*) begin
+    out = (~sel & a) | (sel & b);
+end
+
+endmodule

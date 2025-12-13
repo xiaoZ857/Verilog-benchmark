@@ -1,0 +1,14 @@
+Here is the Verilog implementation of the TopModule:
+
+```verilog
+module TopModule (
+  output one
+);
+  
+  // Assign the output to logic high (1)
+  assign one = 1;
+
+endmodule
+```
+
+This module has no inputs and one output. The `assign` statement ensures that the output `one` is always driven to a logic high value, regardless of timing or other conditions.

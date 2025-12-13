@@ -1,0 +1,34 @@
+```verilog
+module TopModule (
+  input mode,
+  input too_cold,
+  input too_hot,
+  input fan_on,
+  output heater,
+  output aircon,
+  output fan
+);
+
+  // Heater is on if in heating mode and it's too cold
+  assign heater = mode & too_cold;
+
+  // Air conditioner is on if in cooling mode and it's too hot
+  assign aircon = ~mode & too_hot;
+
+  // Fan is on if heater or air conditioner is on, or if the user requests it
+  assign fan = heater | aircon | fan_on;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign heater = mode & too_cold;`**:  This line uses the logical AND operator (`&`) to turn on the heater. The heater is on only if `mode` is 1 (heating mode) AND `too_cold` is 1.
+* **`assign aircon = ~mode & too_hot;`**: This line uses the logical AND operator (`&`) and the logical NOT operator (`~`) to turn on the air conditioner. The air conditioner is on only if `mode` is 0 (cooling mode) AND `too_hot` is 1.  `~mode` inverts the `mode` signal.
+* **`assign fan = heater | aircon | fan_on;`**: This line uses the logical OR operator (`|`) to turn on the fan. The fan is on if the heater is on, OR the air conditioner is on, OR the user requests the fan to be on (`fan_on`).
+
+**How it addresses the requirements:**
+
+* **Heating Mode (mode = 1):**  The `heater` signal is controlled by `too_cold`. The `aircon` signal is always off because `~mode` is 0. The `fan` is on if the heater is on or if `fan_on` is asserted.
+* **Cooling Mode (mode = 0):** The `aircon` signal is controlled by `too_hot`. The `heater` signal is always off because `mode` is 0. The `fan` is on if the air conditioner is on or if `fan_on` is asserted.
+* **Fan Control:** The fan is always on when either the heater or air conditioner is on, fulfilling the requirement to circulate air.  The `fan_on` signal provides a way to override this and turn on the fan even when neither the heater nor the air conditioner is active.

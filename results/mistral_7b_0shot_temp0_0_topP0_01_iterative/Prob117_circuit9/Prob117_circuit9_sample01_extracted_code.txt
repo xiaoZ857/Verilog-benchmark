@@ -1,0 +1,15 @@
+always @(posedge clk) begin
+  if (a) begin
+    if (q == 3'b100 || q == 3'b000) begin // Changed from 'b100' to 'b100 || b000' as per the reset condition
+      q <= 3'b000; // reset counter when counting from 6 to 0 or when a is low
+    end
+    else begin
+      q <= q + 1; // increment counter when counting up
+    end
+  end
+end
+
+// timescale directive should be outside the module definition
+timescale of 1ns / 1ps
+
+endmodule

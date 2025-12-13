@@ -1,0 +1,81 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+
+  // Define the states
+  parameter A = 2'b00,
+            B = 2'b01,
+            C = 2'b10,
+            D = 2'b11,
+            E = 2'b10,
+            F = 2'b01;
+
+  reg [1:0] current_state;
+
+  // Assign output z based on the current state
+  always @(current_state) begin
+    case (current_state)
+      A: z = 0;
+      B: z = 0;
+      C: z = 0;
+      D: z = 0;
+      E: z = 0;
+      F: z = 0;
+      default: z = 0;
+    endcase
+  end
+
+  // State register update logic
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A;
+    end else begin
+      case (current_state)
+        A: begin
+          if (w)
+            current_state <= A;
+          else
+            current_state <= B;
+        end
+        B: begin
+          if (w)
+            current_state <= C;
+          else
+            current_state <= D;
+        end
+        C: begin
+          if (w)
+            current_state <= E;
+          else
+            current_state <= D;
+        end
+        D: begin
+          if (w)
+            current_state <= A;
+          else
+            current_state <= F;
+        end
+        E: begin
+          if (w)
+            current_state <= E;
+          else
+            current_state <= D;
+        end
+        F: begin
+          if (w)
+            current_state <= C;
+          else
+            current_state <= D;
+        end
+        default: current_state <= A;
+      endcase
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

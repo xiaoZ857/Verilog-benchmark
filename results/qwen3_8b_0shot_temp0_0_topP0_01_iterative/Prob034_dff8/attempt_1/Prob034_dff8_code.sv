@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+Here is the implementation of the `TopModule` in Verilog, which creates 8 D flip-flops, each triggered by the positive edge of the `clk` signal. The module takes an 8-bit input `d` and produces an 8-bit output `q`, where each bit of `q` is the output of a corresponding D flip-flop.
+
+---
+
+### ✅ **Module Description**
+
+- **Inputs:**
+  - `clk`: Clock signal (positive edge-triggered).
+  - `d`: 8-bit input data.
+
+- **Outputs:**
+  - `q`: 8-bit output register, where each bit is the output of a D flip
+
+// VERILOG-EVAL: endmodule not found

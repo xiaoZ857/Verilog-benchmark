@@ -1,0 +1,56 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 20
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:11: error: next_state is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:15: error: next_state['sd1] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd1] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:19: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:21: error: next_state['sd2] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd2] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:25: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:27: error: next_state['sd3] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd3] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:31: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:33: error: next_state['sd4] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd4] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:37: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:39: error: next_state['sd5] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd5] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:43: error: next_state['sd8] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd8] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:45: error: next_state['sd6] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd6] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:49: error: next_state['sd9] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd9] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:51: error: next_state['sd7] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd7] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:55: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:57: error: next_state['sd7] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd7] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:61: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:63: error: next_state['sd1] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd1] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:67: error: next_state['sd0] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd0] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:69: error: next_state['sd1] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:5:      : next_state['sd1] is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob143_fsm_onehot\attempt_3\Prob143_fsm_onehot_code.sv:10: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+20 error(s) during elaboration.

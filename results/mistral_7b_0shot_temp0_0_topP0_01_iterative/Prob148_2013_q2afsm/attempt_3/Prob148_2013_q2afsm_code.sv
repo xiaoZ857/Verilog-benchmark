@@ -1,0 +1,56 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+always @(posedge clk or posedge resetn) begin
+  if (resetn) begin
+    current_state <= STATE_A; // Assigning the timescale directive outside of the module definition
+  end else begin
+    case (current_state)
+      STATE_A: begin
+        if (r[1] == 1) begin
+          current_state <= STATE_B;
+          g[1] <= 1'b1;
+        end else if (r[2] == 1) begin
+          current_state <= STATE_C;
+          g[2] <= 1'b1;
+        end else if (r[3] == 1) begin
+          current_state <= STATE_D;
+          g[3] <= 1'b1;
+        end else begin
+          current_state <= STATE_A;
+        end
+      end
+      STATE_B: begin
+        if (r[1] == 0) begin
+          current_state <= STATE_A;
+        end else begin
+          current_state <= STATE_B;
+        end
+      end
+      STATE_C: begin
+        if ((current_state != STATE_D) && (r[2] == 0)) begin
+          current_state <= STATE_A;
+        end else begin
+          current_state <= STATE_C;
+        end
+      end
+      STATE_D: begin
+        if ((current_state != STATE_C) && (r[3] == 0)) begin
+          current_state <= STATE_A;
+        end else begin
+          current_state <= STATE_D;
+        end
+      end
+    endcase
+  end
+end
+
+assign g[1] = (current_state == STATE_B || current_state == STATE_A);
+assign g[2] = (current_state == STATE_C || current_state == STATE_A);
+assign g[3] = (current_state == STATE_D || current_state == STATE_A);
+
+endmodule

@@ -1,0 +1,25 @@
+ Here is the Verilog implementation for the "top_module" based on your description:
+
+```verilog
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+
+// Define 2-to-1 multiplexers
+logic [1:0] sel_0 = {c, ~d};
+logic [1:0] sel_1 = {d, c};
+logic [1:0] sel_2 = {~d, c};
+logic [1:0] sel_3 = {~d, ~c};
+
+// Assign outputs to the appropriate multiplexers
+assign mux_in[0] = sel_0[0];
+assign mux_in[1] = sel_1[0];
+assign mux_in[2] = sel_2[0];
+assign mux_in[3] = sel_3[0];
+
+endmodule
+```
+
+This Verilog code creates a module named "TopModule" with inputs 'c' and 'd', and outputs 'mux_in[3:0]'. Inside the module, it defines four 2-to-1 multiplexers (sel_0 to sel_3) based on the given Karnaugh map. The appropriate output is connected to each multiplexer using the selector inputs 'a' and 'b', which are derived from 'c' and 'd'. This implementation should correctly implement the Karnaugh map as described in your question.

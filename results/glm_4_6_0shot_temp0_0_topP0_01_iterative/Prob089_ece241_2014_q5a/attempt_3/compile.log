@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:16: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:18: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:20: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:23: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:24: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:32: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:33: error: Unable to bind wire/reg/memory `S1' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_3\Prob089_ece241_2014_q5a_code.sv:40: error: Unable to bind wire/reg/memory `S0' in `tb.top_module1'
+8 error(s) during elaboration.

@@ -1,0 +1,19 @@
+ Here is a simple Verilog implementation for the module you described:
+
+```verilog
+module TopModule (
+  output reg one
+);
+
+always_comb begin
+  one = 1'b1;
+end
+
+initial begin
+  $finish;
+end
+
+endmodule
+```
+
+In this code, the `TopModule` has a single output `one`, which is always set to logic high (1). The `always_comb` block ensures that the assignment to `one` is combinational logic, meaning it will update immediately when the clock changes. The `initial` block with `$finish` serves no purpose in this case but is included for completeness as it terminates simulation once executed.

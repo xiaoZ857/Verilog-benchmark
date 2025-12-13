@@ -1,0 +1,7 @@
+always_comb begin
+  if (sel == 0) begin
+    out <= a;
+  end else begin
+    out <= b;
+  end
+end

@@ -1,0 +1,39 @@
+```verilog
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+Create a half adder. A half adder adds two bits (with no carry-in) and
+produces a sum and carry-out.
+
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+
+  assign sum = a ^ b;  // XOR gate for sum
+  assign cout = a & b; // AND gate for carry-out
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and lists its input and output ports.
+* **`input a, input b;`**:  Declares `a` and `b` as input signals. These are the two bits to be added.
+* **`output sum, output cout;`**: Declares `sum` and `cout` as output signals. `sum` represents the sum bit, and `cout` represents the carry-out bit.
+* **`assign sum = a ^ b;`**:  This line uses the `assign` statement to continuously assign the result of the XOR operation (`^`) between `a` and `b` to the `sum` output.  The XOR gate produces a 1 if the inputs are different and a 0 if they are the same.
+* **`assign cout = a & b;`**: This line uses the `assign` statement to continuously assign the result of the AND operation (`&`) between `a` and `b` to the `cout` output. The AND gate produces a 1 only if both inputs are 1.
+
+**How it works (Half Adder Logic):**
+
+* **Sum:** The sum of two bits is 1 if the bits are different (one is 0 and the other is 1).  This is exactly what the XOR gate does.
+* **Carry-out:**  A carry-out is generated when both input bits are 1.  This is exactly what the AND gate does.
+
+**Example:**
+
+| a | b | sum (a ^ b) | cout (a & b) |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 1 |

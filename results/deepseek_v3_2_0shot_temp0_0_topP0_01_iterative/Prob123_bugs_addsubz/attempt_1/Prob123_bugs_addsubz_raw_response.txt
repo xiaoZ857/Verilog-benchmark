@@ -1,0 +1,34 @@
+The bug is that `result_is_zero` is not assigned in all branches of the `always` block. When `out` is non-zero, `result_is_zero` retains its previous value, creating a latch. To fix this, assign `result_is_zero` in all cases.
+
+Here's the corrected code:
+
+```verilog
+  always @(*) begin
+      case (do_sub)
+        0: out = a + b;
+        1: out = a - b;
+      endcase
+
+      if (out == 8'b0)
+          result_is_zero = 1;
+      else
+          result_is_zero = 0;
+  end
+```
+
+Alternatively, using a conditional assignment:
+
+```verilog
+  always @(*) begin
+      case (do_sub)
+        0: out = a + b;
+        1: out = a - b;
+      endcase
+
+      result_is_zero = (out == 8'b0);
+  end
+```
+
+Both versions ensure `result_is_zero` is always assigned, eliminating the latch.
+
+endmodule

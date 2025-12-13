@@ -1,0 +1,14 @@
+module TopModule (
+    input [31:0] in,
+    output [31:0] out
+);
+
+    // Assign each byte from 'in' to the corresponding reversed position in 'out'
+    assign out = {
+        in[7:0],   // Byte 0 (LSB) goes to Byte 3 (MSB)
+        in[15:8],  // Byte 1 goes to Byte 2
+        in[23:16], // Byte 2 goes to Byte 1
+        in[31:24]  // Byte 3 (MSB) goes to Byte 0 (LSB)
+    };
+
+endmodule

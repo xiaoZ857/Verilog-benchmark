@@ -1,0 +1,26 @@
+Here's a simple Verilog module that implements the described circuit:
+
+```verilog
+module TopModule(
+    // Input signals
+    input clk,  // Positive clock signal
+    input ring,  // Ringing signal from incoming call
+    input vibrate_mode,  // Vibration mode of the phone
+    
+    // Output signals
+    output ringer,  // Signal to turn on the ringer
+    output motor   // Signal to turn on the vibration motor
+);
+
+// Assignments for output signals based on input conditions
+assign ringer = (ring && !vibrate_mode) ? 1'b1 : 0'b0;
+assign motor = vibrate_mode ? 1'b1 : 0'b0;
+
+endmodule
+```
+
+In this module, the `ringer` signal is assigned a value of 1 only when both the `ring` and `!vibrate_mode` conditions are met. Otherwise, it's set to 0.
+
+The `motor` signal is simply assigned a value based on the `vibrate_mode` condition. If `vibrate_mode` is true, then `motor` is set to 1; otherwise, it's set to 0.
+
+Note that this module uses the `assign` keyword for output signals because we're not using any combinational logic (i.e., no AND, OR, XOR, etc.) in the assignments. If you wanted to use more complex logic, you would need to use a different construct, such as an always block or a combinatorial block.

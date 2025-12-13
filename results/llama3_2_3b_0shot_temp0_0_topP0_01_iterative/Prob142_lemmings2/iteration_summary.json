@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob142_lemmings2",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 179 mismatches. First mismatch occurred at time 100.\nHint: Output 'walk_right' has 165 mismatches. First mismatch occurred at time 150.\nHint: Output 'aaah' has 235 mismatches. First mismatch occurred at time 100.\nHint: Total mismatched samples is 318 out of 441 samples\n\nSimulation finished at 2206 ps\nMismatches: 318 in 441 samples\n",
+      "mismatch_count": 318
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 204 mismatches. First mismatch occurred at time 20.\nHint: Output 'walk_right' has 204 mismatches. First mismatch occurred at time 20.\nHint: Output 'aaah' has 226 mismatches. First mismatch occurred at time 100.\nHint: Total mismatched samples is 349 out of 441 samples\n\nSimulation finished at 2206 ps\nMismatches: 349 in 441 samples\n",
+      "mismatch_count": 349
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 204 mismatches. First mismatch occurred at time 20.\nHint: Output 'walk_right' has 183 mismatches. First mismatch occurred at time 150.\nHint: Output 'aaah' has 203 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 341 out of 441 samples\n\nSimulation finished at 2206 ps\nMismatches: 341 in 441 samples\n",
+      "mismatch_count": 341
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 204 mismatches. First mismatch occurred at time 20.\nHint: Output 'walk_right' has 183 mismatches. First mismatch occurred at time 150.\nHint: Output 'aaah' has 203 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 341 out of 441 samples\n\nSimulation finished at 2206 ps\nMismatches: 341 in 441 samples\n",
+      "mismatch_count": 341
+    }
+  ]
+}

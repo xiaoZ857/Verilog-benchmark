@@ -1,0 +1,21 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:10: warning: macro TopModule undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:16: warning: macro a undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:16: warning: macro b undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:16: warning: macro c undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:16: warning: macro d undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:17: warning: macro out undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:17: warning: macro out_n undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:18: warning: macro and1 undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:18: warning: macro and2 undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:20: warning: macro and1 undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:21: warning: macro and2 undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:22: warning: macro out undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:10: syntax error
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:10: error: Stray tic (`) here. Perhaps you put white space
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob077_wire_decl\attempt_1\Prob077_wire_decl_code.sv:10:      : between the tic and preprocessor directive?
+I give up.

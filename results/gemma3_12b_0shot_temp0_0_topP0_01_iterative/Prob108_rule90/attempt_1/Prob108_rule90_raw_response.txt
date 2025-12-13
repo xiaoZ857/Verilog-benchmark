@@ -1,0 +1,60 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+  reg [511:0] next_q;
+
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+  always @(*) begin
+    for (int i = 0; i < 512; i++) begin
+      // Determine neighbors.  Handle boundary conditions.
+      // q[-1] = 0, q[512] = 0
+      
+      // Calculate XOR of neighbors
+      if (i == 0) begin
+        next_q[i] = q[i] ^ 0 ^ q[i+1];
+      end else if (i == 511) begin
+        next_q[i] = q[i] ^ q[i-1] ^ 0;
+      end else begin
+        next_q[i] = q[i-1] ^ q[i] ^ q[i+1];
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**: Defines the module with the specified inputs and output.
+2. **`reg [511:0] next_q;`**: Declares a register `next_q` to hold the next state of the cells.  This is crucial for sequential logic.
+3. **`always @(posedge clk)`**: This block is triggered on the positive edge of the clock signal.
+4. **`if (load) begin ... end else begin ... end`**:  This conditional statement handles the `load` input. If `load` is high, the current state `q` is loaded with the input data `data`. Otherwise, the next state `next_q` is loaded into `q`.
+5. **`always @(*)`**: This block is a combinational block.  The `*` means it is sensitive to any change in any of the signals used within the block.  This ensures that the next state is calculated whenever any of the current cell states change.
+6. **`for (int i = 0; i < 512; i++) begin ... end`**: This loop iterates through each cell in the 512-cell array.
+7. **Boundary Conditions:** The code explicitly handles the boundary conditions:
+   - `q[-1] = 0`:  When `i == 0` (leftmost cell), the left neighbor is treated as 0.
+   - `q[512] = 0`: When `i == 511` (rightmost cell), the right neighbor is treated as 0.
+8. **XOR Calculation:**  The core logic of the Rule 90 automaton is implemented using the XOR operator (`^`).  The next state of each cell is calculated as the XOR of its left, center, and right neighbors.
+
+**How it works:**
+
+The code simulates the Rule 90 automaton by:
+
+1. **Initialization (Load):** When the `load` signal is asserted, the initial state of the cells is set to the values provided in the `data` input.
+2. **Sequential Update:** On each clock cycle, the code calculates the next state of each cell based on the current state of its neighbors.
+3. **Combinational Logic:** The `always @(*)` block ensures that the next state is calculated as soon as any of the current cell states change.
+4. **Boundary Handling:** The code treats the cells beyond the boundaries as if they were off (0).
+
+This implementation provides a functional simulation of the Rule 90 automaton with the specified boundary conditions and load functionality.

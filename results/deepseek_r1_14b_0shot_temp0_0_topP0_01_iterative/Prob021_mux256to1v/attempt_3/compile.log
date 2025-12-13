@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11:      : This lsb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd4)
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11:      : This msb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd1)
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11:      : This lsb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd4)
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11: error: Part select expressions must be constant.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:11:      : This msb expression violates the rule: (((sel)+('sd1))*('sd4))-('sd1)
+8 error(s) during elaboration.

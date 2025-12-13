@@ -1,0 +1,67 @@
+**Verilog implementation of the two‑state Moore FSM**
+
+```verilog
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire clk,     // clock
+    input  wire j,       // input that drives OFF → ON transition
+    input  wire k,       // input that drives ON  → OFF transition
+    input  wire areset,  // active‑high asynchronous reset
+    output wire out      // Moore output (0 = OFF, 1 = ON)
+);
+
+    /*--------------------------------------------------------------------
+     * State encoding
+     *--------------------------------------------------------------------*/
+    localparam OFF = 1'b0,
+               ON  = 1'b1;
+
+    /*--------------------------------------------------------------------
+     * Registers
+     *--------------------------------------------------------------------*/
+    reg state;          // current state
+    reg next_state;     // next state (combinational)
+
+    /*--------------------------------------------------------------------
+     * Asynchronous reset + state register
+     *--------------------------------------------------------------------*/
+    always @(posedge clk or posedge areset) begin
+        if (areset)          // active‑high asynchronous reset
+            state <= OFF;
+        else
+            state <= next_state;
+    end
+
+    /*--------------------------------------------------------------------
+     * Next‑state logic (combinational)
+     *--------------------------------------------------------------------*/
+    always @(*) begin
+        case (state)
+            OFF: next_state = j;          // OFF --j=0--> OFF, j=1--> ON
+            ON:  next_state = ~k;         // ON  --k=0--> ON,  k=1--> OFF
+            default: next_state = OFF;    // safety
+        endcase
+    end
+
+    /*--------------------------------------------------------------------
+     * Moore output (output depends only on state)
+     *--------------------------------------------------------------------*/
+    assign out = state;
+
+endmodule
+```
+
+### How it works
+
+| Current state | Input | Next state | Output |
+|---------------|-------|------------|--------|
+| OFF (0)       | j=0   | OFF (0)    | 0      |
+| OFF (0)       | j=1   | ON  (1)    | 0      |
+| ON  (1)       | k=0   | ON  (1)    | 1      |
+| ON  (1)       | k=1   | OFF (0)    | 1      |
+
+- The FSM is **Moore**: the output `out` is simply the current state.
+- `areset` is an **asynchronous active‑high reset** that forces the state to `OFF` immediately.
+- The state register updates on the rising edge of `clk` (unless reset is asserted).
+- The next‑state logic is purely combinational and depends only on the current state and the inputs `j` and

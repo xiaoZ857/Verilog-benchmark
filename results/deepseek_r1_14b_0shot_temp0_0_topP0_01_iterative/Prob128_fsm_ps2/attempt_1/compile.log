@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_1\Prob128_fsm_ps2_code.sv:26: error: done is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_1\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_1\Prob128_fsm_ps2_code.sv:33: error: done is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_1\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_1\Prob128_fsm_ps2_code.sv:46: error: done is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_1\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.
+3 error(s) during elaboration.

@@ -1,0 +1,28 @@
+To implement a single D flip-flop in Verilog, you can use an `always` block to describe the behavior of the flip-flop. The D flip-flop captures the value of the data input (`d`) on the rising edge of the clock signal (`clk`) and outputs it at `q`. Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  // Always block triggered by the positive edge of the clock
+  always @(posedge clk) begin
+    q <= d;  // Capture the value of 'd' on the rising edge of 'clk'
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` is declared with three ports: `clk`, `d`, and `q`. `clk` is the clock input, `d` is the data input, and `q` is the output.
+
+- **Output Register**: The `output reg q` declaration indicates that `q` is a register (storage element) driven by procedural assignments within an `always` block.
+
+- **Always Block**: 
+  - The `always @(posedge clk)` construct specifies that the block of code inside it should be executed on the rising edge of the clock signal (`clk`).
+  - Inside the always block, `q <= d;` is a non-blocking assignment. This means that the value of `d` will be assigned to `q` at the end of the current simulation time step, ensuring proper sequential behavior.
+
+This implementation captures the essence of a D flip-flop in digital design using Verilog.

@@ -1,0 +1,55 @@
+always @(posedge clk) begin
+  if (Y1 == 1'b0) begin // Check if Y1 is not in the one-hot encoded state for A or B
+    case ({Y1, Y3})
+      2'b00: Y1 <= 0; // A state
+      2'b01: Y1 <= 1; // B state
+
+      2'b10: if (Y3) begin
+                Y3 <= 0;
+              end else begin
+                Y3 <= 1;
+              end; // C state
+
+      2'b11: if (Y3) begin
+                Y3 <= 0;
+              end else begin
+                Y3 <= 1;
+              end; // D state
+    end
+
+    case ({~Y3})
+      if (w) begin
+        case ({Y1})
+          2'b0: Y1 <= 1; // E state
+          2'b1: Y1 <= 0; // D state
+        end
+      end else begin
+        case ({Y1})
+          2'b0: Y1 <= 0; // A state
+          2'b1: Y1 <= 1; // B state
+        end
+      end
+    endcase
+  end
+
+  case ({Y1, ~w})
+    2'b00: Y1 <= 1; // F state
+    2'b01: Y1 <= 0; // D state
+  endcase
+end
+
+// Add a reset signal to the Y1 flip-flop
+reg [5:0] y_reset = {6'b000001, 6'b000010}; // Reset value for one-hot encoded states A and B
+always @(posedge clk or negedge reset) begin
+  if (reset)
+    Y1 <= y_reset[Y1 == 1'b0 ? 1 : 0];
+end
+
+// Add a reset signal to the Y3 flip-flop
+reg [5:0] y3_reset = {6'b001000, 6'b000100}; // Reset value for one-hot encoded states C and D
+always @(posedge clk or negedge reset) begin
+  if (reset)
+    Y3 <= y3_reset[Y3 == 1'b0 ? 3 : 0];
+end
+
+endmodule

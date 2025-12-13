@@ -1,0 +1,106 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        current_state <= IDLE;
+        done <= 1'b0;
+        bit_counter <= 3'b000;
+    end else begin
+        // Update state and other signals on clock edge
+        case (current_state)
+            IDLE: begin
+                if (!in) begin
+                    next_state = START_BIT;
+                end
+            end
+            
+            START_BIT: begin
+                if (in) begin
+                    next_state = DATA_BITS;
+                    bit_counter <= 3'b000; // Reset counter for data bits
+                end
+            end
+
+            DATA_BITS: begin
+                if (bit_counter == 3'b111) begin
+                    next_state = STOP_BIT;
+                end else begin
+                    bit_counter <= bit_counter + 1'b1;
+                end
+            end
+            
+            STOP_BIT: begin
+                if (!in) begin
+                    // Correct stop bit received
+                    done <= 1'b1; // Indicate successful byte reception
+                    next_state = IDLE;
+                end else begin
+                    // Error detected, wait for a stop bit
+                    next_state = ERROR_WAIT_STOP;
+                end
+            end
+
+            ERROR_WAIT_STOP: begin
+                if (!in) begin
+                    // Found the expected stop bit after error
+                    done <= 1'b0; // Reset done signal
+                    next_state = IDLE;
+                end
+            end
+            
+        endcase
+
+        current_state <= next_state;
+
+        // Reset done signal in all states except STOP_BIT
+        if (current_state != STOP_BIT) begin
+            done <= 1'b0;
+        end
+    end
+end
+
+always_comb begin
+    next_state = current_state; // Default to staying in the same state
+    
+    case (current_state)
+        IDLE: begin
+            if (!in) begin
+                next_state = START_BIT;
+            end
+        end
+        
+        START_BIT: begin
+            if (in) begin
+                next_state = DATA_BITS;
+            end
+        end
+
+        DATA_BITS: begin
+            if (bit_counter == 3'b111) begin
+                next_state = STOP_BIT;
+            end
+        end
+        
+        STOP_BIT: begin
+            if (!in) begin
+                next_state = IDLE;
+            end else begin
+                next_state = ERROR_WAIT_STOP;
+            end
+        end
+
+        ERROR_WAIT_STOP: begin
+            if (!in) begin
+                next_state = IDLE;
+            end
+        end
+        
+    endcase
+end
+
+endmodule

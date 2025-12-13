@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob122_kmap4_test.sv:95: error: Unknown module type: TopModule
+2 error(s) during elaboration.
+*** These modules were missing:
+        TopModule referenced 1 times.
+***

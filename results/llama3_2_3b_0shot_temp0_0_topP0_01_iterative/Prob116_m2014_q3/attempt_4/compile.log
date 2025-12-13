@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:10: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:12: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:12: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:14: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:14: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:16: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:16: error: Unable to bind wire/reg/memory `d' in `tb.top_module1.$unm_blk_1'
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob116_m2014_q3\attempt_4\Prob116_m2014_q3_code.sv:6: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+7 error(s) during elaboration.

@@ -1,0 +1,26 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  always @(posedge clk) begin
+    q <= d;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (clk, d, q);`**:  This line declares the module named `TopModule` and defines its input and output ports:
+    * `clk`: The clock signal.
+    * `d`: The data input.
+    * `q`: The output, declared as a `reg` because it's assigned within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This is a sequential block that executes only on the positive edge (rising edge) of the clock signal (`clk`).  The `@(posedge clk)` sensitivity list specifies this.
+* **`q <= d;`**: This is the core of the D flip-flop.  On each positive clock edge, the value of the data input `d` is assigned to the output `q`.  The `<=` operator is a non-blocking assignment, which means the assignment happens at the end of the current simulation time step.  This is crucial for sequential logic to function correctly.
+
+**How it works as a D flip-flop:**
+
+A D flip-flop simply copies its input `d` to its output `q` on the rising edge of the clock.  This module implements that behavior.  When the clock rises, the value of `d` is latched into `q`.  Between clock edges, `q` holds the last latched value.

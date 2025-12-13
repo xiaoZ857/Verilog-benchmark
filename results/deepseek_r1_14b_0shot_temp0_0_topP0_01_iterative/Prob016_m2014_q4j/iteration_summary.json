@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob016_m2014_q4j",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob016_m2014_q4j_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob016_m2014_q4j_ref.sv:12: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:17: error: Unknown module type: full_adder\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:25: error: Unknown module type: full_adder\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:33: error: Unknown module type: full_adder\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:41: error: Unknown module type: full_adder\n5 error(s) during elaboration.\n*** These modules were missing:\n        full_adder referenced 4 times.\n***\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:7: warning: macro full_adder undefined (and assumed null) at this point.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:7: warning: macro TopModule undefined (and assumed null) at this point.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:7: syntax error\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:7: error: Stray tic (`) here. Perhaps you put white space\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:7:      : between the tic and preprocessor directive?\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:10: error: `timescale directive can not be inside a module definition.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:7: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:21: warning: implicit definition of wire 's'.\nresults/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:22: warning: implicit definition of wire 'cout'.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

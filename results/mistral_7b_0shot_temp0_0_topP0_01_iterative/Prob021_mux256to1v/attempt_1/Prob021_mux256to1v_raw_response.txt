@@ -1,0 +1,28 @@
+ Here is the Verilog code for a 4-bit wide, 256-to-1 multiplexer as per your description:
+
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output reg [3:0] out
+);
+
+always @(posedge clk) begin
+  case(sel)
+    0 : out <= in[3:0];
+    1 : out <= in[7:4];
+    2 : out <= in[11:8];
+    // Add more cases for sel values 3 to 6 (for bits in[15:12], [19:16], ...)
+    default : out <= 4'b0000; // Set output to zero if sel is not valid
+  endcase
+end
+
+// Add clock enable and reset signals if needed
+// e.g., always @(posedge clk or negedge reset) begin if (reset) out <= 4'b0000; end
+
+endmodule
+```
+
+This code creates a TopModule with a 1024-bit input vector, an 8-bit select signal, and a 4-bit output vector. The `always @(posedge clk)` block triggers the multiplexer on each positive edge of the clock signal (clk). The `case` statement checks the value of the select signal (sel) and routes the corresponding bits from the input vector to the output vector. If sel is not valid, the output will be set to zero by default.
+
+You can add more cases for sel values 3 to 6 if you want to select bits in[15:12], [19:16], ..., and also consider adding clock enable and reset signals as needed.

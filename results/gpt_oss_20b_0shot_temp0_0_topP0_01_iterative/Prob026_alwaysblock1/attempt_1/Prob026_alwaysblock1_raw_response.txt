@@ -1,0 +1,48 @@
+Below is a minimal, synthesizable Verilog‑2001 implementation that satisfies the specification:
+
+```verilog
+// ------------------------------------------------------------
+//  TopModule
+//  ---------
+//  Implements a 2‑input AND gate in two different ways:
+//
+//      1)  Continuous assignment (wire)
+//      2)  Combinational always block (reg)
+//
+//  The module has no clock – all logic is purely combinational.
+// ------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire a,                // first AND input
+    input  wire b,                // second AND input
+    output wire out_assign,       // result from continuous assignment
+    output reg  out_alwaysblock   // result from always block
+);
+
+// ------------------------------------------------------------
+// 1) Continuous assignment
+// ------------------------------------------------------------
+assign out_assign = a & b;
+
+// ------------------------------------------------------------
+// 2) Combinational always block
+// ------------------------------------------------------------
+always @(*) begin
+    out_alwaysblock = a & b;
+end
+
+endmodule
+```
+
+### Key Points
+
+| Feature | Implementation |
+|---------|----------------|
+| **Inputs** | `a`, `b` – declared as `wire` (default for module ports). |
+| **Outputs** | `out_assign` – `wire` (continuous assignment).<br>`out_alwaysblock` – `reg` (assigned inside `always`). |
+| **Logic** | Both outputs compute the logical AND of `a` and `b`. |
+| **Combinational** | `always @(*)` ensures the block is evaluated whenever any input changes. |
+| **No clock** | The description states “positive clock/clk triggered unless otherwise stated.” Since no clock is mentioned, the logic is purely combinational. |
+
+This module can be instantiated in a testbench or higher‑level design, and it will synthesize to two identical AND gates (one driven by a continuous assignment, the other by a combinational always block).

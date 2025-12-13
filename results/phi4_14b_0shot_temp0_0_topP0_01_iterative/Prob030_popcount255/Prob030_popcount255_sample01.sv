@@ -1,0 +1,81 @@
+
+module TopModule (
+    input [254:0] in,
+    output reg [7:0] out
+);
+
+    // Internal signals for intermediate counts
+    wire [31:0] count_32bit;
+    wire [15:0] count_16bit;
+    wire [7:0] count_8bit;
+
+    // Instantiate 32-bit population counters
+    genvar i;
+    generate
+        for (i = 0; i < 8; i = i + 1) begin : popcount_32bit
+            assign count_32bit[i*4 +: 4] = in[i*32 +: 32];
+        end
+    endgenerate
+
+    // Instantiate population counters for each 32-bit segment
+    genvar j;
+    generate
+        for (j = 0; j < 8; j = j + 1) begin : popcount_16bit
+            wire [15:0] count_16bit_segment;
+
+            assign count_16bit_segment = count_32bit[j*4 +: 4];
+
+            // Instantiate two 16-bit population counters for each 32-bit segment
+            PopCount_16bit pc1 (.in(count_16bit_segment[3:0]), .out(count_16bit[j*2]));
+            PopCount_16bit pc2 (.in(count_16bit_segment[7:4]), .out(count_16bit[j*2 + 1]));
+        end
+    endgenerate
+
+    // Instantiate population counters for each 16-bit segment
+    generate
+        for (j = 0; j < 16; j = j + 1) begin : popcount_8bit
+            wire [7:0] count_8bit_segment;
+            
+            assign count_8bit_segment = count_16bit[j*2 +: 2];
+            
+            // Instantiate two 8-bit population counters for each 16-bit segment
+            PopCount_8bit pc1 (.in(count_8bit_segment[3:0]), .out(count_8bit[j*2]));
+            PopCount_8bit pc2 (.in(count_8bit_segment[7:4]), .out(count_8bit[j*2 + 1]));
+        end
+    endgenerate
+
+    // Sum all the 8-bit counts to get the final result
+    always @(*) begin
+        out = count_8bit[15] + count_8bit[14] + count_8bit[13] + count_8bit[12] +
+              count_8bit[11] + count_8bit[10] + count_8bit[9]  + count_8bit[8]  +
+              count_8bit[7]  + count_8bit[6]  + count_8bit[5]  + count_8bit[4]  +
+              count_8bit[3]  + count_8bit[2]  + count_8bit[1]  + count_8bit[0];
+    end
+
+endmodule
+
+// Module to count the number of '1's in a 16-bit input
+module PopCount_16bit (
+    input [15:0] in,
+    output reg [3:0] out // Corrected width to match the expected output size
+);
+    always @(*) begin
+        out = (in[15] + in[14] + in[13] + in[12]) +
+              (in[11] + in[10] + in[9]  + in[8])  +
+              (in[7]  + in[6]  + in[5]  + in[4])  +
+              (in[3]  + in[2]  + in[1]  + in[0]);
+    end
+endmodule
+
+// Module to count the number of '1's in an 8-bit input
+module PopCount_8bit (
+    input [7:0] in,
+    output reg [3:0] out // Corrected width to match the expected output size
+);
+    always @(*) begin
+        out = (in[7] + in[6] + in[5] + in[4]) +
+              (in[3] + in[2] + in[1] + in[0]);
+    end
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,19 @@
+
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // Intermediate signal for the inverted in2
+  wire not_in2;
+
+  // Invert in2 using a NOT gate (bubble)
+  assign not_in2 = ~in2;
+
+  // AND gate with in1 and the inverted in2
+  assign out = in1 & not_in2;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

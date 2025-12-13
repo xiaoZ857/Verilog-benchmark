@@ -1,0 +1,84 @@
+To implement a Verilog module that detects PS/2 mouse messages based on the given description, we need to design a finite state machine (FSM) with three states. The FSM will search for message boundaries by looking for bytes where `in[3]` is set to 1 and then capture the subsequent two bytes as part of the same message.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] in,
+    input reset,
+    output reg done
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        IDLE,       // Waiting for the first byte of a message
+        RECEIVE_2,  // Received first byte; waiting for second byte
+        RECEIVE_3   // Received second byte; waiting for third byte
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= IDLE;
+            done <= 1'b0;
+        end else begin
+            current_state <= next_state;
+            // Only set 'done' in the cycle after receiving the third byte
+            if (current_state == RECEIVE_3 && next_state == IDLE)
+                done <= 1'b1;
+            else
+                done <= 1'b0;
+        end
+    end
+
+    always_comb begin
+        case (current_state)
+            IDLE: begin
+                // Transition to RECEIVE_2 when in[3] is set
+                if (in[3]) begin
+                    next_state = RECEIVE_2;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            RECEIVE_2: begin
+                // Always transition to RECEIVE_3 for the next byte
+                next_state = RECEIVE_3;
+            end
+
+            RECEIVE_3: begin
+                // Transition back to IDLE after receiving third byte
+                next_state = IDLE;
+            end
+
+            default: begin
+                next_state = IDLE;  // Default case, should not occur
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We define three states using an enumerated type:
+   - `IDLE`: Waiting for the first byte of a message.
+   - `RECEIVE_2`: First byte received; waiting for the second byte.
+   - `RECEIVE_3`: Second byte received; waiting for the third byte.
+
+2. **State Transition Logic**:
+   - In the `IDLE` state, we check if `in[3]` is set to 1. If it is, transition to `RECEIVE_2`.
+   - From `RECEIVE_2`, always move to `RECEIVE_3` since we assume that any byte following a valid first byte is part of the message.
+   - In `RECEIVE_3`, after receiving the third byte, transition back to `IDLE`.
+
+3. **Output Logic**:
+   - The `done` signal is set high in the cycle immediately after transitioning from `RECEIVE_3` to `IDLE`. This indicates that a complete message has been received.
+
+4. **Reset Handling**: 
+   - The FSM resets synchronously with an active-high reset signal, setting the state back to `IDLE` and clearing the `done` signal.
+
+This design ensures that the FSM correctly identifies and processes PS/2 mouse messages according to the specified protocol.

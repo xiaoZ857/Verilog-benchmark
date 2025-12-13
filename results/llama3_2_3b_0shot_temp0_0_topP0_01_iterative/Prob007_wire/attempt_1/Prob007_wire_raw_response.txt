@@ -1,0 +1,23 @@
+Here's how you can implement the Verilog module as described:
+
+```verilog
+// Create a module with one input and one output that behaves like a wire.
+module TopModule (
+  // Input signal
+  input in,
+
+  // Output signal
+  output out
+);
+
+// Assign the input to the output
+assign out = in;
+
+endmodule
+```
+
+In this code:
+
+- We define a new module named `TopModule`.
+- The module has one input signal `in` and one output signal `out`.
+- Inside the module, we use an `assign` statement to directly connect the input signal `in` to the output signal `out`. This means that the value of `in` will be propagated to `out`, effectively making it behave like a wire.

@@ -1,0 +1,40 @@
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+  // XOR gate using assign statement
+  assign out_assign = a ^ b;
+
+  // XOR gate using combinational always block
+  always_comb begin
+    out_always_comb = a ^ b;
+  end
+
+  // XOR gate using clocked always block
+  always @(posedge clk) begin
+    out_always_ff = a ^ b;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out_assign = a ^ b;`**: This is the simplest way to implement the XOR gate. The `assign` statement continuously assigns the result of `a ^ b` to `out_assign`.  It's a continuous assignment, meaning the output updates immediately whenever `a` or `b` changes.
+
+* **`always_comb begin ... end`**: This block defines a combinational always block.  `always_comb` is a newer Verilog keyword that explicitly states that the block represents combinational logic.  The `begin` and `end` enclose the logic that calculates the XOR output.  The `out_always_comb` signal is updated whenever `a` or `b` changes.  This is functionally equivalent to the `assign` statement.
+
+* **`always @(posedge clk) begin ... end`**: This block defines a clocked always block.  The `@(posedge clk)` sensitivity list specifies that the block is triggered on the positive edge of the clock signal.  Inside the block, `out_always_ff` is assigned the result of `a ^ b` *only* on the positive clock edge.  This introduces a one-clock-cycle delay in the output.  The output `out_always_ff` will only change value when the clock transitions from low to high.  This creates a flip-flop behavior.
+
+**Key Differences:**
+
+* **`assign` and `always_comb`**: These are functionally equivalent and produce the same circuit: a simple XOR gate.
+* **`always @(posedge clk)`**: This creates a circuit with a flip-flop, introducing a delay.  The output `out_always_ff` will only change value on the positive clock edge.
+
+This implementation fulfills the requirements of the problem description by providing three different ways to implement an XOR gate in Verilog, each with distinct characteristics.

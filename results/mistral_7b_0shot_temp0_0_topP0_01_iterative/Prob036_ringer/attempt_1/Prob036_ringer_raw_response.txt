@@ -1,0 +1,41 @@
+ Here's a simple Verilog implementation for the described circuit:
+
+```verilog
+module TopModule (
+  input wire ring,
+  input wire vibrate_mode,
+  output reg ringer,
+  output reg motor
+);
+
+always @(posedge clk) begin
+  if (vibrate_mode)
+    motor <= 1'b1;
+  else if (ring)
+    begin
+      if (!motor)
+        ringer <= 1'b1;
+      motor <= 0'b0;
+    end
+  else
+    motor <= 0'b0;
+end
+
+initial begin
+  // Assuming clk is an external clock signal
+  forever #5 clk = ~clk;
+end
+
+// Add reset logic if needed (e.g., active-high asynchronous reset)
+// initial ringer = 0; motor = 0;
+// always @* begin if (reset) ringer <= 0'b0; motor <= 0'b0; end
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with four signals: `ring`, `vibrate_mode`, `ringer`, and `motor`. The `always` block describes the behavior of the circuit, which is as follows:
+
+1. If `vibrate_mode` is high (1), turn on the motor.
+2. If `ring` is high (1) and the motor is off, turn on the ringer. Otherwise, leave the ringer off and turn on the motor.
+3. The clock signal is assumed to be an external signal named `clk`. In this example, it's a periodic rising edge generator with a period of 5 time units (#5 clk = ~clk). You can adjust the period as needed.
+4. I added a reset mechanism that resets both `ringer` and `motor` to 0 when the reset signal is high (1). This is optional, but it's good practice to include reset logic in your designs.

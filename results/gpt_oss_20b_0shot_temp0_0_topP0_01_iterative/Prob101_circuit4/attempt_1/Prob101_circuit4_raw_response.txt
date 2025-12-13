@@ -1,0 +1,25 @@
+**Solution Explanation**
+
+From the waveform we can build the truth table for the four inputs  
+`a, b, c, d` and the output `q`.  
+The only combinations that produce `q = 0` are
+
+| a | b | c | d | q |
+|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 0 | 1 | 0 |
+| 1 | 0 | 0 | 0 | 0 |
+| 1 | 0 | 0 | 1 | 0 |
+
+All other 12 combinations give `q = 1`.  
+Notice that `q` depends **only** on `b` and `c`:
+
+* When `c = 1` → `q = 1` regardless of `b` (and of `a` and `d`).
+* When `c = 0` → `q = b` (again independent of `a` and `d`).
+
+Thus the Boolean expression is simply
+
+```
+q = b OR c
+```
+

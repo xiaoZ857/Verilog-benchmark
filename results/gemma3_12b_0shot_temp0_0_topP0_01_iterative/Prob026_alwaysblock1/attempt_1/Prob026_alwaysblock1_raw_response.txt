@@ -1,0 +1,39 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+  // AND gate using assign statement
+  assign out_assign = a & b;
+
+  // AND gate using combinational always block
+  always @(a, b) begin
+    out_alwaysblock = a & b;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input a, input b, output out_assign, output reg out_alwaysblock);`**:  This line defines the module named `TopModule` and declares the input signals `a` and `b`, and the output signals `out_assign` (wire) and `out_alwaysblock` (register).
+* **`assign out_assign = a & b;`**: This line uses the `assign` statement to create a continuous assignment.  The output `out_assign` is continuously assigned the result of the logical AND operation (`&`) between inputs `a` and `b`.  This is the simplest way to implement a combinational logic function in Verilog.
+* **`always @(a, b) begin ... end`**: This defines a combinational `always` block.  The `@(a, b)` sensitivity list specifies that the block should be executed whenever the values of `a` or `b` change.
+* **`out_alwaysblock = a & b;`**: Inside the `always` block, the output `out_alwaysblock` is assigned the result of the logical AND operation between `a` and `b`.  Because `out_alwaysblock` is declared as a `reg`, it must be assigned within an `always` block.
+
+**How it works:**
+
+Both implementations achieve the same result: they create an AND gate.
+
+* **`assign` statement:**  The `assign` statement creates a continuous assignment.  Whenever the inputs `a` or `b` change, the expression `a & b` is re-evaluated, and the output `out_assign` is updated immediately.
+
+* **`always` block:** The `always` block is triggered whenever `a` or `b` changes.  The code inside the block is executed, and the value of `out_alwaysblock` is updated.  This also effectively creates a combinational AND gate.
+
+**Key Differences:**
+
+* **`assign` is simpler for basic combinational logic.** It's the preferred method for simple assignments.
+* **`always` blocks are more flexible.** They can be used for more complex logic, sequential logic, and testbenches.  They are essential for describing clocked logic.
+* **`reg` vs. `wire`:**  `out_assign` is a `wire` because it's driven by an `assign` statement.  `out_alwaysblock` is a `reg` because it's assigned within an `always` block.  `reg` signals must be assigned a value within an `always` block.

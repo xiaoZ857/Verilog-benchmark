@@ -1,0 +1,38 @@
+Below is a minimal, synthesizable Verilog‑2001/Verilog‑2012 implementation of the described circuit.  
+The logic is purely combinational – no clock is required – so we use an `assign` statement (or an `always_comb` block if you prefer).  
+
+```verilog
+// ------------------------------------------------------------
+//  TopModule
+//  Implements:  out = (in1 XNOR in2) XOR in3
+// ------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  logic in1,   // First input to the XNOR
+    input  logic in2,   // Second input to the XNOR
+    input  logic in3,   // Second input to the XOR
+    output logic out    // Final output
+);
+
+    // Combinational logic: XNOR followed by XOR
+    //  XNOR:  in1 ~^ in2   (bitwise XNOR)
+    //  XOR :  (in1 ~^ in2) ^ in3
+    assign out = (in1 ~^ in2) ^ in3;
+
+    // If you prefer an always_comb block, uncomment the following:
+    /*
+    always_comb begin
+        out = (in1 ~^ in2) ^ in3;
+    end
+    */
+
+endmodule
+```
+
+### Notes
+- `logic` is used for the ports to allow both synthesis‑friendly and simulation‑friendly behavior (Verilog‑2001/2012).  
+- The `assign` statement makes the module purely combinational; no clock edge is involved.  
+- If you are using an older Verilog‑1995 environment that does not support `logic`, replace `logic` with `wire` for the inputs and `reg` for the output, and keep the `assign` statement.  
+
+This module can be instantiated in any top‑level design or used directly in a testbench.

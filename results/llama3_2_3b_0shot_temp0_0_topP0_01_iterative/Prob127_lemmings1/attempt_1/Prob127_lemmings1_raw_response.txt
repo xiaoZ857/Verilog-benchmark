@@ -1,0 +1,53 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+// Moore State Machine for Lemmings
+module LemmingsFSM (
+    // Clock and Reset signals
+    input clk,
+    input areset,
+
+    // Bump inputs
+    input bump_left,
+    input bump_right,
+
+    // Output signals
+    output walk_left,
+    output walk_right
+);
+
+    // Define the states of the FSM
+    parameter [1:0] state = 2'b00; // Initial state is walking left
+
+    // Define the next state for each possible current state and input combination
+    localparam [1:0] nextState_left = {state[1], ~state[0]};
+    localparam [1:0] nextState_right = {state[0], ~state[1]};
+
+    // Define the output signals based on the current state
+    localparam walk_left_out = (state == 2'b00) || (bump_left && !bump_right);
+    localparam walk_right_out = (state == 2'b01) || (bump_right && !bump_left);
+
+    // Asynchronous reset
+    always @(posedge areset) state <= 2'b00;
+
+    // Clocked next state logic
+    always @(posedge clk) begin
+        if (!areset) state <= nextState_left;
+        else if (state == 2'b00 && bump_right) state <= nextState_right;
+        else if (state == 2'b01 && bump_left) state <= nextState_right;
+        else if (bump_left && bump_right) state <= nextState_right;
+        else state <= nextState_left;
+    end
+
+    // Output signals
+    assign walk_left = walk_left_out;
+    assign walk_right = walk_right_out;
+
+endmodule
+```
+
+This module implements a Moore state machine with two states, walking left and walking right. The `state` variable represents the current state of the Lemming. The next state is determined by the current state and the bump inputs.
+
+The output signals `walk_left` and `walk_right` are assigned based on the current state. If the Lemming is in the initial state (walking left) and receives a 1 on `bump_left`, it will switch to walking right. Similarly, if it's in the initial state and receives a 1 on `bump_right`, it will switch to walking left.
+
+The module also includes an asynchronous reset that sets the state to walking left when the reset signal is active. The clocked next state logic updates the state based on the current state and bump inputs, ensuring that the state machine behaves correctly even in the presence of multiple bump inputs simultaneously.

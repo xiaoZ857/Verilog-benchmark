@@ -1,0 +1,64 @@
+// Internal variables to track the state of the system
+reg [1:0] mode_state; // Current mode (heating or cooling)
+reg [1:0] heater_state; // State of the heater (on or off)
+reg [1:0] aircon_state; // State of the air conditioner (on or off);
+reg fan_state; // Fan control signal
+
+// Initialize internal variables to default values
+initial begin
+    mode_state = 0;
+    heater_state = 0;
+    aircon_state = 0;
+    fan_state = 0;
+end
+
+// Assign output signals based on the current state and input signals
+assign heater = heater_state;
+assign aircon = aircon_state;
+
+// Heating mode logic
+always @(posedge clk) begin
+    if (mode == 1 && too_cold == 1) begin // If it's cold enough to turn on the heater
+        heater_state <= 1; // Turn on the heater
+        aircon_state <= 0; // Do not use the air conditioner
+    end else if (mode == 1) begin // If it's not cold enough, but we're in heating mode
+        heater_state <= 0; // Turn off the heater
+        aircon_state <= 0; // Do not use the air conditioner
+    end
+
+    // Fan control: always turn on when heater or air conditioner is on
+    if (heater_state == 1 || aircon_state == 1) begin
+        fan_state <= 1;
+    } else if (fan_on == 1) begin // If user requests the fan to be turned on
+        fan_state <= 1;
+    end else begin
+        fan_state <= 0; // Turn off the fan
+    end
+end
+
+// Cooling mode logic
+always @(posedge clk) begin
+    if (mode == 0 && too_hot == 1) begin // If it's hot enough to turn on the air conditioner
+        heater_state <= 0; // Turn off the heater
+        aircon_state <= 1; // Turn on the air conditioner
+    end else if (mode == 0) begin // If it's not hot enough, but we're in cooling mode
+        heater_state <= 0; // Turn off the heater
+        aircon_state <= 0; // Do not use the air conditioner
+    end
+
+    // Fan control: always turn on when air conditioner is on
+    if (aircon_state == 1) begin
+        fan_state <= 1;
+    } else if (fan_on == 1) begin // If user requests the fan to be turned on
+        fan_state <= 1;
+    end else begin
+        fan_state <= 0; // Turn off the fan
+    end
+end
+
+// Output signals assignment
+assign heater = heater_state;
+assign aircon = aircon_state;
+assign fan = fan_state;
+
+endmodule

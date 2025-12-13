@@ -1,0 +1,37 @@
+To implement a JK flip-flop in Verilog based on the given truth table, you need to create a module that updates its output `Q` at each positive edge of the clock signal `clk`. The behavior is determined by the inputs `J`, `K`, and the current state `Qold` (which is the value of `Q` before the clock edge). Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q
+);
+
+always @(posedge clk) begin
+    case ({j, k})
+        2'b00: Q <= Q;       // No change
+        2'b01: Q <= 1'b0;    // Reset
+        2'b10: Q <= 1'b1;    // Set
+        2'b11: Q <= ~Q;      // Toggle
+    endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` has three inputs (`clk`, `j`, `k`) and one output (`Q`). The output is declared as a register because it needs to hold state across clock cycles.
+
+- **Always Block**: The `always @(posedge clk)` block ensures that the logic inside is executed at every positive edge of the clock signal. This is typical for synchronous designs like flip-flops.
+
+- **Case Statement**: 
+  - `{j, k}` creates a 2-bit vector from inputs `j` and `k`.
+  - The `case` statement evaluates this vector to determine the next state of `Q`.
+    - `2'b00`: No change (`Q <= Q`), meaning `Q` retains its previous value.
+    - `2'b01`: Reset (`Q <= 1'b0`), setting `Q` to 0.
+    - `2'b10`: Set (`Q <= 1'b1`), setting `Q` to 1.
+    - `2'b11`: Toggle (`Q <= ~Q`), inverting the current value of `Q`.
+
+This implementation correctly follows the JK flip-flop behavior as described by the truth table.

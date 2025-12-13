@@ -1,0 +1,26 @@
+
+// TopModule.v
+// 4‑input combinational logic: AND, OR, XOR
+// All signals are positive‑edge triggered by the clock (if any) –
+// but since this is purely combinational, no clock is required.
+
+module TopModule (
+    input  wire [3:0] in,      // 4‑bit input vector
+    output wire       out_and, // 4‑input AND
+    output wire       out_or,  // 4‑input OR
+    output wire       out_xor  // 4‑input XOR
+);
+
+// 4‑input AND: all bits must be 1
+assign out_and = in[0] & in[1] & in[2] & in[3];
+
+// 4‑input OR: at least one bit is 1
+assign out_or  = in[0] | in[1] | in[2] | in[3];
+
+// 4‑input XOR: parity of the 4 bits
+assign out_xor = in[0] ^ in[1] ^ in[2] ^ in[3];
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

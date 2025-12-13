@@ -1,0 +1,58 @@
+Here is the Verilog module implementation for the Moore state machine based on the provided description:
+
+```verilog
+module TopModule(
+    input in, // Input signal
+    input [3:0] state, // Current state of the state machine
+    output reg [3:0] next_state, // Next state of the state machine
+    output out // Output signal
+);
+
+// State transition table for the Moore state machine
+reg [1:0] nextState;
+
+assign nextState = $signed(state[2:0]); // Extracting the one-hot encoded state
+
+always @(*) begin
+    case ($signed(nextState))
+        4'b0001 : next_state = 4'b0001; // State A
+        4'b0010 : next_state = 4'b0010; // State B
+        4'b0100 : next_state = 4'b0100; // State C
+        4'b1000 : next_state = 4'b1000; // State D
+    endcase
+end
+
+always @(*) begin
+    case ($signed(state))
+        4'b0001 : out = 0; // Output for state A
+        4'b0010 : out = 0; // Output for state B
+        4'b0100 : out = 1; // Output for state C
+        4'b1000 : out = 1; // Output for state D
+    endcase
+end
+
+// State transition logic
+always @(*) begin
+    if (in == 0) begin
+        case ($signed(state))
+            4'b0001 : next_state = 4'b0010;
+            4'b0010 : next_state = 4'b0100;
+            4'b0100 : next_state = 4'b1000;
+            4'b1000 : next_state = 4'b0001;
+        endcase
+    end else begin // in == 1
+        case ($signed(state))
+            4'b0001 : next_state = 4'b0001;
+            4'b0010 : next_state = 4'b0010;
+            4'b0100 : next_state = 4'b0100;
+            4'b1000 : next_state = 4'b1000;
+        endcase
+    end
+end
+
+endmodule // TopModule
+```
+
+This implementation includes the state transition logic and output logic for the Moore state machine. The `next_state` register is used to store the next state of the state machine, which is updated based on the current input signal and state. The `out` signal is also updated based on the current state.
+
+Note that this implementation assumes a one-hot encoding for the states, where each state is represented by a unique binary value (A=4'b0001, B=4'b0010, C=4'b0100, D=4'b1000). The `next_state` register is used to store the next state of the state machine, which is updated based on the current input signal and state.

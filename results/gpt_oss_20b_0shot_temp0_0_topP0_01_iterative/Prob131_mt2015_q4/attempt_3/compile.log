@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_3\Prob131_mt2015_q4_code.sv:12: error: Unknown module type: A
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_3\Prob131_mt2015_q4_code.sv:13: error: Unknown module type: A
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_3\Prob131_mt2015_q4_code.sv:16: error: Unknown module type: B
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_3\Prob131_mt2015_q4_code.sv:17: error: Unknown module type: B
+5 error(s) during elaboration.
+*** These modules were missing:
+        A referenced 2 times.
+        B referenced 2 times.
+***

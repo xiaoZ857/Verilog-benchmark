@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:11: error: Unable to bind wire/reg/memory `in_prev[i]' in `tb.top_module1.$ivl_for_loop0'
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:11: error: Unable to elaborate condition expression.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:22: error: Unable to bind wire/reg/memory `edge_detect[i]' in `tb.top_module1.$ivl_for_loop1'
+3 error(s) during elaboration.

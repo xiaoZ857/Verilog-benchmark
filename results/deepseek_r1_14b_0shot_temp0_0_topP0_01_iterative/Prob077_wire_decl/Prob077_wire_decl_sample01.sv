@@ -1,0 +1,33 @@
+
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out,
+  output out_n
+);
+
+  // Declare intermediate wires
+  wire and1, and2, or_out;
+
+  // AND gate 1: a & b
+  assign and1 = a & b;
+
+  // AND gate 2: c & d
+  assign and2 = c & d;
+
+  // OR gate to combine the two AND gates
+  assign or_out = and1 | and2;
+
+  // Assign final output 'out'
+  assign out = or_out;
+
+  // Inverted output 'out_n'
+  assign out_n = !out;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

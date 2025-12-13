@@ -1,0 +1,39 @@
+Here's how you can implement a D latch in Verilog:
+
+```verilog
+// Define the module parameters and inputs
+module TopModule (
+  input d, // Data input
+  input ena, // Enable input
+  output logic q // Output of the D latch
+);
+
+// Always block to implement the D latch
+always @(posedge clk) begin
+  if (ena == 1'b1) begin
+    q <= d;
+  end else begin
+    q <= q; // Hold the current value when ena is low
+  end
+end
+
+// Add a clock signal to the module
+module TopModule_clock (
+  input clk, // Clock signal
+  output logic clk_out // Clock output
+);
+
+// Assign the clock signal to the output
+assign clk_out = clk;
+
+endmodule
+```
+
+In this implementation:
+
+- The `TopModule` is defined with inputs `d`, `ena`, and output `q`.
+- An always block is used to implement the D latch. It checks if the enable input `ena` is high (`1'b1`) on each clock edge.
+- If `ena` is high, it sets the output `q` to the current value of `d`. Otherwise, it holds the current value of `q`.
+- A separate module `TopModule_clock` is added to provide a clock signal. The clock signal is assigned to an output named `clk_out`.
+
+Note that in this implementation, we assume that the signals are positive edge-triggered unless otherwise stated.

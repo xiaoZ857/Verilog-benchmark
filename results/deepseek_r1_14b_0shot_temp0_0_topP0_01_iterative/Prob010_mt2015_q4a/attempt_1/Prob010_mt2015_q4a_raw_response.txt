@@ -1,0 +1,15 @@
+To implement the Verilog module for the boolean function \( z = (x \oplus y) \& x \), we can directly translate the expression into Verilog code using the XOR operator (^) and AND operator (&). 
+
+Here is the implementation:
+
+```verilog
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  assign z = (x ^ y) & x;
+endmodule
+```
+
+This module takes two inputs, `x` and `y`, computes their XOR, and then ANDs the result with `x` to produce the output `z`.

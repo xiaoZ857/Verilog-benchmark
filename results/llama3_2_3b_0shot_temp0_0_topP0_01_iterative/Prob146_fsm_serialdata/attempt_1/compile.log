@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT and IDLE have the same value: 2'd0
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE has an inferred value that overflowed.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE and START_BIT have the same value: 2'd1
+5 error(s) during elaboration.

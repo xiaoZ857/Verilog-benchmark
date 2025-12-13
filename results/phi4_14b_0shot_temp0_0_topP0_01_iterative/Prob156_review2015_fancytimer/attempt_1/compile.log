@@ -1,0 +1,30 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 17
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:25: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:26: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:27: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:28: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:33: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:34: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:35: sorry: This cast operation is not yet supported.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:43: error: Concatenation operand "(delay_value)+('sd1)" has indefinite width.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:43: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:97: error: Unable to bind wire/reg/memory `READ_DELAY_2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:100: error: Unable to bind wire/reg/memory `READ_DELAY_2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:102: error: Unable to bind wire/reg/memory `READ_DELAY_3' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:105: error: Unable to bind wire/reg/memory `READ_DELAY_3' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:107: error: Unable to bind wire/reg/memory `READ_DELAY_4' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:110: error: Unable to bind wire/reg/memory `READ_DELAY_4' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:119: error: Concatenation operand "(delay_value)+('sd1)" has indefinite width.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:119: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:96: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:101: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:106: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:111: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:112: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:113: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob156_review2015_fancytimer\attempt_1\Prob156_review2015_fancytimer_code.sv:114: warning: A non-blocking assignment should not be used in an always_comb process.
+17 error(s) during elaboration.

@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:11: error: start_shifting is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:6:      : start_shifting is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:13: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:14: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:14: error: Unable to bind wire/reg/memory `FOUND' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:14: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:23: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:23: error: Unable to elaborate this case expression.
+7 error(s) during elaboration.

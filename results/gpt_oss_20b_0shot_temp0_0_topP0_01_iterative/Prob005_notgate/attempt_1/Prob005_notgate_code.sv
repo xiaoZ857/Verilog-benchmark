@@ -1,0 +1,13 @@
+
+// TopModule implements a simple NOT gate
+module TopModule (
+    input  wire in,   // input signal
+    output wire out   // output signal (inverted)
+);
+
+// Combinational logic: out is the logical NOT of in
+assign out = ~in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

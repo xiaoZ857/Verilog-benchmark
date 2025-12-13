@@ -1,0 +1,24 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+always @(posedge clk or negedge a or negedge b) begin
+  if (a && b)
+    out_assign = 1'b1;
+  else
+    out_assign = 1'b0;
+end
+
+always @(posedge clk) begin
+  if (out_assign == 1'b1)
+    out_alwaysblock <= 1'b1;
+  else
+    out_alwaysblock <= 1'b0;
+end
+
+assign out = out_assign; // Assigning out_assign to out for easier use in testbench
+
+endmodule

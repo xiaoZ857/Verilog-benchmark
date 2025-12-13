@@ -1,0 +1,18 @@
+To create a Verilog module that always outputs a LOW signal, we can directly assign the value `0` to the output port. Here's how it's done:
+
+```verilog
+module TopModule (
+  output zero
+);
+  
+  // Assign 0 to the output 'zero' to ensure it is always LOW.
+  assign zero = 0;
+
+endmodule
+```
+
+**Explanation:**
+
+- The module `TopModule` has an output port named `zero`.
+- Inside the module, we use the `assign` statement to set `zero` to `0`. This ensures that the output remains at a LOW voltage level regardless of any other conditions or timing factors.
+- Since there are no inputs or clock signals involved, the circuit doesn't require any complex logic. The constant assignment of `0` suffices to meet the requirement of always outputting LOW.

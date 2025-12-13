@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob121_2014_q3bfsm\attempt_3\Prob121_2014_q3bfsm_code.sv:11: error: Could not find variable ``y'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob121_2014_q3bfsm\attempt_3\Prob121_2014_q3bfsm_code.sv:13: error: Could not find variable ``y'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob121_2014_q3bfsm\attempt_3\Prob121_2014_q3bfsm_code.sv:19: error: Unable to bind wire/reg/memory `y' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob121_2014_q3bfsm\attempt_3\Prob121_2014_q3bfsm_code.sv:19: error: Unable to elaborate this case expression.
+3 error(s) during elaboration.

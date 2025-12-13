@@ -1,0 +1,32 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+reg [7:0] d_reg; // Internal register for the D input to avoid race conditions
+
+always @(posedge clk) begin
+  if (reset) begin
+    d_reg <= 8'b0; // Reset all DFFs to zero
+  end else begin
+    d_reg <= d; // Assign new values to internal register on positive edge of clk
+  end
+end
+
+always @(posedge clk) begin
+  q <= d_reg; // Assign the value from the internal register to output Q
+end
+
+// Active high synchronous reset for all DFFs
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 8'b0; // Reset Q to zero on active high reset edge
+  end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

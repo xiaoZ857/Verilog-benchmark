@@ -1,0 +1,39 @@
+We need a counter to count exactly 4 clock cycles after reset.  
+The FSM can be a simple state machine with two states:  
+- SHIFTING (for 4 cycles)  
+- IDLE (forever after 4 cycles, until reset).  
+
+But since the problem says: after reset, assert shift_ena for 4 cycles, then 0 forever until reset — we don’t need a pattern detector here (the description mentions “whenever the proper bit pattern is detected” but the module given has no pattern input, so maybe that’s handled elsewhere; here we just implement the 4-cycle shift after reset).  
+
+We can implement with a 2-bit counter and a flag.  
+
+Approach:  
+1. On reset, set shift_ena = 1, reset counter to 0.  
+2. Count up each cycle while shift_ena is 1.  
+3. When counter reaches 3 (meaning 4 cycles total, 0,1,2,3), deassert shift_ena and stop counting.  
+4. Keep shift_ena = 0 until next reset.  
+
+Let’s write the Verilog:  
+
+```verilog
+  reg [1:0] count;
+  reg shifting;
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 2'b00;
+      shifting <= 1'b1;
+    end else begin
+      if (shifting) begin
+        if (count == 2'b11) begin
+          shifting <= 1'b0;
+        end else begin
+          count <= count + 1;
+        end
+      end
+    end
+  end
+  
+  assign shift_ena = shifting;
+endmodule
+```

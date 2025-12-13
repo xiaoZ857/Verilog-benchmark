@@ -1,0 +1,50 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [1:0] byteena,
+  input [15:0] d,
+  output reg [15:0] q
+);
+  reg [15:0] dff_q [0:15];
+
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      q <= 0;
+      for (integer i = 0; i < 16; i = i + 1) begin
+        dff_q[i] <= 0;
+      end
+    end else begin
+      q <= 0;
+      for (integer i = 0; i < 16; i = i + 1) begin
+        if (byteena == 2'b00) begin
+          if (i < 8) begin
+            dff_q[i] <= d[i];
+          end else begin
+            dff_q[i] <= d[i];
+          end
+        end else if (byteena == 2'b01) begin
+          if (i < 8) begin
+            dff_q[i] <= d[i];
+          end else begin
+            dff_q[i] <= d[i];
+          end
+        end else if (byteena == 2'b10) begin
+          if (i < 8) begin
+            dff_q[i] <= d[i];
+          end else begin
+            dff_q[i] <= d[i];
+          end
+        end else if (byteena == 2'b11) begin
+          if (i < 8) begin
+            dff_q[i] <= d[i];
+          end else begin
+            dff_q[i] <= d[i];
+          end
+        end
+      end
+      q <= dff_q[0];
+    end
+  end
+
+endmodule

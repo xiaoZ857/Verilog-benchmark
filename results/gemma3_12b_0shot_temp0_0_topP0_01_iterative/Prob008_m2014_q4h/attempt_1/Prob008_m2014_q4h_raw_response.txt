@@ -1,0 +1,18 @@
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+
+  assign out = in;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input in, output out);`**: This line declares the module named `TopModule` and defines its input (`in`) and output (`out`) ports.
+* **`assign out = in;`**: This is the core of the module.  The `assign` statement is used for continuous assignment in Verilog. It means that the value of `out` is *always* equal to the current value of `in`.  Whenever `in` changes, `out` will immediately reflect that change.
+* **`endmodule`**: This line marks the end of the module definition.
+
+This module simply passes the input signal `in` directly to the output signal `out`.  It's a very basic module, but it fulfills the given description.

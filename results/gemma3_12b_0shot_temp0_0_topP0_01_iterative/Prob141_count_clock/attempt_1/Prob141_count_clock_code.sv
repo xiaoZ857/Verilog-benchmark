@@ -1,0 +1,67 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+
+  reg [7:0] seconds_count;
+  reg [7:0] minutes_count;
+  reg [7:0] hours_count;
+
+  // Constants for BCD values
+  localparam SECONDS_MAX = 59;
+  localparam MINUTES_MAX = 59;
+  localparam HOURS_MAX = 12;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      // Reset to 12:00 AM
+      seconds_count <= 0;
+      minutes_count <= 0;
+      hours_count <= 0;
+      pm <= 0; // AM
+    end else if (ena) begin
+      // Increment seconds
+      seconds_count <= seconds_count + 1;
+
+      // Carry from seconds to minutes
+      if (seconds_count > SECONDS_MAX) begin
+        seconds_count <= 0;
+        minutes_count <= minutes_count + 1;
+
+        // Carry from minutes to hours
+        if (minutes_count > MINUTES_MAX) begin
+          minutes_count <= 0;
+          hours_count <= hours_count + 1;
+
+          // Carry from hours to PM indicator
+          if (hours_count > HOURS_MAX) begin
+            hours_count <= 1; // Wrap around to 1
+          end
+        end
+      end
+    end
+  end
+
+  // Assign BCD values to output signals
+  assign hh = hours_count;
+  assign mm = minutes_count;
+  assign ss = seconds_count;
+
+  // Determine PM indicator based on hours
+  always @(hours_count) begin
+    if (hours_count >= 12) begin
+      pm <= 1; // PM
+    end else begin
+      pm <= 0; // AM
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

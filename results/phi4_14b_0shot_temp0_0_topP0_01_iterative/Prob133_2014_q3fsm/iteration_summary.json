@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob133_2014_q3fsm",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'z' has 468 mismatches. First mismatch occurred at time 80.\nHint: Total mismatched samples is 468 out of 1414 samples\n\nSimulation finished at 7071 ps\nMismatches: 468 in 1414 samples\n",
+      "mismatch_count": 468
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_ref.sv:36: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 13\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:13: error: Could not find variable ``count_w_ones'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:14: error: Could not find variable ``cycle_count'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:16: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `A' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `next_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `B' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:18: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:24: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:24: error: Unable to bind wire/reg/memory `B' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:24: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:49: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_3\\Prob133_2014_q3fsm_code.sv:49: error: Unable to elaborate this case expression.\n13 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 13\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:13: error: Could not find variable ``count_w_ones'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:14: error: Could not find variable ``cycle_count'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:16: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `A' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `next_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:18: error: Unable to bind wire/reg/memory `B' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:18: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:24: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:24: error: Unable to bind wire/reg/memory `B' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:24: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:49: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob133_2014_q3fsm\\attempt_4\\Prob133_2014_q3fsm_code.sv:49: error: Unable to elaborate this case expression.\n13 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

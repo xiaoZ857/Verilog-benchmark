@@ -1,0 +1,21 @@
+
+// TopModule.v
+// D‑flip‑flop, positive‑edge clocked, asynchronous active‑high reset
+module TopModule (
+    input  logic clk,   // Clock (positive edge)
+    input  logic d,     // Data input
+    input  logic ar,    // Asynchronous reset (active‑high)
+    output logic q      // Flip‑flop output
+);
+
+    // Sequential logic: triggered on rising edge of clk or ar
+    always_ff @(posedge clk or posedge ar) begin
+        if (ar)          // Asynchronous reset dominates
+            q <= 1'b0;   // Reset output to 0
+        else
+            q <= d;      // Store data on clock edge
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

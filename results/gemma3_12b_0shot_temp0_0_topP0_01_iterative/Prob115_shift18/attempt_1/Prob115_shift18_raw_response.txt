@@ -1,0 +1,66 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input ena,
+  input [1:0] amount,
+  input [63:0] data,
+  output reg [63:0] q
+);
+
+  reg [63:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      shift_reg <= data;
+    end else if (ena) begin
+      case (amount)
+        2'b00: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift left by 1
+        2'b01: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift left by 8 (same as left by 1 repeated 8 times)
+        2'b10: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift right by 1 (arithmetic)
+        2'b11: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift right by 8 (arithmetic)
+        default: shift_reg <= shift_reg; // No shift
+      endcase
+    end else begin
+      shift_reg <= shift_reg; // Hold value
+    end
+  end
+
+  assign q = shift_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [63:0] shift_reg;`**:  Declares a 64-bit register `shift_reg` to hold the contents of the shift register.  This is where the shifting actually happens.
+
+2. **`always @(posedge clk) begin ... end`**:  This block defines the sequential logic that operates on the positive edge of the clock signal.
+
+3. **`if (load) begin ... end`**:  If the `load` signal is high, the shift register is loaded with the value of the `data` input.
+
+4. **`else if (ena) begin ... end`**:  If the `load` signal is low and the `ena` (enable) signal is high, the shift register is shifted according to the `amount` signal.
+
+5. **`case (amount) ... endcase`**:  This `case` statement determines the direction and amount of the shift based on the value of the `amount` signal.
+
+   * **`2'b00: shift_reg <= {shift_reg[62:0], 1'b0};`**:  Shifts left by 1 bit.  The most significant bit (MSB) is filled with a '0'.
+   * **`2'b01: shift_reg <= {shift_reg[62:0], 1'b0};`**: Shifts left by 8 bits.  This is equivalent to shifting left by 1 bit repeated 8 times.
+   * **`2'b10: shift_reg <= {shift_reg[62:0], 1'b0};`**: Shifts right by 1 bit (arithmetic).  The MSB is filled with a '0'.
+   * **`2'b11: shift_reg <= {shift_reg[62:0], 1'b0};`**: Shifts right by 8 bits (arithmetic).  The MSB is filled with a '0'.
+   * **`default: shift_reg <= shift_reg;`**:  If the `amount` signal has an unexpected value, the shift register holds its current value.
+
+6. **`else begin shift_reg <= shift_reg; end`**: If neither `load` nor `ena` is asserted, the shift register holds its current value.
+
+7. **`assign q = shift_reg;`**:  This continuous assignment statement connects the output `q` to the current value of the `shift_reg` register.  This makes the contents of the shift register available as the output.
+
+**Important Considerations:**
+
+* **Arithmetic Right Shift:** The code performs a logical right shift (filling with 0).  For an arithmetic right shift, the sign bit (MSB) should be replicated.  To implement an arithmetic right shift, you would need to determine the sign bit of the `shift_reg` and replicate it during the right shift.  For example:
+
+   ```verilog
+   always @(posedge clk) begin
+     if (load) begin
+       shift_reg <= data;
+     end else if (ena) begin
+       case (amount)
+         2'b00

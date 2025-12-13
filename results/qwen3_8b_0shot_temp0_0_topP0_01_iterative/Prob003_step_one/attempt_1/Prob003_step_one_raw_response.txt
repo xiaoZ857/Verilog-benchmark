@@ -1,0 +1,20 @@
+Here's the implementation of the Verilog module `TopModule` as described:
+
+```verilog
+module TopModule (
+  output one
+);
+  assign one = 1;
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` has a single output signal named `one`.
+- **Continuous Assignment**: The `assign` statement sets the output `one` to the constant value `1`, ensuring it is always driven high.
+- **No Inputs**: Since the problem specifies no inputs, the module does not include any input ports.
+- **Simplicity**: This approach uses a continuous assignment, which is the most straightforward and efficient way to drive a constant value in Verilog.
+
+This implementation satisfies the requirement of always driving the output `one` to logic high.

@@ -1,0 +1,40 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 34
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:92: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:92: error: Unable to elaborate r-value: (state)==(WALK_LEFT)
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:93: error: Unable to bind wire/reg/memory `WALK_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:93: error: Unable to elaborate r-value: (state)==(WALK_RIGHT)
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:94: error: Unable to bind wire/reg/memory `FALL_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:94: error: Unable to bind wire/reg/memory `FALL_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:94: error: Unable to elaborate r-value: ((state)==(FALL_LEFT))o((state)==(FALL_RIGHT))
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:95: error: Unable to bind wire/reg/memory `DIG_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:95: error: Unable to bind wire/reg/memory `DIG_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:95: error: Unable to elaborate r-value: ((state)==(DIG_LEFT))o((state)==(DIG_RIGHT))
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:20: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:22: error: Unable to bind wire/reg/memory `FALL_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:24: error: Unable to bind wire/reg/memory `DIG_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:26: error: Unable to bind wire/reg/memory `WALK_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:28: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:32: error: Unable to bind wire/reg/memory `WALK_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:34: error: Unable to bind wire/reg/memory `FALL_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:36: error: Unable to bind wire/reg/memory `DIG_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:38: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:40: error: Unable to bind wire/reg/memory `WALK_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:44: error: Unable to bind wire/reg/memory `FALL_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:46: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:48: error: Unable to bind wire/reg/memory `FALL_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:52: error: Unable to bind wire/reg/memory `FALL_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:54: error: Unable to bind wire/reg/memory `WALK_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:56: error: Unable to bind wire/reg/memory `FALL_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:60: error: Unable to bind wire/reg/memory `DIG_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:62: error: Unable to bind wire/reg/memory `FALL_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:64: error: Unable to bind wire/reg/memory `DIG_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:68: error: Unable to bind wire/reg/memory `DIG_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:70: error: Unable to bind wire/reg/memory `FALL_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:72: error: Unable to bind wire/reg/memory `DIG_RIGHT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:77: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_0_topP0_01_iterative\Prob152_lemmings3\attempt_2\Prob152_lemmings3_code.sv:85: error: Unable to bind wire/reg/memory `WALK_LEFT' in `tb.top_module1'
+34 error(s) during elaboration.

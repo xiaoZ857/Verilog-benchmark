@@ -1,0 +1,31 @@
+To implement a Verilog module that computes an even parity bit for an 8-bit byte, you can use XOR gates to compute the parity. The parity bit is set such that the total number of 1s (including the parity bit) is even.
+
+Here's how you can write the Verilog code for this:
+
+```verilog
+module TopModule (
+    input [7:0] in,
+    output parity
+);
+
+    // Compute the parity by XORing all bits of the input byte.
+    assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^
+                    in[4] ^ in[5] ^ in[6] ^ in[7];
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `in`: An 8-bit input vector representing the data byte.
+  - `parity`: A single bit output that represents the even parity bit.
+
+- **XOR Operation:**
+  - The XOR operation is used because it effectively counts the number of 1s. If there's an odd number of 1s, the result will be 1; if even, the result will be 0.
+  - By XORing all bits together, you get a single bit that indicates whether the number of 1s in `in` is odd or even.
+
+- **Even Parity:**
+  - The parity bit is set such that the total number of 1s (including the parity bit) is even. Therefore, if the XOR result is 0 (even number of 1s), the parity bit should be 0. If the XOR result is 1 (odd number of 1s), the parity bit should be 1 to make the total count even.
+
+This module will correctly compute and output the even parity bit for any given 8-bit input.

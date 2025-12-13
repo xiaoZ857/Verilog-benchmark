@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob057_kmap2\attempt_3\Prob057_kmap2_code.sv:10: warning: implicit definition of wire 'temp_out_ab'.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob057_kmap2\attempt_3\Prob057_kmap2_code.sv:13: warning: implicit definition of wire 'out_cd'.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob057_kmap2\attempt_3\Prob057_kmap2_code.sv:16: warning: implicit definition of wire 'temp_out_ad'.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob057_kmap2\attempt_3\Prob057_kmap2_code.sv:19: warning: implicit definition of wire 'temp_out_bc'.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob057_kmap2\attempt_3\Prob057_kmap2_code.sv:25: syntax error
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob057_kmap2\attempt_3\Prob057_kmap2_code.sv:25: error: Invalid module instantiation

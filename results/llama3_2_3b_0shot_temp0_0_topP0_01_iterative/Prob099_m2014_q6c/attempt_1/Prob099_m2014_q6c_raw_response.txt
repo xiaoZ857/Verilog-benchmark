@@ -1,0 +1,40 @@
+To implement the Verilog module for the given state machine, we need to derive the logic equations for the next-state signals Y2 and Y4. Since a one-hot encoding is used, we can assume that only one of the states A, B, C, D, E, or F will be active at any given time.
+
+The next-state logic equations can be derived by inspecting the state machine diagram:
+
+- For Y2 (next state of y[2]):
+  - If y[2] is 0 and y[3] is 1, then the next state is B.
+  - Otherwise, if y[2] is 1, then the next state is A.
+
+- For Y4 (next state of y[4]):
+  - If y[4] is 0 and y[5] is 1, then the next state is D.
+  - Otherwise, if y[4] is 1, then the next state is C.
+
+Here's the Verilog code for the next-state signals Y2 and Y4:
+
+```verilog
+module TopModule (
+  input [6:1] y,
+  input w,
+  output logic Y2,
+  output logic Y4
+);
+
+// Define the states
+localparam [7:0] A = 8'd000001;
+localparam [7:0] B = 8'd000010;
+localparam [7:0] C = 8'd000100;
+localparam [7:0] D = 8'd001000;
+localparam [7:0] E = 8'd010000;
+localparam [7:0] F = 8'd100000;
+
+// Derive the logic equations for Y2 and Y4
+assign Y2 = (y[1] == 1 && y[3] == 0) ? B : (y[2] == 1) ? A : 0;
+assign Y4 = (y[4] == 0 && y[5] == 0) ? D : (y[4] == 1 && y[5] == 0) ? C : 0;
+
+endmodule
+```
+
+In this code, we define the states using local parameters. We then use `assign` statements to derive the logic equations for Y2 and Y4 based on the state machine diagram. The `Y2` assignment checks if y[1] is 1 and y[3] is 0 (i.e., B), or if y[2] is 1 (i.e., A). If neither condition is met, Y2 is assigned 0.
+
+Similarly, the `Y4` assignment checks if y[4] is 0 and y[5] is 0 (i.e., D), or if y[4] is 1 and y[5] is 0 (i.e., C). If neither condition is met, Y4 is assigned 0.

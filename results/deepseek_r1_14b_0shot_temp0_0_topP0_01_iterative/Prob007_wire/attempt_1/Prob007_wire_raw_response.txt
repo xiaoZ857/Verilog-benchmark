@@ -1,0 +1,14 @@
+To create a Verilog module named `TopModule` that connects an input directly to an output, you can use an explicit assignment statement within the module. This ensures that the output (`out`) mirrors the input (`in`), functioning like a simple wire.
+
+Here's how the code would look:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  assign out = in;
+endmodule
+```
+
+This module takes an input `in` and directly assigns its value to the output `out`, effectively passing the signal through without any modification.

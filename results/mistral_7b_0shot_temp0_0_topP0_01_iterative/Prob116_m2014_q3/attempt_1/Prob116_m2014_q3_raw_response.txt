@@ -1,0 +1,17 @@
+ Based on the provided Karnaugh map, the function `f` can be expressed in sum-of-products form as follows:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+assign f = ~x[3] & x[2] | x[3] & ~x[2] & x[1];
+
+// Alternative implementation using if-else statements
+// assign f = (x[3] && x[2] && !x[1]) || (!x[3] && !x[2]);
+```
+
+In the provided Karnaugh map, `d` represents a don't care condition. Since we are free to choose any value for `f` in these cases, I have chosen to simplify the expression by using the XOR operation between `x[3]` and `x[2]`, and then applying a NOT gate on `x[3]`. This results in the same output values as specified in the Karnaugh map.
+
+The alternative implementation using if-else statements is also provided for clarity, but it may not be as efficient due to its increased complexity.

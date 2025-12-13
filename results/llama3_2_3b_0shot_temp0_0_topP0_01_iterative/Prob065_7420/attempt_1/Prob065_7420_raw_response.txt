@@ -1,0 +1,27 @@
+Here's a Verilog module that implements the functionality of the 7420 chip:
+
+```verilog
+module TopModule (
+    input p1a, 
+    input p1b, 
+    input p1c, 
+    input p1d, 
+    output p1y,
+    input p2a, 
+    input p2b, 
+    input p2c, 
+    input p2d, 
+    output p2y
+);
+
+    // 4-input NAND gate implementation
+    assign p1y = ~(p1a & p1b & p1c & p1d) | (p1a & ~p1b & ~p1c & ~p1d);
+    
+    assign p2y = ~(p2a & p2b & p2c & p2d) | (p2a & ~p2b & ~p2c & ~p2d);
+
+endmodule
+```
+
+This module consists of two 4-input NAND gates, one for each output. The inputs to the first NAND gate are `p1a`, `p1b`, `p1c`, and `p1d`. The outputs of these gates are assigned to `p1y` and `p2y`, respectively.
+
+The NAND gate is implemented using the bitwise NOT operator (`~`) and the bitwise AND operator (`&`). The expression `(p1a & ~p1b & ~p1c & ~p1d)` represents a 4-input NAND operation, where each input is inverted before being ANDed together.

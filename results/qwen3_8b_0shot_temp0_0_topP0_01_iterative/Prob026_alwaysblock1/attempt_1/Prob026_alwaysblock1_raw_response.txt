@@ -1,0 +1,33 @@
+Here's the implementation of the `TopModule` in Verilog that realizes an AND gate using both an `assign` statement and a combinational `always` block:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Continuous assignment using an assign statement
+assign out_assign = a & b;
+
+// Combinational always block using @(*) for sensitivity
+always @(*) begin
+  out_alwaysblock = a & b;
+end
+
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **`assign out_assign = a & b;`**  
+  This line implements the AND gate using a continuous assignment. It is ideal for combinational logic and will update whenever the inputs `a` or `b` change.
+
+- **`always @(*) begin ... end`**  
+  This is a combinational `always` block. The `@(*)` sensitivity list ensures that the block executes whenever any of the inputs (`a` or `b`) change. Inside the block, the output `out_alwaysblock` is assigned the result of the AND operation between `a` and `b`.
+
+- **`output reg out_alwaysblock`**  
+  The `reg` type is used for `out_alwaysblock` because it is being assigned inside an

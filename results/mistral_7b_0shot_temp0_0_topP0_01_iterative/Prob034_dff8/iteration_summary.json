@@ -1,0 +1,38 @@
+{
+  "problem_name": "Prob034_dff8",
+  "model_name": "mistral:7b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 0,
+  "total_attempts": 2,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Invalid assignment: q is declared as reg but used in continuous assignment",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

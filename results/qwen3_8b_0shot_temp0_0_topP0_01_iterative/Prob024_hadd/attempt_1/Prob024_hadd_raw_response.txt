@@ -1,0 +1,51 @@
+Here's the implementation of a **half adder** in Verilog, as per the given description:
+
+---
+
+### ✅ **Module Description**
+
+- **Inputs**: `a` and `b` (two 1-bit binary inputs)
+- **Outputs**: `sum` (the sum of the two bits) and `cout` (the carry-out)
+- **Behavior**:
+  - `sum = a XOR b` (1 when inputs differ)
+  - `cout = a AND b` (1 only when both inputs are 1)
+
+This is a **combinational logic** circuit, so no clock signal is required.
+
+---
+
+### 📜 **Verilog Code**
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+  assign sum = a ^ b;
+  assign cout = a & b;
+endmodule
+```
+
+---
+
+### 📌 **Explanation**
+
+- `assign sum = a ^ b;` computes the XOR of `a` and `b`, which gives the sum of the two bits.
+- `assign cout = a & b;` computes the AND of `a` and `b`, which gives the carry-out.
+
+This implementation is **synthesizable** and works correctly for all combinations of `a` and `b`.
+
+---
+
+### 🧪 **Truth Table**
+
+| a | b | sum | cout |
+|---|---|-----|------|
+| 0 | 0 |  0  |  0   |
+| 0 | 1 |  1  |  0   |
+| 1 | 0 |  1  |  0   |
+| 1 | 1 |  0  |  1   |
+
+This confirms the correctness of the logic.

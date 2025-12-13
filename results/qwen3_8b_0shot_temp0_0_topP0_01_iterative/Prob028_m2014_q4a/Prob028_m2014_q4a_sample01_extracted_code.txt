@@ -1,0 +1,5 @@
+always @(ena) begin
+    if (ena) begin
+        q <= d;
+    end
+end

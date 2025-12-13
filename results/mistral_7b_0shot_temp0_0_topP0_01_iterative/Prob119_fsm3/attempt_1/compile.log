@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob119_fsm3\attempt_1\Prob119_fsm3_code.sv:31: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob119_fsm3\attempt_1\Prob119_fsm3_code.sv:32: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob119_fsm3\attempt_1\Prob119_fsm3_code.sv:42: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob119_fsm3\attempt_1\Prob119_fsm3_code.sv:43: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob119_fsm3\attempt_1\Prob119_fsm3_code.sv:53: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob119_fsm3\attempt_1\Prob119_fsm3_code.sv:54: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob119_fsm3_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob119_fsm3_ref.sv:31: syntax error
+I give up.

@@ -1,0 +1,10 @@
+assign q = ~(a ^ b) & !c | (a & b) & c;
+
+// OR gate for 'd' using De Morgan's law
+assign or_d = ~(~a & ~b);
+
+// AND gate for 'c' and the OR of 'a' and 'b'
+assign and_cb = c & or_d;
+
+// Invert the output 'q'
+assign q = ~and_cb;

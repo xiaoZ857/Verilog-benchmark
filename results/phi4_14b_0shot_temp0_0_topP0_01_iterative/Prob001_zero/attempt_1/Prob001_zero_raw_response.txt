@@ -1,0 +1,20 @@
+To implement a Verilog module that always outputs a low signal, you can define a simple module with an output port named `zero`. This output will be continuously driven to the logic level '0'. Here's how you can write this in Verilog:
+
+```verilog
+module TopModule (
+  output reg zero // Use 'reg' because we are assigning a continuous value
+);
+
+  initial begin
+    zero = 1'b0; // Assign low (0) to the output
+  end
+
+endmodule
+```
+
+### Explanation:
+- **`output reg zero`:** The `zero` signal is declared as an output and of type `reg`. In Verilog, outputs that are driven continuously need to be declared as `reg`, even though they don't change over time.
+  
+- **`initial begin ... end`:** This block initializes the value of `zero` at the start of simulation. The assignment `zero = 1'b0;` sets the output to a logic low (binary '0').
+
+This module will always drive the `zero` signal to a low state, regardless of any inputs or clock signals, as it doesn't depend on any other conditions or events.

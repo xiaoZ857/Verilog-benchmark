@@ -1,0 +1,75 @@
+To implement the described finite state machine (FSM) in Verilog, we need to define states and transitions based on the given state diagram. We'll use a synchronous active-high reset and separate `always` blocks for handling state transitions and outputs.
+
+Here's how you can write the Verilog code:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output reg z
+);
+
+  // State encoding
+  typedef enum logic [2:0] {
+    A = 3'b000,
+    B = 3'b001,
+    C = 3'b010,
+    D = 3'b011,
+    E = 3'b100,
+    F = 3'b101
+  } state_t;
+
+  // State registers
+  state_t current_state, next_state;
+
+  // State transition logic
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+      current_state <= A;
+    else
+      current_state <= next_state;
+  end
+
+  // Next state logic
+  always_comb begin
+    case (current_state)
+      A: next_state = (w == 1'b1) ? B : A;
+      B: next_state = (w == 1'b1) ? C : D;
+      C: next_state = (w == 1'b0) ? E : D;
+      D: next_state = (w == 1'b1) ? F : A;
+      E: next_state = (w == 1'b1) ? E : D;
+      F: next_state = (w == 1'b1) ? C : D;
+      default: next_state = A; // Default case to handle unexpected states
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    case (current_state)
+      A: z = 0;
+      B: z = 0;
+      C: z = 0;
+      D: z = 0;
+      E: z = 1; // Example output for state E
+      F: z = 1; // Example output for state F
+      default: z = 0; // Default case to handle unexpected states
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We use a `typedef enum` to define the states A, B, C, D, E, and F with binary codes from `3'b000` to `3'b101`.
+
+- **State Registers**: Two state registers, `current_state` and `next_state`, are used. `current_state` holds the current state of the FSM, while `next_state` is calculated based on the current state and input.
+
+- **State Transition Logic**: This block updates `current_state` with `next_state` at every positive edge of the clock or when reset is high. If reset is active, it sets the state to A.
+
+- **Next State Logic**: This combinational logic determines the next state based on the current state and input `w`.
+
+- **Output Logic**: The output `z` is determined by the current state. In this example, `z` is set to 1 for states E and F. You can modify this logic based on your specific requirements.
+
+This code provides a complete implementation of the FSM as described in the problem statement.

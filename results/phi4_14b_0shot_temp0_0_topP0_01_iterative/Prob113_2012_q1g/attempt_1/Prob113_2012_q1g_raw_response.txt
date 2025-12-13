@@ -1,0 +1,52 @@
+To implement the function \( f \) based on the given Karnaugh map, we need to identify the minterms where the function is equal to 1. The Karnaugh map provided is:
+
+\[
+\begin{array}{c|cccc}
+x[3]x[2] & x[4]=0 & x[4]=1 & x[4]=3 & x[4]=2 \\
+\hline
+x[1]=0, x[0]=0 & 1 & 0 & 0 & 1 \\
+x[1]=0, x[0]=1 & 0 & 0 & 0 & 0 \\
+x[1]=1, x[0]=1 & 1 & 1 & 1 & 0 \\
+x[1]=1, x[0]=0 & 1 & 1 & 0 & 1 \\
+\end{array}
+\]
+
+The minterms where \( f = 1 \) are:
+
+- \( x_4'x_3'x_2'x_1' \) (minterm 0000)
+- \( x_4'x_3'x_2'x_1 \) (minterm 0001)
+- \( x_4'x_3x_2x_1' \) (minterm 1010)
+- \( x_4'x_3x_2x_1 \) (minterm 1011)
+- \( x_4x_3'x_2'x_1' \) (minterm 1100)
+- \( x_4x_3'x_2'x_1 \) (minterm 1101)
+- \( x_4x_3x_2'x_1' \) (minterm 1110)
+
+Now, let's write the Verilog module for this function:
+
+```verilog
+module TopModule (
+    input [4:1] x,
+    output logic f
+);
+
+always_comb begin
+    // Initialize f to 0
+    f = 1'b0;
+
+    // Check each minterm where f is 1
+    if ((~x[4] & ~x[3] & ~x[2] & ~x[1]) |   // Minterm 0000
+        (~x[4] & ~x[3] & ~x[2] & x[1]) |     // Minterm 0001
+        (~x[4] & x[3] & x[2] & ~x[1]) |      // Minterm 1010
+        (~x[4] & x[3] & x[2] & x[1]) |       // Minterm 1011
+        (x[4] & ~x[3] & ~x[2] & ~x[1]) |     // Minterm 1100
+        (x[4] & ~x[3] & ~x[2] & x[1]) |      // Minterm 1101
+        (x[4] & x[3] & ~x[2] & ~x[1]))       // Minterm 1110
+    begin
+        f = 1'b1;
+    end
+end
+
+endmodule
+```
+
+This Verilog module uses a combinational always block to evaluate the function \( f \) based on the specified minterms. The output \( f \) is set to 1 if any of the conditions for the minterms are met, otherwise it remains 0.

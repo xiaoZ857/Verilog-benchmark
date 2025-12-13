@@ -1,0 +1,41 @@
+ Here is a simple Verilog implementation for the described decade counter:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire slowena,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 4'b0001; // Reset the counter to 0
+  end else if (slowena) begin
+    q <= q + 1; // Increment the counter when slowena is high
+  end
+end
+
+// To make it a decade counter, we need to add a 4-bit counter and a decoder
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 4'b0001; // Reset the counter to 0
+  end else if (slowena) begin
+    q <= q + 1; // Increment the counter when slowena is high
+  end
+end
+
+always @(posedge clk or posedge reset) begin
+  if (q >= 10'b10010) begin // Decade rollover
+    q <= 4'b0001; // Reset the counter to 0
+  end
+end
+
+// Decoder for outputting the correct value from the 4-bit counter
+assign q[3] = (q >= 4'b0101) && (q < 4'b1000);
+assign q[2] = (q >= 4'b0100) && (q < 4'b0101);
+assign q[1] = (q >= 4'b0010) && (q < 4'b0100);
+assign q[0] = (q >= 4'b0001) && (q < 4'b0010);
+```
+
+This implementation includes a 4-bit counter that counts from 0 to 15, and a decoder to output the correct value for each digit of the decade counter. The `slowena` input is used to pause the counter when it is high. The reset input resets the counter to 0.

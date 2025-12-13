@@ -1,0 +1,54 @@
+Here's the implementation of a one-bit wide 2-to-1 multiplexer in Verilog, as per your description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+  assign out = (sel) ? b : a;
+endmodule
+```
+
+---
+
+### ✅ Explanation:
+
+- **Inputs:**
+  - `a`: First input signal.
+  - `b`: Second input signal.
+  - `sel`: Select signal (1-bit wide).
+  
+- **Output:**
+  - `out`: The selected output based on the value of `sel`.
+
+- **Logic:**
+  - When `sel = 1`, the output is set to `b`.
+  - When `sel = 0`, the output is set to `a`.
+
+- **Implementation:**
+  - The `assign` statement is used to implement the multiplexer logic in a **combinational** fashion.
+  - The conditional operator `? :` is used to select between `a` and `b` based on the value of `sel`.
+
+---
+
+### 📌 Notes:
+
+- This module is **combinational**, meaning the output is directly determined by the inputs without any clock or sequential logic.
+- The `output` is declared as a `wire` by default in Verilog, which is appropriate for this implementation.
+- The syntax `(sel) ? b : a` is correct and standard in Verilog for conditional assignment.
+
+---
+
+### 🧪 Example Behavior:
+
+| a | b | sel | out |
+|---|---|-----|-----|
+| 0 | 0 | 0   | 0   |
+| 0 | 1 | 0   | 0   |
+| 1 | 0 | 0   | 1   |
+| 0 | 1 | 1   | 1   |
+| 1 | 0 | 1   | 0   |
+
+This implementation is correct and matches the functional specification.

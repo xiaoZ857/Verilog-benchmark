@@ -1,0 +1,32 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+// Reverses the byte order of a 32-bit vector
+module TopModule (
+  input [31:0] in,
+  output [31:0] out
+);
+
+// Define the number of bits in a byte
+define BIT_WIDTH 8
+
+// Calculate the total number of bytes in the 32-bit vector
+define TOTAL_BYTES (32 / BIT_WIDTH)
+
+// Initialize the output signal to zero
+assign out = 0;
+
+// Loop through each byte in the input vector
+for (int i = 0; i < TOTAL_BYTES; i++) begin : byte_loop
+    // Extract the current byte from the input vector
+    assign out[BIT_WIDTH * i] = in[BIT_WIDTH * (TOTAL_BYTES - i) - 1];
+
+endfor
+
+// End of module definition
+endmodule
+```
+
+This Verilog module takes a 32-bit input vector and reverses its byte order. It does this by looping through each byte in the input vector, extracting it from the reversed position, and assigning it to the corresponding output position.
+
+Please note that this implementation assumes that the input signal is a positive edge-triggered clock/clk. If your signals are not triggered on the rising or falling edge of the clock, you may need to adjust the module accordingly.

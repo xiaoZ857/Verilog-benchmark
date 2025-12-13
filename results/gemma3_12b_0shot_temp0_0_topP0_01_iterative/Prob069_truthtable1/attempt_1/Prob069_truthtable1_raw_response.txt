@@ -1,0 +1,31 @@
+```verilog
+module TopModule (
+  input x3,
+  input x2,
+  input x1,
+  output f
+);
+
+  assign f = (x3 & x2 & x1) | (x3 & ~x2 & ~x1) | (~x3 & x2 & x1) | (~x3 & x2 & ~x1);
+
+endmodule
+```
+
+**Explanation:**
+
+The truth table can be directly translated into a Boolean expression.  Let's break down how the expression is derived:
+
+* **Row 1 (0 0 0):**  f = 0.  This is the base case, and we don't need any specific term for it.
+* **Row 2 (0 0 1):**  f = 0.  Similar to row 1.
+* **Row 3 (0 1 0):**  f = 1.  This corresponds to `~x3 & x2 & x1`.
+* **Row 4 (0 1 1):**  f = 1.  This corresponds to `~x3 & x2 & ~x1`.
+* **Row 1 (1 0 0):**  f = 0.  Similar to row 1 and 2.
+* **Row 1 (1 0 1):**  f = 1.  This corresponds to `x3 & ~x2 & x1`.
+* **Row 1 (1 1 0):**  f = 0.  Similar to row 1 and 2.
+* **Row 1 (1 1 1):**  f = 1.  This corresponds to `x3 & x2 & x1`.
+
+Combining these terms with OR operations gives the final expression:
+
+`f = (x3 & x2 & x1) | (x3 & ~x2 & ~x1) | (~x3 & x2 & x1) | (~x3 & x2 & ~x1)`
+
+This expression directly implements the truth table.  The `assign` statement in Verilog is used because the output `f` is a purely combinational function of the inputs.  No sequential logic (like registers or flip-flops) is involved.

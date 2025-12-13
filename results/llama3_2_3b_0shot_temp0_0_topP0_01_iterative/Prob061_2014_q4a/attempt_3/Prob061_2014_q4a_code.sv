@@ -1,0 +1,36 @@
+
+module TopModule (
+  input clk,
+  input w,
+  input R,
+  input E,
+  input L,
+  output reg [0:1] Q
+);
+
+DFlipFlop #(.DWIDTH(2)) DFF (
+  .clk(clk),
+  .D(w|L), // Load signal is asserted when it should load
+  .Q(Q[1:])
+);
+
+Mux2 #(.WIDTH(1)) MUX (
+  .A(R), // Current value of the shift register
+  .B(w), // Input to the first stage of the shift register
+  .sel(E), // Enable signal for shifting
+  .out(Q[0])
+);
+
+Mux2 #(.WIDTH(1)) MUX_L (
+  .A(Q[1]), // Current output of the shift register
+  .B(L), // Load signal
+  .sel(!E), // Disable signal for shifting
+  .out(Q[1])
+);
+
+// Connect the outputs of the DFF and the two multiplexers to form the desired behavior
+assign Q = MUX_L.out;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

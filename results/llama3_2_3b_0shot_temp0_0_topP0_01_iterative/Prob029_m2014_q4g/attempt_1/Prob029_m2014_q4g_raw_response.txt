@@ -1,0 +1,27 @@
+Here's how you can implement the described circuit using Verilog:
+
+```verilog
+// Define a module named TopModule with inputs and outputs
+module TopModule (
+  // Input signals
+  input in1, 
+  input in2, 
+  input in3,
+  
+  // Output signal
+  output logic out
+);
+
+// Implement the XNOR gate using XOR gates
+assign out = !((in1 & in2) | (in3));
+
+endmodule
+```
+
+In this code:
+
+- We define a module named `TopModule` with three inputs (`in1`, `in2`, and `in3`) and one output (`out`).
+- The `assign` keyword is used to create an assignment between the output signal `out` and the expression `(in1 & in2) | (in3)`. This expression represents the XNOR operation.
+- The `!` operator is used to invert the result of the XOR operation, which gives us the desired XNOR behavior.
+
+This module can be instantiated in a larger design as needed.

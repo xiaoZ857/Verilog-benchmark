@@ -1,0 +1,68 @@
+To implement the Moore state machine described, we need to derive the logic for both the next state and the output based on the given state transition table. We'll use one-hot encoding for the states.
+
+### State Transition Logic
+
+Given the one-hot encoding:
+- A = 4'b0001
+- B = 4'b0010
+- C = 4'b0100
+- D = 4'b1000
+
+The next state logic can be derived from the table:
+
+- **From State A (4'b0001):**
+  - If `in = 0`, stay in A: Next state = 4'b0001
+  - If `in = 1`, go to B: Next state = 4'b0010
+
+- **From State B (4'b0010):**
+  - If `in = 0` or `in = 1`, stay in B: Next state = 4'b0010
+
+- **From State C (4'b0100):**
+  - If `in = 0`, go to A: Next state = 4'b0001
+  - If `in = 1`, go to D: Next state = 4'b1000
+
+- **From State D (4'b1000):**
+  - If `in = 0` or `in = 1`, go to C: Next state = 4'b0100
+
+Using these transitions, we can write the logic equations for each bit of `next_state`:
+
+- `next_state[3]` (D) = `state[2] & in` + `state[3] & ~in`
+- `next_state[2]` (C) = `state[1] & ~in` + `state[3] & in`
+- `next_state[1]` (B) = `state[1] | (state[0] & in)`
+- `next_state[0]` (A) = `state[0] & ~in` + `state[2] & ~in`
+
+### Output Logic
+
+The output logic is derived directly from the state:
+
+- Output is 0 for states A, B, and C.
+- Output is 1 for state D.
+
+Thus, the output equation is:
+- `out = state[3]`
+
+### Verilog Implementation
+
+```verilog
+module TopModule (
+    input in,
+    input [3:0] state,
+    output reg [3:0] next_state,
+    output out
+);
+
+    // Next state logic
+    always @(*) begin
+        next_state[3] = (state[2] & in) | (state[3] & ~in);  // D
+        next_state[2] = (state[1] & ~in) | (state[3] & in);   // C
+        next_state[1] = state[1] | (state[0] & in);           // B
+        next_state[0] = (state[0] & ~in) | (state[2] & ~in);  // A
+    end
+
+    // Output logic
+    assign out = state[3];  // D
+
+endmodule
+```
+
+This Verilog module implements the combinational logic for the Moore state machine using one-hot encoding. The `next_state` is determined by the current `state` and input `in`, while the output `out` depends solely on the current state.

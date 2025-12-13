@@ -1,0 +1,21 @@
+ In Verilog, to create a module that always outputs a low (logic '0'), you can use the following code:
+
+```verilog
+module TopModule (
+  output logic zero
+);
+
+always @(posedge clk)
+begin
+  zero <= 0;
+end
+
+// Add clock input if not provided
+// input clock clk;
+
+endmodule
+```
+
+In this example, I've created a module named `TopModule` with an output signal `zero`. Inside the module, there is an always block that gets triggered on the positive edge of the clock (since it's not specified, I assumed it would be clk). The `zero` signal is then assigned the value '0'.
+
+If you need a clock input, you can add it as shown in the commented line.

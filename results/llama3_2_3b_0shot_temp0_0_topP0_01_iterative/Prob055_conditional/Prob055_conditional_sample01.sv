@@ -1,0 +1,12 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+reg [7:0] min_val = 8'd255; // Initialize with maximum possible value
+assign min = min_val < a ? min_val : (min_val < b ? min_val : (min_val < c ? min_val : (min_val < d ? min_val : a)));
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob066_edgecapture",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 235 mismatches. First mismatch occurred at time 40.\nHint: Total mismatched samples is 235 out of 266 samples\n\nSimulation finished at 1330 ps\nMismatches: 235 in 266 samples\n",
+      "mismatch_count": 235
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 91 mismatches. First mismatch occurred at time 140.\nHint: Total mismatched samples is 91 out of 266 samples\n\nSimulation finished at 1330 ps\nMismatches: 91 in 266 samples\n",
+      "mismatch_count": 91
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 91 mismatches. First mismatch occurred at time 140.\nHint: Total mismatched samples is 91 out of 266 samples\n\nSimulation finished at 1330 ps\nMismatches: 91 in 266 samples\n",
+      "mismatch_count": 91
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:13: warning: macro out undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:14: warning: macro prev_in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:14: warning: macro out undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:17: warning: macro prev_in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:17: warning: macro in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:17: warning: macro prev_in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:17: warning: macro in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:17: warning: macro in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:20: warning: macro prev_in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:20: warning: macro prev_in undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:8: syntax error\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:13: error: Stray tic (`) here. Perhaps you put white space\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:13:      : between the tic and preprocessor directive?\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:14: error: Stray tic (`) here. Perhaps you put white space\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob066_edgecapture\\attempt_4\\Prob066_edgecapture_code.sv:14:      : between the tic and preprocessor directive?\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

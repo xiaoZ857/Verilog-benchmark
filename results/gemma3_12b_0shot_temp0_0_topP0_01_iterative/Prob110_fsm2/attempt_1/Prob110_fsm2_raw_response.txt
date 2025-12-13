@@ -1,0 +1,73 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  reg state;
+  reg out_reg;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      state <= OFF;
+      out_reg <= 0;
+    end else begin
+      case (state)
+        OFF: begin
+          if (j) begin
+            state <= ON;
+          end else begin
+            state <= OFF;
+          end
+          out_reg <= 0;
+        end
+        ON: begin
+          if (k) begin
+            state <= OFF;
+          end else begin
+            state <= ON;
+          end
+          out_reg <= 1;
+        end
+        default: begin
+          state <= OFF;
+          out_reg <= 0;
+        end
+      endcase
+    end
+  end
+
+  assign out = out_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule(...)`**: Defines the module with the specified inputs and output.
+* **`parameter OFF = 2'b00;` and `parameter ON = 2'b01;`**:  Defines symbolic names for the two states. This makes the code more readable and maintainable.
+* **`reg state;`**: Declares a register `state` to hold the current state of the state machine.
+* **`reg out_reg;`**: Declares a register `out_reg` to hold the output value.  Using a register for the output ensures that the output changes only on the clock edge.
+* **`always @(posedge clk or posedge areset)`**:  This is a clocked `always` block that triggers on the positive edge of the clock (`posedge clk`) or the positive edge of the asynchronous reset (`posedge areset`).
+* **`if (areset) begin ... end`**:  Handles the asynchronous reset. When `areset` is high, the state machine is forced to the `OFF` state and the output is set to 0.
+* **`case (state)`**:  This `case` statement determines the next state and output based on the current state and the input signals `j` and `k`.
+* **`OFF: begin ... end`**:  Handles the `OFF` state.
+    * If `j` is high, the state transitions to `ON`.
+    * Otherwise, the state remains in `OFF`.
+    * The output `out_reg` is set to 0.
+* **`ON: begin ... end`**:  Handles the `ON` state.
+    * If `k` is high, the state transitions to `OFF`.
+    * Otherwise, the state remains in `ON`.
+    * The output `out_reg` is set to 1.
+* **`default: begin ... end`**:  This is a safety net to handle any unexpected state values. It forces the state machine back to the `OFF` state and sets the output to 0.
+* **`assign out = out_reg;`**:  Assigns the value of the `out_reg` register to the output signal `out`.
+
+**How it works:**
+
+The code implements a Moore state machine.  In a Moore machine, the output depends only on the current state.  The `always` block describes the state transitions and the output values for each state.  The `assign` statement connects the internal `out_reg` register to the external `out` signal.  The asynchronous reset ensures that the state machine starts in a known state when power is applied or the reset signal is asserted.

@@ -1,0 +1,34 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 18
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:16: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:17: error: Could not find variable ``fall_counter'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:19: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:20: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:20: error: Unable to bind wire/reg/memory `FALLING' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:20: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:32: error: walk_left is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:9:      : walk_left is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:33: error: walk_right is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:10:      : walk_right is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:34: error: aaah is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:11:      : aaah is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:35: error: digging is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:12:      : digging is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:37: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:37: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:110: error: walk_left is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:9:      : walk_left is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:111: error: walk_right is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:10:      : walk_right is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:112: error: aaah is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:11:      : aaah is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:113: error: digging is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:12:      : digging is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:114: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:114: error: Unable to bind wire/reg/memory `SPLITTER' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:114: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_4\Prob155_lemmings4_code.sv:30: warning: always_comb process has no sensitivities.
+18 error(s) during elaboration.

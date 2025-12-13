@@ -1,0 +1,33 @@
+Here is a minimal, synthesizable Verilog implementation of the requested 4‑bit binary counter.  
+The counter increments on every rising edge of **clk** and is synchronously reset to zero when **reset** is asserted high.
+
+```verilog
+// 4‑bit binary counter (0 … 15) with synchronous active‑high reset
+module TopModule (
+    input  wire        clk,   // clock input
+    input  wire        reset, // active‑high synchronous reset
+    output reg  [3:0]  q      // 4‑bit counter output
+);
+
+    // Synchronous logic: increment or reset on the rising edge of clk
+    always @(posedge clk) begin
+        if (reset)          // synchronous reset
+            q <= 4'd0;      // reset counter to 0
+        else
+            q <= q + 4'd1;  // increment modulo 16 (wrap‑around automatically)
+    end
+
+endmodule
+```
+
+### Key points
+
+| Feature | Implementation |
+|---------|----------------|
+| **Clock‑triggered** | `always @(posedge clk)` |
+| **Synchronous reset** | `if (reset)` inside the clocked block |
+| **Active‑high reset** | `reset` is checked directly (no inversion) |
+| **4‑bit counter** | `reg [3:0] q` and `q <= q + 4'd1` |
+| **Wrap‑around** | Adding 1 to a 4‑bit register automatically wraps from `4'hF` to `4'h0` |
+
+This module is ready for synthesis or simulation. If you need a testbench or additional features (e.g., enable, asynchronous reset, etc.), let me know!

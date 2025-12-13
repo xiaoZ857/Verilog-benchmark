@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:8: Gates do not have port names.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:9: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:9: error: Syntax error in instance port expression(s).
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:9: error: invalid module item.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:10: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:10: error: Syntax error in instance port expression(s).
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:10: error: invalid module item.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:13: Gates do not have port names.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_ref.sv:18: syntax error
+I give up.

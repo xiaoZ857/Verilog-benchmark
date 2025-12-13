@@ -1,0 +1,16 @@
+
+// Define the module TopModule with two ports: in and out.
+module TopModule (
+  // Input port
+  input in, 
+
+  // Output port
+  output out
+);
+
+// Assign the value of the input port to the output port
+assign out = in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

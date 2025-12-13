@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+always @(posedge clk) begin
+  if (load) begin
+    q <= data;
+  end else begin
+    // Calculate next state for each cell based on Rule 90
+    // next_state[i] = current_state[i-1] XOR current_state[i+1]
+    // Boundaries are treated as 0
+    q[0]   <= 0 ^ q[1];       // Left boundary (q[-1] = 0)
+    q[511] <= q[510] ^ 0;     // Right boundary (q[512] = 0)
+    
+    // Middle cells
+    q[1]   <= q[0] ^ q[2];
+    q[2]   <= q[1] ^ q[3];
+    q[3]   <= q[2] ^ q[4];
+    q[4]   <= q[3] ^ q[5];
+    q[5]   <= q[4] ^ q[6];
+    q[6]   <= q[5] ^ q[7];
+    q[7]   <= q[6] ^ q[8];
+    q[8]   <= q[7] ^ q[9];
+    q[9]
+
+// VERILOG-EVAL: endmodule not found

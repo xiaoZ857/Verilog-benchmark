@@ -1,0 +1,93 @@
+  // State definitions
+  parameter A = 2'b00;
+  parameter B = 2'b01;
+  parameter C = 2'b10;
+  parameter D = 2'b11;
+
+  // State register
+  reg [1:0] current_state;
+
+  // Next state logic
+  reg [1:0] next_state;
+
+  // Output logic
+  reg [3:1] grant_reg;
+
+  // State table (always block)
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      current_state <= A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic (always block)
+  always @(*) begin
+    next_state = current_state; // Default: stay in the current state
+
+    case (current_state)
+      A: begin
+        if (r[1]) begin
+          next_state = B;
+        end else if (r[2]) begin
+          next_state = C;
+        end else if (r[3]) begin
+          next_state = D;
+        end
+      end
+      B: begin
+        if (r[1]) begin
+          next_state = B;
+        end else begin
+          next_state = A;
+        end
+      end
+      C: begin
+        if (r[2]) begin
+          next_state = C;
+        end else begin
+          next_state = A;
+        end
+      end
+      D: begin
+        if (r[3]) begin
+          next_state = D;
+        end else begin
+          next_state = A;
+        end
+      end
+      default: begin
+        next_state = A; // Should not happen, but handle it anyway
+      end
+    endcase
+  end
+
+  // Output logic (always block)
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      grant_reg <= 4'b0000;
+    end else begin
+      case (current_state)
+        A: begin
+          grant_reg <= 4'b0000;
+        end
+        B: begin
+          grant_reg[1] = r[1];
+        end
+        C: begin
+          grant_reg[2] = r[2];
+        end
+        D: begin
+          grant_reg[3] = r[3];
+        end
+        default: begin
+          grant_reg <= 4'b0000;
+        end
+      endcase
+    end
+  end
+
+  assign g = grant_reg;
+
+endmodule

@@ -1,0 +1,46 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+// Internal signals for the counter
+logic [2:0] count; // 3-bit counter
+
+// Initialize the counter to weakly not-taken (2'b01) on reset
+always @(posedge areset or posedge clk) begin
+    if (areset) begin
+        count <= 2'd1;
+    end else begin
+        count <= count;
+    end
+end
+
+// Increment the counter when train_valid = 1 and train_taken = 1
+always @(posedge clk) begin
+    if (train_valid && train_taken) begin
+        count <= count + 1;
+        // Ensure count does not exceed maximum value
+        if (count == 3'd3) begin
+            count <= 2'd0;
+        end
+    end
+end
+
+// Decrement the counter when train_valid = 1 and train_taken = 0
+always @(posedge clk) begin
+    if (train_valid && !train_taken) begin
+        count <= count - 1;
+        // Ensure count does not go below minimum value
+        if (count == 2'd0) begin
+            count <= 3'd3;
+        end
+    end
+end
+
+// Output the two-bit counter value
+assign state = {count[1], count[0]};
+
+// VERILOG-EVAL: endmodule not found

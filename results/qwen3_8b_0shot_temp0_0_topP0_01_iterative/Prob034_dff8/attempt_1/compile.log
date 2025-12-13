@@ -1,0 +1,23 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: warning: macro TopModule undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: warning: macro clk undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: warning: macro d undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: warning: macro q undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: warning: macro q undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:14: warning: macro clk undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:15: warning: macro d undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:18: warning: macro q undefined (and assumed null) at this point.
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: syntax error
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: error: Stray tic (`) here. Perhaps you put white space
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7:      : between the tic and preprocessor directive?
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: error: Stray tic (`) here. Perhaps you put white space
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7:      : between the tic and preprocessor directive?
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: error: Stray tic (`) here. Perhaps you put white space
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7:      : between the tic and preprocessor directive?
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7: error: Stray tic (`) here. Perhaps you put white space
+results/qwen3_8b_0shot_temp0_0_topP0_01_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:7:      : between the tic and preprocessor directive?
+I give up.

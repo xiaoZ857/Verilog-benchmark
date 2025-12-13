@@ -1,0 +1,32 @@
+Here's the implementation of a NOT gate in Verilog, as per your description:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  assign out = ~in;
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Module Declaration**:  
+  The module `TopModule` has one input (`in`) and one output (`out`), both of which are single-bit signals.
+
+- **Combinational Logic**:  
+  Since the NOT gate is a **combinational logic** circuit (no clock or sequential behavior), we use a **continuous assignment** with the `assign` statement.
+
+- **NOT Operation**:  
+  The `~` operator in Verilog performs a bitwise negation. When applied to a single-bit input (`in`), it inverts the value, producing the desired NOT gate behavior.
+
+- **Signal Types**:  
+  By default, `in` and `out` are treated as `wire` types in Verilog, which is appropriate for this combinational logic implementation.
+
+---
+
+### Summary:
+
+This module correctly implements a NOT gate by inverting the input signal and assigning it to the output. It is a simple, efficient, and standard way to represent this logic in Verilog.

@@ -1,0 +1,25 @@
+ Here is a simple Verilog implementation for an AND gate:
+
+```verilog
+module TopModule (
+  input wire a,
+  input wire b,
+  output reg out
+);
+
+always @(posedge clk) begin
+  if (a && b)
+    out <= 1;
+  else
+    out <= 0;
+end
+
+initial begin
+  out = 0; // Initialization of the output signal
+  #5 clk = !clk; // Clock initial value and reset after 5 time units
+end
+
+endmodule
+```
+
+In this code, `a` and `b` are inputs, and `out` is the output. The AND operation is performed using the logical AND operator (`&&`) inside the always block that triggers on the positive edge of the clock signal (`clk`). The initial block sets the initial value of the output to 0 and resets the clock after 5 time units.

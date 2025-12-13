@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:22: warning: Static variable initialization requires explicit lifetime in this context.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:12: error: out_both[i] is not a valid l-value in tb.top_module1.$ivl_for_loop0.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:4:      : out_both[i] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:17: error: out_any[(i)-('sd1)] is not a valid l-value in tb.top_module1.$ivl_for_loop1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:5:      : out_any[(i)-('sd1)] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:23: error: out_different[i] is not a valid l-value in tb.top_module1.$ivl_for_loop2.$unm_blk_4.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:6:      : out_different[i] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob092_gatesv100\attempt_1\Prob092_gatesv100_code.sv:9: warning: always_comb process has no sensitivities.
+3 error(s) during elaboration.

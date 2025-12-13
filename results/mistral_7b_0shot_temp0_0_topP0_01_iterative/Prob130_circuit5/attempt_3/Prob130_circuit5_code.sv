@@ -1,0 +1,42 @@
+
+module TopModule (
+  input [3:0] a,
+  input [3:0] b,
+  input [3:0] c,
+  input [3:0] d,
+  input [3:0] e,
+  output reg [3:0] q
+);
+
+// Timescale directive should be outside the module definition
+`timescale ins/ns unit ns
+
+always @(posedge clk) begin
+  // Parity calculation for inputs b, c, d, and e
+  q = ~(b + c + d + e);
+
+  // Encode the input a based on the given simulation waveforms
+  case (a)
+    0 : q <= b;
+    1 : q <= b^1;
+    2 : q <= b^2;
+    3 : q <= b^3;
+    4 : q <= b^4;
+    5 : q <= b^5;
+    6 : q <= b^6;
+    7 : q <= b^7;
+    8 : q <= b^8;
+    9 : q <= b^9;
+    a : q <= b^a;
+    b : q <= b^b;
+    c : q <= b^c;
+    d : q <= b^d;
+    e : q <= b^e;
+    f : q <= b^f;
+  endcase
+end
+
+// Endmodule declaration
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

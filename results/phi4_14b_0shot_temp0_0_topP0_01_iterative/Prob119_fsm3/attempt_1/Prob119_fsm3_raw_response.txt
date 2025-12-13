@@ -1,0 +1,72 @@
+To implement the described Moore state machine in Verilog, we need to define a module that handles the state transitions and outputs based on the given table. The state machine has four states (A, B, C, D), one input (`in`), one output (`out`), and an asynchronous reset (`areset`). Here's how you can implement it:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    A = 2'b00,
+    B = 2'b01,
+    C = 2'b10,
+    D = 2'b11
+  } state_t;
+
+  // Declare the current and next state registers
+  state_t current_state, next_state;
+
+  // State transition logic
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= A; // Asynchronous reset to state A
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state and output logic
+  always_comb begin
+    case (current_state)
+      A: begin
+        next_state = in ? B : A;
+        out = 0;
+      end
+      B: begin
+        next_state = in ? B : C;
+        out = 0;
+      end
+      C: begin
+        next_state = in ? D : A;
+        out = 0;
+      end
+      D: begin
+        next_state = in ? B : C;
+        out = 1;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a `typedef enum` to define the states A, B, C, and D with binary encoding for simplicity.
+
+2. **Registers**:
+   - `current_state`: Holds the current state of the FSM.
+   - `next_state`: Determines the next state based on the current state and input.
+
+3. **Asynchronous Reset**: The `always_ff` block handles the clock edge and asynchronous reset. If `areset` is high, the state machine resets to state A regardless of the clock.
+
+4. **State Transition Logic**:
+   - The `always_comb` block determines the next state and output based on the current state and input.
+   - For each state, we use a conditional expression (`in ? B : A`) to decide the next state based on the value of `in`.
+
+5. **Output**: The output is determined solely by the current state in a Moore machine, as specified in the table.
+
+This implementation captures the behavior described in the state transition table and includes an asynchronous reset functionality.

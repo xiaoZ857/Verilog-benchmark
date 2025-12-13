@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_3\Prob139_2013_q2bfsm_code.sv:20: error: Enumeration name STATE_Y_MONITOR_1 has an inferred value that overflowed.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_3\Prob139_2013_q2bfsm_code.sv:20: error: Enumeration name STATE_Y_MONITOR_1 and STATE_A have the same value: 2'd0
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_3\Prob139_2013_q2bfsm_code.sv:20: error: Enumeration name STATE_Y_MONITOR_2 has an inferred value that overflowed.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_3\Prob139_2013_q2bfsm_code.sv:20: error: Enumeration name STATE_Y_MONITOR_2 and STATE_F_SET have the same value: 2'd1
+5 error(s) during elaboration.

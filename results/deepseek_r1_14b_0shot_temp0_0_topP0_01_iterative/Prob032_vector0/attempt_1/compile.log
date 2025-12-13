@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:13: warning: macro vec undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:14: warning: macro outv undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:15: warning: macro o0 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:9: syntax error
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:15: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:15:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob032_vector0_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob032_vector0\attempt_1\Prob032_vector0_code.sv:9: error: Invalid module instantiation

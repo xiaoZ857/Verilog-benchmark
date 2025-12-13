@@ -1,0 +1,11 @@
+
+module TopModule (
+  output one
+);
+
+    // Directly drive the output high
+    assign one = 1;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

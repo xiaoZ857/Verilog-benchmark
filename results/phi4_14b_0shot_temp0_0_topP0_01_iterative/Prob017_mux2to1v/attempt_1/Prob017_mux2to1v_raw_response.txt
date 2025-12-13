@@ -1,0 +1,36 @@
+To implement a 2-1 multiplexer in Verilog based on the given description, you need to create a module that selects between two 100-bit inputs (`a` and `b`) based on a single bit select signal (`sel`). When `sel` is 0, the output should be equal to input `a`, and when `sel` is 1, the output should be equal to input `b`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [99:0] a,
+    input [99:0] b,
+    input sel,
+    output reg [99:0] out
+);
+
+always @(*) begin
+    if (sel == 1'b0) begin
+        out = a;
+    end else begin
+        out = b;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` is declared with inputs `a`, `b`, and `sel`, and an output `out`. All signals are 100 bits wide except for the select signal `sel`, which is a single bit.
+
+- **Output Register**: The output `out` is declared as a register (`output reg`) because it will be driven by procedural logic inside an always block.
+
+- **Combinational Logic**: The `always @(*)` block indicates that this block should be evaluated whenever any of its inputs change. This makes the multiplexer combinational logic.
+
+- **Conditional Assignment**:
+  - If `sel` is `0`, assign `a` to `out`.
+  - Otherwise, assign `b` to `out`.
+
+This implementation ensures that the output correctly reflects the selected input based on the value of `sel`.

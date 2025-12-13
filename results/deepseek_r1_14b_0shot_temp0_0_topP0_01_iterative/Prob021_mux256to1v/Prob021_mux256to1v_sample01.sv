@@ -1,0 +1,15 @@
+
+// Timescale directive should be placed outside of any module
+`timescale 1ns / 1ps
+
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+
+assign out = in[(sel + 1) * 4 - 1 : (sel + 1) * 4 - 4];
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

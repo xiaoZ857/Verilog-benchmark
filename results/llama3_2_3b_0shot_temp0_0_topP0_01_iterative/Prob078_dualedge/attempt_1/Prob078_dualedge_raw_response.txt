@@ -1,0 +1,29 @@
+To implement a dual-edge triggered flip-flop in Verilog, we can use two separate D-latch circuits, one for each edge of the clock. Here's how you could do it:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+// Dual-edge triggered flip-flop implementation
+reg [1:0] q_next;
+
+assign q_next[0] = d;
+assign q_next[1] = q;
+
+always @(posedge clk) begin
+    if (clk == 1'b1) begin // rising edge
+        q <= q_next;
+    end else if (clk == 1'b0) begin // falling edge
+        q <= q_next;
+    end
+end
+
+assign q = q_next;
+```
+
+In this implementation, we use two separate D-latch circuits to update the state of `q` on both rising and falling edges of the clock. The `q_next` register holds the next value of `q`, which is updated on each clock edge.
+
+Note that in a real-world implementation, you would typically want to add some logic to handle the case where the clock edge is not one of the two possible values (i.e., 0 or 1). However, for simplicity, we've assumed here that the clock will always be either rising or falling.

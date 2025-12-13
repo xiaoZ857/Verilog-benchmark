@@ -1,0 +1,43 @@
+Here's an implementation of the Verilog module for a decade counter based on your description:
+
+```verilog
+// Define the module parameters
+param DECIMAL_COUNT = 10;
+
+// Define the module inputs and outputs
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+// Create a register to store the current count value
+reg [DECIMAL_COUNT-1:0] count;
+
+// Initialize the count to 0 (since we're counting from 1)
+initial begin
+  count = 0;
+end
+
+// Define the module's behavior
+always @(posedge clk) begin
+  // If reset is active high, reset the counter to 0
+  if (reset && q == 0) begin
+    count <= 0;
+    q <= 1'b0;
+  end else begin
+    // Increment the count and wrap around when it reaches 10
+    count <= count + 1;
+    q <= count[3:0];
+  end
+end
+
+// Initialize the output to 0 (since we're counting from 1)
+initial begin
+  q <= 1'b0;
+end
+
+endmodule
+```
+
+This module creates a decade counter that counts up from 1 to 10, inclusive. The `reset` input is active high and resets the counter to 0 when it's asserted. When the clock edge occurs, the counter increments by 1 and wraps around to 0 when it reaches 10.

@@ -1,0 +1,38 @@
+**Verilog implementation – Rule 90 cellular automaton (512 cells)**  
+
+```verilog
+// 512‑cell Rule‑90 CA
+//  q[i]  =  q[i-1] XOR q[i+1]   (with q[-1] = q[512] = 0)
+//  load  = 1 → q <= data
+//  load  = 0 → q <= next state
+//
+//  All signals are positive‑edge triggered.
+
+module TopModule (
+    input  wire        clk,          // clock
+    input  wire        load,         // load enable
+    input  wire [511:0] data,        // data to load
+    output reg  [511:0] q            // current state
+);
+
+    // Next state of the CA – XOR of left and right neighbours.
+    // The shift operators automatically insert zeros on the
+    // boundaries (q[-1] and q[512]).
+    wire [511:0] next_state;
+    assign next_state = (q >> 1) ^ (q << 1);
+
+    // Sequential logic – update on the rising edge of clk.
+    always @(posedge clk) begin
+        if (load)          // load new data
+            q <= data;
+        else               // advance one time step
+            q <= next_state;
+    end
+
+endmodule
+```
+
+**Explanation**
+
+* `next_state` is computed as the XOR of the left and right neighbours of each cell.  
+  `q >> 1` shifts the vector

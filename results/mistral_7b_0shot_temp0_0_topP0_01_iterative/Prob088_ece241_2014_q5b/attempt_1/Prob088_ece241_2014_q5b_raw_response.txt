@@ -1,0 +1,34 @@
+ Here is the Verilog implementation of the 2's complementer Mealy machine using one-hot encoding:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input wire x,
+  output reg z
+);
+
+// One-hot encoding for states A and B
+reg [1:0] state;
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state <= 2'b00; // Reset to state A
+  end else if (state == 2'b01) begin // State B
+    if (x == 1'b1) begin
+      state <= 2'b00; // Transition back to state A
+      z <= 1'b0; // Output z = 0
+    end
+  end
+
+  assign z = state == 2'b01 ? 1'b1 : 1'b0; // Assign output z based on current state
+end
+
+// Initialization block for synthesis tools
+initial begin
+  state <= 2'b00; // Initialize state to A at time 0
+end
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with inputs `clk`, `areset`, `x`, and output `z`. The one-hot encoding for states A and B is represented using a 2-bit register `state`. The always block describes the state transition diagram, and the assign statement generates the output `z` based on the current state. An initial block is also included to initialize the state at time 0.

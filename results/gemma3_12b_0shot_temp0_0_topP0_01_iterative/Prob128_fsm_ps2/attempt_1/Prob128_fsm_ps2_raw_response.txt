@@ -1,0 +1,114 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+
+  // State definition
+  typedef enum logic [1:0] {
+    IDLE,
+    BYTE1,
+    BYTE2,
+    BYTE3
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // Internal signals
+  logic byte_valid;
+  logic [7:0] received_byte;
+
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      current_state <= IDLE;
+      done <= 0;
+    end else begin
+      current_state <= next_state;
+      done <= 0; // Reset done on each clock cycle
+    end
+  end
+
+  always_comb begin
+    next_state = current_state;
+    byte_valid = 0; // Default: byte is not valid
+
+    case (current_state)
+      IDLE: begin
+        if (in[3]) begin
+          next_state = BYTE1;
+          byte_valid = 1;
+          received_byte = in;
+        end
+      end
+
+      BYTE1: begin
+        if (byte_valid) begin
+          next_state = BYTE2;
+          byte_valid = 0;
+        end else begin
+          next_state = BYTE1;
+        end
+      end
+
+      BYTE2: begin
+        if (byte_valid) begin
+          next_state = BYTE3;
+          byte_valid = 0;
+        end else begin
+          next_state = BYTE2;
+        end
+      end
+
+      BYTE3: begin
+        next_state = IDLE;
+        done = 1;
+        byte_valid = 0;
+      end
+
+      default: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+
+  // Input data latch
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      received_byte <= 0;
+    end else if (byte_valid) begin
+      received_byte <= in;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Definition:**
+   - `IDLE`: The FSM is waiting for the first byte of a message.
+   - `BYTE1`: The FSM has received the first byte (in[3] == 1) and is waiting for the second byte.
+   - `BYTE2`: The FSM has received the second byte and is waiting for the third byte.
+   - `BYTE3`: The FSM has received the third byte and is signaling the completion of the message.
+
+2. **State Transitions:**
+   - **IDLE to BYTE1:**  The FSM transitions to `BYTE1` when it receives a byte with `in[3] == 1`.
+   - **BYTE1 to BYTE2:** The FSM transitions to `BYTE2` after receiving the first byte.
+   - **BYTE2 to BYTE3:** The FSM transitions to `BYTE3` after receiving the second byte.
+   - **BYTE3 to IDLE:** The FSM transitions back to `IDLE` after receiving the third byte, and the `done` signal is asserted for one clock cycle.
+
+3. **`done` Signal:**
+   - The `done` signal is asserted for one clock cycle when the FSM transitions from `BYTE3` to `IDLE`. This indicates that a complete message has been received.
+   - The `done` signal is reset to 0 at the beginning of each clock cycle within the `always_ff` block for `current_state`.
+
+4. **`byte_valid` Signal:**
+   - This signal is used to latch the input byte into the `received_byte` register. It is set to 1 only when a valid byte is received (i.e., when transitioning from `IDLE` to `BYTE1`).
+
+5. **`received_byte` Register:**
+   - This register stores the received byte when `byte_valid` is asserted.  While not directly used in the state machine logic, it's included to potentially provide access to the received data.
+
+**How it works:**
+
+The FSM continuously monitors the input byte stream. When it encounters a byte with `in[3] == 1`, it assumes this is the first byte of a message and enters the `BYTE1` state. It then waits for two more bytes. After receiving all three bytes, it transitions to the `IDLE` state and asserts the `done` signal for one clock

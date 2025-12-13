@@ -1,0 +1,36 @@
+To implement a Verilog module that mimics the functionality of the 7420 chip, which contains two 4-input NAND gates, we can create a module with eight inputs and two outputs. Each output is determined by computing the NAND of its respective four input signals.
+
+Here's how to construct the module:
+
+1. **Define the Module**: Start by defining the module `TopModule` with the specified input and output ports.
+2. **Implement NAND Logic**: For each NAND gate, compute the AND of its four inputs and then invert the result using the NOT operation.
+
+The Verilog code is as follows:
+
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+  
+  // Compute NAND for the first gate (p1y)
+  assign p1y = !(p1a & p1b & p1c & p1d);
+  
+  // Compute NAND for the second gate (p2y)
+  assign p2y = !(p2a & p2b & p2c & p2d);
+endmodule
+```
+
+**Explanation**:
+- **NAND Functionality**: Each output (`p1y` and `p2y`) is calculated by taking the logical AND of its four corresponding inputs and then negating the result. This follows the definition of a NAND gate, which outputs 0 only when all inputs are 1, and 1 otherwise.
+- **Efficiency**: The use of `assign` ensures that the computation is continuous and immediately reflects any changes in the input signals, making it suitable for combinational logic without clock dependencies.
+
+This module accurately replicates

@@ -1,0 +1,89 @@
+ Here is a possible implementation of the Verilog module for the Lemmings finite state machine based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah,
+  output reg digging
+);
+
+reg state; // Current state of the FSM (0: walking left, 1: walking right)
+reg falling; // Is the Lemming currently falling?
+reg digging_state; // State of the digging sub-FSM (0: not digging, 1: digging)
+reg splattered; // Has the Lemming splattered?
+reg count; // Counts the number of clock cycles since the last ground change or reset
+
+always @(posedge clk) begin
+  if (areset) begin
+    state <= 0;
+    falling <= 0;
+    digging_state <= 0;
+    splattered <= 0;
+    count <= 0;
+  end else if (ground == 1 && !falling) begin
+    // If the Lemming is on ground and not falling, it can start digging if dig=1
+    if (dig) begin
+      digging_state <= 1;
+    end
+  end else if (ground == 0 && !falling) begin
+    // If the Lemming falls off the ground, it says "aaah!" and starts falling
+    aaah <= 1;
+    falling <= 1;
+    count <= 0;
+  end else if (falling) begin
+    // While falling, the Lemming doesn't change direction or start digging
+    if (count >= 20) begin
+      splattered <= 1;
+      // If the Lemming has fallen for too long, it splatters and stops moving
+      walk_left <= 0;
+      walk_right <= 0;
+      aaah <= 0;
+      digging <= 0;
+    end else begin
+      count <= count + 1;
+    end
+  end else if (bump_left) begin
+    // If the Lemming is bumped on the left, it switches direction
+    state <= ~state;
+  end else if (bump_right) begin
+    // If the Lemming is bumped on the right, it switches direction
+    state <= ~state;
+  end
+
+  // Update outputs based on current state and sub-FSM states
+  walk_left <= state;
+  walk_right <= ~state;
+  aaah <= !falling && (!splattered || falling);
+  digging <= digging_state;
+end
+```
+
+This Verilog code defines a Moore finite state machine with the following states:
+
+* Walking left (state=0)
+* Walking right (state=1)
+* Falling (falling=1)
+* Digging (digging\_state=1)
+* Splattered (splattered=1)
+
+The FSM has a single input `clk` for the clock signal, and several inputs:
+
+* `areset`: asynchronous positive edge-triggered reset
+* `bump_left`, `bump_right`: signals indicating whether the Lemming is bumped on the left or right side, respectively
+* `ground`: signal indicating whether the Lemming is currently on ground (1) or falling (0)
+* `dig`: signal indicating whether the Lemming should start digging if it's on ground and not falling
+
+The FSM has several outputs:
+
+* `walk_left`, `walk_right`: signals indicating whether the Lemming is walking left or right, respectively
+* `aaah`: signal indicating whether the Lemming says "aaah!" (1) or not (0)
+* `digging`: signal indicating whether the Lemming is digging (1) or not (0)
+
+The FSM keeps track of the number of clock cycles since the last ground change or reset using the `count` register. The Lemming splatters if it falls for more than 20 clock cycles and hits the ground. The Lemming can dig only when it's on ground, not falling, and the `dig` input is set to 1. The Lemming switches direction when bumped on either side, but not while falling or digging.

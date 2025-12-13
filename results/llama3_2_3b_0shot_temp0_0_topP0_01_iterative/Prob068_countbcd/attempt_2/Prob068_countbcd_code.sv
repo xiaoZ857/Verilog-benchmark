@@ -1,0 +1,54 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+// Define the internal registers
+reg [7:0] tens;
+reg [3:0] ones;
+
+// Initialize the counters to zero
+initial begin
+  tens = 8'd0000; // 0000 in BCD
+  ones = 8'd0000; // 0000 in BCD
+end
+
+// Define the state machine for the counter
+always @(posedge clk) begin
+  if (reset) begin
+    tens <= 8'd0000;
+    ones <= 8'd0000;
+  end else begin
+    // Increment the ones digit
+    if (ones == 8'd9999) begin
+      ones <= 8'd0000;
+      tens <= tens + 1;
+    end else begin
+      ones <= ones + 1;
+    end
+
+    // Enable upper digits when necessary
+    ena[2] = (tens > 7'd777);
+    ena[1] = (tens > 7'd776);
+    ena[0] = (tens > 7'd775);
+
+    // Shift the tens digit to the ones place
+    if (ones == 8'd000) begin
+      tens <= tens + 1;
+    end else begin
+      tens <= tens - 1;
+    end
+
+    // Ensure tens digit is within valid range
+    if (tens < 8'd0000) begin
+      tens <= 8'd7777;
+    end
+  end
+end
+
+// Assign the output BCD value to q
+assign q = {ones[3:0], tens[7:4]};
+
+// VERILOG-EVAL: endmodule not found

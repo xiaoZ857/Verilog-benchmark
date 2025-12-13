@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:22: error: Enumeration name STATE_E has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:22: error: Enumeration name STATE_E and STATE_A have the same value: 2'd0
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:22: error: Enumeration name STATE_F has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:22: error: Enumeration name STATE_F and STATE_B have the same value: 2'd1
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:22: error: Enumeration name STATE_G has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:22: error: Enumeration name STATE_G and STATE_C have the same value: 2'd2
+7 error(s) during elaboration.

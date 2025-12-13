@@ -1,0 +1,32 @@
+ Here's a simple Verilog implementation for a decade counter that counts from 1 to 10, inclusive. The reset input is active high synchronous and resets the counter to 1.
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    q <= 4'b0001; // Reset the counter to 1
+  end else begin
+    if (q == 4'b10010) begin // If we reach 10, wrap around to 1
+      q <= 4'b0001;
+    end else begin // Otherwise, increment the counter
+      q <= q + 1'b1;
+    end
+  end
+end
+
+// For testing purposes, you can add this always block to display the current state of q
+always @* begin
+  $display("Current state: %b", q);
+end
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with three inputs (`clk`, `reset`) and one output (`q`). The counter is implemented using an always block that triggers on the positive edge of the clock or reset signal. When the reset signal is high, the counter is set to 1. Otherwise, if the current state of the counter equals 10, it wraps around to 1; otherwise, it increments by 1.
+
+For testing purposes, an additional always block has been added that displays the current state of the `q` register on every simulation cycle.

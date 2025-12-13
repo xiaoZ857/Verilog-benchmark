@@ -1,0 +1,45 @@
+```verilog
+`timescale 1ns / 1ps
+
+`synthesis verilog_input_version verilog_2001
+module top_module (
+    input do_sub,
+    input [7:0] a,
+    input [7:0] b,
+    output reg [7:0] out,
+    output reg result_is_zero
+);
+
+  always @(a, b, do_sub) begin
+    if (do_sub) begin
+      out = a - b;
+    end else begin
+      out = a + b;
+    end
+
+    if (out == 3'b00000000) begin
+      result_is_zero = 1;
+    end else begin
+      result_is_zero = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation of the fix:**
+
+1. **Sensitivity List:** The original code used `always @(*)` which is combinational logic inferred.  While it *can* work, it's generally better practice to explicitly list the signals that the `always` block depends on.  This makes the code more readable and avoids potential issues with unintended dependencies.  I've changed it to `always @(a, b, do_sub)`.  This ensures that the block is re-evaluated whenever `a`, `b`, or `do_sub` changes.
+
+2. **Correct Subtraction:** The original code had the `do_sub` condition reversed in the `case` statement.  It was adding when `do_sub` was 1 and subtracting when it was 0.  I've corrected this so that `out = a - b` when `do_sub` is 1 and `out = a + b` when `do_sub` is 0.
+
+3. **Zero Flag Logic:** The original code used `~out` to check for zero.  This is incorrect because it checks for the complement of the output.  The correct way to check if `out` is zero is to compare it to `3'b00000000`.  I've changed the zero flag logic to `if (out == 3'b00000000)`.
+
+**Key Improvements and Best Practices:**
+
+* **Explicit Sensitivity List:**  Using `always @(a, b, do_sub)` makes the code more readable and maintainable.
+* **Corrected Logic:** The subtraction and addition operations are now correctly implemented based on the `do_sub` signal.
+* **Accurate Zero Flag:** The zero flag logic now correctly identifies when the output is zero.
+* **Readability:** The code is formatted for better readability.
+
+This corrected code should now function as a proper adder-subtractor with a zero flag.  It addresses the original bugs and incorporates best practices for Verilog coding.

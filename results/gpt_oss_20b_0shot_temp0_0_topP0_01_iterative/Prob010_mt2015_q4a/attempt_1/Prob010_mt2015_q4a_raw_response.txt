@@ -1,0 +1,25 @@
+Here’s a minimal, clean Verilog implementation of the requested Boolean function:
+
+```verilog
+// TopModule.v
+// Computes z = (x ^ y) & x
+// All signals are combinational – no clock required.
+
+module TopModule (
+    input  wire x,   // First input
+    input  wire y,   // Second input
+    output wire z    // Result
+);
+
+    // Continuous assignment – the result updates immediately
+    // whenever x or y changes.
+    assign z = (x ^ y) & x;
+
+endmodule
+```
+
+**Explanation**
+
+* `input wire` and `output wire` are the default signal types for combinational logic.
+* The expression `(x ^ y) & x` implements the required Boolean function.
+* A `continuous assignment` (`assign`) keeps the output `z` in sync with the inputs without any clock edge or procedural block.

@@ -1,0 +1,17 @@
+ Based on the provided truth table, it appears that the circuit is a 4-input OR gate with an additional input `c`. The output `q` will be HIGH (1) if any of the inputs `a`, `b`, `d`, or `c` are HIGH (1). Since this is a combinational circuit, the output `q` will change immediately when any of the inputs change.
+
+Here's the Verilog code for the TopModule:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+assign q = a | b | d | c;
+
+endmodule
+```

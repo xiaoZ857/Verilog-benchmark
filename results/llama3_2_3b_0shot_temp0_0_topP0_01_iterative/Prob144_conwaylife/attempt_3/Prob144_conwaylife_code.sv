@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+always @(posedge clk) begin
+    if (load) begin
+        q = data;
+    end else begin
+        signed [GRID_SIZE-1:0] new_q = {GRID_SIZE-1: 0};
+        for (signed [2:0] row = 0; row < NUM_ROWS; row++) begin
+            for (signed [2:0] col = 0; col < NUM_COLS; col++) begin
+                signed [3:0] count = count_neighbors(row, col);
+                signed [2:0] state = get_state(count);
+                new_q[(row * NUM_COLS) + col] = state;
+            end
+        end
+
+        q = new_q;
+    end
+end
+
+// Initialize the module with the initial grid state
+initial begin
+    q = {GRID_SIZE-1: 0};
+end
+
+// VERILOG-EVAL: endmodule not found

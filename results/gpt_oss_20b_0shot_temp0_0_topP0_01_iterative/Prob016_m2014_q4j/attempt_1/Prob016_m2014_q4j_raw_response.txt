@@ -1,0 +1,55 @@
+Below is a clean, synthesizable Verilog implementation that follows the specification:
+
+* **Full‑Adder** – a tiny combinational module that produces a sum bit and a carry‑out.
+* **TopModule** – instantiates four of those full adders to build a 4‑bit ripple‑carry adder.  
+  The carry out of the most significant full adder is wired to `sum[4]`, which is the “overflow” bit requested.
+
+```verilog
+// ---------------------------------------------------------------------------
+//  Full Adder (combinational)
+// ---------------------------------------------------------------------------
+module FullAdder (
+    input  wire a,      // operand bit
+    input  wire b,      // operand bit
+    input  wire cin,    // carry‑in
+    output wire sum,    // sum bit
+    output wire cout    // carry‑out
+);
+    // The 2‑bit addition of a, b and cin produces a 3‑bit result.
+    // The most significant bit is the carry‑out, the least significant is the sum.
+    assign {cout, sum} = a + b + cin;
+endmodule
+
+
+// ---------------------------------------------------------------------------
+//  TopModule – 4‑bit adder with overflow bit
+// ---------------------------------------------------------------------------
+module TopModule (
+    input  wire [3:0] x,      // 4‑bit operand
+    input  wire [3:0] y,      // 4‑bit operand
+    output wire [4:0] sum     // 5‑bit result: [4] = overflow, [3:0] = sum
+);
+    // Internal carry wires between the full adders
+    wire c0, c1, c2, c3;
+
+    // Least significant bit – no carry‑in
+    FullAdder fa0 (
+        .a   (x[0]),
+        .b   (y[0]),
+        .cin (1'b0),
+        .sum (sum[0]),
+        .cout(c0)
+    );
+
+    // Bit 1
+    FullAdder fa1 (
+        .a   (x[1]),
+        .b   (y[1]),
+        .cin (c0),
+        .sum (sum[1]),
+        .cout(c1)
+    );
+
+    // Bit 2
+    FullAdder fa2 (
+        .a

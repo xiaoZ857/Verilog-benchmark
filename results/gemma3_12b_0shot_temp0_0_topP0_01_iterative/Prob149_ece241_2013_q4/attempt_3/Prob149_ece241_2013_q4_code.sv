@@ -1,0 +1,121 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [3:1] s,
+  output reg fr3,
+  output reg fr2,
+  output reg fr1,
+  output reg dfr
+);
+  // Define states
+  parameter LOW_STATE = 2'b00
+  parameter MID_STATE = 2'b01
+  parameter HIGH_STATE = 2'b10
+  parameter RESET_STATE = 2'b11
+
+  reg [1:0] current_state;
+  reg [1:0] next_state;
+  reg sensor_change;
+
+  // State register update on positive clock edge
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= RESET_STATE;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    next_state = current_state; // Default: stay in current state
+
+    case (current_state)
+      RESET_STATE: begin
+        // After reset, transition to LOW_STATE
+        next_state = LOW_STATE;
+      end
+      LOW_STATE: begin
+        // If any sensor is asserted, transition to MID_STATE
+        if (s[1] || s[2] || s[3]) begin
+          next_state = MID_STATE;
+        end else begin
+          // Stay in LOW_STATE if no sensors are asserted
+          next_state = LOW_STATE;
+        end
+      end
+      MID_STATE: begin
+        // If all sensors are asserted, transition to HIGH_STATE
+        if (s[1] && s[2] && s[3]) begin
+          next_state = HIGH_STATE;
+        end else begin
+          // If no sensors are asserted, transition to LOW_STATE
+          if (!s[1] && !s[2] && !s[3]) begin
+            next_state = LOW_STATE;
+          end else begin
+            // Stay in MID_STATE
+            next_state = MID_STATE;
+          end
+        end
+      end
+      HIGH_STATE: begin
+        // Stay in HIGH_STATE
+        next_state = HIGH_STATE;
+      end
+      default: begin
+        next_state = RESET_STATE;
+      end
+    endcase
+  end
+
+  // Output logic
+  always @(posedge clk) begin
+    if (reset) begin
+      fr3 <= 1;
+      fr2 <= 1;
+      fr1 <= 1;
+      dfr <= 1;
+    end else begin
+      case (current_state)
+        LOW_STATE: begin
+          fr3 <= 1;
+          fr2 <= 1;
+          fr1 <= 1;
+          dfr <= 1;
+        end
+        MID_STATE: begin
+          if (s[1] && s[2]) begin
+            fr3 <= 0;
+            fr2 <= 1;
+            fr1 <= 1;
+            dfr <= 0;
+          end else if (s[1]) begin
+            fr3 <= 0;
+            fr2 <= 1;
+            fr1 <= 1;
+            dfr <= 1;
+          end else begin
+            fr3 <= 0;
+            fr2 <= 1;
+            fr1 <= 1;
+            dfr <= 1;
+          end
+        end
+        HIGH_STATE: begin
+          fr3 <= 0;
+          fr2 <= 0;
+          fr1 <= 0;
+          dfr <= 0;
+        end
+        default: begin
+          fr3 <= 1;
+          fr2 <= 1;
+          fr1 <= 1;
+          dfr <= 1;
+        end
+      endcase
+    end
+  end
+
+endmodule

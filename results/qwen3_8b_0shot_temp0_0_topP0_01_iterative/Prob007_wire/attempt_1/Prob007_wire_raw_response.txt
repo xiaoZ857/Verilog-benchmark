@@ -1,0 +1,20 @@
+Here's the implementation of the `TopModule` in Verilog, which behaves exactly like a wire—meaning the output is directly connected to the input with no additional logic or delay:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  assign out = in;
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` has one input (`in`) and one output (`out`).
+- **Continuous Assignment**: The `assign` statement ensures that the output `out` is always equal to the input `in`. This is the standard way to implement a wire in Verilog.
+- **No Clock or Logic**: Since the behavior is purely a wire, there is no need for a clock signal or any additional logic. The output is directly tied to the input.
+
+This implementation satisfies the requirement of a wire-like behavior with no delay or additional processing.

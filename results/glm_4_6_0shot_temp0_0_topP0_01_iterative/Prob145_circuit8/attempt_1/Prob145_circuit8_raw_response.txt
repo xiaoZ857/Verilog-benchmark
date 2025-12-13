@@ -1,0 +1,28 @@
+
+Based on the waveform analysis, I can determine the circuit behavior:
+
+1. `p` is triggered on the rising edge of clock and follows input `a` when clock is high
+2. `q` is triggered on the falling edge of clock and captures the value of `p` at that moment
+
+Here's the implementation:
+
+```verilog
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+
+  // p is triggered on rising edge and follows a when clock is high
+  always @(posedge clock) begin
+    p <= a;
+  end
+
+  // q is triggered on falling edge and captures p's value
+  always @(negedge clock) begin
+    q <= p;
+  end
+
+endmodule
+```

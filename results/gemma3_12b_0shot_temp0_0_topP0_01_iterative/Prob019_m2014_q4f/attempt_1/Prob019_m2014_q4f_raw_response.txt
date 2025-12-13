@@ -1,0 +1,24 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  assign out = in1 & ~in2;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and lists its input and output ports.
+* **`input in1, in2;`**:  Declares `in1` and `in2` as input signals.
+* **`output logic out;`**: Declares `out` as an output signal of type `logic`.  `logic` is a versatile type that can represent both 0 and 1.
+* **`assign out = in1 & ~in2;`**: This is the core of the implementation.
+    * `&` is the logical AND operator.
+    * `~` is the logical NOT operator (bubble).  It inverts the `in2` signal.
+    * Therefore, `in1 & ~in2` performs a logical AND between `in1` and the inverted `in2` signal, which is exactly what the description asks for.
+* **`endmodule`**:  Marks the end of the module definition.
+
+This Verilog code accurately represents the described circuit: `in1` ANDed with the bubble of `in2` connected to `out`.

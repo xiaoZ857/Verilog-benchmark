@@ -1,0 +1,74 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+  // Define states
+  typedef enum logic [1:0] {
+    A,
+    B,
+    C,
+    D,
+    E
+  } state_t;
+
+  reg state, next_state;
+  reg [1:0] w_count;
+
+  // State register update
+  always_ff @(posedge clk, posedge reset) begin
+    if (reset) begin
+      state <= A;
+      w_count <= 0;
+    end else begin
+      state <= next_state;
+      if (next_state == B) begin
+        w_count <= 0;
+      end
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = state; // Default: stay in the current state
+
+    case (state)
+      A: begin
+        if (s == 1) begin
+          next_state = B;
+        end
+      end
+      B: begin
+        if (w == 1) begin
+          w_count <= w_count + 1;
+        end else begin
+          w_count <= 0;
+        end
+        if (w_count == 2) begin
+          next_state = E;
+        end else begin
+          next_state = B;
+        end
+      end
+      E: begin
+        next_state = B;
+      end
+      default: begin
+        next_state = A;
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    if (state == E) begin
+      z = 1;
+    end else begin
+      z = 0;
+    end
+  end
+
+endmodule

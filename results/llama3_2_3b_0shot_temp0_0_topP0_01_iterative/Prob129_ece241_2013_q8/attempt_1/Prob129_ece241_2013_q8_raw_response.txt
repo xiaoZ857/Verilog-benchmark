@@ -1,0 +1,50 @@
+Here's the Verilog code for the Mealy-type finite state machine that recognizes the sequence "101" on an input signal named x:
+
+```verilog
+module TopModule(
+    input clk, // Positive edge triggered clock
+    input aresetn, // Negative edge triggered asynchronous reset
+    input x, // Input signal to be recognized
+    output reg z // Output signal to indicate detection of the sequence "101"
+);
+
+// Define the states of the finite state machine
+typedef enum logic [1:0] {
+    S0,  // Initial state
+    S1,  // State after detecting '1'
+    S2   // Final state after detecting '01'
+} States;
+
+// Initialize the current state to S0
+reg [1:0] currentState = S0;
+reg [1:0] nextState = S0; // Next state
+
+// Define the output signal z as 1 when the sequence "101" is detected
+reg z = 0;
+
+// Asynchronous reset
+always @(posedge aresetn) {
+    currentState <= S0;
+}
+
+// Mealy-type finite state machine
+always @(posedge clk or negedge aresetn) begin
+    // If the input signal x is '1', transition to S1
+    if (x == 1'b1) {
+        nextState <= S1;
+    }
+    // If the current state is S0 and the next state is S2, set z to 1
+    else if (currentState == S0 && nextState == S2) {
+        z <= 1'b1;
+    }
+    // Update the current state
+    currentState <= nextState;
+end
+
+// Output signal z
+assign z = z;
+
+endmodule
+```
+
+This code defines a Mealy-type finite state machine that recognizes the sequence "101" on an input signal named x. The FSM has three states: S0, S1, and S2. When the input signal x is '1', the FSM transitions to state S1. If the current state is S0 and the next state is S2, the output signal z is set to 1, indicating that the sequence "101" has been detected. The FSM also includes an asynchronous reset, which resets the current state to S0 when the negative edge of the clock or the asynchronous reset input is triggered.

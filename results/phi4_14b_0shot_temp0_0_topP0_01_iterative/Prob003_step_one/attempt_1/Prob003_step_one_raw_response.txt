@@ -1,0 +1,24 @@
+To implement the described Verilog module, you need to create a simple module named `TopModule` that has an output signal `one`. This output should always be driven to logic high (`1`). Since there are no inputs and the behavior is constant, this can be achieved by assigning the value directly in the continuous assignment statement.
+
+Here's how you can implement it:
+
+```verilog
+module TopModule (
+  output reg one // Use 'reg' because we're driving a continuous value
+);
+
+  always @(*) begin
+    one = 1'b1; // Assign logic high to the output
+  end
+
+endmodule
+```
+
+### Explanation:
+- **`output reg one`:** The `one` signal is declared as an output and of type `reg`. In Verilog, outputs that are driven by procedural blocks (like always blocks) need to be declared as `reg`.
+  
+- **`always @(*) begin ... end`:** This is a combinational logic block. The sensitivity list `@(*)` means the block will execute whenever any signal in its scope changes. However, since there are no inputs or other signals affecting this module, it effectively runs once and sets `one` to `1`.
+
+- **`one = 1'b1;`:** This line assigns a logic high (`1`) to the output `one`. The `1'b1` notation specifies that it's a single-bit binary value of `1`.
+
+This implementation ensures that the output `one` is always driven to logic high, fulfilling the requirements specified.

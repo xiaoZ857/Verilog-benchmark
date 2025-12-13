@@ -1,0 +1,26 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  // Internal wires for submodule outputs
+  wire a1_out, b1_out, a2_out, b2_out;
+  wire or_out, and_out;
+
+  // Instantiate the two A modules
+  A uA1 ( .x(x), .y(y), .z(a1_out) );
+  A uA2 ( .x(x), .y(y), .z(a2_out) );
+
+  // Instantiate the two B modules
+  B uB1 ( .x(x), .y(y), .z(b1_out) );
+  B uB2 ( .x(x), .y(y), .z(b2_out) );
+
+  // Combine outputs as specified
+  assign or_out  = a1_out | b1_out;   // OR of first pair
+  assign and_out = a2_out & b2_out;   // AND of second pair
+
+  // Final XOR to produce z
+  assign z = or_out ^ and_out;
+
+endmodule

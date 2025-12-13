@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:17: error: Unknown module type: full_adder
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:25: error: Unknown module type: full_adder
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:33: error: Unknown module type: full_adder
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:41: error: Unknown module type: full_adder
+5 error(s) during elaboration.
+*** These modules were missing:
+        full_adder referenced 4 times.
+***

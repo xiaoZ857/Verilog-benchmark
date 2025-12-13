@@ -1,0 +1,81 @@
+To implement the described Moore state machine in Verilog, we need to define a module with two states: `OFF` and `ON`. The state transitions are based on inputs `j` and `k`, and there is an active-high synchronous reset that sets the state to `OFF`.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire j,
+  input wire k,
+  input wire reset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    OFF = 2'b00,
+    ON  = 2'b01
+  } state_t;
+
+  // Declare the current and next state registers
+  state_t current_state, next_state;
+
+  // Sequential logic for state transition
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= OFF;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Combinational logic to determine the next state and output
+  always_comb begin
+    case (current_state)
+      OFF: begin
+        out = 0; // Output is 0 in OFF state
+        if (j) begin
+          next_state = ON;
+        end else begin
+          next_state = OFF;
+        end
+      end
+
+      ON: begin
+        out = 1; // Output is 1 in ON state
+        if (k) begin
+          next_state = OFF;
+        end else begin
+          next_state = ON;
+        end
+      end
+
+      default: begin
+        out = 0;
+        next_state = OFF;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a `typedef enum` to define the states `OFF` and `ON`. This makes the code more readable.
+
+2. **Registers for State Management**:
+   - `current_state`: Holds the current state of the machine.
+   - `next_state`: Determines the next state based on inputs `j` and `k`.
+
+3. **Sequential Logic**: 
+   - The always block triggered by `posedge clk or posedge reset` updates the `current_state`. If `reset` is high, it sets the state to `OFF`. Otherwise, it transitions to `next_state`.
+
+4. **Combinational Logic**:
+   - The always_comb block determines the output and next state based on the current state.
+   - In the `OFF` state, if `j` is 1, transition to `ON`; otherwise, stay in `OFF`.
+   - In the `ON` state, if `k` is 1, transition to `OFF`; otherwise, stay in `ON`.
+
+5. **Output Logic**: The output `out` is determined by the current state (`0` for `OFF`, `1` for `ON`). 
+
+This implementation captures the behavior of the Moore machine as described.

@@ -1,0 +1,6 @@
+
+always @(*) begin
+    out = do_sub ? a - b : a + b;
+    result_is_zero = (out == 8'b0);
+end
+endmodule

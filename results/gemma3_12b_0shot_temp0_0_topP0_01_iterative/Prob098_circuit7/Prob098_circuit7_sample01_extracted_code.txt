@@ -1,0 +1,9 @@
+  reg q_next;
+
+  always @(posedge clk) begin
+    if (a == 1) begin
+      q <= ~q;
+    end else begin
+      q <= q;
+    end
+  end

@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_2\Prob096_review2015_fsmseq_code.sv:17: error: Enumeration name S4 has an inferred value that overflowed.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob096_review2015_fsmseq\attempt_2\Prob096_review2015_fsmseq_code.sv:17: error: Enumeration name S4 and S0 have the same value: 2'd0
+3 error(s) during elaboration.

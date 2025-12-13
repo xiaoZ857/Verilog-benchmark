@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob146_fsm_serialdata",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_1\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT has an inferred value that overflowed.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_1\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT and IDLE have the same value: 2'd0\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_1\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE has an inferred value that overflowed.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_1\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE and START_BIT have the same value: 2'd1\n5 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT has an inferred value that overflowed.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT and IDLE have the same value: 2'd0\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE has an inferred value that overflowed.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE and START_BIT have the same value: 2'd1\n5 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_3\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT has an inferred value that overflowed.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_3\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name VERIFIED_STOP_BIT and IDLE have the same value: 2'd0\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_3\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE has an inferred value that overflowed.\nresults/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\\Prob146_fsm_serialdata\\attempt_3\\Prob146_fsm_serialdata_code.sv:21: error: Enumeration name DONE and START_BIT have the same value: 2'd1\n5 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

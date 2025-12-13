@@ -1,0 +1,20 @@
+
+module TopModule (
+    input [2:0] vec,   // 3-bit input vector
+    output [2:0] outv, // 3-bit output vector
+    output o2,         // 1-bit output for position 2 of the input vector
+    output o1,         // 1-bit output for position 1 of the input vector
+    output o0          // 1-bit output for position 0 of the input vector
+);
+
+    // Assign the entire input vector to the output vector
+    assign outv = vec;
+
+    // Split the input vector into individual bits and assign them to outputs
+    assign o2 = vec[2];
+    assign o1 = vec[1];
+    assign o0 = vec[0];
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

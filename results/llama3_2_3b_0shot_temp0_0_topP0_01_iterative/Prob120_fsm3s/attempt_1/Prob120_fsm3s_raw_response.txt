@@ -1,0 +1,44 @@
+Here is the Verilog module implementation of the Moore state machine based on the provided description:
+
+```verilog
+module TopModule(
+    input clk,
+    input in,
+    input reset,
+    output out
+);
+
+// Define the states and their corresponding next states
+typedef enum logic [1:0] state_type {
+    A, B, C, D
+} state_type;
+
+state_type current_state = 'a; // Initialize to state A
+
+always @(posedge clk) begin
+    if (reset) begin
+        current_state <= A;
+    end else begin
+        case (current_state)
+            A:      if (!in) current_state <= B; else current_state <= A;
+            B:      if (!in) current_state <= C; else current_state <= B;
+            C:      if (!in) current_state <= D; else current_state <= C;
+            D:      if (!in) current_state <= B; else current_state <= D;
+        endcase
+    end
+end
+
+always @(posedge clk or posedge reset) begin
+    out <= (current_state == A) ? 0 : 1;
+end
+
+endmodule
+```
+
+This implementation includes the following features:
+
+- The `state_type` enum defines the four states of the state machine.
+- The `current_state` variable keeps track of the current state of the FSM.
+- The `always @(posedge clk)` block updates the `current_state` based on the input signal and the clock edge.
+- The `reset` condition resets the `current_state` to state A when the reset signal is active.
+- The `always @(posedge clk or posedge reset)` block generates the output signal based on the current state.

@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:59: error: Unknown module type: A
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:60: error: Unknown module type: B
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:62: error: Unknown module type: OR
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:63: error: Unknown module type: AND
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:64: error: Unknown module type: XOR
+6 error(s) during elaboration.
+*** These modules were missing:
+        A referenced 1 times.
+        AND referenced 1 times.
+        B referenced 1 times.
+        OR referenced 1 times.
+        XOR referenced 1 times.
+***

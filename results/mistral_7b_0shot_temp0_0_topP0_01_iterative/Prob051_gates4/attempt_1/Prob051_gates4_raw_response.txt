@@ -1,0 +1,41 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input [3:0] in,
+  output reg out_and,
+  output reg out_or,
+  output reg out_xor
+);
+
+// Instantiate AND gate
+and4 U1 (
+    .A(in[3]),
+    .B(in[2]),
+    .C(in[1]),
+    .D(in[0]),
+    .Y(out_and)
+);
+
+// Instantiate OR gate
+or4 U2 (
+    .A(in[3]),
+    .B(in[2]),
+    .C(in[1]),
+    .D(in[0]),
+    .Y(out_or)
+);
+
+// Instantiate XOR gate
+xor4 U3 (
+    .A(in[3]),
+    .B(in[2]),
+    .C(in[1]),
+    .D(in[0]),
+    .Y(out_xor)
+);
+
+endmodule
+```
+
+In this code, I have used predefined gates `and4`, `or4`, and `xor4`. These are standard Verilog primitives for 4-input AND, OR, and XOR gates. The module instantiates these gates with the respective inputs and outputs as specified in your description.

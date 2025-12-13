@@ -1,0 +1,35 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else begin
+      q <= q + 1;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input clk, input reset, output reg [3:0] q);`**:  This line declares the module named `TopModule` with the specified input (`clk`, `reset`) and output (`q`) ports.  `q` is declared as a `reg` because it's assigned a value within an `always` block.  `[3:0]` indicates a 4-bit register.
+* **`always @(posedge clk)`**: This is a sequential block that executes on the positive edge of the clock signal (`clk`).
+* **`if (reset) begin q <= 0; end`**: This is the synchronous reset condition. When `reset` is high (active high), the counter `q` is reset to 0.  The `<=` operator is used for non-blocking assignment within the `always` block, which is crucial for sequential logic.
+* **`else begin q <= q + 1; end`**:  If the `reset` signal is low, the counter increments by 1 on each clock cycle.  Again, the non-blocking assignment `<=` is used.
+
+**How it works:**
+
+The module implements a synchronous counter.  On each positive clock edge:
+
+1. **Reset Check:** It first checks if the `reset` signal is high. If it is, the counter is reset to 0.
+2. **Increment:** If the `reset` signal is low, the counter increments its value by 1.
+
+Because the counter is 4 bits wide, it will count from 0 to 15 (0000 to 1111) before wrapping back around to 0.  The period of the counter is 16 clock cycles, as specified in the problem description.
+
+**To test this module, you would need to write a testbench that provides clock and reset signals and verifies the output `q`.**

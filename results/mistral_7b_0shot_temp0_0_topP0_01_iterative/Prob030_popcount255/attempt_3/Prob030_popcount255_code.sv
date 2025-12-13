@@ -1,0 +1,44 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+always @(posedge clk or negedge in) begin
+  // Initialize the population counters to zero
+  for (int i = 0; i < 8; i++)
+    pop_counts[i] <= 0;
+
+  // Calculate the population count for each bit of the input vector
+  int currentSegment = 7;
+  for (int i = 254; i >= 0; i--) begin
+    if (currentSegment == -1) begin // If we've reached the end of the segments, start a new one
+      currentSegment = 7;
+    end
+
+    int j = currentSegment / 64;
+    int k = currentSegment % 64;
+
+    if (k < i % 64) begin // If the current bit is in a different segment, increment the current segment's count
+      pop_counts[j] += in[i];
+    end
+
+    if (k == i % 64 && j > 0) begin // If the current bit is in the same segment as the previous one, add to previous segment's count and reset the current segment
+      pop_counts[j-1] += pop_counts[j];
+      pop_counts[j] <= 0;
+      currentSegment--;
+    end
+  end
+
+  // Sum up the population counts from each segment to get the final output
+  out = 0;
+  for (int i = 7; i >= 0; i--) begin
+    out[i] += pop_counts[i];
+    if (out[i+1] > out[i])
+      out[i+1] -= out[i]+1;
+  end
+end
+
+// Assuming clk is the clock input
+assign clk = clk; // Clock input is directly passed through
+
+// VERILOG-EVAL: endmodule not found

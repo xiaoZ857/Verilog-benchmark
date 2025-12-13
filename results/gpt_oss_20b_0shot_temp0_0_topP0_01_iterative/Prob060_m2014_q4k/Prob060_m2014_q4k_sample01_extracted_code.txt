@@ -1,0 +1,25 @@
+// ------------------------------------------------------------
+// 4‑bit shift register (synchronous active‑low reset)
+// ------------------------------------------------------------
+module TopModule (
+    input  wire clk,      // Clock (positive edge triggered)
+    input  wire resetn,   // Active‑low synchronous reset
+    input  wire in,       // Serial data input
+    output wire out       // Serial data output (MSB of the register)
+);
+
+    // 4‑bit shift register
+    reg [3:0] shift_reg;
+
+    // Synchronous logic
+    always @(posedge clk) begin
+        if (!resetn)                // active‑low reset
+            shift_reg <= 4'b0;      // clear all bits
+        else
+            shift_reg <= {shift_reg[2:0], in}; // shift left, insert new bit
+    end
+
+    // Output is the MSB of the register
+    assign out = shift_reg[3];
+
+endmodule

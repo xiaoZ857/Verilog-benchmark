@@ -1,0 +1,47 @@
+To implement the Verilog module as described, we need to create a module with 8 D flip-flops that are triggered on the negative edge of the clock. These flip-flops should have an active high synchronous reset that sets their outputs to `0x34` (which is `00110100` in binary) instead of zero.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  // Internal registers for each flip-flop
+  reg [7:0] ff;
+
+  always @(negedge clk or posedge reset) begin
+    if (reset) begin
+      // Set all flip-flops to 0x34 on reset
+      ff <= 8'b00110100;
+    end else begin
+      // On negative edge of clock, load input d into the registers
+      ff <= d;
+    end
+  end
+
+  // Assign internal register values to output
+  always @(ff) begin
+    q <= ff;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Declaration**: The module `TopModule` is declared with inputs `clk`, `d`, and `reset`, and an output `q`.
+
+2. **Internal Register (`ff`)**: An internal register `ff` of width 8 bits is used to hold the state of the flip-flops.
+
+3. **Always Block**: 
+   - The always block is sensitive to both the negative edge of `clk` and the positive edge of `reset`.
+   - If `reset` is high, all flip-flops are set to `0x34` (`00110100` in binary).
+   - On the negative edge of `clk`, if not reset, the input `d` is loaded into `ff`.
+
+4. **Output Assignment**: The value of `ff` is assigned to the output `q`. This ensures that changes in `ff` are reflected in `q`.
+
+This implementation meets the requirements by using synchronous reset and negative edge-triggered flip-flops.

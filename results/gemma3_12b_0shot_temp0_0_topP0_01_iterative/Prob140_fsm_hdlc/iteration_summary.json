@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob140_fsm_hdlc",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 8 mismatches. First mismatch occurred at time 480.\nHint: Output 'flag' has 81 mismatches. First mismatch occurred at time 95.\nHint: Output 'err' has 271 mismatches. First mismatch occurred at time 40.\nHint: Total mismatched samples is 320 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 320 in 801 samples\n",
+      "mismatch_count": 320
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 8 mismatches. First mismatch occurred at time 480.\nHint: Output 'flag' has 590 mismatches. First mismatch occurred at time 10.\nHint: Output 'err' has 564 mismatches. First mismatch occurred at time 15.\nHint: Total mismatched samples is 741 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 741 in 801 samples\n",
+      "mismatch_count": 741
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 8 mismatches. First mismatch occurred at time 480.\nHint: Output 'flag' has 464 mismatches. First mismatch occurred at time 220.\nHint: Output 'err' has 564 mismatches. First mismatch occurred at time 15.\nHint: Total mismatched samples is 708 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 708 in 801 samples\n",
+      "mismatch_count": 708
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 8 mismatches. First mismatch occurred at time 480.\nHint: Output 'flag' has 21 mismatches. First mismatch occurred at time 220.\nHint: Output 'err' has 332 mismatches. First mismatch occurred at time 15.\nHint: Total mismatched samples is 341 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 341 in 801 samples\n",
+      "mismatch_count": 341
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+ Here is a Verilog implementation of the 7458 chip as described:
+
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  input p1e,
+  input p1f,
+  output reg p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output reg p2y
+);
+
+// AND gates for p1y
+assign p1y = (p1a & p1b & p1c) | (p1d & p1e & p1f);
+
+// Internal wires for p1y OR gates
+wire p3 = p1a & p1b & p1c;
+wire p4 = p1d & p1e & p1f;
+wire p5 = p3 | p4;
+
+// OR gates for p2y
+assign p2y = (p2a & p2b) | (p2c & p2d);
+
+endmodule
+```
+
+In this implementation, I chose to use intermediate signals `p3`, `p4`, and `p5` for clarity. The output `p1y` is the OR of two 3-input AND gates as described, and the output `p2y` is the OR of two 2-input AND gates as described.

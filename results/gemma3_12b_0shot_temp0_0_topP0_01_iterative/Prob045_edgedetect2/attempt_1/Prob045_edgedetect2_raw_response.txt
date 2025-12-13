@@ -1,0 +1,47 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    int i;
+    for (i = 0; i < 8; i++) begin
+      if (in[i] != prev_in[i]) begin
+        anyedge[i] = 1;
+      end else begin
+        anyedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [7:0] prev_in;`**:  This declares a register named `prev_in` to store the input signal's value from the previous clock cycle.  This is crucial for detecting changes between cycles.
+
+2. **`always @(posedge clk)`**: This block executes on the positive edge of the clock signal.
+
+3. **`int i; for (i = 0; i < 8; i++) begin ... end`**: This loop iterates through each bit of the 8-bit input vector `in`.
+
+4. **`if (in[i] != prev_in[i]) begin ... end`**: This is the core logic.  It compares the current bit `in[i]` with the previous value `prev_in[i]`.  If they are different, it means an edge (either a 0-to-1 or a 1-to-0 transition) has occurred.
+
+5. **`anyedge[i] = 1;`**: If an edge is detected, the corresponding bit in the `anyedge` output register is set to 1.
+
+6. **`else begin anyedge[i] = 0; end`**: If no edge is detected, the corresponding bit in `anyedge` is set to 0.
+
+7. **`prev_in = in;`**:  After processing all bits, the current value of `in` is stored in `prev_in` for comparison in the next clock cycle.
+
+**How it works:**
+
+The module essentially remembers the input value from the previous clock cycle.  On each clock edge, it compares the current input with the previous input.  If a bit has changed, it sets the corresponding bit in the output `anyedge` to 1.  The output bit is delayed by one clock cycle because the comparison is done on the rising edge of the clock, and the output is set in the same clock cycle.
+
+**Example:**
+
+Let's say `in` is initially `8'b00000000`.  In the next clock cycle, `in` becomes `8'b00000001`.  The `anyedge` output will be `8'b00000001` in the *next* clock cycle.  If `in` then becomes `8'b00000000`, `anyedge` will be `8'b00000000` in the cycle after that.

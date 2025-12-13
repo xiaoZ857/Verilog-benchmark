@@ -1,0 +1,108 @@
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+  // Define the states
+  parameter A = 2'b00
+  parameter B = 2'b01
+  parameter C = 2'b10
+  parameter D = 2'b11
+
+  // Declare state register
+  reg [1:0] current_state;
+
+  // Synchronous reset
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= A;
+    end else begin
+      // State transition logic
+      case (current_state)
+        A: begin
+          if (in == 0) begin
+            current_state <= A;
+          end else begin
+            current_state <= B;
+          end
+        end
+        B: begin
+          if (in == 0) begin
+            current_state <= C;
+          end else begin
+            current_state <= B;
+          end
+        end
+        C: begin
+          if (in == 0) begin
+            current_state <= A;
+          end else begin
+            current_state <= D;
+          end
+        end
+        D: begin
+          if (in == 0) begin
+            current_state <= C;
+          end else begin
+            current_state <= B;
+          end
+        end
+        default: begin
+          current_state <= A; // Default state in case of unexpected state
+        end
+      endcase
+    end
+  end
+
+  // Output logic
+  always @(current_state) begin
+    case (current_state)
+      A: out = 0;
+      B: out = 0;
+      C: out = 0;
+      D: out = 1;
+      default: out = 0; // Default output in case of unexpected state
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, in, reset, out);` declares the module with the specified input and output signals.
+
+2. **State Definition:**
+   - `parameter A = 2'b00`, `B = 2'b01`, `C = 2'b10`, `D = 2'b11` define the four states as 2-bit values.  This makes the code more readable and maintainable.
+
+3. **State Register:**
+   - `reg [1:0] current_state;` declares a 2-bit register to hold the current state of the FSM.
+
+4. **Synchronous Reset:**
+   - `always @(posedge clk) begin ... end` creates a sequential block triggered by the positive edge of the clock.
+   - `if (reset) begin current_state <= A; end` implements the synchronous reset. When `reset` is high, the `current_state` is forced to state `A`.
+
+5. **State Transition Logic:**
+   - The `always @(posedge clk)` block also contains the state transition logic.
+   - `case (current_state)`:  A `case` statement is used to determine the next state based on the current state and the input `in`.
+   - Inside each `case` statement, `if (in == 0) ... else ...` determines the next state based on the value of the input `in`.
+   - `current_state <= ...` assigns the next state to the `current_state` register.
+
+6. **Output Logic:**
+   - `always @(current_state)` creates a combinational block that determines the output based on the current state.
+   - `case (current_state)`:  A `case` statement is used to assign the output based on the current state.
+   - `out = ...` assigns the output value based on the current state.
+   - A `default` case is included for safety in case the state machine somehow enters an unexpected state.
+
+**How it works:**
+
+- The `clk` signal triggers the sequential logic.
+- The `reset` signal forces the FSM to the initial state `A` on the next clock cycle.
+- The `in` signal determines the next state based on the current state.
+- The `out` signal is determined by the current state.
+
+This Verilog code implements the Moore state machine described in the problem statement, including the synchronous reset and the state transitions based on the input `in`.  The use of parameters for the states makes the code more readable and easier to modify.

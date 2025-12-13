@@ -1,0 +1,45 @@
+To implement the `TopModule` as described, we need a Verilog module that directly assigns the input signal to the output signal in a **combinational** manner. This means that the output should reflect the input value **instantly**, without any clock or delay, and the assignment should be done using a **continuous assignment**.
+
+---
+
+### ✅ Implementation
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  assign out = in;
+endmodule
+```
+
+---
+
+### 🔍 Explanation
+
+- **`input in`**: This is the input signal to the module.
+- **`output out`**: This is the output signal that should be equal to the input.
+- **`assign out = in;`**: This is a **continuous assignment** in Verilog, which ensures that the output `out` is always equal to the input `in` in a **combinational** context.
+
+This implementation is **simple and efficient**, and it satisfies the requirement that the output should be the same as the input **combinationally**.
+
+---
+
+### 📌 Notes
+
+- There is **no clock** involved in this module, as the problem specifies that the assignment is **combinationally**.
+- The `out` signal is implicitly a `wire` because it is assigned using the `assign` statement.
+- This module is suitable for use in **combinational logic** circuits where the output is a direct function of the input.
+
+---
+
+### ✅ Final Answer
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  assign out = in;
+endmodule
+```

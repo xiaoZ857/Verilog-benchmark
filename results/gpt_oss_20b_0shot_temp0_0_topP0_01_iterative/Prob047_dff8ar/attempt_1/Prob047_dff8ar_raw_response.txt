@@ -1,0 +1,36 @@
+Here is a minimal, synthesizable Verilog implementation that satisfies all of the requirements:
+
+```verilog
+// 8‑bit register with active‑high asynchronous reset
+// All bits are updated on the rising edge of clk.
+// When areset is asserted, the register is cleared to 0 immediately
+// (i.e., asynchronously).
+
+module TopModule (
+    input  wire        clk,     // synchronous clock
+    input  wire [7:0]  d,       // data input
+    input  wire        areset,  // active‑high asynchronous reset
+    output reg  [7:0]  q        // registered output
+);
+
+    // Asynchronous reset + synchronous data capture
+    always @(posedge clk or posedge areset) begin
+        if (areset)          // asynchronous reset
+            q <= 8'b0;       // reset output to zero
+        else
+            q <= d;          // capture data on rising edge of clk
+    end
+
+endmodule
+```
+
+### Explanation
+
+| Feature | Implementation |
+|---------|----------------|
+| **8 D‑flip‑flops** | The vector `q[7:0]` is treated as eight independent flip‑flops. |
+| **Active‑high asynchronous reset** | `@(posedge clk or posedge areset)` and the `if (areset)` block reset all bits to `0` immediately when `areset` goes high. |
+| **Positive‑edge clock trigger** | The `posedge clk` part of the sensitivity list ensures data is captured on the rising edge of `clk`. |
+| **Reset output to 0** | `q <= 8'b0;` guarantees the output is cleared when reset is asserted. |
+
+This code is concise, synthesizable, and follows the standard Verilog idiom for an asynchronous reset register.

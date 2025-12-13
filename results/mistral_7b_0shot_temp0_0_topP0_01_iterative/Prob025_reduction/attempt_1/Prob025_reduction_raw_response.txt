@@ -1,0 +1,35 @@
+ Here's a simple Verilog implementation for an 8-bit even parity checker based on your description:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg parity
+);
+
+always @(posedge clk) begin
+  parity <= ~in; // Initialize parity as '1'
+  always @(negedge clk) begin
+    parity ^= in; // XOR all input bits with the current parity value
+  end
+end
+
+initial begin
+  $dumpfile("parity_checker.vcd");
+  $dumpvars(0, TopModule);
+  #100; // Simulation time for 100 ns
+  clk = 1'b0; // Reset clock to low state
+  #50; // Delay for 50 ns
+  clk = 1'b1; // Set clock to high state
+  repeat(8) begin
+    #25; // Delay for 25 ns between each input change
+    in <= in + 1; // Increment the input byte by 1 every 25 ns
+  end
+  #100; // Simulation time for 100 ns after the last input change
+end
+```
+
+This Verilog module, `TopModule`, takes an 8-bit input `in` and generates a single-bit output `parity`. The parity bit is calculated using XOR (exclusive OR) logic on all the input bits. The initial value of the parity bit is set to '1' for even parity.
+
+The `initial` block at the bottom of the code sets up a simulation with a clock signal and an 8-bit input sequence that increments every 25 ns. This simulates data being sent through an imperfect channel, and you can observe the generated parity bit to check if errors have occurred.
+
+The `$dumpfile` and `$dumpvars` commands are used for VCD (Value Change Dump) waveform generation, which allows you to visualize the simulation results using tools like GTKWave.

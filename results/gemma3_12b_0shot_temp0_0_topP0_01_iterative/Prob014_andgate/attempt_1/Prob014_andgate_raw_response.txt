@@ -1,0 +1,21 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = a & b;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This line declares the module named `TopModule` and lists its input and output ports.
+* **`input a, input b;`**:  Declares `a` and `b` as input signals.
+* **`output out;`**: Declares `out` as an output signal.
+* **`assign out = a & b;`**: This is the core of the AND gate implementation.  The `assign` statement continuously assigns the result of the logical AND operation (`a & b`) to the output signal `out`.  The `&` operator performs a bitwise AND.  If both `a` and `b` are 1, then `out` will be 1. Otherwise, `out` will be 0.
+* **`endmodule`**:  Marks the end of the module definition.
+
+This module takes two input signals, `a` and `b`, and produces an output `out` that is the logical AND of the two inputs.  This is a simple and direct implementation of an AND gate in Verilog.

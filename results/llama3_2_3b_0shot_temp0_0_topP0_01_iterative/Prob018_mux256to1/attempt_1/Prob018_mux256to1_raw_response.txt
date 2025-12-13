@@ -1,0 +1,23 @@
+Here's the Verilog module implementation for a 1-bit wide, 256-to-1 multiplexer:
+
+```verilog
+module TopModule (
+  input [255:0] in,
+  input [7:0] sel,
+  output reg [7:0] out
+);
+
+// Calculate the index based on the select signal
+reg [8:0] idx;
+
+assign idx = sel + 1;
+
+// Use the calculated index to select from the input vector
+assign out = in[idx-1:idx-8];
+
+endmodule
+```
+
+In this implementation, we first calculate the index `idx` based on the `sel` signal. We then use this index to select from the input vector `in`. The `idx-1` term is used because Verilog's indexing starts at 0, but our problem statement uses 1-based indexing.
+
+Note that we're using a reg for the output `out`, as it needs to be assigned in the module. Also, note that this implementation assumes that the input vector `in` has enough bits to accommodate all possible values of `idx`. If `idx` can exceed 255 (the maximum value of an unsigned 8-bit integer), you'll need to use a larger data type for `out`, such as `signed [9:0]`.

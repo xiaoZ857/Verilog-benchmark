@@ -1,0 +1,31 @@
+We need to track which byte of the message we are expecting.  
+We start in a state where we are waiting for byte 1 (with bit 3 = 1).  
+Once we find it, we go to state for expecting byte 2, then state for expecting byte 3, then after receiving byte 3, assert `done` for one cycle and go back to expecting byte 1 of the next message.  
+
+Here’s the implementation:  
+
+```verilog
+  reg [1:0] state, next_state;
+  localparam WAIT_BYTE1 = 2'b00,
+             WAIT_BYTE2 = 2'b01,
+             WAIT_BYTE3 = 2'b10;
+  
+  always @(posedge clk) begin
+    if (reset)
+      state <= WAIT_BYTE1;
+    else
+      state <= next_state;
+  end
+  
+  always @(*) begin
+    case (state)
+      WAIT_BYTE1: next_state = in[3] ? WAIT_BYTE2 : WAIT_BYTE1;
+      WAIT_BYTE2: next_state = WAIT_BYTE3;
+      WAIT_BYTE3: next_state = in[3] ? WAIT_BYTE2 : WAIT_BYTE1;
+      default:    next_state = WAIT_BYTE1;
+    endcase
+  end
+  
+  assign done = (state == WAIT_BYTE3);
+endmodule
+```

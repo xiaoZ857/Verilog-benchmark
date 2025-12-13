@@ -1,0 +1,25 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+reg ff1, ff2, ff3;
+wire xor_out, and_out, or_out;
+
+// Combinational logic for gate inputs
+assign xor_out = x ^ ff1;
+assign and_out = x & ~ff2;
+assign or_out = x | ~ff3;
+
+// D flip-flops with reset to zero
+always @(posedge clk) begin
+  ff1 <= xor_out;
+  ff2 <= and_out;
+  ff3 <= or_out;
+end
+
+// Three-input NOR gate output
+assign z = ~(ff1 | ff2 | ff3);
+
+endmodule

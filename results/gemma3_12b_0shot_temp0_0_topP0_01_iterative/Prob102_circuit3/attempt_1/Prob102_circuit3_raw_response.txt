@@ -1,0 +1,87 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a == 0) ?
+             ((b == 0) ?
+              ((c == 0) ? d : 0) :
+              ((c == 0) ? 0 : (d == 0 ? 0 : 1))) :
+             ((b == 0) ?
+              ((c == 0) ? 1 : 1) :
+              ((c == 0) ? 1 : 1));
+
+endmodule
+```
+
+**Explanation:**
+
+The provided waveforms show that the output `q` is 1 only when `a` is 0 and `d` is 1.  When `a` is 1, `q` is always 1.
+
+The Verilog code implements this logic using nested conditional assignments (`assign q = ...`).
+
+* **`assign q = (a == 0) ? ... : ...`**: This checks if `a` is 0. If it is, the first part of the expression is evaluated; otherwise, `q` is 1.
+* **`(b == 0) ? ... : ...`**:  If `a` is 0, this checks if `b` is 0.
+* **`(c == 0) ? d : 0`**: If `a` and `b` are 0, this checks if `c` is 0. If `c` is 0, `q` is `d`; otherwise, `q` is 0.
+* **`((c == 0) ? 1 : 1)`**: If `a` is 1, `q` is always 1.
+
+**Alternative (and more readable) implementation:**
+
+The logic can be simplified to:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a == 0) ? ((c == 0) ? d : 0) : 1;
+
+endmodule
+```
+
+This version is more concise and easier to understand.  It directly reflects the observed behavior: if `a` is 0, `q` is equal to `d` when `c` is 0, otherwise `q` is 0. If `a` is 1, `q` is always 1.
+
+**How to test:**
+
+You can test this Verilog code using a simulator like Icarus Verilog or ModelSim.  Create a testbench that provides the input signals `a`, `b`, `c`, and `d` according to the provided waveforms and verifies that the output `q` matches the expected values.  For example:
+
+```verilog
+module TopModule_tb;
+
+  reg a, b, c, d;
+  wire q;
+
+  TopModule uut (
+    .a(a),
+    .b(b),
+    .c(c),
+    .d(d),
+    .q(q)
+  );
+
+  initial begin
+    // Initialize signals
+    a = 0; b = 0; c = 0; d = 0;
+
+    // Test cases based on the provided waveforms
+    #5  a = 0; b = 0; c = 0; d = 0;
+    #5  a = 0; b = 0; c = 0; d = 0;
+    #5  a = 0; b = 0; c = 0; d = 0;
+    #5  a = 0; b = 0; c = 0; d = 0;
+    #5  a = 0; b = 0; c = 0; d = 1;
+    #5  a = 0; b = 0; c = 1; d = 0;
+    #5  a = 0; b = 0; c = 1; d = 1;
+    #5  a = 0; b = 1; d = 0;
+    #5  a = 0; b = 1; d = 1;
+    #5  a = 0; b = 1; c = 1; d = 0;
+    #5  a = 0; b = 1; c = 1; d = 1;
+    #5  a = 1; b = 0; c = 0; d = 0;
+    #5

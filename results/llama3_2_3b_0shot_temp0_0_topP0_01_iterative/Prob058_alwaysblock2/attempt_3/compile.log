@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob058_alwaysblock2\attempt_3\Prob058_alwaysblock2_code.sv:23: error: 'out_always_ff' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob058_alwaysblock2\attempt_3\Prob058_alwaysblock2_code.sv:8:      : It was declared here as a variable.

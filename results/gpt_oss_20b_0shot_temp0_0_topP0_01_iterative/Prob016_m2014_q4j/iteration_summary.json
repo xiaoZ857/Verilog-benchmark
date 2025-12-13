@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob016_m2014_q4j",
+  "model_name": "gpt-oss:20b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_1\\Prob016_m2014_q4j_code.sv:11: warning: macro sum undefined (and assumed null) at this point.\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_1\\Prob016_m2014_q4j_code.sv:7: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:11: error: Unknown module type: FullAdder\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:19: error: Unknown module type: FullAdder\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:27: error: Unknown module type: FullAdder\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_2\\Prob016_m2014_q4j_code.sv:35: error: Unknown module type: FullAdder\n5 error(s) during elaboration.\n*** These modules were missing:\n        FullAdder referenced 4 times.\n***\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:29: error: Unknown module type: FullAdder\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:37: error: Unknown module type: FullAdder\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:45: error: Unknown module type: FullAdder\nresults/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\\Prob016_m2014_q4j\\attempt_3\\Prob016_m2014_q4j_code.sv:53: error: Unknown module type: FullAdder\n5 error(s) during elaboration.\n*** These modules were missing:\n        FullAdder referenced 4 times.\n***\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

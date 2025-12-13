@@ -1,0 +1,20 @@
+// TopModule.v
+// 8 D‑flip‑flops with active‑high synchronous reset
+// All flip‑flops are clocked on the positive edge of `clk`.
+
+module TopModule (
+    input  wire        clk,   // clock
+    input  wire [7:0]  d,     // data input
+    input  wire        reset, // active‑high synchronous reset
+    output reg  [7:0]  q      // data output
+);
+
+    // Positive‑edge triggered, synchronous reset
+    always @(posedge clk) begin
+        if (reset)          // synchronous reset
+            q <= 8'b0;      // set all outputs to zero
+        else
+            q <= d;         // normal D‑FF operation
+    end
+
+endmodule

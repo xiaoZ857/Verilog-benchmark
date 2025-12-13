@@ -1,0 +1,26 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:13: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:16: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:19: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:22: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:25: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:28: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:31: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:34: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:37: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:41: error: q is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob147_circuit10\attempt_4\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+10 error(s) during elaboration.

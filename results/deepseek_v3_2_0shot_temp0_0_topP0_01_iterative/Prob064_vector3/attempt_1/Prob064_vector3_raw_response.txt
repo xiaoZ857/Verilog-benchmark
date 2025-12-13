@@ -1,0 +1,10 @@
+  // Concatenate inputs and pad with two 1's in LSB positions
+  wire [31:0] concat = {a, b, c, d, e, f, 2'b11};
+  
+  // Split into 8-bit output vectors
+  assign w = concat[31:24];
+  assign x = concat[23:16];
+  assign y = concat[15:8];
+  assign z = concat[7:0];
+  
+endmodule

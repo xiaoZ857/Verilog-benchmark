@@ -1,0 +1,43 @@
+Here's an implementation of the Verilog module for the 4-bit binary counter:
+
+```verilog
+// Define the module parameters
+parameter COUNT = 16;
+
+// Define the module inputs and outputs
+input clk;
+input reset;
+output reg [3:0] q;
+
+// Define the internal signals
+reg [2:0] count; // The current count value
+
+// Module implementation
+always @(posedge clk) begin
+    if (reset) begin
+        count <= 0;
+    end else begin
+        count <= count + 1;
+        if (count == COUNT) begin
+            count <= 0;
+        end
+    end
+end
+
+assign q = count;
+
+// Module instantiation
+always @(posedge clk or reset) begin
+    if (reset) begin
+        q <= 0;
+    end else begin
+        q <= count;
+    end
+end
+```
+
+This implementation uses a single `count` register to store the current value of the counter. The `count` is incremented on each positive edge of the clock signal, and when it reaches the maximum value (`COUNT - 1`), it wraps around to zero.
+
+The `q` output is assigned the value of the `count` register at every clock edge or reset event.
+
+Note that this implementation assumes a synchronous reset. If you want an asynchronous reset, you can use a different approach, such as using a separate flip-flop for the reset signal and connecting it to the `count` register.

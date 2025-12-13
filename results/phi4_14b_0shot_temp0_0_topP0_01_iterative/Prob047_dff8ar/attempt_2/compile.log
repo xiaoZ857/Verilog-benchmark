@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob047_dff8ar\attempt_2\Prob047_dff8ar_code.sv:11: error: Could not find variable ``ff'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob047_dff8ar\attempt_2\Prob047_dff8ar_code.sv:15: error: Could not find variable ``ff'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob047_dff8ar\attempt_2\Prob047_dff8ar_code.sv:16: error: Unable to bind wire/reg/memory `ff' in `tb.top_module1'
+3 error(s) during elaboration.

@@ -1,0 +1,81 @@
+To implement the finite-state machine (FSM) described in your question using Verilog, we need to define a module that handles state transitions and outputs based on the given state table. The FSM has three states represented by `y[2:0]`, which means it uses 3 bits for its state encoding. The reset is synchronous and active high, meaning when `reset` is high, the FSM will transition to the initial state `000`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input x,
+    output reg z
+);
+
+    // State encoding
+    parameter S0 = 3'b000;
+    parameter S1 = 3'b001;
+    parameter S2 = 3'b010;
+    parameter S3 = 3'b011;
+    parameter S4 = 3'b100;
+
+    // Current state and next state registers
+    reg [2:0] y, next_y;
+
+    // State transition logic
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            y <= S0; // Reset to initial state 000
+        end else begin
+            y <= next_y;
+        end
+    end
+
+    // Next state and output logic
+    always @(*) begin
+        case (y)
+            S0: begin
+                next_y = (x == 0) ? S0 : S1;
+                z = 0;
+            end
+            S1: begin
+                next_y = (x == 0) ? S1 : S4;
+                z = 0;
+            end
+            S2: begin
+                next_y = (x == 0) ? S2 : S1;
+                z = 0;
+            end
+            S3: begin
+                next_y = (x == 0) ? S1 : S2;
+                z = 1;
+            end
+            S4: begin
+                next_y = (x == 0) ? S3 : S4;
+                z = 1;
+            end
+            default: begin
+                next_y = S0; // Default case to handle unexpected states
+                z = 0;
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We define parameters for each state (`S0` to `S4`) corresponding to the binary values `000` to `100`.
+
+- **Registers**: 
+  - `y`: Holds the current state.
+  - `next_y`: Computes the next state based on the current state and input `x`.
+
+- **State Transition Logic**:
+  - On a positive edge of `clk`, if `reset` is high, the FSM transitions to the initial state `S0`.
+  - Otherwise, it updates the current state `y` with the value from `next_y`.
+
+- **Next State and Output Logic**:
+  - A combinational block (`always @(*)`) determines the next state and output `z` based on the current state `y` and input `x`.
+  - The case statement implements the logic derived from the state table provided.
+
+This implementation ensures that the FSM behaves according to the specified transitions and outputs.

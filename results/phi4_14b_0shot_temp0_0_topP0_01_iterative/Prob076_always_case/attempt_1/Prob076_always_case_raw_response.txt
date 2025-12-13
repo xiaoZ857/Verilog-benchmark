@@ -1,0 +1,46 @@
+To implement a 6-to-1 multiplexer in Verilog, you need to select one of the six 4-bit inputs based on the value of the `sel` signal. If `sel` is between 0 and 5, it selects the corresponding input; otherwise, it outputs 0.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input [2:0] sel,
+    input [3:0] data0,
+    input [3:0] data1,
+    input [3:0] data2,
+    input [3:0] data3,
+    input [3:0] data4,
+    input [3:0] data5,
+    output reg [3:0] out
+);
+
+always @(*) begin
+    case (sel)
+        3'b000: out = data0;
+        3'b001: out = data1;
+        3'b010: out = data2;
+        3'b011: out = data3;
+        3'b100: out = data4;
+        3'b101: out = data5;
+        default: out = 4'b0000; // Output 0 if sel is not between 0 and 5
+    endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs**: 
+  - `sel`: A 3-bit input that determines which data line to select.
+  - `data0` to `data5`: Six 4-bit inputs corresponding to the possible selections.
+
+- **Output**:
+  - `out`: A 4-bit output that reflects the selected input or 0 if `sel` is out of range.
+
+- **Logic**:
+  - The `always @(*)` block ensures combinational logic, meaning it updates whenever any of its inputs change.
+  - The `case` statement checks the value of `sel` and assigns the corresponding data input to `out`.
+  - If `sel` is not between 0 and 5 (i.e., outside the range of valid selections), `out` defaults to 4'b0000.
+
+This implementation efficiently handles the selection logic for a 6-to-1 multiplexer with 4-bit wide inputs.

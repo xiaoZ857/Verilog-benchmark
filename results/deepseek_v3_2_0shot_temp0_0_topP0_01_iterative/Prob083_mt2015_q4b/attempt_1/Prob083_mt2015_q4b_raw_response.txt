@@ -1,0 +1,22 @@
+We can analyze the waveform to determine the behavior of `z` based on `x` and `y`.  
+Looking at the given times and values:
+
+- At 0–20 ns: `x=0, y=0` → `z=1`  
+- At 25–30 ns: `x=1, y=0` → `z=0`  
+- At 35–40 ns: `x=0, y=1` → `z=0`  
+- At 45–50 ns: `x=1, y=1` → `z=1`  
+- At 55 ns: `x=0, y=0` → `z=1`  
+- At 60–65 ns: `x=0, y=1` → `z=0`  
+- At 70 ns: `x=1, y=1` → `z=1`  
+- At 75–85 ns: `x=0, y=1` → `z=0`  
+- At 90 ns: `x=1, y=0` → `z=0`
+
+This matches the truth table of an **XNOR** gate:  
+`z = ~(x ^ y)` or `z = (x ~^ y)` in Verilog, i.e., `z = 1` when `x == y`.
+
+Thus, the module can be implemented as:
+
+```verilog
+  assign z = ~(x ^ y);
+endmodule
+```

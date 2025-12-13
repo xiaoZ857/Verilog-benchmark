@@ -1,0 +1,13 @@
+
+  // Y2: Next state for B (y[2])
+  // From state A (y[1]) with input w=0, we go to state B
+  assign Y2 = y[1] & ~w;
+  
+  // Y4: Next state for D (y[4])
+  // From state B (y[2]) with input w=1, we go to state D
+  // From state C (y[3]) with input w=1, we go to state D
+  // From state E (y[5]) with input w=1, we go to state D
+  // From state F (y[6]) with input w=1, we go to state D
+  assign Y4 = (y[2] & w) | (y[3] & w) | (y[5] & w) | (y[6] & w);
+
+endmodule

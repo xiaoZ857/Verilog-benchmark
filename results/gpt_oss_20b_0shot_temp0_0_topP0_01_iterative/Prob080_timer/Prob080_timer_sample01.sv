@@ -1,0 +1,25 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+// Internal 10‑bit counter
+logic [9:0] counter;
+
+// Synchronous counter logic
+always_ff @(posedge clk) begin
+    if (load) begin
+        // Load new value
+        counter <= data;
+    end else if (counter != 10'd0) begin
+        // Decrement only while counter is non‑zero
+        counter <= counter - 1;
+    end
+    // When counter is zero it stays zero until a new load
+end
+
+// Terminal count output
+assign tc = (counter == 10'd0);
+endmodule

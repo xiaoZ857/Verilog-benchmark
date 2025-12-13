@@ -1,0 +1,31 @@
+ Here is a simple Verilog implementation for a NOR gate:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output reg out
+);
+
+always @(posedge clk) begin
+  out <= ~(a | b);
+end
+
+// If no clock is specified, the default is posedge clock/clk
+// So you can omit the always @(posedge clk) block if you don't have a global clock signal
+
+// Alternatively, if you want to use an event-controlled assignment (level-sensitive),
+// you can use the following code:
+
+// `event none;
+// `event e1 = a or b;
+// input a, b;
+// output reg out;
+//
+// assign out = ~(a | b);
+// eventually_t e2: e1 => out <= ~(a | b);
+```
+
+This Verilog code defines a module named `TopModule` with two inputs `a` and `b`, and one output `out`. The NOR gate's functionality is implemented using the always block, which triggers on the positive edge of an implicit clock signal (clk). The output `out` is assigned the logical negation of the OR operation between `a` and `b`.
+
+The alternative code uses event-controlled assignment for level-sensitive design. In this case, the NOR gate's functionality is implemented using an eventually block that triggers when either `a` or `b` changes (event `e1`). The output `out` is assigned the logical negation of the OR operation between `a` and `b`.

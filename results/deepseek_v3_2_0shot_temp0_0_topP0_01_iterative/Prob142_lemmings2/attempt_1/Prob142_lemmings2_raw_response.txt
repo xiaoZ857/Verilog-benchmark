@@ -1,0 +1,87 @@
+We need to track two things: whether the lemming is currently walking left or right, and whether it is currently falling.  
+The falling state is entered when `ground == 0` and exited when `ground == 1`.  
+While falling, bump inputs are ignored for direction changes.  
+Direction only changes when walking (not falling) and bumped on the corresponding side.  
+On reset, walk left and not falling.
+
+Let’s define states with two bits:  
+- `FALLING` status (1 bit)  
+- `DIR` (1 bit): 1 for left, 0 for right (or vice versa — let’s choose 1 for left, 0 for right to match output logic).  
+
+But since outputs `walk_left` and `walk_right` are mutually exclusive and also separate from `aaah`, we can encode states as:  
+
+State encoding:  
+`FALL_L` = falling, last direction was left  
+`FALL_R` = falling, last direction was right  
+`WALK_L` = walking left  
+`WALK_R` = walking right  
+
+That’s 4 states, 2 bits.  
+
+Transitions:  
+- From `WALK_L`:  
+  - If `ground == 0` → `FALL_L`  
+  - Else if `bump_left == 1` → `WALK_R`  
+  - Else → `WALK_L`  
+- From `WALK_R`:  
+  - If `ground == 0` → `FALL_R`  
+  - Else if `bump_right == 1` → `WALK_L`  
+  - Else → `WALK_R`  
+- From `FALL_L`:  
+  - If `ground == 1` → `WALK_L`  
+  - Else → `FALL_L`  
+- From `FALL_R`:  
+  - If `ground == 1` → `WALK_R`  
+  - Else → `FALL_R`  
+
+Outputs (Moore):  
+- `walk_left` = 1 if state == `WALK_L`  
+- `walk_right` = 1 if state == `WALK_R`  
+- `aaah` = 1 if state == `FALL_L` or `FALL_R`  
+
+Let’s implement with a 2-bit state register.
+
+```verilog
+  reg [1:0] state, next_state;
+  localparam WALK_L = 2'b00,
+             WALK_R = 2'b01,
+             FALL_L = 2'b10,
+             FALL_R = 2'b11;
+  
+  // State register
+  always @(posedge clk, posedge areset) begin
+    if (areset) state <= WALK_L;
+    else state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      WALK_L: begin
+        if (~ground) next_state = FALL_L;
+        else if (bump_left) next_state = WALK_R;
+        else next_state = WALK_L;
+      end
+      WALK_R: begin
+        if (~ground) next_state = FALL_R;
+        else if (bump_right) next_state = WALK_L;
+        else next_state = WALK_R;
+      end
+      FALL_L: begin
+        if (ground) next_state = WALK_L;
+        else next_state = FALL_L;
+      end
+      FALL_R: begin
+        if (ground) next_state = WALK_R;
+        else next_state = FALL_R;
+      end
+      default: next_state = WALK_L;
+    endcase
+  end
+  
+  // Output logic
+  assign walk_left = (state == WALK_L);
+  assign walk_right = (state == WALK_R);
+  assign aaah = (state == FALL_L) | (state == FALL_R);
+endmodule
+```

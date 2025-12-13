@@ -1,0 +1,87 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  reg [3:0] count;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 1;
+    end else begin
+      if (count == 10) begin
+        count <= 1;
+      end else begin
+        count <= count + 1;
+      end
+    end
+  end
+
+  assign q = count;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`reg [3:0] count;`**:  Declares a 4-bit register named `count` to store the current count value.  We need 4 bits to represent numbers from 1 to 10.
+* **`always @(posedge clk)`**:  This block is triggered on the positive edge of the clock signal.
+* **`if (reset)`**:  Checks if the reset signal is high (active high).
+    * **`count <= 1;`**: If the reset is high, the counter is synchronously reset to 1.  The `<=` operator is used for non-blocking assignment within an `always` block.
+* **`else`**:  If the reset is not active, the counter increments.
+    * **`if (count == 10)`**: Checks if the counter has reached 10.
+        * **`count <= 1;`**: If the counter is at 10, it rolls over to 1.
+    * **`else`**: If the counter is not at 10, it increments.
+        * **`count <= count + 1;`**: Increments the counter by 1.
+* **`assign q = count;`**:  Assigns the value of the `count` register to the output signal `q`.  This makes the output `q` reflect the current count value.
+
+**How it works:**
+
+The module uses a synchronous reset and a simple incrementing logic.  On each positive clock edge, it checks if the reset signal is high. If it is, the counter is reset to 1. Otherwise, it checks if the counter has reached 10. If it has, it resets to 1; otherwise, it increments. The output `q` is continuously assigned the value of the `count` register, so it always reflects the current count value.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg reset;
+  wire [3:0] q;
+
+  TopModule uut (
+    .clk(clk),
+    .reset(reset),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    reset = 1; // Initial reset
+    #10 reset = 0; // Release reset after 10 time units
+    #100 $finish;
+  end
+
+  always #5 clk = ~clk;
+
+  initial begin
+    $monitor("Time=%g, clk=%b, reset=%b, q=%d", $time, clk, reset, q);
+  end
+
+endmodule
+```
+
+**Explanation of Testbench:**
+
+* **`reg clk; reg reset;`**: Declares `clk` and `reset` as registers because they are driven by the testbench.
+* **`wire [3:0] q;`**: Declares `q` as a wire because it's the output of the `TopModule`.
+* **`TopModule uut (...)`**: Instantiates the `TopModule` and connects its ports to the testbench signals.
+* **`initial begin ... end`**:  This block defines the testbench's initial actions.
+    * **`clk = 0; reset = 1;`**: Initializes the clock to 0 and the reset to 1.
+    * **`#10 reset = 0;`**:  After 10 time units, the reset signal is deasserted (set to 0).
+    * **`#100 $finish;`**:  After 100 time units, the simulation is terminated.
+* **`always #5 clk = ~clk;`**:  This block generates a clock signal with a period of 10 time units (5 time units high, 5 time units low).
+* **`initial begin ... end`**: This block uses `$monitor` to print the values of the signals during the simulation.  This allows you to observe the counter's behavior.
+
+To simulate this code, you'll need a Verilog

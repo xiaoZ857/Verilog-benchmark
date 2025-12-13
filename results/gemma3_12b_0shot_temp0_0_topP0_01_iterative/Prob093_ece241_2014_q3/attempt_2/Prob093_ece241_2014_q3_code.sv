@@ -1,0 +1,33 @@
+
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+  wire a = c;
+  wire b = d;
+
+  // Implement the K-map using 2-to-1 multiplexers and a 4-to-1 multiplexer.
+  // The K-map is:
+  //
+  //      ab
+  //  cd  00  01  11  10
+  //  00 | 0 | 0 | 0 | 1 |
+  //  01 | 1 | 0 | 0 | 0 |
+  //  11 | 1 | 0 | 1 | 1 |
+  //  10 | 1 | 0 | 0 | 1 |
+
+  // mux_in[0] = c when ab=00, ~c when ab=01, c when ab=11, ~c when ab=10
+  assign mux_in[0] = (c & ~d) ? c : ((~c) & d) ? ~c : (c & d) ? c : (~c & ~d) ? ~c;
+
+  // mux_in[1] = c when ab=00, ~c when ab=01, c when ab=11, ~c when ab=10
+  assign mux_in[1] = (c & ~d) ? c : ((~c) & d) ? ~c : (c & d) ? c : (~c & ~d) ? ~c;
+
+  // mux_in[2] = c when ab=00, ~c when ab=01, c when ab=11, ~c when ab=10
+  assign mux_in[2] = (c & ~d) ? c : ((~c) & d) ? ~c : (c & d) ? c : (~c & ~d) ? ~c;
+
+  // mux_in[3] = c when ab=00, ~c when ab=01, c when ab=11, ~c when ab=10
+  assign mux_in[3] = (c & ~d) ? c : ((~c) & d) ? ~c : (c & d) ? c : (~c & ~d) ? ~c;
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count

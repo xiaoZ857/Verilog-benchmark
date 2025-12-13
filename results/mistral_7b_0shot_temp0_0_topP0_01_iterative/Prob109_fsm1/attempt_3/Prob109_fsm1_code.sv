@@ -1,0 +1,35 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+reg A, B;
+
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    A <= 1'b0; // reset to state B
+    B <= 1'b1;
+  end else if (A == B) begin
+    // hold current state A
+    A <= A;
+  end else if (A == 1'b0 && in == 1'b0) begin
+    // transition from state A to state B
+    A <= 1'b1;
+    B <= A;
+  end else if (A == 1'b1 && in == 1'b1) begin
+    // transition from state A to state A
+    A <= 1'b0;
+  end else if (A == 1'b0 && in == 1'b1) begin
+    // transition from state B to state A
+    A <= 1'b1;
+  end else if (A == 1'b1 && in == 1'b0) begin
+    // transition from state A to state B
+    A <= 1'b0;
+  end
+end
+
+assign out = B;
+
+endmodule

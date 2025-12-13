@@ -1,0 +1,81 @@
+```verilog
+module TopModule (
+  input [3:0] a,
+  input [3:0] b,
+  input [3:0] c,
+  input [3:0] d,
+  input [3:0] e,
+  output reg [3:0] q
+);
+
+  always @(*) begin
+    case (c)
+      4'd0: q = b;
+      4'd1: q = e;
+      4'd2: q = a;
+      4'd3: q = d;
+      default: q = 4'd0; // Or some other default value if needed
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+The simulation waveforms show that the output `q` depends solely on the value of the input `c`.  Specifically:
+
+*   When `c` is 0, `q` is equal to `b`.
+*   When `c` is 1, `q` is equal to `e`.
+*   When `c` is 2, `q` is equal to `a`.
+*   When `c` is 3, `q` is equal to `d`.
+*   For all other values of `c`, `q` is assigned a default value of 0.
+
+The `always @(*)` block creates a combinational logic block that continuously evaluates the condition based on the inputs. The `case` statement then selects the appropriate output based on the value of `c`.
+
+**How to test this code:**
+
+1.  **Save:** Save the code as `TopModule.v`.
+2.  **Create a testbench:** Create a Verilog testbench file (e.g., `testbench.v`) to stimulate the module with different input values and verify the output.  The testbench should apply the same input values as the simulation waveforms.
+3.  **Simulate:** Use a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado) to simulate the design.  The simulator will apply the testbench stimuli and compare the actual output with the expected output based on the simulation waveforms.
+
+Here's a basic testbench example:
+
+```verilog
+module testbench;
+
+  reg [3:0] a, b, c, d, e;
+  wire [3:0] q;
+
+  TopModule dut (
+    .a(a),
+    .b(b),
+    .c(c),
+    .d(d),
+    .e(e),
+    .q(q)
+  );
+
+  initial begin
+    // Initialize inputs
+    a = 0;
+    b = 0;
+    c = 0;
+    d = 0;
+    e = 0;
+
+    // Apply stimuli based on the simulation waveforms
+    #5 a = 0; b = 0; c = 0; d = 0; e = 0;
+    #5 a = 0; b = 0; c = 0; d = 0; e = 0;
+    #5 a = 0; b = 0; c = 0; d = 0; e = 0;
+    #15 a = 0; b = 0; c = 0; d = 0; e = 0;
+    #20 a = 0; b = 0; c = 1; d = 0; e = 0;
+    #25 a = 0; b = 0; c = 2; d = 0; e = 0;
+    #30 a = 0; b = 0; c = 3; d = 0; e = 0;
+    #35 a = 0; b = 0; c = 4; d = 0; e = 0;
+    #40 a = 0; b = 0; c = 5; d = 0; e = 0;
+    #45 a = 0; b = 0; c = 6; d = 0; e = 0;
+    #50 a = 0; b = 0; c = 7; d = 0; e = 0;
+    #55 a = 0; b = 0; c = 8; d = 0; e = 0;
+    #60 a = 0; b = 0; c = 9; d = 0; e = 0;
+    #65 a = 0; b = 0

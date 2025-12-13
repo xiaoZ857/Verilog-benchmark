@@ -1,0 +1,50 @@
+Below is a minimal, synthesizable implementation of the described controller.  
+Because no clock is supplied, the logic is purely combinational – the outputs
+react immediately to changes on `ring` and `vibrate_mode`.
+
+```verilog
+// TopModule.v
+// ---------------
+//  Controls a cellphone ringer and vibration motor.
+//  When an incoming call is detected (ring = 1) the circuit must
+//  enable **exactly one** of the two outputs:
+//
+//      • If vibrate_mode = 1  →  motor = 1, ringer = 0
+//      • If vibrate_mode = 0  →  ringer = 1, motor = 0
+//
+//  When ring = 0 both outputs are forced low.
+//
+//  The design is purely combinational – no clock is required.
+
+module TopModule (
+    input  wire ring,          // Incoming call indicator
+    input  wire vibrate_mode,  // 1 = vibrate mode, 0 = normal mode
+    output wire ringer,        // Ringer output
+    output wire motor          // Vibration motor output
+);
+
+    // Simple combinational logic
+    assign ringer = ring & ~vibrate_mode;   // Ringer on only when ring and not vibrate
+    assign motor  = ring &  vibrate_mode;   // Motor on only when ring and vibrate
+
+endmodule
+```
+
+### How it works
+| ring | vibrate_mode | ringer | motor |
+|------|--------------|--------|-------|
+| 0    | X            | 0      | 0     |
+| 1    | 0            | 1      | 0     |
+| 1    | 1            | 0      | 1     |
+
+The `assign` statements implement the required logic directly.  
+If you prefer an `always @(*)` block, the equivalent code would be:
+
+```verilog
+always @(*) begin
+    ringer = ring & ~vibrate_mode;
+    motor  = ring &  vibrate_mode;
+end
+```
+
+Either form is acceptable for synthesis and simulation.

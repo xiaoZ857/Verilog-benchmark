@@ -1,0 +1,36 @@
+
+// ---------------------------------------------------------------------------
+//  JK Flip‑Flop
+//  -------------------------------------------
+//  Truth table (on the rising edge of clk):
+//      J | K | Qnew
+//      0 | 0 | Qold          // no change
+//      0 | 1 | 0             // clear
+//      1 | 0 | 1             // set
+//      1 | 1 | ~Qold         // toggle
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input  wire clk,   // positive‑edge clock
+    input  wire j,     // J input
+    input  wire k,     // K input
+    output reg  Q      // current state
+);
+
+    // Optional: initialise Q to 0 (useful for simulation)
+    // In real hardware this may be an asynchronous reset instead.
+    initial Q = 1'b0;
+
+    // Positive‑edge triggered process
+    always @(posedge clk) begin
+        case ({j, k})          // combine J and K into a 2‑bit vector
+            2'b00: Q <= Q;     // no change
+            2'b01: Q <= 1'b0;  // clear
+            2'b10: Q <= 1'b1;  // set
+            2'b11: Q <= ~Q;    // toggle
+        endcase
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

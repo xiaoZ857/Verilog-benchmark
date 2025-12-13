@@ -1,0 +1,40 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+// Parity checking module
+module ParityCheckingModule(
+    // Input: 8-bit byte to be checked for errors
+    input [7:0] in,
+
+    // Output: Parity bit (1 if data is odd, 0 if data is even)
+    output parity
+);
+
+    // Calculate the parity bit using XOR operation
+    assign parity = ~in[0];
+
+endmodule
+
+// Main module that combines the parity checking module with the input byte
+module TopModule(
+    // Input: 8-bit byte to be checked for errors
+    input [7:0] in,
+
+    // Output: Parity bit (1 if data is odd, 0 if data is even)
+    output parity
+);
+
+    // Instantiate the parity checking module
+    ParityCheckingModule pck(
+        .in(in),
+        .parity(parity)
+    );
+
+endmodule
+```
+
+In this implementation, we use a separate module `ParityCheckingModule` to calculate the parity bit. The main module `TopModule` instantiates this module and assigns its output to the `parity` signal.
+
+The parity bit is calculated using the XOR operation (`~in[0]`) which returns 1 if the data bits are odd (i.e., the number of 1s in the byte is odd) and 0 if the data bits are even. The `~` operator is used to invert the result, so that a 1 becomes 0 and vice versa.
+
+Note that this implementation assumes that the input byte is an 8-bit value. If you need to handle larger or smaller values, you'll need to adjust the module accordingly.

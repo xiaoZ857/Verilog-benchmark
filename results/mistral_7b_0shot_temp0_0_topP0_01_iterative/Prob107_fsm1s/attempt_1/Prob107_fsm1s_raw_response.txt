@@ -1,0 +1,35 @@
+ Here is a simple Verilog implementation of the described state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire in,
+  output reg out
+);
+
+reg current_state; // Current state of the state machine (B or A)
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    current_state <= 1'b0; // Reset to B state
+  end else if (current_state == 1'b0 && in == 1) begin
+    current_state <= 1'b1; // Transition from B to A on input '1'
+  end else if (current_state == 1'b1 && in == 0) begin
+    current_state <= 1'b0; // Transition from A to B on input '0'
+  end
+end
+
+assign out = current_state; // Output is the same as the current state
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with three inputs (`clk`, `reset`, and `in`) and one output (`out`). The current state of the state machine is stored in the `current_state` register.
+
+The `always` block describes the state transition logic based on the given description:
+- If the reset signal is high, the state machine resets to B (0).
+- If the current state is B and the input is 1, the state transitions to A (1).
+- If the current state is A and the input is 0, the state transitions back to B.
+
+Finally, the output `out` is assigned the value of the current state.

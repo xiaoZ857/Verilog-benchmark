@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input [2:0] a,
+  output reg [15:0] q
+);
+
+  always @(a) begin
+    case (a)
+      0: q = 1232;
+      1: q = aee0;
+      2: q = 27d4;
+      3: q = 5a0e;
+      4: q = 2066;
+      5: q = 64ce;
+      6: q = c526;
+      7: q = 2f19;
+      default: q = 0; // Handle undefined inputs
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input [2:0] a, output reg [15:0] q);` declares the module named `TopModule`.
+   - `input [2:0] a` defines a 3-bit input signal named `a`.
+   - `output reg [15:0] q` defines a 16-bit register output signal named `q`.  The `reg` keyword is necessary because `q` is assigned within an `always` block.
+
+2. **`always @(a)` Block:**
+   - `always @(a)` creates a combinational `always` block.  The `@(a)` sensitivity list means that the block will execute whenever the value of the input `a` changes.  This is crucial for a combinational circuit.
+
+3. **`case` Statement:**
+   - `case (a)` starts a `case` statement that evaluates the value of the input `a`.
+   - The `case` statement provides a mapping between the input `a` and the corresponding output `q`.  Each `a` value is associated with a specific hexadecimal value for `q`.
+   - `default: q = 0;` handles cases where the input `a` has a value that is not explicitly defined in the `case` statement.  This is good practice to prevent unexpected behavior.
+
+**How it works based on the waveforms:**
+
+The waveforms show that the output `q` changes based on the value of the input `a`. The `case` statement directly implements this relationship.  For example:
+
+- When `a` is 0, `q` is 1232.
+- When `a` is 1, `q` is aee0.
+- And so on...
+
+**Important Considerations:**
+
+* **Hexadecimal Values:** The values `1232`, `aee0`, `27d4`, etc., are hexadecimal numbers.  Verilog uses hexadecimal notation for representing binary values.
+* **Combinational Circuit:** The `always @(a)` block ensures that the circuit is combinational.  Combinational circuits produce outputs that depend only on the current inputs.  There are no memory elements (like registers) that store previous states.
+* **Simulation:** This code is designed to match the simulation waveforms you provided.  When you simulate this Verilog code with the same input waveforms, the output `q` should match the values shown in the waveforms.
+* **Default Case:** The `default` case is important for robustness.  If the input `a` ever takes on a value that isn't explicitly handled in the `case` statement, the `default` case will ensure that `q` is assigned a known value (0 in this case).  This prevents the output from becoming unpredictable.

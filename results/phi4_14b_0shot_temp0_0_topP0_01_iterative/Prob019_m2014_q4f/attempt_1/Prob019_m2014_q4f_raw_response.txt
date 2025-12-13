@@ -1,0 +1,30 @@
+To implement the described circuit in Verilog, we need to consider the effect of having a "bubble" on one of the inputs to an AND gate. A bubble typically represents an inversion (NOT operation) before the signal reaches the gate. In this case, `in2` has a bubble, meaning it should be inverted before being used as an input to the AND gate.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // Intermediate signal for the inverted in2
+  wire not_in2;
+
+  // Invert in2 using a NOT gate (bubble)
+  assign not_in2 = ~in2;
+
+  // AND gate with in1 and the inverted in2
+  assign out = in1 & not_in2;
+
+endmodule
+```
+
+### Explanation:
+
+- **Inversion of `in2`:** We use an intermediate wire `not_in2` to store the inverted value of `in2`. This is done using the bitwise NOT operator (`~`) which effectively acts as a NOT gate.
+
+- **AND Gate:** The output `out` is computed by performing an AND operation between `in1` and `not_in2`.
+
+This implementation correctly models the described circuit with the bubble on `in2`.

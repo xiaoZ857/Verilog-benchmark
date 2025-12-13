@@ -1,0 +1,23 @@
+Here’s a minimal Verilog implementation that simply forwards the input to the output – exactly the behavior of a wire.
+
+```verilog
+// TopModule.v
+// A pure combinational pass‑through: out = in
+module TopModule (
+    input  wire in,   // input signal
+    output wire out   // output signal
+);
+
+    // Continuous assignment – no clock needed
+    assign out = in;
+
+endmodule
+```
+
+**Explanation**
+
+- `input wire in` and `output wire out` declare the ports as wires (the default type for ports in Verilog‑2001+).
+- `assign out = in;` is a continuous assignment that drives `out` with the current value of `in`.  
+  This is equivalent to a wire connecting the two signals.
+
+No clock or state is required because the module is purely combinational.

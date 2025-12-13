@@ -1,0 +1,11 @@
+always @(posedge clk) begin // Assuming signals are positive clock triggered
+    if (cpu_overheated)
+        shut_off_computer <= 1;
+end
+
+always @(negedge arrived or posedge clk) begin // Assuming 'arrived' is edge-triggered
+    if (!arrived)
+        keep_driving <= ~gas_tank_empty;
+end
+
+endmodule

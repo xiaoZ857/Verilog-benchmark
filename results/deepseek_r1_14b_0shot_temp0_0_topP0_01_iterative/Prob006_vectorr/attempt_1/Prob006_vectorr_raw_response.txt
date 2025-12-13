@@ -1,0 +1,26 @@
+To solve this problem, we need to implement a Verilog module that reverses the bit ordering of an 8-bit input vector. The goal is to take each bit from the input and place it in the reverse position in the output.
+
+### Approach
+The approach involves reversing the order of bits in the given 8-bit input vector. Each bit in the output will correspond to a bit in the input, but their positions will be reversed. Specifically, the most significant bit (MSB) of the input becomes the least significant bit (LSB) of the output, and vice versa.
+
+We can achieve this by explicitly assigning each bit of the output to the corresponding reversed bit of the input. For example:
+- The first bit of the output will be the eighth bit of the input.
+- The second bit of the output will be the seventh bit of the input.
+- This pattern continues until the eighth bit of the output, which will be the first bit of the input.
+
+### Solution Code
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+  
+  assign out[0] = in[7];
+  assign out[1] = in[6];
+  assign out[2] = in[5];
+  assign out[3] = in[4];
+  assign out[4] = in[3];
+  assign out[5] = in[2];
+  assign out[6] = in[1];
+  assign out[7] = in[

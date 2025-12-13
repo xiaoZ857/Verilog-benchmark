@@ -1,0 +1,17 @@
+Here's the Verilog module implementation for the described 2-to-1 multiplexer:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+
+// Assignments based on the value of 'sel'
+assign out = sel ? b : a;
+
+endmodule
+```
+
+In this code, we use an `assign` statement to directly assign the values of `a` and `b` to the output `out`, depending on the value of `sel`. This is a simple and efficient way to implement a multiplexer in Verilog.

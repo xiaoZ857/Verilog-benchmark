@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob067_countslow_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob067_countslow_test.sv:6: syntax error
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob067_countslow\attempt_1\Prob067_countslow_code.sv:1: Errors in port declarations.

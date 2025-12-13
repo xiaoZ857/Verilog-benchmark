@@ -1,0 +1,30 @@
+Here's the Verilog module for a full adder:
+
+```verilog
+// Full Adder Module
+
+module FullAdder(
+    // Inputs
+    input [1:0] a,      // First bit to be added
+    input [1:0] b,      // Second bit to be added
+    input cin,         // Carry-in from previous adder
+    output [2:0] sum,   // Sum of the three bits
+    output cout        // Carry-out after addition
+);
+
+// Internal signals for the full adder
+wire temp_sum;
+wire temp_cout;
+
+// Full Adder logic
+assign temp_sum = a + b + cin;
+assign temp_cout = (a + b + cin) > 2'd3 ? 1'b1 : 1'b0;
+
+// Output signals
+assign sum[2] = temp_sum;
+assign cout = temp_cout;
+
+endmodule
+```
+
+This module takes three inputs: `a`, `b` and `cin`. It produces two outputs: `sum` (the result of the addition) and `cout` (the carry-out after the addition). The logic is implemented using Verilog's built-in logical operators.

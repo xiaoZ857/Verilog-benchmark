@@ -1,0 +1,58 @@
+
+module TopModule(
+    input clk, // Positive edge triggered clock
+    input aresetn, // Negative edge triggered asynchronous reset
+    input x, // Input signal to be recognized
+    output reg z // Output signal to indicate detection of the sequence "101"
+);
+
+// Define the states of the finite state machine
+typedef enum logic [1:0] {
+    S0,  // Initial state
+    S1,  // State after detecting '1'
+    S2   // Final state after detecting '01'
+} States;
+
+// Initialize the current state to S0
+reg [1:0] currentState = S0;
+reg z_value = 0; // Temporary output signal
+
+// Asynchronous reset
+always @(posedge aresetn) {
+    currentState <= S0;
+}
+
+// Mealy-type finite state machine
+always @(posedge clk or negedge aresetn) begin
+    // If the input signal x is '1', transition to S1
+    if (x == 1'b1) {
+        currentState <= S1;
+    }
+    // If the current state is S0 and the next state is S2, set z_value to 1
+    else if (currentState == S0 && currentState[1] == 1'b1) { // Check for '1' in S0 state
+        z_value <= 1'b1;
+    }
+    // If the current state is S1 and the next state is S2, set z_value to 1
+    else if (currentState == S1 && currentState[1] == 1'b1) { // Check for '1' in S1 state
+        z_value <= 1'b1;
+    }
+    // If the current state is S0 and the next state is S2, set z to 1
+    else if (currentState == S0 && currentState[1:1] == 2'b01) { // Check for '01' in S0 state
+        z <= z_value; // Update z with temporary output signal
+    }
+    // If the current state is S1 and the next state is S2, set z to 1
+    else if (currentState == S1 && currentState[1:1] == 2'b01) { // Check for '01' in S1 state
+        z <= z_value; // Update z with temporary output signal
+    }
+    // If the current state is S2, set z to 1
+    else if (currentState == S2) {
+        z <= z_value; // Update z with temporary output signal
+    } else {
+        z <= 0;
+    }
+
+    // Update the current state
+    currentState <= (currentState == S2 ? S2 : (currentState[1] == 1'b1 ? S1 : S0));
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

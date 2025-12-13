@@ -1,0 +1,135 @@
+To implement this Verilog module, we need to design a finite state machine (FSM) that processes the incoming serial data stream. The FSM will identify start bits, read 8 data bits, verify stop bits, and handle idle states. Here's how you can structure the module:
+
+```verilog
+module TopModule (
+    input clk,
+    input in,
+    input reset,
+    output reg [7:0] out_byte,
+    output reg done
+);
+
+    // State encoding
+    typedef enum logic [2:0] {
+        IDLE = 3'b000,
+        START_BIT = 3'b001,
+        RECEIVE_DATA = 3'b010,
+        STOP_BIT = 3'b011,
+        CHECK_STOP = 3'b100
+    } state_t;
+
+    // State register
+    reg [2:0] current_state, next_state;
+
+    // Data bit counter
+    reg [2:0] bit_counter;
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= IDLE;
+            out_byte <= 8'b00000000;
+            done <= 1'b0;
+            bit_counter <= 3'b000;
+        end else begin
+            current_state <= next_state;
+
+            case (current_state)
+                START_BIT: begin
+                    if (in == 1'b0) begin
+                        bit_counter <= 3'b000; // Reset counter for data bits
+                    end
+                end
+
+                RECEIVE_DATA: begin
+                    out_byte[bit_counter] <= in;
+                    bit_counter <= bit_counter + 1'b1;
+                end
+
+                STOP_BIT: begin
+                    if (in == 1'b1) begin
+                        next_state <= CHECK_STOP;
+                    end else begin
+                        // If stop bit is not correct, go back to IDLE
+                        next_state <= IDLE;
+                    end
+                end
+
+                CHECK_STOP: begin
+                    done <= 1'b1; // Assert done when a valid byte is received
+                    next_state <= IDLE;
+                end
+
+                default: begin
+                    if (in == 1'b1) begin
+                        next_state <= START_BIT;
+                    end else begin
+                        next_state <= current_state;
+                    end
+                end
+            endcase
+        end
+    end
+
+    always_comb begin
+        case (current_state)
+            IDLE: begin
+                if (in == 1'b0) begin
+                    next_state = START_BIT;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            START_BIT: begin
+                if (in == 1'b0) begin
+                    next_state = RECEIVE_DATA;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            RECEIVE_DATA: begin
+                if (bit_counter == 3'b111) begin
+                    next_state = STOP_BIT;
+                end else begin
+                    next_state = RECEIVE_DATA;
+                end
+            end
+
+            STOP_BIT: begin
+                if (in == 1'b1) begin
+                    next_state = CHECK_STOP;
+                end else begin
+                    next_state = IDLE;
+                end
+            end
+
+            CHECK_STOP: begin
+                next_state = IDLE;
+            end
+
+            default: begin
+                next_state = IDLE;
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We define states for the FSM: `IDLE`, `START_BIT`, `RECEIVE_DATA`, `STOP_BIT`, and `CHECK_STOP`.
+
+2. **State Transition Logic**:
+   - In `IDLE`, the FSM waits for a start bit (0).
+   - In `START_BIT`, it checks if the next bit is 0 to confirm the start.
+   - In `RECEIVE_DATA`, it reads 8 data bits, storing them in `out_byte`.
+   - In `STOP_BIT`, it expects a stop bit (1). If not received, it returns to `IDLE`.
+   - In `CHECK_STOP`, it asserts `done` and transitions back to `IDLE`.
+
+3. **Reset Logic**: On reset, the FSM initializes to `IDLE`, clears `out_byte`, and resets `done`.
+
+4. **Bit Counter**: Used to track the number of data bits received.
+
+This module effectively processes a serial stream according to the specified protocol, ensuring correct byte reception and handling idle states appropriately.

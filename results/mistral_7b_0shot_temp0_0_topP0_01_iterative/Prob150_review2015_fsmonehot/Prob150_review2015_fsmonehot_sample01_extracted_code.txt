@@ -1,0 +1,32 @@
+always @(posedge clk) begin
+  if (!state[8]) // Check if current state is not reset
+    begin
+      case (state) // Next state logic
+        10'b0000000001 : next_state <= 3'b000; // S
+        10'b0000000010 : next_state <= 3'b010; // S1
+        10'b0000000100 : next_state <= 3'b000; // S
+        10'b0000001000 : next_state <= 3'b011; // S11
+        10'b0000010000 : next_state <= 3'b100; // S110
+        10'b0000100000 : next_state <= 3'b101; // S11
+        10'b0001000000 : next_state <= 4'b0001; // B0
+        10'b0010000000 : next_state <= 4'b0010; // B1
+        10'b0100000000 : next_state <= 4'b0100; // B2
+        10'b1000000000 : next_state <= 4'b0101; // B3 (typo fixed)
+        5'b00001      : next_state <= 5'b00001; // Count
+        5'b00010      : next_state <= 5'b00010; // Wait
+        default       : next_state <= 1'b0; // Reset to S state
+      endcase
+    end
+end
+
+always @(posedge clk) begin
+  counting <= (next_state == 5'b00001); // Output logic for counting
+  done <= (next_state == 5'b00010 && ack == 1'b1); // Output logic for done
+  shift_ena <= (next_state == 4'b0100 || next_state == 4'b0101); // Output logic for shift_ena (typo fixed)
+end
+
+assign B3_next = (next_state == 4'b0101); // Assign next state outputs
+assign S_next = (next_state == 3'b000);
+assign S1_next = (next_state == 3'b010 || next_state == 3'b011);
+assign Count_next = (next_state == 5'b00001);
+assign Wait_next = (next_state == 5'b00010);

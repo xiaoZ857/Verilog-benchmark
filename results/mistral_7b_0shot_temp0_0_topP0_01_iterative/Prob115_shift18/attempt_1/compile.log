@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:17: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:15: error: Syntax error in task arguments.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:21: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:21: error: malformed statement
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:23: syntax error
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:24: error: malformed statement
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob115_shift18\attempt_1\Prob115_shift18_code.sv:28: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:14: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:22: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:24: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:26: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:31: Syntax in assignment statement l-value.

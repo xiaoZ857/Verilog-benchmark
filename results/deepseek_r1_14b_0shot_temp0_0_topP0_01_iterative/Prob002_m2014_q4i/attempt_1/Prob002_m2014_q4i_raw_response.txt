@@ -1,0 +1,20 @@
+To create a Verilog module where the output `out` is always at logic low (0), follow these steps:
+
+1. **Define the Module**: Start by declaring the module with the specified output port.
+
+2. **Assign Constant Value**: Inside the module, assign the constant 0 to the output `out`.
+
+Here's the implementation:
+
+```verilog
+module TopModule (
+  output out
+);
+
+  // Assign 0 to the output 'out'
+  out = 0;
+
+endmodule
+```
+
+This code ensures that `out` is always driven low.

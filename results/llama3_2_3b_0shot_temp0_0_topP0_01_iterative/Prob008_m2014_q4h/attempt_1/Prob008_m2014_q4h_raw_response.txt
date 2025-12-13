@@ -1,0 +1,22 @@
+Here's a simple implementation of the Verilog module based on your description:
+
+```verilog
+// Define the module TopModule with two ports: in and out.
+module TopModule (
+  // Input port
+  input in, 
+
+  // Output port
+  output out
+);
+
+// Assign the value of the input port to the output port
+assign out = in;
+
+endmodule
+```
+
+In this code:
+
+- We define a module named `TopModule` with two ports: an input port named `in`, and an output port named `out`.
+- The `assign` keyword is used to create a combinational assignment between the `out` and `in` signals. This means that the value of `out` will be equal to the value of `in`.

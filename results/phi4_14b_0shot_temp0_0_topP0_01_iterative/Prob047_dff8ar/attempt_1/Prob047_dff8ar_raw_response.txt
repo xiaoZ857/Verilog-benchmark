@@ -1,0 +1,50 @@
+To implement the Verilog module as described, you need to create a module named `TopModule` that contains eight D flip-flops. Each flip-flop should have an active high asynchronous reset (`areset`) and be triggered by the positive edge of the clock signal (`clk`). The output of each flip-flop is stored in an 8-bit register `q`, which will be reset to zero when `areset` is asserted.
+
+Here's how you can implement this module:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire [7:0] d,
+    input wire areset,
+    output reg [7:0] q
+);
+
+    // Declare internal registers for each D flip-flop
+    reg [7:0] ff;
+
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset to 0
+            ff <= 8'b00000000;
+        end else begin
+            // Positive edge triggered D flip-flop behavior
+            ff <= d;
+        end
+    end
+
+    // Assign the internal register to output
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            q <= 8'b00000000;
+        end else begin
+            q <= ff;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Declaration**: The module `TopModule` is declared with inputs `clk`, `d`, and `areset`, and an output `q`.
+
+2. **Internal Register (`ff`)**: An 8-bit register `ff` is used to hold the intermediate state of the D flip-flops.
+
+3. **Asynchronous Reset**: The always block is sensitive to both the positive edge of `clk` and the positive edge of `areset`. If `areset` is high, all bits in `ff` are reset to zero asynchronously.
+
+4. **D Flip-Flop Behavior**: On the rising edge of `clk`, if `areset` is not asserted, the value of `d` is loaded into `ff`.
+
+5. **Output Assignment**: Another always block ensures that the output `q` follows the state of `ff`. This block also handles asynchronous reset by setting `q` to zero when `areset` is high.
+
+This implementation ensures that all flip-flops are reset asynchronously and updated on the positive edge of the clock, as specified.

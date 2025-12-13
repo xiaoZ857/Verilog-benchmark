@@ -1,0 +1,13 @@
+// TopModule – 8 independent D‑flip‑flops, all clocked on the positive edge of clk
+module TopModule (
+    input  wire        clk,   // global clock
+    input  wire [7:0]  d,     // 8‑bit data input
+    output reg  [7:0]  q      // 8‑bit registered output
+);
+
+    // One always block implements 8 D‑FFs in parallel
+    always @(posedge clk) begin
+        q <= d;          // each bit of q captures the corresponding bit of d
+    end
+
+endmodule

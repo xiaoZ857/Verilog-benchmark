@@ -1,0 +1,21 @@
+Here’s a minimal, synthesizable Verilog implementation of a NOT gate.  
+Since the gate is purely combinational, no clocking is required.
+
+```verilog
+// TopModule implements a simple NOT gate
+module TopModule (
+    input  wire in,   // input signal
+    output wire out   // output signal (inverted)
+);
+
+// Combinational logic: out is the logical NOT of in
+assign out = ~in;
+
+endmodule
+```
+
+**Explanation**
+
+- `input wire in` and `output wire out` are declared as single‑bit signals.
+- The `assign` statement drives `out` continuously with the bitwise complement of `in`.  
+- No clock or edge‑triggered logic is needed because the operation is combinational.

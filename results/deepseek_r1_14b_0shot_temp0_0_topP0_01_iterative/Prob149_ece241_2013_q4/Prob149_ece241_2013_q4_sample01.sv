@@ -1,0 +1,69 @@
+
+module TopModule (
+    input clk,
+    input reset,
+    input [3:1] s,
+    output reg fr3,
+    output reg fr2,
+    output reg fr1,
+    output reg dfr
+);
+
+// State definition
+typedef enum {
+    LOW = 0,
+    NORMAL1 = 1,
+    NORMAL2 = 2,
+    HIGH = 3
+} state_t;
+
+state_t current_state, next_state;
+
+always @(posedge clk or reset) begin
+    if (reset) begin
+        current_state <= LOW;
+    end else begin
+        current_state <= next_state;
+    end
+end
+
+always @(*) begin
+    // State transitions and output logic
+    case (current_state)
+        HIGH: begin
+            fr1 = 0;
+            fr2 = 0;
+            fr3 = 0;
+            dfr = 0;
+            if (s == 3) begin
+                next_state = HIGH;
+            end else if (s >= 2 && s <= 3) begin
+                next_state = NORMAL1;
+            end else begin
+                next_state = NORMAL2;
+            end
+        end
+        NORMAL1: begin
+            fr1 = 1;
+            fr2 = 0;
+            fr3 = 0;
+            dfr = (current_state != NORMAL1) ? 1 : 0;
+            if (s == 2) begin
+                next_state = NORMAL1;
+            end else if (s >= 1 && s <= 2) begin
+                next_state = NORMAL2;
+            end else begin
+                next_state = HIGH;
+            end
+        end
+        NORMAL2: begin
+            fr1 = 1;
+            fr2 = 1;
+            fr3 = 0;
+            dfr = (current_state != NORMAL2) ? 1 : 0;
+            if (s == 1) begin
+                next_state =
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

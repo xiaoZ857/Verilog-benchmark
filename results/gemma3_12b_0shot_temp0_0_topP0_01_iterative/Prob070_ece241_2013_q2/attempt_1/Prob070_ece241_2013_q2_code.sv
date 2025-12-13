@@ -1,0 +1,44 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+  // Sum-of-Products (SOP) form
+  // The output is 1 when 2, 7, or 15 appears.
+  // 2: a=1, b=0, c=0, d=0  -> a & !b & !c & !d
+  // 7: a=0, b=1, c=1, d=1  -> !a & b & c & d
+  // 15: a=1, b=1, c=1, d=1 -> a & b & c & d
+
+  assign out_sop = (a & !b & !c & !d) | (!a & b & c & d) | (a & b & c & d);
+
+  // Product-of-Sums (POS) form
+  // The output is 0 when 0, 1, 4, 5, 6, 9, 10, 13, or 14 appears.
+  // 0: a=0, b=0, c=0, d=0  -> !a & !b & !c & !d
+  // 1: a=0, b=0, c=0, d=1  -> !a & !b & !c & d
+  // 4: a=0, b=0, c=1, d=0  -> !a & !b & c & !d
+  // 5: a=0, b=0, c=1, d=1  -> !a & !b & c & d
+  // 6: a=0, b=1, c=1, d=0  -> !a & b & c & !d
+  // 9: a=0, b=1, c=1, d=1  -> !a & b & c & d
+  // 10: a=1, b=0, c=1, d=0 -> a & !b & c & !d
+  // 13: a=1, b=1, c=0, d=0 -> a & b & !c & !d
+  // 14: a=1, b=1, c=0, d=1 -> a & b & !c & d
+
+  assign out_pos = (!a & !b & !c & !d) &
+                   (!a & !b & !c & d) &
+                   (!a & !b & c & !d) &
+                   (!a & !b & c & d) &
+                   (!a & b & c & !d) &
+                   (!a & b & c & d) &
+                   (a & !b & c & !d) &
+                   (a & b & !c & !d) &
+                   (a & b & !c & d);
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

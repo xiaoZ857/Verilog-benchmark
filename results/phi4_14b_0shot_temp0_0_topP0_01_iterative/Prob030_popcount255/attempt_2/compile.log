@@ -1,0 +1,247 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 24
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:16: warning: in[224+:32] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:28:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 1 (in) of PopCount_16bit expects 16 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 12 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29: warning: Port 2 (out) of PopCount_16bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:29:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[8] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[9] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[10] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[11] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[12] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[13] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[14] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[15] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[16+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[16] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[17] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[18+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[18] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[19] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[20+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[20] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[21] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[22+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[22] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[23] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[24+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[24] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[25] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[26+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[26] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[27] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[28+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[28] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[29] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:38: warning: count_16bit[30+:2] is selecting after vector.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: error: Index count_8bit[30] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:41:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 1 (in) of PopCount_8bit expects 8 bits, got 4.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 4 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: error: Index count_8bit[31] is out of range.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42: warning: Port 2 (out) of PopCount_8bit expects 8 bits, got 1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:42:        : Padding 7 high bits of the port.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48: warning: Constant bit select [15] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48: warning: Constant bit select [14] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48: warning: Constant bit select [13] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48: warning: Constant bit select [12] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:48:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49: warning: Constant bit select [11] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49: warning: Constant bit select [10] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49: warning: Constant bit select [9] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49:        : Replacing select with a constant 1'bx.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49: warning: Constant bit select [8] is after vector count_8bit[7:0].
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob030_popcount255\attempt_2\Prob030_popcount255_code.sv:49:        : Replacing select with a constant 1'bx.
+24 error(s) during elaboration.

@@ -1,0 +1,7 @@
+  assign out_both[98:0] = in[98:0] & (in[99:1]);
+
+  assign out_any[99:1] = in[99:1] | in[1:100];
+  assign out_any[0] = in[0] | in[1];
+
+  assign out_different[99:0] = in[99:0] != in[0:99];
+endmodule

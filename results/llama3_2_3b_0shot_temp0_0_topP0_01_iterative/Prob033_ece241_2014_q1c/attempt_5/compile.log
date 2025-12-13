@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_5\Prob033_ece241_2014_q1c_code.sv:17: error: can not select part of scalar: s_2s
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_5\Prob033_ece241_2014_q1c_code.sv:17: error: Unable to elaborate r-value: s_2s['sd7:'sd0]
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_5\Prob033_ece241_2014_q1c_code.sv:18: error: can not select part of scalar: s_2s
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_5\Prob033_ece241_2014_q1c_code.sv:18: error: can not select part of scalar: s_2s
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob033_ece241_2014_q1c\attempt_5\Prob033_ece241_2014_q1c_code.sv:18: error: Unable to elaborate r-value: ((s_2s['sd0])==('sd1))&&((s_2s['sd7])==('sd1))
+5 error(s) during elaboration.

@@ -1,0 +1,13 @@
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+Create a 2-1 multiplexer. When sel=0, choose a. When sel=1, choose b.
+
+module TopModule (
+  input [99:0] a,
+  input [99:0] b,
+  input sel,
+  output [99:0] out
+);
+
+assign out = (sel == 0) ? a : b;
+
+endmodule

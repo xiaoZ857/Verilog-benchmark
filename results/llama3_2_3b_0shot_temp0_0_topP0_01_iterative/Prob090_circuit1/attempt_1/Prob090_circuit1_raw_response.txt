@@ -1,0 +1,27 @@
+Here's the Verilog module implementation based on the given description:
+
+```verilog
+module TopModule(
+    input a, // Positive clock/clk triggered
+    input b, // Positive clock/clk triggered
+    output q   // Q is not clocked
+);
+
+    always @(*) begin
+        if (a == 1 && b == 0) begin
+            q = 0;
+        end else if (a == 1 && b == 1) begin
+            q = 1;
+        end else if (a == 0 && b == 1) begin
+            q = 0;
+        end else begin // a == 0 and b == 0
+            q = 0;
+        end
+    end
+
+endmodule
+```
+
+This module implements the combinational logic described in the problem. The `always` block is used to describe the behavior of the circuit, which depends on the values of inputs `a` and `b`. The output `q` is determined based on these input combinations.
+
+Note that this implementation assumes that signals are positive clock/clk triggered unless otherwise stated.

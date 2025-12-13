@@ -1,0 +1,70 @@
+To implement a 4-digit BCD counter in Verilog, we need to manage each digit separately and ensure that the carry-over logic is correctly implemented. The counter should increment on every clock cycle unless reset. When a digit reaches its maximum value (9 for BCD), it resets to zero and increments the next higher digit.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena, // Enable signals for tens, hundreds, and thousands
+  output reg [15:0] q // BCD digits: q[3:0] - ones, q[7:4] - tens, q[11:8] - hundreds, q[15:12] - thousands
+);
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      q <= 16'b0000_0000_0000_0000;
+      ena <= 3'b000;
+    end else begin
+      // Check for carry from ones to tens
+      if (q[3:0] == 4'b1001) begin
+        q[3:0] <= 4'b0000; // Reset ones digit
+        ena[1] <= 1'b1;     // Enable tens increment
+      end else begin
+        q[3:0] <= q[3:0] + 4'b0001;
+        ena[1] <= 1'b0;
+      end
+
+      // Check for carry from tens to hundreds
+      if (q[7:4] == 4'b1001) begin
+        q[7:4] <= 4'b0000; // Reset tens digit
+        ena[2] <= 1'b1;     // Enable hundreds increment
+      end else if (ena[1]) begin
+        q[7:4] <= q[7:4] + 4'b0001;
+        ena[2] <= 1'b0;
+      end
+
+      // Check for carry from hundreds to thousands
+      if (q[11:8] == 4'b1001) begin
+        q[11:8] <= 4'b0000; // Reset hundreds digit
+        ena[3] <= 1'b1;     // Enable thousands increment
+      end else if (ena[2]) begin
+        q[11:8] <= q[11:8] + 4'b0001;
+        ena[3] <= 1'b0;
+      end
+
+      // Check for carry from thousands to reset (if needed)
+      if (q[15:12] == 4'b1001) begin
+        q[15:12] <= 4'b0000; // Reset thousands digit
+      end else if (ena[3]) begin
+        q[15:12] <= q[15:12] + 4'b0001;
+      end
+
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Reset Logic**: When `reset` is high, all BCD digits (`q`) are set to zero, and the enable signals (`ena`) are cleared.
+
+- **Increment Logic**:
+  - The ones digit (`q[3:0]`) increments every clock cycle. If it reaches 9 (binary `1001`), it resets to 0, and the tens digit is enabled for increment.
+  - The tens digit (`q[7:4]`) increments when enabled by the carry from the ones digit. It behaves similarly, resetting at 9 and enabling the hundreds digit.
+  - The hundreds digit (`q[11:8]`) increments when enabled by the carry from the tens digit, with similar behavior.
+  - The thousands digit (`q[15:12]`) increments when enabled by the carry from the hundreds digit.
+
+- **Enable Signals**: `ena` signals are used to indicate when each higher digit should be incremented. They are set high only during the clock cycle where a carry occurs and reset immediately after handling the increment.
+
+This design ensures that the BCD counter correctly handles carries between digits and resets appropriately on an active-high synchronous reset signal.

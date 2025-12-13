@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:31: error: Unknown module type: nor3
+2 error(s) during elaboration.
+*** These modules were missing:
+        nor3 referenced 1 times.
+***

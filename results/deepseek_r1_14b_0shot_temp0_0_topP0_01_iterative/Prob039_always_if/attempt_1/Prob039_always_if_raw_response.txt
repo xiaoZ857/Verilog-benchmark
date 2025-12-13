@@ -1,0 +1,41 @@
+Here's the Verilog implementation of the TopModule according to the given requirements:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+// Assign statement implementation for out_assign
+assign out_assign = (sel_b1 & sel_b2) ? b : a;
+
+// Procedural if statement implementation for out_always using always block
+always @ (posedge clk or negedge reset)
+begin
+    if (sel_b1 && sel_b2) begin
+        out_always <= b;
+    end else begin
+        out_always <= a;
+    end
+end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Assign Statement Implementation (`out_assign`):**
+   - Uses an assignment equation to directly compute the output based on the condition `(sel_b1 & sel_b2)`.
+   - If both `sel_b1` and `sel_b2` are high (true), `out_assign` is set to `b`; otherwise, it's set to `a`.
+
+2. **Procedural If Statement Implementation (`out_always`):**
+   - Implements the same logic using a procedural always block triggered by changes on `clk` or `reset`.
+   - Inside the block, an if-else statement checks if both `sel_b1` and `sel_b2` are true.
+     - If true, sets `out_always` to `b`.
+     - Else, sets it to `a`.
+
+This module meets the requirements by providing two different implementations of a 2-to-1 multiplexer based on the specified conditions.

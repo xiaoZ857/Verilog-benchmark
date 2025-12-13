@@ -1,0 +1,38 @@
+{
+  "problem_name": "Prob084_ece241_2013_q12",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 0,
+  "total_attempts": 2,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 8\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:16: error: Q['sd0] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd0] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:17: error: Q['sd1] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd1] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:18: error: Q['sd2] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd2] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:19: error: Q['sd3] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd3] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:20: error: Q['sd4] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd4] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:21: error: Q['sd5] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd5] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:22: error: Q['sd6] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd6] is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:23: error: Q['sd7] is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob084_ece241_2013_q12\\attempt_1\\Prob084_ece241_2013_q12_code.sv:11:      : Q['sd7] is declared here as wire.\n8 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

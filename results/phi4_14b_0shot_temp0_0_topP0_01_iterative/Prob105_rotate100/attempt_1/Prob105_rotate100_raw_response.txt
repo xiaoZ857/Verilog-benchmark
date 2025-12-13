@@ -1,0 +1,57 @@
+To implement a Verilog module for a 100-bit left/right rotator with synchronous load and enable functionality, we need to define the behavior of the module based on the given specifications. Here's how you can structure the `TopModule`:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire load,
+    input wire [1:0] ena,
+    input wire [99:0] data,
+    output reg [99:0] q
+);
+
+    // Always block triggered on positive edge of clock
+    always @(posedge clk) begin
+        if (load) begin
+            // Synchronous load operation
+            q <= data;
+        end else begin
+            case (ena)
+                2'b01: begin
+                    // Rotate right by one bit
+                    q[99] <= q[0];
+                    q[98:0] <= q[99:1];
+                end
+                2'b10: begin
+                    // Rotate left by one bit
+                    q[0] <= q[99];
+                    q[1:99] <= q[98:0];
+                end
+                default: begin
+                    // No rotation for ena = 2'b00 or 2'b11
+                    q <= q;
+                end
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `clk`: Clock signal.
+  - `load`: Synchronous active high load signal.
+  - `ena[1:0]`: Control signals for rotation direction.
+  - `data[99:0]`: Data to be loaded into the register.
+  - `q[99:0]`: Output representing the current state of the rotator.
+
+- **Behavior**:
+  - The module uses an always block triggered on the positive edge of the clock (`posedge clk`).
+  - If `load` is high, the register `q` is loaded with the input `data`.
+  - If `load` is low, the behavior depends on `ena`:
+    - `2'b01`: Rotate right by one bit. The least significant bit (LSB) becomes the most significant bit (MSB), and all other bits are shifted right.
+    - `2'b10`: Rotate left by one bit. The MSB becomes the LSB, and all other bits are shifted left.
+    - `2'b00` or `2'b11`: No rotation occurs; the register retains its current state.
+
+This implementation ensures that the rotator behaves as specified, with synchronous loading and conditional rotation based on control signals.

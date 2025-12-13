@@ -1,0 +1,34 @@
+
+module TopModule (
+    input [15:0] scancode,
+    output reg left,
+    output reg down,
+    output reg right,
+    output reg up
+);
+
+// Define the arrow key scancodes as constants for readability
+const int LEFT_ARROW = 16'h06b;
+const int DOWN_ARROW = 16'h072;
+const int RIGHT_ARROW = 16'h074;
+const int UP_ARROW = 16'h075;
+
+// Initialize outputs to zero (i.e., no arrow key pressed)
+always @(*) begin
+    left = 0;
+    down = 0;
+    right = 0;
+    up = 0;
+end
+
+// Use a case statement to map the scancode to the correct output
+always @(*) begin
+    if (scancode == LEFT_ARROW) left = 1;
+    else if (scancode == DOWN_ARROW) down = 1;
+    else if (scancode == RIGHT_ARROW) right = 1;
+    else if (scancode == UP_ARROW) up = 1;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

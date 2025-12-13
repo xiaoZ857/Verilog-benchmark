@@ -1,0 +1,73 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+// BCD increment helper function
+function [7:0] bcd_increment;
+    input [7:0] bcd;
+    input [3:0] max_tens;
+    input [3:0] max_ones;
+    reg [3:0] ones, tens;
+    begin
+        ones = bcd[3:0];
+        tens = bcd[7:4];
+        
+        if (ones < max_ones) begin
+            ones = ones + 1;
+        end else begin
+            ones = 0;
+            if (tens < max_tens) begin
+                tens = tens + 1;
+            end else begin
+                tens = 0;
+            end
+        end
+        
+        bcd_increment = {tens, ones};
+    end
+endfunction
+
+always @(posedge clk) begin
+    if (reset) begin
+        // Reset to 12:00 AM
+        ss <= 8'h00;
+        mm <= 8'h00;
+        hh <= 8'h12;
+        pm <= 1'b0;
+    end else if (ena) begin
+        // Increment seconds
+        if (ss != 8'h59) begin
+            ss <= bcd_increment(ss, 4'd5, 4'd9);
+        end else begin
+            ss <= 8'h00;
+            
+            // Increment minutes
+            if (mm != 8'h59) begin
+                mm <= bcd_increment(mm, 4'd5, 4'd9);
+            end else begin
+                mm <= 8'h00;
+                
+                // Increment hours and handle PM toggle
+                if (hh == 8'h11) begin
+                    // 11:59:59 -> 12:00:00, toggle PM
+                    hh <= 8'h12;
+                    pm <= ~pm;
+                end else if (hh == 8'h12) begin
+                    // 12:59:59 -> 01:00:00
+                    hh <= 8'h01;
+                end else begin
+                    // Regular hour increment
+                    hh <= bcd_increment(hh, 4'd1, 4'd9);
+                end
+            end
+        end
+    end
+end
+
+// VERILOG-EVAL: endmodule not found

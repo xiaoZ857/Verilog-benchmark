@@ -1,0 +1,39 @@
+Here's an implementation of the Verilog module for the decade counter:
+
+```verilog
+// Define the module parameters
+parameter COUNT = 10;
+parameter PERIOD = 10;
+
+// Define the module inputs and outputs
+input clk, reset;
+output reg [3:0] q;
+
+// Define the internal signals
+reg [COUNT-1:0] count; // The counter value
+
+// Module implementation
+always @(posedge clk) begin
+    if (reset) begin
+        count <= COUNT'1;
+    end else begin
+        count <= count + 1;
+        if (count == COUNT) begin
+            count <= COUNT'1;
+        end
+    end
+end
+
+assign q = count[3:0];
+
+// Module instantiation
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+```
+
+This module uses a counter to increment the value from 0 through 9, inclusive. The `count` signal is incremented on each positive edge of the clock, and when it reaches the maximum value (`COUNT-1`), it wraps around to 0.
+
+The `q` output is assigned the lower 4 bits of the `count` signal, effectively giving us a 4-bit counter that counts from 0 through 9. The `reset` input is used to reset the counter to 0 when active high.

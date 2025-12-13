@@ -1,0 +1,33 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+always @(posedge clk) begin
+  for (int i = 0; i < 8; i++) begin
+    if ((in[i] && ~prev_in[i]) || (!in[i] && prev_in[i])) begin
+      anyedge[i] <= 1'b1;
+    end
+    prev_in[i] <= in[i];
+  end
+end
+
+reg [7:0] prev_in;
+
+// Initialize previous input values
+always_comb begin
+  prev_in = 8'b0;
+end
+
+endmodule
+```
+
+This code creates a Verilog module named `TopModule`. It has an 8-bit input vector `in`, a clock signal `clk`, and an 8-bit output vector `anyedge`. The module uses an always block triggered at the positive edge of the clock to check for changes in each bit of the input vector.
+
+The `prev_in` register is used to store the previous values of the input bits, allowing us to detect transitions from one clock cycle to the next. If a transition occurs (either 0 to 1 or 1 to 0), the corresponding output bit is set to 1.
+
+Finally, an always_comb block initializes the `prev_in` register with all zeros when the design is first synthesized.

@@ -1,0 +1,13 @@
+always @(posedge clk) begin
+  case (y)
+    3'b000 : Y2 <= w; // A -> B transition
+    3'b001 : Y2 <= y[0]; // A -> A transition
+    3'b010 : Y2 <= 0'b0; // B -> C transition
+    3'b011 : Y2 <= 0'b1; // B -> D transition
+    3'b100 : Y2 <= 0'b0; // C -> E transition
+    3'b101 : Y2 <= y[0]; // C -> D transition
+    3'b110 : Y2 <= 0'b0; // D -> F transition
+    3'b111 : Y2 <= y[0]; // D -> A transition
+    default: Y2 <= 3'bx; // Unknown state, set to an undefined value
+  endcase
+end

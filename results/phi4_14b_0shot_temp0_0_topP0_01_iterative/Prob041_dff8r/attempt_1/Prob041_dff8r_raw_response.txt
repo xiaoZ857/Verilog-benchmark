@@ -1,0 +1,46 @@
+To implement a Verilog module with 8 D flip-flops, each having an active high synchronous reset that sets the output to zero on the positive edge of `clk`, you can use the following code. Each flip-flop will be triggered by the positive edge of `clk` and will have its own reset condition.
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  // Declare internal registers for each D flip-flop
+  reg [7:0] ff;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      // Synchronous reset: set all outputs to zero
+      ff <= 8'b00000000;
+    end else begin
+      // On positive edge of clock, load input d into flip-flops
+      ff <= d;
+    end
+  end
+
+  // Assign the internal register values to output
+  always @(*) begin
+    q = ff;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Declaration**: The module `TopModule` is declared with inputs `clk`, `d[7:0]`, and `reset`, and an output `q[7:0]`.
+
+2. **Internal Register**: An internal register `ff[7:0]` is used to hold the state of each D flip-flop.
+
+3. **Always Block for Flip-Flops**:
+   - The block is sensitive to both the positive edge of `clk` and the positive edge of `reset`.
+   - If `reset` is high, all bits in `ff` are set to zero.
+   - Otherwise, on each positive clock edge, the value of `d` is loaded into `ff`.
+
+4. **Output Assignment**:
+   - The output `q` is continuously assigned the value of `ff`, ensuring that changes in `ff` reflect immediately in `q`.
+
+This design ensures synchronous reset behavior and proper data loading on the rising edge of the clock signal.

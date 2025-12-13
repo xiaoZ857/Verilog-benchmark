@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_1\Prob155_lemmings4_code.sv:80: error: Unable to bind wire/reg/memory `SPLITTER' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_1\Prob155_lemmings4_code.sv:118: error: Unable to bind wire/reg/memory `SPLITTER' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob155_lemmings4\attempt_1\Prob155_lemmings4_code.sv:118: error: Unable to elaborate condition expression.
+3 error(s) during elaboration.

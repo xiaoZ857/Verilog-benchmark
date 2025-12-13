@@ -1,0 +1,21 @@
+To implement a 2-input NOR gate in Verilog, you need to create a module that takes two inputs and produces an output. The output of a NOR gate is true only when both inputs are false. Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // Implement the 2-input NOR gate functionality
+  assign out = ~(in1 | in2);
+
+endmodule
+```
+
+### Explanation:
+- **Inputs**: `in1` and `in2` are the two inputs to the NOR gate.
+- **Output**: `out` is the output of the NOR gate.
+- **Logic**: The expression `~(in1 | in2)` computes the NOR operation. It first performs a logical OR on `in1` and `in2`, then negates the result using the bitwise NOT operator (`~`). This gives the desired NOR functionality.
+
+This module can be instantiated in other Verilog designs to provide 2-input NOR gate behavior.

@@ -1,0 +1,18 @@
+To implement the described circuit in Verilog, we need an AND gate where one input is inverted. The inversion of `in2` can be achieved using the logical NOT operator (`!`). 
+
+Here's how the Verilog module would look:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // The AND operation with in2 inverted due to the bubble
+  assign out = in1 & !in2;
+
+endmodule
+```
+
+This code defines a module where `out` is assigned the result of an AND operation between `in1` and the negated value of `in2`.

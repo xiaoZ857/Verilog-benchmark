@@ -1,0 +1,24 @@
+
+// TopModule.v
+// Simple D‑flip‑flop with active‑high synchronous reset
+//   r = 1  →  q is reset to 0 on the next rising edge of clk
+//   r = 0  →  q follows the input d on the next rising edge of clk
+
+module TopModule (
+    input  logic clk,   // Clock input (positive‑edge triggered)
+    input  logic d,     // Data input
+    input  logic r,     // Active‑high synchronous reset
+    output logic q      // Flip‑flop output
+);
+
+    // Synchronous logic: update q on the rising edge of clk
+    always_ff @(posedge clk) begin
+        if (r)          // Reset is asserted
+            q <= 1'b0;  // Drive output low
+        else
+            q <= d;     // Normal D‑FF behavior
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

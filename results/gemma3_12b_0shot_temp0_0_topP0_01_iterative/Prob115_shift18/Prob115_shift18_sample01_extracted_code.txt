@@ -1,0 +1,20 @@
+  reg [63:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      shift_reg <= data;
+    end else if (ena) begin
+      case (amount)
+        2'b00: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift left by 1
+        2'b01: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift left by 8 (same as left by 1 repeated 8 times)
+        2'b10: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift right by 1 (arithmetic)
+        2'b11: shift_reg <= {shift_reg[62:0], 1'b0}; // Shift right by 8 (arithmetic)
+        default: shift_reg <= shift_reg; // No shift
+      endcase
+    end else begin
+      shift_reg <= shift_reg; // Hold value
+    end
+  end
+
+  assign q = shift_reg;
+endmodule

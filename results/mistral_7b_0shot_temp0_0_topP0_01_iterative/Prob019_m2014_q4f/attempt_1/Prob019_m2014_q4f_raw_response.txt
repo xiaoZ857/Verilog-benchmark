@@ -1,0 +1,22 @@
+ Here's the Verilog code for the described circuit:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// Create a temporary variable to hold the inverted value of in2
+logic temp;
+
+// AND gate with bubble on in2 input
+assign out = in1 & !temp;
+
+// Invert the in2 signal and assign it to the temporary variable
+assign temp = ~in2;
+
+endmodule
+```
+
+In this code, we first create a temporary variable `temp` to hold the inverted value of the input `in2`. Then, we define an assignment for the output `out`, which is the result of ANDing the inputs `in1` and the inverted `temp` (i.e., the bubble). Finally, we assign the original `in2` signal to the temporary variable `temp`. This implementation ensures that the bubble on the input `in2` is correctly represented in the Verilog code.

@@ -1,0 +1,56 @@
+To implement a dual-edge triggered flip-flop using standard FPGA components, we can use two separate single-edge triggered flip-flops and some logic to combine their outputs. The idea is to capture the input `d` on both the rising and falling edges of the clock and then update the output `q`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  // Internal registers to hold intermediate values
+  reg pos_edge_capture;
+  reg neg_edge_capture;
+
+  always @(posedge clk) begin
+    // Capture the input on the rising edge of the clock
+    pos_edge_capture <= d;
+  end
+
+  always @(negedge clk) begin
+    // Capture the input on the falling edge of the clock
+    neg_edge_capture <= d;
+  end
+
+  always @(posedge clk or negedge clk) begin
+    if (clk) begin
+      // On rising edge, update q with the value captured on the last rising edge
+      q <= pos_edge_capture;
+    end else begin
+      // On falling edge, update q with the value captured on the last falling edge
+      q <= neg_edge_capture;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Intermediate Registers**: 
+   - `pos_edge_capture` is used to store the input `d` when a rising edge of the clock occurs.
+   - `neg_edge_capture` is used to store the input `d` when a falling edge of the clock occurs.
+
+2. **Rising Edge Logic**:
+   - On every positive edge of the clock, the value of `d` is captured into `pos_edge_capture`.
+
+3. **Falling Edge Logic**:
+   - On every negative edge of the clock, the value of `d` is captured into `neg_edge_capture`.
+
+4. **Output Update Logic**:
+   - The output `q` is updated on both edges of the clock.
+   - On a rising edge, `q` takes the value from `pos_edge_capture`.
+   - On a falling edge, `q` takes the value from `neg_edge_capture`.
+
+This design effectively simulates a dual-edge triggered flip-flop using two single-edge triggered flip-flops and some combinational logic.

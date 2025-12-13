@@ -1,0 +1,63 @@
+To implement the Verilog module for the given state machine using one-hot encoding, we need to derive the logic equations for `Y2` and `Y4`, which correspond to `y[2]` and `y[4]`. The state transitions are based on the current state (`y`) and input signal (`w`). Let's analyze each transition:
+
+### State Encoding:
+- A: 000001
+- B: 000010
+- C: 000100
+- D: 001000
+- E: 010000
+- F: 100000
+
+### Transitions:
+1. **A (0) --0--> B**: `y[1] = 1`, `w = 0` → `Y2 = y[1] & ~w`
+2. **A (0) --1--> A**: `y[1] = 1`, `w = 1` → No change in `Y2` or `Y4`
+3. **B (0) --0--> C**: `y[2] = 1`, `w = 0` → `Y4 = y[2] & ~w`
+4. **B (0) --1--> D**: `y[2] = 1`, `w = 1` → No change in `Y2` or `Y4`
+5. **C (0) --0--> E**: `y[3] = 1`, `w = 0` → No change in `Y2` or `Y4`
+6. **C (0) --1--> D**: `y[3] = 1`, `w = 1` → No change in `Y2` or `Y4`
+7. **D (0) --0--> F**: `y[4] = 1`, `w = 0` → `Y4 = y[4] & ~w`
+8. **D (0) --1--> A**: `y[4] = 1`, `w = 1` → No change in `Y2` or `Y4`
+9. **E (1) --0--> E**: `y[5] = 1`, `w = 0` → No change in `Y2` or `Y4`
+10. **E (1) --1--> D**: `y[5] = 1`, `w = 1` → No change in `Y2` or `Y4`
+11. **F (1) --0--> C**: `y[6] = 1`, `w = 0` → No change in `Y2` or `Y4`
+12. **F (1) --1--> D**: `y[6] = 1`, `w = 1` → No change in `Y2` or `Y4`
+
+### Logic Equations:
+- **Y2** is set when transitioning from A to B:  
+  \[
+  Y2 = y[1] \cdot \overline{w}
+  \]
+
+- **Y4** is set when transitioning from B to C and D to F:  
+  \[
+  Y4 = (y[2] \cdot \overline{w}) + (y[4] \cdot \overline{w})
+  \]
+
+### Verilog Implementation:
+```verilog
+module TopModule (
+    input [6:1] y,
+    input w,
+    output reg Y2,
+    output reg Y4
+);
+
+always @(*) begin
+    // Default values for next state signals
+    Y2 = 0;
+    Y4 = 0;
+
+    // Logic for Y2 and Y4 based on current state and input
+    if (y[1] && ~w) begin
+        Y2 = 1; // Transition A to B
+    end
+
+    if ((y[2] && ~w) || (y[4] && ~w)) begin
+        Y4 = 1; // Transition B to C or D to F
+    end
+end
+
+endmodule
+```
+
+This Verilog module captures the logic for determining `Y2` and `Y4` based on the current state and input, using one-hot encoding.

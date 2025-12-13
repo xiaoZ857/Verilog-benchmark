@@ -1,0 +1,34 @@
+// TopModule.v
+// -------------
+//  Two‑layer combinational logic:
+//      Layer 1 :  a AND b   →  and1_out
+//                 c AND d   →  and2_out
+//      Layer 2 :  and1_out OR and2_out  →  out
+//                 NOT out  →  out_n
+//
+//  All signals are positive‑edge triggered only if a clock is added
+//  (not needed for this purely combinational circuit).
+
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire c,
+    input  wire d,
+    output wire out,
+    output wire out_n
+);
+
+    // ---------- Layer 1 ----------
+    wire and1_out;   // output of a AND b
+    wire and2_out;   // output of c AND d
+
+    and u_and1 (and1_out, a, b);   // a & b
+    and u_and2 (and2_out, c, d);   // c & d
+
+    // ---------- Layer 2 ----------
+    or  u_or (out, and1_out, and2_out);   // (a & b) | (c & d)
+
+    // Inverted output
+    not u_not (out_n, out);
+
+endmodule

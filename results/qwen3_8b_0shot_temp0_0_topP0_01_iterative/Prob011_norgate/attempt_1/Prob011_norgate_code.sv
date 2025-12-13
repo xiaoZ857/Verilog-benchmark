@@ -1,0 +1,12 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+assign out = a nor b;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,46 @@
+Here's the implementation of a 2-input NOR gate in Verilog using SystemVerilog syntax, as indicated by the use of `logic` for the output:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+assign out = ~(in1 | in2);
+
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Inputs**: `in1` and `in2` are the two inputs to the NOR gate.
+- **Output**: `out` is the output of the NOR gate, declared as a `logic` type (which is equivalent to a `wire` in Verilog).
+- **Logic**: The output is computed using the expression `~(in1 | in2)`, which:
+  - First computes the logical OR of `in1` and `in2` using `|`.
+  - Then inverts the result using the bitwise NOT operator `~`, which is the standard way to implement a NOR gate.
+
+---
+
+### Truth Table Verification:
+
+| in1 | in2 | out |
+|-----|-----|-----|
+| 0   | 0   | 1   |
+| 0   | 1   | 0   |
+| 1   | 0   | 0   |
+| 1   | 1   | 0   |
+
+This matches the expected behavior of a 2-input NOR gate.
+
+---
+
+### Notes:
+
+- The module is **combinational**, so no clock or sequential logic is involved.
+- The `assign` statement is used for continuous assignment, which is appropriate for this type of logic.
+- The use of `logic` for the output is valid in SystemVerilog and is equivalent to a `wire` in traditional Verilog.
+
+This implementation is both concise and correct for the given specification.

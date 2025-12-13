@@ -1,0 +1,55 @@
+Here's an implementation of the Verilog module as described:
+
+```verilog
+// Define the module parameters and inputs
+module TopModule (
+  input clk, // Positive clock signal
+  input a,    // Input signal A
+  input b,    // Input signal B
+  output out_assign, // Output using assign statement
+  output reg out_always_comb, // Output using combinational always block
+  output reg out_always_ff   // Output using clocked always block with flip-flop
+);
+
+// Implement the XOR gate using an assign statement (output out_assign)
+assign out_assign = a ^ b;
+
+// Implement the XOR gate using a combinational always block (output out_always_comb)
+always @(*) begin
+  out_always_comb = a ^ b;
+end
+
+// Implement the XOR gate using a clocked always block with flip-flop (output out_always_ff)
+reg [1:0] out_always_ff;
+
+always @(posedge clk) begin
+  if (a == 1 && b == 1) begin // Reset condition
+    out_always_ff <= 0;
+  end else if (a == 1 || b == 1) begin // Set condition
+    out_always_ff <= 1;
+  end else begin // Clear condition
+    out_always_ff <= 0;
+  end
+end
+
+// Instantiate the module
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+// Assign outputs to instance variables
+assign out_assign = TopModule::out_assign;
+reg TopModule::out_always_comb;
+reg TopModule::out_always_ff;
+
+endmodule // End of module definition
+```
+
+Note that the clocked always block with flip-flop produces a different circuit from the other two. The output is delayed by one clock cycle due to the flip-flop, which can be useful in certain applications where the output needs to be stable for at least one clock cycle after the input changes.
+
+Also note that the `assign` statement is used to create an output that is directly connected to a signal, while the `always @(*)` block and the `reg` variable are used to implement a combinational logic circuit. The `posedge clk` condition in the `always @(posedge clk)` block ensures that the flip-flop is updated only when the clock signal changes from low to high (i.e., on the rising edge of the clock).

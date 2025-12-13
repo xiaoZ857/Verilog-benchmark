@@ -1,0 +1,41 @@
+module TopModule (
+    input clk, // Assuming a positive clock edge
+    input in,
+    output reg [9:0] next_state,
+    output reg out1,
+    output reg out2
+);
+
+// State transition logic
+reg [9:0] state_next;
+assign next_state = state;
+
+always @(posedge clk) begin
+    if (in == 0) begin // Falling edge
+        for (int i = 0; i <= 9; i++) begin
+            if (state[i] == 1) begin
+                state_next[i] = 0;
+            end else if (i < 5 && state[4-i] == 1) begin
+                state_next[i] = 1;
+            end else if (i >= 5 && state[9-i] == 1) begin
+                state_next[i] = 1;
+            end
+        end
+    end else if (in == 1) begin // Rising edge
+        for (int i = 0; i <= 9; i++) begin
+            if (state[i] == 1) begin
+                state_next[i] = 0;
+            end else if (i < 5 && state[4-i] == 0) begin
+                state_next[i] = 1;
+            end else if (i >= 5 && state[9-i] == 0) begin
+                state_next[i] = 1;
+            end
+        end
+    end
+end
+
+// Output logic
+assign out1 = state_next[4];
+assign out2 = state_next[8];
+
+endmodule

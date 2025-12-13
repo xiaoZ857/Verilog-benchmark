@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob115_shift18",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 3132 mismatches. First mismatch occurred at time 30.\nHint: Total mismatched samples is 3132 out of 4041 samples\n\nSimulation finished at 20206 ps\nMismatches: 3132 in 4041 samples\n",
+      "mismatch_count": 3132
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 3150 mismatches. First mismatch occurred at time 30.\nHint: Total mismatched samples is 3150 out of 4041 samples\n\nSimulation finished at 20206 ps\nMismatches: 3150 in 4041 samples\n",
+      "mismatch_count": 3150
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 7\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob115_shift18\\attempt_3\\Prob115_shift18_code.sv:10: syntax error\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob115_shift18\\attempt_3\\Prob115_shift18_code.sv:12: error: invalid module item.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob115_shift18\\attempt_3\\Prob115_shift18_code.sv:13: syntax error\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob115_shift18\\attempt_3\\Prob115_shift18_code.sv:17: error: invalid module item.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob115_shift18\\attempt_3\\Prob115_shift18_code.sv:18: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob115_shift18_test.sv:14: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 3094 mismatches. First mismatch occurred at time 30.\nHint: Total mismatched samples is 3094 out of 4041 samples\n\nSimulation finished at 20206 ps\nMismatches: 3094 in 4041 samples\n",
+      "mismatch_count": 3094
+    }
+  ]
+}

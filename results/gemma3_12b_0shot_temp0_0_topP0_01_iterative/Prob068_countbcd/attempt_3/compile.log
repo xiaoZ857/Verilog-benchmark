@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:75: sorry: part selects straddling the start of signal (ena['sd0]) are not currently supported.
+1 error(s) during elaboration.

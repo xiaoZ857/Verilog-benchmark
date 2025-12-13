@@ -1,0 +1,119 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+  reg [2:0] state, next_state;
+  reg [1:0] x_history;
+  reg [1:0] y_timer;
+  reg f_reg, g_reg;
+  
+  localparam A = 3'd0,
+             B = 3'd1,
+             C = 3'd2,
+             D = 3'd3,
+             E = 3'd4,
+             F = 3'd5;
+  
+  // State register
+  always @(posedge clk) begin
+    if (!resetn)
+      state <= A;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      A: next_state = resetn ? B : A;
+      B: next_state = C;
+      C: begin
+        if (x_history == 2'b01 && x == 1'b1)
+          next_state = D;
+        else
+          next_state = C;
+      end
+      D: begin
+        if (y == 1'b1)
+          next_state = E;
+        else if (y_timer == 2'd0)
+          next_state = F;
+        else
+          next_state = D;
+      end
+      E: next_state = E;
+      F: next_state = F;
+      default: next_state = A;
+    endcase
+  end
+  
+  // x history shift register
+  always @(posedge clk) begin
+    if (!resetn)
+      x_history <= 2'b00;
+    else if (state == C)
+      x_history <= {x_history[0], x};
+    else
+      x_history <= 2'b00;
+  end
+  
+  // y timer (counts down from 2 in state D)
+  always @(posedge clk) begin
+    if (!resetn)
+      y_timer <= 2'd2;
+    else if (state == D) begin
+      if (y == 1'b1)
+        y_timer <= 2'd2;
+      else if (y_timer != 2'd0)
+        y_timer <= y_timer - 1'b1;
+    end else
+      y_timer <= 2'd2;
+  end
+  
+  // Output logic
+  always @(posedge clk) begin
+    if (!resetn) begin
+      f_reg <= 1'b0;
+      g_reg <= 1'b0;
+    end else begin
+      case (state)
+        A: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        B: begin
+          f_reg <= 1'b1;
+          g_reg <= 1'b0;
+        end
+        C: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        D: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b1;
+        end
+        E: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b1;
+        end
+        F: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+        default: begin
+          f_reg <= 1'b0;
+          g_reg <= 1'b0;
+        end
+      endcase
+    end
+  end
+  
+  assign f = f_reg;
+  assign g = g_reg;
+endmodule

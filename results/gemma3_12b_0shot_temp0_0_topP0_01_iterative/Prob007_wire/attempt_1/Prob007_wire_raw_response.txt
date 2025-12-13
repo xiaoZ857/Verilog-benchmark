@@ -1,0 +1,20 @@
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+
+  assign out = in;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input in, output out);`**: This line declares the module named `TopModule` and defines its input (`in`) and output (`out`) ports.
+* **`assign out = in;`**: This is the core of the module.  The `assign` statement is a continuous assignment statement. It means that the value of `out` is *always* equal to the value of `in`.  Whenever `in` changes, `out` will immediately reflect that change.  This effectively makes `out` behave like a wire connected directly to `in`.
+* **`endmodule`**: This line marks the end of the module definition.
+
+**How it works as a wire:**
+
+A wire in Verilog is a signal that simply passes a value from one place to another.  This module does exactly that: it takes the value from the `in` signal and passes it directly to the `out` signal.  There's no logic or processing involved.  It's a direct connection.

@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob142_lemmings2",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 243 mismatches. First mismatch occurred at time 140.\nHint: Output 'walk_right' has 246 mismatches. First mismatch occurred at time 150.\nHint: Output 'aaah' has 169 mismatches. First mismatch occurred at time 140.\nHint: Total mismatched samples is 329 out of 441 samples\n\nSimulation finished at 2206 ps\nMismatches: 329 in 441 samples\n",
+      "mismatch_count": 329
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 281 mismatches. First mismatch occurred at time 150.\nHint: Output 'walk_right' has 287 mismatches. First mismatch occurred at time 150.\nHint: Output 'aaah' has 62 mismatches. First mismatch occurred at time 190.\nHint: Total mismatched samples is 315 out of 441 samples\n\nSimulation finished at 2206 ps\nMismatches: 315 in 441 samples\n",
+      "mismatch_count": 315
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 10\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:14: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:15: error: Could not find variable ``previous_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:17: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:18: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:18: error: Unable to bind wire/reg/memory `FALLING' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:18: error: Unable to elaborate condition expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:28: error: walk_left is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:29: error: walk_right is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:30: error: aaah is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:32: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:32: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_3\\Prob142_lemmings2_code.sv:26: warning: always_comb process has no sensitivities.\n10 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 7\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:14: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:15: error: Could not find variable ``previous_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:17: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:17: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:38: error: walk_left is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:39: error: walk_right is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:40: error: aaah is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:42: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:42: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob142_lemmings2\\attempt_4\\Prob142_lemmings2_code.sv:36: warning: always_comb process has no sensitivities.\n7 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

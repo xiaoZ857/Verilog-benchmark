@@ -1,0 +1,63 @@
+
+// Define the module parameters
+module TopModule (
+  // Input clock and reset signals
+  input clk,
+  input reset,
+
+  // Output enable signal for upper digits
+  output [3:1] ena,
+
+  // Output BCD value
+  output reg [15:0] q
+);
+
+// Define the internal registers
+reg [7:4] tens;
+reg [3:0] ones;
+
+// Initialize the counters to zero
+initial begin
+  tens = 8'd0000; // 0000 in BCD
+  ones = 8'd0000; // 0000 in BCD
+end
+
+// Define the state machine for the counter
+always @(posedge clk) begin
+  if (reset) begin
+    tens <= 8'd0000;
+    ones <= 8'd0000;
+  end else begin
+    // Increment the ones digit
+    if (ones == 8'd9999) begin
+      ones <= 8'd0000;
+      tens <= tens + 1;
+    end else begin
+      ones <= ones + 1;
+    end
+
+    // Enable upper digits when necessary
+    ena[2] = (tens > 7'd7777);
+    ena[1] = (tens > 7'd7776);
+    ena[0] = (tens > 7'd7775);
+
+    // Shift the tens digit to the ones place
+    if (ones == 8'd0000) begin
+      tens <= tens + 1;
+    end else begin
+      tens <= tens - 1;
+    end
+
+    // Ensure tens digit is within valid range
+    if (tens < 8'd0000) begin
+      tens <= 8'd7777;
+    end
+  end
+end
+
+// Assign the output BCD value to q
+assign q = {tens[7:4], ones[3:0]};
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

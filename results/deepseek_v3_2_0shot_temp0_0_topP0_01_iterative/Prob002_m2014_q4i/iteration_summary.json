@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob002_m2014_q4i",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob002_m2014_q4i\\attempt_1\\Prob002_m2014_q4i_code.sv:5: syntax error\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob002_m2014_q4i\\attempt_1\\Prob002_m2014_q4i_code.sv:5: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob002_m2014_q4i\\attempt_2\\Prob002_m2014_q4i_code.sv:5: syntax error\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob002_m2014_q4i\\attempt_2\\Prob002_m2014_q4i_code.sv:5: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob002_m2014_q4i\\attempt_3\\Prob002_m2014_q4i_code.sv:5: syntax error\nresults/deepseek_v3_2_0shot_temp0_0_topP0_01_iterative\\Prob002_m2014_q4i\\attempt_3\\Prob002_m2014_q4i_code.sv:5: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

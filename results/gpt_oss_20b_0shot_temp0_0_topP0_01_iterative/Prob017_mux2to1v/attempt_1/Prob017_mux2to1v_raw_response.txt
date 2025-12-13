@@ -1,0 +1,36 @@
+Below is a clean, synthesizable implementation of the 2‑to‑1 multiplexer described.  
+Because no clock is mentioned, the logic is purely combinational – the output follows the inputs immediately.
+
+```verilog
+// ------------------------------------------------------------
+//  2‑to‑1 Multiplexer (100‑bit wide)
+//  When sel = 0 → out = a
+//  When sel = 1 → out = b
+// ------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [99:0] a,   // First 100‑bit input
+    input  wire [99:0] b,   // Second 100‑bit input
+    input  wire        sel, // Select signal
+    output wire [99:0] out  // 100‑bit output
+);
+
+    // Combinational assignment – synthesizable
+    assign out = sel ? b : a;
+
+    // Alternative (always @* block) – equivalent
+    // always @* begin
+    //     if (sel)
+    //         out = b;
+    //     else
+    //         out = a;
+    // end
+
+endmodule
+```
+
+### Notes
+* **Combinational logic** – The `assign` statement ensures that `out` changes immediately when `a`, `b`, or `sel` change.
+* **Synthesis‑friendly** – The ternary operator (`? :`) is widely supported by synthesis tools and results in a simple multiplexer gate.
+* **Testbench** – If you want to verify the module, instantiate it in a testbench and drive `a`, `b`, and `sel` with various values while observing `out`.

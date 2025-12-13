@@ -1,0 +1,32 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output reg out
+);
+
+reg [1:0] state;
+
+always @(posedge clk) begin
+    // State transition table
+    case(state)
+        state = 2'b00 : out = 1'b0;
+        state = 2'b01 : out = 1'b1;
+        state = 2'b11 : out = 1'b0;
+        state = 2'b10 : out = 1'b1;
+        default: out = 1'b0; // reset to 0
+    endcase
+
+    // State update logic
+    if (a && b) state = 2'b01;
+    else if (!a && !b) state = 2'b00;
+    else if (c && d) state = 2'b11;
+    else if (!c && !d) state = 2'b10;
+
+end
+
+// Add a clock signal to the module
+always @(posedge clk) clk <= ~clk;
+
+endmodule

@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob084_ece241_2013_q12\attempt_2\Prob084_ece241_2013_q12_code.sv:30: error: 'Z' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob084_ece241_2013_q12\attempt_2\Prob084_ece241_2013_q12_code.sv:9:      : It was declared here as a variable.

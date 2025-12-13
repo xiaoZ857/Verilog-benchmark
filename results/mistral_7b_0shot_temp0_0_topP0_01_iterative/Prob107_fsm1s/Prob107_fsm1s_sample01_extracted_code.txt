@@ -1,0 +1,29 @@
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    out <= 1'b1; // Reset to B state and output is set to 1
+    current_state <= 1'b0; // Current state is B
+  end else begin
+    case (current_state)
+      1'b0: begin
+        if (in == 1) begin
+          out <= 1'b1; // Transition from B to A on input '1' and output is set to 1
+          current_state <= 1'b1; // Current state is now A
+        end else begin
+          out <= 1'b1; // In B state, input '0', output remains 1
+        end
+      end
+      1'b1: begin
+        if (in == 0) begin
+          out <= 1'b0; // Transition from A to B on input '0' and output is set to 0
+          current_state <= 1'b0; // Current state is now B
+        end else begin
+          out <= 1'b1; // In A state, input '1', output remains 1
+        end
+      end
+    endcase
+  end
+end
+
+assign out = tb.top_module1.out; // Assign the output to the top-level module's output
+
+endmodule

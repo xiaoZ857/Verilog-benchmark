@@ -1,0 +1,24 @@
+Here’s a minimal, synthesizable Verilog implementation of the 2‑to‑1 multiplexer described:
+
+```verilog
+// 2‑to‑1 one‑bit multiplexer
+// When sel = 0 → out = a
+// When sel = 1 → out = b
+module TopModule (
+    input  wire a,    // first data input
+    input  wire b,    // second data input
+    input  wire sel,  // select line
+    output wire out   // selected output
+);
+
+    // Combinational assignment – no clock needed
+    assign out = sel ? b : a;
+
+endmodule
+```
+
+**Explanation**
+
+* `wire` is the default net type for inputs/outputs, so it’s optional but added for clarity.
+* The `assign` statement implements the combinational logic: if `sel` is high, `b` is routed to `out`; otherwise `a` is routed.
+* No clock or `always` block is required because the multiplexer is purely combinational.

@@ -1,0 +1,20 @@
+ Here is the Verilog code for the module you described:
+
+```verilog
+module TopModule (
+  input [2:0] vec,
+  output reg [2:0] outv,
+  output reg o2,
+  output reg o1,
+  output reg o0
+);
+
+always @(posedge clk) begin
+  outv <= vec; // Assign the same vector to output register outv
+  o0 <= vec[0]; // Assign the first bit of input vector to output o0
+  o1 <= vec[1]; // Assign the second bit of input vector to output o1
+  o2 <= vec[2]; // Assign the third bit of input vector to output o2
+end
+```
+
+This Verilog code defines a module named `TopModule` with a 3-bit input `vec`, and separate outputs for the same 3-bit vector (`outv`) and each individual bit from the input vector (`o0`, `o1`, and `o2`). The circuit is positive edge-triggered on the clock signal `clk`. Inside the always block, the output register `outv` is assigned the same value as the input vector `vec`, while the individual outputs are directly assigned their respective bits from the input vector.

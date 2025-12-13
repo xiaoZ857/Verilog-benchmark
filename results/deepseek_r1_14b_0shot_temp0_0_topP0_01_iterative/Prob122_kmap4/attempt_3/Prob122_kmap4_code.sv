@@ -1,0 +1,16 @@
+
+`timescale 1ns / 1ps
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out
+);
+
+  assign out = (c ^ d) & (a ^ b);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

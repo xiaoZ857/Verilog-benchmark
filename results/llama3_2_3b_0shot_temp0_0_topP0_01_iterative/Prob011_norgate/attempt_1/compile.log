@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob011_norgate\attempt_1\Prob011_norgate_code.sv:8: error: port a already has a port declaration.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob011_norgate\attempt_1\Prob011_norgate_code.sv:3: error: Port ``a'' has already been declared a port.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob011_norgate\attempt_1\Prob011_norgate_code.sv:8: error: port b already has a port declaration.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob011_norgate\attempt_1\Prob011_norgate_code.sv:4: error: Port ``b'' has already been declared a port.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob011_norgate\attempt_1\Prob011_norgate_code.sv:9: error: port out already has a port declaration.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob011_norgate\attempt_1\Prob011_norgate_code.sv:5: error: Port ``out'' has already been declared a port.

@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:11: error: done is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:6:      : done is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:12: error: Could not find variable ``bit_counter'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:15: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:15: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:58: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:61: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:61: error: Unable to bind wire/reg/memory `STOP_BIT' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:61: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:68: error: Could not find variable ``next_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:70: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:70: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob137_fsm_serial\attempt_4\Prob137_fsm_serial_code.sv:67: warning: always_comb process has no sensitivities.
+10 error(s) during elaboration.

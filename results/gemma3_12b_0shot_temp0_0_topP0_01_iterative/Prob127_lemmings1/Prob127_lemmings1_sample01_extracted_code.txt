@@ -1,0 +1,36 @@
+  // Define the states
+  parameter LEFT = 2'b00
+  parameter RIGHT = 2'b01
+
+  // Declare the state register
+  reg [1:0] current_state;
+
+  // Assign the outputs based on the current state
+  always @(current_state) begin
+    walk_left  = current_state == LEFT;
+    walk_right = current_state == RIGHT;
+  end
+
+  // Synchronous logic for state transitions
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= LEFT;
+    end else begin
+      if (bump_left && bump_right) begin
+        // Bumped on both sides, switch direction
+        if (current_state == LEFT) begin
+          current_state <= RIGHT;
+        end else begin
+          current_state <= LEFT;
+        end
+      end else if (bump_left) begin
+        // Bumped on the left, walk right
+        current_state <= RIGHT;
+      end else if (bump_right) begin
+        // Bumped on the right, walk left
+        current_state <= LEFT;
+      end
+    end
+  end
+
+endmodule

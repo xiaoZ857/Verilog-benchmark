@@ -1,0 +1,35 @@
+
+module TopModule (
+  input sel,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out
+);
+module top_module (
+    input sel,
+    input [7:0] a,
+    input [7:0] b,
+    output [7:0] out
+);
+
+    assign out = (~sel) ? a : b;
+
+endmodule
+
+module TopModule (
+  input sel,
+  input [7:0] a,
+  input [7:0] b,
+  output reg [7:0] out
+);
+
+  always @(*) begin
+      if (sel)
+          out = b;
+      else
+          out = a;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,42 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q
+);
+
+  always @(posedge clk) begin
+    if (j == 0 && k == 0) begin
+      Q <= Q; // No change
+    end else if (j == 0 && k == 1) begin
+      Q <= 0;
+    end else if (j == 1 && k == 0) begin
+      Q <= 1;
+    end else begin // j == 1 && k == 1
+      Q <= ~Q;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... )`**:  Defines the module named `TopModule` with the specified input and output ports.
+* **`input clk, j, k;`**: Declares `clk`, `j`, and `k` as input signals.
+* **`output reg Q;`**: Declares `Q` as an output signal and also declares it as a `reg`.  `reg` is necessary because `Q` is assigned a value within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This is a sequential block that executes on the positive edge of the clock signal (`clk`).  This is crucial for synchronous logic.
+* **`if (j == 0 && k == 0) begin Q <= Q; end`**:  If both `j` and `k` are 0, the output `Q` retains its previous value (`Qold`).  The `<=` operator is used for non-blocking assignment within `always` blocks, which is essential for correct sequential logic.
+* **`else if (j == 0 && k == 1) begin Q <= 0; end`**: If `j` is 0 and `k` is 1, the output `Q` is set to 0.
+* **`else if (j == 1 && k == 0) begin Q <= 1; end`**: If `j` is 1 and `k` is 0, the output `Q` is set to 1.
+* **`else begin Q <= ~Q; end`**: If both `j` and `k` are 1, the output `Q` is toggled (inverted).  `~Q` represents the logical inverse of `Q`.
+
+**Key Concepts:**
+
+* **Synchronous Logic:** The flip-flop's behavior is synchronized to the clock signal.
+* **Positive Edge Triggered:** The flip-flop changes state only on the rising edge of the clock.
+* **Non-Blocking Assignment (`<=`)**:  Within `always @(posedge clk)` blocks, use the non-blocking assignment operator (`<=`) to ensure that all assignments are evaluated at the end of the clock cycle. This prevents race conditions and ensures predictable behavior.
+* **`reg` Data Type:**  `reg` is used to store values that are assigned within an `always` block.
+
+This Verilog code accurately implements the JK flip-flop based on the provided truth table.  It's a fundamental building block for sequential logic circuits.

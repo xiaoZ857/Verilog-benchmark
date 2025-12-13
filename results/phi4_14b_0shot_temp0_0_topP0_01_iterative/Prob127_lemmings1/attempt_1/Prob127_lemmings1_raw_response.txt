@@ -1,0 +1,79 @@
+To implement the described behavior using a Moore state machine in Verilog, we need to define two states: one for walking left and another for walking right. The state transitions are triggered by the inputs `bump_left` and `bump_right`. Additionally, an asynchronous reset (`areset`) will set the initial state to walk left.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output reg walk_left,
+  output reg walk_right
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    WALK_LEFT = 2'b00,
+    WALK_RIGHT = 2'b01
+  } state_t;
+
+  // Internal state register
+  state_t current_state, next_state;
+
+  // Moore machine behavior
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= WALK_LEFT;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    case (current_state)
+      WALK_LEFT: begin
+        if (bump_left || bump_right) begin
+          next_state = WALK_RIGHT;
+        end else begin
+          next_state = WALK_LEFT;
+        end
+      end
+      
+      WALK_RIGHT: begin
+        if (bump_left || bump_right) begin
+          next_state = WALK_LEFT;
+        end else begin
+          next_state = WALK_RIGHT;
+        end
+      end
+
+      default: begin
+        next_state = WALK_LEFT; // Default case to handle unexpected states
+      end
+    endcase
+  end
+
+  // Output logic based on current state (Moore machine)
+  always_comb begin
+    walk_left = (current_state == WALK_LEFT);
+    walk_right = (current_state == WALK_RIGHT);
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We define two states, `WALK_LEFT` and `WALK_RIGHT`, using a 2-bit state type `state_t`.
+
+2. **State Register**: The `current_state` holds the current state of the machine, while `next_state` is used to determine the next state based on inputs.
+
+3. **Asynchronous Reset**: On the positive edge of `areset`, the state is reset to `WALK_LEFT`. This is handled in an always block sensitive to both `clk` and `areset`.
+
+4. **Next State Logic**: The `always_comb` block determines the next state based on the current state and inputs (`bump_left` and `bump_right`). If either bump input is active, the direction switches.
+
+5. **Output Logic**: In a Moore machine, outputs depend only on the current state. Thus, `walk_left` and `walk_right` are set based on whether `current_state` is `WALK_LEFT` or `WALK_RIGHT`.
+
+This implementation captures the behavior of a Lemming switching directions upon encountering obstacles, with an asynchronous reset to initialize its direction.

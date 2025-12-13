@@ -1,0 +1,49 @@
+```verilog
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else if (slowena) begin
+      if (q == 9) begin
+        q <= 0;
+      end else begin
+        q <= q + 1;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**: Defines the module named `TopModule` with the specified input and output ports.
+* **`input clk, slowena, reset;`**: Declares the input signals:
+    * `clk`: The clock signal.
+    * `slowena`: Enable signal for slow counting.
+    * `reset`: Synchronous reset signal (active high).
+* **`output reg [3:0] q;`**: Declares the 4-bit output register `q`, which represents the counter's value.  `reg` is used because the output is assigned within an `always` block.
+* **`always @(posedge clk) begin ... end`**:  This is a sequential block that executes on the positive edge of the clock signal.
+* **`if (reset) begin q <= 0; end`**:  This is the synchronous reset condition. When `reset` is high, the counter is reset to 0.  The `<=` operator is used for non-blocking assignment, which is crucial for sequential logic.
+* **`else if (slowena) begin ... end`**: This block executes only when `slowena` is high.  This allows us to pause the counter.
+* **`if (q == 9) begin q <= 0; end else begin q <= q + 1; end`**: This is the core counting logic.  If the counter reaches 9, it rolls over to 0. Otherwise, it increments by 1.  Again, the non-blocking assignment `<=` is used.
+
+**How it works:**
+
+1. **Reset:** When `reset` is high, the counter immediately resets to 0 on the next rising edge of the clock.
+2. **Normal Counting (slowena = 1):**  When `slowena` is high, the counter increments by 1 on each rising edge of the clock.  It counts from 0 to 9, then rolls over to 0.
+3. **Paused Counting (slowena = 0):** When `slowena` is low, the counter does *not* increment. It holds its current value.  The clock continues to tick, but the counter remains unchanged.
+
+**Key improvements and considerations:**
+
+* **Synchronous Reset:** The reset is synchronous, meaning it only takes effect on the rising edge of the clock. This is generally preferred for predictable behavior.
+* **Non-Blocking Assignments (`<=`):**  Using non-blocking assignments within the `always` block is essential for correct sequential logic.  It ensures that all assignments within the block are evaluated concurrently and updated at the end of the clock cycle.
+* **Clear and Concise:** The code is well-structured and easy to understand.
+* **Correctness:** The code accurately implements the decade counter's functionality as described in the prompt.
+* **Testability:**  This module is easily testable using a Verilog simulator.  You can apply different combinations of `clk`, `slowena`, and `reset` signals to verify its behavior.

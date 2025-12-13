@@ -1,0 +1,20 @@
+Here is the Verilog implementation of a single D flip-flop:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+always @ (posedge clk)
+    q <= d;
+
+endmodule
+```
+
+**Explanation:**
+
+- **Inputs:** The module has two inputs, `clk` (clock) and `d` (data).
+- **Output:** The output is `q`, which is a registered output.
+- **Functionality:** On the positive edge of the clock (`posedge clk`), the value of `d` is assigned to `q`. This captures the D flip-flop behavior where the output follows the input on each rising clock edge.

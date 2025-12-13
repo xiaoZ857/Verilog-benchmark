@@ -1,0 +1,70 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+always @(posedge clk) begin
+  if (areset) begin
+    state <= 0;
+    falling <= 0;
+    digging_state <= 0;
+    splattered <= 0;
+    count <= 0;
+  end else begin
+    // Update the timescale directive outside of the module definition
+    `timescale ins/ns /1 ns
+
+    if (ground == 1 && !falling) begin
+      // If the Lemming is on ground and not falling, it can start digging if dig=1
+      if (dig) begin
+        digging_state <= 1;
+      end
+    end else if (ground == 0 && !falling) begin
+      // If the Lemming falls off the ground, it says "aaah!" and starts falling
+      aaah <= 1;
+      falling <= 1;
+      count <= 0;
+    end else if (falling) begin
+      // While falling, the Lemming doesn't change direction or start digging
+      if (count >= 20) begin
+        splattered <= 1;
+        // If the Lemming has fallen for too long, it splatters and stops moving
+        walk_left <= 0;
+        walk_right <= 0;
+        aaah <= 0;
+        digging <= 0;
+      end else begin
+        count <= count + 1;
+      end
+    end else if (bump_left) begin
+      // If the Lemming is bumped on the left, it switches direction
+      state <= ~state;
+    end else if (bump_right) begin
+      // If the Lemming is bumped on the right, it switches direction
+      state <= ~state;
+    end
+
+    // Update outputs based on current state and sub-FSM states
+    walk_left <= state;
+    walk_right <= ~state;
+    aaah <= !falling && (!splattered || falling);
+    digging <= digging_state;
+  end
+end
+
+// State machine variables
+reg [1:0] state; // Current state of the FSM (00: walking left, 01: walking right, 10: falling, 11: digging)
+reg falling; // Is the Lemming currently falling?
+reg [1:0] digging_state; // State of the digging sub-FSM (00: not digging, 01: digging, 10: stopped due to splattering)
+reg splattered; // Has the Lemming splattered?
+reg count; // Counts the number of clock cycles since the last ground change or reset
+
+endmodule

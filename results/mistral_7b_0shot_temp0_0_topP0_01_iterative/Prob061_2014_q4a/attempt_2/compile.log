@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+warning: Found both default and explicit timescale based delays. Use
+       : -Wtimescale to find the design element(s) with no explicit
+       : timescale.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_2\Prob061_2014_q4a_code.sv:16: error: Q Unable to assign to unresolved wires.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_2\Prob061_2014_q4a_code.sv:18: error: Q Unable to assign to unresolved wires.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_2\Prob061_2014_q4a_code.sv:19: error: Q_next is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_2\Prob061_2014_q4a_code.sv:12:      : Q_next is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob061_2014_q4a\attempt_2\Prob061_2014_q4a_code.sv:24: error: Q Unable to assign to unresolved wires.
+4 error(s) during elaboration.

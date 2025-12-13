@@ -1,0 +1,34 @@
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+always @* begin
+  // Reverse the bit order
+  out[99] = in[0];
+  out[98] = in[1];
+  out[97] = in[2];
+  out[96] = in[3];
+  out[95] = in[4];
+  out[94] = in[5];
+  out[93] = in[6];
+  out[92] = in[7];
+  out[91] = in[8];
+  out[90] = in[9];
+  out[89] = in[10];
+  out[88] = in[11];
+  out[87] = in[12];
+  out[86] = in[13];
+  out[85] = in[14];
+  out[84] = in[15];
+  out[83] = in[16];
+  out[82] = in[17];
+  out[81] = in[18];
+  out[80] = in[19];
+  out[79] = in[20];
+  out[78] = in[21];
+  out[77] = in[22];
+  out[76] = in[23];
+  out[75] = in[24];
+  out[74] = in[25];
+ 

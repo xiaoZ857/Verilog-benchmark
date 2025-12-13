@@ -1,0 +1,35 @@
+Here’s a compact, synthesizable implementation that simply reverses the 100‑bit vector.  
+Because the module has no clock input, the operation is purely combinational – the
+output follows the input immediately.
+
+```verilog
+// TopModule.v
+// Reverses the bit ordering of a 100‑bit vector.
+// out[0]  = in[99]
+// out[1]  = in[98]
+// ...
+// out[99] = in[0]
+
+module TopModule (
+    input  wire [99:0] in,   // 100‑bit input
+    output reg  [99:0] out   // 100‑bit output (reversed)
+);
+
+    integer i;               // loop index
+
+    // Combinational logic – no clock required
+    always @* begin
+        for (i = 0; i < 100; i = i + 1) begin
+            out[i] = in[99 - i];
+        end
+    end
+
+endmodule
+```
+
+### How it works
+* The `always @*` block is triggered whenever any signal on the right‑hand side changes (here, `in`).
+* The `for` loop iterates over all 100 bit positions.
+* `out[i]` is assigned the bit from the opposite end of `in` (`in[99-i]`), effectively reversing the order.
+
+This code is synthesizable, works on any FPGA/ASIC target, and respects the convention that signals are positive‑edge triggered unless a clock is explicitly provided (here, none is needed).

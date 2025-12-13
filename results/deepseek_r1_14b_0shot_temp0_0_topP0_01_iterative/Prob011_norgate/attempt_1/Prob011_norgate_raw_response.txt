@@ -1,0 +1,16 @@
+Here is the implementation of a NOR gate in Verilog:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+  
+  // Assign the output to be the negation of (a OR b)
+  assign out = ~(a | b);
+
+endmodule
+```
+
+This code defines a module with two inputs, `a` and `b`, and one output, `out`. The output is assigned the value of the logical OR of `a` and `b`, then inverted using the bitwise NOT operator `~`, resulting in the behavior of a NOR gate.

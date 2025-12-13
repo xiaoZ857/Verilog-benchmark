@@ -1,0 +1,39 @@
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+
+  // Calculate the starting index of the selected input based on the selector.
+  wire [9:0] index;
+  assign index = sel * 4;
+
+  // Select the 4-bit input based on the calculated index.
+  assign out = in[index + 3 : index];
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule ( ... );`**: Defines the module named `TopModule` with the specified input and output ports.
+2. **`input [1023:0] in;`**:  Declares a 1024-bit input signal named `in`. This represents the packed 256 4-bit inputs.
+3. **`input [7:0] sel;`**: Declares an 8-bit input signal named `sel`. This is the selector input.
+4. **`output [3:0] out;`**: Declares a 4-bit output signal named `out`. This is the selected 4-bit output.
+5. **`wire [9:0] index;`**: Declares a 10-bit wire named `index`. This wire will hold the starting index of the selected 4-bit input within the `in` vector.
+6. **`assign index = sel * 4;`**:  This is the core logic.  It calculates the starting index.  Since `sel` is 8 bits wide, it can range from 0 to 255.  Each selector value corresponds to a block of 4 bits.  Multiplying `sel` by 4 gives the starting index of the corresponding 4-bit block.  For example:
+    * `sel = 0`: `index = 0 * 4 = 0` (selects bits in[3:0])
+    * `sel = 1`: `index = 1 * 4 = 4` (selects bits in[7:4])
+    * `sel = 2`: `index = 2 * 4 = 8` (selects bits in[11:8])
+    * ...
+    * `sel = 63`: `index = 63 * 4 = 252` (selects bits in[255:252])
+7. **`assign out = in[index + 3 : index];`**: This line performs the actual selection.  It uses the calculated `index` to extract the 4-bit input from the `in` vector.  `in[index + 3 : index]` selects the 4 bits starting from `index + 3` down to `index`.  This is because the starting bit of the selected 4-bit input is `index`, and we need to select the next 3 bits to get a total of 4 bits.
+
+**How it works:**
+
+The code effectively divides the 1024-bit input `in` into 256 blocks of 4 bits each. The `sel` input determines which of these blocks is selected and passed to the output `out`. The `index` calculation determines the starting position of the selected block within the `in` vector.  The slice `in[index + 3 : index]` then extracts the 4 bits from that block and assigns them to the `out` signal.
+
+**Example:**
+
+If `sel = 5` (binary 0101), then `index = 5 * 4 = 20`.  The code will select the 4 bits from `in[23:20]` and assign them to `out`.

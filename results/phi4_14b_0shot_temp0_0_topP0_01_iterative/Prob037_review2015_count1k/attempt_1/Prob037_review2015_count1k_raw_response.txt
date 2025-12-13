@@ -1,0 +1,39 @@
+To implement the described Verilog module for a counter that counts from 0 to 999 with a period of 1000 cycles, we need to design a synchronous counter. The counter should increment on each clock cycle and reset to 0 when the `reset` signal is high. Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    output reg [9:0] q
+);
+
+    // Counter logic
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            q <= 10'b0000000000; // Reset the counter to 0
+        end else begin
+            if (q == 10'd999) begin
+                q <= 10'b0000000000; // Reset to 0 after reaching 999
+            end else begin
+                q <= q + 1; // Increment the counter
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `clk`: The clock signal.
+  - `reset`: Synchronous active-high reset input.
+  - `q`: A 10-bit output register representing the current count.
+
+- **Counter Logic:**
+  - The counter is implemented using a synchronous process triggered by the positive edge of `clk` or `reset`.
+  - If `reset` is high, the counter resets to 0 (`10'b0000000000`).
+  - Otherwise, if the current value of `q` is 999 (`10'd999`), it wraps around to 0.
+  - For all other values, the counter increments by 1.
+
+This design ensures that the counter counts from 0 to 999 and resets back to 0 on reaching 1000 or when a reset signal is received.

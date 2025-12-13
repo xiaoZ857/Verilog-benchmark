@@ -1,0 +1,44 @@
+```verilog
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+
+  always @(cpu_overheated) begin
+    if (cpu_overheated) begin
+      shut_off_computer = 1;
+    end else begin
+      shut_off_computer = 0;
+    end
+  end
+
+  always @(arrived, gas_tank_empty) begin
+    if (~arrived) begin
+      keep_driving = ~gas_tank_empty;
+    end else begin
+      keep_driving = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation of Changes and Bug Fixes:**
+
+1. **`always @(cpu_overheated)`:** The original `always @(*)` block for `shut_off_computer` was problematic.  `always @(*)` means the block will re-evaluate whenever *any* input signal changes.  This is generally bad practice because it can lead to unintended consequences and make the code harder to understand and debug.  Since `shut_off_computer` only depends on `cpu_overheated`, the correct sensitivity list is just `cpu_overheated`.  Also, I added an `else` statement to explicitly set `shut_off_computer` to 0 when `cpu_overheated` is false.  This makes the behavior more predictable.
+
+2. **`always @(arrived, gas_tank_empty)`:**  Similarly, the original `always @(*)` block for `keep_driving` was too broad.  It should only be sensitive to `arrived` and `gas_tank_empty`.  I've corrected the sensitivity list.
+
+3. **`keep_driving = 0;` when `arrived`:** The original code only assigned `keep_driving` when `~arrived`.  When `arrived` is true, `keep_driving` was not explicitly assigned, which could lead to unpredictable behavior (it would retain its previous value).  I've added an `else` statement to explicitly set `keep_driving = 0` when the car has arrived.  This ensures that the car stops driving when it arrives.
+
+**Why these changes are important:**
+
+* **Correctness:** The original code had potential for undefined behavior when `arrived` was true.
+* **Readability:**  Using specific sensitivity lists makes the code much easier to understand.  It clearly shows the dependencies of each signal.
+* **Efficiency:**  `always @(*)` can be inefficient because it triggers unnecessary evaluations.  Using specific sensitivity lists reduces the number of evaluations.
+* **Maintainability:**  Code with clear dependencies is easier to maintain and debug.
+
+This revised code addresses the bugs and improves the overall quality of the Verilog module.  It's now more reliable, readable, and maintainable.

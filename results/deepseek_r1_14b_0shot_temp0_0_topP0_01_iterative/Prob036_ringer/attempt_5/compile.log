@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob036_ringer\attempt_5\Prob036_ringer_code.sv:8: warning: macro ringer undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob036_ringer\attempt_5\Prob036_ringer_code.sv:8: warning: macro motor undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob036_ringer\attempt_5\Prob036_ringer_code.sv:8: syntax error
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob036_ringer\attempt_5\Prob036_ringer_code.sv:8: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob036_ringer\attempt_5\Prob036_ringer_code.sv:8:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob036_ringer_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/deepseek_r1_14b_0shot_temp0_0_topP0_01_iterative\Prob036_ringer\attempt_5\Prob036_ringer_code.sv:8: error: Invalid module instantiation

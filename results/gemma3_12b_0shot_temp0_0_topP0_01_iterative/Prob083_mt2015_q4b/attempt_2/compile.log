@@ -1,0 +1,32 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 14
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:9: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:11: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:13: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:15: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:17: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:19: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:21: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:23: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:25: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:27: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:29: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:31: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:5:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:7: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob083_mt2015_q4b\attempt_2\Prob083_mt2015_q4b_code.sv:7: error: Failed to evaluate event expression 'posedge clk'.
+14 error(s) during elaboration.

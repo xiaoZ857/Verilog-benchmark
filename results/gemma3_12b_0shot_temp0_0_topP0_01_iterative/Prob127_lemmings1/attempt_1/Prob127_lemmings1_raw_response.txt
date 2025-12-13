@@ -1,0 +1,83 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+
+  // Define the states
+  parameter LEFT = 2'b00
+  parameter RIGHT = 2'b01
+
+  // Declare the state register
+  reg [1:0] current_state;
+
+  // Assign the outputs based on the current state
+  always @(current_state) begin
+    walk_left  = current_state == LEFT;
+    walk_right = current_state == RIGHT;
+  end
+
+  // Synchronous logic for state transitions
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= LEFT;
+    end else begin
+      if (bump_left && bump_right) begin
+        // Bumped on both sides, switch direction
+        if (current_state == LEFT) begin
+          current_state <= RIGHT;
+        end else begin
+          current_state <= LEFT;
+        end
+      end else if (bump_left) begin
+        // Bumped on the left, walk right
+        current_state <= RIGHT;
+      end else if (bump_right) begin
+        // Bumped on the right, walk left
+        current_state <= LEFT;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`: Defines the module with the specified input and output ports.
+
+2. **State Definition:**
+   - `parameter LEFT = 2'b00`: Defines the `LEFT` state as binary `00`.
+   - `parameter RIGHT = 2'b01`: Defines the `RIGHT` state as binary `01`.  These parameters make the code more readable and maintainable.
+
+3. **State Register:**
+   - `reg [1:0] current_state;`: Declares a 2-bit register `current_state` to hold the current state of the FSM.
+
+4. **Output Assignment (Moore Machine):**
+   - `always @(current_state) begin ... end`: This block defines the output logic.  In a Moore machine, the outputs are directly determined by the current state.
+   - `walk_left  = current_state == LEFT;`:  `walk_left` is asserted (set to 1) when the `current_state` is `LEFT`.
+   - `walk_right = current_state == RIGHT;`: `walk_right` is asserted when the `current_state` is `RIGHT`.
+
+5. **Synchronous Logic (State Transitions):**
+   - `always @(posedge clk or posedge areset) begin ... end`: This block describes the state transition logic.  It's triggered on the positive edge of the clock (`posedge clk`) or the positive edge of the asynchronous reset (`posedge areset`).
+   - `if (areset) begin ... end`:  Handles the asynchronous reset. When `areset` is asserted, the `current_state` is forced to `LEFT`.
+   - `else begin ... end`:  Handles the normal state transitions when `areset` is not asserted.
+   - `if (bump_left && bump_right) begin ... end`:  If the Lemming is bumped on both sides, it switches direction.
+   - `else if (bump_left) begin ... end`: If bumped on the left, it walks right.
+   - `else if (bump_right) begin ... end`: If bumped on the right, it walks left.
+
+**Key Concepts:**
+
+* **Moore Machine:** The outputs are directly determined by the current state.
+* **Asynchronous Reset:** The `areset` signal is asynchronous, meaning it can change the state of the FSM independently of the clock.
+* **Synchronous Logic:** State transitions happen on the positive edge of the clock.
+* **State Encoding:** The states are encoded as binary values (LEFT = 00, RIGHT = 01).
+* **Combinational Logic:** The output assignment block is purely combinational logic.
+* **Sequential Logic:** The state transition block is sequential logic because it uses a register (`current_state`) and is triggered by the clock or reset.
+
+This Verilog code accurately implements the Lemming FSM as described in the problem statement.  It's well-structured, readable, and follows good Verilog coding practices.

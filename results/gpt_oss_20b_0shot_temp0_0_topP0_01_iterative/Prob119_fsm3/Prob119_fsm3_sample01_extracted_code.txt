@@ -1,0 +1,55 @@
+//  TopModule.v
+//  ------------------------------------------------------------
+//  Moore state‑machine with 4 states (A,B,C,D)
+//  One input  :  in
+//  One output :  out  (1 only in state D)
+//  Asynchronous reset (active‑high) → state A
+//  ------------------------------------------------------------
+
+module TopModule (
+    input  wire clk,     // positive‑edge clock
+    input  wire in,      // data input
+    input  wire areset,  // asynchronous reset (active‑high)
+    output wire out      // FSM output
+);
+
+    // ------------------------------------------------------------
+    // State encoding
+    // ------------------------------------------------------------
+    localparam  A = 2'b00,
+                B = 2'b01,
+                C = 2'b10,
+                D = 2'b11;
+
+    // ------------------------------------------------------------
+    // State register
+    // ------------------------------------------------------------
+    reg [1:0] state, next_state;
+
+    // Asynchronous reset + synchronous state update
+    always @(posedge clk or posedge areset) begin
+        if (areset)                // async reset → state A
+            state <= A;
+        else
+            state <= next_state;   // normal state transition
+    end
+
+    // ------------------------------------------------------------
+    // Next‑state logic (combinational)
+    // ------------------------------------------------------------
+    always @(*) begin
+        case (state)
+            A: next_state = (in) ? B : A;
+            B: next_state = (in) ? B : C;
+            C: next_state = (in) ? D : A;
+            D: next_state = (in) ? B : C;
+            default: next_state = A; // safety
+        endcase
+    end
+
+    // ------------------------------------------------------------
+    // Output logic (Moore – depends only on state)
+    // ------------------------------------------------------------
+    assign out = (state == D) ? 1'b1 : 1'b0;
+
+endmodule

@@ -1,0 +1,8 @@
+
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+
+// VERILOG-EVAL: endmodule not found

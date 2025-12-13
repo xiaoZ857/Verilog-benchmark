@@ -1,0 +1,16 @@
+
+module TopModule (
+  input [3:0] in,
+  output reg [1:0] pos
+);
+// Use a case statement to determine the output based on the input
+case(in[0])
+  1'b0: pos = 2'd0; // If all bits are zero, output is zero
+  1'b1: pos = 2'd1; // If only one bit is set, output is 1
+  default: pos = 2'd0; // Default to zero if input doesn't match any case
+endcase
+
+// Initialize the output signal to zero
+reg [1:0] pos = 2'd0;
+
+// VERILOG-EVAL: endmodule not found

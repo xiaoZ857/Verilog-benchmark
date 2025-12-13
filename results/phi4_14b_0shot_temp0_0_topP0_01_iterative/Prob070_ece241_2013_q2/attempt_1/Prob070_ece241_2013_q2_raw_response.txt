@@ -1,0 +1,66 @@
+To implement the Verilog module based on the given description, we need to determine the logic expressions for both the sum-of-products (SOP) and product-of-sums (POS) forms.
+
+### Sum-of-Products (SOP)
+
+The SOP form is derived by identifying when the output should be 1. According to the problem statement, the output is 1 for inputs corresponding to binary numbers 2, 7, and 15:
+
+- **2**: `a'b'cd`
+- **7**: `ab'cd`
+- **15**: `abcd`
+
+The SOP expression is the OR of these minterms:
+
+\[ \text{out\_sop} = a'b'cd + ab'cd + abcd \]
+
+### Product-of-Sums (POS)
+
+The POS form is derived by identifying when the output should be 0. According to the problem statement, the output is 0 for inputs corresponding to binary numbers 0, 1, 4, 5, 6, 9, 10, 13, and 14:
+
+- **0**: `a'b'c'd'`
+- **1**: `a'b'c'd`
+- **4**: `a'bc'd'`
+- **5**: `a'bc'd`
+- **6**: `a'bcd'`
+- **9**: `ab'cd'`
+- **10**: `ab'c'd`
+- **13**: `abc'd`
+- **14**: `abcd'`
+
+The POS expression is the AND of these maxterms:
+
+\[ \text{out\_pos} = (a+b+c+d)(a+b+c+d')(a+b'+c+d')(a+b'+c+d)(a+b'+c+d)(a+b+c'+d')(a'+b+c+d')(a'+b+c+d)(a+b'+c'+d)(a+b+c+d') \]
+
+### Verilog Module
+
+Here's the Verilog implementation of the module:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+  // Sum-of-Products form
+  assign out_sop = (~a & ~b & c & d) | (a & ~b & c & d) | (a & b & c & d);
+
+  // Product-of-Sums form
+  assign out_pos = 
+    ((a | b | c | d) &
+     (a | b | ~c | d) &
+     (a | ~b | c | d) &
+     (a | ~b | c | ~d) &
+     (a | ~b | c | ~d) &
+     (a | b | ~c | ~d) &
+     (~a | b | c | d) &
+     (~a | b | c | ~d) &
+     (a | ~b | ~c | d) &
+     (a | b | c | ~d));
+
+endmodule
+```
+
+This module defines the logic for both `out_sop` and `out_pos` based on the given conditions.

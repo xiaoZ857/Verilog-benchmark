@@ -1,0 +1,45 @@
+To implement the Verilog module as described, we need to detect when each bit of an 8-bit vector changes from `0` to `1`. The output should reflect this transition by setting the corresponding bit one clock cycle after the transition occurs.
+
+Here's how you can implement the `TopModule`:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] in,
+    output reg [7:0] pedge
+);
+
+    // Internal registers to store the current and previous state of 'in'
+    reg [7:0] prev_in;
+
+    always @(posedge clk) begin
+        // Detect 0 to 1 transitions for each bit
+        pedge <= (prev_in & ~in); // Set bits where prev_in was 0 and in is now 1
+
+        // Update the previous state register with the current input
+        prev_in <= in;
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Registers**: 
+  - `prev_in`: This register holds the value of `in` from the previous clock cycle. It's used to detect changes between cycles.
+
+- **Always Block**:
+  - The block is triggered on the positive edge of the clock (`posedge clk`).
+  
+- **Transition Detection**:
+  - `(prev_in & ~in)`: This expression detects a transition from `0` to `1`. 
+    - `prev_in & ~in` results in a bit being set if it was `1` in `prev_in` and `0` in the current `in`, indicating a change from `1` to `0`.
+    - To detect `0` to `1`, we need to invert this logic: `(prev_in & ~in)` gives us the bits that were `0` in `prev_in` and are now `1` in `in`.
+
+- **Output Assignment**:
+  - `pedge <= (prev_in & ~in);`: This assigns the detected transitions to `pedge`. The use of non-blocking assignment (`<=`) ensures correct sequential logic behavior.
+
+- **State Update**:
+  - `prev_in <= in;`: Updates `prev_in` with the current value of `in` at the end of each clock cycle, preparing it for the next cycle's comparison.
+
+This module will correctly set each bit of `pedge` one cycle after a corresponding bit in `in` transitions from `0` to `1`.

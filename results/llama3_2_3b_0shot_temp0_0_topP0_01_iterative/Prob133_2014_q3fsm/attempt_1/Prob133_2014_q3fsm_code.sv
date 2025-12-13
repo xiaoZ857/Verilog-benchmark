@@ -1,0 +1,31 @@
+
+module TopModule(
+    input clk, // Positive edge triggered clock
+    input reset, // Active high synchronous reset
+    input s,     // Input signal for state A
+    input w,     // Input signal for states B and C
+    output reg z  // Output signal to be set based on the FSM's state
+);
+
+reg [1:0] state; // State of the finite state machine
+
+always @(posedge clk) begin
+    if (reset) begin
+        state <= 2'b00; // Reset to state A
+    end else if (~s && w == 1) begin
+        state <= 2'b01; // Move to state B
+    end else if (state == 2'b01) begin
+        state <= {w, state[0]}; // Update state based on w and previous state
+    end else if (state == 2'b10 || state == 2'b11) begin
+        z <= (state[1] && ~state[0]); // Set z to 1 if two consecutive w=1
+        state <= {w, state[0]}; // Update state based on w and previous state
+    end else if (state == 2'b00) begin
+        state <= 2'b01; // Move to state B
+    end
+end
+
+assign z = z;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

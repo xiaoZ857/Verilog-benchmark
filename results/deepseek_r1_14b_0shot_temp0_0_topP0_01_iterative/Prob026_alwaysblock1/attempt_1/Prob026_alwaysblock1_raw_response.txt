@@ -1,0 +1,32 @@
+Here is the Verilog implementation of the TopModule using both an assign statement and a combinational always block:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Using assign statement for out_assign
+assign out_assign = a & b;
+
+// Using combinational always block for out_alwaysblock
+always @(*) 
+begin
+    out_alwaysblock = a & b;
+end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Assign Statement (out_assign):**
+   - The output `out_assign` is directly assigned the result of `a & b`. This creates an AND gate using Verilog's direct assignment.
+
+2. **Combinational Always Block (out_alwaysblock):**
+   - Inside the always block, the sensitivity list `@(*)` ensures that the block executes whenever any input (`a` or `b`) changes.
+   - The output `out_alwaysblock` is assigned the result of `a & b`, replicating the AND gate functionality through sequential logic.
+
+This module effectively implements two AND gates using different Verilog constructs.

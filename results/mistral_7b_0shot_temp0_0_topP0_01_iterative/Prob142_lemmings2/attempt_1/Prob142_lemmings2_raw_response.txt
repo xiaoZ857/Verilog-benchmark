@@ -1,0 +1,35 @@
+ Here is the Verilog code for the Moore state machine that models the behavior of the Lemmings game as described:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah
+);
+
+reg [1:0] state; // Finite state machine states: 00 - walking left, 01 - falling, 10 - walking right, 11 - idle (reset)
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        state <= 2'b1; // reset to idle state
+    end else if (!ground && (state == 2'b0 || state == 2'b1)) begin
+        state <= 2'b0; // start walking left when ground disappears
+    end else if ((ground == 1 && (state == 2'b0 || state == 2'b1)) || (state == 2'b0 && bump_right) || (state == 2'b1 && bump_left)) begin
+        state <= {walk_left, walk_right}; // switch direction when bumped or ground reappears
+    end else if ((ground == 0 && (state == 2'b0 || state == 2'b1)) && (!bump_left && !bump_right)) begin
+        aaah <= 1; // Lemming says "aaah!" when falling and not bumped
+    end
+end
+
+assign walk_left = state[0];
+assign walk_right = state[1];
+assign aaah = (state == 2'b1); // Lemming says "aaah!" only when in the falling state
+```
+
+This code defines a TopModule with inputs for clock, asynchronous reset, bump_left, bump_right, and ground signals. The outputs are walk_left, walk_right, and aaah. The finite state machine has four states: 00 - walking left, 01 - falling, 10 - walking right, and 11 - idle (reset).
+
+The always block at the bottom handles the positive edge of the clock or negedge of the asynchronous reset. It updates the state based on the conditions described in the problem statement. The walk_left, walk_right, and aaah outputs are assigned according to the current state of the FSM.

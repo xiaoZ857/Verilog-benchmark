@@ -1,0 +1,46 @@
+To implement the described Verilog module for controlling a cellphone's ringer and vibration motor based on the inputs `ring` and `vibrate_mode`, we need to ensure that when an incoming call is detected (`ring = 1`), either the ringer or the motor is activated, but not both. The decision of which one to activate depends on whether the phone is in vibrate mode.
+
+Here's how you can implement this logic in a Verilog module:
+
+```verilog
+module TopModule (
+    input ring,
+    input vibrate_mode,
+    output reg ringer,
+    output reg motor
+);
+
+always @(*) begin
+    // Default state: both outputs are off
+    ringer = 0;
+    motor = 0;
+
+    if (ring) begin
+        if (vibrate_mode) begin
+            // If in vibrate mode, turn on the motor
+            motor = 1;
+        end else begin
+            // Otherwise, turn on the ringer
+            ringer = 1;
+        end
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `ring`: Indicates an incoming call.
+  - `vibrate_mode`: Determines whether the phone should vibrate instead of ringing.
+  - `ringer` and `motor`: Control signals for the ringer and motor, respectively.
+
+- **Logic Implementation:**
+  - The module uses a combinational logic block (`always @(*)`) to determine the state of `ringer` and `motor`.
+  - By default, both `ringer` and `motor` are set to `0`, meaning they are off.
+  - If `ring` is asserted (`1`), it checks the value of `vibrate_mode`.
+    - If `vibrate_mode` is `1`, it sets `motor = 1` (turns on the motor) and keeps `ringer = 0`.
+    - If `vibrate_mode` is `0`, it sets `ringer = 1` (turns on the ringer) and keeps `motor = 0`.
+
+This design ensures that only one of the outputs (`ringer` or `motor`) is active at any time when there's an incoming call, based on the current mode of operation.

@@ -1,0 +1,18 @@
+module TopModule (
+    input wire clk,
+    input wire d,
+    input wire ar,
+    output reg q
+);
+
+always @(posedge clk or posedge ar) begin
+    if (ar) begin
+        // Asynchronous reset: set q to 0 when ar is high
+        q <= 1'b0;
+    end else begin
+        // Positive edge-triggered D flip-flop behavior
+        q <= d;
+    end
+end
+
+endmodule

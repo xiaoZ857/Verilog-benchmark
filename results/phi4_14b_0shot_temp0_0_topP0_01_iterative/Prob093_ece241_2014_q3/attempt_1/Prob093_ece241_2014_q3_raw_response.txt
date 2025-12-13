@@ -1,0 +1,105 @@
+To implement the given Karnaugh map using a combination of one 4-to-1 multiplexer and as many 2-to-1 multiplexers as required, we need to determine how to generate each `mux_in` signal based on inputs `c` and `d`. The goal is to use these signals as inputs to the 4-to-1 multiplexer with selectors `a` and `b`.
+
+### Karnaugh Map Analysis
+
+The K-map provided is:
+
+```
+      ab
+  cd  00  01  11  10
+  00 | 0 | 0 | 0 | 1 |
+  01 | 1 | 0 | 0 | 0 |
+  11 | 1 | 0 | 1 | 1 |
+  10 | 1 | 0 | 0 | 1 |
+```
+
+From this map, we can derive the expressions for each `mux_in`:
+
+- **mux_in[0] (ab = 00):** Output is 0 when cd = 00, 01, 11; and 1 when cd = 10.
+  - Expression: \( \overline{c}d + cd\overline{d} \)
+
+- **mux_in[1] (ab = 01):** Output is 0 for all combinations of `cd`.
+  - Expression: 0
+
+- **mux_in[2] (ab = 11):** Output is 0 when cd = 00, 01, 10; and 1 when cd = 11.
+  - Expression: \( cd \)
+
+- **mux_in[3] (ab = 10):** Output is 1 when cd = 00, 11, 10; and 0 when cd = 01.
+  - Expression: \( \overline{c}\overline{d} + cd + c\overline{d} \)
+
+### Implementation Using Multiplexers
+
+We will use 2-to-1 multiplexers to implement these expressions. The select line for each 2-to-1 MUX will be `c`, and the inputs will be derived from `d` or constants.
+
+#### mux_in[0] Implementation
+Expression: \( \overline{c}d + cd\overline{d} \)
+
+- Use a 2-to-1 MUX with select line `c`.
+  - When `c = 0`: Output is `d`
+  - When `c = 1`: Output is `\overline{d}`
+
+```verilog
+wire mux_in0_0 = d;
+wire mux_in0_1 = ~d;
+assign mux_in[0] = (c ? mux_in0_1 : mux_in0_0);
+```
+
+#### mux_in[1] Implementation
+Expression: 0
+
+- Directly assign 0.
+
+```verilog
+assign mux_in[1] = 0;
+```
+
+#### mux_in[2] Implementation
+Expression: \( cd \)
+
+- Use a 2-to-1 MUX with select line `c`.
+  - When `c = 0`: Output is 0
+  - When `c = 1`: Output is `d`
+
+```verilog
+wire mux_in2_0 = 0;
+wire mux_in2_1 = d;
+assign mux_in[2] = (c ? mux_in2_1 : mux_in2_0);
+```
+
+#### mux_in[3] Implementation
+Expression: \( \overline{c}\overline{d} + cd + c\overline{d} \)
+
+- Use a 2-to-1 MUX with select line `c`.
+  - When `c = 0`: Output is `\overline{d}`
+  - When `c = 1`: Output is `d`
+
+```verilog
+wire mux_in3_0 = ~d;
+wire mux_in3_1 = d;
+assign mux_in[3] = (c ? mux_in3_1 : mux_in3_0) | (~c & ~d);
+```
+
+### Complete Verilog Module
+
+Here is the complete implementation of `TopModule`:
+
+```verilog
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+
+  wire mux_in0_0, mux_in0_1;
+  wire mux_in2_0, mux_in2_1;
+  wire mux_in3_0, mux_in3_1;
+
+  // Implementing mux_in[0]
+  assign mux_in0_0 = d;
+  assign mux_in0_1 = ~d;
+  assign mux_in[0] = (c ? mux_in0_1 : mux_in0_0);
+
+  // Implementing mux_in[1]
+  assign mux_in[1] = 0;
+
+  // Implementing mux_in[

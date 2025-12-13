@@ -1,0 +1,55 @@
+
+module TopModule (
+  input [6:1] y,
+  input w,
+  output reg Y2,
+  output reg Y4
+);
+
+// One-hot encoding of states A, B, C, D, E, F
+reg [1:0] state_next = 7'b000_000; // Initialize to state A (y[6:1]=000001)
+
+always @(posedge clk) begin
+  case (y)
+    7'b000001 : begin // State A
+      Y2 <= 1'b0;
+      Y4 <= 1'b0;
+    end
+    7'b000010 : begin // State B
+      Y2 <= 1'b1;
+      Y4 <= 1'b0;
+    end
+    7'b000100 : begin // State C
+      Y2 <= 1'b0;
+      Y4 <= w ? 1'b0 : 1'b1; // If input w is 1, go to state D (Y4=1) else stay in state C (Y4=0)
+    end
+    7'b001000 : begin // State D
+      Y2 <= w ? 1'b1 : 1'b0; // If input w is 1, go to state A (Y2=1) else stay in state D (Y2=0)
+      Y4 <= 1'b0;
+    end
+    7'b010000 : begin // State E
+      Y2 <= 1'b0;
+      Y4 <= w ? 1'b1 : 1'b0; // If input w is 1, go to state D (Y4=1) else stay in state E (Y4=0)
+    end
+    7'b100000 : begin // State F
+      Y2 <= 1'b0;
+      Y4 <= 1'b1;
+    end
+    default: begin // Reset to state A
+      Y2 <= 1'b0;
+      Y4 <= 1'b0;
+      state_next = 7'b000001;
+    end
+  endcase
+end
+
+always @(posedge clk) begin
+  y <= state_next; // Update the current state
+end
+
+// Assign output pins based on the one-hot encoding of the current state
+assign Y2 = y[2];
+assign Y4 = y[4];
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

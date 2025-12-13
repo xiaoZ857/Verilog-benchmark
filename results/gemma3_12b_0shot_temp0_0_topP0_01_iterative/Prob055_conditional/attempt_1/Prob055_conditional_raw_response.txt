@@ -1,0 +1,53 @@
+```verilog
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+
+  always @(*) begin
+    min = a; // Initialize min to a
+
+    if (b < min) begin
+      min = b;
+    end
+
+    if (c < min) begin
+      min = c;
+    end
+
+    if (d < min) begin
+      min = d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**: Defines the module named `TopModule` with the specified input and output ports.
+2. **`input [7:0] a, b, c, d`**: Declares four 8-bit unsigned input signals.
+3. **`output reg [7:0] min`**: Declares an 8-bit unsigned register `min` as the output.  It's a register because its value is assigned within an `always` block.
+4. **`always @(*)`**:  This is a combinational `always` block. The `@(*)` sensitivity list means that the block will execute whenever *any* of the input signals (`a`, `b`, `c`, or `d`) change.  This ensures that the `min` output is updated whenever a new input value arrives.
+5. **`min = a;`**:  Initializes the `min` register to the value of `a`.  This provides a starting point for the comparison.
+6. **`if (b < min) begin ... end`**:  Compares `b` with the current value of `min`. If `b` is smaller than `min`, `min` is updated to the value of `b`.
+7. **`if (c < min) begin ... end`**:  Compares `c` with the current value of `min`. If `c` is smaller than `min`, `min` is updated to the value of `c`.
+8. **`if (d < min) begin ... end`**:  Compares `d` with the current value of `min`. If `d` is smaller than `min`, `min` is updated to the value of `d`.
+
+**How it works:**
+
+The code iteratively compares each input number with the current minimum value.  The smallest number encountered so far is stored in the `min` register, which is then assigned as the output.  Because it's a combinational `always` block, the output `min` will reflect the minimum value as soon as the inputs change.
+
+**Example:**
+
+If `a = 10`, `b = 5`, `c = 15`, and `d = 2`, the code will execute as follows:
+
+1. `min` is initialized to `a` (10).
+2. `b` (5) is compared with `min` (10). Since 5 < 10, `min` becomes 5.
+3. `c` (15) is compared with `min` (5). Since 15 is not less than 5, `min` remains 5.
+4. `d` (2) is compared with `min` (5). Since 2 < 5, `min` becomes 2.
+
+The final value of `min` will be 2, which is the minimum of the four input numbers.

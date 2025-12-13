@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob134_2014_q3c",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y0' has 58 mismatches. First mismatch occurred at time 10.\nHint: Output 'z' has no mismatches.\nHint: Total mismatched samples is 58 out of 200 samples\n\nSimulation finished at 1001 ps\nMismatches: 58 in 200 samples\n",
+      "mismatch_count": 58
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y0' has 56 mismatches. First mismatch occurred at time 10.\nHint: Output 'z' has no mismatches.\nHint: Total mismatched samples is 56 out of 200 samples\n\nSimulation finished at 1001 ps\nMismatches: 56 in 200 samples\n",
+      "mismatch_count": 56
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob134_2014_q3c_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob134_2014_q3c_ref.sv:37: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob134_2014_q3c\\attempt_4\\Prob134_2014_q3c_code.sv:11: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob134_2014_q3c\\attempt_4\\Prob134_2014_q3c_code.sv:11: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob134_2014_q3c\\attempt_4\\Prob134_2014_q3c_code.sv:23: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob134_2014_q3c\\attempt_4\\Prob134_2014_q3c_code.sv:23: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob134_2014_q3c\\attempt_4\\Prob134_2014_q3c_code.sv:35: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_0_topP0_01_iterative\\Prob134_2014_q3c\\attempt_4\\Prob134_2014_q3c_code.sv:36: error: Unable to bind wire/reg/memory `current_state['sd0]' in `tb.top_module1'\n4 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

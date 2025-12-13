@@ -1,0 +1,31 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [31:0] out
+);
+
+  assign out = {24{in[7]}, in};
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [7:0] in, output [31:0] out);`**:  This declares the module named `TopModule` with an 8-bit input `in` and a 32-bit output `out`.
+* **`assign out = {24{in[7]}, in};`**: This is the core of the sign extension logic.
+    * **`in[7]`**:  This refers to the most significant bit (MSB) of the input `in`, which represents the sign bit.
+    * **`{24{in[7]}`**: This is a concatenation operator.  `24{in[7]}` replicates the value of `in[7]` (the sign bit) 24 times.  This creates a 24-bit sequence of the sign bit.
+    * **`in`**: This is the original 8-bit input.
+    * **`{ ... , in }`**:  The concatenation operator combines the 24 replicated sign bits with the original 8-bit input.  This effectively creates a 32-bit output where the upper 24 bits are copies of the sign bit, and the lower 8 bits are the original input.
+
+**How it works (Sign Extension):**
+
+The circuit takes an 8-bit signed number and extends it to 32 bits.  The sign bit (MSB) of the 8-bit number is replicated to the left, filling the upper 24 bits of the 32-bit output.  This ensures that the sign of the number is preserved during the extension.
+
+**Example:**
+
+* **Input:** `in = 8'b00000101` (5)
+* **Output:** `out = 32'b00000000000000000000000000000101` (5)
+
+* **Input:** `in = 8'b11111101` (-3)
+* **Output:** `out = 32'b11111111111111111111111111111101` (-3)

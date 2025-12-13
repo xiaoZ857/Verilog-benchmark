@@ -1,0 +1,96 @@
+To implement the described behavior using a Moore state machine in Verilog, we need to define states that represent the Lemming's current direction and whether it is falling. The state transitions will be based on inputs such as `bump_left`, `bump_right`, and `ground`. Here's how you can structure the module:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  output reg walk_left,
+  output reg walk_right,
+  output reg aaah
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        WALK_LEFT = 2'b00,   // Walking left
+        WALK_RIGHT = 2'b01,  // Walking right
+        FALLING = 2'b10      // Falling
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            current_state <= WALK_LEFT; // Reset to walk left
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    always_comb begin
+        // Default outputs
+        walk_left = 0;
+        walk_right = 0;
+        aaah = 0;
+
+        case (current_state)
+            WALK_LEFT: begin
+                if (!ground) begin
+                    next_state = FALLING;
+                end else if (bump_right || (bump_left && bump_right)) begin
+                    next_state = WALK_RIGHT;
+                end else begin
+                    next_state = WALK_LEFT;
+                end
+
+                walk_left = 1;
+            end
+
+            WALK_RIGHT: begin
+                if (!ground) begin
+                    next_state = FALLING;
+                end else if (bump_left || (bump_right && bump_left)) begin
+                    next_state = WALK_LEFT;
+                end else begin
+                    next_state = WALK_RIGHT;
+                end
+
+                walk_right = 1;
+            end
+
+            FALLING: begin
+                if (ground) begin
+                    // Resume previous direction
+                    if (current_state == WALK_LEFT) begin
+                        next_state = WALK_LEFT;
+                    end else if (current_state == WALK_RIGHT) begin
+                        next_state = WALK_RIGHT;
+                    end
+                end else begin
+                    next_state = FALLING;
+                end
+
+                aaah = 1; // Lemming is falling, say "aaah!"
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We define three states: `WALK_LEFT`, `WALK_RIGHT`, and `FALLING`. These are encoded using a 2-bit state variable.
+
+- **State Transition Logic**:
+  - In the `WALK_LEFT` state, if `ground` is `0`, transition to `FALLING`. If bumped on the right or both sides, switch to `WALK_RIGHT`.
+  - In the `WALK_RIGHT` state, if `ground` is `0`, transition to `FALLING`. If bumped on the left or both sides, switch to `WALK_LEFT`.
+  - In the `FALLING` state, if `ground` becomes `1`, resume the previous direction (`WALK_LEFT` or `WALK_RIGHT`). The Lemming continues falling until `ground` is detected.
+
+- **Output Logic**:
+  - Outputs `walk_left` and `walk_right` are set based on the current state.
+  - Output `aaah` is asserted when in the `FALLING` state to indicate the Lemming is falling.
+
+This implementation captures the described behavior using a Moore machine, where outputs depend only on the current state.

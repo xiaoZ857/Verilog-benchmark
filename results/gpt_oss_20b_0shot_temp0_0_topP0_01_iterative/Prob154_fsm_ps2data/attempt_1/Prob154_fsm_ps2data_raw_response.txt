@@ -1,0 +1,17 @@
+Below is a clean, synthesizable Verilog implementation of the requested **TopModule**.  
+The design follows the exact behaviour described in the prompt:
+
+* **Search** for a byte whose bit 3 is 1.  
+* Treat that byte as the first byte of a 3‑byte message.  
+* Capture the next two bytes.  
+* In the cycle *after* the third byte is captured, assert **done** and output the 24‑bit message (`out_bytes`).  
+* All signals are synchronous to **clk** and reset is active‑high synchronous.
+
+```verilog
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire        clk,      // Clock
+    input  wire [7:0]  in,       // Input byte stream
+    input  wire        reset,    // Active‑high synchronous reset
+    output reg  [23:0] out_bytes

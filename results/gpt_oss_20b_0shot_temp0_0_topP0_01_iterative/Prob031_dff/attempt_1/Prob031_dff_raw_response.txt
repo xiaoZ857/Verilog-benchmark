@@ -1,0 +1,28 @@
+Here’s a minimal, synthesizable Verilog implementation of a single D‑flip‑flop that captures the input `d` on the rising edge of `clk` and drives the output `q`.
+
+```verilog
+// TopModule.v
+// Simple D‑flip‑flop (positive‑edge triggered)
+//   clk : clock input (positive edge)
+//   d   : data input
+//   q   : registered output
+
+module TopModule (
+    input  wire clk,   // clock
+    input  wire d,     // data input
+    output reg  q      // registered output
+);
+
+    // Positive‑edge triggered D‑FF
+    always @(posedge clk) begin
+        q <= d;          // non‑blocking assignment
+    end
+
+endmodule
+```
+
+### Notes
+
+* `q` is declared as `reg` because it holds a value across clock cycles.
+* The assignment inside the `always @(posedge clk)` block is **non‑blocking** (`<=`) to avoid race‑condition issues in more complex designs.
+* No asynchronous reset or enable signals are included because the specification only required a basic D‑flip‑flop. If you need those, you can extend the module accordingly.

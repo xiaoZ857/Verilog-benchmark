@@ -1,0 +1,6 @@
+
+always @(*) begin
+  out = (c ^ d) ^ (a ^ b);
+end
+
+endmodule

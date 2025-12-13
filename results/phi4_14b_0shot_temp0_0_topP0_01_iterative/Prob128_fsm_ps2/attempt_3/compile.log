@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:11: error: done is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:6:      : done is declared here as wire.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `RECEIVE_3' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `next_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: error: Unable to bind wire/reg/memory `IDLE' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:19: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:24: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:24: error: Unable to elaborate this case expression.
+9 error(s) during elaboration.

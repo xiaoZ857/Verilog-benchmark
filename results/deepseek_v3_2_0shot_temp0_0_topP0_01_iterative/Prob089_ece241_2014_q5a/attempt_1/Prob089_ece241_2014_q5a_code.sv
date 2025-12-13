@@ -1,0 +1,83 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+We can design a Moore state machine with two states:  
+- **State A**: No carry has been generated yet (initial state after reset).  
+- **State B**: A carry has been generated and we are inverting bits.  
+
+In 2's complement, starting from LSB:  
+- Pass through bits unchanged until the first `1` is seen (including that `1`).  
+- After that first `1`, invert all remaining bits.  
+
+Since it’s a Moore machine, output `z` depends only on the current state and `x`.  
+Actually, careful: In Moore, `z` is purely a function of state, but here the output depends on whether we are in "copy mode" or "invert mode" and what the current input `x` is. Wait — that’s Mealy behavior. But the problem says Moore, so `z` must be purely combinational from state only? That’s impossible here because output depends on current input during inversion. Let’s check:  
+
+Given: "Moore state machine" but output is 2's complement bit stream matching input timing. That means:  
+At each clock cycle, output `z` = `x` in state A, and `z` = `~x` in state B. But that’s Mealy if `z` uses `x`.  
+
+But they explicitly say Moore, so maybe they mean: states encode both the mode and the last input? Let’s think:  
+
+Actually, in Moore, output depends only on state. So we need enough states to determine output without looking at `x`. But output at time `t` depends on `x(t)` and whether we’ve seen a `1` yet. So we can’t make output purely from state unless we store `x` in state, but `x` changes each cycle.  
+
+Given common textbook problem: "serial 2's complementer" Moore machine:  
+We can have 2 states:  
+- State S0: haven't seen a 1 yet → output = input (but that’s Mealy) → contradiction.  
+
+Wait — maybe they allow output to be combinational function of state and input? That’s Mealy. But they said Moore. Possibly they misstated, but we must follow "Moore" strictly: output only from state.  
+
+Then we must have state encoding that tells what to output:  
+We can have:  
+State0: output 0 (when input is 0 and no 1 seen yet)  
+State1: output 1 (when input is 1 and no 1 seen yet)  
+State2: output = ~input? Still needs input.  
+
+So impossible unless we define states as (seen_first_one, current_input)? But current_input is not part of state until next clock.  
+
+Given typical solution: This is actually a Mealy machine in most textbooks. But since they insist Moore, maybe they mean:  
+State A: output = input (no carry)  
+State B: output = ~input (carry)  
+But that’s still Mealy.  
+
+Let’s check: If we make output purely from state:  
+State A: output 0  
+State B: output 1  
+That doesn’t match requirement.  
+
+Given the ambiguity, I’ll implement the common correct circuit for serial 2’s complement, which is a Mealy machine, but if they insist Moore, we must adjust.  
+
+But reading carefully: "You are to design a one-input one-output serial 2's complementer Moore state machine." Possibly they mean the output is registered (so one cycle delayed)? That would be Moore. But then output timing is wrong.  
+
+Given the constraints, I’ll implement the standard correct logic:  
+We have a state bit `state` meaning "carry generated".  
+Initially 0.  
+When state=0: z = x; if x=1, next_state=1.  
+When state=1: z = ~x; next_state=1.  
+Reset sets state=0.  
+
+That’s Mealy output, but maybe they call it Moore by considering output register? But output is combinational here.  
+
+Let’s follow the exact spec:  
+- Reset active (areset=1) → stop conversion, hold state.  
+- Reset released → begin conversion.  
+
+We’ll implement as FSM with 2 states, Mealy output (but they said Moore, so maybe they define output as purely combinational from state, which is impossible — so I’ll do the working circuit).  
+
+  reg state;
+  reg next_state;
+  
+  always @(*) begin
+    case (state)
+      1'b0: begin
+        z = x;
+        next_state = x ? 1'b1 : 1'b0;
+      end
+      1'b1: begin
+        z = ~x;
+        next_state =
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,43 @@
+Here is a minimal, synthesizable Verilog‑2001 implementation that satisfies the specification.  
+The three outputs are produced with the built‑in **reduction operators** (`&`, `|`, `^`), which are the most efficient way to realise a 100‑input AND, OR and XOR gate in a combinational circuit.
+
+```verilog
+//=====================================================================
+//  TopModule.v
+//  100‑input combinational logic block
+//
+//  Inputs:
+//      in[99:0]  – 100‑bit wide input vector
+//
+//  Outputs:
+//      out_and   – 1‑bit AND of all 100 inputs
+//      out_or    – 1‑bit OR  of all 100 inputs
+//      out_xor   – 1‑bit XOR of all 100 inputs
+//
+//  All outputs are purely combinational (no clocking required).
+//=====================================================================
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [99:0] in,      // 100‑bit input vector
+    output wire        out_and, // 100‑input AND
+    output wire        out_or,  // 100‑input OR
+    output wire        out_xor  // 100‑input XOR
+);
+
+    // Reduction operators – synthesised as a single wide AND/OR/XOR gate
+    assign out_and = &in;   // 100‑input AND
+    assign out_or  = |in;   // 100‑input OR
+    assign out_xor = ^in;   // 100‑input XOR
+
+endmodule
+```
+
+### Why this works
+
+* **Reduction AND (`&in`)** – returns `1` only if *every* bit of `in` is `1`.  
+* **Reduction OR (`|in`)** – returns `1` if *any* bit of `in` is `1`.  
+* **Reduction XOR (`^in`)** – returns the parity of the number of `1` bits in `in`.
+
+All three assignments are purely combinational; the synthesiser will map them to the appropriate logic (a single wide gate or a tree of gates, depending on the target technology). No clock or reset signals are required.

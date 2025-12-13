@@ -1,0 +1,32 @@
+
+module TopModule (
+  input [99:0] in,
+  output reg [98:0] out_both,
+  output reg [99:1] out_any,
+  output reg [99:0] out_different
+);
+
+always @(posedge clk) begin
+  // Initialize outputs to 0
+  out_both <= 0;
+  out_any <= 0;
+  out_different <= 0;
+
+  // Calculate out_both
+  for (int i = 98; i >= 1; i--) begin
+    out_both[i] <= in[i] & in[i+1];
+  end
+
+  // Calculate out_any
+  for (int i = 1; i < 100; i++) begin
+    out_any[i] <= in[i] | in[i-1];
+  end
+
+  // Calculate out_different
+  for (int i = 0; i < 100; i++) begin
+    out_different[i] <= in[i] ^ (i > 0 ? in[i-1] : in[99]);
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob064_vector3",
+  "model_name": "mistral:7b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Invalid assignment: w is declared as reg but used in continuous assignment",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 6\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:20: error: w is not a valid l-value in tb.top_module1.$unm_blk_1.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:9:      : w is declared here as wire.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:21: error: x is not a valid l-value in tb.top_module1.$unm_blk_1.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:10:      : x is declared here as wire.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:22: error: y is not a valid l-value in tb.top_module1.$unm_blk_1.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:11:      : y is declared here as wire.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:23: error: z is not a valid l-value in tb.top_module1.$unm_blk_1.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:12:      : z is declared here as wire.\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:14: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'\nresults/mistral_7b_0shot_temp0_0_topP0_01_iterative\\Prob064_vector3\\attempt_2\\Prob064_vector3_code.sv:14: error: Failed to evaluate event expression 'posedge clk'.\n6 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Direct combinational loop: w depends on itself in assign statement",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

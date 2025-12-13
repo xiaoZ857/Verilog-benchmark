@@ -1,0 +1,37 @@
+Based on the provided simulation waveforms, we can deduce the behavior of the sequential circuit and implement it in Verilog. The key observations from the waveform are:
+
+1. When `a` is high (`1`) and `clk` transitions from low to high (rising edge), `q` increments by 1.
+2. When `a` is low (`0`) and `clk` transitions from low to high, `q` resets to `0`.
+3. The value of `q` holds steady between clock cycles.
+
+This behavior suggests a counter with an enable signal `a`. If `a` is high, the counter increments on each rising edge of `clk`; if `a` is low, the counter resets to zero on the next rising edge of `clk`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+always @(posedge clk) begin
+    if (a == 1'b1) begin
+        q <= q + 1;
+    end else begin
+        q <= 3'b000; // Reset to zero when 'a' is low
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **always @(posedge clk)**: This block triggers on the rising edge of `clk`, which aligns with the behavior observed in the waveforms.
+  
+- **if (a == 1'b1) begin**: If `a` is high, increment `q` by 1. The use of non-blocking assignment (`<=`) ensures that all updates occur simultaneously at the end of the clock cycle.
+
+- **else begin q <= 3'b000; end**: If `a` is low, reset `q` to zero on the next rising edge of `clk`.
+
+This implementation captures the described behavior accurately.

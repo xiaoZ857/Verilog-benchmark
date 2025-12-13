@@ -1,0 +1,48 @@
+//  TopModule.v
+//  One stage of an n‑bit shift register.
+//  The stage contains a D‑flip‑flop and the multiplexers that
+//  decide what value is loaded into the flip‑flop on the next
+//  rising edge of clk.
+//
+//  Inputs
+//      clk – active‑high clock (positive edge triggered)
+//      w   – serial input coming from the previous stage
+//      R   – data to be loaded when L = 1
+//      E   – enable shift (when L = 0)
+//      L   – load enable (has priority over E)
+//  Output
+//      Q   – stored value of this stage
+//
+//  Behaviour
+//      • If L = 1 → Q <= R  (load)
+//      • Else if E = 1 → Q <= w  (shift)
+//      • Else → Q stays unchanged (hold)
+//  The module is written in synthesizable Verilog‑2001.
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire clk,   // clock
+    input  wire w,     // serial input from previous stage
+    input  wire R,     // data to load
+    input  wire E,     // shift enable
+    input  wire L,     // load enable
+    output reg  Q      // stored value
+);
+
+    // ------------------------------------------------------------------
+    //  Next‑state combinational logic (multiplexers)
+    // ------------------------------------------------------------------
+    //  nextQ = L ? R : (E ? w : Q)
+    //  The priority order is:  L > E > hold
+    wire nextQ;
+    assign nextQ = L ? R : (E ? w : Q);
+
+    // ------------------------------------------------------------------
+    //  Flip‑flop – update Q on the rising edge of clk
+    // ------------------------------------------------------------------
+    always @(posedge clk) begin
+        Q <= nextQ;
+    end
+
+endmodule

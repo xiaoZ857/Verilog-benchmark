@@ -1,0 +1,48 @@
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+  // NAND gate 1: p1y = NOT (p1a AND p1b AND p1c AND p1d)
+  assign p1y = ~ (p1a & p1b & p1c & p1d);
+
+  // NAND gate 2: p2y = NOT (p2a AND p2b AND p2c AND p2d)
+  assign p2y = ~ (p2a & p2b & p2c & p2d);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (...)`**:  This line defines the module named `TopModule` and lists its input and output ports.
+* **`input p1a, p1b, p1c, p1d;`**:  Declares the four inputs for the first NAND gate.
+* **`output p1y;`**: Declares the output of the first NAND gate.
+* **`input p2a, p2b, p2c, p2d;`**: Declares the four inputs for the second NAND gate.
+* **`output p2y;`**: Declares the output of the second NAND gate.
+* **`assign p1y = ~ (p1a & p1b & p1c & p1d);`**: This is the core logic for the first NAND gate.
+    * `p1a & p1b & p1c & p1d`:  Performs a logical AND operation on all four inputs.
+    * `~ (...)`:  Performs a logical NOT operation on the result of the AND operation.  This implements the NAND function.
+* **`assign p2y = ~ (p2a & p2b & p2c & p2d);`**:  This is the core logic for the second NAND gate, mirroring the first.
+
+**How it works (NAND gate):**
+
+A NAND gate is a combination of an AND gate and an inverter (NOT gate).  It outputs a logic low (0) only when *all* of its inputs are high (1).  Otherwise, the output is high (1).
+
+**Example:**
+
+If `p1a = 1`, `p1b = 1`, `p1c = 1`, and `p1d = 0`, then:
+
+* `p1a & p1b & p1c & p1d` evaluates to `0` (because one input is 0).
+* `~ (0)` evaluates to `1`.
+* Therefore, `p1y` will be `1`.
+
+This module accurately replicates the functionality of a 7420 chip, which contains two 4-input NAND gates.  The `assign` statements are used because the logic is combinational (the outputs depend only on the current inputs, not on any state or memory).

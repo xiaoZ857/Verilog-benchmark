@@ -1,0 +1,29 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  output [7:0] s,
+  output overflow
+);
+always @(posedge clk) begin
+  // Timescale directive should be outside the module definition
+  `timescale ins/ns /1 ns
+
+  // Compute the sum of a and b using 8-bit 2's complement addition
+  s = a + b;
+
+  // Check for signed overflow by comparing the result with the maximum positive number (all ones)
+  if ((s[7] == a[7]) && (b[7] == 1'b0))
+    overflow <= 1'b1; // Overflow occurred
+  else if ((s[7] == b[7]) && (a[7] == 1'b0))
+    overflow <= 1'b1; // Overflow occurred
+  else
+    overflow <= 1'b0; // No overflow occurred
+end
+
+// Add this block to synchronize the output with the positive edge of clk
+always @(posedge clk) begin
+  s <= s; // Assign the value of s back to itself, effectively doing nothing but ensuring that s is updated on the rising edge of clk
+end
+
+endmodule

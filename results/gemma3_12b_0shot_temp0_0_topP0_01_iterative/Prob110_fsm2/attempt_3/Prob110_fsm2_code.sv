@@ -1,0 +1,47 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  reg state;
+  reg out_reg;
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      state <= OFF;
+      out_reg <= 0;
+    end else begin
+      case (state)
+        OFF: begin
+          if (j) begin
+            state <= ON;
+          end else begin
+            state <= OFF;
+          end
+          out_reg <= 0;
+        end
+        ON: begin
+          if (k) begin
+            state <= OFF;
+          end else begin
+            state <= ON;
+          end
+          out_reg <= 1;
+        end
+        default: begin
+          state <= OFF;
+          out_reg <= 0;
+        end
+      endcase
+    end
+  end
+
+  assign out = out_reg;
+
+// VERILOG-EVAL: endmodule not found

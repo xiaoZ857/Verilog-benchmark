@@ -1,0 +1,14 @@
+always @(posedge clk) begin
+  if (reset) begin
+    q <= 5'b11111;  // Reset to all 1s
+  end else begin
+    // Galois LFSR with taps at positions 5 and 3 (bits 4 and 2)
+    // Feedback bit is q[0]
+    // Shift right and XOR feedback with tap positions
+    q[4] <= q[3] ^ q[0];  // MSB gets shifted bit XOR feedback (tap at position 5)
+    q[3] <= q[2];         // No tap at position 4
+    q[2] <= q[1] ^ q[0];  // Tap at position 3
+    q[1] <= q[0];         // No tap at position 2
+    q[0] <= q[0];         // LSB stays the same (this is the feedback bit)
+  end
+end

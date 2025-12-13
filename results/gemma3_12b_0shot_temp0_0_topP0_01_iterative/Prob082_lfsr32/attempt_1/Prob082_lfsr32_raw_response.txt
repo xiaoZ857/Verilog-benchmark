@@ -1,0 +1,58 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+  reg [31:0] next_q;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 32'h1;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+  always @(*) begin
+    next_q = q;
+    next_q[31] = q[30] ^ q[0]; // Tap at position 32 (q[31])
+    next_q[21] = q[20] ^ q[0]; // Tap at position 22 (q[21])
+    next_q[1] = q[0] ^ q[0]; // Tap at position 2 (q[1])
+    next_q[0] = q[0]; // No tap at position 1 (q[0])
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input clk, input reset, output reg [31:0] q);` declares the module named `TopModule` with inputs `clk` (clock), `reset`, and output `q` (a 32-bit register).
+
+2. **`next_q` Register:**
+   - `reg [31:0] next_q;` declares a register `next_q` to hold the next state of the LFSR.  This is necessary for sequential logic.
+
+3. **Synchronous Reset:**
+   - `always @(posedge clk) begin ... end` defines a sequential block triggered by the positive edge of the clock.
+   - `if (reset) begin q <= 32'h1; end` implements the synchronous reset. When `reset` is high, the LFSR `q` is initialized to `32'h1`.  The `<=` operator is used for non-blocking assignment within the sequential block.
+
+4. **Next State Logic (Combinational Logic):**
+   - `always @(*) begin ... end` defines a combinational block that calculates the next state of the LFSR based on the current state.  The `*` sensitivity list means the block will re-evaluate whenever any of the input signals (in this case, `q`) change.
+   - `next_q = q;` initializes `next_q` with the current value of `q`. This is important because we only modify the bits that have taps.
+   - The lines `next_q[31] = q[30] ^ q[0];`, `next_q[21] = q[20] ^ q[0];`, and `next_q[1] = q[0] ^ q[0];` implement the XOR operations for the taps at positions 32, 22, and 2, respectively.  The XOR operation combines the bit at the tap position with the LSB (q[0]).
+   - `next_q[0] = q[0];` assigns the current value of q[0] to next_q[0] because there is no tap at position 1.
+
+**How it Works (Galois LFSR):**
+
+- The LFSR shifts the bits to the right on each clock cycle.
+- The XOR operations at the tap positions introduce feedback.  The output of the XOR gate becomes the next value of the corresponding bit position.
+- The taps are chosen to ensure a maximum length sequence (2^n - 1, where n is the number of bits).  The specific tap positions determine the sequence generated.
+
+**Important Considerations:**
+
+* **Maximum Length Sequence:** The choice of tap positions is crucial for generating a maximum-length sequence.  Incorrect tap positions will result in a shorter, repeating sequence.
+* **Initial State:** The initial state of the LFSR (the value of `q` when `reset` is asserted) also affects the sequence generated.
+* **Simulation:**  It's essential to simulate this module to verify that it generates the expected sequence.
+* **Synthesis:**  This code is synthesizable and can be implemented in hardware.

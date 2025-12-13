@@ -1,0 +1,53 @@
+
+module TopModule(
+    input clk, // Positive clock/clk triggered
+    input in,   // Serial data input
+    input reset, // Active-high synchronous reset
+    output [7:0] out_byte, // Correctly received data byte
+    output done     // Done signal to indicate a complete byte has been received
+);
+
+// Define the states of the finite state machine
+typedef enum logic[1:0] {
+    IDLE,
+    START_BIT,
+    DATA_BITS,
+    STOP_BIT,
+    VERIFIED_STOP_BIT,
+    DONE
+} fsm_state;
+
+// Initialize the state machine with the active-high synchronous reset
+fsm_state state = IDLE;
+
+// Define the next state for each current state
+always @(posedge clk) begin
+    if (reset) begin
+        state <= IDLE;
+    end else if (in == 0 && state != IDLE) begin // Start bit detected
+        state <= START_BIT;
+    end else if (state == START_BIT && in == 1) begin // Stop bit detected
+        state <= STOP_BIT;
+    end else if (state == DATA_BITS && in == 1) begin // Data bits received
+        state <= STOP_BIT;
+    end else if (state == STOP_BIT && in == 0) begin // Stop bit verified
+        state <= VERIFIED_STOP_BIT;
+    end else if (state == VERIFIED_STOP_BIT && in == 1) begin // Complete byte received
+        out_byte <= in[7:0]; // Extract the data bits from the input
+        state <= DONE;
+    end else if (in == 1) begin // Stop bit detected, but not verified yet
+        state <= STOP_BIT;
+    end else if (state != IDLE && in == 0) begin // Idle state with no new data
+        state <= IDLE;
+    end
+end
+
+// Output the correctly received data byte when done is asserted
+assign out_byte = done ? in[7:0] : 8'd0;
+
+// Assert done when a complete byte has been received
+assign done = (state == DONE);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

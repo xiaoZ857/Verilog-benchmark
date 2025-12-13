@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    out <= 32'b0;
+    prev_in <= in;
+  end else begin
+    // Detect falling edges (1 to 0 transition)
+    out <= out | (prev_in & ~in);
+    prev_in <= in;
+  end
+end
+
+endmodule

@@ -1,0 +1,85 @@
+To implement the described Moore state machine in Verilog, we need to define a module with two states: `B` and `A`. The state transitions are based on the current state and the input signal. The output is determined solely by the current state.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire reset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    STATE_B = 2'b00,  // Reset state
+    STATE_A = 2'b01   // Other state
+  } state_t;
+
+  // Declare the current and next state registers
+  state_t current_state, next_state;
+
+  // State transition logic
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= STATE_B;  // Synchronous active-high reset to state B
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    case (current_state)
+      STATE_B: begin
+        if (in == 0) begin
+          next_state = STATE_A;  // Transition to A on input 0
+        end else begin
+          next_state = STATE_B;  // Remain in B on input 1
+        end
+      end
+
+      STATE_A: begin
+        if (in == 0) begin
+          next_state = STATE_B;  // Transition to B on input 0
+        end else begin
+          next_state = STATE_A;  // Remain in A on input 1
+        end
+      end
+
+      default: begin
+        next_state = STATE_B;  // Default case, go to state B
+      end
+    endcase
+  end
+
+  // Output logic based on current state (Moore machine)
+  always_comb begin
+    case (current_state)
+      STATE_B: out = 1'b1;
+      STATE_A: out = 1'b0;
+      default: out = 1'b1;  // Default output is 1
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We use a `typedef enum` to define the states `STATE_B` and `STATE_A`. This makes the code more readable.
+
+- **Registers for States**: 
+  - `current_state`: Holds the current state of the machine.
+  - `next_state`: Determines the next state based on the input and current state.
+
+- **State Transition Logic**:
+  - The `always_ff` block updates the `current_state` at every positive edge of the clock or when a reset is detected. If `reset` is high, it sets the state to `STATE_B`.
+
+- **Next State Logic**:
+  - The `always_comb` block determines the next state based on the current state and input.
+
+- **Output Logic**:
+  - Another `always_comb` block assigns the output value based solely on the `current_state`, as per Moore machine characteristics. 
+
+This implementation ensures that the state transitions and outputs are correctly handled according to the given specifications.

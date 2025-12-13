@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:29: error: Unknown module type: FullAdder
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:37: error: Unknown module type: FullAdder
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:45: error: Unknown module type: FullAdder
+results/gpt_oss_20b_0shot_temp0_0_topP0_01_iterative\Prob016_m2014_q4j\attempt_3\Prob016_m2014_q4j_code.sv:53: error: Unknown module type: FullAdder
+5 error(s) during elaboration.
+*** These modules were missing:
+        FullAdder referenced 4 times.
+***

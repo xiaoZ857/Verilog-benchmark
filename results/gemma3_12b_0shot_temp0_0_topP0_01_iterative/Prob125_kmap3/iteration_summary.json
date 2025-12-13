@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob125_kmap3",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 95 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 95 out of 232 samples\n\nSimulation finished at 1161 ps\nMismatches: 95 in 232 samples\n",
+      "mismatch_count": 95
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 119 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 119 out of 232 samples\n\nSimulation finished at 1161 ps\nMismatches: 119 in 232 samples\n",
+      "mismatch_count": 119
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 70 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 70 out of 232 samples\n\nSimulation finished at 1161 ps\nMismatches: 70 in 232 samples\n",
+      "mismatch_count": 70
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 96 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 96 out of 232 samples\n\nSimulation finished at 1161 ps\nMismatches: 96 in 232 samples\n",
+      "mismatch_count": 96
+    }
+  ]
+}

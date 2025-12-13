@@ -1,0 +1,67 @@
+To implement the Verilog module `TopModule` based on the given simulation waveform, we need to analyze how the output `z` changes with respect to inputs `x` and `y`. Let's break down the behavior:
+
+1. **Initial State (0ns - 20ns):**  
+   - Inputs: `x = 0`, `y = 0`
+   - Output: `z = 1`
+
+2. **Change at 25ns:**  
+   - Input: `x` changes to `1`
+   - Output: `z` changes to `0`
+
+3. **Change at 35ns:**  
+   - Input: `y` changes to `1`
+   - Output: `z` changes to `0`
+
+4. **Change at 45ns:**  
+   - Inputs: Both `x = 1`, `y = 1`
+   - Output: `z` changes to `1`
+
+5. **Change at 55ns:**  
+   - Input: `x` changes back to `0`
+   - Output: `z` changes to `1`
+
+6. **Change at 60ns:**  
+   - Input: `y` changes back to `0`
+   - Output: `z` changes to `0`
+
+7. **Change at 70ns:**  
+   - Inputs: Both `x = 1`, `y = 1`
+   - Output: `z` changes to `1`
+
+8. **Change at 75ns:**  
+   - Input: `x` changes back to `0`
+   - Output: `z` changes to `0`
+
+9. **Change at 90ns:**  
+   - Input: `y` changes back to `0`
+   - Output: `z` changes to `0`
+
+From this analysis, we can deduce the logic for `z`:
+
+- `z = 1` when both `x = 0` and `y = 0`.
+- `z = 0` when either `x = 1` or `y = 1`, unless both are `1`.
+
+This behavior is equivalent to a NOR gate followed by an OR gate. Specifically, the output `z` can be described as:
+
+\[ z = \overline{x + y} + (x \cdot y) \]
+
+In Verilog, this logic can be implemented as follows:
+
+```verilog
+module TopModule (
+  input x,
+  input y,
+  output reg z
+);
+
+always @(*) begin
+    if ((~x & ~y) | (x & y))
+        z = 1;
+    else
+        z = 0;
+end
+
+endmodule
+```
+
+This code uses a combinational always block to evaluate the logic for `z` based on the current values of `x` and `y`. The expression checks if both inputs are `0` or both are `1`, setting `z` accordingly.

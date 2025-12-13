@@ -1,0 +1,23 @@
+
+module TopModule (
+  input mode,
+  input too_cold,
+  input too_hot,
+  input fan_on,
+  output heater,
+  output aircon,
+  output fan
+);
+
+// Logic for heater control
+assign heater = (mode == 1) & too_cold;
+
+// Logic for air conditioner control
+assign aircon = (mode == 0) & too_hot;
+
+// Fan control logic
+assign fan = ((heater | aircon) == 1) | fan_on;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

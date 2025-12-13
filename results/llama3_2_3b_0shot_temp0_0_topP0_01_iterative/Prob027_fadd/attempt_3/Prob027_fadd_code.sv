@@ -1,0 +1,22 @@
+
+module TopModule (
+  input a,
+  input b,
+  input cin,
+  output cout,
+  output sum
+);
+### Corrected Module Body Code ###
+// Internal signals for the full adder
+wire temp_sum;
+wire temp_cout;
+
+// Full Adder logic
+temp_sum = a + b + cin; // Fixed error: removed comparison operator
+temp_cout = (a + b + cin) > 2'd3 ? 1'b1 : 1'b0;
+
+// Output signals
+sum[2] = temp_sum;
+cout = temp_cout;
+
+endmodule

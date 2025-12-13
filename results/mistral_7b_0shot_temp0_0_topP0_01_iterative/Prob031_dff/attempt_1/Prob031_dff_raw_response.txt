@@ -1,0 +1,21 @@
+ Here is the Verilog code for a simple D Flip-Flop module as per your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire d,
+  output reg q
+);
+
+always @(posedge clk)
+begin
+  if (d)
+    q <= 1'b1;
+  else
+    q <= 1'b0;
+end
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with three signals: `clk`, `d`, and `q`. The `always` block triggers on the positive edge of the clock signal, and it assigns the value of the `d` input to the `q` output when the clock edge occurs. If `d` is 1, then `q` becomes 1; otherwise, `q` becomes 0.

@@ -1,0 +1,83 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  // Declare an array of D flip-flops
+  reg [7:0] dff_q;
+
+  // Synchronous reset logic
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, d, reset, q);` defines the module named `TopModule` with the specified input and output ports.
+
+2. **Signal Declaration:**
+   - `reg [7:0] q;` declares the output `q` as a register, which is necessary to store the output of the flip-flops.
+   - `reg [7:0] dff_q;` declares an array of registers to hold the output of each D flip-flop.  While not directly used in the final code, it's a good practice to declare this if you were to implement the flip-flops individually.
+
+3. **Synchronous Reset Logic:**
+   - `always @(posedge clk) begin ... end` creates a sequential block that executes on the positive edge of the clock signal (`clk`).
+   - `if (reset) begin q <= 0; end` implements the synchronous reset. When `reset` is high, the output `q` is set to 0 on the next positive clock edge.
+   - `else begin q <= d; end`  If `reset` is low, the output `q` takes the value of the input `d` on the next positive clock edge.
+
+**How it works:**
+
+This code effectively creates a single 8-bit register that is updated on the positive edge of the clock.  The synchronous reset ensures that the register is initialized to zero when the `reset` signal is asserted.  The input `d` is loaded into the register on the positive clock edge when `reset` is not asserted.
+
+**Alternative Implementation (Individual D Flip-Flops):**
+
+If you wanted to explicitly create 8 individual D flip-flops, you could do something like this:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  reg [7:0] dff_q;
+
+  genvar i;
+  generate
+    for (i = 0; i < 8; i = i + 1) begin: dff_loop
+      always @(posedge clk) begin
+        if (reset) begin
+          dff_q[i] <= 0;
+        end else begin
+          dff_q[i] <= d[i];
+        end
+      end
+    end
+  endgenerate
+
+  assign q = dff_q;
+
+endmodule
+```
+
+**Explanation of the Alternative:**
+
+1. **`genvar i;`**: Declares a generate variable `i` for use in the `generate` block.
+2. **`generate ... endgenerate`**:  This block allows you to create multiple instances of a module or a block of code.
+3. **`for (i = 0; i < 8; i = i + 1) begin: dff_loop`**: This loop iterates 8 times, creating 8 separate `always` blocks.  The `dff_loop` is a label for the loop, which is optional but can be helpful for debugging.
+4. **`always @(posedge clk) begin ... end`**:  Each iteration of the loop creates an `always` block that executes on the positive edge of the clock.
+5. **`dff_q[i] <= ...`**:  Inside each `always` block, the `dff_q[i]` register is updated based on the `reset` signal and the corresponding bit of the input `d`.
+6. **`assign q = dff_q;`**:  This assigns the value of the `dff_q` array to the output `q`.
+
+The second implementation is more verbose but explicitly shows the individual flip-flops.  The first implementation is more concise and functionally equivalent.  Choose the implementation that best suits your needs and coding style.  The first implementation is generally preferred for its simplicity.

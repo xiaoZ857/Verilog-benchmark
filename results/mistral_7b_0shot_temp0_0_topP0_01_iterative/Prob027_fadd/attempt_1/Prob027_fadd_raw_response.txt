@@ -1,0 +1,50 @@
+ Here is the Verilog code for a full adder based on your description:
+
+```verilog
+module FullAdder (
+  input a,
+  input b,
+  input cin,
+  output reg cout,
+  output reg sum
+);
+
+// Internal signals for XOR and AND operations
+wire xor_result;
+wire and_result;
+
+// XOR gate
+xor gates (
+  .a(a),
+  .b(b),
+  .o(xor_result)
+);
+
+// AND gate
+and gates (
+  .a(cin),
+  .b(xor_result),
+  .o(and_result)
+);
+
+// OR gate for sum
+or gates (
+  .a(a),
+  .b(b),
+  .c(cin),
+  .o(sum)
+);
+
+// XOR gate for carry-out calculation
+xor gates (
+  .a(cin),
+  .b(and_result),
+  .o(cout)
+);
+
+endmodule
+```
+
+This Verilog code defines a module named `FullAdder` that takes three inputs: `a`, `b`, and `cin` (carry-in). It produces two outputs: `sum` and `cout` (carry-out). The internal signals `xor_result` and `and_result` are used for the XOR and AND operations, respectively.
+
+The XOR gate calculates the sum of the bits `a` and `b`, while the AND gate checks if there is a carry-in (`cin`) and the XOR operation between `a`, `b`, and `cin`. The final OR gate computes the sum by adding the three inputs, including the possible carry-in. Lastly, the XOR gate calculates the carry-out based on the carry-in and the AND result.

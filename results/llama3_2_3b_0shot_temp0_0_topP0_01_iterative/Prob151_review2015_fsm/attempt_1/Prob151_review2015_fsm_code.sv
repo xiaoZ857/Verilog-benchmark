@@ -1,0 +1,73 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+reg [3:0] state;
+reg [7:0] count;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= 4'b0000; // Reset to idle state
+    count <= 8'0;      // Reset counter to 0
+  end else begin
+    case(state)
+      4'b0000: // Idle state
+        if (data == 1'b1 && data[2] == 1'b1 && data[3] == 1'b1) begin
+          shift_ena <= 1'b1;
+          state <= 4'b0100; // Shift enable state
+        end else begin
+          shift_ena <= 1'b0;
+        end
+
+      4'b0100: // Shift enable state
+        if (data == 1'b1 && data[2] == 1'b1 && data[3] == 1'b1) begin
+          count <= count + 4'd1; // Increment counter by 4 bits
+          shift_ena <= 1'b0;
+          state <= 4'b1000; // Counting state
+        end else begin
+          shift_ena <= 1'b0;
+        end
+
+      4'b1000: // Counting state
+        if (done_counting == 1'b1) begin
+          counting <= 1'b1;
+          done <= 1'b1;
+          state <= 4'b0000; // Reset to idle state
+        end else begin
+          counting <= 1'b0;
+        end
+
+      default: // Invalid states
+        state <= 4'b0000;
+    endcase
+  end
+end
+
+assign shift_ena = (state == 4'b0100) ? 1'b1 : 1'b0;
+
+always @(posedge done_counting) begin
+  if (done_counting == 1'b1 && counting == 1'b1) begin
+    ack <= 1'b1;
+  end else begin
+    ack <= 1'b0;
+  end
+end
+
+assign counting = (state != 4'b1000) ? 1'b0 : 1'b1;
+
+always @(posedge clk) begin
+  if (ack == 1'b1 && state == 4'b0000) begin
+    state <= 4'b0100; // Reset to shift enable state
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

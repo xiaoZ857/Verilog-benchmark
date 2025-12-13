@@ -1,0 +1,25 @@
+**Verilog implementation – Moore FSM with two states (OFF/ON)**  
+
+```verilog
+//  TopModule.v
+//  Moore state‑machine with two states, two inputs and one output.
+//  Reset is an active‑high synchronous reset that forces the machine to OFF.
+//
+//  OFF (out = 0)  -- j = 0 --> OFF
+//  OFF (out = 0)  -- j = 1 --> ON
+//  ON  (out = 1)  -- k = 0 --> ON
+//  ON  (out = 1)  -- k = 1 --> OFF
+//
+//  The state bit itself is the output (0 = OFF, 1 = ON).
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire clk,    // clock
+    input  wire j,      // input that drives OFF → ON transition
+    input  wire k,      // input that drives ON  → OFF transition
+    input  wire reset,  // active‑high synchronous reset
+    output wire out     // Moore output (same as state)
+);
+
+    // State

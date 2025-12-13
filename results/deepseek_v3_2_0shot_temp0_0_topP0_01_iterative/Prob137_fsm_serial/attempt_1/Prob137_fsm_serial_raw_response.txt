@@ -1,0 +1,77 @@
+We'll design an FSM with states to detect the start bit, receive 8 data bits, check the stop bit, and handle error recovery if the stop bit is missing. The FSM will also manage a counter for the data bits.
+
+```verilog
+    // States
+    localparam IDLE = 2'b00;
+    localparam DATA = 2'b01;
+    localparam STOP = 2'b10;
+    localparam ERROR = 2'b11;
+    
+    reg [1:0] state, next_state;
+    reg [3:0] bit_cnt, next_bit_cnt;
+    reg done_reg, next_done;
+    
+    // State transition and counter update
+    always @(posedge clk) begin
+        if (reset) begin
+            state <= IDLE;
+            bit_cnt <= 4'b0;
+            done_reg <= 1'b0;
+        end else begin
+            state <= next_state;
+            bit_cnt <= next_bit_cnt;
+            done_reg <= next_done;
+        end
+    end
+    
+    // Next state logic
+    always @(*) begin
+        // Default assignments
+        next_state = state;
+        next_bit_cnt = bit_cnt;
+        next_done = 1'b0;
+        
+        case (state)
+            IDLE: begin
+                // Wait for start bit (0)
+                if (in == 1'b0) begin
+                    next_state = DATA;
+                    next_bit_cnt = 4'b0;
+                end
+            end
+            DATA: begin
+                // Count 8 bits (0 to 7)
+                if (bit_cnt == 4'd7) begin
+                    // After 8th data bit, move to STOP
+                    next_state = STOP;
+                    next_bit_cnt = 4'b0;
+                end else begin
+                    next_bit_cnt = bit_cnt + 1'b1;
+                end
+            end
+            STOP: begin
+                // Check stop bit (expected 1)
+                if (in == 1'b1) begin
+                    // Valid stop bit
+                    next_state = IDLE;
+                    next_done = 1'b1;
+                end else begin
+                    // Missing stop bit, wait in ERROR state
+                    next_state = ERROR;
+                end
+            end
+            ERROR: begin
+                // Wait until a stop bit (1) is found
+                if (in == 1'b1) begin
+                    next_state = IDLE;
+                end
+            end
+            default: begin
+                next_state = IDLE;
+            end
+        endcase
+    end
+    
+    assign done = done_reg;
+endmodule
+```

@@ -1,0 +1,35 @@
+ Here is the Verilog code for your description:
+
+```verilog
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+
+assign temp1 = (a < b) ? a : b;
+assign temp2 = (temp1 < c) ? temp1 : c;
+assign min = (temp2 < d) ? temp2 : d;
+
+always @(posedge clk) begin
+  if (rst) begin
+    min <= 8'b0; // Reset value for min
+  end
+end
+
+// Add reset signal (rst) and clock input (clk) here as needed.
+
+// Example of how to add reset and clock:
+// input clk, rst;
+// always @(posedge clk or negedge rst) begin
+//   if (rst) begin
+//     min <= 8'b0; // Reset value for min
+//   end
+// end
+```
+
+This Verilog code compares the four input signals `a`, `b`, `c`, and `d` to find the minimum. It uses a series of assignment statements with conditional operators (`? :`) to compare the numbers. The `temp1`, `temp2` variables are used as intermediate results during the comparison process.
+
+The code also includes an always block that resets the `min` signal when the reset signal (`rst`) is asserted. You can add a clock input (`clk`) and modify the always block accordingly if needed.

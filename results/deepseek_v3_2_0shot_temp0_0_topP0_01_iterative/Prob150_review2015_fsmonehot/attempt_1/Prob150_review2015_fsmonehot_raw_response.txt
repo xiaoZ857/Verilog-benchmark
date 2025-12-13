@@ -1,0 +1,78 @@
+We can derive the next-state logic and output logic directly from the state transition table and one-hot encoding.  
+
+First, let's label the one-hot state bits:  
+
+`state[0] = S`  
+`state[1] = S1`  
+`state[2] = S11`  
+`state[3] = S110`  
+`state[4] = B0`  
+`state[5] = B1`  
+`state[6] = B2`  
+`state[7] = B3`  
+`state[8] = Count`  
+`state[9] = Wait`  
+
+---
+
+**Next-state logic by inspection:**
+
+- **S_next**:  
+  From S (state[0]) if d=0 → S  
+  From S1 (state[1]) if d=0 → S  
+  From S110 (state[3]) if d=0 → S  
+  From Wait (state[9]) if ack=1 → S  
+
+  So:  
+  `S_next = (state[0] & ~d) | (state[1] & ~d) | (state[3] & ~d) | (state[9] & ack);`
+
+- **S1_next**:  
+  From S (state[0]) if d=1 → S1  
+
+  So:  
+  `S1_next = state[0] & d;`
+
+- **B3_next**:  
+  From B2 (state[6]) → B3 (always)  
+
+  So:  
+  `B3_next = state[6];`
+
+- **Count_next**:  
+  From B3 (state[7]) → Count (always)  
+  From Count (state[8]) if done_counting=0 → Count  
+
+  So:  
+  `Count_next = state[7] | (state[8] & ~done_counting);`
+
+- **Wait_next**:  
+  From Count (state[8]) if done_counting=1 → Wait  
+  From Wait (state[9]) if ack=0 → Wait  
+
+  So:  
+  `Wait_next = (state[8] & done_counting) | (state[9] & ~ack);`
+
+---
+
+**Output logic:**
+
+- `shift_ena = state[4] | state[5] | state[6] | state[7];`  (B0, B1, B2, B3)
+- `counting = state[8];`  (Count state)
+- `done = state[9];`      (Wait state)
+
+---
+
+Here’s the Verilog implementation:
+
+```verilog
+  assign S_next = (state[0] & ~d) | (state[1] & ~d) | (state[3] & ~d) | (state[9] & ack);
+  assign S1_next = state[0] & d;
+  assign B3_next = state[6];
+  assign Count_next = state[7] | (state[8] & ~done_counting);
+  assign Wait_next = (state[8] & done_counting) | (state[9] & ~ack);
+  
+  assign shift_ena = state[4] | state[5] | state[6] | state[7];
+  assign counting = state[8];
+  assign done = state[9];
+endmodule
+```

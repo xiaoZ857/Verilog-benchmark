@@ -1,0 +1,34 @@
+Here's a Verilog module that implements the decade counter as described:
+
+```verilog
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+
+reg [4:0] count; // 5-bit counter to hold the decimal value
+
+always @(posedge clk) begin
+  if (reset) begin
+    count <= 0;
+  end else if (slowena) begin
+    count <= count + 1;
+  end else begin
+    count <= count + 1;
+  end
+end
+
+assign q = count[3:0];
+
+endmodule
+```
+
+This module uses a 5-bit counter to hold the decimal value. The `always` block is triggered by the positive edge of the clock signal, and it checks for three conditions:
+
+- If the reset input is active high, it resets the counter to 0.
+- If the slowena input is active low (i.e., not high), it increments the counter as normal.
+- If the slowena input is active high, it does nothing and leaves the counter unchanged.
+
+The `assign` statement then assigns the lower 4 bits of the counter to the output q.

@@ -1,0 +1,29 @@
+To implement the Verilog module as described, you need to create a combinational circuit that takes a 16-bit input and splits it into two 8-bit outputs. The lower byte (bits 7:0) will be directly taken from bits [7:0] of the input, and the upper byte (bits 15:8) will be extracted from bits [15:8] of the input.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [15:0] in,
+    output [7:0] out_hi,
+    output [7:0] out_lo
+);
+
+    // Assign the upper byte (bits 15:8) to out_hi
+    assign out_hi = in[15:8];
+
+    // Assign the lower byte (bits 7:0) to out_lo
+    assign out_lo = in[7:0];
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module `TopModule` has a 16-bit input `in` and two 8-bit outputs, `out_hi` and `out_lo`.
+  
+- **Assignments**:
+  - `assign out_hi = in[15:8];`: This line assigns the upper byte of the input (bits 15 to 8) to the output `out_hi`. The slicing operation `[15:8]` extracts these bits from the input.
+  - `assign out_lo = in[7:0];`: Similarly, this line assigns the lower byte of the input (bits 7 to 0) to the output `out_lo`.
+
+This module is purely combinational as it uses continuous assignments (`assign`) without any clock or sequential logic. The outputs are directly determined by the current state of the inputs.

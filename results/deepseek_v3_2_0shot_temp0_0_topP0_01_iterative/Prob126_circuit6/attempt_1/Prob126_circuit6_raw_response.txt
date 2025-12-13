@@ -1,0 +1,30 @@
+Looking at the waveform data, we can see that for each input value `a`, there's a corresponding 16-bit output `q` in hexadecimal. The pattern shows that `q` is determined solely by the value of `a`, making it a combinational lookup table.
+
+From the data:
+- When a = 0: q = 1232 (hex)
+- When a = 1: q = aee0 (hex)  
+- When a = 2: q = 27d4 (hex)
+- When a = 3: q = 5a0e (hex)
+- When a = 4: q = 2066 (hex)
+- When a = 5: q = 64ce (hex)
+- When a = 6: q = c526 (hex)
+- When a = 7: q = 2f19 (hex)
+
+This is a simple combinational circuit that implements a ROM-like behavior where `q` is a function of `a`.
+
+```verilog
+always @(*) begin
+    case (a)
+        3'd0: q = 16'h1232;
+        3'd1: q = 16'haee0;
+        3'd2: q = 16'h27d4;
+        3'd3: q = 16'h5a0e;
+        3'd4: q = 16'h2066;
+        3'd5: q = 16'h64ce;
+        3'd6: q = 16'hc526;
+        3'd7: q = 16'h2f19;
+        default: q = 16'hxxxx;
+    endcase
+end
+endmodule
+```

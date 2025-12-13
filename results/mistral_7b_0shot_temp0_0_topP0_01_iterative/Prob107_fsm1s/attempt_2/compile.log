@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob107_fsm1s\attempt_2\Prob107_fsm1s_code.sv:10: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob107_fsm1s\attempt_2\Prob107_fsm1s_code.sv:6:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob107_fsm1s\attempt_2\Prob107_fsm1s_code.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob107_fsm1s\attempt_2\Prob107_fsm1s_code.sv:13: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_0_topP0_01_iterative\Prob107_fsm1s\attempt_2\Prob107_fsm1s_code.sv:13: error: Unable to elaborate this case expression.
+3 error(s) during elaboration.

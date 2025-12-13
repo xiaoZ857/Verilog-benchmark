@@ -1,0 +1,60 @@
+
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg Z
+);
+always @(posedge clk) begin
+    if (enable) begin
+        FF0.clk = 1;
+        FF0.en = enable;
+        FF0.d = S;
+        
+        FF1.clk = 1;
+        FF1.en = FF0.q;
+        FF1.d = FF0.q;
+        
+        FF2.clk = 1;
+        FF2.en = FF1.q;
+        FF2.d = FF1.q;
+        
+        FF3.clk = 1;
+        FF3.en = FF2.q;
+        FF3.d = FF2.q;
+        
+        FF4.clk = 1;
+        FF4.en = FF3.q;
+        FF4.d = FF3.q;
+        
+        FF5.clk = 1;
+        FF5.en = FF4.q;
+        FF5.d = FF4.q;
+        
+        FF6.clk = 1;
+        FF6.en = FF5.q;
+        FF6.d = FF5.q;
+        
+        FF7.clk = 1;
+        FF7.en = FF6.q;
+        FF7.d = FF6.q;
+    end
+end
+
+always @* begin
+    case ({A, B, C})
+        0: Z = FF0.q;
+        1: Z = FF1.q;
+        2: Z = FF2.q;
+        3: Z = FF3.q;
+        4: Z = FF4.q;
+        5: Z = FF5.q;
+        6: Z = FF6.q;
+        7: Z = FF7.q;
+    endcase
+end
+
+endmodule

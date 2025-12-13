@@ -1,0 +1,15 @@
+  logic xor_out;
+  
+  // Initialize output to avoid undefined state
+  initial begin
+    out = 1'b0;
+  end
+  
+  // Combinational XOR logic
+  assign xor_out = in ^ out;
+  
+  // D flip-flop (positive edge triggered, no reset)
+  always_ff @(posedge clk) begin
+    out <= xor_out;
+  end
+endmodule

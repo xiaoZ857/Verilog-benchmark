@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:63: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:67: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:70: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:73: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:6:      : z is declared here as wire.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:76: error: z is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_0_topP0_01_iterative\Prob089_ece241_2014_q5a\attempt_2\Prob089_ece241_2014_q5a_code.sv:6:      : z is declared here as wire.
+5 error(s) during elaboration.

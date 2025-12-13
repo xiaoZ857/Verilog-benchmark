@@ -1,0 +1,57 @@
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always_ff @(posedge clk) begin
+    if (ena) begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input d, input ena, output logic q);`**:  This declares the module named `TopModule` with inputs `d` (data), `ena` (enable), and output `q`.  `logic` is used for the output `q` as it's a more modern and flexible data type in Verilog.
+* **`always_ff @(posedge clk) begin ... end`**: This is an `always_ff` block, which is specifically designed for sequential logic (flip-flops and latches).  The `@(posedge clk)` sensitivity list indicates that the block is triggered on the positive edge of the clock signal `clk`.  **Important:**  The problem description states to assume positive clock triggered signals.  However, a D latch is typically triggered by an enable signal, not a clock.  This implementation assumes a clock signal is present and the latch is clocked by it.  If the latch is truly level-triggered, the `always_ff` block should be replaced with an `always` block and the sensitivity list should include `d` and `ena`.
+* **`if (ena) begin ... end`**: This conditional statement checks if the enable signal `ena` is high.
+* **`q <= d;`**: If `ena` is high, the value of the input `d` is assigned to the output `q`.  The non-blocking assignment operator `<=` is used because this is within an `always_ff` block, which implies sequential logic.  This ensures that the value of `d` is sampled at the clock edge and assigned to `q` at the end of the clock cycle.
+
+**How it works as a D latch:**
+
+The D latch holds the value of the input `d` when the enable signal `ena` is high. When `ena` is low, the output `q` holds its previous value.  The clock signal `clk` is used to trigger the update of `q` when `ena` is high.
+
+**Alternative implementation (level-triggered):**
+
+If the latch is truly level-triggered (i.e., changes state immediately when `ena` changes), the code would be:
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always @(d or ena) begin
+    if (ena) begin
+      q = d;
+    end
+  end
+
+endmodule
+```
+
+In this version:
+
+* **`always @(d or ena)`**:  The `always` block is triggered whenever either `d` or `ena` changes.
+* **`q = d;`**:  A blocking assignment `=` is used because this is a combinational assignment.  The value of `d` is assigned to `q` immediately when `ena` is high.
+
+**Important Considerations:**
+
+* **Clock Signal:** The original problem description mentions positive clock triggered signals, but a D latch is typically triggered by an enable signal.  The first implementation assumes a clock signal is present.  If no clock signal is intended, use the second (level-triggered) implementation.
+* **Blocking vs. Non-Blocking Assignments:**  Use non-blocking assignments (`<=`) in `always_ff` blocks and blocking assignments (`=`) in `always` blocks.  This is crucial for correct sequential logic behavior.
+* **Simulation:**  To verify the functionality of the D latch, you would need to write a testbench that applies different values to `d` and `ena` and observes the output `q`.

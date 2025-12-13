@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:13: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:15: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:17: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:19: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:21: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:23: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:25: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:27: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob102_circuit3\attempt_1\Prob102_circuit3_code.sv:7:      : q is declared here as wire.
+8 error(s) during elaboration.

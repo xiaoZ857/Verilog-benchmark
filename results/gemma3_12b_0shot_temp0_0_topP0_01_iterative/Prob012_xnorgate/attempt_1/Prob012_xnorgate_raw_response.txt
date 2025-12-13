@@ -1,0 +1,38 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = ~(a ^ b);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input a, input b, output out);`**: This line declares the module named `TopModule` and defines its input and output ports. `a` and `b` are inputs, and `out` is the output.
+* **`assign out = ~(a ^ b);`**: This is the core logic of the XNOR gate.
+    * `^` is the XOR (exclusive OR) operator.  It outputs 1 if `a` and `b` are different, and 0 if they are the same.
+    * `~` is the NOT operator. It inverts the output of the XOR gate.  Therefore, the output `out` will be 1 only when `a` and `b` are the same (because the XOR will output 0, and the NOT will invert it to 1).
+
+**Alternative Implementation (using a more explicit logic expression):**
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = (a == b);
+
+endmodule
+```
+
+**Explanation of Alternative:**
+
+* **`assign out = (a == b);`**: This directly compares `a` and `b` using the equality operator `==`.  The result is 1 if `a` and `b` are equal, and 0 otherwise.  This is the definition of an XNOR gate.
+
+Both implementations achieve the same functionality. The first one uses the XOR and NOT operators, while the second uses the equality operator.  The choice between them often depends on personal preference or coding style.  The equality operator is generally considered more readable for XNOR.

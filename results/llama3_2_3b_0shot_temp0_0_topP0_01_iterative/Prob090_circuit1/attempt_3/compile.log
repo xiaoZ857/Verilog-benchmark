@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:8: warning: Port declaration of q inherits dimensions from var/net.
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:8: error: Scalar port ``q'' has a vectored net declaration [1:0].
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:12: error: Could not find variable ``q'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:14: error: Could not find variable ``q'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:16: error: Could not find variable ``q'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:18: error: Could not find variable ``q'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_0_topP0_01_iterative\Prob090_circuit1\attempt_3\Prob090_circuit1_code.sv:5: error: no wire/reg q in module tb.top_module1.
+6 error(s) during elaboration.

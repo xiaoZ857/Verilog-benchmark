@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob145_circuit8\attempt_2\Prob145_circuit8_code.sv:13: error: Unable to bind wire/reg/memory `last_a' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob145_circuit8\attempt_2\Prob145_circuit8_code.sv:13: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob145_circuit8\attempt_2\Prob145_circuit8_code.sv:21: error: Could not find variable ``last_a'' in ``tb.top_module1''
+3 error(s) during elaboration.

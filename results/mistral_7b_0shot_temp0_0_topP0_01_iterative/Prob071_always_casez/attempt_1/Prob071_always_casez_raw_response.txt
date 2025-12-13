@@ -1,0 +1,34 @@
+ Here is a Verilog implementation for the priority encoder as per your description:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+always @(posedge clk) begin
+  pos <= 3'bz; // Initialize output to zero
+
+  if (in[0])
+    pos <= 3'b010; // Output 0 if bit[0] is high
+
+  for (int i = 1; i < 8; i++) begin
+    if (in[i] && !in[(i-1)])
+      pos <= {pos[1], pos[2], i+3'b1}; // Output the index of the first bit that is high
+  end
+end
+
+// Add clock enable and reset signals as needed
+assign clk_en = your_clock_enable_signal;
+assign reset = your_reset_signal;
+
+always @(posedge clk) if (clk_en && !reset) begin
+  pos <= 3'bz; // Reset output to zero
+end
+
+// Replace 'your_clock_enable_signal' and 'your_reset_signal' with actual signals from your design.
+```
+
+This Verilog module implements a priority encoder for an 8-bit input vector. The `in` signal represents the 8-bit input, and the `pos` output reg reports the index of the first (least significant) bit that is high. If no bits are high, the output will be zero.
+
+The module uses a combination of an always block and a for loop to check each bit in the input vector and update the output accordingly. The clock enable and reset signals can be added as needed to integrate this module into your larger design.

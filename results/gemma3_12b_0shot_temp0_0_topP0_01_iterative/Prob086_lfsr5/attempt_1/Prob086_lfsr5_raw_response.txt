@@ -1,0 +1,76 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+
+  // Internal signal to store the next state
+  reg [4:0] next_q;
+
+  // Define the tap positions (5 and 3)
+  localparam TAP_POS1 = 5;
+  localparam TAP_POS2 = 3;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      // Synchronous reset to all 1s
+      q <= 5'b11111;
+    end else begin
+      // Calculate the next state based on the Galois LFSR logic
+      next_q <= q >> 1; // Shift right
+
+      // XOR the tap positions with the LSB
+      if (q[TAP_POS1 - 1] != q[0]) begin
+        next_q[TAP_POS1 - 1] <= 1;
+      end else begin
+        next_q[TAP_POS1 - 1] <= 0;
+      end
+
+      if (q[TAP_POS2 - 1] != q[0]) begin
+        next_q[TAP_POS2 - 1] <= 1;
+      end else begin
+        next_q[TAP_POS2 - 1] <= 0;
+      end
+
+      // Update the output register with the next state
+      q <= next_q;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input clk, input reset, output reg [4:0] q);` declares the module named `TopModule` with a clock input (`clk`), a reset input (`reset`), and a 5-bit output register `q`.
+
+2. **Internal Signal:**
+   - `reg [4:0] next_q;` declares an internal register `next_q` to hold the next state of the LFSR.  This is important because we need to calculate the next state *before* updating the output `q`.
+
+3. **Tap Positions:**
+   - `localparam TAP_POS1 = 5;` and `localparam TAP_POS2 = 3;` define the tap positions as constants.  This makes the code more readable and easier to modify if you want to change the taps.
+
+4. **`always @(posedge clk)` Block:**
+   - This block describes the sequential logic that is triggered on the positive edge of the clock signal.
+
+5. **Synchronous Reset:**
+   - `if (reset) begin q <= 5'b11111; end` handles the synchronous reset. When `reset` is high, the LFSR is initialized to all 1s.
+
+6. **Shift Right:**
+   - `next_q <= q >> 1;` performs the right shift operation.  This shifts all bits in the `q` register one position to the right. The most significant bit (MSB) becomes 0.
+
+7. **XOR with Taps:**
+   - The `if` statements implement the XOR logic for the taps.  For each tap position, it checks if the bit at that position is different from the LSB (`q[0]`). If they are different, the corresponding bit in `next_q` is set to 1; otherwise, it's set to 0.  This effectively XORs the tap position with the LSB.
+
+8. **Update Output:**
+   - `q <= next_q;` updates the output register `q` with the calculated `next_q` value.
+
+**How it works (Galois LFSR):**
+
+The core of a Galois LFSR is the right shift and XOR operation.  The right shift moves the register contents one position to the right.  The XOR operations at the tap positions introduce feedback.  The taps are carefully chosen to ensure that the LFSR cycles through all possible states (except the all-zero state) before repeating.  The specific tap positions (5 and 3 in this case) are determined by a primitive polynomial that generates a maximal-length sequence.
+
+**To simulate this code:**
+
+You'll need a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado).  You can create a testbench to provide clock and reset signals and observe the output `q`.  The output `q` will cycle through a sequence of 31 (2^5 - 1) states before repeating.

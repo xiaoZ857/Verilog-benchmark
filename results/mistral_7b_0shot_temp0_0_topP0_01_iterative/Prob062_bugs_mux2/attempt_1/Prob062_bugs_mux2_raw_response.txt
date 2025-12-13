@@ -1,0 +1,18 @@
+ The issue with your Verilog code is that the `out` signal is declared as a register, which means it will only update on the rising edge of the clock. However, in your current design, there is no clock provided. Since the mux does not have any clock-controlled elements, it should be combinational logic instead.
+
+Here's the corrected version of your code:
+
+```verilog
+module top_module (
+      input sel,
+      input [7:0] a,
+      input [7:0] b,
+      output [7:0] out
+);
+
+assign out = (~sel & a) | (sel & b);
+
+endmodule
+```
+
+In this corrected version, the `out` signal is now 8-bit wide and combinational. This means it will update immediately based on the current values of the input signals `sel`, `a`, and `b`.

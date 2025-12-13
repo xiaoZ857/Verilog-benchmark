@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+  reg [511:0] next_q;
+
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+  always @(*) begin
+    next_q = q; // Default: no change
+
+    for (int i = 0; i < 512; i++) begin
+      // Determine left and right neighbors, handling boundaries
+      int left_neighbor = (i == 0) ? 0 : q[i-1];
+      int right_neighbor = (i == 511) ? 0 : q[i+1];
+
+      // Determine next state based on Rule 110 table
+      case ({left_neighbor, q[i], right_neighbor})
+        3'b111: next_q[i] = 0;
+        3'b110: next_q[i] = 1;
+        3'b101: next_q[i] = 1;
+        3'b100: next_q[i] = 0;
+        3'b011: next_q[i] = 1;
+        3'b010: next_q[i] = 1;
+        3'b001: next_q[i] = 1;
+        3'b000: next_q[i] = 0;
+        default: next_q[i] = 0; // Should never happen, but good to have a default
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`: Defines the module named `TopModule` with the specified input and output ports.
+
+2. **Signal Declarations:**
+   - `reg [511:0] next_q;`:  Declares a register `next_q` to hold the next state of the cells.  This is crucial for the sequential logic.
+   - `output reg [511:0] q;`: Declares the output `q` as a register, as it's updated on the clock edge.
+
+3. **Synchronous Load:**
+   - `always @(posedge clk) begin ... end`: This block is triggered on the positive edge of the clock signal.
+   - `if (load) begin q <= data; end`: If the `load` signal is high, the `q` register is loaded with the value from the `data` input.  This is the synchronous load functionality.
+   - `else begin q <= next_q; end`: Otherwise, the `q` register is updated with the value from the `next_q` register (the next state calculated in the combinatorial logic).
+
+4. **Combinatorial Logic (Rule 110 Implementation):**
+   - `always @(*) begin ... end`: This block is a combinational logic block.  The `@(*)` sensitivity list means it will re-evaluate whenever any of its input signals change.
+   - `next_q = q;`:  Initializes `next_q` with the current state of `q`. This is important because we only want to change the cells that need to change based on the rule.
+   - `for (int i = 0; i < 512; i++) begin ... end`:  This loop iterates through each cell in the 512-cell array.
+   - `int left_neighbor = (i == 0) ? 0 : q[i-1];`:  Determines the left neighbor of the current cell. If the cell is at the left boundary (i=0), the left neighbor is considered to be 0 (off). Otherwise, it's the value of the cell to the left.
+   - `int right_neighbor = (i == 511) ? 0 : q[i+1];`:  Determines the right neighbor of the current cell. If the cell is at the right boundary (i=511), the right neighbor is considered to be 0 (off). Otherwise, it's the value of the cell to the right.
+   - `case ({left_neighbor, q[i], right_neighbor}) ... endcase`: This `case` statement implements the Rule 110 lookup table.  It takes the left neighbor

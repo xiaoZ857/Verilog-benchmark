@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob073_dff16e\attempt_2\Prob073_dff16e_code.sv:12: error: Could not find variable ``ff'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob073_dff16e\attempt_2\Prob073_dff16e_code.sv:17: error: Could not find variable ``ff['sd15:'sd8]'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob073_dff16e\attempt_2\Prob073_dff16e_code.sv:20: error: Could not find variable ``ff['sd7:'sd0]'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob073_dff16e\attempt_2\Prob073_dff16e_code.sv:25: error: Unable to bind wire/reg/memory `ff['sd15:'sd8]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_0_topP0_01_iterative\Prob073_dff16e\attempt_2\Prob073_dff16e_code.sv:28: error: Unable to bind wire/reg/memory `ff['sd7:'sd0]' in `tb.top_module1'
+5 error(s) during elaboration.

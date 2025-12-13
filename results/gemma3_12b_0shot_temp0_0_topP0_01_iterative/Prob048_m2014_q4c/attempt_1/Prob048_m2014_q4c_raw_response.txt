@@ -1,0 +1,41 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+  logic q_internal;
+
+  always_ff @(posedge clk, posedge r) begin
+    if (r) begin
+      q_internal <= 1'b0;
+    end else begin
+      q_internal <= d;
+    end
+  end
+
+  assign q = q_internal;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`logic q_internal;`**:  Declares an internal signal `q_internal` to hold the state of the flip-flop.  This is good practice to separate the internal state from the output signal.
+* **`always_ff @(posedge clk, posedge r)`**: This is a sequential block that describes the behavior of the flip-flop.  `always_ff` is used to explicitly indicate that this is a flip-flop.  The sensitivity list `(posedge clk, posedge r)` specifies that the block is triggered on the positive edge of the clock signal (`clk`) *or* the positive edge of the reset signal (`r`).  This is crucial for synchronous reset.
+* **`if (r) begin ... end else begin ... end`**: This conditional statement implements the reset logic.
+    * **`if (r)`**: If the reset signal `r` is high (active high reset), the flip-flop's output `q_internal` is set to 0.
+    * **`else`**: If the reset signal `r` is low, the flip-flop's output `q_internal` takes the value of the data input `d`.
+* **`assign q = q_internal;`**: This continuous assignment statement connects the internal state `q_internal` to the output signal `q`.  This ensures that the output `q` always reflects the current state of the flip-flop.
+
+**Key Features and Considerations:**
+
+* **Synchronous Reset:** The reset is synchronous because it only takes effect on the positive edge of the clock signal. This is generally preferred for predictable behavior in digital circuits.
+* **Active High Reset:** The reset signal `r` is active high, meaning that a high signal on `r` forces the output `q` to 0.
+* **`always_ff`**:  Using `always_ff` is the recommended way to define sequential logic in modern Verilog. It explicitly states that the block represents a flip-flop, which helps with synthesis and verification.
+* **Internal Signal:** Using an internal signal `q_internal` is good practice for separating the flip-flop's state from its output.  This makes the code more readable and maintainable.
+* **Positive Edge Triggered:** The flip-flop is triggered on the positive edge of the clock signal.
+
+This implementation provides a simple and functional D flip-flop with synchronous reset, suitable for many digital design applications.

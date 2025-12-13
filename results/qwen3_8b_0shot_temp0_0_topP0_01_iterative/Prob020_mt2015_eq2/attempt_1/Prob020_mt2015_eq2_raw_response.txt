@@ -1,0 +1,24 @@
+Here is the implementation of the Verilog module as described:
+
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output z
+);
+
+assign z = (A == B);
+
+endmodule
+```
+
+---
+
+### Explanation:
+
+- **Inputs**: `A` and `B` are 2-bit inputs.
+- **Output**: `z` is a single-bit output.
+- **Functionality**: The output `z` is set to `1` if the 2-bit values of `A` and `B` are equal, and `0` otherwise.
+- **Implementation**: The comparison `A == B` is a bitwise equality check between the two 2-bit vectors. This results in a 1-bit value, which is directly assigned to `z` using a continuous assignment (`assign`).
+
+This approach is **combinational** and does not require any clock or sequential logic, as the output is a direct function of the inputs.

@@ -1,0 +1,15 @@
+
+module TopModule (
+    input clk,
+    input [7:0] d,
+    output reg [7:0] q
+);
+
+    // Always block triggered on the positive edge of the clock
+    always @(posedge clk) begin
+        q <= d;  // Capture the value of 'd' into 'q'
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

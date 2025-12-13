@@ -1,0 +1,45 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else begin
+      if (q == 9) begin
+        q <= 0;
+      end else begin
+        q <= q + 1;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input clk, input reset, output reg [3:0] q);`**:  This line declares the module named `TopModule` with the specified input (`clk`, `reset`) and output (`q`) signals.  `q` is declared as a `reg` because it's assigned within an `always` block.  `[3:0]` indicates a 4-bit register, allowing it to represent values from 0 to 9 (0000 to 1001).
+* **`always @(posedge clk)`**: This block defines a sequential logic block that executes on the positive edge of the clock signal.
+* **`if (reset)`**: This checks if the `reset` signal is high (active high).
+* **`q <= 0;`**: If `reset` is high, the counter `q` is synchronously reset to 0.  The non-blocking assignment (`<=`) is crucial for sequential logic.
+* **`else begin`**: If `reset` is low, the counter proceeds with its normal counting sequence.
+* **`if (q == 9) begin`**: This checks if the counter has reached the maximum value (9).
+* **`q <= 0;`**: If `q` is 9, it resets to 0, completing the count from 0 to 9.
+* **`else begin`**: If `q` is not 9, it increments.
+* **`q <= q + 1;`**:  The counter `q` is incremented by 1.  Again, the non-blocking assignment (`<=`) is essential for correct sequential behavior.
+* **`end`**:  Closes the `else` and `always` blocks.
+
+**How it works:**
+
+The code implements a synchronous decade counter.  On each positive clock edge:
+
+1. **Reset Check:** It first checks if the `reset` signal is high. If it is, the counter is reset to 0.
+2. **Counting:** If the `reset` signal is low, the counter checks its current value.
+3. **Wrap-around:** If the counter is at 9, it resets to 0.
+4. **Increment:** Otherwise, the counter increments by 1.
+
+This ensures that the counter cycles through the values 0 to 9 and then resets to 0, repeating the sequence with each clock pulse. The synchronous reset ensures that the counter is reliably reset to 0 when the `reset` signal is asserted.

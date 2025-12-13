@@ -1,0 +1,10 @@
+always @(posedge clk) begin
+  if (reset && q == 1'b0) begin
+    count <= 1;
+    q <= 1'b0;
+  end else begin
+    // Increment the count and wrap around when it reaches 10
+    count <= count + 1;
+    q <= count % 10; // Use modulo to get the last digit of the count
+  end
+end

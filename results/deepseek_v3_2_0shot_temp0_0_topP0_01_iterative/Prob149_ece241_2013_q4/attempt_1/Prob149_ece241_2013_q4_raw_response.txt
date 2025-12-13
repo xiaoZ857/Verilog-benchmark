@@ -1,0 +1,96 @@
+We need to track the previous sensor state to determine if the level was rising or falling.  
+The outputs fr3, fr2, fr1, dfr are set based on current sensors and previous level trend.  
+
+Let’s define states based on sensor readings:  
+
+1. **STATE_BELOW_S1** (no sensors asserted) → fr3=1, fr2=1, fr1=1, dfr=1  
+2. **STATE_BETWEEN_S1_S2** (only s[1] asserted) → fr1=1, fr2=1, dfr depends on previous state  
+3. **STATE_BETWEEN_S2_S3** (s[1] and s[2] asserted) → fr1=1, fr2=0, dfr depends on previous state  
+4. **STATE_ABOVE_S3** (all s[1], s[2], s[3] asserted) → all fr=0, dfr=0  
+
+The dfr (Supplemental flow valve) is 1 if we were previously lower than current state (i.e., water level was rising), except in states where max flow is already on (below s1) or no flow is needed (above s3). Actually, from spec:  
+- If sensor change indicates previous level was lower than current, dfr=1.  
+- But in below_s1, dfr=1 always. In above_s3, dfr=0 always.  
+- In between states, dfr=1 if last transition was from lower level.  
+
+We store previous sensor state to detect rising/falling.  
+
+Let’s implement:  
+
+```verilog
+  reg [3:1] s_prev;
+  reg [1:0] state, next_state;
+  
+  localparam BELOW_S1      = 2'b00,
+             BETWEEN_S1_S2 = 2'b01,
+             BETWEEN_S2_S3 = 2'b10,
+             ABOVE_S3      = 2'b11;
+  
+  // State transition logic
+  always @(*) begin
+    case (s)
+      3'b000: next_state = BELOW_S1;
+      3'b001: next_state = BETWEEN_S1_S2;
+      3'b011: next_state = BETWEEN_S2_S3;
+      3'b111: next_state = ABOVE_S3;
+      default: next_state = BELOW_S1; // if illegal sensor pattern, treat as low
+    endcase
+  end
+  
+  // Sequential logic
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= BELOW_S1;
+      s_prev <= 3'b000;
+    end else begin
+      state <= next_state;
+      s_prev <= s;
+    end
+  end
+  
+  // Determine if water level was previously lower (rising)
+  wire rising;
+  assign rising = (s_prev == 3'b000 && s == 3'b001) ||
+                  (s_prev == 3'b001 && s == 3'b011) ||
+                  (s_prev == 3'b011 && s == 3'b111) ||
+                  (s_prev == 3'b000 && s == 3'b011) ||
+                  (s_prev == 3'b001 && s == 3'b111) ||
+                  (s_prev == 3'b000 && s == 3'b111);
+  
+  // Output logic
+  always @(*) begin
+    case (state)
+      BELOW_S1: begin
+        fr3 = 1'b1;
+        fr2 = 1'b1;
+        fr1 = 1'b1;
+        dfr = 1'b1;
+      end
+      BETWEEN_S1_S2: begin
+        fr3 = 1'b0;
+        fr2 = 1'b1;
+        fr1 = 1'b1;
+        dfr = rising ? 1'b1 : 1'b0;
+      end
+      BETWEEN_S2_S3: begin
+        fr3 = 1'b0;
+        fr2 = 1'b0;
+        fr1 = 1'b1;
+        dfr = rising ? 1'b1 : 1'b0;
+      end
+      ABOVE_S3: begin
+        fr3 = 1'b0;
+        fr2 = 1'b0;
+        fr1 = 1'b0;
+        dfr = 1'b0;
+      end
+      default: begin
+        fr3 = 1'b0;
+        fr2 = 1'b0;
+        fr1 = 1'b0;
+        dfr = 1'b0;
+      end
+    endcase
+  end
+endmodule
+```

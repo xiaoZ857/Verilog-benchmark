@@ -1,0 +1,39 @@
+// First level of XOR gates to count adjacent pairs
+wire [127:0] w1;
+for (i = 0; i < 128; i++) begin
+    assign w1[i] = in[i+1] ^ in[i];
+end
+
+// Second level of XOR reduction
+wire [63:0] w2;
+for (i = 0; i < 64; i++) begin
+    assign w2[i] = w1[2*i+1] ^ w1[2*i];
+end
+
+// Third level of XOR reduction
+wire [31:0] w3;
+for (i = 0; i < 32; i++) begin
+    assign w3[i] = w2[2*i+1] ^ w2[2*i];
+end
+
+// Fourth level of XOR reduction
+wire [15:0] w4;
+for (i = 0; i < 16; i++) begin
+    assign w4[i] = w3[2*i+1] ^ w3[2*i];
+end
+
+// Fifth level of XOR reduction and final count
+wire [7:0] w5;
+for (i = 0; i < 8; i++) begin
+    assign w5[i] = w4[2*i+1] ^ w4[2*i];
+end
+
+// Sum all bits in w5 to get the population count
+assign out = (w5[7] ? 128 : 0) + 
+             (w5[6] ? 64 : 0) + 
+             (w5[5] ? 32 : 0) + 
+             (w5[4] ? 16 : 0) + 
+             (w5[3] ? 8 : 0) + 
+             (w5[2] ? 4 : 0) + 
+             (w5[1] ? 2 : 0) + 
+             (w5[0] ? 1 : 0);

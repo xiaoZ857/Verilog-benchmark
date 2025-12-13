@@ -1,0 +1,66 @@
+
+module TopModule (
+  input in,
+  input [9:0] state,
+  output reg [9:0] next_state,
+  output out1,
+  output out2
+);
+
+assign out1 = (state[5]) ^ (state[7]); // Output logic for out1
+assign out2 = state[8]; // Output logic for out2
+
+always @(posedge clk) begin
+  if (in) begin
+    case (state)
+      0: next_state <= 1;
+      1: next_state <= 2;
+      2: next_state <= (state + 4); // state + 4 for S3, S6, and S9
+      3: next_state <= 5;
+      4: next_state <= 9;
+      5: next_state <= (state + 1); // state + 1 for S6 and S7
+      6: next_state <= 7;
+      7: next_state <= 7; // Loop back to S7 if in = 0
+      8: next_state <= 0;
+      9: next_state <= 1;
+    endcase
+  end else begin
+    case (state)
+      0: next_state <= 0;
+      1: next_state <= 0;
+      2: next_state <= 0;
+      3: next_state <= 4;
+      4: next_state <= 0;
+      5: next_state <= (state - 1); // state - 1 for S5 and S8
+      6: next_state <= 6;
+      7: next_state <= 0;
+      8: next_state <= 0;
+      9: next_state <= 0;
+    endcase
+  end
+end
+
+// Assuming that the state flip-flops are clocked on posedge clk
+always @(posedge clk) begin
+  if (reset) begin
+    next_state <= 0; // Reset all states to zero
+  end else begin
+    state <= next_state; // Update current state with next state
+  end
+end
+
+// Add reset signal and clock input as needed
+reg [1:0] reset = 2'b00; // Reset signal, assuming active low
+input clk;
+input rising_edge; // Assuming a synchronous reset on the rising edge of clk
+always @(posedge clk or posedge rising_edge) begin
+  if (reset) begin
+    state <= 0; // Reset all states to zero when reset is asserted
+  end
+end
+
+// Add more clock management and reset handling as needed
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (shift_ena) begin
+      // Shift in data MSB first
+      q[3] <= data;
+      for (integer i = 3; i > 0; i--) begin
+        q[i] <= q[i-1];
+      end
+    end else if (count_ena) begin
+      // Decrement the counter
+      q <= q - 1;
+    end else begin
+      // Hold the current value
+      // No action needed, value remains unchanged
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**: Defines the module with the specified inputs and output.
+2. **`reg [3:0] q`**: Declares `q` as a 4-bit register to hold the shift register/counter value.
+3. **`always @(posedge clk)`**:  This block executes on the positive edge of the clock signal.
+4. **`if (shift_ena)`**: If `shift_ena` is high, the shift register functionality is enabled.
+   - `q[3] <= data;`: The input `data` is shifted into the most significant bit (MSB) of the register (`q[3]`).
+   - `for (integer i = 3; i > 0; i--) begin q[i] <= q[i-1]; end`: This loop shifts the existing bits one position to the right (towards the LSB).
+5. **`else if (count_ena)`**: If `shift_ena` is low and `count_ena` is high, the counter functionality is enabled.
+   - `q <= q - 1;`: The register's value is decremented by 1.
+6. **`else`**: If both `shift_ena` and `count_ena` are low, the register holds its current value.  No action is taken in this case.
+
+**How it works:**
+
+* **Shift Register Mode (shift_ena = 1):**  The input `data` is loaded into the MSB, and the existing bits are shifted one position to the right.
+* **Counter Mode (count_ena = 1):** The register's value is decremented by 1.
+* **Hold Mode (shift_ena = 0, count_ena = 0):** The register's value remains unchanged.
+
+**Important Considerations:**
+
+* **Priority:** The problem statement explicitly allows for either `shift_ena` or `count_ena` to take precedence when both are high.  This implementation prioritizes `shift_ena` because it's checked first in the `if-else if` structure.  If you need to prioritize `count_ena`, simply swap the order of the `if` and `else if` statements.
+* **Data Type:**  The `data` input is assumed to be a single bit.  If it's a multi-bit signal, you'll need to adjust the shift register logic accordingly.
+* **Reset:** This implementation doesn't include a reset signal.  If you need to initialize the register to a specific value, you're advised to add a reset signal and incorporate it into the `always` block.
+* **Overflow/Underflow:**  The counter doesn't handle underflow (going below 0).  If you need to wrap around, you'll need to add logic to check for underflow and reset the register to a maximum value (e.g., 15) when it occurs.

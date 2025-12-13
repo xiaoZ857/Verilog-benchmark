@@ -1,0 +1,51 @@
+To implement the described timer module in Verilog, we need to create a down-counter that can be loaded with a new value at any time and decrements each clock cycle when not being reloaded. The counter should assert an output signal `tc` (terminal count) when it reaches zero. Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output reg tc
+);
+
+  // Internal register to hold the current counter value
+  reg [9:0] counter;
+
+  always @(posedge clk) begin
+    if (load) begin
+      // Load the new count value into the counter
+      counter <= data;
+      // Reset terminal count signal when loading a new value
+      tc <= 0;
+    end else begin
+      if (counter > 0) begin
+        // Decrement the counter if it's greater than zero
+        counter <= counter - 1;
+      end
+      // Assert terminal count signal when counter reaches zero
+      if (counter == 0) begin
+        tc <= 1;
+      end
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `clk`: The clock input.
+  - `load`: A control signal to determine whether the counter should be loaded with a new value or decremented.
+  - `data`: A 10-bit wide input that provides the number of cycles for the timer.
+  - `tc`: An output signal indicating when the counter has reached zero.
+
+- **Internal Counter:**
+  - `counter`: A 10-bit register used to store the current count value. It is updated on each positive edge of the clock.
+
+- **Behavior:**
+  - When `load` is high, the counter is loaded with the value from `data`, and `tc` is reset to 0.
+  - When `load` is low, if the counter is greater than zero, it decrements by one. If the counter reaches zero, `tc` is set to 1.
+  - Once `tc` is asserted (i.e., when the counter reaches zero), it remains asserted until a new value is loaded into the counter.
+
+This implementation ensures that the timer can be reloaded at any time and correctly asserts the terminal count signal when the countdown completes.

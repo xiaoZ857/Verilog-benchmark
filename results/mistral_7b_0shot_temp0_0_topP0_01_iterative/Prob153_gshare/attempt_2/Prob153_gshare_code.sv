@@ -1,0 +1,54 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+always @(posedge clk or negedge areset) begin
+  if (!areset) begin
+    PHT <= 0; // Initialize PHT to zero on reset
+    branch_history <= 0; // Initialize global branch history register to zero on reset
+  end
+end
+
+// Move the timescale directive outside of the module definition
+`timescale 1ns / 1ps
+
+always @(posedge clk) begin
+  if (train_valid && train_enable) begin // Train the branch predictor
+    PHT[train_pc] <= train_taken ? (PHT[train_pc] + 1) : (PHT[train_pc] - 1);
+    if (train_mispredicted) branch_history <= train_history;
+  end
+end
+
+always @(posedge clk) begin // Predict the branch direction
+  if (predict_valid) begin
+    predict_taken <= PHT[pc_to_index(predict_pc)] > 63'b1;
+    predict_history <= branch_history[7:0];
+  end
+end
+
+always @(posedge clk) begin // Enable training when needed
+  train_enable <= (train_valid && !predict_valid);
+end
+
+function [6:0] pc_to_index;
+  input [6:0] pc;
+  variable temp;
+  temp = {pc[6], pc[5], pc[4], pc[3], pc[2], pc[1], pc[0], pc[6] ^ pc[5] ^ pc[4] ^ pc[3] ^ pc[2] ^ pc[1] ^ pc[0]};
+  return temp;
+endfunction
+
+// Add missing semicolon at the end of the function definition
+
+// VERILOG-EVAL: endmodule not found

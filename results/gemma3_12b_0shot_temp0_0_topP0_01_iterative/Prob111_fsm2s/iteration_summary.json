@@ -1,0 +1,74 @@
+{
+  "problem_name": "Prob111_fsm2s",
+  "model_name": "gemma3:12b",
+  "parameters": {
+    "temperature": 0.0,
+    "top_p": 0.01,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 3,
+  "total_attempts": 6,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_1\\Prob111_fsm2s_code.sv:20: error: out is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_1\\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_1\\Prob111_fsm2s_code.sv:21: error: out is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_1\\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_1\\Prob111_fsm2s_code.sv:22: error: out is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_1\\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_2\\Prob111_fsm2s_code.sv:19: error: out is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_2\\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_2\\Prob111_fsm2s_code.sv:20: error: out is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_2\\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_2\\Prob111_fsm2s_code.sv:21: error: out is not a valid l-value in tb.top_module1.\nresults/gemma3_12b_0shot_temp0_0_topP0_01_iterative\\Prob111_fsm2s\\attempt_2\\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'out' has 21 mismatches. First mismatch occurred at time 75.\nHint: Total mismatched samples is 21 out of 241 samples\n\nSimulation finished at 1206 ps\nMismatches: 21 in 241 samples\n",
+      "mismatch_count": 21
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'out' has 21 mismatches. First mismatch occurred at time 75.\nHint: Total mismatched samples is 21 out of 241 samples\n\nSimulation finished at 1206 ps\nMismatches: 21 in 241 samples\n",
+      "mismatch_count": 21
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'out' has 21 mismatches. First mismatch occurred at time 75.\nHint: Total mismatched samples is 21 out of 241 samples\n\nSimulation finished at 1206 ps\nMismatches: 21 in 241 samples\n",
+      "mismatch_count": 21
+    },
+    {
+      "attempt": 6,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'out' has 21 mismatches. First mismatch occurred at time 75.\nHint: Total mismatched samples is 21 out of 241 samples\n\nSimulation finished at 1206 ps\nMismatches: 21 in 241 samples\n",
+      "mismatch_count": 21
+    }
+  ]
+}

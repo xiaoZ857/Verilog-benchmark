@@ -1,0 +1,74 @@
+
+// Define timescale at the beginning of the file
+`timescale 1ns / 1ps
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+
+  // State definitions
+  reg current_state;
+  localparam A = 0, B = 1, C = 2, D = 3;
+
+  // State flip-flops
+  reg a, b, c, d;  // These are the state flip-flops
+
+  // Grant signals
+  wire [3:1] g;
+
+  // State flip-flop always blocks
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      current_state <= A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic and output assignments
+  reg [2:0] next_state;  // To store the next state value
+  always @* begin
+    // Default next states
+    next_state = current_state;
+
+    // State transitions
+    case (current_state)
+      A:
+        if (r[1]) begin
+          next_state = B;
+        end else if (r[2]) begin
+          next_state = C;
+        end else if (r[3]) begin
+          next_state = D;
+        end
+      B:
+        if (r[1]) begin
+          next_state = B;  // Stay in B if r1 is still high
+        end else begin
+          next_state = A;
+        end
+      C:
+        if (r[2]) begin
+          next_state = C;  // Stay in C if r2 is still high
+        end else begin
+          next_state = A;
+        end
+      D:
+        next_state = A;  // Always go back to A from D
+    endcase
+
+    // Output assignments based on current state
+    case (current_state)
+      B: g[1] = 1; g[2] = 0; g[3] = 0;
+      C: g[1] = 0; g[2] = 1; g[3] = 0;
+      D: g[1] = 0; g[2] = 0; g[3] = 1;
+      default: g[1] = 0; g[2] = 0; g[3] = 0;
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output shift_ena
+);
+  reg [1:0] count;
+  reg shifting;
+  
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 2'b00;
+      shifting <= 1'b1;
+    end else begin
+      if (shifting) begin
+        if (count == 2'b11) begin
+          shifting <= 1'b0;
+        end else begin
+          count <= count + 1;
+        end
+      end
+    end
+  end
+  
+  assign shift_ena = shifting;
+endmodule

@@ -1,0 +1,35 @@
+ Here's the Verilog code for a 4-bit priority encoder as per your description:
+
+```verilog
+module TopModule (
+  input [3:0] in,
+  output reg [1:0] pos
+);
+
+always @(posedge clk) begin
+  if (in[0] == 1)
+    pos <= 2'b00; // If bit 0 is set, position is 0
+  else if (in[1] == 1)
+    pos <= 2'b01; // If bit 1 is set, position is 1
+  else if (in[2] == 1)
+    pos <= 2'b10; // If bit 2 is set, position is 2
+  else if (in[3] == 1)
+    pos <= 2'b11; // If bit 3 is set, position is 3
+  else
+    pos <= 2'b00; // If none of the bits are set, position is 0
+end
+
+// Add clock enable (ce) if needed: always @(posedge clk) if (ce) pos <= ...
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with a 4-bit input vector `in` and a 2-bit output register `pos`. The priority encoder checks each bit of the input vector in order, and when it finds the first set bit, it sets the corresponding position in the output register. If none of the bits are set, the output is 0.
+
+You can add a clock enable (`ce`) if needed by modifying the always block as follows:
+
+```verilog
+always @(posedge clk) if (ce) begin
+  // ...
+end
+```

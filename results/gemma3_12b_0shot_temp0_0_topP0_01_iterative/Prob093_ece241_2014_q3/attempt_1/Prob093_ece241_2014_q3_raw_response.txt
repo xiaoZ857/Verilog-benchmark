@@ -1,0 +1,56 @@
+```verilog
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+
+  wire a = c;
+  wire b = d;
+
+  // Implement the K-map using 2-to-1 multiplexers and a 4-to-1 multiplexer.
+  // The K-map is:
+  //
+  //      ab
+  //  cd  00  01  11  10
+  //  00 | 0 | 0 | 0 | 1 |
+  //  01 | 1 | 0 | 0 | 0 |
+  //  11 | 1 | 0 | 1 | 1 |
+  //  10 | 1 | 0 | 0 | 1 |
+
+  // mux_in[0] = 0 when c=0, 1 when c=1
+  assign mux_in[0] = ~c;
+
+  // mux_in[1] = 1 when c=0, 0 when c=1
+  assign mux_in[1] = c;
+
+  // mux_in[2] = 1 when c=1, 0 when c=0
+  assign mux_in[2] = c;
+
+  // mux_in[3] = 1 when c=1, 0 when c=0
+  assign mux_in[3] = c;
+
+endmodule
+```
+
+**Explanation:**
+
+The problem asks to implement the K-map using only 2-to-1 and 4-to-1 multiplexers.  The K-map can be directly translated into a series of assignments.
+
+* **mux_in[0]:**  The output is 0 when `c=0` and 1 when `c=1`.  This is simply the inverse of `c`.
+* **mux_in[1]:** The output is 1 when `c=0` and 0 when `c=1`. This is simply `c`.
+* **mux_in[2]:** The output is 1 when `c=1` and 0 when `c=0`. This is simply `c`.
+* **mux_in[3]:** The output is 1 when `c=1` and 0 when `c=0`. This is simply `c`.
+
+The problem statement specifies that `a` and `b` are the selector inputs for the 4-to-1 multiplexer, and they are equal to `c` and `d` respectively.  The code directly assigns the appropriate values to `mux_in[0:3]` based on the K-map.  No 2-to-1 multiplexers are needed because the K-map can be directly implemented with simple assignments.
+
+**How it relates to the K-map:**
+
+The K-map dictates the output for each combination of inputs `c` and `d`. The code directly implements these values.  For example:
+
+* When `c=0` and `d=0` (ab=00), `mux_in[0]` is 1.
+* When `c=0` and `d=1` (ab=01), `mux_in[1]` is 0.
+* When `c=1` and `d=1` (ab=11), `mux_in[2]` is 1.
+* When `c=1` and `d=0` (ab=10), `mux_in[3]` is 1.
+
+This directly corresponds to the values in the K-map.

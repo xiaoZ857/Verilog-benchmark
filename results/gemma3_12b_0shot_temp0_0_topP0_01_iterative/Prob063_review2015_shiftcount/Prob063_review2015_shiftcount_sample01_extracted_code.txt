@@ -1,0 +1,20 @@
+  always @(posedge clk) begin
+    if (shift_ena) begin
+      // Shift in data MSB first
+      q[3] <= data;
+      for (integer i = 3; i > 0; i--) begin
+        q[i] <= q[i-1];
+      end
+    end else if (count_ena) begin
+      // Decrement the counter
+      if (q == 0) begin
+        q <= 0;
+      end else begin
+        q <= q - 1;
+      end
+    end else begin
+      // Hold the current value
+      // No action needed, value remains unchanged
+    end
+  end
+endmodule

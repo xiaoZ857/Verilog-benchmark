@@ -1,0 +1,24 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:25: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:26: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:27: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:28: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:33: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:34: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:35: sorry: This cast operation is not yet supported.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:102: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:102: error: Unable to bind wire/reg/memory `COUNTING' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:102: error: Unable to elaborate r-value: ((state)==(COUNTING))?(count_reg):(4'd0)
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:23: error: Could not find variable ``state'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:32: error: Could not find variable ``state'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:34: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:34: error: Unable to elaborate this case expression.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:72: error: Could not find variable ``next_state'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:74: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:74: error: Unable to elaborate this case expression.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_2\Prob156_review2015_fancytimer_code.sv:71: warning: @* found no sensitivities so it will never trigger.
+15 error(s) during elaboration.

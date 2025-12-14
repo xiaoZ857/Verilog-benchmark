@@ -1,0 +1,41 @@
+Here is the Verilog module that implements a population count circuit for a 3-bit input vector:
+```
+// Population Count Circuit for 3-Bit Input Vector
+
+module TopModule (
+  input [2:0] in, // 3-bit input vector (in, in[1], in[0])
+  output [1:0] out // 2-bit output (out, count)
+);
+
+// Define a separate module for the population count logic
+module PopulationCount(
+  input [2:0] in,
+  output [1:0] out
+);
+
+// Initialize counts to zero
+reg [1:0] bits = 2'b00;
+reg [3:0] total_count = 4'h000;
+
+// Count the '1's in the input vector
+assign {
+    bits[0] = in[0]; // count the least significant bit (rightmost)
+    bits[1] = in[1]; // count the middle bit
+    bits[2] = in[2]; // count the most significant bit (leftmost)
+
+    total_count <= {total_count, ~bits}; // increment the count if a '0' is encountered, otherwise keep the same value
+
+    out = total_count; // output the population count
+}
+
+endmodule
+
+// Create an instance of the population count module
+TopModule top_module (
+  .in(in),
+  .out(out)
+);
+
+endmodule
+```
+This implementation uses a separate module for the population count logic, which assigns the input bits to individual registers `bits`, and then updates a running total `total_count` based on whether each bit is '0' or '1'. The final output is simply the value of `total_count`.

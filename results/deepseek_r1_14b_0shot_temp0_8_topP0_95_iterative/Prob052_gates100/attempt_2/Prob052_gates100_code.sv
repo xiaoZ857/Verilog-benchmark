@@ -1,0 +1,22 @@
+
+// timescale directive should be placed before any modules
+`timescale 1ns / 1ps
+
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+
+  // Compute AND of all inputs
+  assign out_and = (in[99:0] == '1); 
+  // OR can be written as:
+  assign out_or = (in[99:0] != 0);
+  
+  // XOR across all inputs
+  assign out_xor = $countones(in[99:0]) % 2;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

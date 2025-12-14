@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+// Using assign statement (combinatorial logic)
+assign out_assign = a ^ b;
+
+// Using combinational always block
+always @* 
+  begin
+    out_always_comb = a ^ b;
+  end
+
+// Using clocked always block with flip-flop
+always @(posedge clk) 
+  begin
+    reg temp;
+    temp = a ^ b;
+    out_always_ff = temp;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

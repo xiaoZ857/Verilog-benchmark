@@ -1,0 +1,40 @@
+ Here is the Verilog code for the Moore finite state machine as described:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input wire in,
+  output reg out
+);
+
+reg A, B;
+
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    // Reset the state machine to initial state B when reset is high
+    A <= 1'b0;
+    B <= 1'b1;
+  end else begin
+    case (A)
+      // A transition table
+      1'b0: B <= in;
+      1'b1: B <= ~A;
+    endcase
+
+    case (B)
+      // B transition table
+      1'b0: A <= in;
+      1'b1: A <= ~B;
+    endcase
+  end
+end
+
+assign out = B;
+
+endmodule
+```
+
+In this code, the state machine has two states (A and B) represented by the `reg` variables `A` and `B`. The `always` block with sensitivity list `(posedge clk or negedge areset)` is used to describe the state transitions. If the asynchronous reset signal `areset` is high, the machine resets to the initial state B (0). Otherwise, it follows the transition table described in the problem.
+
+The output of the state machine is assigned to the `out` signal, which represents the current state B.

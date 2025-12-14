@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+
+  assign out[0] = in[7];
+  assign out[1] = in[6];
+  assign out[2] = in[5];
+  assign out[3] = in[4];
+  assign out[4] = in[3];
+  assign out[5] = in[2];
+  assign out[6] = in[1];
+  assign out[7] = in[0];
+
+endmodule
+```
+
+**Explanation:**
+
+The code directly assigns the bits of the input `in` to the output `out` in reverse order.
+
+* `assign out[0] = in[7];` assigns the most significant bit of the input (bit 7) to the least significant bit of the output (bit 0).
+* `assign out[1] = in[6];` assigns the second most significant bit of the input (bit 6) to the second least significant bit of the output (bit 1).
+*  And so on...
+* `assign out[7] = in[0];` assigns the least significant bit of the input (bit 0) to the most significant bit of the output (bit 7).
+
+This effectively reverses the bit order of the input vector.
+
+**Alternative (using a loop for more generalizability):**
+
+While the direct assignment is the most straightforward for this specific 8-bit case, a more general solution using a loop can be implemented if you needed to reverse an arbitrary width input.  However, the direct assignment is more efficient for this particular problem.
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+
+  integer i;
+  always @(in) begin
+    for (i = 0; i < 8; i++) begin
+      out[i] = in[7-i];
+    end
+  end
+
+endmodule
+```
+
+This version uses a `for` loop to iterate through the bits and reverse their order.  The `always @(in)` block ensures that the reversal happens whenever the input `in` changes.  However, for a fixed size vector like this, the direct assignment is generally preferred for its simplicity and efficiency.

@@ -1,0 +1,72 @@
+```verilog
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+
+  assign out_and = & in;  // 100-input AND gate
+  assign out_or = | in;  // 100-input OR gate
+  assign out_xor = ^ in;  // 100-input XOR gate
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  Defines the module named `TopModule` with the specified input and output ports.
+* **`input [99:0] in;`**:  Declares `in` as a 100-bit input vector, indexed from 99 down to 0.
+* **`output out_and, out_or, out_xor;`**:  Declares the three output signals.
+* **`assign out_and = & in;`**:  Uses the Verilog reduction operator `&` (bitwise AND) to perform a 100-input AND operation on the `in` vector. The result is assigned to the `out_and` output.
+* **`assign out_or = | in;`**:  Uses the Verilog reduction operator `|` (bitwise OR) to perform a 100-input OR operation on the `in` vector. The result is assigned to the `out_or` output.
+* **`assign out_xor = ^ in;`**:  Uses the Verilog reduction operator `^` (bitwise XOR) to perform a 100-input XOR operation on the `in` vector. The result is assigned to the `out_xor` output.
+* **`endmodule`**:  Marks the end of the module definition.
+
+**How it works:**
+
+The Verilog reduction operators (`&`, `|`, and `^`) are designed to operate on vectors or arrays. They automatically iterate over the entire vector, applying the respective logical operation (AND, OR, XOR) to each element.  This allows us to concisely implement the 100-input logic gates without explicitly writing out 100 individual logic gates.
+
+**Simulation/Testing:**
+
+To test this module, you would need a testbench that provides input values to the `in` port and observes the output values (`out_and`, `out_or`, `out_xor`).  Here's a simple example of a testbench:
+
+```verilog
+module TopModule_tb;
+
+  reg [99:0] in_tb;
+  wire out_and_tb;
+  wire out_or_tb;
+  wire out_xor_tb;
+
+  TopModule uut (
+    .in(in_tb),
+    .out_and(out_and_tb),
+    .out_or(out_or_tb),
+    .out_xor(out_xor_tb)
+  );
+
+  initial begin
+    // Initialize input
+    in_tb = 100'b0;
+
+    // Test case 1: All inputs are 0
+    #10;
+    $display("All inputs 0:");
+    $display("out_and: %b", out_and_tb);  // Expected: 0
+    $display("out_or: %b", out_or_tb);  // Expected: 0
+    $display("out_xor: %b", out_xor_tb);  // Expected: 0
+
+    // Test case 2: All inputs are 1
+    in_tb = 100'b1;
+    #10;
+    $display("All inputs 1:");
+    $display("out_and: %b", out_and_tb);  // Expected: 1
+    $display("out_or: %b", out_or_tb);  // Expected: 1
+    $display("out_xor: %b", out_xor_tb);  // Expected: 1
+
+    // Test case 3: Alternating 0 and 1
+    in_tb = 100'b01010101010101010101010101010101010101010101010101010101010101010101010101010101;
+    #10;
+    $display("Alternating inputs:");
+    $display("out

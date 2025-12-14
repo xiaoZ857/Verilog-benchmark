@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_2\Prob065_7420_code.sv:20: error: Unknown module type: nand_gate
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_2\Prob065_7420_code.sv:21: error: Unknown module type: nand_gate
+3 error(s) during elaboration.
+*** These modules were missing:
+        nand_gate referenced 2 times.
+***

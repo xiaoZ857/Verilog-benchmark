@@ -1,0 +1,23 @@
+
+module TopModule(
+    // inputs
+    input logic a, 
+    input logic b, 
+    input logic c,
+    
+    // outputs
+    output logic w, 
+    output logic x, 
+    output logic y, 
+    output logic z
+);
+
+// Assign wires to signals
+assign w = a;
+assign x = b;
+assign y = b;
+assign z = c;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

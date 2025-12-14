@@ -1,0 +1,101 @@
+
+`timescale 1ns / 1ps
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+
+  // Define states as integer variables
+  typedef enum {
+    STATE_IDLE = 0,
+    STATE_DETECTING,
+    STATE_RECEIVING,
+    STATE_WAITING,
+    STATE_DONE
+  ) state_type;
+
+  state_type current_state, next_state;
+  
+  // Initial values of outputs
+  initial begin
+    shift_ena = 0;
+    counting = 0;
+    done = 1;  // Active high reset: done is initially high
+  end
+
+  always @ (posedge clk or negedge reset) begin
+    if (!reset) begin
+      current_state <= STATE_IDLE;
+      shift_ena <= 0;
+      counting <= 0;
+      done <= 1;
+    end else begin
+      current_state <= next_state;
+      case (current_state)
+        STATE_IDLE: begin
+          if (data == 1) begin
+            next_state = STATE_DETECTING;
+          end else begin
+            next_state = current_state; // Stay in idle until start condition is met
+          end
+          shift_ena <= 0;
+          counting <= 0;
+          done <= 1;
+        end
+        
+        STATE_DETECTING: begin
+          if (data == 1) begin
+            next_state = STATE_RECEIVING;
+            shift_ena <= 1; // Start shifting data
+          end else begin
+            next_state = current_state;
+          end
+          counting <= 0;
+          done <= 1;
+        end
+        
+        STATE_RECEIVING: begin
+          shift_ena <= 1; // Keep shifting for the next 3 bits
+          if (data == 1) begin
+            next_state = STATE_RECEIVING;
+          end else begin
+            next_state = current_state;
+          end
+          counting <= 0;
+          done <= 1;
+        end
+        
+        STATE_WAITING: begin
+          counting <= 1; // Indicate waiting for counters to finish
+          if (done_counting) begin
+            next_state = STATE_DONE;
+          end else begin
+            next_state = current_state;
+          end
+          shift_ena <= 0;
+        end
+        
+        STATE_DONE: begin
+          done <= 1; // Notify user timer has completed
+          if (ack == 1) begin
+            next_state = STATE_IDLE; // Reset when ack received
+          end else begin
+            next_state = current_state;
+          end
+          shift_ena <= 0;
+          counting <= 0;
+        end
+      endcase
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

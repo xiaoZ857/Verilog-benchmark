@@ -1,0 +1,58 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 27
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:11: error: out['sd0] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd0] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:12: error: out['sd1] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd1] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:13: error: out['sd2] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd2] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:14: error: out['sd3] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd3] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:15: error: out['sd4] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd4] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:16: error: out['sd5] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd5] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:17: error: out['sd6] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd6] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:18: error: out['sd7] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd7] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:19: error: out['sd8] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd8] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:20: error: out['sd9] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd9] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:21: error: out['sd10] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd10] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:22: error: out['sd11] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd11] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:23: error: out['sd12] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd12] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:24: error: out['sd13] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd13] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:25: error: out['sd14] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd14] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:26: error: out['sd15] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd15] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:27: error: out['sd16] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd16] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:28: error: out['sd17] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd17] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:29: error: out['sd18] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd18] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:30: error: out['sd19] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd19] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:31: error: out['sd20] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd20] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:32: error: out['sd21] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd21] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:33: error: out['sd22] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd22] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:34: error: out['sd23] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd23] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:35: error: out['sd24] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:8:      : out['sd24] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob043_vector5\attempt_2\Prob043_vector5_code.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+27 error(s) during elaboration.

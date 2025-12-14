@@ -1,0 +1,16 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output reg out
+);
+
+  always @(*) begin
+    // Logic derived from Karnaugh map
+    out = a | b | c;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,46 @@
+To implement the described Verilog module, we'll create a shift register to maintain the branch history. The module will handle two main operations:
+
+1. **Prediction Update**: Shift in `predict_taken` when `predict_valid` is asserted.
+2. **Misprediction Handling**: Load new history from `train_history` and `train_taken` when `train_mispredicted` is asserted.
+
+The logic prioritizes handling a misprediction over updating the prediction, as specified. Let's write the Verilog code for this module:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input predict_valid,
+  input predict_taken,
+  output logic [31:0] predict_history,
+
+  input train_mispredicted,
+  input train_taken,
+  input [31:0] train_history
+);
+
+  // Internal register to hold the branch history
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Asynchronous reset to zero
+      predict_history <= 32'b0;
+    end else if (train_mispredicted) begin
+      // Load new history on misprediction
+      predict_history <= {train_history, train_taken};
+    end else if (predict_valid) begin
+      // Shift in `predict_taken` when a valid prediction is made
+      predict_history <= {predict_history[30:0], predict_taken};
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Asynchronous Reset**: The `always_ff` block is sensitive to both the positive edge of the clock and the asynchronous reset. If `areset` is asserted, it resets `predict_history` to zero.
+  
+- **Misprediction Handling**: When `train_mispredicted` is high, the history register is updated with a combination of `train_history` and `train_taken`. This ensures that the branch history reflects the actual outcome of the mispredicted branch.
+
+- **Prediction Update**: If no misprediction occurs and `predict_valid` is asserted, the module shifts in `predict_taken` from the least significant bit (LSB) side. The rest of the bits are shifted left, maintaining a 32-bit history with the most recent prediction at position 0.
+
+This implementation ensures that both normal operations and special conditions like mispredictions are handled correctly according to the specified requirements.

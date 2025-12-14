@@ -1,0 +1,57 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        current_state <= STATE_A;
+        count_w <= 2'b00; // Reset the counter for w occurrences
+        z <= 1'b0;
+    end else begin
+        case (current_state)
+            STATE_A: begin
+                if (s == 1) 
+                    next_state = STATE_B;
+                else 
+                    next_state = STATE_A;
+                    
+                count_w <= 2'b00; // Ensure counter is reset in state A when not transitioning to B
+            end
+            
+            STATE_B: begin
+                // Shift the count register and add current w value at LSB
+                count_w <= {count_w[0], w};
+
+                if (count_w == 3'b011 || count_w == 3'b101 || count_w == 3'b110) 
+                    next_state = STATE_C; // Move to state C if exactly two '1's in the last three clocks
+                else
+                    next_state = STATE_B;
+
+                z <= 1'b0; // Keep z low in state B
+            end
+
+            STATE_C: begin
+                next_state = STATE_B;
+                
+                // Set output z only when transitioning to STATE_B from STATE_C
+                z <= 1'b1;
+            end
+            
+        endcase
+        
+        // Update current_state at the end of the clock cycle, after determining next state
+        current_state <= next_state;
+    end
+end
+
+always_comb begin
+    case (current_state)
+        default: next_state = current_state; // Ensure stability in undefined states
+    endcase
+end
+
+// VERILOG-EVAL: endmodule not found

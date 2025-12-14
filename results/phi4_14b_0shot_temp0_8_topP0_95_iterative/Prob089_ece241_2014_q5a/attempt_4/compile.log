@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob089_ece241_2014_q5a\attempt_4\Prob089_ece241_2014_q5a_code.sv:10: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob089_ece241_2014_q5a\attempt_4\Prob089_ece241_2014_q5a_code.sv:12: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob089_ece241_2014_q5a\attempt_4\Prob089_ece241_2014_q5a_code.sv:18: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob089_ece241_2014_q5a\attempt_4\Prob089_ece241_2014_q5a_code.sv:18: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob089_ece241_2014_q5a\attempt_4\Prob089_ece241_2014_q5a_code.sv:33: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob089_ece241_2014_q5a\attempt_4\Prob089_ece241_2014_q5a_code.sv:33: error: Unable to elaborate this case expression.
+4 error(s) during elaboration.

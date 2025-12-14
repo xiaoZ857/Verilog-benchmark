@@ -1,0 +1,49 @@
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  always_ff @(posedge clk) begin
+    if (ena) begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input d, input ena, output logic q);`**: This line defines the module named `TopModule` with input signals `d` and `ena`, and output signal `q`.  `logic` is used for the output `q` as it can be either latched or driven.
+* **`always_ff @(posedge clk) begin ... end`**: This block defines a sequential always block triggered by the positive edge of the clock signal `clk`.  The `always_ff` keyword (introduced in SystemVerilog) explicitly tells the synthesis tool that this is a flip-flop (latch in this case).  This is the preferred way to write sequential logic in SystemVerilog as it helps the tool infer the correct hardware.  If you are using older Verilog, you may need to use `always @(posedge clk)` and the synthesis tool will infer the latch.
+* **`if (ena) begin q <= d; end`**: This is the core logic of the D latch. When the `ena` (enable) signal is high, the value of the input `d` is assigned to the output `q` on the positive edge of the clock.  The non-blocking assignment operator `<=` is used, which ensures that the assignment happens at the end of the current simulation time step.  This is essential for correct sequential logic behavior.
+
+**How it works:**
+
+The D latch holds its previous value when the `ena` signal is low. When `ena` is high, the latch "captures" the value of `d` and stores it in `q` on the next positive clock edge.  The output `q` then reflects that captured value until the next time `ena` is high.
+
+**To make this code runnable, you would also need to define the clock signal. Here's a complete, testable example:**
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+  logic clk;  // Declare a clock signal
+
+  always #5 clk = ~clk; // Create a clock signal with a period of 10 time units
+
+  always_ff @(posedge clk) begin
+    if (ena) begin
+      q <= d;
+    end
+  end
+
+endmodule
+```
+
+In this example, a clock signal `clk` is declared and initialized as a toggling signal using an `always` block with a delay. This allows you to simulate the module and observe its behavior.  In a real-world application, the clock signal would be provided by an external clock source.

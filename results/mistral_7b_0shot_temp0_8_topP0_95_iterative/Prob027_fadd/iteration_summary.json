@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob027_fadd",
+  "model_name": "mistral:7b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 6\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_1\\Prob027_fadd_code.sv:27: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_1\\Prob027_fadd_code.sv:27: error: Invalid module instantiation\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_1\\Prob027_fadd_code.sv:30: error: Sized numeric constant must have a size greater than zero.\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_1\\Prob027_fadd_code.sv:31: error: Sized numeric constant must have a size greater than zero.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob027_fadd_ref.sv:14: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 6\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_2\\Prob027_fadd_code.sv:27: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_2\\Prob027_fadd_code.sv:27: error: Invalid module instantiation\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_2\\Prob027_fadd_code.sv:30: error: Sized numeric constant must have a size greater than zero.\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_2\\Prob027_fadd_code.sv:31: error: Sized numeric constant must have a size greater than zero.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob027_fadd_ref.sv:14: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 6\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_3\\Prob027_fadd_code.sv:28: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_3\\Prob027_fadd_code.sv:28: error: Invalid module instantiation\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_3\\Prob027_fadd_code.sv:31: error: Sized numeric constant must have a size greater than zero.\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob027_fadd\\attempt_3\\Prob027_fadd_code.sv:32: error: Sized numeric constant must have a size greater than zero.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob027_fadd_ref.sv:14: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

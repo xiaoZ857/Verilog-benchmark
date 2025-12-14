@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:17: error: q1 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q1 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:18: error: q2 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q2 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:19: error: q3 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q3 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:20: error: q4 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q4 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:22: error: q1 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q1 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:23: error: q2 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q2 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:24: error: q3 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q3 is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:25: error: q4 is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob060_m2014_q4k\attempt_2\Prob060_m2014_q4k_code.sv:13:      : q4 is declared here as wire.
+8 error(s) during elaboration.

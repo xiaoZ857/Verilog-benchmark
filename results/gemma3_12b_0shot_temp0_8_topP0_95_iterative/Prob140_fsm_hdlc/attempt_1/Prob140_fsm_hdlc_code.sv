@@ -1,0 +1,118 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+  // Define states
+  parameter IDLE = 2'b00
+  parameter ONE = 2'b01
+  parameter TWO = 2'b10
+  parameter THREE = 2'b11
+  parameter FOUR = 2'b10  // Temporarily used for 'disc' output
+
+  reg [1:0] current_state;
+  reg [1:0] next_state;
+
+  // Output registers (for delayed assertion)
+  reg disc_reg;
+  reg flag_reg;
+  reg err_reg;
+
+  // Output assignments
+  assign disc = disc_reg;
+  assign flag = flag_reg;
+  assign err = err_reg;
+
+  // State register update
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= IDLE;
+      disc_reg <= 0;
+      flag_reg <= 0;
+      err_reg <= 0;
+    end else begin
+      current_state <= next_state;
+      disc_reg <= 0; // Default to 0
+      flag_reg <= 0;
+      err_reg <= 0;
+
+      case (current_state)
+        IDLE: begin
+          if (in)
+            next_state = ONE;
+          else
+            next_state = IDLE;
+        end
+        ONE: begin
+          if (in)
+            next_state = TWO;
+          else
+            next_state = IDLE;
+        end
+        TWO: begin
+          if (in)
+            next_state = THREE;
+          else
+            next_state = IDLE;
+        end
+        THREE: begin
+          if (in)
+            next_state = FOUR;
+          else
+            next_state = IDLE;
+        end
+        FOUR: begin
+          if (in) begin
+            next_state = IDLE; // Insert 0 after 5 ones
+            disc_reg <= 1; // Signal discard
+          end else begin
+            next_state = IDLE;
+          end
+        end
+      endcase
+      
+      if (current_state == ONE && in) begin
+         if (in) begin
+            if (in) begin
+               if (in) begin
+                  if (in) begin
+                     if (in) begin
+                        next_state = IDLE;  //6 ones, flag
+                        flag_reg <= 1;
+                     end
+                     else begin
+                        next_state = IDLE;
+                     end
+                  end
+                  else begin
+                    next_state = IDLE;
+                  end
+               end
+               else begin
+                 next_state = IDLE;
+               end
+            end
+            else begin
+              next_state = IDLE;
+            end
+         end
+         else begin
+          next_state = IDLE;
+         end
+      end
+    
+      if(current_state == ONE && in && in && in && in && in && in) begin
+        err_reg <= 1;
+        next_state = IDLE;
+      end
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

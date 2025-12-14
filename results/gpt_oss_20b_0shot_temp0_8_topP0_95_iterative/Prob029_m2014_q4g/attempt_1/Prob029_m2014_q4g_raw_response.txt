@@ -1,0 +1,35 @@
+Below is a minimal, synthesizable Verilog implementation of the described circuit.  
+The circuit is purely combinational (no clock edge is required), so we use a continuous
+assignment (`assign`).  The XNOR of `in1` and `in2` is expressed as `~(in1 ^ in2)`, and
+that result is XORed with `in3` to produce the output `out`.
+
+```verilog
+// -----------------------------------------------------------
+//  TopModule
+//  ---------
+//  Implements:   out = XNOR(in1, in2) XOR in3
+//  Description:  Two‑input XNOR feeds into a two‑input XOR.
+//                The second XOR input is in3. The XOR output is out.
+//  Notes:        Purely combinational – no clock is required.
+// -----------------------------------------------------------
+
+module TopModule (
+    input  logic in1,   // First input to the XNOR
+    input  logic in2,   // Second input to the XNOR
+    input  logic in3,   // Second input to the XOR
+    output logic out    // XOR output
+);
+
+    // Continuous assignment – purely combinational logic
+    assign out = (~(in1 ^ in2)) ^ in3;
+
+endmodule
+```
+
+### How it works
+1. **XNOR**: `~(in1 ^ in2)` is equivalent to the two‑input XNOR of `in1` and `in2`.  
+2. **XOR**: The result of the XNOR is then XORed with `in3` via the `^` operator.  
+3. **Output**: The final result is driven onto `out`.
+
+Because all signals are `logic`, the module is compatible with Verilog‑2001 and later
+standards and can be used directly in a testbench or integrated into a larger design.

@@ -1,0 +1,36 @@
+always_comb {
+    // Define the next state for each current state
+    assign next_state = case (state)
+        IDLE : {in, 2'b00}
+        START_BIT: {in, 2'b01}
+        DATA_BYTE: {in, 2'b10}
+        STOP_BIT: {in, 2'b11};
+    endcase;
+}
+
+// Clock edge and input change
+always @(posedge clk or @(*not* reset)) // Reset is ignored in always edge block
+begin: always_edge
+    if (next_state != state)
+        state <= next_state; // Update to new state
+end
+
+// Clock edge and input change, but skip in when no transition occurs
+always @(posedge clk) // Ignore the clock edge for now. This line will be removed.
+begin: always
+    if ((in == 1 && state == START_BIT) || (in == 0 && state != STOP_BIT))
+        state <= IDLE; // Stop bit received, end of byte
+
+end
+
+// Clock edge and input change, but skip in when no transition occurs
+always @(posedge clk)
+begin: always
+    if ((state == DATA_BYTE) && (in != 1)) // Don't write to out_byte unless in is not 1
+        out_byte[7] <= in;
+    else if ((in == 0 && state == STOP_BIT))
+        done <= 1; // Stop bit received, end of byte and set done signal
+
+    else if (state != DATA_BYTE)
+        state <= IDLE; // No data bytes pending. Reset to IDLE state.
+end

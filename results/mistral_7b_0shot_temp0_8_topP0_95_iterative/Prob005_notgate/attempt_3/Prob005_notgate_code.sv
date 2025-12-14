@@ -1,0 +1,15 @@
+
+module TopModule (
+  input in,
+  output out
+);
+wire out;
+
+always @(posedge clk) // Since there's no clock specified, I assume the signals are positive-edge triggered
+begin
+  out <= !in; // The NOT operation
+end
+
+assign out = !in; // Provide an alternative assignment that does not require a process
+
+endmodule

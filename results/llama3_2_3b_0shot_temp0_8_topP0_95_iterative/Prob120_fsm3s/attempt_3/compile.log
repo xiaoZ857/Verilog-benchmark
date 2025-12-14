@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:16: error: Sized numeric constant must have a size greater than zero.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:19: error: Sized numeric constant must have a size greater than zero.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:22: error: Sized numeric constant must have a size greater than zero.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:22: warning: Numeric constant truncated to 0 bits.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:24: error: Sized numeric constant must have a size greater than zero.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:24: warning: Numeric constant truncated to 0 bits.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:38: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:40: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_3\Prob120_fsm3s_code.sv:46: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv:13: error: invalid module item.

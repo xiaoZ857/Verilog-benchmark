@@ -1,0 +1,91 @@
+
+module TopModule (
+  input clk,
+  input [1:0] in,
+  input [9:0] state,
+  output [9:0] next_state,
+  output [1:0] out1,
+  output out2
+);
+
+  localparam [1:0] S0 = 2'b00;
+  localparam [1:0] S1 = 2'b01;
+  localparam [1:0] S2 = 2'b10;
+  localparam [1:0] S3 = 2'b11;
+  localparam [9:0] ONE_HOT = {S0, S1, S2};
+
+  always @(posedge clk) begin
+    next_state[9:0] = state;
+    case (state)
+      {2'b00} : next_state[9:0] = S0;
+      {2'b01} : next_state[9:0] = S1;
+      {2'b10} : next_state[9:0] = S2;
+      {2'b11} : next_state[9:0] = S3;
+      default :
+        // handle invalid state
+        next_state[9:0] = 0;
+    endcase
+
+    case (next_state)
+      {2'b00} : out1 <= 0, out2 <= 0;
+      {2'b01} : out1 <= 0, out2 <= 0;
+      {2'b10} : out1 <= 0, out2 <= 0;
+      {2'b11} : out1 <= 0, out2 <= 0;
+    default :
+      // handle invalid next state
+      out1 <= 0, out2 <= 0;
+    endcase
+  end
+
+  always @ (* & !in) begin
+    if (in == 2'd0) begin
+      if (state[9:8] == ONE_HOT) begin
+        out1 <= S7, out2 <= 0;
+      end else if (state[9] == S0) begin
+        out1 <= 0, out2 <= S5;
+      end else if (state[9] == S1) begin
+        out1 <= 0, out2 <= S4;
+      end else if (state[9] == S2) begin
+        out1 <= S3, out2 <= 0;
+      end else if (state[9] == S3) begin
+        out1 <= S4, out2 <= 0;
+      end else if (state[9] == S4) begin
+        out1 <= S5, out2 <= 0;
+      end else if (state[9] == S5) begin
+        out1 <= S6, out2 <= 0;
+      end else if (state[9] == S6) begin
+        out1 <= S7, out2 <= 0;
+      end else if (state[9] == S7) begin
+        out1 <= S8, out2 <= 0;
+      end else if (state[9] == S8) begin
+        out1 <= S9, out2 <= 0;
+      end else if (state[9] == S9) begin
+        out1 <= S0, out2 <= 0;
+      end else begin // invalid state
+        out1 <= 0, out2 <= 0;
+      end
+    end else if (in == 2'd1) begin
+      if (state[8:7] == ONE_HOT) begin
+        out1 <= S6, out2 <= S7;
+      end else if (state[8] == S0) begin
+        out1 <= S3, out2 <= S4;
+      end else if (state[8] == S1) begin
+        out1 <= 0, out2 <= S5;
+      end else if (state[8] == S2) begin
+        out1 <= 0, out2 <= S6;
+      end else if (state[8] == S3) begin
+        out1 <= S4, out2 <= S7;
+      end else if (state[8] == S4) begin
+        out1 <= 0, out2 <= S8;
+      end else if (state[8] == S5) begin
+        out1 <= 0, out2 <= S9;
+      end else if (state[8] == S6) begin
+        out1 <= 0, out2 <= S7;
+      end else if (state[8] == S7) begin
+        out1 <= 0, out2 <= S6;
+      end else if (state[8] == S8) begin
+        out1 <=
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

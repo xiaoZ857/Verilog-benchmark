@@ -1,0 +1,23 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:43: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:42: error: Syntax error in instance port expression(s).
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:63: error: Sized numeric constant must have a size greater than zero.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:63: warning: implicit definition of wire 'walkLeftOutput'.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:67: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:66: error: Syntax error in instance port expression(s).
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:73: warning: implicit definition of wire 'NEXT_STATE_FALLING'.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:76: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:75: error: Syntax error in instance port expression(s).
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:79: error: Sized numeric constant must have a size greater than zero.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:79: warning: implicit definition of wire 'walkRightOutput'.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:83: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:82: error: Syntax error in instance port expression(s).
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:89: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:88: error: Syntax error in instance port expression(s).
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob155_lemmings4_test.sv:6: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:108: error: syntax error in continuous assignment

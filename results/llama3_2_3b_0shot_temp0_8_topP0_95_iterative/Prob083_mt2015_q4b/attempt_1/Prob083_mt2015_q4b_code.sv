@@ -1,0 +1,68 @@
+
+// Define the module TopModule
+module TopModule(
+    // Input signals
+    input clk,      // Positive clock signal
+    input x,
+    input y,
+
+    // Output signal
+    output z
+);
+
+    // Internal state variables
+    reg [1:0] internal_state;  // State of the internal state machine
+
+    // Initialization block
+    always @(posedge clk) begin
+        if (clk == 1'b1) begin
+            internal_state <= 2'b00;  // Reset to state 0
+        end
+    end
+
+    // States and transitions
+    localparam [2:0] state_0 = 3'b000;
+    localparam [2:0] state_1 = 3'b001;
+    localparam [2:0] state_2 = 3'b010;
+    localparam [2:0] state_3 = 3'b011;
+
+    always @(posedge clk) begin
+        if (clk == 1'b1 && internal_state == state_0) begin
+            z <= 1'b0;  // Output is low in this state
+            internal_state <= state_1;
+        end else if (clk == 1'b1 && internal_state == state_1) begin
+            z <= 1'b0;
+            internal_state <= state_2;
+        end else if (clk == 1'b1 && internal_state == state_2) begin
+            z <= 1'b0;
+            internal_state <= state_3;
+        end else if (clk == 1'b1 && internal_state == state_3) begin
+            z <= 1'b1;  // Output is high in this state
+            internal_state <= state_2;
+        end else if (clk == 1'b1 && internal_state == state_2 && x == 0 && y == 0) begin
+            z <= 1'b0;
+            internal_state <= state_1;
+        end else if (clk == 1'b1 && internal_state == state_1 && x == 0 && y == 1) begin
+            z <= 1'b1;
+            internal_state <= state_2;
+        end else if (clk == 1'b1 && internal_state == state_3 && x == 0 && y == 1) begin
+            z <= 1'b1;
+            internal_state <= state_3;
+        end else if (clk == 1'b1 && internal_state == state_2 && x == 1 && y == 0) begin
+            z <= 1'b1;  
+            internal_state <= state_3;
+        end else if (clk == 1'b1 && internal_state == state_3 && x == 1 && y == 0) begin
+            z <= 1'b1;
+            internal_state <= state_2;
+        end else if (clk == 1'b1 && internal_state == state_3 && x == 1 && y == 1) begin
+            z <= 1'b0;  
+            internal_state <= state_1;
+        end else if (clk == 1'b1 && internal_state == state_1 && x == 1 && y == 1) begin
+            z <= 1'b0;
+            internal_state <= state_2;
+        end
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

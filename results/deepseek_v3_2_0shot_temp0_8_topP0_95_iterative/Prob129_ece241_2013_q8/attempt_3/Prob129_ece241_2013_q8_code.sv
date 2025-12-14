@@ -1,0 +1,40 @@
+
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+// State definitions
+localparam S0 = 2'b00, // initial state, no matching bits
+           S1 = 2'b01, // first '1' detected
+           S2 = 2'b10; // "10" detected
+
+reg [1:0] current_state, next_state;
+
+// State register with negative edge triggered asynchronous reset
+always @(negedge clk or negedge aresetn) begin
+    if (!aresetn)
+        current_state <= S0;
+    else
+        current_state <= next_state;
+end
+
+// Next state logic (combinational)
+always @(*) begin
+    case (current_state)
+        S0: next_state = x ? S1 : S0;  // if x=1, move to S1; else stay in S0
+        S1: next_state = x ? S1 : S2;  // if x=0, move to S2; if x=1, stay in S1
+        S2: next_state = x ? S1 : S0;  // if x=1, move to S1; if x=0, reset to S0
+        default: next_state = S0;
+    endcase
+end
+
+// Output logic (Mealy: depends on current_state AND input x)
+always @(*) begin
+    // Output 1 only when we're in state S2 AND x=1 (completing "101")
+    // This is correct for overlapping detection
+    z = (current_state == S2) && x;
+end
+
+endmodule

@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output reg out
+);
+
+  always @(*) begin
+    // State transition logic
+    next_state[0] = (state[0] && ~in) || (state[1] && ~in);
+    next_state[1] = (state[0] && in) || (state[1] && ~in);
+    next_state[2] = (state[1] && in) || (state[2] && ~in);
+    next_state[3] = (state[2] && in) || (state[3] && ~in);
+
+    // Output logic
+    out = (state[3]);
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Transition Logic:**
+   - The `next_state` signals are assigned based on the current `state` and the input `in`.
+   - The logic is directly derived from the state transition table, implementing the transitions for each state and input combination.
+   - For example, `next_state[0] = (state[0] && ~in) || (state[1] && ~in);`  means if the current state is A (state[0] is 1) and the input is 0, the next state is A. If the current state is B (state[1] is 1) and the input is 0, the next state is also A.  This is how the state transitions are handled for each state.
+
+2. **Output Logic:**
+   - The output `out` is simply the value of the D state bit (state[3]). This is determined by the output logic in the state transition table.
+
+**How it relates to the State Transition Table:**
+
+* **State A (4'b0001):**
+    * `in = 0`: `next_state = A` (state[0] remains 1)
+    * `in = 1`: `next_state = B` (state[1] becomes 1)
+    * `out = 0`
+* **State B (4'b0010):**
+    * `in = 0`: `next_state = C` (state[2] becomes 1)
+    * `in = 1`: `next_state = B` (state[1] remains 1)
+    * `out = 0`
+* **State C (4'b0100):**
+    * `in = 0`: `next_state = A` (state[0] becomes 1)
+    * `in = 1`: `next_state = D` (state[3] becomes 1)
+    * `out = 0`
+* **State D (4'b1000):**
+    * `in = 0`: `next_state = C` (state[2] becomes 1)
+    * `in = 1`: `next_state = B` (state[1] becomes 1)
+    * `out = 1`
+
+This Verilog code accurately implements the state transition and output logic based on the provided state transition table and one-hot encoding.  The `always @(*)` block makes it a combinational logic block, suitable for use in a larger sequential circuit with a clock.

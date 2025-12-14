@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob040_count10",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'q' has 185 mismatches. First mismatch occurred at time 55.\nHint: Total mismatched samples is 185 out of 439 samples\n\nSimulation finished at 2196 ps\nMismatches: 185 in 439 samples\n",
+      "mismatch_count": 185
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'q' has 185 mismatches. First mismatch occurred at time 55.\nHint: Total mismatched samples is 185 out of 439 samples\n\nSimulation finished at 2196 ps\nMismatches: 185 in 439 samples\n",
+      "mismatch_count": 185
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'q' has 185 mismatches. First mismatch occurred at time 55.\nHint: Total mismatched samples is 185 out of 439 samples\n\nSimulation finished at 2196 ps\nMismatches: 185 in 439 samples\n",
+      "mismatch_count": 185
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your reset should be synchronous, but doesn't appear to be.\nHint: Output 'q' has 185 mismatches. First mismatch occurred at time 55.\nHint: Total mismatched samples is 185 out of 439 samples\n\nSimulation finished at 2196 ps\nMismatches: 185 in 439 samples\n",
+      "mismatch_count": 185
+    }
+  ]
+}

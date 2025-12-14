@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob115_shift18\attempt_2\Prob115_shift18_code.sv:32: error: Concatenation operand "'sd0" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob115_shift18\attempt_2\Prob115_shift18_code.sv:36: error: part select q[55:63] is out of order.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob115_shift18\attempt_2\Prob115_shift18_code.sv:36: error: Concatenation operand "'sd0" has indefinite width.
+3 error(s) during elaboration.

@@ -1,0 +1,55 @@
+Here's the implementation of the Verilog module based on your description:
+
+```verilog
+module TopModule (
+    input clk,
+    input areset,
+    input predict_valid,
+    input predict_taken,
+    output logic [31:0] predict_history,
+
+    input train_mispredicted,
+    input train_taken,
+    input [31:0] train_history
+);
+
+    // State of the history counter (i.e., how many instructions we've tracked)
+    reg [7:0] history_counter;
+
+    // Current value of the branch history register
+    reg [31:0] train_history_register;
+    assign predict_history = train_history_register[31:0];
+
+    // Initialize the history register to a valid state (no history yet)
+    always_ff @(posedge clk or negedge areset) begin
+        if (!areset) begin
+            train_history_register <= 0;
+            history_counter <= 7;
+        end else if (predict_valid && !train_mispredicted) begin
+            // Shift in the branch prediction from the LSB side
+            train_history_register[31] = predict_taken;
+            history_counter <= history_counter + 1;
+            if (history_counter == 32) begin
+                // Clear the history register when we've tracked 32 instructions
+                train_history_register <= '0;
+                history_counter <= 7;
+            end
+        end else if (train_mispredicted) begin
+            // Load the branch history register with the history after a misprediction
+            train_history_register <= train_history[31:0];
+            history_counter <= 7;
+        end
+    end
+
+endmodule
+```
+
+In this Verilog module, we maintain a `history_counter` which keeps track of how many instructions have been tracked. The state of the branch history register (`train_history_register`) depends on whether there is an active prediction or misprediction.
+
+The code works as follows:
+
+- When either an active prediction or no misprediction occurs (and neither), it increments the history counter and shifts in the next element from `predict_taken` into the history register. If we've tracked 32 instructions, it clears the entire history register.
+
+- Whenever a branch misprediction occurs, we load the history register with the branch history before misprediction (`train_history[31:0]`) and set the history counter back to zero.
+
+- The value of `predict_history` is the last element of `train_history_register`.

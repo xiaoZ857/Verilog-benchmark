@@ -1,0 +1,35 @@
+To implement an 8-bit register with active-high synchronous reset using Verilog, you can create a module that consists of eight D flip-flops. Each flip-flop will be triggered on the positive edge of the clock and will have its state set to zero if the reset signal is high. Here's how you can write this module:
+
+```verilog
+module TopModule (
+    input wire clk,       // Clock input
+    input wire [7:0] d,   // 8-bit data input
+    input wire reset,     // Active-high synchronous reset
+    output reg [7:0] q    // 8-bit register output
+);
+
+// Sequential logic for the D flip-flops with synchronous reset
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 8'b00000000; // Set all bits to zero on reset
+    end else begin
+        q <= d;            // Update register with input data on clock edge
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs:**
+  - `clk`: The positive edge-triggered clock signal.
+  - `d`: An 8-bit wide vector that serves as the input to the D flip-flops.
+  - `reset`: An active-high synchronous reset signal. When high, it resets all outputs to zero.
+  - `q`: An 8-bit register output which stores the current state of the flip-flops.
+
+- **Always Block:**
+  - The `always` block is sensitive to both the positive edge of `clk` and the positive edge of `reset`.
+  - On a high signal of `reset`, all bits in `q` are set to zero.
+  - When `reset` is not active, on every rising edge of `clk`, each bit of `q` is loaded with the corresponding bit from `d`.
+
+This design ensures that all flip-flops share the same clock and reset signals, providing synchronous behavior across the entire register.

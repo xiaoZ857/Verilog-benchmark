@@ -1,0 +1,65 @@
+{
+  "problem_name": "Prob074_ece241_2014_q4",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 3,
+  "total_attempts": 5,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob074_ece241_2014_q4\\attempt_1\\Prob074_ece241_2014_q4_code.sv:15: error: q0 is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob074_ece241_2014_q4\\attempt_1\\Prob074_ece241_2014_q4_code.sv:8:      : q0 is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob074_ece241_2014_q4\\attempt_1\\Prob074_ece241_2014_q4_code.sv:16: error: q1 is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob074_ece241_2014_q4\\attempt_1\\Prob074_ece241_2014_q4_code.sv:8:      : q1 is declared here as wire.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob074_ece241_2014_q4\\attempt_1\\Prob074_ece241_2014_q4_code.sv:17: error: q2 is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob074_ece241_2014_q4\\attempt_1\\Prob074_ece241_2014_q4_code.sv:8:      : q2 is declared here as wire.\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'z' has 45 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 45 out of 118 samples\n\nSimulation finished at 590 ps\nMismatches: 45 in 118 samples\n",
+      "mismatch_count": 45
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_ref.sv:18: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_ref.sv:18: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+To implement the described Verilog module with both an `assign` statement and a procedural block using an `always` construct, we'll define the `TopModule`. This module will have two outputs: `out_assign`, which uses continuous assignment for logic, and `out_always`, which is driven by an always procedural block. Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+  // Using assign statement for out_assign
+  assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+  // Using always block for out_always
+  always @(*) begin
+    if (sel_b1 && sel_b2)
+      out_always = b;
+    else
+      out_always = a;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **`assign` Statement:**
+   - The `out_assign` output is driven using continuous assignment.
+   - A ternary operator `(sel_b1 && sel_b2) ? b : a;` is used to choose between `b` and `a`. If both `sel_b1` and `sel_b2` are true (`1'b1`), `out_assign` takes the value of `b`, otherwise it takes `a`.
+
+2. **Procedural Block with `always`:**
+   - The `out_always` output is driven by a procedural block using an `always` construct.
+   - The sensitivity list `@(*)` indicates that this block should evaluate whenever any of its inputs change.
+   - Inside the block, an `if-else` statement checks if both `sel_b1` and `sel_b2` are true. If they are, it assigns `b` to `out_always`; otherwise, it assigns `a`.
+
+This implementation effectively replicates the logic twice: once using a combinational assignment (`assign`) and once using procedural logic (`always`). Both outputs should behave identically for given inputs.

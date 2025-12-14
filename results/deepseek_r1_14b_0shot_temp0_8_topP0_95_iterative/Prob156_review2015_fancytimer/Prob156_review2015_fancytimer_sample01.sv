@@ -1,0 +1,48 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+Here's the corrected implementation:
+
+always @(posedge clk) begin
+    if (reset) begin
+        state = SEARCH;
+        shift_reg = 4'b0000;
+        data_shifter = 0;
+        cycle_counter = 0;
+        counting = 0;
+        done = 0;
+    end else begin
+        case (state)
+            SEARCH: begin
+                // Look for the sequence 1101 in the data stream
+                if (data == 1) begin
+                    shift_reg = {shift_reg[2:0], data};
+                    // Check if we've captured the pattern 1101
+                    if (shift_reg == 4'b1101) begin
+                        state = WAIT_FOR_DELAY;
+                        counting = 0;
+                        done = 0;
+                        // Reset shift register to start capturing delay bits
+                        shift_reg = 4'b0000;
+                    end
+                end else begin
+                    // If data is not 1, reset shift register and continue searching
+                    shift_reg = 4'b0000;
+                end
+            end
+
+            WAIT_FOR_DELAY: begin
+                // Shift in the next 4 bits for delay after 1101 pattern
+                if (data == 1) begin
+                    data_shifter = {data_shifter[5:0], data};
+                    if (data_shifter == 6'b111
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,99 @@
+To implement the Verilog module for a gshare branch predictor as described, we need to manage several components: a global history register, a pattern history table (PHT), and logic to handle prediction requests and training updates. Here is how you can structure this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output reg predict_taken,
+  output reg [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+
+  // Parameters and internal signals
+  parameter HISTORY_BITS = 7;
+  parameter PHT_SIZE = 128;
+  
+  reg [1:0] pht[PHT_SIZE-1:0];   // Saturating counters for the PHT
+  reg [HISTORY_BITS-1:0] global_history; // Global branch history register
+  
+  wire [6:0] pht_index;
+
+  assign pht_index = predict_pc ^ global_history; // XOR for gshare index
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Reset logic - synchronous reset assumed
+      global_history <= {HISTORY_BITS{1'b0}};
+      integer i;
+      for (i = 0; i < PHT_SIZE; i++) begin
+        pht[i] <= 2'b10; // Initialize counters to weakly taken state
+      end
+    end else if (train_valid) begin
+      // Training logic
+      if (train_mispredicted) begin
+        // Recover global history to the state before mispredicted branch
+        global_history <= train_history;
+      end
+
+      if (pht_index == (train_pc ^ global_history)) begin
+        case (pht[pht_index])
+          2'b00: pht[pht_index] <= train_taken ? 2'b01 : 2'b00; // Weakly not taken -> weakly taken / unchanged
+          2'b01: pht[pht_index] <= train_taken ? 2'b11 : 2'b00; // Strongly taken -> strongly taken or weakly not taken
+          2'b10: pht[pht_index] <= train_taken ? 2'b11 : 2'b01; // Weakly taken -> strongly taken / weakly not taken
+          2'b11: pht[pht_index] <= train_taken ? 2'b11 : 2'b10; // Strongly taken -> unchanged / weakly taken
+        endcase
+      end
+
+    end else if (predict_valid) begin
+      // Prediction logic
+      predict_history <= global_history;
+
+      case (pht[pht_index])
+        2'b00, 2'b01: predict_taken <= 1'b0;  // Not predicted as taken
+        2'b10, 2'b11: predict_taken <= 1'b1;  // Predicted as taken
+      endcase
+
+    end // if/else for training and prediction
+
+    // Update global history on the next clock cycle if a prediction occurred
+    if (predict_valid) begin
+      global_history <= {global_history[HISTORY_BITS-2:0], predict_taken};
+    end
+
+  end // always block
+
+endmodule
+```
+
+### Explanation:
+
+1. **PHT and Global History**: 
+   - The pattern history table (`pht`) is implemented as a 128-entry array of 2-bit saturating counters.
+   - The global branch history register stores the history of taken/not-taken branches.
+
+2. **Index Calculation**:
+   - An index into the PHT is calculated by XORing the program counter (`predict_pc` or `train_pc`) with the current global history.
+
+3. **Reset Logic**:
+   - On reset, initialize the global history register and all PHT entries to their starting states (global history to zero and PHT counters to weakly taken).
+
+4. **Training Logic**:
+   - When training is valid (`train_valid`), update the PHT entry based on whether a branch was mispredicted.
+   - If there was a misprediction, update the global history to the state prior to executing the mispredicted instruction.
+
+5. **Prediction Logic**:
+   - If prediction is requested (`predict_valid`), output the current prediction (based on the PHT) and save the used global history for updating.
+
+6. **Global History Update**:
+   - The global history register updates based on whether the predicted branch was taken or not. This occurs at the next positive clock edge after a prediction request is valid.
+
+7. **Training Takes Precedence**:
+   - If both training and prediction are requested in the same cycle, this logic prioritizes updating due to potential

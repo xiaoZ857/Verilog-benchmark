@@ -1,0 +1,16 @@
+We can implement Rule 90 by computing the XOR of the left and right neighbors for each cell, with boundary cells treated as having zero neighbors outside the array.  
+
+```verilog
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q[0] <= 0 ^ q[1];               // left neighbor = 0
+      q[511] <= q[510] ^ 0;           // right neighbor = 0
+      for (integer i = 1; i < 511; i = i + 1) begin
+        q[i] <= q[i-1] ^ q[i+1];
+      end
+    end
+  end
+endmodule
+```

@@ -1,0 +1,35 @@
+To implement the described Verilog module, we need to concatenate six 5-bit input vectors `a`, `b`, `c`, `d`, `e`, and `f` into a single 30-bit vector. Then, append two additional bits set to '1' at the least significant bit positions, resulting in a total of 32 bits. These 32 bits need to be split across four 8-bit output vectors: `w`, `x`, `y`, and `z`.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [4:0] a,
+    input [4:0] b,
+    input [4:0] c,
+    input [4:0] d,
+    input [4:0] e,
+    input [4:0] f,
+    output reg [7:0] w,
+    output reg [7:0] x,
+    output reg [7:0] y,
+    output reg [7:0] z
+);
+
+always @(*) begin
+    // Concatenate the inputs and append two '1' bits at the end.
+    {w, x, y, z} = {a, b, c, d, e, f, 2'b11};
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Concatenation:** The input vectors `a`, `b`, `c`, `d`, `e`, and `f` are concatenated together. This is done using the `{}` syntax in Verilog which allows concatenating multiple bit vectors.
+  
+- **Appending Bits:** After concatenating the inputs, two '1' bits (`2'b11`) are appended to form a 32-bit wide vector.
+
+- **Output Assignment:** The `always @(*)` block assigns this concatenated and extended vector directly across the outputs `w`, `x`, `y`, and `z`. Each of these is 8-bits, which collectively hold all 32 bits from the concatenation. The leftmost bits go to `w`, followed by `x`, then `y`, and finally `z` holding the least significant 8 bits.
+
+This implementation ensures that on every change in inputs, the output vectors are updated correctly with their respective portions of the concatenated input vector plus the two '1' bits at the end.

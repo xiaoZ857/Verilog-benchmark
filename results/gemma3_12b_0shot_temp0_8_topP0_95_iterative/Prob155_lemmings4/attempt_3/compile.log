@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:25: error: walk_left is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:9:      : walk_left is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:26: error: walk_right is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:10:      : walk_right is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:27: error: aaah is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:11:      : aaah is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:28: error: digging is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:12:      : digging is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:32: error: walk_left is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:9:      : walk_left is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:35: error: walk_right is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:10:      : walk_right is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:38: error: aaah is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:11:      : aaah is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:41: error: digging is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_3\Prob155_lemmings4_code.sv:12:      : digging is declared here as wire.
+8 error(s) during elaboration.

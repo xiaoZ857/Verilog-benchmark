@@ -1,0 +1,124 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+    // 128-entry PHT of 2-bit saturating counters
+    reg [1:0] pht [0:127];
+    
+    // 7-bit global branch history register
+    reg [6:0] bhr;
+    
+    // Internal signals for next BHR value
+    reg [6:0] next_bhr;
+    
+    // Index calculation for PHT (pc xor bhr)
+    wire [6:0] pht_index_predict;
+    wire [6:0] pht_index_train;
+    
+    // PHT read/write
+    reg [1:0] pht_read_predict;
+    reg [1:0] pht_read_train;
+    reg [1:0] pht_next_state;
+    reg pht_write_en;
+    reg [6:0] pht_write_addr;
+    
+    // Temporary storage for training update in next cycle
+    reg train_valid_delayed;
+    reg train_taken_delayed;
+    reg [6:0] train_pc_delayed;
+    reg [6:0] train_history_delayed;
+    
+    // Combinational logic for prediction
+    assign pht_index_predict = predict_pc ^ bhr;
+    assign predict_taken = (pht_read_predict[1] == 1'b1); // MSB of counter
+    assign predict_history = bhr;
+    
+    // Combinational logic for training index
+    assign pht_index_train = train_pc ^ train_history;
+    
+    // Sequential logic
+    integer i;
+    always @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Reset BHR
+            bhr <= 7'b0;
+            // Reset all PHT entries to 2'b01 (weakly not-taken)
+            for (i = 0; i < 128; i = i + 1)
+                pht[i] <= 2'b01;
+            // Clear delayed training signals
+            train_valid_delayed <= 1'b0;
+        end else begin
+            // Update BHR
+            bhr <= next_bhr;
+            
+            // Handle PHT writes from previous cycle's training
+            if (pht_write_en) begin
+                pht[pht_write_addr] <= pht_next_state;
+            end
+            
+            // Store training request for next cycle PHT update
+            train_valid_delayed <= train_valid;
+            train_taken_delayed <= train_taken;
+            train_pc_delayed <= train_pc;
+            train_history_delayed <= train_history;
+        end
+    end
+    
+    // PHT read for prediction (combinational)
+    always @(*) begin
+        pht_read_predict = pht[pht_index_predict];
+    end
+    
+    // PHT read for training (combinational, used to compute next state)
+    always @(*) begin
+        pht_read_train = pht[pht_index_train];
+    end
+    
+    // Next BHR logic
+    always @(*) begin
+        // Default: keep current BHR
+        next_bhr = bhr;
+        
+        // Training takes precedence over prediction if both happen
+        if (train_valid && train_mispredicted) begin
+            // Recover BHR to train_history shifted by actual outcome
+            next_bhr = {train_history[5:0], train_taken};
+        end else if (train_valid) begin
+            // Normal training update BHR (shift in actual outcome)
+            next_bhr = {train_history[5:0], train_taken};
+        end else if (predict_valid) begin
+            // Prediction updates BHR (shift in predicted outcome)
+            next_bhr = {bhr[5:0], predict_taken};
+        end
+    end
+    
+    // PHT update logic for training (combinational, sets up write for next cycle)
+    always @(*) begin
+        pht_write_en = 1'b0;
+        pht_write_addr = 7'b0;
+        pht_next_state = 2'b0;
+        
+        if (train_valid_delayed) begin
+            pht_write_en = 1'b1;
+            pht_write_addr = train_pc_delayed ^ train_history_delayed;
+            
+            // Update 2-bit saturating counter
+            case (pht_read_train)
+                2'b00: pht_next_state = train_taken_delayed ? 2'b01 : 2'b00;
+                2'b01: pht_next_state = train_taken_delayed ? 2'b10 : 2'b00;
+                2'b10: pht_next_state = train_taken_delayed ? 2'b11 : 2'b01;
+                2'b11: pht_next_state = train_taken_delayed ? 2
+
+// VERILOG-EVAL: endmodule not found

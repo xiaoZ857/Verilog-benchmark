@@ -1,0 +1,69 @@
+Here is the Verilog module implementation based on the given description:
+```
+// Define the combinational circuit
+module TopModule(
+    // Inputs: a and b are sampled on every positive edge of clock/clk
+    input clk,
+    input a,
+    input b,
+    // Output: q is sampled on every positive edge of clock/clk
+    output q
+);
+
+    always_ff @(posedge clk) begin
+        // Combinational logic that calculates the value of q based on a and b
+        if (a && !b)
+            q <= 0;
+        else if (!a && b)
+            q <= 0;
+        else if (a && b)
+            q <= 1;
+    end
+
+endmodule
+```
+To test this module, you can write a simple testbench:
+```
+// Define the testbench
+module TopModule_tb;
+
+    // Inputs: a and b are sampled on every positive edge of clock/clk
+    reg clk = 0;
+    reg a = 0;
+    reg b = 0;
+    reg q;
+
+    // Instantiate the module to be tested
+    TopModule dut(
+        .clk(clk),
+        .a(a),
+        .b(b),
+        .q(q)
+    );
+
+    initial begin
+        clk = 1;
+        #5ns;
+        a = 0;
+        b = 0;
+        q = 0;
+        $display("Time: %d", clk);
+        // Print the output q at each clock edge
+        while (clk <= 90)
+            begin
+                $display("  %d: %d %d %d", clk, a, b, q);
+                #1ns;
+                if (clk < 35) a = 0; else a = 1;
+                if (clk < 60) b = 0; else b = 1;
+
+                $display("  %d: %d %d %d", clk, a, b, q);
+                #1ns;
+                clk = clk + 1;
+            end
+    end
+
+endmodule
+```
+Note that we use the `posedge` sensitivity clause to capture the clock edge in the combinational logic. Also note that the simulation waveforms can be analyzed by running the simulation and examining the output values of q at each clock edge.
+
+Run this testbench using a simulator like VerilogSimulator, Quartus, or Vivado. This will print the values of inputs and outputs to the console at each clock edge, illustrating how the combinational circuit works based on the input signals.

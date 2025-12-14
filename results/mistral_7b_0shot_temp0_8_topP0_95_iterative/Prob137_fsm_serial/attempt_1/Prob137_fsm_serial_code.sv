@@ -1,0 +1,76 @@
+
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire reset,
+  output reg done
+);
+
+reg [7:0] data;
+reg start_bit, data_bits, stop_bit;
+reg current_state = IDLE;
+
+enum {IDLE, WAIT_START, WAIT_DATA, WAIT_STOP} states (
+  IDLE,
+  WAIT_START,
+  WAIT_DATA,
+  WAIT_STOP
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    start_bit <= 0;
+    data_bits <= 0;
+    stop_bit <= 0;
+    current_state <= IDLE;
+    done <= 0;
+  end else begin
+    case (current_state)
+      IDLE: begin
+        if (!in && start_bit == 0) begin
+          start_bit <= 1;
+          current_state <= WAIT_START;
+        end
+      end,
+      WAIT_START: begin
+        if (in && start_bit == 1) begin
+          start_bit <= 0;
+          data_bits <= 0;
+          current_state <= WAIT_DATA;
+        end
+      end,
+      WAIT_DATA: begin
+        data_bits[7 - current_data_index] <= in;
+        if (current_data_index < 7) begin
+          if (!in && start_bit == 0) begin
+            current_data_index += 1;
+          end
+        end
+        if (current_data_index == 8) begin
+          current_state <= WAIT_STOP;
+        end
+      end,
+      WAIT_STOP: begin
+        if (!in && stop_bit == 1) begin
+          stop_bit <= 0;
+          current_state <= IDLE;
+          done <= 1;
+        end
+        if (in && stop_bit == 0) begin
+          stop_bit <= 1;
+        end
+      end
+    endcase
+  end
+end
+
+always @(posedge clk) begin
+  if (!stop_bit && current_state != IDLE) begin
+    current_data_index <= 0;
+  end
+end
+
+reg [7:0] current_data_index;
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

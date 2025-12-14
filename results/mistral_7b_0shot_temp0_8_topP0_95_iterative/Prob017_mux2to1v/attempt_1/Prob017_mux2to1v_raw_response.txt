@@ -1,0 +1,22 @@
+ Here's the Verilog code for the 2-1 multiplexer based on your description:
+
+```verilog
+module TopModule (
+  input wire [99:0] a,
+  input wire [99:0] b,
+  input wire sel,
+  output reg [99:0] out
+);
+
+always @(posedge clk) begin
+  if (sel)
+    out <= b;
+  else
+    out <= a;
+end
+
+// You can add clock enable signal (ce) for controlling the active clock edge. If ce is not provided, the default is synchronous reset-asynchronous switch (SRA) with no glitching.
+// Example: always @(posedge clk or negedge reset) begin if(!reset) out <= a; else if (sel) out <= b; else out <= 0; end
+```
+
+This code creates a 2-1 multiplexer that uses the 'sel' signal to determine which of the two inputs ('a' or 'b') is passed through to the output ('out'). The mux operates on positive edges of the clock. If you want to control the active clock edge, add a clock enable (ce) signal and modify the always block accordingly.

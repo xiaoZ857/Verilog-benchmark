@@ -1,0 +1,30 @@
+Here’s a minimal, self‑contained Verilog‑2001 implementation of the described circuit.  
+The “bubble” on the `in2` input simply means that the `in2` signal is inverted before it goes into the AND gate. The module is purely combinational, so no clock is required.
+
+```verilog
+// TopModule.v
+// 2‑input AND gate where the second input is inverted (bubble)
+// out = in1 & ~in2
+
+`timescale 1ns / 1ps
+`default_nettype none
+
+module TopModule (
+    input  logic in1,
+    input  logic in2,
+    output logic out
+);
+
+    // Combinational logic: out = in1 AND NOT in2
+    assign out = in1 & ~in2;
+
+endmodule
+```
+
+### Explanation
+- **Ports**: `in1` and `in2` are declared as `logic` inputs, and `out` is a `logic` output.
+- **Combinational assignment**: `assign out = in1 & ~in2;` implements the AND gate with an inverted `in2`.  
+- **No clock**: Because the problem statement specifies a combinational AND, no clock or sequential elements are used.  
+- **`timescale` & `default_nettype none`**: These are optional but help avoid implicit nettype warnings during simulation.
+
+Feel free to integrate this module into your larger design or testbench.

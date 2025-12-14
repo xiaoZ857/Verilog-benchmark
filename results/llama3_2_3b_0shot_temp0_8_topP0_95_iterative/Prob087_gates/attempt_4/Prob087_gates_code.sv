@@ -1,0 +1,21 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out_and,
+  output out_or,
+  output out_xor,
+  output out_nand,
+  output out_nor,
+  output out_xnor,
+  output out_anotb
+);
+assign out_and = a & b;
+assign out_or = a | b;
+assign out_xor = (~a) ^ b; // Using XOR instead of XNOR for simplicity
+assign out_nand = ~(a | b); // Corrected implementation of NAND gate
+assign out_nor = ~(a & b); // Corrected implementation of NOR gate
+assign out_xnor = (a & ~b) | (~a & b); // Corrected implementation of XNOR gate
+assign out_anotb = a & ~(b);
+
+// VERILOG-EVAL: endmodule not found

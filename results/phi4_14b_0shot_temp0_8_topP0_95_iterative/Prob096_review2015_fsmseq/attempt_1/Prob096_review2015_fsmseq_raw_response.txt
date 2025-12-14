@@ -1,0 +1,91 @@
+To implement a finite-state machine (FSM) in Verilog that searches for the sequence `1101` in an input bit stream, we need to define states corresponding to each part of this sequence. The FSM will transition between these states as it reads bits from the input. Once the sequence is detected, the output signal `start_shifting` will be set to `1`. This state remains until a reset occurs.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg start_shifting
+);
+
+// Define states for the FSM
+typedef enum logic [2:0] {
+    IDLE = 3'b000, // Initial state, not detected any part of the sequence yet
+    S1 = 3'b001,   // Detected a '1'
+    S11 = 3'b010,  // Detected two consecutive '1's
+    S110 = 3'b011, // Detected the sequence '110'
+    FOUND = 3'b100 // Sequence '1101' is completely detected
+} state_t;
+
+// Declare current and next state variables
+state_t current_state, next_state;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+        current_state <= IDLE; // Synchronous reset to initial state
+    else
+        current_state <= next_state;
+end
+
+// State transition logic
+always_comb begin
+    case (current_state)
+        IDLE: 
+            if (data == 1'b1)
+                next_state = S1;
+            else
+                next_state = IDLE;
+
+        S1:
+            if (data == 1'b1)
+                next_state = S11;
+            else
+                next_state = IDLE;
+
+        S11:
+            if (data == 1'b0)
+                next_state = S110;
+            else
+                next_state = S11; // Stay in this state if another '1' is detected
+
+        S110:
+            if (data == 1'b1)
+                next_state = FOUND;
+            else
+                next_state = IDLE;
+
+        FOUND: 
+            next_state = FOUND; // Remain in this state indefinitely until reset
+
+        default: 
+            next_state = IDLE;
+    endcase
+end
+
+// Output logic based on the current state
+always_ff @(posedge clk) begin
+    if (current_state == FOUND)
+        start_shifting <= 1'b1;
+    else
+        start_shifting <= 1'b0;
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Definition**: We define five states using an enumerated type: `IDLE`, `S1`, `S11`, `S110`, and `FOUND`. The FSM starts in the `IDLE` state and transitions through these states as it detects parts of the sequence `1101`.
+
+- **State Transition Logic**: 
+  - In the `IDLE` state, if a '1' is detected (`data == 1'b1`), transition to `S1`.
+  - From `S1`, if another '1' is detected, move to `S11`. If not (i.e., a '0'), revert to `IDLE`.
+  - In the `S11` state, if a '0' follows (`data == 1'b0`), transition to `S110`. If another '1', stay in `S11`.
+  - From `S110`, if a '1' is detected, move to the `FOUND` state. Otherwise, revert to `IDLE`.
+  - Once in `FOUND`, remain there until reset.
+
+- **Output Logic**: The output signal `start_shifting` is set when the FSM reaches the `FOUND` state and stays `1` unless a synchronous reset occurs.
+
+This implementation ensures that once the sequence `1101` is detected, the output remains active (`1`) indefinitely until a reset is triggered.

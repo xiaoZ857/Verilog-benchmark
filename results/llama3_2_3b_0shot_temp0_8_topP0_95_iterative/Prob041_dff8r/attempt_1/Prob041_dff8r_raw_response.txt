@@ -1,0 +1,22 @@
+Here is a Verilog implementation of the module you described:
+
+```verilog
+module TopModule (
+    input clk, // Positive edge clock signal
+    input [7:0] d, // Data to be written into DFFs
+    input reset, // Synchronous reset signal
+    output reg [7:0] q // Output of all DFFs
+);
+
+    always @(posedge clk) begin // Trigger DFFs on the rising edge of the clock
+        if (reset == 1'b1) begin // Reset condition met when synchronous reset is high
+            q <= 8'h000; // Set output to zero in case of synchronous reset
+        } else begin // Writing data into DFFs
+            q <= d; // Assign input data to the output
+        end
+    end
+
+endmodule
+```
+
+This implementation creates an 8-bit wide module with a clock trigger, an active high reset signal, and 7 input D flip-flops. The `always` block is sensitive to the positive edge of the `clk` signal, meaning it will be triggered every time `clk` goes high. The output `q` is assigned the value of either `d` (when `reset` is low) or 0 (in case of synchronous reset).

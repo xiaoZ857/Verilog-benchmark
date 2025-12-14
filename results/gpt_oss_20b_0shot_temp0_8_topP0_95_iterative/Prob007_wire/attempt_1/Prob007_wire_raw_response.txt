@@ -1,0 +1,22 @@
+Here’s a minimal Verilog module that simply passes the input `in` straight to the output `out`.  
+Because it behaves like a wire, no clocking or storage is required – it’s purely combinational logic.
+
+```verilog
+// TopModule : Passes the input directly to the output
+//            (acts exactly like a wire).
+
+module TopModule (
+    input  wire in,   // Input signal
+    output wire out   // Output signal (same as input)
+);
+
+// Continuous assignment – the output always reflects the input
+assign out = in;
+
+endmodule
+```
+
+**Explanation**
+
+* `input wire in` and `output wire out` declare the ports as wires (the default type).
+* The `assign` statement creates a continuous assignment: whenever `in` changes, `out` updates immediately, just like a physical wire.

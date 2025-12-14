@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:28: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:28: error: malformed statement
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:55: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:56: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:58: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:59: Syntax in assignment statement l-value.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:63: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:64: Syntax in assignment statement l-value.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:68: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:68: error: malformed statement
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:77: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:78: Syntax in assignment statement l-value.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:83: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob153_gshare_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob153_gshare_test.sv:25: error: invalid module item.

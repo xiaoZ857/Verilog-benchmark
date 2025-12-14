@@ -1,0 +1,13 @@
+
+module TopModule;
+  input a, b, c;
+  output reg w, x, y, z;
+
+  assign w = a;
+  assign x = b;
+  assign y = b;
+  assign z = c;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

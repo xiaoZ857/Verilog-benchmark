@@ -1,0 +1,34 @@
+To create a Verilog module that compares two 2-bit inputs `A` and `B`, and produces an output `z` which is `1` if `A` equals `B` and `0` otherwise, you can use the following implementation:
+
+```verilog
+module TopModule (
+    input [1:0] A,
+    input [1:0] B,
+    output reg z
+);
+
+always @(*) begin
+    // Compare A and B
+    if (A == B) begin
+        z = 1'b1;   // Set z to 1 if A equals B
+    end else begin
+        z = 1'b0;   // Set z to 0 otherwise
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module `TopModule` has two inputs, `A[1:0]` and `B[1:0]`, both of which are 2-bit wide. It also has one output `z`.
+
+- **Output Type**: The output `z` is declared as a `reg` because it needs to be driven inside a procedural block (`always` block).
+
+- **Combinational Logic**: The logic to compare `A` and `B` is implemented in an `always @(*)` block, which indicates that the block should be evaluated whenever any of its sensitive inputs change. This makes the circuit combinational.
+
+- **Comparison**: Inside the always block, we use a simple conditional statement:
+  - If `A == B`, set `z` to `1'b1`.
+  - Otherwise, set `z` to `1'b0`.
+
+This design ensures that the output `z` correctly reflects whether the two inputs are equal.

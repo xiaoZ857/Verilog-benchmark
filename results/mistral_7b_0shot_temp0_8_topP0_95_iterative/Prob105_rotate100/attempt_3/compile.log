@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob105_rotate100\attempt_3\Prob105_rotate100_code.sv:9: error: 'q' has already been declared in this scope.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob105_rotate100\attempt_3\Prob105_rotate100_code.sv:7:      : It was declared here as a variable.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob105_rotate100\attempt_3\Prob105_rotate100_code.sv:28: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob105_rotate100_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob105_rotate100_ref.sv:21: syntax error
+I give up.

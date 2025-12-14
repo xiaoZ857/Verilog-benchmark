@@ -1,0 +1,65 @@
+{
+  "problem_name": "Prob062_bugs_mux2",
+  "model_name": "gpt-oss:20b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 3,
+  "total_attempts": 5,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Invalid assignment: out is declared as reg but used in continuous assignment",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 85 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 85 out of 114 samples\n\nSimulation finished at 570 ps\nMismatches: 85 in 114 samples\n",
+      "mismatch_count": 85
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 111 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 111 out of 114 samples\n\nSimulation finished at 570 ps\nMismatches: 111 in 114 samples\n",
+      "mismatch_count": 111
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob062_bugs_mux2_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob062_bugs_mux2_ref.sv:14: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 111 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 111 out of 114 samples\n\nSimulation finished at 570 ps\nMismatches: 111 in 114 samples\n",
+      "mismatch_count": 111
+    }
+  ]
+}

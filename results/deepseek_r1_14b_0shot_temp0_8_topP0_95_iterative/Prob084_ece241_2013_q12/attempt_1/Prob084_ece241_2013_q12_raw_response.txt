@@ -1,0 +1,59 @@
+To solve this problem, we will design a Verilog module that implements an 8x1 memory using a shift register and a multiplexer. The circuit will allow writing data by shifting bits into the register and reading data via random access based on three input signals (A, B, C). 
+
+### Approach
+The solution involves two main components:
+1. **Shift Register**: This part of the circuit uses 8 D-type flip-flops to store 8 bits. The flip-flops are connected in a chain such that the input bit `S` is shifted into the first flip-flop (Q[0]) on each clock cycle when the `enable` signal is high.
+2. **Multiplexer**: This component selects one of the 8 bits from the shift register based on the values of inputs A, B, and C. The multiplexer has 3 input lines (A, B, C) that determine which bit from the shift register will be output as `Z`.
+
+The approach ensures that:
+- Data is written to the memory by shifting in new bits when enabled.
+- Data can be read randomly by selecting any of the 8 stored bits using a combination of A, B, and C.
+
+### Solution Code
+```verilog
+module TopModule (
+    input clk,
+    input enable,
+    input S,
+    input A,
+    input B,
+    input C,
+    output reg Z
+);
+
+// Define the flip-flops for the 8-bit shift register
+reg Q[7:0];
+always @(posedge clk) begin
+    if (enable) begin
+        Q[0] <= S;
+        Q[1] <= Q[0];
+        Q[2] <= Q[1];
+        Q[3] <= Q[2];
+        Q[4] <= Q[3];
+        Q[5] <= Q[4];
+        Q[6] <= Q[5];
+        Q[7] <= Q[6];
+    end
+end
+
+// Define the multiplexer to select the correct output based on A, B, C
+always @* begin
+    case ({A, B, C})
+        0: Z = Q[0];
+        1: Z = Q[1];
+        2: Z = Q[2];
+        3: Z = Q[3];
+        4: Z = Q[4];
+        5: Z = Q[5];
+        6: Z = Q[6];
+        7: Z = Q[7];
+    endcase
+end
+
+endmodule
+```
+
+### Explanation
+1. **Shift Register**:
+   - The shift register consists of 8 D-type flip-flops (Q[0] to Q[7]).
+   - On each clock cycle (`posedge clk`), if the `enable` signal is high, the input bit `S` is shifted into

@@ -1,0 +1,117 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output reg disc,
+  output reg flag,
+  output reg err
+);
+
+  // State encoding
+  typedef enum logic [2:0] {
+    IDLE = 3'b000,     // Initial state and "reset" state
+    ONE_1 = 3'b001,    // Seen one '1'
+    TWO_1 = 3'b010,    // Seen two consecutive '1's
+    THREE_1 = 3'b011,  // Seen three consecutive '1's
+    FOUR_1 = 3'b100,   // Seen four consecutive '1's
+    FIVE_1 = 3'b101,   // Seen five consecutive '1's
+    SIX_1 = 3'b110     // Seen six consecutive '1's
+  } state_t;
+
+  state_t current_state, next_state;
+
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= IDLE;
+      disc <= 0;
+      flag <= 0;
+      err <= 0;
+    end else begin
+      current_state <= next_state;
+      
+      // Output logic based on the state
+      case (current_state)
+        FIVE_1: begin
+          if (in == 0) begin
+            disc <= 1;  // Discard bit after five '1's followed by a '0'
+          end else begin
+            err <= 1;   // Error if six consecutive '1's are found
+          end
+        end
+        SIX_1: begin
+          flag <= 1;    // Flag indicating start/end of frame
+        end
+        default: begin
+          disc <= 0;
+          flag <= 0;
+          err <= 0;
+        end
+      endcase
+    end
+  end
+
+  always_comb begin
+    // Default next state is current state to ensure synchronicity
+    next_state = current_state;
+
+    case (current_state)
+      IDLE: begin
+        if (in == 1) begin
+          next_state = ONE_1;
+        end
+      end
+      
+      ONE_1: begin
+        if (in == 1) begin
+          next_state = TWO_1;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+
+      TWO_1: begin
+        if (in == 1) begin
+          next_state = THREE_1;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+
+      THREE_1: begin
+        if (in == 1) begin
+          next_state = FOUR_1;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+      
+      FOUR_1: begin
+        if (in == 1) begin
+          next_state = FIVE_1;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+
+      FIVE_1: begin
+        if (in == 0) begin
+          next_state = IDLE;
+        end else begin
+          next_state = SIX_1; // Move to error state on six '1's
+        end
+      end
+
+      SIX_1: begin
+        if (in == 1) begin
+          next_state = SIX_1; // Remain in error state for seven or more '1's
+        end else begin
+          next_state = IDLE;
+        end
+      end
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

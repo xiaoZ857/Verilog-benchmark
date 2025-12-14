@@ -1,0 +1,16 @@
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset condition: Initialize LFSR to a non-zero state for maximal length sequence.
+        q <= 5'b10000; // Start with '1' at MSB position.
+    end else begin
+        // Calculate feedback using XOR for taps at positions 5 and 3
+        reg new_feedback = q[4] ^ q[2];
+
+        // Shift right, update tapped bits with feedback logic
+        q[4] <= new_feedback;   // Update bit 5 (MSB) with the feedback.
+        q[3:1] <= {q[2], q[1], q[0]}; // Shift bits 3 to 1 rightward.
+        q[0] <= q[4];           // LSB takes the old MSB value before shift.
+    end
+end
+
+endmodule

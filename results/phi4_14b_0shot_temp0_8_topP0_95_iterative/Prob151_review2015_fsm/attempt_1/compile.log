@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:21: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:22: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:23: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:24: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:29: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:30: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:31: sorry: This cast operation is not yet supported.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_1\Prob151_review2015_fsm_code.sv:37: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+7 error(s) during elaboration.

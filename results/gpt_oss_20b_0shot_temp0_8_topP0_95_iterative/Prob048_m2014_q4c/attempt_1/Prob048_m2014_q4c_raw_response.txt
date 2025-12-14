@@ -1,0 +1,31 @@
+Here is a minimal, synthesizable Verilog‑2001/Verilog‑2005 implementation that satisfies the specification:
+
+```verilog
+//  D‑flip‑flop with active‑high synchronous reset
+//  Reset output is forced to logic 0 when r is high on the rising edge of clk.
+module TopModule (
+    input  logic clk,   // positive‑edge clock
+    input  logic d,     // data input
+    input  logic r,     // synchronous reset (active high)
+    output logic q      // registered output
+);
+
+    // Register with synchronous reset
+    always_ff @(posedge clk) begin
+        if (r) 
+            q <= 1'b0;   // reset to zero
+        else
+            q <= d;      // normal D‑FF operation
+    end
+
+endmodule
+```
+
+**Explanation**
+
+* `always_ff @(posedge clk)` guarantees that the block is evaluated only on the rising edge of `clk`, which is the typical behavior of a synchronous D‑FF.
+* The reset `r` is checked first. If it is asserted (`1`), `q` is set to `0` on that clock edge.  
+* If reset is not asserted, `q` takes the value of the data input `d`.
+* The output `q` is declared as `logic` (Verilog‑2001/2005) to avoid implicit wire/latch inference and to match the module interface.
+
+This module can be instantiated anywhere you need a simple D‑flip‑flop with a synchronous reset that forces the output to zero.

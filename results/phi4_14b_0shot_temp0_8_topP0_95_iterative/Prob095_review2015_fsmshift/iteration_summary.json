@@ -1,0 +1,65 @@
+{
+  "problem_name": "Prob095_review2015_fsmshift",
+  "model_name": "phi4:14b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 3,
+  "total_attempts": 5,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_1\\Prob095_review2015_fsmshift_code.sv:49: error: Unable to bind wire/reg/memory `pattern_detected' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_1\\Prob095_review2015_fsmshift_code.sv:49: error: Unable to elaborate condition expression.\n2 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'shift_ena' has 6 mismatches. First mismatch occurred at time 360.\nHint: Total mismatched samples is 6 out of 200 samples\n\nSimulation finished at 1001 ps\nMismatches: 6 in 200 samples\n",
+      "mismatch_count": 6
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'shift_ena' has 6 mismatches. First mismatch occurred at time 360.\nHint: Total mismatched samples is 6 out of 200 samples\n\nSimulation finished at 1001 ps\nMismatches: 6 in 200 samples\n",
+      "mismatch_count": 6
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob095_review2015_fsmshift_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob095_review2015_fsmshift_ref.sv:30: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 7\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:9: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:10: error: shift_ena is not a valid l-value in tb.top_module1.\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:5:      : shift_ena is declared here as wire.\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:11: error: Could not find variable ``counter'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:13: error: Could not find variable ``current_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:15: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:15: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:36: error: Could not find variable ``next_state'' in ``tb.top_module1''\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:38: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:38: error: Unable to elaborate this case expression.\nresults/phi4_14b_0shot_temp0_8_topP0_95_iterative\\Prob095_review2015_fsmshift\\attempt_5\\Prob095_review2015_fsmshift_code.sv:35: warning: always_comb process has no sensitivities.\n7 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

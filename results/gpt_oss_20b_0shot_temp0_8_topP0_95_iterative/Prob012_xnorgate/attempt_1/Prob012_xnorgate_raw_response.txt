@@ -1,0 +1,22 @@
+Here’s a minimal, clean Verilog implementation of the XNOR gate.  
+Since no clock is required for a pure combinational function, we simply use an **assign** statement.
+
+```verilog
+// XNOR gate – purely combinational
+module TopModule (
+    input  wire a,
+    input  wire b,
+    output wire out
+);
+
+// 2‑input XNOR:  out = NOT (a XOR b)
+assign out = ~(a ^ b);        // equivalent to: assign out = a ~^ b;
+
+endmodule
+```
+
+**Explanation**
+
+- `input wire` and `output wire` are the default net types for combinational signals.  
+- `assign out = ~(a ^ b);` implements the logical XNOR: it outputs `1` when the two inputs are equal, otherwise `0`.  
+- No clock or edge‑triggered logic is needed because the gate is purely combinational.

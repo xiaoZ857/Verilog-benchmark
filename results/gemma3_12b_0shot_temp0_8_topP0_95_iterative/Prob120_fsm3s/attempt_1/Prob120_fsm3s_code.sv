@@ -1,0 +1,75 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+  // Define the states
+  typedef enum logic [1:0] {
+    A,
+    B,
+    C,
+    D
+  } state_t;
+
+  // Declare state and next_state signals
+  state_t current_state, next_state;
+
+  // Synchronous reset logic
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // State transition logic
+  always_comb begin
+    case (current_state)
+      A: begin
+        if (in == 0)
+          next_state = A;
+        else
+          next_state = B;
+      end
+      B: begin
+        if (in == 0)
+          next_state = C;
+        else
+          next_state = B;
+      end
+      C: begin
+        if (in == 0)
+          next_state = A;
+        else
+          next_state = D;
+      end
+      D: begin
+        if (in == 0)
+          next_state = C;
+        else
+          next_state = B;
+      end
+      default: begin
+        next_state = A;  // Default state in case of unexpected state
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    case (current_state)
+      A: out = 0;
+      B: out = 0;
+      C: out = 0;
+      D: out = 1;
+      default: out = 0;
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

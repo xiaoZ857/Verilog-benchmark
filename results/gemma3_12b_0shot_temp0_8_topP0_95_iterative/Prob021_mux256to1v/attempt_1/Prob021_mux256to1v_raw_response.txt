@@ -1,0 +1,45 @@
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+
+  // Calculate the starting index of the selected 4-bit input.
+  // sel = 0 selects in[3:0] (index 0)
+  // sel = 1 selects in[7:4] (index 4)
+  // sel = 2 selects in[11:8] (index 8)
+  // ...
+  // sel = 31 selects in[1020:1017] (index 1020)
+  // The starting index is sel * 4.
+
+  assign out = in[(sel * 4) + 3 : (sel * 4)];
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`assign out = in[(sel * 4) + 3 : (sel * 4)];`**: This is the core of the multiplexer.  It uses a conditional assignment (`assign`) to select the correct 4-bit input from the `in` vector based on the value of the `sel` signal.
+
+   * **`sel * 4`**: This calculates the starting bit index for the selected input.  Each input is 4 bits wide, and they are packed together in the `in` vector.  Therefore, for each increment of `sel`, we need to move forward 4 bits.
+   * **`(sel * 4) + 3`**:  This calculates the *highest* bit index within the selected 4-bit input.  Since we want the 4 bits starting from the calculated index, we add 3.
+   * **`(sel * 4)`**: This is the *lowest* bit index within the selected 4-bit input.
+   * **`in[(sel * 4) + 3 : (sel * 4)]`**:  This slices the `in` vector from the highest bit index to the lowest bit index, effectively selecting the 4-bit input corresponding to the current `sel` value. The result is assigned to the `out` signal.
+
+**How it works with example values:**
+
+* **`sel = 0`**:
+    * `(sel * 4) + 3 = (0 * 4) + 3 = 3`
+    * `(sel * 4) = (0 * 4) = 0`
+    * `out = in[3:0]` (selects bits in[3:0])
+* **`sel = 1`**:
+    * `(sel * 4) + 3 = (1 * 4) + 3 = 7`
+    * `(sel * 4) = (1 * 4) = 4`
+    * `out = in[7:4]` (selects bits in[7:4])
+* **`sel = 2`**:
+    * `(sel * 4) + 3 = (2 * 4) + 3 = 11`
+    * `(sel * 4) = (2 * 4) = 8`
+    * `out = in[11:8]` (selects bits in[11:8])
+
+This implementation efficiently selects the appropriate 4-bit input based on the `sel` value, providing the desired 256-to-1 multiplexer functionality.

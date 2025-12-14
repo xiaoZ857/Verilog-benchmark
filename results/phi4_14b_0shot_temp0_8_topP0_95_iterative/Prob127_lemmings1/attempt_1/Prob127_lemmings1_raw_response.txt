@@ -1,0 +1,85 @@
+To model the behavior of a Lemming using a Moore state machine in Verilog, we need to define two states: one where the Lemming is walking left and another where it's walking right. The state transitions are triggered by bump inputs, and there is an asynchronous reset that sets the initial state.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output reg walk_left,
+  output reg walk_right
+);
+
+    // State encoding: 2 states, so we need only one bit.
+    typedef enum logic [0:0] {
+        WALK_LEFT = 1'b1,   // Lemming is walking left
+        WALK_RIGHT = 1'b0   // Lemming is walking right
+    } state_t;
+
+    // Declare the current and next state variables
+    state_t current_state, next_state;
+
+    // Moore machine behavior: output depends only on the current state.
+    always_comb begin
+        // Default outputs to prevent latches
+        walk_left = 0;
+        walk_right = 0;
+
+        case (current_state)
+            WALK_LEFT: begin
+                walk_left = 1;   // Output is based on current state
+            end
+            WALK_RIGHT: begin
+                walk_right = 1;  // Output is based on current state
+            end
+        endcase
+    end
+
+    // State transition logic and next state logic
+    always_comb begin
+        case (current_state)
+            WALK_LEFT: begin
+                if (bump_left || bump_right) begin
+                    next_state = WALK_RIGHT;  // Switch direction on a bump
+                end else begin
+                    next_state = WALK_LEFT;
+                end
+            end
+
+            WALK_RIGHT: begin
+                if (bump_left || bump_right) begin
+                    next_state = WALK_LEFT;   // Switch direction on a bump
+                end else begin
+                    next_state = WALK_RIGHT;
+                end
+            end
+        endcase
+    end
+
+    // State register update with asynchronous reset
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            current_state <= WALK_LEFT;  // Asynchronous reset to walk left
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We define two states: `WALK_LEFT` and `WALK_RIGHT`, using a single bit for encoding (1 for WALK_LEFT, 0 for WALK_RIGHT).
+
+2. **Output Logic**: The outputs `walk_left` and `walk_right` are determined by the current state in a Moore machine fashion.
+
+3. **Next State Logic**: The transitions occur if there is a bump on either side:
+   - From `WALK_LEFT`, it switches to `WALK_RIGHT` upon any bump.
+   - From `WALK_RIGHT`, it switches to `WALK_LEFT` upon any bump.
+
+4. **State Update with Asynchronous Reset**: The current state updates on each positive edge of the clock unless an asynchronous reset (`areset`) is triggered, which resets the state to `WALK_LEFT`.
+
+This design ensures that a Lemming starts walking left and changes direction when bumped on either side, fulfilling the behavior described in the problem statement.

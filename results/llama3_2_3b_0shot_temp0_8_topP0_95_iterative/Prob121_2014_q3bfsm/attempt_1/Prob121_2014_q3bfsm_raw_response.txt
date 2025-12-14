@@ -1,0 +1,36 @@
+Here's the Verilog code for the finite-state machine:
+```verilog
+module TopModule(
+    input clk,
+    input reset,
+    input x,
+    output [2:0] reg z
+);
+
+reg [2:0] currentState;
+
+initial value = 3'b000;
+currentState <= value;
+
+always @(posedge clk)
+begin
+    if(reset == 1) 
+        currentState <= 3'b000;
+    else if(x == 0)
+        currentState <= 3'b001;
+    else if(x == 1)
+        currentState <= 3'b010;
+    else if(x == 2)
+        if(currentState == 3'b001 || currentState == 3'b011)
+            z <= 3'b000;
+        else
+            z <= 3'b001;
+end
+
+endmodule
+```
+This code implements the finite-state machine described in the prompt. The `currentState` variable holds the current state of the FSM, and it's updated on every rising edge of the clock signal (`clk`). If the reset signal is high, the FSM resets to its initial state (000). If the input `x` is 0 or 1, the FSM transitions to the next states in the table.
+
+The FSM outputs the value stored in the `z` register. The output `z` is updated based on the current and next states of the FSM when `x` is 2.
+
+Note that in Verilog, a state machine should be designed with multiple states instead of binary states (0 or 1). I have used ternary literal for making it more understandable as well as easier to identify different states.

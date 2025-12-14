@@ -1,0 +1,35 @@
+
+// 2‑to‑1 MUX – choose b when both sel_b1 and sel_b2 are high, otherwise choose a.
+// Two versions are shown:  (1) a continuous assignment and (2) a procedural if‑statement.
+
+`timescale 1ns/1ps          // (optional – only needed for simulation timing)
+
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire sel_b1,
+    input  wire sel_b2,
+    output wire out_assign,   // result from the continuous‑assignment version
+    output reg  out_always    // result from the procedural‑if version
+);
+
+    // ------------------------------------------------------------
+    // 1) Continuous assignment (assign statement)
+    // ------------------------------------------------------------
+    // The ternary operator implements the 2‑to‑1 mux logic.
+    assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+    // ------------------------------------------------------------
+    // 2) Procedural assignment (always @(*) block)
+    // ------------------------------------------------------------
+    // Combinational always block that behaves like the continuous assignment.
+    always @(*) begin
+        if (sel_b1 && sel_b2)
+            out_always = b;
+        else
+            out_always = a;
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

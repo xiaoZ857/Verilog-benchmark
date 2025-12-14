@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:11: error: Concatenation operand "'sd0" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:11: error: Concatenation operand "'sd0" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:27: error: Concatenation operand "'sd0" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:27: error: Concatenation operand "'sd0" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:28: error: Concatenation operand "'sd1" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:28: error: Concatenation operand "'sd0" has indefinite width.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_3\Prob149_ece241_2013_q4_code.sv:28: error: Unable to elaborate condition expression.
+7 error(s) during elaboration.

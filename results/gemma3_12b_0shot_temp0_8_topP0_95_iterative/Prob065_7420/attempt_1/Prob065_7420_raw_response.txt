@@ -1,0 +1,35 @@
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+  // NAND gate 1: p1y = NOT (p1a AND p1b AND p1c AND p1d)
+  assign p1y = ~ (p1a & p1b & p1c & p1d);
+
+  // NAND gate 2: p2y = NOT (p2a AND p2b AND p2c AND p2d)
+  assign p2y = ~ (p2a & p2b & p2c & p2d);
+
+endmodule
+```
+
+**Explanation:**
+
+* **Module Declaration:** `module TopModule (...)` declares the module named `TopModule` and lists its input and output ports.
+* **Input Ports:** `input p1a, input p1b, ...` declare the input signals for the first NAND gate.  Similarly for the second gate.
+* **Output Ports:** `output p1y, output p2y` declare the output signals of the two NAND gates.
+* **Assign Statements:**
+    * `assign p1y = ~ (p1a & p1b & p1c & p1d);`  This is the core of the first NAND gate.  It calculates the output `p1y` by performing a NAND operation. The `&` operator performs a logical AND, and the `~` operator performs a logical NOT. So, it's equivalent to:
+        * `p1y = NOT (p1a AND p1b AND p1c AND p1d)`
+    * `assign p2y = ~ (p2a & p2b & p2c & p2d);`  This does the same for the second NAND gate.
+* **Endmodule:**  `endmodule` marks the end of the module definition.
+
+This module accurately replicates the functionality of a 7420 chip, which contains two 4-input NAND gates.  The assign statements directly implement the NAND logic.  The signals are assumed to be positive edge triggered because the `assign` statement is used, which is combinational logic and does not require a clock edge.

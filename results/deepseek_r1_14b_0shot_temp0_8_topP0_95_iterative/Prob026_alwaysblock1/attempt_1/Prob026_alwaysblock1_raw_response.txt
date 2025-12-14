@@ -1,0 +1,25 @@
+Here is the Verilog code implementing an AND gate using both assign statements and combinational always blocks:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Using assign statement for immediate connection to out_assign
+assign out_assign = a & b;
+
+// Using combinational always block for out_alwaysblock
+always @(*) begin
+    out_alwaysblock = a & b;
+end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Definition:**  
+   The module `

@@ -1,0 +1,25 @@
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    // Reset the state machine to initial state B when reset is high
+    A <= 1'b1;
+  end else begin
+    assign out = A;
+    case (A)
+      // A transition table
+      1'b0: A <= in;
+      1'b1: A <= ~A;
+    endcase
+
+    case (A)
+      // B transition table
+      1'b0: B <= in;
+      1'b1: B <= ~A;
+    endcase
+  end
+end
+
+reg A, B;
+
+// Declare the output signal "out" as an assignment to the internal register "A"
+
+endmodule

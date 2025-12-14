@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob053_m2014_q4d\attempt_2\Prob053_m2014_q4d_code.sv:6: error: Unknown module type: XOR
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob053_m2014_q4d\attempt_2\Prob053_m2014_q4d_code.sv:11: error: Unknown module type: DFlipFlopXOR
+3 error(s) during elaboration.
+*** These modules were missing:
+        DFlipFlopXOR referenced 1 times.
+        XOR referenced 1 times.
+***

@@ -1,0 +1,13 @@
+To implement the Verilog module based on the provided simulation data, we observe that the 3-bit input `a` (ranging from 0 to 7) determines the output `q`, which is a fixed 16-bit value for each `a`. This indicates a combinational circuit acting as a lookup table or ROM.
+
+Here's the implementation:
+
+```verilog
+module TopModule (
+    input [2:0] a,
+    output reg [15:0] q
+);
+
+always @(*) begin
+    case (a)
+        0: q = 16'b100101100010; // 1232 in hex is 0x1232, which is binary 0

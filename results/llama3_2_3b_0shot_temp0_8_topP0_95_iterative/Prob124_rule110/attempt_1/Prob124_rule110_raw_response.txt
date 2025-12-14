@@ -1,0 +1,54 @@
+Here's an implementation of Rule 110 in Verilog. This module takes the input `data`, loads it into the system at each clock cycle, and advances the state according to the rules provided.
+
+```verilog
+module TopModule (
+    input clk,
+    input load,
+    input [511:0] data,
+    output reg [511:0] q
+);
+
+reg [511:0] temp;
+
+// Initialize all cells to 0 (off)
+initial begin
+    for(int i = 0; i <= 511; i++) begin
+        temp[i] = 0;
+    end
+end
+
+always @(posedge clk) begin
+    // Load data into the system if active high load is triggered
+    if(load == 1'b1) begin
+        q[511:0] <= data[511:0];
+    end else begin
+        // If load is low, advance state of cells
+        temp[512:0] = q[512:0]; // copy current state to temporary array
+        for(int i = 0; i < 512; i++) begin
+            int left = (i-1+511)%512;
+            int center = i;
+            int right = (i+1)%512;
+
+            if(q[center] == 1'b1 && q[left] == 1'b1 && q[right] == 1'b1) begin
+                temp[i] = 1'b0;
+            elseif(q[center] == 1'b1 && q[left] == 1'b1) begin
+                temp[i] = 1'b1;
+            elseif(q[center] == 1'b1 && q[right] == 1'b1) begin
+                temp[i] = 1'b1;
+            elseif(q[left] == 1'b1 && q[right] == 1'b1) begin
+                temp[i] = 1'b0;
+            end else if(q[center] == 1'b0) begin
+                temp[i] = 1'b1;
+            end else begin
+                temp[i] = 0;
+            end
+        end
+
+        q <= temp[511:0];
+    end
+end
+```
+
+This code works by storing the current state of each cell in a temporary array (`temp`). It then advances the state according to the rules for Rule 110. The `load` signal controls whether or not we load data into the system, and when the `load` is high, it copies the input `data` directly into the system's state vector.
+
+Note that this module does not handle boundary conditions (i.e., cells at `q[-1]` and `q[512]`) as they would be always zero in a 0-indexed grid. This implementation assumes that the edges of the simulation are "wrapped around" so that `temp[-1]` is equivalent to `temp[511]`.

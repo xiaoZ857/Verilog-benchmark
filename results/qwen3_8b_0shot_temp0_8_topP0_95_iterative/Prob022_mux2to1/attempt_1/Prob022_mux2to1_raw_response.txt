@@ -1,0 +1,50 @@
+Here's a well-structured and correct implementation of a one-bit wide 2-to-1 multiplexer in Verilog, as per your specification:
+
+---
+
+### ✅ **Module Description**
+This module implements a **combinational logic circuit** where:
+- When `sel = 0`, the output `out` is equal to input `a`.
+- When `sel = 1`, the output `out` is equal to input `b`.
+
+The implementation uses the **conditional operator** in an `assign` statement to achieve the desired functionality in a concise and efficient manner.
+
+---
+
+### ✅ **Verilog Code**
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+
+assign out = (sel) ? b : a;
+
+endmodule
+```
+
+---
+
+### 📌 **Explanation**
+
+- **Inputs**: `a`, `b`, and `sel` are all single-bit inputs.
+- **Output**: `out` is a single-bit output.
+- **Logic**: The `assign` statement uses the conditional operator `? :` to select between `a` and `b` based on the value of `sel`.
+
+  - If `sel == 1`, then `out = b`
+  - If `sel == 0`, then `out = a`
+
+This is a **combinational logic** implementation, and since there is no clock signal involved, no synchronization or flip-flop is required.
+
+---
+
+### 📌 **Notes**
+- The module assumes all inputs are **positive-edge triggered** (as per the default behavior in Verilog).
+- The code is **synthesizable** and will be correctly implemented as a multiplexer in hardware.
+
+---
+
+This implementation is minimal, efficient, and adheres to standard Verilog syntax and practices.

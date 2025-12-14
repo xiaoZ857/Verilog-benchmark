@@ -1,0 +1,28 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+// Carry-propagate adder (CPA) for two 1-bit inputs and carry-in
+CPA_1Bit cpa1(.a(in[0]), .b(in[1]), .sum(out[7]));
+
+// Macro to create a CPA with a carry-out and 8-bit input vectors
+#define CPA(a, b) \
+CPA_1Bit cpa##a(.a(in[(a)+7:(a)]), .b(in[(b)+7:(b)]), .sum(out[(a)-(b)]))
+
+// Create CPAs for the first half of the 255-bit input vector (128 CPAs)
+# for (int i = 0; i < 64; i++)
+#   CPA(2*i, 2*i+1)
+
+// Create CPAs for the second half of the 255-bit input vector (128 CPAs)
+# for (int i = 0; i < 64; i++)
+#   CPA(128+2*i, 128+2*i+1)
+
+// A final CPA to add the two carry outputs and produce the final result
+CPA_1Bit cpa8(.a(out[6]), .b(0), .sum(out[0])); // Add a carry-in of 0 for the final adder
+
+// Reset the output reg on positive edge of clock
+always @(posedge clk)
+  out <= 8'b0;
+
+endmodule

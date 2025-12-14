@@ -1,0 +1,36 @@
+ Here's a simple Verilog implementation of the described timer module:
+
+```verilog
+module Timer(
+    input clk,
+    input load,
+    input [9:0] data,
+    output reg tc
+);
+
+reg [9:0] counter;
+always @(posedge clk) begin
+    if (load) begin
+        counter <= data; // Load the counter with the given data
+        tc <= 1'b0; // Reset the terminal count signal
+    end
+    if (counter > 0'b0) begin
+        counter <= counter - 1'b1; // Decrement the counter
+    end
+    if (counter == 0'b0) begin
+        tc <= 1'b1; // Assert terminal count signal
+    end
+end
+
+endmodule
+```
+
+This module takes an input clock, load signal, and data signal (a 10-bit value). The output is the terminal count (tc) signal.
+
+Inside the `Timer` module, there's a 10-bit counter register named `counter`. The always @(posedge clk) block controls the behavior at each positive edge of the clock signal:
+
+1. If load is high, it loads the given data into the counter and resets the terminal count signal (tc).
+2. If the counter is greater than 0, it decrements by one.
+3. When the counter reaches zero, the terminal count signal is asserted (set to 1).
+
+The timer can be loaded at any time, including while it's still counting and has not yet reached 0. The counter stays at 0 until it's reloaded again after timing out.

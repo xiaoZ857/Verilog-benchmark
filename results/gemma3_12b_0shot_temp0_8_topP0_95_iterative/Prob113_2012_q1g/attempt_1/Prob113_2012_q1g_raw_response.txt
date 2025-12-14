@@ -1,0 +1,82 @@
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    if (x[1] == 0 && x[2] == 0 && x[3] == 0) begin
+      f = 1;
+    end else if (x[1] == 0 && x[2] == 0 && x[3] == 1) begin
+      f = 0;
+    end else if (x[1] == 0 && x[2] == 1 && x[3] == 1) begin
+      f = 0;
+    end else if (x[1] == 0 && x[2] == 1 && x[3] == 0) begin
+      f = 0;
+    end else if (x[1] == 1 && x[2] == 1 && x[3] == 1) begin
+      f = 0;
+    end else if (x[1] == 1 && x[2] == 1 && x[3] == 0) begin
+      f = 1;
+    end else if (x[1] == 1 && x[2] == 0 && x[3] == 0) begin
+      f = 1;
+    end else if (x[1] == 1 && x[2] == 0 && x[3] == 1) begin
+      f = 0;
+    end else if (x[1] == 1 && x[2] == 1 && x[3] == 1) begin
+      f = 0;
+    end else begin
+      f = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [4:1] x, output logic f);`**: Defines the module named `TopModule` with a 4-bit input `x` and a single-bit output `f`.  `logic` is used for the output, which is the preferred type in SystemVerilog.
+
+2. **`always_comb begin ... end`**:  This block describes combinational logic. The `always_comb` keyword ensures that the output `f` is updated whenever any of the inputs `x[4:1]` change.
+
+3. **`if (condition) f = value;`**:  A series of `if` statements implement the logic based on the Karnaugh map provided.  Each `if` statement checks a specific combination of input values (x[1], x[2], x[3]) and assigns the corresponding output value (`f`).
+
+**Simplified Implementation using Boolean Expression:**
+
+The Karnaugh map can be simplified to the following Boolean expression:
+
+f(x1, x2, x3) = x1'x2'x3' + x1x2'x3' + x1x2x3' + x1x2x3
+
+Where:
+
+* `x1` represents x[1]
+* `x2` represents x[2]
+* `x3` represents x[3]
+
+Here's the Verilog code that implements the simplified expression:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  logic x1, x2, x3;
+
+  assign x1 = x[1];
+  assign x2 = x[2];
+  assign x3 = x[3];
+
+  assign f = ~x1 & ~x2 & ~x3 | x1 & ~x2 & ~x3 | x1 & x2 & ~x3 | x1 & x2 & x3;
+
+endmodule
+```
+
+**Explanation of the simplified version:**
+
+1. **`logic x1, x2, x3;`**: Declares internal signals to represent x[1], x[2], and x[3].
+2. **`assign x1 = x[1]; ...`**: Assigns the values from the input signal `x[1]` to the internal signals `x1`, `x2`, and `x3`. This improves readability and maintainability.
+3. **`assign f = ...`**:  Uses the `assign` statement to directly implement the Boolean expression. The `&` represents AND, `|` represents OR, and `~` represents NOT.
+
+**Which version to use:**
+
+* **Simplified Version:** The simplified version (using the assign statement and Boolean expression) is generally preferred because it's more concise, readable, and often synthesizes more efficiently.  The compiler can better optimize the logic.
+*

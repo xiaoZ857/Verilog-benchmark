@@ -1,0 +1,20 @@
+
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+always @(posedge clk) begin
+    if (shift_ena) begin
+        // Shift operation has priority over counting
+        q <= {q[2:0], data};  // Insert 'data' into LSB, shift everything else left
+    end 
+    else if (count_ena && !shift_ena) begin  // Ensure that we only count when not shifting
+        // Decrement the current value stored in 'q'
+        q <= q - 1; // Always decrement. Underflow naturally results to max value (in a wrapping fashion for unsigned arithmetic).
+    end
+end
+
+endmodule

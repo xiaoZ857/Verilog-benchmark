@@ -1,0 +1,36 @@
+Below is a minimal, **bug‑free** implementation of an 8‑bit wide, 2‑to‑1 multiplexer.  
+The original code had two problems:
+
+| Problem | Why it matters | Fix |
+|---------|----------------|-----|
+| `output out` is declared as a **single bit** while the logic uses 8‑bit vectors (`a`, `b`). | The RHS of the continuous assignment produces an 8‑bit value, but the LHS can only hold 1 bit – synthesis will either truncate or throw an error. | Declare `out` as a vector: `output [7:0] out`. |
+| The second module (`TopModule`) declares `out` as a **register** (`output reg [7:0] out`) but never drives it. | A register must be driven inside an `always` block (or be an output of a module that contains logic). | Add a simple `always_comb` (or `always @*`) block that drives `out`. |
+
+Below you will find **two correct implementations** – one with a continuous assignment and one with an `always_comb` block.  Either version is synthesizable and does exactly what the specification asks for.
+
+---
+
+## 1.  Continuous‑assignment version (recommended for simple combinational logic)
+
+```verilog
+// 8‑bit 2‑to‑1 multiplexer – continuous‑assignment style
+module top_module (
+    input          sel,      // 1‑bit select
+    input  [7:0]   a,        // 8‑bit data input A
+    input  [7:0]   b,        // 8‑bit data input B
+    output [7:0]   out       // 8‑bit data output
+);
+
+    // The expression below works for any vector width:
+    //  (~sel & a)  : when sel=0 → a is passed through
+    //  (sel  & b)  : when sel=1 → b is passed through
+    assign out = (~sel & a) | (sel & b);
+
+endmodule
+```
+
+### Why it works
+
+* `sel` is a single bit; `~sel` is also a single bit.  
+  When it is used in a bit‑wise operation with an 8‑bit vector (`a` or `b`), Verilog **replicates** the 1‑bit value to match the width (so `~sel` becomes `8'hFF` when `sel=0` and `8'h00` when `sel=1`).  
+* The whole RHS therefore produces an 8‑bit value that is directly assigned to the

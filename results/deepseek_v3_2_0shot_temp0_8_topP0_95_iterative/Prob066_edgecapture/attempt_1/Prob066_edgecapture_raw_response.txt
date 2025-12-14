@@ -1,0 +1,7 @@
+always @(posedge clk) begin
+    if (reset) begin
+        out <= 32'b0;
+    end else begin
+        out <= out | ({in[30:0], 1'b0} & ~in);
+    end
+end

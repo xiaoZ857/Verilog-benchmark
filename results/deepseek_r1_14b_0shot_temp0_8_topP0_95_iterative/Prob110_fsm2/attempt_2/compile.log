@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:22: error: next_state is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:15:      : next_state is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:24: error: next_state is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:15:      : next_state is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:28: error: next_state is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:15:      : next_state is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:30: error: next_state is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob110_fsm2\attempt_2\Prob110_fsm2_code.sv:15:      : next_state is declared here as wire.
+4 error(s) during elaboration.

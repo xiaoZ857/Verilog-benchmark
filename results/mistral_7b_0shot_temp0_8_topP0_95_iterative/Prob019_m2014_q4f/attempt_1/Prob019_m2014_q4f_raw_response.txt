@@ -1,0 +1,20 @@
+ Here's the Verilog implementation for your description:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+// Create AND gate using built-in verilog gates
+and gate_inst (
+  .A(in1),
+  .B(!in2), // Using the negation operator (!) to simulate a bubble on the in2 input
+  .Y(out)
+);
+
+endmodule
+```
+
+The Verilog code above creates an AND gate with inputs `in1` and `in2`. The bubble on the `in2` input is simulated using the negation operator (!). This results in the output `out` being high only when both `in1` and `in2` are low.

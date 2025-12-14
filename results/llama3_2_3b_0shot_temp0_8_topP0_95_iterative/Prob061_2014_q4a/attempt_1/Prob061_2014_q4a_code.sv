@@ -1,0 +1,35 @@
+
+// Define the signals as defined in the top_module description
+module TopModule (
+  input clk, // Positive clock/clk triggered
+  input w,   // Input to the first stage of the shift register
+  input R,   // Value to load (for L=0)
+  input E,   // Enable shift signal
+  input L,   // Load signal (L asserted means load value into FF)
+  output reg Q // Output of the flip-flop
+);
+
+// Use a register to hold the previous stage's value
+reg [n-1:0] prev_stage; // assuming n-bit shift register
+
+// Define the logic for this stage
+always @(posedge clk) begin
+  if(E == 0 && L == 0) begin // no change or load on this clock cycle
+    Q <= w; // assign w to Q
+  else if (E == 1 && L == 0) begin // enable shift and not loading
+    prev_stage <= w; // save the current stage's value in prev_stage
+    Q <= {prev_stage[2:n-1], w}; // new state is the next two bits of prev_stage shifted left by one position, followed by w (first two positions)
+  else if(E == 1 && L == 1) begin // enable shift and loading
+    Q <= w; // assign w to Q
+  end
+end
+
+// Default value for Q when no clock edge has occurred
+always @(*) begin
+  if (!L) begin
+    Q <= {w, prev_stage[2:n-1]}; // initial state is the first two bits of prev_stage followed by w
+  end
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

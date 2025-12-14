@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_3\Prob144_conwaylife_code.sv:29: warning: Static variable initialization requires explicit lifetime in this context.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_3\Prob144_conwaylife_code.sv:30: warning: Static variable initialization requires explicit lifetime in this context.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_3\Prob144_conwaylife_code.sv:50: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_3\Prob144_conwaylife_code.sv:50: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_3\Prob144_conwaylife_code.sv:64: warning: Static variable initialization requires explicit lifetime in this context.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_3\Prob144_conwaylife_code.sv:65: warning: Static variable initialization requires explicit lifetime in this context.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob144_conwaylife_ref.sv:38: syntax error
+I give up.

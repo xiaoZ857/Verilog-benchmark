@@ -1,0 +1,15 @@
+ Here is the Verilog code for a 2-input NOR gate:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+assign out = ~(in1 | in2);
+
+endmodule
+```
+
+In this code, the `~` operator is used to create a logical NOT gate. The pipe `|` represents OR operation. So, the `out` signal will be high (1) when both `in1` and `in2` are low (0). Otherwise, it will be low (0).

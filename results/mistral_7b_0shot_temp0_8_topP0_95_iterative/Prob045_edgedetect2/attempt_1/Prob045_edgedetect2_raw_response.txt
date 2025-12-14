@@ -1,0 +1,30 @@
+ Here's the Verilog code for the given description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+always @(posedge clk) begin
+  for (int i = 0; i < 8; i++) begin
+    if ((in[i] && !prev_in[i]) || (!in[i] && prev_in[i])) begin
+      anyedge[i] <= 1'b1;
+    end
+    prev_in[i] <= in[i];
+  end
+end
+
+reg [7:0] prev_in;
+
+initial begin
+  prev_in = 8'b0;
+end
+
+endmodule
+```
+
+In this code, an always block is used to check for any edge transitions on each bit of the `in` vector. It utilizes a 1-clock delay by checking at the positive edge of the clock signal (`posedge clk`). The `prev_in` register stores the previous value of the input vector, which helps in detecting edge transitions.
+
+Initial block is used to initialize the `prev_in` register with all zeros on reset.

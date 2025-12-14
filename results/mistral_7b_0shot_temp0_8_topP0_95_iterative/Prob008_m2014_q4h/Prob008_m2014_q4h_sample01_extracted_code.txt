@@ -1,0 +1,14 @@
+always @(posedge clk or negedge resetn) begin
+  if (resetn) begin
+    out <= 0;
+  end else if (posedge clk) begin
+    out <= in;
+  end
+end
+
+// Initialize your simulation here (if needed)
+initial begin
+  // Initialize your simulation here
+end
+
+endmodule // End of the module body

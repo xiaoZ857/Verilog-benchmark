@@ -1,0 +1,43 @@
+To implement a priority encoder for an 8-bit input vector in Verilog, we need to determine the position of the first (least significant) '1' bit from the input. If no bits are high, the output should be zero. Below is the implementation of such a module:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+  always @(*) begin
+    // Default to zero if there's no '1' bit in the input vector
+    pos = 3'b000;
+    
+    // Check each bit starting from the least significant bit (LSB)
+    if (in[0]) begin
+      pos = 3'b000; // Bit position is 0
+    end else if (in[1]) begin
+      pos = 3'b001; // Bit position is 1
+    end else if (in[2]) begin
+      pos = 3'b010; // Bit position is 2
+    end else if (in[3]) begin
+      pos = 3'b011; // Bit position is 3
+    end else if (in[4]) begin
+      pos = 3'b100; // Bit position is 4
+    end else if (in[5]) begin
+      pos = 3'b101; // Bit position is 5
+    end else if (in[6]) begin
+      pos = 3'b110; // Bit position is 6
+    end else if (in[7]) begin
+      pos = 3'b111; // Bit position is 7
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- The module `TopModule` takes an 8-bit input vector `in`.
+- The output `pos` is a 3-bit register that indicates the position of the first '1' bit encountered in `in`, starting from the least significant bit.
+- A combinational always block (`always @(*)`) is used to evaluate the conditions continuously as the inputs change.
+- The default value for `pos` is set to `3'b000`, which corresponds to zero, indicating no bits are high if none of the conditions below it are met.
+- The conditions check each bit of the input vector starting from the least significant bit (LSB) using an if-else chain. As soon as a '1' bit is found, the corresponding position value is assigned to `pos`.
+- The module efficiently finds and encodes the position of the first high bit in the input vector.

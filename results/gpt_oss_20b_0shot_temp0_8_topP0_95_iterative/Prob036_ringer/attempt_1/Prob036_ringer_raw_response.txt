@@ -1,0 +1,58 @@
+**Verilog implementation – `TopModule`**
+
+```verilog
+`timescale 1ns/1ps
+
+// ---------------------------------------------------------------------
+//  TopModule
+//  -----------------------------
+//  Purpose:  Control a phone’s ringer and vibration motor.
+//  Behaviour: When an incoming call is detected (ring = 1)
+//             • If the phone is in vibrate mode (vibrate_mode = 1)
+//                 → Turn the motor on (motor = 1) and keep the ringer off
+//             • Otherwise (vibrate_mode = 0)
+//                 → Turn the ringer on (ringer = 1) and keep the motor off
+//  When ring = 0, both outputs are 0 (phone is idle).
+// ---------------------------------------------------------------------
+module TopModule (
+    input  wire ring,          // Incoming call signal (active‑high)
+    input  wire vibrate_mode,  // 1 → vibrate mode, 0 → normal mode
+    output wire ringer,        // Ringer output (active‑high)
+    output wire motor          // Motor output (active‑high)
+);
+
+// Combinational logic – the outputs are purely a function of the inputs
+assign ringer = ring & ~vibrate_mode;  // Ringer on only when ring and not vibrate
+assign motor  = ring & vibrate_mode;   // Motor on only when ring and vibrate
+
+endmodule
+```
+
+### Why this works
+
+| ring | vibrate_mode | ringer | motor |
+|------|--------------|--------|-------|
+| 0    | 0            | 0      | 0     |
+| 0    | 1            | 0      | 0     |
+| 1    | 0            | 1      | 0     |
+| 1    | 1            | 0      | 1     |
+
+*Both outputs are never high at the same time, satisfying the “not both” requirement.*
+
+---
+
+**Optional: Testbench (for simulation)**
+
+```verilog
+module tb_TopModule;
+    reg  ring;
+    reg  vibrate_mode;
+    wire ringer;
+    wire motor;
+
+    TopModule dut(.ring(ring), .vibrate_mode(vibrate_mode),
+                  .ringer(ringer), .motor(motor));
+
+    initial begin
+        // Test sequence
+        {ring, vibrate_mode}

@@ -1,0 +1,62 @@
+To implement the Verilog module as described, we need to detect when each bit of a 32-bit input vector transitions from `1` to `0` between consecutive clock cycles. Once this transition is detected for any bit, the corresponding bit in the output should be set to `1`. This state (output `1`) should persist until an active-high synchronous reset (`reset`) is applied.
+
+Here's how you can implement this logic:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+  // Internal register to store the previous state of `in`
+  reg [31:0] prev_in;
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      // On reset, clear the output and update the previous input register
+      out <= 32'b0;
+      prev_in <= 32'b0;
+    end else begin
+      // Iterate over each bit to detect transitions
+      integer i;
+      for (i = 0; i < 32; i = i + 1) begin
+        if (prev_in[i] == 1'b1 && in[i] == 1'b0) begin
+          // If there was a transition from 1 to 0, set the output bit high
+          out[i] <= 1'b1;
+        end else if (in[i] == 1'b1) begin
+          // Only reset the output bit if the current input is 1 (preventing false resets)
+          out[i] <= 1'b0;
+        end
+      end
+
+      // Update the previous input register with the current input state
+      prev_in <= in;
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers:**
+   - `prev_in`: This is a 32-bit register used to store the value of `in` from the previous clock cycle.
+
+2. **Always Block:**
+   - The block is triggered on the positive edge of `clk` and `reset`.
+
+3. **Reset Logic:**
+   - When `reset` is high, all bits in `out` are cleared (set to `0`) and `prev_in` is also reset.
+   
+4. **Transition Detection Loop:**
+   - For each bit position `i` from 0 to 31:
+     - Check if the previous input (`prev_in[i]`) was `1` and the current input (`in[i]`) is `0`. This indicates a transition from `1` to `0`.
+     - If such a transition occurs, set `out[i]` to `1`, indicating that this bit has captured a transition.
+     - Otherwise, if the current input bit `in[i]` is `1`, reset `out[i]` to `0`. This ensures that once the output goes high due to a detected transition, it will only be cleared when the corresponding input returns back to `1`.
+
+5. **Update Previous State:**
+   - At the end of each clock cycle (if not in reset), update `prev_in` with the current value of `in` for comparison in the next cycle.
+
+This implementation effectively captures transitions from `1` to `0` and maintains that captured state until a reset is triggered.

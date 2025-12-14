@@ -1,0 +1,97 @@
+To implement the described finite state machine (FSM) in Verilog, we can follow these steps:
+
+1. **State Encoding**: 
+   - State A: The initial/reset state.
+   - State B: Checking for two occurrences of `w = 1` in three consecutive clock cycles.
+
+2. **State Transitions**:
+   - From State A to State B when `s = 1`.
+   - Remain in State A if `s = 0`.
+   - In State B, count the number of times `w = 1` over three clock cycles.
+   - If exactly two out of three `w` values are `1`, transition back to a special state (let's call it State C) to set `z = 1` in the next cycle.
+   - Otherwise, transition back to State B to check the next set of three cycles.
+
+3. **Output Logic**:
+   - Set `z = 1` only if exactly two `w = 1` were detected in a group of three clock cycles while in State C.
+
+Here's how you can implement this FSM in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input s,
+    input w,
+    output reg z
+);
+
+    // Define state encoding
+    typedef enum logic [1:0] {
+        STATE_A = 2'b00,
+        STATE_B = 2'b01,
+        STATE_C = 2'b10
+    } state_t;
+
+    state_t current_state, next_state;
+    
+    // Counters for tracking occurrences of w in three cycles
+    reg [1:0] count_w; // Counts how many times w = 1 in the last three clock cycles
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= STATE_A;
+            count_w <= 2'b00;
+            z <= 1'b0;
+        end else begin
+            current_state <= next_state;
+            // Only update the count in STATE_B
+            if (current_state == STATE_B) begin
+                count_w <= {count_w[0], w};
+            end
+            
+            // Set output z only when transitioning from STATE_C to STATE_B
+            if (current_state == STATE_C) begin
+                z <= 1'b1;
+            end else begin
+                z <= 1'b0;
+            end
+        end
+    end
+
+    always_comb begin
+        next_state = current_state; // Default to no state change
+        
+        case (current_state)
+            STATE_A: begin
+                if (s == 1) 
+                    next_state = STATE_B;
+            end
+            
+            STATE_B: begin
+                if ((count_w == 2'b10 || count_w == 2'b01)) // Exactly two '1's in three cycles
+                    next_state = STATE_C;
+                else 
+                    next_state = STATE_B;
+            end
+
+            STATE_C: begin
+                next_state = STATE_B; // Always return to checking state B
+            end
+            
+            default: next_state = STATE_A;
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+- **State Encoding**: We use a 2-bit encoding for the states, with `STATE_A`, `STATE_B`, and `STATE_C`.
+- **Counting Logic**: The `count_w` register shifts in the value of `w` every clock cycle when in `STATE_B`. It effectively counts how many times `w = 1` appears in three consecutive cycles.
+- **State Transitions**:
+  - From `STATE_A`, transition to `STATE_B` on `s = 1`.
+  - In `STATE_B`, check if two out of the last three values of `w` were `1`. If true, move to `STATE_C`.
+  - In `STATE_C`, set `z` to `1` and then go back to `STATE_B` for the next cycle.
+- **Reset Logic**: On reset, initialize the state to `STATE_A`, clear counts, and ensure `z` is low.
+
+This design ensures minimal states while accurately detecting the required conditions in the specified number of cycles.

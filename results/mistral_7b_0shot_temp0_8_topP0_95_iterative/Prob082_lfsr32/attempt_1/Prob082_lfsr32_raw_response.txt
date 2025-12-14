@@ -1,0 +1,26 @@
+ Here is a Verilog implementation of a 32-bit Galois LFSR with taps at bit positions 32, 22, 2, and 1:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+always @(posedge clk) begin
+  if (reset)
+    q <= 32'h1;
+  else begin
+    q[31] <= q[30];
+    q[22] <= q[21] ^ q[0];
+    q[ 2] <= q[1] ^ q[0];
+    q[ 1] <= q[0];
+  end
+end
+
+assign q_out = q; // Extract output if needed
+
+endmodule
+```
+
+In this implementation, we have an always block that is sensitive to the positive edge of the clock. Inside the block, there are two cases: reset and non-reset. During reset (active high), the register q is set to 32'h1. For the non-reset case, we shift all bits right except for positions 32, 22, 2, and 1. At these positions, we perform XOR operations with the LSB output bit `q[0]`. The output `q` is also assigned to `q_out` if needed.

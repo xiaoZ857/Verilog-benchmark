@@ -1,0 +1,50 @@
+ To implement the given description in Verilog, we first need to identify the logic conditions for both the sum-of-products (SOP) and product-of-sums (POS) forms of the output.
+
+1. For SOP: We want the output to be 1 when any of the numbers 2, 7, or 15 appear on the inputs (a, b, c, d). Let's represent each input as a binary number `x` with base 4, where the most significant bit corresponds to `d` and the least significant bit corresponds to `a`.
+
+   - For number 2: x = 1000 (binary) or x = 4^3 + 0^2 + 0^1 + 0^0 = 4*d + 0
+   - For number 7: x = 1110 (binary) or x = 4^3 + 4^2 + 0^1 + 0^0 = 4*d + 4*c
+   - For number 15: x = 3300 (binary) or x = 4^3 + 4^2 + 4^1 + 0^0 = 4*(d+c) + 4*c
+
+   Therefore, the SOP for out_sop can be expressed as follows:
+
+   ```verilog
+   always @(posedge clk) begin
+     out_sop <= (d & (c >> 1)) | ((c & 1) * (d + c)) | (4 * d + 4 * c + 4 * (c >> 1));
+   end
+   ```
+
+2. For POS: We want the output to be 0 when any of the numbers 0, 1, 4, 5, 6, 9, 10, 13, or 14 appear on the inputs. Let's find the non-zero conditions for these numbers and their complements:
+
+   - For number 0 (x = 0000): x = !(a) & !(b) & !(c) & !(d)
+   - For number 1 (x = 0001): x = !a | b | c | d
+   - For numbers 4, 5, 6, 9, 10, 13, and 14: We can't find a pattern for these numbers directly but their complements are 2, 3, 7, 8, 11, 12, and we already have the SOP expression for those numbers (out_sop). So, the POS for out_pos can be expressed as follows:
+
+   ```verilog
+   always @(posedge clk) begin
+     out_pos <= !(out_sop);
+   end
+   ```
+
+Here's the complete Verilog code for TopModule with both output signals (out_sop and out_pos):
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+
+always @(posedge clk) begin
+  out_sop <= (d & (c >> 1)) | ((c & 1) * (d + c)) | (4 * d + 4 * c + 4 * (c >> 1));
+end
+
+always @(posedge clk) begin
+  out_pos <= !(out_sop);
+end
+
+endmodule
+```

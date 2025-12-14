@@ -1,0 +1,63 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+
+  // Define the tap positions.  For a 5-bit LFSR, the taps are at positions 5 and 3.
+  // Since we are using a 5-bit register, the tap positions are 1 and 3 (remembering that positions are 1-based).
+  // These are then translated to 0-based indexing for the register.  So tap positions are 1 and 3.
+
+  always @(posedge clk) begin
+    if (reset) begin
+      // Synchronous reset to all 1s
+      q <= 5'b11111;
+    end else begin
+      // Shift right and XOR with LSB output
+      q <= q >> 1;
+      q[0] <= q[1] ^ q[0]; // XOR with LSB output
+      q[1] <= q[2];
+      q[2] <= q[3];
+      q[3] <= q[4];
+      q[4] <= q[4];
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input clk, input reset, output reg [4:0] q);` declares the module named `TopModule` with a clock input (`clk`), a reset input (`reset`), and a 5-bit register output (`q`).  `reg` indicates that `q` is a register and its value will be stored.
+
+2. **Tap Positions:**
+   - The problem specifies taps at bit positions 5 and 3.  Since Verilog arrays are 0-indexed, we need to adjust these.
+   -  For a 5-bit register, bit positions are 0, 3, 2, 1, and 0.  Therefore, the tap positions are 1 and 3.  These are used in the XOR operation to produce the next state.
+
+3. **`always @(posedge clk)` Block:**
+   - This block describes the sequential logic that is triggered on the positive edge of the clock signal (`clk`).
+
+4. **Reset Logic:**
+   - `if (reset) begin q <= 5'b11111; end` implements the synchronous reset. When the `reset` signal is high, the LFSR's output `q` is initialized to all 1s. `5'b11111` represents a 5-bit binary number with all bits set to 1.
+
+5. **Shift and XOR Logic (Main LFSR Logic):**
+   - `else begin ... end` is executed when the `reset` signal is low (inactive).
+   - `q <= q >> 1;` This is the core shift-right operation. The entire register `q` is shifted one position to the right. The MSB (most significant bit) is lost during the shift.
+   - `q[0] <= q[1] ^ q[0];` This is the XOR operation with the LSB output. The bit at position 1 (q[1]) is XORed with the LSB output (q[0]) to produce the next LSB value.  This is the feedback mechanism that creates the LFSR.
+   - `q[1] <= q[2];`
+   - `q[2] <= q[3];`
+   - `q[3] <= q[4];`
+   - `q[4] <= q[4];`
+   The remaining bits are shifted right.
+
+**How it Works (Galois LFSR):**
+
+The LFSR works by repeatedly shifting the register's bits to the right.  The XOR operation introduces the feedback. The XOR of the tapped bits with the output creates a new state that is dependent on the previous state. The taps are carefully chosen to ensure that the LFSR cycles through all possible states except the all-zero state.  This property is what makes it a "maximum-length" LFSR.
+
+**To simulate this in a Verilog simulator, you'll need to provide initial values for `q` (usually an arbitrary non-all-zero state) and apply a clock signal and a reset signal.**
+
+**Important Considerations for Maximum Length:**
+
+* **Primitive Polynomial:** The choice of tap positions is crucial for a maximum-length LFSR. The tap positions must correspond to the coefficients of a primitive polynomial over the Galois field GF(2).  For a 5-bit LFSR, the primitive polynomial is x^5 + x^3 + 1.  This corresponds to tap positions

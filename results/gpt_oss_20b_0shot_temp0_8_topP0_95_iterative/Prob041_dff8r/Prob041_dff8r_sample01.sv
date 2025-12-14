@@ -1,0 +1,24 @@
+
+// 8‑bit D‑flip‑flop array with a synchronous active‑high reset.
+// All registers are clocked on the positive edge of `clk`.
+// When `reset` is asserted (high) the output `q` is forced to 0.
+// Otherwise `q` simply follows the input `d`.
+
+module TopModule (
+    input          clk,    // Positive‑edge clock
+    input  [7:0]   d,      // Parallel data input
+    input          reset,  // Active‑high synchronous reset
+    output reg [7:0] q     // Parallel data output (registers)
+);
+
+    // Synchronous logic: on each rising edge of clk
+    always @(posedge clk) begin
+        if (reset)          // Active‑high synchronous reset
+            q <= 8'b0;      // Drive all bits to zero
+        else
+            q <= d;         // Normal D‑flip‑flop behavior
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

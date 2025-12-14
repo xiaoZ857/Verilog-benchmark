@@ -1,0 +1,13 @@
+
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // The AND gate with a bubble on in2 (inversion)
+  assign out = in1 & (~in2);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

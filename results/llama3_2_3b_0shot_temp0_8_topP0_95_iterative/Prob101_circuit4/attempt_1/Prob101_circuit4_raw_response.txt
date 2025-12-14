@@ -1,0 +1,31 @@
+Below is the Verilog module implementation that corresponds to the given combinational circuit.
+
+```Verilog
+module TopModule (
+    input a,      // Clock/Enable signal
+    input b,      // Input signal
+    input c,      // Input signal
+    input d,      // Input signal
+    output q       // Output signal
+);
+
+wire and_gate;  // Internal wire
+wire not_c;     // Internal wire
+
+// AND gate implementation
+and_gate <= (b && d) ? 1 : 0;
+
+// NOT operation on c
+not_c <= ~c;
+
+// OR operations between and_gate, not_c
+q <= (and_gate & not_c) | ((d == 1) & (!c));
+
+endmodule
+```
+
+In this implementation:
+
+*   We define an internal wire `and_gate` to represent the AND operation between inputs `b` and `d`.
+*   An internal wire `not_c` represents the NOT operation on input `c`. The bitwise NOT operator (`~`) is used.
+*   Finally, we implement the output logic as a combination of the two operations: an AND operation between `and_gate` and `not_c`, followed by an OR operation with `(d == 1) & (!c)`. This corresponds to the given combinational circuit behavior.

@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input enable,
+  input S,
+  input A,
+  input B,
+  input C,
+  output reg Z
+);
+always @(posedge clk) begin
+  if (enable)
+    shift_register[0] <= S; // Assign the input S to Q[0] of the shift register
+  for (int i = 1; i < 8; i++)
+    shift_register[i] <= shift_register[i-1]; // Shift all other bits in the shift register
+end
+
+assign mem [0:7] = shift_register; // Declare mem as a 8-bit vector and assign it to outputs Q[0]...Q[7]
+
+assign Z = mem[(A + B + C)]; // Multiplexer to choose the memory output based on ABC inputs
+
+endmodule

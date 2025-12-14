@@ -1,0 +1,13 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  // Implementing an XNOR gate using basic logic gates
+  assign out = ~(a ^ b); // Equivalent to (a && b) || (!a && !b)
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

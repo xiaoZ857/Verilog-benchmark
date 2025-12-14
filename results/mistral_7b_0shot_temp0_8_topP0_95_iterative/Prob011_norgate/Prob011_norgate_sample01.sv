@@ -1,0 +1,17 @@
+
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+always @(posedge clk) begin
+  out <= a & b; // Using De-Morgan's law to implement NOR gate
+end
+
+// De-Morgan's law states that the logical NOT of a logical OR is equivalent to a logical NAND, and the NOT of a logical AND is equivalent to a logical NOR.
+// In this case, we use NAND (AND with an inverted output) as it has less fanout than NOR gate and is easier to implement.
+
+// To get the inverse of the result from NAND gate, we simply assign '1's complement of the output variable 'out'.
+// Hence, the output 'out' will be '1' only when both inputs 'a' and 'b' are '0'.
+
+endmodule

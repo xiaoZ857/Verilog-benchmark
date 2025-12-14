@@ -1,0 +1,79 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+  always @(in) begin
+    if (in[0] == 1) begin
+      pos = 0;
+    end else if (in[1] == 1) begin
+      pos = 1;
+    end else if (in[2] == 1) begin
+      pos = 2;
+    end else if (in[3] == 1) begin
+      pos = 3;
+    end else if (in[4] == 1) begin
+      pos = 4;
+    end else if (in[5] == 1) begin
+      pos = 5;
+    end else if (in[6] == 1) begin
+      pos = 6;
+    end else if (in[7] == 1) begin
+      pos = 7;
+    end else begin
+      pos = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [7:0] in, output reg [2:0] pos);`**:  This declares the module named `TopModule` with an 8-bit input `in` and a 3-bit output `pos`.  `pos` is declared as `reg` because it's assigned within an `always` block.
+* **`always @(in) begin ... end`**: This is a combinational `always` block.  It means the logic inside will execute whenever any of the signals in the sensitivity list (`in`) changes.  This is essential for a priority encoder, as the output must update immediately when the input changes.
+* **`if (in[0] == 1) begin ... end else if (in[1] == 1) begin ... end ... else begin ... end`**: This is a series of `if-else if-else` statements. It checks each bit of the input vector `in` from the least significant bit (LSB) `in[0]` to the most significant bit (MSB) `in[7]`.
+* **`pos = 0;`**, **`pos = 1;`**, ..., **`pos = 7;`**:  If the current bit being checked is high (equal to 1), the `pos` register is assigned the corresponding value (0 to 7, representing the bit position). This ensures that the *first* high bit is prioritized.
+* **`pos = 0;`**: If none of the bits in the input vector are high, `pos` is assigned 0.
+
+**How it works as a Priority Encoder:**
+
+The code implements a priority encoder by checking the input bits in order of increasing significance. The moment it finds a '1', it assigns the corresponding bit position to the `pos` output and stops checking. This guarantees that the output `pos` always represents the index of the *lowest-indexed* '1' in the input. If no bits are '1', it defaults to 0, as specified in the problem description.
+
+**Testbench (Optional):**
+
+Here's a simple testbench to verify the functionality:
+
+```verilog
+module TopModule_tb;
+
+  reg [7:0] in;
+  wire [2:0] pos;
+
+  TopModule uut (
+    .in(in),
+    .pos(pos)
+  );
+
+  initial begin
+    // Test cases
+    in = 8'b00000000; #10;  // All zeros
+    $display("in = %b, pos = %d", in, pos);
+
+    in = 8'b00000001; #10;  // LSB is high
+    $display("in = %b, pos = %d", in, pos);
+
+    in = 8'b00000010; #10;
+    $display("in = %b, pos = %d", in, pos);
+
+    in = 8'b00000100; #10;
+    $display("in = %b, pos = %d", in, pos);
+
+    in = 8'b00001000; #10;
+    $display("in = %b, pos = %d", in, pos);
+
+    in = 8'b10000000; #10;
+    $display("in = %b, pos = %d", in, pos);
+
+    in =

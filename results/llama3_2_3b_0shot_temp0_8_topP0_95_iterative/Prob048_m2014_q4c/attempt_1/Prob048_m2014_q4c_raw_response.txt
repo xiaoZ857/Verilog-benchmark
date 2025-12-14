@@ -1,0 +1,51 @@
+Here is the implementation of the Verilog module for the simple D flip flop with an active high synchronous reset:
+
+```verilog
+module TopModule(
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+logic q_next;
+
+always_comb {
+  q_next = (r == 1) ? 0 : ((d == 1) && !(clk == 1));
+}
+
+assign q = q_next;
+
+endmodule
+```
+
+This module implements a D flip flop with the following properties:
+
+- The Q output is active high, meaning it goes high on the rising edge of the clock.
+- The D input is not connected to the Q output unless the clock is rising (i.e., `d` becomes valid when `clk == 1`).
+- When the reset (`r`) signal is high, the Q output is set to zero.
+
+However, in a typical implementation of a flip-flop in Verilog, the D input would be connected directly to the next value of Q, without an intermediate logic step. Here's how you could modify the module for that:
+
+```verilog
+module TopModule(
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+logic q_next;
+
+always_ff @(posedge clk) {
+  if(r == 1) {
+    q <= 0;
+  } else if(d == 1 && !q) {
+    q <= d;
+  }
+}
+
+endmodule
+```
+
+This version of the module is more typical for flip-flop implementations in Verilog, as it directly sets the next value of `q` based on the current state and inputs.

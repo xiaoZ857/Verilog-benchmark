@@ -1,0 +1,26 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:14: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:18: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:24: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:28: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:34: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:34: warning: Numeric constant truncated to 2 bits.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:38: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:38: warning: Numeric constant truncated to 2 bits.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:44: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:44: warning: Numeric constant truncated to 2 bits.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:48: warning: extra digits given for sized binary constant.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob100_fsm3comb\attempt_3\Prob100_fsm3comb_code.sv:48: warning: Numeric constant truncated to 2 bits.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:6: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:10: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:14: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:18: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob100_fsm3comb_test.sv:23: error: invalid module item.

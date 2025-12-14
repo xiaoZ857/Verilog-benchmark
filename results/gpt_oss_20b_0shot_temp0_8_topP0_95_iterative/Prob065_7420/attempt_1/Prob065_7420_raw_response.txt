@@ -1,0 +1,46 @@
+Below is a clean, synthesizable Verilog implementation of a 7420‑style chip – two independent 4‑input NAND gates.
+
+```verilog
+//=====================================================================
+//  7420 – Two 4‑input NAND gates
+//
+//  Module name:  TopModule
+//
+//  Ports
+//  ├─ p1a, p1b, p1c, p1d : 4 inputs to the first NAND gate
+//  │  p1y                : output of the first NAND gate
+//  ├─ p2a, p2b, p2c, p2d : 4 inputs to the second NAND gate
+//  │  p2y                : output of the second NAND gate
+//=====================================================================
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire p1a,
+    input  wire p1b,
+    input  wire p1c,
+    input  wire p1d,
+    output wire p1y,
+    input  wire p2a,
+    input  wire p2b,
+    input  wire p2c,
+    input  wire p2d,
+    output wire p2y
+);
+
+    // 4‑input NAND gate #1
+    assign p1y = ~(p1a & p1b & p1c & p1d);
+
+    // 4‑input NAND gate #2
+    assign p2y = ~(p2a & p2b & p2c & p2d);
+
+endmodule
+```
+
+### Notes
+
+* The module uses **continuous assignment (`assign`)** statements, which are the standard way to express combinational logic in Verilog.
+* Each output is simply the logical NAND of its four corresponding inputs, exactly matching the behaviour of the 7420 IC.
+* All signals are declared as `wire` (the default type for ports) – no registers or clocking are required because the gates are purely combinational.
+* The `timescale` directive is optional but handy for simulation; it sets the simulation time units to 1 ns and the time precision to 1 ps.
+
+This module is ready for synthesis or simulation and faithfully reproduces the functionality of the 7420 chip.

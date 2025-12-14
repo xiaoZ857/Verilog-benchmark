@@ -1,0 +1,44 @@
+**Verilog – 10‑bit counter (0 → 999, 1000‑cycle period)**
+
+```verilog
+// TopModule.v
+// 10‑bit synchronous counter that counts from 0 to 999 inclusive.
+// The counter wraps back to 0 after reaching 999 (period = 1000 cycles).
+// `reset` is active‑high and synchronous.
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire        clk,   // Positive‑edge clock
+    input  wire        reset, // Active‑high synchronous reset
+    output reg  [9:0]  q      // 10‑bit counter output
+);
+
+    // --------------------------------------------------------------------
+    // Parameters
+    // --------------------------------------------------------------------
+    localparam MAX_COUNT = 10'd999;   // Final count value (0‑999)
+
+    // --------------------------------------------------------------------
+    // Counter logic
+    // --------------------------------------------------------------------
+    always @(posedge clk) begin
+        if (reset) begin
+            q <= 10'd0;               // Reset to zero
+        end
+        else if (q == MAX_COUNT) begin
+            q <= 10'd0;               // Wrap after reaching 999
+        end
+        else begin
+            q <= q + 1'b1;            // Increment normally
+        end
+    end
+
+endmodule
+```
+
+### Notes
+
+- The counter is **synchronous**: the reset is evaluated only on the clock edge.
+- The counter width (10 bits) is sufficient because `2^10 = 1024 > 999`.
+- The counter will output values `0, 1, …, 999, 0, 1, …` with a period of 1000 clock cycles.

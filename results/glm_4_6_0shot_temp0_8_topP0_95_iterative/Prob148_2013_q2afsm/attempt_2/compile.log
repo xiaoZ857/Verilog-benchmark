@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_2\Prob148_2013_q2afsm_code.sv:11: error: g is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_2\Prob148_2013_q2afsm_code.sv:6:      : g is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_2\Prob148_2013_q2afsm_code.sv:12: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_2\Prob148_2013_q2afsm_code.sv:12: error: Unable to elaborate this case expression.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_2\Prob148_2013_q2afsm_code.sv:10: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

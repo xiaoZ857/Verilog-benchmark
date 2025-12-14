@@ -1,0 +1,43 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+  reg [511:0] next_q;
+
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+  always @(*) begin
+    for (int i = 0; i < 512; i++) begin
+      case (q[i])
+        1'b0: begin
+          if (i == 0) begin
+            next_q[i] = 1'b0;
+          end else if (i == 511) begin
+            next_q[i] = 1'b0;
+          end else begin
+            next_q[i] = q[i-1] ^ q[i+1];
+          end
+        end
+        1'b1: begin
+          if (i == 0) begin
+            next_q[i] = 1'b1;
+          end else if (i == 511) begin
+            next_q[i] = 1'b1;
+          end else begin
+            next_q[i] = q[i-1] ^ q[i+1];
+          end
+        end
+      endcase
+    end
+  end
+
+endmodule

@@ -1,0 +1,89 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+reg [2:0] state, next_state;
+reg [4:0] fall_counter;
+reg direction; // 0 for left, 1 for right
+
+// State definitions
+parameter WALK_LEFT = 3'b000;
+parameter WALK_RIGHT = 3'b001;
+parameter FALL_LEFT = 3'b010;
+parameter FALL_RIGHT = 3'b011;
+parameter DIG_LEFT = 3'b100;
+parameter DIG_RIGHT = 3'b101;
+parameter SPLATTERED = 3'b110;
+
+// Sequential logic
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state <= WALK_LEFT;
+    fall_counter <= 0;
+    direction <= 0;
+  end else begin
+    state <= next_state;
+    if (state == FALL_LEFT || state == FALL_RIGHT) begin
+      if (ground)
+        fall_counter <= 0;
+      else
+        fall_counter <= fall_counter + 1;
+    end else begin
+      fall_counter <= 0;
+    end
+  end
+end
+
+// Combinational logic for next state
+always @(*) begin
+  next_state = state;
+  
+  case (state)
+    WALK_LEFT: begin
+      if (!ground) begin
+        next_state = FALL_LEFT;
+      end else if (dig) begin
+        next_state = DIG_LEFT;
+      end else if (bump_left || bump_right) begin
+        next_state = WALK_RIGHT;
+      end
+    end
+    
+    WALK_RIGHT: begin
+      if (!ground) begin
+        next_state = FALL_RIGHT;
+      end else if (dig) begin
+        next_state = DIG_RIGHT;
+      end else if (bump_left || bump_right) begin
+        next_state = WALK_LEFT;
+      end
+    end
+    
+    FALL_LEFT: begin
+      if (ground) begin
+        if (fall_counter > 20) begin
+          next_state = SPLATTERED;
+        end else begin
+          next_state = WALK_LEFT;
+        end
+      end
+    end
+    
+    FALL_RIGHT: begin
+      if (ground) begin
+        if (fall_counter > 20) begin
+          next_state = SPLATTERED;
+        end else begin
+          next_state = WALK_RIGHT
+
+// VERILOG-EVAL: endmodule not found

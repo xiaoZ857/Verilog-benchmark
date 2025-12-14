@@ -1,0 +1,47 @@
+To implement a D latch in Verilog, you can use an `always` block to describe the behavior of the latch. A D latch is a simple memory element that captures the value on its data input (`d`) when its enable signal (`ena`) is active (typically high). The output (`q`) holds this captured value as long as `ena` remains active.
+
+Here's how you can implement the `TopModule` with an always block:
+
+```verilog
+module TopModule (
+  input wire d,      // Data input
+  input wire ena,    // Enable signal
+  output reg q       // Output of the latch
+);
+
+  // Always block triggered on the positive edge or when enable changes
+  always @(ena or posedge clk) begin
+    if (ena) begin
+      q <= d;  // Capture the value of 'd' at 'q' when 'ena' is high
+    end
+    else begin
+      q <= q;  // Hold the current value of 'q'
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: 
+  - `d`: The data input to the latch.
+  - `ena`: The enable signal. When high, it allows the data from `d` to be captured at `q`.
+  - `q`: The output of the latch.
+
+- **always Block**:
+  - The block is sensitive to changes in `ena` and the positive edge of a clock (`posedge clk`). This setup assumes that you might want to use it with synchronous designs, but typically for a simple D latch, only the enable signal should control the behavior. If you're implementing purely an asynchronous latch (not tied to clock edges), remove `posedge clk` from sensitivity list.
+  - When `ena` is high (`if (ena)`), the value of `d` is captured and stored in `q`.
+  - When `ena` is low, the current state of `q` is maintained. This effectively holds the last captured value.
+
+Note: If this is purely an asynchronous latch without clock dependency, you can modify the sensitivity list to only include `ena`, like so:
+
+```verilog
+always @(ena) begin
+  if (ena) begin
+    q <= d;
+  end
+end
+```
+
+This version will make the latch react immediately to changes in the enable signal.

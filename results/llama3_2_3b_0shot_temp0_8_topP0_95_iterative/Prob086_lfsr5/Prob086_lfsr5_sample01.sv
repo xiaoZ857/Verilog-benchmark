@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [4:0] q
+);
+// Verilog LFSR equation
+reg [1:0][4:0] shiftreg;
+always @(posedge clk or posedge reset) begin
+    if (reset == 1)
+        shiftreg[2:0] = 0;
+    else
+        // XOR each output with the corresponding input bit, except for q[4]
+        shiftreg[4] = q[0];
+        shiftreg[3] = q[1];
+        shiftreg[2:0] = {(tap[5][0]&~q[4]) ^ (tap[3][0]&~q[2])} ;
+    // Update next_state
+    for(int i=6;~i&1;i--) begin
+        if(i == 5 || tap[i-1][0])
+            shiftreg[4+i-1]=shiftreg[i];
+        else
+            shiftreg[4+i-1] = (shiftreg[4+i-1] ^ q[0]);
+    end
+    // Update output
+    for(int i=0;~i&1;i++) begin
+        if(i == 3)
+            shiftreg[0]=q[0];
+        else
+            shiftreg[0] = shiftreg[i+1];
+    end
+end
+
+// XOR for the Galois structure
+assign shiftreg[5] = q[4];
+
+// Update q output
+always @*(posedge clk) begin
+    $regdrop q = {shiftreg[3], shiftreg[2]};
+end
+
+// VERILOG-EVAL: endmodule not found

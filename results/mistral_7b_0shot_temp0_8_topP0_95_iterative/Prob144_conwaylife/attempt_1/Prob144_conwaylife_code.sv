@@ -1,0 +1,50 @@
+
+module TopModule (
+    input clk,
+    input load,
+    input [255:0] data,
+    output reg [255:0] q
+);
+
+// Macro for calculating neighbours in toroidal fashion
+#pragma Verilog_Standard 1995
+macrocell
+neighbors(
+    input [3:0] cell_coords,
+    output reg [7:0] num_neighbours
+);
+    always @* begin
+        num_neighbours = 8'b0; // Initializing neighbors counter to zero
+
+        assign num_neighbours[0] = (cell_coords[3] == 0) && (cell_coords[2] == 1); // Top-left neighbour
+        assign num_neighbours[1] = (cell_coords[2] == 1) && q[(cell_coords[3]*16)+(cell_coords[1])]; // Top neighbour
+        assign num_neighbours[2] = (cell_coords[3] == 0) && (cell_coords[2] == 15); // Top-right neighbour
+        assign num_neighbours[3] = (cell_coords[1] == 15) && q[(cell_coords[3]*16)+(cell_coords[0])]; // Right neighbour
+        assign num_neighbours[4] = q[(cell_coords[3]*(16+1))+(cell_coords[1])]; // Bottom-left neighbour
+        assign num_neighbours[5] = q[(cell_coords[3]*(16+1)+1)+(cell_coords[1]); // Bottom neighbour
+        assign num_neighbours[6] = (cell_coords[1] == 0) && q[(cell_coords[3]*(16+1))+(cell_coords[2])]; // Bottom-right neighbour
+        assign num_neighbours[7] = (cell_coords[2] == 15) && (cell_coords[0] == 1); // Left neighbour
+    end
+endmacro
+
+// Main module logic
+always @(posedge clk) begin
+    if (load) begin
+        q <= data; // Loading data into q at the next clock edge
+    end else begin
+        for (int i = 0; i < 256; i++) begin
+            neighbors(i/16, i%16, num); // Calculate neighbours using the macro
+
+            case (num)
+                0: q[i] <= 'b0; // Cell becomes 0
+                1: q[i] <= q[i]; // Cell state does not change
+                2: q[i] <= 'b1; // Cell becomes 1
+                3: q[i] <= 'b0; // Cell becomes 0
+                default: q[i] <= 'b0'; // Error handling, cell should not have more than 4 neighbors
+            endcase
+        end
+    end
+end
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

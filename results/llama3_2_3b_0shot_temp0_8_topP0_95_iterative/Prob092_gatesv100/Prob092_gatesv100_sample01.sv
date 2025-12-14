@@ -1,0 +1,38 @@
+
+module TopModule (
+  input [99:0] in,
+  output [98:0] out_both,
+  output [99:1] out_any,
+  output [99:0] out_different
+);
+reg [100:0] temp_in; // temporary storage for in vector
+reg [98:0] out_both; // corrected signal name and size
+reg [99:1] out_any; // corrected signal name and size
+reg [99:0] out_different; // corrected signal name and size
+
+assign temp_in = in;
+
+always @(posedge clk) begin
+    int idx_outboth[98];
+    for (int i = 0; i < 98; i++) {
+        idx_outboth[i] = i + 1;
+    }
+    out_both <= {temp_in[idx_outbuth[97]], 
+                   temp_in[idx_outboth[96]], ...};
+
+    int idx_outany[99];
+    for (int i = 0; i < 99; i++) {
+        if(i > 0) idx_outany[i] = i - 1;
+        else idx_outany[i] = in[i]; 
+    }
+    out_any <= {temp_in[idx_outany[98]] | temp_in[idx_outany[97]], 
+                 temp_in[idx_outany[99]] | temp_in[idx_outany[0]], ...};
+
+    int idx_outdiff[99];
+    for (int i = 0; i < 99; i++) {
+        if(i > 0) idx_outdiff[i] = i - 1;
+        else idx_outdiff[i] = in[i]; 
+    }
+    out_different <= {temp_in[idx_outdiff[98]] != temp_in[idx_outdiff[0]], 
+                       ...};
+endmodule

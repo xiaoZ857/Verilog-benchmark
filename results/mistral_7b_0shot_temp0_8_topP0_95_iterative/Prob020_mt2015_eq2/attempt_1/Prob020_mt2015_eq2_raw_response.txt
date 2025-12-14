@@ -1,0 +1,25 @@
+ Here is the Verilog code for your requested circuit:
+
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output reg z
+);
+
+always @(posedge clk) begin
+  if ((A[1] == B[1]) && (A[0] == B[0])) begin
+    z <= 1'b1;
+  end else begin
+    z <= 1'b0;
+  end
+end
+
+// Add clock input and synchronization if needed
+// Assuming clk is provided from external entity or another module
+// (Assumed positive-edge triggered for this example)
+// input clk;
+// always @(posedge clk) $finish;
+```
+
+This Verilog code defines a module called `TopModule` which takes two 2-bit inputs A and B, and generates an output z that is 1 if the two inputs are equal, otherwise z will be 0. The circuit uses positive edge clock triggered signals (unless you add the missing clk input).

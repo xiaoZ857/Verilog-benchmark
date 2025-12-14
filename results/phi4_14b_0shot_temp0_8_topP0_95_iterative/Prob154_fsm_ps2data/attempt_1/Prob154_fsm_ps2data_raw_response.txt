@@ -1,0 +1,93 @@
+To implement this finite state machine (FSM) using Verilog, we need to define states and transitions that process the incoming byte stream according to the specified rules. The FSM will detect message boundaries by identifying a byte where `in[3] == 1`. Once such a byte is identified, it will collect subsequent bytes until three have been received, at which point it signals the completion of a message. Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input [7:0] in,
+    input reset,
+    output reg [23:0] out_bytes,
+    output reg done
+);
+
+    // Define states for FSM
+    typedef enum logic [1:0] {
+        IDLE,     // Discard bytes until a boundary byte is found
+        COLLECT1, // Collecting the first byte of message
+        COLLECT2, // Collecting the second byte of message
+        COLLECT3  // Collecting the third byte of message
+    } state_t;
+
+    state_t current_state, next_state;
+
+    reg [7:0] byte1, byte2; // Registers to hold the first two bytes
+
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            current_state <= IDLE;
+            done <= 0;
+            out_bytes <= 24'b0;
+        end else begin
+            current_state <= next_state;
+            
+            // Update output and done signal based on the state
+            case (current_state)
+                COLLECT3: begin
+                    out_bytes <= {byte1, byte2, in}; 
+                    done <= 1;
+                end
+                default: begin
+                    out_bytes <= 24'b0;
+                    done <= 0;
+                end
+            endcase
+        end
+    end
+
+    always_comb begin
+        next_state = current_state; // Default to staying in the same state
+        
+        case (current_state)
+            IDLE: begin
+                if (in[3] == 1) begin
+                    next_state = COLLECT1;
+                    byte1 = in; // Load first byte upon detecting a boundary
+                end
+            end
+
+            COLLECT1: begin
+                byte2 = in;
+                next_state = COLLECT2;
+            end
+
+            COLLECT2: begin
+                next_state = COLLECT3;
+            end
+            
+            COLLECT3: begin
+                next_state = IDLE; // Start over after completing a message
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Machine Definition**:
+   - `IDLE`: The FSM waits here until it finds the start of a new message, indicated by `in[3] == 1`.
+   - `COLLECT1`, `COLLECT2`, `COLLECT3`: These states handle collecting each byte of the three-byte message.
+
+2. **State Transitions**:
+   - From `IDLE` to `COLLECT1`: Transition occurs when a boundary byte (`in[3] == 1`) is detected.
+   - `COLLECT1` to `COLLECT2`, and then `COLLECT2` to `COLLECT3`: Sequential collection of bytes.
+   - `COLLECT3` back to `IDLE`: After collecting the third byte, reset to begin searching for another message.
+
+3. **Outputs**:
+   - In `COLLECT3`, output `out_bytes` which holds the concatenated three-byte message and assert the `done` signal.
+   - Otherwise, both `out_bytes` and `done` are inactive or zeroed out.
+
+4. **Reset Handling**:
+   - On a reset event (active high synchronous), initialize states to `IDLE`, clear outputs, and set `done` to 0.
+
+This implementation captures the desired behavior as per the waveform example provided in the question.

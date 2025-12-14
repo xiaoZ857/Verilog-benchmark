@@ -1,0 +1,3 @@
+  always @(a, b, c, d) begin
+    out = (c) | (a & b & d);
+  end

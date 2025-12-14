@@ -1,0 +1,32 @@
+Here’s a minimal, synthesizable Verilog implementation of a one‑bit, 2‑to‑1 multiplexer.  
+Since the module is purely combinational (no clock is mentioned), we can use a continuous
+assignment. If you prefer an `always_comb` block, just change the output type to `reg`.
+
+```verilog
+// -----------------------------------------------------
+//  One‑bit 2‑to‑1 Multiplexer
+// -----------------------------------------------------
+//  When sel = 0  -> out = a
+//  When sel = 1  -> out = b
+// -----------------------------------------------------
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire a,      // First input
+    input  wire b,      // Second input
+    input  wire sel,    // Select line
+    output wire out     // Multiplexed output
+);
+
+// Continuous assignment – purely combinational logic
+assign out = sel ? b : a;
+
+endmodule
+```
+
+**Notes**
+
+* `output wire` is the default for an output that isn’t driven by an `always` block, so you can simply keep it as `output out;`.
+* The ternary operator `sel ? b : a` implements the 2‑to‑1 selection logic.
+* If you ever need a clock‑controlled or registered version of the mux, you’d replace the continuous assignment with an `always @(posedge clk)` block and make `out` a `reg`.

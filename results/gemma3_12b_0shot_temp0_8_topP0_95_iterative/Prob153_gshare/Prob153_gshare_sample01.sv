@@ -1,0 +1,91 @@
+
+module TopModule (
+  input clk,
+  input areset,
+
+  input predict_valid,
+  input [6:0] predict_pc,
+  output predict_taken,
+  output [6:0] predict_history,
+
+  input train_valid,
+  input train_taken,
+  input train_mispredicted,
+  input [6:0] train_history,
+  input [6:0] train_pc
+);
+  // Parameters
+  parameter PHT_SIZE = 128;
+  parameter HISTORY_SIZE = 7;
+
+  // Internal Signals
+  reg [7:0] global_history;
+  reg [2:0] pht [0:PHT_SIZE-1]; // Two-bit saturating counters
+  reg [6:0] predict_history_reg; // Register to hold history for prediction
+
+  // Helper Functions
+  function [6:0] hash_index (input [6:0] pc, input [6:0] history);
+    return pc ^ history;
+  endfunction
+
+  // Reset Logic
+  always @(posedge areset) begin
+    global_history <= 0;
+    for (integer i = 0; i < PHT_SIZE; i++) begin
+      pht[i] <= 0;
+    end
+    predict_history_reg <= 0;
+  end
+
+  // Global History Update (during prediction)
+  always @(posedge clk) begin
+    if (predict_valid) begin
+      global_history <= global_history; // No update during prediction
+    end
+  end
+
+  // Prediction Logic
+  always @(posedge clk) begin
+    if (predict_valid) begin
+      integer index;
+      index = hash_index(predict_pc, global_history);
+      index = index % PHT_SIZE; // Ensure index is within bounds
+
+      predict_taken <= pht[index][1]; // MSB indicates taken/not taken
+      predict_history <= global_history;
+    end else begin
+      predict_history <= 0;
+    end
+  end
+
+  // Training Logic
+  always @(posedge clk) begin
+    if (train_valid) begin
+      integer index;
+      index = hash_index(train_pc, train_history);
+      index = index % PHT_SIZE;
+
+      // Saturating counter update
+      if (train_taken) begin
+        pht[index] <= pht[index] + 1'b1;
+      end else begin
+        pht[index] <= pht[index] - 1'b1;
+      end
+
+      // Keep the value within the range 0-3
+      if(pht[index] > 3) pht[index] <= 3;
+      if(pht[index] < 0) pht[index] <= 0;
+
+      // Recovery of branch history register (misprediction)
+      if (train_mispredicted) begin
+          // Recover the branch history register to the state immediately
+          // after the mispredicting branch completes execution.
+          // This is a simplified implementation.  A more complex
+          // implementation might need to track history register values
+          // for each branch.
+          global_history <= train_history;  // Simplistic recovery
+      end
+    end
+  end
+
+endmodule

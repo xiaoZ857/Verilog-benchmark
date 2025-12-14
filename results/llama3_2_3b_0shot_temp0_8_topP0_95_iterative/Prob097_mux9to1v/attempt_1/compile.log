@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob097_mux9to1v\attempt_1\Prob097_mux9to1v_code.sv:25: error: Unable to bind parameter `sel' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob097_mux9to1v\attempt_1\Prob097_mux9to1v_code.sv:25: error: Cannot evaluate genvar case expression: sel
+2 error(s) during elaboration.

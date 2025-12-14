@@ -1,0 +1,28 @@
+Here's the implementation of the Verilog module according to your requirements:
+
+```verilog
+// Define the output signal as a wire and initialize it to 0
+output reg zero = 0;
+
+// Instantiate an always block to update the state of the signal
+always @(posedge clk) begin
+    zero <= 0;
+end
+
+// Don't forget to instantiate and connect the clock
+// Assuming that you have a clock port in your module definition.
+module TopModule (
+    input clk,
+    output reg zero
+);
+```
+
+However, since we are always assigning 0 to `zero` regardless of the state of the signal, it's not practical to use an always block. We can simply initialize the `zero` variable directly:
+
+```verilog
+module TopModule (
+    output reg zero = 0;
+);
+```
+
+This is a more straightforward way to implement this logic in Verilog.

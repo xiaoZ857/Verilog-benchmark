@@ -1,0 +1,68 @@
+  // Define states
+  parameter S_IDLE    = 2'b00;
+  parameter S_DETECT  = 2'b01;
+  parameter S_SHIFT  = 2'b10;
+  parameter S_COUNTING = 2'b11;
+
+  reg [1:0] current_state;
+  reg [3:0] shift_reg;
+  reg shift_ena_cnt;
+  reg shift_ena;
+  reg counting;
+  reg done;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= S_IDLE;
+      shift_reg <= 4'b0000;
+      shift_ena_cnt <= 0;
+      shift_ena <= 0;
+      counting <= 0;
+      done <= 0;
+    end else begin
+      case (current_state)
+        S_IDLE: begin
+          shift_ena <= 0;
+          counting <= 0;
+          done <= 0;
+          if (data) begin
+            shift_reg <= {shift_reg[2:0], data};
+          end else begin
+            shift_reg <= {shift_reg[2:0], 1'b0};
+          end
+
+          if (shift_reg == 4'b1101) begin
+            current_state <= S_DETECT;
+          end
+        end
+
+        S_DETECT: begin
+          current_state <= S_SHIFT;
+          shift_ena <= 1;
+          shift_ena_cnt <= 4;
+        end
+
+        S_SHIFT: begin
+          if(shift_ena_cnt > 0) begin
+            shift_ena_cnt <= shift_ena_cnt - 1;
+          end else begin
+            current_state <= S_COUNTING;
+            shift_ena <= 0;
+          end
+        end
+
+        S_COUNTING: begin
+          shift_ena <= 0;
+          counting <= 1;
+          done <= 0;
+          if (done_counting) begin
+            current_state <= S_IDLE;
+            counting <= 0;
+            done <= 1;
+          end
+        end
+      endcase
+    end
+  end
+
+endmodule

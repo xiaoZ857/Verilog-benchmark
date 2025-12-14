@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob058_alwaysblock2\attempt_1\Prob058_alwaysblock2_code.sv:39: error: You can not instantiate module TopModule within itself.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob058_alwaysblock2\attempt_1\Prob058_alwaysblock2_code.sv:39:      : The offending instance is UUT within tb.top_module1.
+2 error(s) during elaboration.

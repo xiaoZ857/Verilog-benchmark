@@ -1,0 +1,39 @@
+To implement a 4-bit binary counter as described in your requirements, we will create a Verilog module named `TopModule`. The counter should count from 0 to 15 and then wrap around. It has an active high synchronous reset that sets the counter back to 0.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Synchronous active-high reset, set counter to 0
+        q <= 4'b0000;
+    end else begin
+        // Increment the counter on each clock edge
+        q <= q + 1;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: 
+  - `TopModule` is defined with inputs `clk` (clock), `reset` (active high synchronous reset), and an output `q`, which is a 4-bit register.
+  
+- **Always Block**:
+  - The always block is triggered on the positive edge of `clk` or when `reset` is asserted (`posedge reset`). This ensures that both clocking and resetting are considered.
+  
+- **Reset Logic**:
+  - If `reset` is high, the counter `q` is set to `4'b0000`, ensuring a synchronous active-high reset behavior.
+
+- **Counting Logic**:
+  - When `reset` is not asserted, on each positive edge of the clock, the value of `q` is incremented by 1. This results in a count from 0 through 15 and then wraps around to 0 again due to the 4-bit size limitation.
+
+This module will function as a synchronous 4-bit binary counter with an active high reset, meeting the specified requirements.

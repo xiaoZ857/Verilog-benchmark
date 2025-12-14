@@ -1,0 +1,38 @@
+To implement a Verilog module for a decade counter that counts from 1 through 10, we need to create a module named `TopModule`. The counter should be positive edge-triggered by the clock signal (`clk`) and have an active-high synchronous reset input (`reset`). When the reset is asserted, the counter should set its value to 1. On every clock cycle without reset, it should increment by one until reaching 10, then wrap back around to 1.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire reset,
+    output reg [3:0] q
+);
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Active-high synchronous reset, set counter to 1
+            q <= 4'b0001;
+        end else begin
+            if (q == 4'b1010) begin
+                // If the current count is 10, wrap around to 1
+                q <= 4'b0001;
+            end else begin
+                // Increment the counter otherwise
+                q <= q + 1;
+            end
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**: The module has three ports: `clk` for the clock input, `reset` as an active-high synchronous reset input, and `q`, a 4-bit register that holds the counter value.
+
+- **Reset Logic**: Inside the always block sensitive to positive edges of both `clk` and `reset`, we first check if the `reset` is high. If so, we set the output `q` to 1 (binary `0001`).
+
+- **Counting Logic**: If not in reset, we check whether `q` equals 10 (`1010` in binary). If it does, we wrap around to 1 on the next clock cycle. Otherwise, we simply increment `q`.
+
+This design ensures that the counter counts from 1 through 10 and resets correctly when needed.

@@ -1,0 +1,31 @@
+ Here is a Verilog implementation for the module as described:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire resetn,
+    input [1:0] byteena,
+    input [15:0] d,
+    output reg [15:0] q
+);
+
+reg [15:0] upper_d, lower_d; // Internal signals to separate the data for upper and lower bytes
+
+always @(posedge clk) begin
+    if (!resetn) begin
+        upper_d <= 8'b0; // Reset both upper and lower data registers
+        lower_d <= 8'b0;
+    end else begin
+        if (byteena[1]) upper_d <= d[15:8]; // Write to upper byte when enabled
+        if (byteena[0]) lower_d <= d[7:0];  // Write to lower byte when enabled
+    end
+end
+
+always @(posedge clk) begin
+    q <= upper_d[15:0]; // Assign the values of upper and lower data registers to outputs
+end
+
+endmodule
+```
+
+This Verilog code creates a top-level module named `TopModule` with input signals `clk`, `resetn`, `byteena`, and `d`, and output signal `q`. It uses internal signals `upper_d` and `lower_d` to separate the data for upper and lower bytes. The reset is synchronous, active-low, and it resets both `upper_d` and `lower_d` to 0 on the positive edge of clk. The `byteena[1]` signal controls the upper byte d[15:8], while `byteena[0]` controls the lower byte d[7:0]. On each positive clock edge, the values are assigned to `q`.

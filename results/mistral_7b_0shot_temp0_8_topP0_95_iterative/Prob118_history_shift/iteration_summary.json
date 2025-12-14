@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob118_history_shift",
+  "model_name": "mistral:7b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_1\\Prob118_history_shift_code.sv:22: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_1\\Prob118_history_shift_code.sv:22: error: malformed statement\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_1\\Prob118_history_shift_code.sv:27: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_1\\Prob118_history_shift_code.sv:27: error: malformed statement\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 7\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:36: error: Unable to bind wire/reg/memory `history['sd31:'sd0]' in `tb.top_module1'\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:36: error: Unable to elaborate r-value: history['sd31:'sd0]\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:15: error: Could not find variable ``reset_flag'' in ``tb.top_module1''\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:16: error: Could not find variable ``current_index'' in ``tb.top_module1''\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:17: error: Could not find variable ``history'' in ``tb.top_module1''\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:18: error: Unable to bind wire/reg/memory `reset_flag' in `tb.top_module1'\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_2\\Prob118_history_shift_code.sv:18: error: Unable to elaborate condition expression.\n7 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_3\\Prob118_history_shift_code.sv:37: error: Array cannot be indexed by a range.\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_3\\Prob118_history_shift_code.sv:17: error: Cannot assign to array history. Did you forget a word index?\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob118_history_shift\\attempt_3\\Prob118_history_shift_code.sv:22: error: Cannot assign to array history. Did you forget a word index?\n3 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+```verilog
+module TopModule (
+  output one
+);
+
+  assign one = 1;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (output one);`**:  This line defines the module named `TopModule` and declares `one` as an output signal.
+* **`assign one = 1;`**: This is a continuous assignment statement.  It assigns the value `1` (logic high) to the `one` output signal.  Because it's a continuous assignment, whenever the right-hand side (the `1`) is evaluated, the left-hand side (the `one` signal) is updated.  Since the right-hand side is a constant, the output `one` will always be high.
+* **`endmodule`**: This marks the end of the module definition.
+
+**How it fulfills the requirements:**
+
+* **No inputs:** The module doesn't have any input signals declared.
+* **One output:** The module has one output signal named `one`.
+* **Output always drives 1:** The `assign one = 1;` statement ensures that the `one` output is always driven high (logic 1).

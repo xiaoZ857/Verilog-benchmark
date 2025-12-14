@@ -1,0 +1,73 @@
+To implement the Verilog module for a 4-bit adder with full adders that outputs a 5-bit sum (including the overflow bit), we need to use four full adders. Each full adder handles one bit of addition and propagates any carry to the next higher bit.
+
+Here's how you can implement this:
+
+```verilog
+module FullAdder (
+    input a,
+    input b,
+    input cin,   // Carry in from previous less significant bit
+    output sum,
+    output cout  // Carry out to more significant bit
+);
+    assign {cout, sum} = a + b + cin;
+endmodule
+
+module TopModule (
+    input [3:0] x,
+    input [3:0] y,
+    output [4:0] sum
+);
+
+    wire c1, c2, c3; // Intermediate carry signals
+
+    // Instantiate four full adders for each bit of addition
+    FullAdder fa0 (
+        .a(x[0]),
+        .b(y[0]),
+        .cin(1'b0),  // No carry in for the least significant bit
+        .sum(sum[0]),
+        .cout(c1)
+    );
+
+    FullAdder fa1 (
+        .a(x[1]),
+        .b(y[1]),
+        .cin(c1),
+        .sum(sum[1]),
+        .cout(c2)
+    );
+
+    FullAdder fa2 (
+        .a(x[2]),
+        .b(y[2]),
+        .cin(c2),
+        .sum(sum[2]),
+        .cout(c3)
+    );
+
+    FullAdder fa3 (
+        .a(x[3]),
+        .b(y[3]),
+        .cin(c3),
+        .sum(sum[3]),
+        .cout(sum[4])  // Carry out is the overflow bit
+    );
+
+endmodule
+```
+
+### Explanation:
+
+1. **Full Adder Module**:
+   - Each `FullAdder` module takes three inputs: two single-bit operands (`a`, `b`) and a carry-in (`cin`).
+   - It produces a sum and a carry-out (`cout`). The sum is the result of adding these three bits.
+   - The `{cout, sum}` assignment handles both the sum and carry-out in one line by utilizing bit concatenation.
+
+2. **Top Module**:
+   - The `TopModule` instantiates four `FullAdder` modules to add two 4-bit numbers (`x` and `y`).
+   - The carry-in for the least significant bit (LSB) is `1'b0`.
+   - Intermediate carry outputs from each full adder are connected as inputs to the next higher bit's full adder.
+   - The final carry-out from the most significant bit represents the overflow condition, and it's output as `sum[4]`.
+
+This design ensures that the 4-bit addition correctly propagates any carries and provides a valid 5-bit result indicating both the sum and any overflow.

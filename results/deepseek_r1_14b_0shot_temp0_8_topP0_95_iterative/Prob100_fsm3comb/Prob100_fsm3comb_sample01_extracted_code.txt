@@ -1,0 +1,61 @@
+module TopModule (
+  input in,
+  input [1:0] state,
+  output reg [1:0] next_state,
+  output out
+);
+
+// Function to compute next state and output based on current state and input
+function void fsm_logic(input [1:0] state, input in, 
+                         output [1:0] next_state, output out);
+    case ({state, in})
+        // State A (00)
+        2'b00_0: begin
+            next_state = 2'b00; // A on in=0
+            out = 0;
+        end
+        2'b00_1: begin
+            next_state = 2'b01; // B on in=1
+            out = 0;
+        end
+        
+        // State B (01)
+        2'b01_0: begin
+            next_state = 2'b10; // C on in=0
+            out = 0;
+        end
+        2'b01_1: begin
+            next_state = 2'b01; // B on in=1
+            out = 0;
+        end
+        
+        // State C (10)
+        2'b10_0: begin
+            next_state = 2'b00; // A on in=0
+            out = 0;
+        end
+        2'b10_1: begin
+            next_state = 2'b11; // D on in=1
+            out = 0;
+        end
+        
+        // State D (11)
+        2'b11_0: begin
+            next_state = 2'b11; // C on in=0
+            out = 1;
+        end
+        2'b11_1: begin
+            next_state = 2'b01; // B on in=1
+            out = 1;
+        end
+        
+        default: begin
+            next_state = 2'b00; // Default to A if undefined state
+            out = 0;
+        end
+    endcase
+endfunction
+
+// Combinatorial logic implementation
+always_comb begin
+   

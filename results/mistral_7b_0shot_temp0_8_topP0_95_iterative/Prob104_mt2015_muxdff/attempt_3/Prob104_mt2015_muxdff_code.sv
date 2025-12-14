@@ -1,0 +1,28 @@
+
+module TopModule (
+  input clk,
+  input L,
+  input q_in,
+  input r_in,
+  output reg Q
+);
+always @(posedge clk) begin
+    if (L) begin
+        Q <= r_in;
+    end else begin
+        D <= Q[1]; // Use the second flip-flop's output as D input for the next clock cycle
+    end
+end
+
+assign Q[0] = D ^ (Q[2] & ~D); // Implement XOR between current D and previous flip-flop output with an optimization to avoid combinational loop
+assign Q[2] = q_in; // Input q_in is passed through to the third flip-flop when L is low
+
+always @(posedge clk) begin
+    if (L) begin
+        Q[1] <= r_in[1]; // Set the second flip-flop's output to the corresponding input value r_in[1]
+    end else begin
+        Q[1] <= D; // Pass through the current D when L is high
+    end
+end
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,37 @@
+
+module TopModule (
+  input wire clk,
+  input wire areset,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+// Create an 8-bit D flip-flop with active high asynchronous reset
+logic [7:0] flip_flops (
+  .CLK(clk),
+  .RESET(areset),
+  .D(d[i]),
+  .Q(q[i])
+);
+
+generate
+for (integer i = 0; i < 8; i = i + 1) begin : DFF_instances
+  flip_flops flip_flop_instance#{i}(.i(i));
+end
+
+initial begin
+  // Initialize all flip-flops to 0 when reset is high (active high)
+  always @(posedge areset)
+    q <= 8'b0;
+end
+
+always @(posedge clk)
+begin
+  // Assign the D value to each flip-flop on the rising edge of clk
+  for (integer i = 0; i < 8; i = i + 1)
+    q[i] <= d[i];
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

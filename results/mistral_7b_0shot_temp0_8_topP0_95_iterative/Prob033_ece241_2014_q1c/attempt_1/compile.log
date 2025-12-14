@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_1\Prob033_ece241_2014_q1c_code.sv:23: warning: implicit definition of wire 'carry_in'.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_1\Prob033_ece241_2014_q1c_code.sv:13: error: Unable to bind wire/reg/memory `carry_out' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_1\Prob033_ece241_2014_q1c_code.sv:16: error: Could not find variable ``carry_out'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_1\Prob033_ece241_2014_q1c_code.sv:19: error: Unable to bind wire/reg/memory `carry_out' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_1\Prob033_ece241_2014_q1c_code.sv:9: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_1\Prob033_ece241_2014_q1c_code.sv:9: error: Failed to evaluate event expression 'posedge clk'.
+5 error(s) during elaboration.

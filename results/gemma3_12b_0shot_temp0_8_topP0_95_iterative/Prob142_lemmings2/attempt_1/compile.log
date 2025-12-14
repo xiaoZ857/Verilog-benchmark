@@ -1,0 +1,24 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:24: error: walk_left is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:25: error: walk_right is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:26: error: aaah is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:30: error: walk_left is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:33: error: walk_right is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:36: error: aaah is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:39: error: walk_left is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:40: error: walk_right is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:41: error: aaah is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_1\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.
+9 error(s) during elaboration.

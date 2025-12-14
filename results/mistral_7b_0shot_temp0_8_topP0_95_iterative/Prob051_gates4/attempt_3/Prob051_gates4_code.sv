@@ -1,0 +1,21 @@
+
+module TopModule (
+  input [3:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+include "ieee.v"
+
+AND4 u_andGate (out_and, in); // Declare a single port for the inputs array
+OR4  u_orGate  (out_or , in);
+XOR4 u_xorGate(out_xor, in);
+
+// No clock for internal signals as they are combinational
+always @* begin
+  assign out_and = in[3] & in[2] & in[1] & in[0]; // Assign values to outputs using '=' operator
+  assign out_or = in[3] | in[2] | in[1] | in[0];
+  assign out_xor = in[3] ^ in[2] ^ in[1] ^ in[0];
+end
+
+endmodule

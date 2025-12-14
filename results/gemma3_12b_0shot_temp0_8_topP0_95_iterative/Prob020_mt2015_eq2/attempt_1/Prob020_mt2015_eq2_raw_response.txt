@@ -1,0 +1,22 @@
+```verilog
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output z
+);
+
+  assign z = (A == B);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and specifies its input and output ports.
+* **`input [1:0] A, B;`**: Declares two 2-bit input signals, `A` and `B`.  `[1:0]` indicates a 2-bit vector, where `1` is the most significant bit and `0` is the least significant bit.
+* **`output z;`**: Declares a single-bit output signal `z`.
+* **`assign z = (A == B);`**:  This is the core logic.  The `assign` statement continuously assigns a value to the output `z`.  The expression `(A == B)` is a comparison.  It evaluates to 1 if the values of `A` and `B` are equal (i.e., A[1:0] == B[1:0]), and 0 otherwise.
+
+**How it works:**
+
+The circuit directly compares the two 2-bit inputs `A` and `B`. If they are identical, the output `z` is set to 1; otherwise, `z` is set to 0.  This implements the desired functionality.

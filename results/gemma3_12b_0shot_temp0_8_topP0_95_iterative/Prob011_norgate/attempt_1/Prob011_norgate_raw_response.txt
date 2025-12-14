@@ -1,0 +1,84 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = ~(a | b);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This line declares the module named `TopModule` and lists its input and output ports.
+* **`input a, input b;`**:  Declares `a` and `b` as input signals.
+* **`output out;`**: Declares `out` as an output signal.
+* **`assign out = ~(a | b);`**: This is the core logic of the NOR gate.  It uses the continuous assignment operator (`assign`) to define the output `out`.
+    * `a | b`: This performs the OR operation between inputs `a` and `b`.
+    * `~(...)`: This performs the NOT operation (inversion) on the result of the OR operation.  Therefore, `out` will be HIGH (1) only when *both* `a` and `b` are LOW (0).
+
+**How to test the module:**
+
+You can test this module using a Verilog simulator.  Here's a simple testbench:
+
+```verilog
+module TopModule_tb;
+
+  // Inputs
+  reg a;
+  reg b;
+
+  // Output
+  wire out;
+
+  // Instantiate the Unit Under Test (UUT)
+  TopModule uut (
+    .a(a),
+    .b(b),
+    .out(out)
+  );
+
+  // Stimulus
+  initial begin
+    // Initialize Inputs
+    a = 0;
+    b = 0;
+    #10;  // Wait 10 time units
+
+    a = 0;
+    b = 1;
+    #10;
+
+    a = 1;
+    b = 0;
+    #10;
+
+    a = 1;
+    b = 1;
+    #10;
+
+    $finish;  // End simulation
+  end
+
+  // Monitor the signals
+  initial begin
+    $monitor("Time=%0d: a=%b b=%b out=%b", $time, a, b, out);
+  end
+
+endmodule
+```
+
+**Explanation of the testbench:**
+
+* **`module TopModule_tb;`**:  Declares the testbench module.
+* **`reg a; reg b;`**:  Declares `a` and `b` as `reg` because they are driven by the testbench.
+* **`wire out;`**:  Declares `out` as a `wire` because it's the output of the module being tested.
+* **`TopModule uut ( ... );`**:  Instantiates the `TopModule` (the module being tested) within the testbench.  The `.` notation connects the testbench signals to the module's ports.
+* **`initial begin ... end`**:  Defines a block of code that executes only once at the start of the simulation.  This is used to apply stimulus (input values) to the module.
+* **`#10;`**:  Introduces a delay of 10 time units.  This allows the signals to propagate through the circuit.
+* **`$finish;`**:  Ends the simulation.
+* **`$monitor(...)`**:  Prints the values of the signals to the console during the simulation. This is a simple way to observe the output of the module.
+
+Save both the `TopModule.v` and `TopModule_tb.v` files and run the simulation using your Verilog simulator. The simulator will show the output values of `a`, `b`, and `out` at each time step, allowing you to verify that the NOR gate is functioning correctly.  You should see that `out` is only LOW when both `a` and `b` are HIGH.

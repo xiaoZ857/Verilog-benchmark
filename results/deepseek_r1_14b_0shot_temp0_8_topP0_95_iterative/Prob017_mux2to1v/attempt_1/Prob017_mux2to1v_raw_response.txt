@@ -1,0 +1,28 @@
+To implement a 2-1 multiplexer in Verilog that selects between two 100-bit inputs (a and b) based on a single-bit selector (sel), you can use the following module:
+
+```verilog
+module TopModule (
+    input [99:0] a,
+    input [99:0] b,
+    input sel,
+    output [99:0] out
+);
+
+    // When sel is 0, out equals a; when sel is 1, out equals b.
+    assign out = sel ? b : a;
+
+endmodule
+```
+
+**Explanation:**
+
+- **Module Declaration:** The module `TopModule` is defined with four ports:
+  - Two input vectors `a` and `b`, each of width 100 bits.
+  - An input control signal `sel` which is a single bit.
+  - An output vector `out` of width 100 bits.
+
+- **Assign Statement:** The conditional assignment `assign out = sel ? b : a;` ensures that:
+  - When `sel` is `0`, the output `out` is assigned the value of `a`.
+  - When `sel` is `1`, the output `out` is assigned the value of `b`.
+
+This Verilog code efficiently handles the selection of either input based on the selector signal, correctly routing the selected 100-bit vector to the output.

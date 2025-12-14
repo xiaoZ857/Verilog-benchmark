@@ -1,0 +1,21 @@
+
+`timescale 1ns/1ps
+
+// ---------------------------------------------------------------------------
+//  TopModule : 1‑bit NOT gate
+// ---------------------------------------------------------------------------
+//  input  : in   – the input bit
+//  output : out  – logical NOT of the input
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input  wire in,   // Input signal
+    output wire out   // Output signal (NOT of input)
+);
+
+// Combinational assignment – out is the logical complement of in
+assign out = ~in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

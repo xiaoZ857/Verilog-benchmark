@@ -1,0 +1,80 @@
+Here's an implementation of the Verilog module as described:
+
+```verilog
+module TopModule(
+    input clk,     // Positive clock/clk triggered signal
+    input reset,    // Active high synchronous reset signal
+    input in,       // Input bit from the data stream
+    output disc,   // Signal to discard a bit when 0111110 is detected
+    output flag,   // Flag for the beginning/end of a frame (packets)
+    output err      // Error signal for detecting more than 7 consecutive 1s
+);
+
+reg [2:0] state;  // State variable
+reg [3:2] prev_state;  // Previous state to track transitions
+
+// States and their corresponding next states
+wire [2:0] state_next;
+assign state_next = {
+    {3, 0, 0},     // Initial state (reset), disc is asserted after 5 consecutive 1s
+    {2, 0, 0},
+    {1, 1, 0},
+    {0, 0, 0}
+};
+
+// States and their corresponding next prev_state values
+reg [3:2] prev_state_next;
+assign prev_state_next = {
+    {3, 3},     // Reset to state 3 from any previous state (disc is asserted after 5 consecutive 1s)
+    {2, 2},
+    {1, 1},
+    {0, 0}
+};
+
+// Assign initial states
+initial begin
+    state     = 3;   // State 3 for the first cycle
+    prev_state = 3;   // Previous state to track transitions from reset
+end
+
+always @(posedge clk) begin
+    if (reset) begin
+        state = 3;
+        prev_state = 3;
+    end else if (in == '1' && prev_state_next == {2, 0}) begin
+        state = {2, 0};
+        prev_state = {3, 3};
+    end else if ((prev_state == {1, 0} || prev_state == {0, 0})) begin
+        state = {1, 1};
+        prev_state = {1, 0};
+    end else if (in == '1' && prev_state_next[2:1] == {2}) begin
+        state = {3, 2}; // Error detected with more than 7 consecutive 1s
+        err   <= 1;
+        disc   <= 1;
+    end else if (in == '0') begin
+        state = {0, 0};
+        prev_state = {1, 1};
+    end else begin
+        state = {2, 0}; // Reset to initial state when disc is asserted after 5 consecutive 1s
+        prev_state = {3, 3};
+    end
+    
+end
+
+// Generate disc signal for every fifth bit
+assign disc = (state == {2, 0}) ? in : '0';
+
+// Flag the beginning/end of a frame (packets)
+assign flag = state == {3, 0};
+
+endmodule
+```
+
+In this code:
+
+-   The `state` and `prev_state` variables are used to keep track of the current and previous states respectively.
+-   The `state_next` and `prev_state_next` wires calculate the next state based on the current and previous states. This allows us to easily implement a Moore type finite state machine with different output signals for different states, as well as to avoid any potential ambiguity in determining what each input should be when entering that state.
+-   An initial value of 3 is assigned to `state` and `prev_state` at the beginning of the module. This allows it to "remember" which state transition occurred on the previous clock cycle before any other states are set, and as a result will correctly discard the sixth bit after an input sequence contains five consecutive ones.
+-   There is an assignment to `disc` that will make `in` '0' when disc is asserted. Since we want `in` '0' to signal the start of our fifth bit, this means that for every 5-bit sub-sequence, `in` becomes zero after the first five bits in the sequence have been read.
+-   The "flag" and "err" signals are generated based on whether the current state is 3 or not. As a result, `flag` will be asserted as long as we detect either 1 0's immediately followed by any number of zero's between them, while `err` will be asserted if we detect two continuous consecutive ones after a non-zero bit has appeared in the last 7 clock cycles.
+-   A flag is used to enable the disc signal.

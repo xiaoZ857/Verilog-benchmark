@@ -1,0 +1,60 @@
+
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+  // Define states
+  typedef enum logic [1:0] {
+    S0, // Initial state, no part of the sequence seen yet
+    S1, // Saw a '1'
+    S2  // Saw '10'
+  } state_t;
+
+  reg state, next_state;
+
+  // State register update (positive clock edge triggered)
+  always_ff @(posedge clk) begin
+    if (!aresetn) begin
+      state <= S0;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Next state logic (combinational)
+  always_comb begin
+    next_state = state; // Default: stay in the current state
+    case (state)
+      S0: begin
+        if (x == 1) begin
+          next_state = S1;
+        end
+      end
+      S1: begin
+        if (x == 0) begin
+          next_state = S2;
+        end else begin
+          next_state = S1;  // Overlapping sequences: if x == 1 again, stay in S1
+        end
+      end
+      S2: begin
+        if (x == 1) begin
+          next_state = S1; // Move back to S1 for overlapping sequences
+        end else begin
+          next_state = S0; // Back to initial state
+        end
+      end
+    endcase
+  end
+
+  // Output logic (combinational)
+  always_comb begin
+    z = 0;
+    if (state == S2 && x == 1) begin
+      z = 1;
+    end
+  end
+
+endmodule

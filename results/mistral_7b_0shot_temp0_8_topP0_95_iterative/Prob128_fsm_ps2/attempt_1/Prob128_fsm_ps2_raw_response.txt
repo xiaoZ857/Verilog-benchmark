@@ -1,0 +1,46 @@
+ Here is a possible Verilog implementation for the described finite state machine (FSM):
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire [7:0] in,
+  input wire reset,
+  output reg done
+);
+
+reg [2:0] current_byte;
+reg state = 0; // 0: idle, 1: waiting for message start, 2: receiving message
+
+always @(posedge clk) begin
+  if (reset) begin
+    current_byte <= 3'b000;
+    state <= 0;
+  end else if (state == 0 && in[3]) begin // Waiting for message start
+    current_byte <= in;
+    state <= 1;
+  end else if (state == 1) begin // Receiving message
+    current_byte <= {current_byte[1:0], in};
+    if (current_byte[2] == in[3]) begin
+      state <= 2; // Message received, wait for next message start
+    end
+  end else if (state == 2) begin // Waiting for message end
+    done <= 1'b1; // Signal done immediately after the third byte
+    current_byte <= {current_byte[1:0], in};
+    state <= 1; // Reset FSM to wait for next message start
+  end
+end
+
+assign done = ~state && (current_byte == 3'b011 || current_byte == 3'b110);
+
+// Include the following line if you want to use the IEEE Std 1364-2001 compliant edge-sensitive reset
+initial always @(posedge clk or negedge reset) begin
+  if (reset) begin
+    current_byte <= 3'b000;
+    state <= 0;
+  end
+end
+```
+
+This implementation uses a state machine with three states: `idle`, `waiting for message start`, and `receiving message`. The `current_byte` register stores the current byte being received. When the FSM is in the `waiting for message start` state, it waits until it receives a byte with `in[3] = 1`, then transitions to the `receiving message` state. In this state, it accumulates bytes into `current_byte`. If the third byte (`current_byte[2]`) has `in[3] = 1`, the FSM transitions to the `waiting for message end` state and signals that a message has been received by setting `done`. Finally, after the message is signaled, the FSM resets and waits for the next message.
+
+The `assign done` statement ensures that the `done` output is low (0) when not in the `waiting for message end` state or when the current byte received does not have `in[3] = 1`. If you want to use an IEEE Std 1364-2001 compliant edge-sensitive reset, include the initial always block at the bottom.

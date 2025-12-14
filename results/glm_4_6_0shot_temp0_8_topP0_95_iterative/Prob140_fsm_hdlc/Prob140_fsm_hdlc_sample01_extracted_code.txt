@@ -1,0 +1,25 @@
+
+reg [3:0] current_state, next_state;
+reg disc_reg, flag_reg, err_reg;
+
+// State encoding
+parameter IDLE = 4'd0;
+parameter SAW_0 = 4'd1;
+parameter SAW_01 = 4'd2;
+parameter SAW_011 = 4'd3;
+parameter SAW_0111 = 4'd4;
+parameter SAW_01111 = 4'd5;
+parameter SAW_011111 = 4'd6;
+parameter SAW_0111110 = 4'd7;  // discard state
+parameter SAW_01111110 = 4'd8; // flag state
+parameter SAW_01111111 = 4'd9; // error state
+
+always @(posedge clk) begin
+  if (reset) begin
+    current_state <= IDLE;
+  end else begin
+    current_state <= next_state;
+  end
+end
+
+always

@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob108_rule90\attempt_3\Prob108_rule90_code.sv:28: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob108_rule90\attempt_3\Prob108_rule90_code.sv:28: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob108_rule90\attempt_3\Prob108_rule90_code.sv:28: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob108_rule90\attempt_3\Prob108_rule90_code.sv:28: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob108_rule90\attempt_3\Prob108_rule90_code.sv:28: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob108_rule90_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob108_rule90_ref.sv:19: syntax error
+I give up.

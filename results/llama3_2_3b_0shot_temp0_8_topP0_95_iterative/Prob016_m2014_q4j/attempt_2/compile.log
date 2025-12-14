@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:9: warning: Static variable initialization requires explicit lifetime in this context.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:10: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:10: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:12: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:13: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:14: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:16: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:18: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:18: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:20: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:20: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:22: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:22: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:27: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_2\Prob016_m2014_q4j_code.sv:2: assert: pform.cc:1465: failed assertion lexical_scope == cur_module

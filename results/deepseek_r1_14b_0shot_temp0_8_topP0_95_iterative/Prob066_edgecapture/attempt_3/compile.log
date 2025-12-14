@@ -1,0 +1,134 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 64
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[0].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[0].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[1].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[1].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[2].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[2].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[3].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[3].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[4].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[4].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[5].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[5].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[6].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[6].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[7].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[7].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[8].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[8].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[9].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[9].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[10].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[10].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[11].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[11].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[12].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[12].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[13].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[13].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[14].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[14].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[15].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[15].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[16].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[16].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[17].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[17].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[18].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[18].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[19].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[19].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[20].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[20].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[21].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[21].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[22].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[22].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[23].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[23].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[24].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[24].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[25].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[25].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[26].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[26].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[27].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[27].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[28].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[28].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[29].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[29].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[30].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[30].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:18: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[31].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: error: prev_in_i is not a valid l-value in tb.top_module1.bit_gen[31].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:14:      : prev_in_i is declared here as wire.
+64 error(s) during elaboration.

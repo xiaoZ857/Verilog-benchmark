@@ -1,0 +1,79 @@
+
+module TopModule (
+  input wire clk,
+  input wire resetn,
+  input [2:0] r,
+  output reg [2:0] g
+);
+
+// State codes
+parameter STATE_A = 3'b001;
+parameter STATE_B = 3'b010;
+parameter STATE_C = 3'b011;
+parameter STATE_D = 3'b100;
+
+// Current state and next state variables
+reg [2:0] currentState, nextState;
+
+always @(posedge clk or posedge resetn) begin
+    if (resetn) begin
+        currentState <= STATE_A;
+        g <= 3'b000; // All grants are off on reset
+    end else begin
+        case (currentState)
+            STATE_A: begin
+                if (r[0] == 1) begin
+                    nextState <= STATE_B;
+                    g <= r; // Device 1 gets grant if it requests and no higher priority devices request
+                end else if ((r[1] == 1) || (r[2] == 1)) begin
+                    // Priority system: device with lower index can't get grant if a device with higher index requests
+                    if ((r[1] && r[2] == 0) || (r[1] == 0 && r[2] && r[0] == 0)) begin
+                        nextState <= STATE_C;
+                        g <= r; // Device with highest non-zero request gets grant if devices 1 and 3 request and device 1 doesn't request
+                    end else if (r[2] && r[1] == 0) begin
+                        nextState <= STATE_B;
+                        g <= r; // Device 2 gets grant if it requests and device 1 doesn't request
+                    end
+                end
+                if (r[0] == 0 && r[1] == 0 && r[2] == 0) begin
+                    nextState <= STATE_D; // No requests, go to state D
+                end
+            end
+            STATE_B: begin
+                if (r[0] == 1) begin
+                    nextState <= STATE_A;
+                    g <= r; // Device 1 can still maintain grant while requesting
+                end else if (r[1] == 1 && g[1] == 1'b0) begin
+                    nextState <= STATE_B;
+                    g <= {g[0], 1'b1, g[2]}; // Device 2 gets grant if it requests and doesn't have lower priority devices requesting
+                end
+                if (r[2] == 0 && r[0] == 0) begin
+                    nextState <= STATE_D; // No lower priority requests, go to state D
+                end
+            end
+            STATE_C: begin
+                if ((r[1] == 1 && g[1] == 1'b0) || (r[2] == 1 && g[2] == 1'b0)) begin
+                    nextState <= STATE_A; // Device with highest non-zero request gets grant if devices 1 and 3 request
+                end
+                if (r[0] == 0 && r[1] == 0) begin
+                    nextState <= STATE_D; // No lower priority requests, go to state D
+                end
+            end
+            STATE_D: begin
+                if ((r[0] == 1 && g[0] == 1'b0) || (r[1] == 1 && g[1] == 1'b0) || (r[2] == 1 && g[2] == 1'b0)) begin
+                    nextState <= STATE_A; // Go to state A if any device requests while not having grant
+                end
+            end
+        endcase
+        currentState <= nextState;
+    end
+end
+
+// Continuous assignment for output g[i] signals
+always @* begin
+    g[0] = (currentState == STATE_B || currentState == STATE_A);
+    g[1] = (currentState == STATE_B || current
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

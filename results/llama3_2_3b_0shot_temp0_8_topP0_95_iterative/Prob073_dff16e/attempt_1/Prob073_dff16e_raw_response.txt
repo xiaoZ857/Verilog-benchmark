@@ -1,0 +1,38 @@
+Here is a Verilog module that implements the specified D flip-flop array:
+
+```verilog
+module TopModule (
+  input clk, 
+  input resetn, 
+  input [1:0] byteena, 
+  input [15:0] d,
+  output reg [15:0] q
+);
+
+reg [7:0] [8:0] dq[7:0]; // Initialize all DFFs to default value (e.g., zeros)
+
+always @(posedge clk) begin
+  if (!resetn) begin // Asynchronous reset
+    for(int i = 0; i < 8; i++) 
+      dq[i] <= 0;
+  end else if (~= byteena[1]) begin // Write upper byte
+    for (int i = 7; i >= 0; i--) 
+      dq[i] <= d[i];
+  end else if (~= byteena[0]) begin // Write lower byte
+    for (int i = 0; i < 8; i++) 
+      dq[i] <= d[i+8];
+  end
+  assign q[7:0] = dq[7:0], 
+             q[15:8] = dq[15:8]; // Extract upper and lower byte values
+end
+
+endmodule
+```
+This implementation creates a 16 D flip-flop array with the specified features:
+
+1. `byteena` controls which bytes are written to each cycle.
+2. The default value of all DFFs is set to zero (e.g., zeros) when reset.
+3. Reset is asynchronous and active-low.
+4. `q` outputs the current values of all 16 DFFs.
+
+Note that due to hardware constraints, it may not be possible to implement this in the same way as the software simulation model you mentioned. The implementation above may need modifications depending on the specific requirements of the project (e.g., add synchronization mechanisms or use a different data structure).

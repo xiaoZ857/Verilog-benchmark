@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob044_vectorgates\attempt_2\Prob044_vectorgates_code.sv:9: error: port out_or_bitwise already has a port declaration.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob044_vectorgates\attempt_2\Prob044_vectorgates_code.sv:5: error: Port ``out_or_bitwise'' has already been declared a port.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob044_vectorgates\attempt_2\Prob044_vectorgates_code.sv:10: error: port out_or_logical already has a port declaration.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob044_vectorgates\attempt_2\Prob044_vectorgates_code.sv:6: error: Port ``out_or_logical'' has already been declared a port.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob044_vectorgates\attempt_2\Prob044_vectorgates_code.sv:11: error: port out_not already has a port declaration.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob044_vectorgates\attempt_2\Prob044_vectorgates_code.sv:7: error: Port ``out_not'' has already been declared a port.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob044_vectorgates_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob044_vectorgates_ref.sv:16: syntax error
+I give up.

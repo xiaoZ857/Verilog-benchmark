@@ -1,0 +1,31 @@
+Here’s a minimal, synthesizable implementation that satisfies the spec:
+
+```verilog
+// ------------------------------------------------------------
+// 4‑bit binary counter (0‑15) with a period of 16
+// synchronous active‑high reset
+// ------------------------------------------------------------
+module TopModule (
+    input  wire        clk,    // positive‑edge clock
+    input  wire        reset,  // active‑high synchronous reset
+    output reg  [3:0]  q       // 4‑bit counter output
+);
+
+    // Posedge‑triggered logic
+    always @(posedge clk) begin
+        if (reset) begin
+            q <= 4'b0000;          // reset to zero
+        end else begin
+            q <= q + 1'b1;         // count up, wraps automatically at 4 bits
+        end
+    end
+
+endmodule
+```
+
+### Why this works
+
+* **Synchronous reset** – The `if (reset)` check is inside the `posedge clk` block, so the reset takes effect only on a clock edge.
+* **Positive‑edge clocking** – The counter updates on the rising edge of `clk`, as required.
+* **Period of 16** – With a 4‑bit width, `q` overflows from `4'b1111` back to `4'b0000` naturally, giving a period of 16 clock cycles.
+* **Non‑blocking assignments (`<=`)** – This is the recommended style for sequential logic to avoid race conditions during simulation and to match synthesizer expectations.

@@ -1,0 +1,31 @@
+To implement the described Verilog module, you need to consider how the "bubble" affects the `in2` signal before it goes into the AND gate. A bubble on an input effectively means that the signal is inverted before being used. In digital logic terms, this is equivalent to applying a NOT operation.
+
+Here's how you can implement the `TopModule` in Verilog:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // Apply NOT gate (bubble) to in2 before feeding it into the AND gate.
+  wire inverted_in2;
+
+  assign inverted_in2 = ~in2; // Inverts in2
+
+  // Connect in1 and the inverted in2 to an AND gate
+  assign out = in1 & inverted_in2; // Performs logical AND operation
+
+endmodule
+```
+
+### Explanation:
+
+- **Bubble on `in2`:** 
+  - The bubble implies that `in2` should be inverted before being used. This is done using the bitwise NOT operator (`~`) which inverts each bit of the signal.
+  
+- **AND Gate:**
+  - After inverting `in2`, you perform a logical AND operation between `in1` and this inverted `in2`. This results in the output `out`.
+
+The use of `logic` for `out` indicates that it is a reg-type storage, which can be driven by procedural assignments or continuous assignments like `assign`. Here, we're using a continuous assignment with an `assign` statement to connect inputs directly to an internal wire and perform the logical operations.

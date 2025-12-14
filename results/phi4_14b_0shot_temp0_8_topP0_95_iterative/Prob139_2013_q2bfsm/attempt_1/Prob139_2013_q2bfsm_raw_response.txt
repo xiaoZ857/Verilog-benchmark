@@ -1,0 +1,124 @@
+To implement this finite state machine in Verilog, we'll define states and transitions according to the specified behavior. We'll use a synchronous reset that is active low (`resetn`). Here's how you can structure the module:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire resetn,
+    input wire x,
+    input wire y,
+    output reg f,
+    output reg g
+);
+
+    // State encoding
+    typedef enum logic [1:0] {
+        STATE_A,  // Initial state
+        STATE_F1, // Output f = 1 for one clock cycle
+        STATE_X0, // Waiting for x=1 after f was set
+        STATE_X1, // x = 1 detected, waiting for x=0
+        STATE_G1, // x = 0 followed by x=1 detected, setting g = 1
+        STATE_YWAIT_1, // First wait cycle for y=1 after g=1
+        STATE_YWAIT_2, // Second wait cycle for y=1 after g=1
+        STATE_HOLD_G1, // Permanently hold g=1 if y became 1 in time
+        STATE_CLEAR_G   // Clear g = 0 permanently
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or negedge resetn) begin
+        if (!resetn)
+            current_state <= STATE_A;
+        else
+            current_state <= next_state;
+    end
+
+    always_comb begin
+        // Default values for outputs and state transition
+        f = 0;
+        g = (current_state == STATE_HOLD_G1);
+        
+        case (current_state)
+            STATE_A: begin
+                if (!resetn) begin
+                    next_state = STATE_F1;
+                end else begin
+                    next_state = STATE_A;
+                end
+            end
+
+            STATE_F1: begin
+                f = 1; // Set f to 1 for one clock cycle
+                next_state = STATE_X0;
+            end
+
+            STATE_X0: begin
+                if (x == 1) begin
+                    next_state = STATE_X1;
+                end else begin
+                    next_state = STATE_A;
+                end
+            end
+
+            STATE_X1: begin
+                if (x == 0) begin
+                    next_state = STATE_G1;
+                end else begin
+                    next_state = STATE_A;
+                end
+            end
+
+            STATE_G1: begin
+                g = 1; // Set g to 1
+                next_state = STATE_YWAIT_1;
+            end
+
+            STATE_YWAIT_1: begin
+                if (y == 1) begin
+                    next_state = STATE_HOLD_G1;
+                end else begin
+                    next_state = STATE_YWAIT_2;
+                end
+            end
+            
+            STATE_YWAIT_2: begin
+                if (y == 1) begin
+                    next_state = STATE_HOLD_G1;
+                end else begin
+                    next_state = STATE_CLEAR_G;
+                end
+            end
+
+            STATE_HOLD_G1: begin
+                next_state = STATE_HOLD_G1; // Remain in this state
+            end
+
+            STATE_CLEAR_G: begin
+                g = 0; // Set g to 0 permanently
+                next_state = STATE_A; // Or stay in clear G if design requires reset only transition
+            end
+
+            default: begin
+                next_state = STATE_A;
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+1. **State Definitions**: We define states using an enumerated type to represent different phases of the FSM.
+
+2. **Reset Handling**: The `current_state` is updated on each clock cycle, and transitions occur based on the state machine logic unless a reset occurs (active low `resetn`). Upon reset, the FSM returns to `STATE_A`.
+
+3. **State Transitions**:
+   - **STATE_A**: Initial waiting state.
+   - **STATE_F1**: Set output `f` high for one clock cycle when transitioning from reset.
+   - **STATE_X0**: Wait for `x = 1`.
+   - **STATE_X1**: Confirm `x = 0` followed by the previous `x = 1`.
+   - **STATE_G1**: Set `g` to 1 upon detecting sequence 1, 0, 1 in `x`.
+   - **STATE_YWAIT_1/YWAIT_2**: Check for `y = 1` within two cycles.
+   - **STATE_HOLD_G1**: Permanently hold `g = 1` if `y` becomes 1 during the wait period.
+   - **STATE_CLEAR_G**: Set `g` to 0 permanently if `y` does not become 1 in time.
+
+This implementation ensures that all specified behaviors are covered, and it handles transitions and outputs correctly based on input signals `

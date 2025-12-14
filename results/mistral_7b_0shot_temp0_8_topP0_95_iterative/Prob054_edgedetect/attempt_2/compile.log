@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 9
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob054_edgedetect\attempt_2\Prob054_edgedetect_code.sv:12: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob054_edgedetect\attempt_2\Prob054_edgedetect_code.sv:12: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob054_edgedetect\attempt_2\Prob054_edgedetect_code.sv:16: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob054_edgedetect\attempt_2\Prob054_edgedetect_code.sv:16: error: syntax error in left side of continuous assignment.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob054_edgedetect\attempt_2\Prob054_edgedetect_code.sv:19: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob054_edgedetect\attempt_2\Prob054_edgedetect_code.sv:19: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob054_edgedetect_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob054_edgedetect_ref.sv:17: syntax error
+I give up.

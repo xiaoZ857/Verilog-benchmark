@@ -1,0 +1,79 @@
+To implement the given Karnaugh map using a 4-to-1 multiplexer and as few 2-to-1 multiplexers as possible, we need to determine which outputs from the K-map will be directly connected to the inputs of the main 4-to-1 multiplexer. The goal is to use additional 2-to-1 multiplexers only where necessary.
+
+### Karnaugh Map Analysis
+
+The K-map provided is:
+
+```
+      ab
+  cd  00  01  11  10
+  00 | 0 | 0 | 0 | 1 |
+  01 | 1 | 0 | 0 | 0 |
+  11 | 1 | 0 | 1 | 1 |
+  10 | 1 | 0 | 0 | 1 |
+```
+
+### Step-by-Step Implementation
+
+1. **Identify Fixed Outputs:**
+
+   - For `ab = 00` (i.e., `cd = 00`), the output is `1`.
+   - For `ab = 01` (i.e., `cd = any`), the output is always `0`.
+   - For `ab = 10`, the outputs are:
+     - `cd = 00`: `1`
+     - `cd = 01`: `0`
+     - `cd = 11`: `0`
+     - `cd = 10`: `1`
+   - For `ab = 11`, the outputs are:
+     - `cd = 00`: `0`
+     - `cd = 01`: `0`
+     - `cd = 11`: `1`
+     - `cd = 10`: `1`
+
+2. **Determine Mux Inputs:**
+
+   - `mux_in[0]` (for `ab = 00`) should be determined by the condition where both `c` and `d` are `0`. Thus, `mux_in[0] = ~c & ~d`.
+   - `mux_in[1]` (for `ab = 01`) is always `0`, so `mux_in[1] = 0`.
+   - `mux_in[2]` (for `ab = 11`) can be determined by the condition where both `c` and `d` are `1`. Thus, `mux_in[2] = c & d`.
+   - `mux_in[3]` (for `ab = 10`) needs to account for:
+     - `cd = 00`: `1`
+     - `cd = 01`: `0`
+     - `cd = 11`: `0`
+     - `cd = 10`: `1`
+     
+     This can be implemented using a 2-to-1 multiplexer. The output should be `1` when `c = 1` and `d = 0`, or when `c = 0` and `d = 1`. Therefore, we can use:
+     - Selector: `c ^ d`
+     - Inputs: `1` when `c = 1 & d = 0` and `0` otherwise.
+
+### Verilog Implementation
+
+```verilog
+module TopModule (
+    input c,
+    input d,
+    output [3:0] mux_in
+);
+
+    wire temp1;
+    wire temp2;
+
+    // Determine mux_in[0]
+    assign mux_in[0] = ~c & ~d;  // For ab = 00
+
+    // mux_in[1] is always 0
+    assign mux_in[1] = 0;        // For ab = 01
+
+    // Determine mux_in[2]
+    assign mux_in[2] = c & d;    // For ab = 11
+
+    // Determine mux_in[3] using a 2-to-1 multiplexer
+    assign temp1 = (c & ~d);     // True when c=1, d=0
+    assign temp2 = (~c & d);     // True when c=0, d=1
+
+    // Mux for mux_in[3]
+    assign mux_in[3] = temp1 | temp2;  // For ab = 10
+
+endmodule
+```
+
+This implementation uses one 4-to-1 multiplexer and no additional 2-to-1 multiplexers, as the logic for `mux_in[3]` was simplified directly. The outputs are determined based on the conditions derived from the K-map.

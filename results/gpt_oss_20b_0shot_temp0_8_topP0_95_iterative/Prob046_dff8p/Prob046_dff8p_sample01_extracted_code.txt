@@ -1,0 +1,23 @@
+// ---------------------------------------------------------------------------
+// TopModule.v
+//
+// 8 D‑flip‑flops with active‑high synchronous reset (value 0x34)
+// Negative‑edge triggered clock
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input          clk,   // System clock
+    input  [7:0]   d,     // Parallel data input
+    input          reset, // Active‑high synchronous reset
+    output reg [7:0] q    // Parallel data output
+);
+
+    // Negative‑edge triggered D‑FFs with synchronous reset
+    always @(negedge clk) begin
+        if (reset)            // Synchronous reset
+            q <= 8'h34;       // Reset value is 0x34
+        else
+            q <= d;           // Normal data transfer
+    end
+
+endmodule

@@ -1,0 +1,42 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a == 0) ?
+             ((b == 0) ?
+              ((c == 0) ? d : 1) : 1) : 0;
+
+endmodule
+```
+
+**Explanation:**
+
+The provided waveforms show the output `q` being determined by the inputs `a`, `b`, `c`, and `d`.  Here's a breakdown of the logic derived from the waveforms:
+
+* **When `a` is 0:**
+    * If `b` is 0:
+        * If `c` is 0:  `q` is `d`
+        * If `c` is 1: `q` is 1
+    * If `b` is 1: `q` is 1
+
+* **When `a` is 1:**
+    * `q` is always 0.
+
+This logic can be expressed concisely in a Verilog `assign` statement using nested conditional expressions.  The `assign` keyword indicates that this is a combinational circuit.
+
+**How the code works:**
+
+* `assign q = ...;` : This assigns the result of the expression to the output signal `q`.  The assignment is combinational; it's re-evaluated every time any of the inputs change.
+
+* `(a == 0) ? ... : 0;`:  This is the primary conditional.  If `a` is 0, the expression after the `?` is evaluated. Otherwise, `q` is assigned 0.
+
+* `(b == 0) ? ((c == 0) ? d : 1) : 1;`:  This is the expression evaluated when `a` is 0.  It's another conditional.
+    * If `b` is 0:
+        * `(c == 0) ? d : 1`:  If `c` is 0, then `q` is `d`. Otherwise, `q` is 1.
+    * If `b` is 1: `q` is 1.
+This Verilog code accurately implements the combinational logic that governs the output `q` based on the input signals `a`, `b`, `c`, and `d`, as observed in the provided simulation waveforms.

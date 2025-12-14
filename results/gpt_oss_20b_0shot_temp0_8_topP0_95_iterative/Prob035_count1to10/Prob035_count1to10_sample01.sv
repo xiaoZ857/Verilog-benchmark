@@ -1,0 +1,32 @@
+
+//-----------------------------------------------------------------------------
+//  TopModule: 1‑to‑10 decade counter (synchronous active‑high reset)
+//  The counter wraps from 10 back to 1.
+//-----------------------------------------------------------------------------
+module TopModule (
+    input  wire        clk,   // positive‑edge clock
+    input  wire        reset, // synchronous active‑high reset
+    output reg  [3:0]  q      // 4‑bit counter output
+);
+
+// Optional: give a symbolic name to the maximum count
+localparam MAX_COUNT = 4'd10;
+
+always @(posedge clk) begin
+    if (reset) begin
+        // Reset the counter to 1
+        q <= 4'd1;
+    end
+    else if (q == MAX_COUNT) begin
+        // Wrap from 10 back to 1
+        q <= 4'd1;
+    end
+    else begin
+        // Normal counting
+        q <= q + 1;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

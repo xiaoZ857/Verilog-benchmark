@@ -1,0 +1,32 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input x,
+  output reg z
+);
+
+  reg [2:0] y;  // Current state
+
+  always @(posedge clk) begin
+    if (reset) begin
+      y <= 3'b000;
+      z <= 1'b0;
+    end else begin
+      case (y)
+        3'b000: begin
+          if (x == 1'b0) begin
+            y <= 3'b000;
+            z <= 1'b0;
+          end else begin
+            y <= 3'b001;
+            z <= 1'b0;
+          end
+        end
+        3'b001: begin
+          if (x == 1'b0) begin
+            y <= 3'b
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

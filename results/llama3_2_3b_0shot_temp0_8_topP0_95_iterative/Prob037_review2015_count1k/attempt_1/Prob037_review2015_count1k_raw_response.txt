@@ -1,0 +1,51 @@
+```verilog
+// Import the required Verilog module
+`include "reg.sv"
+
+// Define the module TopModule
+module TopModule(
+    // Input clock signal
+    input clk,
+    
+    // Synchronous active-high reset signal
+    input reset,
+    
+    // Output register to hold the counter value
+    output reg [9:0] q
+);
+
+    // Define the internal state of the counter (8-bit)
+    reg [7:0] count;
+    
+    // Initial value of the counter (0)
+    initial begin
+        count = 8; // Counting from 0 to 7 in one cycle
+    end
+    
+    // Synchronous logic to increment the counter
+    always @(posedge clk) begin
+        if (!reset) {
+            count <= 8;
+        } else {
+            count <= count + 1;
+            
+            // Ensure count wraps around after reaching 255
+            if (count >= 256) {
+                count = 0; // Reset the counter to 0 on overflow
+            }
+        }
+    end
+    
+    // Output the current count value
+    assign q = count << 8;
+
+endmodule
+```
+
+### Explanation:
+
+1. The `reg` keyword is used to declare a registered output, ensuring that it retains its previous value between clock edges.
+2. The `initial` block sets the initial state of the counter.
+3. The `always` block is used for synchronous logic. It checks if the reset signal is active high (i.e., the current clock edge), and if so, resets the count to 8. Otherwise, it increments the count.
+4. When the count reaches 256, it wraps around to 0, effectively resetting the counter.
+5. The output `q` is assigned the current value of the count shifted 8 bits to the left (to maintain a 10-bit width).

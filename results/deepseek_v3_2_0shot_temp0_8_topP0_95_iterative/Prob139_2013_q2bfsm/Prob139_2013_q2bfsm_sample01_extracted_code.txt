@@ -1,0 +1,107 @@
+    reg f, g;
+    reg [2:0] state, next_state;
+    reg [1:0] y_counter;
+    reg [1:0] seq_buffer; // Shift register for sequence detection
+    
+    localparam A = 3'd0,
+               B = 3'd1,
+               C = 3'd2,
+               D = 3'd3,
+               E = 3'd4,
+               F = 3'd5,
+               G = 3'd6,
+               H = 3'd7;
+    
+    // State register
+    always @(posedge clk) begin
+        if (!resetn) begin
+            state <= A;
+            y_counter <= 2'd0;
+            seq_buffer <= 2'b00;
+        end
+        else begin
+            state <= next_state;
+            
+            // Update sequence buffer - shift in current x value
+            seq_buffer <= {seq_buffer[0], x};
+            
+            // Update y counter in state G
+            if (state == G) begin
+                y_counter <= y_counter + 1;
+            end
+            else begin
+                y_counter <= 2'd0;
+            end
+        end
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            A: next_state = B;
+            B: next_state = C;
+            C: begin
+                // Wait for first '1' in sequence
+                if (x == 1'b1)
+                    next_state = D;
+                else
+                    next_state = C;
+            end
+            D: begin
+                // Wait for '0' after '1'
+                if (x == 1'b0)
+                    next_state = E;
+                else
+                    next_state = D; // Stay if x remains 1
+            end
+            E: begin
+                // Check if we have sequence "1,0,1"
+                // seq_buffer[1] is x from previous cycle (should be 0)
+                // seq_buffer[0] is x from 2 cycles ago (should be 1)
+                // current x should be 1
+                if (x == 1'b1 && seq_buffer == 2'b01)
+                    next_state = F;
+                else if (x == 1'b0)
+                    next_state = C; // Reset sequence if x=0
+                else
+                    next_state = E;
+            end
+            F: next_state = G; // Transition state before setting g=1
+            G: begin
+                if (y == 1'b1)
+                    next_state = H;
+                else if (y_counter == 2'd2) // After 2 cycles (0 and 1 count)
+                    next_state = A;
+                else
+                    next_state = G;
+            end
+            H: next_state = H;
+            default: next_state = A;
+        endcase
+    end
+    
+    // Output logic
+    always @(posedge clk) begin
+        if (!resetn) begin
+            f <= 1'b0;
+            g <= 1'b0;
+        end
+        else begin
+            // f output: set to 1 only in state B (one cycle after reset deassertion)
+            if (state == B)
+                f <= 1'b1;
+            else
+                f <= 1'b0;
+            
+            // g output: set to 1 in state G (cycle after sequence detection)
+            // and maintain based on y monitoring
+            case (state)
+                G: g <= 1'b1;
+                H: g <= 1'b1;
+                A: g <= 1'b0;
+                default: g <= g; // Hold current value
+            endcase
+        end
+    end
+
+endmodule

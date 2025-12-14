@@ -1,0 +1,49 @@
+To implement the described 16-bit wide, 9-to-1 multiplexer in Verilog, you need to create a module that selects one of nine 16-bit inputs based on a 4-bit selection signal `sel`. If `sel` is between 4'b1000 (8) and 4'b1111 (15), the output should be set to all '1's. Below is the Verilog implementation for this:
+
+```verilog
+module TopModule (
+    input [15:0] a,
+    input [15:0] b,
+    input [15:0] c,
+    input [15:0] d,
+    input [15:0] e,
+    input [15:0] f,
+    input [15:0] g,
+    input [15:0] h,
+    input [15:0] i,
+    input [3:0] sel,
+    output logic [15:0] out
+);
+
+    always_comb begin
+        case (sel)
+            4'b0000: out = a;
+            4'b0001: out = b;
+            4'b0010: out = c;
+            4'b0011: out = d;
+            4'b0100: out = e;
+            4'b0101: out = f;
+            4'b0110: out = g;
+            4'b0111: out = h;
+            4'b1000: out = i;
+            default: out = 16'hFFFF; // Set to all '1's for sel = 9 to 15
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs**:
+  - `a` to `i`: Nine 16-bit input signals.
+  - `sel`: A 4-bit selection signal.
+  - `out`: A 16-bit output signal.
+
+- **always_comb Block**: This block is used for combinational logic. It ensures that the output is continuously updated based on changes in inputs or `sel`.
+
+- **Case Statement**:
+  - For each value of `sel` from 0 to 8, it selects the corresponding input (`a` to `i`) and assigns it to `out`.
+  - The `default` case handles all values of `sel` from 9 to 15 by setting `out` to `16'hFFFF`, which is hexadecimal for 1111 1111 1111 1111 in binary, representing all bits set to '1'.
+
+This implementation efficiently manages the selection logic and covers all specified cases.

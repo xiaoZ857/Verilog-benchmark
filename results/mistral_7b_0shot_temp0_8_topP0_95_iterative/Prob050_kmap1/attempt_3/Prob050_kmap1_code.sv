@@ -1,0 +1,21 @@
+
+always @(posedge clk) begin
+  out <= ((~a & b) | (a & ~b)) + ((~a & c) | (a & c));
+end
+
+// Adding timescale directive outside the module definition
+`timescale 1ns / 1ps
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output out
+);
+
+// Karnaugh map implementation
+assign out = (~a & b) | (a & ~b) + (~a & c) | (a & c);
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

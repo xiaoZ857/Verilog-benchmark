@@ -1,0 +1,50 @@
+Here is the Verilog implementation of the `TopModule` that demonstrates three ways to create an XOR gate:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+// Using assign statement (combinatorial logic)
+assign out_assign = a ^ b;
+
+// Using combinational always block
+always @* 
+  begin
+    out_always_comb = a ^ b;
+  end
+
+// Using clocked always block with flip-flop
+always @(posedge clk) 
+  begin
+    reg temp;
+    temp = a ^ b;
+    out_always_ff = temp;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **`out_assign` (Using Assign Statement):**
+   - This is the simplest way to create an XOR gate.
+   - The `assign` statement directly connects the output to the result of `a ^ b`.
+   - The output will immediately reflect changes in inputs `a` and `b`.
+
+2. **`out_always_comb` (Using Combinatorial Always Block):**
+   - This creates a combinational circuit using an `always` block.
+   - The `@*` sensitivity list means the block is triggered by any change in input signals `a` or `b`.
+   - Inside the block, `out_always_comb` is assigned the result of `a ^ b`.
+
+3. **`out_always_ff` (Using Clocked Always Block with Flip-Flop):**
+   - This creates a clocked circuit using an `always` block.
+   - The `@(posedge clk)` sensitivity list means the block triggers on the rising edge of the clock signal `clk`.
+   - Inside the block, a temporary variable `temp` is assigned the result of `a ^ b`, and then this value is assigned to `out_always_ff`.
+
+This implementation demonstrates three different ways to create an XOR gate with varying levels of complexity and timing behavior.

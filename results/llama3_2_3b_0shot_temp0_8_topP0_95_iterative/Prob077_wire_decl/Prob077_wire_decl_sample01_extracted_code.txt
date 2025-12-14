@@ -1,0 +1,24 @@
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out,
+  output out_n
+);
+
+// Intermediate wires
+wire wire1;
+wire wire2;
+
+// Create AND gates for the first layer
+and #(.op3=1) gate1(a, b, wire1);
+and #(.op4=1) gate2(c, d, wire2);
+
+// Create OR gate for the second layer
+or gate1(wire1, wire2, out);
+
+// Invert the output of the OR gate
+not #(.op2=1) not_gate(out, out_n);
+
+endmodule

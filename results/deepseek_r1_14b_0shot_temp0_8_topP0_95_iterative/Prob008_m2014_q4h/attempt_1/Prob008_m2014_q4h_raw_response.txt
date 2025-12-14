@@ -1,0 +1,22 @@
+To solve this problem, we need to implement a Verilog module that assigns the value of an input port to an output port combinatorially. This means that whenever the input changes, the output should immediately reflect that change without any delay.
+
+### Approach
+The solution involves creating a Verilog module named `TopModule` with one input port `in` and one output port `out`. The goal is to make the output port mirror the value of the input port directly. 
+
+In Verilog, this can be achieved using an **assign statement** which creates a continuous assignment. This means that whenever the input changes, the output will immediately update to match the new value of the input. An assign statement is appropriate here because it efficiently handles combinational logic by continuously monitoring the input and updating the output accordingly.
+
+### Solution Code
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+  assign out = in;
+endmodule
+```
+
+### Explanation
+- **Module Definition**: The module `TopModule` is defined with two ports: an input `in` and an output `out`.
+- **Combinatorial Assignment**: Inside the module, an `assign` statement is used to directly link the output port `out` to the input port `in`. This creates a continuous assignment where any change in `in` will immediately cause `out` to reflect that change.
+  
+This approach ensures that the output port always matches the input port combinatorially, fulfilling the problem requirements efficiently and concisely.

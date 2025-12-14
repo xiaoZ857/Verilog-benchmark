@@ -1,0 +1,23 @@
+ Here's a simple Verilog implementation of the described module. The `always_comb` block monitors the changes in the `in` vector and sets the corresponding bits in `out` when the change from 1 to 0 is detected. The `always_ff` block ensures that the captured value remains in the output until the reset signal is asserted.
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+reg [31:0] prevIn;
+
+always_comb begin
+    assign out = in ^ prevIn; // XOR operation to detect changes from 1 to 0
+    prevIn <= in; // store current input value for next clock cycle
+end
+
+always_ff @(posedge clk) begin
+    if (reset) begin
+        out <= 32'b0; // reset all output bits
+    end
+end
+```

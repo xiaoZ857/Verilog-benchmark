@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob098_circuit7\attempt_2\Prob098_circuit7_code.sv:9: error: No function named `rising_edge' found in this context (tb.top_module1).
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob098_circuit7\attempt_2\Prob098_circuit7_code.sv:9: error: Failed to evaluate event expression 'rising_edge(a)'.
+2 error(s) during elaboration.

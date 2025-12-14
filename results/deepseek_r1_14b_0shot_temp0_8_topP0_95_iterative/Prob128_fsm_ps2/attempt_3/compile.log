@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: warning: macro done undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:16: warning: macro done undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:8: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:10: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:10:      : between the tic and preprocessor directive?
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:14:      : between the tic and preprocessor directive?
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:16: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:16:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:8: error: Invalid module instantiation

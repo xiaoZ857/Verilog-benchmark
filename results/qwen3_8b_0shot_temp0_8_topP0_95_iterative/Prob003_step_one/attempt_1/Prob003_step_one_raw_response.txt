@@ -1,0 +1,39 @@
+To implement the Verilog module `TopModule` as described, we need to define a module with no inputs and a single output signal `one` that is always set to logic high (`1`).
+
+---
+
+### ✅ **Module Overview**
+
+- **Module Name:** `TopModule`
+- **Output:** `one` (always logic high)
+- **No Inputs:** The module is self-contained and does not require any external inputs.
+
+---
+
+### 📌 **Implementation**
+
+The simplest and most efficient way to achieve the desired behavior is to use a **continuous assignment** in Verilog. Since there are no inputs and the output must always be high, we can directly assign the output to the logic value `1`.
+
+Here is the full Verilog module:
+
+```verilog
+module TopModule (
+  output one
+);
+  assign one = 1'b1;
+endmodule
+```
+
+---
+
+### 🧠 **Explanation**
+
+- The `assign` statement creates a continuous assignment that ensures `one` is always set to `1`.
+- There is no need for an `always` block or a clock signal since the output is not time-dependent and is constant.
+- The module is compact and adheres to the specification of having no inputs and one always high output.
+
+---
+
+### ✅ **Conclusion**
+
+This implementation satisfies the requirement of a module with no inputs and a single output that is always driven to logic high. The code is minimal, efficient, and correctly follows Verilog syntax and semantics.

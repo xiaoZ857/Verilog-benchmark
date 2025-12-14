@@ -1,0 +1,24 @@
+// State encoding
+localparam [2:0] A = 3'd0,
+                 B = 3'd1,
+                 C = 3'd2,
+                 D = 3'd3,
+                 E = 3'd4,
+                 F = 3'd5;
+
+// State register (sequential logic)
+reg [2:0] state;
+always @(posedge clk) begin
+    if (reset)
+        state <= A;          // synchronous active‑high reset
+    else
+        state <= next_state; // next state computed combinationally
+end
+
+// Next‑state logic (combinational)
+reg [2:0] next_state;
+always @(*) begin
+    case (state)
+        A: next_state = w ? B : A; // A(0) --1--> B, A(0) --0--> A
+        B: next_state = w ? C : D; // B(0) --1--> C, B(0) --0--> D
+        C: next_state

@@ -1,0 +1,21 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:78: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:78: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:78: error: Unable to elaborate r-value: ((state)==('sd0))o((state)==('sd2))
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:79: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:79: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:79: error: Unable to elaborate r-value: ((state)==('sd2))o((state)==('sd3))
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:16: error: Could not find variable ``state'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:17: error: Could not find variable ``fall_counter'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:19: error: Unable to bind wire/reg/memory `fall_counter' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:19: error: Unable to elaborate condition expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:54: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:54: error: Unable to elaborate condition expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:60: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:60: error: Unable to bind wire/reg/memory `fall_counter' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob155_lemmings4\attempt_2\Prob155_lemmings4_code.sv:60: error: Unable to elaborate condition expression.
+15 error(s) during elaboration.

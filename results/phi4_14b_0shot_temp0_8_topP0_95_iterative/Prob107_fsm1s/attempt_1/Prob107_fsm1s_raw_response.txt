@@ -1,0 +1,75 @@
+To implement the described Moore state machine in Verilog, we will define two states: `B` and `A`. We'll use a synchronous active-high reset to set the initial state. The state transitions depend on the current state and the input signal (`in`). Here's how you can implement this state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire reset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    STATE_B = 2'b00, // Initial state B
+    STATE_A = 2'b01  // State A
+  } state_t;
+
+  // Registers to hold the current and next states
+  state_t current_state, next_state;
+
+  // Moore machine output logic based on state
+  always @(*) begin
+    case (current_state)
+      STATE_B: out = 1;
+      STATE_A: out = 0;
+      default: out = 1; // Default to output of state B
+    endcase
+  end
+
+  // State transition and synchronous reset logic
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= STATE_B; // Reset to initial state B
+    end else begin
+      current_state <= next_state; // Transition to the next state
+    end
+  end
+
+  // Next state logic based on current state and input
+  always @(*) begin
+    case (current_state)
+      STATE_B: begin
+        if (in == 0) begin
+          next_state = STATE_A;
+        end else begin
+          next_state = STATE_B; // Stay in B for input = 1
+        end
+      end
+      
+      STATE_A: begin
+        if (in == 0) begin
+          next_state = STATE_B;
+        end else begin
+          next_state = STATE_A; // Stay in A for input = 1
+        end
+      end
+
+      default: begin
+        next_state = STATE_B; // Default to state B
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+- **State Encoding**: We use a `typedef` for states, encoding them as binary values. State `B` is encoded as `2'b00`, and state `A` is `2'b01`.
+  
+- **Output Logic**: The output (`out`) depends solely on the current state since this is a Moore machine. In state `B`, the output is `1`. In state `A`, it's `0`.
+
+- **Synchronous Reset**: On every positive edge of the clock, if `reset` is high, the state is set to `STATE_B` (initial reset state).
+
+- **Next State Logic**: The next state depends on both the current state and the input (`in`). We use a combinational logic block to determine what `next_state` should be.
+
+This Verilog module correctly implements the described Moore machine with synchronous active-high reset.

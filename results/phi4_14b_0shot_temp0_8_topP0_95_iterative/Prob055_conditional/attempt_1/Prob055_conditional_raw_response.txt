@@ -1,0 +1,48 @@
+To implement the Verilog module `TopModule` that finds the minimum of four unsigned numbers (each 8 bits wide), we can use a series of comparison operations. Here is how you can design the module:
+
+```verilog
+module TopModule (
+    input [7:0] a,
+    input [7:0] b,
+    input [7:0] c,
+    input [7:0] d,
+    output reg [7:0] min
+);
+
+always @(*) begin
+    // Initialize min with the first number a.
+    min = a;
+    
+    // Compare min with b and update if necessary.
+    if (b < min) begin
+        min = b;
+    end
+
+    // Compare min with c and update if necessary.
+    if (c < min) begin
+        min = c;
+    end
+
+    // Compare min with d and update if necessary.
+    if (d < min) begin
+        min = d;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Input Ports**: The module takes four 8-bit unsigned inputs: `a`, `b`, `c`, and `d`.
+
+- **Output Port**: The output is an 8-bit register named `min` which holds the minimum value among the inputs.
+
+- **Combinational Logic**: 
+  - We use an `always @(*)` block to describe combinational logic. This means that whenever any of the inputs change, the logic inside this block will be re-evaluated.
+  
+  - Initially, we assume `a` is the minimum value and assign it to `min`.
+
+  - We then sequentially compare `min` with each subsequent input (`b`, `c`, and `d`). If any input is smaller than the current `min`, we update `min` with that input.
+
+This design ensures that at any given time, `min` holds the smallest value among the four inputs.

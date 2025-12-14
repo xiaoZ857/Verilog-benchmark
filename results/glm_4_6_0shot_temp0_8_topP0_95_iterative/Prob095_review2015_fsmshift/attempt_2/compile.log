@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_2\Prob095_review2015_fsmshift_code.sv:15: error: shift_ena is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_2\Prob095_review2015_fsmshift_code.sv:5:      : shift_ena is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_2\Prob095_review2015_fsmshift_code.sv:19: error: shift_ena is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_2\Prob095_review2015_fsmshift_code.sv:5:      : shift_ena is declared here as wire.
+2 error(s) during elaboration.

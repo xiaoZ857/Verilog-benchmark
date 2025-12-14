@@ -1,0 +1,20 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  // This circuit implements a 4-bit even parity checker.
+  // The output q is 1 when there is an even number of 1s in the input (a, b, c, d).
+  // This can be implemented using XOR operations.
+  // XOR of two bits is 1 when exactly one of them is 1.
+  // The parity of all four bits can be computed as: a ^ b ^ c ^ d
+  // However, since we want even parity (q=1 when even number of 1s),
+  // we need to invert the result of XOR operations.
+  
+  assign q = ~(a ^ b ^ c ^ d);
+  
+endmodule

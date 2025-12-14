@@ -1,0 +1,22 @@
+```verilog
+// Define the TopModule module
+module TopModule (
+  // Output signal: always drives to 1 (logic high)
+  output one
+);
+
+// Always block to drive the output to 1
+always @(*) begin
+  one = 1;
+end
+
+// End of module definition
+endmodule // TopModule
+```
+
+In this code:
+
+*   We define a module named `TopModule` with an output signal named `one`.
+*   The `always` block is used to drive the output to 1, regardless of any input changes.
+*   The `@(*)` clause specifies that the always block should be triggered once at the start of the simulation (i.e., not on every clock transition).
+*   This ensures that the output remains high and drives logic high.

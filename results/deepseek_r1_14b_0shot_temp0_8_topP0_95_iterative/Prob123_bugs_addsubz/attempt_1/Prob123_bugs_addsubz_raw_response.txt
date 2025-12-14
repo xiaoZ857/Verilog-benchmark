@@ -1,0 +1,3 @@
+To fix this code:
+
+The primary issue was in the condition used to determine if `out` is zero. Instead of checking whether all bits are zero, it incorrectly applied the bitwise NOT operation on `out`. The correct approach

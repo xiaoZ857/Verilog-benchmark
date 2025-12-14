@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : This lsb expression violates the rule: (sel)*('sd4)
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : This msb expression violates the rule: ((sel)*('sd4))+('sd3)
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : This lsb expression violates the rule: (sel)*('sd4)
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: A reference to a wire or reg (`sel') is not allowed in a constant expression.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7: error: Part select expressions must be constant.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : This msb expression violates the rule: ((sel)*('sd4))+('sd3)
+8 error(s) during elaboration.

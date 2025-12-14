@@ -1,0 +1,9 @@
+  wire n1, n2;
+  
+  assign n1 = ~(p1a & p1b & p1c & p1d);
+  assign p1y = n1;
+  
+  assign n2 = ~(p2a & p2b & p2c & p2d);
+  assign p2y = n2;
+  
+endmodule

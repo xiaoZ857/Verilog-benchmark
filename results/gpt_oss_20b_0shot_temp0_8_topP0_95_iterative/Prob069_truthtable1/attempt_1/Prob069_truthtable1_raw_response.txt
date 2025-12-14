@@ -1,0 +1,72 @@
+**Verilog implementation of the combinational function**
+
+```verilog
+// --------------------------------------------------------------------
+//  Module : TopModule
+//  Purpose: Implements the combinational function
+//          f = (~x3 & x2) | (x3 & x1)
+//  This expression is derived from the given truth table.
+// --------------------------------------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire x3,   // Most significant input
+    input  wire x2,   // Middle input
+    input  wire x1,   // Least significant input
+    output wire f     // Resulting output
+);
+
+// Continuous assignment – pure combinational logic
+assign f = (~x3 & x2) | (x3 & x1);
+
+endmodule
+```
+
+### Explanation
+
+1. **Truth‑table analysis**
+
+   The output `f` is `1` for the following minterms:
+   - (x3,x2,x1) = (0,1,0)  → `~x3 & x2 & ~x1`
+   - (0,1,1) → `~x3 & x2 & x1`
+   - (1,0,1) → `x3 & ~x2 & x1`
+   - (1,1,1) → `x3 & x2 & x1`
+
+   Grouping them gives the simplified sum‑of‑products:
+
+   ```
+   f = (~x3 & x2) | (x3 & x1)
+   ```
+
+2. **Implementation**
+
+   - The `assign` statement creates a continuous, combinational expression.
+   - No flip‑flops or clock are involved, so the circuit is purely combinational.
+
+3. **Synthesis & simulation**
+
+   The module is fully synthesizable and can be simulated with any Verilog testbench.  
+   ```verilog
+   // Example testbench (optional)
+   module tb;
+       reg x3, x2, x1;
+       wire f;
+
+       TopModule dut(.x3(x3), .x2(x2), .x1(x1), .f(f));
+
+       initial begin
+           $monitor("x3=%b x2=%b x1=%b -> f=%b", x3, x2, x1, f);
+           {x3,x2,x1} = 3'b000; #10;
+           {x3,x2,x1} = 3'b001; #10;
+           {x3,x2,x1} = 3'b010; #10;
+           {x3,x2,x1} = 3'b011; #10;
+           {x3,x2,x1} = 3'b100; #10;
+           {x3,x2,x1} = 3'b101; #10;
+           {x3,x2,x1} = 3'b110; #10;
+           {x3,x2,x1} = 3'b111; #10;
+           $finish;
+       end
+   endmodule
+   ```
+
+This module meets the specification: it is combinational, correctly implements the truth table, and is ready for synthesis or further integration.

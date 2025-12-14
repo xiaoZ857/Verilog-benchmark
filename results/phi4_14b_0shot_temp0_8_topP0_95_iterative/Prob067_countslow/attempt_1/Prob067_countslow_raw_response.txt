@@ -1,0 +1,39 @@
+To implement a decade counter in Verilog based on your description, you can use a finite state machine (FSM) approach. The counter should increment only when the "slowena" signal is high and should be able to reset synchronously with the active high reset signal.
+
+Here's how you can define the `TopModule`:
+
+```verilog
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q // 4-bit output for counting from 0 to 9
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Synchronous active-high reset
+        q <= 4'b0000;
+    end else if (slowena) begin
+        // Increment the counter only when slowena is high
+        if (q == 4'b1001) begin
+            // Reset to 0 after reaching 9
+            q <= 4'b0000;
+        end else begin
+            // Normal increment operation
+            q <= q + 1;
+        end
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+- **always block**: The counter logic is placed inside an `always` block sensitive to the positive edge of the clock (`posedge clk`) and the reset signal (`posedge reset`). This ensures that changes are synchronized with the clock.
+
+- **reset condition**: When the `reset` signal is high, it clears the counter (`q <= 4'b0000`), effectively setting the counter to zero.
+
+- **increment condition**: The counter increments only when `slowena` is high. If `q` equals 9 (`4'b1001` in binary), it resets back to 0; otherwise, it increments by one.
+
+This design ensures that the counter operates correctly with synchronous reset and conditional incrementing based on the "slowena" signal.

@@ -1,0 +1,14 @@
+
+module TopModule (
+    input [99:0] a,
+    input [99:0] b,
+    input sel,
+    output [99:0] out
+);
+
+    // When sel is 0, out equals a; when sel is 1, out equals b.
+    assign out = sel ? b : a;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

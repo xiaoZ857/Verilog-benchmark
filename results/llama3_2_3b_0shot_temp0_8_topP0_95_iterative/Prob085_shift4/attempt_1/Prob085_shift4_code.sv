@@ -1,0 +1,57 @@
+
+// Define the TopModule
+module TopModule (
+    // Clock and Asynchronous Positive Edge Triggered Reset
+    input clk,
+    input areset,
+
+    // Load and Shift Register Enable
+    input load,
+    input ena,
+
+    // Data to be loaded into the shift register
+    input [3:0] data,
+
+    // Output of the shift register
+    output reg [3:0] q
+);
+
+// Internal signals
+reg [3:0] prev_q;  // Previous value of the shift register
+reg [1:0] carry;   // Carry for next shift operation
+
+// Always block for shift register operation
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        prev_q <= 0;
+    end else if (load && load == ena) begin
+        prev_q <= data;
+    end else if (ena) begin
+        // Right shift logic: shift data bits to the right,
+        // set carry for next shift operation
+        prev_q <= {carry, prev_q[1:0]};
+        carry <= data[2];
+    end else begin
+        prev_q <= 4'd0;  // Reset q if load and ena are not asserted
+    end
+
+    q <= prev_q;
+end
+
+// Always block for carry propagation
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        carry <= 1'b0;
+    end else if (load && load == ena) begin
+        // Clear the carry when new data is loaded
+        carry <= data[2];
+    end else if (ena) begin
+        // Update the carry for next shift operation
+        carry <= q[1];
+    end
+end
+
+// Instantiate signals in this module are accessible outside to test the module
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

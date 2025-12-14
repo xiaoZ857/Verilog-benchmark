@@ -1,0 +1,29 @@
+ Here is the Verilog code for the simple D Flip-Flop with an active high synchronous reset as per your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire d,
+  input wire r,
+  output logic q
+);
+
+reg q_internal; // Internal signal for the flip-flop's state
+
+always @(posedge clk) begin
+  if (!r) // If reset is high (active high), set q to 0
+    q_internal <= 0;
+  else // Else, latch the input data into the flip-flop
+    q_internal <= d;
+end
+
+assign q = q_internal; // Assign the internal signal to the output
+
+endmodule
+```
+
+In this implementation:
+
+- The `q_internal` register holds the state of the flip-flop.
+- At each rising edge of the clock, if the reset (r) is high, the flip-flop's state will be set to 0; otherwise, it will latch the input data (d).
+- The output (q) is assigned the value of `q_internal`.

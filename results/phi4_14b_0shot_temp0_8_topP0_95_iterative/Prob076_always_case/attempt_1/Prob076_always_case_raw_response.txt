@@ -1,0 +1,45 @@
+To implement a 6-to-1 multiplexer in Verilog, you need to create logic that selects one of the six 4-bit inputs based on a 3-bit selection signal. If the selection signal is not between 0 and 5, it should default to outputting zero. Here's how you can achieve this:
+
+```verilog
+module TopModule (
+  input [2:0] sel,
+  input [3:0] data0,
+  input [3:0] data1,
+  input [3:0] data2,
+  input [3:0] data3,
+  input [3:0] data4,
+  input [3:0] data5,
+  output reg [3:0] out
+);
+
+always @(*) begin
+  case (sel)
+    3'b000: out = data0;
+    3'b001: out = data1;
+    3'b010: out = data2;
+    3'b011: out = data3;
+    3'b100: out = data4;
+    3'b101: out = data5;
+    default: out = 4'b0000; // Default case if sel is not between 0 and 5
+  endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs:**
+  - `sel`: A 3-bit selection input that determines which of the six inputs to select. It can take values from 0 (`000`) to 5 (`101`).
+  - `data0`, `data1`, `data2`, `data3`, `data4`, `data5`: Six 4-bit data inputs.
+
+- **Output:**
+  - `out`: A 4-bit output that represents the selected input based on the value of `sel`.
+
+- **Logic:**
+  - The `always @(*)` block is a combinational logic block, meaning it will evaluate whenever any of its inputs change.
+  - The `case` statement checks the value of `sel`.
+    - For values from `000` to `101`, it assigns the corresponding data input (`data0` to `data5`) to `out`.
+    - The `default` case handles any other values of `sel` (i.e., `110` and `111`), setting `out` to `4'b0000`.
+
+This implementation ensures that for valid selection signals, the correct data input is output, while invalid signals result in an output of zero.

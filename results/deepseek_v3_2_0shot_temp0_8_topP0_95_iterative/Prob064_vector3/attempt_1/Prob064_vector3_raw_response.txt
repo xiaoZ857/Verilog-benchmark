@@ -1,0 +1,9 @@
+  // Concatenate inputs and pad with two 1's in LSBs
+  wire [31:0] concat = {a, b, c, d, e, f, 2'b11};
+  
+  assign w = concat[31:24];
+  assign x = concat[23:16];
+  assign y = concat[15:8];
+  assign z = concat[7:0];
+
+endmodule

@@ -1,0 +1,115 @@
+We need to track the state with the following considerations:  
+- Walking left or right (two states).  
+- Falling (aaah) — separate state(s) to count cycles.  
+- Digging — separate state(s).  
+- Splattered — final dead state.  
+
+Since falling for more than 20 cycles before ground=1 causes splatter, we need a counter for fall duration.  
+Also, falling can happen from walking or from digging (when digging reaches ground=0).  
+
+Let’s define states:  
+1. WL — walking left  
+2. WR — walking right  
+3. FALL_L — falling, was walking left before fall  
+4. FALL_R — falling, was walking right before fall  
+5. DIG_L — digging, was walking left before digging  
+6. DIG_R — digging, was walking right before digging  
+7. SPLAT — dead  
+
+Rules:  
+- From WL/WR:  
+  - If ground=0 → FALL_L/FALL_R (falling, preserve direction)  
+  - Else if dig=1 → DIG_L/DIG_R  
+  - Else if bump_left=1 → WR (if in WL)  
+  - Else if bump_right=1 → WL (if in WR)  
+  - Else stay in WL/WR.  
+
+- From DIG_L/DIG_R:  
+  - If ground=0 → FALL_L/FALL_R (digging through to empty space → fall)  
+  - Else stay digging.  
+
+- From FALL_L/FALL_R:  
+  - If ground=1 → WL/WR (resume walking) unless fall_count>20 → SPLAT  
+  - Else stay falling (increment fall_count).  
+
+- From SPLAT: stay forever until areset.  
+
+Also, in falling state, ignore bumps and dig.  
+In digging state, ignore bumps.  
+
+We’ll use a counter for fall cycles, resetting when not falling.  
+
+Let’s implement:
+
+```verilog
+    parameter WL = 0, WR = 1, FALL_L = 2, FALL_R = 3, DIG_L = 4, DIG_R = 5, SPLAT = 6;
+    reg [2:0] state, next_state;
+    reg [4:0] fall_count;
+    
+    // State register
+    always @(posedge clk, posedge areset) begin
+        if (areset) begin
+            state <= WL;
+            fall_count <= 0;
+        end else begin
+            state <= next_state;
+            // Fall counter logic
+            if (state == FALL_L || state == FALL_R) begin
+                if (ground) begin
+                    fall_count <= 0;
+                end else begin
+                    fall_count <= fall_count + 1;
+                end
+            end else begin
+                fall_count <= 0;
+            end
+        end
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            WL: begin
+                if (~ground) next_state = FALL_L;
+                else if (dig) next_state = DIG_L;
+                else if (bump_left) next_state = WR;
+                else next_state = WL;
+            end
+            WR: begin
+                if (~ground) next_state = FALL_R;
+                else if (dig) next_state = DIG_R;
+                else if (bump_right) next_state = WL;
+                else next_state = WR;
+            end
+            FALL_L: begin
+                if (ground) begin
+                    if (fall_count > 20) next_state = SPLAT;
+                    else next_state = WL;
+                end else next_state = FALL_L;
+            end
+            FALL_R: begin
+                if (ground) begin
+                    if (fall_count > 20) next_state = SPLAT;
+                    else next_state = WR;
+                end else next_state = FALL_R;
+            end
+            DIG_L: begin
+                if (~ground) next_state = FALL_L;
+                else next_state = DIG_L;
+            end
+            DIG_R: begin
+                if (~ground) next_state = FALL_R;
+                else next_state = DIG_R;
+            end
+            SPLAT: next_state = SPLAT;
+            default: next_state = WL;
+        endcase
+    end
+    
+    // Output logic (Moore: outputs depend only on state)
+    assign walk_left = (state == WL);
+    assign walk_right = (state == WR);
+    assign aaah = (state == FALL_L || state == FALL_R);
+    assign digging = (state == DIG_L || state == DIG_R);
+endmodule
+```

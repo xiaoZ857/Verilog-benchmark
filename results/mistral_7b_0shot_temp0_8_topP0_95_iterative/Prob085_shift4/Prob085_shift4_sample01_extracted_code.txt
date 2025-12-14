@@ -1,0 +1,12 @@
+always @(posedge clk) begin
+  if (!areset) begin
+    q <= 4'b0; // Reset the shift register to zero
+  end else if (load && !ena) begin // Load data when load is asserted and ena is not asserted
+    q <= data; // Load data
+  end else if (ena) begin // Shift right otherwise
+    if(!load) begin
+      q[3:1] <= q[2:0]; // Shift all bits except the first one
+      q[0] <= 0; // The first bit is reset
+    end
+  end
+end

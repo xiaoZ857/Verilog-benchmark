@@ -1,0 +1,43 @@
+always @(posedge clk) begin
+    if(load) begin
+        // Load the timer duration into the counter
+        counter = data;
+        // Reset the flag to prevent counting until new value is loaded
+        initialized = 0;
+    end else if (initialized == 1) begin
+        // Decrement the counter by 1
+        counter <= counter - 1;
+        // Set tc to 1 when count becomes 0
+        tc <= (counter[10:0] == 0);
+    end 
+end
+
+// Move this line outside always block so it's evaluated only once on rising edge of 'clk'
+initial begin
+    initialized = 0;
+end
+
+always @(posedge clk or load) begin
+    if(load) begin
+        initialized = 0;
+    end 
+end
+
+// You need to add a state machine or a similar construct to handle the initialization and resetting of counter
+// Here I have used an always block with init statement
+initial begin
+    counter = 10; // Initialize counter to 10, assuming it's already counting from 10.
+end 
+
+always @(posedge clk) begin
+    if(counter == 0) begin
+        tc <= 1; // Set tc to 1 when count becomes 0
+    end 
+end
+
+// Move this line outside always block so it's evaluated only once on rising edge of 'clk'
+initial begin
+    counter = 10; // Reset counter
+end 
+
+endmodule

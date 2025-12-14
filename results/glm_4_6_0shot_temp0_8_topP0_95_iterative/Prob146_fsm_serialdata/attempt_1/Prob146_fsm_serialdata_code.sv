@@ -1,0 +1,58 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+
+  // State encoding
+  typedef enum logic [2:0] {
+    IDLE,
+    START,
+    DATA,
+    STOP,
+    ERROR_WAIT
+  } state_t;
+  
+  state_t state, next_state;
+  
+  // Counter for data bits (0-7)
+  logic [2:0] bit_count;
+  logic [2:0] next_bit_count;
+  
+  // Register for received data
+  logic [7:0] data_reg;
+  logic [7:0] next_data_reg;
+  
+  // Output assignments
+  assign out_byte = data_reg;
+  assign done = (state == STOP) && (in == 1);
+  
+  // Sequential logic
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      bit_count <= 3'b000;
+      data_reg <= 8'b00000000;
+    end else begin
+      state <= next_state;
+      bit_count <= next_bit_count;
+      data_reg <= next_data_reg;
+    end
+  end
+  
+  // Combinational logic for next state and outputs
+  always_comb begin
+    // Default assignments
+    next_state = state;
+    next_bit_count = bit_count;
+    next_data_reg = data_reg;
+    
+    case (state)
+      IDLE: begin
+        if (
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

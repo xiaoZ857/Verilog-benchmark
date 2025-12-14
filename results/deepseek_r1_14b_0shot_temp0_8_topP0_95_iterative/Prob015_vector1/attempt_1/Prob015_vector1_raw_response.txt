@@ -1,0 +1,33 @@
+To solve this problem, we need to create a combinational Verilog module that splits a 16-bit input into two 8-bit outputs. The lower byte (bits 0-7) will be assigned to an output called `out_lo`, and the upper byte (bits 8-15) will be assigned to another output called `out_hi`.
+
+### Approach
+The approach involves using bit slicing or bit masking to extract specific bits from the input signal. Here's a step-by-step breakdown of the solution:
+
+1. **Input Signal**: The module takes a 16-bit input signal named `in`.
+2. **Lower Byte Extraction**: The lower byte consists of bits 0 through 7 of the input signal. This can be directly assigned to `out_lo` using bit slicing.
+3. **Upper Byte Extraction**: The upper byte consists of bits 8 through 15 of the input signal. This can be directly assigned to `out_hi` using bit slicing.
+
+This approach ensures that each output is correctly extracted from the input without any additional logic since it's a straightforward combinational circuit.
+
+### Solution Code
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+  
+  // Assign the lower byte to out_lo
+  assign out_lo = in[7:0];
+  
+  // Assign the upper byte to out_hi
+  assign out_hi = in[15:8];
+endmodule
+```
+
+### Explanation
+- **Bit Slicing**: In Verilog, `in[7:0]` extracts bits from index 7 down to 0, which forms an 8-bit value. Similarly, `in[15:8]` extracts bits from index 15 down to 8, forming another 8-bit value.
+- **Combinational Circuit**: The circuit is purely combinational as it uses only assignment statements without any sequential elements like flip-flops or clock signals.
+
+This solution efficiently splits the input into two separate bytes using basic bit manipulation, ensuring that each byte is correctly assigned to its respective output.

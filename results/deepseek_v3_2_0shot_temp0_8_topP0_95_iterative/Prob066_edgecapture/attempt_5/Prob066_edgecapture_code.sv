@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+reg [31:0] prev_in;
+
+always @(posedge clk) begin
+    if (reset) begin
+        out <= 32'b0;
+        prev_in <= 32'b0;
+    end else begin
+        // Compare previous cycle's input with current input
+        // Detect falling edges: 1 in previous cycle, 0 in current cycle
+        out <= out | (prev_in & ~in);
+        
+        // Update prev_in for the next cycle
+        prev_in <= in;
+    end
+end

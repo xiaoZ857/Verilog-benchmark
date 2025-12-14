@@ -1,0 +1,35 @@
+ Here is the Verilog code for the Moore state machine based on the provided state transition table:
+
+```verilog
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+
+// One-hot state encoding
+reg A, B, C, D;
+assign A = state[0];
+assign B = state[1];
+assign C = state[2];
+assign D = state[3];
+
+always @(posedge clk) begin
+  // State transition logic
+  if (A && !in) next_state <= B;
+  else if (A && in) next_state <= A;
+  else if (B && !in) next_state <= C;
+  else if (B && in) next_state <= B;
+  else if (C && !in) next_state <= A;
+  else if (C && in) next_state <= D;
+  else if (D && !in) next_state <= C;
+  else if (D && in) next_state <= B;
+
+  // Output logic
+  assign out = (D && in);
+end
+
+// Assuming clk is an external clock input
+endmodule
+```

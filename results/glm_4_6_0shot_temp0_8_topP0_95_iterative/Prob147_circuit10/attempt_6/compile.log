@@ -1,0 +1,24 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10: warning: macro state undefined (and assumed null) at this point.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10: warning: macro q undefined (and assumed null) at this point.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:14: warning: macro a undefined (and assumed null) at this point.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:14: warning: macro b undefined (and assumed null) at this point.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:16: warning: macro q undefined (and assumed null) at this point.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10: syntax error
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10: error: Stray tic (`) here. Perhaps you put white space
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10:      : between the tic and preprocessor directive?
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10: error: Stray tic (`) here. Perhaps you put white space
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10:      : between the tic and preprocessor directive?
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:14: error: Stray tic (`) here. Perhaps you put white space
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:14:      : between the tic and preprocessor directive?
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:16: error: Stray tic (`) here. Perhaps you put white space
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:16:      : between the tic and preprocessor directive?
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:10: error: Invalid module instantiation
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:24: error: invalid module item.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_6\Prob147_circuit10_code.sv:25: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:12: error: invalid module item.

@@ -1,0 +1,38 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  input e,
+  output [24:0] out
+);
+always @(posedge clk) begin
+  out[0] = ~e & e; // out[0] = e^e
+  out[1] = ~e & d; // out[1] = e^d
+  out[2] = ~d & e; // out[2] = d^e
+  out[3] = ~d & c; // out[3] = d^c
+  out[4] = ~c & d; // out[4] = c^d
+  out[5] = ~c & b; // out[5] = c^b
+  out[6] = ~b & c; // out[6] = b^c
+  out[7] = ~b & a; // out[7] = b^a
+  out[8] = ~a & b; // out[8] = a^b
+  out[9] = ~a & c; // out[9] = a^c
+  out[10] = ~c & a; // out[10] = c^a
+  out[11] = ~a & d; // out[11] = a^d
+  out[12] = ~d & a; // out[12] = d^a
+  out[13] = ~b & d; // out[13] = b^d
+  out[14] = ~d & b; // out[14] = d^b
+  out[15] = ~c & d; // out[15] = c^d
+  out[16] = ~d & c; // out[16] = d^c
+  out[17] = ~a & e; // out[17] = a^e
+  out[18] = ~e & a; // out[18] = e^a
+  out[19] = ~b & e; // out[19] = b^e
+  out[20] = ~e & b; // out[20] = e^b
+  out[21] = ~c & e; // out[21] = c^e
+  out[22] = ~e & c; // out[22] = e^c
+  out[23] = ~a & b; // out[23] = a^b
+  out[24] = ~b & a; // out[24] = b^a
+end
+
+endmodule

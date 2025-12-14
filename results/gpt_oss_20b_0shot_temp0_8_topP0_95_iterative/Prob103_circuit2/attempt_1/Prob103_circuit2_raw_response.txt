@@ -1,0 +1,39 @@
+**Verilog implementation**
+
+The truth‑table shows that `q` is **1 only when an even number of the four inputs are ‘1’**.  
+That is exactly the complement of the XOR of all four inputs:
+
+```
+      even number of 1’s  →  q = 1
+      odd  number of 1’s  →  q = 0
+```
+
+So the combinational logic is simply
+
+```
+q = ~(a ^ b ^ c ^ d)
+```
+
+Below is the complete Verilog module.
+
+```verilog
+// TopModule.v
+// Implements a 4‑bit even‑parity checker (q = 1 for even # of 1’s).
+
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire c,
+    input  wire d,
+    output wire q
+);
+
+// Combinational assignment – no clock needed
+assign q = ~(a ^ b ^ c ^ d);
+
+endmodule
+```
+
+> **Explanation**
+> - `^` is the XOR operator.  
+> - `a ^ b ^ c ^ d` yields `1

@@ -1,0 +1,63 @@
+ Here's the implementation of the XOR gate using the three methods you've described in Verilog:
+
+1. Using an assign statement (output `out_assign`):
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign
+);
+
+assign out_assign = a ^ b;
+
+endmodule
+```
+
+2. Using a combinational always block (output `out_always_comb`):
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_always_comb
+);
+
+reg out_always_comb;
+
+always @* begin
+  if(a ^ b)
+    out_always_comb = 1'b1;
+  else
+    out_always_comb = 1'b0;
+end
+
+endmodule
+```
+
+3. Using a clocked always block (output `out_always_ff`):
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output reg out_always_ff,
+  output reg out_reg_clk
+);
+
+always @(posedge clk) begin
+  if(a ^ b)
+    out_always_ff <= 1'b1;
+  else
+    out_always_ff <= 1'b0;
+end
+
+assign out_reg_clk = out_always_ff; // Assign the output to a regular register for observation
+
+endmodule
+```
+
+In this last example, I added an additional output `out_reg_clk` that you can observe in case you want to see the output of the clocked always block without any delays due to the flip-flop.

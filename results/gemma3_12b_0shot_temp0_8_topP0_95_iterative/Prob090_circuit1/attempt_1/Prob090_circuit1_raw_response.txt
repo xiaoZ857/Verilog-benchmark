@@ -1,0 +1,30 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output q
+);
+
+  assign q = (a & b) ? 1 : 0;
+
+endmodule
+```
+
+**Explanation:**
+
+The waveforms show that `q` is high (1) only when both `a` and `b` are high (1).  This is a simple AND gate behavior.
+
+*   **`assign q = (a & b) ? 1 : 0;`**:  This line uses the conditional operator (`? :`) to implement the AND function.  It's equivalent to `assign q = a & b;` which is a more concise way to represent the same logic. If `a` AND `b` is true (both are 1), then `q` is assigned 1; otherwise, `q` is assigned 0.
+
+**Why this solution matches the waveforms:**
+
+*   **Time 0ns - 15ns:** `a` and `b` are both 0, so `q` is 0.
+*   **Time 25ns - 30ns:** `a` is 0, `b` is 1. `q` is 0.
+*   **Time 35ns - 40ns:** `a` is 1, `b` is 0. `q` is 0.
+*   **Time 45ns - 50ns:** `a` is 1, `b` is 1. `q` is 1.
+*   **Time 55ns - 60ns:** `a` and `b` are both 0, so `q` is 0.
+*   **Time 65ns - 70ns:** `a` is 0, `b` is 1. `q` is 0.
+*   **Time 75ns - 80ns:** `a` is 1, `b` is 0. `q` is 0.
+*   **Time 85ns - 90ns:** `a` is 1, `b` is 1. `q` is 1.
+
+This solution accurately implements the logic described by the simulation waveforms.  It's a direct implementation of an AND gate.

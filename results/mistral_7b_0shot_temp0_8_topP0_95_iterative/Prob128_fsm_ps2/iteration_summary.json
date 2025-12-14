@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob128_fsm_ps2",
+  "model_name": "mistral:7b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Invalid assignment: done is declared as reg but used in continuous assignment",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 6\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:32: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:34: Syntax in assignment statement l-value.\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:35: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_2\\Prob128_fsm_ps2_code.sv:35: error: Invalid module instantiation\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:10: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 10\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:13: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:13: error: malformed statement\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:16: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:16: error: malformed statement\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:29: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:31: Syntax in assignment statement l-value.\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:32: syntax error\nresults/mistral_7b_0shot_temp0_8_topP0_95_iterative\\Prob128_fsm_ps2\\attempt_3\\Prob128_fsm_ps2_code.sv:32: error: Invalid module instantiation\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:10: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

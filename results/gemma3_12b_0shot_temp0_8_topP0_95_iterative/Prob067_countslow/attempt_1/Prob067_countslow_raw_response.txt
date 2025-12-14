@@ -1,0 +1,87 @@
+```verilog
+module TopModule (
+  input clk,
+  input slowena,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else if (slowena) begin
+      if (q == 9) begin
+        q <= 0;
+      end else begin
+        q <= q + 1;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, slowena, reset, q);`:  Defines the module named `TopModule` with the specified input and output ports.
+
+2. **Output Declaration:**
+   - `output reg [3:0] q;`:  Declares `q` as a 4-bit register (`reg`) which will hold the counter's value.  A `reg` is required because it holds its value between clock cycles.
+
+3. **Synchronous Reset:**
+   - `always @(posedge clk) begin ... end`: This `always` block executes on the positive edge of the clock signal (`clk`).
+   - `if (reset) begin q <= 0; end`:  This condition checks if the `reset` input is high. If it is, the counter is synchronously reset to 0.
+
+4. **Enable and Increment Logic:**
+   - `else if (slowena) begin ... end`:  This condition is only met if `reset` is low. It checks if the `slowena` (slow enable) signal is high.  If `slowena` is high, the counter increments.
+   - `if (q == 9) begin q <= 0; end`: This checks if the counter has reached 9. If so, it resets to 0, implementing the wrap-around behavior.
+   - `else begin q <= q + 1; end`: If the counter is not at 9, it is incremented by 1.
+
+**How it works:**
+
+- **Clock Triggered:** The counter updates only on the positive edge of the clock signal.
+- **Synchronous Reset:**  The `reset` signal resets the counter to 0 on the clock edge when `reset` is high. This is a synchronous reset.
+- **Slow Enable:** The `slowena` signal controls the incrementing process.  The counter only increments if `slowena` is high.
+- **Wrap-Around:**  When the counter reaches 9, it automatically wraps around to 0 on the next clock cycle.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg slowena;
+  reg reset;
+  wire [3:0] q;
+
+  TopModule dut (
+    .clk(clk),
+    .slowena(slowena),
+    .reset(reset),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    slowena = 1;
+    reset = 0;
+
+    #10 reset = 1; // Assert reset
+    #10 reset = 0; // Deassert reset
+
+    #100 slowena = 0; // Pause the counter
+    #100 slowena = 1; // Resume the counter
+
+    #200 $finish;
+  end
+
+  always #5 clk = ~clk; // Generate a clock signal with a period of 10 time units
+
+endmodule
+```
+
+**To run this code:**
+
+1. Save the `TopModule.v` (or whatever you name it) and `TopModule_tb.v` files.
+2. Use a Verilog simulator (e.g., Icarus Verilog, ModelSim, Vivado Simulator) to compile and run the testbench. The simulator will show you the `q` output over time, verifying that the decade counter works as expected.  You should see the counter incrementing from 0 to 9, then wrapping around to 0, and being paused when `slowena` is low.

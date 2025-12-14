@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:9: error: Unknown module type: DFFArray8
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob034_dff8\attempt_1\Prob034_dff8_code.sv:15: error: Unknown module type: DFFArray4
+3 error(s) during elaboration.
+*** These modules were missing:
+        DFFArray4 referenced 1 times.
+        DFFArray8 referenced 1 times.
+***

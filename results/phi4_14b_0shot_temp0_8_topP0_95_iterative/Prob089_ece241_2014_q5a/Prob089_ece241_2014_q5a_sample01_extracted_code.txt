@@ -1,0 +1,64 @@
+always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+        current_state <= IDLE;
+    end else begin
+        current_state <= next_state;
+    end
+end
+
+// Output logic for Moore machine
+always_comb begin
+    case (current_state)
+        IDLE: z = 1'b0;   // Default output in IDLE state
+        FLIP_AND_PASS: 
+            if (!first_1_encountered) begin
+                z = ~x;
+            end else begin
+                z = x;
+            end
+        PASS_THROUGH: z = 1'b1; // Ensure leading '1' is passed through correctly
+        default: z = 1'bx;
+    endcase
+end
+
+// State transition logic
+always_comb begin
+    case (current_state)
+        IDLE: next_state = (~areset) ? FLIP_AND_PASS : IDLE;
+
+        FLIP_AND_PASS:
+            if (!first_1_encountered && x == 1'b0) begin
+                next_state = FLIP_AND_PASS;
+            end else if (!first_1_encountered && x == 1'b1) begin
+                next_state = PASS_THROUGH;
+                first_1_encountered <= 1; // Set flag when first '1' is encountered
+            end else begin
+                next_state = PASS_THROUGH;
+            end
+
+        PASS_THROUGH: 
+            if (areset) begin
+                next_state = IDLE;
+                first_1_encountered <= 0; // Reset the flag on reset
+            end else begin
+                next_state = PASS_THROUGH;
+            end
+
+        default: next_state = IDLE;
+    endcase
+end
+
+// Define states and auxiliary signal for tracking first '1' encounter
+typedef enum logic [1:0] {
+    IDLE,
+    FLIP_AND_PASS,
+    PASS_THROUGH
+} state_t;
+
+reg first_1_encountered; // Flag to indicate the first 1 has been encountered
+
+initial begin
+    first_1_encountered = 0; // Initialize flag to false at startup
+end
+
+endmodule

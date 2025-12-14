@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+always @(posedge clk) begin
+    if (reset) begin
+        q <= 32'h1;
+    end
+    else begin
+        // Galois LFSR: MSB shifts into LSB, taps XOR with LSB
+        // Taps at positions: 32 (bit 31), 22 (bit 21), 2 (bit 1), 1 (bit 0)
+        
+        // Store the LSB (feedback bit)
+        reg feedback = q[0];
+        
+        // Shift all bits right by 1
+        q <= q >> 1;
+        
+        // Insert MSB into the new LSB position
+        q[31] <= q[31];
+        
+        // Apply XOR at tap positions with the feedback (old LSB)
+        // Position 32 (bit 31): XOR with feedback
+        q[31] <= q[31] ^ feedback;
+        
+        // Position 22 (bit 21): XOR with feedback  
+        q[21] <= q[21] ^ feedback;
+        
+        // Position 2 (bit 1): XOR with feedback
+        q[1] <= q[1] ^ feedback;
+        
+        // Position 1 (bit 0): XOR with feedback AND set to shifted-in MSB
+        // Actually, for Galois LFSR, bit 0 gets the MSB, not XOR with feedback
+        q[0] <= q[31];  // MSB shifts into LSB position
+    end
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

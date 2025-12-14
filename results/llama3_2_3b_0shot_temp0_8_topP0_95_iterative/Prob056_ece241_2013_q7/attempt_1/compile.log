@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob056_ece241_2013_q7\attempt_1\Prob056_ece241_2013_q7_code.sv:13: error: Unable to bind wire/reg/memory `q' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob056_ece241_2013_q7\attempt_1\Prob056_ece241_2013_q7_code.sv:15: error: Unable to bind wire/reg/memory `q' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob056_ece241_2013_q7\attempt_1\Prob056_ece241_2013_q7_code.sv:17: error: Unable to bind wire/reg/memory `q' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob056_ece241_2013_q7\attempt_1\Prob056_ece241_2013_q7_code.sv:19: error: Unable to bind wire/reg/memory `q' in `tb.top_module1'
+4 error(s) during elaboration.

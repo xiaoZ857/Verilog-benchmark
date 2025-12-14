@@ -1,0 +1,48 @@
+Below is a minimal, clean Verilog‑2001 implementation of a **NOR gate**.  
+The module is fully combinational – no clocking is required – but the
+syntax and style are compatible with synthesis tools and simulation.
+
+```verilog
+// 2‑input NOR gate
+// ------------------------------------
+//  a | b | out
+//  0 | 0 |  1
+//  0 | 1 |  0
+//  1 | 0 |  0
+//  1 | 1 |  0
+// ------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire a,      // First input
+    input  wire b,      // Second input
+    output wire out     // NOR of a and b
+);
+
+    // Combinational assignment
+    assign out = ~(a | b);
+
+endmodule
+```
+
+### Why this works
+
+* `wire` is the natural datatype for combinational nets.
+* The `assign` statement is evaluated whenever either `a` or `b` changes,
+  producing a new value for `out` immediately.
+* `~` is the bit‑wise NOT operator; `|` is the bit‑wise OR operator.
+  Thus `~(a | b)` implements the NOR logic.
+
+### Optional: a more explicit `always_comb`
+
+If you prefer to use an `always_comb` block (useful when you want
+more complex combinational logic in the same module), you can replace
+the `assign` line with:
+
+```verilog
+always_comb begin
+    out = ~(a | b);
+end
+```
+
+Both versions are equivalent for this simple gate.

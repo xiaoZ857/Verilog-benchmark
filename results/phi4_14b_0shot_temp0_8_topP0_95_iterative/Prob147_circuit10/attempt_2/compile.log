@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:12: error: state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:7:      : state is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:14: error: state is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:7:      : state is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:19: error: q is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:21: error: q is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:23: error: q is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:25: error: q is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:27: error: q is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_2\Prob147_circuit10_code.sv:6:      : q is declared here as wire.
+7 error(s) during elaboration.

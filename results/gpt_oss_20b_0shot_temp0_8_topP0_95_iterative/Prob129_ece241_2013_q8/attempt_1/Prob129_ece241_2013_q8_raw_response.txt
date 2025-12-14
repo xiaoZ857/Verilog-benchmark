@@ -1,0 +1,18 @@
+**Verilog – Mealy FSM that recognises the overlapping sequence “101”**
+
+```verilog
+// 3‑state Mealy FSM, async active‑low reset (negative edge triggered)
+//  output z is asserted (logic‑1) whenever the sequence 1‑0‑1 is detected
+module TopModule (
+    input  wire clk,      // normal clock
+    input  wire aresetn,  // asynchronous active‑low reset
+    input  wire x,        // data input
+    output reg  z         // sequence‑detected flag
+);
+
+    /* ----------  State encoding  ---------- */
+    localparam  S0 = 2'b00,   // waiting for the first ‘1’
+                S1 = 2'b01,   // have seen a ‘1’
+                S2 = 2'b10;   // have seen “10”
+
+    reg [1:0] state

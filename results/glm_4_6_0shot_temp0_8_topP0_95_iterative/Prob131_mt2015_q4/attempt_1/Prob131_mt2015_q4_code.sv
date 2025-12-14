@@ -1,0 +1,31 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  // Internal signals for submodule outputs
+  wire a1_out, a2_out;
+  wire b1_out, b2_out;
+  wire or_out, and_out;
+  
+  // Module A: z = (x^y) & x
+  assign a1_out = (x ^ y) & x;
+  assign a2_out = (x ^ y) & x;
+  
+  // Module B: XNOR function based on waveform analysis
+  assign b1_out = ~(x ^ y);
+  assign b2_out = ~(x ^ y);
+  
+  // First pair: A1 + B1 → OR gate
+  assign or_out = a1_out | b1_out;
+  
+  // Second pair: A2 + B2 → AND gate
+  assign and_out = a2_out & b2_out;
+  
+  // Final stage: OR output + AND output → XOR gate
+  assign z = or_out ^ and_out;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

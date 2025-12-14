@@ -1,0 +1,53 @@
+To implement a combinational circuit based on the given truth table in Verilog, you need to express the logic function `f` using Boolean expressions. Let's derive the expression for `f` from the truth table:
+
+The truth table is as follows:
+
+```
+x3 | x2 | x1 | f
+--------------
+0  | 0  | 0  | 0
+0  | 0  | 1  | 0
+0  | 1  | 0  | 1
+0  | 1  | 1  | 1
+1  | 0  | 0  | 0
+1  | 0  | 1  | 1
+1  | 1  | 0  | 0
+1  | 1  | 1  | 1
+```
+
+From the truth table, we see that `f` is true (1) for the following combinations of inputs:
+- \( x3 = 0, x2 = 1, x1 = 0 \)
+- \( x3 = 0, x2 = 1, x1 = 1 \)
+- \( x3 = 1, x2 = 0, x1 = 1 \)
+- \( x3 = 1, x2 = 1, x1 = 1 \)
+
+We can write the Sum of Products (SOP) expression for `f` based on these combinations:
+
+\[ f = (\overline{x3} \cdot x2 \cdot \overline{x1}) + (\overline{x3} \cdot x2 \cdot x1) + (x3 \cdot \overline{x2} \cdot x1) + (x3 \cdot x2 \cdot x1) \]
+
+This can be simplified by factoring:
+
+\[ f = \overline{x3} \cdot x2 + x3 \cdot x1 \]
+
+Now, let's implement this logic in a Verilog module:
+
+```verilog
+module TopModule (
+  input x3,
+  input x2,
+  input x1,
+  output f
+);
+
+  assign f = (~x3 & x2) | (x3 & x1);
+
+endmodule
+```
+
+### Explanation:
+- The `assign` statement is used to define combinational logic. It continuously evaluates the expression and assigns the result to `f`.
+- The expression `(~x3 & x2)` corresponds to \(\overline{x3} \cdot x2\), which covers the cases where \(x3 = 0\) and \(x2 = 1\).
+- The expression `(x3 & x1)` corresponds to \(x3 \cdot x1\), covering the cases where either \(x3 = 1\) and \(x1 = 1\).
+- The logical OR `|` is used to combine these two conditions, as `f` should be true if either condition is met.
+
+This Verilog module correctly implements the logic function described by the given truth table.

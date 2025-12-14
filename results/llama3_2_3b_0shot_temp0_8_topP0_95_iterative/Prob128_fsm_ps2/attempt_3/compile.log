@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:24: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:24: error: Malformed event control expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:24: error: Invalid event control.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob128_fsm_ps2_ref.sv:33: syntax error
+I give up.

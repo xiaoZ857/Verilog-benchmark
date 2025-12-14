@@ -1,0 +1,39 @@
+**Verilog Implementation**
+
+```verilog
+// ---------------------------------------------------------------
+//  2‑1 Multiplexer (100‑bit wide)
+//  When sel = 0 → output = a
+//  When sel = 1 → output = b
+// ---------------------------------------------------------------
+
+module TopModule (
+    input  wire [99:0] a,   // Data input A (100‑bit)
+    input  wire [99:0] b,   // Data input B (100‑bit)
+    input  wire        sel, // Select signal
+    output wire [99:0] out  // Multiplexed output
+);
+
+    // Combinational logic – no clock required
+    assign out = sel ? b : a;
+
+endmodule
+```
+
+### Why this works
+* **`assign`** creates a continuous assignment, which is purely combinational – it reflects changes immediately and requires no clock edge.
+* The conditional operator (`? :`) is synthesizable and maps directly to a 2‑to‑1 multiplexer in hardware.
+* All signals are declared as `wire` (default) because they are driven by the continuous assignment and not stored in any register.
+
+If you prefer an `always @(*)` block, it would look like this:
+
+```verilog
+always @(*) begin
+    if (sel)
+        out = b;
+    else
+        out = a;
+end
+```
+
+Both versions are equivalent and will synthesize to the same hardware.

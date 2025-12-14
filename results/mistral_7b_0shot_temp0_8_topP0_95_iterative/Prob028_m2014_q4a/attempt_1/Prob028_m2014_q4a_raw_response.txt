@@ -1,0 +1,28 @@
+ Here's a simple Verilog implementation of a D Latch using an always block:
+
+```verilog
+module TopModule (
+  input wire d,
+  input wire ena,
+  output reg q
+);
+
+always @(posedge clk or posedge ena)
+begin
+    if (ena)
+        q <= d;
+end
+
+initial begin
+    clk = 0;
+    #10 foreach (_; _ in 0..32) begin // Simulation for 32 clock cycles. Adjust as needed.
+        clk = ~clk;
+    end
+end
+
+endmodule
+```
+
+This Verilog module describes a D Latch with a single input `d`, a single enable input `ena`, and an output `q`. The `always` block is responsible for updating the `q` signal at the positive edge of either the clock or the enable signal.
+
+The initial block generates a clock signal named `clk` that toggles every 10 time units (simulation cycles) for better visibility during simulation. You can adjust the number of clock cycles as needed by modifying the `#10 foreach` statement.

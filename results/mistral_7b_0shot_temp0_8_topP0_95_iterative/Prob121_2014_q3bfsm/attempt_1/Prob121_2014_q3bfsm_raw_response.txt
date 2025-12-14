@@ -1,0 +1,58 @@
+ Here is the Verilog implementation of the finite-state machine based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire x,
+  output reg [2:0] y,
+  output reg z
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    y <= 3'b0; // Reset to state 000
+    z <= 0;
+  end else begin
+    casex(y)
+      3'b000 : begin
+          if (x) y <= 3'b001;
+          else y <= 3'b000;
+          z <= 0;
+        end,
+      3'b001 : begin
+          if (x) y <= 3'b100;
+          else y <= 3'b001;
+          z <= 0;
+        end,
+      3'b010 : begin
+          if (x) y <= 3'b001;
+          else y <= 3'b010;
+          z <= 0;
+        end,
+      3'b011 : begin
+          if (x) y <= 3'b010;
+          else y <= 3'b011;
+          z <= 1;
+        end,
+      3'b100 : begin
+          if (x) y <= 3'b100;
+          else y <= 3'b011;
+          z <= 1;
+        end
+    endcase
+  end
+end
+
+// Include this line at the bottom of your file to make the testbench function work correctly
+initial begin
+  #5 reset = 1;
+  #10 reset = 0;
+end
+```
+
+This Verilog code implements a finite-state machine (FSM) with three current states (y[2:0]) represented in binary format. The inputs of the module are clk, reset, and x, while its outputs are y and z.
+
+The FSM transitions between states based on the present state and the input value x. In each clock cycle, the current state is compared with the entries in the state transition table to determine the next state. If the reset signal is high, the FSM will synchronously reset itself to the initial state (000).
+
+The included testbench function at the bottom of the code sets the reset signal to 1 for 5 time units and then back to 0 for 10 time units, simulating a reset event before allowing the FSM to run normally.

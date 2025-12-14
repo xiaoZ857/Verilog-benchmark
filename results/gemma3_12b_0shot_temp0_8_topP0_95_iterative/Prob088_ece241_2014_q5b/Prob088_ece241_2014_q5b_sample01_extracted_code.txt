@@ -1,0 +1,41 @@
+  // State definition using one-hot encoding
+  parameter A_STATE = 1'b0;
+  parameter B_STATE = 1'b1;
+
+  // State variable
+  reg [0:0] current_state;
+
+  // Output variable
+  reg z;
+
+  // State register
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= A_STATE;
+    end else begin
+      case (current_state)
+        A_STATE: begin
+          if (x) begin
+            current_state <= B_STATE;
+            z <= 1;
+          end else begin
+            current_state <= A_STATE;
+            z <= 0;
+          end
+        end
+        B_STATE: begin
+          if (x) begin
+            current_state <= B_STATE;
+            z <= 0;
+          end else begin
+            current_state <= B_STATE;
+            z <= 1;
+          end
+        end
+        default: begin
+          current_state <= A_STATE; // Default state in case of an unexpected state value
+          z <= 0;
+        end
+      endcase
+    end
+  end

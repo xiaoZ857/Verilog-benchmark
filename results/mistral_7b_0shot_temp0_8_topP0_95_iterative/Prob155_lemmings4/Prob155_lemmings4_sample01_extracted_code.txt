@@ -1,0 +1,68 @@
+always @(posedge clk or negedge areset) begin
+  if (areset) begin
+    state <= 'sd0; // reset to walking left
+    fall_counter <= 0; // clear the fall counter
+  end
+  else if (!fall_counter && ground && !dig) begin // ground appears and no falling or digging
+    if (dig) begin // start digging
+      state <= 's1; // set the dig state
+    end
+    else begin // switch direction or keep walking
+      if (bump_left && (!bump_right || fall_counter)) begin // bumped on the left
+        walk_left <= 0;
+        walk_right <= 1;
+        state <= 's2; // set the right walking state
+      end
+      else if (bump_right && (!bump_left || fall_counter)) begin // bumped on the right
+        walk_left <= 1;
+        walk_right <= 0;
+        state <= 's3; // set the left walking state
+      end
+      else begin // keep walking or switch direction if necessary
+        walk_left <= (state === 'sd0) || (state === 's2');
+        walk_right <= (state === 's2') || (state === 's3');
+      end
+    end
+  end
+  else if (!ground && !fall_counter) begin // ground disappears and no falling
+    fall_counter <= fall_counter + 1; // increment the fall counter
+    aaah <= 0; // reset the aah signal
+  end
+  else if (fall_counter > 20) begin // hit the ground after too many falls
+    state <= 's4; // set the splattered state
+    aaah <= 1; // set the aah signal
+    walk_left <= 0;
+    walk_right <= 0;
+    digging <= 0;
+  end
+end
+
+always @(posedge clk) begin
+  if (state === 's4') begin // splattered state
+    fall_counter <= 0; // clear the fall counter
+  end
+end
+
+always @(posedge clk) begin
+  if (state === 's1' && ground && !fall_counter && !dig) begin // digging while on ground
+    digging <= 1; // start digging
+  end
+  else if (ground && !fall_counter) begin // walking while on ground
+    if (!dig) begin // not digging
+      if (bump_left && (!bump_right || fall_counter)) begin // bumped on the left
+        walk_left <= 0;
+        walk_right <= 1;
+      end
+      else if (bump_right && (!bump_left || fall_counter)) begin // bumped on the right
+        walk_left <= 1;
+        walk_right <= 0;
+      end
+    end
+  end
+end
+
+// Assigning the outputs based on the current state
+assign walk_left = (state === 'sd0') || (state === 's2');
+assign walk_right = (state === 's2') || (state === 's3');
+
+endmodule

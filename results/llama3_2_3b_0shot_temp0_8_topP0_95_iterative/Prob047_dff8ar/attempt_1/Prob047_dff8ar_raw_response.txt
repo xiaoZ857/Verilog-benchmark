@@ -1,0 +1,56 @@
+Here is an implementation of the Verilog module based on your description:
+
+```verilog
+// Define the Top Module
+module TopModule (
+  // Clock and Reset Inputs
+  input clk,  // Positive Edge Triggered Clock
+  input areset,  // Active High Asynchronous Reset Signal
+
+  // Data Input
+  input [7:0] d,
+
+  // Q Output of D Flip-Flops (Regized)
+  output reg [7:0] q
+);
+
+// Define the internal D Flip-Flop modules
+reg [7:0] q[8];
+reg [7:0] q_prev[8];
+
+// Asynchronous Reset for all DFFs
+always @(posedge clk or negedge areset) begin
+  // If asynchronous reset is asserted, set all Q outputs to 0
+  if (areset) begin
+    #10  // Allow some setup time
+    $display("Resetting module");
+  end else if (clk == 1'b1) begin
+    // On the next positive clock edge, update the Q output of each DFF
+    for (int i = 0; i < 8; i++) begin
+      q[i] = d[i];
+      q_prev[i] = q[i]; // Store the previous state in q_prev
+    end
+  end
+end
+
+// Update the output signals
+assign q = q[7:0]; // Assign the lower bits of q as the output signal
+
+// Optional: Add a testbench to verify the module's functionality
+module TopModuleTestbench();
+
+  reg [7:0] d;  // Test Data Input
+  wire q;     // Q Output Signal
+
+  RegFile #(.clk clk, .areset areset) u_regfile(
+    .d(d),
+    .q(q)
+  );
+
+endmodule
+```
+In this implementation, we have defined the Top Module with inputs for the clock and reset signals, data input signal d, and output Q. We also have an internal D Flip-Flop module that stores the state of each DFF in the q array.
+
+The always block on the positive edge of the clock or negation of areset will update the values of the q array by reading the data input signal d and setting the Q outputs accordingly. The q_prev array is used to store the previous state of each DFF, allowing us to update the values on the next positive clock edge.
+
+Please note that this implementation assumes that the clock signal is rising-edge triggered (i.e., it goes from 0 to 1). If your clock signal is falling-edge triggered (i.e., it goes from 1 to 0), you'll need to modify the always block accordingly.

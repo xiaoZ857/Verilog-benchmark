@@ -1,0 +1,68 @@
+Here's an implementation of the Moore state machine in Verilog:
+
+```verilog
+// Define the states for the Lemming state machine
+typedef enum reg [1:0] {
+    walking_left,
+    walking_right
+} lemming_state;
+
+// Initialize the state to "walking_left" when module is reset
+assign lemming_state_value = (areset) ? walking_left : lemming_state_value;
+assign walking_left_value = (lemming_state_value == walking_left);
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+
+reg [1:0] lemming_state_value;
+reg walking_left_value;
+
+// Update the state of the Lemming machine based on inputs and clock
+always @(posedge clk or reset) begin
+    if (areset) {
+        // Asynchronous reset to "walking_left"
+        lemming_state_value <= walking_left;
+        walk_left <= walking_left_value;
+        walk_right <= 1'b0;
+
+    } else if (!walk_left_value && bump_left) begin
+        lemming_state_value <= walking_right;
+        walk_left <= 1'b0;
+        walk_right <= walking_left_value;
+    end else if (walk_left_value && !bump_left && !bump_right) begin
+        // No change when no obstacles are present, stay in "walking_left" state.
+        lemming_state_value <= walking_left;
+        walk_left <= 1'b1;
+        walk_right <= walking_left_value;
+
+    } else if (!walk_left_value && bump_right) begin
+        lemming_state_value <= walking_right;
+        walk_left <= 1'b0;
+        walk_right <= walking_left_value;
+    end else if (walk_left_value && !bump_right && bump_left) begin
+        // When both bump inputs are true, switch direction to "walking_right".
+        lemming_state_value <= walking_right;
+        walk_left <= walking_left_value;
+        walk_right <= 1'b1;
+    end
+end
+
+// Assign the outputs from the internal state machine.
+assign walk_left = walking_left_value;
+assign walk_right = walking_right_value;
+
+endmodule // TopModule
+```
+
+This implementation includes the following features:
+
+*   The Lemming state machine is modeled using a Moore machine, where output values are determined by current and next states.
+*   Two states ("walking\_left" and "walking\_right") define the behavior of the machine.
+*   Asynchronous reset to "walking\_left".
+*   The outputs `walk_left` and `walk_right` are assigned from the internal state machine, providing a straightforward interface.

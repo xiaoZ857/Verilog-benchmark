@@ -1,0 +1,34 @@
+Here is a minimal, clean implementation that follows the specification:
+
+```verilog
+// 8‑bit D‑flip‑flop array with a synchronous active‑high reset.
+// All registers are clocked on the positive edge of `clk`.
+// When `reset` is asserted (high) the output `q` is forced to 0.
+// Otherwise `q` simply follows the input `d`.
+
+module TopModule (
+    input          clk,    // Positive‑edge clock
+    input  [7:0]   d,      // Parallel data input
+    input          reset,  // Active‑high synchronous reset
+    output reg [7:0] q     // Parallel data output (registers)
+);
+
+    // Synchronous logic: on each rising edge of clk
+    always @(posedge clk) begin
+        if (reset)          // Active‑high synchronous reset
+            q <= 8'b0;      // Drive all bits to zero
+        else
+            q <= d;         // Normal D‑flip‑flop behavior
+    end
+
+endmodule
+```
+
+### Why this works
+
+* **Synchronous reset** – The `reset` signal is evaluated inside the `always @(posedge clk)` block, so it only takes effect on the next clock edge, satisfying the “synchronous” requirement.
+* **Active‑high** – The reset condition is simply `if (reset)`; when `reset` is high the registers are cleared.
+* **8 D‑flip‑flops** – Using a vector (`[7:0]`) allows the compiler to synthesize eight identical flip‑flops in parallel.
+* **Positive‑edge clock** – `always @(posedge clk)` ensures all registers trigger on the rising edge of `clk`.
+
+This concise implementation is synthesizable on most FPGA/ASIC tools and adheres exactly to the stated behavior.

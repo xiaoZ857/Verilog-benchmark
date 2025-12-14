@@ -1,0 +1,39 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input s,
+  input w,
+  output reg z
+);
+always @(posedge clk) begin
+    if (reset) begin
+        state <= A;
+        window_pos <= 0;
+        ones_count <= 0;
+        z <= 0;
+    end else begin
+        case (state)
+            A: begin
+                z <= 0;
+                if (s) begin
+                    state <= B;
+                    window_pos <= 0;
+                    ones_count <= 0;
+                end
+            end
+            B: begin
+                if (window_pos < 3) begin
+                    if (w) ones_count <= ones_count + 1;
+                    window_pos <= window_pos + 1;
+                end else begin
+                    z <= (ones_count == 2);
+                    window_pos <= 0;
+                    ones_count <= 0;
+                end
+            end
+        endcase
+    end
+end
+
+endmodule

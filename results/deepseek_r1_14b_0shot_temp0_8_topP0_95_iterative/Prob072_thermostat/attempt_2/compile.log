@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:15: error: heater is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:9:      : heater is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:16: error: aircon is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:10:      : aircon is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:19: error: fan is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:11:      : fan is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob072_thermostat\attempt_2\Prob072_thermostat_code.sv:14: warning: always_comb process has no sensitivities.
+3 error(s) during elaboration.

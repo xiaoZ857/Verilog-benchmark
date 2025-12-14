@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [99:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+
+  // Combinational logic for the outputs
+
+  assign out_and = &in;    // AND reduction, '&' operator reduces all bits to a single bit.
+  assign out_or = |in;     // OR reduction, '|' operator reduces all bits to a single bit.
+  assign out_xor = ^in;    // XOR reduction, '^' operator reduces all bits to a single bit.
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

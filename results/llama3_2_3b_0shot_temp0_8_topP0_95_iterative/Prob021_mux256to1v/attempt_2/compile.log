@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:10: error: Unable to bind parameter `NUMSELECTS' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_2\Prob021_mux256to1v_code.sv:10: error: Unable to bind parameter `NUMBITSPERINPUT' in `tb.top_module1'
+2 error(s) during elaboration.

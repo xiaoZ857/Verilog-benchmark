@@ -1,0 +1,46 @@
+
+// -----------------------------------------------------------------------------
+// 74‑Y58 equivalent – four AND gates + two OR gates
+//  p1y : OR of two 3‑input ANDs
+//  p2y : OR of two 2‑input ANDs
+// -----------------------------------------------------------------------------
+// The module is fully combinational – no clock is used.
+// -----------------------------------------------------------------------------
+// Note:  The module name is TopModule as requested.
+module TopModule (
+    input  p1a,
+    input  p1b,
+    input  p1c,
+    input  p1d,
+    input  p1e,
+    input  p1f,
+    output p1y,
+    input  p2a,
+    input  p2b,
+    input  p2c,
+    input  p2d,
+    output p2y
+);
+
+    // -------------------------------------------------------------------------
+    // Internal AND gate results
+    // -------------------------------------------------------------------------
+    wire p1_and1;   // p1a & p1b & p1c
+    wire p1_and2;   // p1d & p1e & p1f
+    wire p2_and1;   // p2a & p2b
+    wire p2_and2;   // p2c & p2d
+
+    assign p1_and1 = p1a & p1b & p1c;
+    assign p1_and2 = p1d & p1e & p1f;
+    assign p2_and1 = p2a & p2b;
+    assign p2_and2 = p2c & p2d;
+
+    // -------------------------------------------------------------------------
+    // Final OR outputs
+    // -------------------------------------------------------------------------
+    assign p1y = p1_and1 | p1_and2;   // OR of the two 3‑input ANDs
+    assign p2y = p2_and1 | p2_and2;   // OR of the two 2‑input ANDs
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

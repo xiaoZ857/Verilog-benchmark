@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_3\Prob118_history_shift_code.sv:37: error: Array cannot be indexed by a range.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_3\Prob118_history_shift_code.sv:17: error: Cannot assign to array history. Did you forget a word index?
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_3\Prob118_history_shift_code.sv:22: error: Cannot assign to array history. Did you forget a word index?
+3 error(s) during elaboration.

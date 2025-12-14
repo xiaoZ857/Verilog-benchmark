@@ -1,0 +1,41 @@
+To implement a 2-input NOR gate in Verilog (or SystemVerilog), we can use a continuous assignment. A NOR gate produces a high output only when both inputs are low. This behavior can be expressed as the logical negation of the OR of the two inputs.
+
+---
+
+### ✅ Implementation
+
+Here is the correct implementation of a 2-input NOR gate using the `assign` statement:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  assign out = ~(in1 | in2);
+
+endmodule
+```
+
+---
+
+### 🔍 Explanation
+
+- **Inputs:** `in1` and `in2` are the two inputs to the NOR gate.
+- **Output:** `out` is the result of the NOR operation.
+- **Logic:** The expression `in1 | in2` computes the logical OR of the two inputs. The `~` operator negates this result, which matches the behavior of a NOR gate.
+- **Syntax:** The `output logic` declaration is valid in SystemVerilog, and it is used here as per the module declaration provided.
+
+---
+
+### 📌 Notes
+
+- This implementation is **combinational** and does not require a clock signal, as there are no sequential elements (like registers or flip-flops).
+- The use of `logic` instead of `reg` is appropriate for this type of continuous assignment in SystemVerilog, and it is consistent with the module definition given.
+
+---
+
+### ✅ Conclusion
+
+The provided Verilog module correctly implements a 2-input NOR gate using a single continuous assignment. This is the most efficient and straightforward way to implement such a logic function.

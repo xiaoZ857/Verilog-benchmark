@@ -1,0 +1,95 @@
+```verilog
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+  // Define states
+  typedef enum logic [1:0] {
+    S0, // Initial state, no part of the sequence seen yet
+    S1, // Saw a '1'
+    S2  // Saw '10'
+  } state_t;
+
+  reg state, next_state;
+
+  // State register update (positive clock edge triggered)
+  always_ff @(posedge clk) begin
+    if (!aresetn) begin
+      state <= S0;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Next state logic (combinational)
+  always_comb begin
+    next_state = state; // Default: stay in the current state
+    case (state)
+      S0: begin
+        if (x == 1) begin
+          next_state = S1;
+        end
+      end
+      S1: begin
+        if (x == 0) begin
+          next_state = S2;
+        end else begin
+          next_state = S1;  // Overlapping sequences: if x == 1 again, stay in S1
+        end
+      end
+      S2: begin
+        if (x == 1) begin
+          next_state = S1; // Move back to S1 for overlapping sequences
+        end else begin
+          next_state = S0; // Back to initial state
+        end
+      end
+    endcase
+  end
+
+  // Output logic (combinational)
+  always_comb begin
+    z = 0;
+    if (state == S2 && x == 1) begin
+      z = 1;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Definition:**
+   - `S0`: The initial state. No part of the sequence "101" has been seen yet.
+   - `S1`: The state where a "1" has been seen.
+   - `S2`: The state where "10" has been seen.
+
+2. **State Register:**
+   - `state`: Holds the current state of the FSM.
+   - `next_state`: Holds the next state that the FSM will transition to.
+
+3. **State Register Update (Positive Clock Edge Triggered):**
+   - `always_ff @(posedge clk)`: This block is triggered on the positive edge of the clock signal.
+   - `if (!aresetn)`: If the asynchronous reset is asserted (low), the FSM is reset to the initial state `S0`.
+   - `state <= next_state`: Otherwise, the current state is updated with the value of `next_state`.
+
+4. **Next State Logic (Combinational):**
+   - `always_comb`: This block defines the combinational logic that determines the next state.
+   - `next_state = state`:  The default next state is the current state, ensuring that if no condition is met, the FSM stays in its current state.
+   - `case (state)`: A `case` statement is used to define the transitions based on the current state and the input `x`.
+     - **S0:** If `x` is '1', transition to `S1`.
+     - **S1:** If `x` is '0', transition to `S2`. If `x` is '1' again, stay in `S1` to handle overlapping sequences like "101101".
+     - **S2:** If `x` is '1', transition to `S1` to handle overlapping sequences. If `x` is '0', transition back to `S0`.
+
+5. **Output Logic (Combinational):**
+   - `always_comb`: Defines the combinational logic for the output signal `z`.
+   - `z = 0`:  The default output is '0'.
+   - `if (state == S2 && x == 1)`: The output `z` is asserted to '1' when the FSM is in state `S2` (meaning "10" has been seen) *and* the current input `x` is '1' (completing the sequence "101").
+
+**Key Features for Overlapping Sequences:**
+
+- **Staying in S1:**  In state `S1`, if `x` is '1' again, the FSM remains in `S1`. This allows for sequences like "101101" to be

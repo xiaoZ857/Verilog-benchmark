@@ -1,0 +1,11 @@
+
+module TopModule (
+  output zero
+);
+// Instantiate an always block to update the state of the signal
+always @(posedge clk) begin
+    if (clk'event && clk != 0)
+        zero <= 0; // Always low, since you want LOW as output
+end
+
+// VERILOG-EVAL: endmodule not found

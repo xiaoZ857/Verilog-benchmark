@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [1:0] A,
+  input [1:0] B,
+  output z
+);
+
+wire eq, neq;
+
+eq <= (A == B);  // z will be 1 only when A equals B
+neq <= (~eq & ~B | ~A & ~B);  // or the opposite condition
+
+assign z = eq;  // assign z based on whether A is equal to B
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,20 @@
+To implement the described Verilog module, you need to create a simple design where the output is constantly driven to logic high (1). Since there are no inputs, the task primarily involves assigning the value `1` to the output. Here's how you can write this in Verilog:
+
+```verilog
+module TopModule (
+  output reg one // Use 'reg' type as we'll be assigning a value to it
+);
+
+  initial begin
+    one = 1; // Assign logic high to the output
+  end
+
+endmodule
+```
+
+### Explanation:
+- **Module Declaration**: The module is named `TopModule`.
+- **Output Declaration**: The output, `one`, is declared as a `reg` because we will be assigning it a value within an initial block or procedural statement.
+- **Initial Block**: An `initial` block is used to set the default state of signals. In this case, it assigns logic high (1) to the output `one`. This assignment happens once at simulation time 0.
+
+This module meets the requirement by ensuring that the output `one` always drives a constant value of 1.

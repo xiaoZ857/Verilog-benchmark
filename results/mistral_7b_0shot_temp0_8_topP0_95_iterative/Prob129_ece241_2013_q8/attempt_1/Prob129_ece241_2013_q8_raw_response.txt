@@ -1,0 +1,54 @@
+ Here is a simple Verilog implementation for the described Mealy finite state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire aresetn,
+  input wire x,
+  output reg z
+);
+
+// Define states and next state/output functions
+enum { STATE0, STATE1, STATE2, STATE3 } state;
+reg [1:0] cur_state = {STATE0, STATE0};
+
+always @(posedge clk or negedge aresetn) begin
+  if (!aresetn) begin
+    cur_state <= STATE0; // Reset to initial state
+    z <= 0; // Reset output to zero
+  end else begin
+    case (cur_state[1])
+      STATE0: begin
+        if (x == 1)
+          cur_state <= STATE1;
+      end
+      STATE1: begin
+        if (x == 0)
+          cur_state <= STATE2;
+        else
+          cur_state <= STATE0; // Overlapping sequence or invalid state transition
+      end
+      STATE2: begin
+        if (x == 1)
+          cur_state <= STATE3;
+        else
+          cur_state <= STATE0; // Overlapping sequence or invalid state transition
+      end
+      STATE3: begin
+        if (x == 0)
+          cur_state <= STATE0; // Complete sequence, return to initial state
+        else
+          cur_state <= STATE2; // Overlapping sequence
+      enddefault: cur_state <= STATE0; // Unreachable states or invalid state transition
+    end
+    z <= (cur_state[1] == STATE3); // Output is 1 if the complete "101" sequence has been detected
+  end
+end
+
+// Assign outputs and create ports
+assign z = cur_state[1] == STATE3;
+
+endmodule
+```
+
+This Verilog code defines a Mealy-type finite state machine with three states (STATE0, STATE1, STATE2, and STATE3) and an output signal `z`. The FSM will recognize the sequence "101" on input `x`, and the output `z` will be asserted to logic-1 when the complete sequence is detected. The reset is negative edge triggered, and the FSM recognizes overlapping sequences.

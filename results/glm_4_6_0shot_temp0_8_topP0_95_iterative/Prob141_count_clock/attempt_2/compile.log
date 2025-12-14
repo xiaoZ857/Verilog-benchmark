@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:64: error: Could not find variable ``min_inc'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:65: error: Could not find variable ``hour_inc'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:66: error: Could not find variable ``pm_toggle'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:71: error: Could not find variable ``min_inc'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:74: error: Could not find variable ``min_inc'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:78: error: Unable to bind wire/reg/memory `min_inc' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:78: error: Unable to elaborate condition expression.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:91: error: Unable to bind wire/reg/memory `hour_inc' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:91: error: Unable to elaborate condition expression.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:105: error: Unable to bind wire/reg/memory `pm_toggle' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:105: error: Unable to elaborate condition expression.
+11 error(s) during elaboration.

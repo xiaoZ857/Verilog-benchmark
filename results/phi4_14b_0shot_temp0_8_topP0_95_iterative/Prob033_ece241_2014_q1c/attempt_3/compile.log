@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:17: error: s_msb is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:10:      : s_msb is declared here as wire.
+1 error(s) during elaboration.

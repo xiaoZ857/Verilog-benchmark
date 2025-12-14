@@ -1,0 +1,41 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input predict_valid,
+  input predict_taken,
+  output logic [31:0] predict_history,
+
+  input train_mispredicted,
+  input train_taken,
+  input [31:0] train_history
+);
+always_ff @(posedge clk or negedge areset) begin
+    if (!areset) begin
+        train_history_register <= 0;
+        history_counter <= 7;
+    end else if (predict_valid && !train_mispredicted) begin
+        // Shift in the branch prediction from the LSB side
+        train_history_register[31:0] = predict_taken & (~train_taken << 32);
+        history_counter <= history_counter + 1;
+        if (history_counter == 32) begin
+            // Clear the history register when we've tracked 32 instructions
+            train_history_register <= '0;
+            history_counter <= 7;
+        end
+    end else if (predict_valid && train_mispredicted) begin
+        // Shift in the branch prediction from the LSB side, update train_history_register with original values and actual result of the branch
+        train_history_register[31:32] = predict_taken;
+        train_history_register[0:30] <= train_taken;
+        history_counter <= history_counter + 1;
+        if (history_counter == 32) begin
+            // Clear the history register when we've tracked 32 instructions
+            train_history_register <= '0;
+            history_counter <= 7;
+        end
+    end else if (train_mispredicted) begin
+        // Load the branch history register with the history after a misprediction, but leave the prediction information intact
+        train_history_register[31:0] = predict_taken & (train_taken << 32);
+        history_counter <= 7;
+    end
+endmodule

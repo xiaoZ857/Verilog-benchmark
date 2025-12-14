@@ -1,0 +1,48 @@
+To implement the Verilog module as described, you need to create a module named `TopModule` that includes eight D flip-flops with an active high asynchronous reset. Each flip-flop should be reset to 0 asynchronously when the reset signal (`areset`) is high, and all should capture the input data on the positive edge of the clock (`clk`). The outputs will be held in a register `q`.
+
+Here's how you can implement this module:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire [7:0] d,
+    input wire areset,
+    output reg [7:0] q
+);
+
+    // Declare individual D flip-flops for each bit
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            // Asynchronous reset to 0
+            q[0] <= 1'b0;
+            q[1] <= 1'b0;
+            q[2] <= 1'b0;
+            q[3] <= 1'b0;
+            q[4] <= 1'b0;
+            q[5] <= 1'b0;
+            q[6] <= 1'b0;
+            q[7] <= 1'b0;
+        end else begin
+            // Positive edge of clock, capture input data
+            q[0] <= d[0];
+            q[1] <= d[1];
+            q[2] <= d[2];
+            q[3] <= d[3];
+            q[4] <= d[4];
+            q[5] <= d[5];
+            q[6] <= d[6];
+            q[7] <= d[7];
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+- **`always_ff` block**: This is used for sequential logic. The sensitivity list includes both the positive edge of `clk` and the positive edge of `areset`. This ensures that changes in either signal trigger an evaluation.
+  
+- **Asynchronous Reset (`areset`)**: When `areset` is high, all bits of `q` are set to 0 immediately, regardless of other conditions. This is done using non-blocking assignments (`<=`) to ensure proper sequential behavior.
+
+- **Positive Edge Triggering**: On the rising edge of `clk`, and only if `areset` is not asserted, each bit in `q` captures the corresponding bit from `d`. The use of non-blocking assignments ensures that all updates occur simultaneously at the end of the clock cycle.
+
+This implementation satisfies the requirements for 8 D flip-flops with asynchronous reset and positive edge-triggered behavior.

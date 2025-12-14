@@ -1,0 +1,6 @@
+always @(*) begin
+  one <= 1;
+end
+
+// Output signal: always drives to 1 (logic high)
+assign one = 1;

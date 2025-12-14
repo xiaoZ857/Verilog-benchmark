@@ -1,0 +1,31 @@
+ Here is a Verilog implementation of the described Mealy machine for the 2's complementer using one-hot encoding:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire areset,
+    input wire x,
+    output reg z
+);
+
+reg [1:0] state = 2'b00; // Initial state is A
+always @(posedge clk) begin
+    if (areset) state <= 2'b00; // Reset to state A
+    else case(state)
+        2'b00: begin
+            if (x) state <= 2'b01; // Transition to state B when x is high
+        end,
+        2'b01: begin
+            if (!x) z <= 1'b1; // Output 1 when in state B and x is low
+            else state <= 2'b01; // Stay in state B when x is high
+        end;
+end
+
+assign z = (state == 2'b00)? 1'b0 : 1'b1; // Assign the final output value based on the current state
+
+endmodule
+```
+
+This Verilog module has a `TopModule` with input signals `clk`, `areset`, `x`, and an output signal `z`. The internal variable `state` is used to represent the current state of the Mealy machine, which is initialized to 2's complementer initial state A (00) upon reset.
+
+The `always @(posedge clk)` block handles the clock transitions and the asynchronous reset. Inside the case statement, the state transitions and output conditions are defined based on the current state and input values. The final output signal `z` is assigned based on the current value of `state`.

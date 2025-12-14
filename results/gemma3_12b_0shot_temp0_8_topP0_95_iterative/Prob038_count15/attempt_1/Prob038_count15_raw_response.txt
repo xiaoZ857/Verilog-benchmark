@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else begin
+      q <= q + 1;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input clk, input reset, output reg [3:0] q);`**: This line declares the module named `TopModule` with the specified input (`clk`, `reset`) and output (`q`) signals.  `q` is declared as a `reg` because it's assigned a value within an `always` block.  `[3:0]` indicates a 4-bit vector.
+* **`always @(posedge clk) begin ... end`**:  This `always` block defines a sequential block that executes on the positive edge of the clock signal `clk`.
+* **`if (reset) begin q <= 0; end`**: This conditional statement checks if the `reset` signal is high. If it is, the counter `q` is synchronously reset to 0. The non-blocking assignment `<=` is used to ensure that the reset happens concurrently with other logic in the clock cycle.
+* **`else begin q <= q + 1; end`**: If the `reset` signal is low, the counter `q` is incremented by 1. Again, the non-blocking assignment `<=` ensures proper timing.
+
+**How it works:**
+
+The counter increments on each positive clock edge if the reset signal is not asserted.  When the reset signal is high, the counter is synchronously reset to 0.  Because it's a 4-bit counter, it can count from 0 to 15 (2<sup>4</sup> - 1).  Therefore, the period of the counter is 16 clock cycles, as required.
+
+**To simulate this code:**
+
+You'd need a testbench to provide clock and reset signals and observe the output.  Here's a simple example testbench:
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg reset;
+  wire [3:0] q;
+
+  TopModule uut (
+    .clk(clk),
+    .reset(reset),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    reset = 1; // Initial reset
+
+    #10 reset = 0;  // Deassert reset after 10 time units
+
+    #100 $finish; // End simulation after 100 time units
+  end
+
+  always #5 clk = ~clk; // Toggle clock every 5 time units
+
+  initial begin
+    $monitor("Time=%g, clk=%b, reset=%b, q=%b", $time, clk, reset, q);
+  end
+
+endmodule
+```
+
+This testbench applies an initial reset, then deasserts it, and runs the simulation for a while, displaying the signals at each time step.  You can modify the simulation time and reset duration as needed.

@@ -1,0 +1,3 @@
+// Always block to calculate the output of XNOR gate
+always @(*)
+  assign out = (a == b) ? 1 : 0;

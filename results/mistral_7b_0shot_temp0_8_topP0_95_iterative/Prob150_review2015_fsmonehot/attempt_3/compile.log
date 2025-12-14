@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:16: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:16: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv:6: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:39: error: syntax error in continuous assignment

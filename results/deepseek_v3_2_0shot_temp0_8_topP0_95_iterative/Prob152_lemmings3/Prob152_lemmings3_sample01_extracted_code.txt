@@ -1,0 +1,74 @@
+    reg [2:0] state, next_state;
+    localparam WL = 3'd0,
+               WR = 3'd1,
+               FALLING_L = 3'd2,
+               FALLING_R = 3'd3,
+               DIG_L = 3'd4,
+               DIG_R = 3'd5;
+
+    // State register
+    always @(posedge clk, posedge areset) begin
+        if (areset)
+            state <= WL;
+        else
+            state <= next_state;
+    end
+
+    // Next state logic with correct precedence
+    always @(*) begin
+        case (state)
+            WL: begin
+                if (~ground)
+                    next_state = FALLING_L;      // Highest priority: fall
+                else if (dig)
+                    next_state = DIG_L;          // Second priority: dig
+                else if (bump_left)
+                    next_state = WR;             // Third priority: switch direction
+                else
+                    next_state = WL;
+            end
+            WR: begin
+                if (~ground)
+                    next_state = FALLING_R;      // Highest priority: fall
+                else if (dig)
+                    next_state = DIG_R;          // Second priority: dig
+                else if (bump_right)
+                    next_state = WL;             // Third priority: switch direction
+                else
+                    next_state = WR;
+            end
+            FALLING_L: begin
+                if (ground)
+                    next_state = WL;             // Resume walking left
+                else
+                    next_state = FALLING_L;
+            end
+            FALLING_R: begin
+                if (ground)
+                    next_state = WR;             // Resume walking right
+                else
+                    next_state = FALLING_R;
+            end
+            DIG_L: begin
+                if (~ground)
+                    next_state = FALLING_L;      // Fall when ground disappears
+                else
+                    next_state = DIG_L;          // Keep digging while ground exists
+            end
+            DIG_R: begin
+                if (~ground)
+                    next_state = FALLING_R;      // Fall when ground disappears
+                else
+                    next_state = DIG_R;          // Keep digging while ground exists
+            end
+            default: next_state = WL;
+        endcase
+    end
+
+    // Output logic - mutually exclusive outputs
+    assign walk_left = (state == WL);
+    assign walk_right = (state == WR);
+    assign aaah = (state == FALLING_L) | (state == FALLING_R);
+    assign digging = (state == DIG_L) | (state == DIG_R);
+
+endmodule

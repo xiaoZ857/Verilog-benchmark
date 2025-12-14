@@ -1,0 +1,85 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output shift_ena
+);
+
+  reg [2:0] counter;
+  reg shift_ena_reg;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      counter <= 0;
+      shift_ena_reg <= 1;
+    end else begin
+      if (counter == 3) begin
+        counter <= 0;
+      end else begin
+        counter <= counter + 1;
+      end
+      
+      if (counter == 0) begin
+        shift_ena_reg <= 1;
+      end else if (counter == 1) begin
+        shift_ena_reg <= 1;
+      end else if (counter == 2) begin
+        shift_ena_reg <= 1;
+      end else if (counter == 3) begin
+        shift_ena_reg <= 0;
+      end
+    end
+  end
+
+  assign shift_ena = shift_ena_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [2:0] counter;`**: This declares a 3-bit register `counter`.  We need 3 bits to count up to 4 (0, 1, 2, 3).
+
+2. **`reg shift_ena_reg;`**: This declares a register `shift_ena_reg` to hold the value of the `shift_ena` signal.  This is necessary because `shift_ena` needs to hold its value for the specified number of clock cycles.
+
+3. **`always @(posedge clk)`**: This block is triggered on the positive edge of the clock.
+
+4. **`if (reset)`**:  This checks for the reset signal. If reset is high:
+   - `counter <= 0;`: The counter is reset to 0.
+   - `shift_ena_reg <= 1;`: `shift_ena_reg` is asserted to 1, starting the 4-cycle enable sequence.
+
+5. **`else`**: If reset is low (inactive):
+   - **`if (counter == 3)`**: If the counter has reached 3:
+     - `counter <= 0;`: The counter is reset to 0, starting the next 4-cycle sequence if reset remains low.
+   - **`else`**: If the counter is not at 3:
+     - `counter <= counter + 1;`: The counter is incremented.
+
+   - **Conditional Assignment to `shift_ena_reg`**:  This is the key to the logic.  `shift_ena_reg` is asserted for the first four clock cycles after the reset is deactivated.  After that, it's deasserted.
+      - `if (counter == 0) shift_ena_reg <= 1;`
+      - `else if (counter == 1) shift_ena_reg <= 1;`
+      - `else if (counter == 2) shift_ena_reg <= 1;`
+      - `else if (counter == 3) shift_ena_reg <= 0;`
+
+6. **`assign shift_ena = shift_ena_reg;`**: This assigns the value of the internal register `shift_ena_reg` to the output signal `shift_ena`.  This is what the rest of the system will see.
+
+**How it Works:**
+
+When the `reset` signal goes high:
+
+1.  The counter is reset to 0.
+2.  `shift_ena_reg` is set to 1, enabling the shift register.
+
+When the `reset` signal goes low:
+
+1.  The counter starts counting from 0.
+2.  `shift_ena_reg` remains high for the first 4 cycles (counter 0, 1, 2, 3).
+3.  After 4 cycles, the counter resets to 0, and `shift_ena_reg` is set to 0, disabling the shift register.
+4.  The cycle repeats if the `reset` signal is asserted again.
+
+**Testing Considerations:**
+
+To properly test this module, you would need to:
+
+*   Apply a reset signal (high for a few cycles, then low).
+*   Observe `shift_ena` to verify that it's high for exactly 4 cycles after the reset becomes inactive.
+*   Verify that `shift_ena` stays low after the 4 cycles until another reset is applied.

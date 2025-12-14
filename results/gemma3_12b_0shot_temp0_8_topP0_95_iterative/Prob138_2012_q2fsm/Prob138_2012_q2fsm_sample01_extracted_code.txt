@@ -1,0 +1,84 @@
+  // State Definition
+  parameter A = 0;
+  parameter B = 1;
+  parameter C = 2;
+  parameter D = 3;
+  parameter E = 2; // E and C share the same code
+  parameter F = 3; // F and D share the same code
+
+  // State Register
+  reg state;
+
+  // Output Assignment
+  wire z_internal;
+
+  // State Table (always block)
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= A;
+    end else begin
+      case (state)
+        A: begin
+          if (w) begin
+            state <= B;
+          end else begin
+            state <= A;
+          end
+        end
+        B: begin
+          if (w) begin
+            state <= C;
+          end else begin
+            state <= D;
+          end
+        end
+        C: begin
+          if (w) begin
+            state <= E;
+          end else begin
+            state <= D;
+          end
+        end
+        D: begin
+          if (w) begin
+            state <= F;
+          end else begin
+            state <= A;
+          end
+        end
+        E: begin
+          if (w) begin
+            state <= E;
+          end else begin
+            state <= D;
+          end
+        end
+        F: begin
+          if (w) begin
+            state <= C;
+          end else begin
+            state <= D;
+          end
+        end
+        default: begin
+          state <= A; // Default case for safety
+        end
+      endcase
+    end
+  end
+
+  // Output Logic (always block)
+  always @(state) begin
+    case (state)
+      A: z_internal = 0;
+      B: z_internal = 0;
+      C: z_internal = 0;
+      D: z_internal = 0;
+      E: z_internal = 0;
+      F: z_internal = 0;
+      default: z_internal = 0;
+    endcase
+  end
+
+  assign z = z_internal;
+endmodule

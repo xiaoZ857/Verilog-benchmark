@@ -1,0 +1,44 @@
+Here is the implementation of the D latch in Verilog:
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+always @(posedge clk) begin
+    if (ena == 1'b1) begin
+        q <= d;
+    else if (q != d) begin // Metastable mode
+        q <= q;
+    end
+end
+
+endmodule
+```
+
+In the above code, we are using a combinational block (`always` statement without `posedge clk`) to capture the metastable state of the latch. However, most VLSI designers prefer using an always block with a clock condition.
+
+```verilog
+module TopModule (
+  input d,
+  input ena,
+  output logic q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (ena == 1'b1) begin
+        q <= d;
+    end
+end
+
+// Reset the latch when reset is asserted
+assign reset = ~clk & reset;
+
+endmodule
+```
+
+In the above code, we are using an always block with a clock condition to capture both the positive edge of the clock and any reset. This ensures that the latch is initialized correctly at the start of each clock cycle.
+
+The metastable mode can be avoided by adding additional logic but this implementation is commonly used in many digital systems.

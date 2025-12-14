@@ -1,0 +1,18 @@
+
+module TopModule (
+  input [7:0] in,
+  output [7:0] out
+);
+// Internal signal to store the reversed bit order
+reg [7:0] temp;
+
+// Behavioral description of the module
+always_comb {
+  // Reversing the bit order using arithmetic operations
+  temp = (($unsigned(in[7:4]) << 4) | ($unsigned(in[3:0])) ^ (unsigned(in[7:4]) >> 4) & 0xAAAAAAAA);
+}
+
+// Combining the signals
+assign out = temp;
+
+endmodule

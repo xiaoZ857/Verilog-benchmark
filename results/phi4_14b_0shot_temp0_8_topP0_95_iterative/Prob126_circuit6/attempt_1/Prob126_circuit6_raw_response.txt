@@ -1,0 +1,63 @@
+To implement the `TopModule` in Verilog, we need to analyze the given simulation waveforms and determine the relationship between the input `a` and the output `q`. From the waveform data:
+
+```
+  time  a     q
+  0ns   x     x
+  5ns   x     x
+  10ns  x     x
+  15ns  0  1232
+  20ns  1  aee0
+  25ns  2  27d4
+  30ns  3  5a0e
+  35ns  4  2066
+  40ns  5  64ce
+  45ns  6  c526
+  50ns  7  2f19
+  55ns  0  1232
+  60ns  1  aee0
+  65ns  2  27d4
+  70ns  4  2066
+  75ns  1  aee0
+  80ns  1  aee0
+  85ns  3  5a0e
+  90ns  5  64ce
+```
+
+We observe that for each value of `a`, there is a corresponding hexadecimal value assigned to `q`. This suggests a simple combinational logic mapping from the input `a` to the output `q`.
+
+The pattern can be summarized as follows:
+- When `a = 0`, `q = 1232`
+- When `a = 1`, `q = aee0`
+- When `a = 2`, `q = 27d4`
+- When `a = 3`, `q = 5a0e`
+- When `a = 4`, `q = 2066`
+- When `a = 5`, `q = 64ce`
+- When `a = 6`, `q = c526`
+- When `a = 7`, `q = 2f19`
+
+With this mapping, we can implement the Verilog module as follows:
+
+```verilog
+module TopModule (
+    input [2:0] a,
+    output reg [15:0] q
+);
+
+always @(*) begin
+    case (a)
+        3'b000: q = 16'h1232;
+        3'b001: q = 16'haee0;
+        3'b010: q = 16'h27d4;
+        3'b011: q = 16'h5a0e;
+        3'b100: q = 16'h2066;
+        3'b101: q = 16'h64ce;
+        3'b110: q = 16'hc526;
+        3'b111: q = 16'h2f19;
+        default: q = 16'h0000; // Default case to handle unexpected input
+    endcase
+end
+
+endmodule
+```
+
+This Verilog module uses a combinational `always` block with a `case` statement to assign the appropriate value to `q` based on the input `a`. The use of `@(*)` indicates that this is a purely combinational logic block, ensuring that any change in inputs will immediately reflect in the outputs.

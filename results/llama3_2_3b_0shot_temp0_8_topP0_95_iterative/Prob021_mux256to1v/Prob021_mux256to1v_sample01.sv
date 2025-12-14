@@ -1,0 +1,16 @@
+
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+parameter NUMSelects = 5;
+parameter NUMBITSPERINPUT = 4;
+parameter IN_WIDTH = NUMSELECTS * NUMBITSPERINPUT;
+
+assign out[3:0] = in[NUMSelects-1:NUMSelects*NUMBITSPERINPUT-1];
+assign out[7:4] = in[NUMSelects*NUMBITSPERINPUT-4:NUMSelects*NUMBITSPERINPUT-1];
+assign out[11:8] = in[NUMSelects*NUMBITSPERINPUT-NUMBITSPERINPUT+3:NUMSelects*NUMBITSPERINPUT-2];
+assign out[15:12] = in[NUMSelects*NUMBITSPERINPUT-1:NUMSelects*NUMBITSPERINPUT-NUMBITSPERINPUT];
+
+// VERILOG-EVAL: endmodule not found

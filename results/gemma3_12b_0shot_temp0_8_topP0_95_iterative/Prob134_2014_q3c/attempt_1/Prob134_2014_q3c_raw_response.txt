@@ -1,0 +1,95 @@
+```verilog
+module TopModule (
+  input clk,
+  input x,
+  input [2:0] y,
+  output reg Y0,
+  output reg z
+);
+
+  always @(posedge clk) begin
+    case (y)
+      3'b000: begin
+        if (x == 0) begin
+          Y0 <= 0;
+          z <= 0;
+        end else begin
+          Y0 <= 1;
+          z <= 0;
+        end
+      end
+      3'b001: begin
+        if (x == 0) begin
+          Y0 <= 1;
+          z <= 0;
+        end else begin
+          Y0 <= 0;
+          z <= 0;
+        end
+      end
+      3'b010: begin
+        if (x == 0) begin
+          Y0 <= 0;
+          z <= 0;
+        end else begin
+          Y0 <= 0;
+          z <= 0;
+        end
+      end
+      3'b011: begin
+        if (x == 0) begin
+          Y0 <= 0;
+          z <= 1;
+        end else begin
+          Y0 <= 0;
+          z <= 1;
+        end
+      end
+      3'b100: begin
+        if (x == 0) begin
+          Y0 <= 0;
+          z <= 1;
+        end else begin
+          Y0 <= 1;
+          z <= 1;
+        end
+      end
+      default: begin // Added default case for robustness
+        Y0 <= 0;
+        z <= 0;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (...)`: Defines the module named `TopModule` with its input and output signals.
+
+2. **`always @(posedge clk)` Block:**
+   - `always @(posedge clk)`: This block ensures that the logic is executed on the positive edge of the clock signal (`clk`). This is crucial for synchronous sequential circuits (like this one, which represents a state machine).
+
+3. **`case (y)` Statement:**
+   - `case (y)`: This statement evaluates the present state (`y`) and branches the logic based on its value.
+
+4. **State-Specific Logic:**
+   - Inside each `case` branch (e.g., `3'b000:`), there's an `if (x == 0) ... else ...` statement.  This logic determines the next state (`Y0`) and the output (`z`) based on the value of the input signal `x`.
+   - `Y0 <= ...`:  Assigns the next state value to `Y0`. The `<=` operator is used for sequential assignments (assignments that happen on the clock edge).
+   - `z <= ...`:  Assigns the output value to `z`.
+
+5. **Default Case:**
+   - `default: ...`:  This is a good practice to include a default case in `case` statements.  It handles situations where the input `y` might have an unexpected value (e.g., due to glitches or errors).  In this case, it sets `Y0` and `z` to safe default values.
+
+**How it Implements the Table:**
+
+The `case` statement directly maps each present state (`y`) to its corresponding next state (`Y0`) and output (`z`) based on the provided state-assigned table. The `if (x)` conditions within each state implement the logic for the two possible input values of `x`.
+
+**Important Considerations:**
+
+* **Synchronous Design:** This code assumes a synchronous design, where all state transitions happen on the clock edge.
+* **State Encoding:**  The code assumes a simple binary encoding for the state variable `y`.
+* **Robustness:** The `default` case makes the code more robust by handling unexpected input states.
+* **Testbench:**  To verify that this module works correctly, you would need to write a testbench that provides different combinations of `clk`, `x`, and `y` and checks the resulting values of `Y0` and `z`.

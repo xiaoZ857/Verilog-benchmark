@@ -1,0 +1,11 @@
+assign S_next = (state[9] & ~d) | (state[8] & ~d);
+assign S1_next = (state[9] & d) | (state[7] & d);
+
+assign B3_next = state[5];
+
+assign Count_next = state[4];
+assign Wait_next = state[3] & done_counting;
+
+assign shift_ena = state[3] | state[2] | state[1] | state[5];
+assign counting = state[4];
+assign done = state[3] & ack;

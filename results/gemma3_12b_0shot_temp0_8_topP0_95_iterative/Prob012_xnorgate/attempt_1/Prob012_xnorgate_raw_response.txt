@@ -1,0 +1,29 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+  assign out = ~(a ^ b);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input a, input b, output out);`**:  This line declares the module named `TopModule` and defines its inputs (`a`, `b`) and output (`out`).
+* **`assign out = ~(a ^ b);`**: This is the core logic of the XNOR gate.  Let's break it down:
+    * **`a ^ b`**: This represents the XOR (exclusive OR) operation between `a` and `b`.  XOR outputs a `1` if only one of the inputs is `1`.
+    * **`~(...)`**:  The `~` is the NOT operator. It inverts the result of the XOR operation.  So, if the XOR result is `1`, the NOT operator changes it to `0`, and vice-versa.
+
+**How it implements XNOR:**
+
+| a | b | a ^ b | ~(a ^ b) |
+|---|---|---|---|
+| 0 | 0 | 0 | 1 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 1 |
+
+As you can see, the output `out` is `1` only when both `a` and `b` are the same (both `0` or both `1`), which is the definition of an XNOR gate.

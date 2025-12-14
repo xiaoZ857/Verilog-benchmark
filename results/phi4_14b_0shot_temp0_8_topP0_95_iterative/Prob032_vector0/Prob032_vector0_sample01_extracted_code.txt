@@ -1,0 +1,17 @@
+module TopModule (
+  input [2:0] vec,   // 3-bit input vector
+  output [2:0] outv, // 3-bit output vector identical to input
+  output o2,        // Single bit output for position 2 of the input vector
+  output o1,        // Single bit output for position 1 of the input vector
+  output o0         // Single bit output for position 0 of the input vector
+);
+
+  // Assign outv directly from vec as they are identical
+  assign outv = vec;
+
+  // Split the individual bits from vec and assign to o2, o1, and o0
+  assign o2 = vec[2];
+  assign o1 = vec[1];
+  assign o0 = vec[0];
+
+endmodule

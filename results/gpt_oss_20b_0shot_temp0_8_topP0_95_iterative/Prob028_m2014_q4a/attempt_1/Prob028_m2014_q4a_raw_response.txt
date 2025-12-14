@@ -1,0 +1,29 @@
+Below is a minimal **SystemVerilog** implementation of a *transparent D‑latch* using a plain `always` block.  
+The latch is *level‑sensitive* – it follows the input `d` whenever the enable (`ena`) is high.  
+When `ena` goes low, the value of `q` is held (latched).
+
+```systemverilog
+// TopModule.sv
+// Simple D‑latch – transparent when ena == 1
+module TopModule (
+    input  logic d,     // Data input
+    input  logic ena,   // Enable (transparent level)
+    output logic q      // Latch output
+);
+
+    // level‑sensitive latch
+    always @* begin
+        if (ena)          // when enable is high, copy d to q
+            q = d;
+        // else: do nothing – q retains its previous value
+    end
+
+endmodule
+```
+
+### Notes
+
+* `always @*` (or equivalently `always @ (d or ena)`) describes a combinational process that reacts to changes in any of its input signals – exactly what you need for a latch.
+* The latch is *transparent* when `ena` is high, and it holds its value when `ena` goes low.
+* No explicit clock is required; the latch is level‑sensitive, not edge‑triggered.  
+  If you need an edge‑triggered register instead, you would use `always @(posedge clk)` with the same enable logic.

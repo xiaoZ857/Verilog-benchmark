@@ -1,0 +1,67 @@
+Here's an implementation of the Verilog module for a priority encoder:
+
+```verilog
+// Priority Encoder Module
+
+module TopModule (
+    input [7:0] in, // 8-bit input vector
+    output reg [2:0] pos // 3-bit priority encoded output
+);
+
+// Bitwidth for the output
+const int BITWIDTH = 3;
+
+// Define the possible output values
+typedef enum reg [BITWIDTH-1:0] {
+    ZERO,
+    ONE,
+    TWO
+} OutputType;
+
+// Assign an output value to each bit position (starting from least significant)
+Assign assign
+    pos = in[BITWIDTH-1:1];
+endmodule
+
+// In case of no matches, add the next higher value
+Assign assign
+    pos = {pos, 3'b0};
+```
+
+This module takes an 8-bit input vector `in` and produces a 3-bit priority encoded output `pos`. The output value is determined by finding the least significant bit that is set in the input vector. If no bits are high, it reports zero.
+
+Note: In Verilog, we use the `Assign` keyword to specify assignments between signals. This module will only function correctly if you add a clock signal (`clk`) and an enabling signal (`en`) to your design. The enabled output should be assigned from a logic expression that ensures it is not asserted when the input signal or the clock is low.
+
+Example Use Case:
+```verilog
+// Usage
+module MyModule(
+    input clk, 
+    input en,
+    input [7:0] in,
+    output reg [2:0] pos
+);
+
+TopModule top_module (
+    .in(in),
+    .pos(pos)
+);
+
+Assign assign
+    pos = top_module.pos;
+
+endmodule
+
+// In the main design:
+// module MyDesign(
+//     input clk, 
+//     input en,
+//     // Other inputs...
+// );
+//     MyModule top_module (
+//         .clk(clk),
+//         .en(en),
+//         .in(in_input), // your 8-bit input
+//         .pos(top_pos)
+//     );
+```

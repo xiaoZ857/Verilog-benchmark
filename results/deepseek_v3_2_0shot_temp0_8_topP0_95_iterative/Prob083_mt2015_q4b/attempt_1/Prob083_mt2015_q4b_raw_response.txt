@@ -1,0 +1,21 @@
+We can see from the waveform that the output z is 1 in the following cases:  
+1. At time 0-20ns: x=0, y=0 → z=1  
+2. At time 45-50ns: x=1, y=1 → z=1  
+3. At time 55ns: x=0, y=0 → z=1  
+4. At time 70ns: x=1, y=1 → z=1  
+
+This suggests z = ~x & ~y | x & y, which is XNOR.  
+
+Let's verify with the rest:  
+- At 25ns: x=1, y=0 → z=0 (XNOR gives 0) ✓  
+- At 35ns: x=0, y=1 → z=0 (XNOR gives 0) ✓  
+- At 60ns: x=0, y=1 → z=0 ✓  
+- At 75ns: x=0, y=1 → z=0 ✓  
+- At 90ns: x=1, y=0 → z=0 ✓  
+
+So the logic is simply z = x ~^ y (XNOR).  
+
+```verilog
+  assign z = ~(x ^ y);
+endmodule
+```

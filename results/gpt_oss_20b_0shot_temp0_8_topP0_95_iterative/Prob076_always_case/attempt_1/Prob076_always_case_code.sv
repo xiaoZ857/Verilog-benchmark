@@ -1,0 +1,36 @@
+
+// 6‑to‑1 multiplexer with 4‑bit wide data ports
+// ---------------------------------------------------
+//  When sel is 0‑5 → output the corresponding data input
+//  When sel is 6 or 7 → output 4'b0000
+//
+//  All signals are assumed to be combinational (no explicit
+//  clock is required for this functional description).
+
+module TopModule (
+    input  [2:0] sel,
+    input  [3:0] data0,
+    input  [3:0] data1,
+    input  [3:0] data2,
+    input  [3:0] data3,
+    input  [3:0] data4,
+    input  [3:0] data5,
+    output reg [3:0] out
+);
+
+    // Combinational always block
+    always @(*) begin
+        case (sel)
+            3'd0: out = data0;
+            3'd1: out = data1;
+            3'd2: out = data2;
+            3'd3: out = data3;
+            3'd4: out = data4;
+            3'd5: out = data5;
+            default: out = 4'd0;   // sel = 6 or 7 → output zero
+        endcase
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

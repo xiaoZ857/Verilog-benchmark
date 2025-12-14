@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:24: error: 'done' has already been declared in this scope.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:6:      : It was declared here as a variable.

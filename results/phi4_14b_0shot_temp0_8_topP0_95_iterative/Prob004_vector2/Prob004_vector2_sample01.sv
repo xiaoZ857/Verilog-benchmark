@@ -1,0 +1,15 @@
+
+module TopModule (
+    input [31:0] in,
+    output [31:0] out
+);
+
+    // Assign each byte from the input to a new position in the output
+    assign out[31:24] = in[7:0];   // Byte 0 -> Byte 3
+    assign out[23:16] = in[15:8];  // Byte 1 -> Byte 2
+    assign out[15:8] = in[23:16];  // Byte 2 -> Byte 1
+    assign out[7:0] = in[31:24];   // Byte 3 -> Byte 0
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

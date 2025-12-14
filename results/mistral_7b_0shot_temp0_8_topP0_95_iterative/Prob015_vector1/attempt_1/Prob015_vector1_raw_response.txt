@@ -1,0 +1,24 @@
+ Here is a simple Verilog implementation of the described combinational circuit:
+
+```verilog
+module TopModule (
+  input [15:0] in,
+  output reg [7:0] out_hi,
+  output reg [7:0] out_lo
+);
+
+always @(posedge clk) begin
+  out_hi <= in [15:8];
+  out_lo <= in [7:0];
+end
+
+// If needed, you can add clock enable for the outputs if they should be gated with the clock signal
+// e.g.,:
+// always @(posedge clk) begin
+//   if (clk_en) begin
+//     out_hi <= in [15:8];
+//     out_lo <= in [7:0];
+//   end
+```
+
+This Verilog module accepts a 16-bit input signal and generates two output signals, `out_hi` (containing the upper byte) and `out_lo` (containing the lower byte). The outputs are positive edge-triggered on the clock signal `clk`. If you need to add clock enable for the outputs, you can do it as shown in the commented block.

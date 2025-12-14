@@ -1,0 +1,6 @@
+Below is a straightforward implementation that reverses a 100‑bit vector on every rising edge of a clock.  
+The module adds an explicit `clk` port – “signals are positive clock/clk triggered unless otherwise stated” – and uses a simple generate‑style `for` loop inside an **always @(posedge clk)** block.
+
+```verilog
+// TopModule.v
+// --------------------------------

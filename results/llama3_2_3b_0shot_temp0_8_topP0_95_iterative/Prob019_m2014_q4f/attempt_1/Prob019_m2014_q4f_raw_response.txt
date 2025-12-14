@@ -1,0 +1,24 @@
+Here's how you could implement this circuit in Verilog:
+
+```verilog
+// Module that implements an AND gate with a bubble on the in2 input
+module TopModule (
+  // Input signals for in1 and in2
+  input in1, 
+  input in2_bubble,
+  // Output signal for 'out'
+  output logic out
+);
+
+  // Assign 'in2' as the negation of 'in2_bubble'
+  assign out = !in2_bubble & in1;
+
+endmodule
+```
+
+In this code:
+
+- `in2` is assigned the value of `!in2_bubble`. The `!` operator inverts (negates) the signal.
+- `&` is used for logical AND between two signals. 
+
+This circuit has the desired behavior: `out` will be 1 when both `in1` and `in2` are high, regardless of whether 'in2' was actually triggered by a clock edge or not (since it's wrapped around with a bubble).

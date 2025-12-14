@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_4\Prob083_mt2015_q4b_code.sv:8: error: Unable to bind wire/reg/memory `reset' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_4\Prob083_mt2015_q4b_code.sv:8: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_4\Prob083_mt2015_q4b_code.sv:16: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_4\Prob083_mt2015_q4b_code.sv:16: error: Unable to elaborate this case expression.
+3 error(s) during elaboration.

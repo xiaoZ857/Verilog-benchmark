@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob028_m2014_q4a\attempt_4\Prob028_m2014_q4a_code.sv:7: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob028_m2014_q4a\attempt_4\Prob028_m2014_q4a_code.sv:7: error: Failed to evaluate event expression 'posedge clk'.
+2 error(s) during elaboration.

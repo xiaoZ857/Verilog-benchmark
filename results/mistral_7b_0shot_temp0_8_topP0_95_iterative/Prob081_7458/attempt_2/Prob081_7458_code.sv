@@ -1,0 +1,71 @@
+
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+module TopModule;
+
+  reg [3:0] p1_and1_out;
+  reg [3:0] p1_and2_out;
+  reg [1:0] p2_and1_out;
+  reg [1:0] p2_and2_out;
+
+  input p1a, p1b, p1c, p1d, p1e, p1f;
+  output reg p1y;
+  input p2a, p2b, p2c, p2d;
+  output reg p2y;
+
+  // AND gates for p1y
+  and gate p1_and1 (
+    .a(p1a),
+    .b(p1b),
+    .c(p1c),
+    .o(p1_and1_out[0])
+  );
+
+  and gate p1_and2 (
+    .a(p1d),
+    .b(p1e),
+    .c(p1f),
+    .o(p1_and1_out[3])
+  );
+
+  or gate p1_or (
+    .a(p1_and1_out),
+    .b(p1_and2_out),
+    .o(p1y)
+  );
+
+  // AND gates for p2y
+  and gate p2_and1 (
+    .a(p2a),
+    .b(p2b),
+    .o(p2_and1_out[0])
+  );
+
+  and gate p2_and2 (
+    .a(p2c),
+    .b(p2d),
+    .o(p2_and1_out[1])
+  );
+
+  or gate p2_or (
+    .a(p2_and1_out),
+    .b(p2_and2_out),
+    .o(p2y)
+  );
+
+assign p1y = ~p1y; // Invert the output of p1y as it was not specified otherwise
+
+always @(posedge clk) begin
+  // Drive intermediate signals for each AND gate output
+  p1_and1_out = {p1a, p1b, p1c};
+  p1_and2_out = {p1d, p1e, p1f};
+  p2_and1_out = {p2a, p2b};
+  p2_and2_out = {p2c, p2d};
+end
+
+initial begin
+  #10 $finish; // simulation stops after 10 clock cycles by default
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

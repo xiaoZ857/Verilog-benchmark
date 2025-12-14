@@ -1,0 +1,62 @@
+To implement the Verilog module for the function \( f \) based on the given Karnaugh map, we need to derive a simplified Boolean expression. Here's how you can approach it:
+
+### Step 1: Analyze the Karnaugh Map
+
+The Karnaugh map is provided as follows:
+
+```
+        x[2]x[1]
+  x[4]x[3]   00  01  11  10
+        00 | d | 0 | d | d |
+        01 | 0 | d | 1 | 0 |
+        11 | 1 | 1 | d | d |
+        10 | 1 | 1 | 0 | d |
+```
+
+### Step 2: Identify Minterms and Don't-Cares
+
+- **Minterms (where \( f = 1 \)):**
+  - \( x[4]x[3]x[2]x[1] = 1101, 1110, 1111, 1010, 1011 \)
+
+- **Don't-Care Conditions:**
+  - \( x[4]x[3]x[2]x[1] = 0000, 0001, 0011, 0100, 0111, 1000, 1100, 1111 \)
+
+### Step 3: Simplify Using the Karnaugh Map
+
+Using the don't-care conditions to simplify:
+
+- Group 1: \( (x[4]x[3]x[2]x[1]) = 1010, 1011, 1110, 1111 \)
+  - This group simplifies to \( x[4]\overline{x[3]} + x[4]x[3]x[2] \)
+
+- Group 2: \( (x[4]x[3]x[2]x[1]) = 1101, 1110, 1111 \)
+  - This group simplifies to \( x[3]x[2]\overline{x[1]} + x[3]x[2]x[1] \)
+
+- Group 3: \( (x[4]x[3]x[2]x[1]) = 1000, 1010, 1011 \)
+  - This group simplifies to \( \overline{x[3]}x[4] \)
+
+### Step 4: Combine Simplified Expressions
+
+Combine the simplified expressions:
+
+\[ f = x[4]\overline{x[3]} + x[3]x[2]\overline{x[1]} + \overline{x[3]}x[4] \]
+
+This can be further simplified to:
+
+\[ f = x[4]\overline{x[3]} + x[3]x[2]\overline{x[1]} \]
+
+### Step 5: Implement the Verilog Module
+
+Now, implement the function in a Verilog module:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  assign f = (x[4] & ~x[3]) | (x[3] & x[2] & ~x[1]);
+
+endmodule
+```
+
+This Verilog code implements the simplified Boolean expression derived from the Karnaugh map.

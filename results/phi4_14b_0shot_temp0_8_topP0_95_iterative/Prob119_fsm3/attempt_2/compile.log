@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob119_fsm3\attempt_2\Prob119_fsm3_code.sv:19: error: This assignment requires an explicit cast.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob119_fsm3\attempt_2\Prob119_fsm3_code.sv:28: error: This assignment requires an explicit cast.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob119_fsm3\attempt_2\Prob119_fsm3_code.sv:37: error: This assignment requires an explicit cast.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob119_fsm3\attempt_2\Prob119_fsm3_code.sv:46: error: This assignment requires an explicit cast.
+4 error(s) during elaboration.

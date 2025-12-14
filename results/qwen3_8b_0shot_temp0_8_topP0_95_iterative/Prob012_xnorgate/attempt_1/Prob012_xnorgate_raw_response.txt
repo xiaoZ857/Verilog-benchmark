@@ -1,0 +1,25 @@
+To implement an XNOR gate in Verilog, we leverage the fact that the XNOR operation is the logical negation of the XOR operation. The XOR of two inputs, `a` and `b`, is `a ^ b`, and the XNOR is simply the inverse of that, which can be expressed as `~(a ^ b)`.
+
+This approach is concise, efficient, and directly reflects the logical behavior of the XNOR gate.
+
+---
+
+### ✅ Verilog Module Implementation
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+  assign out = ~(a ^ b);
+endmodule
+```
+
+---
+
+### 📌 Explanation
+
+- **Inputs**: `a` and `b` are single-bit inputs.
+- **Output**: `out` is the result of the XNOR operation.
+- **Logic**: The expression `~(a ^ b)` computes the XNOR of `a` and `b`. This expression works for both combinational and single-bit logic, as there's

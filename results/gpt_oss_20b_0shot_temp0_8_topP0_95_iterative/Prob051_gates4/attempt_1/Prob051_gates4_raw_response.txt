@@ -1,0 +1,47 @@
+**Verilog – combinational 4‑input AND/OR/XOR**
+
+```verilog
+//  TopModule.v
+//  ------------------------------------------------------------
+//  4‑input combinational circuit
+//  ---------------------------------
+//  • out_and : 4‑input AND (all four bits must be 1)
+//  • out_or  : 4‑input OR  (any bit is 1)
+//  • out_xor : 4‑input XOR (parity of the four bits)
+//  ------------------------------------------------------------
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [3:0] in,      // 4‑bit input vector
+    output wire       out_and, // 4‑input AND
+    output wire       out_or,  // 4‑input OR
+    output wire       out_xor  // 4‑input XOR
+);
+
+// -----------------------------------------------------------------
+//  Implementation – simple continuous assignments
+// -----------------------------------------------------------------
+
+// 4‑input AND
+assign out_and = in[0] & in[1] & in[2] & in[3];
+
+// 4‑input OR
+assign out_or  = in[0] | in[1] | in[2] | in[3];
+
+// 4‑input XOR (parity)
+assign out_xor = in[0] ^ in[1] ^ in[2] ^ in[3];
+
+// -----------------------------------------------------------------
+endmodule
+```
+
+### Notes
+* All signals are purely combinational; no clocks or registers are used.
+* The `wire` type is used for the ports to satisfy the synthesizer’s
+  requirement for continuous assignments.
+* The `timescale` directive is optional but helps with simulation timing.
+
+Feel free to replace the individual bit‑wise operations with the
+reduction operators (`&in`, `|in`, `^in`) if your synthesis tool
+supports them.

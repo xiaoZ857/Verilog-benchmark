@@ -1,0 +1,127 @@
+
+module TopModule (
+  input in,
+  input [9:0] state,
+  output [9:0] next_state,
+  output out1,
+  output out2
+);
+We can derive the next state logic for each bit based on the transitions. Since it's one-hot, each next state bit is set when transitioning into that state from any previous state with the appropriate input.
+
+**State S0 (state[0]):**  
+Next state is S0 when:  
+- In S0 and input=0  
+- In S1 and input=0  
+- In S2 and input=0  
+- In S3 and input=0  
+- In S4 and input=0  
+- In S7 and input=0  
+- In S8 and input=0  
+- In S9 and input=0  
+
+So:  
+next_state[0] = (state[0] & ~in) | (state[1] & ~in) | (state[2] & ~in) | (state[3] & ~in) | (state[4] & ~in) | (state[7] & ~in) | (state[8] & ~in) | (state[9] & ~in)
+
+**State S1 (state[1]):**  
+Next state is S1 when:  
+- In S0 and input=1  
+- In S8 and input=1  
+- In S9 and input=1  
+
+So:  
+next_state[1] = (state[0] & in) | (state[8] & in) | (state[9] & in)
+
+**State S2 (state[2]):**  
+Next state is S2 when:  
+- In S1 and input=1  
+
+So:  
+next_state[2] = state[1] & in
+
+**State S3 (state[3]):**  
+Next state is S3 when:  
+- In S2 and input=1  
+
+So:  
+next_state[3] = state[2] & in
+
+**State S4 (state[4]):**  
+Next state is S4 when:  
+- In S3 and input=1  
+
+So:  
+next_state[4] = state[3] & in
+
+**State S5 (state[5]):**  
+Next state is S5 when:  
+- In S4 and input=1  
+
+So:  
+next_state[5] = state[4] & in
+
+**State S6 (state[6]):**  
+Next state is S6 when:  
+- In S5 and input=1  
+
+So:  
+next_state[6] = state[5] & in
+
+**State S7 (state[7]):**  
+Next state is S7 when:  
+- In S6 and input=1  
+- In S7 and input=1  
+
+So:  
+next_state[7] = (state[6] & in) | (state[7] & in)
+
+**State S8 (state[8]):**  
+Next state is S8 when:  
+- In S5 and input=0  
+
+So:  
+next_state[8] = state[5] & ~in
+
+**State S9 (state[9]):**  
+Next state is S9 when:  
+- In S6 and input=0  
+
+So:  
+next_state[9] = state[6] & ~in
+
+**Outputs:**  
+From the description:  
+out1 = 1 in states S8 and S9, else 0.  
+out2 = 1 in states S7 and S9, else 0.
+
+So:  
+out1 = state[8] | state[9]  
+out2 = state[7] | state[9]
+
+---
+
+Here’s the Verilog:
+
+  assign next_state[0] = (state[0] & ~in) | (state[1] & ~in) | (state[2] & ~in) |
+                         (state[3] & ~in) | (state[4] & ~in) | (state[7] & ~in) |
+                         (state[8] & ~in) | (state[9] & ~in);
+  
+  assign next_state[1] = (state[0] & in) | (state[8] & in) | (state[9] & in);
+  
+  assign next_state[2] = state[1] & in;
+  
+  assign next_state[3] = state[2] & in;
+  
+  assign next_state[4] = state[3] & in;
+  
+  assign next_state[5] = state[4] & in;
+  
+  assign next_state[6] = state[5] & in;
+  
+  assign next_state[7] = (state[6] & in) | (state[7] & in);
+  
+  assign next_state[8] = state[5] & ~in;
+  
+  assign next_state[9]
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

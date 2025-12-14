@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:13: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:13: error: malformed statement
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:16: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:16: error: malformed statement
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:29: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:31: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:32: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob128_fsm_ps2\attempt_3\Prob128_fsm_ps2_code.sv:32: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob128_fsm_ps2_test.sv:10: error: invalid module item.

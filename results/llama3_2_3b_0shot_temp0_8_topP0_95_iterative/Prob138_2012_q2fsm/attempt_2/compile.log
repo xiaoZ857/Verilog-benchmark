@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_2\Prob138_2012_q2fsm_code.sv:14: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_2\Prob138_2012_q2fsm_code.sv:14: error: syntax error localparam list.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_2\Prob138_2012_q2fsm_code.sv:15: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_2\Prob138_2012_q2fsm_code.sv:15: error: syntax error localparam list.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:32: syntax error
+I give up.

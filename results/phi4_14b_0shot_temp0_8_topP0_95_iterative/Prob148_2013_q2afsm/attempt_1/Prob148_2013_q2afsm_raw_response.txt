@@ -1,0 +1,81 @@
+Here's a Verilog module implementation for the described FSM. We'll use two states (A and B) as intermediates to handle requests from devices with priorities, while keeping track of the current state using synchronous D flip-flops.
+
+```verilog
+module TopModule (
+    input clk,
+    input resetn,
+    input [3:1] r,
+    output reg [3:1] g
+);
+
+    // State encoding
+    typedef enum reg [1:0] {
+        A = 2'b00,  // Initial state where no requests are present
+        B = 2'b01,  // Intermediate state for device 1's grant
+        C = 2'b10   // Intermediate state for device 2's grant
+    } state_t;
+
+    // State register
+    reg [1:0] current_state;
+    reg [1:0] next_state;
+
+    // State transition logic
+    always @(posedge clk or negedge resetn) begin
+        if (!resetn)
+            current_state <= A;  // Reset to state A on active-low reset
+        else
+            current_state <= next_state;  // Update state at each clock cycle
+    end
+
+    // Next state logic and output logic
+    always @(*) begin
+        // Default outputs for g (all low) and default next state as current state
+        g = 3'b000;
+        next_state = current_state;
+
+        case (current_state)
+            A: begin
+                if (r[1]) begin
+                    next_state = B;  // Request from device 1, move to state B
+                    g = 3'b100;      // Grant to device 1
+                end else if (r[2]) begin
+                    next_state = C;  // Request from device 2, move to state C
+                    g = 3'b010;      // Grant to device 2
+                end else if (r[3] && !r[1] && !r[2]) begin
+                    next_state = A;  // Only request from device 3, stay in state A
+                    g = 3'b001;      // Grant to device 3
+                end
+            end
+
+            B: begin
+                if (r[1])
+                    g = 3'b100;  // Continue granting to device 1 if it still requests
+                else
+                    next_state = A;  // No request from device 1, return to state A
+            end
+
+            C: begin
+                if (r[2])
+                    g = 3'b010;  // Continue granting to device 2 if it still requests
+                else
+                    next_state = A;  // No request from device 2, return to state A
+            end
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+- **State Encoding**: We use a `state_t` type with three states: `A`, `B`, and `C`. State `A` is the default where no requests are granted. States `B` and `C` handle grants for devices 1 and 2, respectively.
+  
+- **State Transition Logic**: The state register updates on each positive clock edge unless a reset occurs. On an active-low reset (`resetn = 0`), it returns to the initial state `A`.
+
+- **Next State Logic**:
+  - **In State A**: If device 1 requests, transition to state `B`. If only device 2 requests, transition to state `C`. If only device 3 requests (and neither 1 nor 2 is requesting), remain in state `A` and grant access.
+  - **In State B**: Continue granting to device 1 if it still requests. Otherwise, return to state `A`.
+  - **In State C**: Continue granting to device 2 if it still requests. Otherwise, return to state `A`.
+
+- **Output Logic**: Outputs (`g`) are updated in the same block as next-state logic since they depend on both current and next states.
+
+This design ensures priority handling: device 1 has the highest priority, followed by device 2, and then device 3.

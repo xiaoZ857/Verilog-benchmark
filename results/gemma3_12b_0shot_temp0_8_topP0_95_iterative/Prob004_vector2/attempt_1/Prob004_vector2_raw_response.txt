@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input [31:0] in,
+  output [31:0] out
+);
+
+  // Internal signals to hold the reversed bytes
+  wire [7:0] byte0;
+  wire [7:0] byte1;
+  wire [7:0] byte2;
+  wire [7:0] byte3;
+  wire [7:0] byte4;
+  wire [7:0] byte5;
+  wire [7:0] byte6;
+  wire [7:0] byte7;
+
+  // Extract individual bytes from the input
+  assign byte0 = in[7:0];
+  assign byte1 = in[15:8];
+  assign byte2 = in[23:16];
+  assign byte3 = in[31:24];
+
+  // Construct the output with reversed byte order
+  assign out = {byte3, byte2, byte1, byte0};
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (input [31:0] in, output [31:0] out);` declares the module named `TopModule` with a 32-bit input `in` and a 32-bit output `out`.
+
+2. **Internal Wires:**
+   - `wire [7:0] byte0; ... byte7;` declares eight 8-bit wires to hold the individual bytes extracted from the input.
+
+3. **Byte Extraction:**
+   - `assign byte0 = in[7:0];`  assigns the least significant 8 bits of the input `in` to `byte0`.
+   - `assign byte1 = in[15:8];` assigns the next 8 bits (bits 15-8) to `byte1`.
+   - `assign byte2 = in[23:16];` assigns the next 8 bits (bits 23-16) to `byte2`.
+   - `assign byte3 = in[31:24];` assigns the most significant 8 bits (bits 31-24) to `byte3`.
+
+4. **Output Construction:**
+   - `assign out = {byte3, byte2, byte1, byte0};` concatenates the extracted bytes in reversed order (byte3, byte2, byte1, byte0) to form the 32-bit output `out`.  The `{}` operator in Verilog is used for concatenation.
+
+**How it reverses the byte order:**
+
+The circuit essentially breaks down the 32-bit input into four 8-bit bytes. Then, it rearranges these bytes so that the original most significant byte becomes the least significant byte, the second most significant becomes the second least significant, and so on.  This effectively reverses the byte order.
+
+**Example:**
+
+If the input is `in = 32'hAABBCCDD;` (AABBCCDD in hexadecimal), then the output will be `out = 32'hDDCBACAA;`

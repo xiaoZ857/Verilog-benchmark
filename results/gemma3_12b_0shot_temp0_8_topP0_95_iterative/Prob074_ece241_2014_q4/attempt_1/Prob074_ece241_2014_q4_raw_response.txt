@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+
+  // Internal signals
+  wire ff1_data, ff2_data, ff3_data;
+  wire ff1_out, ff2_out, ff3_out;
+
+  // D Flip-Flops
+  always @(posedge clk) begin
+    ff1_out <= ff1_data;
+    ff2_out <= ff2_data;
+    ff3_out <= ff3_data;
+  end
+
+  // Gates and Data Inputs for D Flip-Flops
+  assign ff1_data = x ^ ff1_out;
+  assign ff2_data = x & ~ff2_out;
+  assign ff3_data = x | ~ff3_out;
+
+  // NOR Gate to produce output Z
+  assign z = ~(ff1_out | ff2_out | ff3_out);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**  Declares the `TopModule` with input `clk`, input `x`, and output `z`.
+
+2. **Internal Signals:**  Declares `ff1_data`, `ff2_data`, `ff3_data` to hold the data inputs to the D flip-flops.  `ff1_out`, `ff2_out`, `ff3_out` represent the outputs of the D flip-flops.
+
+3. **D Flip-Flops:** The `always @(posedge clk)` block simulates the behavior of the D flip-flops. On the positive edge of the clock signal (`clk`), the data input (`ff1_data`, `ff2_data`, `ff3_data`) is transferred to the corresponding flip-flop output (`ff1_out`, `ff2_out`, `ff3_out`).
+
+4. **Gates and Data Inputs:**  This section implements the gate logic as described in the problem:
+   - **XOR Gate (for FF1):** `assign ff1_data = x ^ ff1_out;`  The input `x` is XORed with the output of the first flip-flop.
+   - **AND Gate (for FF2):** `assign ff2_data = x & ~ff2_out;`  The input `x` is ANDed with the *complemented* output of the second flip-flop.
+   - **OR Gate (for FF3):** `assign ff3_data = x | ~ff3_out;`  The input `x` is ORed with the *complemented* output of the third flip-flop.
+
+5. **NOR Gate for Output Z:** `assign z = ~(ff1_out | ff2_out | ff3_out);`  This line implements the three-input NOR gate. The outputs of the three flip-flops (`ff1_out`, `ff2_out`, `ff3_out`) are ORed together, and the result is then inverted (NOR).
+
+**Important Considerations:**
+
+* **Initial Conditions:**  The problem states that the flip-flops are initially reset to zero.  While this code simulates the behavior *after* that initial reset, it doesn's explicitly initialize them in the Verilog code.  In a more complete simulation setup, you's likely want to use `initial` blocks to set the initial values of the flip-flop outputs to 0 before the simulation starts.
+* **Simulation:**  To test this module, you will need to create a testbench that provides clock and input signals and observes the output `z`.
+* **Synthesis:** This code is synthesizable and can be converted to a hardware implementation.
+* **Clock Signal:**  The `clk` signal is crucial for the operation of the flip-flops. The frequency and duty cycle of the clock signal will affect the overall behavior of the circuit.

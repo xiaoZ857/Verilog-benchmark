@@ -1,0 +1,38 @@
+```verilog
+// Define the state table for the next state calculation
+localparam [2:0] initialState = 3'b000;
+localparam nextState01 = 3'b001;
+localparam nextState10 = 3'b100;
+
+module TopModule (
+  input clk,
+  input x,
+  input [2:0] y,
+  output reg Y0,
+  output reg z
+);
+
+// Initialize the next state with the initial state
+reg [2:0] nextState = initialState;
+
+// Calculate the next state based on the current state and x value
+always @(posedge clk) begin
+    if (x == 1 && y[2:0] != nextState)
+        nextState = nextState10;
+    else if (y[2:0] == nextState)
+        nextState = nextState01;
+end
+
+// Calculate the output z based on the current state
+assign z = {nextState[1], nextState[0]};
+assign Y0 = nextState;
+
+endmodule // TopModule
+```
+
+This Verilog module implements the logic described in the problem. The next state is determined by comparing it with the input value `x`. If `x` is 1 and the current state is not equal to the predefined next state for this case, then the calculated next state is used. Otherwise, if `y[2:0]` equals the current state, then the predefined next state is used. The output `z` is the value of two bits where both values are combined using a binary expression.
+
+The module includes three main parts:
+
+1.  **Next State Calculation**: This logic block updates the `nextState` variable based on the input value `x`. If `x` equals 1 and the current state does not match the predefined next state for this case, then it calculates the new `nextState`.
+2.  **Output Z Calculation**: This assignment statement takes the calculated `nextState` and combines its bits into a two-bit binary expression that is assigned to the output variable `z`.

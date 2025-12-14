@@ -1,0 +1,53 @@
+
+// Implement the Verilog module based on the following description. Assume that signals are positive clock/clk triggered unless otherwise stated.
+We want to create a timer that:
+
+  (1) is started when a particular pattern (1101) is detected,
+  (2) shifts in 4 more bits to determine the duration to delay,
+  (3) waits for the counters to finish counting, and
+  (4) notifies the user and waits for the user to acknowledge the timer.
+
+In this problem, implement just the finite-state machine that controls
+the timer. The data path (counters and some comparators) are not included
+here.
+
+The serial data is available on the data input pin. When the pattern 1101
+is received, the state machine must then assert output shift_ena for
+exactly 4 clock cycles. After that, the state machine asserts its
+counting output to indicate it is waiting for the counters, and waits
+until input done_counting is high.At that point, the state machine must
+assert done to notify the user the timer has timed out, and waits until
+input ack is 1 before being reset to look for the next occurrence of the
+start sequence (1101). The state machine should have a active high
+synchronous reset, setting the state to where it begins searching for the
+input sequence 1101.
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+  // State definitions
+  reg [1:0] state, next_state;
+  localparam IDLE = 2'b00;
+  localparam SHIFT = 2'b01;
+  localparam COUNT = 2'b10;
+  localparam DONE = 2'b11;
+  
+  // 4-bit pattern register to store incoming serial data
+  reg [3:0] pattern_reg;
+  
+  // Counter to track 4 shift cycles
+  reg [1:0] shift_counter;
+  
+  // State transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      pattern_reg <= 4'b0000;
+      shift

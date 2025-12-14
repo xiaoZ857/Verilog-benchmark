@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:10: error: s['sd0] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:5:      : s['sd0] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:11: error: s['sd7:'sd1] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:5:      : s['sd7:'sd1] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:14: error: Unable to bind wire/reg/memory `initial_state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:14: error: Unable to elaborate condition expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:19: error: Could not find variable ``carry_out'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:22: error: overflow is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:6:      : overflow is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:8: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_3\Prob033_ece241_2014_q1c_code.sv:8: error: Failed to evaluate event expression 'posedge clk'.
+8 error(s) during elaboration.

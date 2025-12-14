@@ -1,0 +1,58 @@
+**TopModule – 100‑bit synchronous rotator**
+
+```verilog
+//==========================================================================
+// 100‑bit left/right rotator
+//   • Synchronous load (active‑high)
+//   • 2‑bit enable selects rotation direction
+//       2'b01 → rotate right  by one bit
+//       2'b10 → rotate left   by one bit
+//       2'b00 or 2'b11 → no rotation
+//
+//   The register is a circular buffer – the bit that is shifted out on one
+//   side is shifted in on the opposite side.
+//
+//   All operations are triggered on the rising edge of **clk**.
+//==========================================================================
+
+module TopModule (
+    input  wire        clk,          // clock
+    input  wire        load,         // synchronous active‑high load
+    input  wire [1:0]  ena,          // enable: 01‑right, 10‑left
+    input  wire [99:0] data,         // data to be loaded
+    output reg  [99:0] q             // register contents
+);
+
+    // -------------------------------------------------------------------
+    // Synchronous process
+    // -------------------------------------------------------------------
+    always @(posedge clk) begin
+        if (load) begin
+            // Load the external data
+            q <= data;
+        end
+        else begin
+            // Rotation depending on ena
+            case (ena)
+                2'b01:   // Rotate right:  MSB <= LSB, shift all bits right
+                    q <= { q[0],   q[99:1] };
+                2'b10:   // Rotate left:   LSB <= MSB, shift all bits left
+                    q <= { q[98:0], q[99] };
+                default: // 2'b00 or 2'b11 – no rotation
+                    q <= q;
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### How it works
+
+| `ena` | Action performed | Verilog expression |
+|-------|------------------|--------------------|
+| `2'b01` | Rotate right by 1 | `q <= {q[0], q[99:1]}` |
+| `2'b10` | Rotate left by 1  | `q <= {q[98:0], q[99]}` |
+| `2'b00` or `2'b11` | No change | `q <= q` |
+
+The load signal overrides rotation: on the rising edge of `clk`, if `load` is high, the register `q` is loaded with `data`; otherwise the enable logic determines whether the register rotates or holds its value. All assignments are non‑blocking (`<=`) to maintain proper synchronous behaviour.

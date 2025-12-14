@@ -1,0 +1,52 @@
+
+module TopModule(
+    input clk, // Positive edge triggered clock signal
+    input aset, // Asynchronous reset signal
+    input [7:0] x, // Input serial data (one bit per clock cycle)
+    output reg [7:0] z // 2's complement of the input data
+);
+
+// State variables
+reg [1:0] state; 
+reg [7:0] z_value;
+
+// Initial state and state transitions
+always @(posedge clk) begin
+    if(!areset) begin
+        state <= 2'b00; // Reset state
+        z_value <= 8'0;
+    end else if(state == 2'b00) begin // Start of conversion
+        state <= 2'b01; 
+    elseif(state == 2'b01) begin // Count the number of leading zeros
+        if(x[0] == 1'b0) begin // If x[0] is zero, continue counting
+            state <= state;
+        end else begin // If x[0] is one, stop conversion
+            state <= 2'b10; 
+        end
+    elseif(state == 2'b10) begin // Count the number of leading ones
+        if(x[0] == 1'b0) begin // If x[0] is zero, continue counting
+            state <= state;
+        end else begin // If x[0] is one, stop conversion and find Z's complement
+            state <= 2'b11; 
+        end
+    elseif(state == 2'b11) begin // Calculate the two's complement
+        if(x[0] == 1'b1) begin // If x[0] is one, find two's complement of negative number
+            for(int i = 7; i >= 0; i--) begin
+                z_value[i] = x[7-i]; 
+            end
+        end else begin // If x[0] is zero, the input data is already positive
+            z_value <= x;
+        end
+    end
+end
+
+assign z = z_value;
+
+// Positive edge triggered asynchronous reset
+always @(posedge aset) begin
+    state <= 2'b00; 
+    z_value <= 8'0;
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

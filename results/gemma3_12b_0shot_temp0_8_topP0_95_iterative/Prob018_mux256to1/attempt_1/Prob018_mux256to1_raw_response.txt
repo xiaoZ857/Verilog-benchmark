@@ -1,0 +1,36 @@
+```verilog
+module TopModule (
+  input [255:0] in,
+  input [7:0] sel,
+  output  out
+);
+
+  assign out = in[sel];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and lists its input and output ports.
+* **`input [255:0] in;`**:  Defines a 256-bit input vector named `in`.
+* **`input [7:0] sel;`**: Defines an 8-bit input signal named `sel` which represents the selector.
+* **`output out;`**: Defines a single-bit output signal named `out`.
+* **`assign out = in[sel];`**: This is the core of the multiplexer. It uses a continuous assignment (`assign`) to select a bit from the `in` vector based on the value of the `sel` signal.
+    * `in[sel]` accesses the bit at the index specified by `sel` within the `in` vector. For example:
+        * If `sel` is 0, `in[sel]` selects `in[0]`.
+        * If `sel` is 1, `in[sel]` selects `in[1]`.
+        * And so on, up to `sel` being 255, which selects `in[255]`.
+
+**How it works as a 256-to-1 MUX:**
+
+The `sel` input acts as the index into the `in` input vector.  Each possible value of `sel` (0 to 255) corresponds to one of the 256 input bits.  The `assign` statement effectively routes the value of the selected input bit to the `out` signal.  This creates a 256-to-1 multiplexer.
+
+**Example:**
+
+Let's say:
+
+* `in = 256'b1010110011110000...` (a 256-bit vector)
+* `sel = 5`
+
+Then, `out` will be equal to the value of `in[5]`.  So, `out` will be the 6th bit of the `in` vector.

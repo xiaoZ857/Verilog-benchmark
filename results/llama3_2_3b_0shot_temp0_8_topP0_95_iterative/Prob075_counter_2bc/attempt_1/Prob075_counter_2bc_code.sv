@@ -1,0 +1,31 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input train_valid,
+  input train_taken,
+  output logic [1:0] state
+);
+
+// Internal signals
+logic [2:0] count;
+logic reg_en; // Enable for increment/decrement operations
+
+// Reset the counter to weakly not-taken (2'b01)
+assign areset = count == 2'd01;
+
+// Increment and decrement operations based on train_valid and train_taken
+always @(posedge clk) begin
+    if (train_valid && !train_taken) reg_en <= 1;
+    else if (train_valid && train_taken) reg_en <= 0;
+    else reg_en <= 0;
+end
+
+assign count[2:0] = count + reg_en;
+
+// The counter output is the last two bits of 'count' to match the state's width
+assign state = count[1:0];
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+reg[7:0] edges[8];
+
+assign anyedge = edges[0];
+
+always @(posedge clk) begin
+
+    if(in != edges[0]) begin
+        edges[0] <= in;
+    end else begin
+        // Add a clocked assignment to prevent static analysis error
+        $force(edges[0], in);
+    end
+
+    for (int i = 1; i < 8; i++) begin
+        if(edges[i-1] != edges[i]) begin
+            edges[i] <= in;
+        end else begin
+            // Add a clocked assignment to prevent static analysis error
+            $force(edges[i], in);
+        end
+    end
+
+endmodule

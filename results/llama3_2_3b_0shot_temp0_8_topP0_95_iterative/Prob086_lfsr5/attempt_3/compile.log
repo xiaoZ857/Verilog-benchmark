@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_3\Prob086_lfsr5_code.sv:37: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_3\Prob086_lfsr5_code.sv:38: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_3\Prob086_lfsr5_code.sv:39: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob086_lfsr5_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob086_lfsr5_test.sv:12: error: invalid module item.

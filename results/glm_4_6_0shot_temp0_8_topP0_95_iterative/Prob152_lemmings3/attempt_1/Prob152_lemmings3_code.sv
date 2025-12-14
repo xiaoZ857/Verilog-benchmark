@@ -1,0 +1,100 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+
+// State encoding
+parameter WALK_LEFT = 3'b000;
+parameter WALK_RIGHT = 3'b001;
+parameter FALL_LEFT = 3'b010;
+parameter FALL_RIGHT = 3'b011;
+parameter DIG_LEFT = 3'b100;
+parameter DIG_RIGHT = 3'b101;
+
+reg [2:0] state, next_state;
+
+always @(posedge clk or posedge areset) begin
+    if (areset) begin
+        state <= WALK_LEFT;
+    end else begin
+        state <= next_state;
+    end
+end
+
+always @(*) begin
+    // Default: stay in current state
+    next_state = state;
+    
+    case (state)
+        WALK_LEFT: begin
+            // Priority 1: Fall
+            if (!ground) begin
+                next_state = FALL_LEFT;
+            end
+            // Priority 2: Dig
+            else if (dig) begin
+                next_state = DIG_LEFT;
+            end
+            // Priority 3: Bump
+            else if (bump_left || bump_right) begin
+                next_state = WALK_RIGHT;
+            end
+        end
+        
+        WALK_RIGHT: begin
+            // Priority 1: Fall
+            if (!ground) begin
+                next_state = FALL_RIGHT;
+            end
+            // Priority 2: Dig
+            else if (dig) begin
+                next_state = DIG_RIGHT;
+            end
+            // Priority 3: Bump
+            else if (bump_left || bump_right) begin
+                next_state = WALK_LEFT;
+            end
+        end
+        
+        FALL_LEFT: begin
+            if (ground) begin
+                next_state = WALK_LEFT;
+            end
+        end
+        
+        FALL_RIGHT: begin
+            if (ground) begin
+                next_state = WALK_RIGHT;
+            end
+        end
+        
+        DIG_LEFT: begin
+            if (!ground) begin
+                next_state = FALL_LEFT;
+            end
+        end
+        
+        DIG_RIGHT: begin
+            if (!ground) begin
+                next_state = FALL_RIGHT;
+            end
+        end
+    endcase
+end
+
+// Moore outputs
+assign walk_left = (state == WALK_LEFT);
+assign walk_right = (state == WALK_RIGHT);
+assign aaah = (state == FALL
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

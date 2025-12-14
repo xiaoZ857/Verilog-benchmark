@@ -1,0 +1,28 @@
+
+`timescale 1ns / 1ps
+
+module TopModule (
+  input [15:0] scancode,
+  output reg left,
+  output reg down,
+  output reg right,
+  output reg up
+);
+
+always @* begin
+  case (scancode)
+    16'hE06B: left = 1; down = 0; right = 0; up = 0; break;
+    16'hE072: left = 0; down = 1; right = 0; up = 0; break;
+    16'hE074: left = 0; down = 0; right = 1; up = 0; break;
+    16'hE075: left = 0; down = 0; right = 0; up = 1; break;
+    default: 
+      left = 0;
+      down = 0;
+      right = 0;
+      up = 0;
+  endcase
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

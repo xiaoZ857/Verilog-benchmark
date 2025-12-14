@@ -1,0 +1,41 @@
+ Here is the Verilog implementation for the given state machine:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire j,
+  input wire k,
+  input wire areset,
+  output reg out
+);
+
+reg currState; // Current state of the state machine.
+param OFF = 0, ON = 1;
+
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        currState <= OFF; // Reset the state machine to OFF when areset is asserted
+    end else begin
+        case (currState)
+            OFF: begin
+                if (j == 1'b1) begin
+                    currState <= ON; // Transition from OFF to ON on j=1
+                end
+            end,
+            ON: begin
+                if (k == 1'b0) begin
+                    currState <= ON; // Stay in ON state when k=0
+                end else begin
+                    currState <= OFF; // Transition from ON to OFF on k=1
+                end
+            end
+        endcase
+    end
+end
+
+assign out = currState == ON ? 1'b1 : 1'b0; // Assign the output based on the current state
+
+endmodule
+```
+
+This code defines a Moore state machine with two states (OFF and ON), two inputs (j, k) and one output (out). The reset signal is active-high asynchronous, and it resets the state machine to OFF when asserted. The always block updates the current state based on the given transitions and the inputs' values at each clock edge. Finally, the assign statement maps the current state to the output value.

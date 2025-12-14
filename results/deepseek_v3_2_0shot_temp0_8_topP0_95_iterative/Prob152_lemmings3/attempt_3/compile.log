@@ -1,0 +1,63 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 38
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:14: syntax error
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:16: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:16:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:20: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:20:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:27: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:27:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:28: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:28:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:38: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:38:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:39: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:39:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:40: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:40:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:41: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:41:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:14: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:6: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:16: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:17: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:17: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:20: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:40: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:47: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:48: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:50: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:52: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:56: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:73: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:74: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:97: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:119: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:119: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_test.sv:120: syntax error
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:16: warning: macro dig undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:16: warning: macro ground undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:18: warning: macro ground undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:20: warning: macro ground undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:27: warning: macro ground undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:27: warning: macro aaah undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:28: warning: macro ground undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:35: warning: macro walk_left undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:38: warning: macro walk_left undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:39: warning: macro walk_right undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:40: warning: macro aaah undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob152_lemmings3\attempt_3\Prob152_lemmings3_code.sv:41: warning: macro digging undefined (and assumed null) at this point.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:16: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:16: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:17: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:17: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:17: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob152_lemmings3_ref.sv:21: error: Incomprehensible case expression.

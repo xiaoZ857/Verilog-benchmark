@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:19: error: z is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:6:      : z is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:22: error: z is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:6:      : z is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:28: error: z is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:6:      : z is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:31: error: z is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob088_ece241_2014_q5b\attempt_2\Prob088_ece241_2014_q5b_code.sv:6:      : z is declared here as wire.
+4 error(s) during elaboration.

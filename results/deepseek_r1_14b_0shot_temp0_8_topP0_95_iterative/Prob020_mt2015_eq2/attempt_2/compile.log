@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob020_mt2015_eq2\attempt_2\Prob020_mt2015_eq2_code.sv:15: sorry: break statements not supported.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob020_mt2015_eq2\attempt_2\Prob020_mt2015_eq2_code.sv:18: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob020_mt2015_eq2\attempt_2\Prob020_mt2015_eq2_code.sv:19: Syntax in assignment statement l-value.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob020_mt2015_eq2\attempt_2\Prob020_mt2015_eq2_code.sv:21: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob020_mt2015_eq2_test.sv:13: error: invalid module item.

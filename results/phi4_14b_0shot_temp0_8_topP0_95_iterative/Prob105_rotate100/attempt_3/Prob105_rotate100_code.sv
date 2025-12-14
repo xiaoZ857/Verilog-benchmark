@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+always @(posedge clk) begin
+    if (load) begin
+        // If load is active, directly load the data into register q
+        q <= data;
+    end else begin
+        case (ena)
+            2'b01: begin
+                // Rotate right by one bit
+                q[99] <= q[0];
+                q[98:0] <= q[99:1];
+            end
+            2'b10: begin
+                // Correctly rotate left by one bit
+                q[0] <= q[99];   // Store the MSB in LSB before shifting
+                q[99:1] <= q[98:0]; // Properly rotate left without reversing the order
+            end
+            default: begin
+                // No rotation for other cases (including ena = 2'b00 and 2'b11)
+                q <= q;
+            end
+        endcase
+    end
+end
+
+endmodule

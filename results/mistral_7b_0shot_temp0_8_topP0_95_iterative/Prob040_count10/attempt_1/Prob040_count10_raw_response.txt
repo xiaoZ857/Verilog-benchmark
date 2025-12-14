@@ -1,0 +1,38 @@
+ Here's a simple Verilog implementation for your decade counter:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) // Positive edge-triggered assignments on both clk and reset
+begin
+  if (reset)
+    q <= 4'b0001; // Reset the counter to 0 (decimal 1)
+  else if (++q >= 5'b10001) // Increment the counter, loop back when it reaches 10001 (decimal 9)
+    q <= 4'b0001;
+end
+
+// Alternatively, you can use a loop to implement the counting part:
+/*
+always @(posedge clk or posedge reset)
+begin
+  if (reset)
+    q <= 4'b0001;
+  else
+  begin
+    for (int i = 0; i < 10; i = i + 1) // Loop from 0 to 9 and increment the counter after each iteration
+      if (i == q) // If the current loop index matches the current count, move on to the next loop iteration
+        continue;
+      q <= i; // Assign the new value of the counter
+    break; // Exit the loop once we've reached 10 and loop back to the reset condition
+  end
+end
+*/
+
+endmodule
+```
+
+This TopModule implementation uses positive edge-triggered assignments for both clk and reset signals. The `reset` signal resets the counter to decimal 1 when it goes high, while the counting logic increments the counter during each clock cycle until it reaches decimal 9, at which point it loops back to decimal 1 for the next count cycle.

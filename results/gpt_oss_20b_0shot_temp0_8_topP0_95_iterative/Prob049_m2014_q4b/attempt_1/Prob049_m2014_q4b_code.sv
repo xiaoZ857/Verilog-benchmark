@@ -1,0 +1,42 @@
+
+// -----------------------------------------------------------------------------
+//  TopModule
+//  ----------
+//  Positive‑edge‑triggered D‑flip‑flop with an asynchronous reset.
+//  -----------------------------------------------------------------------------
+//  Ports
+//  -----
+//  clk : Clock input (positive edge)
+//  d   : Data input
+//  ar  : Asynchronous reset (active‑high)
+//  q   : Flip‑flop output
+// -----------------------------------------------------------------------------
+//  Author: <your name>
+//  Date: <date>
+// -----------------------------------------------------------------------------
+
+module TopModule (
+    input  logic clk,  // Clock
+    input  logic d,    // Data input
+    input  logic ar,   // Asynchronous reset (active‑high)
+    output logic q     // Flip‑flop output
+);
+
+    // A single always_ff block that models the behavior of a
+    // positive‑edge‑triggered D‑FF with an asynchronous reset.
+    //
+    //   * When `ar` goes high → q is immediately set to 0 (reset state).
+    //   * On the positive edge of `clk` (and when `ar` is low) → q takes the
+    //     value of `d`.
+    //
+    // This is synthesizable on all major FPGA/ASIC toolchains.
+    always_ff @(posedge clk or posedge ar) begin
+        if (ar)
+            q <= 1'b0;  // Asynchronous reset
+        else
+            q <= d;     // Normal D‑FF operation
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

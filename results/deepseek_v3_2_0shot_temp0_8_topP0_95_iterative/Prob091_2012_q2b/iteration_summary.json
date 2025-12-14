@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob091_2012_q2b",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 2,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob091_2012_q2b\\attempt_1\\Prob091_2012_q2b_code.sv:8: syntax error\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob091_2012_q2b\\attempt_1\\Prob091_2012_q2b_code.sv:8: error: Invalid module instantiation\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob091_2012_q2b\\attempt_1\\Prob091_2012_q2b_code.sv:9: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'Y1' has 73 mismatches. First mismatch occurred at time 35.\nHint: Output 'Y3' has 163 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 236 out of 600 samples\n\nSimulation finished at 3001 ps\nMismatches: 236 in 600 samples\n",
+      "mismatch_count": 236
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Your circuit passed when given only one-hot inputs, but not with semi-random inputs.\nHint: Are you doing something more complicated than deriving state transition equations by inspection?\n\nHint: Output 'Y1' has 15 mismatches. First mismatch occurred at time 1035.\nHint: Output 'Y3' has 123 mismatches. First mismatch occurred at time 1015.\nHint: Total mismatched samples is 138 out of 600 samples\n\nSimulation finished at 3001 ps\nMismatches: 138 in 600 samples\n",
+      "mismatch_count": 138
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

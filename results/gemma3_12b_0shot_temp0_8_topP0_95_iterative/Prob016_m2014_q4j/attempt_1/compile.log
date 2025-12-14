@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_1\Prob016_m2014_q4j_code.sv:11: warning: Port 3 (cin) of full_adder expects 1 bits, got 32.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob016_m2014_q4j\attempt_1\Prob016_m2014_q4j_code.sv:11:        : Pruning (signed) 31 high bits of the expression.

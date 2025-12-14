@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:11: error: Could not find variable ``q1'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:12: error: Could not find variable ``q2'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:15: error: Could not find variable ``q1'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:16: error: Could not find variable ``q2'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:21: error: Unable to bind wire/reg/memory `q2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:21: error: Unable to bind wire/reg/memory `q1' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob046_dff8p\attempt_3\Prob046_dff8p_code.sv:21: error: Concatenation/replication may not have zero width in this context.
+7 error(s) during elaboration.

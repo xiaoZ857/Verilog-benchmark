@@ -1,0 +1,42 @@
+Below is a straightforward implementation that follows the specification:
+
+* 16‑bit register `q`
+* Byte‑enable `byteena[1]` writes to the upper byte (bits 15:8)
+* Byte‑enable `byteena[0]` writes to the lower byte (bits 7:0)
+* Synchronous, active‑low reset (`resetn`)
+* All updates happen on the **positive** edge of `clk`
+
+```verilog
+// 16‑bit register with byte‑enable and synchronous active‑low reset
+module TopModule (
+    input          clk,        // clock
+    input          resetn,     // active‑low synchronous reset
+    input  [1:0]   byteena,    // byte‑enable: [1] upper byte, [0] lower byte
+    input  [15:0]  d,          // data input
+    output reg [15:0] q         // 16‑bit output register
+);
+
+    // Positive‑edge triggered, synchronous logic
+    always @(posedge clk) begin
+        if (!resetn) begin
+            // Reset all bits to zero
+            q <= 16'h0000;
+        end else begin
+            // Upper byte
+            if (byteena[1])
+                q[15:8] <= d[15:8];
+            // Lower byte
+            if (byteena[0])
+                q[7:0] <= d[7:0];
+        end
+    end
+
+endmodule
+```
+
+**Explanation**
+
+* The `always @(posedge clk)` block guarantees that all assignments are synchronous to the clock.
+* The `if (!resetn)` clause performs a synchronous active‑low reset, clearing the register.
+* Each byte of `q` is updated only when its corresponding byte‑enable bit is high; otherwise the current value of that byte is retained.
+* This code uses a single 16‑bit register instead of instantiating 16 individual flip‑flops, which is functionally equivalent and more concise.

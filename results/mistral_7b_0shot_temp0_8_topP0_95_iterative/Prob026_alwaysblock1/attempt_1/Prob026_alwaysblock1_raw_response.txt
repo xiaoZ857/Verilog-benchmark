@@ -1,0 +1,51 @@
+ Here is the Verilog code for the TopModule which includes an AND gate using both `assign` statement and a combinational `always` block:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+// Using assign statement
+assign out_assign = a & b;
+
+// Using combinational always block
+always @(posedge clk) begin
+  if (a && b)
+    out_alwaysblock <= 1'b1;
+  else
+    out_alwaysblock <= 1'b0;
+end
+
+endmodule
+```
+
+In this example, I assume that there is no clock signal provided `clk`. If you want to make it positive edge-triggered, you need to add a clock input and a reset signal as follows:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input reset,
+  input a,
+  input b,
+  output reg out_assign,
+  output reg out_alwaysblock
+);
+
+// Using assign statement
+assign out_assign = a & b;
+
+// Using combinational always block
+always @(posedge clk and negedge reset) begin
+  if (~reset)
+    out_alwaysblock <= 1'b0;
+  else if (a && b)
+    out_alwaysblock <= 1'b1;
+  else
+    out_alwaysblock <= 1'b0;
+end
+
+endmodule
+```

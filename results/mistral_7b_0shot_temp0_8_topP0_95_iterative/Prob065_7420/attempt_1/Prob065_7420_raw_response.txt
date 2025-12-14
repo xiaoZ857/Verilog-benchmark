@@ -1,0 +1,40 @@
+ Here is a simple Verilog implementation for the 7420 chip, which contains two 4-input NAND gates:
+
+```verilog
+module nand_gate (
+    input a,
+    input b,
+    input c,
+    input d,
+    output y
+);
+
+    assign y = ~(a & b & c & d);
+
+endmodule
+
+module TopModule (
+    input p1a,
+    input p1b,
+    input p1c,
+    input p1d,
+    output p1y,
+    input p2a,
+    input p2b,
+    input p2c,
+    input p2d,
+    output p2y
+);
+
+    nand_gate nand1 (p1a, p1b, p1c, p1d, p1y);
+    nand_gate nand2 (p2a, p2b, p2c, p2d, p2y);
+
+endmodule
+```
+
+This code defines the `nand_gate` module that implements a 4-input NAND gate and the `TopModule` which contains two instances of the nand_gate to emulate the 7420. The inputs and outputs in this implementation are named according to the input/output pins on the actual 7420 IC:
+
+- p1a, p1b, p1c, p1d for the first NAND gate's inputs
+- p1y for the first NAND gate's output
+- p2a, p2b, p2c, p2d for the second NAND gate's inputs
+- p2y for the second NAND gate's output

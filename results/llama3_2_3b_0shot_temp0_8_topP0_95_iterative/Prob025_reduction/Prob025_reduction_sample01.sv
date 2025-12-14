@@ -1,0 +1,21 @@
+
+module TopModule (
+    input [7:0] in,
+    output parity
+);
+
+    wire out[1:0];
+
+    parity_calculator calc(
+        .in(in),
+        .out(out)
+    );
+
+    assign out[1] = in[0]; // Most significant bit of output is data bit from input
+    assign out[0]  = ~in[7]; // Least significant bit of output is parity bit
+
+    assign parity = !~(out[0]); // Fix: Use parentheses for operator precedence
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

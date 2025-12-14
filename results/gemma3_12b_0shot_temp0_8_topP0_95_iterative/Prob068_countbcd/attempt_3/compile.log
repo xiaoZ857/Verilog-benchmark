@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:33: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd1] is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:35: error: ena['sd1] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd1] is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:47: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd2] is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:49: error: ena['sd2] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd2] is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:61: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd3] is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:63: error: ena['sd3] is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob068_countbcd\attempt_3\Prob068_countbcd_code.sv:5:      : ena['sd3] is declared here as wire.
+6 error(s) during elaboration.

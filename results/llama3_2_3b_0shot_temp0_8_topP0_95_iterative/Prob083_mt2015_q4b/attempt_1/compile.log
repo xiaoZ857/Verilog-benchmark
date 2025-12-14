@@ -1,0 +1,29 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:31: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:34: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:37: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:40: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:43: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:46: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:49: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:52: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:55: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:58: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:61: error: z is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob083_mt2015_q4b\attempt_1\Prob083_mt2015_q4b_code.sv:10:      : z is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob083_mt2015_q4b_test.sv:89: warning: Instantiating module TopModule with dangling input port 1 (clk) floating.
+11 error(s) during elaboration.

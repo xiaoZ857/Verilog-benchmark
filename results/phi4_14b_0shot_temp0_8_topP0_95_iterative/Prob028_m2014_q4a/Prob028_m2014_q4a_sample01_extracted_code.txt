@@ -1,0 +1,6 @@
+always @(*) begin
+  if (ena)
+    q <= d;  // Capture the value of 'd' at 'q' when 'ena' is high
+end
+
+endmodule

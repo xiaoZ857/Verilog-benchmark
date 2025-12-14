@@ -1,0 +1,46 @@
+Here's an implementation of a NOT gate using Verilog:
+
+```verilog
+// Define the NOT gate module
+module NotGate(
+    // Input signal
+    input in,
+
+    // Output signal
+    output out
+);
+
+    // Assign the NOT operation to the output
+    assign out = !in;
+
+endmodule // End of NotGate module definition
+```
+
+In this code:
+
+- The `NotGate` is a module with two inputs: one for the input signal (`in`) and none explicitly, but you can add some other inputs as needed.
+- The `out` signal is an output that will hold the result of the NOT operation on the input signal.
+
+The `!` operator in Verilog is used to perform a NOT (inversion) operation on its operand. 
+
+You can now use this module in your top-level design by instantiating it:
+
+```verilog
+module TopModule (
+    // Input signal
+    input in,
+
+    // Output signal
+    output out
+);
+
+    // Instantiate the NotGate module
+    NotGate not_gate(
+        .in(in),
+        .out(out)
+    );
+
+endmodule // End of TopModule module definition
+```
+
+This instantiation will make `not_gate` a child module of `TopModule`, connecting its inputs and outputs to those of `TopModule`.

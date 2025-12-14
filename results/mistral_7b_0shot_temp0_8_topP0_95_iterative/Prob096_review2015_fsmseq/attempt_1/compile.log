@@ -1,0 +1,27 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 22
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:10: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:10: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:23: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:23: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:29: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:30: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:35: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:37: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:38: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:38: error: Invalid module instantiation
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:40: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:41: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:46: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:47: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:48: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:49: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:54: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:55: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:55: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:56: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob096_review2015_fsmseq_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob096_review2015_fsmseq_test.sv:12: error: invalid module item.

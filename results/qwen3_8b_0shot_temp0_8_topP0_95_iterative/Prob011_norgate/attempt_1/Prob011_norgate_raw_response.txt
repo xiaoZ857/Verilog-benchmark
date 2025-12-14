@@ -1,0 +1,41 @@
+Here's a complete and correct implementation of a **NOR gate** in Verilog, as per your specifications:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+  assign out = ~(a | b);
+endmodule
+```
+
+---
+
+### 🔍 Explanation
+
+- **Inputs:** `a` and `b` are single-bit inputs.
+- **Output:** `out` is a single-bit output representing the result of the NOR operation.
+- **NOR Logic:** A NOR gate is equivalent to the logical negation of an OR gate. In Verilog, this is expressed using the operator `~|`, which computes the bitwise NOR of the two inputs.
+
+---
+
+### 📌 Truth Table
+
+| a | b | out |
+|---|---|-----|
+| 0 | 0 |  1  |
+| 0 | 1 |  0  |
+| 1 | 0 |  0  |
+| 1 | 1 |  0  |
+
+This implementation correctly reflects the behavior of a NOR gate for all possible input combinations.
+
+---
+
+### ✅ Notes
+
+- This is a **combinational logic** module, so no clock or synchronous behavior is required.
+- The `assign` statement is used for continuous assignment, which is appropriate for this type of logic gate.
+
+This module is suitable for synthesis and simulation in standard Verilog environments.

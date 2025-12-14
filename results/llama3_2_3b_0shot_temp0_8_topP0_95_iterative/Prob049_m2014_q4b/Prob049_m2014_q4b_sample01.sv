@@ -1,0 +1,19 @@
+
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+logic clk_en;
+assign clk_en = ~(ar | ~clk);
+
+// Update the current state (Q) on the rising edge of the clock
+always @(posedge clk or posedge clk_en) begin
+  cur_q <= d & ar_rst ? d : prev_q;
+end
+
+// Store the updated current state in the output q
+assign q = cur_q;
+
+// VERILOG-EVAL: endmodule not found

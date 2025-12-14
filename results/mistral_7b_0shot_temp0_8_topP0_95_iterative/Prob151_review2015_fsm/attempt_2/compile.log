@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_2\Prob151_review2015_fsm_code.sv:53: warning: implicit definition of wire 'q_shift_ena'.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_2\Prob151_review2015_fsm_code.sv:54: warning: implicit definition of wire 'last_shift_ena'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob151_review2015_fsm_ref.sv:57: syntax error
+I give up.

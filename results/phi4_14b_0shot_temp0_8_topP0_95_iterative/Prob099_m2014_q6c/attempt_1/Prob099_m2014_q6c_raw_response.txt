@@ -1,0 +1,56 @@
+To implement the Verilog module for this state machine using one-hot encoding, we need to derive the logic equations for `Y2` and `Y4`. These outputs correspond to the next-state signals for `y[2]` and `y[4]`, respectively.
+
+### State Transition Table
+
+Let's first translate the state transitions into a table:
+
+| Current State | Input (w) | Next State |
+|---------------|-----------|------------|
+| A (000001)    | 0         | B (000010) |
+| A (000001)    | 1         | A (000001) |
+| B (000010)    | 0         | C (000100) |
+| B (000010)    | 1         | D (001000) |
+| C (000100)    | 0         | E (010000) |
+| C (000100)    | 1         | D (001000) |
+| D (001000)    | 0         | F (100000) |
+| D (001000)    | 1         | A (000001) |
+| E (010000)    | 0         | E (010000) |
+| E (010000)    | 1         | D (001000) |
+| F (100000)    | 0         | C (000100) |
+| F (100000)    | 1         | D (001000) |
+
+### Logic Equations
+
+#### For `Y2`:
+- From A to B: `y[1] = 1, w = 0` -> `Y2 = y[1] & ~w`
+- From C to E: `y[3] = 1, w = 0` -> `Y2 = y[3] & ~w`
+
+Thus, the equation for `Y2` is:
+\[ Y2 = (y[1] \land \lnot w) \lor (y[3] \land \lnot w) \]
+
+#### For `Y4`:
+- From B to D: `y[2] = 1, w = 1` -> `Y4 = y[2] & w`
+- From C to D: `y[3] = 1, w = 1` -> `Y4 = y[3] & w`
+- From E to D: `y[4] = 1, w = 1` -> `Y4 = y[4] & w`
+- From F to D: `y[6] = 1, w = 1` -> `Y4 = y[6] & w`
+
+Thus, the equation for `Y4` is:
+\[ Y4 = (y[2] \land w) \lor (y[3] \land w) \lor (y[4] \land w) \lor (y[6] \land w) \]
+
+### Verilog Implementation
+
+```verilog
+module TopModule (
+  input [6:1] y,
+  input w,
+  output Y2,
+  output Y4
+);
+
+assign Y2 = (y[1] & ~w) | (y[3] & ~w);
+assign Y4 = (y[2] & w) | (y[3] & w) | (y[4] & w) | (y[6] & w);
+
+endmodule
+```
+
+This Verilog module correctly implements the logic for `Y2` and `Y4` based on the given state transitions using one-hot encoding.

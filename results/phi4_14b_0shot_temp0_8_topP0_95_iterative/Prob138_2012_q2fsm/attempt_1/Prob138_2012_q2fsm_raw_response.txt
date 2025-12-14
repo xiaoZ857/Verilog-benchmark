@@ -1,0 +1,61 @@
+To implement the described finite state machine (FSM) in Verilog, we'll define a module with separate `always` blocks for handling the next state logic and updating the current state. We'll also determine the FSM output `z`. Below is the complete Verilog code:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output reg z
+);
+
+  // State encoding
+  typedef enum logic [2:0] { A = 3'b000, B = 3'b001, C = 3'b010, D = 3'b011, E = 3'b100, F = 3'b101 } state_t;
+  
+  // Declare current and next state registers
+  state_t current_state, next_state;
+
+  // Next state logic
+  always @(*) begin
+    case (current_state)
+      A: next_state = (w == 1) ? B : A;
+      B: next_state = (w == 1) ? C : D;
+      C: next_state = (w == 1) ? E : D;
+      D: next_state = (w == 1) ? F : A;
+      E: next_state = (w == 0) ? D : E;
+      F: next_state = (w == 0) ? D : C;
+      default: next_state = A; // Default case to handle unexpected states
+    endcase
+  end
+
+  // State register update on clock edge
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A; // Reset state
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Output logic for 'z'
+  always @(*) begin
+    case (current_state)
+      E: z = 1'b0;  // Example output, modify as needed
+      F: z = 1'b1;  // Example output, modify as needed
+      default: z = 1'bX; // Undefined for other states, can be modified if specific logic is required
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding**: We use a `typedef` to define the state type `state_t`, which maps each state to a unique 3-bit binary code.
+  
+- **Next State Logic**: The `always @(*)` block computes the next state based on the current state and input signal `w`. The case statements handle transitions according to the specified conditions.
+
+- **State Register Update**: This `always @(posedge clk or posedge reset)` block updates the `current_state` register with `next_state` at every positive clock edge, unless a synchronous active-high reset occurs, in which case it resets to state A.
+
+- **Output Logic for `z`**: The output `z` is determined by another `always @(*)` block. Here, `z` is assigned based on the current state. You can adjust this logic according to specific requirements or conditions related to states E and F as placeholders in the example.
+
+This design assumes that only states E and F are relevant for determining the output `z`. Modify these assignments if additional conditions should be applied.

@@ -1,0 +1,23 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel,
+  output out
+);
+
+  assign out = sel ? b : a;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and lists the input and output signals.
+* **`input a, input b, input sel;`**: Declares `a`, `b`, and `sel` as input signals.
+* **`output out;`**: Declares `out` as the output signal.
+* **`assign out = sel ? b : a;`**: This is the core of the multiplexer. It uses the conditional operator (`? :`) which is equivalent to an `if-else` statement.
+    * `sel ? b : a`  means: "If `sel` is true (1), then `out` is assigned the value of `b`; otherwise (if `sel` is false or 0), `out` is assigned the value of `a`."  This directly implements the described behavior.
+* **`endmodule`**:  Marks the end of the module definition.
+
+This code is concise and directly translates the functional description of the 2-to-1 multiplexer into Verilog.  It's the standard and most efficient way to implement this logic.

@@ -1,0 +1,121 @@
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input areset,
+  output out
+);
+
+  // Define states
+  parameter A = 2'b00
+  parameter B = 2'b01
+
+  // State register
+  reg current_state;
+
+  // Output register
+  reg out;
+
+  // Synchronous reset
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= B;
+    end else begin
+      case (current_state)
+        A: begin
+          if (in == 0) begin
+            current_state <= B;
+          end else begin
+            current_state <= A;
+          end
+          out <= 0;
+        end
+        B: begin
+          if (in == 0) begin
+            current_state <= B;
+          end else begin
+            current_state <= A;
+          end
+          out <= 1;
+        end
+        default: begin
+          current_state <= B; // Default to a known state
+          out <= 1;
+        end
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (clk, in, areset, out);`**:  Defines the module with the specified input and output ports.
+
+2. **`parameter A = 2'b00` & `parameter B = 2'b01`**: Defines named constants for the states A and B. Using parameters makes the code more readable and maintainable.
+
+3. **`reg current_state;` & `reg out;`**: Declares the state register `current_state` and the output register `out` as `reg` types, as their values are updated within the `always` block.
+
+4. **`always @(posedge clk or posedge areset)`**:  This `always` block is triggered on the positive edge of the clock (`posedge clk`) or the positive edge of the asynchronous reset (`posedge areset`). This ensures that the state transitions and output updates happen synchronously with the clock and asynchronously during reset.
+
+5. **`if (areset) begin ... end else begin ... end`**: Implements the asynchronous reset. If `areset` is high, the state machine is immediately forced into state B.
+
+6. **`case (current_state)`**: This `case` statement determines the next state and output based on the current state and the input `in`.
+
+7. **State Transitions:**  Inside each state (A and B), the `if` statement determines the next state based on the value of the input `in`. The transitions are implemented according to the problem description.
+
+8. **Output Assignments:**  The `out` signal is assigned a value (0 for state A and 1 for state B) in each state. This is a characteristic of a Moore machine, where the output depends only on the current state.
+
+9. **`default: begin ... end`**: This `default` case handles unexpected or invalid state values. It forces the state machine back to a known state (B) and sets the output to 1. This is a good practice for robustness.
+
+**How to test this module:**
+
+You would need to write a testbench to simulate this module.  Here's a simple example of a testbench:
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg in;
+  reg areset;
+  wire out;
+
+  TopModule uut (
+    .clk(clk),
+    .in(in),
+    .areset(areset),
+    .out(out)
+  );
+
+  initial begin
+    clk = 0;
+    in = 0;
+    areset = 0;
+
+    // Apply asynchronous reset
+    areset = 1;
+    #10;
+    areset = 0;
+
+    // Test sequence
+    #10; in = 0; #10;
+    in = 0; #10;
+    in = 1; #10;
+    in = 1; #10;
+    in = 0; #10;
+    in = 0; #10;
+    in = 1; #10;
+    in = 1; #10;
+    $finish;
+  end
+
+  always #5 clk = ~clk;
+endmodule
+```
+
+This testbench will:
+
+1. Initialize the inputs.
+2. Apply an asynchronous reset.
+3. Apply a sequence of input

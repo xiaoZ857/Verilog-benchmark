@@ -1,0 +1,28 @@
+ Here is the Verilog code for the given description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output reg out_assign,
+  output reg out_always
+);
+
+// Using assign statements
+assign out_assign = (sel_b1 && sel_b2) ? b : a;
+
+// Using procedural if statement
+always @(posedge clk) begin
+    if ((sel_b1 && sel_b2)) begin
+        out_always <= b;
+    end else begin
+        out_always <= a;
+    end
+end
+
+endmodule
+```
+
+In the provided code, I have created two versions of the 2-to-1 multiplexer as you requested. The first one uses `assign` statements, and the second one uses an `always @(posedge clk)` block with procedural if statements for choosing between `a` and `b`. Note that, as per your request, I assumed positive edge-triggered signals unless explicitly stated otherwise, so I added a clock signal `clk` for the procedural version. However, since it was not provided in your description, I did not include it in the first version. You can adjust the code accordingly if you want to use posedge-triggered signals for both versions.

@@ -1,0 +1,41 @@
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+  // XOR gate using assign statement
+  assign out_assign = a ^ b;
+
+  // XOR gate using combinational always block
+  always_comb begin
+    out_always_comb = a ^ b;
+  end
+
+  // XOR gate using clocked always block
+  always @(posedge clk) begin
+    out_always_ff = a ^ b;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out_assign = a ^ b;`**: This is the simplest way to implement the XOR gate. The `assign` statement creates a continuous assignment, meaning the output `out_assign` is updated immediately whenever `a` or `b` changes.  The `^` operator represents the XOR operation.
+
+* **`always_comb begin ... end`**:  The `always_comb` block defines a combinational logic block.  It guarantees that the output `out_always_comb` is updated whenever any of the inputs (`a`, `b`) change. Inside the block, `out_always_comb = a ^ b;` performs the XOR operation and assigns the result to the output.  `always_comb` is a more modern and preferred way to define combinational logic compared to `always @(a, b)`.
+
+* **`always @(posedge clk) begin ... end`**: This `always` block is a clocked always block. The `@(posedge clk)` sensitivity list specifies that the block is triggered on the positive edge of the clock signal `clk`. Inside the block, `out_always_ff = a ^ b;` assigns the XOR result to the register `out_always_ff`.  Because `out_always_ff` is a `reg` and is assigned inside a clocked `always` block, it acts as a flip-flop. The output `out_always_ff` will only change on the positive edge of the clock and will hold its value between clock edges.  This introduces a one-clock-cycle delay compared to the other two implementations.
+
+**Key Differences:**
+
+* **`out_assign`**: Continuous assignment, immediate output update.
+* **`out_always_comb`**: Combinational logic, immediate output update.
+* **`out_always_ff`**: Registered output, output changes only on the positive edge of the clock, introducing a one-clock-cycle delay.
+
+This example clearly demonstrates the different ways to implement the same XOR logic in Verilog, highlighting the differences in timing and behavior.  The clocked `always` block introduces a flip-flop, leading to a delayed output.

@@ -1,0 +1,67 @@
+To implement the Verilog module `TopModule` based on the given simulation waveforms, we need to deduce the behavior of the sequential circuit by analyzing how the outputs `p` and `q` change with respect to inputs `clock` and `a`.
+
+### Observations:
+
+1. **Clock Transitions:**
+   - The circuit seems to be edge-triggered on the rising edge of the clock.
+
+2. **Initial State (0ns):**
+   - At `25ns`, when there is a rising edge of the clock, both `p` and `q` are set to 0, regardless of `a`.
+
+3. **When `a = 0`:**
+   - If `a` is 0 during a rising edge of the clock, `p` and `q` remain 0 (as seen from `25ns` to `55ns`).
+
+4. **When `a = 1`:**
+   - At `90ns`, when there's a rising edge with `a = 1`, both `p` and `q` are set to 1.
+   - This pattern repeats at `100ns` and `110ns`.
+
+5. **Behavior on Falling Edge:**
+   - At `115ns`, during the falling edge, `q` retains its value (set to 1), while `p` is reset to 0.
+
+6. **Hold Behavior:**
+   - Between clock edges, `p` and `q` retain their values.
+
+### Verilog Implementation:
+
+Based on these observations, we can implement the module as follows:
+
+```verilog
+module TopModule (
+    input clock,
+    input a,
+    output reg p,
+    output reg q
+);
+
+always @(posedge clock) begin
+    if (a == 1'b0) begin
+        // If 'a' is 0 on rising edge, reset both outputs.
+        p <= 1'b0;
+        q <= 1'b0;
+    end else begin
+        // If 'a' is 1 on rising edge, set both outputs to 1.
+        p <= 1'b1;
+        q <= 1'b1;
+    end
+end
+
+always @(negedge clock) begin
+    if (p == 1'b1 && q == 1'b1) begin
+        // On falling edge, reset 'p' but hold 'q'.
+        p <= 1'b0;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- The first `always` block captures the behavior on the rising edge of the clock:
+  - If `a` is 0, both `p` and `q` are reset to 0.
+  - If `a` is 1, both `p` and `q` are set to 1.
+
+- The second `always` block captures the behavior on the falling edge of the clock:
+  - When transitioning from a state where both `p` and `q` were 1 (due to `a = 1`), `p` is reset to 0 while `q` retains its value as 1.
+
+This implementation matches the observed waveform transitions.

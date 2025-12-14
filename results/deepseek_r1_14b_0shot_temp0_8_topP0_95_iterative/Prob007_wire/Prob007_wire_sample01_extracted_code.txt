@@ -1,0 +1,9 @@
+module TopModule (
+  input in,
+  output out
+);
+  
+  // Assign input 'in' directly to output 'out'
+  assign out = in;
+  
+endmodule

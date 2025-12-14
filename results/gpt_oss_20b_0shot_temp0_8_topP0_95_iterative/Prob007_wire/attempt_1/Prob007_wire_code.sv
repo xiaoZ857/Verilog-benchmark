@@ -1,0 +1,15 @@
+
+// TopModule : Passes the input directly to the output
+//            (acts exactly like a wire).
+
+module TopModule (
+    input  wire in,   // Input signal
+    output wire out   // Output signal (same as input)
+);
+
+// Continuous assignment – the output always reflects the input
+assign out = in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

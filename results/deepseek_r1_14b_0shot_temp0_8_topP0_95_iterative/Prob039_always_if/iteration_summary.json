@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob039_always_if",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 4\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_1\\Prob039_always_if_code.sv:10: warning: macro out_assign undefined (and assumed null) at this point.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_1\\Prob039_always_if_code.sv:10: syntax error\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_1\\Prob039_always_if_code.sv:10: error: Stray tic (`) here. Perhaps you put white space\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_1\\Prob039_always_if_code.sv:10:      : between the tic and preprocessor directive?\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob039_always_if_test.sv:1: error: `timescale directive can not be inside a module definition.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_1\\Prob039_always_if_code.sv:10: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob039_always_if_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob039_always_if_ref.sv:16: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_3\\Prob039_always_if_code.sv:15: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob039_always_if\\attempt_3\\Prob039_always_if_code.sv:15: error: Failed to evaluate event expression 'posedge clk'.\n2 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    if ((x[1] == 0 && x[2] == 0 && x[3] == 0 && x[4] == 0) ||
+        (x[1] == 0 && x[2] == 1 && x[3] == 0 && x[4] == 1) ||
+        (x[1] == 1 && x[2] == 1 && x[3] == 1 && x[4] == 1) ||
+        (x[1] == 1 && x[2] == 1 && x[3] == 1 && x[4] == 0)) begin
+      f = 1;
+    end else begin
+      f = 0;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [4:1] x, output logic f);`**:  This declares the module named `TopModule`. It has a 5-bit input `x` (indexed from 1 to 5) and a single-bit output `f`.  We use `logic` for `f` which is the modern Verilog data type.
+
+2. **`always_comb begin ... end`**:  This block defines a combinational logic block. The `always_comb` construct ensures that the logic is re-evaluated whenever any of the inputs change.
+
+3. **`if (...) begin ... end else begin ... end`**: This is a conditional statement that implements the logic derived from the K-map.
+    * **K-map Logic:**  The K-map indicates that `f` is 1 in the following cases:
+        * `x[1]x[2]x[3]x[4] = 0000` (don't care)
+        * `x[1]x[2]x[3]x[4] = 0110`
+        * `x[1]x[2]x[3]x[4] = 1111`
+        * `x[1]x[2]x[3]x[4] = 1110`
+    * **Verilog Implementation:** The `if` statement directly translates these K-map expressions into Verilog code.  The `else` part sets `f` to 0 for all other cases.
+
+**Alternative (Simplified) Implementation using Boolean Expression:**
+
+We can derive a simplified Boolean expression from the K-map. The terms are:
+
+* `x[1]x[2]x[3]x[4]` (when x[1]=0, x[2]=0, x[3]=0, x[4]=0)
+* `!x[3] & !x[4] & x[1] & (x[2] & !x[3] & !x[4])`
+* `x[1] & x[2] & x[3] & x[4]`
+* `x[1] & x[2] & x[3] & !x[4]`
+
+This simplifies to:
+
+```verilog
+module TopModule (
+  input [4:1] x,
+  output logic f
+);
+
+  always_comb begin
+    f = (x[1] & x[2] & x[3] & x[4]) |
+        (x[1] & x[2] & x[3] & !x[4]) |
+        (!x[3] & !x[4] & x[1] & (x[2]));
+  end
+
+endmodule
+```
+
+This alternative is functionally equivalent but might be more efficient because it reduces the number of terms.  The first solution is easier to understand and directly maps to the K-map.
+**How to Test:**
+
+To test this module, you would create a testbench that applies different input combinations to `x` and verifies that the output `f` matches the expected values based on the K-map.  A basic testbench might look like this:
+
+```verilog
+module TopModule_tb;
+  logic [4:1] x;
+  logic f;
+
+  TopModule uut (
+    .x(x),
+    .f(f)
+  );
+
+  initial begin
+    // Test cases
+    x = 5'b0000; #10;  $display("x=%b, f=%b", x, f);  // Expected: 0
+    x = 5

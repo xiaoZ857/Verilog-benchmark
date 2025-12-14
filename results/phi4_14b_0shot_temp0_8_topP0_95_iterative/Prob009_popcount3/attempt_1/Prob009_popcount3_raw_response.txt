@@ -1,0 +1,41 @@
+To implement a Verilog module that performs a population count on a 3-bit input vector, we need to determine the number of '1's present in the input and represent this count as a 2-bit output. Here is how you can design such a module:
+
+```verilog
+module TopModule (
+    input [2:0] in,
+    output reg [1:0] out
+);
+
+    always @(*) begin
+        case (in)
+            3'b000: out = 2'b00; // 0 ones
+            3'b001, 3'b010, 3'b100: out = 2'b01; // 1 one
+            3'b011, 3'b101, 3'b110: out = 2'b10; // 2 ones
+            3'b111: out = 2'b11; // 3 ones
+            default: out = 2'b00; // Should never reach here due to case statement coverage
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Module Definition**: 
+   - `TopModule` is defined with a 3-bit input vector `in` and a 2-bit output vector `out`.
+
+2. **Output Register**:
+   - The output `out` is declared as an `output reg` because it will be assigned values within procedural blocks like `always`.
+
+3. **Combinational Logic**:
+   - A combinational logic block (`always @(*)`) is used to ensure that the value of `out` is updated whenever any input changes.
+
+4. **Case Statement**:
+   - The case statement evaluates each possible 3-bit input vector.
+   - Each combination of inputs and corresponding outputs is explicitly listed for clarity:
+     - If `in` is `000`, there are 0 ones, so `out` is `00`.
+     - If `in` is `001`, `010`, or `100`, there is 1 one, so `out` is `01`.
+     - If `in` is `011`, `101`, or `110`, there are 2 ones, so `out` is `10`.
+     - If `in` is `111`, there are 3 ones, so `out` is `11`.
+
+This design efficiently implements a population count for a 3-bit input using Verilog's case statement to map input vectors to their respective output counts.

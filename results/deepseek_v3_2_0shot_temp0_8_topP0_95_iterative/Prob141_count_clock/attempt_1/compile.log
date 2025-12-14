@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:11: syntax error
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:12: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:12:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:12: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:12:      : between the tic and preprocessor directive?
+I give up.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:12: warning: macro ena undefined (and assumed null) at this point.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_1\Prob141_count_clock_code.sv:12: warning: macro reset undefined (and assumed null) at this point.

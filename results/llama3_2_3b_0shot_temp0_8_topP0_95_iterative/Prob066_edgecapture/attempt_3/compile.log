@@ -1,0 +1,23 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 16
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob066_edgecapture_test.sv:2: error: macro names cannot be directive keywords ('`define'); replaced with nothing.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob066_edgecapture_test.sv:3: error: macro names cannot be directive keywords ('`define'); replaced with nothing.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:19: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:19: error: malformed statement
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:20: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:23: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:24: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:26: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:30: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:34: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:35: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:40: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:40: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:40: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:40: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob066_edgecapture\attempt_3\Prob066_edgecapture_code.sv:46: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob066_edgecapture_test.sv:2: syntax error
+I give up.

@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob079_fsm3onehot\attempt_1\Prob079_fsm3onehot_code.sv:28: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob079_fsm3onehot\attempt_1\Prob079_fsm3onehot_code.sv:6:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob079_fsm3onehot\attempt_1\Prob079_fsm3onehot_code.sv:16: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob079_fsm3onehot\attempt_1\Prob079_fsm3onehot_code.sv:16: error: Failed to evaluate event expression 'posedge clk'.
+3 error(s) during elaboration.

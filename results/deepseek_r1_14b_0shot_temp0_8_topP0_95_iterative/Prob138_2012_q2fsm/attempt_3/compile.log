@@ -1,0 +1,19 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 14
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:17: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:10: error: Syntax error in typedef clause.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:19: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:19: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:6: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:74: error: Malformed conditional expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:37: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:37: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:38: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:10: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:10: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:18: error: Incomprehensible case expression.

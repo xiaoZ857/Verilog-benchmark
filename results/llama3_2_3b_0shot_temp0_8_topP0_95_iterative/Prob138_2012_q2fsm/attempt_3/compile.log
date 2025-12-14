@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:11: warning: extra digits given for sized binary constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:12: warning: extra digits given for sized binary constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:13: warning: extra digits given for sized binary constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:13: warning: Numeric constant truncated to 2 bits.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:14: warning: extra digits given for sized binary constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:14: warning: Numeric constant truncated to 2 bits.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:15: warning: extra digits given for sized binary constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:15: warning: Numeric constant truncated to 2 bits.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:16: warning: extra digits given for sized binary constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_3\Prob138_2012_q2fsm_code.sv:16: warning: Numeric constant truncated to 2 bits.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:70: warning: Port 4 (z) of TopModule expects 7 bits, got 1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:70:        : Padding 6 high bits of the port.

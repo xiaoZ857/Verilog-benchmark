@@ -1,0 +1,56 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output reg shift_ena,
+  output reg counting,
+  input done_counting,
+  output reg done,
+  input ack
+);
+always @(posedge clk) begin
+  if (reset) begin
+    state <= IDLE;
+    shift_ena <= 0;
+    counting <= 0;
+  end
+  else begin
+    case (state)
+      IDLE:
+        if (data == 4'b1101 && start_seq_counter < 4) begin
+          start_seq_counter += 1;
+        end
+        else begin
+          start_seq_counter <= 0;
+        end
+      START_SEQ:
+        if (start_seq_counter == 4) begin
+          shift_ena <= 1; // Start shifting for delay duration
+          counting <= 4; // Set delay counter to 4
+          start_seq_counter <= 0;
+        end
+      SHIFT:
+        if (counting > 0) begin
+          counting -= 1;
+        end
+      COUNTING:
+        if (done_counting == 1 && counting == 0) begin
+          done <= 1; // Notify user the timer has timed out
+        end
+      DONE:
+        if (ack == 1) begin
+          state <= IDLE;
+        end
+    endcase
+  end
+end
+
+always @(posedge clk) if (shift_ena) begin
+  counting <= counting + 1; // Increment delay counter for shifting period
+end
+
+assign q_shift_ena = shift_ena != last_shift_ena;
+assign last_shift_ena = shift_ena;
+
+// VERILOG-EVAL: endmodule not found

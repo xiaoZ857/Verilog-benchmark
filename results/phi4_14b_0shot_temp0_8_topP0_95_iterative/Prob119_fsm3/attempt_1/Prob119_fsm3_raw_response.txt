@@ -1,0 +1,96 @@
+To implement the described Moore state machine using Verilog, we need to design a module that adheres to the specified state transition table. The module will have an asynchronous reset (`areset`) that initializes the FSM to state `A` on its positive edge.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset, // Asynchronous reset
+  output reg out     // Output signal
+);
+
+    // State encoding
+    typedef enum logic [1:0] {A, B, C, D} state_t;
+    state_t current_state, next_state;
+
+    // Next state logic and output generation
+    always_comb begin
+        case (current_state)
+            A: begin
+                out = 0; // Output for state A
+                if (!areset) begin
+                    next_state = in ? B : A;
+                end else begin
+                    next_state = A; // Reset to A
+                end
+            end
+            
+            B: begin
+                out = 0; // Output for state B
+                if (!areset) begin
+                    next_state = in ? B : C;
+                end else begin
+                    next_state = A; // Reset to A
+                end
+            end
+
+            C: begin
+                out = 0; // Output for state C
+                if (!areset) begin
+                    next_state = in ? D : A;
+                end else begin
+                    next_state = A; // Reset to A
+                end
+            end
+
+            D: begin
+                out = 1; // Output for state D
+                if (!areset) begin
+                    next_state = in ? B : C;
+                end else begin
+                    next_state = A; // Reset to A
+                end
+            end
+            
+            default: begin
+                out = 0;
+                if (!areset) begin
+                    next_state = A;
+                end else begin
+                    next_state = A; // Default reset case
+                end
+            end
+        endcase
+    end
+
+    // State register update logic
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            current_state <= A;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding:** 
+   - We use an enumerated type `state_t` with 2-bit values to encode the states (A, B, C, D).
+   
+2. **Asynchronous Reset (`areset`):**
+   - The asynchronous reset is checked in the next state logic.
+   - If `areset` is high on its positive edge, the FSM resets to state `A`.
+
+3. **Next State Logic:**
+   - Based on the current state and input signal `in`, we determine the next state using a `case` statement.
+   - The output for each state is specified according to the Moore machine's characteristics (output depends only on the current state).
+
+4. **State Register Update Logic:**
+   - We use an always block triggered by both the positive edge of the clock and the positive edge of `areset`.
+   - If `areset` is high, we reset the `current_state` to `A`. Otherwise, we update `current_state` with the value of `next_state`.
+
+This module correctly implements the state machine described in your problem statement.

@@ -1,0 +1,10 @@
+Here is the corrected module body:
+
+// Module for sign-extending an 8-bit number to 32 bits
+reg [7:0] temp;
+assign temp = in;
+reg [31:0] out;
+
+assign out = |temp[24:20], temp[19:15], temp[14:10], temp[9:5], temp[4:0], temp[23:22];
+
+endmodule

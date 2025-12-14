@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:35: warning: implicit definition of wire 'a_out1'.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:36: warning: implicit definition of wire 'a_out2'.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:38: warning: implicit definition of wire 'b_out1'.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:39: warning: implicit definition of wire 'b_out2'.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:43: warning: implicit definition of wire 'or_out'.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:47: warning: implicit definition of wire 'and_out'.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:50: error: 'z' has already been declared in this scope.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:5:      : It was declared here as a net.

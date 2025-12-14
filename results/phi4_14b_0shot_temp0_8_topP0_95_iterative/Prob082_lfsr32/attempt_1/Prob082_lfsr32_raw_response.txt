@@ -1,0 +1,41 @@
+To implement a 32-bit Galois Linear Feedback Shift Register (LFSR) with taps at bit positions 32, 22, 2, and 1 in Verilog, you can follow the module description provided. The reset is active high and synchronous, which means it will immediately set the LFSR to its initial value on a rising clock edge when asserted.
+
+Below is the Verilog code for the described LFSR:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+  // On every positive edge of the clock, update the state of the register.
+  always @(posedge clk) begin
+    if (reset) begin
+      // Reset condition: set the LFSR to 32'h1 when reset is high.
+      q <= 32'b0000_0000_0000_0000_0000_0000_0000_0001;
+    end else begin
+      // Compute new value of q[31] based on taps and current state.
+      wire new_bit = ^({q[31], q[21], q[1], q[0]});
+      
+      // Shift all bits to the right by one position.
+      q <= {new_bit, q[31:1]};
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs**: The module `TopModule` has three ports: a clock (`clk`), a reset signal (`reset`), and an output register `q` (32 bits).
+  
+- **Reset Logic**:
+  - The LFSR is initialized to `32'h1` when the `reset` signal is high. This is done using a synchronous reset inside the always block triggered on the positive edge of the clock.
+  
+- **LFSR Operation**:
+  - On each positive clock edge, if not in reset, calculate the new bit (`new_bit`) to be inserted into `q[31]`.
+  - The new bit calculation uses an XOR operation across taps at positions 32 (which is effectively q[31]), 22 (q[21]), 2 (q[1]), and 1 (q[0]).
+    - In Verilog, the `^` operator represents bitwise XOR over all bits of a concatenated vector.
+  - The register `q` is then shifted right by one position with the new bit being placed at the most significant bit (`q[31]`).
+
+This setup ensures that your LFSR works as specified, using a Galois configuration.

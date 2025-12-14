@@ -1,0 +1,26 @@
+    // Flip‑flop outputs (state bits), initialized to zero
+    reg  q1 = 1'b0, q2 = 1'b0, q3 = 1'b0;
+
+    // D‑input combinational logic
+    wire d1, d2, d3;
+
+    // 1st gate: XOR (second input is the FF’s own output)
+    assign d1 = x ^ q1;
+
+    // 2nd gate: AND (second input is complement of its FF’s output)
+    assign d2 = x & ~q2;
+
+    // 3rd gate: OR (second input is complement of its FF’s output)
+    assign d3 = x | ~q3;
+
+    // Clocked process for D flip‑flops
+    always @(posedge clk) begin
+        q1 <= d1;
+        q2 <= d2;
+        q3 <= d3;
+    end
+
+    // NOR of flip‑flop outputs
+    assign z = ~(q1 | q2 | q3);
+
+endmodule

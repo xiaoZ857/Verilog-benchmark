@@ -1,0 +1,90 @@
+To implement the finite-state machine (FSM) based on the provided state table, we'll use a Verilog module with a synchronous active high reset. The FSM has three states (`000`, `001`, `010`, `011`, and `100`) which will be represented by a 3-bit register. Here's how you can implement it:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input x,
+    output reg z
+);
+
+    // State encoding
+    parameter S0 = 3'b000; // State 0
+    parameter S1 = 3'b001; // State 1
+    parameter S2 = 3'b010; // State 2
+    parameter S3 = 3'b011; // State 3
+    parameter S4 = 3'b100; // State 4
+
+    reg [2:0] y; // Current state register
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            // Synchronous active high reset
+            y <= S0;
+        end else begin
+            case (y)
+                S0: begin
+                    if (x == 1'b0) 
+                        y <= S0;
+                    else 
+                        y <= S1;
+                    z <= 1'b0;
+                end
+
+                S1: begin
+                    if (x == 1'b0) 
+                        y <= S1;
+                    else 
+                        y <= S4;
+                    z <= 1'b0;
+                end
+
+                S2: begin
+                    if (x == 1'b0) 
+                        y <= S2;
+                    else 
+                        y <= S1;
+                    z <= 1'b0;
+                end
+
+                S3: begin
+                    if (x == 1'b0)
+                        y <= S1;
+                    else 
+                        y <= S2;
+                    z <= x; // Output is 1 when transitioning from S3 and x=1
+                end
+
+                S4: begin
+                    if (x == 1'b0) 
+                        y <= S3;
+                    else 
+                        y <= S4;
+                    z <= 1'b1;
+                end
+
+                default: begin
+                    y <= S0; // Default case to handle any undefined states
+                    z <= 1'b0;
+                end
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **State Encoding:** The state machine has five states, which are represented using a 3-bit binary encoding: `S0` for `000`, `S1` for `001`, and so on.
+
+- **Register `y`:** This 3-bit register holds the current state of the FSM. It is updated synchronously with the positive edge of the clock (`posedge clk`). A synchronous reset signal (`reset`) resets the state to `S0`.
+
+- **State Transition Logic:** The next state logic is implemented using a `case` statement that selects actions based on the current state stored in `y`. Each case handles transitions and output settings for each possible input `x`.
+
+- **Output `z`:** The output `z` is determined according to the transition rules provided:
+  - In state `000`, `001`, and `010`, `z` remains `0`.
+  - In state `011`, `z` follows `x`.
+  - In state `100`, `z` is always `1`.
+
+This design ensures that all transitions and outputs conform to the given state table.

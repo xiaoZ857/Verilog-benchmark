@@ -1,0 +1,26 @@
+
+// Bitwidth for the output
+const int BITWIDTH = 3;
+
+// Define the possible output values
+typedef enum reg [BITWIDTH-1:0] {
+    ZERO,
+    ONE,
+    TWO
+} OutputType;
+
+// Assign an output value to each bit position (starting from least significant)
+reg [BITWIDTH-1:0] pos;
+
+module TopModule (
+  input [7:0] in,
+  output reg [2:0] pos
+);
+
+// Implementation of the priority encoder
+always @(posedge clk) begin
+    pos = in[7:4]; // select the first high bit from most significant to least significant
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,60 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input w,
+  output z
+);
+always @(posedge clk or reset) begin
+    // Reset to initial states on clock rising edge and reset pulse
+    if (reset)
+        state <= 2'b00;
+    else 
+    case(state)
+        2'b00: // A (0)
+            if (!w && clk == 1)   // If no input is applied and clock transitions from 0 to 1
+                next_state <= 2'b01; // B
+            else if (w == 1)           // Apply transition based on current state and input w
+                next_state <= 2'b10; // C
+            else 
+                next_state <= 2'b00;
+        2'b01: // B
+            if (!w && clk == 1)   // If no input is applied and clock transitions from 0 to 1
+                next_state <= 2'b11; // D
+            else if (w == 1)           // Apply transition based on current state and input w
+                next_state <= 2'b00; // A
+            else 
+                next_state <= 2'b01;
+        2'b10: // C
+            if (!w && clk == 1)   // If no input is applied and clock transitions from 0 to 1
+                next_state <= 2'b12; // E
+            else if (w == 1)           // Apply transition based on current state and input w
+                next_state <= 2'b11; // D
+            else 
+                next_state <= 2'b10;
+        2'b11: // D
+            if (!w && clk == 1)   // If no input is applied and clock transitions from 0 to 1
+                next_state <= 2'b13; // F
+            else if (w == 1)           // Apply transition based on current state and input w
+                next_state <= 2'b00; // A
+            else 
+                next_state <= 2'b11;
+        2'b12: // E
+            if (!w && clk == 1)   // If no input is applied and clock transitions from 0 to 1
+                next_state <= 2'b12; // E (no change on first edge, wait for next edge)
+            else 
+                next_state <= 2'b11;
+        2'b13: // F
+            if (!w && clk == 1)   // If no input is applied and clock transitions from 0 to 1
+                next_state <= 2'b14; // C
+            else if (w == 1)           // Apply transition based on current state and input w
+                next_state <= 2'b00; // A
+            else 
+                next_state <= 2'b13;
+    endcase
+
+    state = next_state;
+
+    // Update output Z
+    z <= state;
+endmodule

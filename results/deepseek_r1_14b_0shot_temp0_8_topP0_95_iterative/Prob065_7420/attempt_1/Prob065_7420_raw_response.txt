@@ -1,0 +1,25 @@
+To implement the 7420 chip functionality in Verilog, we'll create a module with two NAND gates. Each gate takes four inputs and produces one output by computing the NAND operation.
+
+```verilog
+module TopModule (
+    input p1a,
+    input p1b,
+    input p1c,
+    input p1d,
+    output p1y,
+    input p2a,
+    input p2b,
+    input p2c,
+    input p2d,
+    output p2y
+);
+    
+    // Compute NAND for the first gate (p1y)
+    assign p1y = !(p1a & p1b & p1c & p1d);
+    
+    // Compute NAND for the second gate (p2y)
+    assign p2y = !(p2a & p2b & p2c & p2d);
+endmodule
+```
+
+This code defines two NAND gates. Each output is calculated as the negation of the AND operation on its respective four inputs, matching the 7420 chip's functionality.

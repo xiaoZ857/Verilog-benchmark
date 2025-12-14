@@ -1,0 +1,18 @@
+  // State encoding: 0 = walk left, 1 = walk right
+  reg state;
+
+  // State transition logic (Moore machine)
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Asynchronous reset: walk left
+      state <= 1'b0;
+    end else if (bump_left | bump_right) begin
+      // Any bump toggles the direction
+      state <= ~state;
+    end
+  end
+
+  // Output logic (Moore outputs depend only on state)
+  assign walk_left  = (state == 1'b0);
+  assign walk_right = (state == 1'b1);
+endmodule

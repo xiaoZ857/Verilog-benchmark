@@ -1,0 +1,52 @@
+
+//=====================================================================
+//  TopModule : Reverse the byte order of a 32‑bit vector
+//=====================================================================
+//  Author : OpenAI ChatGPT
+//  Date   : 2025‑12‑13
+//
+//  Description:
+//    The module takes a 32‑bit input vector 'in' and produces an output
+//    'out' where the byte order is reversed:
+//      out[7:0]   = in[31:24]
+//      out[15:8]  = in[23:16]
+//      out[23:16] = in[15:8]
+//      out[31:24] = in[7:0]
+//
+//    The design is fully combinational – no clock is used.
+//    If a synchronous version is required, uncomment the block below
+//    and add a 'clk' input to the module interface.
+//
+//---------------------------------------------------------------------
+
+module TopModule (
+    input  wire [31:0] in,   // 32‑bit input vector
+    output wire [31:0] out   // 32‑bit output vector (bytes reversed)
+);
+
+    // ---------------------------------------------------------------
+    //  Combinational byte‑reverse
+    // ---------------------------------------------------------------
+    assign out = { in[7:0],   // LSB of output comes from MSB of input
+                   in[15:8],  // ...
+                   in[23:16],
+                   in[31:24]  // MSB of output comes from LSB of input
+                 };
+
+    // ---------------------------------------------------------------
+    //  OPTIONAL: Synchronous (clocked) version
+    // ---------------------------------------------------------------
+    /*
+    input  wire        clk;               // Positive‑edge clock
+    reg    [31:0]      out_reg;
+
+    assign out = out_reg;
+
+    always @(posedge clk) begin
+        out_reg <= { in[7:0],  in[15:8],  in[23:16],  in[31:24] };
+    end
+    */
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

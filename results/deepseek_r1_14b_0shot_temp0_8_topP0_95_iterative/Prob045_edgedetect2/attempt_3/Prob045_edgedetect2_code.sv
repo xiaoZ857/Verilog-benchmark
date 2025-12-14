@@ -1,0 +1,28 @@
+
+// timescale 1ns / 1ps
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+always @ (posedge clk)
+begin
+  for (int i = 0; i < 8; i++) begin
+    if (in[i] != in_prev[i]) begin
+      anyedge[i] <= 1;
+    end else begin
+      anyedge[i] <= 0;
+    end
+  end
+end
+
+reg [7:0] in_prev = 0;
+
+always @ (posedge clk)
+  in_prev <= in;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

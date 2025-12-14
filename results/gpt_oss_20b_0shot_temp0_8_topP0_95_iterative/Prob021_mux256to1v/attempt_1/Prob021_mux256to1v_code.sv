@@ -1,0 +1,19 @@
+
+// -------------------------------------------------------------
+// 4‑bit wide, 256‑to‑1 multiplexer
+//  in  : 1024‑bit packed vector (256×4‑bit inputs)
+//  sel : 8‑bit address (0 … 255)
+//  out : 4‑bit selected input
+// -------------------------------------------------------------
+module TopModule (
+    input  wire [1023:0] in,   // 256×4‑bit packed inputs
+    input  wire [7:0]    sel,  // 8‑bit selection signal
+    output wire [3:0]    out   // 4‑bit output
+);
+
+    // Variable part‑select: 4 bits starting at offset sel*4
+    assign out = in[sel*4 +: 4];
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

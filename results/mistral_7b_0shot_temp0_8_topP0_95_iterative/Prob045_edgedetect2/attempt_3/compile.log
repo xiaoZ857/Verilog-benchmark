@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:16: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:18: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:20: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:20: error: Invalid module instantiation
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:22: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:23: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob045_edgedetect2\attempt_3\Prob045_edgedetect2_code.sv:26: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob045_edgedetect2_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob045_edgedetect2_ref.sv:17: syntax error
+I give up.

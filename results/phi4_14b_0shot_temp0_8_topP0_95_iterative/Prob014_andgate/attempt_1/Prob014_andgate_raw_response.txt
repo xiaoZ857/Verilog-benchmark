@@ -1,0 +1,26 @@
+To implement an AND gate in Verilog, you need to define a simple module with two inputs and one output. The output will be high only when both inputs are high. Below is the implementation for such a module:
+
+```verilog
+module TopModule (
+    input wire a,
+    input wire b,
+    output wire out
+);
+
+  // Implement the AND logic
+  assign out = a & b;
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Output:**
+  - `input wire a`: First input to the AND gate.
+  - `input wire b`: Second input to the AND gate.
+  - `output wire out`: The output of the AND gate.
+
+- **Logic Implementation:**
+  - The `assign` statement is used here for combinational logic. It assigns the result of the bitwise AND operation (`a & b`) to `out`.
+  - The `&` operator performs a logical AND on its operands, which means `out` will be high (1) only when both `a` and `b` are high (1).
+
+This module provides a straightforward implementation of an AND gate using Verilog.

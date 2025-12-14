@@ -1,0 +1,17 @@
+```verilog
+module TopModule (
+  output out
+);
+
+  assign out = 0;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (output out);`**:  This line defines the Verilog module named `TopModule` and declares `out` as the single output signal.
+* **`assign out = 0;`**: This is a continuous assignment statement.  It assigns the value 0 to the `out` signal.  Because it's a continuous assignment, `out` will always be 0 whenever the simulation runs.  No clock signal or other inputs are needed, fulfilling the requirement of no inputs.
+* **`endmodule`**: This line marks the end of the module definition.
+
+This is the simplest possible Verilog module that satisfies the given requirements.

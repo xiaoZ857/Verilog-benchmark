@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output q,
+  output state
+);
+always @(posedge clk) begin
+    if (a ^ b) begin
+        // XOR operation
+        q <= ~q;
+    end else if ((q == 1 && a == 0) || (q == 0 && b == 0)) begin
+        // Edge-triggered behavior when one of the inputs changes from 1 to 0
+        q <= !q;
+    end else begin
+        // Inputs are equal or both are 0, don't change Q
+        q <= q;
+    end
+    state <= a ^ b; // Output state is XOR of the two inputs
+end
+
+`timescale 1ns / 1ps
+reg q_ff;
+assign q = q_ff;
+always @(posedge clk) q_ff <= q;
+
+// DFF for Q flip-flop
+reg q_dff;
+assign q = q_dff;
+always @(posedge clk) q_dff <= (a ^ b) ? ~q : q;
+
+endmodule

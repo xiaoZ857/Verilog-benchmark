@@ -1,0 +1,46 @@
+To implement an XOR gate in three different ways as described, we can use Verilog. The module will have two inputs (`a` and `b`), a clock input (`clk`), and three outputs: one for each method of implementation.
+
+Here's how you can structure the Verilog code for the `TopModule`:
+
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output out_assign,
+  output reg out_always_comb,
+  output reg out_always_ff
+);
+
+  // XOR using assign statement
+  assign out_assign = a ^ b;
+
+  // XOR using combinational always block
+  always @(*) begin
+    out_always_comb = a ^ b;
+  end
+
+  // XOR using clocked always block (with flip-flop for output delay)
+  always @(posedge clk) begin
+    out_always_ff <= a ^ b;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Assign Statement (`out_assign`):**
+   - The `assign` statement directly computes the XOR of inputs `a` and `b`.
+   - This is a combinational logic implementation, meaning it updates immediately when `a` or `b` changes.
+
+2. **Combinational Always Block (`out_always_comb`):**
+   - The `always @(*)` block is used for combinational logic.
+   - It behaves similarly to the `assign` statement, updating the output whenever any of its sensitive inputs change.
+
+3. **Clocked Always Block (`out_always_ff`):**
+   - The `always @(posedge clk)` block is a sequential logic implementation.
+   - It uses a flip-flop to store the XOR result, causing the output to update only on the rising edge of the clock signal.
+   - This introduces a delay in the output relative to changes in `a` or `b`.
+
+Each method provides a different way to implement the XOR functionality, demonstrating both combinational and sequential logic designs.

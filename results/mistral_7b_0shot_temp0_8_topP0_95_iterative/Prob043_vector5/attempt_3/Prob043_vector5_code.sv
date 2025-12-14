@@ -1,0 +1,19 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  input e,
+  output [24:0] out
+);
+always @(posedge clk) begin
+    int i;
+    for (i = 0; i < 25; i++) {
+        out[i] = a^i & b^(i%2) & c^(i%3) & d^(i%4) & e^(i%5);
+    }
+end
+
+// Declare and initialize the inputs if needed. For example:
+reg a, b, c, d, e; // Initialize as appropriate (0 or 1)
+input clk;

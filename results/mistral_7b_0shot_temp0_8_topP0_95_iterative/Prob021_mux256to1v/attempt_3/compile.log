@@ -1,0 +1,28 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 12
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:12: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:13: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:14: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:15: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:16: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:17: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:18: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:19: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:20: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:22: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:7:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:10: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob021_mux256to1v\attempt_3\Prob021_mux256to1v_code.sv:10: error: Failed to evaluate event expression 'posedge clk'.
+12 error(s) during elaboration.

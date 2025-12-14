@@ -1,0 +1,39 @@
+```verilog
+module TopModule (
+  input mode,
+  input too_cold,
+  input too_hot,
+  input fan_on,
+  output heater,
+  output aircon,
+  output fan
+);
+
+  // heater is on when mode is 1 (heating) and too_cold is 1
+  assign heater = mode & too_cold;
+
+  // aircon is on when mode is 0 (cooling) and too_hot is 1
+  assign aircon = ~mode & too_hot;
+
+  // fan is on if heater or aircon is on OR fan_on is 1
+  assign fan = heater | aircon | fan_on;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign heater = mode & too_cold;`**: This line uses the logical AND operator (`&`) to turn on the heater.  The heater is only on if the `mode` is heating (1) *and* it's too cold (`too_cold` is 1).
+* **`assign aircon = ~mode & too_hot;`**: This line turns on the air conditioner.  The `~mode` inverts the `mode` signal, so it's active when the mode is cooling (0).  The air conditioner turns on only when the mode is cooling *and* it's too hot (`too_hot` is 1).
+* **`assign fan = heater | aircon | fan_on;`**: This line uses the logical OR operator (`|`) to control the fan.  The fan is on if *any* of the following conditions are met:
+    * The heater is on (`heater`).
+    * The air conditioner is on (`aircon`).
+    * The user has explicitly requested the fan to be on (`fan_on`).
+
+**How it satisfies the requirements:**
+
+* **Heating Mode (mode = 1):**  The heater turns on when `too_cold` is 1. The air conditioner is always off because `~mode` is 0. The fan turns on when the heater is on or the user requests it.
+* **Cooling Mode (mode = 0):** The air conditioner turns on when `too_hot` is 1. The heater is always off because `mode` is 0.  The fan turns on when the air conditioner is on or the user requests it.
+* **Fan Control:**  The fan is always on if either the heater or air conditioner is on, or if the user requests it via `fan_on`.
+
+This Verilog module accurately implements the described thermostat logic.

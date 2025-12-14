@@ -1,0 +1,54 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input ena,
+  input [1:0] amount,
+  input [63:0] data,
+  output reg [63:0] q
+);
+
+  reg [63:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      shift_reg <= data;
+    end else if (ena) begin
+      case (amount)
+        2'b00: shift_reg <= {shift_reg[62:0], shift_reg[0]}; // Shift left by 1
+        2'b01: shift_reg <= {shift_reg[62:0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0]}; // Shift left by 8
+        2'b10: shift_reg <= {shift_reg[62:0], shift_reg[62]}; // Arithmetic shift right by 1.  Sign extension.
+        2'b11: shift_reg <= {shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0]}; // Arithmetic shift right by 8. Sign extension.
+        default: shift_reg <= shift_reg; // No shift, keep the current value
+      endcase
+    end else begin
+      shift_reg <= shift_reg; // keep the current value
+    end
+  end
+
+  assign q = shift_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [63:0] shift_reg;`**: Declares a 64-bit register `shift_reg` to hold the contents of the shift register.
+
+2. **`always @(posedge clk)`**: This block is triggered on the positive edge of the clock signal.
+
+3. **`if (load)`**: If the `load` signal is high, the `shift_reg` is loaded with the value of the `data` input.
+
+4. **`else if (ena)`**: If `load` is low and `ena` is high, the shift operation is performed.
+
+5. **`case (amount)`**:  A `case` statement is used to select the shift operation based on the value of the `amount` input.
+
+   * **`2'b00: shift_reg <= {shift_reg[62:0], shift_reg[0]};`**: Shifts left by 1 bit. The least significant bit is moved to the most significant bit.
+   * **`2'b01: shift_reg <= {shift_reg[62:0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0], shift_reg[0]};`**: Shifts left by 8 bits. The least significant 8 bits are moved to the most significant 8 bits.
+   * **`2'b10: shift_reg <= {shift_reg[62:0], shift_reg[62]};`**:  Arithmetic shift right by 1 bit.  The most significant bit (MSB) is duplicated to fill the vacated MSB position.  This performs sign extension.
+   * **`2'b11: shift_reg <= {shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0], shift_reg[62:0]};`**:  Arithmetic shift right by 8 bits. The MSB is duplicated to fill the vacated 8 MSB positions. This also performs sign extension.
+   * **`default: shift_reg <= shift_reg;`**: If the `amount` signal has an unexpected value, the shift register's value remains unchanged.
+
+6. **`else begin shift_reg <= shift_reg; end`**: If neither `load` nor `ena` is asserted, the shift register maintains its current value. This prevents unwanted changes when the module is idle.
+
+7. **`assign q =

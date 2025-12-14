@@ -1,0 +1,60 @@
+Here is the complete Verilog code for the described FSM:
+
+```verilog
+// Define constants for states and signals
+typedef enum logic[2:0]
+{
+    // States
+    A, B, C, D
+} state_t;
+
+// State table
+state_t state = 'a;  // Initialize state to A
+
+// Always block for state table
+always @(posedge clk)
+if (!resetn) state <= A; // Reset on active-low synchronous reset
+
+else
+begin
+    if (r[0] && !r[1] && !r[2]) state <= B;
+    else if (r[1] && !r[0] && !r[2]) state <= C;
+    else if (r[2] && !r[1] && !r[0]) state <= D;
+end
+
+// Always block for state flip-flops
+always @(posedge clk)
+if (!resetn) state_t::A;
+
+else
+begin
+    // Update g[i] signals based on current state and input r[i]
+    // Priority system used here: device 1 (g[0]) > device 2 (g[1]) > device 3 (g[2])
+    case(state)
+        A:      {g[0], g[1], g[2]} <= 'z; // No request, all signals set to zero
+        B:      if(r[0]) g[0] <= '1', g[1] <= 'z; else g[0] <= 'z;
+               else if(r[1]) g[1] <= '1', g[2] <= 'z; else g[1] <= 'z;
+               else g[2] <= '1';
+        C:      if(r[1]) g[1] <= '1', g[2] <= 'z; else g[1] <= 'z;
+               else if(r[0]) g[0] <= '1'; // Prevent device 3 from getting grant when device 2 is set
+               else g[0] <= 'z, g[2] <= '1;
+        D:      if(r[1]) g[1] <= '1', g[2] <= 'z; else g[1] <= 'z;
+               else if(r[0]) g[0] <= '1'; // Prevent device 3 from getting grant when device 2 is set
+               else g[0] <= 'z, g[2] <= '1;
+    endcase
+
+end
+
+// Output signals
+assign {g[0], g[1], g[2]} = {g[0], g[1], g[2]};
+```
+
+In this code:
+
+- The `state_t` type represents the states of the FSM. The enum values A, B, C, and D represent each state respectively.
+
+- The `always @ (posedge clk)` block for the state table updates the current state based on the input signals and outputs from previous time step. It sets the state to reset if the resetn signal is active-low, otherwise it follows the state transition logic specified in the problem description.
+
+- The `always @ (posedge clk)` block for the state flip-flops simply copies the value of state_t::A from the last time step.
+
+- The case statement in this always block for the state flip-flops updates the output signals g[i] based on the current state and input r[i]. The priority system is implemented here. Device 1 (g[0]) gets a grant if it's the only device that requests the resource. Otherwise, it will be granted if it has higher priority than other devices.

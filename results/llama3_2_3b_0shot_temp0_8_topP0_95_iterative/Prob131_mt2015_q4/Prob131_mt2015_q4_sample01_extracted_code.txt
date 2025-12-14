@@ -1,0 +1,13 @@
+Module TopModule (
+  input x,
+  input y,
+  output z
+); // A submodule and B submodule outputs are connected to a two-input AND gate respectively
+    A A_module1(x,y,z);
+    A A_module2(x,y,z);
+    B B_module1(x,y,z);
+    B B_module2(x,y,z);
+
+    assign z = ~(or(A_module1.z, A_module2.z));
+
+Endmodule: TopModule

@@ -1,0 +1,24 @@
+
+// 2‑input NOR gate
+// ------------------------------------
+//  a | b | out
+//  0 | 0 |  1
+//  0 | 1 |  0
+//  1 | 0 |  0
+//  1 | 1 |  0
+// ------------------------------------
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire a,      // First input
+    input  wire b,      // Second input
+    output wire out     // NOR of a and b
+);
+
+    // Combinational assignment
+    assign out = ~(a | b);
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

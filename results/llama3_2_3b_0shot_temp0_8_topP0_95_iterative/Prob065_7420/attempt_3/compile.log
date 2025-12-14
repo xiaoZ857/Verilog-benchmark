@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob065_7420_test.sv:2: error: macro names cannot be directive keywords ('`define'); replaced with nothing.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob065_7420_test.sv:3: error: macro names cannot be directive keywords ('`define'); replaced with nothing.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_3\Prob065_7420_code.sv:18: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_3\Prob065_7420_code.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob065_7420_test.sv:2: syntax error
+I give up.

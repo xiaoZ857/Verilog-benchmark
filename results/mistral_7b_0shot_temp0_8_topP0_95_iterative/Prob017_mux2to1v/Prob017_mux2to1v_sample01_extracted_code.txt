@@ -1,0 +1,10 @@
+`timescale 1ns / 1ps
+
+always @(posedge clk) begin
+  if (sel)
+    out = b;
+  else
+    out = a;
+end
+
+endmodule

@@ -1,0 +1,29 @@
+To implement a simple NOT gate using Verilog, you'll create a module named `TopModule`. This module will have one input signal (`in`) and one output signal (`out`). The behavior of the NOT gate is to invert the input: when the input is logic high (1), the output should be logic low (0), and vice versa. Here's how you can implement it:
+
+```verilog
+module TopModule (
+  input wire in,      // Input signal for the NOT gate
+  output reg out      // Output signal from the NOT gate
+);
+
+  // Combinational logic to invert the input
+  always @(*) begin
+    out = ~in;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Input and Output Declaration**: 
+  - `input wire in`: This is a single-bit input for the NOT gate.
+  - `output reg out`: The output uses `reg` because it's assigned inside an always block, even though this is combinatorial logic.
+
+- **Always Block**:
+  - `always @(*)`: This syntax specifies that the block should be executed whenever any of the signals in its sensitivity list change. Using `@(*)` (also known as "sensitive to all inputs") is suitable for combinational logic because it automatically infers dependencies on all signals within the block.
+
+- **Inversion Operation**:
+  - `out = ~in;`: The bitwise NOT operator (`~`) is used to invert the input signal. This means if `in` is 1, `out` becomes 0, and if `in` is 0, `out` becomes 1.
+
+This module will behave as a basic NOT gate in your digital design projects using Verilog.

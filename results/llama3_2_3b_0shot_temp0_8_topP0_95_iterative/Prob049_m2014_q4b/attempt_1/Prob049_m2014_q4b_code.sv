@@ -1,0 +1,35 @@
+
+// Define the D flip flop with a positive edge trigger and an asynchronous reset
+module TopModule(
+  input clk,
+  input d,
+  input ar, // Note: Ar should be Async Reset inverter, not active low
+  output logic q
+) {
+  // Initialize the current state (Q)
+  logic [1:0] prev_q = 2'b00;
+
+  // Create a new register to hold the current state
+  reg [1:0] cur_q = prev_q;
+
+  // Create an asynchronous reset signal for the flip flop
+  logic ar_rst = ~ar; // Inverter of active low ar
+
+  // Create a clock enable signal
+  logic clk_en;
+  assign clk_en = clk & ~ar_rst; // Reset when ar is asserted
+
+  // Update the current state (Q) on the rising edge of the clock
+  always @(posedge clk_en) begin
+    cur_q <= d & ar_rst ? d : prev_q;
+  end
+
+  // Store the updated current state in the output q
+  assign q = cur_q;
+
+  // Initialize the previous state with a default value (0)
+  initial prev_q = 2'b00;
+}
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

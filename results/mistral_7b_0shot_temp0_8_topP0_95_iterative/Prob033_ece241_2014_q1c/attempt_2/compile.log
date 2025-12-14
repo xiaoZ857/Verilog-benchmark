@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 12
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob033_ece241_2014_q1c_test.sv:97: error: port ``a'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob033_ece241_2014_q1c_test.sv:97: error: port ``b'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob033_ece241_2014_q1c_test.sv:97: error: port ``s'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob033_ece241_2014_q1c_test.sv:97: error: port ``overflow'' is not a port of top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:8: error: Could not find variable ``s['sd0]'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:9: error: Could not find variable ``s['sd7:'sd1]'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:12: error: Unable to bind wire/reg/memory `initial_state' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:12: error: Unable to elaborate condition expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:17: error: Unable to bind wire/reg/memory `s['sd7]' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:20: error: Could not find variable ``overflow'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:5: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob033_ece241_2014_q1c\attempt_2\Prob033_ece241_2014_q1c_code.sv:5: error: Failed to evaluate event expression 'posedge clk'.
+12 error(s) during elaboration.

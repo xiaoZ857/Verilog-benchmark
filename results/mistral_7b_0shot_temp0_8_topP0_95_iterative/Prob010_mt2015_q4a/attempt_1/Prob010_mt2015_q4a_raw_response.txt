@@ -1,0 +1,21 @@
+ Here is a simple Verilog implementation for your specified boolean function:
+
+```verilog
+module TopModule (
+  input logic x,
+  input logic y,
+  output logic z
+);
+
+assign z = (x ^ y) & x;
+
+endmodule
+```
+
+The above code describes a module named `TopModule` with two inputs: `x` and `y`, and one output: `z`. The assignment statement `assign z = (x ^ y) & x;` implements the specified boolean function.
+
+Here's a brief explanation of the code:
+
+- `input logic x, y` defines the input signals `x` and `y` as logic type with positive edge triggering (by default).
+- `output logic z` defines the output signal `z`.
+- The assignment statement `assign z = (x ^ y) & x;` calculates the specified boolean function: z = (x^y) & x.

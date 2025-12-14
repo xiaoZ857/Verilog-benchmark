@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob007_wire_test.sv:84: error: port ``in'' is not a port of top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob007_wire\attempt_1\Prob007_wire_code.sv:11: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob007_wire\attempt_1\Prob007_wire_code.sv:11: error: Unable to elaborate r-value: in
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob007_wire_test.sv:84: warning: Instantiating module TopModule with dangling input port 1 (clk) floating.
+3 error(s) during elaboration.

@@ -1,0 +1,55 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    for (int i = 0; i < 8; i++) begin
+      if (in[i] == 1 && prev_in[i] == 0) begin
+        pedge[i] = 1;
+      else begin
+        pedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [7:0] prev_in;`**:  This declares a register `prev_in` of size 8 bits. This register will store the input `in` from the *previous* clock cycle.  It's crucial for detecting the change from 0 to 1.
+
+2. **`always @(posedge clk) begin ... end`**: This `always` block is triggered on the positive edge of the clock signal (`clk`). This ensures that the detection logic executes synchronously with the clock.
+
+3. **`for (int i = 0; i < 8; i++) begin ... end`**: This loop iterates through each bit of the 8-bit input vector `in`.
+
+4. **`if (in[i] == 1 && prev_in[i] == 0) begin ... end`**: This is the core logic.  It checks two conditions:
+   - `in[i] == 1`:  The current input bit is 1.
+   - `prev_in[i] == 0`: The input bit was 0 in the previous clock cycle.
+   If *both* conditions are true, it means there's been a transition from 0 to 1.
+
+5. **`pedge[i] = 1;`**: If the transition is detected, the corresponding bit in the `pedge` output register is set to 1.
+
+6. **`else begin pedge[i] = 0; end`**:  If the transition is *not* detected (either the current bit is not 1, or it was also 0 in the previous cycle), the corresponding `pedge` bit is set to 0.
+
+7. **`prev_in = in;`**:  Crucially, at the end of each clock cycle, the current value of `in` is assigned to `prev_in`. This prepares `prev_in` to hold the previous value for the *next* clock cycle's comparison.
+
+**How it works (example):**
+
+Let's say `in` is initially `8'b00000000`.
+
+* **Cycle 1:** `in = 8'b00000000`, `prev_in = 8'b00000000`.  The `if` condition is always false, so `pedge` remains `8'b00000000`.  Then `prev_in` becomes `8'b00000000`.
+
+* **Cycle 2:** `in = 8'b00000001`, `prev_in = 8'b00000000`.  The first bit (bit 0) satisfies the `if` condition (`in[0] == 1 && prev_in[0] == 0`). So, `pedge[0]` becomes 1. All other bits of `pedge` remain 0.  Then `prev_in` becomes `8'b00000001`.
+
+* **Cycle 3:** `in = 8'b00000000`, `prev_in = 8'b00000001`.  No bit satisfies the condition in the loop.  `pedge` remains unchanged. `prev_in` becomes `8'b00000000`.
+
+* **Cycle 4:** `in = 8'b00000001`, `prev_in = 8'b00000000`. The first bit will trigger the condition again, so `pedge` will be 1 in the first bit and 0 in the rest.
+
+This pattern repeats, with a one-cycle delay for each detected transition.  The `pedge` output is delayed by one clock cycle relative to the input signal.

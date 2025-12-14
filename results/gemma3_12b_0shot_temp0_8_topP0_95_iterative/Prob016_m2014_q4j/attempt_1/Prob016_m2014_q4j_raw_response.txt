@@ -1,0 +1,106 @@
+```verilog
+module TopModule (
+  input [3:0] x,
+  input [3:0] y,
+  output [4:0] sum
+);
+
+  wire c0, c1, c2, c3;
+
+  // Instantiate the first full adder
+  full_adder fa0 (
+    .a(x[0]),
+    .b(y[0]),
+    .cin(0),
+    .sum(sum[0]),
+    .cout(c0)
+  );
+
+  // Instantiate the second full adder
+  full_adder fa1 (
+    .a(x[1]),
+    .b(y[1]),
+    .cin(c0),
+    .sum(sum[1]),
+    .cout(c1)
+  );
+
+  // Instantiate the third full adder
+  full_adder fa2 (
+    .a(x[2]),
+    .b(y[2]),
+    .cin(c1),
+    .sum(sum[2]),
+    .cout(c2)
+  );
+
+  // Instantiate the fourth full adder
+  full_adder fa3 (
+    .a(x[3]),
+    .b(y[3]),
+    .cin(c2),
+    .sum(sum[3]),
+    .cout(c3)
+  );
+
+  // Assign the overflow bit
+  assign sum[4] = c3;
+
+endmodule
+
+// Full adder module
+module full_adder (
+  input a,
+  input b,
+  input cin,
+  output sum,
+  output cout
+);
+
+  assign sum = a ^ b ^ cin;
+  assign cout = (a & b) | (a & cin) | (b & cin);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`TopModule`:**
+   - Takes two 4-bit inputs `x` and `y`.
+   - Outputs a 5-bit `sum` (4 bits for the sum, 1 bit for the overflow).
+   - Declares wires `c0`, `c1`, `c2`, and `c3` to represent the carry signals between the full adders.
+   - Instantiates four `full_adder` modules (`fa0`, `fa1`, `fa2`, `fa3`).  Each full adder handles one bit position.
+   - The `cin` (carry-in) of the first full adder (`fa0`) is connected to ground (0) because it's the least significant bit and has no carry-in.
+   - The carry-out of each full adder is connected to the carry-in of the next higher-order full adder.
+   - The overflow bit (`sum[4]`) is assigned the value of the carry-out of the most significant full adder (`c3`).  This indicates if the sum overflows beyond 4 bits.
+
+2. **`full_adder`:**
+   - This is a standard full adder module.
+   - It takes three inputs: `a`, `b`, and `cin` (carry-in).
+   - It produces two outputs: `sum` and `cout` (carry-out).
+   - The `sum` is calculated as the XOR of `a`, `b`, and `cin`.
+   - The `cout` is calculated as the OR of the AND of `a` and `b`, the AND of `a` and `cin`, and the AND of `b` and `cin`.
+
+**How it works:**
+
+The `TopModule` implements a 4-bit adder by chaining four `full_adder` modules together. Each `full_adder` calculates the sum and carry for a single bit position. The carry-out of each full adder becomes the carry-in for the next full adder, effectively propagating the carry across all four bits.  The final carry-out (`c3`) is used as the overflow bit in the `sum` output.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg [3:0] x;
+  reg [3:0] y;
+  wire [4:0] sum;
+
+  TopModule dut (
+    .x(x),
+    .y(y),
+    .sum(sum)
+  );
+
+  initial begin
+    // Test cases
+    x = 4'b0000; y = 4'b0000; #10;  // 0 + 0 = 0
+    x = 4'b0001; y = 4'b0001; #10;  //

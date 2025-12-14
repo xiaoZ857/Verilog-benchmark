@@ -1,0 +1,54 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+  assign q = (a & b & c & d) | (a & b & !c & d) | (a & b & c & !d) | (!a & b & c & d);
+
+endmodule
+```
+
+**Explanation:**
+
+The provided truth table defines the behavior of the circuit. We need to express this behavior using Boolean logic.  Let's analyze the table and derive the equation:
+
+*   **q = 0** when:
+    *   a=0, b=0, c=0, d=0
+    *   a=0, b=0, c=0, d=1
+    *   a=0, b=0, c=1, d=0
+    *   a=0, b=1, c=0, d=0
+    *   a=0, b=1, c=0, d=1
+    *   a=0, b=1, c=1, d=0
+    *   a=1, b=0, c=0, d=0
+    *   a=1, b=0, c=0, d=1
+    *   a=1, b=0, c=1, d=0
+    *   a=1, b=0, c=1, d=1
+    *   a=1, b=1, c=0, d=0
+    *   a=1, b=1, c=0, d=1
+
+*   **q = 1** when:
+    *   a=0, b=0, c=1, d=1
+    *   a=0, b=1, c=0, d=1
+    *   a=0, b=1, c=1, d=0
+    *   a=0, b=1, c=1, d=1
+    *   a=1, b=0, c=0, d=0
+    *   a=1, b=0, c=0, d=1
+    *   a=1, b=0, c=1, d=0
+    *   a=1, b=0, c=1, d=1
+    *   a=1, b=1, c=0, d=0
+    *   a=1, b=1, c=0, d=1
+    *   a=1, b=1, c=1, d=0
+    *   a=1, b=1, c=1, d=1
+
+The simplest way to represent the above behavior in Verilog is to use a combination of AND and OR operations, covering all the cases where q = 1.
+
+**How the Code Works:**
+
+*   `assign q = ...;`:  This declares `q` as a continuous assignment, meaning its value is calculated and updated whenever any of its input signals (`a`, `b`, `c`, `d`) change.
+*   The expression inside `assign` represents the Boolean equation.  The logic covers the cases where the truth table indicates `q` should be 1.
+
+**Important Note:**  This is a straightforward implementation based on the provided truth table. There might be other equivalent Boolean expressions that could achieve the same functionality. The code given is designed for clarity and direct mapping from the table.

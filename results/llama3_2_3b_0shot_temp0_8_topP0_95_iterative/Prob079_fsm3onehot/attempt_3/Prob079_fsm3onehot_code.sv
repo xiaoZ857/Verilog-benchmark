@@ -1,0 +1,49 @@
+
+always_comb begin
+    case(state[1:0])
+        2'b00 : next_state = A; // A -> A, B
+        2'b01 : next_state = B; // B -> C, B
+        2'b10 : next_state = C; // C -> A, D
+        2'b11 : next_state = D; // D -> C, B
+    endcase
+end
+
+always_comb begin
+    case(state[1:0])
+        2'b00 : out = 0;
+        2'b01 : out = 1;
+        default: out = 0; // Assuming no default case is needed here
+    endcase
+end
+
+timescale 1 ps / 10 ns;
+
+module TopModule (
+  input in,
+  input [3:0] state,
+  output reg [3:0] next_state,
+  output out
+);
+
+// Derive the next state logic from the state transition table
+always_comb begin
+    case(state[1:0])
+        2'b00 : next_state = A; // A -> A, B
+        2'b01 : next_state = B; // B -> C, B
+        2'b10 : next_state = C; // C -> A, D
+        2'b11 : next_state = D; // D -> C, B
+    endcase
+end
+
+// Derive the output logic from the state transition table
+always_comb begin
+    case(state[1:0])
+        2'b00 : out = 0;
+        2'b01 : out = 1;
+        default: out = 0; // Assuming no default case is needed here
+    endcase
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

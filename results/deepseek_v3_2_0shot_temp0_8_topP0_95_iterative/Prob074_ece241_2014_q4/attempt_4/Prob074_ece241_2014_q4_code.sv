@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input x,
+  output z
+);
+wire xor_in, and_in, or_in;
+reg q0 = 1'b0, q1 = 1'b0, q2 = 1'b0;
+
+assign xor_in = x ^ q0;
+assign and_in = x & (~q1);
+assign or_in  = x | (~q2);
+
+always @(posedge clk) begin
+    q0 <= xor_in;
+    q1 <= and_in;
+    q2 <= or_in;
+end
+
+assign z = ~(q0 | q1 | q2);
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

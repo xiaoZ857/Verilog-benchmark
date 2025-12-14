@@ -1,0 +1,27 @@
+ Here is a simple Verilog implementation for a 32-bit byte swapping module named `ByteSwap32`. The circuit reverses the byte order of the input vector `in` and outputs the result as `out`.
+
+```verilog
+module ByteSwap32 (
+  input [31:0] in,
+  output [31:0] out
+);
+
+always @(posedge clk)
+begin
+  out = {in[31:24], in[23:16], in[15:8], in[7:0]};
+end
+
+// Optional reset signal (assuming active-low)
+reg [31:0] temp;
+input reset;
+always @(posedge clk or negedge reset)
+begin
+  if (!reset)
+    temp <= in;
+end
+
+// Add this part if you want to use the temp register for easier testing/simulation.
+assign out = temp;
+```
+
+This module has an optional reset signal (active-low), and it can also make use of a temporary register named `temp`. To use the `temp` register, simply add the `assign out = temp;` line at the end.

@@ -1,0 +1,30 @@
+
+module TopModule (
+  input [4:0] a,
+  input [4:0] b,
+  input [4:0] c,
+  input [4:0] d,
+  input [4:0] e,
+  input [4:0] f,
+  output [7:0] w,
+  output [7:0] x,
+  output [7:0] y,
+  output [7:0] z
+);
+reg [28:0] temp;
+temp = {{a[4], b[4], c[4], d[4], e[4], f[4], 1'b1, 1'b1}};
+assign w = {temp[24:20], temp[19:15], temp[14:10], temp[9:5], temp[4:0]};
+
+reg [28:0] temp_x;
+temp_x = {{a[4], b[4], c[4], d[4], e[4], f[4], 1'b1, 1'b1}};
+assign x = {temp_x[24:20], temp_x[19:15], temp_x[14:10], temp_x[9:5]};
+
+reg [28:0] temp_y;
+temp_y = {{a[4], b[4], c[4], d[4], e[4], f[4], 1'b1, 1'b1}};
+assign y = {temp_y[24:20], temp_y[19:15], temp_y[14:10]};
+
+reg [28:0] temp_z;
+temp_z = {{a[4], b[4], c[4], d[4], e[4], f[4], 1'b1, 1'b1}};
+assign z = {temp_z[24:20], temp_z[19:15]};
+
+// VERILOG-EVAL: endmodule not found

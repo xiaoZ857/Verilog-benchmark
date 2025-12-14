@@ -1,0 +1,47 @@
+
+module TopModule (
+  input [3:1] y,
+  input w,
+  output reg Y2
+);
+
+  always @(y, w) begin
+    case (y[3:1])
+      4'b0000: // State A
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0001: // State B
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0010: // State C
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0011: // State D
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0100: // State E
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0101: // State F
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      default:
+        Y2 = 0;
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

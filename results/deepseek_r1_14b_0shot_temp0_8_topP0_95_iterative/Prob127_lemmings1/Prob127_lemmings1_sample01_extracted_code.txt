@@ -1,0 +1,69 @@
+// Implementation of Lemmings finite state machine
+// Inputs: areset, bump_left, bump_right
+// Outputs: walk_left, walk_right
+
+`timescale 1ns / 1ps
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+
+  // State definition
+  typedef enum {
+    WALK_LEFT = 0,
+    WALK_RIGHT = 1
+  } state_t;
+
+  reg [1:0] state;
+  reg next_state;
+
+  always @ (posedge clk or posedge areset) begin
+    if (areset) begin
+      state <= WALK_LEFT;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  always @ (*) begin
+    case (state)
+      WALK_LEFT: begin
+        if (bump_left == 1) begin
+          next_state = WALK_RIGHT;
+        end else if (bump_right == 1) begin
+          next_state = WALK_LEFT; // Wait, shouldn't it switch direction?
+        end else if (bump_left == 1 && bump_right == 1) begin
+          next_state = WALK_RIGHT; // Override to right when both bumps
+        end else begin
+          next_state = WALK_LEFT; // Stay in current state otherwise
+        end
+      end
+
+      WALK_RIGHT: begin
+        if (bump_right == 1) begin
+          next_state = WALK_LEFT;
+        end else if (bump_left == 1) begin
+          next_state = WALK_RIGHT;
+        end else if (bump_left == 1 && bump_right == 1) begin
+          next_state = WALK_LEFT; // Override to left when both bumps
+        end else begin
+          next_state = WALK_RIGHT;
+        end
+      end
+
+      default: begin
+        next_state = WALK_LEFT;
+      end
+    endcase
+  end
+
+  // Output assignments
+  assign walk_left = (state == WALK_LEFT);
+  assign walk_right = (state == WALK_RIGHT);
+
+endmodule

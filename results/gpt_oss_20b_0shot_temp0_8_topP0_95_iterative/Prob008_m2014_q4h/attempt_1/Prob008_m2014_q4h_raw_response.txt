@@ -1,0 +1,33 @@
+Here’s a minimal, clean Verilog implementation that meets the specification.  
+The output `out` is driven combinationally from the input `in` with a continuous assignment.
+
+```verilog
+// TopModule.v
+// ---------------------------------------------
+// A simple combinational pass‑through module.
+// ---------------------------------------------
+// Assumes  positive‑edge clocked logic is not required.
+//
+// Input:  in   – source signal
+// Output: out  – identical to the input (combinational)
+// ---------------------------------------------
+module TopModule (
+  input  wire in,   // input port
+  output wire out   // output port
+);
+
+  // Continuous assignment – the output follows the input immediately.
+  assign out = in;
+
+endmodule
+```
+
+**Key points**
+
+| Feature | Reason |
+|---------|--------|
+| `wire` types | Default for ports in plain Verilog; no storage element is required. |
+| `assign` statement | Implements a purely combinational connection. |
+| No `always` block | Keeps the design simple and synthesis‑friendly. |
+
+This module can be instantiated anywhere in your design, and the synthesis tools will infer a wire that directly connects `in` to `out`.

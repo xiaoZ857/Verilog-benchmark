@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_2\Prob142_lemmings2_code.sv:43: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_2\Prob142_lemmings2_code.sv:55: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_2\Prob142_lemmings2_code.sv:75: warning: A non-blocking assignment should not be used in an always_comb process.

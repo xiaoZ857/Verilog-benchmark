@@ -1,0 +1,45 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input r,
+  output logic q
+);
+
+  logic q_internal;
+
+  always_ff @(posedge clk, posedge r) begin
+    if (r) begin
+      q_internal <= 1'b0;
+    end else begin
+      q_internal <= d;
+    end
+  end
+
+  assign q = q_internal;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`logic q_internal;`**: Declares an internal signal `q_internal` to hold the state of the flip-flop.  This is good practice to avoid directly assigning to the output `q` inside the `always_ff` block.
+* **`always_ff @(posedge clk, posedge r)`**:  This is a sequential block that describes the flip-flop's behavior.  The `@(posedge clk, posedge r)` sensitivity list specifies that the block should be triggered on the positive edge of the clock (`clk`) or the positive edge of the reset (`r`).  This makes it a synchronous reset.
+* **`if (r) begin ... end`**: This is the reset condition. When `r` is high (active high reset), the flip-flop is reset, and `q_internal` is set to 0.
+* **`else begin ... end`**: This is the normal operation of the flip-flop. When `r` is low, the value of the input `d` is loaded into `q_internal` on the positive clock edge.
+* **`assign q = q_internal;`**:  This continuous assignment connects the internal state `q_internal` to the output signal `q`.  This ensures that the output reflects the current state of the flip-flop.
+
+**How it works:**
+
+1. **Reset Condition (r = 1):** When the reset signal `r` is high, the `always_ff` block is triggered, and `q_internal` is immediately set to 0, regardless of the clock signal.  The output `q` follows `q_internal`.
+
+2. **Normal Operation (r = 0):** When the reset signal `r` is low, the flip-flop waits for the positive edge of the clock signal.  On the positive clock edge, the value of the input `d` is copied to the internal signal `q_internal`, and then to the output `q`.
+
+**Key improvements and considerations:**
+
+* **Synchronous Reset:** The reset is synchronous, meaning it only takes effect on the clock edge.  This is generally preferred over asynchronous resets in many designs because they are easier to analyze and debug and avoid potential timing issues.
+* **`logic` Data Type:** Using `logic` is the preferred data type in SystemVerilog.
+* **Internal Signal:** Using an internal signal `q_internal` is good practice for clarity and to avoid directly driving the output signal inside the sequential block.  It also makes it easier to add more complex functionality later if needed.
+* **Clear Sensitivity List:** The sensitivity list is complete and accurate, ensuring that the flip-flop reacts correctly to changes in `clk` and `r`.
+* **Conciseness:** The code is concise and easy to understand.
+* **Testability:** This implementation is easily testable in a simulation environment.

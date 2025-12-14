@@ -1,0 +1,49 @@
+```verilog
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+
+  always @(*) begin
+    min = a; // Initialize min with a
+
+    if (b < min) begin
+      min = b;
+    end
+
+    if (c < min) begin
+      min = c;
+    end
+
+    if (d < min) begin
+      min = d;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**:  Defines the module named `TopModule` with the specified input and output ports.
+2. **`input [7:0] a, b, c, d`**: Declares four 8-bit unsigned input signals `a`, `b`, `c`, and `d`.
+3. **`output reg [7:0] min`**:  Declares an 8-bit unsigned register `min` as the output.  We use `reg` because the value will be assigned within an `always` block.
+4. **`always @(*)`**: This is a combinational `always` block.  The `@(*)` sensitivity list means the block will execute whenever *any* of the input signals change.  This is suitable for a combinational circuit that finds the minimum.
+5. **`min = a;`**:  Initializes the `min` register with the value of `a`.  This provides a starting point for comparison.
+6. **`if (b < min) begin min = b; end`**:  Compares `b` with the current `min`. If `b` is smaller, `min` is updated to the value of `b`.
+7. **`if (c < min) begin min = c; end`**:  Compares `c` with the current `min`. If `c` is smaller, `min` is updated to the value of `c`.
+8. **`if (d < min) begin min = d; end`**:  Compares `d` with the current `min`. If `d` is smaller, `min` is updated to the value of `d`.
+
+**How it works:**
+
+The code sequentially compares each input number (`a`, `b`, `c`, and `d`) with the current minimum value (`min`).  If a smaller number is found, the `min` register is updated.  After all comparisons are done, the `min` register holds the smallest value among the four inputs.
+
+**Important Considerations:**
+
+* **Combinational Logic:** This implementation assumes the comparison is purely combinational, meaning the output `min` depends only on the current values of the inputs `a`, `b`, `c`, and `d`.
+* **Positive Clock:** The description specifies positive clock triggering.  However, this combinational logic doesn't explicitly use a clock signal; it reacts immediately to changes in inputs.
+* **Tie-breaking:** If multiple inputs have the same minimum value, the code will return the value that was first encountered during the comparisons (in this case, `a`, then `b`, then `c`, then `d`).
+* **Alternatives:**  You could also implement this using more complex logic, but this simple sequential comparison is clear and efficient for a small number of inputs.  For a larger number of inputs, a tree-based comparison structure might be more efficient, but would be more complex to implement.

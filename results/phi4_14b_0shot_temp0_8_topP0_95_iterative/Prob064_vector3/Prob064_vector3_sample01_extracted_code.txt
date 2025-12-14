@@ -1,0 +1,12 @@
+always @(*) begin
+    // Concatenate inputs and append two '1' bits at the end.
+    wire [31:0] combined = {a, b, c, d, e, f, 2'b11};
+
+    // Assign slices of the concatenated vector to outputs
+    w = combined[31:24];  // Most significant 8 bits
+    x = combined[23:16];
+    y = combined[15:8];
+    z = combined[7:0];    // Two '1' bits should be here as LSBs
+end
+
+endmodule

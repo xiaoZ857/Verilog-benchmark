@@ -1,0 +1,3 @@
+// Implement D flip-flop with XOR feedback
+always @(posedge clk) 
+    out <= in ^ out;

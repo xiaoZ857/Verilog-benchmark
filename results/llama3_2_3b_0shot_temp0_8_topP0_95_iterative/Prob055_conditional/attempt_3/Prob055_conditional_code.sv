@@ -1,0 +1,60 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  input [7:0] c,
+  input [7:0] d,
+  output reg [7:0] min
+);
+
+reg [7:0] min_min;
+
+always_comb begin
+  if (a < b) begin
+    if (c < d) begin
+      if (a < c) begin
+        if (b < d) begin
+          min_min = a;
+        end else begin
+          min_min = b;
+        end
+      end else begin
+        if (d < b) begin
+          min_min = d;
+        end else begin
+          min_min = b;
+        end
+      end
+    end else begin
+      if (c < b) begin
+        if (a < d) begin
+          min_min = a;
+        end else begin
+          min_min = d;
+        end
+      end else begin
+        if (d < b) begin
+          min_min = d;
+        end else begin
+          min_min = b;
+        end
+      end
+    end
+  end else if (b < c) begin
+    if (a < d) begin
+      min_min = a;
+    end else begin
+      min_min = d;
+    end
+  end else if (c < d) begin
+    min_min = c;
+  end else begin
+    min_min = d;
+  end
+end
+
+assign min = min_min;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

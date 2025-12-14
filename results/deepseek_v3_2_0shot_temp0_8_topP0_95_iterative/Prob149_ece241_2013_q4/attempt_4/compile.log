@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_4\Prob149_ece241_2013_q4_code.sv:17: error: Could not find variable ``prev_s'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_4\Prob149_ece241_2013_q4_code.sv:19: error: Could not find variable ``prev_s'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_4\Prob149_ece241_2013_q4_code.sv:32: error: Unable to bind wire/reg/memory `prev_s' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_4\Prob149_ece241_2013_q4_code.sv:38: error: Unable to bind wire/reg/memory `prev_s' in `tb.top_module1'
+4 error(s) during elaboration.

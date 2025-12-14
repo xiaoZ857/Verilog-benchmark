@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob150_review2015_fsmonehot",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'B3_next' has no mismatches.\nHint: Output 'S_next' has no mismatches.\nHint: Output 'S1_next' has no mismatches.\nHint: Output 'Count_next' has 13 mismatches. First mismatch occurred at time 270.\nHint: Output 'Wait_next' has 10 mismatches. First mismatch occurred at time 60.\nHint: Output 'done' has no mismatches.\nHint: Output 'counting' has no mismatches.\nHint: Output 'shift_ena' has no mismatches.\nHint: Total mismatched samples is 23 out of 300 samples\n\nSimulation finished at 1501 ps\nMismatches: 23 in 300 samples\n",
+      "mismatch_count": 23
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'B3_next' has no mismatches.\nHint: Output 'S_next' has no mismatches.\nHint: Output 'S1_next' has 17 mismatches. First mismatch occurred at time 100.\nHint: Output 'Count_next' has 32 mismatches. First mismatch occurred at time 10.\nHint: Output 'Wait_next' has 14 mismatches. First mismatch occurred at time 130.\nHint: Output 'done' has no mismatches.\nHint: Output 'counting' has no mismatches.\nHint: Output 'shift_ena' has no mismatches.\nHint: Total mismatched samples is 63 out of 300 samples\n\nSimulation finished at 1501 ps\nMismatches: 63 in 300 samples\n",
+      "mismatch_count": 63
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 1\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob150_review2015_fsmonehot_test.sv:72: vvp.tgt error: uwire \"S1_next_dut\" must have a single driver, found (2).\nerror: Code generation had 1 error(s).\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'B3_next' has no mismatches.\nHint: Output 'S_next' has no mismatches.\nHint: Output 'S1_next' has no mismatches.\nHint: Output 'Count_next' has 13 mismatches. First mismatch occurred at time 270.\nHint: Output 'Wait_next' has 10 mismatches. First mismatch occurred at time 60.\nHint: Output 'done' has no mismatches.\nHint: Output 'counting' has no mismatches.\nHint: Output 'shift_ena' has no mismatches.\nHint: Total mismatched samples is 23 out of 300 samples\n\nSimulation finished at 1501 ps\nMismatches: 23 in 300 samples\n",
+      "mismatch_count": 23
+    }
+  ]
+}

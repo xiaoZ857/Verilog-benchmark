@@ -1,0 +1,74 @@
+We need to track two things: whether the lemming is falling, and if not falling, which direction it's walking.  
+We’ll use a state register with two bits:  
+- `state[1]`: 1 if falling, 0 if walking.  
+- `state[0]`: if walking, 0 for left, 1 for right (don’t care when falling).  
+
+Transitions:  
+- If `areset`, go to walking left (state = 2'b00).  
+- If `ground == 0`, go to falling (state[1]=1), keep direction bit as before.  
+- If `ground == 1` and currently falling, go to walking with previous direction.  
+- If `ground == 1` and currently walking, update direction based on bumps, but only if not falling.  
+
+Bumps only affect direction when walking (`state[1]==0`).  
+If both bumps happen, toggle direction.  
+
+Outputs:  
+- `walk_left = (state == 2'b00)`  
+- `walk_right = (state == 2'b01)`  
+- `aaah = state[1]`  
+
+Let’s implement:
+
+```verilog
+  reg [1:0] state, next_state;
+  parameter WL = 2'b00, WR = 2'b01, FL = 2'b10, FR = 2'b11;
+  
+  // State register
+  always @(posedge clk, posedge areset) begin
+    if (areset)
+      state <= WL;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      WL: begin
+        if (~ground)
+          next_state = FL;
+        else if (bump_left)
+          next_state = WR;
+        else
+          next_state = WL;
+      end
+      WR: begin
+        if (~ground)
+          next_state = FR;
+        else if (bump_right)
+          next_state = WL;
+        else
+          next_state = WR;
+      end
+      FL: begin
+        if (ground)
+          next_state = WL;
+        else
+          next_state = FL;
+      end
+      FR: begin
+        if (ground)
+          next_state = WR;
+        else
+          next_state = FR;
+      end
+      default: next_state = WL;
+    endcase
+  end
+  
+  // Output logic (Moore)
+  assign walk_left = (state == WL);
+  assign walk_right = (state == WR);
+  assign aaah = state[1];
+endmodule
+```

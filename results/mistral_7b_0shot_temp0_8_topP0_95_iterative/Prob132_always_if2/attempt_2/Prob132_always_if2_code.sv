@@ -1,0 +1,19 @@
+
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+always @(posedge clk) begin // Assuming signals are positive edge triggered
+    if (cpu_overheated)
+       shut_off_computer <= 1;
+end
+
+always @(negedge arrived or posedge clk) begin // Assuming 'arrived' is level-sensitive
+    if (!arrived)
+       keep_driving <= ~gas_tank_empty;
+end
+
+endmodule

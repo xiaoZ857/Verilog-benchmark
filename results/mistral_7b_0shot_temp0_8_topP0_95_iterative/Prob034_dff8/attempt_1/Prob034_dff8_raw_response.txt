@@ -1,0 +1,21 @@
+ Here is a simple Verilog implementation for your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+reg [7:0] dff_regs [7:0]; // Declare array of DFF registers
+
+always @(posedge clk) begin
+  dff_regs <= d; // Assign new input data to the DFF registers on every posedge clock
+end
+
+assign q = dff_regs; // Assign the value of DFF registers as output q
+
+endmodule
+```
+
+This Verilog module creates an 8-bit shift register composed of 8 D flip-flops. The `dff_regs` array stores the data for each DFF, and it is updated on every positive edge of the clock signal `clk`. The output `q` is assigned the value of the `dff_regs` array at any given time.

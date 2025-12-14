@@ -1,0 +1,31 @@
+Here’s a minimal, synthesizable implementation of a 2‑input NOR gate in SystemVerilog.  
+It’s a pure combinational block – no clock is required.
+
+```verilog
+// ---------------------------------------------------------------------
+// 2‑input NOR gate
+// ---------------------------------------------------------------------
+//  out = NOT (in1 OR in2)
+// ---------------------------------------------------------------------
+module TopModule (
+    input  logic in1,      // first input
+    input  logic in2,      // second input
+    output logic out       // NOR output
+);
+
+    // Combinational assignment – the simplest way to describe a NOR gate
+    assign out = ~(in1 | in2);
+
+    // (Optional) equivalent always_comb form:
+    // always_comb begin
+    //     out = ~(in1 | in2);
+    // end
+
+endmodule
+```
+
+**Explanation**
+
+* `input logic` and `output logic` give the signals a 4‑state (`0, 1, x, z`) domain, which is the default for SystemVerilog.  
+* The `assign` statement describes a purely combinational relationship – `out` changes immediately whenever `in1` or `in2` change.  
+* If you prefer the procedural style, replace the `assign` with the commented `always_comb` block. Both are functionally identical and synthesizable.

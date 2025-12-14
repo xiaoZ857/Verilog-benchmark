@@ -1,0 +1,10 @@
+
+always @(posedge clk) begin
+    if (!r) // If reset is active high (0), hold the previous state of the flip-flop
+        q_internal <= 0;
+    else // Otherwise, latch the input data into the flip-flop
+        q_internal <= d;
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

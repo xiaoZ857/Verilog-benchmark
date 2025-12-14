@@ -1,0 +1,64 @@
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Synchronous reset to "12:00 AM"
+        sec_low <= 4'b0000;
+        sec_high <= 4'b0000;
+        min_low <= 4'b0000;
+        min_high <= 4'b0000;
+        hour_low <= 4'b0001; // BCD for '1'
+        hour_high <= 4'b0011; // BCD for '2' (for 12)
+        pm <= 1'b0; // AM
+    end else if (ena) begin
+        // Increment seconds
+        if (sec_low == 4'd9) begin
+            sec_low <= 4'b0000;
+            if (sec_high == 4'd5) begin
+                sec_high <= 4'b0000;
+                // Increment minutes
+                if (min_low == 4'd9) begin
+                    min_low <= 4'b0000;
+                    if (min_high == 4'd5) begin
+                        min_high <= 4'b0000;
+                        // Increment hours
+                        if ((hour_low == 4'd9 && hour_high == 4'b0011) || 
+                            (hour_low == 4'd0 && hour_high == 4'b0100)) begin
+                            if (pm == 1'b1 && hour_high == 4'b0011) begin
+                                // Transition from 11:59:59 PM to 12:00:00 AM
+                                hour_low <= 4'b0001;
+                                hour_high <= 4'b0011;
+                                pm <= 1'b0; // Switch to AM
+                            end else if (hour_high == 4'b0100) begin
+                                // Transition from 12:59:59 PM to 01:00:00 PM or from 11:59:59 AM to 12:00:00 PM
+                                hour_low <= 4'b0001;
+                                hour_high <= pm ? 4'b0010 : 4'b0011; // 12 to 01 for AM, 12 to 12 for PM
+                                pm <= ~pm; // Toggle AM/PM only on 11:59:59 transition
+                            end else begin
+                                hour_low <= 4'b0000;
+                                hour_high <= hour_high + 1;
+                            end
+                        end else {
+                            hour_low <= hour_low + 1;
+                        }
+                    end else {
+                        min_high <= min_high + 1;
+                    }
+                end else {
+                    min_low <= min_low + 1;
+                }
+            end else {
+                sec_high <= sec_high + 1;
+            }
+        end else {
+            sec_low <= sec_low + 1;
+        }
+    end
+end
+
+// Update BCD outputs
+always @(*) begin
+    hh = {hour_high, hour_low};
+    mm = {min_high, min_low};
+    ss = {sec_high, sec_low};
+end
+
+endmodule

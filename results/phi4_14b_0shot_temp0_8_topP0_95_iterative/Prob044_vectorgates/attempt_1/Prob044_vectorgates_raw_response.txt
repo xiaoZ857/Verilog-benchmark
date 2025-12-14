@@ -1,0 +1,46 @@
+To implement the described Verilog module, we need to compute three operations based on two 3-bit inputs `a` and `b`. The operations are:
+
+1. **Bitwise-OR**: Compute the bitwise OR of `a` and `b`.
+2. **Logical-OR**: Compute the logical (or arithmetic) OR of `a` and `b`.
+3. **Inverse (NOT)**: Compute the inverse of both vectors, placing the inverse of `b` in the upper half of `out_not` and the inverse of `a` in the lower half.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input [2:0] a,
+  input [2:0] b,
+  output [2:0] out_or_bitwise,
+  output out_or_logical,
+  output [5:0] out_not
+);
+
+  // Compute bitwise-OR of a and b
+  assign out_or_bitwise = a | b;
+
+  // Compute logical-OR of a and b
+  assign out_or_logical = (a != 3'b000) || (b != 3'b000);
+
+  // Compute inverse (NOT) of both vectors
+  assign out_not[5:3] = ~b;  // Inverse of b in the upper half
+  assign out_not[2:0] = ~a;  // Inverse of a in the lower half
+
+endmodule
+```
+
+### Explanation:
+
+- **Bitwise-OR (`out_or_bitwise`)**:
+  - The bitwise OR operation is performed using the `|` operator, which operates bit by bit on `a` and `b`.
+
+- **Logical-OR (`out_or_logical`)**:
+  - Logical OR checks if any of the bits in either `a` or `b` are set (i.e., not all zeros). 
+  - `(a != 3'b000)` checks if `a` is not zero.
+  - `(b != 3'b000)` checks if `b` is not zero.
+  - The `||` operator combines these conditions to produce a single logical result.
+
+- **Inverse (NOT) (`out_not`)**:
+  - The inverse of `b` is calculated using the `~` operator and placed in bits `[5:3]`.
+  - Similarly, the inverse of `a` is calculated and placed in bits `[2:0]`.
+
+This module effectively computes the required operations on two 3-bit inputs and outputs them as specified.

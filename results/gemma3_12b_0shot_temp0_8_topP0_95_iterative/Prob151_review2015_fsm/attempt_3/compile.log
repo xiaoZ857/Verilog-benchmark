@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_3\Prob151_review2015_fsm_code.sv:21: error: 'shift_ena' has already been declared in this scope.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_3\Prob151_review2015_fsm_code.sv:6:      : It was declared here as a variable.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_3\Prob151_review2015_fsm_code.sv:22: error: 'counting' has already been declared in this scope.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_3\Prob151_review2015_fsm_code.sv:7:      : It was declared here as a variable.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_3\Prob151_review2015_fsm_code.sv:23: error: 'done' has already been declared in this scope.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob151_review2015_fsm\attempt_3\Prob151_review2015_fsm_code.sv:9:      : It was declared here as a variable.

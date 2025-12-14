@@ -1,0 +1,23 @@
+To implement a Verilog module where the output is assigned the same value as the input combinationally, you can directly connect the `in` signal to the `out` signal within an `always` block or use continuous assignment. Since this operation does not depend on any clock signal and should be updated immediately whenever `in` changes, a combinational logic implementation with a continuous assignment is appropriate.
+
+Here's how you can implement the module:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+
+  // Continuous assignment for combinational logic
+  assign out = in;
+
+endmodule
+```
+
+### Explanation
+
+- **Continuous Assignment (`assign`)**: The `assign` statement is used to create a continuous assignment, which means the right-hand side expression is continuously evaluated and immediately assigned to the left-hand side signal whenever any of its operands change. This ensures combinational behavior without needing an `always` block.
+  
+- **Combinational Logic**: Since there's no need for sequential logic (no clocks or registers), the use of continuous assignment directly reflects the description: "The module assigns the output port to the same value as the input port combinationally."
+
+This implementation is efficient and concise, perfectly matching the requirement for simple combinational behavior.

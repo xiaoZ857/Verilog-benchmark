@@ -1,0 +1,16 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  // Compute the XOR between x and y
+  wire xor_result;
+  
+  assign xor_result = x ^ y;  // XOR operation
+
+  // Compute the AND between xor_result and x
+  assign z = xor_result & x;  // AND operation
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

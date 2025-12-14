@@ -1,0 +1,21 @@
+To create a Verilog module with no inputs and an output that always drives high, you can use an `assign` statement to directly set the output to 1.
+
+**Step-by-Step Explanation:**
+
+1. **Module Declaration:** Start by declaring the module named `TopModule` with an output port named `one`.
+
+2. **Assign Statement:** Inside the module, use an `assign` statement to continuously assign a value of 1 to the output `one`. Since no inputs are present, this direct assignment ensures that the output remains high at all times.
+
+3. **End Module:** Close the module declaration with `endmodule`.
+
+**Verilog Code:**
+
+```verilog
+module TopModule (
+  output one
+);
+  assign one = 1;
+endmodule
+```
+
+This code defines a module where the output `one` is always set to logic high, fulfilling the specified requirements.

@@ -1,0 +1,3 @@
+=== Static Analysis ===
+SKIP: Simulation-hanging pattern detected
+Reason: Direct combinational loop: clk_en depends on itself in assign statement

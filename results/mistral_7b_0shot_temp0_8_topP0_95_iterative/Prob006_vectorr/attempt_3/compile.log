@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd7] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd7] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd6] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd6] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd5] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd5] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd4] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd4] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd3] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd3] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd2] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd2] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd1] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd1] is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:7: error: out['sd0] is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob006_vectorr\attempt_3\Prob006_vectorr_code.sv:4:      : out['sd0] is declared here as wire.
+8 error(s) during elaboration.

@@ -1,0 +1,16 @@
+
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+always @(posedge clock) begin
+    q <= p;
+end
+
+always @(posedge clock) begin
+    p <= a & (~q);
+end
+
+endmodule

@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 14
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:36: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:36: error: Unable to elaborate r-value: (state)==(2'd3)
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:37: error: Unable to bind wire/reg/memory `b1' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:37: error: Unable to bind wire/reg/memory `b2' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:37: error: Unable to bind wire/reg/memory `b3' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:37: error: Concatenation/replication may not have zero width in this context.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:37: error: Unable to elaborate r-value: {b1, b2, b3}
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:11: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:12: error: Could not find variable ``b1'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:13: error: Could not find variable ``b2'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:14: error: Could not find variable ``b3'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:16: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:17: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:17: error: Unable to elaborate this case expression.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:27: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_2\Prob154_fsm_ps2data_code.sv:27: error: Unable to elaborate this case expression.
+14 error(s) during elaboration.

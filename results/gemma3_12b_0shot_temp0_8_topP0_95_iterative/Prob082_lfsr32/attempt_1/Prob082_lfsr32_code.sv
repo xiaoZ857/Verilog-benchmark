@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+  // Internal register to store the LFSR state
+  reg [31:0] lf_sr;
+
+  // Assign initial value for reset
+  initial begin
+    lf_sr = 32'h1;
+  end
+
+  always @(posedge clk) begin
+    if (reset) begin
+      lf_sr <= 32'h1;
+    end else begin
+      // Shift register logic
+      lf_sr <= {lf_sr[31:2], lf_sr[31] ^ lf_sr[31] ^ lf_sr[30] ^ lf_sr[1]};
+    end
+  end
+
+  // Assign the LFSR state to the output
+  assign q = lf_sr;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

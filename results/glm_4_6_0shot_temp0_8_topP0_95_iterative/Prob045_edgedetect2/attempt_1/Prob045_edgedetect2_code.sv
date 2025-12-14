@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+always @(posedge clk) begin
+  // Store previous input value
+  reg [7:0] prev_in;
+  prev_in <= in;
+  
+  // Detect any edge by XORing current and previous input
+  // Output is set the cycle after the transition
+  anyedge <= in ^ prev_in;
+end
+
+endmodule

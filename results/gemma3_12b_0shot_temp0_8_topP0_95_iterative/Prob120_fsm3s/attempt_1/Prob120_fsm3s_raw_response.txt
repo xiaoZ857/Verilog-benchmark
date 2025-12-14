@@ -1,0 +1,102 @@
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+  // Define the states
+  typedef enum logic [1:0] {
+    A,
+    B,
+    C,
+    D
+  } state_t;
+
+  // Declare state and next_state signals
+  state_t current_state, next_state;
+
+  // Synchronous reset logic
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+      current_state <= A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // State transition logic
+  always_comb begin
+    case (current_state)
+      A: begin
+        if (in == 0)
+          next_state = A;
+        else
+          next_state = B;
+      end
+      B: begin
+        if (in == 0)
+          next_state = C;
+        else
+          next_state = B;
+      end
+      C: begin
+        if (in == 0)
+          next_state = A;
+        else
+          next_state = D;
+      end
+      D: begin
+        if (in == 0)
+          next_state = C;
+        else
+          next_state = B;
+      end
+      default: begin
+        next_state = A;  // Default state in case of unexpected state
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    case (current_state)
+      A: out = 0;
+      B: out = 0;
+      C: out = 0;
+      D: out = 1;
+      default: out = 0;
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Definition:**
+   - `typedef enum logic [1:0] { A, B, C, D } state_t;` defines an enumerated type `state_t` to represent the four states (A, B, C, D).  Using `logic [1:0]` creates a 2-bit signal to represent the states.
+
+2. **State Signals:**
+   - `state_t current_state, next_state;` declares the signals to hold the current state and the next state, respectively.
+
+3. **Synchronous Reset:**
+   - `always_ff @(posedge clk or posedge reset) begin ... end`  This block describes a sequential block (flip-flop) triggered by the positive edge of the clock or the positive edge of the reset signal.
+   - `if (reset) begin current_state <= A; end`:  If the reset signal is high, the `current_state` is forced to state A.
+   - `else begin current_state <= next_state; end`: Otherwise, the `current_state` takes its value from the `next_state` calculated in the combinatorial logic.
+
+4. **State Transition Logic:**
+   - `always_comb begin ... end` This block describes a combinatorial block, which means its output is directly and immediately determined by its inputs.  It calculates the `next_state` based on the `current_state` and the input `in`.
+   - `case (current_state) ... endcase`:  A `case` statement implements the state transition table.  For each state, it checks the value of the input `in` and assigns the corresponding `next_state`.
+   - `default: next_state = A;`:  A `default` case is included for safety. If the FSM somehow enters an undefined state, it will transition back to state A.
+
+5. **Output Logic:**
+   - `always_comb begin ... end` Another combinatorial block that determines the output `out` based on the `current_state`.
+   - `case (current_state) ... endcase`:  The `case` statement assigns the appropriate output value based on the current state, as specified in the state table.
+
+**Key improvements and considerations:**
+
+* **Synchronous Reset:** The code implements a synchronous reset, which is the preferred method for resetting sequential logic.  This ensures that the reset takes effect on the clock edge.
+* **`always_ff` and `always_comb`:**  Using `always_ff` for sequential logic (state updates) and `always_comb` for combinatorial logic (next state calculation and output assignment) is crucial for correct Verilog behavior and simulation.
+* **Enumerated Type:** Using an enumerated type (`state_t`)

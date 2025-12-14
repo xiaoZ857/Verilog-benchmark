@@ -1,0 +1,43 @@
+// State variables
+reg [7:0] state; 
+reg [8:0] z_value;
+
+// Initial state and state transitions
+always @(posedge clk) begin
+    if(!areset) begin
+        state <= 8'0;
+        z_value <= 8'0;
+    end else if(state == 8'b0) begin // Reset state
+        state <= state;
+    elseif(state == 8'b1) begin // Start of conversion
+        state <= 8'b01; 
+    elseif(state == 8'b10) begin // Count the number of leading zeros
+        if(x[7] == 1'b0) begin // If x[7] is zero, continue counting
+            state <= state;
+        end else begin // If x[7] is one, stop conversion
+            state <= 8'b11; 
+        end
+    elseif(state == 8'b100) begin // Count the number of leading ones
+        if(x[7] == 1'b0) begin // If x[7] is zero, continue counting
+            state <= state;
+        end else begin // If x[7] is one, stop conversion and find Z's complement
+            state <= 8'b111; 
+        end
+    elseif(state == 8'b1000) begin // Calculate the two's complement
+        if(x[7] == 1'b1) begin // If x[7] is one, find two's complement of negative number
+            for(int i = 6; i >= 0; i--) begin
+                z_value[i] = x[15-i]; 
+            end
+        end else begin // If x[7] is zero, the input data is already positive
+            z_value <= state;
+        end
+    end
+end
+
+assign z = ~z_value + 1;
+
+// Positive edge triggered asynchronous reset
+always @(posedge aset) begin
+    state <= 8'b0; 
+    z_value <= 8'b0;
+end

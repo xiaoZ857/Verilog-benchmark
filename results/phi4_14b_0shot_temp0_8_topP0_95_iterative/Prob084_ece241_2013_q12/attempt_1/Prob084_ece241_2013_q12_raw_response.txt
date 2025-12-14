@@ -1,0 +1,64 @@
+To implement this Verilog module based on the given description, we need to create an 8-bit shift register using D-type flip-flops and extend it with a decoding mechanism that allows random access reads. We will use multiplexers to select which bit from the shift register should be output based on inputs A, B, and C.
+
+Here's how you can design this:
+
+1. **Shift Register Design:**
+   - Create an 8-bit shift register using D-type flip-flops.
+   - The input `S` is fed into Q[0], and each subsequent bit is the output of the previous flip-flop when enabled.
+   - Use a synchronous active-high enable signal to control shifting.
+
+2. **Multiplexer Design:**
+   - Use inputs A, B, C to select one of the 8 bits from the shift register as the output `Z`.
+   - Create a 3-to-8 line decoder using these inputs to select the correct bit.
+
+Here is the Verilog code for the described module:
+
+```verilog
+module TopModule (
+    input clk,
+    input enable,
+    input S,
+    input A,
+    input B,
+    input C,
+    output reg Z
+);
+
+    // 8-bit shift register using D-type flip-flops
+    reg [7:0] shift_reg;
+
+    always @(posedge clk) begin
+        if (enable) begin
+            // Shift left operation on the register
+            shift_reg <= {S, shift_reg[7:1]};
+        end
+    end
+
+    // 3-to-8 line decoder using multiplexing logic
+    always @(*) begin
+        case ({A, B, C})
+            3'b000: Z = shift_reg[0];
+            3'b001: Z = shift_reg[1];
+            3'b010: Z = shift_reg[2];
+            3'b011: Z = shift_reg[3];
+            3'b100: Z = shift_reg[4];
+            3'b101: Z = shift_reg[5];
+            3'b110: Z = shift_reg[6];
+            3'b111: Z = shift_reg[7];
+            default: Z = 1'bx; // Undefined state
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Shift Register:**
+  - The `always @(posedge clk)` block updates the contents of the `shift_reg` only when `enable` is high. It shifts bits left, with `S` becoming `Q[0]`.
+
+- **Multiplexer Logic:**
+  - The `always @(*)` block uses a combinational logic to assign the value of `Z` based on inputs A, B, and C. This is effectively using a multiplexer where the select lines are A, B, and C.
+  - Each possible combination of A, B, and C selects one bit from the shift register as output.
+
+This design provides an 8x1 memory with shifting-in capability and random access read functionality through the use of a simple decoder implemented by case statements.

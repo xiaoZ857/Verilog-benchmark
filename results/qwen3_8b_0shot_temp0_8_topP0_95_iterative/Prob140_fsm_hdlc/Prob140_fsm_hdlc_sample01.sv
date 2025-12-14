@@ -1,0 +1,69 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input in,
+  output disc,
+  output flag,
+  output err
+);
+
+// State definitions
+localparam S0 = 2'b00,  // Initial state (behaves as previous input was 0)
+             S1 = 2'b01,  // One consecutive 1
+             S2 = 2'b10,  // Two consecutive 1s
+             S3 = 2'b11,  // Three consecutive 1s
+             S4 = 3'b100, // Four consecutive 1s
+             S5 = 3'b101, // Five consecutive 1s
+             S6 = 3'b110; // Six consecutive 1s (flag start)
+
+reg [2:0] state;
+reg [2:0] next_state;
+reg disc_reg, flag_reg, err_reg;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= S0;
+    disc_reg <= 1'b0;
+    flag_reg <= 1'b0;
+    err_reg <= 1'b0;
+  end else begin
+    state <= next_state;
+    
+    // Output registers
+    disc_reg <= (state == S5) ? 1'b1 : disc_reg;
+    flag_reg <= (state == S6) ? 1'b1 : flag_reg;
+    err_reg <= (state == S6) ? 1'b1 : err_reg;
+  end
+end
+
+always @(posedge clk) begin
+  case (state)
+    S0: begin
+      if (in) begin
+        next_state <= S1;
+        disc_reg <= 1'b0;
+        flag_reg <= 1'b0;
+        err_reg <= 1'b0;
+      end else begin
+        next_state <= S0;
+      end
+    end
+
+    S1: begin
+      if (in) begin
+        next_state <= S2;
+        disc_reg <= 1'b0;
+        flag_reg <= 1'b0;
+        err_reg <= 1'b0;
+      end else begin
+        next_state <= S0;
+      end
+    end
+
+    S2: begin
+      if (in
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,14 @@
+
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+  // Initialise the output to a defined value (0) to avoid X‑states
+  initial out = 0;
+
+  // Positive edge‑triggered D‑flip‑flop whose D input is the XOR of 'in' and the current 'out'
+  always_ff @(posedge clk) begin
+    out <= in ^ out;
+  end
+endmodule

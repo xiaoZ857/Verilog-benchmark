@@ -1,0 +1,15 @@
+
+module TopModule (
+    input [7:0] in,
+    output reg [31:0] out
+);
+
+always @(*) begin
+    // Sign extend by replicating bit[7] (the sign bit) 24 times 
+    // and concatenating it with the original 8-bit number.
+    out = {{24{in[7]}}, in};
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

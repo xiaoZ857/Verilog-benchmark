@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:44: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:44: error: Operand of unary ! is not a primary expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:47: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:48: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:44: error: Malformed conditional expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:53: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_1\Prob096_review2015_fsmseq_code.sv:56: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob096_review2015_fsmseq_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob096_review2015_fsmseq_ref.sv:31: syntax error
+I give up.

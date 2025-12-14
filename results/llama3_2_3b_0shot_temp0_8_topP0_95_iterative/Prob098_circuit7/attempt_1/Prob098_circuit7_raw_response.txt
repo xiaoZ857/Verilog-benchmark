@@ -1,0 +1,31 @@
+Here is the Verilog code that implements the described sequential circuit:
+
+```verilog
+module TopModule (
+  input clk,         // Positive edge triggered clock signal
+  input a             // Input signal
+  output reg q         // Output signal
+);
+
+reg internal_state;  // Internal state of the module
+
+always @(posedge clk) begin   // Always trigger on the positive edge of the clock signal
+    if (a == 1 && internal_state == 0)    // If a is high and internal_state is low, q becomes 1
+        q <= 1;
+    else if ((a == 0 || internal_state == 1) && (internal_state != 0))   // If a is low or internal_state is high, but not both, q remains 1
+        q <= 1;
+    else
+        q <= 0;  // Otherwise, q becomes 0
+    internal_state = !a;     // Update the internal state for the next clock pulse
+end
+
+endmodule
+```
+
+Explanation:
+
+This module has one input (`clk`), one output (`q`), and one input with a signal (`a`). The `internal_state` is used to keep track of the current state of the circuit.
+
+The state of the circuit can be summarized as follows:
+- If both `a` and `internal_state` are 0, or if `a` is 1 and `internal_state` is 0, then `q` is set to 1.
+- In any other case (i.e., when `a` is 0 but `internal_state` is 1), or both `a` and `internal_state` are 1, `q` remains 1.

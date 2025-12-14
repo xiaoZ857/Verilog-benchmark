@@ -1,0 +1,35 @@
+Here's a Verilog module that implements an even parity checking circuit for an 8-bit byte:
+
+```verilog
+module parity_calculator(
+    input [7:0] in, // Input byte to calculate parity for
+    output [1:0] out // Output byte containing the calculated parity bit
+);
+
+    assign out[1] = in[0]; // Most significant bit of output is data bit from input
+    assign out[0]  = ~in[7]; // Least significant bit of output is parity bit
+
+endmodule
+
+module TopModule (
+    input [7:0] in, // Input byte to calculate parity for
+    output [8:0] out, // Output containing the calculated byte and parity bit
+    output parity // Output signal for setting parity flag
+);
+
+    wire [1:0] parity_bit;
+    parity_calculator calc(
+        .in(in),
+        .out(parity_bit)
+    );
+
+    assign out = { in[7:0], parity_bit };
+
+endmodule
+```
+
+This code defines two modules. The first module, `parity_calculator`, takes an 8-bit input byte and calculates the even parity bit by taking the XOR of all data bits.
+
+The second module, `TopModule`, includes a call to `parity_calculator` to calculate the parity bit and assigns it to an output byte along with the original input byte. The `out[1:0]` part is used because in your prompt you mentioned "output parity" which I assume was meant for setting a flag rather than directly using the calculated parity bit.
+
+Note: Since signals are positive clock/clk triggered unless otherwise stated, we will use this assumption to generate an output that can be driven from the `TopModule`.

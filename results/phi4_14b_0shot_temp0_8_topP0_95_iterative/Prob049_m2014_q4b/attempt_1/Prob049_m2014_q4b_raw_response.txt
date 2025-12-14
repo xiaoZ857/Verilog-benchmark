@@ -1,0 +1,32 @@
+To implement a D flip-flop that is positive edge-triggered and has an asynchronous reset (`ar`), you can design a Verilog module as described below. The asynchronous reset will clear the `q` output when it's asserted, regardless of the clock signal state.
+
+Here's how the implementation would look:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+  always_ff @(posedge clk or posedge ar) begin
+    if (ar) begin
+      q <= 1'b0; // Asynchronous reset, reset `q` to 0
+    end else begin
+      q <= d; // On the positive edge of clock, load `d` into `q`
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Always Block**: The `always_ff` block is used for sequential logic and is sensitive to both the positive edge of `clk` and the positive edge of `ar`. This means it will trigger whenever there's a rising edge on either signal.
+
+- **Asynchronous Reset (`ar`)**: If `ar` is high, the output `q` is set to 0 immediately, regardless of the clock state. This ensures that the reset takes priority and acts asynchronously.
+
+- **Positive Edge Trigger**: When `ar` is not asserted (i.e., low), on each positive edge of `clk`, the value of `d` is loaded into `q`. 
+
+This module effectively implements a basic D flip-flop with an asynchronous reset capability.

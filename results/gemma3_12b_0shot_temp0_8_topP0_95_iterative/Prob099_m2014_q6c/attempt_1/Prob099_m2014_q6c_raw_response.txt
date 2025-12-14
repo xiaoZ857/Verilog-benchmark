@@ -1,0 +1,41 @@
+```verilog
+module TopModule (
+  input [6:1] y,
+  input w,
+  output Y2,
+  output Y4
+);
+
+  // Y2 corresponds to bit 2 of the one-hot encoding.
+  // It is 1 when the state is B.
+  assign Y2 = (y[2] == 1);
+
+  // Y4 corresponds to bit 4 of the one-hot encoding.
+  // It is 1 when the state is D.
+  assign Y4 = (y[4] == 1);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **One-Hot Encoding:** The problem states that the states A, B, C, D, E, and F are represented by a one-hot encoding:
+   * A: `y[6:1] = 000001`
+   * B: `y[6:1] = 000010`
+   * C: `y[6:1] = 000100`
+   * D: `y[6:1] = 001000`
+   * E: `y[6:1] = 010000`
+   * F: `y[6:1] = 100000`
+
+2. **Y2 (Bit 2):**  Y2 corresponds to the bit position that is '1' in the one-hot encoding for state B. Therefore, Y2 is high when `y[2]` is high.
+
+3. **Y4 (Bit 4):** Y4 corresponds to the bit position that is '1' in the one-hot encoding for state D. Therefore, Y4 is high when `y[4]` is high.
+
+**How the Logic Equations are Derived by Inspection:**
+
+* **Y2 = y[2]:**  Look at the one-hot encodings. Only state B has a '1' at position 2 (`y[2]`). Therefore, Y2 should be equal to `y[2]`.
+* **Y4 = y[4]:**  Similarly, only state D has a '1' at position 4 (`y[4]`). Therefore, Y4 should be equal to `y[4]`.
+
+**Why the input `w` (transition signal) is not used:**
+
+The problem asks us to derive the logic equations by inspection *without considering the transition signal (w)*.  The state transitions are given explicitly in the problem description.  The transition signal `w` would be used to determine the next state based on the current state and the transition conditions. However, we are only asked to determine the values of Y2 and Y4 based on the current state `y`.

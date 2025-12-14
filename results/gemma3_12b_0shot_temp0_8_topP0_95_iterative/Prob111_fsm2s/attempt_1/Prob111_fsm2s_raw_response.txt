@@ -1,0 +1,82 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input reset,
+  output out
+);
+
+  // Define the states
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  // Declare the state register
+  reg current_state;
+
+  // Assign the output based on the current state
+  always @(current_state) begin
+    case (current_state)
+      OFF: out = 0;
+      ON : out = 1;
+      default: out = 0;  // Default case for safety
+    endcase
+  end
+
+  // Synchronous reset
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= OFF;
+    end else begin
+      // State transition logic
+      case (current_state)
+        OFF: begin
+          if (j) begin
+            current_state <= ON;
+          end else begin
+            current_state <= OFF;
+          end
+        end
+        ON: begin
+          if (k) begin
+            current_state <= OFF;
+          end else begin
+            current_state <= ON;
+          end
+        end
+        default: current_state <= OFF; // Safety net
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`: Defines the module named `TopModule` with the specified input and output ports.
+
+2. **State Definition:**
+   - `parameter OFF = 2'b00;`: Defines the `OFF` state as binary 00.
+   - `parameter ON  = 2'b01;`: Defines the `ON` state as binary 01.  These parameters make the code more readable and maintainable.
+
+3. **State Register:**
+   - `reg current_state;`: Declares a register `current_state` to hold the current state of the state machine.  Registers store their values on the clock edge.
+
+4. **Output Assignment (always @(current_state)):**
+   - `always @(current_state) begin ... end`: This block describes the combinatorial logic that determines the output `out` based on the `current_state`.  The `@(current_state)` sensitivity list ensures that the output is updated whenever the current state changes.
+   - `case (current_state) ... endcase`:  A `case` statement assigns the output `out` based on the current state.  `OFF` results in `out = 0`, and `ON` results in `out = 1`.  The `default` case is included as a safety measure to handle unexpected state values.
+
+5. **Synchronous Reset and State Transition (always @(posedge clk)):**
+   - `always @(posedge clk) begin ... end`: This block describes the sequential logic that updates the state register `current_state` on the positive edge of the clock signal.
+   - `if (reset) begin ... end`:  Handles the synchronous reset. If `reset` is high, the state register is forced to the `OFF` state on the next clock edge.
+   - `else begin ... end`:  If the reset is not asserted, the state transition logic is executed.
+   - `case (current_state) ... endcase`:  A `case` statement determines the next state based on the current state and the input signals `j` and `k`.
+     - **OFF State:** If `j` is high, the state transitions to `ON`. Otherwise, it remains in the `OFF` state.
+     - **ON State:** If `k` is high, the state transitions to `OFF`. Otherwise, it remains in the `ON` state.
+   - `default: current_state <= OFF;`: The `default` case handles any unexpected state values and forces the state machine to the `OFF` state, providing a safety measure.
+
+**How it works:**
+
+The code implements a Moore state machine.  This means that the output `out` is directly determined by the current state.  The `always @(current_state)` block ensures that `out` changes whenever the `current_state` changes.  The `always @(posedge clk)` block describes how the `current_state` changes based on the inputs `j` and `k` and the `reset` signal.  The reset forces the state machine to the `OFF` state on the next clock edge.  The state transitions are governed by the `case` statements within the `always` blocks.

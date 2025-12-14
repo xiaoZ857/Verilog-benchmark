@@ -1,0 +1,21 @@
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+begin : PopulationCountLoop
+  for (int i = 254; i >= 0; i--) begin
+    if (in[i] == 1) begin
+      population_counts[i] <= $unsigned({population_counts[i - 1] + 1});
+    end else if ($unsigned(population_counts[i]) != 0) begin
+      population_counts[i] <= 2'b00;
+    end 
+  end : PopulationCountLoop
+end
+
+always @(posedge clk)
+begin
+  assign out = population_counts[254:1];
+end
+
+// VERILOG-EVAL: endmodule not found

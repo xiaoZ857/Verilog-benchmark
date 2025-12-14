@@ -1,0 +1,8 @@
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+  // The in2 signal is inverted due to the bubble, and then ANDed with in1
+  assign out = in1 & (~in2);
+endmodule

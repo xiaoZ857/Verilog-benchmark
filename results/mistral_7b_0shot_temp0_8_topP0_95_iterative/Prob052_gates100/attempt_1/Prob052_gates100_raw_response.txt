@@ -1,0 +1,39 @@
+ Here is the Verilog code for your request:
+
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg out_and,
+  output reg out_or,
+  output reg out_xor
+);
+
+// Create instances of AND, OR, and XOR gates using built-in Verilog primitives
+and_gate #(100) and_instance (
+    .A(in[99:0]),
+    .Y(out_and)
+);
+
+or_gate #(100) or_instance (
+    .A(in[99:0]),
+    .Y(out_or)
+);
+
+xor_gate #(100) xor_instance (
+    .A(in[99:0]),
+    .Y(out_xor)
+);
+
+endmodule
+```
+
+This Verilog code defines a module named `TopModule` with 100 inputs, `in[99:0]`, and three outputs: `out_and`, `out_or`, and `out_xor`. Inside the module, it creates instances of AND, OR, and XOR gates using built-in Verilog primitives (`and_gate`, `or_gate`, and `xor_gate`) with appropriate bit widths.
+
+Please note that in order to use these primitives, you need to have the corresponding libraries included in your Verilog environment. For example, if you are using a Xilinx Vivado or ISE environment, you would need to include the following line at the beginning of your verilog file:
+
+```verilog
+library IEEE;
+include "IEEEStd_1164.vhd";
+```
+
+For a GHDL simulator or other Verilog environments, you may need to adjust the library and include statements accordingly.

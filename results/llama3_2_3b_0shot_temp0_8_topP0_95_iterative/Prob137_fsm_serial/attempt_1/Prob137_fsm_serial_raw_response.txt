@@ -1,0 +1,75 @@
+Here is an implementation of the finite state machine (FSM) using Verilog.
+
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+
+// Define the states of the FSM
+typedef enum reg [1:0] {
+  IDLE,  // Idle state
+  START_BIT,  // Waiting for start bit
+  DATA BIT,   // Waiting for data bits
+  STOP_BIT   // Waiting for stop bit
+} fsm_state_t;
+
+// Current state of the FSM
+reg fsm_state_t fsm_state = IDLE;
+reg [0:7] fsm_data_bits = {1'b0};  // To store received data bits
+
+always @(posedge clk) begin
+  if (reset) begin
+    fsm_state <= IDLE;
+    fsm_data_bits <= {1'b0};
+  end else begin
+    case (fsm_state)
+      IDLE:
+        if (~in && in) begin  // If idle transition occurs, set state to START_BIT
+          fsm_state <= START_BIT;
+        end
+      START_BIT:
+        if (in == 0) begin  // Start bit found, wait for data bits
+          fsm_state <= DATA_BIT;
+        end else begin  // If not start bit, remain in START_BIT
+          fsm_state <= START_BIT;
+        end
+      DATA_BIT:
+        if (~in) begin  // Data bit transition occurs
+          fsm_data_bits[7] = in;
+        end else begin  // Receive next data bit
+          fsm_data_bits[0] = in;  // Least significant bit first
+          if (fsm_state == DATA_BIT) begin  // All 8 data bits received
+            fsm_state <= STOP_BIT;
+          end else begin  // Remain in START_BIT until all 8 data bits are received
+            fsm_state <= START_BIT;
+          end
+        end
+      STOP_BIT:
+        if (~in && in) begin  // Stop bit transition occurs and matches expected value (1)
+          fsm_state <= IDLE;  // Successful byte received, reset FSM
+          done <= 1'b1;
+        end else begin  // If not stop bit, remain in STOP_BIT
+          fsm_state <= STOP_BIT;
+        end
+      default:
+        // Ignore other states for simplicity
+    endcase;
+  end
+end
+
+// Outputs
+assign done = (fsm_state == STOP_BIT);
+
+endmodule
+```
+
+In this code:
+
+- The FSM starts in the `IDLE` state, where it waits for the transition from `~in` to `in`.
+- Once in the `START_BIT` state, the FSM waits for a `0` bit and then transitions into the `DATA_BIT` state.
+- In the `DATA_BIT` state, it checks if a new transition occurs (`~in`). If so, it sets the corresponding data bit. Otherwise, it receives another data bit.
+- After receiving all 8 data bits, the FSM enters the `STOP_BIT` state and waits for a match to the expected value (1).
+- When the stop bit matches, the FSM resets itself and generates an active-high signal on `done`.

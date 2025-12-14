@@ -1,0 +1,37 @@
+ Based on the provided simulation waveform, it seems that the behavior of the circuit can be described as follows:
+
+- Initially, `z` is 1 and does not change until time 25ns.
+- From 25ns to 45ns (inclusive), if both `x` and `y` are 0, then `z` becomes 0; otherwise, `z` remains 1.
+- From 45ns to 75ns (inclusive), `z` is the opposite of what `x` is (if `x` is 0, then `z` is 1, and if `x` is 1, then `z` is 0).
+- From 75ns to 90ns, `z` behaves similarly to the interval from 25ns to 45ns, but with `x` and `y` swapped.
+
+Here's a Verilog implementation of this circuit:
+
+```verilog
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+reg z;
+
+always @(posedge clk) begin
+  if (x == 0 && y == 0) begin
+    z <= ~z; // Toggle z at the rising edge of clock when both x and y are 0
+  end else begin
+    z <= x; // Otherwise, assign the value of x to z
+  end
+end
+
+always @(posedge clk or negedge x or negedge y) begin
+  if (x == 1 && y == 0 && (clk == posedge(clk) || clk == negedge(y))) begin
+    z <= ~z; // Toggle z at the rising edge of clock, negative edge of x or y when x is 1 and y is 0
+  end else if (x == 0 && y == 1 && (clk == posedge(clk) || clk == negedge(x))) begin
+    z <= ~z; // Toggle z at the rising edge of clock, negative edge of x or y when x is 0 and y is 1
+  end
+end
+
+// Assuming that clk is an input, but not explicitly defined in your waveform
+assume clk;
+```

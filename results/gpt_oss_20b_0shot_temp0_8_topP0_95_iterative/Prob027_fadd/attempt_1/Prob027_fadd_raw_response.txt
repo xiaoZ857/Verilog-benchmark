@@ -1,0 +1,62 @@
+**Verilog implementation – combinational full adder**
+
+```verilog
+// ---------------------------------------------------------------
+//  Full‑adder – 3‑input, 1‑output (sum, carry‑out)
+//  ---------------------------------------------------------------
+//  a, b      – two input bits
+//  cin       – carry‑in
+//  sum       – sum output
+//  cout      – carry‑out
+//
+//  The logic is purely combinational – no clock is required.
+//  If you really need a clocked version you can wrap the logic
+//  inside an `always @(posedge clk)` block, but for a typical
+//  full adder the combinational form is preferred.
+//
+//  Using the `assign` statements is the most concise and
+//  synthesis‑friendly implementation.
+// ---------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire a,     // first addend bit
+    input  wire b,     // second addend bit
+    input  wire cin,   // carry‑in
+    output wire cout,  // carry‑out
+    output wire sum    // sum output
+);
+
+    // Sum: a XOR b XOR cin
+    assign sum = a ^ b ^ cin;
+
+    // Carry‑out: majority function
+    // cout = (a & b) | (a & cin) | (b & cin)
+    assign cout = (a & b) | (a & cin) | (b & cin);
+
+endmodule
+```
+
+---
+
+### Alternative (always‑comb) style
+
+If you prefer the procedural form, the same logic can be written as:
+
+```verilog
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire cin,
+    output reg  cout,
+    output reg  sum
+);
+
+    always @(*) begin
+        sum  = a ^ b ^ cin;
+        cout = (a & b) | (a & cin) | (b & cin);
+    end
+endmodule
+```
+
+Both versions are functionally identical and will synthesize to the same hardware. The `assign` form is typically preferred for pure combinational logic because it is shorter and expresses the intent directly.

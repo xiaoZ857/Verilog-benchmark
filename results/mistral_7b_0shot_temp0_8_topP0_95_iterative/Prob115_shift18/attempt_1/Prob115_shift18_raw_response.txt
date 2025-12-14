@@ -1,0 +1,55 @@
+ Here is a possible implementation of the 64-bit arithmetic shift register in Verilog based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input ena,
+  input [1:0] amount,
+  input [63:0] data,
+  output reg [63:0] q
+);
+
+always @(posedge clk) begin
+  if (load)
+    q <= data;
+  else if (ena) begin
+    case (amount)
+      2'b00 : begin
+         if (ena_lsh)
+           q <= {q[62], 0} + q[63]; // Left shift by 1 bit
+         else if (ena_lsh8)
+           q <= {q[55:63], 0}; // Left shift by 8 bits
+       end
+      2'b01 : begin
+         if (ena_lsh8)
+           q <= q << 8; // Left shift by 8 bits
+       end
+      2'b10 : begin
+         if (ena_rsh)
+           q <= {q[62], q[63]} >> 1; // Arithmetic right shift by 1 bit
+       end
+      2'b11 : begin
+         if (ena_rsh8)
+           q <= q >> 8; // Arithmetic right shift by 8 bits
+       end
+    endcase
+  end
+end
+
+// Declare internal signals for shift enable conditions
+reg ena_lsh, ena_lsh8, ena_rsh, ena_rsh8;
+
+always @(posedge clk) begin
+  ena_lsh <= (ena & amount[0]) | (!ena & amount[1]); // Shift left enable
+  ena_lsh8 <= amount[1]; // Shift left by 8 bits enable
+  ena_rsh <= (ena & ~amount[0]) & ~amount[1]; // Shift right enable
+  ena_rsh8 <= !ena & amount[0]; // Shift right by 8 bits enable
+end
+```
+
+This design uses two sets of shift enable conditions: one for left shifts (`ena_lsh` and `ena_lsh8`) and the other for right shifts (`ena_rsh` and `ena_rsh8`). The internal signals are updated on every clock edge, ensuring that only one set of enable conditions is active at a time.
+
+The shift operation itself takes place inside an `always @(posedge clk)` block which checks the `load`, `ena`, and `amount` inputs to determine whether to load data into the register or perform a shift operation. If the `load` signal is high, the shift register is loaded with the `data`. Otherwise, if the `ena` signal is high, the shifter either shifts left by 1 bit (`ena_lsh`) or 8 bits (`ena_lsh8`), or it arithmetically right-shifts by 1 bit (`ena_rsh`) or 8 bits (`ena_rsh8`).
+
+The `case` statement in the shift operation block is used to handle different values of the `amount` signal. The '00' and '01' cases cover left shifts, while the '10' and '11' cases cover right shifts. Inside each case, we check if the corresponding shift enable condition is high (i.e., both `ena` and the relevant bits in the `amount` signal are high), and perform the appropriate shift operation on the contents of the register (`q`). For left shifts, the '0' bit is appended to the least significant end of the register, while for right shifts, we concatenate the most significant and least significant bits of the register.

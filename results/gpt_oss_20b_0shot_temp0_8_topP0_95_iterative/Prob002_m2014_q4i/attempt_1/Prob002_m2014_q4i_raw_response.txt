@@ -1,0 +1,28 @@
+Here’s a minimal, synthesizable Verilog module that drives the single output **`out`** to logic‑low (0) at all times.  
+Since the design has no inputs and no clock dependency, a continuous assignment is the simplest and most efficient way to implement this.
+
+```verilog
+// TopModule.v
+// ---------------------------------------------------------------
+// Description:
+//   A simple combinational module with no inputs.
+//   The single output `out` is permanently driven to logic 0.
+// ---------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    output out          // Single output, always 0
+);
+
+    // Continuous assignment: always drive `out` to 0
+    assign out = 1'b0;
+
+endmodule
+```
+
+### Why this works
+- **No clock needed** – The output is not clock‑sensitive, so a continuous assignment (`assign`) is sufficient.
+- **Combinational** – The design is purely combinational; `out` is always 0 regardless of any other signals.
+- **Synthesis‑friendly** – This is the most efficient way for synthesis tools to generate a constant‑0 output.
+
+Feel free to copy this module into your design. If you later need to change the constant value or add inputs, you can modify the assignment accordingly.

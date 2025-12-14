@@ -1,0 +1,23 @@
+Here's the implementation of the described circuit:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  // The AND gate with a bubble on in2 (inversion)
+  assign out = in1 & (~in2);
+
+endmodule
+```
+
+**Explanation:**
+
+- **Inputs:** Two inputs, `in1` and `in2`.
+- **Output:** Single output `out`.
+- **Circuit Behavior:**
+  - The AND gate takes two inputs. 
+  - A bubble on the `in2` line indicates that the signal is inverted before being applied to the AND gate.
+  - Therefore, the output `out` will be `1` only if `in1` is `1` and `in2` is `0`.

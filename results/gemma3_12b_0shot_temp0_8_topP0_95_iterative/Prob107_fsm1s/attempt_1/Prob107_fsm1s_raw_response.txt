@@ -1,0 +1,85 @@
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+  parameter A = 1'b0;
+  parameter B = 1'b1;
+
+  reg current_state;
+  reg next_state;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      current_state <= B;
+    else begin
+      current_state <= next_state;
+    end
+  end
+
+  always @(*) begin
+    next_state = current_state; // Default: stay in current state
+
+    case (current_state)
+      A: begin
+        if (in == 0) begin
+          next_state = B;
+        end else begin
+          next_state = A;
+        end
+      end
+      B: begin
+        if (in == 0) begin
+          next_state = A;
+        end else begin
+          next_state = B;
+        end
+      end
+      default: begin
+        next_state = B; // Default to B in case of unexpected state
+      end
+    endcase
+  end
+
+  assign out = current_state == B ? 1'b1 : 1'b0;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, in, reset, out);` declares the module named `TopModule` with the specified input and output signals.
+
+2. **Parameter Declaration:**
+   - `parameter A = 1'b0;` and `parameter B = 1'b1;` define named constants for the two states. This makes the code more readable and easier to modify if you want to change the state assignments.
+
+3. **State Register:**
+   - `reg current_state;` and `reg next_state;` declare registers to hold the current and next states of the state machine.  `current_state` holds the current state, and `next_state` is calculated in the combinational logic and assigned to `current_state` on the clock edge.
+
+4. **Synchronous Reset:**
+   - `always @(posedge clk) begin ... end` block: This is a synchronous clocking block.  It's triggered by the positive edge of the `clk` signal.
+   - `if (reset) begin current_state <= B; end`:  This implements the synchronous reset. When `reset` is high, the `current_state` is forced to state `B`.
+
+5. **Combinational Logic for Next State:**
+   - `always @(*) begin ... end` block: This is a combinational logic block.  It is sensitive to any changes in the inputs (`current_state`, `in`).  The `@(*)` sensitivity list automatically includes all input signals used in the block.
+   - `next_state = current_state;`: This sets the default next state to the current state. This is important for ensuring that the state machine doesn't change state unexpectedly if the inputs don't match any of the defined transitions.
+   - `case (current_state) ... endcase`:  This `case` statement defines the state transitions based on the current state and the input `in`.  The logic is directly based on the problem description.
+
+6. **Output Assignment:**
+   - `assign out = current_state == B ? 1'b1 : 1'b0;`: This line assigns the output `out` based on the current state.  If the current state is `B`, the output is `1`; otherwise, the output is `0`. This implements the output logic described in the problem.
+
+**How it works:**
+
+The state machine operates as follows:
+
+- **Initialization (Reset):** When `reset` is high, the `current_state` is set to `B`.
+- **Clock Edge:**  On the positive edge of the clock:
+  - The `current_state` is updated with the value of `next_state`.
+- **Combinational Logic:** The combinational logic calculates the `next_state` based on the current state and the input `in`, according to the state transition table in the problem description.
+- **Output:** The output `out` is determined by the value of the `current_state`.
+
+This implementation accurately reflects the Moore state machine described in the problem statement.  The use of parameters for the states makes it more maintainable and readable. The synchronous reset ensures proper initialization.

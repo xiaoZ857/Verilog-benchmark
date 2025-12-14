@@ -1,0 +1,4 @@
+
+assign out = (in >> (sel * 4)) & 4'hF;
+
+endmodule

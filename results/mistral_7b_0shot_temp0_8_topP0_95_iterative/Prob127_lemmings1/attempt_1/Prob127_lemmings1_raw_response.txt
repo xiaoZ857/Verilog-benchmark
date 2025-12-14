@@ -1,0 +1,31 @@
+ Here's the Verilog code for the Moore state machine as described:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output reg walk_left,
+  output reg walk_right
+);
+
+// State variables
+reg [1:0] state; // 2-state machine (0 - walking left, 1 - walking right)
+
+always @(posedge clk or negedge areset) begin
+    if (areset) // Asynchronous reset on positive edge of areset
+        state <= 0;
+    else if (bump_left && !walk_left) // Bumped left and not currently walking left
+        state <= 1;
+    else if (bump_right && !walk_right) // Bumped right and not currently walking right
+        state <= 0;
+end
+
+always @(posedge clk) begin
+    walk_left <= state[0]; // Assign the current state to walk_left
+    walk_right <= state[1]; // Assign the current state to walk_right
+end
+```
+
+In this code, the TopModule has an asynchronous reset that sets the state to 0 (walking left). It also has two inputs `bump_left` and `bump_right`, which cause a transition to the other state when both conditions are met: bumped on the side and not currently walking in that direction. The output signals `walk_left` and `walk_right` will follow the current state of the machine.

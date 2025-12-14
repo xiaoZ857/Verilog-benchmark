@@ -1,0 +1,37 @@
+module TopModule (
+    input wire mode,        // Mode: 1 for heating, 0 for cooling
+    input wire too_cold,    // Too cold condition
+    input wire too_hot,     // Too hot condition
+    input wire fan_on,      // User request to turn on the fan
+    output reg heater,      // Heater control signal
+    output reg aircon,      // Air conditioner control signal
+    output reg fan          // Fan control signal
+);
+
+always @(*) begin
+    // Default state: Turn off all devices
+    heater = 0;
+    aircon = 0;
+    fan = 0;
+
+    if (mode == 1) begin
+        // Heating mode
+        if (too_cold) begin
+            heater = 1;      // Turn on the heater when too cold
+            fan = 1;         // Turn on the fan to circulate air
+        end
+    end else begin
+        // Cooling mode
+        if (too_hot) begin
+            aircon = 1;      // Turn on the air conditioner when too hot
+            fan = 1;         // Turn on the fan to circulate air
+        end
+    end
+
+    // Check user request for fan control
+    if (fan_on) begin
+        fan = 1;             // Turn on the fan if requested by the user
+    end
+end
+
+endmodule

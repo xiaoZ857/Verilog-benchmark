@@ -1,0 +1,64 @@
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input in,
+  output out
+);
+
+  // Internal signals for the four D flops
+  reg [3:0] shift_reg;
+
+  // Assign the output to the MSB of the shift register
+  assign out = shift_reg[3];
+
+  // Sequential logic for the shift register
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      // Reset the shift register to all zeros
+      shift_reg <= 4'b0000;
+    end else begin
+      // Shift the register one position to the right, and load the new input into the LSB
+      shift_reg <= {in, shift_reg[3:1]};
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, resetn, in, out);` declares the module named `TopModule` with input signals `clk`, `resetn`, `in`, and output signal `out`.
+
+2. **Internal Signal Declaration:**
+   - `reg [3:0] shift_reg;` declares a 4-bit register named `shift_reg` to hold the shift register's contents.  `reg` is used because this signal is assigned a value within an `always` block.  `[3:0]` indicates a 4-bit register, with bit 3 being the most significant bit (MSB) and bit 0 being the least significant bit (LSB).
+
+3. **Output Assignment:**
+   - `assign out = shift_reg[3];` assigns the MSB of the `shift_reg` to the output `out`.  This means the oldest value in the shift register will be the output.
+
+4. **Sequential Logic (`always` block):**
+   - `always @(posedge clk or negedge resetn) begin ... end` defines a sequential block that executes on the positive edge of the clock signal (`posedge clk`) or the negative edge of the reset signal (`negedge resetn`). This makes the reset synchronous.
+
+5. **Reset Logic:**
+   - `if (!resetn) begin shift_reg <= 4'b0000; end` handles the reset condition.  `!resetn` evaluates to true when `resetn` is low (active-low reset).  When the reset is active, the `shift_reg` is assigned the value `4'b0000`, which sets all bits of the register to zero.  The `<=` operator is used for non-blocking assignment within an `always` block.
+
+6. **Shift Logic:**
+   - `else begin shift_reg <= {in, shift_reg[3:1]}; end`  This is the core of the shift register. When the reset is not active, this code executes on each clock cycle.
+     - `{in, shift_reg[3:1]}` is a concatenation operation. It creates a new 4-bit value by:
+       - Taking the input `in` and placing it as the LSB (bit 0).
+       - Concatenating the existing contents of the shift register from bit 3 down to bit 1 (bits 3:1) after the input. This effectively shifts the existing values one position to the right.  Bit 0 gets overwritten by the new input.
+
+**How it Works:**
+
+The `shift_reg` holds the four most recent values of the input `in`.  On each clock cycle, the input `in` is shifted into the LSB, and the value previously in the LSB is shifted out to the next position. The output `out` is always the value that was originally the MSB of the register.
+
+**Example:**
+
+Let's say `in` is a sequence of 1s and 0s: `in = 1, 0, 1, 0`.
+
+* **Initial State:** `shift_reg = 0000` (due to reset)
+* **Clock 1:** `shift_reg = {1, 0000} = 1000`  (`out = 1`)
+* **Clock 2:** `shift_reg = {0, 1000} = 0100`  (`out = 0`)
+* **Clock 3:** `shift_reg = {1, 0100} = 1010`  (`out = 1`)
+* **Clock 4:** `shift_reg = {0, 1010} =

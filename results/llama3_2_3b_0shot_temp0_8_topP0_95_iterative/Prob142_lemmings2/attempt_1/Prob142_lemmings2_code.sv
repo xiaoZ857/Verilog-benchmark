@@ -1,0 +1,72 @@
+
+module TopModule(
+  input clk,           // Positive edge triggered clock signal
+  input areset,         // Asynchronous reset signal
+  input bump_left,      // Input to bump the Lemming on the left
+  input bump_right,     // Input to bump the Lemming on the right
+  input ground,         // Ground state signal
+  output walk_left,     // Walking direction signal for Lemmings moving left
+  output walk_right,    // Walking direction signal for Lemmings moving right
+  output aaah           // Fall signal
+);
+
+// Moore State Machine Parameters
+localparam [4:0] SMStates = {0x1, 0x2}; // Define possible states (only two in this case)
+reg [4:0] state; // Current state of the Lemming machine
+
+// Default State (reset to walking left)
+initial begin
+    state = SMStates[0]; // Initial value is walking left
+end
+
+always @(posedge clk) // Clock edge triggered
+begin
+    if (areset) // Asynchronous reset condition
+        state <= SMStates[0]; // Reset the machine when areset is high
+    
+    else if (state == SMStates[0]) // Walking left initial state
+        begin
+            if (ground == 0) // If ground is 0, Lemming will fall
+                state <= SMStates[2]; // Change to falling state
+            
+            if (bump_left | bump_right) // If bumped on either side, change direction
+                state <= (state == SMStates[0]) ? SMStates[1] : SMStates[0];
+        end
+
+    else if (state == SMStates[1]) // Walking right initial state
+        begin
+            if (ground == 0) // If ground is 0, Lemming will fall
+                state <= SMStates[3]; // Change to falling state
+            
+            if (bump_left | bump_right) // If bumped on either side, change direction
+                state <= (state == SMStates[1]) ? SMStates[2] : SMStates[1];
+        end
+
+    else if (state == SMStates[2]) // Falling state
+        begin
+            if (ground == 1) // When ground reappears, Lemming will resume walking
+                state <= SMStates[0]; // Resume walking left
+            
+            if ((bump_left | bump_right)) // If bumped while falling or ground disappears, don't change direction
+                state <= state;
+        end
+
+    else if (state == SMStates[3]) // State for ground reappearing
+        begin
+            if (ground == 0) // When ground disappears, Lemming will fall
+                state <= SMStates[2]; // Change to falling state
+            
+            if ((bump_left | bump_right)) // If bumped when ground reappears or falls, don't change direction
+                state <= state;
+        end
+
+    endcase
+    
+    walk_left = (state == SMStates[0]) ? 1'b1 : 0'b0; // Walking left signal
+    walk_right = (state == SMStates[1]) ? 1'b1 : 0'b0; // Walking right signal
+    aaah = (state == SMStates[2] | state == SMStates[3]) ? 1'b1 : 0'b0; // Fall signal
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,58 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output done
+);
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        current_state <= IDLE;
+        done <= 1'b0;
+    end else begin
+        // Update 'done' signal only when transitioning from RECEIVE_3 to the next state
+        if (current_state == RECEIVE_3 && next_state != RECEIVE_3) begin
+            done <= 1'b1;  // Asserted immediately after the third byte is received
+        end else begin
+            done <= 1'b0;
+        end
+
+        current_state <= next_state;
+    end
+end
+
+always_comb begin
+    // Default assignments for next state and outputs
+    next_state = current_state;
+
+    case (current_state)
+        IDLE: begin
+            if (in[3] == 1) begin
+                next_state = RECEIVE_1;  // Transition to RECEIVE_1 on start byte detection
+            end else begin
+                next_state = IDLE;
+            end
+        end
+
+        RECEIVE_1: begin
+            // Automatically proceed to next state after receiving first byte
+            next_state = RECEIVE_2;
+        end
+
+        RECEIVE_2: begin
+            // Automatically proceed to next state after receiving second byte
+            next_state = RECEIVE_3;
+        end
+
+        RECEIVE_3: begin
+            // Automatically return to IDLE after receiving the third byte
+            next_state = IDLE;
+        end
+
+        default: begin
+            next_state = IDLE;  // Fallback to ensure valid state transitions
+        end
+    endcase
+end
+
+// VERILOG-EVAL: endmodule not found

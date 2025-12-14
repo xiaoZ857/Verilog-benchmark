@@ -1,0 +1,64 @@
+module TopModule (
+    input clk,
+    input resetn,
+    input [3:1] r,  // r[1], r[2], r[3]
+    output reg [3:1] g  // g[1], g[2], g[3]
+);
+
+    // State encoding
+    typedef enum reg [1:0] {
+        A = 2'b00,
+        B = 2'b01,
+        C = 2'b10
+    } state_t;
+
+    // State register
+    reg [1:0] current_state;
+    reg [1:0] next_state;
+
+    // State transition logic (synchronous reset)
+    always @(posedge clk or negedge resetn) begin
+        if (!resetn)
+            current_state <= A;  // Reset to state A on active-low reset
+        else
+            current_state <= next_state;  // Update state at each clock cycle
+    end
+
+    // Next state logic and output logic (combinational)
+    always @(*) begin
+        // Default outputs for g (all low) and default next state as current state
+        g = 3'b000;
+        next_state = current_state;
+
+        case (current_state)
+            A: begin
+                if (r[1]) begin
+                    next_state = B;  // Request from device 1, move to state B
+                    g = 3'b100;      // Grant to device 1
+                end else if (r[2]) begin
+                    next_state = C;  // Request from device 2, move to state C
+                    g = 3'b010;      // Grant to device 2
+                end else if (!r[1] && !r[2] && r[3]) begin
+                    // Only request from Device 3
+                    next_state = A;
+                    g = 3'b001;      // Grant to device 3
+                end
+            end
+
+            B: begin
+                if (r[1])
+                    g = 3'b100;  // Continue granting to device 1 if it still requests
+                else
+                    next_state = A;  // No request from device 1, return to state A
+            end
+
+            C: begin
+                if (r[2])
+                    g = 3'b010;  // Continue granting to device 2 if it still requests
+                else
+                    next_state = A;  // No request from device 2, return to state A
+            end
+        endcase
+    end
+
+endmodule

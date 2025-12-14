@@ -1,0 +1,26 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:18: error: out_sop is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:10:      : out_sop is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:19: error: out_sop is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:10:      : out_sop is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:34: error: out_sop is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:10:      : out_sop is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:35: error: out_sop is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:10:      : out_sop is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:36: error: out_sop is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:10:      : out_sop is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:37: error: out_sop is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:10:      : out_sop is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:42: error: out_pos is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:11:      : out_pos is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:43: error: out_pos is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:11:      : out_pos is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:44: error: out_pos is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:11:      : out_pos is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:45: error: out_pos is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_2\Prob070_ece241_2013_q2_code.sv:11:      : out_pos is declared here as wire.
+10 error(s) during elaboration.

@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob145_circuit8_test.sv:101: error: port ``clock'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob145_circuit8_test.sv:101: warning: Instantiating module TopModule with dangling input port 1 (clk) floating.
+1 error(s) during elaboration.

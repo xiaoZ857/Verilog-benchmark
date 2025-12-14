@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob028_m2014_q4a\attempt_2\Prob028_m2014_q4a_code.sv:11: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob028_m2014_q4a\attempt_2\Prob028_m2014_q4a_code.sv:12: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob028_m2014_q4a\attempt_2\Prob028_m2014_q4a_code.sv:15: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:9: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:11: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:13: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:16: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:16: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:17: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob028_m2014_q4a_test.sv:21: error: invalid module item.

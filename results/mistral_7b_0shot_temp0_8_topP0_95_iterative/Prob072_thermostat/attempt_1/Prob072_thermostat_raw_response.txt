@@ -1,0 +1,29 @@
+ Here is a simple Verilog implementation for the described thermostat. Note that this is a basic version and may require adjustments based on specific technology library functions and design requirements.
+
+```verilog
+module TopModule (
+  input logic mode,
+  input logic too_cold,
+  input logic too_hot,
+  input logic fan_on,
+  output logic heater,
+  output logic aircon,
+  output logic fan
+);
+
+always @(posedge clk) begin
+  if (fan_on)
+    fan <= 1'b1; // Fan is controlled directly by user request
+  else if (mode == 1 && too_cold) // Heating mode, turn on heater when it's too cold
+    heater <= 1'b1;
+  else if (mode == 0 && too_hot) // Cooling mode, turn on aircon when it's too hot
+    aircon <= 1'b1;
+
+  if ((heater == 1'b1 || aircon == 1'b1) || fan_on)
+    fan <= 1'b1; // Fan is always turned on when heater, aircon or user request are active
+  else
+    fan <= 1'b0;
+end
+```
+
+This design assumes that the clock signal (clk) is provided and the Verilog code should be integrated into a larger system with the appropriate clock management.

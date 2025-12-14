@@ -1,0 +1,36 @@
+Below is a minimal, synthesizable Verilog implementation of a NOT gate.  
+Because the gate is purely combinational there is no clocking required – the output
+updates immediately whenever the input changes.
+
+```verilog
+`timescale 1ns/1ps
+
+// ---------------------------------------------------------------------------
+//  TopModule : 1‑bit NOT gate
+// ---------------------------------------------------------------------------
+//  input  : in   – the input bit
+//  output : out  – logical NOT of the input
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input  wire in,   // Input signal
+    output wire out   // Output signal (NOT of input)
+);
+
+// Combinational assignment – out is the logical complement of in
+assign out = ~in;
+
+endmodule
+```
+
+**Explanation**
+
+* `assign out = ~in;` creates a continuous, combinational connection that
+  drives `out` with the bit‑wise inverse of `in`.  
+* No `always` block or clock is needed, because a NOT gate is inherently
+  combinational.  
+* The `timescale` directive is optional but commonly included for simulation
+  timing units.  
+
+This module can be instantiated in any top‑level design or used directly in
+simulation.

@@ -1,0 +1,20 @@
+Here's how you can implement a 2-input NOR gate using Verilog:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+assign out = ~ (in1 & in2);
+
+endmodule
+```
+
+Explanation:
+
+- `~` is the NOT operator, which flips the value of a signal.
+- `(in1 & in2)` represents an AND operation between `in1` and `in2`. This result is then inverted with the `~` operator.
+
+This Verilog code will create a 2-input NOR gate where the output `out` is equal to 1 only when both inputs are 0, otherwise it's 0.

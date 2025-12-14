@@ -1,0 +1,111 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+
+  // Define states
+  typedef enum logic [1:0] {
+    S0, // Initial state
+    S1, // Received a '1'
+    S2, // Received '11'
+    S3, // Received '110'
+    S4  // Received '1101'
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // Output signal
+  reg start_shifting;
+
+  // State register
+  always_ff @(posedge clk, posedge reset) begin
+    if (reset) begin
+      current_state <= S0;
+      start_shifting <= 0;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Output logic
+  always_comb begin
+    next_state = current_state;
+    start_shifting = 0; // Default: don't start shifting
+
+    case (current_state)
+      S0: begin
+        if (data == 1) begin
+          next_state = S1;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S1: begin
+        if (data == 1) begin
+          next_state = S2;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S2: begin
+        if (data == 0) begin
+          next_state = S3;
+        end else begin
+          next_state = S1;
+        end
+      end
+      S3: begin
+        if (data == 1) begin
+          next_state = S4;
+          start_shifting = 1; // Sequence found!
+        end else begin
+          next_state = S0;
+        end
+      end
+      S4: begin
+        // Stay in S4 forever once the sequence is found
+        next_state = S4;
+        start_shifting = 1; // Keep shifting
+      end
+      default: begin
+        next_state = S0;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Definition:**
+   - `state_t`: Defines an enumerated type for the states of the FSM.
+     - `S0`: Initial state.
+     - `S1`: Received a '1'.
+     - `S2`: Received '11'.
+     - `S3`: Received '110'.
+     - `S4`: Received '1101' (sequence found).
+
+2. **State Register (`always_ff` block):**
+   - `current_state`: Holds the current state of the FSM.
+   - `next_state`: Holds the next state to transition to.
+   - On the positive clock edge (`posedge clk`) and the synchronous reset edge (`posedge reset`):
+     - If `reset` is high, the FSM is reset to `S0`, and `start_shifting` is set to 0.
+     - Otherwise, the `current_state` is updated with the value of `next_state`.
+
+3. **Output Logic (`always_comb` block):**
+   - `next_state`: This is set to the current state initially.  This is important for correct operation, as the next state may not always change based on the current input.
+   - `start_shifting`: This is the output signal that indicates whether the sequence has been found. It's initialized to 0 (not shifting).
+   - The `case` statement defines the transitions between states based on the input `data`.
+     - **S0:** If `data` is 1, transition to `S1`. Otherwise, remain in `S0`.
+     - **S1:** If `data` is 1, transition to `S2`. Otherwise, return to `S0`.
+     - **S2:** If `data` is 0, transition to `S3`. Otherwise, return to `S1`.
+     - **S3:** If `data` is 1, transition to `S4` (sequence found) and set `start_shifting` to 1. Otherwise, return to `S0`.
+     - **S4:**  Once the sequence is found (S4), the FSM stays in `S4` forever. `start_shifting` remains 1.
+
+**How it works:**
+
+The FSM steps through the

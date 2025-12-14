@@ -1,0 +1,16 @@
+Here's the Verilog implementation of the one-bit wide 2-to-1 multiplexer based on your description:
+
+```verilog
+module TopModule (
+    input a,      // Input signal for select=0
+    input b,      // Input signal for select=1
+    input sel,    // Select signal (0 or 1)
+    output out   // Output of the multiplexer
+);
+
+assign out = sel == 0 ? a : b;
+
+endmodule
+```
+
+In this implementation, we use the `assign` keyword to create an assignment that selects between signals `a` and `b` based on the value of signal `sel`. When `sel` is 0, `out` will take the value of `a`, otherwise it will take the value of `b`.

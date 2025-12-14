@@ -1,0 +1,15 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:12: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:14: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:19: error: f is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:7:      : f is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:20: error: g is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:8:      : g is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:22: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:22: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_4\Prob139_2013_q2bfsm_code.sv:17: warning: always_comb process has no sensitivities.
+5 error(s) during elaboration.

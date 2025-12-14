@@ -1,0 +1,29 @@
+Here is the Verilog implementation of a single D flip-flop based on your description:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+always @ (posedge clk)
+begin
+    q <= d;
+end
+
+endmodule
+```
+
+**Explanation:**
+
+- **Module Definition:** The `TopModule` is defined with three ports:
+  - `clk`: Input clock signal.
+  - `d`: Input data signal.
+  - `q`: Output register.
+
+- **Flip-Flop Behavior:**
+  - The `always` block triggers on the positive edge (`posedge`) of the clock (`clk`).
+  - On each rising clock edge, the output `q` is assigned the value of the input `d`.
+
+This implementation creates a basic D flip-flop that captures the state of `d` on each rising clock edge and holds it until the next edge.

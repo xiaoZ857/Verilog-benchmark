@@ -1,0 +1,34 @@
+Here’s the simplest Verilog implementation that guarantees the output **zero** is always `0` (logic‑LOW).  
+Since the specification says “Assume that signals are positive clock/clk triggered unless otherwise stated,” but no clock or input is actually required for this behavior, we can use a continuous assignment (a combinational wire) which is the cleanest and most efficient way to keep the output permanently low.
+
+```verilog
+// TopModule.v
+`timescale 1ns / 1ps
+
+module TopModule (
+    output zero
+);
+    // Continuous assignment – zero is always driven low
+    assign zero = 1'b0;
+
+endmodule
+```
+
+### Why this works
+
+- **No clock required**: The output is driven by a continuous assignment, so it doesn’t depend on any clock edge.
+- **Combinational logic**: The driver for `zero` is a simple logic‑0, so the synthesized hardware will be a direct wire (or a pull‑down if you choose to add a pull‑down resistor in physical design).
+- **Synthesis‑friendly**: Most synthesis tools will optimize this to zero logic (no gates, just a constant driver).
+
+If you *really* need a clock‑triggered register that always resets to 0, you could do:
+
+```verilog
+module TopModule (
+    input  wire clk,
+    output reg  zero
+);
+    always @(posedge clk) zero <= 1'b0;
+endmodule
+```
+
+But the continuous‑assignment version above is the simplest and most appropriate for a constant‑LOW output.

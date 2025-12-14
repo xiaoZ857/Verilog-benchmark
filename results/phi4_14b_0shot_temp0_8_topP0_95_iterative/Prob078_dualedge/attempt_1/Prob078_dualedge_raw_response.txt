@@ -1,0 +1,44 @@
+To implement a dual-edge triggered flip-flop using standard FPGA components, we can use two separate single-edge triggered flip-flops: one for the positive edge and another for the negative edge. By combining their outputs with some logic, we can mimic the behavior of a dual-edge triggered flip-flop.
+
+Here's how you can build such a circuit in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  // Internal signals for each edge-triggered flip-flop
+  reg pos_edge_ff;
+  reg neg_edge_ff;
+
+  always @(posedge clk) begin
+    pos_edge_ff <= d; // Capture the data on positive clock edge
+  end
+
+  always @(negedge clk) begin
+    neg_edge_ff <= d; // Capture the data on negative clock edge
+  end
+
+  // Combine outputs of both flip-flops to mimic dual-edge behavior
+  always @(*) begin
+    if (clk == 1'b0) begin
+      q = pos_edge_ff; // Use pos_edge_ff value when clock is low
+    end else begin
+      q = neg_edge_ff; // Use neg_edge_ff value when clock is high
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **pos_edge_ff**: This register captures the input `d` on every positive edge of the clock. It represents the state that would be expected after a rising edge.
+
+- **neg_edge_ff**: This register captures the input `d` on every negative edge of the clock, representing the state after a falling edge.
+
+- The final output `q` switches between these two registers depending on whether the clock is high or low. When the clock is low (`clk == 1'b0`), it uses the value from `pos_edge_ff`. When the clock is high (`clk == 1'b1`), it takes the value from `neg_edge_ff`.
+
+This setup ensures that changes to `d` are captured on both edges of the clock cycle, effectively simulating a dual-edge triggered flip-flop using available resources in an FPGA.

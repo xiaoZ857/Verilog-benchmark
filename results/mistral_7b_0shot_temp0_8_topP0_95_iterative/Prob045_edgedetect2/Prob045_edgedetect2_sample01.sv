@@ -1,0 +1,21 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+always @(posedge clk) begin
+  if (reset) begin // Added a condition for the reset signal
+    anyedge <= 8'b0; // Resetting all output bits to 0
+  end else begin
+    for (int i = 0; i < 8; i++) begin
+      if ((prev_in[i] == 0 && in[i]) || (prev_in[i] == 1 && !in[i])) begin
+        anyedge[i] <= 1'b1;
+      end
+      prev_in[i] <= in[i];
+    end
+  end
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

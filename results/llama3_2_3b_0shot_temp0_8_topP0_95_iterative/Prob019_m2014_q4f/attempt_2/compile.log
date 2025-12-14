@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob019_m2014_q4f_test.sv:67: error: port ``in2'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob019_m2014_q4f_test.sv:67: warning: Instantiating module TopModule with dangling input port 2 (in2_bubble) floating.
+1 error(s) during elaboration.

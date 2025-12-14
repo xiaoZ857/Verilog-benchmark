@@ -1,0 +1,20 @@
+
+always @(posedge clk) begin
+    if (areset) begin
+        predict_history <= 0;
+    end else begin
+        if (train_mispredicted) begin
+            // Misprediction takes precedence. Combine train_history and train_taken, then shift right by 1
+            logic [32:0] new_history;
+            new_history = {train_history, train_taken};
+            predict_history <= new_history >> 1;
+        end else if (predict_valid) begin
+            // Shift in predict_taken from LSB side
+            predict_history <= ({predict_history[30:0], predict_taken});
+        end
+    end
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

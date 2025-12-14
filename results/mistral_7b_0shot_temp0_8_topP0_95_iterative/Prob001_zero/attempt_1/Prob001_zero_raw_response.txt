@@ -1,0 +1,18 @@
+ In Verilog, to create a circuit that always outputs a low, you can use an always block with a default case that assigns logic '0' to the output. Here's the code for the `TopModule`:
+
+```verilog
+module TopModule (
+  output reg zero
+);
+
+always @(posedge clk)
+begin
+  // Default case, since no else clause is provided, this will be executed always
+  zero <= 0;
+end
+
+// You can add a clock input if needed:
+input wire clk;
+```
+
+This circuit will assign '0' to the output `zero` on every positive edge of the clock signal. If you don't have an explicit clock, it would still always output '0'.

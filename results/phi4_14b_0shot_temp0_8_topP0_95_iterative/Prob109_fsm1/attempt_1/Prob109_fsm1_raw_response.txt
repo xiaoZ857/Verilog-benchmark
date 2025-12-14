@@ -1,0 +1,74 @@
+To implement the described Moore machine in Verilog, we need to define the states and transitions based on the given state diagram. The machine has two states: A and B. State B is the reset state when `areset` is high.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire areset,
+  output reg out
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    STATE_A = 2'b00,  // A
+    STATE_B = 2'b01   // B (Reset state)
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // Moore output logic based on the current state
+  always_comb begin
+    out = 0;  // Default output
+    case (current_state)
+      STATE_A: out = 1;
+      STATE_B: out = 1;
+      default: out = 0;  // Safe default
+    endcase
+  end
+
+  // Next state logic and asynchronous reset
+  always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= STATE_B;  // Asynchronous reset to state B
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Determine the next state based on current state and input
+  always_comb begin
+    case (current_state)
+      STATE_A: begin
+        if (in == 0) next_state = STATE_B;
+        else         next_state = STATE_A;
+      end
+      STATE_B: begin
+        if (in == 0) next_state = STATE_B;
+        else         next_state = STATE_A;
+      end
+      default:   next_state = STATE_B;  // Default to B on undefined state
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: We use a 2-bit `enum` to encode the states A and B.
+
+2. **Moore Output Logic**: The output `out` is determined by the current state. Both states A and B produce an output of 1, as per the Moore machine definition.
+
+3. **Asynchronous Reset**: The state register updates on the positive edge of `clk`. If `areset` is high, it asynchronously resets to state B.
+
+4. **Next State Logic**: Based on the current state and input `in`, we determine the next state:
+   - From A: 
+     - If `in` is 0, transition to B.
+     - If `in` is 1, remain in A.
+   - From B:
+     - If `in` is 0, stay in B.
+     - If `in` is 1, go to A.
+
+This Verilog module implements the specified Moore machine with asynchronous reset functionality.

@@ -1,0 +1,22 @@
+```verilog
+module TopModule (
+  input [99:0] a,
+  input [99:0] b,
+  input sel,
+  output [99:0] out
+);
+
+  assign out = sel ? b : a;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign out = sel ? b : a;`**: This is a conditional assignment statement. It's a concise way to implement a multiplexer in Verilog.
+    * `sel ? b : a`:  This is the ternary operator. It works like this:
+        * If `sel` is 1 (true), then `out` is assigned the value of `b`.
+        * If `sel` is 0 (false), then `out` is assigned the value of `a`.
+* **`endmodule`**:  Marks the end of the module definition.
+
+This implementation efficiently selects either input `a` or input `b` based on the value of the `sel` signal, effectively creating a 2-to-1 multiplexer.

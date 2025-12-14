@@ -1,0 +1,99 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+    // States
+    localparam IDLE = 2'b00;
+    localparam DATA = 2'b01;
+    localparam STOP = 2'b10;
+    localparam ERROR = 2'b11;
+    
+    reg [1:0] state, next_state;
+    reg [7:0] shift_reg;
+    reg [3:0] bit_count;
+    reg done_reg;
+    reg [7:0] out_byte_reg;
+    
+    // State register
+    always @(posedge clk) begin
+        if (reset) begin
+            state <= IDLE;
+            shift_reg <= 8'b0;
+            bit_count <= 0;
+            out_byte_reg <= 8'b0;
+            done_reg <= 0;
+        end else begin
+            state <= next_state;
+            
+            // Shift register and bit counter logic
+            case (next_state)
+                IDLE: begin
+                    shift_reg <= 8'b0;
+                    bit_count <= 0;
+                    done_reg <= 0;
+                end
+                DATA: begin
+                    shift_reg <= {in, shift_reg[7:1]}; // LSB first
+                    bit_count <= bit_count + 1;
+                    done_reg <= 0;
+                end
+                STOP: begin
+                    // Hold shift_reg, reset bit_count for next byte
+                    bit_count <= 0;
+                    if (in == 1'b1) begin
+                        out_byte_reg <= shift_reg;
+                        done_reg <= 1'b1;
+                    end else begin
+                        done_reg <= 1'b0;
+                    end
+                end
+                ERROR: begin
+                    done_reg <= 0;
+                    // Wait for in == 1 (stop bit) before going to IDLE
+                end
+                default: begin
+                    // do nothing
+                end
+            endcase
+        end
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            IDLE: begin
+                if (in == 1'b0) // start bit detected
+                    next_state = DATA;
+                else
+                    next_state = IDLE;
+            end
+            DATA: begin
+                if (bit_count == 8) // collected 8 bits
+                    next_state = STOP;
+                else
+                    next_state = DATA;
+            end
+            STOP: begin
+                if (in == 1'b1) // correct stop bit
+                    next_state = IDLE;
+                else // missing stop bit
+                    next_state = ERROR;
+            end
+            ERROR: begin
+                if (in == 1'b1) // finally found stop bit
+                    next_state = IDLE;
+                else
+                    next_state = ERROR;
+            end
+            default: next_state = IDLE;
+        endcase
+    end
+    
+    // Outputs
+    assign out_byte = out_byte_reg;
+    assign done = done_reg;
+endmodule

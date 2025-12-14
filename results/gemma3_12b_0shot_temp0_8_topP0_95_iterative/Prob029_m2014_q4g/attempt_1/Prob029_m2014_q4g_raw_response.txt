@@ -1,0 +1,31 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  input in3,
+  output logic out
+);
+
+  logic xnor_out;
+
+  // Two-input XNOR
+  assign xnor_out = ~(in1 ^ in2);
+
+  // Two-input XOR
+  assign out = xnor_out ^ in3;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule ( ... );`**:  Defines the module named `TopModule` with the specified inputs and output.
+2. **`logic xnor_out;`**: Declares an internal `logic` signal named `xnor_out`. This is used to store the output of the XNOR gate. Using `logic` is generally preferred over `wire` in modern Verilog.
+3. **`assign xnor_out = ~(in1 ^ in2);`**: This line implements the XNOR gate.
+   - `in1 ^ in2`: Calculates the XOR of `in1` and `in2`.
+   - `~(...)`: Inverts the result of the XOR, effectively creating the XNOR.
+4. **`assign out = xnor_out ^ in3;`**:  This line implements the second XOR gate.
+   - `xnor_out ^ in3`: Calculates the XOR of the XNOR output (`xnor_out`) and the input `in3`.
+   - `assign out = ...`:  Assigns the result of the XOR operation to the output signal `out`.
+
+This code directly translates the description into Verilog code, using continuous assignments (`assign`) for the logic gates.  The `assign` statements are used because the logic gates are combinational (they don't have memory or state).  They are evaluated whenever any of their inputs change.

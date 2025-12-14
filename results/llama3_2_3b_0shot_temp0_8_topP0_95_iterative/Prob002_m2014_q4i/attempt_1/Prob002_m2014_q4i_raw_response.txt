@@ -1,0 +1,14 @@
+Here's the Verilog code to implement the described module:
+
+```verilog
+module TopModule (
+    output out // Output signal
+);
+
+// Immediately assigned logic to ensure the output is driven low
+assign out = 0; // Always drive the output to 0
+
+endmodule
+```
+
+This implementation uses an `assign` statement to directly set the value of the output wire. The module has no inputs and drives the output wire to a logical zero (0) on every clock cycle, assuming it's a positive edge-triggered clock.

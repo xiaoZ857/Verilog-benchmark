@@ -1,0 +1,46 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output [7:0] out_byte,
+  output done
+);
+
+localparam IDLE = 2'b00;
+localparam START = 2'b01;
+localparam DATA = 2'b10;
+localparam STOP = 2'b11;
+
+reg [1:0] state, next_state;
+reg [2:0] bit_count, next_bit_count;
+reg [7:0] data_reg, next_data_reg;
+reg out_done;
+
+always @(posedge clk) begin
+  if (reset) begin
+    state <= IDLE;
+    bit_count <= 3'b000;
+    data_reg <= 8'b00000000;
+    out_done <= 1'b0;
+  end else begin
+    state <= next_state;
+    bit_count <= next_bit_count;
+    data_reg <= next_data_reg;
+    out_done <= (next_state == STOP);
+  end
+end
+
+assign out_byte = data_reg;
+assign done = out_done;
+
+always_comb begin
+  next_state = state;
+  next_bit_count = bit_count;
+  next_data_reg = data_reg;
+  
+  case (state)
+    IDLE: begin
+      if (in
+
+// VERILOG-EVAL: endmodule not found

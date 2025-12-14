@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_4\Prob124_rule110_code.sv:21: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_4\Prob124_rule110_code.sv:22: warning: Static variable initialization requires explicit lifetime in this context.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_4\Prob124_rule110_code.sv:23: warning: Static variable initialization requires explicit lifetime in this context.

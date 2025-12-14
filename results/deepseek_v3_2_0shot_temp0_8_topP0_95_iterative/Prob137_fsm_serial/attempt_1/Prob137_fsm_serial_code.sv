@@ -1,0 +1,85 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+  // States
+  localparam IDLE = 3'd0;
+  localparam START = 3'd1;
+  localparam DATA0 = 3'd2;
+  localparam DATA1 = 3'd3;
+  localparam DATA2 = 3'd4;
+  localparam DATA3 = 3'd5;
+  localparam DATA4 = 3'd6;
+  localparam DATA5 = 3'd7;
+  localparam DATA6 = 3'd8;
+  localparam DATA7 = 3'd9;
+  localparam STOP = 3'd10;
+  localparam ERROR = 3'd11;
+  
+  reg [3:0] state, next_state;
+  reg [3:0] bit_count;
+  reg done_reg;
+  
+  // State register
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+    end else begin
+      state <= next_state;
+    end
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      IDLE: begin
+        if (in == 1'b0) next_state = START;  // start bit detected
+        else next_state = IDLE;
+      end
+      START: begin
+        next_state = DATA0;  // move to first data bit
+      end
+      DATA0: next_state = DATA1;
+      DATA1: next_state = DATA2;
+      DATA2: next_state = DATA3;
+      DATA3: next_state = DATA4;
+      DATA4: next_state = DATA5;
+      DATA5: next_state = DATA6;
+      DATA6: next_state = DATA7;
+      DATA7: begin
+        // After 8th data bit, check stop bit
+        if (in == 1'b1) next_state = STOP;
+        else next_state = ERROR;  // missing stop bit
+      end
+      STOP: begin
+        // After correct stop bit, check for next start bit or idle
+        if (in == 1'b0) next_state = START;
+        else next_state = IDLE;
+      end
+      ERROR: begin
+        // Wait until we see a stop bit (1) before looking for next start
+        if (in == 1'b1) next_state = IDLE;
+        else next_state = ERROR;  // stay in error until line goes high
+      end
+      default: next_state = IDLE;
+    endcase
+  end
+  
+  // Output logic: done is high for one cycle when correct stop bit is received
+  always @(posedge clk) begin
+    if (reset) begin
+      done_reg <= 1'b0;
+    end else begin
+      if (state == DATA7 && in == 1'b1) begin
+        done_reg <= 1'b1;
+      end else begin
+        done_reg <= 1'b0;
+      end
+    end
+  end
+  
+  assign done = done_reg;
+endmodule

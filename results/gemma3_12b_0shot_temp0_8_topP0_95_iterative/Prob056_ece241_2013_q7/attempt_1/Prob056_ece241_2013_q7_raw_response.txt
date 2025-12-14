@@ -1,0 +1,40 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  output reg Q
+);
+
+  always @(posedge clk) begin
+    if (j == 0 && k == 0) begin
+      Q <= Q;  // No change, retain previous value
+    end else if (j == 0 && k == 1) begin
+      Q <= 0;  // Reset to 0
+    end else if (j == 1 && k == 0) begin
+      Q <= 1;  // Set to 1
+    end else if (j == 1 && k == 1) begin
+      Q <= ~Q; // Toggle
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... )`:** Defines the Verilog module named `TopModule` with the specified inputs and output.
+* **`input clk, j, k;`:** Declares `clk`, `j`, and `k` as input signals.
+* **`output reg Q;`:** Declares `Q` as an output signal and also declares it as a `reg`.  `reg` is necessary because `Q` is assigned a value within an `always` block.
+* **`always @(posedge clk) begin ... end`:** This is a sequential block that executes only on the positive edge (rising edge) of the clock signal `clk`.  This ensures synchronous behavior.
+* **`if (j == 0 && k == 0) begin Q <= Q; end`:**  If both `j` and `k` are 0, the output `Q` retains its previous value (`Qold`).  The `<=` operator is used for non-blocking assignment within `always` blocks, which is crucial for correct sequential logic.
+* **`else if (j == 0 && k == 1) begin Q <= 0; end`:** If `j` is 0 and `k` is 1, `Q` is reset to 0.
+* **`else if (j == 1 && k == 0) begin Q <= 1; end`:** If `j` is 1 and `k` is 0, `Q` is set to 1.
+* **`else if (j == 1 && k == 1) begin Q <= ~Q; end`:** If both `j` and `k` are 1, `Q` toggles (inverts) its value.
+
+**Key Concepts:**
+
+* **Synchronous Logic:** The flip-flop's behavior is synchronized to the clock signal, ensuring predictable and reliable operation.
+* **Positive Edge Triggered:** The flip-flop reacts only on the rising edge of the clock signal.
+* **Non-Blocking Assignment (`<=`):**  Using the non-blocking assignment operator (`<=`) within the `always` block is *essential* for sequential logic. It ensures that the values of the inputs `j`, `k`, and `clk` are sampled *before* any assignments to `Q` are made.  This avoids race conditions and ensures correct behavior.  Using blocking assignments (`=`) would lead to incorrect results.
+* **`reg` data type:**  `reg` is required for signals that are assigned values within `always` blocks.

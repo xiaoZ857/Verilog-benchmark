@@ -1,0 +1,37 @@
+ Here's the Verilog code for a 3-digit counter that counts from 0 to 999, inclusive, with a period of 1000 clock cycles and a reset feature. The counter is designed as a synchronous, positive edge-triggered device:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [2:0] hundreds, // thousand's place counter
+  output reg [1:0] tens,     // tens place counter
+  output reg units            // unit's place counter
+);
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    hundreds <= 0;
+    tens <= 0;
+    units <= 0;
+  end else begin
+    if (hundreds == 9) begin
+      hundreds <= 0;
+      tens <= tens + 1;
+    end
+    if ((hundreds < 9) && (tens == 9)) begin
+      tens <= 0;
+      units <= units + 1;
+    end
+    if ((hundreds < 9) && (tens < 9)) begin
+      // Do nothing, the counter will increment naturally
+    end
+  end
+end
+
+assign q = {hundreds, tens, units};
+```
+
+This code defines a 3-digit counter using three separate counters for each digit (hundreds, tens, and units). The `always @(posedge clk or posedge reset)` block specifies that the counter will change on either the rising edge of the clock signal or the active high edge of the reset signal.
+
+The output register `q` is assigned the values of the hundreds, tens, and units registers to return the final 3-digit value in binary-coded decimal format (BCD).

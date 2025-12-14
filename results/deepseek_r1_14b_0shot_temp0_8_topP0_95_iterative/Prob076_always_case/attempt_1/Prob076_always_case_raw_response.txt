@@ -1,0 +1,10 @@
+Here's a Verilog implementation of a 6-to-1 multiplexer based on the given description:
+
+```verilog
+module TopModule (
+    input [2:0] sel,
+    input [3:0] data0,
+    input [3:0] data1,
+    input [3:0] data2,
+    input [3:0] data3,
+    input [3:0] data4

@@ -1,0 +1,56 @@
+Here is the Verilog code for the 6-to-1 multiplexer:
+
+```verilog
+module TopModule (
+  input [2:0] sel,
+  input [3:0] data0,
+  input [3:0] data1,
+  input [3:0] data2,
+  input [3:0] data3,
+  input [3:0] data4,
+  input [3:0] data5,
+  output reg [3:0] out
+);
+
+// Check if sel is valid (between 0 and 5)
+assign out = sel < 6 ? 
+                (sel == 0) ? data0 : 
+                 (sel == 1) ? data1 : 
+                  (sel == 2) ? data2 : 
+                   (sel == 3) ? data3 : 
+                    (sel == 4) ? data4 : 
+                     data5
+                 : 0;
+
+endmodule
+```
+
+This code uses the conditional operator (`sel < 6 ?`) to evaluate the multiplexer. If `sel` is less than 6, it selects the corresponding `dataX` input based on its value; otherwise, it outputs 0.
+
+However, Verilog does not support a single line if statement like this. We have to use an assign statement inside a block. The above code would look something like this instead:
+
+```verilog
+module TopModule (
+  input [2:0] sel,
+  input [3:0] data0,
+  input [3:0] data1,
+  input [3:0] data2,
+  input [3:0] data3,
+  input [3:0] data4,
+  input [3:0] data5,
+  output reg [3:0] out
+);
+
+// Assign the value to out based on sel
+assign out = (sel < 6) ? 
+               ((sel == 0) ? data0 : 
+                (sel == 1) ? data1 : 
+                 (sel == 2) ? data2 : 
+                  (sel == 3) ? data3 : 
+                   (sel == 4) ? data4 : data5)
+             : 0;
+
+endmodule
+```
+
+This way we are using a single if statement to select the correct dataX input when sel is between 0 and 5.

@@ -1,0 +1,48 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0;
+    end else begin
+      if (q == 9) begin
+        q <= 0;
+      end else begin
+        q <= q + 1;
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input clk, input reset, output reg [3:0] q);`**:  This declares the module named `TopModule` with the specified input (`clk`, `reset`) and output (`q`).  `q` is declared as `reg` because it's assigned within an `always` block.  `[3:0]` defines `q` as a 4-bit register, capable of representing values from 0 to 15. Since we only need to count to 9, we're using 4 bits which is sufficient.
+
+* **`always @(posedge clk)`**: This block is triggered on the positive edge of the clock signal.  This ensures synchronous operation.
+
+* **`if (reset) begin q <= 0; end`**: This is the synchronous reset condition.  When `reset` is high (active high), the counter `q` is immediately reset to 0 on the next clock edge. The `<=` operator is used for non-blocking assignment within the `always` block, which is crucial for sequential logic.
+
+* **`else begin ... end`**: This block executes when the `reset` signal is low (inactive).
+
+* **`if (q == 9) begin q <= 0; end`**: This is the counter's rollover condition. When `q` reaches 9, it resets to 0, ensuring it counts from 0 to 9 and back to 0.
+
+* **`else begin q <= q + 1; end`**:  This is the incrementing logic.  If `q` is not equal to 9, it's incremented by 1 on each clock cycle.
+
+**How it works:**
+
+The module implements a decade counter that counts from 0 to 9.  It uses a synchronous reset, meaning the counter is reset to 0 only when the `reset` signal is high and a clock edge occurs.  The `always` block ensures that the counter's value changes only on the positive edge of the clock signal. The `if` statements determine the next value of the counter based on the current value and the `reset` signal.
+
+**Simulation and Verification:**
+
+To verify the functionality of this module, you would typically use a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado).  You would write a testbench to apply various input sequences to the `clk` and `reset` signals and observe the output `q`.  The testbench should include:
+
+1. **Initialization:** Set initial values for the inputs.
+2. **Reset Test:** Assert `reset` and verify that `q` becomes 0.
+3. **Counting Test:** Deassert `reset` and apply a series of clock pulses. Verify that `q` counts from 0 to 9 and then resets to 0.
+4. **Edge Cases:** Test with long sequences of clock pulses to ensure correct rollover behavior.

@@ -1,0 +1,28 @@
+
+module TopModule (
+  input [2:0] sel,
+  input [3:0] data0,
+  input [3:0] data1,
+  input [3:0] data2,
+  input [3:0] data3,
+  input [3:0] data4,
+  input [3:0] data5,
+  output reg [3:0] out
+);
+`timescale 1ns / 1ps
+
+always @(posedge clk) begin
+    case (sel)
+      0 : out <= data0;
+      1 : out <= data1;
+      2 : out <= data2;
+      3 : out <= data3;
+      4 : out <= data4;
+      5 : out <= data5;
+      default : out <= 4'b0000; // Output 0 if sel is not between 0 and 5
+    endcase
+end
+
+// Your module interface is already provided, so I won't repeat it here.
+
+endmodule

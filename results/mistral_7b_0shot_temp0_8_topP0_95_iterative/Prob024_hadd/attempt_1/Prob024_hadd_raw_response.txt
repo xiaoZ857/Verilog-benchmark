@@ -1,0 +1,29 @@
+ Here is the Verilog code for a simple half adder:
+
+```verilog
+module HalfAdder(
+  input a,
+  input b,
+  output reg sum,
+  output reg cout
+);
+
+always @(posedge clk) begin
+  sum <= a ^ b; // XOR operation for sum
+  cout <= a & b; // AND operation for carry-out
+end
+
+// In Verilog, you don't need to explicitly define the clock signal. It is typically assumed and can be named as 'clk' or any other suitable name based on the context of your design.
+```
+
+This code defines a module called `HalfAdder` which has two input signals `a` and `b`, and two output signals `sum` and `cout`. The `always` block is triggered at each positive edge of the clock (`clk`), which in this case isn't explicitly defined but assumed as part of your design.
+
+The sum signal calculates the XOR (exclusive OR) of input signals `a` and `b`, while the carry-out (cout) signal performs an AND operation on the same inputs. This corresponds to the logic for a half adder:
+
+```
+    a   b   Sum   Carry-Out
+    0   0    0       0
+    0   1    1       0
+    1   0    1       0
+    1   1    0       1
+```

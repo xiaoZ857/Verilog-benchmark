@@ -1,0 +1,55 @@
+Here is the correct and complete implementation of a **half adder** in Verilog, as per your description:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+  assign sum = a ^ b;
+  assign cout = a & b;
+endmodule
+```
+
+---
+
+### 🔍 Explanation
+
+- **Inputs**:
+  - `a`: First input bit.
+  - `b`: Second input bit.
+
+- **Outputs**:
+  - `sum`: The XOR of `a` and `b` (1 when inputs differ).
+  - `cout`: The AND of `a` and `b` (1 only when both inputs are 1).
+
+---
+
+### ✅ Logic Breakdown
+
+- **Sum (`sum`)**:  
+  This is the result of the **XOR** operation between `a` and `b`.  
+  - `a ^ b` evaluates to:
+    - `0` if `a` and `b` are the same.
+    - `1` if `a` and `b` are different.
+
+- **Carry-out (`cout`)**:  
+  This is the result of the **AND** operation between `a` and `b`.  
+  - `a & b` evaluates to:
+    - `1` only when both `a` and `b` are `1`.
+    - `0` otherwise.
+
+---
+
+### 📌 Notes
+
+- The design is **combinational** and does **not** involve any clock signal, so no `always` blocks or clock-edge sensitivity lists are needed.
+- The module is named `TopModule`, as specified.
+- All signals are **positive-edge triggered** by default (as per the assumption), but this is irrelevant for a purely combinational circuit like a half adder.
+
+---
+
+### ✅ Conclusion
+
+This Verilog module correctly implements a **half adder**, producing the desired `sum` and `carry-out` signals based on the inputs `a` and `b`.

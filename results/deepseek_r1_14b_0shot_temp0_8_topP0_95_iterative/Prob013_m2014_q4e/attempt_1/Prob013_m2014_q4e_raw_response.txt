@@ -1,0 +1,19 @@
+To implement a 2-input NOR gate in Verilog, we'll use a combinational circuit since the output depends only on the current inputs. The output is the inverse of the logical OR of the two inputs.
+
+Here's the Verilog code:
+
+```verilog
+module TopModule (
+    input in1,
+    input in2,
+    output logic out
+);
+
+    always_comb begin
+        out = ~(in1 | in2);
+    end
+
+endmodule
+```
+
+This code defines a module with two input wires `in1` and `in2`, and one output wire `out`. The `always_comb` block ensures that the output is updated whenever any of its inputs change. The expression `(in1 | in2)` computes the logical OR, and `~` inverts it to produce the NOR function.

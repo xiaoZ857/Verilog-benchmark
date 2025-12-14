@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:8: syntax error
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:28: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:28:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:35: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:35:      : between the tic and preprocessor directive?
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:65: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:65:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob124_rule110_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_5\Prob124_rule110_code.sv:8: error: Invalid module instantiation

@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob155_lemmings4",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 42 mismatches. First mismatch occurred at time 580.\nHint: Output 'walk_right' has 56 mismatches. First mismatch occurred at time 600.\nHint: Output 'aaah' has 20 mismatches. First mismatch occurred at time 690.\nHint: Output 'digging' has 38 mismatches. First mismatch occurred at time 620.\nHint: Total mismatched samples is 156 out of 1003 samples\n\nSimulation finished at 5016 ps\nMismatches: 156 in 1003 samples\n",
+      "mismatch_count": 156
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 30 mismatches. First mismatch occurred at time 1910.\nHint: Output 'walk_right' has 24 mismatches. First mismatch occurred at time 1940.\nHint: Output 'aaah' has 10 mismatches. First mismatch occurred at time 1960.\nHint: Output 'digging' has 16 mismatches. First mismatch occurred at time 1950.\nHint: Total mismatched samples is 80 out of 1003 samples\n\nSimulation finished at 5016 ps\nMismatches: 80 in 1003 samples\n",
+      "mismatch_count": 80
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 50 mismatches. First mismatch occurred at time 580.\nHint: Output 'walk_right' has 64 mismatches. First mismatch occurred at time 600.\nHint: Output 'aaah' has 20 mismatches. First mismatch occurred at time 690.\nHint: Output 'digging' has 38 mismatches. First mismatch occurred at time 620.\nHint: Total mismatched samples is 164 out of 1003 samples\n\nSimulation finished at 5016 ps\nMismatches: 164 in 1003 samples\n",
+      "mismatch_count": 164
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'walk_left' has 38 mismatches. First mismatch occurred at time 1910.\nHint: Output 'walk_right' has 24 mismatches. First mismatch occurred at time 1940.\nHint: Output 'aaah' has 10 mismatches. First mismatch occurred at time 1960.\nHint: Output 'digging' has 16 mismatches. First mismatch occurred at time 1950.\nHint: Total mismatched samples is 84 out of 1003 samples\n\nSimulation finished at 5016 ps\nMismatches: 84 in 1003 samples\n",
+      "mismatch_count": 84
+    }
+  ]
+}

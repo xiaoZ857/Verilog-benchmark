@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:36: error: Unable to bind wire/reg/memory `history['sd31:'sd0]' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:36: error: Unable to elaborate r-value: history['sd31:'sd0]
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:15: error: Could not find variable ``reset_flag'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:16: error: Could not find variable ``current_index'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:17: error: Could not find variable ``history'' in ``tb.top_module1''
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:18: error: Unable to bind wire/reg/memory `reset_flag' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:18: error: Unable to elaborate condition expression.
+7 error(s) during elaboration.

@@ -1,0 +1,13 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 8
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:42: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:48: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:52: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:52: error: Malformed conditional expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:48: error: Malformed conditional expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:42: error: Malformed conditional expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:63: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob140_fsm_hdlc\attempt_1\Prob140_fsm_hdlc_code.sv:63: error: syntax error in continuous assignment

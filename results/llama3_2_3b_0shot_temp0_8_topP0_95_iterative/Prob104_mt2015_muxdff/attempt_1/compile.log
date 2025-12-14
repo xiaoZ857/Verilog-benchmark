@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:11: error: 'Q' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:8:      : It was declared here as a variable.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_ref.sv:16: syntax error
+I give up.

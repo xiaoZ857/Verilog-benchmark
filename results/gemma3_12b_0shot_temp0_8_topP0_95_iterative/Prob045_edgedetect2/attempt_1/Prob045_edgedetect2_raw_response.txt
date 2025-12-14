@@ -1,0 +1,55 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    int i;
+    for (i = 0; i < 8; i++) begin
+      if (in[i] != prev_in[i]) begin
+        anyedge[i] = 1;
+      end else begin
+        anyedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [7:0] prev_in;`**:  This declares a register named `prev_in` which will store the input `in` from the *previous* clock cycle.  This is crucial for detecting changes between cycles.
+
+2. **`always @(posedge clk)`**: This block executes on the positive edge of the clock signal.
+
+3. **`int i; for (i = 0; i < 8; i++) begin ... end`**: This loop iterates through each bit of the 8-bit input vector.
+
+4. **`if (in[i] != prev_in[i]) begin ... end`**:  This is the core logic.  It compares the current bit `in[i]` with the previous value of that bit `prev_in[i]`.  If they are different (meaning a transition occurred), the `anyedge[i]` bit is set to 1.
+
+5. **`anyedge[i] = 1;`**: Sets the corresponding output bit to 1, indicating an edge has been detected.
+
+6. **`anyedge[i] = 0;`**:  If there's no change between the current and previous cycle, the output bit remains 0.
+
+7. **`prev_in = in;`**:  This line is essential.  After processing each bit for the current clock cycle, the current value of `in` is stored in `prev_in`. This ensures that `prev_in` holds the input from the *previous* clock cycle for the *next* cycle's comparison.
+
+**How it works:**
+
+The module uses a register (`prev_in`) to store the input from the previous clock cycle. On each clock edge, it compares the current input with the previous input.  If a bit has changed (a transition from 0 to 1 or 1 to 0), the corresponding output bit `anyedge` is set to 1.  The current input is then stored in `prev_in` for the next cycle. The output `anyedge` will be set one cycle later than the change occurs in the input.
+
+**Example:**
+
+Let's say `in` is initially `8'b00000000`.
+
+* **Clock Cycle 1:** `in = 8'b00000000`.  `prev_in` is initialized to 0. `anyedge` remains 0. `prev_in` becomes `8'b00000000`.
+* **Clock Cycle 2:** `in = 8'b11111111`.  `in` is different from `prev_in`.  `anyedge` becomes `8'b11111111`. `prev_in` becomes `8'b11111111`.
+* **Clock Cycle 3:** `in = 8'b00000000`.  `in` is different from `prev_in`. `anyedge` becomes `8'b11111111`. `prev_in` becomes `8'b00000000`.
+* **Clock Cycle 4:** `in = 8'b10101010`. `in` is different from `prev_in`. `anyedge` becomes `8'b11111111`. `prev_in` becomes `8'b10101010`.
+* **Clock Cycle 1 (Output):** `anyedge` becomes `8'b00000000`
+
+The output `anyedge` will be one clock cycle delayed with respect to the input edge.

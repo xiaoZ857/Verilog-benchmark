@@ -1,0 +1,36 @@
+reg valid;
+always @(posedge clk) begin
+    if (valid) begin
+        case(code)
+            8'h45 : out <= 4'b0; // Key 0
+            8'h16 : out <= 4'b1; // Key 1
+            8'h1e : out <= 4'b2; // Key 2
+            8'h26 : out <= 4'b3; // Key 3
+            8'h25 : out <= 4'b4; // Key 4
+            8'h2e : out <= 4'b5; // Key 5
+            8'h36 : out <= 4'b6; // Key 6
+            8'h3d : out <= 4'b7; // Key 7
+            8'h3e : out <= 4'b8; // Key 8
+            8'h46 : out <= 4'b9; // Key 9
+            default : out <= 4'bx; // Default value (X)
+        endcase
+        valid <= 1; // Assigning valid as 1 if the condition is met
+    end
+end
+
+always @(posedge clk) begin
+    if (!valid) begin
+        out <= 4'bx; // Default value (X) for output
+        valid <= 0;  // Resetting valid to 0
+    end
+end
+
+// If you want to use synchronous reset, add the following lines:
+reg clk_r;
+assign clk_r = ~clk; // Clock inverting buffer
+always @(posedge clk_r) begin
+    if (reset) begin
+        out <= 4'bx; // Default value (X) for output
+        valid <= 0;  // Resetting valid to 0
+    end
+end

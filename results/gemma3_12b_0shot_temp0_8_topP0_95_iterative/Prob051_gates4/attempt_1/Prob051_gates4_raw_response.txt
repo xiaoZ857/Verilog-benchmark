@@ -1,0 +1,26 @@
+```verilog
+module TopModule (
+  input [3:0] in,
+  output out_and,
+  output out_or,
+  output out_xor
+);
+
+  assign out_and = in[3] & in[2] & in[1] & in[0];
+  assign out_or  = in[3] | in[2] | in[1] | in[0];
+  assign out_xor = in[3] ^ in[2] ^ in[1] ^ in[0];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the Verilog module named `TopModule` with its input and output ports.
+* **`input [3:0] in;`**:  Declares `in` as a 4-bit input signal (in[3] is the most significant bit, in[0] is the least significant bit).
+* **`output out_and, out_or, out_xor;`**: Declares `out_and`, `out_or`, and `out_xor` as output signals.
+* **`assign out_and = in[3] & in[2] & in[1] & in[0];`**: This line uses the `assign` statement to continuously assign the output `out_and` to the result of a 4-input AND operation on the input signal `in`. The `&` operator performs the logical AND.
+* **`assign out_or  = in[3] | in[2] | in[1] | in[0];`**:  This line performs a 4-input OR operation on the input signal and assigns the result to the output `out_or`.  The `|` operator performs the logical OR.
+* **`assign out_xor = in[3] ^ in[2] ^ in[1] ^ in[0];`**: This line performs a 4-input XOR operation on the input signal and assigns the result to the output `out_xor`. The `^` operator performs the logical XOR.
+* **`endmodule`**:  This marks the end of the module definition.
+
+This code directly implements the described combinational circuit using continuous assignment statements (`assign`).  These statements are used because the outputs are solely functions of the inputs and don't depend on any clock signals or sequential logic.

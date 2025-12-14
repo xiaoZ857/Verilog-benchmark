@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:69: error: start_shifting is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:6:      : start_shifting is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:71: error: start_shifting is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob096_review2015_fsmseq\attempt_3\Prob096_review2015_fsmseq_code.sv:6:      : start_shifting is declared here as wire.
+2 error(s) during elaboration.

@@ -1,0 +1,25 @@
+Here's the implementation of the Verilog module with 8 D flip-flops triggered by the positive edge of `clk`:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+  // Implement 8 D flip-flops using a generate statement
+  generate
+    for (i = 0; i < 8; i++) begin : d_ff_gen
+      always @(posedge clk) 
+        q[i] <= d[i];
+    end
+  endgenerate
+
+endmodule
+```
+
+This implementation:
+- Creates an array of 8 D flip-flops using a generate statement and a for loop.
+- Each flip-flop is triggered by the positive edge (`posedge`) of `clk`.
+- The input data bus `d` is connected to the data inputs of the flip-flops, and the output bus `q` captures the outputs of all 8 flip-flops.
+- The `always` block defines the behavior of each D flip-flop, which simply copies the value of the corresponding bit in `d` to the corresponding bit in `q` on each rising edge of `clk`.

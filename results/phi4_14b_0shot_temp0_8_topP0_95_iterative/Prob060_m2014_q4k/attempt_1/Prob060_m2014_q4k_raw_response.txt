@@ -1,0 +1,49 @@
+To implement the described Verilog module for a shift register using four D flip-flops, we can create a sequential circuit where each flip-flop's output is connected to the next flip-flop's input. The shift register will have an active-low synchronous reset and will be triggered by the positive edge of the clock.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input clk,
+    input resetn,  // Active-low synchronous reset
+    input in,      // Input to the shift register
+    output out     // Output from the last D flip-flop
+);
+
+    reg [3:0] shift_reg; // 4-bit register to hold the shift register
+
+    assign out = shift_reg[3]; // Connect the output of the last flip-flop to 'out'
+
+    always @(posedge clk or negedge resetn) begin
+        if (!resetn) begin
+            // Synchronous active-low reset: Reset all bits in the shift register
+            shift_reg <= 4'b0000;
+        end else begin
+            // Shift left operation and loading new input to the first bit
+            shift_reg <= {shift_reg[2:0], in};
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Inputs and Outputs**:
+   - `clk`: Clock signal.
+   - `resetn`: Active-low synchronous reset signal.
+   - `in`: Input data to be shifted into the register.
+   - `out`: Output from the last flip-flop in the shift register.
+
+2. **Register Declaration**:
+   - A 4-bit register `shift_reg` is used to hold the current state of the shift register.
+
+3. **Output Assignment**:
+   - The most significant bit (MSB) of `shift_reg`, which is `shift_reg[3]`, is assigned to the output `out`.
+
+4. **Sequential Logic**:
+   - We use an always block that triggers on the positive edge of `clk` or the negative edge of `resetn`.
+   - On reset (`!resetn`), all bits in the `shift_reg` are cleared to 0.
+   - Otherwise, during a clock rising edge, the register is shifted left by one position. The input `in` is loaded into the least significant bit (LSB).
+
+This implementation ensures that the shift register behaves correctly with an active-low synchronous reset and provides the desired shifting functionality.

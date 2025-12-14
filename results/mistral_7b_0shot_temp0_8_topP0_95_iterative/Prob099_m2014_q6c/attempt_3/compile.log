@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:9: error: Sized numeric constant must have a size greater than zero.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:17: error: Sized numeric constant must have a size greater than zero.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob099_m2014_q6c\attempt_3\Prob099_m2014_q6c_code.sv:26: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob099_m2014_q6c_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob099_m2014_q6c_ref.sv:14: syntax error
+I give up.

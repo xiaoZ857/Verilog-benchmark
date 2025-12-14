@@ -1,0 +1,26 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+always @(posedge clk or @(*reset)) begin
+  if (reset) begin // Reset condition: s[tap_0] = s[tap_0] ^ q[0];
+    s[0][0] <= q[31]; // Reset with a tap at position 0 and XOR input from LSB.
+    s[(tap_3 + 1):31] <= s[(tap_3 + 2):32]; // Shift bits without taps.
+    s[31:(tap_2 - 1)] <= {q[tap_1], s[(tap_1 + 1):32]};
+    q <= 1;
+  } else begin
+    s[0][0] <= q[31]; // Reset with a tap at position 0 and XOR input from LSB.
+    s[(tap_3 + 1):31] <= s[(tap_3 + 2):32]; // Shift bits without taps.
+    s[31:(tap_2 - 1)] <= {q[tap_1], s[(tap_1 + 1):32]};
+    q <= (s << 1) | q; // XOR with LSB output for taps at positions tap_0, tap_1, and tap_3.
+  end
+end
+
+// Assign the initial state to the full bit width of 32'h1.
+initial begin
+  q = 32'h1;
+end
+
+// VERILOG-EVAL: endmodule not found

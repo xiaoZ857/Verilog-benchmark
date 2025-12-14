@@ -1,0 +1,17 @@
+
+module TopModule (
+  input [6:1] y,
+  input w,
+  output Y2,
+  output Y4
+);
+  // Next-state logic for Y2 (next state B)
+  assign Y2 = (y[1] & ~w);  // From state A (y[1]=1) on input w=0
+
+  // Next-state logic for Y4 (next state D)
+  assign Y4 = (y[2] & w) |   // From state B (y[2]=1) on input w=1
+              (y[3] & w) |   // From state C (y[3]=1) on input w=1
+              (y[5] & w) |   // From state E (y[5]=1) on input w=1
+              (y[6] & w);    // From state F (y[6]=1) on input w=1
+
+endmodule

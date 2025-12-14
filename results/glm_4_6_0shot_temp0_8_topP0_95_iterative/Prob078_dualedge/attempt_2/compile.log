@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob078_dualedge\attempt_2\Prob078_dualedge_code.sv:9: error: Could not find variable ``q_pos'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob078_dualedge\attempt_2\Prob078_dualedge_code.sv:13: error: Could not find variable ``q_neg'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob078_dualedge\attempt_2\Prob078_dualedge_code.sv:17: error: Unable to bind wire/reg/memory `q_pos' in `tb.top_module1'
+3 error(s) during elaboration.

@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+always @(posedge clk) begin
+    if (load) begin
+        if(counter == 10'bz) // Load the counter with the given data
+            counter <= data;
+        tc <= 1'b0; // Reset the terminal count signal
+    end
+    if (counter > 0) begin
+        counter <= counter - 1'b1; // Decrement the counter
+    end
+    if (counter == 0) begin
+        tc <= 1'b1; // Assert terminal count signal
+        counter <= 10'bz; // Reset the counter to prevent further decrements until reloaded
+    end
+end
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:31: error: walk_left is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:32: error: walk_right is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:33: error: aaah is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:37: error: walk_left is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:8:      : walk_left is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:47: error: walk_right is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:9:      : walk_right is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:57: error: aaah is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:63: error: aaah is not a valid l-value in tb.top_module1.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob142_lemmings2\attempt_5\Prob142_lemmings2_code.sv:10:      : aaah is declared here as wire.
+7 error(s) during elaboration.

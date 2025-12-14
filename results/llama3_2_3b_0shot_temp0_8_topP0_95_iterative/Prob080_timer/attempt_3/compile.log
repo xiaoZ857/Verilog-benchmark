@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:11: error: Could not find variable ``counter'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:13: error: Could not find variable ``initialized'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:14: error: Unable to bind wire/reg/memory `initialized' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:14: error: Unable to elaborate condition expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:24: error: Could not find variable ``initialized'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:29: error: Could not find variable ``initialized'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:36: error: Could not find variable ``counter'' in ``tb.top_module1''
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:40: error: Unable to bind wire/reg/memory `counter' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:40: error: Unable to elaborate condition expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_3\Prob080_timer_code.sv:47: error: Could not find variable ``counter'' in ``tb.top_module1''
+10 error(s) during elaboration.

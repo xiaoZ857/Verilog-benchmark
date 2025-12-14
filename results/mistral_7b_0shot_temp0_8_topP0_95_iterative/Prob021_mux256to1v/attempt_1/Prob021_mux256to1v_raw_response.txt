@@ -1,0 +1,27 @@
+ Here's the Verilog code for a 4-bit wide, 256-to-1 multiplexer as per your description:
+
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output reg [3:0] out
+);
+
+always @(posedge clk) begin
+  case(sel)
+    4'b0000 : out <= in[3:0];
+    4'b0001 : out <= in[7:4];
+    4'b0010 : out <= in[11:8];
+    4'b0011 : out <= in[15:12];
+    4'b0100 : out <= in[19:16];
+    4'b0101 : out <= in[23:20];
+    4'b0110 : out <= in[27:24];
+    4'b0111 : out <= in[31:28];
+    4'b1000 : out <= in[35:32];
+    ... (continued for the remaining values of sel up to 1111)
+    default : out <= 4'bz; // Set output to zero if an invalid selection is made
+  endcase
+end
+```
+
+This code defines a module named TopModule with three ports: a 1024-bit input vector 'in', a 8-bit selection signal 'sel', and a 4-bit output vector 'out'. The always block with posedge clk trigger captures the changes in the signals at the rising edge of the clock. Inside the always block, there is a case statement that checks the value of sel and assigns the appropriate 4-bits from the input vector to the output based on the selection. If an invalid selection is made (i.e., sel exceeds 1111), the output is set to zero ('z').

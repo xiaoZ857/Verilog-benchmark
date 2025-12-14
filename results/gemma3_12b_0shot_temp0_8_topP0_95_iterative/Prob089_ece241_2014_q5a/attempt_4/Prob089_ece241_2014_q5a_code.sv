@@ -1,0 +1,96 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input x,
+  output z
+);
+  // Define states
+  typedef enum logic [1:0] {
+    IDLE,
+    CAPTURE_BIT
+  } state_t;
+
+  reg state_t current_state, next_state;
+  reg [7:0] accumulated_value; // Assuming a maximum input of 8 bits for now.  Can be generalized.
+  reg bit_received;
+
+  // State transition logic
+  always_comb begin
+    next_state = current_state;
+    case (current_state)
+      IDLE: begin
+        if (areset) begin
+          next_state = IDLE;
+        end else begin
+          next_state = IDLE; // Stay in IDLE until reset is released
+        end
+      end
+      CAPTURE_BIT: begin
+        if (areset) begin
+          next_state = IDLE;
+        end else begin
+          next_state = CAPTURE_BIT;
+        end
+      end
+      default: next_state = IDLE;
+    endcase
+  end
+
+  // State register update
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      current_state <= IDLE;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Output logic
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      z <= 0;
+      accumulated_value <= 0;
+      bit_received <= 0;
+    end else begin
+      case (current_state)
+        IDLE: begin
+          z <= 0;
+          accumulated_value <= 0;
+          bit_received <= 0;
+        end
+        CAPTURE_BIT: begin
+          if (bit_received) begin
+            accumulated_value <= {accumulated_value[7], accumulated_value[7:1]};
+            z <= ~accumulated_value[0]; // 2's complement bit
+          end
+        end
+      endcase
+    end
+  end
+
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      bit_received <= 0;
+    end else begin
+      if (current_state == CAPTURE_BIT) begin
+        bit_received <= 1;
+      end else begin
+        bit_received <= 0;
+      end
+    end
+  end
+
+  // Start the conversion when reset is released
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      // Stay in IDLE
+    end else begin
+      if (current_state == IDLE) begin
+        // Start conversion
+        next_state = CAPTURE_BIT;
+      end
+    end
+  end
+
+// VERILOG-EVAL: endmodule not found

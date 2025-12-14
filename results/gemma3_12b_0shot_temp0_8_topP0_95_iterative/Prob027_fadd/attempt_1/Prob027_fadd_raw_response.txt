@@ -1,0 +1,35 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input cin,
+  output cout,
+  output sum
+);
+
+  assign sum = a ^ b ^ cin;
+  assign cout = (a & b) | (a & cin) | (b & cin);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign sum = a ^ b ^ cin;`**: This line calculates the sum bit.  The `^` operator is the XOR operator. The sum is the XOR of the three inputs (a, b, and cin).  XOR gives a '1' if an odd number of inputs are '1', and a '0' otherwise.
+
+* **`assign cout = (a & b) | (a & cin) | (b & cin);`**: This line calculates the carry-out bit. The `&` operator is the AND operator, and the `|` operator is the OR operator.  The carry-out is '1' if at least two of the three inputs (a, b, and cin) are '1'.  This is because a carry occurs when the sum of the three inputs exceeds 1.
+
+**How it works (Truth Table):**
+
+| a | b | cin | sum | cout |
+|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 | 0 |
+| 1 | 0 | 1 | 0 | 1 |
+| 1 | 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 1 | 1 |
+
+This module implements a single full adder.  To create larger adders (e.g., a 4-bit adder), you would chain together multiple full adder modules, connecting the carry-out of one stage to the carry-in of the next.

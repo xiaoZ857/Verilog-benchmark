@@ -1,0 +1,13 @@
+
+module TopModule (
+    output reg out  // Use 'reg' because we're driving it with procedural assignment
+);
+
+    // Initial block assigns and maintains the output as low
+    initial begin
+        out = 1'b0;  // Drive the output to logic low
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

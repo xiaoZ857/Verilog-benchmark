@@ -1,0 +1,17 @@
+
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+
+  // The sum is the XOR of inputs 'a' and 'b'
+  assign sum = a ^ b;
+
+  // The carry-out is the AND of inputs 'a' and 'b'
+  assign cout = a & b;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

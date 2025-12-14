@@ -1,0 +1,50 @@
+//====================================================================
+//  TopModule.v
+//
+//  Description:
+//      A pure combinational module that implements seven basic logic
+//      functions on two 1‑bit inputs (a, b).  All outputs are driven
+//      by continuous assignments (i.e., gate‑level logic) and are
+//      updated immediately when either input changes.
+//
+//  Ports:
+//      input  a          – first operand
+//      input  b          – second operand
+//      output out_and    – a AND b
+//      output out_or     – a OR  b
+//      output out_xor    – a XOR b
+//      output out_nand   – a NAND b
+//      output out_nor    – a NOR  b
+//      output out_xnor   – a XNOR b
+//      output out_anotb  – a AND NOT b
+//
+//  Author:  <Your Name>
+//  Date:    <Date>
+//====================================================================
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire a,
+    input  wire b,
+    output wire out_and,
+    output wire out_or,
+    output wire out_xor,
+    output wire out_nand,
+    output wire out_nor,
+    output wire out_xnor,
+    output wire out_anotb
+);
+
+//---------------------------------------------------------------------
+//  Combinational logic – continuous assignments
+//---------------------------------------------------------------------
+assign out_and   = a &  b;          // a AND b
+assign out_or    = a |  b;          // a OR  b
+assign out_xor   = a ^  b;          // a XOR b
+assign out_nand  = ~(a &  b);       // a NAND b
+assign out_nor   = ~(a |  b);       // a NOR  b
+assign out_xnor  = ~(a ^  b);       // a XNOR b
+assign out_anotb = a & ~b;          // a AND NOT b
+
+endmodule

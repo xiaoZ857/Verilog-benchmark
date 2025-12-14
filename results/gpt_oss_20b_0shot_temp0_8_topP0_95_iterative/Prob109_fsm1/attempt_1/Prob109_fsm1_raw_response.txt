@@ -1,0 +1,39 @@
+Below is a compact, synthesizable implementation of the two‑state Moore machine described.  
+The machine has
+
+* **States** – `A` and `B`.  
+  * `A` is encoded as `0`, `B` as `1`.  
+* **Transitions** –  
+  * From `A` on input `0` → `B`  
+  * From `A` on input `1` → `A`  
+  * From `B` on input `0` → `A`  
+  * From `B` on input `1` → `B`  
+* **Output** – `out` equals the current state (Moore output).  
+  * `out = 0` when in `A`, `out = 1` when in `B`.  
+* **Reset** – Asynchronous reset (`areset`) forces the state to `B`.
+
+```verilog
+// TopModule.v
+// Two‑state Moore FSM – asynchronous reset to state B
+module TopModule (
+    input  wire clk,     // system clock
+    input  wire in,      // input to the FSM
+    input  wire areset,  // asynchronous active‑high reset
+    output reg  out      // Moore output (0 = A, 1 = B)
+);
+
+    // State encoding
+    localparam STATE_A = 1'b0;
+    localparam STATE_B = 1'b1;
+
+    // Current state register
+    reg state;
+    // Next state combinational signal
+    reg next_state;
+
+    // ------------------------------------------------------------------
+    // State register – synchronous update, asynchronous reset
+    // ------------------------------------------------------------------
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            state <= STATE_B

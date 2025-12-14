@@ -1,0 +1,62 @@
+**Verilog – Simple 4‑bit decade counter (0‑9, period = 10)**  
+
+```verilog
+// ---------------------------------------------------------------------------
+//  TopModule : 4‑bit synchronous decade counter
+// ---------------------------------------------------------------------------
+//  Description
+//  -----------
+//  Counts from 0 to 9 (inclusive).  The counter is synchronous – it
+//  advances on the rising edge of clk.  A high reset synchronously
+//  brings the counter back to 0.  The output `q` is a 4‑bit register
+//  that holds the current count value.
+//
+//  Implementation notes
+//  --------------------
+//  * The counter is reset only on the *clock edge* when reset is asserted
+//    – this is the definition of a *synchronous* reset.
+//  * The counter rolls over to 0 after 9.  We explicitly test for 9
+//    instead of relying on the 4‑bit overflow because the counter
+//    should never reach 10 (binary 1010).
+//
+//  Interface
+//  ---------
+//  input  clk      – rising‑edge clock
+//  input  reset    – active‑high synchronous reset
+//  output reg [3:0] q   – current count (0 … 9)
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input  wire        clk,
+    input  wire        reset,
+    output reg  [3:0]  q
+);
+
+    // Sequential logic – synchronous reset and counting
+    always @(posedge clk) begin
+        if (reset) begin
+            // Synchronous reset: set counter to 0
+            q <= 4'd0;
+        end else if (q == 4'd9) begin
+            // When 9 is reached, wrap back to 0
+            q <= 4'd0;
+        end else begin
+            // Normal count increment
+            q <= q + 1'b1;
+        end
+    end
+
+endmodule
+```
+
+### What the code does
+
+1. **Synchronous reset** – On every rising edge of `clk`, if `reset` is high the counter is set to zero (`q <= 4'd0`).
+
+2. **Counting** –  
+   * If the counter is at 9, it is wrapped back to 0 (`q <= 4'd0`).  
+   * Otherwise the counter increments by one (`q <= q + 1'b1`).
+
+3. The output `q` is a 4‑bit register that always holds the current decade count (0‑9).  
+
+This module satisfies all the stated requirements: it counts from 0 to 9, has a period of 10, and uses an active‑high synchronous reset.

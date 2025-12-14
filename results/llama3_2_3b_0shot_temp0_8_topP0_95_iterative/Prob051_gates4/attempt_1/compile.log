@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3221225477
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob051_gates4\attempt_1\Prob051_gates4_code.sv:10: error: Concatenation operand "'sd0" has indefinite width.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob051_gates4\attempt_1\Prob051_gates4_code.sv:10: error: Unable to elaborate r-value: {in['sd2], in['sd1], in['sd0], 'sd0}
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob051_gates4\attempt_1\Prob051_gates4_code.sv:13: error: System function $range not defined in system table or SFT file(s).

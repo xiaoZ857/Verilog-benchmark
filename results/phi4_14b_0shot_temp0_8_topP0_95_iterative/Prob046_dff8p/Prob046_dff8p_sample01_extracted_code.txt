@@ -1,0 +1,9 @@
+always @(negedge clk) begin
+  if (reset) begin
+    q <= 8'b00110100; // Synchronously reset to '0x34' on negative edge of clk
+  end else begin
+    q <= d;            // Capture input data into q on the negative edge of clock when not resetting
+  end
+end
+
+endmodule

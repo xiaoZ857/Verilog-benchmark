@@ -1,0 +1,33 @@
+
+// ---------------------------------------------------------------
+//  TopModule : 1‑bit JK flip‑flop
+//
+//  Behaviour (synchronous to the positive edge of clk):
+//    J K |  Qnext
+//    0 0 |  Qold   // hold
+//    0 1 |  0
+//    1 0 |  1
+//    1 1 |  ~Qold  // toggle
+//
+//  (All signals are active‑high and the flip‑flop is clock‑enabled only.)
+// ---------------------------------------------------------------
+module TopModule (
+    input  wire clk,  // positive‑edge clock
+    input  wire j,
+    input  wire k,
+    output reg  Q
+);
+
+    // Positive‑edge synchronous logic
+    always @(posedge clk) begin
+        case ({j, k})          // combine J and K into a 2‑bit selector
+            2'b00: Q <= Q;     // hold (no change)
+            2'b01: Q <= 1'b0;  // reset
+            2'b10: Q <= 1'b1;  // set
+            2'b11: Q <= ~Q;    // toggle
+        endcase
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

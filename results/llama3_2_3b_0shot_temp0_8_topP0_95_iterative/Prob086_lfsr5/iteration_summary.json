@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob086_lfsr5",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 11\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:17: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:17: error: Invalid module instantiation\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:18: error: Invalid module instantiation\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:30: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:30: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:41: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:42: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_1\\Prob086_lfsr5_code.sv:43: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob086_lfsr5_test.sv:12: error: invalid module item.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob086_lfsr5_ref.sv:24: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nSKIP: Simulation-hanging pattern detected\nReason: Combinational loop: shiftreg depends on itself (found in expression)",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_3\\Prob086_lfsr5_code.sv:37: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_3\\Prob086_lfsr5_code.sv:38: Syntax in assignment statement l-value.\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob086_lfsr5\\attempt_3\\Prob086_lfsr5_code.sv:39: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob086_lfsr5_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob086_lfsr5_test.sv:12: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

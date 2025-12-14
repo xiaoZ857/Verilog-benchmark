@@ -1,0 +1,29 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    // On reset, clear the output register and update the previous input register
+    out <= 32'b0;
+    prev_in <= 32'b0;
+  end else begin
+    integer i;
+    for (i = 0; i < 32; i = i + 1) begin
+      if (prev_in[i] == 1'b1 && in[i] == 1'b0) begin
+        // If there was a transition from 1 to 0, set the output bit high
+        out[i] <= 1'b1;
+      end else if (reset == 1'b0) begin
+        // Maintain previous state unless reset is active
+        // This ensures that once an 'out' bit is set to 1, it remains so until a reset occurs.
+        out[i] <= out[i];
+      end
+    end
+
+    // Update the previous input register with the current input state
+    prev_in <= in;
+  end
+endmodule

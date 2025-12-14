@@ -1,0 +1,30 @@
+
+// -------------------------------------------------------------
+// TopModule.v
+//
+// 512‑cell Rule‑90 cellular automaton.
+// -------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire          clk,        // Positive‑edge clock
+    input  wire          load,       // Load enable
+    input  wire [511:0]  data,       // Data to load
+    output reg  [511:0]  q           // Current cell states
+);
+
+    // Next state logic: Rule‑90 (XOR of left and right neighbours)
+    wire [511:0] next_state;
+    assign next_state = (q << 1) ^ (q >> 1);
+
+    always @(posedge clk) begin
+        if (load) begin
+            q <= data;            // Load new configuration
+        end else begin
+            q <= next_state;      // Advance one time step
+        end
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,17 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+assign q = a + b + c;
+reg carry_reg;
+always @(posedge clk)
+begin
+    carry_reg <= a & b | (~a & b & c) | (a & ~b & c) | (a & b & ~c);
+    q <= ~carry_reg & d | carry_reg;
+end
+
+endmodule

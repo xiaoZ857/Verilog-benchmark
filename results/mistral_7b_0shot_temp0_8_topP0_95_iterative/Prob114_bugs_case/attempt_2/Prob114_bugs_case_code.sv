@@ -1,0 +1,40 @@
+
+module TopModule (
+  input [7:0] code,
+  output reg [3:0] out,
+  output reg valid
+);
+assign valid = (code == 8'h45 || code == 8'h16 || code == 8'h1e || code == 8'h26 ||
+                code == 8'h25 || code == 8'h2e || code == 8'h36 || code == 8'h3d ||
+                code == 8'h3e || code == 8'h46);
+always @(posedge clk) begin
+    if (valid) begin
+        case(code)
+            8'h45 : out <= 4'b0; // Key 0
+            8'h16 : out <= 4'b1; // Key 1
+            8'h1e : out <= 4'b2; // Key 2
+            8'h26 : out <= 4'b3; // Key 3
+            8'h25 : out <= 4'b4; // Key 4
+            8'h2e : out <= 4'b5; // Key 5
+            8'h36 : out <= 4'b6; // Key 6
+            8'h3d : out <= 4'b7; // Key 7
+            8'h3e : out <= 4'b8; // Key 8
+            8'h46 : out <= 4'b9; // Key 9
+            default : out <= 4'bx; // Default value (X)
+        endcase
+    end
+end
+
+// If you want to use synchronous reset, add the following lines:
+reg reset;
+assign clk_r = ~clk; // Clock inverting buffer
+always @(posedge clk_r) begin
+    if (reset) begin
+        out <= 4'bx; // Default value (X)
+        valid <= 0;
+    end
+end
+
+// Assuming that you have an input reset signal, connect it to the reset signal here.
+
+endmodule

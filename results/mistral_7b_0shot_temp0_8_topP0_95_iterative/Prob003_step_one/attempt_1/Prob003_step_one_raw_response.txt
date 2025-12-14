@@ -1,0 +1,19 @@
+ In Verilog, you can create a module that always outputs a logical '1' as follows:
+
+```verilog
+module TopModule (
+  output reg one
+);
+
+always_comb begin
+  one = 1;
+end
+
+initial begin
+  $finish; // To terminate the simulation after one clock cycle
+end
+```
+
+This module called `TopModule` has an output named `one`, which is a registered signal. The `always_comb` block initializes the `one` signal to be always high ('1'). Since there are no inputs, the value of `one` will not change during simulation unless it's connected to other modules or components.
+
+The `initial` block at the bottom with $finish ensures that the simulation terminates after one clock cycle because there is nothing else to simulate in this module since its output is constant.

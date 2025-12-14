@@ -1,0 +1,40 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  input ar,
+  output logic q
+);
+
+  logic q_internal;
+
+  always_ff @(posedge clk, posedge ar) begin
+    if (ar) begin
+      q_internal <= 1'b0;
+    end else begin
+      q_internal <= d;
+    end
+  end
+
+  assign q = q_internal;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`logic q_internal;`**: Declares an internal signal `q_internal` to store the state of the flip-flop.  This is good practice to separate the internal state from the output signal.
+* **`always_ff @(posedge clk, posedge ar) begin ... end`**:  This is a sequential block that describes the flip-flop's behavior.  `always_ff` is used to indicate a sequential logic block (flip-flop, register, etc.).  The `@(posedge clk, posedge ar)` sensitivity list specifies that the block will execute on the positive edge of the clock signal (`clk`) *or* the positive edge of the asynchronous reset signal (`ar`).  This is crucial for the asynchronous reset to function correctly.
+* **`if (ar) begin q_internal <= 1'b0; end`**: This is the asynchronous reset condition.  If `ar` is high (asserted), the flip-flop's internal state `q_internal` is immediately set to 0, regardless of the clock signal.  The `<=` is the non-blocking assignment, which is essential within `always_ff` blocks to avoid race conditions.
+* **`else begin q_internal <= d; end`**: If the reset is *not* asserted (`ar` is low), the flip-flop's internal state `q_internal` is updated with the value of the data input `d` on the positive edge of the clock signal.
+* **`assign q = q_internal;`**:  This statement continuously assigns the value of the internal signal `q_internal` to the output signal `q`.  This makes the flip-flop's output available to other modules.
+
+**Key Concepts:**
+
+* **`always_ff`**:  Specifies a sequential logic block.
+* **`posedge clk`**:  Refers to the positive (rising) edge of the clock signal.
+* **Asynchronous Reset:**  A reset signal that overrides the normal operation of the flip-flop immediately when asserted.  It is "asynchronous" because it doesn't wait for the clock signal.
+* **Non-Blocking Assignment (`<=`)**:  Crucial for sequential logic.  It schedules the update of the `q_internal` signal for after all statements in the `always_ff` block have been evaluated.  This prevents race conditions.
+* **Sensitivity List:**  Specifies the signals that trigger the execution of the `always_ff` block.  In this case, the block executes on the positive edge of `clk` or `ar`.
+
+This implementation provides a correct and clear D flip-flop with an asynchronous reset, following Verilog best practices.  It is readily synthesizable and suitable for use in larger digital designs.

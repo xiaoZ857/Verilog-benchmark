@@ -1,0 +1,11 @@
+// Bitwise OR of the two vectors
+assign out_or_bitwise = a | b;
+
+// Logical OR of the two vectors
+assign out_or_logical = (|a) || (|b);
+
+// Inverse of both vectors
+// NOT of b in upper half [5:3], NOT of a in lower half [2:0]
+assign out_not = {~b, ~a};
+
+endmodule

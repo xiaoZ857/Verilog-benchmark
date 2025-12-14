@@ -1,0 +1,24 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 17
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:14: error: Could not find variable ``sec_low'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:15: error: Could not find variable ``sec_high'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:16: error: Could not find variable ``min_low'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:17: error: Could not find variable ``min_high'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:18: error: Could not find variable ``hour_low'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:19: error: Could not find variable ``hour_high'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:23: error: Unable to bind wire/reg/memory `sec_low' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:23: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:61: error: Unable to bind wire/reg/memory `hour_high' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:61: error: Unable to bind wire/reg/memory `hour_low' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:61: error: Concatenation/replication may not have zero width in this context.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:62: error: Unable to bind wire/reg/memory `min_high' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:62: error: Unable to bind wire/reg/memory `min_low' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:62: error: Concatenation/replication may not have zero width in this context.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:63: error: Unable to bind wire/reg/memory `sec_high' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:63: error: Unable to bind wire/reg/memory `sec_low' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:63: error: Concatenation/replication may not have zero width in this context.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob141_count_clock\attempt_2\Prob141_count_clock_code.sv:60: warning: @* found no sensitivities so it will never trigger.
+17 error(s) during elaboration.

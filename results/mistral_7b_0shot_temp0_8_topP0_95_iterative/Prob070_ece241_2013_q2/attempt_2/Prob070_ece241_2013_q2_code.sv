@@ -1,0 +1,26 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+always @(posedge clk) begin
+  // Define intermediate variables for a, b, c, and d
+  wire inter_abcd = a ^ b ^ c ^ d;
+  wire inter_abc = a & b & c;
+  wire inter_acd = a & c & d;
+
+  out_sop <= (inter_abcd && !(inter_abc || inter_acd)) // 0, 1, 4, 5, 6, 9, 10, 13, 14 conditions are false
+      | (inter_abc && c)                                // c is set to 1 for input condition 7
+      | ((inter_abcd || inter_acd) && !(c >> 1))       // c shifted by 1 is used for input conditions 2 and 15
+      | (4 * d + 4 * c + 4 * (c >> 1));                // Addition for input condition 8
+end
+
+always @(posedge clk) begin
+  out_pos <= ~out_sop; // out_pos is the negation of out_sop
+end
+
+// VERILOG-EVAL: endmodule not found

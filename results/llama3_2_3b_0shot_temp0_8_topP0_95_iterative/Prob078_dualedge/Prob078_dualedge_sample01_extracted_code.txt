@@ -1,0 +1,20 @@
+reg prev_q, prev_d;
+
+always @(posedge clk) begin
+    prev_d <= d;
+end
+
+always #10 @(negedge clk) begin
+    if (prev_d == 1'0 && d == 1'1)
+        q <= ~q;
+    else if (prev_d == 1'1 && d == 1'0)
+        q <= ~q;
+    else
+        q <= prev_q;
+end
+
+always @(posedge clk or posedge clk) begin
+    prev_q <= q;
+end
+
+endmodule

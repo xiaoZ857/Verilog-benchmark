@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_3\Prob148_2013_q2afsm_code.sv:71: error: Index g[4] is out of range.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob148_2013_q2afsm\attempt_3\Prob148_2013_q2afsm_code.sv:71: error: Unresolved net/uwire g cannot have multiple drivers.
+2 error(s) during elaboration.

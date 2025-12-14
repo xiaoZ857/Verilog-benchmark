@@ -1,0 +1,75 @@
+**Solution Overview**
+
+The Karnaugh map shows that the function is *1* for every combination of the inputs except when all three inputs are `0`.  
+That is exactly the logical **OR** of the three variables:
+
+```
+out = a ∨ b ∨ c
+```
+
+Because this is a purely combinational function, no clocking is required – the output reacts immediately to any change in the inputs.
+
+---
+
+### Verilog implementation
+
+```verilog
+// TopModule.v
+// 3‑input OR – implemented directly from the Karnaugh map
+//
+//      a
+//  bc   0   1
+//  00 | 0 | 1 |
+//  01 | 1 | 1 |
+//  11 | 1 | 1 |
+//  10 | 1 | 1 |
+module TopModule (
+    input  wire a,
+    input  wire b,
+    input  wire c,
+    output wire out
+);
+    // Combinational logic – direct OR of the three inputs
+    assign out = a | b | c;
+
+endmodule
+```
+
+**Explanation**
+
+* `assign out = a | b | c;`  
+  This single line implements the minimized Boolean expression obtained from the Karnaugh map.
+
+* All signals are declared as `wire` (the default for module ports) and are driven combinationally.
+
+---
+
+### Optional Testbench (for simulation)
+
+```verilog
+`timescale 1ns/1ps
+module tb_TopModule;
+    reg a, b, c;
+    wire out;
+
+    TopModule dut (.a(a), .b(b), .c(c), .out(out));
+
+    initial begin
+        $monitor("a=%b b=%b c=%b -> out=%b", a, b, c, out);
+
+        // Test all 8 combinations
+        {a,b,c} = 3'b000; #10;
+        {a,b,c} = 3'b001; #10;
+        {a,b,c} = 3'b010; #10;
+        {a,b,c} = 3'b011; #10;
+        {a,b,c} = 3'b100; #10;
+        {a,b,c} = 3'b101; #10;
+        {a,b,c} = 3'b110; #10;
+        {a,b,c} = 3'b111; #10;
+
+        $finish;
+    end
+endmodule
+```
+
+Running this testbench will confirm that `out` is `1` for all input patterns except `000`.

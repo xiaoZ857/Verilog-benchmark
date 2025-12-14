@@ -1,0 +1,12 @@
+
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+// Logic to reverse bit ordering
+reg [99:0] out;
+always reg @(*) 
+  begin
+    out = {in[99], in[98:0]};
+  end
+endmodule

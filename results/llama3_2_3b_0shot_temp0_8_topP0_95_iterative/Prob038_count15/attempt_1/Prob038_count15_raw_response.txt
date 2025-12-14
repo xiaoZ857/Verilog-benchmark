@@ -1,0 +1,43 @@
+Here's how you could implement this Verilog module:
+
+```verilog
+// Define the module
+module TopModule(
+    // Inputs
+    input clk, // Positive clock signal
+    input reset, // Active high synchronous reset input
+    
+    // Outputs
+    output reg [3:0] q // 4-bit binary counter value
+);
+
+// Instantiate a 4-bit binary counter
+reg [3:0] count = 0;
+reg [1:0] carry = 0;
+
+// Counter logic
+always @(posedge clk) begin
+    if (reset) begin // Reset the counter on rising edge of clock when reset is high
+        count <= 0;
+    else begin // Increment the counter
+        // Carry logic
+        if (count == 15) begin // 16th bit is always carry
+            carry <= 1;
+        else begin // Count up in binary
+            count <= count + 1;
+            carry <= 0;
+        end
+    end
+end
+
+// Output the counter value to q
+assign q = {carry, count[2], count[1], count[0]};
+
+endmodule
+```
+
+This module creates a 4-bit binary counter. The `count` variable is used to store the current count, and the `carry` variable keeps track of carry bits.
+
+When reset is active high on the rising edge of the clock signal (`clk`), it resets the `count` variable to zero. On each subsequent rise of the clock, if the `reset` input isn't asserted, it increments the counter by one bit in binary fashion (using a carry bit for borrow information).
+
+The output `q` variable combines the two bits that make up our 4-bit counter into an output sequence where we can see all four bits.

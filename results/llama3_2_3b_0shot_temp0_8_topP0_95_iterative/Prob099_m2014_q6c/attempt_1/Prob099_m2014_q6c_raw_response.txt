@@ -1,0 +1,50 @@
+To implement the state machine in Verilog, we need to derive the logic equations for the next-state signals Y2 and Y4. We can do this by examining the truth table derived from the given state diagram.
+
+Based on the state assignment and one-hot encoding, the states and their corresponding values of y[6:1] are:
+
+| y[7] | y[6] | y[5] | y[4] | y[3] | y[2] | y[1] | y[0] |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0   | 0    | 0    | 0    | 0    | A    | 0    | 0    |
+| 0   | 0    | 0    | 1    | 0    | B    | 0    | 0    |
+| 0   | 1    | 0    | 0    | 1    | D    | 0    | 0    |
+| 1   | 0    | 1    | 0    | 0    | A    | 0    | 1    |
+| 0   | 1    | 1    | 0    | 0    | D    | 0    | 1    |
+| 1   | 0    | 0    | 1    | 0    | B    | 0    | 1    |
+| 0   | 1    | 0    | 1    | 0    | D    | 0    | 1    |
+| 0   | 0    | 1    | 1    | 0    | D    | 0    | 1    |
+| 1   | 0    | 0    | 0    | 1    | E    | 1    | 0    |
+| 1   | 0    | 1    | 0    | 0    | D    | 1    | 0    |
+| 1   | 0    | 0    | 1    | 0    | B    | 1    | 0    |
+
+Based on this truth table, we can derive the logic equations for Y2 and Y4 as follows:
+
+Y2 is set when y[5] = 1 (i.e., transitions from A to D), or when y[6] = 1 (i.e., transitions from B to E):
+
+```verilog
+module TopModule (
+  input [6:1] y,
+  input w,
+  output logic Y2;
+);
+
+assign Y2 = (y[5] == 1) || (y[6] == 1);
+
+// ... (rest of the module remains the same)
+```
+
+Y4 is set when y[3] = 0 and y[7] = 0, or when y[2] = 0 and y[6] = 1:
+
+```verilog
+module TopModule (
+  input [6:1] y,
+  input w,
+  output logic Y4;
+);
+
+assign Y4 = ((y[3] == 0) && (y[7] == 0)) || 
+           ((y[2] == 0) && (y[6] == 1));
+
+// ... (rest of the module remains the same)
+```
+
+Note that we can use `logic` instead of `wire` for Y2 and Y4 since they are single-output signals.

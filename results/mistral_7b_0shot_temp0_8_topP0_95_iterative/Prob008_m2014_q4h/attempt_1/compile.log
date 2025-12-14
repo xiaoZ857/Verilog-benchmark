@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob008_m2014_q4h\attempt_1\Prob008_m2014_q4h_code.sv:14: reset definition conflicts with definition at results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob008_m2014_q4h\attempt_1\Prob008_m2014_q4h_code.sv:12.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob008_m2014_q4h\attempt_1\Prob008_m2014_q4h_code.sv:16: warning: implicit definition of wire 'clk_neg'.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob008_m2014_q4h_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob008_m2014_q4h_ref.sv:11: syntax error
+I give up.

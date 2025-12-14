@@ -1,0 +1,47 @@
+Below is a minimal, synthesizable Verilog implementation that satisfies every item in the brief:
+
+* 8 D‑flip‑flops (one for each bit of **q**)
+* Active‑high synchronous reset that drives the outputs to **0x34** (binary 0011 0100)
+* Negative‑edge‑triggered (negedge clk) logic
+
+```verilog
+// ---------------------------------------------------------------------------
+// TopModule.v
+//
+// 8 D‑flip‑flops with active‑high synchronous reset (value 0x34)
+// Negative‑edge triggered clock
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input          clk,   // System clock
+    input  [7:0]   d,     // Parallel data input
+    input          reset, // Active‑high synchronous reset
+    output reg [7:0] q    // Parallel data output
+);
+
+    // Negative‑edge triggered D‑FFs with synchronous reset
+    always @(negedge clk) begin
+        if (reset)            // Synchronous reset
+            q <= 8'h34;       // Reset value is 0x34
+        else
+            q <= d;           // Normal data transfer
+    end
+
+endmodule
+```
+
+### Why this works
+
+| Requirement | How it is met |
+|-------------|---------------|
+| **8 D‑flip‑flops** | The vector `q[7:0]` is updated as a whole; each bit behaves as an independent D‑FF. |
+| **Active‑high synchronous reset** | The `if (reset)` clause is evaluated only on the **negative** clock edge, so the reset is synchronous. |
+| **Reset value 0x34** | The literal `8'h34` is written to `q` when `reset` is high. |
+| **Triggered by the negative edge of clk** | The `always @(negedge clk)` block guarantees negative‑edge triggering. |
+
+### Optional Enhancements
+
+* **Parameterize the reset value** – if you later want to change it, you can add a `parameter RESET_VAL = 8'h34;`.
+* **Generate block for explicit individual FF instances** – for educational or simulation purposes, you could instantiate eight separate FF modules instead of using a vector assignment.
+
+But for all practical synthesis and simulation purposes, the code above is concise, clear, and meets the specification.

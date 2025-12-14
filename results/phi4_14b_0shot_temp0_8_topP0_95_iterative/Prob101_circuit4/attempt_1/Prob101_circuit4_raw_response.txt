@@ -1,0 +1,38 @@
+To implement the Verilog module `TopModule` based on the given simulation waveforms, we need to determine the logic that maps inputs (`a`, `b`, `c`, `d`) to the output (`q`). The circuit is combinational, meaning the output depends only on the current input values.
+
+From the waveforms:
+
+- Whenever `a = 1`, the output `q` is always `1`.
+- When `a = 0`, the output `q` is `1` if and only if at least one of `b`, `c`, or `d` is `1`.
+
+This behavior can be captured using a logical expression. The output `q` can be expressed as:
+
+\[ q = a + (\neg a \cdot (b + c + d)) \]
+
+Breaking it down:
+- \( a \) alone determines the output if it's `1`.
+- If \( a = 0 \), then the output is determined by whether any of `b`, `c`, or `d` are `1`. This can be expressed as \( b + c + d \).
+
+The expression simplifies to:
+
+\[ q = a | (b | c | d) \]
+
+This is because when \( a = 0 \), the output depends on whether any of `b`, `c`, or `d` are `1`.
+
+Here's the Verilog implementation:
+
+```verilog
+module TopModule (
+    input wire a,
+    input wire b,
+    input wire c,
+    input wire d,
+    output wire q
+);
+
+assign q = a | (b | c | d);
+
+endmodule
+```
+
+This code uses an `assign` statement to continuously evaluate the logical expression and drive the output `q`. The expression uses bitwise OR operations (`|`) to implement the logic derived from the simulation waveforms.

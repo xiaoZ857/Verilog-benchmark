@@ -1,0 +1,41 @@
+```verilog
+  synthesis verilog_input_version verilog_2001
+  module top_module (
+      input do_sub,
+      input [7:0] a,
+      input [7:0] b,
+      output reg [7:0] out,
+      output reg result_is_zero
+  );
+
+      always @(a, b, do_sub) begin
+          if (do_sub) begin
+              out = a - b;
+          end else begin
+              out = a + b;
+          end
+
+          if (out == 0) begin
+              result_is_zero = 1;
+          end else begin
+              result_is_zero = 0;
+          end
+      end
+
+  endmodule
+```
+
+**Reasoning for the fix:**
+
+The original code had two main issues:
+
+1. **Incorrect `always` block sensitivity list:** The `always @(*)` construct is a non-blocking always block that implicitly lists all inputs on the right-hand side of any assignments within the block.  However, it's generally considered best practice to explicitly list the signals that trigger the block.  This improves readability and helps prevent unintended behavior.  In this case, the `always` block should be sensitive to `a`, `b`, and `do_sub` because any change in these signals should trigger a recalculation of `out` and `result_is_zero`.
+
+2. **Incorrect Zero Flag Logic:** The original code used `~out` to check for the zero flag.  This checks if `out` is zero, but it's better to explicitly compare `out` to 0.  Using `~out` has some unexpected behavior with signed numbers.
+
+The corrected code addresses these issues by:
+
+1. **Explicit Sensitivity List:**  The `always @(a, b, do_sub)` makes the block dependent on changes to `a`, `b`, and `do_sub`.
+2. **Correct Zero Flag Check:**  The `if (out == 0)` condition accurately checks if the result `out` is zero.
+
+This revised code implements the adder-subtractor with the zero flag correctly and follows better Verilog coding practices.

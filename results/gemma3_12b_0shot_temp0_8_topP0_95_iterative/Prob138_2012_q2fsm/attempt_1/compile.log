@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:81: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:82: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:83: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:84: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:85: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:86: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:87: error: z_internal is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_1\Prob138_2012_q2fsm_code.sv:21:      : z_internal is declared here as wire.
+7 error(s) during elaboration.

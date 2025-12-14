@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:36: error: Count_next is not a valid l-value in tb.top_module1.NEXT_STATE_LOGIC.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:10:      : Count_next is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:37: error: Wait_next is not a valid l-value in tb.top_module1.NEXT_STATE_LOGIC.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:11:      : Wait_next is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:42: error: done is not a valid l-value in tb.top_module1.OUTPUT_LOGIC.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:12:      : done is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:43: error: counting is not a valid l-value in tb.top_module1.OUTPUT_LOGIC.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:13:      : counting is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:44: error: shift_ena is not a valid l-value in tb.top_module1.OUTPUT_LOGIC.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:14:      : shift_ena is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:41: warning: always_comb process has no sensitivities.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob150_review2015_fsmonehot\attempt_3\Prob150_review2015_fsmonehot_code.sv:35: warning: always_comb process has no sensitivities.
+5 error(s) during elaboration.

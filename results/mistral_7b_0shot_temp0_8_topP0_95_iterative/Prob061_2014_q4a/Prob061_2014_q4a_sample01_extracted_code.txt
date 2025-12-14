@@ -1,0 +1,13 @@
+always @(posedge clk or negedge E) begin
+  if (!E) D <= Q; // Else, keep the previous value of Q when enable (E) goes low
+  else if (E && !L) D <= R; // Load data into D when enable (E) is high and load (L) is low
+  else D <= Q; // Keep the previous value of Q when both E and L are high
+end
+
+assign w = R when (E && !L), Q otherwise; // Multiplexer for the first stage
+always @(posedge clk) begin
+  if (L) Q <= D; // Load new value to Q when load (L) is high
+  else Q <= {Q[0], D}; // Else, shift Q left by one bit and set the first bit as D
+end
+
+endmodule

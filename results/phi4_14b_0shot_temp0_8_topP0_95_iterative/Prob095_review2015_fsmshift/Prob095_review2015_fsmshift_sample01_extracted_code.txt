@@ -1,0 +1,59 @@
+always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
+        current_state <= IDLE;
+        shift_ena <= 1'b1; // Assert shift_ena on reset
+        counter <= 3; // Initialize counter for 4 cycles of shift_ena
+    end else begin
+        current_state <= next_state;
+
+        case (current_state)
+            ENABLE_SHIFT: begin
+                if (counter > 0) begin
+                    shift_ena <= 1'b1;
+                    counter <= counter - 1;
+                end else begin
+                    shift_ena <= 1'b0; // De-assert after 4 cycles
+                end
+            end
+
+            default: begin
+                shift_ena <= 1'b0; // Default state should de-assert shift_ena
+                if (next_state == ENABLE_SHIFT) begin
+                    counter <= 3; // Reset the counter when transitioning to ENABLE_SHIFT
+                end
+            end
+        endcase
+    end
+end
+
+always_comb begin
+    next_state = current_state;
+
+    case (current_state)
+        IDLE: begin
+            if (reset || pattern_detected) begin
+                next_state = ENABLE_SHIFT;
+            end
+        end
+
+        ENABLE_SHIFT: begin
+            // Transition to HOLD after the counter reaches 0
+            if (counter == 0) begin
+                next_state = HOLD;
+            end
+        end
+        
+        HOLD: begin
+            // Stay in HOLD state unless reset is detected, which will transition back to IDLE
+            if (reset) begin
+                next_state = ENABLE_SHIFT; // Transition directly to ENABLE_SHIFT on reset
+            end
+        end
+
+        default: begin
+            next_state = IDLE; // Default case for unexpected states
+        end
+    endcase
+end
+
+endmodule

@@ -1,0 +1,25 @@
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+  
+  always @(posedge clk) begin
+    if (load) begin
+      // Load the initial state
+      q <= data;
+    end else begin
+      // Compute next state for Rule 90
+      // Each cell's next state is XOR of its two neighbors
+      // For cell i: next_state[i] = q[i-1] XOR q[i+1]
+      // Boundaries: q[-1] = 0 and q[512] = 0
+      
+      // Using bitwise operations to compute all cells simultaneously
+      // Left shift gives q[i+1] values, right shift gives q[i-1] values
+      // For boundaries, we need to handle q[-1] and q[512] as 0
+      q <= ({q[510:0], 1'b0} ^ {1'b0, q[511:1]});
+    end
+  end
+  
+endmodule

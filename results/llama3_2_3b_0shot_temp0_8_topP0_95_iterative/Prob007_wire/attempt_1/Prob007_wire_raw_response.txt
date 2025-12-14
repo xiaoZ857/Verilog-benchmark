@@ -1,0 +1,23 @@
+Here's an implementation of the Verilog module:
+
+```verilog
+// Create a module with one input and one output that behaves like a wire
+module TopModule (
+  // Input signal
+  input clk, // Positive edge trigger clock signal
+  // Output signal (acts as a wire)
+  output logic out
+);
+
+// Assignation clause to make the output behave like a wire
+assign out = in;
+
+endmodule
+```
+
+In this implementation:
+
+- The module `TopModule` has two inputs: one for the clock signal and one for the input signal.
+- The output of the module is assigned to be the same as the input signal, effectively making it act as a wire. This is achieved using an `assign` statement in the Verilog language.
+
+Note that in Verilog, signals are usually represented as `logic`, but you can also use other types like `integer` or `reg` depending on your requirements.

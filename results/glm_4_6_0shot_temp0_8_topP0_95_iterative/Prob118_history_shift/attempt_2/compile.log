@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:14: warning: macro train_history undefined (and assumed null) at this point.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:14: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob118_history_shift_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob118_history_shift\attempt_2\Prob118_history_shift_code.sv:14: error: Invalid module instantiation

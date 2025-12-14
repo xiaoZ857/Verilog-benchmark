@@ -1,0 +1,18 @@
+always @(posedge clk) begin
+  if (load) begin
+    // Load new value into the counter when load signal is high
+    counter <= data;
+    tc <= 0; // Clear terminal count immediately after loading a new value
+  end else begin
+    if (counter > 0) begin
+      // Decrement the counter as long as it's greater than 0 and load is not asserted
+      counter <= counter - 1;
+      tc <= 0; // Keep terminal count low while counting down
+    end else if (load == 0) begin
+      // Assert terminal count only when the counter reaches zero and load is not active
+      tc <= 1;
+    end
+  end
+end
+
+endmodule

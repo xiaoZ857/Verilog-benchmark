@@ -1,0 +1,39 @@
+To factor the `full_module` into a hierarchical design, we will create a submodule called `TopModule`. This module will represent each bit of the register `q[2:0]`, handling both the loading and shifting operations. The `TopModule` will use a 2:1 multiplexer to select between loading from `r_in` or computing the next value based on the current state.
+
+Here's how you can implement the `TopModule`:
+
+```verilog
+module TopModule (
+    input clk,
+    input L,
+    input q_in,
+    input r_in,
+    output reg Q
+);
+    always @(posedge clk) begin
+        if (L) begin
+            Q <= r_in; // Load value from r_in when L is asserted
+        end else begin
+            // Compute next state based on current state
+            Q <= q_in;
+        end
+    end
+endmodule
+```
+
+### Explanation:
+
+- **Inputs:**
+  - `clk`: Clock signal.
+  - `L`: Load control signal. When high, the module loads the value from `r_in`.
+  - `q_in`: Input to the current bit from the previous state of the register.
+  - `r_in`: Value to load into the register when `L` is asserted.
+
+- **Output:**
+  - `Q`: The output bit representing the current state of this bit in the register.
+
+- **Behavior:**
+  - On each positive edge of the clock, if `L` is high, `Q` loads the value from `r_in`.
+  - If `L` is low, `Q` takes its next value based on the input `q_in`, which represents the current state of this bit. The logic for computing the next state (shifting and XOR operations) will be handled externally by connecting multiple instances of `TopModule`.
+
+In the hierarchical design, you would instantiate three `TopModule` components in the `full_module`, each handling one bit of the register `q[2:0]`. The interconnections between these modules will implement the shifting logic described in the original module.

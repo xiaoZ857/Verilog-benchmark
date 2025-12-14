@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:13: error: Unknown module type: A
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:19: error: Unknown module type: A
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:36: error: Unknown module type: B
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob131_mt2015_q4\attempt_2\Prob131_mt2015_q4_code.sv:42: error: Unknown module type: B
+5 error(s) during elaboration.
+*** These modules were missing:
+        A referenced 2 times.
+        B referenced 2 times.
+***

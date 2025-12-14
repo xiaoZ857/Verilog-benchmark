@@ -1,0 +1,61 @@
+
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    S0,  // Initial state, waiting for '1'
+    S1,  // Detected '1', now looking for '0'
+    S2   // Detected "10", now looking for '1' to complete the sequence
+  } state_t;
+
+  // State register
+  state_t current_state, next_state;
+
+  // FSM logic
+  always_ff @(posedge clk or negedge aresetn) begin
+    if (!aresetn)
+      current_state <= S0;
+    else
+      current_state <= next_state;
+  end
+
+  // Next state logic and output logic
+  always_comb begin
+    z = 1'b0; // Default value for z
+
+    case (current_state)
+      S0: begin
+        if (x == 1'b1) begin
+          next_state = S1;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S1: begin
+        if (x == 1'b0) begin
+          next_state = S2;
+        end else if (x == 1'b1) begin
+          next_state = S1; // Stay in S1 if another '1' is detected
+        end else begin
+          next_state = S0;
+        end
+      end
+      S2: begin
+        if (x == 1'b1) begin
+          next_state = S1; // Transition to S1 for overlapping sequence
+          z = 1'b1;       // Assert output when "101" is detected
+        end else begin
+          next_state = S0;
+        end
+      end
+    endcase
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

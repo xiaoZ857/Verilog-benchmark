@@ -1,0 +1,65 @@
+{
+  "problem_name": "Prob145_circuit8",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 3,
+  "total_attempts": 5,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob145_circuit8_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob145_circuit8_ref.sv:18: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'p' has 128 mismatches. First mismatch occurred at time 95.\nHint: Output 'q' has 169 mismatches. First mismatch occurred at time 60.\nHint: Total mismatched samples is 185 out of 240 samples\n\nSimulation finished at 1200 ps\nMismatches: 185 in 240 samples\n",
+      "mismatch_count": 185
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'p' has 112 mismatches. First mismatch occurred at time 90.\nHint: Output 'q' has 109 mismatches. First mismatch occurred at time 240.\nHint: Total mismatched samples is 138 out of 240 samples\n\nSimulation finished at 1200 ps\nMismatches: 138 in 240 samples\n",
+      "mismatch_count": 138
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'p' has 141 mismatches. First mismatch occurred at time 90.\nHint: Output 'q' has 145 mismatches. First mismatch occurred at time 60.\nHint: Total mismatched samples is 199 out of 240 samples\n\nSimulation finished at 1200 ps\nMismatches: 199 in 240 samples\n",
+      "mismatch_count": 199
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'p' has 141 mismatches. First mismatch occurred at time 90.\nHint: Output 'q' has 145 mismatches. First mismatch occurred at time 60.\nHint: Total mismatched samples is 199 out of 240 samples\n\nSimulation finished at 1200 ps\nMismatches: 199 in 240 samples\n",
+      "mismatch_count": 199
+    }
+  ]
+}

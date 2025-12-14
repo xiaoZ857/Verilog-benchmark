@@ -1,0 +1,26 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:16: error: Y1 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:5:      : Y1 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:18: error: Y1 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:5:      : Y1 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:20: error: Y1 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:5:      : Y1 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:40: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:42: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:44: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:46: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:48: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:50: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:52: error: Y3 is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob091_2012_q2b\attempt_2\Prob091_2012_q2b_code.sv:6:      : Y3 is declared here as wire.
+10 error(s) during elaboration.

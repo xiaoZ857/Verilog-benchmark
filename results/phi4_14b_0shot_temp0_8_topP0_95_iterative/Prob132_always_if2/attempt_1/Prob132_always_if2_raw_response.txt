@@ -1,0 +1,55 @@
+To implement the Verilog module based on the description, we need to address a few issues in the provided code:
+
+1. **Sensitivity List for `always` Blocks**: The use of `@(*)` indicates an always block sensitive to all signals, which is not appropriate here since it doesn't specify any specific events or conditions that should trigger updates. We'll change these to `always @(posedge clk)` assuming a positive clock edge triggers the logic.
+
+2. **Reset Logic**: It's common practice to include a reset signal in synchronous designs to initialize outputs and ensure predictable behavior during power-up.
+
+3. **Blocking vs Non-blocking Assignments**: Since we are dealing with registers, non-blocking assignments (`<=`) should be used within `always` blocks that trigger on the clock edge to prevent race conditions.
+
+4. **Naming Convention**: The module name in Verilog is case-sensitive and typically uses lowercase letters. We'll keep it as `top_module`.
+
+Here's the corrected implementation:
+
+```verilog
+module top_module (
+    input      clk,             // Clock signal
+    input      reset,           // Active-high synchronous reset
+    input      cpu_overheated,
+    output reg shut_off_computer,
+    input      arrived,
+    input      gas_tank_empty,
+    output reg keep_driving  
+);
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      shut_off_computer <= 1'b0; // Reset the shutdown signal
+    end else begin
+      if (cpu_overheated)
+        shut_off_computer <= 1'b1;
+      else
+        shut_off_computer <= 1'b0;
+    end
+  end
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      keep_driving <= 1'b0; // Reset the driving signal
+    end else begin
+      if (~arrived)
+        keep_driving <= ~gas_tank_empty;
+      else
+        keep_driving <= 1'b0; // If arrived, stop driving
+    end
+  end
+
+endmodule
+```
+
+### Key Changes:
+- **Clock and Reset**: Added `clk` and `reset` inputs to handle synchronous behavior.
+- **Non-blocking Assignments**: Used non-blocking assignments (`<=`) within the clocked always blocks.
+- **Reset Logic**: Included logic to reset outputs on a high reset signal, ensuring predictable initial states.
+- **Sensitivity List**: Changed sensitivity lists to trigger on positive clock edges or reset. 
+
+This implementation ensures that `shut_off_computer` and `keep_driving` are updated correctly based on the given conditions while considering standard synchronous design practices.

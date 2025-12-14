@@ -1,0 +1,50 @@
+ Here's the Verilog implementation of the Finite State Machine (FSM) and datapath as per your description. I have named the FSM module `MessageFinder` and the datapath module `DataPath`.
+
+```verilog
+module MessageFinder (
+  input clk,
+  input [7:0] in,
+  input reset,
+  output reg [23:0] out_bytes,
+  output reg done
+);
+
+reg [2:0] state; // FSM states: 0 - initial, 1 - waiting for first byte, 2 - receiving message, 3 - done
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    state <= 0;
+    out_bytes <= 0;
+    done <= 0;
+  end else if (state == 0 && in[3] == 1) begin
+    state <= 1;
+    out_bytes <= {in[7:4], 4'bx}; // x is a placeholder value for unused bits
+  end else if (state == 1) begin
+    out_bytes <= {out_bytes[23:8], in[7:0]};
+    state <= 2;
+    done <= 0;
+  end else if (state == 2 && in[3] == 1) begin
+    state <= 3; // signal done immediately after the third byte of each message
+    out_bytes <= {out_bytes[23:8], in[7:0]};
+  end else begin
+    state <= state; // stay in the same state if conditions are not met
+  end
+
+  if (state == 3) begin
+    done <= 1'b1;
+  end
+end
+
+module DataPath (
+  input clk,
+  input [7:0] in,
+  output reg reset,
+  output reg [23:0] out_bytes,
+  output reg done
+);
+
+always @(posedge clk) begin
+  reset <= top_module.done; // reset the datapath on FSM's done signal
+end
+```
+
+In this implementation, the `MessageFinder` FSM module reads the input byte stream and searches for message boundaries by discarding bytes until it finds one with `in[3] = 1`. After that, it assumes the received bytes are a part of a message, and signals the reception of a message (`done`) once all three bytes have been received. The `DataPath` module simply resets on the FSM's done signal to output the valid 24-bit message whenever a packet is received.

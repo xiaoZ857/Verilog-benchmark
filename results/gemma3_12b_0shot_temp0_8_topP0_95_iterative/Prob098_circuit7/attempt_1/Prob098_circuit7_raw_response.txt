@@ -1,0 +1,49 @@
+```verilog
+module TopModule (
+  input clk,
+  input a,
+  output reg q
+);
+
+  always @(posedge clk) begin
+    if (a == 0) begin
+      q <= 1;
+    end else begin
+      q <= ~q;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Sequential Circuit:** The problem states that this is a sequential circuit, which means it has memory and its output depends not only on the current input but also on the past inputs.  This necessitates the use of a `always @(posedge clk)` block.
+
+2. **Analyzing the Waveforms:**
+   - When `a` is 0, `q` is always 1.
+   - When `a` is 1, `q` toggles (changes its value).
+
+3. **Implementation:**
+   - `always @(posedge clk)`: This block defines a sequential block that executes on the positive edge of the clock signal.
+   - `if (a == 0)`: This condition checks if the input `a` is 0.
+     - `q <= 1;`: If `a` is 0, the output `q` is set to 1.
+   - `else`: If `a` is not 0 (i.e., `a` is 1), the `else` block is executed.
+     - `q <= ~q;`: This toggles the value of `q`.  `~q` inverts the current value of `q`.  So, if `q` was 0, it becomes 1; if `q` was 1, it becomes 0.
+
+**How the Code Matches the Waveforms:**
+
+Let's trace the execution with the provided waveforms:
+
+- **Time 5ns:** `clk` = 1, `a` = 0.  `q` is initialized to `x`. The `if (a == 0)` condition is true, so `q <= 1`.  `q` becomes 1.
+- **Time 10ns:** `clk` = 0, `a` = 0.  The `always` block does not execute. `q` remains 1.
+- **Time 15ns:** `clk` = 1, `a` = 0.  `if (a == 0)` is true, so `q <= 1`. `q` remains 1.
+- **Time 20ns:** `clk` = 0, `a` = 0. The `always` block does not execute. `q` remains 1.
+- **Time 25ns:** `clk` = 1, `a` = 0. `if (a == 0)` is true, so `q <= 1`. `q` remains 1.
+- **Time 35ns:** `clk` = 1, `a` = 1.  `if (a == 0)` is false, so `q <= ~q;`. `q` toggles from 1 to 0.
+- **Time 40ns:** `clk` = 0, `a` = 1.  The `always` block does not execute. `q` remains 0.
+- **Time 45ns:** `clk` = 1, `a` = 1.  `if (a == 0)` is false, so `q <= ~q;`. `q` toggles from 0 to 1.
+- **Time 55ns:** `clk` = 1, `a` = 1. `if (a == 0)` is false, so `q <= ~q;`. `q` toggles from 0 to 1.
+- ...and so on.
+
+This code accurately reflects the observed behavior in the waveforms.

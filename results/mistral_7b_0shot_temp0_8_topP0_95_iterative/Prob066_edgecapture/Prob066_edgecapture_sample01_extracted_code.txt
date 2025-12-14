@@ -1,0 +1,17 @@
+reg [31:0] prevIn;
+
+// Assuming `i` was a declared register or wire
+wire [31:0] i; // Add this line to declare 'i'
+
+always @(posedge clk or negedge reset) begin
+    if (reset) begin
+        out <= 32'b0; // reset all output bits
+    end else if (~prevIn[i] && in[i]) begin // Check for a transition from 1 to 0
+        out[i] <= 1'b1; // Set the corresponding output bit when transition happens
+    end
+    prevIn <= in; // store current input value for next clock cycle
+end
+
+assign i = <some_initialization>; // Add this line to initialize 'i'
+
+endmodule

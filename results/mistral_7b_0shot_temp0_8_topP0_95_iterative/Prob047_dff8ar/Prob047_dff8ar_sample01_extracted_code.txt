@@ -1,0 +1,43 @@
+logic [7:0] flip_flops [7:0]; // Declare an array of flip-flops instead of a single module instance
+
+always @(posedge clk or negedge areset) // Combine posedge clk and negedge areset for active high asynchronous reset
+begin
+  if (areset) // If areset is high, reset all flip-flops to 0
+    for (integer i = 0; i < 8; i = i + 1)
+      q[i] <= 1'b0;
+  else // Else assign the D value to each flip-flop on the rising edge of clk
+    for (integer i = 0; i < 8; i = i + 1)
+      flip_flops[i].Q(q[i]); // Assign q[i] to each flip-flop's Q output
+    q[i] <= d[i]; // Assign d[i] to the D input of the current flip-flop
+end
+
+assign flip_flops[0].D(d[0]); // Assign d[0] as the D input for the first flip-flop
+assign flip_flops[1].D(d[1]); // ... for the second flip-flop, and so on...
+assign flip_flops[2].D(d[2]);
+assign flip_flops[3].D(d[3]);
+assign flip_flops[4].D(d[4]);
+assign flip_flops[5].D(d[5]);
+assign flip_flops[6].D(d[6]);
+assign flip_flops[7].D(d[7]);
+
+// Assign clk to each flip-flop's clock input
+assign flip_flops[0].CLK(clk);
+assign flip_flops[1].CLK(clk);
+assign flip_flops[2].CLK(clk);
+assign flip_flops[3].CLK(clk);
+assign flip_flops[4].CLK(clk);
+assign flip_flops[5].CLK(clk);
+assign flip_flops[6].CLK(clk);
+assign flip_flops[7].CLK(clk);
+
+// Assign areset to each flip-flop's reset input
+assign flip_flops[0].RESET(areset);
+assign flip_flops[1].RESET(areset);
+assign flip_flops[2].RESET(areset);
+assign flip_flops[3].RESET(areset);
+assign flip_flops[4].RESET(areset);
+assign flip_flops[5].RESET(areset);
+assign flip_flops[6].RESET(areset);
+assign flip_flops[7].RESET(areset);
+
+endmodule

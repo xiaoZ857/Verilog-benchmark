@@ -1,0 +1,57 @@
+Here is the Verilog implementation of the state machine:
+
+```verilog
+module StateMachine(
+    input clk,
+    input in,
+    input areset,
+    output reg [1:0] out,
+    input [1:0] state
+);
+
+reg [1:0] current_state;
+assign out = current_state;
+
+// Initialize state to A on reset
+initial begin
+    if (areset) {
+        current_state <= 2'b00; // State A
+    }
+end
+
+always @(posedge clk or areset) begin
+    // Asynchronous reset
+    if (areset || current_state == 2'b00) { // A
+        current_state <= 2'b00; // Reset to state A
+    } else begin
+        // Transition table
+        case(current_state)
+            2'b00: // State A
+                when(in == 0) out = 2'b00;
+                when(in == 1) out = 2'b01;
+            
+            2'b01: // State B
+                when(in == 0) out = 2'b01;
+                when(in == 1) out = 2'b10;
+            
+            2'b10: // State C
+                when(in == 0) out = 2'b10;
+                when(in == 1) out = 2'b11;
+            
+            default: // State D
+                when(in == 0) out = 2'b00;
+                when(in == 1) out = 2'b01;
+        endcase
+    end
+end
+
+endmodule
+```
+
+In this implementation, the state machine is defined inside a module called `StateMachine`. The inputs are clock (`clk`), input signal (`in`), asynchronous reset (`areset`), and output (`out`). The state (`state`) is also an input to the module.
+
+The initial state of the FSM is set to `State A` when the reset is asserted. In each subsequent clock cycle, if a reset or the current state is not `State A`, the FSM transitions according to the transition table defined in the problem statement. The output of the FSM is then assigned based on the current state and the input signal.
+
+Please note that we use an internal register (`reg [1:0] current_state`) to store the current state of the FSM, because Verilog does not support the `state` keyword as a module input. We also use an `always` block with the `posedge` event condition to capture the changes in the clock and reset signals.
+
+Also note that this code assumes the output signal is always non-zero, so we set it to 00 when there's no transition (i.e., when the input is 0). This is a common practice in state machine designs.

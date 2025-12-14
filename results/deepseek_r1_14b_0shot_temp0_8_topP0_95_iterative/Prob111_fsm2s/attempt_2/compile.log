@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob111_fsm2s\attempt_2\Prob111_fsm2s_code.sv:34: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob111_fsm2s\attempt_2\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob111_fsm2s\attempt_2\Prob111_fsm2s_code.sv:35: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob111_fsm2s\attempt_2\Prob111_fsm2s_code.sv:7:      : out is declared here as wire.
+2 error(s) during elaboration.

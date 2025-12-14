@@ -1,0 +1,24 @@
+ Here's a simple Verilog implementation of a module that acts as a pass-through wire:
+
+```verilog
+module TopModule (
+  input wire in,
+  output wire out
+);
+
+always @(posedge clk) begin
+  out <= in;
+end
+
+initial begin
+  $finish; // Exits the simulation once the initial block is completed.
+end
+
+endmodule
+```
+
+In this code, the module `TopModule` has an input signal `in` and an output signal `out`. The behavior is defined inside the always block which triggers on a positive clock edge (posedge clk). The `out` signal is assigned the value of the `in` signal on each clock cycle.
+
+Since there are no explicit clocks in the given description, I assumed that clock (clk) will be provided from another module or circuit where this TopModule will be used.
+
+Also, I added an initial block with $finish to exit the simulation once the initial block is completed as it acts like a wire and doesn't have any internal state change.

@@ -1,0 +1,9 @@
+// Assign statement version
+assign out_assign = sel_b1 && sel_b2 ? b : a;
+
+// Always block with if statement version
+always @(*)
+    if ((sel_b1 && sel_b2))
+        out_always <= b;
+    else
+        out_always <= a;

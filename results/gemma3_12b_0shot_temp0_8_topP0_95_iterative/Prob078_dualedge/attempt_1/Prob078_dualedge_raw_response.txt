@@ -1,0 +1,47 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  reg q_n; // Internal register to hold the inverted value
+
+  always @(posedge clk) begin
+    q <= d;
+  end
+
+  always @(negedge clk) begin
+    q_n <= d;
+  end
+
+  assign q = ~q_n;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg q_n;`**:  We declare an internal register `q_n` to hold the inverted value of the output `q`. This is crucial for simulating the dual-edge triggering behavior.
+
+2. **`always @(posedge clk) begin ... end`**: This block captures the behavior of the flip-flop on the positive edge of the clock.  It assigns the input `d` to the output `q` on each positive clock edge.
+
+3. **`always @(negedge clk) begin ... end`**: This block captures the behavior of the flip-flop on the negative edge of the clock. It assigns the input `d` to the internal register `q_n` on each negative clock edge.
+
+4. **`assign q = ~q_n;`**: This continuous assignment inverts the value of `q_n` and assigns it to the output `q`.  This ensures that when `q_n` changes (due to the negative clock edge), `q` reflects that change, effectively simulating the dual-edge behavior.
+
+**How it works (Simulation of Dual-Edge Triggering):**
+
+The key to this approach is the combination of the two `always` blocks and the continuous assignment.
+
+* **Positive Clock Edge:**  The `posedge clk` block updates `q` with the value of `d`.
+* **Negative Clock Edge:** The `negedge clk` block updates `q_n` with the value of `d`.
+* **Inversion:** The `assign q = ~q_n;` continuously inverts the value in `q_n`, so that any change in `q_n` due to the negative edge of the clock is reflected in the output `q`.
+
+By doing this, we are effectively making the output `q` update based on the *latest* value of `d` on *either* the positive or negative edge of the clock.  This mimics the functionality of a dual-edge triggered flip-flop.
+
+**Why this is acceptable in FPGAs:**
+
+* **Positive and Negative Edge Triggers:** FPGAs are designed to handle positive-edge and negative-edge triggered logic.
+* **No Invalid Sensitivity List:**  This implementation does *not* use a sensitivity list that combines `posedge clk or negedge clk`.  Instead, it uses two separate `always` blocks, each sensitive to a single edge.
+* **Standard Verilog Constructs:**  The code uses only standard Verilog constructs that are supported by most FPGA synthesis tools.

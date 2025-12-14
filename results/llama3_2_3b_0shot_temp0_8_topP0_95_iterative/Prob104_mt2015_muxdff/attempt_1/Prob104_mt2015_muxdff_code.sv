@@ -1,0 +1,61 @@
+
+// Submodule for a flip-flop with 2:1 multiplexer
+module TopModule (
+  input clk,
+  input L,
+  input q_in,
+  input r_in,
+  output reg Q
+);
+
+reg [2:0] Q;
+
+always @(posedge clk) begin
+  if (L) begin
+    // Load the input value into Q_in
+    Q <= r_in;
+  end else begin
+    // Update the existing state of q
+    case (Q)
+      3'd0 : Q = {1'b1, q_in[2], q_in[0]};
+      3'd1 : Q = {q_in[1], q_in[2], q_in[0]};
+      default: Q = {q_in[1] ^ q_in[2], q_in[0], q_in[2]};
+    endcase
+  end
+end
+
+// Instantiate TopModule in full_module
+module full_module (
+    input [2:0] r, // load value
+    input L, // load
+    input clk, // clock
+    output reg [2:0] q // output
+
+);
+
+TopModule T1(
+    .clk(clk),
+    .L(L),
+    .q_in(r),
+    .r_in(3'd0),
+    .Q(q[2])
+);
+
+TopModule T2(
+    .clk(clk),
+    .L(L),
+    .q_in(r),
+    .r_in(3'd1),
+    .Q(q[1])
+);
+
+TopModule T3(
+    .clk(clk),
+    .L(L),
+    .q_in(r),
+    .r_in(3'd2),
+    .Q(q[0])
+);
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

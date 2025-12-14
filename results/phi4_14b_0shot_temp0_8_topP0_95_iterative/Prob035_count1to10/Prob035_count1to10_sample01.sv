@@ -1,0 +1,31 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset is active high synchronous. Set counter to 1.
+        q <= 4'b0001;
+    end else begin
+        case (q)
+            4'b1010: begin
+                // If current value is 10, wrap around to 1
+                q <= 4'b0001;
+            end
+            default: begin
+                // For all other values, increment the counter
+                if (q == 4'b1001) begin
+                    // Special case for wrapping from 9 to 10
+                    q <= 4'b1010;
+                end else begin
+                    // Increment normally within range 1 to 9
+                    q <= q + 1;
+                end
+            end
+        endcase
+    end
+end
+
+endmodule

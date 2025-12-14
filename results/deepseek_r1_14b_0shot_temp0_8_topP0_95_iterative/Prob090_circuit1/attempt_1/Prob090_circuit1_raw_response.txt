@@ -1,0 +1,18 @@
+The combinational circuit appears to implement the logical AND function between inputs `a` and `b`. The output `q` is high (1) only when both `a` and `b` are high.
+
+**Verilog Implementation:**
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output q
+);
+
+// Implementing the AND function
+q = a & b;
+
+endmodule
+```
+
+This module uses the logical AND operation to produce the output.

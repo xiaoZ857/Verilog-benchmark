@@ -1,0 +1,136 @@
+Here's how you can implement this module using Verilog:
+
+```verilog
+module TopModule(
+    // Clock signal
+    input clk,
+
+    // Input 8-bit vector
+    input [7:0] in,
+
+    // Output 8-bit vector to store any edge detection
+    output reg [7:0] anyedge
+);
+
+// Instantiate a D flip-flop for each bit of the input vector
+reg[7:0] edges[8];
+
+assign anyedge = edges;
+
+always @(posedge clk) begin
+
+    // Flip through the input vector
+    edges[0] <= in;
+    
+    for (int i = 1; i < 8; i++) begin
+        edges[i] <= edges[i-1];
+    end
+
+end
+
+endmodule
+```
+
+However, this above approach will not work as expected because it does not capture the transitions from one clock cycle to another. This is where we need a separate always block for detecting transitions.
+
+Here's how you can modify the module to detect the transition in any bit of the input vector and set that bit on the next clock cycle:
+
+```verilog
+module TopModule(
+    // Clock signal
+    input clk,
+
+    // Input 8-bit vector
+    input [7:0] in,
+
+    // Output 8-bit vector to store any edge detection
+    output reg [7:0] anyedge
+);
+
+reg[7:0] edges[8];
+reg[7:0] next_edges[8];
+
+assign anyedge = edges;
+
+always @(posedge clk) begin
+
+    for (int i = 0; i < 8; i++) begin
+        // Check if the current bit has changed from one clock cycle to another
+        if ((edges[i] == in[i]) && (edges[i+1] != in[i])) begin
+            next_edges[i] <= 1;
+        end else begin
+            next_edges[i] <= 0;
+        end
+
+        // Flip through the input vector
+        edges[i] <= in[i];
+    end
+
+end
+
+always @(posedge clk) begin
+
+    for (int i = 0; i < 8; i++) begin
+        edges[i+1] <= next_edges[i];
+    end
+
+end 
+
+endmodule
+```
+
+However, this approach still has an issue. It sets any bit that changes from one clock cycle to another at the rising edge of the same clock cycle and flips it to its new value on the next clock cycle.
+
+Here's how you can modify it to set a bit only when there is a transition (and not just because it changed from 0 to 1 or 1 to 0 within a single clock cycle):
+
+```verilog
+module TopModule(
+    // Clock signal
+    input clk,
+
+    // Input 8-bit vector
+    input [7:0] in,
+
+    // Output 8-bit vector to store any edge detection
+    output reg [7:0] anyedge
+);
+
+reg[7:0] edges[8];
+reg[7:0] next_edges[8];
+
+assign anyedge = edges;
+
+always @(posedge clk) begin
+
+    for (int i = 0; i < 8; i++) begin
+        if (edges[i] != in[i]) begin
+            // A bit has changed, set the corresponding edge to 1
+            next_edges[i] <= 1;
+            // We don't flip it yet, let's do that on the next clock cycle.
+            edges[i] = in[i];
+        end else begin
+            // If no transition, just continue flipping from one clock cycle to another
+            edges[i] = in[i];
+
+            if (edges[i+1] != in[i]) begin
+                next_edges[i] <= 0;
+            end else begin
+                next_edges[i] <= 1;
+            end
+        end
+    end
+
+end 
+
+always @(posedge clk) begin
+
+    for (int i = 0; i < 8; i++) begin
+        edges[i+1] <= next_edges[i];
+    end
+
+end 
+
+endmodule
+```
+
+This version of the code will ensure that it only sets an edge when there is a transition and then flips it to its new value on the next clock cycle.

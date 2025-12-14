@@ -1,0 +1,42 @@
+Here is a clean, synthesizable Verilog implementation of a 4‑bit shift register with an active‑low synchronous reset.  
+The register shifts the input `in` into the LSB on every rising edge of `clk`.  
+When `resetn` is low, all four flip‑flops are cleared to `0` on the next clock edge.  
+The most significant bit (the output of the last flip‑flop) is exposed as the module output `out`.
+
+```verilog
+// ---------------------------------------------------------------------------
+// 4‑bit Shift Register
+//  - Positive‑edge triggered
+//  - Active‑low synchronous reset
+//  - Data input:  in
+//  - Data output: out (MSB of the shift register)
+// ---------------------------------------------------------------------------
+
+module TopModule (
+    input  wire clk,     // Clock input
+    input  wire resetn,  // Active‑low synchronous reset
+    input  wire in,      // Data to shift in
+    output wire out      // MSB of the shift register
+);
+
+    // 4‑bit shift register
+    reg [3:0] shift_reg;
+
+    // Synchronous logic
+    always @(posedge clk) begin
+        if (!resetn)                     // Active‑low reset
+            shift_reg <= 4'b0;
+        else
+            shift_reg <= {shift_reg[2:0], in}; // Shift left, input goes to LSB
+    end
+
+    // Connect the MSB of the register to the output
+    assign out = shift_reg[3];
+
+endmodule
+```
+
+### Notes
+* The `always @(posedge clk)` block guarantees that the reset and shift operations are synchronous (i.e., occur on a clock edge).
+* `shift_reg` is a 4‑bit register; the assignment `{shift_reg[2:0], in}` concatenates the lower three bits with the new input to form the new state.
+* The output `out` is simply the most significant bit of `shift_reg`, giving the value that was present four clocks ago.

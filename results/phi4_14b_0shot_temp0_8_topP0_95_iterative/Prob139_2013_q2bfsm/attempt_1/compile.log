@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_G1 has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_G1 and STATE_A have the same value: 2'd0
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_YWAIT_1 has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_YWAIT_1 and STATE_F1 have the same value: 2'd1
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_YWAIT_2 has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_YWAIT_2 and STATE_X0 have the same value: 2'd2
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_HOLD_G1 has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_HOLD_G1 and STATE_X1 have the same value: 2'd3
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_CLEAR_G has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob139_2013_q2bfsm\attempt_1\Prob139_2013_q2bfsm_code.sv:24: error: Enumeration name STATE_CLEAR_G and STATE_A have the same value: 2'd0
+11 error(s) during elaboration.

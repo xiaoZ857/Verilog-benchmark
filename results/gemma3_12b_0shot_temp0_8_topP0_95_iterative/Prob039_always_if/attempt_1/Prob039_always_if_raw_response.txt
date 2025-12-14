@@ -1,0 +1,40 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input sel_b1,
+  input sel_b2,
+  output out_assign,
+  output reg out_always
+);
+
+  // Implementation using assign statements
+  assign out_assign = (sel_b1 & sel_b2) ? b : a;
+
+  // Implementation using procedural if statement
+  always @(a, b, sel_b1, sel_b2) begin
+    if (sel_b1 & sel_b2) begin
+      out_always = b;
+    end else begin
+      out_always = a;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (...)`**:  Defines the module named `TopModule` with the specified input and output ports.
+* **`assign out_assign = (sel_b1 & sel_b2) ? b : a;`**: This is the assign statement implementation.  It uses the conditional operator `? :` (ternary operator).  If `sel_b1` AND `sel_b2` are both true, `out_assign` is assigned the value of `b`; otherwise, it's assigned the value of `a`.  Assign statements are purely combinational logic.
+* **`always @(a, b, sel_b1, sel_b2) begin ... end`**: This is the procedural block implementation.  The `always` block is sensitive to changes in `a`, `b`, `sel_b1`, and `sel_b2`.  Whenever any of these signals change, the code inside the `always` block will execute.  The `@` symbol lists the signals that trigger the execution of the `always` block.
+* **`if (sel_b1 & sel_b2) begin ... end else begin ... end`**: This is a standard `if-else` statement.  It checks if `sel_b1` AND `sel_b2` are both true.  If they are, `out_always` is assigned the value of `b`.  Otherwise, `out_always` is assigned the value of `a`.  `out_always` is declared as a `reg` because it's assigned a value inside an `always` block.  `reg` variables must be assigned within `always` or `initial` blocks.
+
+**How it works:**
+
+The module implements a 2-to-1 multiplexer (mux).  A mux selects one of several input signals and forwards the selected input to a single output.  In this case, the inputs are `a` and `b`, and the select lines are `sel_b1` and `sel_b2`.
+
+* **When `sel_b1` and `sel_b2` are both true:**  The mux selects input `b`, and `out_always` and `out_assign` both become equal to `b`.
+* **When either `sel_b1` or `sel_b2` is false (or both are false):** The mux selects input `a`, and `out_always` and `out_assign` both become equal to `a`.
+
+The assign and always block implementations achieve the same functionality, but they use different styles of Verilog code.  The assign statement is more concise for simple combinational logic, while the `always` block is more flexible for more complex sequential and combinational logic.  In this case, both approaches are appropriate.

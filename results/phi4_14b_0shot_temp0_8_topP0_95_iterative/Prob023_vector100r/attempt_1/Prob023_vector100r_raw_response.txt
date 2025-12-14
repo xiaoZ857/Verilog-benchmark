@@ -1,0 +1,31 @@
+To implement the Verilog module as described, you need to create a module that takes a 100-bit wide input vector and reverses the order of its bits. The output will also be a 100-bit wide vector with the reversed bit order.
+
+Here's how you can write this Verilog module:
+
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+always @(*) begin
+  integer i;
+  for (i = 0; i < 100; i = i + 1) begin
+    out[i] = in[99 - i];
+  end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module is named `TopModule` and it takes a 100-bit input vector `in` and produces a 100-bit output vector `out`.
+
+- **Combinational Logic with `always @(*)`**: This block is sensitive to all inputs of the module. Using `@(*)` makes this an always_comb block, which means it will be executed whenever any signal it depends on changes.
+
+- **Loop for Bit Reversal**:
+  - We use a loop that iterates over each bit position from 0 to 99.
+  - For each index `i`, the output bit at position `i` is assigned the value of the input bit at position `99-i`. This effectively reverses the bits.
+
+This implementation ensures that the bit ordering of the input vector is reversed in the output vector.

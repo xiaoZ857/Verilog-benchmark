@@ -1,0 +1,23 @@
+To solve this problem, we need to create a Verilog module that computes an even parity bit for an 8-bit byte. The even parity bit is determined by taking the XOR of all 8 data bits, resulting in a 9th bit that ensures the total number of 1s in the 9-bit byte is even.
+
+### Approach
+The approach involves calculating the XOR of all eight input bits to determine the parity bit. Since XOR is both associative and commutative, we can compute the result by applying XOR operations across all bits sequentially or directly combining them with XOR operators. This method ensures that the resulting parity bit correctly reflects whether there are an even number of 1s in the 8-bit input.
+
+### Solution Code
+```verilog
+module TopModule (
+  input [7:0] in,
+  output parity
+);
+  
+  assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7];
+  
+endmodule
+```
+
+### Explanation
+The provided code defines a Verilog module named `TopModule`. It takes an 8-bit input vector `in` and outputs the parity bit. The key line inside the module is:
+```verilog
+assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7];
+```
+This line computes the XOR of all eight bits. If there are an even number of 1s among the input bits, the result will be 0 (indicating even parity). If there are an odd number of 1s, the result will be 1 (indicating odd parity), ensuring that the total number of 1s in the resulting 9-bit byte is even. This approach efficiently computes the parity bit using a straightforward application of XOR operations across all input bits.

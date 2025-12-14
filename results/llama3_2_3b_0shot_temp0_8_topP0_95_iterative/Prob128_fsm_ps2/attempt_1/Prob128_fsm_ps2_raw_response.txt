@@ -1,0 +1,40 @@
+Here is a Verilog implementation of the finite state machine you described:
+
+```verilog
+module TopModule(
+    input clk,
+    input [7:0] in,
+    input reset,
+    output done
+);
+
+    integer byte_count; // 0-2, 3 for valid message, -1 for invalid data
+
+    always @(posedge clk) begin
+        if (reset) begin
+            byte_count <= 0;
+        end else begin
+            if (in[7] == 1) byte_count <= 0;
+            else if (byte_count < 2 && in[7] != 1) byte_count <= -1;
+            else if (byte_count >= 0 && byte_count < 3) byte_count <= byte_count + 1;
+            // If we're at the end of a message, set done
+            if (byte_count == 2) begin
+                byte_count <= 3;
+                done <= 1;
+            end else
+                done <= 0;
+        end
+    end
+
+endmodule
+```
+
+This module has one state variable `byte_count` that tracks the number of bytes we've seen so far. If we see a byte where `in[7] == 1`, we set `byte_count` to 0, indicating that we're waiting for the next valid message. 
+
+If we don't see such a byte and `byte_count` is less than 2, we set it to -1, indicating invalid data.
+
+As long as `byte_count` is greater or equal to 0 but less than 3, we increment it by one. This represents that we are waiting for the next valid message to be received.
+
+If `byte_count` equals 2, it means we have two complete bytes and this is the last byte of a message, so we set `done` to 1 (true) immediately after. 
+
+This implementation assumes that the input signal `in` is positive edge-triggered on a rising clock edge.

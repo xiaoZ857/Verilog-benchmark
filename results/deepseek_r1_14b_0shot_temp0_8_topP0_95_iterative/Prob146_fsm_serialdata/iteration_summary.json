@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob146_fsm_serialdata",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:47: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 35\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:19: syntax error\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:14: error: Syntax error in typedef clause.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:21: syntax error\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:21: error: Invalid module instantiation\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:55: syntax error\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:55: error: malformed statement\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:56: syntax error\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:62: Syntax in assignment statement l-value.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob146_fsm_serialdata\\attempt_2\\Prob146_fsm_serialdata_code.sv:64: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:66: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:66: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:67: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:76: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:76: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:77: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:77: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:77: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:78: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:8: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:6: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:10: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:11: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:11: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:12: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:12: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:12: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:14: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:14: error: malformed statement\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:14: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:16: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:18: error: Incomprehensible case expression.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:33: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:34: Syntax in assignment statement l-value.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:35: syntax error\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:35: Syntax in assignment statement l-value.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:47: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

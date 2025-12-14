@@ -1,0 +1,66 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+  reg [511:0] next_q;
+
+  always @(posedge clk) begin
+    if (load) begin
+      q <= data;
+    end else begin
+      q <= next_q;
+    end
+  end
+
+  always @(*) begin
+    for (int i = 0; i < 512; i++) begin
+      case (q[i])
+        1'b0: begin
+          if (q[i-1] == 1'b0 && q[i+1] == 1'b0)
+            next_q[i] = 1'b0;
+          else if (q[i-1] == 1'b0 && q[i+1] == 1'b1)
+            next_q[i] = 1'b1;
+          else if (q[i-1] == 1'b1 && q[i+1] == 1'b0)
+            next_q[i] = 1'b0;
+          else
+            next_q[i] = 1'b1;
+        end
+        1'b1: begin
+          if (q[i-1] == 1'b1 && q[i+1] == 1'b1)
+            next_q[i] = 1'b0;
+          else if (q[i-1] == 1'b1 && q[i+1] == 1'b0)
+            next_q[i] = 1'b1;
+          else if (q[i-1] == 1'b0 && q[i+1] == 1'b1)
+            next_q[i] = 1'b0;
+          else
+            next_q[i] = 1'b1;
+        end
+      endcase
+    }
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - Defines the `TopModule` with inputs `clk`, `load`, `data` (512 bits), and output `q` (512 bits).
+
+2. **Internal Register:**
+   - `reg [511:0] next_q;`: This register holds the next state of the cellular automaton.  It's declared as `reg` because it will be assigned a value within an `always` block.
+
+3. **Sequential Logic (`always @(posedge clk)`):**
+   - `always @(posedge clk)`: This block executes on the positive edge of the clock signal.  This is the core of the sequential logic.
+   - `if (load) begin q <= data; end`:  If the `load` input is high, the `q` output is loaded with the value of the `data` input. The `<=` operator is used for non-blocking assignment, which is crucial for correct sequential behavior.
+   - `else begin q <= next_q; end`: Otherwise (if `load` is low), the `q` output is updated with the value of `next_q`, which holds the next state calculated in the combinational logic.
+
+4. **Combinational Logic (`always @(*)`):**
+   - `always @(*)`: This block is a combinational `always` block. The `@(*)` sensitivity list means that the block will re-evaluate whenever *any* of its input signals change.  This ensures that `next_q` is always up-to-date based on the current state of `q`.
+   - **Loop for Each Cell:** `for (int i = 0; i < 512; i++) begin ... end`:  This loop iterates through each of the 512 cells in the automaton.
+   - **Case Statement for Rule 90:** `case (q[i])`:  This `case` statement implements the Rule 90 logic.  It examines the current state of the cell (`q[i]`) and its two neighbors (`q[i-1]` and `q[i+1]`) to determine the next state of the cell (`next_q[i]`).  The conditions within the `case` statement directly correspond to the truth table provided in the problem description.
+   - **Boundary Conditions:** The code implicitly handles boundary conditions. `q[i-1]` and `q[i+1]` are read as if

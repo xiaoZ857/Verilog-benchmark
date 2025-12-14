@@ -1,0 +1,38 @@
+
+module TopModule(
+  input clk,           // Positive edge triggered clock signal
+  input areset,         // Asynchronous reset signal
+  input bump_left,      // Input to bump the Lemming on the left
+  input bump_right,     // Input to bump the Lemming on the right
+  input ground,         // Ground state signal
+  output walk_left,     // Walking direction signal for Lemmings moving left
+  output walk_right,    // Walking direction signal for Lemmings moving right
+  output aaah           // Fall signal
+);
+
+// Moore State Machine Parameters
+localparam [3:0] SMStates = {0, 1, 2, 3}; // Define possible states
+reg [3:0] state; // Current state of the Lemming machine
+
+// Default State (reset to walking left)
+initial begin
+    state = {0, 0, 0, 0}; // Initial value is walking left
+end
+
+always @(posedge clk) // Clock edge triggered
+begin
+    if (areset) // Asynchronous reset condition
+        state <= SMStates[0]; // Reset the machine when areset is high
+    
+    else 
+        state <= state; // No change in state unless clock or inputs change
+
+    walk_left = (state == SMStates[0]) ? 1'b1 : 0'b0; // Walking left signal
+    walk_right = (state == SMStates[1]) ? 1'b1 : 0'b0; // Walking right signal
+    aaah = (state == {SMStates[2], SMStates[3]}) ? 1'b1 : 0'b0; // Fall signal
+
+endcase
+    
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

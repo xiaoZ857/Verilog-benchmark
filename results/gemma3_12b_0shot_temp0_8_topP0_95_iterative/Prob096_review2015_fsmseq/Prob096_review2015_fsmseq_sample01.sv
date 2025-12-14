@@ -1,0 +1,78 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+  // Define states
+  typedef enum logic [1:0] {
+    S0, // Initial state
+    S1, // Received a '1'
+    S2, // Received '11'
+    S3, // Received '110'
+    S4  // Received '1101'
+  } state_t;
+
+  state_t current_state, next_state;
+
+  // Output signal
+  reg start_shifting;
+
+  // State register
+  always_ff @(posedge clk, posedge reset) begin
+    if (reset) begin
+      current_state <= S0;
+      start_shifting <= 0;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Output logic
+  always_comb begin
+    next_state = current_state;
+    start_shifting = 0; // Default: don't start shifting
+
+    case (current_state)
+      S0: begin
+        if (data == 1) begin
+          next_state = S1;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S1: begin
+        if (data == 1) begin
+          next_state = S2;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S2: begin
+        if (data == 0) begin
+          next_state = S3;
+        end else begin
+          next_state = S1;
+        end
+      end
+      S3: begin
+        if (data == 1) begin
+          next_state = S4;
+          start_shifting = 1; // Sequence found!
+        end else begin
+          next_state = S0;
+        end
+      end
+      S4: begin
+        // Stay in S4 forever once the sequence is found
+        next_state = S4;
+        start_shifting = 1; // Keep shifting
+      end
+      default: begin
+        next_state = S0;
+      end
+    endcase
+  end
+
+endmodule

@@ -1,0 +1,82 @@
+```verilog
+module TopModule (
+  input [7:0] code,
+  output reg [3:0] out,
+  output reg valid
+);
+
+  always @(code) begin
+    valid = 0;
+    out = 0;
+
+    if (code == 8'h45) begin
+      valid = 1;
+      out = 0;
+    end else if (code == 8'h16) begin
+      valid = 1;
+      out = 1;
+    end else if (code == 8'h1e) begin
+      valid = 1;
+      out = 2;
+    end else if (code == 8'h26) begin
+      valid = 1;
+      out = 3;
+    end else if (code == 8'h25) begin
+      valid = 1;
+      out = 4;
+    end else if (code == 8'h2e) begin
+      valid = 1;
+      out = 5;
+    end else if (code == 8'h36) begin
+      valid = 1;
+      out = 6;
+    end else if (code == 8'h3d) begin
+      valid = 1;
+      out = 7;
+    end else if (code == 8'h3e) begin
+      valid = 1;
+      out = 8;
+    end else if (code == 8'h46) begin
+      valid = 1;
+      out = 9;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... )`**: Defines the module named `TopModule` with inputs `code` (8-bit) and outputs `out` (4-bit) and `valid` (1-bit).
+* **`always @(code)`**:  This block is a combinational `always` block. It is triggered whenever the `code` input changes.  This ensures that the outputs `out` and `valid` are updated immediately when the input `code` changes.
+* **`valid = 0; out = 0;`**:  This initializes `valid` and `out` to 0 at the beginning of each evaluation.  This is important because it ensures that if none of the conditions are met, the outputs are correctly set to 0.
+* **`if (code == 8'h45) begin ... end else if (code == 8'h16) begin ... end ...`**:  This is a chain of `if-else if` statements that check if the input `code` matches each of the specified scan codes.
+* **`valid = 1; out = <key_value>;`**:  If a match is found, `valid` is set to 1, and `out` is set to the corresponding 4-bit key value (0 to 9).
+* **`end`**:  Marks the end of the `always` block and the end of the module.
+
+**How it works:**
+
+The code implements a series of comparisons.  It checks the `code` input against a list of predefined scan codes. If a match is found, the corresponding key value is assigned to the `out` signal, and the `valid` signal is asserted (set to 1).  If no match is found, the `valid` signal remains 0, and the `out` signal is also 0.  Because the `always` block is triggered by changes to the `code` input, the output signals are updated immediately whenever the input changes.
+
+**Testing (for Simulation):**
+
+You can test this module using a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado simulator).  Here's a simple testbench example:
+
+```verilog
+module TopModule_tb;
+
+  reg [7:0] code;
+  wire [3:0] out;
+  wire valid;
+
+  TopModule dut (
+    .code(code),
+    .out(out),
+    .valid(valid)
+  );
+
+  initial begin
+    // Test cases
+    code = 8'h45; #10; $display("Code: %h, Out: %h, Valid: %b", code, out, valid);
+    code = 8'h16; #10; $display("Code: %h, Out: %h, Valid: %b", code, out, valid);
+    code = 8'h1e; #10; $display("Code: %h,

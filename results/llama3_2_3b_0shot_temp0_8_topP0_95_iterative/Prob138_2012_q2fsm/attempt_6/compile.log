@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 12
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_6\Prob138_2012_q2fsm_code.sv:33: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_6\Prob138_2012_q2fsm_code.sv:34: error: Incomprehensible case expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob138_2012_q2fsm\attempt_6\Prob138_2012_q2fsm_code.sv:36: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:37: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:37: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_test.sv:38: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:10: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:10: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:18: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:26: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob138_2012_q2fsm_ref.sv:28: error: invalid module item.

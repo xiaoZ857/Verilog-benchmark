@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:9: warning: macro TopModule undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:10: warning: macro r_in undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:10: warning: macro L undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:10: warning: macro q_in undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob104_mt2015_muxdff\attempt_1\Prob104_mt2015_muxdff_code.sv:9: syntax error
+I give up.

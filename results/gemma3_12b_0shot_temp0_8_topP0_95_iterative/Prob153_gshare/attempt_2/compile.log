@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:54: error: predict_taken is not a valid l-value in tb.top_module1.$unm_blk_6.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob153_gshare\attempt_2\Prob153_gshare_code.sv:8:      : predict_taken is declared here as wire.
+1 error(s) during elaboration.

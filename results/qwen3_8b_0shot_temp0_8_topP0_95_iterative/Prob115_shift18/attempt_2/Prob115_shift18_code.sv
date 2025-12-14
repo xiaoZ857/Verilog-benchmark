@@ -1,0 +1,12 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input ena,
+  input [1:0] amount,
+  input [63:0] data,
+  output reg [63:0] q
+);
+
+
+// VERILOG-EVAL: endmodule not found

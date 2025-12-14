@@ -1,0 +1,16 @@
+Here's the implementation of the Verilog module for an AND gate:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out
+);
+
+// Assign the AND operation directly to the output
+assign out = a & b;
+
+endmodule
+```
+
+This module takes two inputs, `a` and `b`, and assigns their logical AND result to the output `out`.

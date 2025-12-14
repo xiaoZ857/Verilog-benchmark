@@ -1,0 +1,101 @@
+```verilog
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+
+  // State definitions
+  parameter A = 2'b00;
+  parameter B = 2'b01;
+  parameter C = 2'b10;
+
+  // State variables
+  reg [1:0] current_state;
+  reg [1:0] next_state;
+
+  // Output variables
+  reg [3:1] g;
+
+  // State table
+  always @(posedge clk or negedge resetn) begin
+    if (!resetn) begin
+      current_state <= A;
+    end else begin
+      current_state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    next_state = current_state; // Default: stay in current state
+
+    case (current_state)
+      A: begin
+        if (r[1]) begin
+          next_state = B;
+        end else if (r[2]) begin
+          next_state = C;
+        end else if (r[3]) begin
+          next_state = B; // Prioritize device 1 if device 1 and 3 request
+        end
+      end
+
+      B: begin
+        if (r[1]) begin
+          next_state = B;
+        end else begin
+          next_state = A;
+        end
+      end
+
+      C: begin
+        if (r[2]) begin
+          next_state = C;
+        end else begin
+          next_state = A;
+        end
+      end
+
+      default: begin
+        next_state = A;
+      end
+    endcase
+  end
+
+  // Output logic (using continuous assignment)
+  assign g[1] = (current_state == B) ? r[1] : 0;
+  assign g[2] = (current_state == C) ? r[2] : 0;
+  assign g[3] = (current_state == B) ? r[3] : 0;
+  assign g[4] = 0; // No grant for device 4.
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (...)`: Defines the module with the specified inputs and outputs.
+
+2. **State Definitions:**
+   - `parameter A = 2'b00;`, `parameter B = 2'b01;`, `parameter C = 2'b10;`: Defines symbolic names for the states. This makes the code more readable and maintainable.
+
+3. **State Variables:**
+   - `reg [1:0] current_state;`: Stores the current state of the FSM.
+   - `reg [1:0] next_state;`: Stores the next state to be transitioned to.
+
+4. **Output Variables:**
+   - `reg [3:1] g;`: Stores the grant signals for each device.  Note that the prompt mentions 3 devices but the input is r[4:1]. I assumed that the last device (r[4]) is not granted.
+
+5. **State Table (Sequential Logic):**
+   - `always @(posedge clk or negedge resetn) begin ... end`: This block describes the sequential logic that updates the `current_state` register on the rising edge of the clock or the falling edge of the reset signal.
+   - `if (!resetn) begin ... end else begin ... end`:  When `resetn` is low (active-low reset), the FSM is reset to state `A`. Otherwise, the `current_state` is updated with the value of `next_state`.
+
+6. **Next State Logic (Combinational Logic):**
+   - `always @(*) begin ... end`: This block describes the combinational logic that determines the `next_state` based on the current state and the input signals `r`.
+   - `case (current_state) ... endcase`: A `case` statement is used to implement the state transition logic.
+   - The conditions within the `case` statement directly correspond to the state transition diagram provided in the prompt.  The transitions are as follows:
+     - **State A:**
+       - If `r[1]` is high, transition to state `B`.
+       - If `r[2]` is high, transition to state `C`.
+       - If `r[3]` is high, transition to state `B`.  (Device 1 has higher priority

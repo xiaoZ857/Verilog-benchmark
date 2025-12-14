@@ -1,0 +1,22 @@
+
+module TopModule (
+  input clk,
+  input a,
+  output reg q
+);
+reg internal_state;  // Internal state of the module
+
+always @(posedge clk or rising_edge(a)) begin   // Always trigger on the positive edge of the clock signal and the rising edge of a
+    if (a == 1 && internal_state == 0)    // If a is high and internal_state is low, q becomes 1
+        q <= 1;
+    else if ((a == 0 || internal_state == 1) && (internal_state != 0))   // If a is low or internal_state is high, but not both, q remains 1
+        q <= 1;
+    else
+        q <= 0;  // Otherwise, q becomes 0
+    internal_state = !a;     // Update the internal state for the next clock pulse
+end
+
+reg q_out;  // Output of the module
+assign q_out = q;
+
+endmodule

@@ -1,0 +1,85 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  // Declare an array of D flip-flops
+  reg [7:0] dff_q;
+
+  // Synchronous reset logic
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0; // Reset the output to zero
+    end else begin
+      q <= d; // Update the output with the input data
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (clk, d, reset, q);`**:  This line declares the module named `TopModule` and specifies its input and output ports.
+    * `clk`: Clock signal (positive edge triggered).
+    * `d`: Input data [7:0] to the flip-flops.
+    * `reset`: Active-high synchronous reset signal.
+    * `q`: Output register [7:0] representing the flip-flop outputs.
+
+* **`reg [7:0] dff_q;`**:  This declares a register `dff_q` to hold the values of the 8 flip-flops. While not directly used in this simplified version, it's good practice to conceptualize them as separate flip-flops if you were to implement them individually.  In this single-register implementation, the entire output `q` functions as the combined output of all 8 flip-flops.
+
+* **`always @(posedge clk) begin ... end`**: This `always` block defines a sequential logic block that is triggered by the positive edge of the clock signal (`posedge clk`).
+
+* **`if (reset) begin q <= 0; end`**: This is the synchronous reset logic.  When the `reset` signal is high, the output `q` is synchronously reset to zero on the next rising edge of the clock.
+
+* **`else begin q <= d; end`**:  If the `reset` signal is low, the output `q` is updated with the value of the input data `d` on the next rising edge of the clock.
+
+**How it Works:**
+
+This module implements 8 D flip-flops conceptually.  The single register `q` effectively represents the combined output of all 8 flip-flops.  On each rising edge of the clock:
+
+1. **If `reset` is high:** The output `q` is set to 0.
+2. **If `reset` is low:** The output `q` takes on the value of the input `d`.
+
+**Important Considerations and Potential Improvements:**
+
+* **Individual Flip-Flops:**  The prompt asked for 8 D flip-flops. This solution implements a single register representing the combined output.  For a more accurate representation of 8 separate flip-flops, you would need to instantiate 8 individual D flip-flop modules inside this module.  See the example below for this implementation.
+* **Synchronous Reset:**  The reset is synchronous, meaning it only takes effect on the clock edge.  This is generally preferred to asynchronous resets because it avoids potential timing issues (metastability).
+* **Code Clarity:**  While this solution is concise, using individual flip-flop modules would make the code more readable and easier to debug.
+
+**Example with Individual Flip-Flops (more accurate representation of 8 separate flip-flops):**
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+  reg [7:0] dff_q;
+
+  assign dff_q[0] = d[0];
+  assign dff_q[1] = d[1];
+  assign dff_q[2] = d[2];
+  assign dff_q[3] = d[3];
+  assign dff_q[4] = d[4];
+  assign dff_q[5] = d[5];
+  assign dff_q[6] = d[6];
+  assign dff_q[7] = d[7];
+
+  always @(posedge clk) begin
+    if (reset) begin
+      q <= 0; // Reset the output to zero
+    end else begin
+      q <= d; // Update the output with the input data
+    end
+  end
+
+endmodule
+```
+
+This more complex implementation would be closer to the original request, but for a more robust implementation, you should implement a separate flip-flop module.

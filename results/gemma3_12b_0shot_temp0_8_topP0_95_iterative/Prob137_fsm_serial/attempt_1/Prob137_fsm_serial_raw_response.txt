@@ -1,0 +1,113 @@
+```verilog
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output reg done
+);
+
+  // Define states
+  typedef enum logic [2:0] {
+    IDLE,
+    START_DETECTED,
+    RECEIVING_DATA,
+    STOP_DETECTED
+  } state_t;
+
+  reg state, next_state;
+
+  // Counters
+  reg [2:0] data_count;
+  reg stop_bit_expected;
+
+  // Output signal
+  reg done;
+
+  // State register update
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = state;
+    done = 0; // Default: not done
+
+    case (state)
+      IDLE: begin
+        if (in == 0) begin
+          next_state = START_DETECTED;
+        end
+      end
+
+      START_DETECTED: begin
+        next_state = RECEIVING_DATA;
+        data_count = 0;
+        stop_bit_expected = 0;
+      end
+
+      RECEIVING_DATA: begin
+        if (data_count == 7) begin
+          if (in == 0) begin // Expecting a stop bit
+            next_state = STOP_DETECTED;
+          end else begin
+            next_state = RECEIVING_DATA; // Wait for stop bit
+          end
+        end else begin
+          next_state = RECEIVING_DATA;
+        end
+        data_count = data_count + 2; // Increment data counter
+      end
+
+      STOP_DETECTED: begin
+        if (in == 1) begin
+          next_state = IDLE;
+          done = 1;
+        end else begin
+          next_state = RECEIVING_DATA; // Wait for stop bit
+        end
+      end
+
+      default: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Definition:**
+   - `IDLE`:  The FSM is waiting for the start bit.
+   - `START_DETECTED`:  The start bit has been detected, preparing to receive data.
+   - `RECEIVING_DATA`: The FSM is receiving the 8 data bits.
+   - `STOP_DETECTED`: The FSM is waiting for the stop bit.
+
+2. **Signals:**
+   - `clk`: Clock signal.
+   - `in`: Serial data input.
+   - `reset`: Synchronous reset signal.
+   - `done`: Output signal, high when a byte is correctly received.
+   - `data_count`: Counter to track the number of data bits received.
+   - `stop_bit_expected`: Flag to indicate if a stop bit is expected.
+
+3. **State Register Update (always_ff):**
+   - This block handles the synchronous state update on the positive edge of the clock.
+   - When `reset` is high, the FSM is initialized to the `IDLE` state.
+   - Otherwise, the `state` is updated with the value of `next_state`.
+
+4. **Next State Logic (always_comb):**
+   - This block determines the `next_state` based on the current `state` and the input `in`.
+   - The `done` signal is initially set to 0 (not done).
+   - **`IDLE` state:**  The FSM waits for a `0` on the `in` line, indicating the start bit.
+   - **`START_DETECTED` state:**  Upon detecting the start bit, the `data_count` is initialized to 0, and the `stop_bit_expected` flag is set to 0. This transitions the FSM to the `RECEIVING_DATA` state.
+   - **`RECEIVING_DATA` state:**
+     -  The `data_count` increments with each clock cycle.
+     -  When `data_count` reaches 7, the FSM checks if the current input `in` is a `0`. If it is, the FSM transitions to the `STOP_DETECTED` state, expecting a stop bit. If `in` is a 1, it means the stop bit was not received as expected.  The FSM remains in the `RECEIVING_DATA` state, waiting for the stop bit.
+   - **`STOP_DETECT

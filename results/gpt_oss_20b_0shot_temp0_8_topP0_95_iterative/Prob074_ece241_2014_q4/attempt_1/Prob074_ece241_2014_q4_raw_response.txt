@@ -1,0 +1,31 @@
+Here is a straightforward Verilog implementation that follows the description exactly.  
+Each D‑FF is driven by its own combinational gate (XOR, AND, OR).  
+The gate’s second input is taken from the corresponding FF’s current output (or its complement).  
+The three FF outputs are fed into a 3‑input NOR that produces `z`.  
+All FFs start reset to 0 (via an `initial` block – suitable for simulation; for real hardware you’d normally add an explicit reset).
+
+```verilog
+// TopModule.v
+// Finite‑state machine as described in the problem statement.
+// All signals are 1‑bit wide and clock‑synchronous.
+
+module TopModule (
+    input  wire clk,   // positive‑edge clock
+    input  wire x,     // input
+    output wire z      // output from 3‑input NOR
+);
+
+    // Flip‑flop outputs (state bits)
+    reg  q1, q2, q3;
+
+    // D‑input combinational logic
+    wire d1, d2, d3;
+
+    // 1st gate: XOR (second input is the FF’s own output)
+    assign d1 = x ^ q1;
+
+    // 2nd gate: AND (second input is complement of its FF’s output)
+    assign d2 = x & ~q2;
+
+    // 3rd gate: OR (second input is complement of its FF’s output)
+    assign d3 = x | ~

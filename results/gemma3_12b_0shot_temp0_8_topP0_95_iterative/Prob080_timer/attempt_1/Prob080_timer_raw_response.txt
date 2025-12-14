@@ -1,0 +1,50 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [9:0] data,
+  output tc
+);
+
+  reg [9:0] counter;
+  reg tc_reg;
+
+  always @(posedge clk) begin
+    if (load) begin
+      counter <= data;
+    end else if (counter > 0) begin
+      counter <= counter - 1;
+    end
+    
+    if (counter == 0) begin
+      tc_reg <= 1;
+    end else begin
+      tc_reg <= 0;
+    end
+  end
+
+  assign tc = tc_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [9:0] counter;`**:  Declares a 10-bit register named `counter`. This register holds the countdown value.
+2. **`reg tc_reg;`**: Declares a register `tc_reg` to hold the terminal count signal.  We use a register because `tc` needs to be synchronous with the clock.
+3. **`always @(posedge clk) begin ... end`**:  This block is triggered on the positive edge of the clock signal.
+4. **`if (load) begin counter <= data; end`**:  If the `load` signal is high, the `counter` register is loaded with the value from the `data` input. This allows the timer duration to be set at any time.
+5. **`else if (counter > 0) begin counter <= counter - 1; end`**: If `load` is low and the `counter` is greater than 0, the counter is decremented.  The `counter > 0` condition prevents the counter from going into negative values when it reaches 0.
+6. **`if (counter == 0) begin tc_reg <= 1; end else begin tc_reg <= 0; end`**:  This section determines the value of the `tc` signal. When the counter reaches 0, `tc` is asserted (set to 1). Otherwise, `tc` is deasserted (set to 0).
+7. **`assign tc = tc_reg;`**: This line assigns the value of the synchronous register `tc_reg` to the output signal `tc`. This makes `tc` a combinational assignment of `tc_reg`.
+
+**Key improvements and considerations:**
+
+* **Synchronous Logic:**  The code uses registers (`counter` and `tc_reg`) and the `posedge clk` to ensure all operations are synchronized with the clock. This is crucial for reliable digital circuit behavior.
+* **Preventing Negative Counts:** The `counter > 0` condition prevents the counter from going negative during the countdown.
+* **Clear `tc` signal:** The code correctly asserts `tc` when the counter reaches 0 and deasserts it when the counter is greater than 0.
+* **Load at any time:**  The counter can be loaded at any time, even while it is counting or has already reached 0.
+* **Concise and Readable:** The code is well-formatted and easy to understand.
+* **No Reset Signal:** The original prompt didn't include a reset signal.  If a reset is needed, you would add a `reset` input and add an `else begin` clause to the `always` block to initialize `counter` to a specific value (e.g., 0 or the maximum value) when `reset` is asserted.
+
+This Verilog code fulfills the requirements of the problem description. It's a complete and functional implementation of a down-counting timer with a load function and terminal count signal.

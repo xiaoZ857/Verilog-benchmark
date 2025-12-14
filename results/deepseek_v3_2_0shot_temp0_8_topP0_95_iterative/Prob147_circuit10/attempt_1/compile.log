@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_1\Prob147_circuit10_code.sv:16: error: state is not a valid l-value in tb.top_module1.
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob147_circuit10\attempt_1\Prob147_circuit10_code.sv:7:      : state is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:112: warning: output port state is coerced to inout.
+1 error(s) during elaboration.

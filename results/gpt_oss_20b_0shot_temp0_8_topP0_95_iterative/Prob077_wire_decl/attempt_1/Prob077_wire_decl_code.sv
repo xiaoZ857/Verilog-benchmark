@@ -1,0 +1,40 @@
+
+// TopModule implements:
+//   out   = (a & b) | (c & d)
+//   out_n = ~out
+//
+// Two intermediate wires are used to connect the first‑layer AND gates
+// to the second‑layer OR gate.  The NOT gate feeds directly from the
+// OR gate output (`out`), so no additional wire is required.
+
+module TopModule (
+    input  a,    // first input
+    input  b,    // second input
+    input  c,    // third input
+    input  d,    // fourth input
+    output out,  // OR of the two AND results
+    output out_n // inverted value of `out`
+);
+
+    // -----------------
+    // 1st layer: AND gates
+    // -----------------
+    wire w_and1;   // output of a & b
+    wire w_and2;   // output of c & d
+
+    and  (w_and1, a, b);   // w_and1 = a & b
+    and  (w_and2, c, d);   // w_and2 = c & d
+
+    // -----------------
+    // 2nd layer: OR gate
+    // -----------------
+    or   (out, w_and1, w_and2);   // out = w_and1 | w_and2
+
+    // -----------------
+    // Invert the output
+    // -----------------
+    not  (out_n, out);   // out_n = ~out
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

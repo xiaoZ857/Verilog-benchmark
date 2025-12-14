@@ -1,0 +1,9 @@
+module TopModule (
+  input in,
+  output out
+);
+
+  // Continuous assignment for combinational logic
+  assign out = in;
+
+endmodule

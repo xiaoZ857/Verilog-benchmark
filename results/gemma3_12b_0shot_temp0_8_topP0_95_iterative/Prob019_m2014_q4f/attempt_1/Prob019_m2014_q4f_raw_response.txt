@@ -1,0 +1,25 @@
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+
+  assign out = in1 & ~in2;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**: This line defines the module named `TopModule` and declares its input and output ports.
+* **`input in1, in2;`**:  These lines declare `in1` and `in2` as input signals.
+* **`output logic out;`**: This line declares `out` as an output signal of type `logic`.  Using `logic` is generally preferred in SystemVerilog for simple assignments.
+* **`assign out = in1 & ~in2;`**: This is the core of the circuit.  It assigns the result of the logical AND operation to the output `out`.
+    * `in1`: The first input signal.
+    * `~in2`:  The bubble on the second input `in2` is represented by the `~` operator (logical NOT).  This inverts the `in2` signal.
+    * `&`:  The logical AND operator.  The output `out` will be high (1) only if *both* `in1` is high and `~in2` is high (which means `in2` is low).
+
+**How the bubble affects the logic:**
+
+A bubble on an input to a gate effectively changes the behavior of the gate.  Normally, an AND gate's output is high when both inputs are high.  With a bubble on `in2`, the output is only high when `in1` is high *and* `in2` is low.  The `~in2` in the Verilog code implements this behavior.

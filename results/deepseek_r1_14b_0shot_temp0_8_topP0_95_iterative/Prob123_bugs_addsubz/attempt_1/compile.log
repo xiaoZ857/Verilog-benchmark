@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob123_bugs_addsubz\attempt_1\Prob123_bugs_addsubz_code.sv:11: warning: macro out undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob123_bugs_addsubz\attempt_1\Prob123_bugs_addsubz_code.sv:11: warning: macro out undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob123_bugs_addsubz\attempt_1\Prob123_bugs_addsubz_code.sv:9: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob123_bugs_addsubz\attempt_1\Prob123_bugs_addsubz_code.sv:11: error: Stray tic (`) here. Perhaps you put white space
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob123_bugs_addsubz\attempt_1\Prob123_bugs_addsubz_code.sv:11:      : between the tic and preprocessor directive?
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob123_bugs_addsubz_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob123_bugs_addsubz\attempt_1\Prob123_bugs_addsubz_code.sv:9: error: Invalid module instantiation

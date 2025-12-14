@@ -1,0 +1,47 @@
+To implement the described Verilog module, we need to create a state machine that manages the operations of resetting, loading, and shifting based on the provided control signals. Here's how you can structure the Verilog code for this behavior:
+
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      // Asynchronous reset to zero
+      q <= 4'b0000;
+    end else begin
+      if (load) begin
+        // Load the shift register with data
+        q <= data;
+      end else if (ena) begin
+        // Shift right operation, shifting out from q[0]
+        q <= {1'b0, q[3:1]};
+      end
+    end
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Asynchronous Reset (`areset`)**:
+  - When `areset` is asserted high (positive edge triggered), the shift register `q` is reset to zero regardless of other signals.
+
+- **Load Operation**:
+  - If `load` is asserted and not in a reset condition, the module loads the value from the input `data[3:0]` into the shift register `q`.
+
+- **Enable and Shift Right (`ena`)**:
+  - When `ena` is high (shift enable), and if `load` is not asserted, the contents of `q` are shifted right.
+  - The most significant bit becomes zero due to the right shift operation. The least significant bit `q[0]` is effectively discarded.
+
+- **Priority**:
+  - The module checks for `areset` first due to its asynchronous nature and priority over all other operations.
+  - When both `load` and `ena` are asserted, `load` takes precedence, ensuring that the shift register loads new data instead of shifting.
+
+This Verilog code ensures that the desired behavior is achieved according to your specifications. The use of non-blocking assignments (`<=`) in sequential blocks (those triggered by clock edges) helps avoid race conditions typically in hardware description languages like Verilog.

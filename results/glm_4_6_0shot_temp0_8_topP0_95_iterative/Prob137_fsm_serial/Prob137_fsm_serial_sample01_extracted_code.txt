@@ -1,0 +1,58 @@
+
+  // State encoding
+  parameter IDLE = 3'd0;
+  parameter START = 3'd1;
+  parameter DATA = 3'd2;
+  parameter STOP = 3'd3;
+  parameter WAIT_STOP = 3'd4;
+
+  reg [2:0] state, next_state;
+  reg [2:0] bit_count; // Count data bits received (0-7)
+  reg done_reg;
+
+  // State transition logic
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      bit_count <= 3'd0;
+      done_reg <= 1'b0;
+    end else begin
+      state <= next_state;
+      if (state == START) begin
+        bit_count <= 3'd0;
+      end else if (state == DATA) begin
+        bit_count <= bit_count + 1'b1;
+      end
+      
+      if (next_state == STOP) begin
+        done_reg <= 1'b1;
+      end else begin
+        done_reg <= 1'b0;
+      end
+    end
+  end
+
+  // Next state logic
+  always @(*) begin
+    next_state = state;
+    
+    case (state)
+      IDLE: begin
+        if (in == 1'b0) begin  // Start bit detected
+          next_state = START;
+        end
+      end
+      
+      START: begin
+        next_state = DATA;  // Always go to DATA after START
+      end
+      
+      DATA: begin
+        if (bit_count == 3'd7) begin  // Received all 8 bits
+          next_state = STOP;
+        end
+      end
+      
+      STOP: begin
+        if (in == 1'b1) begin  // Correct stop bit
+          next_state = IDLE

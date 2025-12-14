@@ -1,0 +1,25 @@
+
+module TopModule (
+  input [99:0] in,
+  output [98:0] out_both,
+  output [99:1] out_any,
+  output [99:0] out_different
+);
+always @(*) begin
+    // Calculate out_both[98:0]
+    for (i = 0; i < 99; i = i + 1) begin
+        out_both[i] = in[i] & in[i + 1];
+    end
+
+    // Calculate out_any[99:1]
+    for (i = 1; i <= 99; i = i + 1) begin
+        out_any[i] = in[i - 1] | in[i];
+    end
+
+    // Calculate out_different[99:0], considering wrap-around
+    for (i = 0; i < 100; i = i + 1) begin
+        out_different[i] = in[i] ^ in[(i - 1 + 100) % 100];
+    end
+end
+
+endmodule

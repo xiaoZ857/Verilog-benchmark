@@ -1,0 +1,13 @@
+always @(posedge clk) begin
+    // Update dff0 with the XOR result
+    dff0 <= x ^ dff0;
+    
+    // Update dff1 with the AND result
+    dff1 <= x & ~dff1;
+    
+    // Update dff2 with the OR result
+    dff2 <= x | ~dff2;
+end
+
+// Combine the outputs of the D flip-flops using a three-input NOR gate
+assign z = ~(dff0 | dff1 | dff2);

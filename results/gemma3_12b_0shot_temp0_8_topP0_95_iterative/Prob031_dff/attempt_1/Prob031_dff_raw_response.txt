@@ -1,0 +1,64 @@
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+  always @(posedge clk) begin
+    q <= d;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input clk, input d, output reg q);`**: This line declares the module named `TopModule`. It defines the input signals `clk` (clock) and `d` (data) and the output signal `q` as a `reg`.  Using `reg` is important for output signals that are assigned values within an `always` block.
+* **`always @(posedge clk) begin ... end`**: This is an `always` block that is triggered on the positive edge of the clock signal (`clk`). The `posedge` keyword specifies that the block's statements will be executed only when the `clk` signal transitions from a low value to a high value.
+* **`q <= d;`**: This is the core of the D flip-flop logic.  It assigns the value of the input `d` to the output `q` on the positive edge of the clock.  The non-blocking assignment operator `<=` is used within the `always` block to ensure that the value of `q` is updated only after all statements in the block have been evaluated.
+
+**How it works as a D Flip-Flop:**
+
+A D flip-flop is a fundamental building block in sequential logic.  It stores a single bit of data.  The 'D' in D flip-flop stands for "data."  The flip-flop's output `q` takes on the value of the input `d` on each rising edge of the clock signal.  This effectively "latches" the data `d` into the flip-flop.
+
+**Testbench (optional):**
+
+Here's a simple testbench to verify the functionality:
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg d;
+  wire q;
+
+  TopModule uut (
+    .clk(clk),
+    .d(d),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    d = 0;
+    #10;
+    d = 1;
+    #10;
+    d = 0;
+    #10;
+    d = 1;
+    #10;
+    $finish;
+  end
+
+  always #5 clk = ~clk;
+
+  initial begin
+    $monitor("Time: %0d, clk: %b, d: %b, q: %b", $time, clk, d, q);
+  end
+
+endmodule
+```
+
+This testbench applies a clock signal and toggles the input `d`. The `$monitor` statement displays the values of the signals at each time step, allowing you to observe the behavior of the flip-flop.  You can simulate this testbench using a Verilog simulator (like ModelSim, Icarus Verilog, or Vivado Simulator) to confirm that the output `q` follows the input `d` on each rising edge of the clock.

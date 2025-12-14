@@ -1,0 +1,13 @@
+
+always @(posedge clk) begin
+  if (shift_ena) begin
+    // Shift operation - MSB first
+    q <= {data, q[3:1]};
+  end
+  else if (count_ena) begin
+    // Decrement operation
+    q <= q - 1;
+  end
+  // If neither is enabled, q holds its value (default behavior)
+end
+endmodule

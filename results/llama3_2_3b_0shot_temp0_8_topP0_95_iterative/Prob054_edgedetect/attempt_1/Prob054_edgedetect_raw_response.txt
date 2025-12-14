@@ -1,0 +1,40 @@
+Here's an implementation of the Verilog module as per your description:
+
+```verilog
+module TopModule(
+    // Input clock signal
+    input clk,
+
+    // Input 8-bit vector with positive clock edge detection
+    input [7:0] in,
+
+    // Output bit for each detected edge
+    output reg [7:0] pedge
+);
+
+// Initialize output bits to zero
+assign pedge = 7'd0;
+
+always @(*) begin
+    // Iterate over each bit of the 8-bit vector
+    for (integer i = 0; i < 8; i++) begin
+        // If current bit is zero and next bit is one, set the current output bit to one
+        if ((in[i] == 0 && i + 1 >= 8 || in[i+1] != 0) && (pedge[i] == 0)) {
+            pedge[i] = 1;
+        }
+    end
+end
+
+// Update on each clock cycle
+always @(posedge clk) begin
+    // No changes within a clock cycle
+end
+```
+
+This module uses two `always` blocks. The first one is used for the logic of detecting and storing the edges, while the second one handles the updating of the output bits in response to the rising edge of the clock signal.
+
+In the first `always` block, we iterate over each bit of the 8-bit vector. If a bit transitions from zero to one (i.e., the next bit is not zero) and the corresponding output bit has not been set yet, it means that there was an edge detected in this bit position. We set the corresponding output bit to 1.
+
+The second `always` block checks if any changes have occurred within a clock cycle. In Verilog, the `posedge` signal is the rising edge of the clock signal. Since no changes are required within a clock cycle (the state of the bits has already been checked in the first `always` block), this block does nothing.
+
+Note that we use a 0-based indexing for the bits of the vector and also check if the current bit position is out of bounds to avoid an error in the loop.

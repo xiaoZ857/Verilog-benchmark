@@ -1,0 +1,13 @@
+
+module TopModule;
+    input a, b;
+    output reg sum, cout;
+
+    // Half Adder module implementation
+    always @(posedge clk) begin
+        sum <= a ^ b; // XOR operation for sum
+        cout <= a & b; // AND operation for carry-out
+    end
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

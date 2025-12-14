@@ -1,0 +1,32 @@
+// State encoding
+parameter A = 1'b0;
+parameter B = 1'b1;
+
+reg state;
+
+// Sequential logic for state transition
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state <= B;  // Asynchronous reset to state B
+  end else begin
+    case (state)
+      A: begin
+        if (in) 
+          state <= A;
+        else 
+          state <= B;
+      end
+      B: begin
+        if (in) 
+          state <= B;
+        else 
+          state <= A;
+      end
+    endcase
+  end
+end
+
+// Combinational logic for output (Moore machine)
+assign out = state;
+
+endmodule

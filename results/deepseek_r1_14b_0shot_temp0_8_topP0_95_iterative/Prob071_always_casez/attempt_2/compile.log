@@ -1,0 +1,37 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 24
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:9: warning: macro b00000001 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:10: warning: macro b00000010 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:11: warning: macro b00000100 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:12: warning: macro b00001000 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:13: warning: macro b00010000 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:14: warning: macro b00100000 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:15: warning: macro b01000000 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:16: warning: macro b10000000 undefined (and assumed null) at this point.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:9: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:9: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:10: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:10: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:11: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:11: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:12: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:12: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:13: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:13: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:14: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:14: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:15: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:15: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:16: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:16: error: Incomprehensible case expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_2\Prob071_always_casez_code.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:18: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:18: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:19: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:21: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:23: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob071_always_casez_test.sv:28: error: malformed statement

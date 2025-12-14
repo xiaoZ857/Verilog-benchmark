@@ -1,0 +1,44 @@
+```verilog
+module TopModule (
+  input [3:0] a,
+  input [3:0] b,
+  input [3:0] c,
+  input [3:0] d,
+  input [3:0] e,
+  output reg [3:0] q
+);
+
+  always @(*) begin
+    case (c)
+      4'd0: q = b;
+      4'd1: q = e;
+      4'd2: q = a;
+      4'd3: q = d;
+      4'd4: q = d;
+      4'd5: q = d;
+      4'd6: q = d;
+      4'd7: q = d;
+      4'd8: q = d;
+      4'd9: q = d;
+      default: q = 4'd0; // Default case for any value of c not explicitly defined
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+The simulation waveforms show that the output `q` depends on the input `c`.  The value of `q` is determined based on the value of `c` according to the following mapping:
+
+* `c = 0`: `q = b`
+* `c = 1`: `q = e`
+* `c = 2`: `q = a`
+* `c = 3`: `q = d`
+* `c = 4` through `c = 9`: `q = d`
+
+The Verilog code implements this logic using a `case` statement within an `always @(*)` block.  `always @(*)` indicates a combinational logic block, meaning the output `q` is updated whenever any of the inputs change. The `case` statement directly maps the value of `c` to the corresponding output value for `q`.  A default case is added for any unexpected value of `c` to prevent undefined behavior.
+
+**How to Test:**
+
+To verify this implementation, you would write a testbench that applies various values to the inputs `a`, `b`, `c`, `d`, and `e` and checks that the output `q` matches the expected values based on the simulation waveforms.

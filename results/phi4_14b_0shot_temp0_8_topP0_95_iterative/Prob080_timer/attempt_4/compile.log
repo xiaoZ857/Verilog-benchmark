@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_4\Prob080_timer_code.sv:11: error: Could not find variable ``counter'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_4\Prob080_timer_code.sv:12: error: tc is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_4\Prob080_timer_code.sv:6:      : tc is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_4\Prob080_timer_code.sv:14: error: Unable to bind wire/reg/memory `counter' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob080_timer\attempt_4\Prob080_timer_code.sv:14: error: Unable to elaborate condition expression.
+4 error(s) during elaboration.

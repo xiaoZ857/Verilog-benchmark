@@ -1,0 +1,67 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+always @(posedge clk) begin
+  if (reset) begin
+    start_bit <= 0;
+    data_bits <= 4'b0;
+    stop_bit <= 0;
+    current_state <= IDLE;
+    done <= 0;
+  end else begin
+    case (current_state)
+      IDLE: begin
+        if (!in && start_bit == 0) begin
+          start_bit <= 1;
+          current_state <= WAIT_START;
+        end
+      end,
+      WAIT_START: begin
+        if (in && start_bit == 1) begin
+          start_bit <= 0;
+          data_bits <= 4'b0;
+          current_state <= WAIT_DATA;
+        end
+      end,
+      WAIT_DATA: begin
+        data_bits[3] <= in;
+        if (data_bits[3]) begin
+          data_bits[2] <= in;
+          if (data_bits[2]) begin
+            data_bits[1] <= in;
+            if (data_bits[1]) begin
+              data_bits[0] <= in;
+              if (in) begin
+                current_state <= WAIT_STOP;
+              end else begin
+                current_state <= IDLE;
+              end
+            end
+          end
+        end
+      end,
+      WAIT_STOP: begin
+        if (!in && stop_bit == 1) begin
+          stop_bit <= 0;
+          current_state <= IDLE;
+          done <= 1;
+        end
+        if (in && stop_bit == 0) begin
+          stop_bit <= 1;
+        end
+      end
+    endcase
+  end
+end
+
+always @(posedge clk) begin
+  if (!stop_bit && current_state != IDLE) begin
+    data_bits <= 4'b0;
+  end
+end
+
+// VERILOG-EVAL: endmodule not found

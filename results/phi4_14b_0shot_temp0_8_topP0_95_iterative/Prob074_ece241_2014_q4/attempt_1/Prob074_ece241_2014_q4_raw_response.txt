@@ -1,0 +1,53 @@
+To implement the described finite state machine in Verilog, we need to set up a module with D flip-flops and logic gates as specified. Here’s how you can design this circuit:
+
+```verilog
+module TopModule (
+    input clk,
+    input x,
+    output z
+);
+
+  // Declare internal signals for D flip-flop outputs
+  reg dff0, dff1, dff2;
+
+  // Intermediate wires for logic gates
+  wire xor_out, and_out, or_out;
+
+  // XOR gate with inputs x and the output of the corresponding DFF (dff0)
+  assign xor_out = x ^ dff0;
+
+  // AND gate with inputs x and complement of the output of the corresponding DFF (dff1)
+  assign and_out = x & ~dff1;
+
+  // OR gate with inputs x and complement of the output of the corresponding DFF (dff2)
+  assign or_out = x | ~dff2;
+
+  // Three-input NOR gate combining outputs from all three gates
+  assign z = ~(xor_out | and_out | or_out);
+
+  // Always block to handle positive edge-triggered updates for each D flip-flop
+  always @(posedge clk) begin
+    dff0 <= xor_out;
+    dff1 <= and_out;
+    dff2 <= or_out;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers (`dff0`, `dff1`, `dff2`)**: These are used to store the state of each D flip-flop. They are initialized to zero by default, as specified.
+
+2. **Logic Gates**:
+   - An XOR gate with inputs `x` and `dff0`.
+   - An AND gate with inputs `x` and the complement (`~`) of `dff1`.
+   - An OR gate with inputs `x` and the complement (`~`) of `dff2`.
+
+3. **NOR Gate**: Combines the outputs of the XOR, AND, and OR gates to produce the output `z`. The NOR operation inverts the OR result.
+
+4. **Always Block**:
+   - This block ensures that each D flip-flop updates its state on the positive edge of the clock signal (`posedge clk`).
+   - Each flip-flop takes its input from the respective logic gate and stores it during the next clock cycle.
+
+This Verilog code accurately reflects the behavior described in the problem statement, implementing a finite state machine with the specified logic operations.

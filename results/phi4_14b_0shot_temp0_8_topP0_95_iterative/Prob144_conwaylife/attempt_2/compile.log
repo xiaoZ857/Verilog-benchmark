@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:37: warning: Static variable initialization requires explicit lifetime in this context.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:38: warning: Static variable initialization requires explicit lifetime in this context.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:50: error: Concatenation operand "'sd0" has indefinite width.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:51: error: Concatenation operand "'sd1" has indefinite width.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:52: error: Concatenation operand "'sd2" has indefinite width.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:53: error: Concatenation operand "'sd2" has indefinite width.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:54: error: Concatenation operand "'sd3" has indefinite width.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob144_conwaylife\attempt_2\Prob144_conwaylife_code.sv:55: error: Concatenation operand "'sd3" has indefinite width.
+6 error(s) during elaboration.

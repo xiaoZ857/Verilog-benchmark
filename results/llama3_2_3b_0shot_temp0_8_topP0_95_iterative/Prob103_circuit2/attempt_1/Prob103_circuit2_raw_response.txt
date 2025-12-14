@@ -1,0 +1,37 @@
+To implement the Verilog module based on your description, we can start by examining the signal transitions.
+
+Based on the provided simulation waveforms, we notice that the output `q` is set high for two consecutive clock cycles (5-10ns and 15-20ns) before being set low. Then it remains low until the next clock cycle where it becomes high again. If both inputs `a`, `b`, or `c` are high at a given clock cycle, then output `q` is also high.
+
+Here's the implementation of the Verilog module based on this understanding:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+// Create an always block to capture the transitions
+always @((a, b, c, d)) begin
+    // Capture the output Q value at each clock cycle
+    if (a && b) 
+        q <= 1;
+    else if (b && c)
+        q <= 1;
+    else if (d)
+        q <= 1;
+    else if (!a && !b && !c && !d)
+        q <= 0;
+    else
+        q <= q; // Do nothing, i.e., no change on the current clock cycle
+end
+
+// Add a default value for q to avoid warning
+default q = 0;
+
+endmodule
+```
+
+This implementation simulates the behavior of your combinational circuit using only a single always block.

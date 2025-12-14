@@ -1,0 +1,13 @@
+Here is the Verilog implementation of the TopModule:
+
+```verilog
+module TopModule (
+  output out
+);
+
+  always out = 0;
+
+endmodule
+```
+
+This module implements a circuit with no inputs and one output, where the output (`out`) is always driven to logic low (0). The `always` block ensures that the output remains at 0 continuously.

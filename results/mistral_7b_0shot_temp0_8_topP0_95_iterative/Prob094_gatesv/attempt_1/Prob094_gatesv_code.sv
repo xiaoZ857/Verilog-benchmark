@@ -1,0 +1,26 @@
+
+module TopModule (
+  input [3:0] in,
+  output reg [2:0] out_both,
+  output reg [3:1] out_any,
+  output reg [3:0] out_different
+);
+
+assign out_both[0] = 0; // Initializing out_both[0] to 0 since it's not mentioned in the description.
+always @(posedge clk) begin
+  out_both[1] = (in[1] & in[0]);
+  out_both[2] = (in[2] & in[3]);
+  out_both[3] = 0; // Initializing out_both[3] to 0 since it's not part of the output vector.
+
+  out_any[1] = (in[1] | in[0]);
+  out_any[2] = (in[2] | in[1]);
+  out_any[3] = in[3]; // Initializing out_any[3] to the value of in[3], since it's not part of the output vector.
+
+  out_different[0] = (in[0] ^ in[3]); // Treating the input vector as wrapping around, using XOR for different.
+  out_different[1] = (in[1] ^ in[0]);
+  out_different[2] = (in[2] ^ in[3]);
+  out_different[3] = (in[0] ^ in[3]); // Treating the input vector as wrapping around, using XOR for different.
+end
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

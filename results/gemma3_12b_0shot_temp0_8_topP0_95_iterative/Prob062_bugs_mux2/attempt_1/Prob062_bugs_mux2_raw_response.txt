@@ -1,0 +1,28 @@
+```verilog
+module top_module (
+    input sel,
+    input [7:0] a,
+    input [7:0] b,
+    output reg [7:0] out  );
+
+    always @(sel, a, b) begin
+        out = (~sel & a) | (sel & b);
+    end
+
+endmodule
+```
+
+**Bug and Fix:**
+
+The original code used a continuous assignment (`assign`) for the output `out`. While this works for simple logic, it's not appropriate when you want to use `reg` for the output.  `reg` types require an assignment within a procedural block (like an `always` block) to be updated.  The original code declared `out` as `reg [7:0]` in the second module but didn't actually assign it within a procedural block.  This would lead to a latch inference or other unexpected behavior, as the `reg` would not be properly updated.
+
+The fix replaces the `assign` statement with an `always` block triggered by the inputs `sel`, `a`, and `b`.  This ensures that the `out` signal is updated whenever any of these inputs change.  Using `always @(sel, a, b)` also ensures that the output is updated whenever any of the inputs change, which is crucial for the multiplexer to function correctly.
+
+**Explanation:**
+
+* **`module top_module (...)`**: Defines the Verilog module named `top_module` with the specified inputs and output.
+* **`input sel, input [7:0] a, input [7:0] b, output reg [7:0] out`**: Declares the input signals `sel`, `a`, and `b`, and the 8-bit output signal `out` as a `reg`.
+* **`always @(sel, a, b) begin ... end`**: This is a procedural block that executes whenever any of the signals `sel`, `a`, or `b` change.  This ensures that the output is updated correctly when the selection signal or the input data changes.
+* **`out = (~sel & a) | (sel & b);`**: This is the core logic of the 2-to-1 multiplexer.  It selects either input `a` or input `b` based on the value of the selection signal `sel`.
+    * If `sel` is 0, then `~sel` is 1, so the output `out` is equal to `a`.
+    * If `sel` is 1, then `sel` is 1, so the output `out` is equal to `b`.

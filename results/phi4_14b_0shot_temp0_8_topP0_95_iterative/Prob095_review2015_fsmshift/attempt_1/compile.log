@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_1\Prob095_review2015_fsmshift_code.sv:49: error: Unable to bind wire/reg/memory `pattern_detected' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_1\Prob095_review2015_fsmshift_code.sv:49: error: Unable to elaborate condition expression.
+2 error(s) during elaboration.

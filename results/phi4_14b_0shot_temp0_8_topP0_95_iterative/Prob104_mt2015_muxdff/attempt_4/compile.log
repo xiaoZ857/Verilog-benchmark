@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_test.sv:76: error: port ``q_in'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_test.sv:76: warning: Instantiating module TopModule with dangling input port 3 (q0_in) floating.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_test.sv:76: warning: Instantiating module TopModule with dangling input port 4 (q1_in) floating.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob104_mt2015_muxdff_test.sv:76: warning: Instantiating module TopModule with dangling input port 5 (q2_in) floating.
+1 error(s) during elaboration.

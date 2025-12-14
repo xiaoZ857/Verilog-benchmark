@@ -1,0 +1,12 @@
+**Solution – Verilog 4‑bit Priority Encoder**
+
+The encoder must output the *index of the first “1” bit* counted from the least‑significant side.  
+If no bit is high the result is `0`.  
+The design is purely combinational, so the output is driven in an `always @*` block (or by a continuous
+assignment).
+
+```verilog
+`timescale 1ns / 1ps
+// 4‑bit priority encoder – first ‘1’ from LSB
+module TopModule (
+    input  wire [3:0] in,   // 4

@@ -1,0 +1,40 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 35
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:19: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:14: error: Syntax error in typedef clause.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:21: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:21: error: Invalid module instantiation
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:55: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:55: error: malformed statement
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:56: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:62: Syntax in assignment statement l-value.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_2\Prob146_fsm_serialdata_code.sv:64: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:66: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:66: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:67: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:76: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:76: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:77: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:77: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:77: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:78: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:8: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:6: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:10: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:11: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:11: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:12: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:12: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:12: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:14: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:14: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:14: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:16: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:18: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:33: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:34: Syntax in assignment statement l-value.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:35: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_ref.sv:35: Syntax in assignment statement l-value.

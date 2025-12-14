@@ -1,0 +1,70 @@
+```verilog
+module TopModule (
+  input [3:1] y,
+  input w,
+  output reg Y2
+);
+
+  always @(y, w) begin
+    case (y[3:1])
+      4'b0000: // State A
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0001: // State B
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0010: // State C
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0011: // State D
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0100: // State E
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      4'b0101: // State F
+        if (w == 0)
+          Y2 = 0;
+        else
+          Y2 = 0;
+      default:
+        Y2 = 0;
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [3:1] y, input w, output reg Y2);`**:  This line declares the module named `TopModule` with inputs `y` (a 4-bit state register) and `w` (the input signal) and output `Y2` (the next-state logic for bit `y[2]`).
+
+2. **`always @(y, w) begin ... end`**: This block defines a sequential block that executes whenever `y` or `w` changes.  This is necessary to implement the next-state logic.
+
+3. **`case (y[3:1])`**:  The `case` statement is used to determine the next state of `y[2]` based on the current state `y[3:1]` and the input `w`.
+
+4. **State-Specific Logic**: Inside the `case` statement, each state (A, B, C, D, E, F) is handled with an `if` statement based on the input `w`. The `Y2` value is assigned based on the state transition rules provided in the problem description.
+
+   * For example, in state A (y[3:1] = 4'b0000), if `w` is 0, `Y2` is assigned 0. If `w` is 1, `Y2` is assigned 0.  This reflects the transition rules from A.
+
+5. **`default: Y2 = 0;`**: This handles any unexpected state values, assigning `Y2` to 0 as a safe default.  It's good practice to include a default case in `case` statements.
+
+**How it relates to the state machine description:**
+
+The code directly implements the state transition rules provided.  Each `if` statement within each state's case corresponds to one of the transitions, ensuring that the next state of `y[2]` is correctly determined based on the current state and the input `w`.  The state codes are matched with the corresponding states as defined in the problem.
+
+**Important Considerations:**
+
+* **Complete FSM Implementation:**  This code only provides the next-state logic for `y[2]`. To implement the entire FSM, you would need to write similar `always` blocks for `y[1]` and `y[0]`.
+* **Positive Clock Edge Triggered:**  The problem states that signals are positive clock triggered.  In a real implementation, this `always` block would be within a `posedge clk` block to synchronize the state transitions with the clock signal.  For this simplified problem, the `always @(y, w)` is used as a substitute.
+* **State Encoding:** The code assumes the state encoding `y[3:1]` = 000, 001, ..., 101 as specified.

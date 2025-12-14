@@ -1,0 +1,31 @@
+
+module TopModule (
+  input clk,
+  input a,
+  input b,
+  output q,
+  output state
+);
+always_ff @(posedge clk) begin
+  // Combinational logic to determine next state
+  localparam next_state = {a, b};
+  
+  // Flip-flop to store current state
+  reg [1:0] state_reg;
+  
+  initial state = 'x; // Initialize the state to unknown
+  
+  always @(state) begin
+    
+    case(state)
+      2'b00: q <= 2'b00;
+      2'b01: q <= 2'b10;
+      2'b11: q <= 2'b11;
+      default: q <= 2'b00;
+    endcase;
+    
+    // Update observable output state
+    state_reg <= next_state;
+  end
+
+endmodule

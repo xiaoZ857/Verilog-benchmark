@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:17: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:17: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:18: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:30: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:30: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:41: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:42: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob086_lfsr5\attempt_1\Prob086_lfsr5_code.sv:43: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob086_lfsr5_test.sv:12: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob086_lfsr5_ref.sv:24: syntax error
+I give up.

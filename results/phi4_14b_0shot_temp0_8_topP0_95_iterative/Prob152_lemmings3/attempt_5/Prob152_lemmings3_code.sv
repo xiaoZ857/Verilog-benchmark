@@ -1,0 +1,97 @@
+
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  input ground,
+  input dig,
+  output walk_left,
+  output walk_right,
+  output aaah,
+  output digging
+);
+always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+        current_state <= WALK_LEFT; // Asynchronous reset to WALK_LEFT
+    end else begin
+        current_state <= next_state;
+    end
+end
+
+always_comb begin
+    // Default outputs and next state logic
+    walk_left = 0;
+    walk_right = 0;
+    aaah = 0;
+    digging = 0;
+    next_state = current_state;
+
+    case (current_state)
+        WALK_LEFT: begin
+            if (!ground) begin
+                next_state = FALLING;
+            end else if (dig && ground) begin
+                next_state = DIGGING_RIGHT;
+            end else if ((bump_right || dig) && !bump_left) begin
+                next_state = WALK_RIGHT;
+            end else if ((bump_left || dig) && !bump_right) begin
+                next_state = WALK_LEFT; // Remain in current state as no change is required
+            end else if (bump_left && bump_right) begin
+                next_state = WALK_RIGHT;
+            end else begin
+                next_state = WALK_LEFT;
+            end
+        end
+
+        WALK_RIGHT: begin
+            if (!ground) begin
+                next_state = FALLING;
+            end else if (dig && ground) begin
+                next_state = DIGGING_LEFT;
+            end else if ((bump_left || dig) && !bump_right) begin
+                next_state = WALK_LEFT;
+            end else if ((bump_right || dig) && !bump_left) begin
+                next_state = WALK_RIGHT; // Remain in current state as no change is required
+            end else if (bump_left && bump_right) begin
+                next_state = WALK_LEFT;
+            end else begin
+                next_state = WALK_RIGHT;
+            end
+        end
+
+        FALLING: begin
+            if (ground) begin
+                // Resume the same direction as before falling
+                next_state = current_state == WALK_LEFT ? WALK_LEFT : WALK_RIGHT;
+            end
+        end
+
+        DIGGING_LEFT: begin
+            if (!ground) begin
+                next_state = FALLING;
+            end else if (ground && !dig) begin
+                next_state = WALK_LEFT;
+            end
+        end
+
+        DIGGING_RIGHT: begin
+            if (!ground) begin
+                next_state = FALLING;
+            end else if (ground && !dig) begin
+                next_state = WALK_RIGHT;
+            end
+        end
+    endcase
+
+    // Output logic based on current state
+    case (current_state)
+        WALK_LEFT: walk_left = 1;
+        WALK_RIGHT: walk_right = 1;
+        FALLING: aaah = 1;
+        DIGGING_LEFT: digging = 1;
+        DIGGING_RIGHT: digging = 1;
+    endcase
+end
+
+endmodule

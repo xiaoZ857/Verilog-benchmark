@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob027_fadd\attempt_1\Prob027_fadd_code.sv:27: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob027_fadd\attempt_1\Prob027_fadd_code.sv:27: error: Invalid module instantiation
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob027_fadd\attempt_1\Prob027_fadd_code.sv:30: error: Sized numeric constant must have a size greater than zero.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob027_fadd\attempt_1\Prob027_fadd_code.sv:31: error: Sized numeric constant must have a size greater than zero.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob027_fadd_ref.sv:14: syntax error
+I give up.

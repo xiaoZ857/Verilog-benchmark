@@ -1,0 +1,52 @@
+Here's the implementation of the Verilog module according to your description:
+
+```verilog
+module TopModule (
+    input clk,
+    input load,
+    input ena,
+    input [1:0] amount,
+    input [63:0] data,
+    output reg [63:0] q
+);
+
+reg [63:0] q_reg;
+
+always_comb begin
+    case (amount)
+        2'b00 : // left shift by 1 bit
+            q_reg = q_reg << 1;
+        2'b01 : // left shift by 8 bits
+            q_reg = q_reg << 8;
+        2'b10 : // right shift by 1 bit
+            q_reg = {q_reg[31:0], 1'h0};
+        2'b11 : // right shift by 8 bits
+            q_reg = {q_reg[23:0], q_reg[15:8], 1'h0, q_reg[7:0]};
+        default :
+            q_reg = data;
+    endcase
+end
+
+always @(posedge clk) begin
+    if (ena && load == 1'b0) begin
+        q_reg <= data;
+    end else begin
+        q_reg <= q_reg;
+    end
+end
+
+assign q = q_reg;
+
+endmodule
+```
+
+In this Verilog code:
+
+*   The `TopModule` module takes the required signals as inputs and outputs.
+*   A 64-bit register (`q_reg`) is used to store the contents of the shift register. It's initialized with the `data` signal when the load is high (active high).
+*   An always_comb block is used to compute the new contents of `q_reg` based on the value of `amount`.
+*   The right shift is implemented using bitwise OR operation.
+*   The always block is used to update the value of `q_reg` when the clock edge occurs. If the enable signal (`ena`) is high and the load signal is low, the `data` is loaded into `q_reg`. Otherwise, `q_reg` remains unchanged.
+*   The output assignment of the module uses the updated `q_reg` to assign its value to the output wire `q`.
+
+Please note that this code assumes the signals are positive clock/clk triggered unless otherwise stated.

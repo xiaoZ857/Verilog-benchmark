@@ -1,0 +1,66 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+Here is the corrected Verilog code:
+
+// timescale should be placed outside module definition (at file level)
+`timescale 1ns / 1ps
+
+module top_module (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+
+  // Internal signals
+  reg [15:0] next_q;
+  reg [3:1] next_ena;
+
+  always @ (posedge clk or posedge reset) begin
+    if (reset) begin
+      q <= 16'b0000_0000_0000_0000;
+      ena <= 4'b000;
+    end else begin
+      // Calculate next state
+      reg [3:0] digit_ones = q[0:3];
+      reg [3:0] digit_tens = q[4:7];
+      reg [3:0] digit_hundreds = q[8:11];
+      reg [3:0] digit_thousands = q[12:15];
+
+      // Update each digit based on BCD overflow
+      reg carry_over = 1;
+
+      // Ones place (q[0:3])
+      if (carry_over) begin
+        digit_ones += 1;
+        carry_over = (digit_ones > 9);
+      end
+
+      // Tens place (q[4:7])
+      if (carry_over) begin
+        digit_tens += 1;
+        carry_over = (digit_tens > 9);
+      end
+
+      // Hundreds place (q[8:11])
+      if (carry_over) begin
+        digit_hundreds += 1;
+        carry_over = (digit_hundreds > 9);
+      end
+
+      // Thousands place (q[12:15])
+      if (carry_over) begin
+        digit_thousands += 1;
+        carry_over = (digit_thousands > 9);
+      end
+
+      // Update q with new values
+      next_q = {digit_thousands, digit_hundreds, digit_tens,
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

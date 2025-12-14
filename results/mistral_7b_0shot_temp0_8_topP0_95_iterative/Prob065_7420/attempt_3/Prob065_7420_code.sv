@@ -1,0 +1,45 @@
+
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+// Verilog module for NAND gate, based on the 7402 IC (4-input NAND gate)
+module nand_gate(
+    input a,
+    input b,
+    input c,
+    input d,
+    output y
+);
+    assign y = ~(a & b & c & d);
+endmodule
+
+// TopModule with 2 instances of the corrected nand_gate module
+module TopModule (
+    input p1a,
+    input p1b,
+    input p1c,
+    input p1d,
+    output p1y,
+    input p2a,
+    input p2b,
+    input p2c,
+    input p2d,
+    output p2y
+);
+
+// Create 2 instances of the nand_gate module
+nand_gate nand1 (p1a, p1b, p1c, p1d, p1y); // For NAND Gate 1 output connected to p1y
+nand_gate nand2 (p2a, p2b, p2c, p2d, p2y); // For NAND Gate 2 output connected to p2y
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,89 @@
+```verilog
+module TopModule (
+  input clock,
+  input a,
+  output reg p,
+  output reg q
+);
+
+  reg [1:0] state;
+
+  always @(posedge clock) begin
+    case (state)
+      2'b00: begin
+        if (a == 0) begin
+          p <= 0;
+          q <= 0;
+        end else begin
+          p <= 0;
+          q <= 1;
+        end
+      end
+      2'b01: begin
+        p <= 0;
+        q <= 0;
+      end
+      2'b10: begin
+        if (a == 0) begin
+          p <= 0;
+          q <= 0;
+        end else begin
+          p <= 0;
+          q <= 1;
+        end
+      end
+      2'b11: begin
+        p <= 0;
+        q <= 1;
+      end
+      default: begin
+        p <= 0;
+        q <= 0;
+      end
+    endcase
+  end
+
+  always @(posedge clock) begin
+    if (clock == 0) begin
+      state <= 2'b00;
+    end else if (a == 0) begin
+      state <= 2'b01;
+    end else begin
+      state <= 2'b10;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **State Machine:**  The circuit appears to be a state machine. The `state` register holds the current state.  The `always @(posedge clock)` blocks control state transitions and output assignments based on the current state and input `a`.
+
+2. **Initial State:** `state` is initialized to `2'b00` when the clock goes low.
+
+3. **State Transitions:**
+   - When the clock is low, state is 00
+   - When the clock is high and a is low, state transitions to 01
+   - When the clock is high and a is high, state transitions to 10
+
+4. **Output Logic (p, q):** The `always @(posedge clock)` block within the `case` statement defines how `p` and `q` are assigned based on the current state.
+
+**How it matches the waveform:**
+
+* **Time 0-25ns:**  `state` is 00, `p` and `q` are 0.
+* **Time 25-55ns:** `state` is 01, `p` and `q` are 0.
+* **Time 55-70ns:** `state` is 00, `p` and `q` are 0.
+* **Time 70-85ns:** `state` is 10, `p` and `q` are 0.
+* **Time 85-90ns:** `state` is 10, `p` and `q` are 0.
+* **Time 90-95ns:** `state` is 10, `p` and `q` are 0.
+* **Time 95-110ns:** `state` is 10, `p` and `q` are 0.
+* **Time 110-115ns:** `state` is 11, `p` and `q` are 1.
+* **Time 115-140ns:** `state` is 11, `p` and `q` are 1.
+* **Time 140-145ns:** `state` is 11, `p` and `q` are 1.
+* **Time 145-160ns:** `state` is 11, `p` and `q` are 1.
+* **Time 160-165ns:** `state` is 11, `p` and `q` are 1.
+* **Time 165-170ns:** `state` is 11, `p` and `q` are 1.
+* **Time 170-175ns:** `state` is 11, `p` and `q` are 1.
+* **Time 175-180ns:** `state` is 11, `p` and `q` are 1.
+* **Time 180-1

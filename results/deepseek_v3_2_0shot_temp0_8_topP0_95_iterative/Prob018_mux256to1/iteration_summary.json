@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob018_mux256to1",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 5\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob018_mux256to1\\attempt_1\\Prob018_mux256to1_code.sv:7: syntax error\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob018_mux256to1\\attempt_1\\Prob018_mux256to1_code.sv:7: error: Invalid module instantiation\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob018_mux256to1_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob018_mux256to1_ref.sv:12: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob018_mux256to1\\attempt_2\\Prob018_mux256to1_code.sv:7: syntax error\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob018_mux256to1\\attempt_2\\Prob018_mux256to1_code.sv:7: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob018_mux256to1\\attempt_3\\Prob018_mux256to1_code.sv:7: syntax error\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob018_mux256to1\\attempt_3\\Prob018_mux256to1_code.sv:7: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

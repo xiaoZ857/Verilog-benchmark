@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:8: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob052_gates100_test.sv:1: error: `timescale directive can not be inside a module definition.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob052_gates100\attempt_1\Prob052_gates100_code.sv:8: error: Invalid module instantiation

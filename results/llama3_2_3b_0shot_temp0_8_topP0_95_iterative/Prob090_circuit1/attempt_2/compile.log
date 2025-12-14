@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 1
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob090_circuit1\attempt_2\Prob090_circuit1_code.sv:25: error: q is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob090_circuit1\attempt_2\Prob090_circuit1_code.sv:8:      : q is declared here as wire.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob090_circuit1_test.sv:87: warning: Instantiating module TopModule with dangling input port 1 (clk) floating.
+1 error(s) during elaboration.

@@ -1,0 +1,60 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+// Declare current and next state variables
+state_t current_state, next_state;
+
+always_ff @(posedge clk or posedge reset) begin
+    if (reset)
+        current_state <= IDLE; // Synchronous reset to initial state
+    else
+        current_state <= next_state;
+end
+
+// State transition logic
+always_comb begin
+    case (current_state)
+        IDLE: 
+            if (data == 1'b1)
+                next_state = S1;
+            else
+                next_state = IDLE;
+
+        S1:
+            if (data == 1'b1)
+                next_state = S11;
+            else
+                next_state = IDLE;
+
+        S11:
+            if (data == 1'b0)
+                next_state = S110;
+            else
+                next_state = S11; // Stay here on consecutive '1's
+
+        S110:
+            if (data == 1'b1)
+                next_state = S1101;
+            else
+                next_state = IDLE;
+
+        S1101: 
+            next_state = FOUND; // Once the sequence is completed, go to FOUND
+
+        FOUND: 
+            next_state = FOUND; // Remain in this state indefinitely until reset
+            
+        default: 
+            next_state = IDLE;
+    endcase
+end
+
+// Output logic based on the current state
+assign start_shifting = (current_state == FOUND); // Continuously output 1 when sequence is found
+
+
+// VERILOG-EVAL: endmodule not found

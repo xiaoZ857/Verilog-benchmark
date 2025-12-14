@@ -1,0 +1,48 @@
+To implement the Verilog module for this combinational circuit, we need to analyze the given waveform and determine how the output `q` is generated based on the inputs `a`, `b`, `c`, `d`, and `e`.
+
+### Observations:
+
+- For inputs `a = b`, the value of `c` determines which input (`b`, `e`, `a`, or `d`) will be assigned to the output `q`.
+- The pattern for assigning `q` based on `c` is:
+  - When `c = 0`: `q = b`
+  - When `c = 1`: `q = e`
+  - When `c = 2`: `q = a`
+  - When `c = 3`: `q = d`
+- For all other values of `c` (from 4 to f), `q = f`.
+
+### Implementation:
+
+We can use a combination of conditional statements to implement this logic in Verilog. Here's the implementation for the module:
+
+```verilog
+module TopModule (
+    input [3:0] a,
+    input [3:0] b,
+    input [3:0] c,
+    input [3:0] d,
+    input [3:0] e,
+    output reg [3:0] q
+);
+
+always @(*) begin
+    // Default value for q when c is 4 to f
+    q = 4'b1111; // 'f' in hexadecimal
+
+    case (c)
+        4'b0000: q = b;
+        4'b0001: q = e;
+        4'b0010: q = a;
+        4'b0011: q = d;
+        default: q = 4'b1111; // 'f' in hexadecimal
+    endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+- The `always @(*)` block ensures that the logic inside it is evaluated whenever any of the inputs change, making it suitable for combinational logic.
+- We use a `case` statement to handle different values of `c`. This allows us to assign `q` based on the value of `c`.
+- For each specific case (`0`, `1`, `2`, and `3`), we assign `q` accordingly.
+- The default case handles all other values of `c` (from `4` to `f`) by setting `q` to `1111` which is the hexadecimal representation of `f`.

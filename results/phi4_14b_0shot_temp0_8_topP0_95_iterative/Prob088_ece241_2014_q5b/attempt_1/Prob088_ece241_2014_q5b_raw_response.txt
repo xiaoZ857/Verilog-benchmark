@@ -1,0 +1,66 @@
+To implement the given Mealy machine as a 2's complementer using one-hot encoding in Verilog, we need to define states and their transitions. Here’s how you can write the `TopModule`:
+
+```verilog
+module TopModule (
+    input clk,
+    input areset,
+    input x,
+    output z
+);
+
+    // State encoding using one-hot encoding
+    parameter A = 1'b0;
+    parameter B = 1'b1;
+
+    reg [1:0] current_state, next_state;
+
+    assign z = (current_state == A) ? (!x) : x; // Mealy output logic
+
+    always @(*) begin
+        case(current_state)
+            A: begin
+                if (areset) 
+                    next_state = A;
+                else 
+                    next_state = (x) ? B : A;
+            end
+            
+            B: begin
+                if (areset) 
+                    next_state = A;
+                else 
+                    next_state = B; // Remain in state B regardless of input x
+            end
+            
+            default: 
+                next_state = A; // Default to state A on undefined state
+        endcase
+    end
+
+    always @(posedge clk or posedge areset) begin
+        if (areset)
+            current_state <= A;
+        else
+            current_state <= next_state;
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **State Encoding**: 
+   - We use one-hot encoding where state `A` is represented by `01`, and state `B` is represented by `10`. Since we only need two states, a 2-bit register suffices.
+
+2. **Output Logic**:
+   - The output `z` depends on the current state and input `x`. In state `A`, `z = !x`, and in state `B`, `z = x`.
+
+3. **Next State Logic**:
+   - If `areset` is high, transition to state `A`.
+   - From state `A`, if `x` is 1, move to state `B`; otherwise, stay in state `A`.
+   - From state `B`, always remain in state `B`.
+
+4. **Current State Update**:
+   - The current state is updated on the positive edge of the clock or when `areset` is high.
+
+This design ensures that the module behaves as a 2's complementer using the specified Mealy machine transitions and outputs.

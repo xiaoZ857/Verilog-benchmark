@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob092_gatesv100\attempt_3\Prob092_gatesv100_code.sv:10: register ``i'' unknown in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob092_gatesv100\attempt_3\Prob092_gatesv100_code.sv:15: register ``i'' unknown in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob092_gatesv100\attempt_3\Prob092_gatesv100_code.sv:20: register ``i'' unknown in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob092_gatesv100\attempt_3\Prob092_gatesv100_code.sv:8: warning: @* found no sensitivities so it will never trigger.
+3 error(s) during elaboration.

@@ -1,0 +1,131 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+  // State definition
+  typedef enum logic [2:0] {
+    IDLE,
+    DETECT_1,
+    DETECT_11,
+    DETECT_110,
+    DETECT_1101,
+    SHIFT_DELAY,
+    COUNTING,
+    DONE
+  } state_t;
+
+  reg state, next_state;
+
+  // Delay register
+  reg [3:0] delay;
+
+  // Counter for the counting state
+  reg [15:0] counter;
+
+  // Internal signals
+  reg [3:0] shift_reg;
+
+  // State register update
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+    end else begin
+      state <= next_state;
+    end
+  end
+
+  // Next state logic
+  always_comb begin
+    next_state = state;
+    case (state)
+      IDLE: begin
+        if (data == 1) begin
+          next_state = DETECT_1;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+      DETECT_1: begin
+        if (data == 1) begin
+          next_state = DETECT_11;
+        end else begin
+          next_state = IDLE;
+        end
+      end
+      DETECT_11: begin
+        if (data == 0) begin
+          next_state = DETECT_110;
+        end else begin
+          next_state = DETECT_1;
+        end
+      end
+      DETECT_110: begin
+        if (data == 1) begin
+          next_state = DETECT_1101;
+        end else begin
+          next_state = DETECT_11;
+        end
+      end
+      DETECT_1101: begin
+        // Shift in the delay bits
+        shift_reg <= {shift_reg[2:0], data};
+        next_state = SHIFT_DELAY;
+      end
+      SHIFT_DELAY: begin
+        delay <= shift_reg[3:0];
+        next_state = COUNTING;
+      end
+      COUNTING: begin
+        next_state = COUNTING;
+      end
+      DONE: begin
+        next_state = IDLE;
+      end
+    endcase
+  end
+
+  // Output logic
+  always_comb begin
+    counting = (state == COUNTING);
+    done = (state == DONE);
+
+    if (counting) begin
+      if (counter < ((delay + 1) * 1000)) begin
+        count = delay - (counter / 1000);
+      end else begin
+        count = 0;
+      end
+    end else begin
+      count = 0;
+    end
+  end
+
+  // Counter for counting state
+  always_ff @(posedge clk) begin
+    if (reset) begin
+      counter <= 0;
+    end else begin
+      if (counting) begin
+        counter <= counter + 1;
+        if (counter >= ((delay + 1) * 1000)) begin
+          state <= DONE;
+        end
+      end
+    end
+  end
+
+  // Acknowledgement logic
+  always_ff @(posedge clk) begin
+    if (reset) begin
+    end else if (done && ack) begin
+      state <= IDLE;
+    end
+  end
+
+endmodule

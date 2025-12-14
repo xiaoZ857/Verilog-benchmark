@@ -1,0 +1,21 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  output [7:0] s,
+  output overflow
+);
+// 8‑bit two's‑complement adder with overflow detection
+wire signed [8:0] sum_full;
+
+// Perform the full 9‑bit addition
+assign sum_full = $signed(a) + $signed(b);
+
+// Result is the lower 8 bits
+assign s = sum_full[7:0];
+
+// Overflow occurs when the sign bits of a and b are the same
+// but the sign bit of the result differs from them
+assign overflow = (~(a[7] ^ b[7])) & (s[7] ^ a[7]);
+
+endmodule

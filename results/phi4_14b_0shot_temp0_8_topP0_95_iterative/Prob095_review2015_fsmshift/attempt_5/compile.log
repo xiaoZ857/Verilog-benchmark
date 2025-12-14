@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:9: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:10: error: shift_ena is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:5:      : shift_ena is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:11: error: Could not find variable ``counter'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:13: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:15: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:15: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:36: error: Could not find variable ``next_state'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:38: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:38: error: Unable to elaborate this case expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_5\Prob095_review2015_fsmshift_code.sv:35: warning: always_comb process has no sensitivities.
+7 error(s) during elaboration.

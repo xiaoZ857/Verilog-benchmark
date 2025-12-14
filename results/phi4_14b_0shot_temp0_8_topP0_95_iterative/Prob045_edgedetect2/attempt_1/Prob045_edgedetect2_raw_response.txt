@@ -1,0 +1,44 @@
+To implement the Verilog module as described, you need to detect edges (both rising and falling) for each bit of an 8-bit input vector. The output should reflect these changes one clock cycle after they occur.
+
+Here's how you can structure the `TopModule`:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+  // Intermediate registers to store previous state of inputs
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    // Detect edges by comparing current input with the previous input
+    for (int i = 0; i < 8; i++) begin
+      anyedge[i] <= (prev_in[i] ^ in[i]); // XOR to detect change
+    end
+
+    // Update the previous input register on each clock cycle
+    prev_in <= in;
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Registers:**
+   - `prev_in`: This 8-bit register holds the value of the input from the previous clock cycle.
+
+2. **Edge Detection Logic:**
+   - The detection is done using an XOR operation between the current input (`in`) and the previous input (`prev_in`). An XOR will result in `1` when there's a change (either from 0 to 1 or 1 to 0), effectively detecting any edge.
+
+3. **Always Block:**
+   - The block is triggered on the positive edge of `clk`.
+   - Inside, it iterates over each bit of the input vector.
+   - It assigns the result of the XOR operation to `anyedge[i]` for each bit `i`. This way, `anyedge` will reflect changes one cycle after they occur.
+
+4. **Updating Previous State:**
+   - After computing the edge detection, `prev_in` is updated with the current input value `in`.
+
+This design ensures that any change in the input vector is captured and reflected in the output on the subsequent clock cycle.

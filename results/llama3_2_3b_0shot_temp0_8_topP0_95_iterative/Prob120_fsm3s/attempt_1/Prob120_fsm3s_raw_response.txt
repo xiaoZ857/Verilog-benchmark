@@ -1,0 +1,40 @@
+Here is the implementation of the Moore state machine in Verilog:
+```
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output out
+);
+
+reg [1:0] state;
+reg [1:0] output_value;
+
+always @(posedge clk) begin
+    if (reset)
+        state <= 2'a; // A
+    else
+        case(state)
+            2'd0 : state = 2'd0, output_value <= 0'b0;
+            2'd1 : state = 2'd1, output_value <= 0'b0;
+            2'd2 : state = 2'd2, output_value <= 0'b1;
+            2'd3 : state = 2'd3, output_value <= 0'b1;
+        endcase
+end
+
+always @(posedge in) begin
+    case(state)
+        2'd0 : state = 2'd0; // A
+        2'd1 : state = 2'd1; // B
+        2'd2 : state = 2'd3; // C -> D
+        2'd3 : state = 2'd3; // D
+    endcase
+end
+
+assign out = output_value;
+
+endmodule
+```
+This implementation includes a synchronous active high reset, which resets the FSM to state `A` when the `reset` input is asserted. The state transitions are implemented based on the provided state transition table.
+
+Note that the states and outputs are represented as unsigned integers (with 2 bits) for simplicity. The actual values of these representations depend on the specific application and hardware requirements.

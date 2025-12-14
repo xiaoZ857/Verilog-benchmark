@@ -1,0 +1,79 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+We first interpret the problem:  
+Inputs a, b, c, d form a 4-bit number:  
+Let’s assume a is MSB (value 8), b is 4, c is 2, d is 1 (so number = 8a + 4b + 2c + d).  
+
+Given:  
+- Output = 1 for inputs 2, 7, 15.  
+- Output = 0 for inputs 0, 1, 4, 5, 6, 9, 10, 13, 14.  
+- Inputs 3, 8, 11, 12 never occur (don’t cares).  
+
+Let’s list truth table with a,b,c,d order (a=MSB):  
+
+Number | a b c d | out | don’t care?  
+0      | 0 0 0 0 | 0  
+1      | 0 0 0 1 | 0  
+2      | 0 0 1 0 | 1  
+3      | 0 0 1 1 | X (never occurs)  
+4      | 0 1 0 0 | 0  
+5      | 0 1 0 1 | 0  
+6      | 0 1 1 0 | 0  
+7      | 0 1 1 1 | 1  
+8      | 1 0 0 0 | X  
+9      | 1 0 0 1 | 0  
+10     | 1 0 1 0 | 0  
+11     | 1 0 1 1 | X  
+12     | 1 1 0 0 | X  
+13     | 1 1 0 1 | 0  
+14     | 1 1 1 0 | 0  
+15     | 1 1 1 1 | 1  
+
+---
+
+**Step 1: SOP minimization (out_sop)**  
+Minterms for 1’s: m2, m7, m15.  
+Don’t cares: m3, m8, m11, m12.  
+
+K-map (order ab\cd):  
+
+cd\ab  00  01  11  10  
+00      0   0   0   0  
+01      0   0   0   0  
+11      X   1   1   X  
+10      1   0   0   X  
+
+Wait, let’s place carefully:  
+
+ab = 00: cd=00 → m0=0, cd=01 → m1=0, cd=11 → m3=X, cd=10 → m2=1  
+ab = 01: cd=00 → m4=0, cd=01 → m5=0, cd=11 → m7=1, cd=10 → m6=0  
+ab = 11: cd=00 → m12=X, cd=01 → m13=0, cd=11 → m15=1, cd=10 → m14=0  
+ab = 10: cd=00 → m8=X, cd=01 → m9=0, cd=11 → m11=X, cd=10 → m10=0  
+
+Grouping 1’s with don’t cares:  
+
+m2(0010) with m3(0011) → a’b’c (d don’t care)  
+m7(0111) with m3(0011) → a’cd (b don’t care? not quite, m3 and m7 differ in b)  
+
+Better:  
+m15(1111) with m11(1011) → b c d (a don’t care)  
+m15 with m7(0111) → b c d again, but m7 with m3? m3(0011) and m7(0111) → a’ c d (b don’t care)  
+
+Also m2(0010) with m3(0011) → a’b’c (d don’t care)  
+
+Check if m7 can be covered: m7 with m15? They differ in a, so need b c d.  
+
+Let’s list:  
+1’s: m2(0010), m7(0111), m15(1111)  
+
+Cover m2: a’b’c  
+Cover m7: a’cd (since m3 is don’t care, m3=0011, m7=0111 → b changes, so not same cube unless we include m11? m11=1011 not same) Wait, m7 and m3 differ in b, so to cover m7 with don’t cares: m3(
+
+// VERILOG-EVAL: endmodule not found

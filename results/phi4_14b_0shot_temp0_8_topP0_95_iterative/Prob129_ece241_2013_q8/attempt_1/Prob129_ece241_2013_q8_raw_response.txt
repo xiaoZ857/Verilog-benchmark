@@ -1,0 +1,83 @@
+To implement the described Mealy-type finite state machine (FSM) that recognizes the sequence "101" on an input signal `x` and asserts an output signal `z` when the sequence is detected, we can define three states. The FSM should also handle overlapping sequences and have a negative edge triggered asynchronous reset.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+
+  // State encoding
+  typedef enum logic [1:0] {
+    S0,  // Initial state, waiting for '1'
+    S1,  // Detected '1', now looking for '0'
+    S2   // Detected "10", now looking for '1' to complete the sequence
+  } state_t;
+
+  // State register
+  state_t current_state, next_state;
+
+  // FSM logic
+  always_ff @(posedge clk or negedge aresetn) begin
+    if (!aresetn)
+      current_state <= S0;
+    else
+      current_state <= next_state;
+  end
+
+  // Next state logic and output logic
+  always_comb begin
+    z = 1'b0; // Default value for z
+
+    case (current_state)
+      S0: begin
+        if (x == 1'b1) begin
+          next_state = S1;
+        end else begin
+          next_state = S0;
+        end
+      end
+      S1: begin
+        if (x == 1'b0) begin
+          next_state = S2;
+        end else if (x == 1'b1) begin
+          next_state = S1; // Stay in S1 if another '1' is detected
+        end else begin
+          next_state = S0;
+        end
+      end
+      S2: begin
+        if (x == 1'b1) begin
+          next_state = S1; // Transition to S1 for overlapping sequence
+          z = 1'b1;       // Assert output when "101" is detected
+        end else begin
+          next_state = S0;
+        end
+      end
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **States**: We define three states (`S0`, `S1`, `S2`) to track the sequence detection.
+  - `S0`: Initial state, waiting for a '1'.
+  - `S1`: A '1' has been detected; now looking for a '0'.
+  - `S2`: Sequence "10" is detected; now looking for another '1' to complete "101".
+
+- **Reset**: The asynchronous reset (`aresetn`) is active low. On its negative edge, the FSM resets to state `S0`.
+
+- **Transition Logic**:
+  - From `S0`, if a '1' is detected, transition to `S1`.
+  - From `S1`, if a '0' is detected, move to `S2`. If another '1' is detected, stay in `S1` (for overlapping sequences).
+  - From `S2`, if a '1' is detected, output `z` is asserted and transition back to `S1` for potential overlapping sequences. Otherwise, return to `S0`.
+
+- **Output Logic**:
+  - The output `z` is asserted high only when transitioning from `S2` to `S1`, indicating the detection of "101".
+
+This FSM efficiently handles overlapping sequences by returning to state `S1` after detecting a complete sequence, allowing it to recognize subsequent occurrences of "101" immediately.

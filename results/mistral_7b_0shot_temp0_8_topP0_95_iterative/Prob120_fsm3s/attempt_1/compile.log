@@ -1,0 +1,20 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:44: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:48: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:52: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:53: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:57: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:62: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:63: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:63: error: Invalid module instantiation
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:64: error: Invalid module instantiation
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:67: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:68: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:68: error: Invalid module instantiation
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:69: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv:13: error: invalid module item.

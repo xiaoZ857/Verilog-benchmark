@@ -1,0 +1,20 @@
+// -----------------------------------------------------
+//  One‑bit 2‑to‑1 Multiplexer
+// -----------------------------------------------------
+//  When sel = 0  -> out = a
+//  When sel = 1  -> out = b
+// -----------------------------------------------------
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire a,      // First input
+    input  wire b,      // Second input
+    input  wire sel,    // Select line
+    output wire out     // Multiplexed output
+);
+
+// Continuous assignment – purely combinational logic
+assign out = sel ? b : a;
+
+endmodule

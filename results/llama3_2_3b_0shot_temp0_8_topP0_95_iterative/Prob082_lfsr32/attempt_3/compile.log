@@ -1,0 +1,24 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 17
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:2: error: macro names cannot be directive keywords ('`define'); replaced with nothing.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:3: error: macro names cannot be directive keywords ('`define'); replaced with nothing.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:7: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:7: error: Malformed event control expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:9: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:7: error: Invalid event control.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:10: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:10: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:11: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:12: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:14: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:15: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:15: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:16: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:17: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:23: error: invalid module item.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob082_lfsr32\attempt_3\Prob082_lfsr32_code.sv:24: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob082_lfsr32_test.sv:9: error: invalid module item.

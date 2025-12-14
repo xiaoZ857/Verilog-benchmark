@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 12
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:14: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:14: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:14: error: malformed statement
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:15: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:15: error: Operand of unary ! is not a primary expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:15: error: malformed statement
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:16: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:16: error: Operand of unary ! is not a primary expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_2\Prob074_ece241_2014_q4_code.sv:16: error: malformed statement
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob074_ece241_2014_q4_ref.sv:18: syntax error
+I give up.

@@ -1,0 +1,48 @@
+Here is a correct and well-structured implementation of the `TopModule` in Verilog, as per the given description:
+
+---
+
+### ✅ **Module Overview**
+
+- **Inputs:**
+  - `clk`: Positive-edge-triggered clock.
+  - `d`: 8-bit input data.
+  - `reset`: Active-high synchronous reset.
+
+- **Output:**
+  - `q`: 8-bit output register, which holds the value of `d` unless `reset` is asserted.
+
+- **Functionality:**
+  - On the **positive edge of `clk`**, the `q` register is updated.
+  - If `reset` is asserted, `q` is set to **0** (all bits zero).
+  - Otherwise, `q` is assigned the value of `d`.
+
+---
+
+### 📜 **Verilog Code**
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  input reset,
+  output reg [7:0] q
+);
+
+always @(posedge clk) begin
+  if (reset) begin
+    q <= 8'b0;
+  end else begin
+    q <= d;
+  end
+end
+
+endmodule
+```
+
+---
+
+### 🔍 **Explanation**
+
+- The `always @(posedge clk)` block ensures that all logic is triggered only on the **rising edge** of the clock signal.
+- The `

@@ -1,0 +1,23 @@
+
+// ------------------------------------------------------------
+// 4‑bit binary counter (0‑15) with a period of 16
+// synchronous active‑high reset
+// ------------------------------------------------------------
+module TopModule (
+    input  wire        clk,    // positive‑edge clock
+    input  wire        reset,  // active‑high synchronous reset
+    output reg  [3:0]  q       // 4‑bit counter output
+);
+
+    // Posedge‑triggered logic
+    always @(posedge clk) begin
+        if (reset) begin
+            q <= 4'b0000;          // reset to zero
+        end else begin
+            q <= q + 1'b1;         // count up, wraps automatically at 4 bits
+        end
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,23 @@
+ Here is a Verilog implementation of the sign-extending circuit as described:
+
+```verilog
+module TopModule (
+  input [7:0] in,
+  output [31:0] out
+);
+
+  wire signed [7:0] sign_in; // Extract the sign bit from the input
+  assign sign_in = in[7];
+
+  // Replicate the sign bit 24 times and concatenate with the input
+  wire [31:0] temp_out;
+  for(int i = 0; i < 24; i++)
+    temp_out[i + 8] = sign_in;
+  temp_out[8:0] = in;
+
+  assign out = temp_out; // Assign the result to output
+
+endmodule
+```
+
+In this implementation, we first extract the sign bit (msb) of the input using a wire variable `sign_in`. Then, using a `for` loop, we replicate the `sign_in` 24 times and concatenate it with the original input. The resulting concatenated signal is then assigned to the output `out`. This creates a 32-bit signed extended version of the original 8-bit input while preserving its signed value.

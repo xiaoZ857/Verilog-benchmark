@@ -1,0 +1,11 @@
+always @(posedge clk) begin
+  reg out_reg = in; // Declare a register to store the input value
+  out <= out_reg;   // Assign the stored value to output when clock rises
+end
+
+initial
+begin
+  #1 $finish; // Exits the simulation once the initial block is completed.
+end
+
+endmodule

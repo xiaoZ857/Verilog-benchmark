@@ -1,0 +1,32 @@
+
+module TopModule(
+    // 8-bit keyboard scancode input
+    input [7:0] code,    
+    // Output to show detected key 
+    output reg [3:0] out,   
+    // Output to show if valid scancode detected
+    output reg valid)    
+
+{
+    // Assign valid as 0 for no match
+    valid <= 0;
+
+    // Use a case statement to check the input code against known keys
+    case(code)
+        8'h45: out <= 0;          // Matched with key '5'
+        8'h16: out <= 1;          // Matched with key '1'
+        8'h1e: out <= 2;          // Matched with key 'E'
+        8'h26: out <= 3;          // Matched with key '2'
+        8'h25: out <= 4;          // Matched with key 'A'
+        8'h2e: out <= 5;          // Matched with key '6' & 'E'
+        8'h36: out <= 6;          // Matched with key 'B'
+        8'h3d: out <= 7;          // Matched with key 'D'
+        8'h3e: out <= 8;          // Matched with key 'E'
+        8'h46: out <= 9;          // Matched with key '6' & 'E'
+        default: out <= 0;       // No match
+    endcase
+
+}
+
+// VERILOG-EVAL: errant inclusion of module definition
+// VERILOG-EVAL: endmodule not found

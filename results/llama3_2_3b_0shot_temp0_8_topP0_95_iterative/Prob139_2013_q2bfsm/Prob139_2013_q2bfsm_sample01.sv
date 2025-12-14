@@ -1,0 +1,76 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input x,
+  input y,
+  output f,
+  output g
+);
+reg [1:0] state = 2'b00; // State A (reset)
+reg [1:0] prev_state_A = 2'b00; // Previous state of A
+reg [1:1] x_count = 2'b00; // Count of x inputs for pattern 110
+reg [1:1] y_count = 2'b00; // Count of y inputs for pattern 10
+
+reg f_value = 0;
+reg g_value = 0;
+
+always @(posedge clk or posedge resetn) begin
+    if (resetn == 0 && state == 2'b00) begin
+        state <= 2'b01; // Transition to state B
+        x_count <= 2'b11; // Reset x_count to start from both '1' at the same time
+        y_count <= 2'b00;
+    end else if (state == 2'b00) continue; // If we are in reset, do not change anything
+
+    if (state == 2'b01) begin // State A, waiting for next clk edge
+        prev_state_A <= state;
+
+        if (x == 1'b1) begin
+            x_count <= x_count + 1;
+            if (x_count >= 2'b11) begin
+                state <= 2'b10; // Transition to state C
+                x_count <= 2'b00;
+            end
+        end else if (x == 1'b0) begin
+            f_value <= 1'b0;
+            prev_state_A <= 2'b01;
+            x_count <= 2'b11; // Reset x_count after a 0 is detected
+        end
+    end else if (state == 2'b10) begin // State C, waiting for next clk edge
+        prev_state_A <= state;
+
+        if (y == 1'b1 && y_count < 2'b01) begin
+            y_count <= y_count + 1;
+            f_value <= 1'b1;
+        end else if (y == 1'b0) begin
+            g_value <= 1'b1; // Set g to 1 permanently if y becomes 1 within two clock cycles
+            state <= 2'b11; // Transition to State D
+            y_count <= 2'b00;
+        end
+
+    else if (state == 2'b11) begin // State D, waiting for next clk edge
+        prev_state_A <= state;
+
+        if (y == 1'b0 || (x == 1'b0 && y == 1'b1)) begin
+            f_value <= 1'b0;
+            g_value <= 1'b0; // Reset both outputs when leaving the high state
+            y_count <= 2'b00; // Reset y_count to indicate that y has not been set to 1 within two clock cycles
+        end 
+
+    else if (state == 2'b12) begin // State E, waiting for next clk edge
+        prev_state_A <= state;
+
+        if (y == 1'b0 && y_count < 2'b01) begin // Check if y has not been set to 1 within two clock cycles
+            g_value <= 1'b0;
+        end else if (y == 1'b1 || (x == 1'b0 && y == 1'b1)) begin
+            f_value <= 1'b0; 
+            g_value <= 1'b0; // Reset both outputs when leaving the high state
+            state <= 2'b00; // Transition to State A
+        end
+    end
+end
+
+assign f = f_value;
+assign g = g_value;
+
+endmodule

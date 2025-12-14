@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+:0: error: Enumeration name E has an inferred value that overflowed.
+:0: error: Enumeration name E and A have the same value: 2'd0
+3 error(s) during elaboration.

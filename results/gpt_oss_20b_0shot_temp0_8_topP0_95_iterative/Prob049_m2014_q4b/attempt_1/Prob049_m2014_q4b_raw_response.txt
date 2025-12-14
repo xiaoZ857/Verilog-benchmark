@@ -1,0 +1,66 @@
+Below is a minimal, synthesizable SystemVerilog implementation of a positive‑edge‑triggered D‑flip‑flop with an **active‑high** asynchronous reset (`ar`).  
+The reset is “asynchronous” because the assignment to `q` occurs immediately when `ar` goes high, regardless of the clock.
+
+```systemverilog
+// -----------------------------------------------------------------------------
+//  TopModule
+//  ----------
+//  Positive‑edge‑triggered D‑flip‑flop with an asynchronous reset.
+//  -----------------------------------------------------------------------------
+//  Ports
+//  -----
+//  clk : Clock input (positive edge)
+//  d   : Data input
+//  ar  : Asynchronous reset (active‑high)
+//  q   : Flip‑flop output
+// -----------------------------------------------------------------------------
+//  Author: <your name>
+//  Date: <date>
+// -----------------------------------------------------------------------------
+
+module TopModule (
+    input  logic clk,  // Clock
+    input  logic d,    // Data input
+    input  logic ar,   // Asynchronous reset (active‑high)
+    output logic q     // Flip‑flop output
+);
+
+    // A single always_ff block that models the behavior of a
+    // positive‑edge‑triggered D‑FF with an asynchronous reset.
+    //
+    //   * When `ar` goes high → q is immediately set to 0 (reset state).
+    //   * On the positive edge of `clk` (and when `ar` is low) → q takes the
+    //     value of `d`.
+    //
+    // This is synthesizable on all major FPGA/ASIC toolchains.
+    always_ff @(posedge clk or posedge ar) begin
+        if (ar)
+            q <= 1'b0;  // Asynchronous reset
+        else
+            q <= d;     // Normal D‑FF operation
+    end
+
+endmodule
+```
+
+### Quick notes
+
+- **`always_ff`** is a SystemVerilog construct that clearly indicates a
+  clock‑dependent register.  
+  If you prefer classic Verilog‑2001 syntax, replace it with:
+
+  ```verilog
+  always @(posedge clk or posedge ar) begin
+      if (ar)
+          q <= 1'b0;
+      else
+          q <= d;
+  end
+  ```
+
+- The reset is **active‑high** (`posedge ar`).  
+  If you need an active‑low reset, change it to `negedge ar` and adjust the
+  assignment accordingly.
+
+- `logic` is used for the ports and internal signals to avoid the
+  ambiguities of `reg`/`wire` in

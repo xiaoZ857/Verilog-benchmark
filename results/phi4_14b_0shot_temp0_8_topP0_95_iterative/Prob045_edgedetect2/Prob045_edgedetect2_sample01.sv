@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] anyedge
+);
+
+  // Intermediate registers to store previous state of inputs
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    // Detect edges by comparing current input with the previous input
+    for (int i = 0; i < 8; i++) begin
+      anyedge[i] <= (prev_in[i] ^ in[i]); // XOR to detect change
+    end
+
+    // Update the previous input register on each clock cycle
+    prev_in <= in;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

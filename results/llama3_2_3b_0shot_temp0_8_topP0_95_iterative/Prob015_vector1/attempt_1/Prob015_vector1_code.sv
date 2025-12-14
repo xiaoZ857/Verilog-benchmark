@@ -1,0 +1,23 @@
+
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+
+// Half word size is defined as 16 bits
+#define HALF_WORD_SIZE 16
+
+// Upper byte size is defined as 8 bits
+#define UPPER_BYTE_SIZE 8
+
+// Lower byte size is defined as 8 bits
+#define LOWER_BYTE_SIZE 8
+
+assign out_hi = in[UPPER_BYTE_SIZE-1:0];
+assign out_lo = in[LOWER_BYTE_SIZE-1:UPPER_BYTE_SIZE-UPPER_BYTE_SIZE];
+
+endmodule
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

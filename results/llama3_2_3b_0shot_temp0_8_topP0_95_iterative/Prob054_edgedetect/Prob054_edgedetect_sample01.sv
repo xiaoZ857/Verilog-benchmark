@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+// Initialize output bits to zero
+assign pedge = 7'd0;
+
+always @(*) begin
+    // Iterate over each bit of the 8-bit vector
+    for (integer i = 0; i < 8; i++) begin
+        // If current bit is zero and next bit is one, set the current output bit to one
+        if ((in[i] == 0 && i + 1 < 8 && in[i+1] != 0) || (in[i] != 0)) {
+            pedge[i] = 1;
+        } else {
+            // Fix: Change pedge[i] to pedge[i+7]
+            pedge[i+7] = 0; // Update the current output bit
+        }
+    end
+end
+
+// Update on each clock cycle
+always @(posedge clk) begin
+    // Set all output bits to zero for the next clock cycle when a 0->1 transition is detected
+    assign pedge = 7'd0;
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: endmodule not found

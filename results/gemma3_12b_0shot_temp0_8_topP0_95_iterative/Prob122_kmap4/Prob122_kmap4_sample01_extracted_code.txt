@@ -1,0 +1,7 @@
+  always @(a, b, c, d) begin
+    if ((~a & b & ~c & ~d) | (a & b & c & d) | (a & ~b & ~c & ~d) | (~a & b & c & d)) begin
+      out = 1;
+    end else begin
+      out = 0;
+    end
+  end

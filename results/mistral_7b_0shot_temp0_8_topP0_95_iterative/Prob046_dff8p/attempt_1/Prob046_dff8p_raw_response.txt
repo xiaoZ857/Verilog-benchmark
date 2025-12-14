@@ -1,0 +1,25 @@
+ In Verilog, the following code implements a module with 8 D flip-flops that are triggered by the negative edge of `clk` and have an active high synchronous reset set to `0x34`.
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    input [7:0] d,
+    output reg [7:0] q
+);
+
+always @(posedge clk or negedge clk)
+begin
+    if (reset)
+        q <= 8'b10100100; // Initializing the flip-flops with 0x34
+    else if (negedge clk)
+        q <= d; // Assigning input `d` to output `q` on the negative edge of clock
+end
+
+// Ensure that reset has a high impedance state (Z) when it's not asserted
+assign reset = 8'bz when (reset != 1'b1);
+
+endmodule
+```
+
+In this implementation, an `always` block is used to capture both positive and negative edges of the clock signal `clk`. The flip-flops are initialized with `0x34` when the asynchronous reset `reset` is active high. On every negative edge of the clock, if the reset is not asserted, the input data `d` is assigned to the output `q`. Additionally, I added a line that sets `reset` to high-impedance (Z) when it's not explicitly asserted (1). This allows the reset signal to float when it's not being actively driven.

@@ -1,0 +1,48 @@
+Below is a compact, synthesizable implementation of **one stage** of the described shift‑register.  
+The stage contains:
+
+* a D‑flip‑flop whose output is `Q`  
+* a 3‑to‑1 mux that selects the next value to be stored in the flip‑flop  
+  * **Load** – when `L` is asserted, the stage loads the external value `R`.  
+  * **Shift** – when `E` is asserted (and `L` is low), the stage shifts the input `w` into `Q`.  
+  * **Hold** – otherwise the stage keeps its current value.  
+
+The logic is written in a style that is easy to read and maps directly to
+hardware – the mux is expressed with a ternary operator and the flip‑flop
+is driven on the rising edge of `clk`.
+
+```verilog
+// ====================================================================
+//  One‑stage shift register
+//  --------------------------------------------------------------
+//  Inputs:
+//    clk : Clock (positive edge triggered)
+//    w   : Data coming from the previous stage (or external input
+//          for the first stage)
+//    R   : Value to load when L = 1
+//    E   : Enable shift when 1
+//    L   : Load enable – when 1 the register loads R
+//
+//  Output:
+//    Q   : Stored value of this stage
+// ====================================================================
+
+module TopModule (
+    input  wire clk, // Clock
+    input  wire w,   // Input from previous stage / external data
+    input  wire R,   // Load value
+    input  wire E,   // Shift enable
+    input  wire L,   // Load enable
+    output reg  Q    // Output of this stage
+);
+
+    // ----------------------------------------------------------------
+    //  D‑flip‑flop with 3‑to‑1 mux for next state
+    //  --------------------------------------------------------------
+    //  The mux selects between:
+    //     L ? R   (load)
+    //     : E ? w (shift)
+    //     : Q     (hold)
+    //  The selected value is fed into the flip‑flop on clk's rising edge.
+    // ----------------------------------------------------------------
+    always @(

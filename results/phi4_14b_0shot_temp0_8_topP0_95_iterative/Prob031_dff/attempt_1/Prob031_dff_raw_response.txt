@@ -1,0 +1,30 @@
+To implement a single D flip-flop in Verilog, you need to create a module that captures the value of `d` on the rising edge of the clock and assigns it to `q`. The `reg` type is used for `q` since it holds state information. Here's how you can define the `TopModule`:
+
+```verilog
+module TopModule (
+  input wire clk,    // Clock input
+  input wire d,      // Data input
+  output reg q       // Output that stores the captured data
+);
+
+  always @(posedge clk) begin
+    q <= d;           // Capture the value of `d` on the rising edge of `clk`
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `input wire clk`: The clock signal that triggers the flip-flop.
+  - `input wire d`: The data input to be captured by the flip-flop.
+  - `output reg q`: The output register that holds the state of the D flip-flop.
+
+- **Always Block:**
+  - `always @(posedge clk) begin ... end`: This block is triggered on the rising edge of the clock (`clk`). It ensures that the value of `d` is captured and assigned to `q` only at this specific event.
+  
+- **Non-blocking Assignment (`<=`):**
+  - The non-blocking assignment operator `<=` is used to ensure that all updates within the always block occur concurrently at the end of each clock cycle. This is crucial in sequential logic to prevent race conditions.
+
+This module effectively implements a D flip-flop, capturing and holding the input value on each rising edge of the clock signal.

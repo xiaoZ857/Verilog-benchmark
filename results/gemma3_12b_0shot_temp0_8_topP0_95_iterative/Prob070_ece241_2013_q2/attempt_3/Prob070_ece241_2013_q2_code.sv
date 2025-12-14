@@ -1,0 +1,35 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output out_sop,
+  output out_pos
+);
+  // Sum-of-Products (SOP) form:
+  // out_sop = (a & b & ~c & ~d) | (~a & ~b & c & d) | (a & b & c & d) | (a & ~b & ~c & ~d)
+  // The numbers represented are:
+  // 2: 0010 -> a=0, b=0, c=1, d=0  (a & b & ~c & ~d)
+  // 7: 0111 -> a=0, b=1, c=1, d=1  (a & ~b & c & d)
+  // 15: 1111 -> a=1, b=1, c=1, d=1 (a & b & c & d)
+  // 2: 0010 -> a=0, b=1, c=0, d=0  (a & ~b & ~c & ~d)
+
+  assign out_sop = (a & ~b & ~c & ~d) | (~a & ~b & c & d) | (a & b & c & d) | (a & ~b & ~c & ~d);
+
+  // Product-of-Sums (POS) form:
+  // out_pos = (~a | b | c | d) & (a | ~b | ~c | ~d) & (a | ~b | c | ~d) & (a | b | ~c | d)
+  // Numbers that are not allowed: 0, 1, 4, 5, 6, 9, 10, 13, 14
+  // 0: 0000 -> a=0, b=0, c=0, d=0
+  // 1: 0001 -> a=0, b=0, c=0, d=1
+  // 4: 0100 -> a=0, b=1, c=0, d=0
+  // 5: 0101 -> a=0, b=1, c=0, d=1
+  // 6: 0110 -> a=0, b=1, c=1, d=0
+  // 9: 1001 -> a=1, b=0, c=0, d=1
+  // 10: 1010 -> a=1, b=0, c=1, d=0
+  // 13: 1101 -> a=1, b=1, c=0, d=1
+  // 14: 1110 -> a=1, b=1, c=1, d=0
+
+  assign out_pos = (~a | b | c | d) & (a | ~b | ~c | ~d) & (a | ~b | c | ~d) & (a | b | ~c | d);
+
+endmodule

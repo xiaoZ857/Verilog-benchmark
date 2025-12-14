@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:13: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:18: error: invalid module item.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:34: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:35: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:41: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:42: error: Incomprehensible case expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:52: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob137_fsm_serial\attempt_1\Prob137_fsm_serial_code.sv:53: error: Incomprehensible case expression.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob137_fsm_serial_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob137_fsm_serial_ref.sv:39: syntax error
+I give up.

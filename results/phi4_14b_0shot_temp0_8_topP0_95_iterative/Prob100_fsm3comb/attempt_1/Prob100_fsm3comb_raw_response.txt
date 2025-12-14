@@ -1,0 +1,67 @@
+To implement the described Moore state machine in Verilog, we need to define both the combinational logic for computing `next_state` and the logic for generating the output `out`. Below is the implementation of the module based on the provided state transition table:
+
+```verilog
+module TopModule (
+  input wire in,
+  input wire [1:0] state,
+  output reg [1:0] next_state,
+  output wire out
+);
+
+  // Output logic for Moore machine, depends only on current state
+  assign out = (state == 2'b11) ? 1 : 0;
+
+  // Combinational logic to determine the next_state based on current state and input
+  always @(*) begin
+    case(state)
+      2'b00: // State A
+        if (in == 1'b0)
+          next_state = 2'b00; // Next state is A
+        else
+          next_state = 2'b01; // Next state is B
+
+      2'b01: // State B
+        if (in == 1'b0)
+          next_state = 2'b10; // Next state is C
+        else
+          next_state = 2'b01; // Next state is B
+
+      2'b10: // State C
+        if (in == 1'b0)
+          next_state = 2'b00; // Next state is A
+        else
+          next_state = 2'b11; // Next state is D
+
+      2'b11: // State D
+        if (in == 1'b0)
+          next_state = 2'b10; // Next state is C
+        else
+          next_state = 2'b01; // Next state is B
+      
+      default:
+        next_state = 2'b00; // Default case, assign to A
+    endcase
+  end
+
+endmodule
+```
+
+### Explanation:
+
+1. **Output Logic**:
+   - The output `out` depends only on the current state, characteristic of a Moore machine.
+   - The output is high (`1`) only when in state D (`2'b11`).
+
+2. **Next State Logic**:
+   - We use a combinational logic block with an `always @(*)` construct to compute `next_state`.
+   - Based on the current `state`, we check the value of `in` and assign the appropriate next state using a `case` statement.
+   - Each case covers one possible state, with transitions based on whether `in` is 0 or 1.
+
+3. **State Encoding**:
+   - The states are encoded as: 
+     - A = `2'b00`
+     - B = `2'b01`
+     - C = `2'b10`
+     - D = `2'b11`
+
+This module effectively handles the state transitions and output logic according to the given transition table.

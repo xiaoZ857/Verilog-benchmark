@@ -1,0 +1,42 @@
+**TopModule – 8‑bit even‑parity generator**
+
+```verilog
+// 8‑bit even parity generator
+// The parity bit is the XOR (exclusive‑or) of all 8 data bits.
+//
+//   parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^ in[4] ^ in[5] ^ in[6] ^ in[7]
+//
+// No clock is required – the result is purely combinational.
+//
+//--------------------------------------------------------------------
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [7:0] in,   // 8‑bit data input
+    output wire        parity // 1‑bit even‑parity output
+);
+
+    // The Verilog reduction operator ^ performs an XOR of all bits in the operand.
+    // The result is a single bit that represents even parity.
+    assign parity = ^in;
+
+endmodule
+```
+
+### Explanation
+
+| Item | Details |
+|------|---------|
+| **Input** | `in[7:0]` – the 8‑bit byte for which parity is calculated. |
+| **Output** | `parity` – a single bit; `0` if the number of `1` bits in `in` is even, `1` otherwise. |
+| **Method** | `^in` is a *reduction XOR* operator in Verilog; it XORs all bits of `in` together. |
+| **Combinational** | No `always @ (posedge clk)` block is needed; the output follows the input immediately. |
+
+If you prefer an explicit XOR chain (useful for readability or older tools):
+
+```verilog
+assign parity = in[0] ^ in[1] ^ in[2] ^ in[3] ^
+                in[4] ^ in[5] ^ in[6] ^ in[7];
+```
+
+Either form is equivalent.

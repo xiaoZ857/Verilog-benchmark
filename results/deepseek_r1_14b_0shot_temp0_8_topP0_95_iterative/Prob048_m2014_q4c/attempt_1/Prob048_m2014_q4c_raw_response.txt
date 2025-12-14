@@ -1,0 +1,28 @@
+Here's the implementation of a D flip-flop with an active-high synchronous reset:
+
+```verilog
+module TopModule (
+    input clk,
+    input d,
+    input r,
+    output logic q
+);
+
+always @(posedge clk)
+begin
+    if (r) 
+        q <= 0;
+    else
+        q <= d;
+end
+
+endmodule
+```
+
+**Explanation:**
+
+- The `always` block is triggered on the positive edge of `clk`.
+- If the reset signal `r` is high, `q` is set to 0.
+- If `r` is low, `q` takes the value of `d` when the clock rises.
+
+This ensures that during an active-high reset (`r=1`), `q` remains 0. Once reset is released (`r=0`), subsequent clock edges will pass the input `d` to `q`.

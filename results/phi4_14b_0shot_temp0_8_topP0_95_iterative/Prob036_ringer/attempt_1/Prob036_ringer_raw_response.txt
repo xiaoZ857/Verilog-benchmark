@@ -1,0 +1,49 @@
+To implement this functionality in Verilog, you need a module that takes two inputs: `ring` and `vibrate_mode`, and produces two outputs: `ringer` and `motor`. The logic should ensure that whenever the phone needs to ring (`ring = 1`), it activates either the ringer or motor based on the value of `vibrate_mode`.
+
+Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input wire ring,
+  input wire vibrate_mode,
+  output reg ringer,
+  output reg motor
+);
+
+always @(*) begin
+    if (ring) begin
+        if (vibrate_mode) begin
+            // If the phone is in vibrate mode, turn on the motor.
+            motor = 1;
+            ringer = 0;
+        end else begin
+            // Otherwise, turn on the ringer.
+            ringer = 1;
+            motor = 0;
+        end
+    end else begin
+        // When not ringing, both outputs should be off.
+        ringer = 0;
+        motor = 0;
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs and Outputs:**
+  - `ring`: Indicates whether the phone needs to alert for an incoming call.
+  - `vibrate_mode`: Determines if the notification should be via vibration or sound.
+  - `ringer`: Controls the ringer output (1 means on, 0 means off).
+  - `motor`: Controls the vibration motor (1 means on, 0 means off).
+
+- **Behavior:**
+  - The `always` block is sensitive to changes in all inputs using `@(*)`, which triggers whenever any of the specified signals change.
+  - If `ring` is asserted (`ring = 1`), we check the value of `vibrate_mode`.
+    - If `vibrate_mode` is true, we turn on the motor and keep the ringer off by setting `motor = 1` and `ringer = 0`.
+    - If `vibrate_mode` is false, we do the opposite: set `ringer = 1` and `motor = 0`.
+  - When `ring` is not asserted (`ring = 0`), both outputs are turned off to ensure that neither the ringer nor motor is active when there's no incoming call.
+
+This module provides a simple control mechanism for managing the ringer and vibration behavior based on the current mode of operation.

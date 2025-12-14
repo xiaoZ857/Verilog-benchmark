@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:14: warning: macro top_module undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:14: warning: macro TopModule undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:14: warning: macro top_module undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:15: warning: macro always undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:16: warning: macro if undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:16: `else without a matching `ifdef - ignored.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:20: warning: macro shut_off_computer undefined (and assumed null) at this point.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_1\Prob132_always_if2_code.sv:9: syntax error
+I give up.

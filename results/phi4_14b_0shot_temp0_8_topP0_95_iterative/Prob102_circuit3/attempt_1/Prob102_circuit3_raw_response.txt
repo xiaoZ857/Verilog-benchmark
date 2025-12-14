@@ -1,0 +1,52 @@
+To implement the Verilog module based on the given simulation waveforms, we need to determine the relationship between inputs `a`, `b`, `c`, `d` and the output `q`. By examining the waveform table, we can identify when `q` is asserted (1) or deasserted (0).
+
+From the table:
+
+- `q = 1` at times: 40ns, 45ns, 50ns, 60ns, 65ns, 70ns, 80ns, 85ns, 90ns
+- `q = 0` at all other times
+
+Let's analyze when `q` is asserted:
+
+1. **When `a = 0`:**
+   - At 40ns: `b=1`, `c=0`, `d=1`
+   - At 45ns, 50ns: `b=1`, `c=1`
+
+2. **When `a = 1`:**
+   - At 60ns: `b=0`, `c=0`, `d=1`
+   - At 65ns, 70ns: `b=0`, `c=1`
+   - At 80ns, 85ns, 90ns: `b=1`
+
+From this analysis, we can deduce the logic for `q`:
+
+- When `a = 0`, `q` is high if:
+  - (`b == 1 && d == 1`) or
+  - (`b == 1 && c == 1`)
+
+- When `a = 1`, `q` is high if:
+  - (`b == 0 && d == 1`) or
+  - (`b == 0 && c == 1`) or
+  - (`b == 1`)
+
+This can be expressed in a single Boolean expression:
+
+\[ q = (a \land b) \lor (\lnot a \land b \land (c \lor d)) \lor (a \land \lnot b \land (c \lor d)) \]
+
+Now, we can implement this logic in Verilog:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+
+assign q = (a & b) | 
+           (~a & b & (c | d)) |
+           (a & ~b & (c | d));
+
+endmodule
+```
+
+This Verilog code captures the logic derived from the waveform table, ensuring that `q` is asserted under the correct conditions for each combination of inputs.

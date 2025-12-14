@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_2\Prob132_always_if2_code.sv:9: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_2\Prob132_always_if2_code.sv:9: error: Failed to evaluate event expression 'posedge clk'.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_2\Prob132_always_if2_code.sv:14: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob132_always_if2\attempt_2\Prob132_always_if2_code.sv:14: error: Failed to evaluate event expression 'posedge clk'.
+4 error(s) during elaboration.

@@ -1,0 +1,27 @@
+
+module TopModule (
+  input clk,
+  input w,      // Input to shift register stage
+  input R,      // Load value when L is asserted
+  input E,      // Enable for shifting
+  input L,      // Load enable
+  output reg Q  // Output of the current stage
+);
+
+always @(posedge clk) begin
+    if (L) begin
+        // Load the register with R
+        Q <= R;
+    end else if (E) begin
+        // Shift operation: load the input w
+        Q <= w;
+    end else begin
+        // Retain the current value of Q when neither L nor E is asserted
+        // This line can be omitted since no-operation is implied
+        // Q <= Q;
+    end
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

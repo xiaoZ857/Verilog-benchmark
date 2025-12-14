@@ -1,0 +1,31 @@
+Here's a correct and well-structured Verilog implementation of the described circuit:
+
+```verilog
+module TopModule (
+  input in1,
+  input in2,
+  output logic out
+);
+  // The in2 signal is inverted due to the bubble, and then ANDed with in1
+  assign out = in1 & (~in2);
+endmodule
+```
+
+---
+
+### ✅ **Explanation**
+
+- **Inputs and Output:**
+  - `in1` and `in2` are single-bit input signals.
+  - `out` is the output signal, which is a single-bit `logic` type.
+
+- **Circuit Behavior:**
+  - The circuit contains an **AND gate**.
+  - The **in2 input has a bubble**, which implies it is **inverted** before being passed to the AND gate.
+  - Therefore, the logic implemented is:
+    $$
+    \text{out} = \text{in1} \ \& \ \neg\text{in2}
+    $$
+
+- **Implementation:**
+  - A **continuous assignment** (`assign`) is

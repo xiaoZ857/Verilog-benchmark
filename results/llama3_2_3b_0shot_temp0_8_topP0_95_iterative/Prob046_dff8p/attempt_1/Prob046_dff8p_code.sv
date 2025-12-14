@@ -1,0 +1,73 @@
+
+// Define the module
+module TopModule (
+  // Input signals
+  input clk, 
+  input [7:0] d,
+  input reset,
+
+  // Output signal
+  output reg [7:0] q
+);
+
+// Initial values for DFFs (in this case 0x34)
+initial begin
+  assign q[0:7] = 34'h34; // Assign the initial value to all DFFs
+end
+
+// Create 8 instances of D flip-flop
+DFlipFlop dff [
+  'a0, 'a1, 'a2, 'a3, 'a4, 'a5, 'a6, 'a7
+];
+
+// Connect DFFs to output q
+assign q = {
+  dff['a0].q,
+  dff['a1'].q,
+  dff['a2'].q,
+  dff['a3'].q,
+  dff['a4'].q,
+  dff['a5'].q,
+  dff['a6'].q,
+  dff['a7'].q
+};
+
+// Create DFF instances
+DFlipFlop DFF (
+  .D(d), // Input data
+  .Q(q[$bitpos(q)], $bitpos(q)+1), // Output Q 
+  .clock(clk), // Clock input
+  .reset(reset) // Reset pin
+);
+
+endmodule
+
+// Define the D flip-flop instance
+module DFlipFlop (
+  input clk,
+  input reset,
+  output reg q,
+
+  input reg D, // Input data
+  output reg Q // Output Q 
+);
+
+always @(posedge(clk)) begin // Synchronous reset
+    if(reset) begin
+        Q <= 0; // Reset the flip-flop to 0
+    end else begin // Normal operation
+        if(D) begin // If D is high, change the state of the output
+            Q <= ~Q;
+        end else begin // If D is low, keep the current state
+            Q <= Q;
+        end
+    end
+end
+
+always @(posedge(clk)) begin
+    Q <= Q; // Hold old state in case no clock edge has occurred.
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

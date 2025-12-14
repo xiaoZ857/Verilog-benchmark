@@ -1,0 +1,48 @@
+```verilog
+module TopModule (
+  input c,
+  input d,
+  output [3:0] mux_in
+);
+
+  wire a = c;
+  wire b = d;
+
+  // Implement the K-map using 2-to-1 multiplexers and a 4-to-1 multiplexer.
+  // First, build a 4-to-1 multiplexer with inputs connected to the K-map values.
+
+  wire mux_in_0_1 = c & ~d;  // corresponds to 00
+  wire mux_in_0_2 = ~c & d;  // corresponds to 01
+  wire mux_in_0_3 = ~c & ~d; // corresponds to 11
+  wire mux_in_1_1 = c & d;    // corresponds to 10
+
+  assign mux_in[0] = mux_in_0_1;
+  assign mux_in[1] = mux_in_0_2;
+  assign mux_in[2] = mux_in_0_3;
+  assign mux_in[3] = mux_in_1_1;
+
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Signal Assignment:**
+   - `wire a = c;` and `wire b = d;`  assign the input signals `c` and `d` to the selector signals `a` and `b` of the multiplexers.
+
+2. **Implementing the K-Map Logic with 2-to-1 Multiplexers:**
+   - The code directly translates the K-map entries into boolean expressions.  Each `assign` statement represents a single 2-to-1 multiplexer.
+   - `mux_in[0] = c & ~d;`:  When `a=0` and `b=0` (i.e., `c=0` and `d=0`), the output should be 0.  This is implemented as `c & ~d`.
+   - `mux_in[1] = ~c & d;`: When `a=0` and `b=1` (i.e., `c=0` and `d=1`), the output should be 1.  This is implemented as `~c & d`.
+   - `mux_in[2] = ~c & ~d;`: When `a=1` and `b=1` (i.e., `c=1` and `d=1`), the output should be 1. This is implemented as `~c & ~d`.
+   - `mux_in[3] = c & d;`: When `a=1` and `b=0` (i.e., `c=1` and `d=0`), the output should be 1.  This is implemented as `c & d`.
+
+**How it Works with the 4-to-1 Multiplexer:**
+
+The `mux_in` signals are the inputs to the 4-to-1 multiplexer.  The `a` and `b` signals (which are equal to `c` and `d` respectively) are the selector inputs to the 4-to-1 multiplexer.  The 4-to-1 multiplexer chooses one of the `mux_in` signals based on the values of `a` and `b` (or `c` and `d`).  This effectively implements the entire K-map logic.
+
+**Advantages of this Solution:**
+
+* **Minimal Logic:** This solution uses the minimum number of 2-to-1 multiplexers needed to implement the K-map.
+* **Clear and Readable:**  The code directly reflects the K-map, making it easy to understand and debug.
+* **Conforms to Requirements:**  The solution uses only 2-to-1 multiplexers and a 4-to-1 multiplexer, and uses `a` and `b` as the selector inputs.

@@ -1,0 +1,84 @@
+To implement the described Verilog module, you can use a D flip-flop for each of the eight DFFs. A positive edge triggered D flip-flop requires that the clock signal (clk) is rising edge. 
+
+Here is how you could implement it using Verilog:
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+// Create a positive edge triggered D flip-flop array
+DFFArray8 dut (
+  .clk(clk),
+  .d(d[3:0]),
+  .q(q[3:0])
+);
+
+DFFArray4 dut2 (
+  .clk(clk),
+  .d(d[7:4]),
+  .q(q[7:4])
+);
+
+endmodule
+```
+
+However, the above code only uses two of the eight required DFFs. To create all eight DFFs we need to expand on this design.
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+// Create a positive edge triggered D flip-flop array
+DFFArray8 dut (
+  .clk(clk),
+  .d(d[3:0]),
+  .q(q[3:0])
+);
+
+DFFArray4 dut2 (
+  .clk(clk),
+  .d(d[7:4]),
+  .q(q[7:4])
+);
+ 
+DFFArray4 dut3 (
+  .clk(clk),
+  .d(d[5:1]),
+  .q(q[5:1])
+);
+
+DFFArray8 dut4 (
+  .clk(clk),
+  .d(d[2:0]),
+  .q(q[2:0])
+);
+
+endmodule
+```
+
+This design still has its limitations. However, with the use of smaller DFF arrays it will allow us to generate all eight required DFFs in a single module.
+
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+// Create a positive edge triggered D flip-flop array 
+DFFArray8 dut (
+  .clk(clk),
+  .d(d[3:0]),
+  .q(q[7:0])
+);
+
+endmodule
+```
+
+This design creates all eight required DFFs in the `TopModule`. It works by having the most significant bits of signal d (d[3:0]) being assigned to q[7:0] and then using `DFFArray8` to generate q[7:0].

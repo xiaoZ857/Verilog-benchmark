@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob053_m2014_q4d",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 7\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:8: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:11: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:42: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:42: error: invalid module item.\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:44: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:44: error: syntax error in parameter value assignment list.\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_1\\Prob053_m2014_q4d_code.sv:44: error: Invalid module instantiation\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_2\\Prob053_m2014_q4d_code.sv:8: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_2\\Prob053_m2014_q4d_code.sv:12: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_3\\Prob053_m2014_q4d_code.sv:28: syntax error\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob053_m2014_q4d\\attempt_3\\Prob053_m2014_q4d_code.sv:32: error: invalid module item.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

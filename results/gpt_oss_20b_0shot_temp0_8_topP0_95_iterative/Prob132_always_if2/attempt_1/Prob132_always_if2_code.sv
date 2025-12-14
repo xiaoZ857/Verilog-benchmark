@@ -1,0 +1,22 @@
+
+module TopModule (
+  input cpu_overheated,
+  output reg shut_off_computer,
+  input arrived,
+  input gas_tank_empty,
+  output reg keep_driving
+);
+Below is a cleaned‑up, synthesizable version of the module.  
+The original code had three major problems:
+
+| Problem | Why it’s an issue | Fix |
+|---------|------------------|-----|
+| Two modules (`top_module` and `TopModule`) with identical ports | Confuses the compiler and leads to duplicate definitions | Keep a single module (`top_module`) |
+| Missing *else* clauses in the combinational `always @(*)` blocks | Creates inferred latches, which is almost never what you want | Provide an explicit default assignment |
+| Logic that only assigns a signal when a condition is true (e.g. `if (~arrived) keep_driving = ~gas_tank_empty;`) | Leaves the output unchanged when the condition is false, again creating latches | Express the intended Boolean expression directly, or add an `else` branch |
+
+The required behaviour (interpreted from the original code) is:
+
+* `shut_off_computer` should be **high** whenever the CPU is overhe
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob019_m2014_q4f\attempt_2\Prob019_m2014_q4f_code.sv:8: Gates do not have port names.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob019_m2014_q4f\attempt_2\Prob019_m2014_q4f_code.sv:19: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob019_m2014_q4f\attempt_2\Prob019_m2014_q4f_code.sv:23: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob019_m2014_q4f_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob019_m2014_q4f_ref.sv:12: syntax error
+I give up.

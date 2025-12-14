@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob140_fsm_hdlc",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 2,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": true,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:13: warning: macro S0 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:14: warning: macro S1 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:15: warning: macro S2 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:16: warning: macro S3 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:17: warning: macro S4 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:18: warning: macro S5 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:19: warning: macro S6 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:20: warning: macro S_err undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:30: warning: macro disc undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:30: warning: macro S_disc undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:35: warning: macro S0 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:36: warning: macro S1 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:36: warning: macro S5 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:37: warning: macro S6 undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:38: warning: macro S_err undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:39: warning: macro S_flag undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:40: warning: macro S_disc undefined (and assumed null) at this point.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob140_fsm_hdlc\\attempt_1\\Prob140_fsm_hdlc_code.sv:10: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 4 mismatches. First mismatch occurred at time 1240.\nHint: Output 'flag' has 2 mismatches. First mismatch occurred at time 1620.\nHint: Output 'err' has no mismatches.\nHint: Total mismatched samples is 4 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 4 in 801 samples\n",
+      "mismatch_count": 4
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'disc' has 8 mismatches. First mismatch occurred at time 480.\nHint: Output 'flag' has no mismatches.\nHint: Output 'err' has no mismatches.\nHint: Total mismatched samples is 8 out of 801 samples\n\nSimulation finished at 4006 ps\nMismatches: 8 in 801 samples\n",
+      "mismatch_count": 8
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": true,
+      "test_error": null,
+      "mismatch_count": 0
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+To implement the Verilog module for a one-input, one-output serial 2's complementer Moore state machine, we need to design a circuit that processes each bit of an arbitrary-length binary number in sequence and outputs its 2's complement. The conversion starts when the asynchronous reset is released and stops when it is asserted.
+
+Here’s how you can implement this:
+
+```verilog
+module TopModule (
+    input clk,
+    input areset,      // Asynchronous reset
+    input x,           // Serial input bit (least significant bit first)
+    output reg z       // Serial output bit
+);
+
+    // Define states for the Moore machine
+    typedef enum logic [1:0] {
+        IDLE,          // Waiting for conversion to start
+        FLIP_AND_PASS  // Inverting bits until first '1' is found
+    } state_t;
+
+    state_t current_state, next_state;
+
+    always_ff @(posedge clk or posedge areset) begin
+        if (areset) begin
+            current_state <= IDLE;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    // Output logic for Moore machine
+    always_comb begin
+        case (current_state)
+            IDLE: z = 1'b0;   // Default output in IDLE state
+            FLIP_AND_PASS: z = ~x; // Flip the bit until first '1'
+            default: z = 1'bx;
+        endcase
+    end
+
+    // State transition logic
+    always_comb begin
+        case (current_state)
+            IDLE: begin
+                if (~areset) next_state = FLIP_AND_PASS;
+                else next_state = IDLE; // Stay in IDLE if reset is asserted
+            end
+            
+            FLIP_AND_PASS: begin
+                if (x == 1'b0) next_state = FLIP_AND_PASS;
+                else next_state = IDLE; // Transition to IDLE after first '1'
+            end
+            
+            default: next_state = IDLE;
+        endcase
+    end
+
+endmodule
+```
+
+### Explanation:
+
+1. **States**: The Moore machine has two states:
+   - `IDLE`: Waits for the reset signal to be de-asserted, indicating that input processing can start.
+   - `FLIP_AND_PASS`: Inverts each bit of the input until a '1' is encountered. After inverting the first '1', it starts passing bits unchanged (essentially outputting their complement).
+
+2. **Asynchronous Reset**: The state machine handles an asynchronous reset, which immediately sets the system to the `IDLE` state when asserted.
+
+3. **State Transition**:
+   - From `IDLE`, the machine moves to `FLIP_AND_PASS` when the reset is de-asserted.
+   - In `FLIP_AND_PASS`, it remains in this state as long as input bits are '0'. Upon reading a '1', it transitions back to `IDLE`.
+
+4. **Output Logic**:
+   - In the `IDLE` state, output `z` is set to 0 by default.
+   - In the `FLIP_AND_PASS` state, output `z` is the logical NOT of input `x`, effectively flipping bits until a '1' is encountered.
+
+This design ensures that after all bits have been processed, the serial output represents the 2's complement of the input number.

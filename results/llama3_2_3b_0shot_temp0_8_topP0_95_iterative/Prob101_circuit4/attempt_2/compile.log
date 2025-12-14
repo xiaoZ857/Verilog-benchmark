@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob101_circuit4\attempt_2\Prob101_circuit4_code.sv:13: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob101_circuit4\attempt_2\Prob101_circuit4_code.sv:13: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob101_circuit4\attempt_2\Prob101_circuit4_code.sv:16: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob101_circuit4\attempt_2\Prob101_circuit4_code.sv:19: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob101_circuit4_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob101_circuit4_ref.sv:14: syntax error
+I give up.

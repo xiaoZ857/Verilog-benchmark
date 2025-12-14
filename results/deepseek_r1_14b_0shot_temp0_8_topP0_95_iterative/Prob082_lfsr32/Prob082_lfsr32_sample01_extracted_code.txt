@@ -1,0 +1,21 @@
+module TopModule (
+  input clk,
+  input reset,
+  output reg [31:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset == 1) begin
+        q <= 32'h1; // Initialize to 0x00000001 when reset is active high
+    end else begin
+        reg [31:0] new_q;
+
+        // For each bit, determine the next state
+        new_q[0] = ~q[31] & ~reset | (q[31] ^ q[0]) & (~reset);
+        new_q[5] = (q[31] ^ q[5]) & (~reset);
+        new_q[10] = (q[31] ^ q[10]) & (~reset);
+        new_q[31] = ~q[31] & ~reset | (q[31] ^ q[31]) & (~reset);
+
+        // Shift right for all other bits
+        for (int i=1; i<5; i++) begin
+            if (i == 0 || i == 1 || i ==5

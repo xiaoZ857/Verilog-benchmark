@@ -1,0 +1,133 @@
+Here's a Verilog implementation of the module described:
+
+```verilog
+// Define the counter module structure.
+module Counter(
+  input clk,                // Fast-running clock signal
+  input ena,                 // Enable pulse signal
+  output reg [3:0] hour,     // Hours (AM/PM indicator)
+  output reg [1:0] minute,   // Minutes
+  output reg [2:0] second,
+  output reg pm             // AM/PM indicator
+);
+
+// Define the clock counter logic.
+always @(posedge clk) begin
+    if (ena) begin
+        // Reset to zero before each iteration
+        hour <= 0;
+        minute <= 0;
+        second <= 0;
+
+        // Clock counter logic
+        if (hour == 11 && minute >= 59) begin
+            // AM/PM indicator
+            pm <= 1'b1; 
+            // Hour increment
+            hour <= 12;
+        end else if (minute > 10) begin
+            // AM/PM indicator
+            pm <= 1'b0; 
+            // Hour and minute increment
+            hour <= hour + 1;
+            minute <= minute - 10;
+        end else if (minute == 59 && second >= 50) begin
+            // Midnight transition
+            pm <= 1'b0; 
+            // Minute decrement
+            minute <= minute - 1;
+            second <= second + 1;
+        end else if (second > 9) begin
+            // Second increment
+            second <= second - 10;
+        end else if (minute == 59 && second == 50) begin
+            // AM/PM indicator transition for PM hour
+            pm <= 1'b1; 
+            // Minute and second reset
+            minute <= 0;
+            second <= 0;
+            // Hour increment
+            hour <= hour + 1;
+        end else if (minute >= 10 && minute < 59) begin
+            // Second increment
+            second <= second - 1;
+            // Minute decrement
+            minute <= minute + 1;
+        end else if (second == 50 && minute > 0) begin
+            // AM/PM indicator transition for PM hour
+            pm <= 1'b1; 
+            // Minute and second reset
+            minute <= 0;
+            second <= 0;
+            // Hour increment
+            hour <= hour + 1;
+        end else if (second == 50 && minute < 10) begin
+            // AM/PM indicator transition for PM hour
+            pm <= 1'b1; 
+            // Minute and second reset
+            minute <= 0;
+            second <= 0;
+            // Hour increment
+            hour <= hour + 1;
+        end else if (minute > 9 && minute < 59) begin
+            // Second increment
+            second <= second - 10;
+            // Minute decrement
+            minute <= minute + 1;
+        end else if (second == 50 && minute == 0) begin
+            // AM/PM indicator transition for PM hour
+            pm <= 1'b1; 
+            // Minute and second reset
+            minute <= 0;
+            second <= 0;
+            // Hour increment
+            hour <= hour + 1;
+        end else if (second < 50 && minute == 59) begin
+            // Second decrement
+            second <= second + 10;
+        end else if (second == 0 && minute > 0) begin
+            // AM/PM indicator transition for AM hour
+            pm <= 1'b0; 
+            // Minute and second reset
+            minute <= 0;
+            second <= 0;
+            // Hour increment
+            hour <= hour + 1;
+        end else if (second < 50 && minute == 59) begin
+            // Second decrement
+            second <= second - 10;
+        end
+    end
+end
+
+// Instantiate the clock counter module.
+module TopModule(
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+
+    // Clock counter instance
+    Counter topClkCnter(clk, ena, 
+                         .hour(hh[1:2]),
+                         .minute(mm),
+                         .second(ss),
+                         .pm(pm)
+    );
+
+    // Reset signal block
+    always @ (posedge reset) begin
+        hh <= 12;
+        mm <= 0;
+        ss <= 0;
+        pm <= 1'b0;
+    end
+
+endmodule
+```
+
+This implementation includes the AM/PM indicator, hours, minutes, seconds counters and resets the clock to "12:00 AM" when the reset signal is active.

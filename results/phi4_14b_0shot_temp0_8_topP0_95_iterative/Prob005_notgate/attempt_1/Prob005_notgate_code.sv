@@ -1,0 +1,14 @@
+
+module TopModule (
+  input wire in,      // Input signal for the NOT gate
+  output reg out      // Output signal from the NOT gate
+);
+
+  // Combinational logic to invert the input
+  always @(*) begin
+    out = ~in;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

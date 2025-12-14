@@ -1,0 +1,85 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [255:0] data,
+  output reg [255:0] q
+);
+module GameOfLife(
+    input clk,        // Clock signal
+    input load,        // Active high synchronous load signal
+    input [255:0] data, // Data to be loaded into q
+    output reg [255:0] q  // Output register to hold the game state
+);
+
+reg [15:0] row[16]; // Rows of the grid
+reg [15:0] col[16]; // Columns of the grid
+
+// Initialize rows and columns with all zeros
+initial begin
+    for (int i = 0; i < 16; i++) begin
+        row[i] = 16'd0;
+        col[i] = 16'd0;
+    end
+end
+
+always_comb begin
+    // Calculate the number of neighbors for each cell
+    for (int i = 0; i < 256; i++) begin
+        int cellRow = i / 16;
+        int cellCol = i % 16;
+
+        q[i] = 1'b0;
+
+        if (cellRow > 0) begin // Top row wraps around to bottom
+            q[i] += q[15 + i];
+        end
+
+        if (cellRow < 15) begin // Bottom row wraps around to top
+            q[i] += q[(i - 16)/16 * 16];
+        end
+
+        if (cellCol > 0) begin // Left column wraps around to right
+            q[i] += q[i % 256 + 1];
+        end
+
+        if (cellCol < 15) begin // Right column wraps around to left
+            q[i] += q[(i - 1) / 16 * 16];
+        end
+
+        int neighbors = 0;
+        if (row[cellRow][cellCol] == 1'b1 && col[cellCol] == 1'b1) neighbors++;
+        if (row[15 + cellRow][cellCol] == 1'b1 && col[cellCol] == 1'b1) neighbors++;
+        if (col[15 + cellRow][cellCol] == 1'b1 && row[cellRow] == 1'b1) neighbors++;
+        if (row[(i - 16)/16 * 16][cellCol] == 1'b1 && col[cellCol] == 1'b1) neighbors++;
+
+        // Update the cell state based on the number of neighbors
+        q[i] += ((neighbors == 2 || neighbors == 3) ? 1 : ((neighbors > 4)? -1 : (0)));
+    end
+end
+
+// Clock edge logic
+always @(posedge clk) begin
+    if (load == 1'b1) begin
+        for (int i = 0; i < 256; i++) begin
+            int cellRow = i / 16;
+            int cellCol = i % 16;
+
+            row[cellRow] += data[i];
+            col[cellCol] += data[i];
+
+            // Handle wraparound edges
+            if (cellRow > 15) row[(i - 16)/16 * 16] += data[i];
+            if (cellRow < 0) row[(cellRow + 1) / 16 * 16] -= data[i];
+            if (cellCol > 15) col[(i - 1) / 16] += data[i];
+            if (cellCol < 0) col[(cellCol + 1) / 16] -= data[i];
+
+            q[i] = row[cellRow][cellCol];
+        end
+    end
+
+    // Flip the load signal for next clock cycle
+    load <= !load;
+end
+
+endmodule

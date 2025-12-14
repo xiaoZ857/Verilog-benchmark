@@ -1,0 +1,101 @@
+We need to track the state with a state register. The behavior suggests the following states:  
+- **WL**: walking left  
+- **WR**: walking right  
+- **FALL_L**: falling, but before falling was walking left  
+- **FALL_R**: falling, but before falling was walking right  
+- **DIG_L**: digging, but before digging was walking left  
+- **DIG_R**: digging, but before digging was walking right  
+
+Priority:  
+1. If `ground == 0` and not already falling → go to FALL_L or FALL_R depending on current walking direction (or if already digging, go to FALL in same direction as before digging).  
+2. Else if `dig == 1` and currently walking (WL/WR) and `ground == 1` → go to DIG_L or DIG_R.  
+3. Else if bump signals → switch walking direction (only in WL/WR states).  
+4. Else keep state.  
+
+Also:  
+- In FALL states, if `ground == 1` → go back to WL or WR accordingly.  
+- In DIG states, if `ground == 0` → go to FALL_L or FALL_R accordingly.  
+
+Outputs:  
+- `walk_left = 1` if state is WL or FALL_L or DIG_L.  
+- `walk_right = 1` if state is WR or FALL_R or DIG_R.  
+- `aaah = 1` if state is FALL_L or FALL_R.  
+- `digging = 1` if state is DIG_L or DIG_R.  
+
+Let’s implement:
+
+```verilog
+    reg [2:0] state, next_state;
+    localparam WL = 3'd0,
+               WR = 3'd1,
+               FALL_L = 3'd2,
+               FALL_R = 3'd3,
+               DIG_L = 3'd4,
+               DIG_R = 3'd5;
+    
+    // State register
+    always @(posedge clk, posedge areset) begin
+        if (areset)
+            state <= WL;
+        else
+            state <= next_state;
+    end
+    
+    // Next state logic
+    always @(*) begin
+        case (state)
+            WL: begin
+                if (~ground)
+                    next_state = FALL_L;
+                else if (dig)
+                    next_state = DIG_L;
+                else if (bump_left)
+                    next_state = WR;
+                else
+                    next_state = WL;
+            end
+            WR: begin
+                if (~ground)
+                    next_state = FALL_R;
+                else if (dig)
+                    next_state = DIG_R;
+                else if (bump_right)
+                    next_state = WL;
+                else
+                    next_state = WR;
+            end
+            FALL_L: begin
+                if (ground)
+                    next_state = WL;
+                else
+                    next_state = FALL_L;
+            end
+            FALL_R: begin
+                if (ground)
+                    next_state = WR;
+                else
+                    next_state = FALL_R;
+            end
+            DIG_L: begin
+                if (~ground)
+                    next_state = FALL_L;
+                else
+                    next_state = DIG_L;
+            end
+            DIG_R: begin
+                if (~ground)
+                    next_state = FALL_R;
+                else
+                    next_state = DIG_R;
+            end
+            default: next_state = WL;
+        endcase
+    end
+    
+    // Output logic (Moore)
+    assign walk_left = (state == WL) | (state == FALL_L) | (state == DIG_L);
+    assign walk_right = (state == WR) | (state == FALL_R) | (state == DIG_R);
+    assign aaah = (state == FALL_L) | (state == FALL_R);
+    assign digging = (state == DIG_L) | (state == DIG_R);
+endmodule
+```

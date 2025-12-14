@@ -1,0 +1,41 @@
+To implement a 5-bit maximal-length Galois Linear Feedback Shift Register (Galois LFSR) with taps at bit positions 5 and 3, we need to create a Verilog module. This module will include an active-high synchronous reset that initializes the state of the LFSR to `1`. The feedback logic uses XOR gates on specified tap positions, which in this case are bit positions 5 (q[4]) and 3 (q[2]), with the least significant bit (q[0]).
+
+Here's how you can implement the Verilog module:
+
+```verilog
+module TopModule (
+    input clk,
+    input reset,
+    output reg [4:0] q
+);
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        // Reset condition: Set LFSR to 1'b1 at the most significant bit position.
+        q <= 5'b00001;
+    end else begin
+        // Shift right by one position and apply feedback logic with taps at positions 5 and 3.
+        q[4] <= q[0];                   // MSB is feedback from LSB
+        q[3:1] <= q[2:0];               // Middle bits simply shift right
+        
+        // Calculate the new value of LSB using XOR for tap positions
+        q[0] <= q[4] ^ q[2];
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration:** The module is named `TopModule`, and it has three ports: a clock input (`clk`), an active-high synchronous reset input (`reset`), and a 5-bit output register (`q`).
+
+- **Synchronous Process Block:**
+  - This block reacts to the positive edge of the clock or the positive edge of the reset.
+  - Inside, there is a conditional check for `reset`. If it's asserted (high), the LFSR state is set to `00001`, which means only the least significant bit is high. This corresponds to setting the most significant bit in typical big-endian notation to represent this value (`1'b1` at position 4).
+  - In the absence of a reset signal, the register shifts right:
+    - The MSB `q[4]` receives feedback from the LSB `q[0]`.
+    - The middle bits `q[3:1]` shift to the right.
+    - The new value for `q[0]` is calculated by XORing the current values of taps `q[4]` and `q[2]`.
+
+This implementation ensures that under normal conditions (no reset), the LFSR cycles through all possible non-zero states, thereby achieving maximum length.

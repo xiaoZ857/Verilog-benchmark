@@ -1,0 +1,37 @@
+Below is a minimal, synthesizable Verilog implementation that satisfies the specification:
+
+```verilog
+// TopModule.v
+// Description:  No inputs – single output that is always driven high (logic '1').
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    output one          // output that should always be logic high
+);
+
+    // Continuous assignment – the output is permanently tied to logic '1'
+    assign one = 1'b1;
+
+endmodule
+```
+
+### Why this works
+* **No inputs** – the module has only the one output port.
+* **Always high** – `assign one = 1'b1;` ties the output permanently to a logic‑high value.
+* **Combinational** – no clock or storage elements are used, so the output is constant during simulation and in hardware.
+* **Synthesis‑friendly** – most synthesis tools will map this to a constant‑high buffer or a direct connection to VCC.
+
+If you prefer a procedural style (e.g., for educational purposes), you could also write:
+
+```verilog
+module TopModule (
+    output reg one
+);
+    initial begin
+        one = 1'b1;
+    end
+endmodule
+```
+
+Both versions produce the same hardware: a single wire constantly driven to logic high.

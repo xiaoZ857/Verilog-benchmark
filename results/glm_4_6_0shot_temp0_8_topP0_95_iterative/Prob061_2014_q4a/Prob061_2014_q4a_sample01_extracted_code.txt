@@ -1,0 +1,10 @@
+
+always @(posedge clk) begin
+  if (L) begin
+    Q <= R;
+  end
+  else if (E) begin
+    Q <= w;
+  end
+end
+endmodule

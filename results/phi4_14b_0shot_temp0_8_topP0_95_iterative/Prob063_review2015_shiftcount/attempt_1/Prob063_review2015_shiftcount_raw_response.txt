@@ -1,0 +1,44 @@
+To implement the described Verilog module, we need to create a four-bit register that can perform two main operations based on control inputs: shifting in data and decrementing its current value. Here's how you can implement it:
+
+```verilog
+module TopModule (
+  input clk,
+  input shift_ena,   // Enable for shifting operation
+  input count_ena,   // Enable for counting (decrementing) operation
+  input data,        // Data to be shifted in when shift_ena is active
+  output reg [3:0] q // The four-bit register that holds the current state
+);
+
+always @(posedge clk) begin
+    if (shift_ena) begin
+        // Shift left most-significant-bit first operation
+        q <= {q[2:0], data}; // Insert 'data' into LSB, shift everything else left
+    end 
+    else if (count_ena) begin
+        // Decrement the current value stored in 'q'
+        if (q != 4'b0000) begin
+            q <= q - 1; // Simple decrement if not zero to avoid underflow
+        end
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Module Declaration**: The module `TopModule` defines the interface with inputs and outputs. Inputs are `clk`, `shift_ena`, `count_ena`, and `data`. The output is a 4-bit register `q`.
+
+- **Always Block**: 
+  - It triggers on the positive edge of the clock (`posedge clk`). This ensures that operations occur synchronously with the clock signal.
+  
+- **Shift Operation**:
+  - If `shift_ena` is active, the module performs a left shift operation. The most-significant-bit (MSB) is shifted out and replaced by the input `data`. This is done using concatenation: `{q[2:0], data}` moves bits from positions `[3] to [1]` to `[2] to [0]`, while inserting `data` at position `[0]`.
+
+- **Count Operation**:
+  - If `count_ena` is active, the module decrements the current value in `q`. The check `if (q != 4'b0000)` ensures that we don't underflow below zero. This decrement operation occurs only if `shift_ena` is not simultaneously active due to separate `else if`.
+
+- **Priority**:
+  - Since both operations should never be active at the same time, there's no priority handling needed when both are asserted.
+
+This Verilog code effectively implements a four-bit shift register that can also function as a down counter based on the given control inputs.

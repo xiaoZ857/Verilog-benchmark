@@ -1,0 +1,23 @@
+To implement a Verilog module where an output behaves like a wire connected to an input, you can use the `assign` statement. The `assign` statement allows continuous assignment of values from one signal to another, similar to how wires behave.
+
+Here's how you can create the `TopModule`:
+
+```verilog
+module TopModule (
+  input in,
+  output out
+);
+
+  // Continuous assignment: Connect input directly to output
+  assign out = in;
+
+endmodule
+```
+
+### Explanation:
+
+- **Input and Output Declaration:** The module has one input (`in`) and one output (`out`).
+
+- **Continuous Assignment:** The `assign` statement is used for continuous assignments. Here, it assigns the value of `in` directly to `out`. This means that any change in `in` will immediately reflect on `out`, just like a wire connection.
+
+This module effectively makes `out` behave as if it were connected directly to `in` through a wire, with no additional logic or delay involved.

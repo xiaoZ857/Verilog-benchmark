@@ -1,0 +1,32 @@
+```verilog
+module TopModule (
+  input [2:0] in,
+  output [1:0] out
+);
+
+  assign out = in[2] + in[1] + in[0];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [2:0] in, output [1:0] out);`**:  This line declares the module named `TopModule`. It defines the input `in` as a 3-bit vector (bits indexed from 2 down to 0) and the output `out` as a 2-bit vector.
+* **`assign out = in[2] + in[1] + in[0];`**: This is the core logic.  It directly adds the values of each bit in the input vector. Since the input bits are either 0 or 1, the sum will be equal to the number of '1's. The result is assigned to the `out` signal.  The `assign` statement is a continuous assignment, meaning that `out` will update whenever any of the input bits change.
+
+**How it works (example):**
+
+Let's say the input `in` is `3'b101`.
+
+* `in[2]` is 1
+* `in[1]` is 0
+* `in[0]` is 1
+* `out` will be 1 + 0 + 1 = 2.
+
+Therefore, the output `out` will be `2'b10`, indicating that there are two '1's in the input vector.
+
+**Important Considerations:**
+
+* **Output Width:** The output width (`[1:0]`) is determined by the maximum possible population count for a 3-bit input, which is 3. However, since the output is only 2 bits, it can only represent values from 0 to 3. In this case, `out` will represent the number of 1's in the input vector, effectively truncating the result if the count is greater than 3. This is important to note, as you might need a 3-bit output for a more accurate representation.
+* **Synthesis:** This code is simple and synthesizable.  Most synthesis tools will implement this directly as an adder.
+* **Generalization:** To create a population count for a different input width, change the input width and output width accordingly.  For example, a 5-bit input would require a 3-bit output.

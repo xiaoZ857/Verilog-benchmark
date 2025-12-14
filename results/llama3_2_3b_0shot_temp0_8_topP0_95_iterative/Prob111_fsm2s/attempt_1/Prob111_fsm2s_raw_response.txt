@@ -1,0 +1,37 @@
+Here is the Verilog module that implements the described state machine:
+```
+module TopModule (
+  input clk,      // Positive clock signal
+  input j,         // Input to transition from OFF to ON state
+  input k,         // Input to transition within the ON state
+  input reset,     // Active-high synchronous reset
+  output out       // Output of the state machine
+);
+
+wire [1:0] nextState; // Next state of the state machine
+
+always @(posedge clk or reset) begin
+  if (reset == 1) begin      // Reset active-high, resets to OFF state
+    nextState <= 2'b00;
+  else if (j == 1 && k == 0) begin
+    nextState <= 2'b10;       // Transition from OFF to ON state
+  else if (k == 1) begin        // Transition within the ON state
+    nextState <= 2'b01;
+  else                          // Stay in the current state
+    nextState <= 2'b00;
+  end
+end
+
+assign out = nextState[0];   // Output is the next state in binary format
+
+endmodule
+```
+Here's a brief explanation of how this Verilog module implements the described state machine:
+
+*   We define two internal signals: `nextState` to hold the next state, and an output port `out` that holds the current output value.
+*   The always block checks for changes on either the clock edge (`clk`) or the reset signal (`reset`). When a change is detected, it updates the `nextState`.
+*   To transition between states, we use different combinations of input values. For example, when `j` is 1 and `k` is 0, we move from OFF to ON.
+*   If no changes are detected on either clock edge or reset, the state machine stays in its current state (`nextState == 2'b00`).
+*   The output value of the module is taken directly from the `nextState` signal.
+
+You can test this module by creating a testbench and applying different input values to see how it behaves according to the specified transitions.

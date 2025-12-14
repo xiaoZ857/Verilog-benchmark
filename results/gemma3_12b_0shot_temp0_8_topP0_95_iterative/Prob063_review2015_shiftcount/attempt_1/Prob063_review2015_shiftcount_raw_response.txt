@@ -1,0 +1,93 @@
+```verilog
+module TopModule (
+  input clk,
+  input shift_ena,
+  input count_ena,
+  input data,
+  output reg [3:0] q
+);
+
+  always @(posedge clk) begin
+    if (shift_ena) begin
+      // Shift in data MSB first
+      q[3] <= data;
+      for (integer i = 3; i > 0; i--) begin
+        q[i] <= q[i-1];
+      end
+    end else if (count_ena) begin
+      // Decrement the counter
+      q <= q - 1;
+    end else begin
+      // Hold the current value
+      q <= q;
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`**:  Defines the module named `TopModule` with the specified input and output ports.
+
+2. **`output reg [3:0] q`**: Declares the output `q` as a 4-bit register. Registers hold their values until explicitly changed.
+
+3. **`always @(posedge clk)`**: This block is executed on the positive edge of the clock signal.
+
+4. **`if (shift_ena)`**:  If `shift_ena` is high, the shift register functionality is activated.
+   - `q[3] <= data;`: The input `data` is loaded into the most significant bit (MSB) of the register.
+   - `for (integer i = 3; i > 0; i--) begin q[i] <= q[i-1]; end`:  This loop shifts the existing bits one position to the left (MSB to the next position).
+
+5. **`else if (count_ena)`**: If `shift_ena` is low and `count_ena` is high, the counter functionality is activated.
+   - `q <= q - 1;`: The register's value is decremented by 1.
+
+6. **`else`**: If both `shift_ena` and `count_ena` are low, the register holds its current value.
+   - `q <= q;`: This statement explicitly assigns the current value of `q` back to itself, effectively holding the value. This is important to prevent unintended changes if the `always` block is executed without any of the `if` or `else if` conditions being met.
+
+**How it works:**
+
+The code implements a sequential circuit using an `always` block triggered by the clock signal.  It prioritizes the `shift_ena` and `count_ena` signals. When `shift_ena` is asserted, data is shifted into the register.  When `count_ena` is asserted, the register's value is decremented. If neither signal is asserted, the register holds its current value.  Because the description allows for both signals being asserted at the same time, the behavior in that case is undefined and not specifically addressed.
+
+**Example Usage (Testbench - for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg clk;
+  reg shift_ena;
+  reg count_ena;
+  reg data;
+  wire [3:0] q;
+
+  TopModule DUT (
+    .clk(clk),
+    .shift_ena(shift_ena),
+    .count_ena(count_ena),
+    .data(data),
+    .q(q)
+  );
+
+  initial begin
+    clk = 0;
+    shift_ena = 0;
+    count_ena = 0;
+    data = 1;
+
+    // Test shift register
+    #10 shift_ena = 1;
+    #10 shift_ena = 0;
+    #10;
+
+    // Test counter
+    #10 count_ena = 1;
+    #20 count_ena = 0;
+    #10;
+
+    $finish;
+  end
+
+  always #5 clk = ~clk; // Clock toggling every 5 time units
+endmodule
+```
+
+This testbench provides a basic simulation to verify the functionality. You can adjust the timings and data values to test different scenarios.  Remember to use a Verilog simulator (like Icarus Verilog, Modelsim, etc.) to run the simulation.

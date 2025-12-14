@@ -1,0 +1,50 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+// Main logic to generate rotated bits
+assign q = (ena[0] ? r1 : !ena[1] ? r2 : 0);
+
+reg [99:0] r1, r2;
+
+initial begin
+    // Initialize r1 with data when load is active
+    always @(posedge clk or posedge load) 
+        if(load) begin
+            r1 = data;
+        end else begin
+            r1 = !ena[1]?r2:0;
+        end
+    
+    // Initialize r2 with empty values for default condition
+    always @(posedge clk) r2 <= 0;
+end
+
+// Module instance for left shift register
+TopRotatorModule LShift (
+    .clk(clk),
+    .load(load),
+    .ena(ena[1:0]),
+    .data(data_in[99:0]), // Shift data into rotator from right end
+    .q(r2)               // Left shifted-out bit to be fed into left register
+);
+
+// Module instance for right shift register
+TopRotatorModule RShift (
+    .clk(clk),
+    .load(load),
+    .ena(ena[1:0]),
+    .data(data_in[99:1]), // Shift data into rotator from left end
+    .q(r1)               // Right shifted-out bit to be fed into right register
+);
+
+// Direction of shift control 
+assign r2 = (load ? data_in[99:0] : !ena[1] ? r1 : 0);
+assign LShift.q = r2;
+assign RShift.q = r1;
+
+endmodule

@@ -1,0 +1,19 @@
+
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+  reg q_n; // Internal register to hold the inverted value
+
+  always @(posedge clk) begin
+    q <= d;
+  end
+
+  always @(negedge clk) begin
+    q_n <= d;
+  end
+
+  assign q = ~q_n;
+
+endmodule

@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob041_dff8r\attempt_3\Prob041_dff8r_code.sv:8: error: `timescale directive can not be inside a module definition.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob041_dff8r\attempt_3\Prob041_dff8r_code.sv:20: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob041_dff8r_test.sv:12: error: invalid module item.

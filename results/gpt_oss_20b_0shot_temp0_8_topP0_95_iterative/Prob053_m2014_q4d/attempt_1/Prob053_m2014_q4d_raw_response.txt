@@ -1,0 +1,31 @@
+Here is a compact, synthesizable Verilog implementation that follows the description exactly:
+
+```verilog
+// TopModule.v
+// -------------
+// A simple D‑flip‑flop whose D input is the XOR of the external
+// stimulus 'in' and the flip‑flop's own output 'out'.
+// The flip‑flop is clock‑synchronous (positive‑edge triggered)
+// and has no reset.
+module TopModule (
+    input  logic clk,   // clock input (positive edge)
+    input  logic in,    // external data input
+    output logic out    // flip‑flop output
+);
+
+    // Positive‑edge triggered D‑FF with feedback
+    // `out` on the RHS is the *current* value of the output
+    // (i.e. the value before the clock edge).
+    always_ff @(posedge clk) begin
+        out <= in ^ out;   // D = in XOR out
+    end
+
+endmodule
+```
+
+### Notes
+
+- `logic` (SystemVerilog) is used for all signals; it behaves like a `reg` for procedural assignments and is compatible with Verilog‑2001 simulators that support SystemVerilog.
+- The non‑blocking assignment (`<=`) inside `always_ff` preserves the correct semantics for a D‑FF: the old value of `out` is used when evaluating `in ^ out`, and the new value is latched on the same clock edge.
+- No reset or enable signals are provided, as specified.
+- This module can be instantiated or tested in a testbench that drives `clk` and `in`.

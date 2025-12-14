@@ -1,0 +1,74 @@
+```verilog
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+
+  // Define the states
+  parameter OFF = 2'b00;
+  parameter ON  = 2'b01;
+
+  // Declare state register
+  reg current_state;
+
+  // Assign output based on current state (Moore machine)
+  always @(current_state) begin
+    case (current_state)
+      OFF: out = 0;
+      ON:  out = 1;
+      default: out = 0; // Default to 0 for unknown states
+    endcase
+  end
+
+  // Synchronous state transition logic
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      current_state <= OFF;
+    end else begin
+      case (current_state)
+        OFF: begin
+          if (j) begin
+            current_state <= ON;
+          end else begin
+            current_state <= OFF;
+          end
+        end
+        ON: begin
+          if (k) begin
+            current_state <= OFF;
+          end else begin
+            current_state <= ON;
+          end
+        end
+        default: current_state <= OFF; // Default to OFF for unknown states
+      endcase
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:** Defines the module `TopModule` with input signals `clk`, `j`, `k`, `areset`, and output `out`.
+2. **State Definition:** Defines two states `OFF` and `ON` using `parameter`. This makes the code more readable and easier to modify.
+3. **State Register:** Declares `current_state` as a `reg` to hold the current state of the state machine.
+4. **Output Logic (Moore Machine):**  The `always @(current_state)` block implements the output logic. In a Moore machine, the output is directly determined by the current state. The `case` statement assigns the output `out` based on the value of `current_state`.  This block is sensitive to changes in `current_state`.
+5. **State Transition Logic (Synchronous):** The `always @(posedge clk or posedge areset)` block implements the state transition logic. This block is triggered by a positive clock edge or a positive reset edge.
+   - **Asynchronous Reset:** When `areset` is high, the state machine is reset to the `OFF` state.
+   - **State Transitions:** The `case` statement defines the state transitions based on the inputs `j` and `k`.
+     - **From OFF:** If `j` is high, the state transitions to `ON`. Otherwise, it remains in `OFF`.
+     - **From ON:** If `k` is high, the state transitions to `OFF`. Otherwise, it remains in `ON`.
+   - **Default State:** The `default` case in both the output and state transition logic ensures that the state machine behaves predictably in case of unexpected states.
+
+**Key improvements and considerations:**
+
+* **Moore Machine Implementation:**  The output is assigned directly based on the state, adhering to the Moore machine specification.
+* **Asynchronous Reset:**  The `areset` signal is used for an asynchronous reset, bringing the state machine to a known state.
+* **Default States:** The `default` cases handle unexpected states and provide predictable behavior.
+* **Readability:**  Using `parameter` for state definitions enhances readability.
+* **Synthesis:** This code is suitable for synthesis into hardware.
+* **Testbench:**  To verify the functionality, a testbench should be created to apply various input combinations and observe the output.

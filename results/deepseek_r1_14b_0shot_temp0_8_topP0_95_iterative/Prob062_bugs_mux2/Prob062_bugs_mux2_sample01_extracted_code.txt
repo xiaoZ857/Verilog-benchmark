@@ -1,0 +1,7 @@
+always @ (sel or a or b)
+begin
+    if (~sel)
+        out <= a;
+    else
+        out <= b;
+end

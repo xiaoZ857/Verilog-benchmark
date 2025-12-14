@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob042_vector4\attempt_3\Prob042_vector4_code.sv:11: error: System function $repl not defined in system table or SFT file(s).
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob042_vector4\attempt_3\Prob042_vector4_code.sv:11: internal error: Failed to synthesize expression: (($repl(<select=in[7:0]['sd7+:1] expr_type=logic>, 32'sd24))<<(32'b00000000000000000000000000001000))|(<select=in[7:0][(0)+:32] expr_type=logic>)
+2 error(s) during elaboration.

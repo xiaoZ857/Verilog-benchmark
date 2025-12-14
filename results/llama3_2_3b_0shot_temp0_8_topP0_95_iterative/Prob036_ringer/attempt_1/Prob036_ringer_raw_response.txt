@@ -1,0 +1,42 @@
+Here's an implementation of the Verilog module as described:
+
+```verilog
+module TopModule(
+    // Input signal: incoming call from the phone
+    input ring,
+
+    // Input signal: whether the phone is in vibration mode
+    input vibrate_mode,
+
+    // Output signal: indicates when the ringer should be turned on (1)
+    output ringer,
+
+    // Output signal: indicates when the motor should be turned on (1)
+    output motor
+);
+
+// Assign logic to output signals based on input conditions
+
+always_comb
+begin
+    // If there's a call and it's not in vibration mode, turn on the ringer
+    if(ring && !vibrate_mode) begin
+        ringer = 1;
+        motor = 0;  // Motor should be turned off to avoid both outputs being high
+    end else if (ring && vibrate_mode) begin
+        ringer = 0;
+        motor = 1;  // Turn on the motor when in vibration mode
+    end else if (!ring && !vibrate_mode) begin
+        ringer = 0;
+        motor = 0;  // Motor should be turned off and so should the ringer
+    end
+end
+
+// Clock edge (if needed)
+
+endmodule
+```
+
+This module uses an always_comb block to evaluate the conditions for `ringer` and `motor` based on the input signals. If a call is received (`ring == 1`) but it's not in vibration mode, then the ringer should be turned on. When there's no incoming call (`!ring`) but it's still in vibration mode, the motor will turn on. Otherwise, both outputs are set to zero.
+
+The module doesn't include any clock edge handling as all signals are assumed to be positive and only trigger when `clk` is high (clock domain), except for `vibrate_mode`, which can take a low value to indicate no action should occur.

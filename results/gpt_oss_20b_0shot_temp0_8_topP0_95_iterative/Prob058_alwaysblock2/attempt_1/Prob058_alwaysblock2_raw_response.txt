@@ -1,0 +1,56 @@
+Here’s a minimal, synthesizable implementation of the three XOR‑gate variants.  
+The module is written in plain Verilog‑2001 (no SystemVerilog constructs) so it
+will compile with any standard‑compliant simulator or synthesis tool.
+
+```verilog
+// TopModule.v
+// 3‑way XOR implementation:
+//
+//   * Continuous assignment (combinational)
+//   * Combinational always block
+//   * Clocked always block (registered output)
+//
+module TopModule (
+    input  wire clk,          // clock for the registered output
+    input  wire a,            // first XOR operand
+    input  wire b,            // second XOR operand
+    output wire out_assign,   // XOR via continuous assignment
+    output reg  out_always_comb, // XOR via combinational always
+    output reg  out_always_ff    // XOR via clocked always (flip‑flop)
+);
+
+    // --------------------------------------------------------------------
+    // 1) Continuous assignment – pure combinational logic
+    // --------------------------------------------------------------------
+    assign out_assign = a ^ b;
+
+    // --------------------------------------------------------------------
+    // 2) Combinational always block
+    // --------------------------------------------------------------------
+    // Using the @(*) sensitivity list guarantees that the block
+    // recomputes whenever any of its input signals change.
+    always @(*) begin
+        out_always_comb = a ^ b;
+    end
+
+    // --------------------------------------------------------------------
+    // 3) Clocked always block – registered (latched) output
+    // --------------------------------------------------------------------
+    // The non‑blocking assignment (<=) is used because this block models
+    // a D‑flip‑flop whose output is updated on the rising edge of clk.
+    always @(posedge clk) begin
+        out_always_ff <= a ^ b;
+    end
+
+endmodule
+```
+
+### What each part does
+
+| Variant | Implementation | Behavior |
+|---------|----------------|----------|
+| `out_assign` | `assign out_assign = a ^ b;` | Immediate combinational logic – output changes as soon as `a` or `b` change. |
+| `out_always_comb` | `always @(*) out_always_comb = a ^ b;` | Same combinational logic but expressed inside an always block. |
+| `out_always_ff` | `always @(posedge clk) out_always_ff <= a ^ b;` | Registered output; the result of the XOR is stored in a D‑flip‑flop and appears one clock cycle later. |
+
+This module satisfies the requirement of having **three distinct XOR implementations** while keeping the code clean and easily synthesizable.

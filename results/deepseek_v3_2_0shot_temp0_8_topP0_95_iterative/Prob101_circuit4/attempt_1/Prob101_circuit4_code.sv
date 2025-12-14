@@ -1,0 +1,73 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+Looking at the waveform, q is 1 whenever (c XOR d) is 1, except when a=1 and b=0 and c=0 and d=0.  
+But actually, let's check the truth table from the given times:
+
+From the table:
+- When (a,b,c,d) = (0,0,0,0): q=0  
+- (0,0,0,1): q=0  
+- (0,0,1,0): q=1  
+- (0,0,1,1): q=1  
+- (0,1,0,0): q=1  
+- (0,1,0,1): q=1  
+- (0,1,1,0): q=1  
+- (0,1,1,1): q=1  
+- (1,0,0,0): q=0  
+- (1,0,0,1): q=0  
+- (1,0,1,0): q=1  
+- (1,0,1,1): q=1  
+- (1,1,0,0): q=1  
+- (1,1,0,1): q=1  
+- (1,1,1,0): q=1  
+- (1,1,1,1): q=1  
+
+Pattern: q = 1 when (c != d) OR (b == 1).  
+Let's verify:  
+For b=1: all q=1 (matches).  
+For b=0: q=1 only when c!=d, except (a,b,c,d) = (0,0,0,1) is c!=d? No, c=0,d=1 → c!=d is true, but q=0 here. So that's an exception.  
+Check (a,b,c,d) = (0,0,0,1): b=0, c=0, d=1 → c!=d true, but q=0.  
+Check (a,b,c,d) = (1,0,0,1): b=0, c=0, d=1 → c!=d true, but q=0.  
+
+So exceptions: when b=0 and c=0 and d=1, q=0 regardless of a? Wait, both (0,0,0,1) and (1,0,0,1) give q=0.  
+Also when b=0 and c=1 and d=0: q=1 (no exception).  
+When b=0 and c=1 and d=1: q=1.  
+When b=0 and c=0 and d=0: q=0 (c==d, so q=0 matches rule "q=1 when c!=d" → false, so q=0, fine).  
+
+So exception is: if b=0 and c=0 and d=1, q=0.  
+
+Let's write logic:  
+q = (b) | (c ^ d) & ~( ~b & ~c & d)  
+Simplify:  
+~( ~b & ~c & d) = b | c | ~d.  
+So q = b | (c ^ d) & (b | c | ~d).  
+If b=1, q=1. If b=0, q = (c ^ d) & (c | ~d).  
+
+Let's check b=0:  
+(c ^ d) & (c | ~d)  
+Case c=0,d=0: (0) & (0|1)=0.  
+Case c=0,d=1: (1) & (0|0)=0.  
+Case c=1,d=0: (1) & (1|1)=1.  
+Case c=1,d=1: (0) & (1|0)=0.  
+
+So b=0: q=1 only for (c,d)=(1,0). But from table, b=0:  
+(0,0,0,0): q=0 ✓  
+(0,0,0,1): q=0 ✓  
+(0,0,1,0): q=1 ✓  
+(0,0,1,1): q=1 ✗ Here my formula gives 0, but table says 1. So my formula wrong for (0,0,1,1).  
+
+Let's re-examine b=0 cases from table:  
+(a,b,c,d) → q  
+(0,0,0,0):0  
+(0,0,0,1):0  
+(0,0,1,0):1  
+(0,0,1,1):1  
+(1,0,0,0):0  
+(1,0,0,1
+
+// VERILOG-EVAL: endmodule not found

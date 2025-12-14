@@ -1,0 +1,13 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output out
+);
+  // From the Karnaugh map, we can see that the output is 1 for all cases except when a=0, b=0, c=0.
+  // This means out = a | b | c
+  assign out = a | b | c;
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

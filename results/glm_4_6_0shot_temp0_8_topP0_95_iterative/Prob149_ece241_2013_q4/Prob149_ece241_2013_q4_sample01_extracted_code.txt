@@ -1,0 +1,17 @@
+
+  // State encoding for water levels
+  localparam LEVEL_ABOVE_S3 = 3'b111;  // Above s[3]
+  localparam LEVEL_BETWEEN_S3_S2 = 3'b011;  // Between s[3] and s[2]
+  localparam LEVEL_BETWEEN_S2_S1 = 3'b001;  // Between s[2] and s[1]
+  localparam LEVEL_BELOW_S1 = 3'b000;  // Below s[1]
+  
+  reg [2:0] current_level, prev_level;
+  
+  // Sequential logic for state updates
+  always @(posedge clk) begin
+    if (reset) begin
+      // Reset to state equivalent to low water level for a long time
+      current_level <= LEVEL_BELOW_S1;
+      prev_level <= LEVEL_BELOW_S1;
+      fr1 <= 1'b1;
+      fr2 <= 1'b1

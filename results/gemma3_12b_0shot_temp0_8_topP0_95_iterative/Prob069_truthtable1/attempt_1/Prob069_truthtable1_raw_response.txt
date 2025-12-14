@@ -1,0 +1,53 @@
+```verilog
+module TopModule (
+  input x3,
+  input x2,
+  input x1,
+  output f
+);
+
+  assign f = (x3 & x2 & x1) | (x3 & ~x2 & ~x1) | (~x3 & x2 & x1) | (~x3 & x2 & ~x1);
+
+endmodule
+```
+
+**Explanation:**
+
+The truth table can be expressed as a Boolean equation:
+
+f = (!x3 && x2 && x1) | (x3 && x2 && x1) | (x3 && !x2 && !x1) | (!x3 && x2 && !x1)
+
+Where:
+
+* `!` denotes the NOT operator.
+* `&&` denotes the AND operator.
+* `|` denotes the OR operator.
+
+The Verilog code directly translates this Boolean equation into a combinational `assign` statement.  This statement calculates the output `f` based on the current values of the inputs `x3`, `x2`, and `x1`.
+
+**Alternative Implementation (using nested if statements):**
+
+While the above is the most concise and preferred method, for clarity, here's an alternative implementation using nested `if` statements (though less efficient):
+
+```verilog
+module TopModule (
+  input x3,
+  input x2,
+  input x1,
+  output f
+);
+
+  assign f = 
+    (x3 == 0 && x2 == 0 && x1 == 0) ? 0 :
+    (x3 == 0 && x2 == 0 && x1 == 1) ? 0 :
+    (x3 == 0 && x2 == 1 && x1 == 0) ? 1 :
+    (x3 == 0 && x2 == 1 && x1 == 1) ? 1 :
+    (x3 == 1 && x2 == 0 && x1 == 0) ? 0 :
+    (x3 == 1 && x2 == 0 && x1 == 1) ? 1 :
+    (x3 == 1 && x2 == 1 && x1 == 0) ? 0 :
+    (x3 == 1 && x2 == 1 && x1 == 1) ? 1 :
+    0; // Default case (shouldn't happen)
+endmodule
+```
+
+This version explicitly checks each row of the truth table and assigns the corresponding output value.  However, this is generally less efficient and less readable than the Boolean equation approach.  The Boolean equation is preferred for its conciseness and direct representation of the logic.

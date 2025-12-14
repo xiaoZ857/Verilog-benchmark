@@ -1,0 +1,33 @@
+To implement a Verilog module for a half-adder, you need to define the logic that computes the sum and carry-out from two single-bit inputs, `a` and `b`. A half-adder produces:
+
+- **Sum**: This is the XOR of the two input bits.
+- **Carry-Out (cout)**: This is the AND of the two input bits.
+
+Here's how you can implement this in a Verilog module named `TopModule`:
+
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+
+  // The sum is the XOR of inputs 'a' and 'b'
+  assign sum = a ^ b;
+
+  // The carry-out is the AND of inputs 'a' and 'b'
+  assign cout = a & b;
+
+endmodule
+```
+
+### Explanation:
+
+- **Sum Calculation**: 
+  - The `sum` output uses the XOR operator (`^`). In binary addition, XOR yields a sum bit that represents whether there is an odd number of ones in the inputs (i.e., it results in `1` when either one or both inputs are `1`, and `0` otherwise).
+
+- **Carry-Out Calculation**: 
+  - The `cout` output uses the AND operator (`&`). In binary addition, a carry-out occurs only when both input bits are `1`.
+
+This module is designed to handle single-bit inputs and outputs, which makes it suitable for use as part of more complex adders or digital arithmetic circuits.

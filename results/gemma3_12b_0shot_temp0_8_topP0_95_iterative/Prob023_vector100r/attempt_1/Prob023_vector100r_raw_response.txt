@@ -1,0 +1,54 @@
+```verilog
+module TopModule (
+  input [99:0] in,
+  output reg [99:0] out
+);
+
+  always @(in) begin
+    for (int i = 0; i < 100; i++) begin
+      out[i] = in[99 - i];
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule (input [99:0] in, output reg [99:0] out);`**:  This declares the module named `TopModule` with a 100-bit input `in` and a 100-bit output `out`. The `reg` keyword is used for the output `out` because it needs to store a value within the `always` block.
+* **`always @(in) begin ... end`**: This is a procedural block that executes whenever the input signal `in` changes. This ensures that the output is updated whenever the input changes.
+* **`for (int i = 0; i < 100; i++) begin ... end`**: This loop iterates through all 100 bits of the input and output vectors.
+* **`out[i] = in[99 - i];`**: This is the core of the reversal logic.  For each bit index `i` in the output, it assigns the bit at index `99 - i` from the input to the output.  This effectively reverses the bit order.  For example:
+    * `out[0] = in[99]` (first bit of output gets the last bit of input)
+    * `out[1] = in[98]` (second bit of output gets the second-to-last bit of input)
+    * ...
+    * `out[99] = in[0]` (last bit of output gets the first bit of input)
+
+**How it works:**
+
+The code uses a `for` loop to iterate through each bit of the input vector `in`. Inside the loop, it assigns the bit at the corresponding reversed position in the input to the output. The index calculation `99 - i` ensures that the bits are reversed.  For instance, the first bit of the input `in[99]` becomes the last bit of the output `out[0]`, the second bit of the input `in[98]` becomes the second-to-last bit of the output `out[1]`, and so on.
+
+**Testbench (for simulation):**
+
+```verilog
+module TopModule_tb;
+
+  reg [99:0] in;
+  wire [99:0] out;
+
+  TopModule dut (
+    .in(in),
+    .out(out)
+  );
+
+  initial begin
+    // Initialize input
+    in = 100'b1;  // All bits set to 1
+
+    #10; // Wait for the output to settle
+
+    $display("Input: %b", in);
+    $display("Output: %b", out);
+
+    // Test with a specific input
+    in = 100'b0000000000000000000000000000000

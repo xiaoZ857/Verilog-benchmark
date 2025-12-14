@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_3\Prob071_always_casez_code.sv:12: sorry: break statements not supported.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_3\Prob071_always_casez_code.sv:18: error: port in already has a port declaration.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_3\Prob071_always_casez_code.sv:3: error: Port ``in'' has already been declared a port.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_3\Prob071_always_casez_code.sv:19: pos definition conflicts with definition at results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_3\Prob071_always_casez_code.sv:4.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob071_always_casez\attempt_3\Prob071_always_casez_code.sv:28: error: `timescale directive can not be inside a module definition.

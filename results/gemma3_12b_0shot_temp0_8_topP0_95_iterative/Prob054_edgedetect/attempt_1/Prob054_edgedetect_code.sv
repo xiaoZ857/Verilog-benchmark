@@ -1,0 +1,23 @@
+
+module TopModule (
+  input clk,
+  input [7:0] in,
+  output reg [7:0] pedge
+);
+
+  reg [7:0] prev_in;
+
+  always @(posedge clk) begin
+    for (int i = 0; i < 8; i++) begin
+      if (in[i] == 1 && prev_in[i] == 0) begin
+        pedge[i] = 1;
+      else begin
+        pedge[i] = 0;
+      end
+    end
+    prev_in = in;
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

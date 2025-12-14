@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob109_fsm1\attempt_4\Prob109_fsm1_code.sv:19: error: out is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob109_fsm1\attempt_4\Prob109_fsm1_code.sv:6:      : out is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob109_fsm1\attempt_4\Prob109_fsm1_code.sv:20: error: out is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob109_fsm1\attempt_4\Prob109_fsm1_code.sv:6:      : out is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob109_fsm1\attempt_4\Prob109_fsm1_code.sv:21: error: out is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob109_fsm1\attempt_4\Prob109_fsm1_code.sv:6:      : out is declared here as wire.
+3 error(s) during elaboration.

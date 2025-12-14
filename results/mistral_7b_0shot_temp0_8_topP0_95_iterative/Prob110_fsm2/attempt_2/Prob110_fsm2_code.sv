@@ -1,0 +1,33 @@
+
+module TopModule (
+  input clk,
+  input j,
+  input k,
+  input areset,
+  output out
+);
+always @(posedge clk or negedge areset) begin
+    if (areset) begin
+        out <= 0; // Reset the output to 0 when areset is asserted
+        currState <= OFF; // Reset the state machine to OFF when areset is asserted
+    end else begin
+        case (currState)
+            OFF: begin
+                if (j == 1'b1) begin
+                    currState <= ON; // Transition from OFF to ON on j=1
+                    out <= 1'b1; // Set the output to 1 when transitioning to ON
+                end
+            end,
+            ON: begin
+                if (k == 1'b0) begin
+                    out <= 1'b1; // Stay in ON state when k=0 and set the output to 1
+                end else begin
+                    currState <= OFF; // Transition from ON to OFF on k=1
+                    out <= 1'b0; // Set the output to 0 when transitioning to OFF
+                end
+            end
+        endcase
+    end
+end
+
+endmodule

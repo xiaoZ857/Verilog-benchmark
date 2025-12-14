@@ -1,0 +1,35 @@
+
+module TopModule (
+  input clk,
+  input load,
+  input [511:0] data,
+  output reg [511:0] q
+);
+
+always @(posedge clk) begin
+  if (load)
+    q <= data; // Load data into the system when load is high
+
+  int i;
+  for (i = 0; i < 512; i++) begin
+    case (q[i - 1], q[i], q[i + 1])
+      4'b110: q[i] <= 0; // Left = 1, Center = 1, Right = 1
+      4'b111: q[i] <= 1; // Left = 1, Center = 1, Right = 0
+      4'b011: q[i] <= 1; // Left = 0, Center = 1, Right = 1
+      4'b001: q[i] <= 0; // Left = 0, Center = 0, Right = 1
+      4'b100: q[i] <= 0; // Left = 1, Center = 0, Right = 0
+      4'b010: q[i] <= 0; // Left = 0, Center = 1, Right = 0
+      4'b000: q[i] <= 0; // Left = 0, Center = 0, Right = 0
+    endcase
+  end
+end
+
+// Zero boundary conditions
+always @* begin
+  if (q[0]) q[0] <= 0;
+  if (q[511]) q[511] <= 0;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,21 @@
+
+module TopModule (
+  input a,
+  input b,
+  input c,
+  input d,
+  output q
+);
+always @(posedge clk) begin
+  case ({a, b, c, d})
+    4'b0000 : q <= 1'b1; // When all inputs are 0
+    4'b0001 : q <= 1'b0; // When a is 1 and others are 0
+    4'b0010 : q <= 1'b0; // When b is 1 and others are 0
+    4'b0100 : q <= 1'b0; // When c is 1 and others are 0
+    4'b1000 : q <= 1'b0; // When d is 1 and others are 0
+    4'b0001, 4'b0010, 4'b0100, 4'b1000 : q <= 1'b1; // When any single input is 1
+    4'b0111, 4'b1011, 4'b1101, 4'b1110, 4'b1111 : q <= 1'b0; // When two or more inputs are 1
+  endcase
+end
+
+// VERILOG-EVAL: endmodule not found

@@ -1,0 +1,47 @@
+We can implement this as a simple 2-state Moore FSM.  
+The two states are:  
+- `LEFT`: walking left (output walk_left = 1, walk_right = 0)  
+- `RIGHT`: walking right (output walk_left = 0, walk_right = 1)  
+
+Transitions:  
+- In `LEFT` state:  
+  - If `bump_left == 1`, next state = `RIGHT` (switch direction)  
+  - Else, stay in `LEFT`  
+- In `RIGHT` state:  
+  - If `bump_right == 1`, next state = `LEFT`  
+  - Else, stay in `RIGHT`  
+- If both bumps happen at once in either state, we still switch (so in `LEFT` with `bump_left=1`, go to `RIGHT` even if `bump_right=1`).  
+
+Asynchronous reset (`areset`) sets state to `LEFT`.  
+
+Here’s the Verilog code:  
+
+```verilog
+  // State encoding
+  parameter LEFT = 1'b0;
+  parameter RIGHT = 1'b1;
+  
+  reg state, next_state;
+  
+  // State register with asynchronous reset
+  always @(posedge clk, posedge areset) begin
+    if (areset)
+      state <= LEFT;
+    else
+      state <= next_state;
+  end
+  
+  // Next state logic
+  always @(*) begin
+    case (state)
+      LEFT: next_state = bump_left ? RIGHT : LEFT;
+      RIGHT: next_state = bump_right ? LEFT : RIGHT;
+      default: next_state = LEFT;
+    endcase
+  end
+  
+  // Output logic (Moore style: outputs depend only on state)
+  assign walk_left = (state == LEFT);
+  assign walk_right = (state == RIGHT);
+endmodule
+```

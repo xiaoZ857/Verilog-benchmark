@@ -1,0 +1,43 @@
+We can analyze the waveform to understand the behavior:
+
+1. **Initialization**: At the first positive clock edge (25ns), `p` becomes 0 and `q` is still unknown. At 55ns (after the clock goes low), `q` becomes 0. This suggests `q` is updated on the negative edge of the clock, while `p` is updated on the positive edge.
+
+2. **Behavior of `p`**:  
+   - `p` changes only on positive clock edges.  
+   - `p` seems to follow the value of `a` at the positive edge, but only if `q` is 0.  
+   - When `q` is 1, `p` remains 0 regardless of `a`.  
+   - So: `p = a & (~q)` at the positive edge.
+
+3. **Behavior of `q`**:  
+   - `q` changes on negative clock edges.  
+   - `q` becomes 1 when `p` is 1 at the negative edge.  
+   - Once `q` is 1, it stays 1 until `a` is 1 at a negative edge? Let's check:  
+     At 115ns (clock falling), `p=1`, so `q` becomes 1.  
+     At 175ns (clock falling), `a=1` and `q=1`, so `q` becomes 0.  
+   - So: `q` toggles or sets/resets based on `p` and `a`? Actually, looking closely:  
+     When `q=0`: if `p=1` at negative edge, `q` becomes 1.  
+     When `q=1`: if `a=1` at negative edge, `q` becomes 0.  
+     Otherwise, `q` keeps its value.
+
+Thus:
+- Positive edge: `p <= a & (~q)`
+- Negative edge: `q <= (p & ~q) | (q & ~a)`? Let's simplify:  
+  If `q=0`, next `q = p`.  
+  If `q=1`, next `q = ~a`.  
+  So: `q <= (~q & p) | (q & ~a)`.
+
+We implement with two always blocks: one posedge for `p`, one negedge for `q`.
+
+```verilog
+always @(posedge clock) begin
+    p <= a & (~q);
+end
+
+always @(negedge clock) begin
+    if (~q) begin
+        q <= p;
+    end else begin
+        q <= ~a;
+    end
+end
+```

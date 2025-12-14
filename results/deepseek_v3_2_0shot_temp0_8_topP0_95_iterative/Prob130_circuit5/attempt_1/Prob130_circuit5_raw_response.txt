@@ -1,0 +1,24 @@
+Looking at the simulation waveforms, we can see that the output `q` depends on the value of `c`:
+
+- When `c = 0`, `q = b`
+- When `c = 1`, `q = e`
+- When `c = 2`, `q = a`
+- When `c = 3`, `q = d`
+- For all other values of `c` (4 through 15, including hex values a-f), `q = f` (which appears to be a constant, though not listed as an input)
+
+Since `f` is not an input, it's likely a constant value. From the hex values shown, `f` is 4'b1111 (15 in decimal).
+
+This is essentially a 4-bit wide multiplexer with 5 inputs (a, b, d, e, and constant f), where `c` acts as the select signal, but with specific mappings.
+
+```verilog
+  always @(*) begin
+    case (c)
+      4'd0: q = b;
+      4'd1: q = e;
+      4'd2: q = a;
+      4'd3: q = d;
+      default: q = 4'b1111; // f = 4'b1111
+    endcase
+  end
+endmodule
+```

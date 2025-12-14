@@ -1,0 +1,50 @@
+Here is the Verilog module that meets the requirements:
+
+```verilog
+module TopModule (
+    input a, 
+    input b, 
+    input c, 
+    input d, 
+    output out_sop, 
+    output out_pos
+);
+
+    always_comb begin : calc_outsop
+        out_sop = ~(a&~b|c&d) | (~a&c|d&b) | (a&b&c);
+    end
+
+    always_comb begin : calc_outpos
+        out_pos = ~((~a&b)&~(c|d)) | ((a|d)&c)&b;
+    end
+
+endmodule
+```
+
+Explanation:
+
+1. In the `calc_outsop` block, we use the XOR operator (`^`) to find the conditions where the output is logic 1.
+
+   - The first term in the expression `(~a&b)` represents when `a` and `b` are both true.
+   - The second term `(c|d)`, is when either `c` or `d` (or both) are true. Since we're looking for when the output is 1, we need to negate this expression with a tilde (~).
+   - We then use these two terms as input to an XOR (`^`) function to find where they are different.
+   
+   The final term `(a&b&c)` represents when all of `a`, `b` and `c` are true. Again, we negate this expression.
+
+2. In the `calc_outpos` block, we use De Morgan's laws to convert the conditions for which the output is logic 0 into a product-of-sums form:
+
+   - First term `~(a&b)`, represents when both `a` and `b` are false.
+   - Second term `(c|d)` is when either of `c` or `d` (or both) is true, since we're looking for when the output is 0, we need this expression negated.
+
+   We then use an AND (`&`) function to find where these two conditions are met. 
+
+We negate the final condition with a tilde (~).
+
+```verilog
+// This is not valid Verilog syntax:
+// out_pos = ~(a|~(b|c));
+```
+
+To achieve this, we use De Morgan's law: `~(p&q) = ~p | ~q`.
+
+We apply this to the expression `(~a|d)` to get its negation as the final product-of-sums term.

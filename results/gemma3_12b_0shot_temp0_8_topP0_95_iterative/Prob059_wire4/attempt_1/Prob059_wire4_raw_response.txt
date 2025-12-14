@@ -1,0 +1,31 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  input c,
+  output w,
+  output x,
+  output y,
+  output z
+);
+
+  assign w = a;
+  assign x = b;
+  assign y = b;
+  assign z = c;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This declares the module named `TopModule` and lists its input and output ports.
+* **`input a, input b, input c, ...`**:  These lines declare the input signals `a`, `b`, and `c`.
+* **`output w, output x, output y, output z`**: These lines declare the output signals `w`, `x`, `y`, and `z`.
+* **`assign w = a;`**: This statement connects the input signal `a` to the output signal `w`.  The `assign` keyword is used for continuous assignment, meaning that `w` will always reflect the current value of `a`.
+* **`assign x = b;`**: This statement connects the input signal `b` to the output signal `x`.
+* **`assign y = b;`**: This statement connects the input signal `b` to the output signal `y`.  Note that `y` is also driven by `b`, so `y` will have the same value as `x`.
+* **`assign z = c;`**: This statement connects the input signal `c` to the output signal `z`.
+* **`endmodule`**: This marks the end of the module definition.
+
+This module effectively acts as a set of wires, simply forwarding the input signals to the specified outputs.  There is no logic or processing involved.

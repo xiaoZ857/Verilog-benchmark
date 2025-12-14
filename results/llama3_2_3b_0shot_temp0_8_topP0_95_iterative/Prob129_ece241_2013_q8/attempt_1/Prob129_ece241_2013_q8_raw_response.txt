@@ -1,0 +1,40 @@
+```verilog
+module MealyFSM(clk, aresetn, x, z);
+
+    // Define the states of the finite state machine
+    parameter [0:1] ST_IDLE = 2'b00;
+    parameter [0:1] ST Seq1 = 2'b01;
+    parameter [0:1] ST(Seq1 | Seq101) = 2'b10;
+
+    // Define the next state and output values for each input signal
+    reg [0:1] st;
+    reg z_value;
+
+    always @(posedge clk or negedge aresetn) begin
+        if (~aresetn)
+            st <= ST_IDLE;
+        else if (posedge clk)
+            st <= STIdle;
+        else if (x == 1 && st == ST_Idle)
+            st <= ST Seq1;
+        else if (x == 0 && st == ST_Seq1)
+            st <= ST(Seq1 | Seq101);
+        // The sequence is detected, but we're still processing it
+        else if (x == 1 && st == ST_Seq101)
+            st <= ST(Seq1 | Seq101);
+        else if (x == 0 && st == ST_Seq101)
+            z_value <= 1;
+        else if (x == 1 && st == ST_Seq101)
+            z_value <= 1;
+        else
+            st <= ST_Idle;
+    end
+
+    assign z = z_value;
+
+endmodule
+```
+
+This module implements a Mealy-type finite state machine that recognizes the sequence "101" on an input signal `x`. The FSM has three states: `STIdle`, `STSeq1`, and `ST(Seq1 | Seq101)`. When the `z` output is asserted, it means that the sequence is detected, but we're still processing it. On the next clock cycle, the FSM will assert `z` again if the sequence is complete.
+
+Note that this implementation has overlapping sequences recognized in a single clock cycle due to the negative edge triggered asynchronous reset and the Mealy machine's behavior. The FSM resets when the input signal `x` goes low or when the clock is deasserted, but it doesn't wait for the next clock cycle to reset after asserting `z`.

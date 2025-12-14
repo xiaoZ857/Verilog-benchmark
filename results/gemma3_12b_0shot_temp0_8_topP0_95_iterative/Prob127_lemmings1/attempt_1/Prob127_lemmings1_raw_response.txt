@@ -1,0 +1,82 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input bump_left,
+  input bump_right,
+  output walk_left,
+  output walk_right
+);
+
+  // Internal state variable
+  reg state;
+
+  // Define states
+  parameter WALK_LEFT = 0;
+  parameter WALK_RIGHT = 1;
+
+  // State register
+  always @(posedge clk or posedge areset) begin
+    if (areset) begin
+      state <= WALK_LEFT;
+    end else begin
+      case (state)
+        WALK_LEFT: begin
+          if (bump_left) begin
+            state <= WALK_RIGHT;
+          end else if (bump_right) begin
+            state <= WALK_RIGHT;
+          end
+        end
+        WALK_RIGHT: begin
+          if (bump_left) begin
+            state <= WALK_LEFT;
+          end else if (bump_right) begin
+            state <= WALK_LEFT;
+          end
+        end
+        default: begin
+          state <= WALK_LEFT; // Default to WALK_LEFT in case of unexpected state
+        end
+      endcase
+    end
+  end
+
+  // Output logic based on the current state (Moore machine)
+  assign walk_left = (state == WALK_LEFT);
+  assign walk_right = (state == WALK_RIGHT);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`: Defines the module with input and output ports as specified in the problem description.
+
+2. **State Variable:**
+   - `reg state;`: Declares a register named `state` to hold the current state of the FSM.  Registers are used because their values change on clock edges.
+
+3. **State Definitions:**
+   - `parameter WALK_LEFT = 0;`: Defines a named constant `WALK_LEFT` to represent the "walking left" state.
+   - `parameter WALK_RIGHT = 1;`: Defines a named constant `WALK_RIGHT` to represent the "walking right" state.  Using named constants makes the code more readable and maintainable.
+
+4. **State Register (Sequential Logic):**
+   - `always @(posedge clk or posedge areset) begin ... end`: This `always` block describes the sequential logic of the FSM. It's triggered on the positive edge of the clock (`posedge clk`) or the positive edge of the asynchronous reset (`posedge areset`).
+   - `if (areset) begin state <= WALK_LEFT; end`:  This is the asynchronous reset logic. When `areset` is high, the state is forced to `WALK_LEFT`. The `<=` is a non-blocking assignment, which is crucial in sequential logic.
+   - `case (state) ... endcase`: This `case` statement implements the state transitions.
+     - **`WALK_LEFT` State:** If the current state is `WALK_LEFT`, the Lemming will switch to `WALK_RIGHT` if it's bumped on either the left or right.
+     - **`WALK_RIGHT` State:** If the current state is `WALK_RIGHT`, the Lemming will switch to `WALK_LEFT` if it's bumped on either the left or right.
+     - **`default`:**  This is a safety net. If the FSM somehow enters an undefined state, it will reset to `WALK_LEFT`.
+
+5. **Output Logic (Combinational Logic):**
+   - `assign walk_left = (state == WALK_LEFT);`: This `assign` statement describes the combinational logic that determines the output signals based on the current state.  `walk_left` is high when the state is `WALK_LEFT`.
+   - `assign walk_right = (state == WALK_RIGHT);`: `walk_right` is high when the state is `WALK_RIGHT`.
+
+**Key Concepts:**
+
+* **Moore Machine:**  The outputs are directly determined by the current state.
+* **Sequential Logic (Registers):** The `always @(posedge clk or posedge areset)` block uses registers to store the state and update it on clock edges.
+* **Combinational Logic (Assign Statements):** The `assign` statements create the output signals based on the current state.
+* **Asynchronous Reset:** The `areset` signal forces the state to a known initial state, independent of the clock.
+* **Non-Blocking Assignments (`<=`):** Essential for correct sequential logic behavior.  They update the state at the *end* of the clock cycle, preventing race conditions.

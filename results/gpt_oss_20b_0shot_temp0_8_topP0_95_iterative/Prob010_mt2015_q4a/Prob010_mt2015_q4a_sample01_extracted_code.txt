@@ -1,0 +1,26 @@
+//  TopModule.v
+//  ------------------------------------------
+//  Implements the Boolean function
+//        z = (x ^ y) & x
+//
+//  The expression is purely combinational – no clock is required.
+//  The output is driven continuously from the inputs.
+//
+//  Author:  <Your Name>
+//  Date:    <Date>
+//
+//  Note:  If the function were to be evaluated only on a clock edge,
+//  an additional `clk` input and an `always @(posedge clk)` block would
+//  be necessary.  As the specification states no clock is involved,
+//  the following purely combinational implementation is sufficient.
+
+module TopModule (
+    input  wire x,   // First input bit
+    input  wire y,   // Second input bit
+    output wire z    // Result of (x XOR y) AND x
+);
+
+    // Continuous assignment – evaluates immediately when x or y changes
+    assign z = (x ^ y) & x;
+
+endmodule

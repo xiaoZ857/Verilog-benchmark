@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 10
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:17: warning: extra digits given for sized hex constant.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:21: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:20: error: syntax error in left side of continuous assignment.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:22: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:22: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:23: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:25: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:27: error: Invalid module instantiation
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_1\Prob009_popcount3_code.sv:36: error: invalid module item.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob009_popcount3_ref.sv:11: syntax error
+I give up.

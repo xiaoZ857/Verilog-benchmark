@@ -1,0 +1,16 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 11
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:24: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:24: error: Malformed conditional expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:39: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:39: error: Malformed event control expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:46: syntax error
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:48: Syntax in assignment statement l-value.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:46: error: Malformed conditional expression.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:39: error: Invalid event control.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:53: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob133_2014_q3fsm_test.sv:11: error: invalid module item.

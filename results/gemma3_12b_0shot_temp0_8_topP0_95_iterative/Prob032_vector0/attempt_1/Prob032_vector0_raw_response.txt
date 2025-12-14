@@ -1,0 +1,32 @@
+```verilog
+module TopModule (
+  input [2:0] vec,
+  output [2:0] outv,
+  output o2,
+  output o1,
+  output o0
+);
+
+  assign outv = vec;
+  assign o2 = vec[2];
+  assign o1 = vec[1];
+  assign o0 = vec[0];
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**:  This defines the module named `TopModule` and lists its input and output ports.
+* **`input [2:0] vec;`**:  Declares a 3-bit input signal named `vec`. The `[2:0]` notation defines a vector of 3 bits, where bit 2 is the most significant bit (MSB) and bit 0 is the least significant bit (LSB).
+* **`output [2:0] outv;`**: Declares a 3-bit output vector named `outv`.
+* **`output o2, o1, o0;`**: Declares three single-bit outputs named `o2`, `o1`, and `o0`.
+* **`assign outv = vec;`**: This is a continuous assignment statement.  It assigns the value of the input vector `vec` directly to the output vector `outv`.  This means that `outv` will always have the same value as `vec`.
+* **`assign o2 = vec[2];`**: Assigns the value of the 3rd bit (index 2) of the input vector `vec` to the output signal `o2`.
+* **`assign o1 = vec[1];`**: Assigns the value of the 2nd bit (index 1) of the input vector `vec` to the output signal `o1`.
+* **`assign o0 = vec[0];`**: Assigns the value of the 1st bit (index 0) of the input vector `vec` to the output signal `o0`.
+* **`endmodule`**:  Marks the end of the module definition.
+
+**How it works:**
+
+The circuit simply copies the input vector `vec` to the output vector `outv`.  It also extracts the individual bits of the input vector and assigns them to the separate single-bit outputs `o2`, `o1`, and `o0`.  The `assign` statements are continuous, meaning they are evaluated whenever the input signals change.  This ensures that the outputs always reflect the current value of the input vector.

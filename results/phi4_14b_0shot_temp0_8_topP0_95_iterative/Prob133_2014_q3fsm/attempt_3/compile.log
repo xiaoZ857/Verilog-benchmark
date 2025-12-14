@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_3\Prob133_2014_q3fsm_code.sv:37: error: Unable to bind wire/reg/memory `STATE_C' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_3\Prob133_2014_q3fsm_code.sv:44: error: Unable to bind wire/reg/memory `STATE_C' in `tb.top_module1'
+2 error(s) during elaboration.

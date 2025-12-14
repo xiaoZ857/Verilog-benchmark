@@ -1,0 +1,44 @@
+```verilog
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  output [7:0] s,
+  output overflow
+);
+
+  assign s = a + b;
+
+  assign overflow = (a[7] == b[7]) && (a[7] != s[7]);
+
+endmodule
+```
+
+**Explanation:**
+
+* **`assign s = a + b;`**: This line performs the addition of the two 8-bit numbers `a` and `b` and assigns the result to the 8-bit signal `s`.  Verilog automatically handles the bitwise addition.
+* **`assign overflow = (a[7] == b[7]) && (a[7] != s[7]);`**: This line calculates the overflow signal.  The overflow condition occurs when:
+    * **`a[7] == b[7]`**:  Both `a` and `b` have the same sign bit (both positive or both negative).
+    * **`a[7] != s[7]`**:  The sign bit of the sum `s` is different from the sign bits of the operands.
+
+**How it works (Overflow Detection):**
+
+Consider the two numbers `a` and `b` are signed numbers.
+
+* **Case 1: Both positive:** If both `a` and `b` are positive (sign bit = 0), the sum will also be positive unless the result overflows.  Overflow means the most significant bit changes from 0 to 1.
+* **Case 2: Both negative:** If both `a` and `b` are negative (sign bit = 1), the sum will also be negative unless the result overflows. Overflow means the most significant bit changes from 1 to 0.
+
+The `overflow` signal is true only when these conditions are met, indicating that the addition has resulted in a signed overflow.
+
+**Example:**
+
+* `a = 1000 0000` (negative 128)
+* `b = 0000 0001` (positive 1)
+* `s = 1000 0001` (negative 127)
+* `overflow = 1` (because a[7] == b[7] == 0, and a[7] != s[7] because 0 != 1)
+
+* `a = 0111 1111` (positive 127)
+* `b = 0000 0001` (positive 1)
+* `s = 1000 0000` (negative 128)
+* `overflow = 1` (because a[7] == b[7] == 0, and a[7] != s[7] because 0 != 1)
+
+This code directly implements the overflow detection logic as described in the problem statement.  It's a concise and efficient solution for detecting signed addition overflow in Verilog.

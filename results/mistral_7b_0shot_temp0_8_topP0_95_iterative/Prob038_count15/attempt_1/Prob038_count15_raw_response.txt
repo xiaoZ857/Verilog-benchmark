@@ -1,0 +1,30 @@
+ Here's a simple Verilog implementation for the 4-bit binary counter based on your description:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire reset,
+  output reg [3:0] q
+);
+
+always @(posedge clk or posedge reset) // Positive edge-triggered assignment for both clock and reset
+begin
+  if (reset)
+    q <= 4'b0001; // Reset value is 4 bits of binary '1' to initialize counter at zero
+  else if (q < 4'b1111) // If the counter is less than 15, increment it
+    q <= q + 1;
+end
+
+initial begin // Initialization block for simulation
+  $dumpfile("waveform.vcd"); // Dump VCD file for waveform visualization
+  $dumpvars(0); // Initialize VCD variable dump
+  clk = 0; // Start with clock low
+  #5 clk = ~clk; // Set clock to high after 5 time units (assuming that 'time unit' is 1ns by default)
+end
+
+// End of the TopModule
+```
+
+This Verilog module implements a positive edge-triggered 4-bit binary counter. The `reset` input resets the counter to 0 when it is high and the `clk` input triggers the counter's state update on the positive edge. The counter increments until it reaches 15 and then wraps around to 0 again.
+
+The initial block sets up clock pulsing for simulation purposes, dumps the waveform into a VCD file, and initializes the clock at low state.

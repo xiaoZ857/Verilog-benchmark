@@ -1,0 +1,22 @@
+**Verilog implementation – a simple combinational AND gate**
+
+```verilog
+// TopModule.v
+// Description:  Combinational circuit that produces q = a AND b
+//               (based on the simulation wave‑forms provided).
+
+module TopModule (
+    input  wire a,   // First input
+    input  wire b,   // Second input
+    output wire q    // Output
+);
+
+    // Combinational logic: output is the logical AND of the two inputs
+    assign q = a & b;
+
+endmodule
+```
+
+**Explanation**
+
+The simulation table shows that `q` is `1` only when both `a` and `b` are `1`; in all other input combinations `q` is `0`. This is exactly the truth table of a logical AND gate. The `assign` statement implements this combinational logic directly. No clocking or state is involved, so a simple continuous assignment is sufficient.

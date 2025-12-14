@@ -1,0 +1,51 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input [31:0] in,
+  output reg [31:0] out
+);
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      out <= 0;
+    end else begin
+      for (int i = 0; i < 32; i++) begin
+        if (in[i] == 0 && out[i] == 1) begin
+          out[i] <= 1;
+        end else if (in[i] != out[i]) begin
+          out[i] <= in[i];
+        end
+      end
+    end
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`:**  Defines the module named `TopModule` with its input and output ports.
+2. **`output reg [31:0] out`:** Declares `out` as a 32-bit register.  Registers are used because we need to hold the "captured" 1 values until the reset signal is asserted.
+3. **`always @(posedge clk or posedge reset)`:**  This is a clocked always block that triggers on the positive edge of the clock (`posedge clk`) or the positive edge of the reset signal (`posedge reset`).  This ensures that the logic updates synchronously.
+4. **`if (reset)`:**  This condition checks if the reset signal is active (high). If it is, the `out` register is cleared to all zeros. This is the synchronous reset.
+5. **`else`:** If the reset is not active, the following logic is executed.
+6. **`for (int i = 0; i < 32; i++)`:**  This loop iterates through each bit of the input vector `in`.
+7. **`if (in[i] == 0 && out[i] == 1)`:** This is the core logic for "capturing" the transition.  It checks if the current input bit `in[i]` is 0 *and* the corresponding output bit `out[i]` is 1.  This means we're detecting a transition from 1 to 0.  If this condition is true, `out[i]` is set to 1, "capturing" the event.  The `out[i]` will remain 1 until the register is reset.
+8. **`else if (in[i] != out[i])`:** This condition checks if the current input bit `in[i]` is different from the current output bit `out[i]`. If they are different, it means the input has changed. This is necessary to update the output to match the new input. This is important to handle cases where the input goes to 1 and then back to 0.
+9. **`out[i] <= in[i];`:**  If the input and output bits are different, the output bit is updated to match the current input bit.
+
+**How it works (example):**
+
+Let's say `in[0]` is initially 1, and `out[0]` is also 1.  Then, `in[0]` changes to 0.
+
+1. **First Clock Cycle (in[0] = 1, out[0] = 1):** The first condition `(in[0] == 0 && out[0] == 1)` is false. The second condition `(in[0] != out[0])` is also false.  `out[0]` remains 1.
+2. **Second Clock Cycle (in[0] = 0, out[0] = 1):** The first condition `(in[0] == 0 && out[0] == 1)` is *true*!  `out[0]` is set to 1.  This "captures" the transition.  `out[0]` will remain 1 until reset.
+3. **Subsequent Clock Cycles (in[0] = 0):**  The first condition is always false. The second condition is false because `in[0]` and `out[0]` are equal.  `out[0]` remains 1.
+
+If `in[0]` later changes back to 1, the second `else if` condition would trigger, and `out[0]` would be updated to 1.
+
+**Important Considerations:**
+
+* **Synchronous Reset:** This code uses a synchronous reset, which is generally preferred for better predictability and avoiding metastability issues.
+* **Positive Edge Triggered:**  The logic is triggered

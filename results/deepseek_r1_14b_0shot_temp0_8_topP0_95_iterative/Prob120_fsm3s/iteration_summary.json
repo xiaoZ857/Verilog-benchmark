@@ -1,0 +1,47 @@
+{
+  "problem_name": "Prob120_fsm3s",
+  "model_name": "deepseek-r1:14b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 3,
+  "test_attempts": 0,
+  "total_attempts": 3,
+  "final_compile_success": false,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob120_fsm3s_ref.sv:31: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 16\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:22: warning: Port declaration of in inherits dimensions from var/net.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:22: error: Scalar port ``in'' has a vectored net declaration [1:0].\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:27: error: out is not a valid l-value in tb.top_module1.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:27: error: out is not a valid l-value in tb.top_module1.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:27: error: out is not a valid l-value in tb.top_module1.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:28: error: out is not a valid l-value in tb.top_module1.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:39: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:39: error: Unable to elaborate condition expression.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:42: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:42: error: Unable to elaborate condition expression.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:45: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:45: error: Unable to elaborate condition expression.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:48: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:48: error: Unable to elaborate condition expression.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:57: error: clk is not a valid l-value in tb.top_module1.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:6:      : clk is declared here as wire.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:58: error: clk is not a valid l-value in tb.top_module1.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:6:      : clk is declared here as wire.\nresults/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\\Prob120_fsm3s\\attempt_2\\Prob120_fsm3s_code.sv:7: error: no wire/reg in in module tb.top_module1.\n16 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 3,
+      "phase": "compile_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 3\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob120_fsm3s_test.sv:1: error: `timescale directive can not be inside a module definition.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob120_fsm3s_ref.sv:31: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

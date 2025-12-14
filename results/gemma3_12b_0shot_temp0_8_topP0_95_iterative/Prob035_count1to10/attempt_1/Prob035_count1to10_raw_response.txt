@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [3:0] q
+);
+
+  reg [3:0] count;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      count <= 1;
+    end else begin
+      if (count == 10) begin
+        count <= 1;
+      end else begin
+        count <= count + 1;
+      end
+    end
+  end
+
+  assign q = count;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`reg [3:0] count;`**:  This declares a 4-bit register named `count`.  We use 4 bits to represent numbers from 1 to 10 (10 requires 4 bits).  This register holds the current count value.
+* **`always @(posedge clk)`**: This is a clocked always block, meaning the code inside will execute on the positive (rising) edge of the `clk` signal.
+* **`if (reset)`**: This checks if the `reset` signal is high (active high).
+    * **`count <= 1;`**: If `reset` is high, the counter is synchronously reset to 1.  The `<=` is a non-blocking assignment, which is crucial in clocked always blocks.  It means the assignment doesn't happen immediately, but is scheduled to happen at the end of the current simulation time step.
+* **`else`**:  If `reset` is low, the counter increments.
+    * **`if (count == 10)`**:  This checks if the counter has reached 10.
+        * **`count <= 1;`**:  If `count` is 10, it resets to 1, creating the decade count.
+    * **`else`**: If `count` is less than 10.
+        * **`count <= count + 1;`**: The counter is incremented by 1.
+* **`assign q = count;`**: This assigns the value of the `count` register to the output `q`.  This is a continuous assignment, meaning that whenever `count` changes, `q` will be updated immediately.
+
+**How it works:**
+
+1. **Reset:** When `reset` is high, the counter immediately sets `count` to 1.
+2. **Counting:** On each rising edge of `clk`, the counter checks if `reset` is high. If not, it checks if `count` is 10. If `count` is 10, it resets to 1; otherwise, it increments.
+3. **Output:** The value of `count` is continuously assigned to the output `q`, so `q` always reflects the current count value.
+
+**Important Considerations:**
+
+* **Synchronous Reset:** The reset is *synchronous* because it's triggered by the clock.  This is generally preferred for more predictable behavior in digital circuits.
+* **Non-Blocking Assignments (`<=`):** Using non-blocking assignments inside the `always @(posedge clk)` block is *essential* for correct behavior.  Blocking assignments (`=`) can lead to unexpected results in clocked logic.
+* **Active High Reset:** The problem statement specifies an active-high reset.  If you needed an active-low reset, you would change the `if (reset)` condition to `if (!reset)`.
+* **Bit Width:**  The counter uses a 4-bit register because 10 (the highest number to be counted) requires 4 bits to represent (2<sup>4</sup> = 16, enough bits for 1 to 10).
+* **Simulation and Synthesis:**  This code is written to be both simulatable (meaning you can verify its functionality in a simulator) and synthesizable (meaning it can be converted into a hardware implementation).

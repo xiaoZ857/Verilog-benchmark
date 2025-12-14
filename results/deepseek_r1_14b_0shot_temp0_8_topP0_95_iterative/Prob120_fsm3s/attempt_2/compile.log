@@ -1,0 +1,29 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 16
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:22: warning: Port declaration of in inherits dimensions from var/net.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:22: error: Scalar port ``in'' has a vectored net declaration [1:0].
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:27: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:27: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:27: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:28: error: out is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:9:      : out is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:39: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:39: error: Unable to elaborate condition expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:42: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:42: error: Unable to elaborate condition expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:45: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:45: error: Unable to elaborate condition expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:48: error: Unable to bind wire/reg/memory `in' in `tb.top_module1'
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:48: error: Unable to elaborate condition expression.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:57: error: clk is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:6:      : clk is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:58: error: clk is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:6:      : clk is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:7: error: no wire/reg in in module tb.top_module1.
+16 error(s) during elaboration.

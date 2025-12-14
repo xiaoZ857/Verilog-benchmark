@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_2\Prob149_ece241_2013_q4_code.sv:50: error: Unable to bind wire/reg/memory `BELOW_S2' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob149_ece241_2013_q4\attempt_2\Prob149_ece241_2013_q4_code.sv:50: error: Unable to elaborate condition expression.
+2 error(s) during elaboration.

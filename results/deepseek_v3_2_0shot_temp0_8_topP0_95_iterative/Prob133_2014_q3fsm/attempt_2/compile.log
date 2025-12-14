@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:11: error: Could not find variable ``state'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:12: error: Could not find variable ``window_pos'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:13: error: Could not find variable ``ones_count'' in ``tb.top_module1''
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:16: error: Unable to bind wire/reg/memory `state' in `tb.top_module1'
+results/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\Prob133_2014_q3fsm\attempt_2\Prob133_2014_q3fsm_code.sv:16: error: Unable to elaborate this case expression.
+4 error(s) during elaboration.

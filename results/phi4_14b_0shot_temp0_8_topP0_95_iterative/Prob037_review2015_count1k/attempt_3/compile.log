@@ -1,0 +1,22 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 15
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:9: error: Could not find variable ``H'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:10: error: Could not find variable ``T'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:11: error: Could not find variable ``B'' in ``tb.top_module1''
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:14: error: Unable to bind wire/reg/memory `B' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:14: error: Unable to elaborate condition expression.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:33: error: Unable to bind wire/reg/memory `H['sd2]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:34: error: Unable to bind wire/reg/memory `H['sd1]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:35: error: Unable to bind wire/reg/memory `H['sd0]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:36: error: Unable to bind wire/reg/memory `T['sd3]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:37: error: Unable to bind wire/reg/memory `T['sd2]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:38: error: Unable to bind wire/reg/memory `T['sd1]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:39: error: Unable to bind wire/reg/memory `T['sd0]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:40: error: Unable to bind wire/reg/memory `B['sd3]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:41: error: Unable to bind wire/reg/memory `B['sd2]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:42: error: Unable to bind wire/reg/memory `B['sd1]' in `tb.top_module1'
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob037_review2015_count1k\attempt_3\Prob037_review2015_count1k_code.sv:32: warning: @* found no sensitivities so it will never trigger.
+15 error(s) during elaboration.

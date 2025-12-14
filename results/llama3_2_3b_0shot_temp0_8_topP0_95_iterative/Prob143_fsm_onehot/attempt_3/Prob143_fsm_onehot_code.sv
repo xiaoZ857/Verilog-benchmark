@@ -1,0 +1,65 @@
+
+module TopModule (
+  input in,
+  input [9:0] state,
+  output [9:0] next_state,
+  output out1,
+  output out2
+);
+
+always @(posedge clk or !in) begin
+  unique case (state)
+    default:
+      next_state[8:0] = state;
+  endcase
+
+  if (state == {10'b00000000}) begin // S0
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b01000000}) begin // S1
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b10000000}) begin // S2
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b11000000}) begin // S3
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b00001000}) begin // S4
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b00110000}) begin // S5
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b01100000}) begin // S6
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b10011000}) begin // S7
+    out1 <= state[9];
+    out2 <= state[8];
+  end else if (state == {10'b00101100}) begin // S8
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b11010100}) begin // S6 and S7 with in = 1
+    out1 <= state[9];
+    out2 <= state[8];
+  end else if (state == {10'b00011100}) begin // S3 and S4 with in = 0
+    out1 <= state[9];
+    out2 <= state[8];
+  end else if (state == {10'b10010100}) begin // S7 and S8 with in = 0
+    out1 <= state[9];
+    out2 <= state[8];
+  end else if (state == {10'b00101010}) begin // S5 and S4 with in = 0
+    out1 <= 0;
+    out2 <= 0;
+  end else if (state == {10'b10101100}) begin // S6 and S7 with in = 0
+    out1 <= state[9];
+    out2 <= state[8];
+  end else // invalid state
+    out1 <= 0;
+    out2 <= 0;
+  endcase
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

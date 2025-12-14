@@ -1,0 +1,27 @@
+Below is a **pure‑state‑machine** implementation of the controller that
+drives the timer.  
+Only the control signals (`shift_ena`, `counting`, `done`) and the
+internal FSM logic are provided – the actual counters and data path are
+assumed to be elsewhere in the design.
+
+```verilog
+//  TopModule
+//  -------------
+//  Implements the FSM that:
+//
+//      (1) Detects the 4‑bit pattern 1101 on the serial input `data`
+//      (2) Asserts `shift_ena` for exactly four clocks to shift in the
+//          duration bits
+//      (3) Asserts `counting` while waiting for `done_counting`
+//      (4) Asserts `done` until the user acknowledges (`ack`)
+//      (5) Resets back to the idle search state on `reset` or after
+//          acknowledgment
+//
+//  All registers are synchronous‑reset on the active‑high `reset` signal.
+
+module TopModule (
+    input  wire clk,
+    input  wire reset,          // active‑high synchronous reset
+    input  wire data,           // serial data input
+
+    output reg  shift_ena,     

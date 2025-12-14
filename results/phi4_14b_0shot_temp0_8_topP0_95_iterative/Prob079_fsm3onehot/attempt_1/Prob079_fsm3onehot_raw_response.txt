@@ -1,0 +1,70 @@
+To implement the Moore state machine as described, we need to derive the logic for both the next state transitions and the output based on a one-hot encoding of states. Here is how you can do it:
+
+### State Transition Logic
+
+The current states are encoded in a one-hot manner:
+- A = 4'b0001
+- B = 4'b0010
+- C = 4'b0100
+- D = 4'b1000
+
+From the state transition table, we derive the next state logic based on the input:
+
+- **State A (4'b0001):**
+  - Next state if `in=0`: A (4'b0001)
+  - Next state if `in=1`: B (4'b0010)
+
+- **State B (4'b0010):**
+  - Next state if `in=0`: C (4'b0100)
+  - Next state if `in=1`: B (4'b0010)
+
+- **State C (4'b0100):**
+  - Next state if `in=0`: A (4'b0001)
+  - Next state if `in=1`: D (4'b1000)
+
+- **State D (4'b1000):**
+  - Next state if `in=0`: C (4'b0100)
+  - Next state if `in=1`: B (4'b0010)
+
+Using these transitions, we can write the logic for `next_state`:
+
+```verilog
+module TopModule (
+    input in,
+    input [3:0] state,
+    output reg [3:0] next_state,
+    output out
+);
+
+// Output logic
+assign out = (state == 4'b1000) ? 1 : 0;
+
+always @(*) begin
+    // Default to zero when no condition matches
+    next_state = 4'b0000;
+
+    case (state)
+        4'b0001: // State A
+            next_state = (!in) ? 4'b0001 : 4'b0010;
+        4'b0010: // State B
+            next_state = (!in) ? 4'b0100 : 4'b0010;
+        4'b0100: // State C
+            next_state = (!in) ? 4'b0001 : 4'b1000;
+        4'b1000: // State D
+            next_state = (!in) ? 4'b0100 : 4'b0010;
+    endcase
+end
+
+endmodule
+```
+
+### Explanation:
+
+- **Output Logic:** The output `out` is determined by the current state. It's high (`1`) only when in state D (4'b1000).
+
+- **Next State Logic:** 
+  - A `case` statement checks the current state.
+  - For each state, a ternary operator determines the next state based on the input `in`.
+  - If no condition matches, `next_state` defaults to 4'b0000, which is a safe default in one-hot encoding (though typically you'll never be here if transitions are well-defined).
+
+This module will correctly implement the Moore machine described, handling both state transitions and output logic as specified.

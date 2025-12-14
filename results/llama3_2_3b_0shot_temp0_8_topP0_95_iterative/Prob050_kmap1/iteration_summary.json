@@ -1,0 +1,56 @@
+{
+  "problem_name": "Prob050_kmap1",
+  "model_name": "llama3.2:3b",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 1,
+  "test_attempts": 3,
+  "total_attempts": 4,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": true,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": false,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 125 mismatches. First mismatch occurred at time 30.\nHint: Total mismatched samples is 125 out of 219 samples\n\nSimulation finished at 1096 ps\nMismatches: 125 in 219 samples\n",
+      "mismatch_count": 125
+    },
+    {
+      "attempt": 2,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 85 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 85 out of 219 samples\n\nSimulation finished at 1096 ps\nMismatches: 85 in 219 samples\n",
+      "mismatch_count": 85
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'out' has 85 mismatches. First mismatch occurred at time 5.\nHint: Total mismatched samples is 85 out of 219 samples\n\nSimulation finished at 1096 ps\nMismatches: 85 in 219 samples\n",
+      "mismatch_count": 85
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 2\nresults/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\\Prob050_kmap1\\attempt_4\\Prob050_kmap1_code.sv:2: syntax error\nI give up.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    }
+  ]
+}

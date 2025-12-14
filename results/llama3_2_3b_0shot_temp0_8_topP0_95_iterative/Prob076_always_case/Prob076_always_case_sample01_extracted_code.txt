@@ -1,0 +1,7 @@
+assign out = sel < 6 ? 
+               (sel == 0) ? data0 : 
+                (sel == 1) ? data1 : 
+                 (sel == 2) ? data2 : 
+                  (sel == 3) ? data3 : 
+                   (sel == 4) ? data4 : 
+                    sel[2] ? data5 : 0;

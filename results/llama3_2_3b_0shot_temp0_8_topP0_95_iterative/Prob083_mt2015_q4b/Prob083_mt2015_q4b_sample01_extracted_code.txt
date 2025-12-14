@@ -1,0 +1,43 @@
+module TopModule(
+    // Input signals
+    input clk,
+    input x,
+    input y,
+
+    // Output signal
+    output [1:0] z
+);
+
+reg internal_state;  // State of the internal state machine
+
+always @(posedge clk) begin
+    if (clk == 1'b1 && internal_state == 3'b000) begin
+        internal_state <= 2'b00;
+        z <= 1'b1;
+    end else if (clk == 1'b1 && x == 0 && y == 0) begin
+        internal_state <= 3'b001;
+        z <= 1'b1;
+    end else if (clk == 1'b1 && x != 0 && y == 0) begin
+        internal_state <= 2'b00;
+        z <= 1'b1;
+    end else if (clk == 1'b1 && x == 0 && y == 1) begin
+        internal_state <= 3'b010;
+        z <= 1'b0;
+    end else if (clk == 1'b1 && x != 0 && y == 1) begin
+        internal_state <= 2'b00; // Transition to state with low output
+        z <= 1'b1;
+    end else if (clk == 1'b1 && internal_state == 3'b011 && x == 0 && y == 1) begin
+        internal_state <= 3'b111;
+        z <= 1'b0;
+    end else if (clk == 1'b1 && internal_state != 3'b001 && internal_state != 3'b010 && internal_state != 3'b011 && internal_state != 3'b111) begin
+        internal_state <= 2'b00; // Reset to state 0 when the system is in a valid state.
+        z <= 1'b1;
+    end else if (clk == 1'b1 && internal_state == 3'b001 && x == 0 && y == 1) begin
+        internal_state <= 2'b01;
+        z <= 1'b0;
+    end else if (clk == 1'b1 && internal_state != 3'b000 && internal_state != 3'b001 && internal_state != 3'b011 && internal_state != 3'b111) begin
+        z <= 1'b0;
+    end
+end
+
+endmodule

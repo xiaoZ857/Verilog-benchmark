@@ -1,0 +1,38 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output sum,
+  output cout
+);
+
+  assign sum = a ^ b;  // XOR gate for sum
+  assign cout = a & b; // AND gate for carry-out
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... )`**:  This declares the Verilog module named `TopModule` with the specified input and output ports.
+* **`input a, input b`**:  Declare `a` and `b` as input signals (the two bits to be added).
+* **`output sum, output cout`**:  Declare `sum` and `cout` as output signals (the sum and carry-out, respectively).
+* **`assign sum = a ^ b;`**:  This is a continuous assignment.  The `^` operator is the XOR (exclusive OR) operator.  The XOR of `a` and `b` gives the sum bit.  For example:
+    * `0 ^ 0 = 0`
+    * `0 ^ 1 = 1`
+    * `1 ^ 0 = 1`
+    * `1 ^ 1 = 0`
+* **`assign cout = a & b;`**:  This is another continuous assignment. The `&` operator is the AND operator. The AND of `a` and `b` gives the carry-out bit.  For example:
+    * `0 & 0 = 0`
+    * `0 & 1 = 0`
+    * `1 & 0 = 0`
+    * `1 & 1 = 1`
+
+**How it works (Half Adder Logic):**
+
+A half adder follows these logical equations:
+
+* **Sum = A XOR B**
+* **Carry-out = A AND B**
+
+The Verilog code directly implements these equations using the XOR and AND operators.

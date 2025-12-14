@@ -1,0 +1,39 @@
+Here is a simple Verilog module that sign-extends an 8-bit number to 32 bits:
+```verilog
+// Module for sign-extending an 8-bit number to 32 bits
+module TopModule(
+    // 8-bit input number
+    input [7:0] in,
+
+    // 32-bit output with extended number and replicated sign bit
+    output [31:0] out
+);
+
+    // Sign extension logic
+    reg [1:0] sign_ext;
+
+    assign
+        sign_ext = (in[0]) ? {24{in[0]}};
+        out = {sign_ext, in};
+
+endmodule
+```
+This module uses a simple `reg` to store the sign bit of the input number (`in[0]`) and then replicates it 24 times using the `{24{in[0]}}` syntax. The replicated sign bit is concatenated with the original 8-bit number to produce the extended 32-bit output.
+
+You can instantiate this module in your top-level design like so:
+```verilog
+module TopLevelModule(
+    // ... other inputs ...
+    input [7:0] in,
+    output [31:0] out
+);
+
+    // Instantiate the sign extension module
+    TopModule u_sign_ext(
+        .in(in),
+        .out(out)
+    );
+
+endmodule
+```
+You can then connect the `out` of this instantiation to your desired output.

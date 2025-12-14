@@ -1,0 +1,33 @@
+
+`timescale 1ns / 1ps
+//==========================================================================
+//  TopModule
+//  100‑input combinational logic that produces the AND, OR and XOR of all
+//  inputs.
+//
+//  Ports:
+//    in[99:0]   – 100‑bit wide input vector
+//    out_and    – 1‑bit AND of all 100 inputs
+//    out_or     – 1‑bit OR of all 100 inputs
+//    out_xor    – 1‑bit XOR of all 100 inputs
+//
+//  The design is purely combinational – no clocks or storage elements are
+//  required.  The reduction operators are synthesizable on all major
+//  FPGA/ASIC toolchains.
+//==========================================================================
+
+module TopModule (
+    input  wire [99:0] in,       // 100‑bit wide input vector
+    output wire        out_and,  // AND of all bits
+    output wire        out_or,   // OR  of all bits
+    output wire        out_xor   // XOR of all bits
+);
+
+// Continuous assignment using built‑in reduction operators
+assign out_and = &in;   // 100‑input AND
+assign out_or  = |in;   // 100‑input OR
+assign out_xor = ^in;   // 100‑input XOR
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

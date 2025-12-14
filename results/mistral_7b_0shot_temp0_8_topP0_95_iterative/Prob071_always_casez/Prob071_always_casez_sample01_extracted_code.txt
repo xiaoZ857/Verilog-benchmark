@@ -1,0 +1,26 @@
+always @(posedge clk) begin
+    pos <= 3'bz; // initialize output to zero
+
+    for (integer i = 7; i >= 0; i--) begin
+        if (in[i]) begin // check each bit from the most significant bit
+            pos <= i + 1'b0; // update the output with the index of the first set bit (zero-based to one-based)
+            break; // exit the loop after finding the first set bit
+        end
+    end
+end
+
+// Clock and reset inputs, replace 'clk' and 'reset' with your actual clock and active-low reset signals
+input [7:0] in;
+output reg [2:0] pos;
+input clk, reset;
+
+always @(posedge reset) begin
+    if (reset) begin
+        pos <= 3'bz; // set output to zero on reset
+    end
+end
+
+`timescale 1ns / 1ps
+
+// The module body ends here:
+endmodule

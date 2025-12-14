@@ -1,0 +1,96 @@
+
+module TopModule (
+  input clk,
+  input in,
+  input reset,
+  output done
+);
+// States definition
+typedef enum {
+    IDLE,
+    START_BIT,
+    DATA_BITS,
+    STOP_BIT
+} state_type;
+
+state_type state, next_state;
+reg [2:0] data_counter; // For counting 8 data bits (3-bit counter for 0-7)
+reg rx_data;            // To store received data bit
+
+// FSM transition table
+always @* 
+begin
+    case(state)
+        IDLE:
+            if (~reset) begin
+                next_state = IDLE;
+                data_counter = 0;
+                done = 1;
+            end else if (in == 0) begin
+                next_state = START_BIT;
+                data_counter = 0;
+                done = 0;
+            end else begin
+                next_state = IDLE;
+                data_counter = 0;
+                done = 1;
+            end
+            
+        START_BIT:
+            if (~reset) begin
+                next_state = IDLE;
+                data_counter = 0;
+                done = 1;
+            end else begin
+                next_state = DATA_BITS;
+                data_counter = 0;
+                done = 0;
+            end
+            
+        DATA_BITS: 
+            if (~reset) begin
+                next_state = IDLE;
+                data_counter = 0;
+                done = 1;
+            end else begin
+                rx_data = in;  // Store each received data bit (LSB first)
+                data_counter++;
+                
+                if (data_counter == 7) begin
+                    next_state = STOP_BIT;
+                end else begin
+                    next_state = DATA_BITS;
+                end
+                
+                done = 0;
+            end
+            
+        STOP_BIT:
+            if (~reset) begin
+                next_state = IDLE;
+                data_counter = 0;
+                done = 1;
+            end else if (in == 1) begin
+                next_state = IDLE;
+                done = 1;
+            end else begin
+                next_state = STOP_BIT;
+                done = 0;
+            end
+            
+        default:
+            next_state = IDLE; // Default to idle state
+            data_counter = 0;
+            done = 1;
+    endcase
+end
+
+always @ (posedge clk)
+begin
+    if (~reset) 
+        state <= IDLE;
+    else 
+        state <= next_state;
+end
+
+// VERILOG-EVAL: abnormal backticks count

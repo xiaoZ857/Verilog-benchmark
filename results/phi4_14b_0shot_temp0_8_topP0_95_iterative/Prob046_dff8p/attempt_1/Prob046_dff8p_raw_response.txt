@@ -1,0 +1,45 @@
+To implement the Verilog module `TopModule` with 8 D flip-flops, we need to ensure that each flip-flop is triggered on the negative edge of the clock (`clk`) and has an active high synchronous reset. When a reset occurs, all flip-flops should be set to the value `0x34`, which is binary `00110100`. Here's how you can implement this:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire [7:0] d,
+  input wire reset,
+  output reg [7:0] q
+);
+
+  // Internal registers to hold the state of each D flip-flop
+  reg [3:0] q1;  // First nibble (4 bits)
+  reg [3:0] q2;  // Second nibble (4 bits)
+
+  always @(negedge clk or posedge reset) begin
+    if (reset) begin
+      // Reset to 0x34
+      q1 <= 4'b0011;
+      q2 <= 4'b0100;
+    end else begin
+      // Update on negative edge of clock
+      q1 <= d[3:0];   // Capture lower nibble
+      q2 <= d[7:4];   // Capture upper nibble
+    end
+  end
+
+  // Concatenate the internal registers to form the output `q`
+  always @(*) begin
+    q = {q2, q1};  // Combine the two nibbles into one byte
+  end
+
+endmodule
+```
+
+### Explanation:
+
+- **Flip-Flop Division**: The module uses two separate 4-bit registers (`q1` and `q2`) to represent the lower and upper halves (nibbles) of the 8-bit output `q`. This is a common practice for managing bit-widths in Verilog.
+
+- **Reset Logic**: On a positive edge of `reset`, both nibble registers are set to form the binary value `00110100` (`0x34`).
+
+- **Clock Edge Sensitivity**: The `always` block is triggered on the negative edge of `clk`. It updates the internal state based on the input `d`.
+
+- **Output Assignment**: A separate combinational `always` block concatenates `q2` and `q1` to form the final 8-bit output `q`.
+
+This design ensures that all flip-flops are reset synchronously and only updated on the falling edge of the clock, as required.

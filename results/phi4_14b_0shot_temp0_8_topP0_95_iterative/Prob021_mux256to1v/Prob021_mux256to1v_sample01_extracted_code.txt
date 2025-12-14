@@ -1,0 +1,69 @@
+module TopModule (
+    input [1023:0] in,
+    input [7:0] sel,
+    output reg [3:0] out
+);
+
+    // Always block triggered on changes to 'in' or 'sel'.
+    always @(*) begin
+        case (sel)
+            8'd0 : out = in[3:0];
+            8'd1 : out = in[7:4];
+            8'd2 : out = in[11:8];
+            8'd3 : out = in[15:12];
+            8'd4 : out = in[19:16];
+            8'd5 : out = in[23:20];
+            8'd6 : out = in[27:24];
+            8'd7 : out = in[31:28];
+            8'd8 : out = in[35:32];
+            8'd9 : out = in[39:36];
+            8'd10: out = in[43:40];
+            8'd11: out = in[47:44];
+            8'd12: out = in[51:48];
+            8'd13: out = in[55:52];
+            8'd14: out = in[59:56];
+            8'd15: out = in[63:60];
+            8'd16: out = in[67:64];
+            8'd17: out = in[71:68];
+            8'd18: out = in[75:72];
+            8'd19: out = in[79:76];
+            8'd20: out = in[83:80];
+            8'd21: out = in[87:84];
+            8'd22: out = in[91:88];
+            8'd23: out = in[95:92];
+            8'd24: out = in[99:96];
+            8'd25: out = in[103:100];
+            8'd26: out = in[107:104];
+            8'd27: out = in[111:108];
+            8'd28: out = in[115:112];
+            8'd29: out = in[119:116];
+            8'd30: out = in[123:120];
+            8'd31: out = in[127:124];
+            8'd32: out = in[131:128];
+            8'd33: out = in[135:132];
+            8'd34: out = in[139:136];
+            8'd35: out = in[143:140];
+            8'd36: out = in[147:144];
+            8'd37: out = in[151:148];
+            8'd38: out = in[155:152];
+            8'd39: out = in[159:156];
+            8'd40: out = in[163:160];
+            8'd41: out = in[167:164];
+            8'd42: out = in[171:168];
+            8'd43: out = in[175:172];
+            8'd44: out = in[179:176];
+            8'd45: out = in[183:180];
+            8'd46: out = in[187:184];
+            8'd47: out = in[191:188];
+            8'd48: out = in[195:192];
+            8'd49: out = in[199:196];
+            8'd50: out = in[203:200];
+            8'd51: out = in[207:204];
+            8'd52: out = in[211:208];
+            8'd53: out = in[215:212];
+            8'd54: out = in[219:216];
+            8'd55: out = in[223:220];
+            8'd56: out = in[227:224];
+            8'd57: out = in[231:228];
+            8'd58: out = in[235:232];
+            8'd59: out

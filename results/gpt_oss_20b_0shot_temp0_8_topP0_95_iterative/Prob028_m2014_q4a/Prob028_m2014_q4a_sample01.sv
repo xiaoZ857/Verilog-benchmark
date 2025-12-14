@@ -1,0 +1,19 @@
+
+// TopModule.sv
+// Simple D‑latch – transparent when ena == 1
+module TopModule (
+    input  logic d,     // Data input
+    input  logic ena,   // Enable (transparent level)
+    output logic q      // Latch output
+);
+
+    // level‑sensitive latch
+    always @* begin
+        if (ena)          // when enable is high, copy d to q
+            q = d;
+        // else: do nothing – q retains its previous value
+    end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

@@ -1,0 +1,14 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:8: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:5:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:16: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:5:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:18: error: out is not a valid l-value in tb.top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:5:      : out is declared here as wire.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:14: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob012_xnorgate\attempt_2\Prob012_xnorgate_code.sv:14: error: Failed to evaluate event expression 'posedge clk'.
+5 error(s) during elaboration.

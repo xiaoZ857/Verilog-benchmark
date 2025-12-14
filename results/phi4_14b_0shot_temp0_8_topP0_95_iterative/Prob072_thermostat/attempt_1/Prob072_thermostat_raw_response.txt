@@ -1,0 +1,60 @@
+Below is a Verilog module implementation for the described thermostat system. The module takes inputs for mode, temperature conditions, and user control for the fan. It outputs signals to control the heater, air conditioner, and fan.
+
+```verilog
+module TopModule (
+    input wire mode,        // Mode: 1 for heating, 0 for cooling
+    input wire too_cold,    // Too cold condition
+    input wire too_hot,     // Too hot condition
+    input wire fan_on,      // User request to turn on the fan
+    output reg heater,      // Heater control signal
+    output reg aircon,      // Air conditioner control signal
+    output reg fan          // Fan control signal
+);
+
+always @(*) begin
+    // Default state: Turn off all devices
+    heater = 0;
+    aircon = 0;
+    fan = 0;
+
+    if (mode == 1) begin
+        // Heating mode
+        if (too_cold) begin
+            heater = 1;      // Turn on the heater when too cold
+            fan = 1;         // Turn on the fan to circulate air
+        end
+    end else begin
+        // Cooling mode
+        if (too_hot) begin
+            aircon = 1;      // Turn on the air conditioner when too hot
+            fan = 1;         // Turn on the fan to circulate air
+        end
+    end
+
+    // Check user request for fan control
+    if (fan_on) begin
+        fan = 1;             // Turn on the fan if requested by the user
+    end
+end
+
+endmodule
+```
+
+### Explanation:
+- **Inputs:**
+  - `mode`: Determines whether the system is in heating mode (`1`) or cooling mode (`0`).
+  - `too_cold`: Indicates if it's too cold, triggering the heater.
+  - `too_hot`: Indicates if it's too hot, triggering the air conditioner.
+  - `fan_on`: User request to turn on the fan regardless of other conditions.
+
+- **Outputs:**
+  - `heater`: Controls the heater (on = `1`, off = `0`).
+  - `aircon`: Controls the air conditioner (on = `1`, off = `0`).
+  - `fan`: Controls the fan (on = `1`, off = `0`).
+
+- **Logic:**
+  - In heating mode (`mode == 1`), if it's too cold, both the heater and fan are turned on.
+  - In cooling mode (`mode == 0`), if it's too hot, both the air conditioner and fan are turned on.
+  - The fan is also turned on if `fan_on` is high, regardless of other conditions.
+
+This implementation ensures that the system responds appropriately to temperature conditions and user inputs.

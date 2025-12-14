@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_2\Prob124_rule110_code.sv:19: warning: Part select temp[512:0] is out of range.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_2\Prob124_rule110_code.sv:19: warning: Part select [512:0] is selecting after the vector q[511:0].
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob124_rule110\attempt_2\Prob124_rule110_code.sv:19:        : Replacing the out of bound bits with 'bx.

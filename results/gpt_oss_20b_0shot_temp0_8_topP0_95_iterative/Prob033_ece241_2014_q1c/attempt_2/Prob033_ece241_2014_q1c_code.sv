@@ -1,0 +1,10 @@
+
+module TopModule (
+  input [7:0] a,
+  input [7:0] b,
+  output [7:0] s,
+  output overflow
+);
+  // Full 9‑bit sum (to keep the carry
+
+// VERILOG-EVAL: endmodule not found

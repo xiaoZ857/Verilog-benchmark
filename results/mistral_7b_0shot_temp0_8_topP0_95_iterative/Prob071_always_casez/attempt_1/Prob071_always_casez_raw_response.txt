@@ -1,0 +1,35 @@
+ Here's a Verilog implementation of the priority encoder for an 8-bit input as described. The `TopModule` will output the position of the least significant bit that is set to 1. If all bits are 0, it will output zero.
+
+```verilog
+module TopModule (
+    input [7:0] in,
+    output reg [2:0] pos
+);
+
+always @(posedge clk) begin
+    pos <= 3'bz; // initialize output to zero
+
+    for (int i = 0; i < 8; i++) begin
+        if (in[i]) begin
+            if (pos == 3'bz) begin // if any bit is set and the output was zero before, update the output
+                pos <= i + 1'b0; // add one to the index to get the correct position (zero-based to one-based)
+            end
+        end
+    end
+end
+
+// Optional: Add a reset signal if needed
+always @(posedge reset) begin
+    if (reset) begin
+        pos <= 3'bz; // set output to zero on reset
+    end
+end
+
+// Clock and reset inputs, replace 'clk' and 'reset' with your actual clock and active-low reset signals
+input clk, reset;
+
+// Add the clock and reset pins to the module port list
+output reg [2:0] pos, input clk, reset;
+```
+
+This Verilog code will implement a top-level module for the priority encoder. You can adjust the `clk`, `reset` signals according to your design. The circuit uses an always block with a for loop to check every bit in the 8-bit input vector and update the output when it finds the first set bit. If all bits are zero, the output remains zero.

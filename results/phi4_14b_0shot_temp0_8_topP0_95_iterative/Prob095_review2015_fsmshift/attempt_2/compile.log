@@ -1,0 +1,7 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 0
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob095_review2015_fsmshift_test.sv:66: warning: Instantiating module TopModule with dangling input port 3 (pattern_detected) floating.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob095_review2015_fsmshift\attempt_2\Prob095_review2015_fsmshift_code.sv:51: warning: A non-blocking assignment should not be used in an always_comb process.

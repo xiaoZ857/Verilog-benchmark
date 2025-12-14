@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:24: error: Enumeration name RECEIVE_13 has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:24: error: Enumeration name RECEIVE_13 and IDLE have the same value: 3'd0
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:24: error: Enumeration name WAIT_STOP has an inferred value that overflowed.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_1\Prob146_fsm_serialdata_code.sv:24: error: Enumeration name WAIT_STOP and START_BIT have the same value: 3'd1
+5 error(s) during elaboration.

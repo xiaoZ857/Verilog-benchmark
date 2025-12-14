@@ -1,0 +1,30 @@
+Here's a Verilog implementation of the function described in the Karnaugh map:
+
+```verilog
+module TopModule (
+    input [4:1] x,
+    output logic f
+);
+
+logic [3:0][2:0] y;
+
+assign y[2] = (x[3] == 1) ? x[2]: x[3];
+assign y[1] = ~(y[2]);
+assign y[0] = (x[3] == 0) || (x[2] == 1);
+
+logic f;
+assign f = 
+    (~x[4]) & y[3]
+    | (x[2] == 1) & x[1]
+    | ~(x[3] & ~y[0])
+    | (x[0] == 0) & y[2];
+
+endmodule
+```
+
+Explanation:
+
+- We first define an output variable `y` where we assign values based on the Karnaugh map.
+- Next, we use the `assign` keyword to link `y` with its assigned values. 
+- Then, in the module instance, we create an output variable `f`. We use the `assign` keyword to connect it to the expression derived from the Karnaugh map.
+- The last line of the code is used to generate the function `f` based on the truth table shown in the problem statement.

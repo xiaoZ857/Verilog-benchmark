@@ -1,0 +1,90 @@
+```verilog
+module TopModule (
+  input [7:0] in,
+  output parity
+);
+
+  // Internal signal to store the XOR result
+  wire xor_result;
+
+  // XOR the 8 data bits to calculate the parity bit
+  xor(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7], parity);
+
+endmodule
+
+// Define a custom XOR function for 8 inputs
+module xor (
+  input a,
+  input b,
+  input c,
+  input d,
+  input e,
+  input f,
+  input g,
+  input h,
+  output reg out
+);
+
+  always @* begin
+    out = a ^ b ^ c ^ d ^ e ^ f ^ g ^ h;
+  end
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule (input [7:0] in, output parity);`**: This defines the top-level module named `TopModule`. It takes an 8-bit input `in` and produces a single-bit output `parity`.
+
+2. **`wire xor_result;`**: This declares a wire named `xor_result`. Wires are used to connect components within a Verilog module. It's declared here to hold the intermediate XOR result, although in this simple case, it's not strictly necessary and could be directly assigned.
+
+3. **`xor(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7], parity);`**: This line calls a custom module named `xor` to perform the XOR operation on all 8 input bits and assigns the result to the `parity` output.
+
+4. **`module xor (input a, input b, input c, input d, input e, input f, input g, input h, output reg out);`**: This defines the custom module `xor` which performs an XOR operation on 8 inputs.  Using a custom module allows the main module to remain cleaner and more readable.
+
+5. **`always @* begin ... end`**: This is a combinational `always` block. The `@*` sensitivity list means the block will execute whenever any of the inputs change.
+
+6. **`out = a ^ b ^ c ^ d ^ e ^ f ^ g ^ h;`**: This is the core logic of the XOR module.  It calculates the XOR of all 8 input bits (`a` through `h`) and assigns the result to the `out` output.
+
+**How it works (Even Parity):**
+
+* **XOR Operation:** The XOR (exclusive OR) operation returns 1 if the number of 1s in the inputs is odd, and 0 if the number of 1s is even.
+* **Even Parity:**  To achieve even parity, the parity bit is set to 0 if the number of 1s in the data bits is even, and 1 if the number of 1s is odd. The custom `xor` module implements this.
+
+**To simulate this code:**
+
+You would need to create a testbench to provide input values to the `in` port and observe the `parity` output.  A basic testbench could look like this:
+
+```verilog
+module testbench;
+
+  reg [7:0] in;
+  wire parity;
+
+  TopModule uut (
+    .in(in),
+    .parity(parity)
+  );
+
+  initial begin
+    // Test case 1: All zeros
+    in = 8'b00000000;
+    #10;
+    $display("Input: %b, Parity: %b", in, parity);
+
+    // Test case 2: Single 1
+    in = 8'b00000001;
+    #10;
+    $display("Input: %b, Parity: %b", in, parity);
+
+    // Test case 3: All ones
+    in = 8'b11111111;
+    #10;
+    $display("Input: %b, Parity: %b", in, parity);
+
+    $finish;
+  end
+
+endmodule
+```
+
+This testbench provides a few test cases and prints the input and parity bit to the console.  You'd need a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado) to run the testbench and verify the functionality of the `TopModule`.

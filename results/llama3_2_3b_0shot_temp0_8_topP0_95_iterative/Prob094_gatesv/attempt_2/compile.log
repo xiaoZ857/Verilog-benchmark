@@ -1,0 +1,34 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 17
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:10: warning: Part select out_any[2:0] is out of range.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:10: sorry: part selects straddling the start of signal (out_any['sd2:'sd0]) are not currently supported.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:15: error: out_both['sd0] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:4:      : out_both['sd0] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:16: error: out_both['sd1] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:4:      : out_both['sd1] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:17: error: out_both['sd2] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:4:      : out_both['sd2] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:14: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:14: error: Failed to evaluate event expression 'posedge clk'.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:22: error: out_any['sd0] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:5:      : out_any['sd0] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:23: error: out_any['sd1] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:5:      : out_any['sd1] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:24: error: out_any['sd2] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:5:      : out_any['sd2] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:21: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:21: error: Failed to evaluate event expression 'posedge clk'.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:29: error: out_different['sd0] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:6:      : out_different['sd0] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:30: error: out_different['sd1] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:6:      : out_different['sd1] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:31: error: out_different['sd2] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:6:      : out_different['sd2] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:32: error: out_different['sd3] is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:6:      : out_different['sd3] is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:28: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob094_gatesv\attempt_2\Prob094_gatesv_code.sv:28: error: Failed to evaluate event expression 'posedge clk'.
+17 error(s) during elaboration.

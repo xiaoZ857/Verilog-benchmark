@@ -1,0 +1,14 @@
+
+`timescale 1ns/1ps
+
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+
+assign out = (in >> (4 * sel[2..0])) & 4'b1111;
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

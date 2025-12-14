@@ -1,0 +1,17 @@
+  logic [31:0] history_reg;
+
+  always_ff @(posedge clk, posedge areset) begin
+    if (areset) begin
+      history_reg <= 0;
+    end else begin
+      if (train_mispredicted) begin
+        // Load the mispredicted history, misprediction takes precedence
+        history_reg <= {train_history, train_taken};
+      end else if (predict_valid) begin
+        // Shift in the prediction
+        history_reg <= {predict_taken, history_reg[31:1]};
+      end
+    end
+  end
+
+  assign predict_history = history_reg;

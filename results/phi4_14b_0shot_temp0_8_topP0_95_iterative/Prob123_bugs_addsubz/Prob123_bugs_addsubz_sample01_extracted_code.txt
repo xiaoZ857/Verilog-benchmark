@@ -1,0 +1,12 @@
+always @(*) begin
+    // Perform addition or subtraction with proper sign extension.
+    if (do_sub) begin
+        {out[7], out} = a - b;  // Subtraction with sign extension
+    end else begin
+        {out[7], out} = a + b;  // Addition with sign extension
+    end
+
+    // Check if the output is zero for setting result_is_zero flag.
+    // We use equality check to determine if all bits are zero.
+    result_is_zero = (out == 8'b0000_0000);
+end

@@ -1,0 +1,4 @@
+  heater = mode & too_cold;
+  aircon = ~mode & too_hot;
+  fan = fan_on | heater | aircon;
+endmodule

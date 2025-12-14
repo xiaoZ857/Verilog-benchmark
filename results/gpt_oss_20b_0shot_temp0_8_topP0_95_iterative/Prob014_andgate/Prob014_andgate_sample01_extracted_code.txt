@@ -1,0 +1,19 @@
+//===================================================================
+//  TopModule
+//  Simple 2‑input AND gate
+//
+//  Ports:
+//      input  a      – first operand
+//      input  b      – second operand
+//      output out    – result (a AND b)
+//===================================================================
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // output of the AND operation
+);
+
+// Continuous assignment – purely combinational logic
+assign out = a & b;
+
+endmodule

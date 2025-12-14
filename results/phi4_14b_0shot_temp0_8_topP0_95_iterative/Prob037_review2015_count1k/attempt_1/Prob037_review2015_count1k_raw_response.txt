@@ -1,0 +1,74 @@
+To implement the described Verilog module for a 4-bit BCD (Binary-Coded Decimal) counter that counts from 0 to 999 and resets synchronously on an active-high reset signal, you'll need to follow these steps:
+
+1. Define three 6-bit registers (`B`, `T`, and `H`) to represent the units, tens, and hundreds place of a BCD number respectively.
+2. Create logic to increment each digit correctly, ensuring that when any digit rolls over (exceeds its maximum value for BCD), it resets back to zero and increments the next higher digit.
+3. Implement the synchronous reset logic.
+
+Here's the Verilog code:
+
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  output reg [9:0] q // q[9:0] represents H[2:0], T[5:0], and B[5:0]
+);
+
+  // Registers for hundreds, tens, and units place of BCD
+  reg [2:0] H;   // Hundreds place (range 000 to 111 which is 0 to 7 in decimal)
+  reg [5:0] T;   // Tens place (BCD range 00000 to 1001 for 0 to 9)
+  reg [5:0] B;   // Units place (BCD range 00000 to 1001 for 0 to 9)
+
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      H <= 3'b000;
+      T <= 6'b000000;
+      B <= 6'b000000;
+    end else begin
+      // Increment the BCD counter
+      if (B < 6'd9) begin
+        B <= B + 1;
+      end else begin
+        B <= 0;
+        if (T < 6'd9) begin
+          T <= T + 1;
+        end else begin
+          T <= 0;
+          if (H < 3'd7) begin
+            H <= H + 1;
+          end else begin
+            H <= 0; // When it rolls over from 999 to 000, reset the entire counter.
+          end
+        end
+      end
+    end
+  end
+
+  // Assign output values to q. Format: [H2:H0,T5:T0,B5:B0]
+  always @(*) begin
+    q[9] = H[2];
+    q[8] = H[1];
+    q[7] = H[0];
+    q[6] = T[5];
+    q[5] = T[4];
+    q[4] = T[3];
+    q[3] = T[2];
+    q[2] = T[1];
+    q[1] = T[0];
+    q[0] = B[5]; // Only the MSB of B is assigned for a 10-bit output
+  end
+
+endmodule
+```
+
+### Explanation:
+- **Reset Logic:** The counter resets to `H=000`, `T=000000`, and `B=000000` on an active high reset.
+  
+- **Increment Logic:**
+  - Increment the unit's BCD digit (`B`). If it overflows (i.e., becomes 10), reset it to zero and increment the tens place.
+  - Similarly, handle overflow of the tens place by resetting it and incrementing the hundreds place.
+  - The hundreds place can go from `0` to `7`, so when it reaches `8` upon increment, it rolls over back to `0`.
+
+- **Output Mapping:** 
+  - The output `q[9:0]` represents `[H2:H0,T5:T0,B5:B0]`. Only the most significant bit of B (`B[5]`) is used in this mapping because a full BCD digit would be `1001`.
+  
+This design ensures that the counter rolls over correctly and operates within the constraints of counting from 000 to 999 in BCD form.

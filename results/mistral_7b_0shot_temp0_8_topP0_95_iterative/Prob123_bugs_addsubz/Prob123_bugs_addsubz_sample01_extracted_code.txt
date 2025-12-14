@@ -1,0 +1,13 @@
+always @(posedge clk) begin
+    case (do_sub)
+      0: out <= a + b;
+      1: out <= {a, b} >> 1'b1 & a << 8 - b; // Right-shifting 'a' and 'b' to ensure correct output width
+    endcase
+
+    if (out === 'h0) // Check for zero value by comparing with hexadecimal zero representation
+        result_is_zero <= 1'b1;
+    else if ((a >= b && do_sub) || (a < b && !do_sub)) // Check for overflow during subtraction
+        result_is_zero <= 1'b0;
+    else
+        result_is_zero <= 1'b0; // Otherwise, clear the flag
+end

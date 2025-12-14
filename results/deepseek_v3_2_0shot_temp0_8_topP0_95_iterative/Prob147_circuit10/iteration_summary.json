@@ -1,0 +1,65 @@
+{
+  "problem_name": "Prob147_circuit10",
+  "model_name": "deepseek-v3.2",
+  "parameters": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "max_compile_attempts": 3,
+    "max_test_attempts": 3
+  },
+  "compile_attempts": 2,
+  "test_attempts": 3,
+  "total_attempts": 5,
+  "final_compile_success": true,
+  "final_test_success": false,
+  "first_attempt_compile_success": false,
+  "first_attempt_test_success": false,
+  "improved_by_iteration": true,
+  "history": [
+    {
+      "attempt": 1,
+      "phase": "initial",
+      "compile_success": false,
+      "compile_error": "=== Static Analysis ===\nPASS: No simulation-hanging patterns detected\n==================================================\n=== Compilation ===\nReturn code: 1\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob147_circuit10\\attempt_1\\Prob147_circuit10_code.sv:16: error: state is not a valid l-value in tb.top_module1.\nresults/deepseek_v3_2_0shot_temp0_8_topP0_95_iterative\\Prob147_circuit10\\attempt_1\\Prob147_circuit10_code.sv:7:      : state is declared here as wire.\nD:\\WorkSpace\\ResearchCode\\LLM4DSL\\verilog\\Verilog-benchmark\\dataset_code-complete-iccad2023/Prob147_circuit10_test.sv:112: warning: output port state is coerced to inout.\n1 error(s) during elaboration.\n",
+      "test_success": null,
+      "test_error": null,
+      "mismatch_count": null
+    },
+    {
+      "attempt": 2,
+      "phase": "compile_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 229 mismatches. First mismatch occurred at time 20.\nHint: Output 'state' has 229 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 229 out of 232 samples\n\nSimulation finished at 1160 ps\nMismatches: 229 in 232 samples\n",
+      "mismatch_count": 229
+    },
+    {
+      "attempt": 3,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 229 mismatches. First mismatch occurred at time 20.\nHint: Output 'state' has 229 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 229 out of 232 samples\n\nSimulation finished at 1160 ps\nMismatches: 229 in 232 samples\n",
+      "mismatch_count": 229
+    },
+    {
+      "attempt": 4,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 229 mismatches. First mismatch occurred at time 20.\nHint: Output 'state' has 229 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 229 out of 232 samples\n\nSimulation finished at 1160 ps\nMismatches: 229 in 232 samples\n",
+      "mismatch_count": 229
+    },
+    {
+      "attempt": 5,
+      "phase": "test_fix",
+      "compile_success": true,
+      "compile_error": null,
+      "test_success": false,
+      "test_error": "=== Test Execution ===\nReturn code: 0\nVCD info: dumpfile wave.vcd opened for output.\nHint: Output 'q' has 229 mismatches. First mismatch occurred at time 20.\nHint: Output 'state' has 229 mismatches. First mismatch occurred at time 20.\nHint: Total mismatched samples is 229 out of 232 samples\n\nSimulation finished at 1160 ps\nMismatches: 229 in 232 samples\n",
+      "mismatch_count": 229
+    }
+  ]
+}

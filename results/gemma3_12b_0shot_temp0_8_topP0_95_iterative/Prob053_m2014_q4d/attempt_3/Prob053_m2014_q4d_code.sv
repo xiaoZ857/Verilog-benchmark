@@ -1,0 +1,18 @@
+
+module TopModule (
+  input clk,
+  input in,
+  output logic out
+);
+  logic q;
+
+  // XOR gate
+  assign xor_out = in ^ q;
+
+  // D flip-flop
+  always_ff @(posedge clk) begin
+    q <= xor_out;
+  end
+
+  assign out = q;
+endmodule

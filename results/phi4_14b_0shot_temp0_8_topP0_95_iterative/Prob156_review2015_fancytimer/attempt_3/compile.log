@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 7
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:25: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:26: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:27: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:28: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:33: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:34: sorry: This cast operation is not yet supported.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob156_review2015_fancytimer_ref.sv:35: sorry: This cast operation is not yet supported.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:63: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:63: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:79: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:83: warning: A non-blocking assignment should not be used in an always_comb process.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob156_review2015_fancytimer\attempt_3\Prob156_review2015_fancytimer_code.sv:84: warning: A non-blocking assignment should not be used in an always_comb process.
+7 error(s) during elaboration.

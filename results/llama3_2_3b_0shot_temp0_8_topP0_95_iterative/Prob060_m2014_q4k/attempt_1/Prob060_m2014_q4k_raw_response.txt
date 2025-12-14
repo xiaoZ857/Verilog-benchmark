@@ -1,0 +1,59 @@
+Here's the implementation of the Verilog module based on your description:
+
+```verilog
+module TopModule (
+  input  wire clk,
+  input  wire resetn,
+  input  wire in,
+  output reg [3:0] out
+);
+
+// Positive edge clocking with synchronous reset
+always @(posedge clk or posedge resetn) begin
+  if (resetn == 1) begin // active-low reset
+    out <= 4'd0; // reset to all zeros
+  else begin
+    out <= in; // shift register logic here
+  end
+end
+
+// Add the shift register logic as needed. This is a basic implementation where each D flip-flop is connected to the input and the output of the previous state.
+always @(posedge clk) begin
+  // Update the output
+  if (out[3]) out <= in; 
+  else if (out[2]) out <= out[1];
+  else if (out[1]) out <= out[0];
+  else if (out[0]) out <= in;
+end
+```
+
+However, a more typical implementation of a shift register would be to have the input and output shifted across the flip-flops. Here's an updated version:
+
+```verilog
+module TopModule (
+  input  wire clk,
+  input  wire resetn,
+  input  wire in,
+  input  wire [3:0] out
+);
+
+reg [3:0] shift register[4:0];
+
+// Positive edge clocking with synchronous reset
+always @(posedge clk or posedge resetn) begin
+  if (resetn == 1) begin // active-low reset
+    for (int i = 0; i < 5; i++) shift_register[i] <= 4'd0;
+  end else begin
+    for (int i = 4; i >= 1; i--) 
+      shift_register[i] <= shift_register[i-1];
+    shift_register[0] <= in;
+  end
+end
+
+always @(*)
+begin
+  out <= shift_register[4]; // output the last value
+end
+```
+
+This implementation shifts the input `in` across the flip-flops and updates the outputs based on the current state. The `out` signal is then assigned the last value in the shift register.

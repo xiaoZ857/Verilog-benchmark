@@ -1,0 +1,17 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:12: error: done is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:13: error: out_bytes is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:6:      : out_bytes is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:18: error: out_bytes is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:6:      : out_bytes is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:19: error: done is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:22: error: done is not a valid l-value in tb.top_module1.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:7:      : done is declared here as wire.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob154_fsm_ps2data\attempt_3\Prob154_fsm_ps2data_code.sv:30: sorry: constant selects in always_* processes are not currently supported (all bits will be included).
+5 error(s) during elaboration.

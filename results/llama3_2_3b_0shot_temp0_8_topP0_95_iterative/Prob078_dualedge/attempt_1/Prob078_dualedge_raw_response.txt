@@ -1,0 +1,23 @@
+To implement a dual-edge triggered flip-flop in Verilog, we can use two separate D-latch pairs and a combination of AND and OR gates to mimic the behavior of a dual-edge latch. Here's an example implementation:
+
+```verilog
+module TopModule (
+  input clk,
+  input d,
+  output reg q
+);
+
+reg prev_q;
+
+assign prev_q = q;
+assign q = (d & ~prev_q) | (~d & prev_q);
+
+endmodule
+```
+
+In this design, we're using the fact that both `q` and `prev_q` are latched onto at both rising and falling edges of the clock. The assignment for `q` is a combination of two AND and OR operations: 
+
+- `(d & ~prev_q)` will be true only when `d` is high (or 1) and `prev_q` is low (0). This corresponds to the case where the input signal goes high during the rising edge.
+- `(~d & prev_q)` will be true only when `d` is low (or 0) and `prev_q` is high. This corresponds to the case where the input signal goes low during the falling edge.
+
+Since both terms of the OR operation are mutually exclusive, they cannot occur at the same time, effectively mimicking the behavior of a dual-edge latch where `q` is set on both rising and falling edges of the clock.

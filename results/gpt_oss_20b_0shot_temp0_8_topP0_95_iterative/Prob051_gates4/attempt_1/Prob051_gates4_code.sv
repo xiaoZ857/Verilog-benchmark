@@ -1,0 +1,36 @@
+
+//  TopModule.v
+//  ------------------------------------------------------------
+//  4‑input combinational circuit
+//  ---------------------------------
+//  • out_and : 4‑input AND (all four bits must be 1)
+//  • out_or  : 4‑input OR  (any bit is 1)
+//  • out_xor : 4‑input XOR (parity of the four bits)
+//  ------------------------------------------------------------
+
+`timescale 1ns / 1ps
+
+module TopModule (
+    input  wire [3:0] in,      // 4‑bit input vector
+    output wire       out_and, // 4‑input AND
+    output wire       out_or,  // 4‑input OR
+    output wire       out_xor  // 4‑input XOR
+);
+
+// -----------------------------------------------------------------
+//  Implementation – simple continuous assignments
+// -----------------------------------------------------------------
+
+// 4‑input AND
+assign out_and = in[0] & in[1] & in[2] & in[3];
+
+// 4‑input OR
+assign out_or  = in[0] | in[1] | in[2] | in[3];
+
+// 4‑input XOR (parity)
+assign out_xor = in[0] ^ in[1] ^ in[2] ^ in[3];
+
+// -----------------------------------------------------------------
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

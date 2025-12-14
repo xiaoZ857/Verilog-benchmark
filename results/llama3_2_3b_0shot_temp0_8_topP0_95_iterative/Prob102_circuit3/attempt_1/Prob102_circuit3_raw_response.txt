@@ -1,0 +1,21 @@
+Below is the Verilog module implementation for the described combinational circuit.
+
+```verilog
+module TopModule (
+    input a,        // clock signal
+    input b,        // reset signal (asserted on clock edges)
+    input c,        // data line 'c'
+    input d,        // data line 'd'
+    output q        // output signal 'q'
+);
+
+    assign q = ~(a & c) | (b ^ d);
+
+endmodule
+```
+
+This implementation works as follows:
+
+- The expression `~(a & c)` means the output `q` is 1 whenever either `c` or `a` are 0. This effectively selects any input from `d` where it was not selected on the previous clock edge.
+- The expression `(b ^ d)` represents an XOR operation between `b` and `d`. This outputs the opposite of what would be in memory when this is asserted (in terms of its value) based on a "carry" logic. 
+- The combination of these two expressions, using bitwise OR (`|`) creates the desired logic for a binary counter with no carry.

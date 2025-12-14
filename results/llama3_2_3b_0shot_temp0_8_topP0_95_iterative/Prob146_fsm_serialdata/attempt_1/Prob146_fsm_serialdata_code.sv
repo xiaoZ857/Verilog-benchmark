@@ -1,0 +1,62 @@
+
+// Finite State Machine for Serial Communication Protocol
+module TopModule (
+    input clk, // Clock signal
+    input in,   // Input stream (serial data)
+    input reset, // Active-high synchronous reset
+    output [7:0] out_byte, // Correctly received byte
+    output done     // Done signal
+);
+
+// States of the finite state machine
+typedef enum reg {
+    IDLE,
+    START_BIT,
+    DATA_BYTE,
+    STOP_BIT
+} state;
+
+reg [1:0] state; // Current state
+
+// Next state logic
+assign next_state = case (state)
+    IDLE        : {in, 2'b00}
+    START_BIT  : {in, 2'b01}
+    DATA_BYTE  : {in, 2'b10}
+    STOP_BIT   : {in, 2'b11};
+endcase;
+
+always @(posedge clk) // Clock edge
+begin: always_edge
+    if (next_state != state)
+        state <= next_state;
+    else if (in == 1 && state == START_BIT)
+        state <= DATA_BYTE; // Start bit detected, wait for data byte
+    else if (in == 0 && state == STOP_BIT && state == DATA_BYTE)
+        state <= IDLE; // Stop bit received, end of byte
+end
+
+// State-dependent outputs
+always (posedge clk) // Clock edge
+begin: always_edge
+    case (state)
+        IDLE        : out_byte <= 8'b0;
+        START_BIT  : out_byte <= 8'b00000000;
+        DATA_BYTE  : out_byte[7] <= in;
+        STOP_BIT   : out_byte <= 8'b11100001; // Correctly received byte
+    endcase
+end
+
+// Done signal logic
+assign done = (state == IDLE) || (state == START_BIT); // Done if idle or waiting for start bit
+
+// Synchronous reset logic
+always_ff @(posedge reset)
+begin: sync_reset
+    state <= IDLE;
+    out_byte <= 8'b0;
+end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

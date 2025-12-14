@@ -1,0 +1,7 @@
+  always @(posedge clk) begin
+    if (a == 0) begin
+      q <= 1;
+    end else begin
+      q <= ~q;
+    end
+  end

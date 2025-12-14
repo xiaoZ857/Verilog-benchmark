@@ -1,0 +1,55 @@
+**Verilog – Find the minimum of four 8‑bit unsigned numbers**
+
+```verilog
+// ---------------------------------------------------------------
+//  Module: TopModule
+//  Purpose: Compute the minimum of four 8‑bit unsigned inputs
+//  Author : ChatGPT
+// ---------------------------------------------------------------
+
+`timescale 1ns/1ps
+
+module TopModule (
+    input  wire [7:0] a,
+    input  wire [7:0] b,
+    input  wire [7:0] c,
+    input  wire [7:0] d,
+    output reg  [7:0] min          // min is declared as a reg because we assign it
+);
+
+    // ---------------------------------------------
+    //  Combinational logic – no clock involved
+    // ---------------------------------------------
+    always @* begin
+        // First, find the min of a & b
+        reg [7:0] min_ab;
+        if (a < b)
+            min_ab = a;
+        else
+            min_ab = b;
+
+        // Then, find the min of c & d
+        reg [7:0] min_cd;
+        if (c < d)
+            min_cd = c;
+        else
+            min_cd = d;
+
+        // Finally, compare the two intermediate mins
+        if (min_ab < min_cd)
+            min = min_ab;
+        else
+            min = min_cd;
+    end
+
+endmodule
+```
+
+### Notes
+
+* The module is **combinational** – it has no clock input, so the `always @*` block (or `always_comb` if you are using SystemVerilog) is the right choice.
+* The `min` output is declared as a `reg` because it is assigned inside an `always` block.  
+  (In plain Verilog‑2001 `reg` just means “a variable that can be assigned in an `always` block”; it is not a hardware register unless you use a clocked block.)
+* The comparison operators (`<`, `>`, etc.) work on unsigned numbers, so this module correctly handles all 8‑bit unsigned values.
+
+You can now instantiate `TopModule` in your design or use it in a testbench to verify that it returns the smallest of the four inputs.

@@ -1,0 +1,45 @@
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    current_state <= 0; // Reset state to 0
+    err <= 1'b0; // Reset error state as well
+  end else begin
+    case(current_state)
+      0: begin
+        if (in == 1'b1) begin
+          current_state <= 1; // First bit of a sequence
+        end
+      end,
+      1: begin
+        if (in == 1'b0) begin
+          current_state <= 2; // First 0 after sequence start
+        end else if(in == 1'b1 && current_state < 6) begin
+          current_state <= [5:0]current_state + 1; // Continue counting
+        end
+      end,
+      6: begin
+        if (in == 1'b0) begin
+          current_state <= 7; // First 0 after 7 consecutive 1s
+        end
+      end,
+      7: begin
+        if (!disc && !(current_state >= 8)) begin // Check if we haven't skipped a bit or exceeded 7 consecutive 1s
+          err <= 1'b1;
+          current_state <= 8; // Reset error state and discard the bit
+        end
+      end,
+      _: current_state <= current_state; // Ignore invalid states
+    endcase
+
+    assign disc = (current_state == 5); // Discard bit when in sequence 5
+
+    always @(posedge clk) begin
+      if (((current_state == 6) || (current_state == 11)) && !disc) begin
+        flag <= 1'b1;
+      end
+    end
+
+    assign err = ((current_state >= 7) && !disc); // Error state should also consider the discard bit
+  end
+end
+
+endmodule

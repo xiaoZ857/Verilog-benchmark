@@ -1,0 +1,8 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob025_reduction\attempt_3\Prob025_reduction_code.sv:17: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob025_reduction\attempt_3\Prob025_reduction_code.sv:17: error: Operand of unary ! is not a primary expression.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob025_reduction\attempt_3\Prob025_reduction_code.sv:17: error: syntax error in continuous assignment

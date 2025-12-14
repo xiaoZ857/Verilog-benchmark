@@ -1,0 +1,25 @@
+To implement a one-bit wide, 2-to-1 multiplexer in Verilog, you need to create a module that takes two inputs (`a` and `b`), a select signal (`sel`), and outputs the selected input on `out`. The behavior of the multiplexer is determined by the value of `sel`: when `sel` is 0, the output should be `a`, and when `sel` is 1, the output should be `b`.
+
+Here is how you can write this Verilog module:
+
+```verilog
+module TopModule (
+    input wire a,
+    input wire b,
+    input wire sel,
+    output wire out
+);
+
+// Implementing the multiplexer using conditional operator
+assign out = (sel == 1'b0) ? a : b;
+
+endmodule
+```
+
+### Explanation:
+- **Inputs and Outputs**: The module `TopModule` has three inputs (`a`, `b`, `sel`) and one output (`out`).
+- **Conditional Operator**: The multiplexer logic is implemented using the ternary conditional operator `(condition ? true_value : false_value)`. 
+  - If `sel == 1'b0`, then `out` takes the value of `a`.
+  - Otherwise, when `sel == 1'b1`, `out` takes the value of `b`.
+
+This simple implementation efficiently realizes a 2-to-1 multiplexer using Verilog's conditional operator.

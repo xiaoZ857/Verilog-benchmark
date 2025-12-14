@@ -1,0 +1,80 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output [3:1] ena,
+  output reg [15:0] q
+);
+
+  reg [3:0] ones_count;
+  reg [3:0] tens_count;
+  reg [3:0] hundreds_count;
+  reg [3:0] thousands_count;
+
+  // Ones digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      ones_count <= 0;
+    end else begin
+      if (ones_count == 9) begin
+        ones_count <= 0;
+      end else begin
+        ones_count <= ones_count + 1;
+      end
+    end
+  end
+
+  // Tens digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      tens_count <= 0;
+    end else begin
+      if (tens_count == 9) begin
+        tens_count <= 0;
+        ena[1] <= 1;
+      end else begin
+        ena[1] <= 0;
+      end
+    end
+  end
+
+  // Hundreds digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      hundreds_count <= 0;
+    end else begin
+      if (hundreds_count == 9) begin
+        hundreds_count <= 0;
+        ena[2] <= 1;
+      end else begin
+        ena[2] <= 0;
+      end
+    end
+  end
+
+  // Thousands digit counter
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      thousands_count <= 0;
+    end else begin
+      if (thousands_count == 9) begin
+        thousands_count <= 0;
+        ena[3] <= 1;
+      end else begin
+        ena[3] <= 0;
+      end
+    end
+  end
+
+  // Assign outputs
+  always @(posedge clk or posedge reset) begin
+    if (reset) begin
+      q <= 0;
+    end else begin
+      q <= {thousands_count, hundreds_count, tens_count, ones_count};
+    end
+  end
+
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

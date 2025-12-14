@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_1\Prob070_ece241_2013_q2_code.sv:12: error: out_sop is not a valid l-value in tb.top_module1.calc_outsop.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_1\Prob070_ece241_2013_q2_code.sv:7:      : out_sop is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_1\Prob070_ece241_2013_q2_code.sv:16: error: out_pos is not a valid l-value in tb.top_module1.calc_outpos.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_1\Prob070_ece241_2013_q2_code.sv:8:      : out_pos is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_1\Prob070_ece241_2013_q2_code.sv:15: warning: always_comb process has no sensitivities.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob070_ece241_2013_q2\attempt_1\Prob070_ece241_2013_q2_code.sv:11: warning: always_comb process has no sensitivities.
+2 error(s) during elaboration.

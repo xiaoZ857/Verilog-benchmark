@@ -1,0 +1,65 @@
+```verilog
+module TopModule (
+  input a,
+  input b,
+  output out_assign,
+  output reg out_alwaysblock
+);
+
+  // AND gate using assign statement
+  assign out_assign = a & b;
+
+  // AND gate using combinational always block
+  always @(a, b) begin
+    out_alwaysblock = a & b;
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+* **`module TopModule ( ... );`**: Defines the module named `TopModule` with the specified inputs and outputs.
+* **`input a, input b;`**: Declares `a` and `b` as input signals.
+* **`output out_assign;`**: Declares `out_assign` as an output signal.
+* **`output reg out_alwaysblock;`**:  Declares `out_alwaysblock` as an output signal and also declares it as a `reg` type.  This is required when assigning to an output within an `always` block.
+* **`assign out_assign = a & b;`**: This line uses an `assign` statement to continuously assign the bitwise AND of `a` and `b` to the output signal `out_assign`.  `assign` statements are used for continuous assignment and are well-suited for combinational logic.
+* **`always @(a, b) begin ... end`**: This defines a combinational `always` block. The `@(a, b)` sensitivity list specifies that the block will be triggered whenever the values of `a` or `b` change.
+* **`out_alwaysblock = a & b;`**: Inside the `always` block, this line assigns the bitwise AND of `a` and `b` to the `reg` output signal `out_alwaysblock`. Because it's a `reg`, the value is only assigned when the `always` block is triggered.
+
+**How to test this module:**
+
+You can test this module using a testbench. Here's a simple example:
+
+```verilog
+module TopModule_tb;
+
+  reg a, b;
+  wire out_assign, out_alwaysblock;
+
+  TopModule dut (
+    .a(a),
+    .b(b),
+    .out_assign(out_assign),
+    .out_alwaysblock(out_alwaysblock)
+  );
+
+  initial begin
+    // Test cases
+    a = 0; b = 0; #10;
+    a = 0; b = 1; #10;
+    a = 1; b = 0; #10;
+    a = 1; b = 1; #10;
+
+    $finish;
+  end
+
+  // Optional: Display results
+  initial begin
+    $monitor("a=%b, b=%b, out_assign=%b, out_alwaysblock=%b", a, b, out_assign, out_alwaysblock);
+  end
+
+endmodule
+```
+
+This testbench drives the inputs `a` and `b` through different combinations and monitors the outputs `out_assign` and `out_alwaysblock`.  You should see that both outputs are identical and represent the AND operation.  Use a Verilog simulator (like Icarus Verilog, ModelSim, or Vivado) to run this testbench and verify the module's functionality.

@@ -1,0 +1,48 @@
+Here's the Verilog module that implements a 4-bit wide, 256-to-1 multiplexer as per your description:
+
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output reg [3:0] out
+);
+
+    parameter NUMSelects = 5;
+    parameter NUMBitsPerInput = 4;
+    parameter IN_WIDTH = NUMSELECTS * NUMBITSPERINPUT;
+
+    // Define the signal for 'in' to be broken down into bits of the correct size
+    assign out = {sel[3:0], sel[7:4], sel[11:8], sel[15:12]};
+
+endmodule
+```
+
+However, the above module doesn't quite work as desired because you need a separate path for each set of 4 bits chosen by 'in'. Also, this multiplexer is not really an ideal representation of a multiplexer in which all inputs are connected to a single output.
+
+Here's a more suitable implementation using a combination of multiplexers and AND gates:
+
+```verilog
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output reg [3:0] out
+);
+
+    parameter NUMSELECTS = 5;
+    parameter NUMBITSPERINPUT = 4;
+    parameter IN_WIDTH = NUMSELECTS * NUMBITSPERINPUT;
+
+    // Define the number of bits for each part of 'in'
+    localparam index_3_0 = {IN_WIDTH - 1:0, (IN_WIDTH-2):{2}{1}h0},
+               index_7_4 = {(IN_WIDTH-1):0 IN_WIDTH-4},
+               index_11_8 = {(IN_WIDTH-2):0 IN_WIDTH-9};
+
+    // Define the signal for 'in' to be broken down into bits of the correct size
+    assign out = {sel[3:0] == 0 ? in[index_3_0]: 
+                  sel[7:4] == 1 ? in[index_7_4]: 
+                  sel[11:8] == 2 ? in[index_11_8]: 0};
+
+endmodule
+```
+
+In this case, the input is first split into its various bits and then a multiplexer is used to select which one of these bits should be passed through. The bit that's selected by 'sel' when equal to some specific value is multiplied with a mask made of all zeros except for the bit position where the actual value would have been if there was no mask.

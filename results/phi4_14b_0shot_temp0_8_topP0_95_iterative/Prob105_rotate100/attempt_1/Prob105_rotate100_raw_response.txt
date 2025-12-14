@@ -1,0 +1,57 @@
+Below is a Verilog module implementation for a 100-bit left/right rotator with synchronous load and enable functionality as described:
+
+```verilog
+module TopModule (
+    input wire clk,
+    input wire load,
+    input wire [1:0] ena,
+    input wire [99:0] data,
+    output reg [99:0] q
+);
+
+    // Synchronous process on the positive edge of the clock
+    always @(posedge clk) begin
+        if (load) begin
+            // If load is active, directly load the data into register q
+            q <= data;
+        end else begin
+            case (ena)
+                2'b01: begin
+                    // Rotate right by one bit
+                    q[99] <= q[0];
+                    q[98:0] <= q[99:1];
+                end
+                2'b10: begin
+                    // Rotate left by one bit
+                    q[0] <= q[99];
+                    q[1:99] <= q[98:0];
+                end
+                default: begin
+                    // No rotation for other cases (including ena = 2'b00 and 2'b11)
+                    q <= q;
+                end
+            endcase
+        end
+    end
+
+endmodule
+```
+
+### Explanation:
+
+- **Inputs & Outputs**:
+  - `clk`: Clock signal.
+  - `load`: Synchronous active high input for loading data into the register.
+  - `ena`: A 2-bit control signal determining the rotation direction or no rotation.
+  - `data`: The 100-bit input data to be loaded when load is asserted.
+  - `q`: The output 100-bit rotator state.
+
+- **Behavior**:
+  - On each positive edge of the clock (`posedge clk`), the module checks if `load` is active.
+    - If `load` is high, the register `q` loads the input `data`.
+    - If `load` is not asserted, it evaluates the `ena` signal using a `case` statement:
+      - `2'b01`: Rotate right by shifting all bits to the right and placing the last bit (`q[99]`) into the first position (`q[0]`).
+      - `2'b10`: Rotate left by shifting all bits to the left and placing the first bit (`q[0]`) into the last position (`q[99]`).
+      - For `2'b00` and `2'b11`, no rotation occurs, so `q` retains its current state.
+
+This module uses non-blocking assignments (`<=`) within a clocked process to ensure correct sequential behavior.

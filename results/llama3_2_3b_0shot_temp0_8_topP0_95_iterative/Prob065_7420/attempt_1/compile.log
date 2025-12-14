@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_1\Prob065_7420_code.sv:17: error: p1y is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_1\Prob065_7420_code.sv:7:      : p1y is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_1\Prob065_7420_code.sv:18: error: p2y is not a valid l-value in tb.top_module1.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_1\Prob065_7420_code.sv:12:      : p2y is declared here as wire.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob065_7420\attempt_1\Prob065_7420_code.sv:15: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

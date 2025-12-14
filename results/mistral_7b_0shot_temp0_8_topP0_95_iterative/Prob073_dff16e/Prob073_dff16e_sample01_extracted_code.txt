@@ -1,0 +1,16 @@
+always @(posedge clk) begin
+    if (!resetn) begin
+        upper_d <= 8'b0;
+        lower_d <= 8'b0;
+    end else begin
+        if (byteena[1] && byteena[0]) begin // Both bytes enabled, write to outputs and D flip-flops
+            q <= d[15:0];
+        end else if (byteena[1]) begin // Only upper byte enabled, write only to upper data register and D flip-flop
+            upper_d <= d[15:8];
+            q <= upper_d[15:0];
+        end else if (byteena[0]) begin // Only lower byte enabled, write only to lower data register and D flip-flop
+            lower_d <= d[7:0];
+            q <= lower_d[15:0];
+        end
+    end
+end

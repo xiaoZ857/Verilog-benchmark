@@ -1,0 +1,57 @@
+
+module TopModule (
+  input clk,
+  input resetn,
+  input [3:1] r,
+  output [3:1] g
+);
+// Current state and next state variables
+reg [2:0] currentState, nextState;
+
+// Timescale directive outside the module definition
+`timescale 1ns / 1ps
+
+always @(posedge clk or posedge resetn) begin
+    if (resetn) begin
+        currentState <= STATE_A;
+        g <= 3'b000; // All grants are off on reset
+    end else begin
+        case (currentState)
+            STATE_A: begin
+                if (r[0] == 1) begin
+                    nextState <= STATE_B;
+                    g <= r; // Device 1 gets grant if it requests and no higher priority devices request
+                end else if ((r[1] == 1) || (r[2] == 1)) begin
+                    // Priority system: device with lower index can't get grant if a device with higher index requests
+                    if (((r[1] && r[2] == 0) || (r[1] == 0 && r[2] && r[0] == 0)) && ((g[1] != 1'b1) || (g[2] != 1'b1))) begin
+                        nextState <= STATE_C;
+                        g <= {g[0], 1'b1, g[2]}; // Device with highest non-zero request gets grant if devices 1 and 3 request and device 1 doesn't request
+                    end else if (r[2] && r[1] == 0) begin
+                        nextState <= STATE_B;
+                        g <= {g[0], g[1], 1'b1}; // Device 2 gets grant if it requests and device 1 doesn't request
+                    end
+                end
+                if (r[0] == 0 && r[1] == 0 && r[2] == 0) begin
+                    nextState <= STATE_D; // No requests, go to state D
+                end
+            end
+            ... // Add other states following the same pattern
+        endcase
+        currentState <= nextState;
+    end
+end
+
+// Continuous assignment for output g[i] signals
+always @* begin
+    assign g[0] = (currentState == STATE_B || currentState == STATE_A);
+    assign g[1] = (currentState == STATE_B || currentState == STATE_C);
+    assign g[2] = (currentState == STATE_C || currentState == STATE_D);
+end
+
+// State codes
+parameter STATE_A = 3'b001;
+parameter STATE_B = 3'b010;
+parameter STATE_C = 3'b011;
+parameter STATE_D = 3'b100;
+
+// VERILOG-EVAL: endmodule not found

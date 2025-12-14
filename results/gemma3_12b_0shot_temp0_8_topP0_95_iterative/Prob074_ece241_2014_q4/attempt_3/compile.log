@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:13: error: ff1_out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:9:      : ff1_out is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:14: error: ff2_out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:9:      : ff2_out is declared here as wire.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:15: error: ff3_out is not a valid l-value in tb.top_module1.
+results/gemma3_12b_0shot_temp0_8_topP0_95_iterative\Prob074_ece241_2014_q4\attempt_3\Prob074_ece241_2014_q4_code.sv:9:      : ff3_out is declared here as wire.
+3 error(s) during elaboration.

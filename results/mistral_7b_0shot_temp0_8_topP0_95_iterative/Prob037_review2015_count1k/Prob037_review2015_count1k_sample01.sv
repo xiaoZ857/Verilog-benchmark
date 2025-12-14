@@ -1,0 +1,30 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  output reg [9:0] q
+);
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        q <= 32'b0000_0000; // reset counter to 0
+    end else begin
+        if (q[8] == 1) begin
+            q[9:8] <= 3'b001; // increment hundreds place
+            q[9] = q[9] + 4'b0001; // shift the remaining digits left and add carry to units place if needed
+        end
+        if (q[8] == 0 && q[7] == 1) begin
+            q[9:7] <= 3'b010; // increment tens place
+            q[9] = q[9] + 4'b0100; // shift the remaining digits left and add carry to units place if needed
+        end
+        if (q[8] == 0 && q[7] == 0 && q[6] == 1) begin
+            q[9:6] <= 4'b0100; // increment units place
+        end
+    end
+end
+
+// `timescale directive should be outside the module definition
+`timescale 1ns / 1ps
+
+assign q_out = {q[9], q[8], q[7], q[6], q[5], q[4], q[3], q[2], q[1], q[0]};
+
+endmodule

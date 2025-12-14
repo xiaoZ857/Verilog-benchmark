@@ -1,0 +1,35 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input ena,
+  output reg pm,
+  output reg [7:0] hh,
+  output reg [7:0] mm,
+  output reg [7:0] ss
+);
+// Reset signal block
+always @ (posedge reset) begin
+    hh <= 12;
+    mm <= 0;
+    ss <= 0;
+    pm <= 1'b0;
+end
+
+// Assignments for hour, minute and second counters
+assign hh = Counter(clk, ena, .hour(Counter::counter_value(hh)), .count(count.hh[2:1]));
+assign mm = Counter(clk, ena, .minute(Counter::counter_value(mm)), .count(count.mm));
+assign ss = Counter(clk, ena, .second(Counter::counter_value(ss)), .count(count.ss));
+
+// PM indicator
+always @(posedge clk) begin
+    if (hh[2:1] >= 12) pm <= 1'b1;
+    else pm <= 1'b0;
+end
+
+// Clock counter instances
+Counter count(hh, ena, .hour(Counter::counter_value(hh)), .count(count.hh[2:1]));
+Counter count(mm, ena, .minute(Counter::counter_value(mm)), .count(count.mm));
+Counter count(ss, ena, .second(Counter::counter_value(ss)), .count(count.ss));
+
+endmodule

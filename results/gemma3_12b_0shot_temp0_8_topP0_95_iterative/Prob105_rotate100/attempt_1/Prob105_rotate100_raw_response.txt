@@ -1,0 +1,54 @@
+```verilog
+module TopModule (
+  input clk,
+  input load,
+  input [1:0] ena,
+  input [99:0] data,
+  output reg [99:0] q
+);
+
+  reg [99:0] register;
+
+  always @(posedge clk) begin
+    if (load) begin
+      register <= data;
+    end else begin
+      case (ena)
+        2'b01: begin // Rotate right by one bit
+          register <= {register[98:0], register[99]};
+        end
+        2'b10: begin // Rotate left by one bit
+          register <= {register[0], register[99:1]};
+        end
+        default: begin // No rotation
+          register <= register;
+        end
+      endcase
+    end
+  end
+
+  assign q = register;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`reg [99:0] register;`**:  Declares a 100-bit register named `register` to hold the rotating data. This register is where the actual rotation takes place.
+2. **`always @(posedge clk)`**: This block describes the synchronous logic that executes on the rising edge of the clock signal (`clk`).
+3. **`if (load) begin ... end`**:  This conditional statement checks if the `load` signal is high. If it is, the `register` is loaded with the value of the `data` input. This overrides the rotation functionality.
+4. **`else begin ... end`**:  If `load` is low, the rotation logic is executed.
+5. **`case (ena) ... endcase`**: This `case` statement handles the different rotation directions based on the `ena` input.
+   - **`2'b01: begin ... end`**:  If `ena` is `2'b01`, the register rotates right by one bit. The rightmost bit (`register[99]`) is shifted to the leftmost position (`register[0]`).  This is achieved using concatenation: `{register[98:0], register[99]}`.
+   - **`2'b10: begin ... end`**: If `ena` is `2'b10`, the register rotates left by one bit.  The leftmost bit (`register[0]`) is shifted to the rightmost position (`register[99]`).  This is also done using concatenation: `{register[0], register[99:1]}`.
+   - **`default: begin ... end`**: If `ena` is `2'b00` or `2'b11`, no rotation is performed.  The register simply holds its current value.
+6. **`assign q = register;`**: This continuous assignment statement makes the value of the `register` available as the output `q`. This is how the rotated data is presented to the outside world.
+
+**How it works (Rotation):**
+
+* **Right Rotation:** The right rotation moves the most significant bit (MSB) to the least significant bit (LSB) position, effectively shifting all other bits one position to the right.  The `register[98:0], register[99]`  concatenation creates this new bit pattern.
+* **Left Rotation:** The left rotation moves the least significant bit (LSB) to the most significant bit (MSB) position, shifting all other bits one position to the left. The `{register[0], register[99:1]}` concatenation creates the rotated bit pattern.
+* **Load:** When `load` is asserted, the register is loaded with the input data, effectively replacing the current contents.
+* **No Rotation:** When `ena` is either `2'b00` or `2'b11`, the register holds its previous value.
+
+This implementation fulfills all the requirements specified in the problem description.  It's synchronous, uses positive clock edges, and correctly handles the rotation directions and load functionality.

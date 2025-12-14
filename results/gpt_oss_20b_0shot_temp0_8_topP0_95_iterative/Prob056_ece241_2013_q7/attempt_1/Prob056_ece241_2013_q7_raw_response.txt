@@ -1,0 +1,47 @@
+Here’s a straightforward implementation that follows the truth table you gave.  
+The module is completely synchronous – nothing happens until the rising edge of **clk**.  
+The `case` statement keeps the code concise and is easy to read.
+
+```verilog
+// ---------------------------------------------------------------
+//  TopModule : 1‑bit JK flip‑flop
+//
+//  Behaviour (synchronous to the positive edge of clk):
+//    J K |  Qnext
+//    0 0 |  Qold   // hold
+//    0 1 |  0
+//    1 0 |  1
+//    1 1 |  ~Qold  // toggle
+//
+//  (All signals are active‑high and the flip‑flop is clock‑enabled only.)
+// ---------------------------------------------------------------
+module TopModule (
+    input  wire clk,  // positive‑edge clock
+    input  wire j,
+    input  wire k,
+    output reg  Q
+);
+
+    // Positive‑edge synchronous logic
+    always @(posedge clk) begin
+        case ({j, k})          // combine J and K into a 2‑bit selector
+            2'b00: Q <= Q;     // hold (no change)
+            2'b01: Q <= 1'b0;  // reset
+            2'b10: Q <= 1'b1;  // set
+            2'b11: Q <= ~Q;    // toggle
+        endcase
+    end
+
+endmodule
+```
+
+### How it works
+
+1. **`always @(posedge clk)`** – The block is evaluated only on a rising clock edge, so the flip‑flop behaves synchronously.
+2. **`case ({j, k})`** – The two input bits are concatenated into a 2‑bit selector.  
+   * `2'b00`: J=0, K=0 → keep the current value (`Q <= Q`).  
+   * `2'b01`: J=0, K=1 → set output to 0.  
+   * `2'b10`: J=1, K=0 → set output to 1.  
+   * `2'b11`: J=1, K=1 → toggle (`Q <= ~Q`).
+
+Because the assignments are all non‑blocking (`<=`), the flip‑flop correctly models hardware behaviour in a synthesizable way. Feel free to expand the module with optional asynchronous reset or enable signals if your design requires them.

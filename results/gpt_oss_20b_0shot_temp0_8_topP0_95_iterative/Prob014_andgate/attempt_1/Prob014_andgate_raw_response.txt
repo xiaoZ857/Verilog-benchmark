@@ -1,0 +1,34 @@
+Here is a minimal, synthesizable Verilog implementation of a two‑input AND gate.  
+Because the operation is purely combinational, it can be expressed with a continuous assignment, which is the most concise and efficient way to implement it.
+
+```verilog
+//===================================================================
+//  TopModule
+//  Simple 2‑input AND gate
+//
+//  Ports:
+//      input  a      – first operand
+//      input  b      – second operand
+//      output out    – result (a AND b)
+//===================================================================
+module TopModule (
+    input  wire a,   // first input
+    input  wire b,   // second input
+    output wire out  // output of the AND operation
+);
+
+// Continuous assignment – purely combinational logic
+assign out = a & b;
+
+endmodule
+```
+
+### Why this implementation?
+* **No clock** – The specification says “assume that signals are positive clock/clk triggered unless otherwise stated.”  
+  Since an AND gate is combinational, there is no clock; the outputs change immediately as soon as the inputs change.
+
+* **Continuous assignment** – `assign out = a & b;` is synthesizable, uses no flip‑flops, and produces the cleanest logic.
+
+* **Ports declared as `wire`** – By default, ports are `wire`; explicit typing makes the intent clear and is good practice.
+
+You can now instantiate `TopModule` in any larger design or test it with a simple testbench.

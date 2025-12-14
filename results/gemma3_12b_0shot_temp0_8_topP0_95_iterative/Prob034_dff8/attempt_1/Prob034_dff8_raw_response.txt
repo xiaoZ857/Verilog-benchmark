@@ -1,0 +1,52 @@
+```verilog
+module TopModule (
+  input clk,
+  input [7:0] d,
+  output reg [7:0] q
+);
+
+  // Declare 8 D flip-flop instances
+  wire [7:0] d_ff_inputs;
+  reg [7:0] q_ff;
+
+  assign d_ff_inputs = d; // Pass the input d to all flip-flops
+
+  always @(posedge clk) begin
+    q_ff <= d; // Update all flip-flops on the positive edge of clk
+  end
+
+  assign q = q_ff;
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule (clk, d, q);` defines the module named `TopModule` with input `clk`, input `d` (8-bit), and output `q` (8-bit).
+
+2. **Signal Declarations:**
+   - `wire [7:0] d_ff_inputs;`: Declares a wire to pass the input `d` to all D flip-flops.  While not strictly necessary for this simple implementation, it's good practice for more complex designs where you might want to modify or filter the input before it reaches the flip-flops.
+   - `reg [7:0] q_ff;`: Declares a register `q_ff` to hold the output of the flip-flops.  Registers hold their values until explicitly changed.  This is the value that will be assigned to the output `q`.
+
+3. **Assign Statement (for the D input):**
+   - `assign d_ff_inputs = d;`:  This assigns the input signal `d` to the internal wire `d_ff_inputs`.  This ensures that all the flip-flops receive the same input data.
+
+4. **`always` Block (for the Flip-Flop Logic):**
+   - `always @(posedge clk) begin ... end`: This block describes the sequential logic.  `@(posedge clk)` specifies that the code inside the block will execute only on the positive (rising) edge of the `clk` signal.
+   - `q_ff <= d;`: This is the core of the D flip-flop logic.  On each positive clock edge, the value of the input `d` is copied to the register `q_ff`.  The `<=` operator is the non-blocking assignment operator, which is crucial for sequential logic.  It ensures that all assignments within the `always` block are scheduled to happen at the same time.
+
+5. **Assign Output:**
+   - `assign q = q_ff;`: This assigns the value of the register `q_ff` (the output of the flip-flops) to the module's output `q`.
+
+**How it works:**
+
+This module effectively creates 8 D flip-flops in parallel.  On each positive edge of the `clk` signal, the value present at the input `d` is transferred to the register `q_ff`, which is then assigned to the output `q`.  This creates a delayed version of the input `d`, with the delay determined by the clock period.
+
+**Key Concepts:**
+
+* **Sequential Logic:** The `always @(posedge clk)` block implements sequential logic, where the output depends on both the current input and the previous state.
+* **D Flip-Flop:** A D flip-flop copies its input (D) to its output (Q) on the rising edge of the clock signal.
+* **Non-Blocking Assignment (`<=`):**  Crucial for sequential logic. It ensures that all assignments within an `always` block are evaluated simultaneously and the updates happen at the end of the time step.
+* **Parallelism:** The 8 flip-flops are implemented in parallel, meaning they all operate concurrently.
+* **Positive Edge Triggered:** The flip-flops are triggered by the positive edge (rising edge) of the clock signal.

@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:39: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:39: error: Unable to elaborate r-value: (current_state)==(2'd3)
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:11: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:13: error: Could not find variable ``current_state'' in ``tb.top_module1''
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:18: error: Unable to bind wire/reg/memory `current_state' in `tb.top_module1'
+results/glm_4_6_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_2\Prob120_fsm3s_code.sv:18: error: Unable to elaborate this case expression.
+5 error(s) during elaboration.

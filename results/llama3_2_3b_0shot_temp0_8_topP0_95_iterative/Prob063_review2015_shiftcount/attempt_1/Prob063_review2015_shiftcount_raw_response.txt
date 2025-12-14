@@ -1,0 +1,63 @@
+Here's an implementation of the Verilog module based on your description:
+
+```verilog
+module TopModule (
+    input clk,
+    input shift_ena,
+    input count_ena,
+    input data,
+    output reg [3:0] q
+);
+
+// Create internal registers for storing data and current count
+reg [1:0] reg_data;
+reg [2:0] reg_count;
+
+// Create the shift register
+reg [4:0] shift_reg = {data, 1'b0, 1'b0, 1'b0};
+
+// Down counter logic
+always @(*) begin
+    if (count_ena == 1) begin
+        if (shift_reg[2:0] != 3'b111) begin
+            shift_reg[2:0] = shift_reg[2:0] - 1;
+        end else begin
+            shift_reg[4] = 1;
+            shift_reg[2:0] = 3'b000;
+        end
+    end
+end
+
+// Shift register logic
+always @(posedge clk) begin
+    if (shift_ena == 1) begin
+        reg_data <= data;
+        if (q != {reg_data, 1'b0, 1'b0, 1'b0}) begin
+            q <= 4'b0;
+            shift_reg[3] = 1;
+            shift_reg[0:2] = {reg_data, 1'b0};
+        end else if (reg_data == 3'b111) begin
+            q <= {1'b0, 1'b0, 1'b0};
+            shift_reg[4] = 1;
+            shift_reg[0:2] = {1'b0, 1'b0, 1'b0};
+        end else if (shift_ena == 1) begin
+            q <= reg_data;
+        end
+    end
+end
+
+// Initialize the counter value
+initial begin
+    reg_count = 4'b111;
+end
+
+assign q = {reg_count[2:0], shift_reg[3], shift_reg[4]};
+```
+
+This module uses two internal registers `reg_data` and `reg_count` to store data and current count respectively. The shift register is implemented using a 5-bit reg register with the MSB being the input data. 
+
+The down counter logic subtracts from the lower bits of the count when count_ena is 1, wrapping around if all three lower bits are equal to 3'b111.
+
+When both count_ena and shift_ena are low, no operations occur on either the down counter or the shift register as they have opposite priority. 
+
+The output q then combines the current value of reg_count with the last bit of the shift_reg.

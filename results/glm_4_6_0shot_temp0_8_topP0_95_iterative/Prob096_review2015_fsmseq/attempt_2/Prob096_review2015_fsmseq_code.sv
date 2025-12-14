@@ -1,0 +1,57 @@
+
+module TopModule (
+  input clk,
+  input reset,
+  input data,
+  output start_shifting
+);
+// FSM to detect sequence 1101
+reg [2:0] state, next_state;
+
+// State encoding
+localparam S0 = 3'b000;  // No bits matched
+localparam S1 = 3'b001;  // First '1' detected
+localparam S2 = 3'b010;  // Sequence '11' detected  
+localparam S3 = 3'b011;  // Sequence '110' detected
+localparam S4 = 3'b100;  // Sequence '1101' detected
+
+// State register
+always @(posedge clk) begin
+  if (reset) begin
+    state <= S0;
+  end else begin
+    state <= next_state;
+  end
+end
+
+// Next state logic
+always @(*) begin
+  next_state = state;
+  case (state)
+    S0: begin
+      if (data) next_state = S1;
+      else next_state = S0;
+    end
+    S1: begin
+      if (data) next_state = S2;
+      else next_state = S0;
+    end
+    S2: begin
+      if (data) next_state = S2;  // Stay in S2 for overlapping sequences
+      else next_state = S3;
+    end
+    S3: begin
+      if (data) next_state = S4;
+      else next_state = S0;
+    end
+    S4: begin
+      next_state = S4;  // Stay in S4 forever
+    end
+    default: next_state = S0;
+  endcase
+end
+
+// Output logic
+assign start_shifting = (state == S4);
+
+endmodule

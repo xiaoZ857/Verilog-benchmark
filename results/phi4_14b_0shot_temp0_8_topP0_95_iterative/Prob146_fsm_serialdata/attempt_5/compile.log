@@ -1,0 +1,102 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 3
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:9: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13: error: Stray tic (`) here. Perhaps you put white space
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13:      : between the tic and preprocessor directive?
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13: warning: macro RECEIVE_8 undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13: warning: macro WAIT_STOP undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13: warning: macro IDLE undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:15: warning: macro out_byte undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:15: warning: macro done undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:17: warning: macro RECEIVE_8 undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:17: warning: macro IDLE undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:19: warning: macro out_byte undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:19: warning: macro done undefined (and assumed null) at this point.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13: error: Stray tic (`) here. Perhaps you put white space
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:13:      : between the tic and preprocessor directive?
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:15: error: Stray tic (`) here. Perhaps you put white space
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:15:      : between the tic and preprocessor directive?
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:15: error: Stray tic (`) here. Perhaps you put white space
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:15:      : between the tic and preprocessor directive?
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:19: error: Stray tic (`) here. Perhaps you put white space
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:19:      : between the tic and preprocessor directive?
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:19: error: Stray tic (`) here. Perhaps you put white space
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:19:      : between the tic and preprocessor directive?
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:25: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:26: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:26: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:27: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:28: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:34: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:35: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:39: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:40: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:41: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:42: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:44: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:45: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:45: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:46: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:46: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:47: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:47: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:48: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:48: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:49: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:49: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:50: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:50: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:53: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:54: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:55: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:56: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:57: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:61: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:62: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:62: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:64: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:65: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:65: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:69: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:70: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:74: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:75: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:76: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:77: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:81: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:82: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:82: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:84: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:85: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:90: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:95: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:95: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:100: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:100: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:102: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:102: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:105: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:105: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:106: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:106: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:107: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:107: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:108: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:108: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:109: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:109: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:110: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:110: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:111: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:111: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:115: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:115: error: Invalid module instantiation
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:117: syntax error
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:117: error: Invalid module instantiation
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:1: error: `timescale directive can not be inside a module definition.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:6: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob146_fsm_serialdata_test.sv:10: error: invalid module item.
+results/phi4_14b_0shot_temp0_8_topP0_95_iterative\Prob146_fsm_serialdata\attempt_5\Prob146_fsm_serialdata_code.sv:2: assert: pform.cc:1465: failed assertion lexical_scope == cur_module

@@ -1,0 +1,41 @@
+Below is a straightforward implementation that follows the functional description.  
+The logic is purely combinational – the outputs react immediately to any change on the inputs.  
+(If you need a registered version, just add a `clk` input and move the assignments into an `always @(posedge clk)` block.)
+
+```verilog
+`timescale 1ns/1ps
+module TopModule (
+    input  wire mode,      // 1 → heating, 0 → cooling
+    input  wire too_cold,  // asserted when temperature is too low
+    input  wire too_hot,   // asserted when temperature is too high
+    input  wire fan_on,    // user‑requested fan
+    output wire heater,    // heater ON/OFF
+    output wire aircon,    // air‑conditioner ON/OFF
+    output wire fan        // blower fan ON/OFF
+);
+
+// Heater is on only in heating mode and when the room is too cold
+assign heater = mode & too_cold;
+
+// Air‑conditioner is on only in cooling mode and when the room is too hot
+assign aircon = (~mode) & too_hot;
+
+// Fan is on if either the heater or the air‑con is on,
+// or if the user explicitly requests it.
+assign fan = fan_on | heater | aircon;
+
+endmodule
+```
+
+### Explanation
+
+| Signal | Logic | Why |
+|--------|-------|-----|
+| `heater` | `mode & too_cold` | In heating mode (`mode=1`) the heater should turn on only when the temperature is below the setpoint (`too_cold=1`). |
+| `aircon` | `~mode & too_hot` | In cooling mode (`mode=0`) the air‑con should turn on only when the temperature is above the setpoint (`too_hot=1`). |
+| `fan` | `fan_on | heater | aircon` | The fan circulates air whenever the heater or the air‑con is active, or when the user explicitly requests it. |
+
+This satisfies all the stated requirements:  
+* Heater is never on in cooling mode.  
+* Air‑con is never on in heating mode.  
+* The fan is driven by the heater, air‑con, or a user request.

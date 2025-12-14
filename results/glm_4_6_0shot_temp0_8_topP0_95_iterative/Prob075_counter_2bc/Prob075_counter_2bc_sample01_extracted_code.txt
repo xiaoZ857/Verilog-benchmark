@@ -1,0 +1,16 @@
+
+always @(posedge clk or posedge areset) begin
+  if (areset) begin
+    state <= 2'b01;
+  end else if (train_valid) begin
+    if (train_taken) begin
+      // Increment, saturate at 3
+      state <= (state == 2'b11) ? 2'b11 : (state + 1);
+    end else begin
+      // Decrement, saturate at 0
+      state <= (state == 2'b00) ? 2'b00 : (state - 1);
+    end
+  end
+  // When train_valid = 0, state remains unchanged
+end
+endmodule

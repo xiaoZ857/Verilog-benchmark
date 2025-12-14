@@ -1,0 +1,35 @@
+module TopModule (
+    input clk,
+    input x,
+    input [2:0] y,
+    output reg Y0,
+    output reg z
+);
+
+    reg [2:0] Y;  // Declare state register for Y[2:0]
+
+    always @(posedge clk) begin
+        case (y)
+            3'b000: 
+                if (~x) begin  // When x=0
+                    Y = 3'b000;
+                end else begin  // When x=1
+                    Y = 3'b001;
+                end
+
+            3'b001: 
+                if (~x) begin  // When x=0
+                    Y = 3'b001;
+                end else begin  // When x=1
+                    Y = 3'b100;
+                end
+
+            3'b010: 
+                if (~x) begin  // When x=0
+                    Y = 3'b010;
+                end else begin  // When x=1
+                    Y = 3'b001;
+                end
+
+            3'b011: 
+                if (~x) begin  // When

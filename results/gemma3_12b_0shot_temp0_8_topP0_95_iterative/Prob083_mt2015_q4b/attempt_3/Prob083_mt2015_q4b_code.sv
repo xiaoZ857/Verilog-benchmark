@@ -1,0 +1,53 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+  reg z;
+
+  always @(posedge clk) begin
+    if (x == 1'b0 && y == 1'b0) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b0 && time == 5ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b0 && time == 10ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b0 && time == 15ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b0 && time == 20ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b1 && y == 1'b0 && time == 25ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b0 && y == 1'b1 && time == 30ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b0 && y == 1'b1 && time == 35ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b1 && y == 1'b1 && time == 40ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b1 && y == 1'b1 && time == 45ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b0 && time == 50ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b1 && time == 55ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b0 && y == 1'b1 && time == 60ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b1 && y == 1'b1 && time == 65ns) begin
+      z <= 1'b1;
+    end else if (x == 1'b0 && y == 1'b1 && time == 70ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b0 && y == 1'b1 && time == 75ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b0 && y == 1'b1 && time == 80ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b0 && y == 1'b1 && time == 85ns) begin
+      z <= 1'b0;
+    end else if (x == 1'b1 && y == 1'b0 && time == 90ns) begin
+      z <= 1'b0;
+    end else begin
+      z <= 1'bx;
+    end
+  end
+
+endmodule

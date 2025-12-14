@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 2
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:17: error: out['sd0] is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:7:      : out['sd0] is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:18: error: out['sd1] is not a valid l-value in tb.top_module1.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:7:      : out['sd1] is declared here as wire.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob009_popcount3\attempt_2\Prob009_popcount3_code.sv:15: warning: @* found no sensitivities so it will never trigger.
+2 error(s) during elaboration.

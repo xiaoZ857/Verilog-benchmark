@@ -1,0 +1,115 @@
+To fix the logic error in the Verilog code, let's analyze the requirements and how they are implemented:
+
+### Key Requirements:
+1. **State Management**: The FSM has states for walking left (`WALK_LEFT`), walking right (`WALK_RIGHT`), falling (`FALLING`), digging (`DIGGING`), and splattered (`SPLATTERED`).
+2. **Transitions**:
+   - From `WALK_LEFT` or `WALK_RIGHT`, a Lemming can transition to `FALLING` if `ground = 0`.
+   - A Lemming in `WALK_LEFT` or `WALK_RIGHT` can switch direction based on bumps.
+   - A Lemming in `WALK_LEFT` or `WALK_RIGHT` can start `DIGGING` if `dig = 1`.
+   - From `FALLING`, the Lemming transitions to `SPLATTERED` after falling for more than 20 cycles.
+3. **Output Control**:
+   - Outputs should reflect the current state, e.g., `walk_left` or `walk_right` is asserted in their respective states.
+   - The `aaah` signal is asserted during `FALLING`.
+4. **Reset and Initial State**: On reset (`areset`), the Lemming starts in the `WALK_LEFT` state.
+
+### Issues Identified:
+1. **State Transition Logic**:
+   - In `WALK_LEFT` and `WALK_RIGHT`, transitions to `DIGGING` should only occur if `ground = 1`.
+2. **Fall Counter Reset**:
+   - The fall counter should reset when transitioning out of the `FALLING` state.
+3. **Output Assignment**:
+   - Ensure that outputs are correctly assigned in all states, especially handling the `SPLATTERED` state.
+
+### Corrected Code:
+
+always_ff @(posedge clk or posedge areset) begin
+    if (areset) begin
+        current_state <= WALK_LEFT;
+        fall_counter <= 6'b000000;
+    end else begin
+        case (current_state)
+            FALLING: begin
+                // Increment the fall counter only while falling.
+                if (!ground && fall_counter < 20) begin
+                    fall_counter <= fall_counter + 1;
+                end
+            end
+
+            default: begin
+                fall_counter <= 6'b000000; // Reset fall counter on any state change except FALLING.
+            end
+        endcase
+
+        current_state <= next_state; // Update the current state to the computed next state.
+
+        if (current_state == SPLATTERED) begin
+            aaah <= 0; // Ensure "aaah" is reset in splattered state
+        end
+    end
+end
+
+always_comb begin
+    walk_left = 0;
+    walk_right = 0;
+    aaah = 0;
+    digging = 0;
+
+    case (current_state)
+        WALK_LEFT: begin
+            if (!ground) begin
+                next_state = FALLING;
+            end else if (dig && ground) begin // Ensure ground is checked before digging.
+                next_state = DIGGING;
+            end else begin
+                if (bump_right || (bump_left && bump_right)) begin
+                    next_state = WALK_RIGHT;
+                end else begin
+                    next_state = WALK_LEFT;
+                end
+            end
+        end
+
+        WALK_RIGHT: begin
+            if (!ground) begin
+                next_state = FALLING;
+            end else if (dig && ground) begin // Ensure ground is checked before digging.
+                next_state = DIGGING;
+            end else begin
+                if (bump_left || (bump_right && bump_left)) begin
+                    next_state = WALK_LEFT;
+                end else begin
+                    next_state = WALK_RIGHT;
+                end
+            end
+        end
+
+        FALLING: begin
+            if (!ground) begin
+                aaah = 1; // Assert "aaah" during falling.
+                if (fall_counter < 20) begin
+                    next_state = FALLING;
+                end else begin
+                    next_state = SPLATTERED;
+                end
+            end else begin
+                next_state = (walk_dir == WALK_LEFT) ? WALK_LEFT : WALK_RIGHT; // Restore walking direction.
+            end
+        end
+
+        DIGGING: begin
+            if (!ground) begin
+                aaah = 1; // Start "aaah" when digging falls off ground.
+                next_state = FALLING;
+            end else begin
+                next_state = (walk_dir == WALK_LEFT) ? WALK_LEFT : WALK_RIGHT; // Continue in original direction.
+            end
+        end
+
+        SPLATTERED: begin
+            next_state = SPLATTERED; // Remain in splattered state.
+        end
+
+    default:
+        next_state = WALK_LEFT;
+    endcase
+end

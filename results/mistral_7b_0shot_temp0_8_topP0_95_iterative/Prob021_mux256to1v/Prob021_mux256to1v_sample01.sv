@@ -1,0 +1,29 @@
+
+`timescale 1ns / 1ps
+
+module TopModule (
+  input [1023:0] in,
+  input [7:0] sel,
+  output [3:0] out
+);
+
+always @(posedge clk) begin
+  case(sel)
+    4'b0000 : out <= in[3:0];
+    4'b0001 : out <= in[7:4];
+    4'b0010 : out <= in[11:8];
+    4'b0011 : out <= in[15:12];
+    4'b0100 : out <= in[19:16];
+    4'b0101 : out <= in[23:20];
+    4'b0110 : out <= in[27:24];
+    4'b0111 : out <= in[31:28];
+    4'b1000 : out <= in[35:32];
+    // ... (continued for the remaining values of sel up to 1111)
+    default : out <= 4'bz; // Set output to zero if an invalid selection is made
+  endcase
+end
+
+// Testbench and reference code can be added here if needed
+endmodule
+
+// VERILOG-EVAL: errant inclusion of module definition

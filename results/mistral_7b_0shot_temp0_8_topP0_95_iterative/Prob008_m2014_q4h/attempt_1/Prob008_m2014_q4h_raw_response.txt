@@ -1,0 +1,32 @@
+ Here's a simple Verilog implementation of your description:
+
+```verilog
+module TopModule (
+  input wire in,
+  output reg out
+);
+
+always @(posedge clk) begin
+  out <= in;
+end
+
+// If you want to ensure the synchronous nature of the design, you can add a reset signal.
+reg reset;
+
+input wire clk, reset;
+
+assign clk_neg = !clk; // Invert the clock for active-low signals if needed
+
+// Flip-flop for asynchronous reset (optional)
+always @(posedge reset or negedge clk_neg) begin
+  if (reset) begin
+    out <= 0;
+  end
+end
+
+initial begin
+  // Initialize your simulation here (if needed)
+end
+```
+
+This code creates a combinational logic module that assigns the output to the input on every rising edge of the clock signal. If an active-low clock is required, simply invert the clock within the Verilog design. The additional reset signal allows for asynchronous resets, which can be useful in specific situations. Adjust the initial block for your simulation requirements if needed.

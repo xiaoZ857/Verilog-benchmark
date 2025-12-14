@@ -1,0 +1,10 @@
+always @(posedge clk or posedge resetn) begin
+  if (resetn == 1) begin // active-low reset
+    out <= 4'd0; // reset to all zeros
+  else begin
+    out[3] <= in;
+    out[2] <= out[3];
+    out[1] <= out[2];
+    out[0] <= out[1];
+  end
+end

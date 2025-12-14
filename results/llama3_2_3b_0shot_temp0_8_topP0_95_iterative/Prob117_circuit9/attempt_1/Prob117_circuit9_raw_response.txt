@@ -1,0 +1,31 @@
+Here is the Verilog implementation of the described sequential circuit:
+```
+module TopModule (
+  input clk,
+  input a,
+  output reg [2:0] q
+);
+
+reg [3:0] internal_q;
+
+always @(posedge clk or rising_edge(clk)) 
+begin
+    if (a) 
+        internal_q <= 4'b000;
+    else
+        case(internal_q)
+            4'b000: internal_q <= 4'b001;
+            4'b001: internal_q <= 4'b010;
+            4'b010: internal_q <= 4'b100;
+            4'b100: internal_q <= 4'b000;
+            default: 
+                $assertError("Internal Q is not equal to any state", $file, $line);
+        endcase
+    end
+end
+
+assign q = internal_q;
+
+endmodule
+```
+In this implementation we have a state machine that takes an input `a` and produces output `q`. If the clock `clk` is rising or on a positive edge, then we update our internal state according to the rules defined by our circuit. We use a case statement to check if our current state matches any of the states in our transition function (`4'b000`, `4'b001`, `4'b010`, and `4'b100`). If it does, we move on to the next state.

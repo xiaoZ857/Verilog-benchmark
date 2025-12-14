@@ -1,0 +1,33 @@
+To implement a Verilog module that always outputs a LOW signal, we need to define a module with a single output port named `zero`. Since there are no inputs and the signal is required to be constantly low, we can achieve this using a **continuous assignment** in Verilog.
+
+---
+
+### ✅ Key Considerations:
+- The output `zero` must be **always LOW** (i.e., `0`).
+- There are **no inputs** to the module.
+- The problem specifies that signals are **positive-edge-triggered** by default if a clock is involved, but in this case, no clock is used.
+- Therefore, no flip-flops or synchronous logic is required.
+
+---
+
+### ✅ Verilog Implementation
+
+```verilog
+module TopModule (
+  output zero
+);
+  assign zero = 1'b0;
+endmodule
+```
+
+---
+
+### 📝 Explanation:
+- `assign zero = 1'b0;` is a **continuous assignment** that sets the output signal `zero` to a constant low value (`0`).
+- The `1'b0` notation explicitly denotes a **1-bit** value of `0`, which is a common and readable way to specify constants in Verilog.
+- This module does not require any clock or input signals, making it a simple and efficient way to produce a constant low output.
+
+---
+
+### 📌 Final Note:
+This implementation is **synthesizable** and will produce a constant `0` on the output pin `zero` regardless of any other signals or conditions.

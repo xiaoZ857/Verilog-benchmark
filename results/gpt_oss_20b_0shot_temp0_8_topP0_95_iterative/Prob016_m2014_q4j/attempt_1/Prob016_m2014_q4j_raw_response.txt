@@ -1,0 +1,50 @@
+Below is a clean, synthesizable Verilog implementation of a 4‑bit adder that builds the result out of four **full‑adder** primitives.  
+The fifth output bit (`sum[4]`) is the carry out of the most significant full adder – it is the “overflow” bit requested.
+
+```verilog
+// -----------------------------------------------------------
+//  Full‑Adder (1‑bit)
+// -----------------------------------------------------------
+module full_adder (
+    input  wire a,      // first operand bit
+    input  wire b,      // second operand bit
+    input  wire cin,    // carry‑in
+    output wire sum,    // sum bit
+    output wire cout    // carry‑out
+);
+    // A 1‑bit full adder can be implemented in a single
+    // expression – it is completely combinational.
+    assign {cout, sum} = a + b + cin;
+endmodule
+
+
+// -----------------------------------------------------------
+//  4‑bit adder (TopModule)
+// -----------------------------------------------------------
+module TopModule (
+    input  wire [3:0] x,   // first 4‑bit operand
+    input  wire [3:0] y,   // second 4‑bit operand
+    output wire [4:0] sum  // 5‑bit result (4 bits + overflow)
+);
+    // Carry wires between successive full adders
+    wire c0, c1, c2, c3;
+
+    // Least‑significant bit
+    full_adder fa0 (
+        .a   (x[0]),
+        .b   (y[0]),
+        .cin (1'b0),      // no carry‑in for LSB
+        .sum (sum[0]),
+        .cout(c0)
+    );
+
+    // Bit 1
+    full_adder fa1 (
+        .a   (x[1]),
+        .b   (y[1]),
+        .cin (c0),
+        .sum (sum[1]),
+        .cout(c1)
+    );
+
+    // Bit 2

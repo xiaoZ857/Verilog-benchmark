@@ -1,0 +1,11 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 5
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob023_vector100r\attempt_3\Prob023_vector100r_code.sv:7: error: 'out' has already been declared in this scope.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob023_vector100r\attempt_3\Prob023_vector100r_code.sv:4:      : It was declared here as a variable.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob023_vector100r\attempt_3\Prob023_vector100r_code.sv:8: syntax error
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob023_vector100r\attempt_3\Prob023_vector100r_code.sv:10: Syntax in assignment statement l-value.
+results/llama3_2_3b_0shot_temp0_8_topP0_95_iterative\Prob023_vector100r\attempt_3\Prob023_vector100r_code.sv:11: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob023_vector100r_test.sv:9: error: invalid module item.

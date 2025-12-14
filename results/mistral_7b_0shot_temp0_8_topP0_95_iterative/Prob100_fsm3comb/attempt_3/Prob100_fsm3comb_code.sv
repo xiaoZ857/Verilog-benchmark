@@ -1,0 +1,33 @@
+
+always @(posedge clk) begin
+  case (state)
+    2'b00: // A
+      if (in == 0)
+        next_state <= 2'b00; // A -> A
+      else
+        next_state <= 2'b01; // A -> B
+      out <= 0;
+    // Similar blocks for states B, C and D
+    2'b01: // B
+      if (in == 0)
+        next_state <= 2'b10; // B -> C
+      else
+        next_state <= 2'b01; // B -> B
+      out <= 0;
+    2'b10: // C
+      if (in == 0)
+        next_state <= 2'b11; // C -> D
+      else
+        next_state <= 2'b00; // C -> A
+      out <= 0;
+    2'b11: // D
+      if (in == 0)
+        next_state <= 2'b10; // D -> C
+      else
+        next_state <= 2'b01; // D -> B
+      out <= 1;
+  endcase
+end
+
+// VERILOG-EVAL: abnormal backticks count
+// VERILOG-EVAL: errant inclusion of module definition

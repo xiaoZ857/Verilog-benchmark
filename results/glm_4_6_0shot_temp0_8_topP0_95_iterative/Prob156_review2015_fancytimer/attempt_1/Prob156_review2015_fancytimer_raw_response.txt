@@ -1,0 +1,55 @@
+
+module TopModule (
+  input wire clk,
+  input wire reset,
+  input wire data,
+  output wire [3:0] count,
+  output reg counting,
+  output reg done,
+  input wire ack
+);
+
+  // State definitions
+  parameter IDLE = 2'b00;
+  parameter CAPTURE_DELAY = 2'b01;
+  parameter COUNTING = 2'b10;
+  parameter DONE = 2'b11;
+
+  // State registers
+  reg [1:0] state, next_state;
+  
+  // Pattern detection shift register (4 bits for "1101")
+  reg [3:0] pattern_shift;
+  
+  // Delay value and counters
+  reg [3:0] delay_reg;
+  reg [13:0] cycle_counter; // Count up to 1000 * 16 = 16000 (need 14 bits)
+  reg [3:0] count_reg;
+  reg [2:0] delay_capture_count; // Count bits captured for delay
+
+  // State machine
+  always @(posedge clk) begin
+    if (reset) begin
+      state <= IDLE;
+      pattern_shift <= 4'b0000;
+      delay_reg <= 4'b0000;
+      cycle_counter <= 14'b00000000000000;
+      count_reg <= 4'b0000;
+      delay_capture_count <= 3'b000;
+      counting <= 1'b0;
+      done <= 1'b0;
+    end else begin
+      state <= next_state;
+      
+      case (state)
+        IDLE: begin
+          // Shift pattern detection register
+          pattern_shift <= {pattern_shift[2:0], data};
+          counting <= 1'b0;
+          done <= 1'b0;
+        end
+        
+        CAPTURE_DELAY: begin
+          // Capture delay bits (MSB first)
+          delay_reg <= {delay_reg[2:0], data};
+          delay_capture

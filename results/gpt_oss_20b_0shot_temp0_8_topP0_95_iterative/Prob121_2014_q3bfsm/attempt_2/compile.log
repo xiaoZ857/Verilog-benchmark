@@ -1,0 +1,18 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:15: error: next_state is not a valid l-value in tb.top_module1.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:10:      : next_state is declared here as wire.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:16: error: next_state is not a valid l-value in tb.top_module1.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:10:      : next_state is declared here as wire.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:17: error: next_state is not a valid l-value in tb.top_module1.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:10:      : next_state is declared here as wire.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:18: error: next_state is not a valid l-value in tb.top_module1.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:10:      : next_state is declared here as wire.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:19: error: next_state is not a valid l-value in tb.top_module1.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:10:      : next_state is declared here as wire.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:20: error: next_state is not a valid l-value in tb.top_module1.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob121_2014_q3bfsm\attempt_2\Prob121_2014_q3bfsm_code.sv:10:      : next_state is declared here as wire.
+6 error(s) during elaboration.

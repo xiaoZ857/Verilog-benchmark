@@ -1,0 +1,10 @@
+module TopModule (
+  input logic in1,     // Input signal 1
+  input logic in2,     // Input signal 2
+  output logic out     // Output signal
+);
+
+  // NOR operation: the output is true only when both inputs are false
+  assign out = ~(in1 | in2); 
+
+endmodule

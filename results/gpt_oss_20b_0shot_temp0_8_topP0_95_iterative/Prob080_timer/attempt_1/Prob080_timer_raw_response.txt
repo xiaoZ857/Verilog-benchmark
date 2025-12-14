@@ -1,0 +1,53 @@
+**Verilog implementation**
+
+```verilog
+`timescale 1ns / 1ps
+module TopModule (
+    input  wire        clk,   // clock
+    input  wire        load,  // active‑high load signal
+    input  wire [9:0]  data,  // value to load into the counter
+    output wire        tc     // terminal‑count flag (high when counter == 0)
+);
+
+    // ------------------------------------------------------------------
+    // Internal 10‑bit down‑counter
+    // ------------------------------------------------------------------
+    reg [9:0] counter;
+
+    // ------------------------------------------------------------------
+    // Sequential logic – clock‑synchronous
+    // ------------------------------------------------------------------
+    always @(posedge clk) begin
+        if (load) begin
+            // (1) Load the counter with the supplied value
+            counter <= data;
+        end
+        else if (counter != 10'b0) begin
+            // (2) Decrement only while the counter is non‑zero
+            counter <= counter - 1'b1;
+        end
+        // If counter == 0 and load == 0, keep it at 0 (stop counting)
+    end
+
+    // ------------------------------------------------------------------
+    // Combinational output – terminal count flag
+    // ------------------------------------------------------------------
+    assign tc = (counter == 10'b0);
+
+endmodule
+```
+
+### How it works
+1. **Load**  
+   When `load` is high, the counter is immediately loaded with the 10‑bit value in `data`.  
+   If `data` is `0`, the counter becomes `0` and `tc` will be asserted right away.
+
+2. **Counting**  
+   When `load` is low, the counter decrements by one each rising edge of `clk` **only** while it is not yet zero.  
+   Once it reaches `0` it stays there (the counter stops counting) until the next load event.
+
+3. **Terminal count (`tc`)**  
+   The output `tc` is a simple combinational assignment: it is high whenever the counter is `0`.  
+   Because the counter stops at zero, `tc` remains high until the counter is reloaded.
+
+This implementation satisfies all the requirements described in the prompt.

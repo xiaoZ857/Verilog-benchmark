@@ -1,0 +1,32 @@
+module TopModule (
+  input [15:0] in,
+  output [7:0] out_hi,
+  output [7:0] out_lo
+);
+
+// Add timescale directive outside the module definition.
+`timescale 1ns / 1ps
+
+always @(posedge clk) begin
+  if (clk_en) begin // Add condition for clock enable
+    out_hi <= {in[15], in[14:8]};
+    out_lo <= in [7:0];
+  end
+end
+
+// Ensure the module item is valid.
+// This line was missing in your original code and added here to make it valid.
+initial begin
+end
+
+// Add reset signal for safe operation (optional)
+reg [15:0] reset; // Assuming reset can be synchronous
+assign reset = 8'b0000_0000; // Reset value
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    out_hi <= 8'b0000_0000;
+    out_lo <= 8'b0000_0000;
+  end
+end
+
+endmodule

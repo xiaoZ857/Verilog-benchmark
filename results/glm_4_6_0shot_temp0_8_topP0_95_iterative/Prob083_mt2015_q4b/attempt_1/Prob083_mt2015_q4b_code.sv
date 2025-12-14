@@ -1,0 +1,12 @@
+
+module TopModule (
+  input x,
+  input y,
+  output z
+);
+
+  // Combinational logic implementing XNOR gate
+  // z = 1 when x and y are the same, z = 0 when x and y are different
+  assign z = ~(x ^ y);
+  
+endmodule

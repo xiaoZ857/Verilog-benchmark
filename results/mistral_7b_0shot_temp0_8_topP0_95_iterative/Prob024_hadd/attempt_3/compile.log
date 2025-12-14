@@ -1,0 +1,12 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 6
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob024_hadd_test.sv:71: error: port ``a'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob024_hadd_test.sv:71: error: port ``b'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob024_hadd_test.sv:71: error: port ``sum'' is not a port of top_module1.
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob024_hadd_test.sv:71: error: port ``cout'' is not a port of top_module1.
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob024_hadd\attempt_3\Prob024_hadd_code.sv:7: error: Unable to bind wire/reg/memory `clk' in `tb.top_module1'
+results/mistral_7b_0shot_temp0_8_topP0_95_iterative\Prob024_hadd\attempt_3\Prob024_hadd_code.sv:7: error: Failed to evaluate event expression 'posedge clk'.
+6 error(s) during elaboration.

@@ -1,0 +1,55 @@
+```verilog
+module TopModule (
+  input clk,
+  input areset,
+  input load,
+  input ena,
+  input [3:0] data,
+  output reg [3:0] q
+);
+
+  reg [3:0] shift_reg;
+
+  always @(posedge clk) begin
+    if (areset) begin
+      shift_reg <= 0;
+    end else if (load) begin
+      shift_reg <= data;
+    end else if (ena) begin
+      shift_reg <= {shift_reg[2:0], 1'b0};
+    end else begin
+      // No operation - maintain current state
+    end
+  end
+
+  assign q = shift_reg;
+
+endmodule
+```
+
+**Explanation:**
+
+* **`reg [3:0] shift_reg;`**:  Declares a 4-bit register named `shift_reg` to store the shift register's contents.  This register holds the actual shifting data.
+* **`always @(posedge clk) begin ... end`**: This block describes sequential logic that executes on the positive edge of the clock signal (`clk`).
+* **`if (areset) begin ... end`**: This `if` statement handles the asynchronous reset. When `areset` is high, the shift register is reset to all zeros.
+* **`else if (load) begin ... end`**: If `load` is asserted (high), the shift register is loaded with the value of the input `data`.  This overrides any shift operation.
+* **`else if (ena) begin ... end`**: If `ena` is asserted and `load` is not asserted, the shift register performs a right shift.  `{shift_reg[2:0], 1'b0}` is a concatenation operation.  It shifts the existing bits `shift_reg[2:0]` one position to the right and inserts a `1'b0` (zero) into the most significant bit (MSB) position, effectively shifting the register right and discarding the least significant bit.
+* **`else begin ... end`**: If none of the above conditions are met (neither `areset`, `load`, nor `ena` is asserted), the shift register maintains its current value.  This is the default behavior when no specific action is requested.
+* **`assign q = shift_reg;`**: This continuous assignment statement connects the output `q` to the contents of the `shift_reg` register.  The output `q` always reflects the current state of the shift register.
+
+**Key Improvements and Considerations:**
+
+* **Asynchronous Reset:**  The `areset` signal is handled asynchronously, meaning it immediately resets the shift register regardless of the clock signal. This is crucial for initialization and error recovery.
+* **Load Priority:** The code explicitly prioritizes the `load` signal over the `ena` signal. If both are asserted, the shift register will be loaded with the value of `data`.
+* **Clear and Concise:** The code is structured for readability and clarity.
+* **Correct Shift Operation:**  The right shift operation is implemented correctly, shifting the bits and discarding the least significant bit.
+* **Blocking vs. Non-Blocking Assignments:**  The `always @(posedge clk)` block uses *non-blocking* assignments (`<=`). This is important for sequential logic. Non-blocking assignments ensure that all assignments within the block are evaluated at the *end* of the clock cycle, preventing race conditions and ensuring predictable behavior.
+* **Simulation and Synthesis:** This code is suitable for both simulation and synthesis.  You can use a Verilog simulator (like ModelSim, Icarus Verilog) to verify its functionality and then use a synthesis tool (like Xilinx Vivado or Intel Quartus) to convert it into a hardware implementation.
+
+**How to Test:**
+
+1. **Create a testbench:** Write a Verilog testbench to apply various input combinations (different values of `clk`, `areset`, `load`, `ena`, and `data`) to the `TopModule` and observe the output `q`.
+2. **Verify Reset:**  Assert `areset` and verify that `q` is initialized to all zeros.
+3. **Verify Load:** Assert `load` and provide different values for `data`. Verify that `q` is loaded with the correct values.
+4. **Verify Shift:**  Assert `ena` and verify that the shift register shifts the contents correctly.
+5. **Test Load Priority:** Assert both `load` and `ena` simultaneously and confirm that the shift register is loaded with the value of `data` and does *not* shift.

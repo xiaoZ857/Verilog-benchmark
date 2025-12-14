@@ -1,0 +1,72 @@
+Here is the Verilog module implementation based on the provided description:
+
+```verilog
+// Define the population count function
+function int unsigned [2:0] population_count(input int unsigned [255:0] vector);
+    population_count = $unsigned(vector[254:1]);
+endfunction
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+
+// Calculate the population count for each bit position from 254 down to 0
+always @(posedge clk) begin
+  for (int i = 254; i >= 0; i--) begin : PopulationCountLoop
+    if (in[i] == 1) begin
+      // If the current bit is '1', calculate the population count
+      out[population_count(in)] <= $unsigned({i, out[population_count(in)], out[population_count(in) - 1]});
+    end else begin
+      out[population_count(in)] <= 2'b00;
+    end
+  end : PopulationCountLoop
+end
+
+endmodule
+```
+
+However, the original code doesn't specify how the `out` value should be calculated when a bit is '0'. We can modify it to handle this case.
+
+Here's an updated version of the module:
+
+```verilog
+// Define the population count function
+function int unsigned [2:0] population_count(input int unsigned [255:0] vector);
+    if (vector[254] == 1) begin
+        return $unsigned(vector[253]);
+    end else if (vector[254] == 0 && vector[253] == 1) begin
+        return $unsigned(vector[252]);
+    end else begin
+        return 3'b000;
+    end
+endfunction
+
+module TopModule (
+  input [254:0] in,
+  output reg [7:0] out
+);
+
+// Calculate the population count for each bit position from 254 down to 0
+always @(posedge clk) begin
+  if (in[255] == 1) begin
+    out <= $unsigned({out[6], out[5]});
+  end else if (in[255] == 0 && in[254] == 1) begin
+    out <= $unsigned({out[7], out[5]});
+  end else if (in[255] == 0 && in[254] == 0 && in[253] == 1) begin
+    out <= $unsigned({out[6], out[2]});
+  end else if (in[255] == 0 && in[254] == 0 && in[253] == 0 && in[252] == 1) begin
+    out <= $unsigned({out[7], out[3]});
+  end else if (in[255] == 0 && in[254] == 0 && in[253] == 0 && in[252] == 0 && in[251] == 1) begin
+    out <= $unsigned({out[6], out[4]});
+  end else if (in[255] == 0 && in[254] == 0 && in[253] == 0 && in[252] == 0 && in[251] == 0 && in[250] == 1) begin
+    out <= $unsigned({out[7], out[5]});
+  end else if (in[255] == 0 && in[254] == 0 && in[253] == 0 && in[252] == 0 && in[251] == 0 && in[250] == 0) begin
+    out <= $unsigned({out[6], out[4]});
+  end else if (in[255] == 1 && in[254] == 0 && in[253] == 0 && in[252] == 0 && in[251] == 0 && in[250] == 0) begin
+    out <= $unsigned({out[7], out[3]});
+  end else if (in[255] == 1 && in[254] == 0 && in[253] == 0 && in[252] == 0 && in[251] == 0 && in[250] == 1) begin
+    out <= $unsigned({out[6], out[2]});
+  end else if (in[255] == 1 && in[254] == 0 && in[253] == 0 && in[252] == 0 && in[251] == 1 && in[250] == 0) begin
+    out <= $unsigned({out[7], out[4]});
+  end else if (in[255] == 1 && in[254] == 0 && in[253] == 0 && in[252] == 1 && in[251] == 

@@ -1,0 +1,28 @@
+Here’s a minimal, synthesizable Verilog implementation of a single D‑flip‑flop that captures the value of **d** on the rising edge of **clk** and stores it in **q**.
+
+```verilog
+// ---------------------------------------------------------------
+//  TopModule: Simple D‑Flip‑Flop
+//  - Positive‑edge triggered on 'clk'
+//  - Data input: 'd'
+//  - Data output: 'q' (registered)
+// ---------------------------------------------------------------
+module TopModule (
+    input  wire  clk,   // Clock input
+    input  wire  d,     // Data input
+    output reg   q      // Registered output
+);
+
+    // Capture 'd' on the rising edge of 'clk'
+    always @(posedge clk) begin
+        q <= d;
+    end
+
+endmodule
+```
+
+### Notes
+
+* `q` is declared as a `reg` because it holds state between clock edges.
+* The `always @(posedge clk)` block ensures the flip‑flop is positive‑edge triggered.
+* No reset or enable signals are required as per the specification. If you need an asynchronous or synchronous reset later, you can add an additional input and modify the `always` block accordingly.

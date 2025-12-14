@@ -1,0 +1,47 @@
+ Here is the Verilog code for the state machine you described:
+
+```verilog
+module TopModule (
+  input wire clk,
+  input wire in,
+  input wire reset,
+  output reg out
+);
+
+reg currState; // Current state of the state machine
+param B = 0;
+param A = 1;
+
+always @(posedge clk) begin
+    if (reset) begin
+        currState <= B;
+    end else begin
+        case (currState)
+            B: begin
+                if (in == 0) begin
+                    currState <= A;
+                    out <= 1;
+                end else if (in == 1) begin
+                    currState <= B;
+                    out <= 1;
+                end
+            end
+            A: begin
+                if (in == 0) begin
+                    currState <= B;
+                    out <= 0;
+                end else if (in == 1) begin
+                    currState <= A;
+                    out <= 0;
+                end
+            end
+        endcase
+    end
+end
+
+endmodule
+```
+
+This code defines a Moore state machine with two states `B` and `A`, an input signal `in`, an output signal `out`, and a reset signal `reset`. The current state of the state machine is stored in the `currState` register.
+
+The state transition table you provided is implemented using a case statement within an always block that triggers on positive edges of the clock signal (`posedge clk`). When the reset signal is high, the state machine resets to the initial state `B`. For each state, the conditions for transitions and corresponding output values are defined. The output is updated according to the current state and input.

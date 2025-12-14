@@ -1,0 +1,10 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:56: error: This assignment requires an explicit cast.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:57: error: This assignment requires an explicit cast.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:58: error: This assignment requires an explicit cast.
+results/gpt_oss_20b_0shot_temp0_8_topP0_95_iterative\Prob120_fsm3s\attempt_1\Prob120_fsm3s_code.sv:59: error: This assignment requires an explicit cast.
+4 error(s) during elaboration.

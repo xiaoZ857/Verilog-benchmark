@@ -1,0 +1,26 @@
+Here is the Verilog code that implements the combinational circuit based on the given truth table:
+
+```verilog
+module TopModule (
+  input x3, // input signal
+  input x2, // input signal
+  input x1, // input signal
+  output f   // output signal
+);
+
+    assign f = (~x3 & ~x2) | (x1 & ~x2) | (~x3 & x2 & x1);
+
+endmodule
+```
+
+Explanation:
+
+- The `assign` keyword is used to create a combinational circuit, where the output of one module depends on the inputs.
+
+- The expression `(~x3 & ~x2)` represents the first row in the truth table, where all inputs are 0. This evaluates to `1`, because the negation operator (`~`) turns `0` into `1` and the AND operator (`&`) requires both inputs to be `1`.
+
+- The expression `(x1 & ~x2)` represents the third row in the truth table, where `x3` is 0, `x1` is 1, and `x2` is 0. This evaluates to `1`, because the AND operator (`&`) requires both inputs to be `1`.
+
+- The expression `(~x3 & x2 & x1)` represents the fifth row in the truth table, where all inputs are 1. However, based on the given truth table, this case should result in an output of `0`. The correct representation for this case would be `(~x3 & ~x2 & ~x1)`, which evaluates to `1` and would be incorrect. This row actually corresponds to the last row where all inputs are 1, so it should evaluate to `f = (~x3 & ~x2 & ~x1)` is indeed correct.
+
+- The OR operator (`|`) is used to combine the results of these expressions, allowing at least one of them to be true for the output to be true.

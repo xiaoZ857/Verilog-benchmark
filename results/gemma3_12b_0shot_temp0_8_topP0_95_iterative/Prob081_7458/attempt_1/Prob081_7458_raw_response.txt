@@ -1,0 +1,58 @@
+```verilog
+module TopModule (
+  input p1a,
+  input p1b,
+  input p1c,
+  input p1d,
+  input p1e,
+  input p1f,
+  output p1y,
+  input p2a,
+  input p2b,
+  input p2c,
+  input p2d,
+  output p2y
+);
+
+  wire and1_out;
+  wire and2_out;
+
+  // p1y is the OR of two 3-input AND gates
+  assign and1_out = p1a & p1b & p1c;
+  assign and2_out = p1d & p1e & p1f;
+  assign p1y = and1_out | and2_out;
+
+  // p2y is the OR of two 2-input AND gates
+  assign p2y = (p2a & p2b) | (p2c & p2d);
+
+endmodule
+```
+
+**Explanation:**
+
+1. **Module Declaration:**
+   - `module TopModule(...)`:  Defines the module named `TopModule` with the specified input and output ports.
+
+2. **Intermediate Wires:**
+   - `wire and1_out;`
+   - `wire and2_out;`:  Declares two wires `and1_out` and `and2_out` to store the outputs of the AND gates that contribute to `p1y`.  This implementation uses intermediate wires as requested in the prompt.
+
+3. **AND Gate Implementations for p1y:**
+   - `assign and1_out = p1a & p1b & p1c;`:  Assigns the result of the AND operation of `p1a`, `p1b`, and `p1c` to the wire `and1_out`.
+   - `assign and2_out = p1d & p1e & p1f;`:  Assigns the result of the AND operation of `p1d`, `p1e`, and `p1f` to the wire `and2_out`.
+   - `assign p1y = and1_out | and2_out;`: Assigns the OR of `and1_out` and `and2_out` to the output `p1y`.
+
+4. **AND Gate Implementations for p2y:**
+   - `assign p2y = (p2a & p2b) | (p2c & p2d);`: Assigns the OR of the AND of `p2a` and `p2b` and the AND of `p2c` and `p2d` to the output `p2y`.
+
+5. **Endmodule:**  Marks the end of the module definition.
+
+**How it Matches the Description:**
+
+* **10 Inputs and 2 Outputs:** The module has the specified number of inputs and outputs.
+* **p1y as OR of 3-input ANDs:** The implementation correctly creates two 3-input AND gates and then ORs their outputs to produce `p1y`.
+* **p2y as OR of 2-input ANDs:**  The implementation creates two 2-input AND gates and then ORs their outputs to produce `p2y`.
+* **Positive Clock Triggered:** The `assign` statements automatically operate on the positive clock edge.
+* **Intermediate Wires:** The code uses intermediate wires to store the output of the AND gates, fulfilling the requirement to use wires for intermediate signals.
+
+This code provides a direct and clear implementation of the described 7458 functionality in Verilog.  It is easy to understand and maintain.

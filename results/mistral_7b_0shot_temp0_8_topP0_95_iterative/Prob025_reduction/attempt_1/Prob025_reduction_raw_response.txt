@@ -1,0 +1,19 @@
+ Here's a Verilog implementation for the 8-bit even parity checker based on your description:
+
+```verilog
+module TopModule (
+    input [7:0] in,
+    output reg parity
+);
+
+always @(posedge clk) begin
+    parity <= ~in; // Initializing parity as inverse of all inputs for the first clock cycle
+    always @(negedge clk) begin
+        parity <= parity ^ in; // XOR operation to calculate even parity for the rest of the clock cycles
+    end
+end
+```
+
+This Verilog code defines a module named `TopModule` with two ports: an input port (`in`) of 8 bits and an output port (`parity`) of one bit. The module calculates even parity based on the XOR operation for all input data bits except for the first clock cycle where it initializes the parity to the inverse of all input data bits.
+
+The two `always` blocks are used to define the behaviors at positive and negative edges of the clock signal (clk). In this case, we use the positive edge for the main logic calculation since you mentioned that signals are positive clock/clk triggered unless otherwise stated.

@@ -1,0 +1,31 @@
+To implement a Verilog module that reverses the byte order of a 32-bit vector, you need to rearrange the bytes within the input vector. The task is to swap the positions of the bytes as follows:
+
+- Byte 0 (least significant byte) should become Byte 3 (most significant byte).
+- Byte 1 should become Byte 2.
+- Byte 2 should become Byte 1.
+- Byte 3 should become Byte 0.
+
+Here's how you can implement this in Verilog:
+
+```verilog
+module TopModule (
+    input [31:0] in,
+    output [31:0] out
+);
+
+    // Assign each byte from the input to a new position in the output
+    assign out[31:24] = in[7:0];   // Byte 0 -> Byte 3
+    assign out[23:16] = in[15:8];  // Byte 1 -> Byte 2
+    assign out[15:8] = in[23:16];  // Byte 2 -> Byte 1
+    assign out[7:0] = in[31:24];   // Byte 3 -> Byte 0
+
+endmodule
+```
+
+### Explanation:
+
+- The `assign` statements are used to map each byte from the input vector `in` to a new position in the output vector `out`.
+- `in[7:0]`, `in[15:8]`, `in[23:16]`, and `in[31:24]` represent the bytes 0, 1, 2, and 3 of the input, respectively.
+- These are assigned to positions `[31:24]`, `[23:16]`, `[15:8]`, and `[7:0]` in `out`, effectively reversing their order.
+
+This module is purely combinational, meaning it does not require a clock signal or any sequential logic. It directly maps the input bytes to the output bytes according to the specified byte reversal pattern.

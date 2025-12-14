@@ -1,0 +1,86 @@
+```verilog
+module TopModule (
+  input clk,
+  input reset,
+  input x,
+  output reg z
+);
+
+  reg [2:0] y;
+
+  always @(posedge clk) begin
+    if (reset) begin
+      y <= 3'b000;
+    end else begin
+      case (y)
+        3'b000: begin
+          if (x == 0)
+            y <= 3'b000;
+          else
+            y <= 3'b001;
+        end
+        3'b001: begin
+          if (x == 0)
+            y <= 3'b001;
+          else
+            y <= 3'b100;
+        end
+        3'b010: begin
+          if (x == 0)
+            y <= 3'b010;
+          else
+            y <= 3'b001;
+        end
+        3'b011: begin
+          if (x == 0)
+            y <= 3'b001;
+          else
+            y <= 3'b010;
+        end
+        3'b100: begin
+          if (x == 0)
+            y <= 3'b011;
+          else
+            y <= 3'b100;
+        end
+        default: begin
+            y <= 3'b000; // Add a default case for safety
+        end
+      endcase
+    end
+  end
+
+  always @(y) begin
+    case (y)
+      3'b000: z <= 0;
+      3'b001: z <= 0;
+      3'b010: z <= 0;
+      3'b011: z <= 1;
+      3'b100: z <= 1;
+      default: z <= 0; // Default case for safety.
+    endcase
+  end
+
+endmodule
+```
+
+**Explanation:**
+
+1. **`module TopModule(...)`:** Defines the module with inputs `clk`, `reset`, `x`, and output `z`.
+2. **`reg [2:0] y;`:** Declares a 3-bit register `y` to represent the current state of the FSM.
+3. **`always @(posedge clk)`:**  Specifies a sequential block triggered by the positive edge of the clock signal.
+4. **`if (reset) begin ... end`:**  Handles the synchronous reset.  When `reset` is high, the FSM is reset to the initial state `3'b000`.
+5. **`case (y)`:**  The core of the state machine.  This `case` statement determines the next state (`y`) based on the current state (`y`) and the input `x`.  Each state has two branches: one for `x = 0` and one for `x = 1`.
+6. **`always @(y)`:**  This block defines the output `z` based on the current state `y`.
+7. **`case (y)`:**  This `case` statement determines the output `z` based on the current state `y`.
+8. **`default`:** Added `default` cases in both `case` statements to handle unexpected states and ensure the FSM behaves predictably.
+
+**How it works:**
+
+The code implements the state transitions as described in the state-assigned table. The `always @(posedge clk)` block handles the state updates on each clock cycle.  The `always @(y)` block generates the output `z` based on the current state `y`.
+
+**To use this code:**
+
+1.  **Save:** Save the code as a `.v` file (e.g., `top_module.v`).
+2.  **Simulate:** Use a Verilog simulator (like ModelSim, Icarus Verilog, or Vivado simulator) to simulate the module and verify its functionality.  You're going to need a testbench to provide the clock, reset, and input `x` signals.
+3.  **Synthesize:** If you're implementing this on an FPGA or ASIC, you're going to need to synthesize it using appropriate tools.

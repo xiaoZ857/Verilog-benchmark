@@ -1,0 +1,9 @@
+=== Static Analysis ===
+PASS: No simulation-hanging patterns detected
+==================================================
+=== Compilation ===
+Return code: 4
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob085_shift4\attempt_2\Prob085_shift4_code.sv:16: syntax error
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob085_shift4\attempt_2\Prob085_shift4_code.sv:18: Syntax in assignment statement l-value.
+results/deepseek_r1_14b_0shot_temp0_8_topP0_95_iterative\Prob085_shift4\attempt_2\Prob085_shift4_code.sv:24: syntax error
+D:\WorkSpace\ResearchCode\LLM4DSL\verilog\Verilog-benchmark\dataset_code-complete-iccad2023/Prob085_shift4_test.sv:16: error: invalid module item.

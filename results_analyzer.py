@@ -1941,5 +1941,699 @@ def main():
     print(f"分析完成，耗时 {time.time() - start_time:.2f} 秒")
     print(f"{'='*60}")
 
+# ============================================================================
+# Iterative Strategy Analysis - 迭代策略分析
+# ============================================================================
+
+# README中的Baseline和优化提示词v1结果数据（硬编码）
+BASELINE_RESULTS = {
+    # 参数组1: temp=0.0, top_p=0.01
+    (0.0, 0.01): {
+        'gpt_oss_20b': {'compiled': 93, 'passed': 88, 'compile_rate': 59.6, 'pass_rate': 56.4},
+        'deepseek_v3_2': {'compiled': 92, 'passed': 72, 'compile_rate': 59.0, 'pass_rate': 46.2},
+        'phi4_14b': {'compiled': 107, 'passed': 47, 'compile_rate': 68.6, 'pass_rate': 30.1},
+        'gemma3_12b': {'compiled': 84, 'passed': 44, 'compile_rate': 53.8, 'pass_rate': 28.2},
+        'glm_4_6': {'compiled': 41, 'passed': 39, 'compile_rate': 26.3, 'pass_rate': 25.0},
+        'qwen3_8b': {'compiled': 28, 'passed': 27, 'compile_rate': 17.9, 'pass_rate': 17.3},
+        'deepseek_r1_14b': {'compiled': 20, 'passed': 15, 'compile_rate': 12.8, 'pass_rate': 9.6},
+        'llama3_2_3b': {'compiled': 48, 'passed': 15, 'compile_rate': 30.8, 'pass_rate': 9.6},
+        'mistral_7b': {'compiled': 34, 'passed': 14, 'compile_rate': 21.8, 'pass_rate': 9.0},
+    },
+    # 参数组2: temp=0.8, top_p=0.95
+    (0.8, 0.95): {
+        'deepseek_v3_2': {'compiled': 92, 'passed': 76, 'compile_rate': 59.0, 'pass_rate': 48.7},
+        'gpt_oss_20b': {'compiled': 67, 'passed': 65, 'compile_rate': 42.9, 'pass_rate': 41.7},
+        'phi4_14b': {'compiled': 120, 'passed': 62, 'compile_rate': 76.9, 'pass_rate': 39.7},
+        'gemma3_12b': {'compiled': 105, 'passed': 58, 'compile_rate': 67.3, 'pass_rate': 37.2},
+        'glm_4_6': {'compiled': 45, 'passed': 39, 'compile_rate': 28.8, 'pass_rate': 25.0},
+        'deepseek_r1_14b': {'compiled': 25, 'passed': 24, 'compile_rate': 16.0, 'pass_rate': 15.4},
+        'qwen3_8b': {'compiled': 16, 'passed': 16, 'compile_rate': 10.3, 'pass_rate': 10.3},
+        'mistral_7b': {'compiled': 27, 'passed': 8, 'compile_rate': 17.3, 'pass_rate': 5.1},
+        'llama3_2_3b': {'compiled': 28, 'passed': 7, 'compile_rate': 17.9, 'pass_rate': 4.5},
+    },
+}
+
+PROMPT_V1_RESULTS = {
+    # 参数组1: temp=0.0, top_p=0.01
+    (0.0, 0.01): {
+        'glm_4_6': {'compiled': 128, 'passed': 106, 'compile_rate': 82.1, 'pass_rate': 67.9},
+        'deepseek_v3_2': {'compiled': 115, 'passed': 92, 'compile_rate': 73.7, 'pass_rate': 59.0},
+        'gpt_oss_20b': {'compiled': 96, 'passed': 86, 'compile_rate': 61.5, 'pass_rate': 55.1},
+        'phi4_14b': {'compiled': 122, 'passed': 66, 'compile_rate': 78.2, 'pass_rate': 42.3},
+        'gemma3_12b': {'compiled': 80, 'passed': 44, 'compile_rate': 51.3, 'pass_rate': 28.2},
+        'deepseek_r1_14b': {'compiled': 47, 'passed': 39, 'compile_rate': 30.1, 'pass_rate': 25.0},
+        'qwen3_8b': {'compiled': 32, 'passed': 30, 'compile_rate': 20.5, 'pass_rate': 19.2},
+        'llama3_2_3b': {'compiled': 46, 'passed': 15, 'compile_rate': 29.5, 'pass_rate': 9.6},
+        'mistral_7b': {'compiled': 1, 'passed': 0, 'compile_rate': 0.6, 'pass_rate': 0.0},
+    },
+    # 参数组2: temp=0.8, top_p=0.95
+    (0.8, 0.95): {
+        'glm_4_6': {'compiled': 133, 'passed': 111, 'compile_rate': 85.3, 'pass_rate': 71.2},
+        'gpt_oss_20b': {'compiled': 102, 'passed': 95, 'compile_rate': 65.4, 'pass_rate': 60.9},
+        'deepseek_v3_2': {'compiled': 117, 'passed': 92, 'compile_rate': 75.0, 'pass_rate': 59.0},
+        'phi4_14b': {'compiled': 119, 'passed': 65, 'compile_rate': 76.3, 'pass_rate': 41.7},
+        'gemma3_12b': {'compiled': 87, 'passed': 45, 'compile_rate': 55.8, 'pass_rate': 28.8},
+        'deepseek_r1_14b': {'compiled': 44, 'passed': 37, 'compile_rate': 28.2, 'pass_rate': 23.7},
+        'qwen3_8b': {'compiled': 32, 'passed': 30, 'compile_rate': 20.5, 'pass_rate': 19.2},
+        'llama3_2_3b': {'compiled': 43, 'passed': 11, 'compile_rate': 27.6, 'pass_rate': 7.1},
+        'mistral_7b': {'compiled': 5, 'passed': 1, 'compile_rate': 3.2, 'pass_rate': 0.6},
+    },
+}
+
+
+@dataclass
+class DetailedIterationStats:
+    """详细的迭代统计信息"""
+    model_name: str
+    temperature: float
+    top_p: float
+    total_problems: int
+    # 最终结果
+    final_compiled: int
+    final_passed: int
+    # 首次尝试结果
+    first_attempt_compiled: int
+    first_attempt_passed: int
+    # 迭代改进
+    improved_by_compile_iteration: int
+    improved_by_test_iteration: int
+    # 迭代次数统计
+    total_compile_attempts: int
+    total_test_attempts: int
+    avg_compile_attempts: float
+    avg_test_attempts: float
+    # 迭代次数分布
+    compile_attempts_distribution: Dict[int, int]  # {1: 数量, 2: 数量, 3: 数量}
+    # 问题列表
+    problems_improved_by_compile: List[str]
+    problems_improved_by_test: List[str]
+    problems_never_compiled: List[str]
+    problems_compiled_but_failed_test: List[str]
+
+    @property
+    def compile_rate(self) -> float:
+        return (self.final_compiled / self.total_problems * 100) if self.total_problems > 0 else 0.0
+
+    @property
+    def pass_rate(self) -> float:
+        return (self.final_passed / self.total_problems * 100) if self.total_problems > 0 else 0.0
+
+    @property
+    def first_compile_rate(self) -> float:
+        return (self.first_attempt_compiled / self.total_problems * 100) if self.total_problems > 0 else 0.0
+
+    @property
+    def first_pass_rate(self) -> float:
+        return (self.first_attempt_passed / self.total_problems * 100) if self.total_problems > 0 else 0.0
+
+
+def collect_detailed_iteration_stats(model_dir: str, temperature: float, top_p: float) -> Optional[DetailedIterationStats]:
+    """从每个问题的iteration_summary.json收集详细迭代统计"""
+    model_path = Path(model_dir)
+    model_name = extract_model_name(model_dir)
+
+    if not model_path.name.endswith('_iterative'):
+        return None
+
+    total_problems = 0
+    final_compiled = 0
+    final_passed = 0
+    first_attempt_compiled = 0
+    first_attempt_passed = 0
+    improved_by_compile = 0
+    improved_by_test = 0
+    total_compile_attempts = 0
+    total_test_attempts = 0
+    compile_attempts_distribution = {1: 0, 2: 0, 3: 0}
+
+    problems_improved_by_compile = []
+    problems_improved_by_test = []
+    problems_never_compiled = []
+    problems_compiled_but_failed_test = []
+
+    for problem_dir in model_path.iterdir():
+        if not problem_dir.is_dir() or problem_dir.name == "compile_test_result":
+            continue
+
+        summary_path = problem_dir / "iteration_summary.json"
+        if not summary_path.exists():
+            continue
+
+        try:
+            with open(summary_path, 'r', encoding='utf-8') as f:
+                summary = json.load(f)
+        except Exception:
+            continue
+
+        total_problems += 1
+        problem_name = summary.get('problem_name', problem_dir.name)
+
+        # 统计编译尝试次数
+        compile_attempts = summary.get('compile_attempts', 1)
+        test_attempts = summary.get('test_attempts', 0)
+        total_compile_attempts += compile_attempts
+        total_test_attempts += test_attempts
+
+        # 编译尝试次数分布
+        if compile_attempts in compile_attempts_distribution:
+            compile_attempts_distribution[compile_attempts] += 1
+
+        # 首次尝试结果
+        if summary.get('first_attempt_compile_success', False):
+            first_attempt_compiled += 1
+        if summary.get('first_attempt_test_success', False):
+            first_attempt_passed += 1
+
+        # 最终结果
+        if summary.get('final_compile_success', False):
+            final_compiled += 1
+            if summary.get('final_test_success', False):
+                final_passed += 1
+            else:
+                problems_compiled_but_failed_test.append(problem_name)
+        else:
+            problems_never_compiled.append(problem_name)
+
+        # 迭代改进统计
+        if summary.get('improved_by_iteration', False):
+            # 判断是编译改进还是测试改进
+            if not summary.get('first_attempt_compile_success', False) and summary.get('final_compile_success', False):
+                improved_by_compile += 1
+                problems_improved_by_compile.append(problem_name)
+            elif summary.get('first_attempt_compile_success', False) and not summary.get('first_attempt_test_success', False) and summary.get('final_test_success', False):
+                improved_by_test += 1
+                problems_improved_by_test.append(problem_name)
+
+    avg_compile = total_compile_attempts / total_problems if total_problems > 0 else 0
+    avg_test = total_test_attempts / total_problems if total_problems > 0 else 0
+
+    return DetailedIterationStats(
+        model_name=model_name,
+        temperature=temperature,
+        top_p=top_p,
+        total_problems=total_problems,
+        final_compiled=final_compiled,
+        final_passed=final_passed,
+        first_attempt_compiled=first_attempt_compiled,
+        first_attempt_passed=first_attempt_passed,
+        improved_by_compile_iteration=improved_by_compile,
+        improved_by_test_iteration=improved_by_test,
+        total_compile_attempts=total_compile_attempts,
+        total_test_attempts=total_test_attempts,
+        avg_compile_attempts=avg_compile,
+        avg_test_attempts=avg_test,
+        compile_attempts_distribution=compile_attempts_distribution,
+        problems_improved_by_compile=problems_improved_by_compile,
+        problems_improved_by_test=problems_improved_by_test,
+        problems_never_compiled=problems_never_compiled,
+        problems_compiled_but_failed_test=problems_compiled_but_failed_test,
+    )
+
+
+def generate_iterative_comparison_html(
+    iterative_stats: List[DetailedIterationStats],
+    baseline_data: Dict,
+    prompt_v1_data: Dict,
+    temperature: float,
+    top_p: float,
+    output_path: str
+):
+    """生成迭代策略对比分析HTML报告"""
+
+    param_key = (temperature, top_p)
+    baseline = baseline_data.get(param_key, {})
+    prompt_v1 = prompt_v1_data.get(param_key, {})
+
+    # 按通过率排序迭代结果
+    sorted_stats = sorted(iterative_stats, key=lambda x: x.pass_rate, reverse=True)
+
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>迭代策略分析报告 - Temp {temperature} TopP {top_p}</title>
+        <meta charset="utf-8">
+        {generate_css_styles()}
+        <style>
+            .comparison-table th {{
+                background-color: #2c3e50;
+            }}
+            .strategy-baseline {{ background-color: #3498db; color: white; padding: 2px 8px; border-radius: 3px; }}
+            .strategy-v1 {{ background-color: #9b59b6; color: white; padding: 2px 8px; border-radius: 3px; }}
+            .strategy-iterative {{ background-color: #27ae60; color: white; padding: 2px 8px; border-radius: 3px; }}
+            .improvement {{ color: #27ae60; font-weight: bold; }}
+            .decline {{ color: #e74c3c; font-weight: bold; }}
+            .iteration-badge {{
+                display: inline-block;
+                padding: 3px 10px;
+                border-radius: 15px;
+                font-size: 0.85em;
+                font-weight: 600;
+                margin: 2px;
+            }}
+            .badge-1 {{ background-color: #27ae60; color: white; }}
+            .badge-2 {{ background-color: #f39c12; color: white; }}
+            .badge-3 {{ background-color: #e74c3c; color: white; }}
+            .stats-highlight {{
+                font-size: 2em;
+                font-weight: bold;
+                color: #2c3e50;
+            }}
+            .mini-chart {{
+                display: flex;
+                align-items: flex-end;
+                height: 60px;
+                gap: 4px;
+            }}
+            .mini-bar {{
+                width: 30px;
+                background: linear-gradient(180deg, #3498db, #2980b9);
+                border-radius: 3px 3px 0 0;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                color: white;
+                font-size: 0.75em;
+                padding-bottom: 2px;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>迭代策略分析报告 <span class="strategy-iterative">Iterative Fix</span></h1>
+            <p><strong>参数配置:</strong> Temperature = {temperature}, Top_p = {top_p}</p>
+            <p><strong>生成时间:</strong> {time.strftime('%Y-%m-%d %H:%M:%S')}</p>
+
+            <h2>总体概览</h2>
+            <div class="summary-grid">
+                <div class="summary-card" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                    <h3>迭代策略平均通过率</h3>
+                    <div class="value">{sum(s.pass_rate for s in sorted_stats) / len(sorted_stats):.1f}%</div>
+                </div>
+                <div class="summary-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                    <h3>Baseline平均通过率</h3>
+                    <div class="value">{sum(b['pass_rate'] for b in baseline.values()) / len(baseline):.1f}%</div>
+                </div>
+                <div class="summary-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                    <h3>优化提示词v1平均通过率</h3>
+                    <div class="value">{sum(p['pass_rate'] for p in prompt_v1.values()) / len(prompt_v1):.1f}%</div>
+                </div>
+                <div class="summary-card" style="background: linear-gradient(135deg, #e67e22, #d35400);">
+                    <h3>通过编译迭代改进</h3>
+                    <div class="value">{sum(s.improved_by_compile_iteration for s in sorted_stats)}</div>
+                    <p>个问题</p>
+                </div>
+            </div>
+
+            <h2>三策略对比（按迭代策略通过率排序）</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>模型</th>
+                        <th>参数规模</th>
+                        <th><span class="strategy-baseline">Baseline</span><br>编译/通过</th>
+                        <th><span class="strategy-v1">优化v1</span><br>编译/通过</th>
+                        <th><span class="strategy-iterative">Iterative</span><br>编译/通过</th>
+                        <th>vs Baseline</th>
+                        <th>vs 优化v1</th>
+                        <th>编译迭代改进</th>
+                    </tr>
+                </thead>
+                <tbody>
+    """
+
+    for stats in sorted_stats:
+        model_name = stats.model_name
+        param_size = get_model_parameter_size(model_name)
+
+        # 获取baseline和v1数据
+        b = baseline.get(model_name, {'compile_rate': 0, 'pass_rate': 0})
+        v = prompt_v1.get(model_name, {'compile_rate': 0, 'pass_rate': 0})
+
+        # 计算对比
+        vs_baseline = stats.pass_rate - b['pass_rate']
+        vs_v1 = stats.pass_rate - v['pass_rate']
+
+        vs_baseline_class = "improvement" if vs_baseline > 0 else ("decline" if vs_baseline < 0 else "")
+        vs_v1_class = "improvement" if vs_v1 > 0 else ("decline" if vs_v1 < 0 else "")
+
+        vs_baseline_str = f"+{vs_baseline:.1f}%" if vs_baseline > 0 else f"{vs_baseline:.1f}%"
+        vs_v1_str = f"+{vs_v1:.1f}%" if vs_v1 > 0 else f"{vs_v1:.1f}%"
+
+        html_content += f"""
+                    <tr>
+                        <td><strong>{model_name}</strong></td>
+                        <td>{param_size}</td>
+                        <td>{b['compile_rate']:.1f}% / {b['pass_rate']:.1f}%</td>
+                        <td>{v['compile_rate']:.1f}% / {v['pass_rate']:.1f}%</td>
+                        <td><strong>{stats.compile_rate:.1f}%</strong> / <strong>{stats.pass_rate:.1f}%</strong></td>
+                        <td class="{vs_baseline_class}">{vs_baseline_str}</td>
+                        <td class="{vs_v1_class}">{vs_v1_str}</td>
+                        <td>{stats.improved_by_compile_iteration}</td>
+                    </tr>
+        """
+
+    html_content += """
+                </tbody>
+            </table>
+
+            <h2>迭代统计详情</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>模型</th>
+                        <th>首次编译成功</th>
+                        <th>最终编译成功</th>
+                        <th>编译改进数</th>
+                        <th>平均编译迭代</th>
+                        <th>首次测试通过</th>
+                        <th>最终测试通过</th>
+                        <th>迭代次数分布</th>
+                    </tr>
+                </thead>
+                <tbody>
+    """
+
+    for stats in sorted_stats:
+        dist = stats.compile_attempts_distribution
+        total = sum(dist.values())
+
+        html_content += f"""
+                    <tr>
+                        <td><strong>{stats.model_name}</strong></td>
+                        <td>{stats.first_attempt_compiled} ({stats.first_compile_rate:.1f}%)</td>
+                        <td>{stats.final_compiled} ({stats.compile_rate:.1f}%)</td>
+                        <td style="color: #27ae60; font-weight: bold;">+{stats.improved_by_compile_iteration}</td>
+                        <td>{stats.avg_compile_attempts:.2f}</td>
+                        <td>{stats.first_attempt_passed} ({stats.first_pass_rate:.1f}%)</td>
+                        <td>{stats.final_passed} ({stats.pass_rate:.1f}%)</td>
+                        <td>
+                            <span class="iteration-badge badge-1">1次: {dist.get(1, 0)}</span>
+                            <span class="iteration-badge badge-2">2次: {dist.get(2, 0)}</span>
+                            <span class="iteration-badge badge-3">3次: {dist.get(3, 0)}</span>
+                        </td>
+                    </tr>
+        """
+
+    html_content += """
+                </tbody>
+            </table>
+
+            <h2>迭代收益分析</h2>
+            <div class="stats-grid">
+    """
+
+    # 统计总体收益
+    total_improved_compile = sum(s.improved_by_compile_iteration for s in sorted_stats)
+    total_improved_test = sum(s.improved_by_test_iteration for s in sorted_stats)
+    total_never_compiled = sum(len(s.problems_never_compiled) for s in sorted_stats)
+    total_compile_but_fail = sum(len(s.problems_compiled_but_failed_test) for s in sorted_stats)
+
+    html_content += f"""
+                <div class="stats-card">
+                    <h3>编译阶段收益</h3>
+                    <p class="stats-highlight" style="color: #27ae60;">+{total_improved_compile}</p>
+                    <p>个问题通过编译迭代从失败变为成功</p>
+                    <hr>
+                    <p>仍无法编译: <strong style="color: #e74c3c;">{total_never_compiled}</strong> 个问题</p>
+                </div>
+                <div class="stats-card">
+                    <h3>测试阶段收益</h3>
+                    <p class="stats-highlight" style="color: #3498db;">+{total_improved_test}</p>
+                    <p>个问题通过测试迭代从失败变为成功</p>
+                    <hr>
+                    <p>编译成功但测试失败: <strong style="color: #f39c12;">{total_compile_but_fail}</strong> 个问题</p>
+                </div>
+            </div>
+
+            <h2>各模型迭代改进详情</h2>
+    """
+
+    for stats in sorted_stats:
+        if stats.improved_by_compile_iteration > 0 or len(stats.problems_never_compiled) > 0:
+            html_content += f"""
+            <div class="stats-card" style="margin-bottom: 15px;">
+                <h3>{stats.model_name}</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <h4 style="color: #27ae60;">通过编译迭代改进的问题 ({stats.improved_by_compile_iteration}个)</h4>
+                        <ul class="problem-list">
+            """
+            for problem in stats.problems_improved_by_compile[:10]:
+                html_content += f"<li>{problem}</li>"
+            if len(stats.problems_improved_by_compile) > 10:
+                html_content += f"<li>...还有 {len(stats.problems_improved_by_compile) - 10} 个</li>"
+
+            html_content += f"""
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #e74c3c;">无法修复的问题 ({len(stats.problems_never_compiled)}个)</h4>
+                        <ul class="problem-list">
+            """
+            for problem in stats.problems_never_compiled[:10]:
+                html_content += f"<li>{problem}</li>"
+            if len(stats.problems_never_compiled) > 10:
+                html_content += f"<li>...还有 {len(stats.problems_never_compiled) - 10} 个</li>"
+
+            html_content += """
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            """
+
+    html_content += """
+        </div>
+    </body>
+    </html>
+    """
+
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+
+
+def analyze_iterative_strategy():
+    """分析迭代策略结果并生成对比报告"""
+    print("迭代策略分析")
+    print("=" * 60)
+
+    results_dir = Path("results")
+    param_groups = [
+        (0.0, 0.01, "参数组1（低温/确定性）"),
+        (0.8, 0.95, "参数组2（高温/多样性）"),
+    ]
+
+    all_results = {}
+
+    for temp, top_p, group_name in param_groups:
+        print(f"\n{group_name}: temp={temp}, top_p={top_p}")
+        print("-" * 50)
+
+        # 查找迭代策略目录
+        temp_str = str(temp).replace('.', '_')
+        top_p_str = str(top_p).replace('.', '_')
+        pattern = f"*_0shot_temp{temp_str}_topP{top_p_str}_iterative"
+
+        iterative_dirs = list(results_dir.glob(pattern))
+        print(f"找到 {len(iterative_dirs)} 个迭代策略结果目录")
+
+        if not iterative_dirs:
+            continue
+
+        # 收集每个模型的详细迭代统计
+        stats_list = []
+        for dir_path in iterative_dirs:
+            stats = collect_detailed_iteration_stats(str(dir_path), temp, top_p)
+            if stats:
+                stats_list.append(stats)
+                print(f"  {stats.model_name}: 编译 {stats.compile_rate:.1f}% -> 通过 {stats.pass_rate:.1f}% (编译改进: +{stats.improved_by_compile_iteration})")
+
+        all_results[(temp, top_p)] = stats_list
+
+        # 生成HTML报告
+        analysis_dir = f"results/analysis/temp{temp}_topP{top_p}_iterative_comparison"
+        os.makedirs(analysis_dir, exist_ok=True)
+        report_path = os.path.join(analysis_dir, "iterative_comparison.html")
+
+        generate_iterative_comparison_html(
+            stats_list,
+            BASELINE_RESULTS,
+            PROMPT_V1_RESULTS,
+            temp,
+            top_p,
+            report_path
+        )
+        print(f"\n[完成] 生成对比报告: {report_path}")
+
+    # 打印汇总表格
+    print("\n" + "=" * 80)
+    print("迭代策略结果汇总")
+    print("=" * 80)
+
+    for (temp, top_p), stats_list in all_results.items():
+        if not stats_list:
+            continue
+
+        print(f"\n参数配置: temp={temp}, top_p={top_p}")
+        print(f"{'模型':<20} {'编译率':>10} {'通过率':>10} {'编译改进':>10} {'平均迭代':>10}")
+        print("-" * 70)
+
+        sorted_stats = sorted(stats_list, key=lambda x: x.pass_rate, reverse=True)
+        for s in sorted_stats:
+            print(f"{s.model_name:<20} {s.compile_rate:>9.1f}% {s.pass_rate:>9.1f}% {'+' + str(s.improved_by_compile_iteration):>10} {s.avg_compile_attempts:>10.2f}")
+
+        avg_pass = sum(s.pass_rate for s in sorted_stats) / len(sorted_stats)
+        avg_compile = sum(s.compile_rate for s in sorted_stats) / len(sorted_stats)
+        total_improved = sum(s.improved_by_compile_iteration for s in sorted_stats)
+        print("-" * 70)
+        print(f"{'平均/总计':<20} {avg_compile:>9.1f}% {avg_pass:>9.1f}% {'+' + str(total_improved):>10}")
+
+    return all_results
+
+
+# 修改主函数以支持迭代策略分析
+def main():
+    parser = argparse.ArgumentParser(
+        description="分析 VerilogEval 结果，专注于失败分析和统计分类",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python results_analyzer.py                           # 分析所有参数配置
+  python results_analyzer.py --temp 0.8 --top-p 0.95   # 分析特定参数
+  python results_analyzer.py --temp 0.0               # 分析下限测试
+  python results_analyzer.py --prompt-strategy v1     # 分析特定提示词策略
+  python results_analyzer.py --prompt-strategy iterative  # 分析迭代策略
+  python results_analyzer.py --iterative-analysis     # 迭代策略对比分析
+  python results_analyzer.py --stats-only             # 仅生成统计信息
+        """
+    )
+
+    parser.add_argument(
+        '--temp',
+        type=float,
+        help='过滤特定温度参数'
+    )
+    parser.add_argument(
+        '--top-p',
+        type=float,
+        dest='top_p',
+        help='过滤特定top_p参数'
+    )
+    parser.add_argument(
+        '--prompt-strategy',
+        type=str,
+        dest='prompt_strategy',
+        help='过滤特定提示词策略 (e.g., default, v1, iterative)'
+    )
+    parser.add_argument(
+        '--stats-only',
+        action='store_true',
+        help='仅生成统计信息，不生成详细报告'
+    )
+    parser.add_argument(
+        '--iterative-analysis',
+        action='store_true',
+        dest='iterative_analysis',
+        help='执行迭代策略对比分析（对比baseline和优化提示词v1）'
+    )
+
+    args = parser.parse_args()
+
+    print("VerilogEval 失败分析工具")
+    print("=" * 50)
+
+    start_time = time.time()
+
+    # 如果是迭代策略对比分析模式
+    if args.iterative_analysis:
+        analyze_iterative_strategy()
+        print(f"\n{'='*60}")
+        print(f"分析完成，耗时 {time.time() - start_time:.2f} 秒")
+        print(f"{'='*60}")
+        return
+
+    # 查找所有结果目录
+    result_dirs = find_result_directories(args.temp, args.top_p, args.prompt_strategy)
+
+    if not result_dirs:
+        print("没有找到匹配的结果目录")
+        sys.exit(1)
+
+    print(f"找到 {len(result_dirs)} 个结果目录")
+
+    # 按温度、top_p和提示词策略分组
+    groups = defaultdict(list)
+    for dir_path, temp, top_p, prompt_strategy in result_dirs:
+        groups[(temp, top_p, prompt_strategy)].append((dir_path, temp, top_p, prompt_strategy))
+
+    print(f"发现 {len(groups)} 个参数配置组合")
+
+    # 为每个参数组合生成分析
+    for (temp, top_p, prompt_strategy), directories in groups.items():
+        print(f"\n{'='*60}")
+        print(f"分析参数配置: Temperature = {temp}, Top_p = {top_p}, Prompt = {prompt_strategy}")
+        print(f"{'='*60}")
+
+        # 创建输出目录结构（包含提示词策略）
+        if prompt_strategy and prompt_strategy != "default":
+            analysis_dir = f"results/analysis/temp{temp}_topP{top_p}_prompt{prompt_strategy}"
+        else:
+            analysis_dir = f"results/analysis/temp{temp}_topP{top_p}"
+        model_details_dir = os.path.join(analysis_dir, "model_details")
+        os.makedirs(model_details_dir, exist_ok=True)
+
+        # 分析所有模型
+        models = []
+        for dir_path, model_temp, model_top_p, model_prompt_strategy in directories:
+            model_analysis = analyze_model_directory(dir_path, model_temp, model_top_p, model_prompt_strategy)
+            models.append(model_analysis)
+
+        # 生成统一分析
+        unified_analysis = analyze_unified_results(models, temp, top_p, prompt_strategy)
+
+        if not args.stats_only:
+            # 生成统一分析HTML报告
+            unified_report_path = os.path.join(analysis_dir, "unified_analysis.html")
+            generate_unified_analysis_html(unified_analysis, unified_report_path)
+            print(f"[完成] 生成统一分析报告: {unified_report_path}")
+
+            # 为每个模型生成详细报告
+            for model in models:
+                model_report_path = os.path.join(model_details_dir, f"{model.model_name}_details.html")
+                generate_model_detail_html(model, model_report_path, unified_report_path)
+                print(f"  [完成] 生成模型详情报告: {model.model_name}_details.html")
+
+        # 打印详细统计表格
+        print(f"\n[统计] 参数配置 temp={temp}/top_p={top_p}/prompt={prompt_strategy} 详细结果:")
+        print(f"{'模型名称':<20} {'参数规模':>10} {'生成成功':>12} {'编译成功':>12} {'测试通过':>12} {'总数':>6} {'编译失败':>12} {'测试失败':>12}")
+        print("-" * 110)
+
+        # 按通过率排序
+        sorted_models = sorted(models, key=lambda m: m.pass_rate, reverse=True)
+        for model in sorted_models:
+            # 计算参数规模
+            param_size = get_model_parameter_size(model.model_name)
+
+            # 计算编译失败和测试失败个数
+            compile_failures = model.generated - model.compiled
+            test_failures = model.compiled - model.passed
+
+            print(f"{model.model_name:<20} {param_size:>10} {model.generated:>4}({model.generation_rate:>5.1f}%) {model.compiled:>4}({model.compile_rate:>5.1f}%) {model.passed:>4}({model.pass_rate:>5.1f}%) {model.total_problems:>6} {compile_failures:>12} {test_failures:>12}")
+
+        print("-" * 110)
+        avg_pass_rate = sum(m.pass_rate for m in models) / len(models)
+        avg_compile_rate = sum(m.compile_rate for m in models) / len(models)
+        avg_generation_rate = sum(m.generation_rate for m in models) / len(models)
+        print(f"{'平均':>20} {'-':>10} {avg_generation_rate:>9.1f}% {avg_compile_rate:>9.1f}% {avg_pass_rate:>9.1f}% {'-':>6} {'-':>12} {'-':>12}")
+        print(f"\n  总编译错误模式: {len(unified_analysis.compilation_error_patterns)}")
+        print(f"  总测试失败模式: {len(unified_analysis.test_failure_patterns)}")
+
+    print(f"\n{'='*60}")
+    print(f"分析完成，耗时 {time.time() - start_time:.2f} 秒")
+    print(f"{'='*60}")
+
+
 if __name__ == "__main__":
     main()

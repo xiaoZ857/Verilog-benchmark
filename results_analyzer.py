@@ -2029,6 +2029,8 @@ class DetailedIterationStats:
     problems_improved_by_test: List[str]
     problems_never_compiled: List[str]
     problems_compiled_but_failed_test: List[str]
+    # 编译错误统计
+    compile_error_patterns: Dict[str, int]  # {错误类型: 数量}
 
     @property
     def compile_rate(self) -> float:
@@ -2045,6 +2047,55 @@ class DetailedIterationStats:
     @property
     def first_pass_rate(self) -> float:
         return (self.first_attempt_passed / self.total_problems * 100) if self.total_problems > 0 else 0.0
+
+
+def classify_compile_error(error_text: str) -> str:
+    """对编译错误进行分类"""
+    if not error_text:
+        return "未知错误"
+
+    error_lower = error_text.lower()
+
+    # 常见错误模式
+    if "syntax error" in error_lower:
+        return "语法错误 (syntax error)"
+    elif "is not a valid l-value" in error_lower:
+        return "非法左值赋值 (invalid l-value)"
+    elif "timescale directive" in error_lower:
+        return "timescale指令位置错误"
+    elif "undeclared" in error_lower or "was not declared" in error_lower:
+        return "未声明的信号/变量"
+    elif "cannot be indexed" in error_lower:
+        return "非法索引操作"
+    elif "port" in error_lower and ("mismatch" in error_lower or "missing" in error_lower):
+        return "端口不匹配/缺失"
+    elif "module instantiation" in error_lower:
+        return "模块实例化错误"
+    elif "type mismatch" in error_lower:
+        return "类型不匹配"
+    elif "range must be" in error_lower or "out of range" in error_lower:
+        return "范围/位宽错误"
+    elif "duplicate" in error_lower:
+        return "重复定义"
+    elif "expected" in error_lower:
+        return "缺少预期符号"
+    elif "unable to" in error_lower or "cannot" in error_lower:
+        return "无法执行的操作"
+    elif "endmodule" in error_lower:
+        return "缺少endmodule"
+    elif "static analysis" in error_lower or "simulation-hanging" in error_lower:
+        return "静态分析失败 (可能无限循环)"
+    else:
+        # 截取关键错误信息
+        lines = error_text.split('\n')
+        for line in lines:
+            if 'error:' in line.lower():
+                # 提取错误描述
+                parts = line.split('error:')
+                if len(parts) > 1:
+                    err_desc = parts[1].strip()[:50]
+                    return f"其他: {err_desc}"
+        return "其他编译错误"
 
 
 def collect_detailed_iteration_stats(model_dir: str, temperature: float, top_p: float) -> Optional[DetailedIterationStats]:
@@ -2065,6 +2116,7 @@ def collect_detailed_iteration_stats(model_dir: str, temperature: float, top_p: 
     total_compile_attempts = 0
     total_test_attempts = 0
     compile_attempts_distribution = {1: 0, 2: 0, 3: 0}
+    compile_error_patterns = {}
 
     problems_improved_by_compile = []
     problems_improved_by_test = []
@@ -2113,6 +2165,14 @@ def collect_detailed_iteration_stats(model_dir: str, temperature: float, top_p: 
                 problems_compiled_but_failed_test.append(problem_name)
         else:
             problems_never_compiled.append(problem_name)
+            # 收集最后一次编译错误
+            history = summary.get('history', [])
+            if history:
+                last_attempt = history[-1]
+                error_text = last_attempt.get('compile_error', '')
+                if error_text:
+                    error_type = classify_compile_error(error_text)
+                    compile_error_patterns[error_type] = compile_error_patterns.get(error_type, 0) + 1
 
         # 迭代改进统计
         if summary.get('improved_by_iteration', False):
@@ -2147,6 +2207,7 @@ def collect_detailed_iteration_stats(model_dir: str, temperature: float, top_p: 
         problems_improved_by_test=problems_improved_by_test,
         problems_never_compiled=problems_never_compiled,
         problems_compiled_but_failed_test=problems_compiled_but_failed_test,
+        compile_error_patterns=compile_error_patterns,
     )
 
 
@@ -2257,6 +2318,7 @@ def generate_iterative_comparison_html(
                         <th>vs Baseline</th>
                         <th>vs 优化v1</th>
                         <th>编译迭代改进</th>
+                        <th>测试迭代改进</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2289,7 +2351,8 @@ def generate_iterative_comparison_html(
                         <td><strong>{stats.compile_rate:.1f}%</strong> / <strong>{stats.pass_rate:.1f}%</strong></td>
                         <td class="{vs_baseline_class}">{vs_baseline_str}</td>
                         <td class="{vs_v1_class}">{vs_v1_str}</td>
-                        <td>{stats.improved_by_compile_iteration}</td>
+                        <td>+{stats.improved_by_compile_iteration}</td>
+                        <td>+{stats.improved_by_test_iteration}</td>
                     </tr>
         """
 
@@ -2308,6 +2371,7 @@ def generate_iterative_comparison_html(
                         <th>平均编译迭代</th>
                         <th>首次测试通过</th>
                         <th>最终测试通过</th>
+                        <th>测试改进数</th>
                         <th>迭代次数分布</th>
                     </tr>
                 </thead>
@@ -2327,6 +2391,7 @@ def generate_iterative_comparison_html(
                         <td>{stats.avg_compile_attempts:.2f}</td>
                         <td>{stats.first_attempt_passed} ({stats.first_pass_rate:.1f}%)</td>
                         <td>{stats.final_passed} ({stats.pass_rate:.1f}%)</td>
+                        <td style="color: #3498db; font-weight: bold;">+{stats.improved_by_test_iteration}</td>
                         <td>
                             <span class="iteration-badge badge-1">1次: {dist.get(1, 0)}</span>
                             <span class="iteration-badge badge-2">2次: {dist.get(2, 0)}</span>
@@ -2402,6 +2467,88 @@ def generate_iterative_comparison_html(
                 </div>
             </div>
             """
+
+    # 汇总所有模型的编译错误统计
+    all_compile_errors = {}
+    for stats in sorted_stats:
+        for error_type, count in stats.compile_error_patterns.items():
+            all_compile_errors[error_type] = all_compile_errors.get(error_type, 0) + count
+
+    # 按数量排序
+    sorted_errors = sorted(all_compile_errors.items(), key=lambda x: x[1], reverse=True)
+
+    if sorted_errors:
+        html_content += """
+            <h2>编译失败原因统计（汇总所有模型）</h2>
+            <p>以下统计了迭代3次后仍无法编译成功的问题的错误类型分布：</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>错误类型</th>
+                        <th>数量</th>
+                        <th>占比</th>
+                        <th>分布</th>
+                    </tr>
+                </thead>
+                <tbody>
+        """
+
+        total_errors = sum(count for _, count in sorted_errors)
+        for idx, (error_type, count) in enumerate(sorted_errors[:15], 1):
+            percentage = count / total_errors * 100 if total_errors > 0 else 0
+            bar_width = int(percentage * 2)  # 最大200px
+
+            html_content += f"""
+                    <tr>
+                        <td>{idx}</td>
+                        <td>{error_type}</td>
+                        <td><strong>{count}</strong></td>
+                        <td>{percentage:.1f}%</td>
+                        <td><div style="background: linear-gradient(90deg, #e74c3c, #c0392b); width: {bar_width}px; height: 20px; border-radius: 3px;"></div></td>
+                    </tr>
+            """
+
+        html_content += f"""
+                </tbody>
+            </table>
+            <p><strong>总计:</strong> {total_errors} 个编译失败问题</p>
+        """
+
+        # 按模型分别统计
+        html_content += """
+            <h3>各模型编译错误分布</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>模型</th>
+                        <th>编译失败数</th>
+                        <th>主要错误类型</th>
+                    </tr>
+                </thead>
+                <tbody>
+        """
+
+        for stats in sorted_stats:
+            if stats.compile_error_patterns:
+                top_errors = sorted(stats.compile_error_patterns.items(), key=lambda x: x[1], reverse=True)[:3]
+                top_errors_str = ", ".join([f"{e[0]}({e[1]})" for e in top_errors])
+            else:
+                top_errors_str = "-"
+
+            fail_count = len(stats.problems_never_compiled)
+            html_content += f"""
+                    <tr>
+                        <td><strong>{stats.model_name}</strong></td>
+                        <td>{fail_count}</td>
+                        <td>{top_errors_str}</td>
+                    </tr>
+            """
+
+        html_content += """
+                </tbody>
+            </table>
+        """
 
     html_content += """
         </div>
